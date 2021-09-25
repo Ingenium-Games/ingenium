@@ -75,3 +75,25 @@ function c.RegisterClientCallback(eventName, fn)
 end
 
 -- ====================================================================================--
+
+
+-- Vehicle Condition
+c.RegisterClientCallback("GetVehicleCondition", function(entity) 
+    return c.GetVehicleCondition(entity)
+end)
+
+c.RegisterClientCallback("SetVehicleCondition", function(entity, con) 
+    c.SetVehicleCondition(entity, con)
+    return true
+end)
+
+-- Vehicle Modifications
+c.RegisterClientCallback("GetVehicleModifications", function(entity) 
+    return c.GetVehicleModifications(entity)
+end)
+
+c.RegisterClientCallback("SetVehicleModifications", function(entity, mods) 
+    c.SetVehicleModifications(entity, mods)
+    return true
+end)
+
