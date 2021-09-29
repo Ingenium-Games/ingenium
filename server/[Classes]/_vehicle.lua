@@ -23,7 +23,7 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 
 function c.class.UnownedVehicle(net, bool)
-    local stolen = c.check.Boolean(bool) 
+    local stolen = c.check.Boolean(bool)
     local fuel = math.random(45, 100)
     --
     local self = {}
@@ -36,7 +36,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Model
     self.Model = GetEntityModel(self.Entity)
-    self.State.Model= self.Model
+    self.State.Model = self.Model
     --
     self.GetModel = function()
         return self.State.Model or self.Model
@@ -45,7 +45,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Plate
     self.Plate = GetVehicleNumberPlateText(self.Entity)
-    self.State.Plate= self.Plate
+    self.State.Plate = self.Plate
     --
     self.GetPlate = function()
         return self.State.Plate or self.Plate
@@ -69,13 +69,13 @@ function c.class.UnownedVehicle(net, bool)
             SetEntityHeading(self.Entity, coords.h)
             SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
         else
-            c.debug("Table missing x,y,z,h referance, table dump below: "..c.table.Dump(coords))
+            c.debug("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
         end
     end
 
     -- Inventory
     self.Inventory = {}
-    self.State.Inventory= self.Inventory
+    self.State.Inventory = self.Inventory
     --
     self.GetInventory = function()
         return self.State.Inventory or self.Inventory
@@ -83,12 +83,12 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetInventory = function(t)
         self.Inventory = t
-        self.State.Inventory= self.Inventory
+        self.State.Inventory = self.Inventory
     end
 
     -- Keys
     self.Keys = {}
-    self.State.Keys= self.Keys
+    self.State.Keys = self.Keys
     --
     self.GetKeys = function()
         return self.State.Keys or self.Keys
@@ -96,14 +96,14 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetKeys = function(t)
         self.Keys = t
-        self.State.Keys= self.Keys
+        self.State.Keys = self.Keys
     end
     --
     self.AddKey = function(id)
         local t = self.GetKeys()
         if not self.CheckKey(id) then
             table.insert(self.Keys, id)
-            self.State.Keys= self.Keys
+            self.State.Keys = self.Keys
         else
             c.debug('User: ' .. id .. ' Already has key to this vehicle.')
         end
@@ -113,7 +113,7 @@ function c.class.UnownedVehicle(net, bool)
         local t = self.GetKeys()
         if self.CheckKey(id) then
             table.remove(self.Keys, id)
-            self.State.Keys= self.Keys
+            self.State.Keys = self.Keys
         else
             c.debug('User: ' .. id .. ' Never had a key to this vehicle.')
         end
@@ -130,7 +130,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Condition
     self.Condition = c.TriggerClientCallback(self.GetSource(), "GetVehicleCondition", self.Entity)
-    self.State.Condition= self.Condition
+    self.State.Condition = self.Condition
     --
     self.GetCondition = function()
         return self.State.Condition or self.Condition
@@ -138,14 +138,14 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetCondition = function(conditions)
         self.Condition = conditions
-        self.State.Condition= self.Condition
+        self.State.Condition = self.Condition
         c.TriggerClientCallback(self.GetSource(), "SetVehicleCondition", self.Entity)
     end
     --
     self.AlterCondition = function(id, v)
         if self.CheckConds(id) then
             self.Condition[id] = v
-            self.State.Condition= self.Condition
+            self.State.Condition = self.Condition
         end
     end
     --
@@ -158,10 +158,9 @@ function c.class.UnownedVehicle(net, bool)
         end
     end
 
-
     -- Modifications
     self.Modifications = c.TriggerClientCallback(self.GetSource(), "GetVehicleModifications", self.Entity)
-    self.State.Modifications= self.Condition
+    self.State.Modifications = self.Condition
     --
     self.GetModifications = function()
         return self.State.Modifications or self.Modifications
@@ -169,14 +168,14 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetModifications = function(modifications)
         self.Modifications = modifications
-        self.State.Modifications= self.Modifications
-        c.TriggerClientCallback( self.GetSource(), "SetVehicleModifications", self.Entity)
+        self.State.Modifications = self.Modifications
+        c.TriggerClientCallback(self.GetSource(), "SetVehicleModifications", self.Entity)
     end
     --
     self.AlterModification = function(id, v)
         if self.CheckMods(id) then
             self.Modifications[id] = v
-            self.State.Modifications= self.Modifications
+            self.State.Modifications = self.Modifications
         end
     end
     --
@@ -192,7 +191,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Fuel
     self.Fuel = fuel
-    self.State.Fuel= self.Fuel
+    self.State.Fuel = self.Fuel
     --
     self.GetFuel = function()
         return self.State.Fuel or self.Fuel
@@ -200,7 +199,7 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetFuel = function(v)
         local num = c.check.Number(v, 0, 100)
-        self.State.Fuel= num
+        self.State.Fuel = num
         self.Fuel = num
     end
     --
@@ -224,23 +223,21 @@ function c.class.UnownedVehicle(net, bool)
         end
     end
 
-    
     self.Instance = false
-    self.State.Instance= self.Instance
+    self.State.Instance = self.Instance
 
     self.Garage = false
-    self.State.Garage= self.Garage
+    self.State.Garage = self.Garage
 
     self.State = false
-    self.State.State= self.State
+    self.State.State = self.State
 
     self.Impound = false
-    self.State.Impound= self.Impound
-    
+    self.State.Impound = self.Impound
 
     -- Owner
     self.Owner = false
-    self.State.Owner= self.Owner
+    self.State.Owner = self.Owner
     --
     self.GetOwner = function()
         return self.State.Owner or self.Owner
@@ -306,7 +303,7 @@ function c.class.OwnedVehicle(net, plate)
             SetEntityHeading(self.Entity, coords.h)
             SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
         else
-            c.debug("Table missing x,y,z,h referance, table dump below: "..c.table.Dump(coords))
+            c.debug("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
         end
     end
 
@@ -365,8 +362,6 @@ function c.class.OwnedVehicle(net, plate)
         end
     end
 
-
-    
     -- Condition
     self.Condition = data.Condition
     self.State.Condition = self.Condition
@@ -377,14 +372,14 @@ function c.class.OwnedVehicle(net, plate)
     --
     self.SetCondition = function(conditions)
         self.Condition = conditions
-        self.State.Condition= self.Condition
-        c.TriggerClientCallback( self.GetSource(), "SetVehicleCondition", self.Entity)
+        self.State.Condition = self.Condition
+        c.TriggerClientCallback(self.GetSource(), "SetVehicleCondition", self.Entity)
     end
     --
     self.AlterCondition = function(id, v)
         if self.CheckConds(id) then
             self.Condition[id] = v
-            self.State.Condition= self.Condition
+            self.State.Condition = self.Condition
         end
     end
     --
@@ -397,10 +392,9 @@ function c.class.OwnedVehicle(net, plate)
         end
     end
 
-
     -- Modifications
     self.Modifications = data.Modifications
-    self.State.Modifications= self.Condition
+    self.State.Modifications = self.Condition
     --
     self.GetModifications = function()
         return self.State.Modifications or self.Modifications
@@ -408,14 +402,14 @@ function c.class.OwnedVehicle(net, plate)
     --
     self.SetModifications = function(modifications)
         self.Modifications = modifications
-        self.State.Modifications= self.Modifications
-        c.TriggerClientCallback( self.GetSource(), "SetVehicleModifications", self.Entity)
+        self.State.Modifications = self.Modifications
+        c.TriggerClientCallback(self.GetSource(), "SetVehicleModifications", self.Entity)
     end
     --
     self.AlterModification = function(id, v)
         if self.CheckMods(id) then
             self.Modifications[id] = v
-            self.State.Modifications= self.Modifications
+            self.State.Modifications = self.Modifications
         end
     end
     --
@@ -429,23 +423,21 @@ function c.class.OwnedVehicle(net, plate)
     end
     --
 
-
     self.Instance = data.Instance
-    self.State.Instance= self.Instance
+    self.State.Instance = self.Instance
 
     self.Garage = data.Garage
-    self.State.Garage= self.Garage
+    self.State.Garage = self.Garage
 
     self.State = data.State
-    self.State.State= self.State
+    self.State.State = self.State
 
     self.Impound = data.Impound
-    self.State.Impound= self.Impound
-    
+    self.State.Impound = self.Impound
 
     -- Fuel
     self.Fuel = self.Modifications.Fuel
-    self.State.Fuel= self.Fuel
+    self.State.Fuel = self.Fuel
     --
     self.GetFuel = function()
         return self.State.Fuel or self.Fuel
@@ -453,7 +445,7 @@ function c.class.OwnedVehicle(net, plate)
     --
     self.SetFuel = function(v)
         local num = c.check.Number(v, 0, 100)
-        self.State.Fuel= num
+        self.State.Fuel = num
         self.Fuel = num
         self.Modifications.Fuel = num
     end
@@ -482,11 +474,9 @@ function c.class.OwnedVehicle(net, plate)
         end
     end
 
-    
-
     -- Owner
     self.Owner = data.Character_ID
-    self.State.Owner= self.Owner
+    self.State.Owner = self.Owner
     --
     self.GetOwner = function()
         return self.State.Owner or self.Owner
@@ -495,13 +485,12 @@ function c.class.OwnedVehicle(net, plate)
 
     -- Wanted
     self.Wanted = data.Wanted
-    self.State.Wanted=  self.Wanted
+    self.State.Wanted = self.Wanted
     --
     self.GetWanted = function()
         return self.State.Wanted or self.Wanted
     end
     --
-
 
     --
     return self
