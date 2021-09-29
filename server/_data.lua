@@ -290,7 +290,7 @@ function c.data.RequestSync()
     for _,v in pairs(xPlayers) do
         local src = v
         local xPlayer = c.data.GetPlayer(src)
-        local data = c.TriggerClientCallback("Client:Packet", src)
+        local data = c.TriggerClientCallback(src, "Client:Packet")
         if data then
             xPlayer.SetHealth(data.Health)
             xPlayer.SetArmour(data.Armour)

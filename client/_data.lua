@@ -88,7 +88,7 @@ function c.data.Packet()
     return data
 end
 
-c.RegisterClientCallback("Client:Packet", function(...)
+c.RegisterClientCallback("Client:Packet", function()
     local data = false
     if c.data.GetLoadedStatus() then
         c.IsBusy()
