@@ -27,7 +27,7 @@ function c.class.UnownedVehicle(net, bool)
     local fuel = math.random(45, 100)
     --
     local self = {}
-    self.Entity = tonumber(net)
+    self.Entity = net
     self.State = Entity(self.Entity).state
     --
     self.GetSource = function()
@@ -36,7 +36,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Model
     self.Model = GetEntityModel(self.Entity)
-    self.State:set('Model', self.Model)
+    self.State.Model= self.Model
     --
     self.GetModel = function()
         return self.State.Model or self.Model
@@ -45,7 +45,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Plate
     self.Plate = GetVehicleNumberPlateText(self.Entity)
-    self.State:set('Plate', self.Plate)
+    self.State.Plate= self.Plate
     --
     self.GetPlate = function()
         return self.State.Plate or self.Plate
@@ -75,7 +75,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Inventory
     self.Inventory = {}
-    self.State:set('Inventory', self.Inventory)
+    self.State.Inventory= self.Inventory
     --
     self.GetInventory = function()
         return self.State.Inventory or self.Inventory
@@ -83,12 +83,12 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetInventory = function(t)
         self.Inventory = t
-        self.State:set('Inventory', self.Inventory)
+        self.State.Inventory= self.Inventory
     end
 
     -- Keys
     self.Keys = {}
-    self.State:set('Keys', self.Keys)
+    self.State.Keys= self.Keys
     --
     self.GetKeys = function()
         return self.State.Keys or self.Keys
@@ -96,14 +96,14 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetKeys = function(t)
         self.Keys = t
-        self.State:set('Keys', self.Keys)
+        self.State.Keys= self.Keys
     end
     --
     self.AddKey = function(id)
         local t = self.GetKeys()
         if not self.CheckKey(id) then
             table.insert(self.Keys, id)
-            self.State:set('Keys', self.Keys)
+            self.State.Keys= self.Keys
         else
             c.debug('User: ' .. id .. ' Already has key to this vehicle.')
         end
@@ -113,7 +113,7 @@ function c.class.UnownedVehicle(net, bool)
         local t = self.GetKeys()
         if self.CheckKey(id) then
             table.remove(self.Keys, id)
-            self.State:set('Keys', self.Keys)
+            self.State.Keys= self.Keys
         else
             c.debug('User: ' .. id .. ' Never had a key to this vehicle.')
         end
@@ -130,7 +130,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Condition
     self.Condition = c.TriggerClientCallback("GetVehicleCondition", self.GetSource(), self.Entity)
-    self.State:set('Condition', self.Condition)
+    self.State.Condition= self.Condition
     --
     self.GetCondition = function()
         return self.State.Condition or self.Condition
@@ -138,14 +138,14 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetCondition = function(conditions)
         self.Condition = conditions
-        self.State:set('Condition', self.Condition)
+        self.State.Condition= self.Condition
         c.TriggerClientCallback("SetVehicleCondition", self.GetSource(), self.Entity)
     end
     --
     self.AlterCondition = function(id, v)
         if self.CheckConds(id) then
             self.Condition[id] = v
-            self.State:set('Condition', self.Condition)
+            self.State.Condition= self.Condition
         end
     end
     --
@@ -161,7 +161,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Modifications
     self.Modifications = c.TriggerClientCallback("GetVehicleModifications", self.GetSource(), self.Entity)
-    self.State:set('Modifications', self.Condition)
+    self.State.Modifications= self.Condition
     --
     self.GetModifications = function()
         return self.State.Modifications or self.Modifications
@@ -169,14 +169,14 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetModifications = function(modifications)
         self.Modifications = modifications
-        self.State:set('Modifications', self.Modifications)
+        self.State.Modifications= self.Modifications
         c.TriggerClientCallback("SetVehicleModifications", self.GetSource(), self.Entity)
     end
     --
     self.AlterModification = function(id, v)
         if self.CheckMods(id) then
             self.Modifications[id] = v
-            self.State:set('Modifications', self.Modifications)
+            self.State.Modifications= self.Modifications
         end
     end
     --
@@ -192,7 +192,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Fuel
     self.Fuel = fuel
-    self.State:set('Fuel', self.Fuel)
+    self.State.Fuel= self.Fuel
     --
     self.GetFuel = function()
         return self.State.Fuel or self.Fuel
@@ -200,7 +200,7 @@ function c.class.UnownedVehicle(net, bool)
     --
     self.SetFuel = function(v)
         local num = c.check.Number(v, 0, 100)
-        self.State:set('Fuel', num)
+        self.State.Fuel= num
         self.Fuel = num
     end
     --
@@ -226,21 +226,21 @@ function c.class.UnownedVehicle(net, bool)
 
     
     self.Instance = false
-    self.State:set('Instance', self.Instance)
+    self.State.Instance= self.Instance
 
     self.Garage = false
-    self.State:set('Garage', self.Garage)
+    self.State.Garage= self.Garage
 
     self.State = false
-    self.State:set('State', self.State)
+    self.State.State= self.State
 
     self.Impound = false
-    self.State:set('Impound', self.Impound)
+    self.State.Impound= self.Impound
     
 
     -- Owner
     self.Owner = false
-    self.State:set('Owner', self.Owner)
+    self.State.Owner= self.Owner
     --
     self.GetOwner = function()
         return self.State.Owner or self.Owner
@@ -249,7 +249,7 @@ function c.class.UnownedVehicle(net, bool)
 
     -- Wanted
     self.Wanted = stolen
-    self.State:set('Wanted', self.Wanted)
+    self.State.Wanted = self.Wanted
     --
     self.GetWanted = function()
         return self.State.Wanted or self.Wanted
@@ -264,7 +264,7 @@ end
 function c.class.OwnedVehicle(net, plate)
     local data = c.sql.GetVehicleByPlate(plate)
     local self = {}
-    self.Entity = tonumber(net)
+    self.Entity = net
     self.State = Entity(self.Entity).state
     --
     self.GetSource = function()
@@ -273,7 +273,7 @@ function c.class.OwnedVehicle(net, plate)
 
     -- Model
     self.Model = data.Model
-    self.State:set('Model', self.Model)
+    self.State.Model = self.Model
     --
     self.GetModel = function()
         return self.State.Model or self.Model
@@ -282,7 +282,7 @@ function c.class.OwnedVehicle(net, plate)
 
     -- Plate
     self.Plate = data.Plate
-    self.State:set('Plate', self.Plate)
+    self.State.Plate = self.Plate
     --
     self.GetPlate = function()
         return self.State.Plate or self.Plate
@@ -312,7 +312,7 @@ function c.class.OwnedVehicle(net, plate)
 
     -- Inventory
     self.Inventory = data.Inventory
-    self.State:set('Inventory', self.Inventory)
+    self.State.Inventory = self.Inventory
     --
     self.GetInventory = function()
         return self.State.Inventory or self.Inventory
@@ -320,12 +320,12 @@ function c.class.OwnedVehicle(net, plate)
     --
     self.SetInventory = function(t)
         self.Inventory = t
-        self.State:set('Inventory', self.Inventory)
+        self.State.Inventory = self.Inventory
     end
 
     -- Keys
     self.Keys = data.Keys
-    self.State:set('Keys', self.Keys)
+    self.State.Keys = self.Keys
     --
     self.GetKeys = function()
         return self.State.Keys or self.Keys
@@ -333,14 +333,14 @@ function c.class.OwnedVehicle(net, plate)
     --
     self.SetKeys = function(t)
         self.Keys = t
-        self.State:set('Keys', self.Keys)
+        self.State.Keys = self.Keys
     end
     --
     self.AddKey = function(id)
         local t = self.GetKeys()
         if not self.CheckKey(id) then
             table.insert(self.Keys, id)
-            self.State:set('Keys', self.Keys)
+            self.State.Keys = self.Keys
         else
             c.debug('User: ' .. id .. ' Already has key to this vehicle.')
         end
@@ -350,7 +350,7 @@ function c.class.OwnedVehicle(net, plate)
         local t = self.GetKeys()
         if self.CheckKey(id) then
             table.remove(self.Keys, id)
-            self.State:set('Keys', self.Keys)
+            self.State.Keys = self.Keys
         else
             c.debug('User: ' .. id .. ' Never had a key to this vehicle.')
         end
@@ -369,7 +369,7 @@ function c.class.OwnedVehicle(net, plate)
     
     -- Condition
     self.Condition = data.Condition
-    self.State:set('Condition', self.Condition)
+    self.State.Condition = self.Condition
     --
     self.GetCondition = function()
         return self.State.Condition or self.Condition
@@ -377,14 +377,14 @@ function c.class.OwnedVehicle(net, plate)
     --
     self.SetCondition = function(conditions)
         self.Condition = conditions
-        self.State:set('Condition', self.Condition)
+        self.State.Condition= self.Condition
         c.TriggerClientCallback("SetVehicleCondition", self.GetSource(), self.Entity)
     end
     --
     self.AlterCondition = function(id, v)
         if self.CheckConds(id) then
             self.Condition[id] = v
-            self.State:set('Condition', self.Condition)
+            self.State.Condition= self.Condition
         end
     end
     --
@@ -400,7 +400,7 @@ function c.class.OwnedVehicle(net, plate)
 
     -- Modifications
     self.Modifications = data.Modifications
-    self.State:set('Modifications', self.Condition)
+    self.State.Modifications= self.Condition
     --
     self.GetModifications = function()
         return self.State.Modifications or self.Modifications
@@ -408,14 +408,14 @@ function c.class.OwnedVehicle(net, plate)
     --
     self.SetModifications = function(modifications)
         self.Modifications = modifications
-        self.State:set('Modifications', self.Modifications)
+        self.State.Modifications= self.Modifications
         c.TriggerClientCallback("SetVehicleModifications", self.GetSource(), self.Entity)
     end
     --
     self.AlterModification = function(id, v)
         if self.CheckMods(id) then
             self.Modifications[id] = v
-            self.State:set('Modifications', self.Modifications)
+            self.State.Modifications= self.Modifications
         end
     end
     --
@@ -431,21 +431,21 @@ function c.class.OwnedVehicle(net, plate)
 
 
     self.Instance = data.Instance
-    self.State:set('Instance', self.Instance)
+    self.State.Instance= self.Instance
 
     self.Garage = data.Garage
-    self.State:set('Garage', self.Garage)
+    self.State.Garage= self.Garage
 
     self.State = data.State
-    self.State:set('State', self.State)
+    self.State.State= self.State
 
     self.Impound = data.Impound
-    self.State:set('Impound', self.Impound)
+    self.State.Impound= self.Impound
     
 
     -- Fuel
     self.Fuel = self.Modifications.Fuel
-    self.State:set('Fuel', self.Fuel)
+    self.State.Fuel= self.Fuel
     --
     self.GetFuel = function()
         return self.State.Fuel or self.Fuel
@@ -453,7 +453,7 @@ function c.class.OwnedVehicle(net, plate)
     --
     self.SetFuel = function(v)
         local num = c.check.Number(v, 0, 100)
-        self.State:set('Fuel', num)
+        self.State.Fuel= num
         self.Fuel = num
         self.Modifications.Fuel = num
     end
@@ -486,7 +486,7 @@ function c.class.OwnedVehicle(net, plate)
 
     -- Owner
     self.Owner = data.Character_ID
-    self.State:set('Owner', self.Owner)
+    self.State.Owner= self.Owner
     --
     self.GetOwner = function()
         return self.State.Owner or self.Owner
@@ -495,7 +495,7 @@ function c.class.OwnedVehicle(net, plate)
 
     -- Wanted
     self.Wanted = data.Wanted
-    self.State:set('Wanted',  self.Wanted)
+    self.State.Wanted=  self.Wanted
     --
     self.GetWanted = function()
         return self.State.Wanted or self.Wanted
