@@ -27,7 +27,7 @@ function c.class.UnownedVehicle(net, bool)
     local fuel = math.random(45, 100)
     --
     local self = {}
-    self.Entity = net
+    self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
     --
     self.GetSource = function()
@@ -264,7 +264,7 @@ end
 function c.class.OwnedVehicle(net, plate)
     local data = c.sql.GetVehicleByPlate(plate)
     local self = {}
-    self.Entity = net
+    self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
     --
     self.GetSource = function()
