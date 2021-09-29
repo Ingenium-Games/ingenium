@@ -691,7 +691,7 @@ function c.GetVehicleModifications(vehicle)
         Plate = GetVehicleNumberPlateText(vehicle),
         PlateIndex = GetVehicleNumberPlateTextIndex(vehicle),
         Fuel = math.ceil(GetVehicleFuelLevel(vehicle), 1),
-        Dirt = math.ceil(GetVehicleDirt(vehicle), 1),
+        Dirt = math.ceil(GetVehicleDirtLevel(vehicle), 1),
         Colour_1 = Colour_1,
         Colour_2 = Colour_2,
         Pearlescent = Pearlescent,
