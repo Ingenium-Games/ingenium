@@ -78,21 +78,25 @@ end
 
 
 -- Vehicle Condition
-c.RegisterClientCallback("GetVehicleCondition", function(entity) 
+c.RegisterClientCallback("GetVehicleCondition", function(net)
+    local entity = NetToVeh(net)
     return c.GetVehicleCondition(entity)
 end)
 
-c.RegisterClientCallback("SetVehicleCondition", function(entity, con) 
+c.RegisterClientCallback("SetVehicleCondition", function(net, con) 
+    local entity = NetToVeh(net)
     c.SetVehicleCondition(entity, con)
     return true
 end)
 
 -- Vehicle Modifications
-c.RegisterClientCallback("GetVehicleModifications", function(entity) 
+c.RegisterClientCallback("GetVehicleModifications", function(net) 
+    local entity = NetToVeh(net)
     return c.GetVehicleModifications(entity)
 end)
 
-c.RegisterClientCallback("SetVehicleModifications", function(entity, mods) 
+c.RegisterClientCallback("SetVehicleModifications", function(net, mods) 
+    local entity = NetToVeh(net)
     c.SetVehicleModifications(entity, mods)
     return true
 end)
