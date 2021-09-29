@@ -285,29 +285,34 @@ function c.data.LoadPlayer(source, Character_ID)
 end
 
 
-function c.data.RequestSync()
-    local xPlayers = c.data.GetPlayers()
-    for source, xPlayer in pairs(xPlayers) do
-        local src = tonumber(source)
-        local data = c.TriggerClientCallback(src, "Client:Packet")
-        if data then
-            xPlayer.SetHealth(data.Health)
-            xPlayer.SetArmour(data.Armour)
-            xPlayer.SetHunger(data.Hunger)
-            xPlayer.SetThirst(data.Thirst)
-            xPlayer.SetStress(data.Stress)
-            xPlayer.SetModifiers(data.Modifiers)
-            xPlayer.SetCoords(data.Coords)
-            --
-            c.state.UpdateStates(src)
-        end
-    end
-end
-
 function c.data.ClientSync()
-    local function Do()
-        c.data.RequestSync()
-        SetTimeout(conf.clientsync, Do)
-    end
-    SetTimeout(conf.clientsync, Do)
+    Citizen.CreateThread(function()
+        while true do
+            Citizen.Wait(conf.clientsync)
+            local xPlayers = c.data.GetPlayers()
+            if not xPlayers then 
+                Citizen.Wait(conf.clientsync * 2) 
+            else
+                for source, xPlayer in pairs(xPlayers) do
+                    -- Incase its false
+                    if xPlayer then
+                        local src = tonumber(source)
+                        local data = c.TriggerClientCallback(src, "Client:Packet")
+                        -- Incase its false
+                        if data then
+                            xPlayer.SetHealth(data.Health)
+                            xPlayer.SetArmour(data.Armour)
+                            xPlayer.SetHunger(data.Hunger)
+                            xPlayer.SetThirst(data.Thirst)
+                            xPlayer.SetStress(data.Stress)
+                            xPlayer.SetModifiers(data.Modifiers)
+                            xPlayer.SetCoords(data.Coords)
+                            --
+                            c.state.UpdateStates(src)
+                        end
+                    end
+                end
+            end
+        end
+    end)
 end
