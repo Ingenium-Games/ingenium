@@ -109,26 +109,26 @@ end
 --- Same as above.
 ---@param source number
 function c.GetPlayer(source)
-    return c.data.GetPlayer(source)
+    return c.data.GetPlayer(tonumber(source))
 end
 
 --- Same as above.
 ---@param source number
 function c.GetPlayerFromId(source)
-	return c.data.GetPlayer(source)
+	return c.data.GetPlayer(tonumber(source))
 end
 
 --- Set the player id to the table.
 ---@param source number
 ---@param data table
 function c.data.SetPlayer(source, data)
-    c.pdex[source] = data
+    c.pdex[tonumber(source)] = data
 end
 
 --- Set to false.
 ---@param source number
 function c.data.RemovePlayer(source)
-    c.pdex[source] = false
+    c.pdex[tonumber(source)] = false
 end
 
 --- Get the player table
@@ -288,8 +288,9 @@ end
 function c.data.RequestSync()
     local xPlayers = c.data.GetPlayers()
     for _,v in pairs(xPlayers) do
-        local xPlayer = c.data.GetPlayer(v)
-        local data = c.TriggerClientCallback("Client:Packet")
+        local src = v
+        local xPlayer = c.data.GetPlayer(src)
+        local data = c.TriggerClientCallback("Client:Packet", src)
         if data then
             xPlayer.SetHealth(data.Health)
             xPlayer.SetArmour(data.Armour)
@@ -299,7 +300,7 @@ function c.data.RequestSync()
             xPlayer.SetModifiers(data.Modifiers)
             xPlayer.SetCoords(data.Coords)
             --
-            c.state.UpdateStates(v)
+            c.state.UpdateStates(src)
         end
     end
 end
