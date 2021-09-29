@@ -283,3 +283,31 @@ function c.data.LoadPlayer(source, Character_ID)
         TriggerClientEvent('Client:Character:Loaded', src, data)
     end)
 end
+
+
+function c.data.RequestSync()
+    local xPlayers = c.data.GetPlayers()
+    for _,v in pairs(xPlayers) do
+        local xPlayer = c.data.GetPlayer(v)
+        local data = c.TriggerClientCallback("Client:Packet")
+        if data then
+            xPlayer.SetHealth(data.Health)
+            xPlayer.SetArmour(data.Armour)
+            xPlayer.SetHunger(data.Hunger)
+            xPlayer.SetThirst(data.Thirst)
+            xPlayer.SetStress(data.Stress)
+            xPlayer.SetModifiers(data.Modifiers)
+            xPlayer.SetCoords(data.Coords)
+            --
+            c.state.UpdateStates(v)
+        end
+    end
+end
+
+function c.data.CharacterSync()
+    local function Do()
+        c.data.RequestSync()
+        SetTimeout(conf.clientsync, Do)
+    end
+    SetTimeout(conf.clientsync, Do)
+end

@@ -167,30 +167,6 @@ AddEventHandler('Server:Instance:Player:Default', function(req)
 end)
 
 -- ====================================================================================--
--- The data reciever to modify the xPlayer Table
-
----- SHOULD REALLY MAKE THIS A TRIGGER CLIENT CALLBACK LOOP NOT AN EVENT FOR THE CLIENT.
-RegisterNetEvent('Server:Packet:Update')
-AddEventHandler('Server:Packet:Update', function(data)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    -- Status
-    xPlayer.SetHealth(data.Health)
-    xPlayer.SetArmour(data.Armour)
-    xPlayer.SetHunger(data.Hunger)
-    xPlayer.SetThirst(data.Thirst)
-    xPlayer.SetStress(data.Stress)
-    -- Status Modifiers the old modifers are retained after every sync
-    xPlayer.SetModifiers(data.Modifiers)
-    -- Coords
-    xPlayer.SetCoords(data.Coords)    
-    -- Run the following functions after update has been receieved.
-    -- Update triggers and events based on old vs new modifiers per user sync times etc.
-
-    c.state.UpdateStates(src)
-end)
-
--- ====================================================================================--
 -- Bank Events for Transactions
 
 RegisterNetEvent("Server:Bank:Deposit")
