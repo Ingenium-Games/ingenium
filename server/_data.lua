@@ -304,7 +304,7 @@ function c.data.RequestSync()
     end
 end
 
-function c.data.CharacterSync()
+function c.data.ClientSync()
     local function Do()
         c.data.RequestSync()
         SetTimeout(conf.clientsync, Do)
