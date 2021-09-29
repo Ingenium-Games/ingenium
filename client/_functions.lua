@@ -409,11 +409,11 @@ function c.CreateVehicle(name, x, y, z, h, plate, stolen)
     SetNetworkIdCanMigrate(net, true)
     SetModelAsNoLongerNeeded(hash)
     if NetworkDoesEntityExistWithNetworkId(net) then
-        c.debug("Entity exists on network, id: "..net)              
+        c.debug("Entity exists on network, id: "..net.." entity: "..entity)              
         if plate then
-            TriggerServerEvent("AssignVehicleData", net, plate)
+            TriggerServerEvent("AssignVehicleData", entity, plate)
         else
-            TriggerServerEvent("AssignVehicleData", net, false, stolen)
+            TriggerServerEvent("AssignVehicleData", entity, false, stolen)
         end
     else
         net = false
