@@ -287,8 +287,8 @@ end
 
 function c.data.RequestSync()
     local xPlayers = c.data.GetPlayers()
-    for _,v in pairs(xPlayers) do
-        local src = v
+    for k,v in pairs(xPlayers) do
+        local src = tonumber(v)
         local xPlayer = c.data.GetPlayer(src)
         local data = c.TriggerClientCallback(src, "Client:Packet")
         if data then
