@@ -403,14 +403,11 @@ function c.CreateVehicle(name, x, y, z, h, plate, stolen)
         Citizen.Wait(0)
     end
     local entity = CreateVehicle(hash, x, y, z, h, true, false)
-    SetVehicleOnGroundProperly(entity)
     local net = VehToNet(entity)
+    SetVehicleOnGroundProperly(entity)
     SetVehicleHasBeenOwnedByPlayer(entity, true)
     SetNetworkIdCanMigrate(net, true)
     SetModelAsNoLongerNeeded(hash)
-
-    -- here is where it will get confusing...
-    local state = nil
     if NetworkDoesEntityExistWithNetworkId(net) then
         c.debug("Entity exists on network, id: "..net)              
         if plate then
