@@ -3,79 +3,127 @@
 -- ====================================================================================--
 --[[
 NOTES.
-    - 
-    -
-    -
+    - Why have the user and character classes seperate?
+    - Becasue a player has different data to the character being played.
+    - Not using the Player State, as still testing.
 ]] --
 
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-function c.class.CreateCharacter(character_id)
+function c.class.CreateCharacter(source, character_id)
     c.debug("Start Character Class Creation")
+    local src = tonumber(source)
     local data = c.sql.char.Get(character_id)
     local self = {}
+    --
+    -- For the State to work
+    self.ID = src
+    self.State = Player(self.ID).state
+    --
     -- Strings
     self.Character_ID = data.Character_ID -- 50 Random Characters [Aa-Zz][0-9]
+    self.State.Character_ID = self.Character_ID
+    --
     self.City_ID = data.City_ID -- X-00000
+    self.State.City_ID = self.City_ID
+    --
     self.Birth_Date = data.Birth_Date
+    self.State.Birth_Date = self.Birth_Date
+    --
     self.First_Name = data.First_Name
+    self.State.First_Name = self.First_Name
+    --
     self.Last_Name = data.Last_Name
+    self.State.Last_Name = self.Last_Name
+    --
     self.Full_Name = data.First_Name .. " " .. data.Last_Name
+    self.State.Full_Name = self.Full_Name
+    --
     self.Phone = data.Phone -- 200000 - 699999
+    self.State.Phone = self.Phone
+    --
     -- Integers
     self.Instance = data.Instance
+    self.State.Instance = self.Instance
+    --
     self.Health = data.Health
+    self.State.Health = self.Health
+    --
     self.Armour = data.Armour
+    self.State.Armour = self.Armour
+    --
     self.Hunger = data.Hunger
+    self.State.Hunger = self.Hunger
+    --
     self.Thirst = data.Thirst
+    self.State.Thirst = self.Thirst
+    --
     self.Stress = data.Stress
+    self.State.Stress = self.Stress
+    --
     -- Booleans
     self.Wanted = data.Wanted
+    self.State.Wanted = self.Wanted
+    --
     self.Supporter = data.Supporter
+    self.State.Supporter = self.Supporter
+    --
     -- Tables (JSONIZE)
     self.Job = json.decode(data.Job)
+    self.State.Job = self.Job
+    --
     self.Coords = json.decode(data.Coords)
+    self.State.Coords = self.Coords
+    --
     self.Accounts = json.decode(data.Accounts)
+    self.State.Accounts = self.Accounts
+    --
     self.Licenses = json.decode(data.Licenses)
+    self.State.Licenses = self.Licenses
+    --
     self.Inventory = json.decode(data.Inventory)
+    self.State.Inventory = self.Inventory
+    --
     self.Modifiers = json.decode(data.Modifiers)    
-    self.Appearance = json.decode(data.Appearance)
-
+    self.State.Modifiers = self.Modifiers
     --
     self.OldModifiers = self.Modifiers
-    ---- FUNCTIONS
-    -- This one is to check if they are a VIP/Supporter of the server, ie tebex linked.
+    --
+    self.Appearance = json.decode(data.Appearance)
+    self.State.Appearance = self.Appearance
+    --
+    -- Functions
     self.IsSupporter = function()
-        return self.Supporter
+        return self.State.Supporter or self.Supporter
     end
     --
     self.GetIdentifier = function()
-        return self.Character_ID
+        return self.State.Character_ID or self.Character_ID
     end
     --
     self.GetCharacter_ID = function()
-        return self.Character_ID
+        return self.State.Character_ID or self.Character_ID
     end
     --
     self.GetCity_ID = function()
-        return self.City_ID
+        return self.State.City_ID or self.City_ID
     end
     --
     self.GetBirth_Date = function()
-        return self.Birth_Date
+        return self.State.Birth_Date or self.Birth_Date
     end
     --
     self.GetFirst_Name = function()
-        return self.First_Name
+        return self.State.First_Name or self.First_Name
     end
     --
     self.GetLast_Name = function()
-        return self.Last_Name
+        return self.State.Last_Name or self.Last_Name
     end
     --
     self.GetFull_Name = function()
-        return self.Full_Name
+        return self.State.Full_Name or self.Full_Name
     end
     --
     self.Get = function(k)
@@ -95,7 +143,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetAccounts = function()
-        return self.Accounts
+        return self.State.Accounts or self.Accounts
     end
     --
     self.GetAccount = function(acc)
@@ -116,7 +164,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetLicenses = function()
-        return self.Licenses
+        return or self.Licenses
     end
     --
     self.GetLicense = function(license)
@@ -225,7 +273,7 @@ function c.class.CreateCharacter(character_id)
     end
     -- esx style, except table format.
     self.GetJob = function()
-        return self.Job
+        return or self.Job
     end
     --
     self.SetJob = function(t)
@@ -244,7 +292,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetPhone = function()
-        return self.Phone
+        return or self.Phone
     end
     --
     self.SetPhone = function(s)
@@ -253,7 +301,7 @@ function c.class.CreateCharacter(character_id)
     end
     -- 
     self.GetInstance = function()
-        return self.Instance
+        return or self.Instance
     end
     --
     self.SetInstance = function(v)
@@ -262,7 +310,7 @@ function c.class.CreateCharacter(character_id)
     end
     -- 
     self.GetHealth = function()
-        return self.Health
+        return or self.Health
     end
     --
     self.SetHealth = function(v)
@@ -273,7 +321,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetArmour = function()
-        return self.Armour
+        return or self.Armour
     end
     --
     self.SetArmour = function(v)
@@ -284,7 +332,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetHunger = function()
-        return self.Hunger
+        return or self.Hunger
     end
     --
     self.SetHunger = function(v)
@@ -295,7 +343,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetThirst = function()
-        return self.Thirst
+        return or self.Thirst
     end
     --
     self.SetThirst = function(v)
@@ -306,7 +354,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetStress = function()
-        return self.Stress
+        return or self.Stress
     end
     --
     self.SetStress = function(v)
@@ -317,11 +365,11 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetOldModifiers = function()
-        return self.OldModifiers
+        return or self.OldModifiers
     end
     --
     self.GetModifiers = function()
-        return self.Modifiers
+        return or self.Modifiers
     end
     --
     self.SetModifiers = function(t)
@@ -331,7 +379,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetAppearance = function()
-        return self.Appearance
+        return or self.Appearance
     end
     --
     self.SetAppearance = function(t)
@@ -340,7 +388,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetCoords = function()
-        return self.Coords
+        return or self.Coords
     end
     --
     self.SetCoords = function(t)
@@ -353,7 +401,7 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.GetWanted = function()
-        return self.Wanted
+        return or self.Wanted
     end
     --
     self.SetWanted = function(b)
@@ -396,5 +444,5 @@ function c.class.CreateCharacter(character_id)
     end
     --
     c.debug("End Character Class Creation")
-    return self
+    return or self
 end

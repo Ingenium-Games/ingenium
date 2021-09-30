@@ -2,15 +2,52 @@
 
 This is the core resource used on the Ingenium Games FiveM Server.
 
-It is advised that you do not change the name of this resource. *It's just polite.*
+<br>
+
+It utilizes state bags and will __ONLY__ work as intended with OneSync Infinity, so use or tick the box from your txAdmin web panel. or set `+onesync on`
 
 <br>
 
->##### Note: As with all source code on the internet, please review prior to blindly using...
+-----
+
+<br>
+
+> Note: As with all source code on the internet, please review prior to blindly using...
 
 <br>
 <br>
+
+## __How it works__
+
 <br>
+
+Data tables (xPlayer, xVehicle, xPed, xObject) are stored server side for each entity, with its entity as its key and data being the table value. ^1
+
+<br>
+
+Any update of an entities data table on the server will trigger the entity state to also updated and repliated. As statebags can be accessed by the client, there is no need to pass the data to the client for any entity. ^2
+
+<br>
+
+From the data tables, the server will asyncriously save data stored to the SQL database at scheduled intervals. ^3
+
+<br>
+
+> ^1: I kept it in the ESX style format for ease of reading/switching over for other servers to not break your brain. Databases are different and will not work from ES / ESX / OX / VRP / Any Other.
+
+<br>
+
+> ^2: Do not trust the clients, for the most part.
+Some natives are only client sided, so leverage the callbacks to request data when applicable.
+
+<br>
+
+> ^3: Using the mysql-async resource's store functions, pre determined queries only send the data per transaction rather than full statements, cutting down the time needed to perform.
+
+<br>
+
+-----
+
 <br>
 
 
@@ -18,7 +55,7 @@ It is advised that you do not change the name of this resource. *It's just polit
 
 <br>
 
->##### This is a work of constant development and change, some functions may break or change on the way to release.
+>#### This is a work of constant development and change, some functions may break or change on the way to release.
 
 <br>
 
@@ -29,7 +66,11 @@ It is a learning experiance getting started with native functions, runtime issue
 Just try and have fun.
 
 <br>
+
+-----
+
 <br>
+
 
 ## Getting Started
 
@@ -52,6 +93,9 @@ A general getting started guide will be on the wiki as mentioned below.
 >##### Note: *Please only use a linux build server if you are comfortable in development. It does not have features that assist with debugging and troubleshooting for the [CFX.re](https://cfx.re/) team.*
 
 <br>
+
+-----
+
 <br>
 
 ## [Wiki](https://github.com/Ingenium-Games/ore/wiki)
@@ -60,12 +104,15 @@ A general getting started guide will be on the wiki as mentioned below.
 
 The [Wiki](https://github.com/Ingenium-Games/ore/wiki) contains a breif overview of functions and events that operate within the core to assist in leveraging for your own works.
 
-It will also contain a guide on how to get started ad eventually a way to import a pre-made server as apart of the TxAdmin web panel as a recipe.
+It will also contain a guide on how to get started and eventually a way to import a pre-made server as apart of the txAdmin web panel as a recipe.
 
-This is still very much a work in progress
+This is still, very much, a work in progress
 
 
 <br>
+
+-----
+
 <br>
 
 ## Code Formatting
@@ -103,7 +150,7 @@ end
 <br>
 <br>
 
-### For SQL
+### For SQL (mysql-async)
 
 <br>
 
@@ -172,11 +219,31 @@ function SameSameB(var) {
 >I need to figure out my style..
 
 <br>
+
+<br>
+
+-----
+
+<br>
+
+## Credits and Indirect Contributors
+
+<br>
+
+Special thanks too; 
+
+- @[pietermcfiber](https://github.com/pitermcflebor) for [pmc-callbacks](https://github.com/pitermcflebor/pmc-callbacks)
+
 <br>
 
 
 
+-----
+
 <br>
+
+## Testing
+
 <br>
 
 >Note: *It has currently been tested and working on the following server operating systems with no issues present. __As you would hopefully expect!__*
@@ -184,12 +251,21 @@ function SameSameB(var) {
 >- CentOS 8 Stream (64bit) - RHEL Distro
 
 <br>
-<br>
-<br>
 
->##### If you seek to profit, sell, include or use secitons of code, please include the full license as shown herein, Or if you utilitze the tebex functions, maybe consider passing some of that cash my way by sponsering this project to continue development for your server and communities.
+-----
 
 <br>
+
+
+> __If you seek to profit, sell, include or use secitons of code, please include the full license as shown.__
+> If you do profit, please consider sending some my way.
+
+<br>
+
+-----
+
+<br>
+
 
 ## MIT License (MIT)
 
