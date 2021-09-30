@@ -206,8 +206,6 @@ function c.status.SetPlayer(data)
             c.status.SetStress(data.Stress)
         end
     end
-    -- Give it 30 seconds then begin the routines
-    Wait(c.sec * 30)
     -- Begin Routines / Timeouts
     c.status.StartHungerDecrease()
     c.status.StartThirstDecrease()

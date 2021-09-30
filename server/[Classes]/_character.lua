@@ -158,13 +158,14 @@ function c.class.CreateCharacter(source, character_id)
         local num = c.check.Number(v)
         if self.Accounts[acc] then
             self.Accounts[acc] = c.math.Decimals(num, 0)
+            self.State.Accounts = self.Accounts
         else
             c.debug("Account entered does not exist")
         end
     end
     --
     self.GetLicenses = function()
-        return or self.Licenses
+        return self.State.Licenses or self.Licenses
     end
     --
     self.GetLicense = function(license)
@@ -273,7 +274,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     -- esx style, except table format.
     self.GetJob = function()
-        return or self.Job
+        return self.State.Job or self.Job
     end
     --
     self.SetJob = function(t)
@@ -286,109 +287,109 @@ function c.class.CreateCharacter(source, character_id)
             self.Job.Grade = Object.Grades[t.Grade].Grade
             self.Job.Grade_Label = Object.Grades[t.Grade].Grade_Label
             self.Job.Grade_Salary = Object.Grades[t.Grade].Grade_Salary
+            self.State.Job = self.Job
         else
             c.debug("Ignoring invalid .SetJob()")
         end
     end
     --
     self.GetPhone = function()
-        return or self.Phone
+        return self.State.Phone or self.Phone
     end
     --
     self.SetPhone = function(s)
         local str = c.check.String(s)
         self.Phone = str
+        self.State.Phone = self.Phone
     end
     -- 
     self.GetInstance = function()
-        return or self.Instance
+        return self.State.Instance or self.Instance
     end
     --
     self.SetInstance = function(v)
         local num = c.check.Number(v, 0, 63)
         self.Instance = num
+        self.State.Instance = self.Instance
     end
     -- 
     self.GetHealth = function()
-        return or self.Health
+        return self.State.Health or self.Health
     end
     --
     self.SetHealth = function(v)
-        local _min = 0
-        local _max = conf.defaulthealth
-        local num = c.check.Number(v, _min, _max)
+        local num = c.check.Number(v, 0, conf.defaulthealth)
         self.Health = num
+        self.State.Health = self.Health
     end
     --
     self.GetArmour = function()
-        return or self.Armour
+        return self.State.Armour or self.Armour
     end
     --
     self.SetArmour = function(v)
-        local _min = 0
-        local _max = conf.defaultarmour
-        local num = c.check.Number(v, _min, _max)        
+        local num = c.check.Number(v, 0, conf.defaultarmour)        
         self.Armour = num
+        self.State.Armour = self.Armour
     end
     --
     self.GetHunger = function()
-        return or self.Hunger
+        return self.State.Hunger or self.Hunger
     end
     --
     self.SetHunger = function(v)
-        local _min = 0
-        local _max = 100
-        local num = c.check.Number(v, _min, _max)
+        local num = c.check.Number(v, 0, 100)
         self.Hunger = num
+        self.State.Hunger = self.Hunger
     end
     --
     self.GetThirst = function()
-        return or self.Thirst
+        return self.State.Thirst or self.Thirst
     end
     --
     self.SetThirst = function(v)
-        local _min = 0
-        local _max = 100
-        local num = c.check.Number(v, _min, _max)
+        local num = c.check.Number(v, 0, 100)
         self.Thirst = num
+        self.State.Thirst = self.Thirst
     end
     --
     self.GetStress = function()
-        return or self.Stress
+        return self.State.Stress or self.Stress
     end
     --
     self.SetStress = function(v)
-        local _min = 0
-        local _max = 100
-        local num = c.check.Number(v, _min, _max)
+        local num = c.check.Number(v, 0, 100)
         self.Stress = num
+        self.State.Stress = self.Stress
     end
     --
     self.GetOldModifiers = function()
-        return or self.OldModifiers
+        return self.OldModifiers
     end
     --
     self.GetModifiers = function()
-        return or self.Modifiers
+        return self.State.Modifiers or self.Modifiers
     end
     --
     self.SetModifiers = function(t)
         local tab = c.check.Table(t)
         self.OldModifiers = self.Modifiers
         self.Modifiers = tab
+        self.State.Modifiers = self.Modifiers
     end
     --
     self.GetAppearance = function()
-        return or self.Appearance
+        return self.State.Appearance or self.Appearance
     end
     --
     self.SetAppearance = function(t)
         local tab = c.check.Table(t)
         self.Appearance = tab
+        self.State.Appearance = self.Appearance
     end
     --
     self.GetCoords = function()
-        return or self.Coords
+        return self.State.Coords or self.Coords
     end
     --
     self.SetCoords = function(t)
@@ -398,15 +399,17 @@ function c.class.CreateCharacter(source, character_id)
             y = c.math.Decimals(tab.y, 2),
             z = c.math.Decimals(tab.z, 2)
         }
+        self.State.Coords = self.Coords
     end
     --
     self.GetWanted = function()
-        return or self.Wanted
+        return self.State.Wanted or self.Wanted
     end
     --
     self.SetWanted = function(b)
         local b = c.check.Boolean(b)
         self.Wanted = b
+        self.State.Wanted = self.Wanted
     end
     --
     self.AddItem = function(name, qty)
@@ -414,12 +417,15 @@ function c.class.CreateCharacter(source, character_id)
             if not self.Inventory[name] then
                 table.insert(self.Inventory, name)
                 self.Inventory[name] = qty
+                self.State.Inventory = self.Inventory
             else
                 self.Inventory[name] = self.Inventory[name] + qty
+                self.State.Inventory = self.Inventory
             end
         end
     end
     --
+    -- need to remove qty prior to remove from table.
     self.RemoveItem = function(name, qty)
         if self.HasItem(name) then
             for k,v in pairs(self.Inventory) do
@@ -444,5 +450,5 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     c.debug("End Character Class Creation")
-    return or self
+    return self
 end

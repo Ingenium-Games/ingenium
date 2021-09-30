@@ -17,8 +17,6 @@ function c.data.Initilize(cb)
     -- Get time and update every minute.
     c.time.UpdateTime()
     --
-
-    --
     if cb then
         cb()
     end
@@ -32,7 +30,7 @@ end
 --- Takes local information from the `user` SQL table and sets it for the client.
 function c.data.SetLocale()
     local xPlayer = c.data.GetPlayer()
-    c.data.locale = xPlayer.GetLocale()
+    c.data.locale = xPlayer.Locale
 end
 
 --- Sets the client as receieved the character data. Boolean
@@ -53,15 +51,9 @@ function c.data.IsPlayerLoaded()
     return c.CharacterLoaded
 end
 
---- Sets the data to the local table on the client side.
----@param t table "Contains the table of data provided by the server to clinet on character selection."
-function c.data.SetPlayer(t)
-    c.Character = t
-end
-
---- Returns the xPlayer passed from the server. Table
+--- Returns the Player state
 function c.data.GetPlayer()
-    return c.Character
+    return Player(GetPlayerServerId()).state
 end
 
 ------------------------------------------------------------------------------

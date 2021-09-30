@@ -76,10 +76,10 @@ if IS_SERVER then
 			-- check if this is a simulated callback (TriggerServerCallback)
 			if not source then
 				-- return the simulated data
-				cb( msgpack_pack_args( eventCallback(src, table_unpack(msgpack_unpack(packed)) ) ) )
+				cb( msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ) )
 			else
 				-- return the data
-				TriggerClientEvent(('Client:Callback:Response:%s:%s'):format(eventName, src), source, msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ))
+				TriggerClientEvent(('Client:Callback:Response:%s:%s'):format(eventName, source), source, msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ))
 			end
 		end)
 		-- return the event data to UnregisterServerCallback

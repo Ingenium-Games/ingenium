@@ -259,28 +259,13 @@ function c.data.LoadPlayer(source, Character_ID)
     local src = tonumber(source)
     -- Fuck Metatable inheritance.
     local xUser = c.class.CreateUser(src)
-    local xCharacter = c.class.CreateCharacter(Character_ID)
+    local xCharacter = c.class.CreateCharacter(src, Character_ID)
     local xPlayer = c.table.Merge(xUser, xCharacter)
-    local data = {}
-    -- what data needs to be sent to the client?
-    data.ID = xPlayer.GetID()
-    data.Character_ID = xPlayer.GetCharacter_ID()
-    data.Ace = xPlayer.GetAce()
-    data.City_ID = xPlayer.GetCity_ID()
-    data.Full_Name = xPlayer.GetFull_Name()
-    data.Phone = xPlayer.GetPhone()
-    data.Health = xPlayer.GetHealth()
-    data.Armour = xPlayer.GetArmour()
-    data.Hunger = xPlayer.GetHunger()
-    data.Thirst = xPlayer.GetThirst()
-    data.Stress = xPlayer.GetStress()
-    data.Modifiers = xPlayer.GetModifiers()
-    data.Appearance = xPlayer.GetAppearance()
-    --
+    -- No need to pass data to the client anymore.
     c.sql.char.SetActive(Character_ID, true, function()
         c.data.SetPlayer(src, xPlayer)
         c.inst.SetPlayer(source, xPlayer.GetInstance())
-        TriggerClientEvent('Client:Character:Loaded', src, data)
+        TriggerClientEvent('Client:Character:Loaded', src)
     end)
 end
 

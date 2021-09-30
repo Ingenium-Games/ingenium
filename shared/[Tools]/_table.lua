@@ -37,13 +37,27 @@ function c.table.Clone(t)
     return u
 end
 
-function c.table.Merge(t, u)
+
+---@param t table "The original table"
+---@param u table "The table to bring into the original"
+---@param bool boolean "keep or replace?""
+function c.table.Merge(t, u, bool)
+    if not bool then bool = true end
     local r = c.table.Clone(t)
-    for i, v in pairs(u) do
-        r[i] = v
+    if bool then
+        for i, v in pairs(u) do
+            if not r[i] then
+                r[i] = v
+            end
+        end
+    else
+        for i, v in pairs(u) do
+            r[i] = v
+        end
     end
     return r
 end
+
 
 function c.table.ReArrange(p, t)
     local r = c.table.Clone(t)

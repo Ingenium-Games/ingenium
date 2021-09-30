@@ -20,18 +20,15 @@ end)
 
 -- Event to receive the data of the chosen character for the client.
 RegisterNetEvent('Client:Character:Loaded')
-AddEventHandler('Client:Character:Loaded', function(data)
-    -- Add routines to do upon resicing the data from server.
-    c.data.SetPlayer(data) -- Full table will be in here
+AddEventHandler('Client:Character:Loaded', function()
+    local xPlayer = c.data.GetPlayer()
     c.data.SetLoadedStatus(true)
-    Wait(250) -- Give yourself a moment prior to marked as loaded.
-    -- SET STATUS
-    c.status.SetPlayer(data) -- This will only use the Health, Armour, Hunger, Thirst and Stress as a sub table c.stats
-    c.modifier.SetModifiers(data)
     --
-    Wait(250) -- Give yourself a moment prior to Syncing from loaded.
-    c.chat.AddSuggestions(data)
-
+    c.chat.AddSuggestions(xPlayer)
+    -- Add routines
+    c.status.SetPlayer(xPlayer)
+    c.modifier.SetModifiers(xPlayer)
+    --
     -- Trigger any events after the Ready State.
     TriggerEvent('Client:Character:Ready')
 end)
