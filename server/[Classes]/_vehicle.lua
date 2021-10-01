@@ -2,22 +2,10 @@
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
 --[[
-NOTES.
-    - Reasoning behind duplicating it as a state and class table.
-    - Just incase it goes arse up and state bags become fucked.
-    - Preemuch the reason. So, Why rely on one, when you can have two?
-    - FUka you.
-
-    Shallow limitations
-State getters and setters are naive: 
-every get will return the full serialized state from the game, 
-and only a direct set operation will serialize the entire state back into the game.
-
-fuck my life, seeya later self code.
-    local entState = Entity(veh).state
-    entState:set('owner', GetPlayerName(source), false)
-    entState:set('fishedSpawning', false, true)
-    
+NOTES
+    - Lemme lay this on thick, Only created vehicles are currently classed into this core.
+    - I need to review the best method moving forward to generate class. Be it on entity 
+    - creation or to run a check to see if it needs to be created.. Probably the later.
 ]] --
 math.randomseed(c.Seed)
 -- ====================================================================================--
