@@ -130,7 +130,11 @@ function c.class.UnownedVehicle(net, bool)
     end
 
     -- Condition
-    self.Condition = c.TriggerClientCallback(self.GetSource(), "GetVehicleCondition", self.Net)
+    self.Condition = TriggerClientCallback({
+        source = self.GetSource(),
+        eventName = 'GetVehicleCondition',
+        args = {self.Net}
+    })
     self.State.Condition = self.Condition
     --
     self.GetCondition = function()
@@ -140,7 +144,12 @@ function c.class.UnownedVehicle(net, bool)
     self.SetCondition = function(conditions)
         self.Condition = conditions
         self.State.Condition = self.Condition
-        c.TriggerClientCallback(self.GetSource(), "SetVehicleCondition", self.Net)
+        -- I dont remember why I added this?
+        TriggerClientCallback({
+            source = self.GetSource(),
+            eventName = 'SetVehicleCondition',
+            args = {self.Net, self.Condition}
+        })
     end
     --
     self.AlterCondition = function(id, v)
@@ -160,7 +169,11 @@ function c.class.UnownedVehicle(net, bool)
     end
 
     -- Modifications
-    self.Modifications = c.TriggerClientCallback(self.GetSource(), "GetVehicleModifications", self.Net)
+    self.Modifications = TriggerClientCallback({
+        source = self.GetSource(),
+        eventName = 'GetVehicleModifications',
+        args = {self.Net}
+    })
     self.State.Modifications = self.Condition
     --
     self.GetModifications = function()
@@ -170,7 +183,12 @@ function c.class.UnownedVehicle(net, bool)
     self.SetModifications = function(modifications)
         self.Modifications = modifications
         self.State.Modifications = self.Modifications
-        c.TriggerClientCallback(self.GetSource(), "SetVehicleModifications", self.Net)
+        -- I dont remember why I added this?
+        TriggerClientCallback({
+            source = self.GetSource(),
+            eventName = 'SetVehicleModifications',
+            args = {self.Net, self.Modifications}
+        })
     end
     --
     self.AlterModification = function(id, v)
@@ -374,7 +392,11 @@ function c.class.OwnedVehicle(net, plate)
     self.SetCondition = function(conditions)
         self.Condition = conditions
         self.State.Condition = self.Condition
-        c.TriggerClientCallback(self.GetSource(), "SetVehicleCondition", self.Net)
+        TriggerClientCallback({
+            source = self.GetSource(),
+            eventName = 'SetVehicleCondition',
+            args = {self.Net, self.Condition}
+        })
     end
     --
     self.AlterCondition = function(id, v)
@@ -404,7 +426,11 @@ function c.class.OwnedVehicle(net, plate)
     self.SetModifications = function(modifications)
         self.Modifications = modifications
         self.State.Modifications = self.Modifications
-        c.TriggerClientCallback(self.GetSource(), "SetVehicleModifications", self.Net)
+        TriggerClientCallback({
+            source = self.GetSource(),
+            eventName = 'SetVehicleModifications',
+            args = {self.Net, self.Modifications}
+        })
     end
     --
     self.AlterModification = function(id, v)
