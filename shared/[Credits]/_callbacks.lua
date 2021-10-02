@@ -57,6 +57,7 @@ end
 
 -- SERVER-SIDE
 if IS_SERVER then
+	local queue = {}
 	--
 	-- @table RegisterServerCallback
 	--
@@ -121,7 +122,7 @@ if IS_SERVER then
 				if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 				prom:resolve( table_unpack(msgpack_unpack(packed)) )
 				-- remove the event handler
-				RemoveEventHandler(eventData)
+				-- RemoveEventHandler(eventData)
 			end)
 
 			-- request the callback
@@ -211,6 +212,7 @@ end
 
 -- CLIENT-SIDE
 if not IS_SERVER then
+	local queue = {}
 	local SERVER_ID = GetPlayerServerId(PlayerId())
 
 	--
@@ -271,7 +273,7 @@ if not IS_SERVER then
 			if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 			prom:resolve( table_unpack(msgpack_unpack(packed)) )
 			-- remove the event handler
-			RemoveEventHandler(eventData)
+			-- RemoveEventHandler(eventData)
 		end)
 
 		-- fire the callback event
