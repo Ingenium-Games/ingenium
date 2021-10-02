@@ -12,7 +12,7 @@ math.randomseed(c.Seed)
 
 function c.class.UnownedVehicle(net, bool)
     local stolen = c.check.Boolean(bool)
-    local fuel = math.random(45, 100)
+    local fuel = math.random(25, 100)
     --
     local self = {}
     self.Net = net
@@ -132,11 +132,10 @@ function c.class.UnownedVehicle(net, bool)
     self.SetCondition = function(conditions)
         self.Condition = conditions
         self.State.Condition = self.Condition
-        -- I dont remember why I added this?
         TriggerClientCallback({
             source = self.GetSource(),
             eventName = 'SetVehicleCondition',
-            args = {self.Net, self.Condition}
+            args = {self.Net}
         })
     end
     --
@@ -171,11 +170,10 @@ function c.class.UnownedVehicle(net, bool)
     self.SetModifications = function(modifications)
         self.Modifications = modifications
         self.State.Modifications = self.Modifications
-        -- I dont remember why I added this?
         TriggerClientCallback({
             source = self.GetSource(),
             eventName = 'SetVehicleModifications',
-            args = {self.Net, self.Modifications}
+            args = {self.Net}
         })
     end
     --
@@ -383,7 +381,7 @@ function c.class.OwnedVehicle(net, plate)
         TriggerClientCallback({
             source = self.GetSource(),
             eventName = 'SetVehicleCondition',
-            args = {self.Net, self.Condition}
+            args = {self.Net}
         })
     end
     --
@@ -417,7 +415,7 @@ function c.class.OwnedVehicle(net, plate)
         TriggerClientCallback({
             source = self.GetSource(),
             eventName = 'SetVehicleModifications',
-            args = {self.Net, self.Modifications}
+            args = {self.Net}
         })
     end
     --
