@@ -257,6 +257,7 @@ end
 ---@param Character_ID string
 function c.data.LoadPlayer(source, Character_ID)
     local src = tonumber(source)
+    local p = promise.new()
     -- Fuck Metatable inheritance.
     local xUser = c.class.CreateUser(src)
     local xCharacter = c.class.CreateCharacter(src, Character_ID)
@@ -265,8 +266,11 @@ function c.data.LoadPlayer(source, Character_ID)
     c.sql.char.SetActive(Character_ID, true, function()
         c.data.SetPlayer(src, xPlayer)
         c.inst.SetPlayer(source, xPlayer.GetInstance())
-        TriggerClientEvent('Client:Character:Loaded', src)
+        p:resolve()
     end)
+    --
+    Citizen.Await(p)
+    TriggerClientEvent('Client:Character:Loaded', src)
 end
 
 
@@ -276,13 +280,17 @@ function c.data.ClientSync()
             Citizen.Wait(conf.clientsync)
             local xPlayers = c.data.GetPlayers()
             if not xPlayers then 
-                Citizen.Wait(conf.clientsync * 2) 
+                Citizen.Wait(conf.clientsync) 
             else
                 for source, xPlayer in pairs(xPlayers) do
                     -- Incase its false
                     if xPlayer then
                         local src = tonumber(source)
-                        local data = c.TriggerClientCallback(src, "Client:Packet")
+                        local data = TriggerClientCallback({
+                            source = src,
+                            eventName = 'DataPacket',
+                            args = {}
+                        })
                         -- Incase its false
                         if data then
                             xPlayer.SetHealth(data.Health)

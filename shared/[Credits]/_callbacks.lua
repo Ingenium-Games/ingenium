@@ -70,7 +70,7 @@ if IS_SERVER then
 		-- save the event name on this call
 		local eventName = args.eventName
 		-- save the event data to return
-		local eventData = RegisterNetEvent('Server:Callback:'..eventName, function(packed, src, cb)
+		RegisterNetEvent('Server:Callback:'..eventName, function(packed, src, cb)
 			-- save the source on this call
 			local source = tonumber(source)
 			-- check if this is a simulated callback (TriggerServerCallback)
@@ -82,16 +82,7 @@ if IS_SERVER then
 				TriggerClientEvent(('Client:Callback:Response:%s:%s'):format(eventName, source), source, msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ))
 			end
 		end)
-		-- return the event data to UnregisterServerCallback
-		return eventData
-	end
 
-	--
-	-- @void UnregisterServerCallback
-	--
-	-- @table eventData - The data from the RegisterServerCallback
-	_G.UnregisterServerCallback = function(eventData)
-		RemoveEventHandler(eventData)
 	end
 
 	--
@@ -115,13 +106,13 @@ if IS_SERVER then
 			-- save the callback function on this call
 			local eventCallback = args.callback
 			-- save the event data on this call
-			local eventData = RegisterNetEvent(('Callback:Return:%s:%s:%s'):format(args.source, args.eventName, ticket), function(packed)
+			RegisterNetEvent(('Callback:Return:%s:%s:%s'):format(args.source, args.eventName, ticket), function(packed)
 				-- check if this call was async
 				-- & if promise wasn't rejected or resolved
 				if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 				prom:resolve( table_unpack(msgpack_unpack(packed)) )
 				-- remove the event handler
-				RemoveEventHandler(eventData)
+				RemoveEventHandler('Callback:Return:%s:%s:%s'):format(args.source, args.eventName, ticket)
 			end)
 
 			-- request the callback
@@ -142,7 +133,7 @@ if IS_SERVER then
 						-- reject the promise
 						if prom.state == PENDING then prom:reject() end
 						-- remove the event handler
-						RemoveEventHandler(eventData)
+						RemoveEventHandler('Callback:Return:%s:%s:%s'):format(args.source, args.eventName, ticket)
 					end
 				end)
 			end
@@ -226,7 +217,7 @@ if not IS_SERVER then
 		-- save the event name on this call
 		local eventName = args.eventName
 		-- save the event data to return
-		local eventData = RegisterNetEvent('Client:Callback:'..eventName, function(packed, ticket)
+		RegisterNetEvent('Client:Callback:'..eventName, function(packed, ticket)
 			-- check if this call is simulated (TriggerClientCallback)
 			if type(ticket) == 'function' then
 				-- return the data to the simulated call
@@ -236,16 +227,6 @@ if not IS_SERVER then
 				TriggerServerEvent(('Callback:Return:%s:%s:%s'):format(SERVER_ID, eventName, ticket), msgpack_pack_args( eventCallback( table_unpack(msgpack_unpack(packed)) ) ))
 			end
 		end)
-		-- return event data so you can UnregisterClientCallback
-		return eventData
-	end
-
-	--
-	-- @void UnregisterClientCallback
-	--
-	-- @table eventData - The data from RegisterClientCallback
-	_G.UnregisterClientCallback = function(eventData)
-		RemoveEventHandler(eventData)
 	end
 
 	--
@@ -264,14 +245,14 @@ if not IS_SERVER then
 		-- save the callback function on this call
 		local eventCallback = args.callback
 		-- save the event data to remove it when resolved
-		local eventData = RegisterNetEvent(('Client:Callback:Response:%s:%s'):format(args.eventName, SERVER_ID),
+		RegisterNetEvent(('Client:Callback:Response:%s:%s'):format(args.eventName, SERVER_ID),
 		function(packed)
 			-- check if this call is async
 			-- & the promise wasn't rejected or resolved
 			if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 			prom:resolve( table_unpack(msgpack_unpack(packed)) )
 			-- remove the event handler
-			RemoveEventHandler(eventData)
+			RemoveEventHandler('Client:Callback:Response:%s:%s'):format(args.eventName, SERVER_ID)
 		end)
 
 		-- fire the callback event
@@ -292,7 +273,7 @@ if not IS_SERVER then
 					-- reject the promise if it wasn't rejected
 					if prom.state == PENDING then prom:reject() end
 					-- remove the event handler
-					RemoveEventHandler(eventData)
+					RemoveEventHandler('Client:Callback:Response:%s:%s'):format(args.eventName, SERVER_ID)
 				end
 			end)
 		end
