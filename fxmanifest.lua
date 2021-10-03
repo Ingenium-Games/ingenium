@@ -3,7 +3,7 @@ fx_version "cerulean"
 game "gta5"
 author "Twiitchter"
 description 'c = exports["ig.core"]:c()'
-version "0.6.5"
+version "0.6.8"
 ------------------------------------------------------------------------------
 ui_page "nui/ig.core.html"
 loadscreen "https://www.ingenium.games/"

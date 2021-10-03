@@ -222,17 +222,17 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
   `Inventory` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Modifications` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Garage` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `State` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'In = True / Out = False',
+  `Status` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'In = True / Out = False',
   `Impound` tinyint(1) NOT NULL DEFAULT 0,
   `Wanted` tinyint(1) NOT NULL DEFAULT 0,
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`ID`),
   UNIQUE KEY `Plate` (`Plate`),
   KEY `Character_ID` (`Character_ID`),
-  KEY `State` (`State`),
   KEY `Impound` (`Impound`),
   KEY `Wanted` (`Wanted`),
-  KEY `Garage` (`Garage`)
+  KEY `Garage` (`Garage`),
+  KEY `State` (`Status`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db.vehicles: ~0 rows (approximately)
