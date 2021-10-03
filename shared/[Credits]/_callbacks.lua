@@ -145,7 +145,9 @@ if IS_SERVER then
 
 			-- check if this call was async
 			if not eventCallback then
-				return Citizen.Await(prom)
+				Citizen.Await(prom)
+				RemoveEventHandler(eventData)
+				return prom
 			end
 	end
 
@@ -262,8 +264,6 @@ if not IS_SERVER then
 			-- & the promise wasn't rejected or resolved
 			if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 			prom:resolve( table_unpack(msgpack_unpack(packed)) )
-			-- remove the event handler
-			-- RemoveEventHandler(eventData)
 		end)
 
 		-- fire the callback event
@@ -291,7 +291,9 @@ if not IS_SERVER then
 
 		-- check if this call is async
 		if not eventCallback then
-			return Citizen.Await(prom)
+			Citizen.Await(prom)
+			RemoveEventHandler(eventData)
+			return prom
 		end
 	end
 

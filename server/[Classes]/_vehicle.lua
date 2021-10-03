@@ -234,8 +234,8 @@ function c.class.UnownedVehicle(net, bool)
     self.Garage = false
     self.State.Garage = self.Garage
 
-    self.State = false
-    self.State.State = self.State
+    self.Status = false
+    self.State.Status = self.Status
 
     self.Impound = false
     self.State.Impound = self.Impound
@@ -442,8 +442,8 @@ function c.class.OwnedVehicle(net, plate)
     self.Garage = data.Garage
     self.State.Garage = self.Garage
 
-    self.State = data.State
-    self.State.State = self.State
+    self.Status = data.Status
+    self.State.Status = self.Status
 
     self.Impound = data.Impound
     self.State.Impound = self.Impound
