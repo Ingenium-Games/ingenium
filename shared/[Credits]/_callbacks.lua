@@ -57,13 +57,12 @@ end
 
 -- SERVER-SIDE
 if IS_SERVER then
-	local queue = {}
 	--
 	-- @table RegisterServerCallback
 	--
 	-- @string eventName - The name of the event to be registered
 	-- @function eventCallback - The function to be executed when event is fired
-	_G.RegisterServerCallback = function(args)
+	RegisterServerCallback = function(args)
 		ensure(args, 'table'); ensure(args.eventName, 'string'); ensure(args.eventCallback, 'function')
 
 		-- save the callback function on this call
@@ -91,7 +90,7 @@ if IS_SERVER then
 	-- @void UnregisterServerCallback
 	--
 	-- @table eventData - The data from the RegisterServerCallback
-	_G.UnregisterServerCallback = function(eventData)
+	UnregisterServerCallback = function(eventData)
 		RemoveEventHandler(eventData)
 	end
 
@@ -104,13 +103,13 @@ if IS_SERVER then
 	-- [@number timeout - Seconds to wait for response]
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
-	_G.TriggerClientCallback = function(args)
+	TriggerClientCallback = function(args)
 		ensure(args, 'table'); ensure(args.source, 'string', 'number'); ensure(args.eventName, 'string'); ensure(args.args, 'table', 'nil'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
 
 		-- check if is a valid playerId [1-...]
 		if tonumber(args.source) > 0 then
 			-- create a new ticket
-			local ticket = tostring(args.source) .. 'x' .. tostring(GetGameTimer())
+			local ticket = c.rng.char(10)
 			-- create a new promise
 			local prom = promise.new()
 			-- save the callback function on this call
@@ -168,7 +167,7 @@ if IS_SERVER then
 	-- [@number timeout - Seconds to wait for response]
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
-	_G.TriggerServerCallback = function(args)
+	TriggerServerCallback = function(args)
 		ensure(args, 'table'); ensure(args.source, 'string', 'number'); ensure(args.eventName, 'string'); ensure(args.args, 'table', 'nil'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
 
 		-- create a new promise
@@ -212,7 +211,6 @@ end
 
 -- CLIENT-SIDE
 if not IS_SERVER then
-	local queue = {}
 	local SERVER_ID = GetPlayerServerId(PlayerId())
 
 	--
@@ -220,7 +218,7 @@ if not IS_SERVER then
 	--
 	-- @string eventName - The name of the event to be fired
 	-- @function eventCallback - The function to be executed when event is fired
-	_G.RegisterClientCallback = function(args)
+	RegisterClientCallback = function(args)
 		ensure(args, 'table'); ensure(args.eventName, 'string'); ensure(args.eventCallback, 'function')
 		
 		-- save the callback function on this call
@@ -246,7 +244,7 @@ if not IS_SERVER then
 	-- @void UnregisterClientCallback
 	--
 	-- @table eventData - The data from RegisterClientCallback
-	_G.UnregisterClientCallback = function(eventData)
+	UnregisterClientCallback = function(eventData)
 		RemoveEventHandler(eventData)
 	end
 
@@ -258,7 +256,7 @@ if not IS_SERVER then
 	-- [@number timeout - Seconds to wait for response]
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
-	_G.TriggerServerCallback = function(args)
+	TriggerServerCallback = function(args)
 		ensure(args, 'table'); ensure(args.args, 'table', 'nil'); ensure(args.eventName, 'string'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
 		
 		-- create a new promise
@@ -314,7 +312,7 @@ if not IS_SERVER then
 	-- [@number timeout - Seconds to wait for response]
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
-	_G.TriggerClientCallback = function(args)
+	TriggerClientCallback = function(args)
 		ensure(args, 'table'); ensure(args.eventName, 'string'); ensure(args.args, 'table', 'nil'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
 
 		-- create a new promise for this call
