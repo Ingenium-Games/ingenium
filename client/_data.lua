@@ -53,7 +53,7 @@ end
 
 --- Returns the Player state
 function c.data.GetPlayer()
-    return Player(GetPlayerServerId()).state
+    return Player(GetPlayerServerId(PlayerId())).state
 end
 
 ------------------------------------------------------------------------------

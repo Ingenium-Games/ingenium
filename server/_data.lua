@@ -291,8 +291,8 @@ function c.data.ClientSync()
                             eventName = 'DataPacket',
                             args = {}
                         })
-                        -- Incase its false
-                        if data then
+                        -- Incase its false or not yet defined
+                        if data ~= nil or data ~= false then
                             xPlayer.SetHealth(data.Health)
                             xPlayer.SetArmour(data.Armour)
                             xPlayer.SetHunger(data.Hunger)
