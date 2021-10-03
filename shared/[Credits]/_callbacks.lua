@@ -106,10 +106,8 @@ if IS_SERVER then
 	TriggerClientCallback = function(args)
 		ensure(args, 'table'); ensure(args.source, 'string', 'number'); ensure(args.eventName, 'string'); ensure(args.args, 'table', 'nil'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
 
-		-- check if is a valid playerId [1-...]
-		if tonumber(args.source) > 0 then
 			-- create a new ticket
-			local ticket = c.rng.char(10)
+			local ticket = c.rng.chars(10)
 			-- create a new promise
 			local prom = promise.new()
 			-- save the callback function on this call
@@ -147,15 +145,8 @@ if IS_SERVER then
 
 			-- check if this call was async
 			if not eventCallback then
-				return Citizen.Await(function()
-					RemoveEventHandler(eventData)
-					return prom
-				end)
+				return Citizen.Await(prom)
 			end
-		else
-			-- raise an error if source isn't valid
-			error 'source should be higher than 0'
-		end
 	end
 
 	--
@@ -300,10 +291,7 @@ if not IS_SERVER then
 
 		-- check if this call is async
 		if not eventCallback then
-			return Citizen.Await(function()
-				RemoveEventHandler(eventData)
-				return prom
-			end)
+			return Citizen.Await(prom)
 		end
 	end
 
