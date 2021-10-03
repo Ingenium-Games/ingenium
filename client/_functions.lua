@@ -411,9 +411,9 @@ function c.CreateVehicle(name, x, y, z, h, plate, stolen)
     if NetworkDoesEntityExistWithNetworkId(net) then
         c.debug("Entity exists on network, id: "..net.." entity: "..entity)              
         if plate then
-            TriggerServerEvent("AssignVehicleData", net, plate)
+            TriggerServerEvent("Server:VehicleData", net, plate)
         else
-            TriggerServerEvent("AssignVehicleData", net, false, stolen)
+            TriggerServerEvent("Server:VehicleData", net, false, stolen)
         end
     else
         net = false

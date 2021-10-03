@@ -25,7 +25,6 @@ AddEventHandler('Client:Character:Loaded', function()
     c.data.SetLoadedStatus(true)
     --
     c.chat.AddSuggestions(xPlayer)
-    -- Add routines
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
     --

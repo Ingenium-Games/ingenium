@@ -226,21 +226,41 @@ AddEventHandler("Server:Bank:Add", function(data, req)
 end)
 
 RegisterNetEvent("Server:EnteringVehicle")
-AddEventHandler("Server:EnteringVehicle", function(vehicle, seat, name, netId)
-    local found = c.vehicle.Find(netId)
+AddEventHandler("Server:EnteringVehicle", function(vehicle, seat, name, net)
+    local found = c.vehicle.Find(net)
+    -- Are we stealing a vehicle ??
     if not found then
-        local xVehicle = c.class.UnownedVehicle(netId)
-        c.vehicle.Add(netId, xVehicle)
+        c.vehicle.Add(net, c.class.UnownedVehicle(net, true))
     end
 end)
 
 RegisterNetEvent("Server:EnteredVehicle")
-AddEventHandler("Server:EnteredVehicle", function(vehicle, seat, name, netId)
+AddEventHandler("Server:EnteredVehicle", function(vehicle, seat, name, net)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    local xVehicle = c.data.GetVehicle(net)
 
+    if not xVehicle.CheckKey(xPlayer.Character_ID) then
+        if GetIsVehicleEngineRunning(xVehicle.Entity) then
+            TriggerClientEvent("Client:Notify", src, "Found the keys!")
+            xVehicle.AddKey(xPlayer.Character_ID)
+        else
+            local test = math.random(0,5)
+            if test >= 3 then
+                TriggerClientEvent("Client:Notify", src, "Found the keys!")
+                xVehicle.AddKey(xPlayer.Character_ID)
+            else
+                TriggerClientEvent("Client:Notify", src, "Shit, it was disabled!")
+                SetVehicleAlarm(xVehicle.Entity, true)
+                TaskEveryoneLeaveVehicle(xVehicle.Entity)
+                SetVehicleDoorsLocked(xVehicle.Entity, 6)
+            end
+        end 
+    end
 end)
 
 RegisterNetEvent("Server:LeftVehicle")
-AddEventHandler("Server:LeftVehicle", function(vehicle, seat, name, netId)
+AddEventHandler("Server:LeftVehicle", function(vehicle, seat, name, net)
 
 end)
 
@@ -252,8 +272,8 @@ AddEventHandler("Server:EnteringVehicle:Aborted", function()
     CancelEvent()
 end)
 
-RegisterNetEvent("AssignVehicleData")
-AddEventHandler("AssignVehicleData", function(net, plate, stolen)
+RegisterNetEvent("Server:VehicleData")
+AddEventHandler("Server:VehicleData", function(net, plate, stolen)
     local src = source
     if plate then
         c.vehicle.Add(net, c.class.OwnedVehicle(net, plate))

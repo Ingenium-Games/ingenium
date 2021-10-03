@@ -72,11 +72,11 @@ Citizen.CreateThread(function()
 				local netId = VehToNet(vehicle)
 				isEnteringVehicle = true
                 TriggerEvent('Client:EnteringVehicle', vehicle, seat, GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)), netId)
-				TriggerServerEvent('Client:EnteringVehicle', vehicle, seat, GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)), netId)
+				TriggerServerEvent('Server:EnteringVehicle', vehicle, seat, GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)), netId)
 			elseif not DoesEntityExist(GetVehiclePedIsTryingToEnter(ped)) and not IsPedInAnyVehicle(ped, true) and isEnteringVehicle then
 				-- vehicle entering aborted
                 TriggerEvent('Client:EnteringAborted')
-				TriggerServerEvent('Client:EnteringAborted')
+				TriggerServerEvent('Server:EnteringAborted')
 				isEnteringVehicle = false
 			elseif IsPedInAnyVehicle(ped, false) then
 				-- suddenly appeared in a vehicle, possible teleport
@@ -88,7 +88,7 @@ Citizen.CreateThread(function()
 				local name = GetDisplayNameFromVehicleModel()
 				local netId = VehToNet(currentVehicle)
                 TriggerEvent('Client:EnteredVehicle', currentVehicle, currentSeat, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
-				TriggerServerEvent('Client:EnteredVehicle', currentVehicle, currentSeat, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
+				TriggerServerEvent('Server:EnteredVehicle', currentVehicle, currentSeat, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
 			end
 		elseif isInVehicle then
 			if not IsPedInAnyVehicle(ped, false) or IsPlayerDead(PlayerId()) then
@@ -97,7 +97,7 @@ Citizen.CreateThread(function()
 				local name = GetDisplayNameFromVehicleModel()
 				local netId = VehToNet(currentVehicle)
                 TriggerEvent('Client:LeftVehicle', currentVehicle, currentSeat, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
-				TriggerServerEvent('Client:LeftVehicle', currentVehicle, currentSeat, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
+				TriggerServerEvent('Server:LeftVehicle', currentVehicle, currentSeat, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
 				isInVehicle = false
 				currentVehicle = 0
 				currentSeat = 0

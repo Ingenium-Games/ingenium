@@ -5,14 +5,7 @@ c.ace = {"public","mod","admin","superadmin","developer","owner"}
 c.aces = {}
 --[[
 NOTES
-    This is used to loop the lists of chat suggestions based on player loading in and the client receiving the infromation they need.
-    this is client sided, so if they wanted too they COULD look at this, but really this is only an attempt at limiting the displayed 
-    commands in chat to reduce clutter.
-
-    And there is no client side way of getting it and its low priotiry, so I could define a number then using the number minue 1 till 0
-        too provide permissions per list, in the mean time, ill pul the ace passed to the client and load them as a single one off.
-
-        fuk it
+    - Aces are now run based off the xPlayer (Player(id).state) table containing the Ace.
 ]] --
 math.randomseed(c.Seed)
 -- ====================================================================================--

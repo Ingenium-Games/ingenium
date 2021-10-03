@@ -11,6 +11,7 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 
 function c.class.UnownedVehicle(net, bool)
+    c.debug("Creating UnOwned Vehicle")
     local stolen = c.check.Boolean(bool)
     local fuel = math.random(25, 100)
     --
@@ -257,13 +258,14 @@ function c.class.UnownedVehicle(net, bool)
         return self.State.Wanted or self.Wanted
     end
     --
-
+    c.debug("Completed UnOwned Vehicle")
     return self
 end
 
 -- ====================================================================================--
 
 function c.class.OwnedVehicle(net, plate)
+    c.debug("Creating Owned Vehicle")
     local data = c.sql.GetVehicleByPlate(plate)
     local self = {}
     self.Entity = NetworkGetEntityFromNetworkId(net)
@@ -506,5 +508,6 @@ function c.class.OwnedVehicle(net, plate)
     --
 
     --
+    c.debug("Completed Owned Vehicle")
     return self
 end

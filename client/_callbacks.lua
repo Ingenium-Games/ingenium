@@ -10,7 +10,7 @@ math.randomseed(c.Seed)
 
 local DataPacket = RegisterClientCallback({
     eventName = 'DataPacket',
-    eventCallback = function(...)
+    eventCallback = function()
         local data = false
         if c.data.GetLoadedStatus() then
             c.IsBusy()
