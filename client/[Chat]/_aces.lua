@@ -1,7 +1,7 @@
 -- ====================================================================================--
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
-c.ace = {"public","mod","admin","superadmin","developer","owner"}
+c.ace = {}
 c.aces = {}
 --[[
 NOTES
@@ -10,14 +10,15 @@ NOTES
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-c.aces.public = function()
+c.ace.public = function()
     -- public
     TriggerEvent("chat:addSuggestion", "/switch", "Use to change your character(s).")
+
 end
 
-c.aces.mod = function()
+c.ace.mod = function()
     -- public
-    c.aces.public()
+    c.ace.public()
 
     -- mod
 
@@ -34,9 +35,9 @@ c.aces.mod = function()
     
 end
 
-c.aces.admin = function()
+c.ace.admin = function()
     -- mod
-    c.aces.mod()
+    c.ace.mod()
 
     -- admin
 
@@ -51,21 +52,26 @@ c.aces.admin = function()
     }})
 end
 
-c.aces.superadmin = function()   
+c.ace.superadmin = function()   
     -- admin
-    c.aces.admin()
+    c.ace.admin()
 
 end
 
-c.aces.developer = function()     
+c.ace.developer = function()     
     -- admin
-    c.aces.superadmin()
+    c.ace.superadmin()
     
 end
 
-c.aces.owner = function()     
+c.ace.owner = function()     
     -- admin
-    c.aces.developer()
+    c.ace.developer()
     
 
 end
+
+for k,v in pairs(c.ace) do
+    table.insert(c.aces, k)
+end
+

@@ -42,43 +42,49 @@ end)
 RegisterNetEvent('Server:Character:Request:Delete')
 AddEventHandler('Server:Character:Request:Delete', function(Character_ID)
     local src = tonumber(source)
-    local prim = c.identifier(src)
+    local primary_id = c.identifier(src)
     c.sql.char.Delete(Character_ID, function()
-        TriggerEvent('Server:Character:Request:List', src, prim)
+        TriggerEvent('Server:Character:Request:List', src, primary_id)
     end)
 end)
 
 
 -- Need to move this and clean it the fuck up, its gross atm.
 RegisterNetEvent('Server:Character:Request:Create')
-AddEventHandler('Server:Character:Request:Create', function(first_name, last_name, height, date)
+AddEventHandler('Server:Character:Request:Create', function(first_name, last_name, height, birth_date)
     local src = tonumber(source)
-    local char = c.sql.gen.CharacterID()
-    local city = c.sql.gen.CityID()
-    local phone = c.sql.gen.PhoneNumber()
-    local banknum = c.sql.gen.AccountNumber()
-    local prim = c.identifier(src)
-    local data = {
-        Primary_ID = prim, -- Owner
-        Character_ID = char, -- Unique ID
-        First_Name = first_name,
-        Last_Name = last_name,
-        Height = height,
-        Birth_Date = date,
-        City_ID = city,
-        Phone = phone,
-        Coords = json.encode(conf.spawn),
-        Job = json.encode(conf.default.job),
-        Accounts = json.encode(conf.default.accounts),
-        Modifiers = json.encode(conf.default.modifiers),
-    }
+    local p = promise.new()
+    local character_id = c.sql.gen.CharacterID()
+    local city_id = c.sql.gen.CityID()
+    local phone_number = c.sql.gen.PhoneNumber()
+    local bank_number = c.sql.gen.AccountNumber()
+    local primary_id = c.identifier(src)
+    local data = {}
+    
+    data.Primary_ID = primary_id -- Owner
+    data.Character_ID = character_id -- Unique ID
+    data.First_Name = first_name
+    data.Last_Name = last_name
+    data.Height = height
+    data.Birth_Date = birth_date
+    data.City_ID = city_id
+    data.Phone = phone_number
+    data.Coords = json.encode(conf.spawn)
+    data.Job = json.encode(conf.default.job)
+    data.Accounts = json.encode(conf.default.accounts)
+    data.Modifiers = json.encode(conf.default.modifiers)
+    
     c.sql.char.Add(data, function()
         -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etc.
-        c.sql.bank.AddAccount(char, banknum)
+        c.sql.bank.AddAccount(character_id, bank_number)
         
+        --
+        p:resolve()
     end)
-    c.data.LoadPlayer(src, char)
-    TriggerClientEvent('Client:Character:FirstSpawn', src)
+    --
+    c.data.LoadPlayer(src, character_id)
+    --
+    Citizen.Await(p)    
     --[[
             ADD YOUR CHARACTER CREATION EVENT BELOW
     ]]--
@@ -88,8 +94,6 @@ AddEventHandler('Server:Character:Request:Create', function(first_name, last_nam
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
     ]]--
-    Wait(500)
-    c.inst.SetPlayer(src, c.inst.New())
 end)
 
 
@@ -166,6 +170,18 @@ AddEventHandler('Server:Instance:Player:Default', function(req)
     c.inst.SetPlayerDefault(src)
 end)
 
+
+RegisterNetEvent("Server:VehicleData")
+AddEventHandler("Server:VehicleData", function(net, plate, stolen)
+    local src = source
+    if plate then
+        c.vehicle.Add(net, c.class.OwnedVehicle(net, plate))
+    else
+        c.vehicle.Add(net, c.class.UnownedVehicle(net, stolen))
+    end
+end)
+
+
 -- ====================================================================================--
 -- Bank Events for Transactions
 
@@ -223,61 +239,4 @@ AddEventHandler("Server:Bank:Add", function(data, req)
     --
     xPlayer.AddBank(amount)
     TriggerClientEvent("Client:Notify", xPlayer.ID, "$"..amount.." was added to your account.", "warn")
-end)
-
-RegisterNetEvent("Server:EnteringVehicle")
-AddEventHandler("Server:EnteringVehicle", function(vehicle, seat, name, net)
-    local found = c.vehicle.Find(net)
-    -- Are we stealing a vehicle ??
-    if not found then
-        c.vehicle.Add(net, c.class.UnownedVehicle(net, true))
-    end
-end)
-
-RegisterNetEvent("Server:EnteredVehicle")
-AddEventHandler("Server:EnteredVehicle", function(vehicle, seat, name, net)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    local xVehicle = c.data.GetVehicle(net)
-
-    if not xVehicle.CheckKey(xPlayer.Character_ID) then
-        if GetIsVehicleEngineRunning(xVehicle.Entity) then
-            TriggerClientEvent("Client:Notify", src, "Found the keys!")
-            xVehicle.AddKey(xPlayer.Character_ID)
-        else
-            local test = math.random(0,5)
-            if test >= 3 then
-                TriggerClientEvent("Client:Notify", src, "Found the keys!")
-                xVehicle.AddKey(xPlayer.Character_ID)
-            else
-                TriggerClientEvent("Client:Notify", src, "Shit, it was disabled!")
-                SetVehicleAlarm(xVehicle.Entity, true)
-                TaskEveryoneLeaveVehicle(xVehicle.Entity)
-                SetVehicleDoorsLocked(xVehicle.Entity, 6)
-            end
-        end 
-    end
-end)
-
-RegisterNetEvent("Server:LeftVehicle")
-AddEventHandler("Server:LeftVehicle", function(vehicle, seat, name, net)
-
-end)
-
-RegisterNetEvent("Server:EnteringVehicle:Aborted")
-AddEventHandler("Server:EnteringVehicle:Aborted", function()
-    -- before canceling event
-
-    --
-    CancelEvent()
-end)
-
-RegisterNetEvent("Server:VehicleData")
-AddEventHandler("Server:VehicleData", function(net, plate, stolen)
-    local src = source
-    if plate then
-        c.vehicle.Add(net, c.class.OwnedVehicle(net, plate))
-    else
-        c.vehicle.Add(net, c.class.UnownedVehicle(net, stolen))
-    end
 end)
