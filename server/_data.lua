@@ -254,6 +254,39 @@ end
 
 -- ====================================================================================--
 
+function c.data.UpdatePacket(source, data)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    --
+    if data.Health then
+        xPlayer.SetHealth(data.Health)
+    end
+    if data.Armour then
+        xPlayer.SetArmour(data.Armour)
+    end
+    if data.Hunger then
+        xPlayer.SetHunger(data.Hunger)
+    end
+    if data.Thirst then
+        xPlayer.SetThirst(data.Thirst)
+    end
+    if data.Stress then
+        xPlayer.SetStress(data.Stress)
+    end
+    if data.Modifiers then
+        xPlayer.SetModifiers(data.Modifiers)
+    end
+    if data.Coords then
+        xPlayer.SetCoords(data.Coords)
+    end                    
+    
+    
+    --
+    -- Run Additional Functions post data update.
+    c.state.UpdateStates(src)
+end
+
+
 --- Create xPlayer table and pass to client.
 ---@param source number
 ---@param Character_ID string
@@ -279,31 +312,16 @@ end
 function c.data.ClientSync()
     local function Do()
         local xPlayers = c.data.GetPlayers()
-        if not xPlayers then 
-            Citizen.Wait(conf.clientsync) 
-        else
-            for source, xPlayer in pairs(xPlayers) do
-                -- Incase its false
-                if xPlayer then
-                    local src = tonumber(source)
-                    local data = TriggerClientCallback({
-                        source = src,
-                        eventName = 'DataPacket',
-                        args = {}
-                    })
-                    -- Incase its false or not yet defined
-                    if data then
-                        xPlayer.SetHealth(data.Health)
-                        xPlayer.SetArmour(data.Armour)
-                        xPlayer.SetHunger(data.Hunger)
-                        xPlayer.SetThirst(data.Thirst)
-                        xPlayer.SetStress(data.Stress)
-                        xPlayer.SetModifiers(data.Modifiers)
-                        xPlayer.SetCoords(data.Coords)
-                        --
-                        c.state.UpdateStates(src)
-                    end
-                end
+        for source, xPlayer in pairs(xPlayers) do
+            -- Incase its false
+            if xPlayer then
+                local src = tonumber(source)
+                local data = TriggerClientCallback({
+                    source = src,
+                    eventName = 'DataPacket',
+                    args = {}
+                })
+                c.data.UpdatePacket(source, data)
             end
         end
         SetTimeout(conf.clientsync, Do)
