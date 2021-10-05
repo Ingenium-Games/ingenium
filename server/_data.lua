@@ -277,37 +277,36 @@ end
 
 
 function c.data.ClientSync()
-    Citizen.CreateThread(function()
-        while true do
-            Citizen.Wait(conf.clientsync)
-            local xPlayers = c.data.GetPlayers()
-            if not xPlayers then 
-                Citizen.Wait(conf.clientsync) 
-            else
-                for source, xPlayer in pairs(xPlayers) do
-                    -- Incase its false
-                    if xPlayer then
-                        local src = tonumber(source)
-                        local data = TriggerClientCallback({
-                            source = src,
-                            eventName = 'DataPacket',
-                            args = {}
-                        })
-                        -- Incase its false or not yet defined
-                        if data then
-                            xPlayer.SetHealth(data.Health)
-                            xPlayer.SetArmour(data.Armour)
-                            xPlayer.SetHunger(data.Hunger)
-                            xPlayer.SetThirst(data.Thirst)
-                            xPlayer.SetStress(data.Stress)
-                            xPlayer.SetModifiers(data.Modifiers)
-                            xPlayer.SetCoords(data.Coords)
-                            --
-                            c.state.UpdateStates(src)
-                        end
+    local function Do()
+        local xPlayers = c.data.GetPlayers()
+        if not xPlayers then 
+            Citizen.Wait(conf.clientsync) 
+        else
+            for source, xPlayer in pairs(xPlayers) do
+                -- Incase its false
+                if xPlayer then
+                    local src = tonumber(source)
+                    local data = TriggerClientCallback({
+                        source = src,
+                        eventName = 'DataPacket',
+                        args = {}
+                    })
+                    -- Incase its false or not yet defined
+                    if data then
+                        xPlayer.SetHealth(data.Health)
+                        xPlayer.SetArmour(data.Armour)
+                        xPlayer.SetHunger(data.Hunger)
+                        xPlayer.SetThirst(data.Thirst)
+                        xPlayer.SetStress(data.Stress)
+                        xPlayer.SetModifiers(data.Modifiers)
+                        xPlayer.SetCoords(data.Coords)
+                        --
+                        c.state.UpdateStates(src)
                     end
                 end
             end
         end
-    end)
+        SetTimeout(conf.clientsync, Do)
+    end
+    SetTimeout(conf.clientsync, Do)
 end

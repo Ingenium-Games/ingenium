@@ -191,19 +191,19 @@ function c.status.SetPlayer(data)
     -- time to gain our data from the server.
     if data then
         if data.Health then
-            c.status.SetHealth(ped, data.Health)
+            c.status.SetHealth(ped, (data.Health or conf.defaulthealth))
         end
         if data.Armour then
-            c.status.SetArmour(ped, data.Armour)
+            c.status.SetArmour(ped, (data.Armour or conf.defaultarmour))
         end
         if data.Hunger then
-            c.status.SetHunger(data.Hunger)
+            c.status.SetHunger((data.Hunger or _max))
         end
         if data.Thirst then
-            c.status.SetThirst(data.Thirst)
+            c.status.SetThirst((data.Thirst or _max))
         end
         if data.Stress then
-            c.status.SetStress(data.Stress)
+            c.status.SetStress((data.Stress or _min))
         end
     end
     -- Begin Routines / Timeouts
