@@ -84,8 +84,8 @@ AddEventHandler('entityCreating', function(ent)
     end
 end)
 
-AddEventHandler('entityRemoved', function()
-
+AddEventHandler('entityRemoved', function(ent)
+    
 end)
 
 AddEventHandler('playerEnteredScope', function()
