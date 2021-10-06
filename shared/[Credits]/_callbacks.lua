@@ -147,7 +147,7 @@ if IS_SERVER then
 			if not eventCallback then
 				Citizen.Await(prom)
 				RemoveEventHandler(eventData)
-				return prom
+				return prom.value
 			end
 	end
 
@@ -293,7 +293,7 @@ if not IS_SERVER then
 		if not eventCallback then
 			Citizen.Await(prom)
 			RemoveEventHandler(eventData)
-			return prom
+			return prom.value
 		end
 	end
 
