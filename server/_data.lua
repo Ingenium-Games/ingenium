@@ -291,6 +291,7 @@ function c.data.ClientSync()
                         eventName = 'DataPacket',
                         args = {}
                     })
+                    c.debug(c.table.Dump(data))
                     -- Incase its false or not yet defined
                     if data then
                         xPlayer.SetHealth(data.Health)
