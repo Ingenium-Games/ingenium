@@ -32,7 +32,7 @@ end
 
 function c.vehicle.CleanUp()
     for k,v in pairs(c.vdex) do
-        if not DoesEntityExist(NetworkGetEntityFromNetworkId(v)) then
+        if not DoesEntityExist(NetworkGetEntityFromNetworkId(k)) then
             table.remove(c.vdex, k)
         end
     end

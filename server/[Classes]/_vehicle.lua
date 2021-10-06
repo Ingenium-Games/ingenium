@@ -246,7 +246,7 @@ function c.class.UnownedVehicle(net, bool)
     self.State.Owner = self.Owner
     --
     self.GetOwner = function()
-        return self.Owner or self.State.Owner
+        return self.State.Owner or self.Owner
     end
     --
 
