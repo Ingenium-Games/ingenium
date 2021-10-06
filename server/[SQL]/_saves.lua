@@ -161,8 +161,8 @@ end
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
-    for i = 1, #xVehicles, 1 do
-        local data = c.data.GetVehicle(i)
+    for k,v in pairs(xVehicles) do
+        local data = v
         if data.GetOwner() then
             -- Other Variables.
             local Garage = data.GetGarage()
@@ -200,7 +200,7 @@ function c.sql.save.Vehicles(cb)
     if cb then
         cb()
     end
-    
+
 end
 
 --[[    Jobss ]]--
