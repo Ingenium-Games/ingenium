@@ -16,7 +16,7 @@ math.randomseed(c.Seed)
 
 function c.vehicle.Find(net)
     for k,v in pairs(c.vdex) do
-        if v == net then
+        if k == net then
             return true
         end
     end
