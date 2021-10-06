@@ -238,7 +238,7 @@ function c.data.ServerSync()
         end)
         Citizen.Wait(conf.sec * 5)
         c.sql.save.Vehicles(function() 
-            -- do 
+            c.vehicle.CleanUp()
         end)
         Citizen.Wait(conf.sec * 5)
         c.sql.save.Jobs(function() 
@@ -321,7 +321,6 @@ function c.data.ClientSync()
                     eventName = 'DataPacket',
                     args = {}
                 })
-                c.debug(c.table.Dump(data))
                 c.data.UpdatePacket(source, data)
             end
         end

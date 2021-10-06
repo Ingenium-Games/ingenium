@@ -77,6 +77,5 @@ function c.data.Packet()
         y = c.math.Decimals(loc.y, 2),
         z = c.math.Decimals(loc.z, 2)
     }
-    c.debug(c.table.Dump(data))
     return data
 end
