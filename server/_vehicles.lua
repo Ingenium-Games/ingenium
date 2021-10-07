@@ -28,6 +28,7 @@ function c.vehicle.Add(net, vehicle)
         table.insert(c.vdex, net)
         c.vdex[net] = vehicle
     end
+    c.debug(c.table.Dump(c.vdex))
 end
 
 function c.vehicle.CleanUp()
