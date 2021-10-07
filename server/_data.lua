@@ -233,19 +233,11 @@ end
 -- Server to DB routine.
 function c.data.ServerSync()
     local function Do()
-        c.sql.save.Users(function() 
-            -- do 
-        end)
+        c.sql.save.Users()
         Citizen.Wait(conf.sec * 5)
-        c.sql.save.Vehicles(function() 
-            c.vehicle.CleanUp()
-        end)
+        c.sql.save.Vehicles()
         Citizen.Wait(conf.sec * 5)
-        c.sql.save.Jobs(function() 
-            -- do 
-        end)
-        Citizen.Wait(conf.sec * 5)
-        --
+        c.sql.save.Jobs()
         c.data.Save("Users, Vehicles, Jobs, ")
         SetTimeout(conf.serversync, Do)
     end

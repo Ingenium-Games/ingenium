@@ -15,8 +15,8 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 
 function c.vehicle.Find(net)
-    for k,v in pairs(c.vdex) do
-        if k == net then
+    for k,v in ipairs(c.vdex) do
+        if v == net then
             return true
         end
     end
@@ -31,8 +31,8 @@ function c.vehicle.Add(net, vehicle)
 end
 
 function c.vehicle.CleanUp()
-    for k,v in pairs(c.vdex) do
-        if not DoesEntityExist(NetworkGetEntityFromNetworkId(k)) then
+    for k,v in ipairs(c.vdex) do
+        if not DoesEntityExist(v.Entity) then
             table.remove(c.vdex, k)
         end
     end

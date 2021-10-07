@@ -44,7 +44,7 @@ local GetVehicleModifications = RegisterClientCallback({
     eventName = 'GetVehicleModifications',
     eventCallback = function(net)
         local entity = NetToVeh(net)
-        return c.GetVehicleCondition(entity)
+        return c.GetVehicleModifications(entity)
     end
 })
 

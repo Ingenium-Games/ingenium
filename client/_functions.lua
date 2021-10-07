@@ -754,7 +754,7 @@ end
 function c.GetVehicleCondition(vehicle)
     local numwheels = GetVehicleNumberOfWheels(vehicle)
     local wheels = {}
-    for i = 1, numwheels, 0 do
+    for i = 1, numwheels do
         wheels[i] = {
             ["Burst"] = IsVehicleTyreBurst(vehicle, i, false),
             ["Gone"] = DoesVehicleTyreExist(vehicle, i),
@@ -764,7 +764,7 @@ function c.GetVehicleCondition(vehicle)
     end
     local numdoors = GetNumberOfVehicleDoors(vehicle)
     local doors = {}
-    for i = 1, numdoors, 0 do
+    for i = 1, numdoors do
         doors[i] = {
             ["ConValid"] = GetIsDoorValid(vehicle, i),
             ["ConDamaged"] = IsVehicleDoorDamaged(vehicle, i)
