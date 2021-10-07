@@ -25,7 +25,6 @@ end
 
 function c.vehicle.Add(net, vehicle)
     if not c.vehicle.Find(net) then
-        table.insert(c.vdex, net)
         c.vdex[net] = vehicle
     end
     c.debug(c.table.Dump(c.vdex))
