@@ -157,15 +157,11 @@ AddEventHandler("Server:Character:Switch", function(req)
 end)
 
 -- Server Death Handler - if was killed by a player or not.
--- [C+S]
+-- [C]
 RegisterNetEvent("Server:Character:Death")
-AddEventHandler("Server:Character:Death", function(req, data)
-    local src = req or source
-    if (data.PlayerKill == true) then
-        c.discord(conf.deathlog)
-    else
-        c.discord(conf.deathlog)
-    end
+AddEventHandler("Server:Character:Death", function(data)
+    local src = source
+
 end)
 
 --@ req = server_id or source

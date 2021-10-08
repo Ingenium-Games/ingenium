@@ -352,6 +352,50 @@ function c.sql.char.SetCoords(character_id, vector3, cb)
     end)
 end
 
+--- Get - The `Tattoos` from the `Character_ID`
+-- @`Character_ID`
+-- cb if any.
+function c.sql.char.GetTattoos(character_id, cb)
+    local Character_ID = character_id
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchScalar('SELECT `Tattoos` FROM `characters` WHERE `Character_ID` = @Character_ID;', {
+        ['@Character_ID'] = Character_ID
+    }, function(data)
+        if data then
+            result = json.decode(data)
+            IsBusy = false
+        end
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+    return result
+end
+
+--- SET - The `Tattoos` from the `Character_ID`
+-- @`Character_ID`
+-- @style - TABLE VALUE
+-- cb if any.
+function c.sql.char.SetTattoos(character_id, style, cb)
+    local Character_ID = character_id
+    local Tattoos = json.encode(style)
+    MySQL.Async.execute('UPDATE `characters` SET `Tattoos` = @Tattoos WHERE `Character_ID` = @Character_ID;', {
+        ['@Tattoos'] = Tattoos,
+        ['@Character_ID'] = Character_ID
+    }, function(data)
+        if data then
+            --
+        end
+        if cb then
+            cb()
+        end
+    end)
+end
+
 --- Get - The `Appearance` from the `Character_ID`
 -- @`Character_ID`
 -- cb if any.

@@ -90,6 +90,9 @@ function c.class.CreateCharacter(source, character_id)
     --
     self.OldModifiers = self.Modifiers
     --
+    self.Tattoos = json.decode(data.Tattoos)
+    self.State.Tattoos = self.Tattoos
+    --    
     self.Appearance = json.decode(data.Appearance)
     self.State.Appearance = self.Appearance
     --
@@ -386,6 +389,16 @@ function c.class.CreateCharacter(source, character_id)
         local tab = c.check.Table(t)
         self.Appearance = tab
         self.State.Appearance = self.Appearance
+    end
+    --
+    self.GetTattoos = function()
+        return self.State.Tattoos or self.Tattoos
+    end
+    --
+    self.SetTattoos = function(t)
+        local tab = c.check.Table(t)
+        self.Tattoos = tab
+        self.State.Tattoos = self.Tattoos
     end
     --
     self.GetCoords = function()
