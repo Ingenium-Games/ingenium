@@ -14,6 +14,7 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
+---@param net integer "Network ID 16 bit integer"
 function c.vehicle.Find(net)
     for k,v in ipairs(c.vdex) do
         if k == net or v.Net == net then
@@ -21,13 +22,6 @@ function c.vehicle.Find(net)
         end
     end
     return false
-end
-
-function c.vehicle.Add(net, vehicle)
-    if not c.vehicle.Find(net) then
-        c.vdex[net] = vehicle
-    end
-    c.debug(c.table.Dump(c.vdex))
 end
 
 function c.vehicle.CleanUp()
@@ -38,6 +32,7 @@ function c.vehicle.CleanUp()
     end
 end
 
+---@param plate string "Plate of vehicle."
 function c.vehicle.GetByPlate(plate)
     for k,v in pairs(c.vdex) do
         if v.Plate == plate then

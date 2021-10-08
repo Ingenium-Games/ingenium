@@ -163,15 +163,25 @@ end
 
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
+    
+function c.data.AddVehicle(net, plate, stolen)
+    if not c.vehicle.Find(net) then
+        if plate then
+            c.vdex[net] = c.class.OwnedVehicle(net, plate)
+        else
+            c.vdex[net] = c.class.UnownedVehicle(net, stolen)
+        end
+    end
+end
 
 --- Get the xVehicle Data/Table
----@param net number "Network ID 16 bit integer"
+---@param net integer "Network ID 16 bit integer"
 function c.data.GetVehicle(net)
     return c.vdex[net]
 end
 
 --- Same as above.
----@param net number "Network ID 16 bit integer"
+---@param net integer "Network ID 16 bit integer"
 function c.GetVehicle(net)
     return c.data.GetVehicle(net)
 end
@@ -188,9 +198,10 @@ end
 
 ---@param plate string "Plate of vehicle."
 function c.data.GetVehicleByPlate(plate)
-   return c.vehicle.GetVehicleByPlate(plate)
+   return c.vehicle.GetByPlate(plate)
 end
 
+---@param plate string "Plate of vehicle."
 function c.GetVehicleByPlate(plate)
     return c.data.GetVehicleByPlate(plate)
 end
@@ -250,6 +261,7 @@ function c.data.UpdatePacket(source, data)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     --
+    -- Place a check prior to running the update.
     if data.Health then
         xPlayer.SetHealth(data.Health)
     end
@@ -295,7 +307,7 @@ function c.data.LoadPlayer(source, Character_ID)
         c.inst.SetPlayer(source, xPlayer.GetInstance())
         p:resolve()
     end)
-    --
+    -- Wait for the player to be loaded prior to sending the "ok" to load to the client.
     Citizen.Await(p)
     TriggerClientEvent('Client:Character:Loaded', src)
 end

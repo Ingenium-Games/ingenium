@@ -171,14 +171,10 @@ AddEventHandler('Server:Instance:Player:Default', function(req)
 end)
 
 
-RegisterNetEvent("Server:VehicleData")
-AddEventHandler("Server:VehicleData", function(net, plate, stolen)
+RegisterNetEvent("Server:Vehicle:Create")
+AddEventHandler("Server:Vehicle:Create", function(net, plate, stolen)
     local src = source
-    if plate then
-        c.vehicle.Add(net, c.class.OwnedVehicle(net, plate))
-    else
-        c.vehicle.Add(net, c.class.UnownedVehicle(net, stolen))
-    end
+    c.data.AddVehicle(net, plate, stolen)
 end)
 
 

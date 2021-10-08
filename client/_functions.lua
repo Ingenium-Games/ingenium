@@ -391,7 +391,7 @@ end
 
 function c.CreateVehicle(name, x, y, z, h, plate, stolen)
     if plate == nil then plate = false end
-    if stolen == nil then stolen = false end
+    if stolen == nil then stolen = true end
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -410,11 +410,7 @@ function c.CreateVehicle(name, x, y, z, h, plate, stolen)
     SetModelAsNoLongerNeeded(hash)
     if NetworkDoesEntityExistWithNetworkId(net) then
         c.debug("Entity exists on network, id: "..net.." entity: "..entity)              
-        if plate then
-            TriggerServerEvent("Server:VehicleData", net, plate)
-        else
-            TriggerServerEvent("Server:VehicleData", net, false, stolen)
-        end
+        TriggerServerEvent("Server:Vehicle:Create", net, plate, stolen)
     else
         net = false
         c.debug("Entity DOES NOT exist on network.")
