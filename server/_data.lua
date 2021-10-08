@@ -93,7 +93,6 @@ end
 ---@param source number "source [server_id]"
 function c.data.AddPlayer(source)
     local num = tonumber(source)
-    table.insert(c.pdex, num)
     c.pdex[num] = false
 end
 

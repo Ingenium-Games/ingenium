@@ -26,26 +26,27 @@ end)
 
 RegisterNUICallback('Client:Character:Join', function(Data, cb)
     SetNuiFocus(false, false)
-    TriggerServerEvent('Server:Character:Request:Join', Data.ID)
+    TriggerServerEvent('Server:Character:Join', Data.ID)
     cb("ok")
 end)
 
 -- Not currently in use...
 RegisterNUICallback('Client:Character:Delete', function(Data, cb)
     SetNuiFocus(false, false)
-    TriggerServerEvent('Server:Character:Request:Delete', Data.ID)
+    TriggerServerEvent('Server:Character:Delete', Data.ID)
     cb("ok")
 end)
 
 RegisterNUICallback('Client:Character:Create', function(Data, cb)
     SetNuiFocus(false, false)
-    TriggerServerEvent('Server:Character:Request:Create', Data.First_Name, Data.Last_Name, Data.Height, Data.Birth_Date)
+    TriggerServerEvent('Server:Character:Create', Data.First_Name, Data.Last_Name, Data.Height, Data.Birth_Date)
     SetCamActive(cam,false)
     SetCamActive(cam2,false)
     SetCamActive(cam3,false)
     cb("ok")
 end)
 
+-- [C+S]
 RegisterNetEvent('Client:Character:OpeningMenu')
 AddEventHandler('Client:Character:OpeningMenu', function()
     -- Set false for switch command.
@@ -58,6 +59,7 @@ AddEventHandler('Client:Character:OpeningMenu', function()
 end)
 
 -- Respawn in on last saved coords.
+-- [S]
 RegisterNetEvent('Client:Character:ReSpawn')
 AddEventHandler('Client:Character:ReSpawn', function(Character_ID, Coords)
     c.IsBusyPleaseWait(1500)
@@ -85,6 +87,7 @@ end)
 -- Notifications 
 
 -- Send Update to HTML NUI Notification - Still to make.
+-- [C+S]
 RegisterNetEvent("Client:Notify")
 AddEventHandler("Client:Notify", function(text,style,fade)
     if not style then style = 'normal' end

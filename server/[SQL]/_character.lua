@@ -29,7 +29,7 @@ function c.sql.char.Add(t, cb)
             Modifiers = t.Modifiers,
         }, function(data)
             if data then
-
+                TriggerEvent('txaLogger:CommandExecuted', "Adding new Character for Primary_ID: "..t.Primary_ID)
             end
             if cb then
                 cb()
@@ -112,7 +112,7 @@ function c.sql.char.Delete(character_id, cb)
         ['@Character_ID'] = Character_ID
     }, function(data)
         if data then
-            --
+            TriggerEvent('txaLogger:CommandExecuted', "Deleting Character: "..Character_ID)
         end
         if cb then
             cb()

@@ -50,6 +50,7 @@ function c.sql.user.Add(usermame, license_id, fivem_id, steam_id, discord_id, ip
         ["Locale"] = conf.locale,
     }, function(r)
         IsBusy = false
+        TriggerEvent('txaLogger:CommandExecuted', "Adding new User "..Username)
     end)
     while IsBusy do
         Wait(0)
@@ -137,7 +138,7 @@ function c.sql.user.SetLocale(locale, license_id, cb)
         ['@License_ID'] = License_ID
     }, function(data)
         if data then
-            --
+            TriggerEvent('txaLogger:CommandExecuted', "Locale set to "..Locale.." on Primary ID :"..License_ID)
         end
     end)
     if cb then
@@ -176,7 +177,7 @@ function c.sql.user.SetAce(ace, license_id, cb)
         ['@License_ID'] = License_ID
     }, function(data)
         if data then
-            --
+            TriggerEvent('txaLogger:CommandExecuted', "Ace set to "..Ace.." on Primary ID :"..License_ID)
         end
         if cb then
             cb()
@@ -216,7 +217,7 @@ function c.sql.user.SetBan(license_id, bool, cb)
         ['@License_ID'] = License_ID
     }, function(data)
         if data then
-            --
+            TriggerEvent('txaLogger:CommandExecuted', "Ban set to "..tostring(Bool).." on Primary ID :"..License_ID)
         end
         if cb then
             cb()

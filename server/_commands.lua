@@ -20,6 +20,7 @@ end, false)
 RegisterCommand('switch', function(source, args, rawCommand)
     TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
     local src = source
+    local p = promise.new()
     local Primary_ID = c.identifier(src)
     local Character_ID = c.sql.GetActiveCharacter(Primary_ID)
     -- Send the client/sever the events once the character has changed to inactive on the db. 
@@ -27,10 +28,13 @@ RegisterCommand('switch', function(source, args, rawCommand)
         TriggerClientEvent('Client:Character:OpeningMenu', src)
         TriggerEvent('Server:Character:Request:List', src, Primary_ID)
         c.data.RemovePlayer(src)
-        -- Events to handle character removeal.
-        TriggerClientEvent("Client:Character:Switch")
-        TriggerEvent("Server:Character:Switch")
+        p:resolve()
     end)
+    --
+    Citizen.Await(p)
+    -- Events to handle character removeal.
+    TriggerClientEvent("Client:Character:Switch")
+    TriggerEvent("Server:Character:Switch")
 end, true)
 
 -- ====================================================================================--

@@ -11,8 +11,9 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 --  Get Character Info for the NUI to allow character selection.
-RegisterNetEvent('Server:Character:Request:List')
-AddEventHandler('Server:Character:Request:List', function(req, Primary_ID)
+-- [C+S]
+RegisterNetEvent('Server:Character:List')
+AddEventHandler('Server:Character:List', function(req, Primary_ID)
     local src = tonumber(req) or source
     local Characters = c.sql.char.GetAll(Primary_ID)
     local Command = "OnJoin"
@@ -22,8 +23,9 @@ AddEventHandler('Server:Character:Request:List', function(req, Primary_ID)
     c.inst.SetPlayer(src, c.inst.New(), true)
 end)
 
-RegisterNetEvent('Server:Character:Request:Join')
-AddEventHandler('Server:Character:Request:Join', function(Character_ID)
+-- [C]
+RegisterNetEvent('Server:Character:Join')
+AddEventHandler('Server:Character:Join', function(Character_ID)
     local src = tonumber(source)
     -- If the User selected the NEW button on the NUI, the Character_ID will be listed as NEW, if this is the case, trigger the registration NUI?
     if (Character_ID == 'New') then
@@ -39,20 +41,29 @@ AddEventHandler('Server:Character:Request:Join', function(Character_ID)
     end
 end)
 
-RegisterNetEvent('Server:Character:Request:Delete')
-AddEventHandler('Server:Character:Request:Delete', function(Character_ID)
+-- [C]
+RegisterNetEvent('Server:Character:Delete')
+AddEventHandler('Server:Character:Delete', function(Character_ID)
     local src = tonumber(source)
     local primary_id = c.identifier(src)
     c.sql.char.Delete(Character_ID, function()
-        TriggerEvent('Server:Character:Request:List', src, primary_id)
+        TriggerEvent('Server:Character:List', src, primary_id)
     end)
 end)
 
 
 -- Need to move this and clean it the fuck up, its gross atm.
-RegisterNetEvent('Server:Character:Request:Create')
-AddEventHandler('Server:Character:Request:Create', function(first_name, last_name, height, birth_date)
+-- [S]
+RegisterNetEvent('Server:Character:Create')
+AddEventHandler('Server:Character:Create', function(first_name, last_name, height, birth_date)
     local src = tonumber(source)
+    -- Run a check to see if it being exploited.
+    if c.data.GetPlayer(src) ~= false then
+        TriggerEvent('txaLogger:CommandExecuted', src.." / "..c.identifer(src).." / "..GetPlayerName(src).." : Attempted to abuse [E] Server:Character:Create")
+        c.debug("User attempting to exploit character creation??: "..src)
+        c.sql.user.SetBan(c.identifier(src), true, function() DropPlayer(src, "Banned for attmpting to exploit event") end)
+        return CancelEvent()
+    end
     local p = promise.new()
     local character_id = c.sql.gen.CharacterID()
     local city_id = c.sql.gen.CityID()
@@ -98,6 +109,7 @@ end)
 
 
 -- Triggered after character has been loaded from db and informaiton is passed to client
+-- [C]
 RegisterNetEvent("Server:Character:Loaded")
 AddEventHandler("Server:Character:Loaded", function()
     local src = source
@@ -116,6 +128,7 @@ AddEventHandler("Server:Character:Loaded", function()
 end)
 
 -- Triggered by the client after it has recieved its character data.
+-- [C] 
 RegisterNetEvent("Server:Character:Ready")
 AddEventHandler("Server:Character:Ready", function()
     local src = source
@@ -132,6 +145,7 @@ AddEventHandler("Server:Character:Ready", function()
 end)
 
 -- Use this to remove any things connected to Characters like police blips etc.
+-- [C+S]
 RegisterNetEvent("Server:Character:Switch")
 AddEventHandler("Server:Character:Switch", function(req)
     local src = req or source
@@ -143,9 +157,10 @@ AddEventHandler("Server:Character:Switch", function(req)
 end)
 
 -- Server Death Handler - if was killed by a player or not.
+-- [C+S]
 RegisterNetEvent("Server:Character:Death")
-AddEventHandler("Server:Character:Death", function(data)
-    local src = source
+AddEventHandler("Server:Character:Death", function(req, data)
+    local src = req or source
     if (data.PlayerKill == true) then
         c.discord(conf.deathlog)
     else
@@ -155,6 +170,7 @@ end)
 
 --@ req = server_id or source
 --@ t = {'name'='police','grade'=0}
+-- [C+S]
 RegisterNetEvent("Server:Character:SetJob")
 AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
@@ -164,75 +180,16 @@ AddEventHandler("Server:Character:SetJob", function(req, data)
 end)
 
 -- Default player to instance listed in conf.defaultinstance
+-- [C+S]
 RegisterNetEvent('Server:Instance:Player:Default')
 AddEventHandler('Server:Instance:Player:Default', function(req)
     local src = req or source
     c.inst.SetPlayerDefault(src)
 end)
 
-
+-- [C+S]
 RegisterNetEvent("Server:Vehicle:Create")
 AddEventHandler("Server:Vehicle:Create", function(net, plate, stolen)
     local src = source
     c.data.AddVehicle(net, plate, stolen)
-end)
-
-
--- ====================================================================================--
--- Bank Events for Transactions
-
-RegisterNetEvent("Server:Bank:Deposit")
-AddEventHandler("Server:Bank:Deposit", function(data, req)
-    local src = req or source
-    local amount = data
-    local xPlayer = c.data.GetPlayer(src)
-    --
-    xPlayer.RemoveCash(amount)
-    xPlayer.AddBank(amount)
-    TriggerClientEvent("Client:Notify", xPlayer.ID, "Diposited $"..amount, "warn")
-end)
-
-RegisterNetEvent("Server:Bank:Withdraw")
-AddEventHandler("Server:Bank:Withdraw", function(data, req)
-    local src = req or source
-    local amount = data
-    local xPlayer = c.data.GetPlayer(src)
-    --
-    xPlayer.RemoveBank(amount)
-    xPlayer.AddCash(amount)
-    TriggerClientEvent("Client:Notify", xPlayer.ID, "Withdrew $"..amount, "warn")
-end)
-
-RegisterNetEvent("Server:Bank:Transfer")
-AddEventHandler("Server:Bank:Transfer", function(data, req, id)
-    local src = req or source
-    local too = id
-    local amount = data
-    local xPlayer = c.data.GetPlayer(src)
-    local tPlayer = c.data.GetPlayer(too)
-    --
-    xPlayer.RemoveBank(amount)
-    tPlayer.AddBank(amount)
-    TriggerClientEvent("Client:Notify", xPlayer.ID, "Sent $"..amount.." to "..tPlayer.Full_Name, "warn")
-    TriggerClientEvent("Client:Notify", tPlayer.ID, "Recieved $"..amount.." from "..xPlayer.Full_Name, "warn")
-end)
-
-RegisterNetEvent("Server:Bank:Remove")
-AddEventHandler("Server:Bank:Remove", function(data, req)
-    local src = req or source
-    local amount = data
-    local xPlayer = c.data.GetPlayer(src)
-    --
-    xPlayer.RemoveBank(amount)
-    TriggerClientEvent("Client:Notify", xPlayer.ID, "Payed $"..amount, "warn")
-end)
-
-RegisterNetEvent("Server:Bank:Add")
-AddEventHandler("Server:Bank:Add", function(data, req)
-    local src = req or source
-    local amount = data
-    local xPlayer = c.data.GetPlayer(src)
-    --
-    xPlayer.AddBank(amount)
-    TriggerClientEvent("Client:Notify", xPlayer.ID, "$"..amount.." was added to your account.", "warn")
 end)
