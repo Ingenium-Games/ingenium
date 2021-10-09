@@ -54,7 +54,7 @@ AddEventHandler('Server:PlayerConnecting', function()
     --
     local function Startup()
         TriggerClientEvent('Client:Character:OpeningMenu', src)
-        TriggerEvent('Server:Character:Request:List', src, Primary_ID)
+        TriggerEvent('Server:Character:List', src, Primary_ID)
     end
     --
     if License_ID then
