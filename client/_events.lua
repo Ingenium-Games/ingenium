@@ -27,7 +27,8 @@ AddEventHandler('Client:Character:Loaded', function()
     c.chat.AddSuggestions(xPlayer)
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
-    --
+    -- 
+    TriggerEvent("Client:LoadSkinFromSelf")
     -- Trigger any events after the Ready State.
     TriggerEvent('Client:Character:Ready')
 end)

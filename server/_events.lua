@@ -96,11 +96,12 @@ AddEventHandler('Server:Character:Create', function(first_name, last_name, heigh
     c.data.LoadPlayer(src, character_id)
     --
     Citizen.Await(p)    
+    
     --[[
             ADD YOUR CHARACTER CREATION EVENT BELOW
     ]]--
     
-    TriggerClientEvent('creator:OpenCreator', src)
+
     
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
