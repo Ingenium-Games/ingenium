@@ -28,7 +28,8 @@ AddEventHandler('Client:Character:Loaded', function()
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
     -- 
-    TriggerEvent("Client:LoadSkinFromSelf")
+    local appearance = json.decode(xPlayer.Appearance)
+    TriggerEvent("Client:LoadSkin", appearance)
     -- Trigger any events after the Ready State.
     TriggerEvent('Client:Character:Ready')
 end)
