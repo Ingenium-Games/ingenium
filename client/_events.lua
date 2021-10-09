@@ -30,6 +30,7 @@ AddEventHandler('Client:Character:Loaded', function()
     -- 
     local appearance = json.decode(xPlayer.Appearance)
     TriggerEvent("Client:LoadSkin", appearance)
+    --TriggerServerEvent("Server:LoadSkin")
     -- Trigger any events after the Ready State.
     TriggerEvent('Client:Character:Ready')
 end)

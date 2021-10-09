@@ -388,7 +388,7 @@ function c.class.CreateCharacter(source, character_id)
     self.SetAppearance = function(t)
         local tab = c.check.Table(t)
         self.Appearance = tab
-        self.State.Appearance = json.encode(self.Appearance)
+        self.State.Appearance = self.Appearance
     end
     --
     self.GetTattoos = function()
