@@ -14,22 +14,16 @@ math.randomseed(c.Seed)
 
 local count = 1
 
+-- There is no longer a limit on instaces/buckets.
 --- Rotate through a list of numbers to generate a new instance with.
 function c.inst.New()
-    if count <= 63 then
-        count = count + 1
-        return count
-    else
-        count = 1
-        count = count + 1
-        return count
-    end
+    count = count + 1
+    return count
 end
 
 --- Sets the player and their ped entity to a routing bucket.
 ---@param source number ""
 ---@param num number "The number of the istance/routing bucket"
----@param bool boolean "Is this a new join or in character already"
 function c.inst.SetPlayer(source, num)
     local src = tonumber(source)
     local xPlayer = c.data.GetPlayer(src)

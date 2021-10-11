@@ -1,9 +1,9 @@
 -- ====================================================================================--
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
-c.vehicle = {} -- function level
-c.vehicles = {} -- database pull - If ever used?	
-c.vdex = {} -- the index/store for currently used vehciles prior to writing to db.
+c.npc = {} -- function level
+c.npcs = {} -- database pull - If ever used?	
+c.ndex = {} -- the index/store for currently used vehciles prior to writing to db.
 --[[
 NOTES.
     - Some natives use entity
@@ -14,20 +14,10 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
----@param plate string "Plate of vehicle."
-function c.vehicle.GetByPlate(plate)
-    for k,v in pairs(c.vdex) do
-        if v.Plate == plate then
-            return v
-        end
-    end 
-    return false
-end
-
 ---@param net integer "Network ID 16 bit integer"
-function c.vehicle.Find(net)
-    for k,v in ipairs(c.vdex) do
-        if k == net and type(v) == "table" then
+function c.npc.Find(net)
+    for k,v in ipairs(c.ndex) do
+        if k == net and type(v) == "table"  then
             return true
         end
     end
@@ -35,27 +25,27 @@ function c.vehicle.Find(net)
 end
 
 -- Runs off net id's within the table
-function c.vehicle.CleanAll()
-    for k,v in ipairs(c.vdex) do
+function c.npc.CleanAll()
+    for k,v in ipairs(c.ndex) do
         -- Check the entities do not exist.
         if not DoesEntityExist(v.Entity) then
-            table.remove(c.vdex, k)
+            table.remove(c.ndex, k)
         end
     end
 end
 
 -- Runs off net id's within the table
-function c.vehicle.CleanOne(net)
+function c.npc.CleanOne(net)
     local ent = NetworkGetEntityFromNetworkId(net)
     if not DoesEntityExist(ent) then
-        table.remove(c.vdex, net)
+        table.remove(c.ndex, net)
     end
 end
 
 
-function c.vehicle.CleanUp()
+function c.npc.CleanUp()
     local function Do()
-        c.vehicle.CleanAll()
+        c.npc.CleanAll()
         SetTimeout(conf.cleanup, Do)
     end
     SetTimeout(conf.cleanup, Do)

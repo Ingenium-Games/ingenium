@@ -34,9 +34,10 @@ AddEventHandler('explosionEvent', function()
 end)
 
 AddEventHandler('entityCreated', function(ent)
-    local type = GetEntityType(ent)
+    local net = NetworkGetNetworkIdFromEntity(ent)
     local model = GetEntityModel(ent)
-    
+    local type = GetEntityType(ent)
+
     if DoesEntityExist(ent) then
         -- Object
         if type == 3 then
@@ -52,7 +53,6 @@ AddEventHandler('entityCreated', function(ent)
                 end
             end
             
-        
         -- Ped
         elseif type == 1 then
             -- Look for blacklisted vheicles and remove them
@@ -63,8 +63,16 @@ AddEventHandler('entityCreated', function(ent)
                     c.debug('Entity has been Deleted.')
                 end
             end
+            
+            -- not a human player
+            if not IsPedAPlayer(ent) then
+                if not c.npc.Find(ent) then
 
-
+                end
+            else
+            -- is a player
+            
+            end
         -- No entity
         else
 
@@ -74,18 +82,72 @@ AddEventHandler('entityCreated', function(ent)
 end)
 
 AddEventHandler('entityCreating', function(ent)
+    local net = NetworkGetNetworkIdFromEntity(ent)
     local model = GetEntityModel(ent)
-    for _, v in pairs(conf.disable.vehicles) do
-        local diabled = v
-        if (model == diabled) then
-            CancelEvent()
-            c.debug('Entity prevented from Spawning.')
+    local type = GetEntityType(ent)
+
+    -- Object
+    if type == 3 then
+
+    -- Vehicle
+    elseif type == 2 then            
+        -- Look for blacklisted vheicles and remove them
+        for _, v in pairs(conf.disable.vehicles) do
+            local diabled = v
+            if (model == diabled) then
+                CancelEvent()
+                c.debug('Entity prevented from Spawning.')
+            end
+        end
+
+    -- Ped
+    elseif type == 1 then
+        -- not a human player
+        if not IsPedAPlayer(ent) then
+            for _, v in pairs(conf.disable.peds) do
+                local diabled = v
+                if (model == diabled) then
+                    CancelEvent()
+                    c.debug('Entity prevented from Spawning.')
+                end
+            end
+            
+        else
+        -- is a player
+            
         end
     end
 end)
 
 AddEventHandler('entityRemoved', function(ent)
+    local net = NetworkGetNetworkIdFromEntity(ent)
+    local model = GetEntityModel(ent)
+    local type = GetEntityType(ent)
     
+    -- Object
+    if type == 3 then
+        if c.object.Find() then
+            c.object.CleanOne(net)
+        end
+    -- Vehicle
+    elseif type == 2 then            
+        if c.vehicle.Find() then
+            -- This is the inital remove, the loops CleanAll() functions are too ensure entities exist with data.
+            c.vehicle.CleanOne(net)
+        end
+    -- Ped
+    elseif type == 1 then
+        -- not a human player
+        if not IsPedAPlayer(ent) then
+            if c.npc.Find(ent) then
+                -- This is the inital remove, the loops CleanAll() functions are too ensure entities exist with data.
+                c.npc.CleanOne(net)
+            end
+        else
+        -- is a player
+            
+        end
+    end        
 end)
 
 AddEventHandler('playerEnteredScope', function()

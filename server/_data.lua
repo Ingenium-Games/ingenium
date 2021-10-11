@@ -195,6 +195,11 @@ function c.GetVehicles()
     return c.data.GetVehicles()
 end
 
+-- Set to false for cleanup function inside _vehicles.lua
+function c.data.RemoveVehicle(net)
+    c.vdex[net] = false
+end
+
 ---@param plate string "Plate of vehicle."
 function c.data.GetVehicleByPlate(plate)
    return c.vehicle.GetByPlate(plate)
@@ -204,6 +209,79 @@ end
 function c.GetVehicleByPlate(plate)
     return c.data.GetVehicleByPlate(plate)
 end
+
+-- ====================================================================================--
+-- NPC's 
+    
+function c.data.AddNpc(net)
+    if not c.npc.Find(net) then
+        c.ndex[net] = c.class.Npc(net)
+    end
+end
+
+--- Get the xVehicle Data/Table
+---@param net integer "Network ID 16 bit integer"
+function c.data.GetNpc(net)
+    return c.ndex[net]
+end
+
+--- Same as above.
+---@param net integer "Network ID 16 bit integer"
+function c.GetNpc(net)
+    return c.data.GetNpc(net)
+end
+
+--- Get all xVehicles
+function c.data.GetNpcs()
+    return c.ndex
+end
+
+--- Get all xVehicles
+function c.GetNpcs()
+    return c.data.GetNpcs()
+end
+
+-- Set to false for cleanup function inside _vehicles.lua
+function c.data.RemoveNpc(net)
+    c.ndex[net] = false
+end
+
+-- ====================================================================================--
+-- NPC's 
+    
+function c.data.AddObject(net)
+    if not c.object.Find(net) then
+        c.odex[net] = c.class.Object(net)
+    end
+end
+
+--- Get the xVehicle Data/Table
+---@param net integer "Network ID 16 bit integer"
+function c.data.GetObject(net)
+    return c.odex[net]
+end
+
+--- Same as above.
+---@param net integer "Network ID 16 bit integer"
+function c.GetObject(net)
+    return c.data.GetObject(net)
+end
+
+--- Get all xVehicles
+function c.data.GetObjects()
+    return c.odex
+end
+
+--- Get all xVehicles
+function c.GetObjects()
+    return c.data.GetObjects()
+end
+
+-- Set to false for cleanup function inside _vehicles.lua
+function c.data.RemoveObject(net)
+    c.odex[net] = false
+end
+
 
 -- ====================================================================================--
 -- Jobs - c.jdex = Object table, c.jobs = table built from the DB, c.job = functions.

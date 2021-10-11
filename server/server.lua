@@ -40,9 +40,14 @@ function OnStart(resourceName)
     c.data.ClientSync()
     -- Start Paying players based on conf.
     c.job.PayCycle()  
+    
+    
+    -- Cleanup Cycles
+    c.object.CleanUp()
     --
-
-
+    c.vehicle.CleanUp()
+    --
+    c.npc.CleanUp()
 end
 -- ====================================================================================--
 RegisterNetEvent('Server:PlayerConnecting')
