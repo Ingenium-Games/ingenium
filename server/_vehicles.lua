@@ -34,15 +34,6 @@ function c.vehicle.Find(net)
     return false
 end
 
--- Runs off net id's within the table
-function c.vehicle.CleanAll()
-    for k,v in ipairs(c.vdex) do
-        -- Check the entities do not exist.
-        if not DoesEntityExist(v.Entity) then
-            table.remove(c.vdex, k)
-        end
-    end
-end
 
 -- Runs off net id's within the table
 function c.vehicle.CleanOne(net)
@@ -52,6 +43,15 @@ function c.vehicle.CleanOne(net)
     end
 end
 
+-- Runs off net id's within the table
+function c.vehicle.CleanAll()
+    for k,v in ipairs(c.vdex) do
+        -- Check the entities do not exist.
+        if not DoesEntityExist(v.Entity) then
+            table.remove(c.vdex, k)
+        end
+    end
+end
 
 function c.vehicle.CleanUp()
     local function Do()

@@ -24,15 +24,6 @@ function c.object.Find(net)
     return false
 end
 
--- Runs off net id's within the table
-function c.object.CleanAll()
-    for k,v in ipairs(c.odex) do
-        -- Check the entities do not exist.
-        if not DoesEntityExist(v.Entity) then
-            table.remove(c.odex, k)
-        end
-    end
-end
 
 -- Runs off net id's within the table
 function c.object.CleanOne(net)
@@ -42,6 +33,15 @@ function c.object.CleanOne(net)
     end
 end
 
+-- Runs off net id's within the table
+function c.object.CleanAll()
+    for k,v in ipairs(c.odex) do
+        -- Check the entities do not exist.
+        if not DoesEntityExist(v.Entity) then
+            table.remove(c.odex, k)
+        end
+    end
+end
 
 function c.object.CleanUp()
     local function Do()

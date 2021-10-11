@@ -25,6 +25,14 @@ function c.npc.Find(net)
 end
 
 -- Runs off net id's within the table
+function c.npc.CleanOne(net)
+    local ent = NetworkGetEntityFromNetworkId(net)
+    if not DoesEntityExist(ent) then
+        table.remove(c.ndex, net)
+    end
+end
+
+-- Runs off net id's within the table
 function c.npc.CleanAll()
     for k,v in ipairs(c.ndex) do
         -- Check the entities do not exist.
@@ -33,15 +41,6 @@ function c.npc.CleanAll()
         end
     end
 end
-
--- Runs off net id's within the table
-function c.npc.CleanOne(net)
-    local ent = NetworkGetEntityFromNetworkId(net)
-    if not DoesEntityExist(ent) then
-        table.remove(c.ndex, net)
-    end
-end
-
 
 function c.npc.CleanUp()
     local function Do()
