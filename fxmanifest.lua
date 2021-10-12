@@ -33,4 +33,4 @@ dependencies {"mysql-async", "discordroles"}
 files {"nui/ig.core.js", "nui/ig.core.css", "nui/ig.core.html", "nui/img/*.png", "nui/img/*.jpg",
        "nui/jquery-3.5.1.min.js", "nui/jquery.mask.min.js", "nui/jquery.validate.min.js"}
 
-data {"data/Jobs.json", "data/Drops.json", "data/GSR.json", "data/Items.json", "data/Notes.json", "data/Pickups.json"}
+data {"data/Names.json","data/Jobs.json", "data/Drops.json", "data/GSR.json", "data/Items.json", "data/Notes.json", "data/Pickups.json"}

@@ -29,7 +29,6 @@ function OnStart(resourceName)
     while c.Loading do
         Wait(25)
     end
-
     -- Create Channels for Instances
     c.mumble.GenerateInstanceChannels()
     -- Time now updates
@@ -46,8 +45,9 @@ function OnStart(resourceName)
     c.pick.CleanUp()
     c.note.CleanUp()
     c.object.CleanUp()
-    c.vehicle.CleanUp(
+    c.vehicle.CleanUp()
     c.npc.CleanUp()
+    --
 end
 -- ====================================================================================--
 RegisterNetEvent('Server:PlayerConnecting')
