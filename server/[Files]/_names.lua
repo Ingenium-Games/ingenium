@@ -14,8 +14,8 @@ local gender = {["m"] = {},["f"] = {},["u"] = {}}
 
 function c.name.Load()    
     local p = promise.new()
-    if c.json.Exists("Names.json") then
-        local file = c.json.Read("Names.json")
+    if c.json.Exists("Names") then
+        local file = c.json.Read("Names")
         c.names = file
         p:resolve()
     end
