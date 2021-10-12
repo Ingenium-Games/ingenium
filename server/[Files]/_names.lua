@@ -27,8 +27,6 @@ function c.name.Load()
             table.insert(gender.u, v.name)
         end
     end
-
-    c.debug(c.table.Dump(gender.u))
 end
 
 function c.name.RandomMale()
