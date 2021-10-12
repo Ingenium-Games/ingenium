@@ -39,11 +39,12 @@ function OnStart(resourceName)
     c.data.ClientSync()
     -- Start Paying players based on conf.
     c.job.PayCycle()  
-    -- Cleanup Cycles on files and objects.
+    -- Cleanup Cycles on files.
     c.gsr.CleanUp()
     c.drop.CleanUp()
     c.pick.CleanUp()
     c.note.CleanUp()
+    -- Cleanup Cycles on objects.
     c.object.CleanUp()
     c.vehicle.CleanUp()
     c.npc.CleanUp()

@@ -13,6 +13,7 @@ conf.file.gsr = "GSR"
 conf.file.jobs = "Jobs"
 conf.file.items = "Items"
 conf.file.notes = "Notes"
+conf.file.names = "Names"
 conf.file.drops = "Drops"
 conf.file.pickups = "Pickups"
 --
