@@ -15,17 +15,7 @@ math.randomseed(c.Seed)
 
 
 function c.data.LoadFiles()
-    c.gsr.Load()
-    c.gsr.CleanUp()
 
-    c.drop.Load()
-    c.drop.CleanUp()
-
-    c.pick.Load()
-    c.pick.CleanUp()
-
-    c.note.Load()
-    c.note.CleanUp()    
 end
 
 
@@ -39,7 +29,15 @@ function c.data.Initilize()
         [3] = 'DB: Finding Job Accounts or Creating them;',
         [4] = 'DB: Job Accounts have been Generated;',
         [5] = 'DB: Job Objects Created and Added;',
-        [6] = 'DB: Loading Data Files - Drops, Pickups, Notes, GSR;'
+        [6] = 'DB: Loading Data File - GSR;',
+        
+        [7] = 'DB: Loading Data File - Drops;',
+        
+        [8] = 'DB: Loading Data File - Pickups;',
+        
+        [9] = 'DB: Loading Data File - Notes;',
+        
+        [10] = 'DB: Loading Data File - Names;',
     }
     --
     local function cb()
@@ -61,8 +59,20 @@ function c.data.Initilize()
         -- [5] -- Not so much a SQL function, but dependant on it being conducted in order.
         c.data.CreateJobObjects()
         cb()
-        --
-        c.data.LoadFiles()
+        -- [6] gunshot residue data table
+        c.gsr.Load()
+        cb()
+        -- [7] dropped items data table
+        c.drop.Load()
+        cb()
+        -- [8] pickups data table (not items script)
+        c.pick.Load()
+        cb()
+        -- [9] notes data table (notepad script)
+        c.note.Load()
+        cb()
+        -- [10] Load names for random names selection.
+        c.name.Load()
         cb()
         --
         loaded = true
