@@ -21,9 +21,9 @@ AddEventHandler('onResourceStart', function(resourceName)
 end)
 -- ====================================================================================--
 function OnStart(resourceName)
-    --
+    -- Check version
     c.version.Check(conf.url.version, resourceName)
-    --
+    -- Run setup / startup by loading data from files the database etc.
     c.data.Initilize()
     --
     while c.Loading do
@@ -39,7 +39,7 @@ function OnStart(resourceName)
     c.data.ClientSync()
     -- Start Paying players based on conf.
     c.job.PayCycle()  
-    -- Cleanup Cycles
+    -- Cleanup Cycles on files and objects.
     c.gsr.CleanUp()
     c.drop.CleanUp()
     c.pick.CleanUp()
@@ -48,9 +48,6 @@ function OnStart(resourceName)
     c.vehicle.CleanUp()
     c.npc.CleanUp()
     --
-    print(c.name.RandomMale())
-    print(c.name.RandomMale())
-    print(c.name.RandomMale())
 end
 -- ====================================================================================--
 RegisterNetEvent('Server:PlayerConnecting')
