@@ -14,7 +14,7 @@ local gender = {["m"] = {},["f"] = {},["u"] = {}}
 
 function c.name.Load()    
     if c.json.Exists("Names.json") then
-        local file = c.json.Read(conf.file.drops)
+        local file = c.json.Read("Names.json")
         c.names = file
     end
     --
