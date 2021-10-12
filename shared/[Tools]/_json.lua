@@ -18,7 +18,7 @@ function c.json.Read(file)
     local f = io.open(GetResourcePath(GetCurrentResourceName()).."/data/"..file..".json", "r")
     local content = f:read("a")
     f:close()
-    return json.decode(content) ~= nil
+    return json.decode(content)
 end
   
 -- Write a string to a file.

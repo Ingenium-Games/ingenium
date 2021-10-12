@@ -13,15 +13,11 @@ math.randomseed(c.Seed)
 local gender = {["m"] = {},["f"] = {},["u"] = {}}
 
 function c.name.Load()    
-    local p = promise.new()
     if c.json.Exists("Names") then
         local file = c.json.Read("Names")
         c.names = file
-        p:resolve()
     end
     --
-    Citizen.Await(p)
-    local p = promise.new()
     for _,v in pairs(c.names) do
         if v.gender == "male" then
             table.insert(gender.m, v.name)
@@ -31,8 +27,7 @@ function c.name.Load()
             table.insert(gender.u, v.name)
         end
     end
-    p:resolve()
-    Citizen.Await(p)
+
     c.debug(c.table.Dump(gender.u))
 end
 
