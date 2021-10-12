@@ -48,6 +48,9 @@ function OnStart(resourceName)
     c.vehicle.CleanUp()
     c.npc.CleanUp()
     --
+    c.name.RandomMale()
+    c.name.RandomMale()
+    c.name.RandomMale()
 end
 -- ====================================================================================--
 RegisterNetEvent('Server:PlayerConnecting')

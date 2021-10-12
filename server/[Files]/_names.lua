@@ -12,7 +12,7 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 local gender = {["m"] = {},["f"] = {},["u"] = {}}
 
-function c.name.Load()    
+function c.name.Load()
     if c.json.Exists("Names") then
         local file = c.json.Read("Names")
         c.names = file
