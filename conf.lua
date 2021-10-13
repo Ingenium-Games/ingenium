@@ -7,12 +7,15 @@ conf.sec = 1000
 conf.min = 60 * conf.sec
 conf.hour = 60 * conf.min
 conf.day = 24 * conf.hour
+-- ====================================================================================--
+conf.url = {}
+conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ig.core/main/version.txt"
+conf.url.discordchannel_1 = "Example"
 --[[
 DEBUG :
     -- Up to you if you want to see whats going on or not, or open the DevTools. Scrub.
 ]]--
 conf.debug = true
--- ====================================================================================--
 --[[
 GENERIC :
     [1] Map name.
@@ -120,8 +123,6 @@ conf.enableduty = true
 conf.paycycle = conf.min * 15
 
 -- ====================================================================================--
-conf.url = {}
-conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ig.core/main/version.txt"
 
 
 
