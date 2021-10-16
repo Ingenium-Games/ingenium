@@ -11,7 +11,7 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-function c.class.NpcClass(net)
+function c.class.CreateNpc(net)
     local self = {}
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)

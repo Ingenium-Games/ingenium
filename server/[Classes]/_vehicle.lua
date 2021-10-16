@@ -10,7 +10,7 @@ NOTES
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-function c.class.UnownedVehicle(net, bool)
+function c.class.CreateVehicle(net, bool)
     local stolen = c.check.Boolean(bool)
     local fuel = math.random(25, 100)
     --
@@ -263,7 +263,7 @@ end
 
 -- ====================================================================================--
 
-function c.class.OwnedVehicle(net, plate)
+function c.class.CreatePlayerVehicle(net, plate)
     c.debug("Creating Owned Vehicle")
     local data = c.sql.GetVehicleByPlate(plate)
     local self = {}
