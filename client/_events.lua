@@ -38,13 +38,6 @@ end)
 -- Event to trigger other resources once the client has received the chosen characters data from the server.
 RegisterNetEvent('Client:Character:Ready')
 AddEventHandler('Client:Character:Ready', function()
-    local ped = PlayerPedId()
-    local ply = PlayerId()
-    --
-    SetMaxWantedLevel(0)
-    SetPedMinGroundTimeForStungun(ped, 12500)
-    SetCanAttackFriendly(ped, true, false)
-    NetworkSetFriendlyFireOption(true)
     --
     TriggerServerEvent("Server:Character:Ready")
 end)
@@ -52,8 +45,7 @@ end)
 -- Use this to remove any things connected to Characters like police blips etc.
 RegisterNetEvent("Client:Character:Switch")
 AddEventHandler("Client:Character:Switch", function()
-    
-
+    --
 end)
 
 RegisterNetEvent("Client:Character:OffDuty")

@@ -12,7 +12,6 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 
 function c.class.NpcClass(net)
-    c.debug("Generating NPC State")
     local self = {}
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
@@ -86,9 +85,8 @@ function c.class.NpcClass(net)
     end
     --    
     self.Full_Name = self.First_Name .. " " .. self.Last_Name
-
     --
-    c.debug("Generated NPC State")
+    c.debug("Generated NPC State: "..net)
     --
     return self
 end

@@ -11,7 +11,6 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 
 function c.class.UnownedVehicle(net, bool)
-    c.debug("Creating UnOwned Vehicle")
     local stolen = c.check.Boolean(bool)
     local fuel = math.random(25, 100)
     --
@@ -119,11 +118,7 @@ function c.class.UnownedVehicle(net, bool)
     end
 
     -- Condition
-    self.Condition = TriggerClientCallback({
-        source = self.GetSource(),
-        eventName = 'GetVehicleCondition',
-        args = {self.Net}
-    })
+    self.Condition = {}    
     self.State.Condition = self.Condition
     --
     self.GetCondition = function()
@@ -131,7 +126,11 @@ function c.class.UnownedVehicle(net, bool)
     end
     --
     self.SetCondition = function(conditions)
-        self.Condition = conditions
+        self.Condition = conditions or TriggerClientCallback({
+            source = self.GetSource(),
+            eventName = 'GetVehicleCondition',
+            args = {self.Net}
+        })    
         self.State.Condition = self.Condition
         TriggerClientCallback({
             source = self.GetSource(),
@@ -157,11 +156,7 @@ function c.class.UnownedVehicle(net, bool)
     end
 
     -- Modifications
-    self.Modifications = TriggerClientCallback({
-        source = self.GetSource(),
-        eventName = 'GetVehicleModifications',
-        args = {self.Net}
-    })
+    self.Modifications = {}
     self.State.Modifications = self.Condition
     --
     self.GetModifications = function()
@@ -169,7 +164,11 @@ function c.class.UnownedVehicle(net, bool)
     end
     --
     self.SetModifications = function(modifications)
-        self.Modifications = modifications
+        self.Modifications = modifications or TriggerClientCallback({
+            source = self.GetSource(),
+            eventName = 'GetVehicleModifications',
+            args = {self.Net}
+        })
         self.State.Modifications = self.Modifications
         TriggerClientCallback({
             source = self.GetSource(),
@@ -258,7 +257,7 @@ function c.class.UnownedVehicle(net, bool)
         return self.State.Wanted or self.Wanted
     end
     --
-    c.debug("Completed UnOwned Vehicle")
+    c.debug("Generated Vehicle State: "..net)
     return self
 end
 

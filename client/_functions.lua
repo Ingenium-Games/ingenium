@@ -336,6 +336,15 @@ function c.GetVehicleInDirection()
     return nil
 end
 
+
+function c.GetVehicleSeatOfPed(ped)
+    local vehicle = GetVehiclePedIsIn(ped, false)
+    for i=-2,GetVehicleMaxNumberOfPassengers(vehicle) do
+        if(GetPedInVehicleSeat(vehicle, i) == ped) then return i end
+    end
+    return -2
+end
+
 -- https://forum.cfx.re/t/use-displayonscreenkeyboard-properly/51143
 
 function c.Keyboard(TextEntry, ExampleText, MaxStringLenght)
