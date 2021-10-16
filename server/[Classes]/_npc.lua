@@ -57,12 +57,10 @@ function c.class.NpcClass(net)
         if rng >= 2 then
             self.First_Name = c.name.RandomMale()
         else
-            self.First_Name = c.name.RandomUnisex()
+            self.First_Name = c.name.RandomFemale()
         end
         local rng = math.random(1,5)
         if rng >= 3 then
-            self.Last_Name = c.name.RandomUnisex()
-        elseif rng == 2 then
             self.Last_Name = c.name.RandomMale()
         else
             self.Last_Name = c.name.RandomFemale()    
@@ -72,12 +70,10 @@ function c.class.NpcClass(net)
         if rng >= 2 then
             self.First_Name = c.name.RandomFemale()
         else
-            self.First_Name = c.name.RandomUnisex()
+            self.First_Name = c.name.RandomMale()
         end
         local rng = math.random(1,5)
         if rng >= 3 then
-            self.Last_Name = c.name.RandomUnisex()
-        elseif rng == 2 then
             self.Last_Name = c.name.RandomFemale()
         else
             self.Last_Name = c.name.RandomMale()    

@@ -17,26 +17,16 @@ function c.name.Load()
         local file = c.json.Read(conf.file.names)
         c.names = file
     end
-    --
-    for _,v in pairs(c.names) do
-        if v.gender == "male" then
-            table.insert(gender.m, v.name)
-        elseif v.gender == "female" then
-            table.insert(gender.f, v.name)
-        else
-            table.insert(gender.u, v.name)
-        end
-    end
 end
 
 function c.name.RandomMale()
-    return gender.m[math.random(1,#gender.m)]
+    return c.names.m[math.random(1,#c.names.m)]
 end
 
 function c.name.RandomFemale()
-    return gender.m[math.random(1,#gender.f)]
+    return c.names.f[math.random(1,#c.names.f)]
 end
 
 function c.name.RandomUnisex()
-    return gender.m[math.random(1,#gender.u)]
+    return c.names.u[math.random(1,#c.names.u)]
 end
