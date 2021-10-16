@@ -12,7 +12,6 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 
 function c.class.CreateUser(source)
-    c.debug('Start User Class Creation')
     local src = tonumber(source)
     local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = c.identifiers(src)
     local Ace = c.sql.user.GetAce(License_ID)
@@ -94,6 +93,6 @@ function c.class.CreateUser(source)
         return self.IP_Address
     end
     --
-    c.debug('End User Class Creation')
+    c.debug('Generated User')
     return self
 end

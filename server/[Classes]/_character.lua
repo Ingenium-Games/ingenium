@@ -12,7 +12,6 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 
 function c.class.CreateCharacter(source, character_id)
-    c.debug("Start Character Class Creation")
     local src = tonumber(source)
     local data = c.sql.char.Get(character_id)
     local self = {}
@@ -462,6 +461,6 @@ function c.class.CreateCharacter(source, character_id)
         
     end
     --
-    c.debug("End Character Class Creation")
+    c.debug("Generated Character")
     return self
 end

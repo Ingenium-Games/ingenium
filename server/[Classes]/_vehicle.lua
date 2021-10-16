@@ -264,7 +264,6 @@ end
 -- ====================================================================================--
 
 function c.class.CreatePlayerVehicle(net, plate)
-    c.debug("Creating Owned Vehicle")
     local data = c.sql.GetVehicleByPlate(plate)
     local self = {}
     self.Entity = NetworkGetEntityFromNetworkId(net)
@@ -507,6 +506,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     --
 
     --
-    c.debug("Completed Owned Vehicle")
+    c.debug("Generated Player Vehicle State: "..net)
+    --
     return self
 end
