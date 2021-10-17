@@ -20,30 +20,6 @@ function c.class.CreateNpc(net)
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
     end
-    --
-    -- Gender
-    self.Gender = IsPedMale(self.Entity) -- boolean value true = m, false = f
-    self.State.Gender = self.Gender
-    --    
-    self.GetGender = function()
-        if self.Gender then
-            return 0 -- Male
-        else
-            return 1 -- Female / technically all others, would need to then run a IsPedHuman check.
-        end
-    end
-    --
-    self.Human = IsPedHuman(self.Entity)
-    self.State.Human = self.Human
-    --
-    self.IsHuman = function()
-        if self.Human then
-            return 0 -- Yes is human, true
-        else
-            return 1 -- No is an animal or some shit.
-        end
-    end
-    --
     -- Model
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
