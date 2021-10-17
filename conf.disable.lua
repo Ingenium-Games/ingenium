@@ -11,6 +11,7 @@ NOTES
 -- ====================================================================================--
 conf.disable.peds = {}
 conf.disable.weapons = {}
+conf.disable.objects = {}
 conf.disable.pickups = {}
 conf.disable.vehicles = {
 	-- Military, or weaponized vehicles.
@@ -30,7 +31,6 @@ conf.disable.vehicles = {
 	`APC`,	
 	`KHANJALI`,
 	-- Supers that spawn around town.
-	--[[
 	`ADDER`,
 	`AUTARCH`,
 	`BANSHEE2`,
@@ -79,5 +79,4 @@ conf.disable.vehicles = {
 	`ZENTORNO`,
 	`ZORRUSSO`,
 	`FURIA`,
-	]]--
 }
