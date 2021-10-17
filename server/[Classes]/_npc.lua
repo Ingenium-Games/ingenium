@@ -27,36 +27,6 @@ function c.class.CreateNpc(net)
     self.GetModel = function()
         return self.State.Model or self.Model
     end
-    -- Sorting names based on gender of ped
-    if self.Gender then
-        local rng = math.random(1,5)
-        if rng >= 2 then
-            self.First_Name = c.name.RandomMale()
-        else
-            self.First_Name = c.name.RandomFemale()
-        end
-        local rng = math.random(1,5)
-        if rng >= 3 then
-            self.Last_Name = c.name.RandomMale()
-        else
-            self.Last_Name = c.name.RandomFemale()    
-        end
-    else
-        local rng = math.random(1,5)
-        if rng >= 2 then
-            self.First_Name = c.name.RandomFemale()
-        else
-            self.First_Name = c.name.RandomMale()
-        end
-        local rng = math.random(1,5)
-        if rng >= 3 then
-            self.Last_Name = c.name.RandomFemale()
-        else
-            self.Last_Name = c.name.RandomMale()    
-        end
-    end
-    --    
-    self.Full_Name = self.First_Name .. " " .. self.Last_Name
     --
     c.debug("Generated NPC State: "..net)
     --
