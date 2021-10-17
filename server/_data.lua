@@ -176,9 +176,7 @@ end
 function c.data.AddVehicle(net, plate, stolen)
     if not c.vehicle.Find(net) then
         if plate then
-            c.vdex[net] = c.class.OwnedVehicle(net, plate)
-        else
-            c.vdex[net] = c.class.UnownedVehicle(net, stolen)
+            c.vdex[net] = c.class.CreatePlayerVehicle(net, plate)
         end
     end
 end
