@@ -7,6 +7,7 @@ version "0.6.8"
 ------------------------------------------------------------------------------
 ui_page "nui/ig.core.html"
 loadscreen "https://www.ingenium.games/"
+loadscreen_cursor 'yes'
 ------------------------------------------------------------------------------
 -- shared
 shared_scripts {"conf.lua", "conf.default.lua", "conf.cars.lua", "conf.disable.lua", "conf.file.lua", "shared/_c.lua"}
