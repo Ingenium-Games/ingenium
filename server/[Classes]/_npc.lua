@@ -28,6 +28,20 @@ function c.class.CreateNpc(net)
         return self.State.Model or self.Model
     end
     --
+    -- Gender
+    _, self.Gender = c.IsPedMale(self.Model)
+    self.State.Gender = self.Gender
+    --
+    self.GetGender =  function()
+        return self.State.Gender or self.Gender
+    end
+    --
+    -- Humaniod Model
+    self.IsHuman = c.IsPedHuman(self.Model)
+    self.State.IsHuman = self.IsHuman
+    --
+
+
     c.debug("Generated NPC State: "..net)
     --
     return self

@@ -143,3 +143,22 @@ function c.CreateObject(name, x, y, z, isdoor)
     local net = CreateObject(hash, x, y, z, true, isdoor)
     return net
 end
+
+-- My own version of the native for the server to use.
+function c.IsPedMale(hash)
+    if conf.peds.male[hash] then
+        return true, "Male"
+    end
+    if conf.peds.female[hash] then
+        return false, "Female"
+    end
+end
+
+-- My own version of the native for the server to use.
+function c.IsPedHuman(hash)
+    if conf.peds.animals[hash] then
+        return false, "Animal"
+    else
+        return true, "Human"
+    end
+end
