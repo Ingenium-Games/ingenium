@@ -4,9 +4,7 @@
 conf.peds = {}
 --[[
 NOTES
-	- Saves having to add them over and over
-	-
-	- conf.vehicles upto date as build 2149
+	- Need to identify: csb, ig, cs ped genders.
 ]] --
 -- ====================================================================================--
 
