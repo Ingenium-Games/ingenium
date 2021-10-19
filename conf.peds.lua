@@ -561,7 +561,7 @@ conf.peds.female = {
 	[0x5B81D86C] = {["name"] = "u_f_y_spyactress", ["description"] = "Spy Actress"},
 }
 
-conf.peds.animal = {
+conf.peds.animals = {
 	[0xCE5FF074] = {["name"] = "a_c_boar", ["description"] = "Boar"},
 	[0x573201B8] = {["name"] = "a_c_cat_01", ["description"] = "Cat"},
 	[0xAAB71F62] = {["name"] = "a_c_chickenhawk", ["description"] = "Hawk"},
