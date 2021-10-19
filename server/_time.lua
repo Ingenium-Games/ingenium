@@ -11,10 +11,23 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-local hours = {
-    _min = 0,
-    _max = 23,
-}
+--- func desc
+---@param h number "Can do any, but really only 0,23 will work."
+function c.time.AlterTime(h)
+    local h = c.check.Number(h, 0, 23)
+    local _min, _max = 0, 23
+    local timealter = conf.altertime
+    if timealter <= -23 then timealter = -23 end
+    if timealter >= 23 then timealter = 23 end
+    local newhour = h + timealter
+    if newhour <= _min then
+        newhour = (_max - newhour)
+    end
+    if newhour >= _max then
+        newhour = _min + (newhour - _max)
+    end
+    return newhour
+end
 
 --- func desc
 function c.time.Update()
@@ -34,20 +47,4 @@ function c.time.ServerSync()
         SetTimeout(c.min, Do)
     end
     SetTimeout(c.min, Do)
-end
-
---- func desc
----@param h number "Can do any, but really only 0,23 will work."
-function c.time.AlterTime(h)
-    local timealter = conf.altertime
-    if timealter <= -23 then timealter = -23 end
-    if timealter >= 23 then timealter = 23 end
-    local newhour = h + timealter
-    if newhour <= hours._min then
-        newhour = (hours._max - newhour)
-    end
-    if newhour >= hours._max then
-        newhour = hours._min + (newhour - hours._max)
-    end
-    return newhour
 end

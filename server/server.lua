@@ -1,11 +1,12 @@
 -- ====================================================================================--
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
+--
 SetGameType(conf.gamemode)
-SetConvarReplicated("Game Mode", conf.gamemode)
+SetConvarServerInfo("Game Mode", conf.gamemode)
 --
 SetMapName(conf.mapname)
-SetConvarReplicated("Map Name", conf.mapname)
+SetConvarServerInfo("Map Name", conf.mapname)
 --
 math.randomseed(c.Seed)
 -- ====================================================================================--

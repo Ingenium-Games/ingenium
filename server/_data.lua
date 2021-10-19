@@ -13,12 +13,6 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-
-function c.data.LoadFiles()
-
-end
-
-
 --- Used on startup prior to the server really running.
 function c.data.Initilize()
     c.debug('Loading Sequence Begin.')
@@ -30,13 +24,9 @@ function c.data.Initilize()
         [4] = 'DB: Job Accounts have been Generated;',
         [5] = 'DB: Job Objects Created and Added;',
         [6] = 'DB: Loading Data File - GSR;',
-        
         [7] = 'DB: Loading Data File - Drops;',
-        
         [8] = 'DB: Loading Data File - Pickups;',
-        
-        [9] = 'DB: Loading Data File - Notes;',
-        
+        [9] = 'DB: Loading Data File - Notes;',        
         [10] = 'DB: Loading Data File - Names;',
     }
     --

@@ -24,10 +24,14 @@ function c.version.Check(url, resourceName)
     end, "GET", "", "")
 end
 
-function c.version.ScheduleCheck(time, url, resourceName)
-    SetTimeout(time, c.version.Check(url,resourceName))
+function c.version.LoopCheck(time, url, resourceName)
+    local function Do()
+        c.version.Check(url, resourceName)
+        SetTimeout(time, Do)
+    end
+    SetTimeout(time, Do)
 end
 
 function c.version.CronCheck(hour, min, url, resourceName)
-    c.cron.Add(h, m, c.version.Check(url,resourceName))
+    c.cron.Add(h, m, c.version.Check(url, resourceName))
 end

@@ -14,6 +14,8 @@ math.randomseed(c.Seed)
 
 --- [F] - Add Functino be be called back @ Hour and Minute.
 function c.cron.Add(h, m, cb)
+	local h = c.check.Number(h, 0, 23)
+	local m = c.check.Number(m, 0, 59)
 	table.insert(c.crons, {
 		h  = h,
 		m  = m,

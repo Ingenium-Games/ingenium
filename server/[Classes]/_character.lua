@@ -310,9 +310,12 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.SetInstance = function(v)
-        local num = c.check.Number(v, 0, 63)
-        self.Instance = num
-        self.State.Instance = self.Instance
+        local num = c.check.Number(v)
+        if num ~= self.GetInstance() then
+            self.Instance = num
+            self.State.Instance = self.Instance
+            c.sql.char.SetInstance(self.GetIdentifier(), num)
+        end
     end
     -- 
     self.GetHealth = function()
@@ -460,6 +463,8 @@ function c.class.CreateCharacter(source, character_id)
     self.CraftItem = function()
         
     end
+    --
+
     --
     c.debug("Generated Character")
     return self

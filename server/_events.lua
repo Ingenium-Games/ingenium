@@ -134,6 +134,8 @@ RegisterNetEvent("Server:Character:Ready")
 AddEventHandler("Server:Character:Ready", function()
     local src = source
     local xPlayer = c.data.GetPlayer(src)
+    -- update what instance they are in.
+    c.inst.SetPlayer(src, xPlayer.GetInstance())
     -- Remove from current ACL Job Group
     ExecuteCommand(('remove_principal identifier.%s job.%s'):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
     --

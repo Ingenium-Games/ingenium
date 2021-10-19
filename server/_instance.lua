@@ -5,7 +5,7 @@ c.inst = {}
 --[[
 NOTES.
     -
-    -
+    - In theroy this could be added to all entity objects.. To Do...
     -
 ]] --
 
@@ -37,7 +37,7 @@ function c.inst.SetPlayer(source, num)
             SetPlayerRoutingBucket(src, num)
             SetEntityRoutingBucket(GetPlayerPed(src), num)
             xPlayer.SetInstance(num)
-            c.sql.char.SetInstance(xPlayer.GetIdentifier(), num, c.debug(xPlayer.Name.." added to Instance: "..num))
+            c.debug(xPlayer.Name.." added to Instance: "..num)
         end
     end
 end
@@ -72,7 +72,7 @@ function c.inst.SetPlayerDefault(source)
     SetPlayerRoutingBucket(source, conf.instancedefault)
     SetEntityRoutingBucket(GetPlayerPed(source), conf.instancedefault)
     xPlayer.SetInstance(conf.instancedefault)
-    c.sql.char.SetInstance(xPlayer.GetIdentifier(), conf.instancedefault, c.debug(xPlayer.Name.." added to Global Instance."))
+    c.debug(xPlayer.Name.." added to Global Instance.")
 end
 
 --- Set entity routing bucket
@@ -80,12 +80,3 @@ end
 function c.inst.SetEntityDefault(entity)
     SetEntityRoutingBucket(entity, conf.instancedefault)
 end
-
--- only called once client is character ready.
--- check instance on reload of character
-AddEventHandler("Server:Character:Ready", function()
-    local src = tonumber(source)
-    local xPlayer = c.data.GetPlayer(source)
-    SetPlayerRoutingBucket(source, xPlayer.GetInstance())
-    SetEntityRoutingBucket(GetPlayerPed(source), xPlayer.GetInstance())
-end)
