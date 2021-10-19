@@ -19,10 +19,10 @@ conf.debug = true
 --[[
 GENERIC :
     [1] Map name.
-    [2] Game Type.
+    [2] Game mode. Use RP/GG/KOTH etc etc
 ]]--
 conf.mapname = 'Los Santos'
-conf.gametype = 'Role Play'
+conf.gamemode = 'RP'
 --[[
 LOCALISATION/INTERNATIONALISATION also known as.. i18n :
     -- Standard language selection.

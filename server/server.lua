@@ -1,14 +1,12 @@
 -- ====================================================================================--
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
-SetGameType(conf.gametype)
+SetGameType(conf.gamemode)
+SetConvarReplicated("Game Mode", conf.gametype)
+--
 SetMapName(conf.mapname)
---[[
-NOTES.
-    -
-    -
-    -
-]]--
+SetConvarReplicated("Map Name", conf.gametype)
+--
 math.randomseed(c.Seed)
 -- ====================================================================================--
 AddEventHandler('onResourceStart', function(resourceName)
@@ -16,12 +14,6 @@ AddEventHandler('onResourceStart', function(resourceName)
         return
     end
     --
-    OnStart(resourceName)
-    --
-end)
--- ====================================================================================--
-function OnStart(resourceName)
-    -- Check version
     c.version.Check(conf.url.version, resourceName)
     -- Run setup / startup by loading data from files the database etc.
     c.data.Initilize()
@@ -49,7 +41,7 @@ function OnStart(resourceName)
     c.vehicle.CleanUp()
     c.npc.CleanUp()
     --
-end
+end)
 -- ====================================================================================--
 RegisterNetEvent('Server:PlayerConnecting')
 AddEventHandler('Server:PlayerConnecting', function()
@@ -78,9 +70,7 @@ AddEventHandler('Server:PlayerConnecting', function()
         DropPlayer(src, 'No License Identifier, No Entry.')
     end
 end)
-
 -- ====================================================================================--
-
 AddEventHandler('playerDropped', function()
     local src = tonumber(source)
     local xPlayer = c.data.GetPlayer(src)

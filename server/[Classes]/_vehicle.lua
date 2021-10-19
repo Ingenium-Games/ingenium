@@ -3,9 +3,7 @@
 -- ====================================================================================--
 --[[
 NOTES
-    - Lemme lay this on thick, Only created vehicles are currently classed into this core.
-    - I need to review the best method moving forward to generate class. Be it on entity 
-    - creation or to run a check to see if it needs to be created.. Probably the later.
+    - Fuck yeh onesync creation event boi.
 ]] --
 math.randomseed(c.Seed)
 -- ====================================================================================--

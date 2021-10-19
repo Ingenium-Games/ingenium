@@ -283,66 +283,66 @@ function c.GetPickupsInArea(coords, radius, minimal)
     return obj
 end
 
--- returns closestPlayer, closestDistance
+-- returns closest, closestdist
 function c.GetClosestPlayer()
     local players = GetActivePlayers()
-    local closestDistance = -1
-    local closestPlayer = -1
+    local closest = -1
+    local closestdist = -1
     local ply = PlayerPedId()
-    local plyCoords = GetEntityCoords(ply)
-    for _, value in ipairs(players) do
+    local coords = vector3(GetEntityCoords(ply))
+    for _, value in pairs(players) do
         local target = GetPlayerPed(value)
-        if (target ~= ply) then
-            local targetCoords = GetEntityCoords(GetPlayerPed(value))
-            local distance = #(vector3(targetCoords["x"], targetCoords["y"], targetCoords["z"]) -
-                                 vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
-            if (closestDistance == -1 or closestDistance > distance) and not IsPedInAnyVehicle(target, false) then
-                closestPlayer = value
-                closestDistance = distance
+        if target ~= ply then
+            local targetcoords = vector3(GetEntityCoords(target))
+            local distance = #(targetcoords - coords)
+            if (closestdist == -1 or closestdist > distance) then
+                closest = value
+                closestdist = distance
             end
         end
     end
-    return closestPlayer, closestDistance
+    return closest, closestdist, IsPedInAnyVehicle(closest, false)
 end
 
--- returns closestVeh, closestDistance
+-- returns closestVeh, closestdist
 function c.GetClosestVehicle()
-    local closestDistance = -1
-    local closestVeh = -1
+    local closest = -1
+    local closestdist = -1
     local ply = PlayerPedId()
-    local plyCoords = GetEntityCoords(ply)
-    local vehicles = c.GetVehiclesInArea(plyCoords, 20)
-    for _, value in ipairs(vehicles) do
-        local targetCoords = GetEntityCoords(GetPlayerPed(value))
-        local distance = #(vector3(targetCoords["x"], targetCoords["y"], targetCoords["z"]) -
-                             vector3(plyCoords["x"], plyCoords["y"], plyCoords["z"]))
-        if (closestDistance == -1 or closestDistance > distance) then
-            closestVeh = value
-            closestDistance = distance
+    local coords = vector3(GetEntityCoords(ply))
+    local vehicles = c.GetVehiclesInArea(coords, 20, true)
+    for _, value in pairs(vehicles) do
+        local targetcoords = vector3(GetEntityCoords(value))
+        local distance = #(targetcoords - coords)
+        if (closestdist == -1 or closestdist > distance) then
+            closest = value
+            closestdist = distance
         end
     end
-    return closestVeh, closestDistance
+    return closest, closestdist
 end
 
-function c.GetVehicleInDirection()
-    local playerPed = PlayerPedId()
-    local playerCoords = GetEntityCoords(playerPed)
-    local inDirection = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 5.0, 0.0)
-    local rayHandle = StartShapeTestRay(playerCoords, inDirection, 10, playerPed, 0)
-    local numRayHandle, hit, endCoords, surfaceNormal, entityHit = GetShapeTestResult(rayHandle)
-    if hit == 1 and GetEntityType(entityHit) == 2 then
-        return entityHit
-    end
-    return nil
-end
-
-
+-- base events.
 function c.GetVehicleSeatOfPed(ped)
     local vehicle = GetVehiclePedIsIn(ped, false)
-    for i=-2,GetVehicleMaxNumberOfPassengers(vehicle) do
+    for i=-2, GetVehicleMaxNumberOfPassengers(vehicle) do
         if(GetPedInVehicleSeat(vehicle, i) == ped) then return i end
     end
     return -2
+end
+
+function c.GetEntityFromRay()
+    local ped = PlayerPedId()
+    local coords = GetEntityCoords(ped)
+    local direction = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
+    local rayhandle = StartShapeTestLosProbe(coords, direction, 10, ped, 0)
+    local result, hit, endcoords, surface, entity = GetShapeTestResult(rayhandle)
+    if result == 2 then
+        if hit and entity then
+            return entity, endcoords
+        end
+    end
+    return false, false
 end
 
 -- https://forum.cfx.re/t/use-displayonscreenkeyboard-properly/51143
