@@ -4,7 +4,7 @@
 conf.peds = {}
 --[[
 NOTES
-	- Need to identify: csb, ig, cs ped genders.
+	- Need to identify: csb, ig, cs, hc ped genders.
 ]] --
 -- ====================================================================================--
 
@@ -19,7 +19,6 @@ conf.peds.gender = {
 	["g_f_y"] = 1,
 	["g_m_m"] = 0,
 	["g_m_y"] = 0,
-	["hc"] = 2,
 	["mp_f"] = 1,
 	["mp_m"] = 0,
 	["player_"] = 0,

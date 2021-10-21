@@ -164,7 +164,19 @@ end)
 RegisterNetEvent("Server:Character:Death")
 AddEventHandler("Server:Character:Death", function(data)
     local src = source
+    if data.Log then
+        -- agro = source id or -1 for server.
+        local agro = data.Log.Source
+        if data.Cause == "Weapon" then
+            
+        elseif data.Cause == "Vehicle" then
 
+        elseif data.Cause == "Obejct" then
+            
+        end
+    else
+
+    end
 end)
 
 --@ req = server_id or source

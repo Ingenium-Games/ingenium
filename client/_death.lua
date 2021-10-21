@@ -14,36 +14,45 @@ math.randomseed(c.Seed)
 local function PlayerKilled()
     local ply = PlayerId()
     local ped = PlayerPedId()
-    local pvp = false
+    local log = false
     local cause = GetPedCauseOfDeath(ped)
     local source = GetPedSourceOfDeath(ped)
 
     if source ~= 0 then
         local type = GetEntityType(source)
         if type == 1 then
+            cause = "Weapon"
             local attacker, weapon = NetworkGetEntityKillerOfPlayer(ply)
             local isplayer = IsPedAPlayer(attacker)
             if isplayer then
-                pvp = {['source'] = NetworkGetPlayerIndexFromPed(attacker), ['weapon'] = weapon}
-            end 
+                log = {["Source"] = NetworkGetPlayerIndexFromPed(attacker), ["Weapon"] = weapon}
+            else
+                log = {["Source"] = -1, ["Weapon"] = weapon}
+            end
         elseif type == 2 then
+            cause = "Vehicle"
             local attacker = GetPedInVehicleSeat(source, 1)
             local class = GetVehicleClass(source)
-            local colours = GetVehicleColours(source)
+            local primary, secondary = GetVehicleColours(source)
             local isplayer = IsPedAPlayer(attacker)
             if isplayer then
-                pvp = {['source'] = NetworkGetPlayerIndexFromPed(attacker), ['class'] = conf.vehicle.classes[class], }
+                log = {["Source"] = NetworkGetPlayerIndexFromPed(attacker), ["Class"] = conf.vehicle.classes[class], ["Primary"] = primary, ["Secondary"] = secondary}
+            else
+                log = {["Source"] = -1, ["Class"] = conf.vehicle.classes[class], ["Primary"] = primary, ["Secondary"] = secondary}
             end 
-        
+        elseif type == 3 then
+            -- Did a brick fall on your ped, wtf?
+            cause = "Object"
+            log = {["Source"] = -1}
         end
     end
-    
     local data = {
-        PVP = pvp,
+        Log = log,
+        Cause = cause,
         Coords = vector3(GetEntityCoords(ped)),
     }
-    TriggerEvent('Client:Character:Death', data)
-    TriggerServerEvent('Server:Character:Death', data)
+    TriggerEvent("Client:Character:Death", data)
+    TriggerServerEvent("Server:Character:Death", data)
 end
 
 Citizen.CreateThread(function()

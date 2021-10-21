@@ -1,7 +1,7 @@
 -- ====================================================================================--
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
-conf.vehicle = {}
+conf.vehicles = {}
 --[[
 NOTES
 	- Saves having to add them over and over
@@ -9,7 +9,7 @@ NOTES
 	- conf.vehicles upto date as build 2149
 ]] --
 -- ====================================================================================--
-conf.vehicle.classes = {
+conf.vehicles.classes = {
 [0] = "Compact",
 [1] = "Sedan",
 [2] = "SUV",
@@ -34,7 +34,7 @@ conf.vehicle.classes = {
 [21] = "Train",
 }
 
-conf.vehicle.list = {
+conf.vehicles.all = {
 `ADDER`,
 `AIRBUS`,
 `AIRTUG`,

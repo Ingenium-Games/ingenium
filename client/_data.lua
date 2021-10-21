@@ -56,7 +56,31 @@ function c.data.GetPlayer()
     return Player(GetPlayerServerId(PlayerId())).state
 end
 
-------------------------------------------------------------------------------
+--- Return the Entity"s state bag.
+---@param net any "Network ID 16 bit integer"
+function c.data.GetEntityState(net)    
+    return Entity(NetworkGetEntityFromNetworkId(net)).state
+end
+
+--- Return the Entity"s state bag.
+---@param net any "Network ID 16 bit integer"
+function c.GetEntityState(net)    
+    return c.data.GetEntityState(net)
+end
+
+--- Return the Players's state bag.
+---@param id any "Player's Server Id"
+function c.data.GetPlayerState(id)    
+    return Player(id).state
+end
+
+--- Return the Players's state bag.
+---@param id any "Player's Server Id"
+function c.GetPlayerState(id)    
+    return c.data.GetPlayerState(id)
+end
+
+-- ====================================================================================--
 
 --- Sends the packet of data to the server to register and update xPlayer
 function c.data.Packet()

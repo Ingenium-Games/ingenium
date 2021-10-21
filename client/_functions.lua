@@ -79,12 +79,6 @@ end
 
 -- ====================================================================================--
 
---- Return the Entity"s state bag.
----@param entity any "Typically a number or string"
-function c.GetEntity(entity)
-    return Entity(entity).state
-end
-
 -- @entity - the object
 -- @arrays - locations in a table format
 -- @style - c.SelectMarker() - Pick Marker type.
@@ -820,3 +814,29 @@ function c.SetVehicleCondition(vehicle, cons)
         end
     end
 end
+
+function c.SetVehicleFuel(net, level)
+    local ent = NetworkGetEntityFromNetworkId(net)
+    if GetEntityType(ent) ~= 2 then
+        c.debug("Unexpected entity type to Set State Fuel")
+        return 
+    end
+    local state = c.data.GetEntityState(net)
+    SetVehicleFuelLevel(ent, level)
+    state:set("Fuel", level, true)
+end
+
+function c.GetVehicleFuel(net)
+    local ent = NetworkGetEntityFromNetworkId(net)
+    if GetEntityType(ent) ~= 2 then
+        c.debug("Unexpected entity type to Get State Fuel")
+        return 
+    end
+    local fuel = GetVehicleFuelLevel(ent)
+    local state = c.data.GetEntityState(net)
+    if state.Fuel ~= fuel then
+        c.SetVehicleFuel(net, state.Fuel)
+    end
+    return state.Fuel
+end
+

@@ -106,10 +106,6 @@ end
 
 -- ====================================================================================--
 
-function c.State(entity)
-    return Entity(entity).state
-end
-
 function c.CreateVehicle(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then

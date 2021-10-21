@@ -11,8 +11,16 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 RegisterNetEvent("Client:Character:Death")
 AddEventHandler("Client:Character:Death", function(data)
-    if (data.PlayerKill == true) then
-        
+    if data.Log then
+        -- agro = source id or -1 for server.
+        local agro = data.Log.Source
+        if data.Cause == "Weapon" then
+            
+        elseif data.Cause == "Vehicle" then
+
+        elseif data.Cause == "Obejct" then
+
+        end
     else
         
     end
@@ -28,17 +36,15 @@ AddEventHandler('Client:Character:Loaded', function()
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
     -- 
-    local appearance = xPlayer.Appearance
-    TriggerEvent("Client:LoadSkin", appearance)
-    --TriggerServerEvent("Server:LoadSkin")
-    -- Trigger any events after the Ready State.
+    TriggerEvent("Client:LoadSkin", xPlayer.Appearance)
     TriggerEvent('Client:Character:Ready')
 end)
 
 -- Event to trigger other resources once the client has received the chosen characters data from the server.
 RegisterNetEvent('Client:Character:Ready')
 AddEventHandler('Client:Character:Ready', function()
-    --
+    -- Character has loaded in, no need to respawn any more.
+    exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")
 end)
 
