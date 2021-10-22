@@ -87,7 +87,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     --
     --
     Citizen.Wait(2500)
-    d.presentCard(connecting, function(data, raw)
+    d.presentCard(json.encode(connecting), function(data, raw)
         if data.submidId == "Submit" then
             if drop then
                 Citizen.Wait(100)

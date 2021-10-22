@@ -18,7 +18,7 @@ function DeferralCards.Card.Create(self, pOptions)
     pOptions.version = pOptions.version or '1.4'
     pOptions.body = pOptions.body or {}
     pOptions['$schema'] = 'http://adaptivecards.io/schemas/adaptive-card.json'
-    return json.encode(pOptions)
+    return pOptions
 end
 --[[
     DeferralCards.Card:Create({
