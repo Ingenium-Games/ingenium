@@ -65,22 +65,13 @@ AddEventHandler("playerConnecting", function(name, skr, d)
             }))
         end
     end
-    --     
-    table.insert(connecting.body, DeferralCards.Container:Create({
-        items = {
-            DeferralCards.CardElement:TextBlock({
-                text = '..__..__..__..__..__..__..__..__..',
-                wrap = false
-            })
-        }})
-    )
     --
     table.insert(connecting.body, 
     DeferralCards.Container:ActionSet({
         actions = {
             DeferralCards.Action:Submit({
                 id = 'Submit',
-                title = 'Continue...'
+                title = 'Continue'
             })
         }
     }))
@@ -88,7 +79,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     --
     Citizen.Wait(2500)
     d.presentCard(json.encode(connecting), function(data, raw)
-        if data.submidId == "Submit" then
+        if data.Submit == "Submit" then
             if drop then
                 Citizen.Wait(100)
                 d.done("Connection canceled per the formentioned reasons.")
