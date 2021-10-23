@@ -71,7 +71,8 @@ AddEventHandler("playerConnecting", function(name, skr, d)
         actions = {
             DeferralCards.Action:Submit({
                 id = 'Submit',
-                title = 'Continue'
+                title = 'Continue',
+                data = {Submit = true}
             })
         }
     }))
