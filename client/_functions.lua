@@ -814,24 +814,3 @@ function c.SetVehicleCondition(vehicle, cons)
         end
     end
 end
-
-function c.SetVehicleFuel(net, level)
-    local ent = NetworkGetEntityFromNetworkId(net)
-    if GetEntityType(ent) ~= 2 then
-        c.debug("Unexpected entity type to Set State Fuel")
-        return 
-    end
-    local state = c.data.GetEntityState(net)
-    if not level then level = state.Fuel end
-    SetVehicleFuelLevel(ent, level)
-    state:set("Fuel", level, true)
-end
-
-function c.GetVehicleFuel(net)
-    local ent = NetworkGetEntityFromNetworkId(net)
-    if GetEntityType(ent) ~= 2 then
-        c.debug("Unexpected entity type to Get State Fuel")
-        return 
-    end
-    local fuel = GetVehicleFuelLevel(ent)
-end

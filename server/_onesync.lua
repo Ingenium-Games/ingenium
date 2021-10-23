@@ -53,9 +53,7 @@ AddEventHandler('entityCreated', function(ent)
         -- Vehicle
         elseif type == 2 then
             if not conf.disable.vehicles[model] then                        
-                if not c.vehicle.Find(net) then
-                    c.data.AddVehicle(net, c.class.CreateVehicle, net, false)
-                end
+                c.data.AddVehicle(net, c.class.CreateVehicle, net, false)
             else
                 DeleteEntity(ent)
                 c.debug('Vehicle has been Deleted.')

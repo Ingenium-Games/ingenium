@@ -166,7 +166,9 @@ end
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
     
 function c.data.AddVehicle(net, cb, ...)
-    c.vdex[net] = cb(...)
+    if not c.vehicle.Find(net) then
+        c.vdex[net] = cb(...)
+    end
 end
 
 --- Get the xVehicle Data/Table
