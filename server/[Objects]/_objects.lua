@@ -23,30 +23,3 @@ function c.object.Find(net)
     end
     return false
 end
-
-
--- Runs off net id's within the table
-function c.object.CleanOne(net)
-    local ent = NetworkGetEntityFromNetworkId(net)
-    if not DoesEntityExist(ent) then
-        table.remove(c.odex, net)
-    end
-end
-
--- Runs off net id's within the table
-function c.object.CleanAll()
-    for k,v in ipairs(c.odex) do
-        -- Check the entities do not exist.
-        if not DoesEntityExist(v.Entity) then
-            table.remove(c.odex, k)
-        end
-    end
-end
-
-function c.object.CleanUp()
-    local function Do()
-        c.object.CleanAll()
-        SetTimeout(conf.cleanup, Do)
-    end
-    SetTimeout(conf.cleanup, Do)
-end

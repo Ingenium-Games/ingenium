@@ -66,9 +66,7 @@ AddEventHandler('entityCreated', function(ent)
             if not conf.disable.peds[model] then                        
                 -- not a human player
                 if not IsPedAPlayer(ent) then
-                    if not c.npc.Find(net) then
-                        c.class.CreateNpc(net)
-                    end
+                    c.class.CreateNpc(net)
                 else
                 -- is a player
                 
@@ -123,7 +121,7 @@ AddEventHandler('entityRemoved', function(ent)
     
     -- Object
     if type == 3 then
-
+        c.data.RemoveObject(net)
     -- Vehicle
     elseif type == 2 then            
         c.data.RemoveVehicle(net)
@@ -131,7 +129,7 @@ AddEventHandler('entityRemoved', function(ent)
     elseif type == 1 then
         -- not a human player
         if not IsPedAPlayer(ent) then
-            c.npc.CleanOne(net)
+            c.data.RemoveNpc(net)
         else
         -- is a player
             

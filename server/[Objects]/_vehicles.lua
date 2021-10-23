@@ -33,30 +33,3 @@ function c.vehicle.Find(net)
     end
     return false
 end
-
-
--- Runs off net id's within the table
-function c.vehicle.CleanOne(net)
-    local ent = NetworkGetEntityFromNetworkId(net)
-    if not DoesEntityExist(ent) then
-        table.remove(c.vdex, net)
-    end
-end
-
--- Runs off net id's within the table
-function c.vehicle.CleanAll()
-    for k,v in ipairs(c.vdex) do
-        -- Check the entities do not exist.
-        if not DoesEntityExist(v.Entity) then
-            table.remove(c.vdex, k)
-        end
-    end
-end
-
-function c.vehicle.CleanUp()
-    local function Do()
-        c.vehicle.CleanAll()
-        SetTimeout(conf.cleanup, Do)
-    end
-    SetTimeout(conf.cleanup, Do)
-end
