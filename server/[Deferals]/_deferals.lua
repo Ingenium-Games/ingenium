@@ -76,10 +76,9 @@ AddEventHandler("playerConnecting", function(name, skr, d)
         }
     }))
     --
-    --
     Citizen.Wait(2500)
     d.presentCard(json.encode(connecting), function(data, raw)
-        if data.Submit == "Submit" then
+        if data.Submit then
             if drop then
                 Citizen.Wait(100)
                 d.done("Connection canceled per the formentioned reasons.")
