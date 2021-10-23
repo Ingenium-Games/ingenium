@@ -15,7 +15,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     local name = GetPlayerName(src)
     --
     local connecting = DeferralCards.Card:Create()
-    local facts = DeferralCards.Container:FactSet()
+    local facts = DeferralCards.Container:FactSet({facts = {}})
     table.insert(connecting.body, DeferralCards.Container:Create({
         items = {
             DeferralCards.CardElement:TextBlock({
