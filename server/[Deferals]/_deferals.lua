@@ -35,7 +35,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     if namecheck then
         drop = true
         print('drop')
-        table.insert(facts, DeferralCards.Container:Fact({
+        table.insert(facts.facts, DeferralCards.Container:Fact({
             title = "Issue",
             value = "Your name contains forbidden characters."
         }))
@@ -45,7 +45,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     if ban then
         drop = true
         print('drop 2')
-        table.insert(facts, DeferralCards.Container:Fact({
+        table.insert(facts.facts, DeferralCards.Container:Fact({
             title = "Issue",
             value = "You have been banned."
         }))
@@ -60,7 +60,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
                 discord = false
                 print('drop 3')
                 drop = true
-                table.insert(facts, DeferralCards.Container:Fact({
+                table.insert(facts.facts, DeferralCards.Container:Fact({
                     title = "Issue",
                     value = "You have not joined our discord."
                 }))
