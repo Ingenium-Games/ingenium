@@ -822,6 +822,7 @@ function c.SetVehicleFuel(net, level)
         return 
     end
     local state = c.data.GetEntityState(net)
+    if not level then level = state.Fuel end
     SetVehicleFuelLevel(ent, level)
     state:set("Fuel", level, true)
 end
@@ -833,10 +834,4 @@ function c.GetVehicleFuel(net)
         return 
     end
     local fuel = GetVehicleFuelLevel(ent)
-    local state = c.data.GetEntityState(net)
-    if state.Fuel ~= fuel then
-        c.SetVehicleFuel(net, state.Fuel)
-    end
-    return state.Fuel
 end
-
