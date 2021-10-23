@@ -24,7 +24,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
                 text = 'Welcome '..name,
             }),
             DeferralCards.CardElement:TextBlock({
-                text = 'Note: If you see any __**Issues**__ below this point, then you may need to take a screenshot and report it to __**THIS SERVER**__, as they are preventing you from joining.',
+                text = '***Notice:*** If you see any __Issues__ below this point, then you may need to take a screenshot and report it to __**THIS SERVER**__, as they are preventing you from joining. General Contact information can be found here: '..conf.discordlink,
                 wrap = true
             })
         }})

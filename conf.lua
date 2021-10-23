@@ -68,6 +68,7 @@ DEFERALS :
     [3] Discord role to confirm the player is apart of the required guild.
 ]]--
 conf.forcename = true
+conf.discordlink = "https://discord.gg/zduUDU8Frv"
 conf.discordperms = true
 conf.discordrole = '834191331844030524'
 --[[
