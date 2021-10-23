@@ -165,12 +165,8 @@ end
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
     
-function c.data.AddVehicle(net, plate, stolen)
-    if not c.vehicle.Find(net) then
-        if plate then
-            c.vdex[net] = c.class.CreatePlayerVehicle(net, plate)
-        end
-    end
+function c.data.AddVehicle(net, cb, ...)
+    c.vdex[net] = cb(...)
 end
 
 --- Get the xVehicle Data/Table

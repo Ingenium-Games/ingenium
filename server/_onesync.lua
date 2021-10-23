@@ -42,9 +42,7 @@ AddEventHandler('entityCreated', function(ent)
         -- Object
         if type == 3 then
             if not conf.disable.objects[model] then
-                if c.object.Find(net) then
-
-                end                       
+               
             else
                 DeleteEntity(ent)
                 c.debug('Object has been Deleted.')
@@ -52,10 +50,8 @@ AddEventHandler('entityCreated', function(ent)
         --
         -- Vehicle
         elseif type == 2 then
-            if not conf.disable.vehicles[model] then                        
-                if not c.vehicle.Find(net) then
-                    c.class.CreateVehicle(net, false)
-                end
+            if not conf.disable.vehicles[model] then
+                c.data.AddVehicle(net, c.class.CreateVehicle, net, false) 
             else
                 DeleteEntity(ent)
                 c.debug('Vehicle has been Deleted.')
@@ -66,9 +62,7 @@ AddEventHandler('entityCreated', function(ent)
             if not conf.disable.peds[model] then                        
                 -- not a human player
                 if not IsPedAPlayer(ent) then
-                    if not c.npc.Find(net) then
-                        c.class.CreateNpc(net)
-                    end
+                    c.class.CreateNpc(net)
                 else
                 -- is a player
                 
@@ -123,23 +117,15 @@ AddEventHandler('entityRemoved', function(ent)
     
     -- Object
     if type == 3 then
-        if c.object.Find(net) then
-            c.object.CleanOne(net)
-        end
+
     -- Vehicle
     elseif type == 2 then            
-        if c.vehicle.Find(net) then
-            -- This is the inital remove, the loops CleanAll() functions are too ensure entities exist with data.
-            c.vehicle.CleanOne(net)
-        end
-    -- Ped
+        c.data.RemoveVehicle(net)
+   -- Ped
     elseif type == 1 then
         -- not a human player
         if not IsPedAPlayer(ent) then
-            if c.npc.Find(net) then
-                -- This is the inital remove, the loops CleanAll() functions are too ensure entities exist with data.
-                c.npc.CleanOne(net)
-            end
+            c.npc.CleanOne(net)
         else
         -- is a player
             
