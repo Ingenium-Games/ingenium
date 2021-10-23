@@ -68,7 +68,8 @@ AddEventHandler("playerConnecting", function(name, skr, d)
         end)
     end
     --
-    table.insert(connecting.body, {facts,
+    table.insert(connecting.body, facts)
+    table.insert(connecting.body,
     DeferralCards.Container:ActionSet({
         actions = {
             DeferralCards.Action:Submit({
@@ -77,7 +78,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
                 data = {Submit = true}
             })
         }
-    })})
+    }))
     --
     Citizen.Wait(2000)
     d.presentCard(json.encode(connecting), function(data, raw)
