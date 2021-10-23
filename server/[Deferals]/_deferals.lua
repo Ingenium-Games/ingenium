@@ -24,7 +24,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
                 text = 'Welcome '..name,
             }),
             DeferralCards.CardElement:TextBlock({
-                text = '***Notice:*** If you see any __Issues__ below this point, then you may need to take a screenshot and report it to __**THIS SERVER**__, as they are preventing you from joining. General Contact information can be found here: '..conf.discordlink,
+                text = '__**Notice:**__ If you see any _Issues_ below this line, then you may need to take a screenshot and report it to __**THIS SERVER**__, as they are preventing you from joining. General Contact information can be found here: '..conf.discordlink,
                 wrap = true
             })
         }})
@@ -34,7 +34,6 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     local namecheck = name:match("%W")
     if namecheck then
         drop = true
-        print('drop')
         table.insert(facts.facts, DeferralCards.Container:Fact({
             title = "Issue",
             value = "Your name contains forbidden characters."
@@ -44,10 +43,9 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     local ban = c.sql.user.GetBan(id)
     if ban then
         drop = true
-        print('drop 2')
         table.insert(facts.facts, DeferralCards.Container:Fact({
             title = "Issue",
-            value = "You have been banned."
+            value = "You have been banned by command or automatic event."
         }))
     end
     --
@@ -58,7 +56,6 @@ AddEventHandler("playerConnecting", function(name, skr, d)
                 discord = true
             else
                 discord = false
-                print('drop 3')
                 drop = true
                 table.insert(facts.facts, DeferralCards.Container:Fact({
                     title = "Issue",
@@ -85,7 +82,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
         if data.Submit then
             if drop then
                 Citizen.Wait(0)
-                d.done("Connection canceled per the formentioned reasons.")
+                d.done("You saw the reasons a moment ago, on an adaptive card. It renders all the reasons why you cannot join, as long as the server owner has updated them with more fact points.")
             else
                 Citizen.Wait(0)
                 d.done()
