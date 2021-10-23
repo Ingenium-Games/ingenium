@@ -37,10 +37,6 @@ AddEventHandler('onResourceStart', function(resourceName)
     c.drop.CleanUp()
     c.pick.CleanUp()
     c.note.CleanUp()
-    -- Cleanup Cycles on objects.
-    c.object.CleanUp()
-    c.vehicle.CleanUp()
-    c.npc.CleanUp()
     --
 end)
 -- ====================================================================================--
