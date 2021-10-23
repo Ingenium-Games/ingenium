@@ -57,16 +57,14 @@ AddEventHandler("playerConnecting", function(name, skr, d)
                 discord = true
             else
                 discord = false
+                print('drop 3')
+                drop = true
+                table.insert(connecting.body, DeferralCards.Container:Fact({
+                    title = "Issue",
+                    value = "You have not joined our discord."
+                }))
             end
         end)
-        if not discord then
-            print('drop 3')
-            drop = true
-            table.insert(connecting.body, DeferralCards.Container:Fact({
-                title = "Issue",
-                value = "You have not joined our discord."
-            }))
-        end
     end
     --
     table.insert(connecting.body, 
