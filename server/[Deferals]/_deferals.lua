@@ -33,6 +33,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     local namecheck = name:match("%W")
     if namecheck then
         drop = true
+        print('drop')
         table.insert(connecting.body, DeferralCards.Container:Fact({
             title = "Issue",
             value = "Your name contains forbidden characters."
@@ -42,6 +43,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     local ban = c.sql.user.GetBan(id)
     if ban then
         drop = true
+        print('drop 2')
         table.insert(connecting.body, DeferralCards.Container:Fact({
             title = "Issue",
             value = "You have been banned."
@@ -58,6 +60,7 @@ AddEventHandler("playerConnecting", function(name, skr, d)
             end
         end)
         if not discord then
+            print('drop 3')
             drop = true
             table.insert(connecting.body, DeferralCards.Container:Fact({
                 title = "Issue",
@@ -77,14 +80,14 @@ AddEventHandler("playerConnecting", function(name, skr, d)
         }
     }))
     --
-    Citizen.Wait(2500)
+    Citizen.Wait(2000)
     d.presentCard(json.encode(connecting), function(data, raw)
         if data.Submit then
             if drop then
-                Citizen.Wait(100)
+                Citizen.Wait(0)
                 d.done("Connection canceled per the formentioned reasons.")
             else
-                Citizen.Wait(100)
+                Citizen.Wait(0)
                 d.done()
             end
         end 
