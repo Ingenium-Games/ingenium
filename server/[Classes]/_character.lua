@@ -162,7 +162,7 @@ function c.class.CreateCharacter(source, character_id)
             self.Accounts[acc] = c.math.Decimals(num, 0)
             self.State.Accounts = self.Accounts
         else
-            c.debug("Account entered does not exist")
+            c.debug_1("Account entered does not exist")
         end
     end
     --
@@ -291,7 +291,7 @@ function c.class.CreateCharacter(source, character_id)
             self.Job.Grade_Salary = Object.Grades[t.Grade].Grade_Salary
             self.State.Job = self.Job
         else
-            c.debug("Ignoring invalid .SetJob()")
+            c.debug_1("Ignoring invalid .SetJob()")
         end
     end
     --
@@ -466,6 +466,6 @@ function c.class.CreateCharacter(source, character_id)
     --
 
     --
-    c.debug("Generated Character")
+    c.debug_2("Generated Character")
     return self
 end

@@ -8,7 +8,7 @@ if IsDuplicityVersion() then
         if channel == conf.consolechannel and string == conf.lock then
             c.json.Write("Doors", c.doors)
             setmetatable(c.doors, c.meta)
-            c.debug("Doors table locked")      
+            c.debug_1("Doors table locked")      
         end
     end)
 end

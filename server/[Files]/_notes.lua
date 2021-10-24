@@ -40,7 +40,7 @@ function c.note.Add(data)
         table.insert(c.notes, id)
         c.notes[id] = data
     else
-        c.debug("Drop to be added, please check data sent.")
+        c.debug_1("Drop to be added, please check data sent.")
     end
 end
 

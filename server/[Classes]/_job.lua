@@ -38,7 +38,7 @@ function c.class.CreateJob(tab)
         if #str <= 1500 then
             self.Description = str
         else
-            c.debug("Unable to set description as length is too long. Must be less than 255 characters.")
+            c.debug_1("Unable to set description as length is too long. Must be less than 255 characters.")
         end
     end
     --
@@ -68,7 +68,7 @@ function c.class.CreateJob(tab)
         if self.Accounts[acc] then
             self.Accounts[acc] = c.math.Decimals(num,0)
         else
-            c.debug("Account entered does not exist")
+            c.debug_1("Account entered does not exist")
         end
     end
     --
@@ -96,7 +96,7 @@ function c.class.CreateJob(tab)
                 acc = acc + c.math.Decimals(num, 0)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    c.debug("Job "..self.Name.." has AddSafe() Cancelled due to Negative balance remaining.")
+                    c.debug_1("Job "..self.Name.." has AddSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
                     self.SetAccount("Safe", acc)
@@ -114,7 +114,7 @@ function c.class.CreateJob(tab)
                 acc = acc - c.math.Decimals(num, 0)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    c.debug("Job "..self.Name.." has RemoveSafe() Cancelled due to Negative balance remaining.")
+                    c.debug_1("Job "..self.Name.." has RemoveSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
                     self.SetAccount("Safe", acc)
@@ -196,6 +196,6 @@ function c.class.CreateJob(tab)
     --
 
     --
-    c.debug("Generated Job: "..self.Name)
+    c.debug_2("Generated Job: "..self.Name)
     return self
 end

@@ -40,7 +40,7 @@ function c.pick.Add(data)
         table.insert(c.picks, id)
         c.picks[id] = data
     else
-        c.debug("Drop to be added, please check data sent.")
+        c.debug_1("Drop to be added, please check data sent.")
     end
 end
 

@@ -38,9 +38,21 @@ function c.error(err)
     end
 end
 
-function c.debug(str)
-    if conf.debug then
-        print("   ^7[^6Debug^7]:  ==    ", str)
+function c.debug_1(str)
+    if conf.debug_1 then
+        print("   ^7[^6Debug L1^7]:  ==    ", str)
+    end
+end
+
+function c.debug_2(str)
+    if conf.debug_2 then
+        print("   ^7[^6Debug L2^7]:  ==    ", str)
+    end
+end
+
+function c.debug_3(str)
+    if conf.debug_3 then
+        print("   ^7[^6Debug L3^7]:  ==    ", str)
     end
 end
 

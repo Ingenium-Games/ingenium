@@ -13,9 +13,14 @@ conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ig.core/mai
 conf.url.discordchannel_1 = "Example"
 --[[
 DEBUG :
-    -- Up to you if you want to see whats going on or not, or open the DevTools. Scrub.
+    -- Up to you if you want to see whats going on or not.
+    -- _1 is most common ways of tracking at top level functions
+    -- _2 is for state and class generation, to prevent console spam
+    -- _3 is alterations of state, event triggers etc.
 ]]--
-conf.debug = true
+conf.debug_1 = true
+conf.debug_2 = false
+conf.debug_3 = true
 --[[
 GENERIC :
     [1] Map name.

@@ -44,7 +44,7 @@ function c.class.CreateNpc(net)
     --
 
     --
-    c.debug("Generated NPC State: "..net)
+    c.debug_2("Generated NPC State: "..net)
     --
     return self
 end

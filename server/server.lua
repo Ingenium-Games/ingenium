@@ -78,7 +78,7 @@ AddEventHandler('playerDropped', function()
         -- Save Data
         c.sql.save.User(xPlayer, function()
             c.sql.char.SetActive(xPlayer.Character_ID, false, function()
-                c.debug("[E] 'playerDropped' : Player Disconnection.")
+                c.debug_1("[E] 'playerDropped' : Player Disconnection.")
                 c.data.RemovePlayer(src)
             end)
         end)

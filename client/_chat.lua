@@ -19,9 +19,9 @@ function c.chat.AddSuggestions(xPlayer)
     local ace = xPlayer.Ace
     if c.ace[ace] then
         c.ace[ace]()
-        c.debug("Added chat suggestions for group: "..ace.." and below.")
+        c.debug_1("Added chat suggestions for group: "..ace.." and below.")
     else
-        c.debug("Unable to find chat suggestions for group: "..ace)
+        c.debug_1("Unable to find chat suggestions for group: "..ace)
     end
 end
 

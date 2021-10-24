@@ -60,7 +60,7 @@ AddEventHandler("Client:Character:OffDuty", function()
         -- Add Functions or Hooks here!
 
     else
-        c.debug("Ability to go off duty has ben disabled.")
+        c.debug_3("Ability to go off duty has ben disabled.")
     end
 end)
 
@@ -70,6 +70,6 @@ AddEventHandler("Client:Character:OnDuty", function()
         -- Add Functions or Hooks here!
     
     else
-        c.debug("Ability to go on duty has ben disabled.")
+        c.debug_3("Ability to go on duty has ben disabled.")
     end
 end)

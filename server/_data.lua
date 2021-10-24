@@ -15,7 +15,7 @@ math.randomseed(c.Seed)
 
 --- Used on startup prior to the server really running.
 function c.data.Initilize()
-    c.debug('Loading Sequence Begin.')
+    c.debug_1('Loading Sequence Begin.')
     local num, loaded = 0, false
     local t = {
         [1] = 'DB: Characters marked as In-Active;',
@@ -32,7 +32,7 @@ function c.data.Initilize()
     --
     local function cb()
         num = num + 1
-        c.debug(t[num])
+        c.debug_1(t[num])
     end
     --
     MySQL.ready(function()
@@ -73,7 +73,7 @@ function c.data.Initilize()
     end
     
     c.Loading = false
-    c.debug('Loading Sequence Complete.')
+    c.debug_1('Loading Sequence Complete.')
     c.Running = true
 
     -- Testing Table builds from SQL builds.
@@ -83,7 +83,7 @@ function c.data.Initilize()
     conf.lock = c.rng.chars(10)  
     SetTimeout(c.min, function()
         print(conf.lock)
-        c.debug("locking tables...")
+        c.debug_1("locking tables...")
     end)
     --
 end

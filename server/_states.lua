@@ -33,7 +33,7 @@ function c.state.ChangeAction(name, value, cb)
     if c.states[name][value] then
         c.states[name][value]["action"] = cb()
     else
-        c.debug("The states action: "..name.." does not exist, please add state prior to action.")
+        c.debug_1("The states action: "..name.." does not exist, please add state prior to action.")
     end
 end
 
@@ -42,7 +42,7 @@ function c.state.ChangeEffect(name, value, cb)
     if c.states[name][value] then
         c.states[name][value]["effect"] = cb()
     else
-        c.debug("The states effect: "..name.." does not exist, please add state prior to effect.")
+        c.debug_1("The states effect: "..name.." does not exist, please add state prior to effect.")
     end
 end
 
@@ -117,4 +117,4 @@ for k,v in pairs(S) do
 end
 
 
--- c.debug(c.table.Dump(c.states.Hunger))
+-- c.debug_1(c.table.Dump(c.states.Hunger))

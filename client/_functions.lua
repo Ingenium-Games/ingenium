@@ -37,9 +37,21 @@ function c.error(err)
     end
 end
 
-function c.debug(str)
-    if conf.debug then
-        print("   ^7[^6Debug^7]:  ==    ", str)
+function c.debug_1(str)
+    if conf.debug_1 then
+        print("   ^7[^6Debug L1^7]:  ==    ", str)
+    end
+end
+
+function c.debug_2(str)
+    if conf.debug_2 then
+        print("   ^7[^6Debug L2^7]:  ==    ", str)
+    end
+end
+
+function c.debug_3(str)
+    if conf.debug_3 then
+        print("   ^7[^6Debug L3^7]:  ==    ", str)
     end
 end
 
@@ -412,11 +424,11 @@ function c.CreateVehicle(name, x, y, z, h, plate, stolen)
     SetNetworkIdCanMigrate(net, true)
     SetModelAsNoLongerNeeded(hash)
     if NetworkDoesEntityExistWithNetworkId(net) then
-        c.debug("Entity exists on network, id: "..net.." entity: "..entity)              
+        c.debug_1("Entity exists on network, id: "..net.." entity: "..entity)              
         TriggerServerEvent("Server:Vehicle:Create", net, plate, stolen)
     else
         net = false
-        c.debug("Entity DOES NOT exist on network.")
+        c.debug_1("Entity DOES NOT exist on network.")
     end
     return entity, net
 end

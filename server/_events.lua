@@ -60,7 +60,7 @@ AddEventHandler('Server:Character:Create', function(first_name, last_name, heigh
     -- Run a check to see if it being exploited.
     if c.data.GetPlayer(src) ~= false then
         TriggerEvent('txaLogger:CommandExecuted', src.." / "..c.identifer(src).." / "..GetPlayerName(src).." : Attempted to abuse [E] Server:Character:Create")
-        c.debug("User attempting to exploit character creation??: "..src)
+        c.debug_1("User attempting to exploit character creation??: "..src)
         c.sql.user.SetBan(c.identifier(src), true, function() DropPlayer(src, "Banned for attmpting to exploit event") end)
         return CancelEvent()
     end

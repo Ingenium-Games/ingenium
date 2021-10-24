@@ -30,7 +30,7 @@ end)
 
 AddEventHandler('explosionEvent', function()
     CancelEvent()
-    c.debug('Explosion has been Cancelled.')
+    c.debug_1('Explosion has been Cancelled.')
 end)
 
 AddEventHandler('entityCreated', function(ent)
@@ -47,7 +47,7 @@ AddEventHandler('entityCreated', function(ent)
                 end                       
             else
                 DeleteEntity(ent)
-                c.debug('Object has been Deleted.')
+                c.debug_1('Object has been Deleted.')
             end
         --
         -- Vehicle
@@ -56,7 +56,7 @@ AddEventHandler('entityCreated', function(ent)
                 c.data.AddVehicle(net, c.class.CreateVehicle, net, false)
             else
                 DeleteEntity(ent)
-                c.debug('Vehicle has been Deleted.')
+                c.debug_1('Vehicle has been Deleted.')
             end
         --
         -- Ped
@@ -71,7 +71,7 @@ AddEventHandler('entityCreated', function(ent)
                 end
             else
                 DeleteEntity(ent)
-                c.debug('Ped has been Deleted.')
+                c.debug_1('Ped has been Deleted.')
             end
         -- no other types // fin
         end
@@ -87,14 +87,14 @@ AddEventHandler('entityCreating', function(ent)
     if type == 3 then
         if conf.disable.objects[model] then
             CancelEvent()
-            c.debug('Object prevented from Spawning.')
+            c.debug_1('Object prevented from Spawning.')
         end
     --
     -- Vehicle
     elseif type == 2 then            
         if conf.disable.vehicles[model] then
             CancelEvent()
-            c.debug('Vehicle prevented from Spawning.')
+            c.debug_1('Vehicle prevented from Spawning.')
         end
     --
     -- Ped
@@ -103,7 +103,7 @@ AddEventHandler('entityCreating', function(ent)
         if not IsPedAPlayer(ent) then
             if conf.disable.peds[model] then
                 CancelEvent()
-                c.debug('Ped prevented from Spawning.')
+                c.debug_1('Ped prevented from Spawning.')
             end
         else
         -- is a player

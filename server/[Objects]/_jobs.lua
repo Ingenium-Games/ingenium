@@ -68,7 +68,7 @@ AddEventHandler("Server:Character:OffDuty", function(req)
         CurrentlyActive[src] = "OffDuty"
         TriggerClientEvent("Client:Character:OffDuty",src)
     else
-        c.debug("Ability to go off duty has ben disabled.")
+        c.debug_1("Ability to go off duty has ben disabled.")
     end
 end)
 
@@ -80,7 +80,7 @@ AddEventHandler("Server:Character:OnDuty", function(req)
         CurrentlyActive[src] = xPlayer.GetJob()
         TriggerClientEvent("Client:Character:OnDuty",src)
     else
-        c.debug("Ability to go on duty has ben disabled.")
+        c.debug_1("Ability to go on duty has ben disabled.")
     end
 end)
 

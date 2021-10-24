@@ -93,6 +93,6 @@ function c.class.CreateUser(source)
         return self.IP_Address
     end
     --
-    c.debug('Generated User')
+    c.debug_2('Generated User')
     return self
 end

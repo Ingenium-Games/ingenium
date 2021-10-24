@@ -56,7 +56,7 @@ function c.class.CreateVehicle(net, bool)
             SetEntityHeading(self.Entity, coords.h)
             SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
         else
-            c.debug("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
+            c.debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
         end
     end
 
@@ -92,7 +92,7 @@ function c.class.CreateVehicle(net, bool)
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug('User: ' .. id .. ' Already has key to this vehicle.')
+            c.debug_1('User: ' .. id .. ' Already has key to this vehicle.')
         end
     end
     --
@@ -102,7 +102,7 @@ function c.class.CreateVehicle(net, bool)
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug('User: ' .. id .. ' Never had a key to this vehicle.')
+            c.debug_1('User: ' .. id .. ' Never had a key to this vehicle.')
         end
     end
     --
@@ -255,7 +255,7 @@ function c.class.CreateVehicle(net, bool)
         return self.State.Wanted or self.Wanted
     end
     --
-    c.debug("Generated Vehicle State: "..net)
+    c.debug_2("Generated Vehicle State: "..net)
     return self
 end
 
@@ -306,7 +306,7 @@ function c.class.CreatePlayerVehicle(net, plate)
             SetEntityHeading(self.Entity, coords.h)
             SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
         else
-            c.debug("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
+            c.debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
         end
     end
 
@@ -342,7 +342,7 @@ function c.class.CreatePlayerVehicle(net, plate)
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug('User: ' .. id .. ' Already has key to this vehicle.')
+            c.debug_1('User: ' .. id .. ' Already has key to this vehicle.')
         end
     end
     --
@@ -352,7 +352,7 @@ function c.class.CreatePlayerVehicle(net, plate)
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug('User: ' .. id .. ' Never had a key to this vehicle.')
+            c.debug_1('User: ' .. id .. ' Never had a key to this vehicle.')
         end
     end
     --
@@ -504,7 +504,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     --
 
     --
-    c.debug("Generated Player Vehicle State: "..net)
+    c.debug_2("Generated Player Vehicle State: "..net)
     --
     return self
 end

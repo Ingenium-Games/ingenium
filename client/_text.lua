@@ -19,7 +19,7 @@ function c.text.AddEntry(s1, s2)
         c.texts[str1] = str2
         AddTextEntry(str1, str2)
     else
-        c.debug("Text Entry: "..str1.." has already been used. Ignoring this input.")
+        c.debug_1("Text Entry: "..str1.." has already been used. Ignoring this input.")
     end    
 end
 

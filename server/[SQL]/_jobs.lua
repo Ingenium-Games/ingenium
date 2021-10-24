@@ -86,7 +86,7 @@ function c.sql.jobs.Accounts(cb)
         for i=1, #data, 1 do
             local i = data[i]
             if not c.jobs[i.Name] then
-                c.debug("Please run GetAll(), followed by Setup() before this...")
+                c.debug_1("Please run GetAll(), followed by Setup() before this...")
             end
             c.jobs[i.Name].Accounts = json.decode(i.Accounts)
             c.jobs[i.Name].Members = json.decode(i.Members)

@@ -40,7 +40,7 @@ function c.gsr.Add(data)
         table.insert(c.gsrs, id)
         c.gsrs[id] = data
     else
-        c.debug("Drop to be added, please check data sent.")
+        c.debug_1("Drop to be added, please check data sent.")
     end
 end
 
