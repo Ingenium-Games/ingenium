@@ -1,3 +1,5 @@
+-- This is actually lit.
+
 -- https://github.com/mw-138/fivem-deferralCards/blob/main/sv_main.lua
 -- Full credits to this guy for making the table structure. Very helpful.
 
@@ -9,6 +11,9 @@ DeferralCards = {
     Input = {}
 }
 
+function DefferalCards.Card.Generate(self)
+    return json.encode(self)
+end
 
 --------------------------------------------------[[ Cards ]]--------------------------------------------------
 

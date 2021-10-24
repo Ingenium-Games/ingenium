@@ -2,8 +2,7 @@
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
 
-AddEventHandler("playerConnecting", function(name, skr, d)
-    --    
+AddEventHandler("playerConnecting", function(name, reject, d)
     local src = source
     --
     d.defer()    
@@ -66,25 +65,41 @@ AddEventHandler("playerConnecting", function(name, skr, d)
     end
     --
     table.insert(connecting.body, facts)
-    table.insert(connecting.body,
-    DeferralCards.Container:ActionSet({
-        actions = {
-            DeferralCards.Action:Submit({
-                id = 'Submit',
-                title = 'Continue',
-                data = {Submit = true}
-            })
-        }
-    }))
+    if not drop then
+        table.insert(connecting.body,
+        DeferralCards.Container:ActionSet({
+            actions = {
+                DeferralCards.Action:Submit({
+                    id = 'Submit',
+                    title = 'Click to Join',
+                    data = {Submit = true}
+                })
+            }
+        }))
+    else
+        table.insert(connecting.body,
+        DeferralCards.Container:ActionSet({
+            actions = {
+                DeferralCards.Action:Submit({
+                    id = 'Submit',
+                    title = 'Click to Leave',
+                    data = {Submit = true}
+                })
+            }
+        }))
+    end
     --
     Citizen.Wait(2000)
-    d.presentCard(json.encode(connecting), function(data, raw)
+    d.presentCard(connecting:Generate(), function(data, raw)
         if data.Submit then
             if drop then
                 Citizen.Wait(0)
-                d.done("You saw the reasons a moment ago, on an adaptive card. It renders all the reasons why you cannot join, as long as the server owner has updated them with more fact points.")
+                reject("You saw the reasons a moment ago, on an adaptive card. It renders all the reasons why you cannot join.")
+                CancelEvent()
             else
+                -- Send to the queue.
                 Citizen.Wait(0)
+                -- Too alter and present cards from _queue.lua
                 d.done()
             end
         end 
