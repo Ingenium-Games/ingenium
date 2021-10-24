@@ -27,7 +27,7 @@ local function PlayerKilled()
             if isplayer then
                 log = {["Source"] = NetworkGetPlayerIndexFromPed(attacker), ["Weapon"] = weapon}
             else
-                log = {["Source"] = -1, ["Weapon"] = weapon}
+                log = {["Source"] = 0, ["Weapon"] = weapon}
             end
         elseif type == 2 then
             cause = "Vehicle"
@@ -38,12 +38,12 @@ local function PlayerKilled()
             if isplayer then
                 log = {["Source"] = NetworkGetPlayerIndexFromPed(attacker), ["Class"] = conf.vehicle.classes[class], ["Primary"] = primary, ["Secondary"] = secondary}
             else
-                log = {["Source"] = -1, ["Class"] = conf.vehicle.classes[class], ["Primary"] = primary, ["Secondary"] = secondary}
+                log = {["Source"] = 0, ["Class"] = conf.vehicle.classes[class], ["Primary"] = primary, ["Secondary"] = secondary}
             end 
         elseif type == 3 then
             -- Did a brick fall on your ped, wtf?
             cause = "Object"
-            log = {["Source"] = -1}
+            log = {["Source"] = 0}
         end
     end
     local data = {
