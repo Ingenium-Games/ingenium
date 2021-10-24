@@ -11,7 +11,7 @@ DeferralCards = {
     Input = {}
 }
 
-function DefferalCards.Card.Generate(self)
+function DeferralCards.Card.Generate(self)
     return json.encode(self)
 end
 
