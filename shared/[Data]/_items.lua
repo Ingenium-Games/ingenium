@@ -167,7 +167,7 @@ if IsDuplicityVersion() then
         if channel == conf.consolechannel and string == conf.lock then
             c.json.Write(conf.file.items, c.items)
             setmetatable(c.items, c.meta)
-            c.debug_1("Item's table locked")        
+            c.debug_2("Item's table locked")        
         end
     end)
 end
