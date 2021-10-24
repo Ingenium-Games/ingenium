@@ -90,7 +90,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     end
     --
     Citizen.Wait(2000)
-    d.presentCard(connecting:Generate(), function(data, raw)
+    d.presentCard(DeferralCards.Card:Generate(connecting), function(data, raw)
         if data.Submit then
             if drop then
                 Citizen.Wait(0)
