@@ -5,8 +5,6 @@
  
 EXPERIMENTAL, DO NOT USE.
 
-]]--
-
 
 local maxplayers = GetConvar(sv_maxclients, 0)
 local queue = {} 
@@ -70,3 +68,5 @@ local QueueUpdate = RegisterServerCallback({
     end
 })
 
+
+]]--
