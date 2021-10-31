@@ -427,8 +427,9 @@ function c.CreateVehicle(name, x, y, z, h, plate, stolen)
         c.debug_1("Entity exists on network, id: "..net.." entity: "..entity)              
         TriggerServerEvent("Server:Vehicle:Create", net, plate, stolen)
     else
-        net = false
         c.debug_1("Entity DOES NOT exist on network.")
+        DeleteEntity(entity)
+        return false, false
     end
     return entity, net
 end

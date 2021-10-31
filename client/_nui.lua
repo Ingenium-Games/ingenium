@@ -71,9 +71,9 @@ AddEventHandler('Client:Character:ReSpawn', function(Character_ID, Coords)
     cam3 = c.camera.Basic(Coords.x, Coords.y, Coords.z + 200, 300.00, 0.00, 0.00, 100.00)
     PointCamAtCoord(cam, Coords.x, Coords.y, Coords.z + 2)
     SetCamActiveWithInterp(cam3, cam2, 3700, 1, 1)
-
+    c.IsBusyPleaseWait(2700)
     --[[
-            ADD YOUR RESPAWN SHIT  BELOW
+            ADD YOUR RESPAWN SHIT BELOW
     ]]--
     
     TriggerServerEvent("Server:LoadSkin")
@@ -81,8 +81,7 @@ AddEventHandler('Client:Character:ReSpawn', function(Character_ID, Coords)
     --[[
             ADD YOUR RESPAWN SHIT ABOVE
     ]]--
-
-    c.IsBusyPleaseWait(3700)
+    c.IsBusyPleaseWait(1000)
     PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
     RenderScriptCams(false, true, 500, 1, 1)
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)

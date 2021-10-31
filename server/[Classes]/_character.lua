@@ -69,6 +69,7 @@ function c.class.CreateCharacter(source, character_id)
     self.State.Supporter = self.Supporter
     --
     -- Tables (JSONIZE)
+    -- Uncertain if these table valeus are actually stored on the state bags as they are nieve...
     self.Job = json.decode(data.Job)
     self.State.Job = self.Job
     --
@@ -427,37 +428,38 @@ function c.class.CreateCharacter(source, character_id)
         self.State.Wanted = self.Wanted
     end
     --
-    self.AddItem = function(name, qty)
+    self.AddItem = function(name)
         if c.item.Exists(name) then
-            if not self.Inventory[name] then
-                table.insert(self.Inventory, name)
-                self.Inventory[name] = qty
-                self.State.Inventory = self.Inventory
-            else
-                self.Inventory[name] = self.Inventory[name] + qty
-                self.State.Inventory = self.Inventory
-            end
+            table.insert(self.Inventory, name)
+            self.State.Inventory = self.Inventory
         end
     end
     --
-    -- need to remove qty prior to remove from table.
-    self.RemoveItem = function(name, qty)
+    -- 
+    self.RemoveItem = function(name)
         if self.HasItem(name) then
-            for k,v in pairs(self.Inventory) do
+            for k,v in ipairs(self.Inventory) do
                 if k == name then
-                    table.remove(self.Inventory, k)
+                    self.Inventory[k] = false
                 end
             end
         end
     end
     --
     self.HasItem = function(name)
-        for k,v in pairs(self.Inventory) do
+        for k,v in ipairs(self.Inventory) do
             if k == name then
                 return true
             end
         end
         return false
+    end
+    --
+    self.MoveItemToSlot = function(old, new)
+        if self.Inventory[new] == false or self.Inventory[new] == nil then
+            self.Inventory[new] = self.Inventory[old]
+            self.Inventory[old] = false
+        end
     end
     --
     self.CraftItem = function()

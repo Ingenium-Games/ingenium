@@ -42,6 +42,15 @@ function c.item.CanStack(name)
     return c.items[name].Stackable
 end
 
+function c.item.ReturnPosition(name)
+    for k,v in ipairs(c.items) do
+        if v == name then
+            return k
+        end
+    end
+    return false
+end
+
 function c.item.CreateDrop()
 
 end

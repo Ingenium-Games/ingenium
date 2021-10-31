@@ -238,3 +238,81 @@ SKY_DIVING_SHAKE
 VIBRATE_SHAKE
 
 ]]--
+
+
+
+--[[
+
+Callbacks for status aliments
+NUI icons for aliments or buffs.
+timer to recieve end to be elivered from server.
+
+]]--
+
+-- Quicker
+function c.status.Haste(dec, bool)
+
+end
+
+-- Slower
+function c.status.Slow(dec, bool)
+
+end
+
+-- Set wither quicker or slower
+function c.status.SetSpeed(dec, bool)
+
+end
+
+-- set ingmae vision styles
+function c.status.SetVision(style)
+
+end
+
+-- tick damage
+function c.status.DegradeHealth(dec, bool)
+
+end
+
+-- tick reovery
+function c.status.RestoreHealth(dec, bool)
+
+end
+
+-- tick damage
+function c.status.DegradeArmour(dec, bool)
+
+end
+
+-- tick recovery
+function c.status.RestoreArmour(dec, bool)
+
+end
+
+-- wrapper for hp, armour
+function c.status.SetAilment(type, dec, bool)
+
+end
+
+-- One of three, first person only, third person only, out of body experiance. FP, TP, OB
+function c.status.Camera(type)
+
+end
+
+-- Notmal, Static, Micky Mouse.
+function c.status.Sound(type)
+
+end
+
+-- Really fuck your camera up.
+function c.status.Bobble(bool)
+
+end
+
+function c.status.WalkType(type)
+
+end
+
+function c.status.FaceType(type)
+
+end

@@ -14,16 +14,6 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
----@param plate string "Plate of vehicle."
-function c.vehicle.GetByPlate(plate)
-    for k,v in pairs(c.vdex) do
-        if v.Plate == plate then
-            return v
-        end
-    end 
-    return false
-end
-
 ---@param net integer "Network ID 16 bit integer"
 function c.vehicle.Find(net)
     for k,v in ipairs(c.vdex) do
@@ -31,5 +21,15 @@ function c.vehicle.Find(net)
             return true
         end
     end
+    return false
+end
+
+---@param plate string "Plate of vehicle."
+function c.vehicle.GetByPlate(plate)
+    for k,v in pairs(c.vdex) do
+        if v.Plate == plate then
+            return v
+        end
+    end 
     return false
 end
