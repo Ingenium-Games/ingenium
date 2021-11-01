@@ -163,8 +163,7 @@ function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for k,v in pairs(xVehicles) do
         local data = v
-        local exist = DoesEntityExist(NetworkGetEntityFromNetworkId(k))
-        if exist and data.Owner then -- owner = charid or false / false = stolen
+        if data.Owner then -- owner = charid or false / false = stolen
             -- Other Variables.
             local Garage = data.GetGarage()
             -- Booleans
