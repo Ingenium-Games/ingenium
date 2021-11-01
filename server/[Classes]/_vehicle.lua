@@ -42,13 +42,12 @@ function c.class.CreateVehicle(net, bool)
     self.GetCoords = function()
         local x, y, z = GetEntityCoords(self.Entity)
         local h = GetEntityHeading(self.Entity)
-        local Coords = {
+        return {
             ['x'] = c.math.Decimals(x, 2),
             ['y'] = c.math.Decimals(y, 2),
             ['z'] = c.math.Decimals(z, 2),
             ['h'] = c.math.Decimals(h, 2)
         }
-        return Coords
     end
     --
     self.SetCoords = function(coords)
@@ -292,13 +291,12 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.GetCoords = function()
         local x, y, z = GetEntityCoords(self.Entity)
         local h = GetEntityHeading(self.Entity)
-        local Coords = {
+        return {
             ['x'] = c.math.Decimals(x, 2),
             ['y'] = c.math.Decimals(y, 2),
             ['z'] = c.math.Decimals(z, 2),
             ['h'] = c.math.Decimals(h, 2)
         }
-        return Coords
     end
     --
     self.SetCoords = function(coords)
