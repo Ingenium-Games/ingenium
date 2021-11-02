@@ -66,8 +66,8 @@ end
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Users(cb)
     local xPlayers = c.data.GetPlayers()
-    for i = 1, #xPlayers, 1 do
-        local data = c.data.GetPlayer(i)
+    for k,v in pairs(xPlayers) do
+        local data = c.data.GetPlayer(k)
         if data then
             -- Other Variables.
             local Health = data.GetHealth()
@@ -161,39 +161,42 @@ end
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
-    for k, data in pairs(xVehicles) do
-        if data.Owner then -- owner = charid or false / false = stolen
-            -- Other Variables.
-            local Garage = data.GetGarage()
-            -- Booleans
-            local State = data.GetState()
-            local Impound = data.GetImpound()
-            local Wanted = data.GetWanted()
-            -- Tables require JSON Encoding.
-            local Keys = json.encode(data.GetKeys())
-            local Coords = json.encode(data.GetCoords())
-            local Condition = json.encode(data.GetCondition())
-            local Modifications = json.encode(data.GetModifications())
-            -- The Key
-            local Plate = data.GetPlate()
-            --
-            MySQL.Async.insert(VehicleSaveData, {
+    for k,v in pairs(xVehicles) do
+        local data = c.data.GetVehicle(k)
+        if data then
+            if data.Owner then
                 -- Other Variables.
-                ['@Garage'] = Garage,
+                local Garage = data.GetGarage()
                 -- Booleans
-                ['@Impound'] = Impound,
-                ['@State'] = State,
-                ['@Wanted'] = Wanted,
-                -- Table Informaiton.
-                ['@Keys'] = Keys,
-                ['@Coords'] = Coords,
-                ['@Condition'] = Condition,
-                ['@Modifications'] = Modifications,
+                local State = data.GetState()
+                local Impound = data.GetImpound()
+                local Wanted = data.GetWanted()
+                -- Tables require JSON Encoding.
+                local Keys = json.encode(data.GetKeys())
+                local Coords = json.encode(data.GetCoords())
+                local Condition = json.encode(data.GetCondition())
+                local Modifications = json.encode(data.GetModifications())
+                -- The Key
+                local Plate = data.GetPlate()
                 --
-                ['@Plate'] = Plate
-                }, function(r)
-                    -- Do nothing.
-            end)
+                MySQL.Async.insert(VehicleSaveData, {
+                    -- Other Variables.
+                    ['@Garage'] = Garage,
+                    -- Booleans
+                    ['@Impound'] = Impound,
+                    ['@State'] = State,
+                    ['@Wanted'] = Wanted,
+                    -- Table Informaiton.
+                    ['@Keys'] = Keys,
+                    ['@Coords'] = Coords,
+                    ['@Condition'] = Condition,
+                    ['@Modifications'] = Modifications,
+                    --
+                    ['@Plate'] = Plate
+                    }, function(r)
+                        -- Do nothing.
+                end)
+            end
         end
     end
     if cb then

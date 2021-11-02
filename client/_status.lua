@@ -173,7 +173,6 @@ function c.status.SetPlayer(data)
     --
     -- Set default hp to 400 on spawn
     SetPedMaxHealth(ped, conf.defaulthealth)
-    SetEntityMaxHealth(ped, conf.defaulthealth)
     c.status.SetHealth(ped, conf.defaulthealth)
     --
     -- Set default armour to 0 on spawn
@@ -250,18 +249,31 @@ timer to recieve end to be elivered from server.
 ]]--
 
 -- Quicker
-function c.status.Haste(dec, bool)
-
+function c.status.SetHaste(bool, dec)
+    local ped = PlayerPedId()
+    if bool then
+        if not dec then dec = 2.0 end
+        local dec = c.math.Decimals(dec, 1)
+        if dec >= 1.0 then
+            SetPedMoveRateOverride(ped, dec)
+        end
+    else
+        SetPedMoveRateOverride(ped, 1.0)
+    end
 end
 
 -- Slower
-function c.status.Slow(dec, bool)
-
-end
-
--- Set wither quicker or slower
-function c.status.SetSpeed(dec, bool)
-
+function c.status.SetSlow(bool, dec)
+    local ped = PlayerPedId()
+    if bool then
+        if not dec then dec = 0.5 end
+        local dec = c.math.Decimals(dec, 1)
+        if dec <= 1.0 then
+            SetPedMoveRateOverride(ped, dec)
+        end
+    else
+        SetPedMoveRateOverride(ped, 1.0)
+    end
 end
 
 -- set ingmae vision styles
@@ -270,29 +282,29 @@ function c.status.SetVision(style)
 end
 
 -- tick damage
-function c.status.DegradeHealth(dec, bool)
-
-end
-
--- tick reovery
-function c.status.RestoreHealth(dec, bool)
+function c.status.SetBleed(bool, dec)
 
 end
 
 -- tick damage
-function c.status.DegradeArmour(dec, bool)
+function c.status.SetPoison(bool, dec)
 
 end
 
--- tick recovery
-function c.status.RestoreArmour(dec, bool)
+-- tick damage
+function c.status.SetBurn(bool, dec)
 
 end
 
--- wrapper for hp, armour
-function c.status.SetAilment(type, dec, bool)
+-- tick damage
+function c.status.SetWithdrawls(bool, dec)
 
 end
+
+function c.status.SetInjury(bool, dec)
+
+end
+
 
 -- One of three, first person only, third person only, out of body experiance. FP, TP, OB
 function c.status.Camera(type)
@@ -310,9 +322,5 @@ function c.status.Bobble(bool)
 end
 
 function c.status.WalkType(type)
-
-end
-
-function c.status.FaceType(type)
 
 end
