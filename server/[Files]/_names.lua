@@ -1,5 +1,5 @@
 -- ====================================================================================--
---  MIT License 2020 : Twiitchter
+--  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
 c.name = {} -- function level
 c.names = {} -- names table to be imported from Names.json

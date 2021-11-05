@@ -1,5 +1,5 @@
 -- ====================================================================================--
---  MIT License 2020 : Twiitchter
+--  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
 c.npc = {} -- function level
 c.npcs = {} -- database pull - If ever used?	

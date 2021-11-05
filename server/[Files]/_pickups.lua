@@ -1,5 +1,5 @@
 -- ====================================================================================--
---  MIT License 2020 : Twiitchter
+--  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
 c.pick = {} -- function level
 c.picks = false -- dropped items table
