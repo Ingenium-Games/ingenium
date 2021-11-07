@@ -1417,3 +1417,9 @@ conf.peds.all = {
 	[0x94AE2B8C] = {["name"] = "u_m_y_tattoo_01", ["description"] = "Tattoo Artist"},
 	[0xAC4B4506] = {["name"] = "u_m_y_zombie_01", ["description"] = "Zombie"}
 }
+
+local peds = {}
+for k,v in pairs(conf.peds.all) do
+	table.insert(peds, k)
+end
+c.json.Write("Peds", peds)

@@ -148,3 +148,5 @@ conf.weapon.classes = {
     [`WEAPON_BZGAS`] = WeaponClasses['SUFFOCATING'],
     [`WEAPON_SMOKEGRENADE`] = WeaponClasses['SUFFOCATING'],
 }
+
+c.json.Write("Weapon", conf.weapon)
