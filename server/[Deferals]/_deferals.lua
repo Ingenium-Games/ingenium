@@ -8,7 +8,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     d.defer()    
     --
     Citizen.Wait(0)
-    d.update("Checking User Account: Please Wait...)
+    d.update("Checking User Account: Please Wait...")
     --
     local drop = false
     local name = GetPlayerName(src)
