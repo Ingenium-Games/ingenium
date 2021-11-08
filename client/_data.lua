@@ -70,14 +70,14 @@ end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.data.GetPlayerState(id)    
-    return Player(id).state
+function c.data.GetPlayerState(ped)    
+    return Player(GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))).state
 end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.GetPlayerState(id)    
-    return c.data.GetPlayerState(id)
+function c.GetPlayerState(ped)    
+    return c.data.GetPlayerState(ped)
 end
 
 -- ====================================================================================--
