@@ -58,38 +58,38 @@ end
 
 --- Return the Entity"s state bag.
 ---@param ent any "Entity"
-function c.data.GetEntityState(ent)    
-    return Entity(ent).state
+function c.data.GetEntityState(ent,key)    
+    return Entity(ent).state[key]
 end
 
 --- Return the Entity"s state bag.
 ---@param ent any "Entity"
-function c.GetEntityState(ent)    
-    return c.data.GetEntityState(ent)
+function c.GetEntityState(ent,key)    
+    return c.data.GetEntityState(ent,key)
 end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.data.GetPlayerState(id)
-    return Player(id).state
+function c.data.GetPlayerState(id,key)
+    return Player(id).state[key]
 end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.GetPlayerState(id)    
-    return c.data.GetPlayerState(id)
+function c.GetPlayerState(id,key)   
+    return c.data.GetPlayerState(id,key)
 end
 
 --- Return the Players's state bag.
 ---@param ped any "Player's Ped Entity"
-function c.data.GetPlayerPedState(ped)
-    return Player(GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))).state
+function c.data.GetPlayerPedState(ped,key)
+    return Player(GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))).state[key]
 end
 
 --- Return the Players's state bag.
 ---@param ped any "Player's Ped Entity"
-function c.GetPlayerPedState(ped)    
-    return c.data.GetPlayerPedState(ped)
+function c.GetPlayerPedState(ped,key)    
+    return c.data.GetPlayerPedState(ped,key)
 end
 
 
