@@ -8,7 +8,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     d.defer()    
     --
     Citizen.Wait(0)
-    d.update("Checking User Account: Please Wait...")
+    d.update("Checking User Account: Please Wait...)
     --
     local drop = false
     local name = GetPlayerName(src)
@@ -47,6 +47,9 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             value = "You have been banned by command or automatic event."
         }))
     end
+    --
+    Citizen.Wait(0)
+    d.update("If you get stuck here, please open Discord and try again...")
     --
     local discord = false
     if conf.discordperms then
