@@ -43,7 +43,7 @@ function c.class.CreateNpc(net)
     self.State.IsHuman = self.IsHuman
     --
     -- City_ID
-    local s1 = string.upper(c.rng.lets(1))
+    local s1 = string.upper(c.rng.let())
     local s2 = c.rng.nums(4)
     self.City_ID = string.format("%s-%sN", s1, s2)
     self.State.City_ID = self.City_ID
