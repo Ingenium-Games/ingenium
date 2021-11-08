@@ -57,27 +57,27 @@ function c.data.GetPlayer()
 end
 
 --- Return the Entity"s state bag.
----@param net any "Network ID 16 bit integer"
-function c.data.GetEntityState(net)    
-    return Entity(NetworkGetEntityFromNetworkId(net)).state
+---@param ent any "Entity"
+function c.data.GetEntityState(ent)    
+    return Entity(ent).state
 end
 
 --- Return the Entity"s state bag.
----@param net any "Network ID 16 bit integer"
-function c.GetEntityState(net)    
-    return c.data.GetEntityState(net)
+---@param ent any "Entity"
+function c.GetEntityState(ent)    
+    return c.data.GetEntityState(ent)
 end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.data.GetPlayerState(ped)    
-    return Player(GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))).state
+function c.data.GetPlayerState(id)
+    return Player(id).state
 end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.GetPlayerState(ped)    
-    return c.data.GetPlayerState(ped)
+function c.GetPlayerState(id)    
+    return c.data.GetPlayerState(id)
 end
 
 -- ====================================================================================--
