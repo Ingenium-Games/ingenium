@@ -67,6 +67,9 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         end)
     end
     --
+    Citizen.Wait(0)
+    d.update("Loading Awesome Server: Please Wait...")
+    --
     table.insert(connecting.body, facts)
     if not drop then
         table.insert(connecting.body,
