@@ -80,6 +80,19 @@ function c.GetPlayerState(id)
     return c.data.GetPlayerState(id)
 end
 
+--- Return the Players's state bag.
+---@param ped any "Player's Ped Entity"
+function c.data.GetPlayerPedState(ped)
+    return Player(GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))).state
+end
+
+--- Return the Players's state bag.
+---@param ped any "Player's Ped Entity"
+function c.GetPlayerPedState(ped)    
+    return c.data.GetPlayerPedState(ped)
+end
+
+
 -- ====================================================================================--
 
 --- Sends the packet of data to the server to register and update xPlayer
