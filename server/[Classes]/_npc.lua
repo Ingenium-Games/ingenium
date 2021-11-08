@@ -30,9 +30,10 @@ function c.class.CreateNpc(net)
         return self.State.Model or self.Model
     end
     --
-    -- Gender ("Male"/"Felame")
-    _, self.Gender = c.IsPedMale(self.Model)
+    -- Gender ("Male"/"Female")
+    self.Gender, self.GenderString = c.IsPedMale(self.Model)
     self.State.Gender = self.Gender
+    self.State.GenderString = self.GenderString
     --
     self.GetGender =  function()
         return self.State.Gender or self.Gender
