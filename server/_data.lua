@@ -319,8 +319,6 @@ end
 -- Server to DB routine.
 function c.data.ServerSync()
     local function Do()
-        Citizen.CreateThread(function()
-            while true do
                 c.sql.save.Users()
                 Citizen.Wait(conf.sec * 5)
                 c.sql.save.Vehicles()
@@ -328,8 +326,6 @@ function c.data.ServerSync()
                 c.sql.save.Jobs()
                 Citizen.Wait(conf.sec * 5)
                 c.data.Save("Users, Vehicles, Jobs, ")
-            end
-        end)
         SetTimeout(conf.serversync, Do)
     end
     SetTimeout(conf.serversync, Do)
