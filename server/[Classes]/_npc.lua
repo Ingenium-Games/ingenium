@@ -42,6 +42,12 @@ function c.class.CreateNpc(net)
     self.IsHuman = c.IsPedHuman(self.Model)
     self.State.IsHuman = self.IsHuman
     --
+    -- City_ID
+    local s1 = string.upper(c.rng.lets(1))
+    local s2 = c.rng.nums(4)
+    self.City_ID = string.format("%s-%sN", s1, s2)
+    self.State.City_ID = self.City_ID
+    --
     -- Name 
     if self.Gender and self.IsHuman then
         -- is male, is human
