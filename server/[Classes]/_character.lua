@@ -290,7 +290,8 @@ function c.class.CreateCharacter(source, character_id)
             self.Job.Grade = Object.Grades[t.Grade].Grade
             self.Job.Grade_Label = Object.Grades[t.Grade].Grade_Label
             self.Job.Grade_Salary = Object.Grades[t.Grade].Grade_Salary
-            self.State.Job = self.Job
+            self.State.Job = self.Job.Name
+            self.State.Grade = self.Job.Grade
         else
             c.debug_1("Ignoring invalid .SetJob()")
         end
