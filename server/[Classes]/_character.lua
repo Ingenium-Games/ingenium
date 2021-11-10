@@ -71,6 +71,8 @@ function c.class.CreateCharacter(source, character_id)
     -- Tables (JSONIZE)
     -- Uncertain if these table valeus are actually stored on the state bags as they are nieve...
     self.Job = json.decode(data.Job)
+    self.State.Job = self.Job.Name
+    self.State.Grade = self.Job.Grade
     --
     self.Coords = json.decode(data.Coords)
     self.State.Coords = self.Coords
@@ -285,6 +287,9 @@ function c.class.CreateCharacter(source, character_id)
             self.Job.Grade = t.Grade
             self.State.Job = self.Job.Name
             self.State.Grade = self.Job.Grade
+            --
+            TriggerEvent('Server:Character:SetJob', self.ID, self.Job)
+            TriggerClientEvent('Client:Character:SetJob', self.ID, self.Job)
         else
             c.debug_1("Ignoring invalid .SetJob()")
         end

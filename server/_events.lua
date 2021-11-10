@@ -140,11 +140,6 @@ AddEventHandler("Server:Character:Ready", function()
     ExecuteCommand(('remove_principal identifier.%s job.%s'):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
     --
     xPlayer.SetJob(xPlayer.GetJob())
-    Wait(250)
-    --
-    TriggerEvent('Server:Character:SetJob', xPlayer.ID, xPlayer.GetJob())
-    TriggerClientEvent('Client:Character:SetJob', xPlayer.ID, xPlayer.GetJob())
-    --
 end)
 
 -- Use this to remove any things connected to Characters like police blips etc.
