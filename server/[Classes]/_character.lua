@@ -281,14 +281,8 @@ function c.class.CreateCharacter(source, character_id)
     --
     self.SetJob = function(t)
         if c.job.Exist(t.Name, t.Grade) then
-            local Object = c.jobs[t.Name]
-            --
-            self.Job.Name = Object.Name
-            self.Job.Label = Object.Label
-            --
-            self.Job.Grade = Object.Grades[t.Grade]
-            self.Job.Grade_Label = Object.Grades[t.Grade].Grade_Label
-            self.Job.Grade_Salary = Object.Grades[t.Grade].Grade_Salary
+            self.Job.Name = t.Name
+            self.Job.Grade = t.Grade
             self.State.Job = self.Job.Name
             self.State.Grade = self.Job.Grade
         else

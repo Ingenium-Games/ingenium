@@ -293,9 +293,6 @@ function c.data.CreateJobObjects()
         end
     end
     c.json.Write(conf.file.jobs, c.jobs)
-    -- Lock the Jobs after DV Pull.
-    setmetatable(c.jobs,c.meta)
-    setmetatable(c.jdex,c.meta)
 end
 
 function c.data.GetJobs()
