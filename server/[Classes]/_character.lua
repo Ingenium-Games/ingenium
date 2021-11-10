@@ -277,7 +277,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     -- esx style, except table format.
     self.GetJob = function()
-        return {[self.State.Job] = self.State.Grade} or self.Job
+        return self.Job
     end
     --
     self.SetJob = function(t)
