@@ -74,7 +74,7 @@ AddEventHandler("Client:Character:OnDuty", function()
     end
 end)
 
-RegisterNetEvent("Server:Character:SetJob")
-AddEventHandler("Server:Character:SetJob", function(data)
+RegisterNetEvent("Client:Character:SetJob")
+AddEventHandler("Client:Character:SetJob", function(data)
 
 end)
