@@ -71,7 +71,6 @@ function c.class.CreateCharacter(source, character_id)
     -- Tables (JSONIZE)
     -- Uncertain if these table valeus are actually stored on the state bags as they are nieve...
     self.Job = json.decode(data.Job)
-    self.State.Job = self.Job
     --
     self.Coords = json.decode(data.Coords)
     self.State.Coords = self.Coords
@@ -287,10 +286,11 @@ function c.class.CreateCharacter(source, character_id)
             self.Job.Name = Object.Name
             self.Job.Label = Object.Label
             --
-            self.Job.Grade = Object.Grades[t.Grade].Grade
+            self.Job.Grade = Object.Grades[t.Grade]
             self.Job.Grade_Label = Object.Grades[t.Grade].Grade_Label
             self.Job.Grade_Salary = Object.Grades[t.Grade].Grade_Salary
-            self.State.Job = self.Job
+            self.State.Job = self.Job.Name
+            self.State.Grade = self.Job.Grade
         else
             c.debug_1("Ignoring invalid .SetJob()")
         end
