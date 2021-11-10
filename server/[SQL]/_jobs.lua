@@ -26,7 +26,7 @@ function c.sql.jobs.GetAll(cb)
                 c.jobs[i.Name].Label = i.Label
                 c.jobs[i.Name].Grades = {}
             end
-            table.insert(c.jobs[i.Name].Grades, {Grade = i.Grade, Grade_Label = i.Grade_Label, Grade_Salary = i.Grade_Salary})
+            c.jobs[i.Name].Grades[i.Grade] = {Grade = i.Grade, Grade_Label = i.Grade_Label, Grade_Salary = i.Grade_Salary}
         end
         IsBusy = false
     end)
