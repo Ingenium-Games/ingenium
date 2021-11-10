@@ -188,23 +188,11 @@ function c.status.SetPlayer(data)
     SetPlayerInvincible(ply, false)
     --
     -- time to gain our data from the server.
-    if data then
-        if data.Health then
-            c.status.SetHealth(ped, (data.Health or conf.defaulthealth))
-        end
-        if data.Armour then
-            c.status.SetArmour(ped, (data.Armour or conf.defaultarmour))
-        end
-        if data.Hunger then
-            c.status.SetHunger((data.Hunger or _max))
-        end
-        if data.Thirst then
-            c.status.SetThirst((data.Thirst or _max))
-        end
-        if data.Stress then
-            c.status.SetStress((data.Stress or _min))
-        end
-    end
+    c.status.SetHealth(ped, (data.Health or conf.defaulthealth))
+    c.status.SetArmour(ped, (data.Armour or conf.defaultarmour))
+    c.status.SetHunger((data.Hunger or _max))
+    c.status.SetThirst((data.Thirst or _max))
+    c.status.SetStress((data.Stress or _min))
     -- Begin Routines / Timeouts
     c.status.StartHungerDecrease()
     c.status.StartThirstDecrease()

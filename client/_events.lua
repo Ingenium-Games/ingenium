@@ -73,3 +73,8 @@ AddEventHandler("Client:Character:OnDuty", function()
         c.debug_3("Ability to go on duty has ben disabled.")
     end
 end)
+
+RegisterNetEvent("Server:Character:SetJob")
+AddEventHandler("Server:Character:SetJob", function(data)
+
+end)
