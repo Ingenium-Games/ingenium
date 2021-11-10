@@ -101,32 +101,21 @@ end)
 --- func desc
 ---@param bool boolean "Use the Job funds to pay all employees?" 
 function c.job.Payroll(bool)
-    if bool then
-        for k,v in ipairs(CurrentlyActive) do
-            if type(v) == 'table' then
-                -- CurrentlyActive[1] = [Name='popo',Grade=2,etc,etc]
-                local xPlayer = c.data.GetPlayer(k)
-                local xJob = c.data.GetJob(CurrentlyActive[k].Name)
-                --
-                xPlayer.AddBank(v.Grade_Salary)
-                TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..v.Grade_Salary.." deposided confirmed.")
-                xJob.RemoveBank(v.Grade_Salary)
-            elseif v == "OffDuty" then
-                TriggerClientEvent("Client:Notify", k, "Payroll for active staff paid.")
+    for k,v in ipairs(CurrentlyActive) do
+        if type(v) == 'table' then
+            -- CurrentlyActive[1] = [Name='popo',Grade=2,etc,etc]
+            local xPlayer = c.data.GetPlayer(k)
+            local xJob = c.data.GetJob(CurrentlyActive[k].Name)
+            local pay = xJob.Grades[v.Grade].Grade_Salary
+            --
+            xPlayer.AddBank(pay)
+            TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..pay.." deposided confirmed.")
+            if bool then
+                xJob.RemoveBank(pay)
             end
+        elseif v == "OffDuty" then
+            TriggerClientEvent("Client:Notify", k, "Payroll for active staff paid.")
         end
-    else
-        for k,v in ipairs(CurrentlyActive) do
-            if type(v) == 'table' then
-                -- CurrentlyActive[1] = [Name='Police',Grade=2,etc,etc]
-                local xPlayer = c.data.GetPlayer(k)
-                --
-                xPlayer.AddBank(v.Grade_Salary)
-                TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..v.Grade_Salary.." deposided confirmed.")
-            elseif v == "OffDuty" then
-                TriggerClientEvent("Client:Notify", k, "Payroll for active staff paid.")
-            end
-        end 
     end
 end
 
