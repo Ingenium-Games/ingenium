@@ -1,6 +1,7 @@
 -- ====================================================================================--
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
+math = require('glm')
 conf = {}
 -- Just some time, because fuck maths.
 conf.sec = 1000
