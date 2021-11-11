@@ -17,7 +17,7 @@ NOTES.
 
 ]] --
 
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 function c.class.CreateInventory(inv)

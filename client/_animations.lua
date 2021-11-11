@@ -8,7 +8,7 @@ NOTES.
     - Example for RP, A police officer is aiming a weapon at an UNARMED ped, that ped is forced to raise their hands.
     - If they aim at an ARMED ped, the ped does not have to raise hands.
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 local function GetPed(Ped)
     if Ped == nil then

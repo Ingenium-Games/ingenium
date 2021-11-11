@@ -8,7 +8,7 @@ NOTES.
     -
 ]] --
 
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 --  Get Character Info for the NUI to allow character selection.
 -- [C+S]

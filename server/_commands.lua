@@ -8,7 +8,7 @@ NOTES.
     -
 ]] --
 
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 RegisterCommand('test', function(source, args, rawCommand)

@@ -8,7 +8,7 @@ NOTES.
     -
     -
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 --- Upon joining, these are core functions to run internally prior to sending the join request to the server

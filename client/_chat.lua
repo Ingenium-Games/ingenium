@@ -10,7 +10,7 @@ NOTES
     of parent and child relations on ACL permissions.
     Preffer to do client sided.
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 ----

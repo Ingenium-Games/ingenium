@@ -7,7 +7,7 @@ NOTES.
     - enable job functions or equilivant meu selections.
 ]]--
 
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 function c.class.CreateJob(tab)

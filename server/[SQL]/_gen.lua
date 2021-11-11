@@ -8,7 +8,7 @@ c.sql.gen = {}
 NOTES
 
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 function c.sql.gen.CharacterID(cb)

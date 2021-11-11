@@ -9,7 +9,7 @@ NOTES.
     -
     -
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 -- https://docs.fivem.net/docs/game-references/markers/
 

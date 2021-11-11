@@ -8,7 +8,7 @@ NOTES:
     -
     -
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 -- I miss NetworkOverrideClockMillisecondsPerGameMinute()
 

@@ -7,7 +7,7 @@ c.aces = {}
 NOTES
     - Aces are now run based off the xPlayer (Player(id).state) table containing the Ace.
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 c.ace.public = function()

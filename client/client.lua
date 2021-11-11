@@ -5,7 +5,7 @@
 NOTES:
     -
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 Citizen.CreateThread(function()

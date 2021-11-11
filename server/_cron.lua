@@ -9,7 +9,7 @@ NOTES.
     - No need to add days intot he mix as generally all time based events within
     - FiveM Game modes are not relyant on days.
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 --- [F] - Add Functino be be called back @ Hour and Minute.
