@@ -1,5 +1,7 @@
 # ig.core
 
+Please only use the releases, cloneing may result in errors.
+
 This is the core resource used on the Ingenium Games FiveM Server.
 
 <br>
