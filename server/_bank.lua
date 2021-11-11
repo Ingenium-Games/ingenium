@@ -58,7 +58,7 @@ end
 -- queued to add
 -- Set so the server will debit bank accounts on the hour every hour if in negative balance.
 AddEventHandler("onServerResourceStart", function()
-    for i=1, 23, 0 do
+    for i=0,23 do
         c.cron.Add(i, 0, c.bank.CheckNegativeBalances)
     end
     -- c.debug_1("[E] Added Cron Job: [F] c.bank.CheckNegativeBalances()")
