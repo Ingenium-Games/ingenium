@@ -21,12 +21,12 @@ end
 RegisterNetEvent("Client:Animation:CrossedArms")
 AddEventHandler("Client:Animation:CrossedArms", function(Bool, Ped)
     local ped = GetPed(Ped)
-    local dict = "amb@world_human_hang_out_street@female_armscrossed@base" 
+    local dict = "amb@world_human_hang_out_street@female_arms_crossed@base" 
     local anim = "base" 
     --
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
-        Citizen.Wait(1)
+        Citizen.Wait(100)
     end
     --
     if Bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
@@ -48,7 +48,7 @@ AddEventHandler("Client:Animation:HandsUp", function(Bool, Ped)
     --
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
-        Citizen.Wait(1)
+        Citizen.Wait(100)
     end
     --
     if Bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
@@ -70,7 +70,7 @@ AddEventHandler("Client:Animation:ArmHold", function(Bool, Ped)
     --
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
-        Citizen.Wait(1)
+        Citizen.Wait(100)
     end
     --
     if Bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
