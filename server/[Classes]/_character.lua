@@ -97,6 +97,9 @@ function c.class.CreateCharacter(source, character_id)
     self.Appearance = json.decode(data.Appearance)
     self.State.Appearance = self.Appearance
     --
+    -- Animation?
+    self.State.Animation = false
+    --
     -- Functions
     self.IsSupporter = function()
         return self.State.Supporter or self.Supporter

@@ -8,7 +8,6 @@ NOTES.
     -
     -
 ]]--
-math.randomseed(c.Seed)
 -- ====================================================================================--
 
 --- Upon joining, these are core functions to run internally prior to sending the join request to the server
@@ -66,6 +65,25 @@ end
 ---@param ent any "Entity"
 function c.GetEntityState(ent,key)    
     return c.data.GetEntityState(ent,key)
+end
+
+-- Please do not use this other than for animations or such...
+--- Set the Players's state bag.
+---@param id any "Player's Server Id"
+---@param key string "The key"
+---@param value any "Just not a table"
+---@param sync boolean "Sync to Server, default is false"
+function c.data.SetPlayerState(id, key, value, sync)
+    Player(id).state:Set(key, value, sync)
+end
+
+--- Set the Players's state bag.
+---@param id any "Player's Server Id"
+---@param key string "The key"
+---@param value any "Just not a table"
+---@param sync boolean "Sync to Server, default is false"
+function c.SetPlayerState(id, key, value, sync)  
+    c.data.SetPlayerState(id, key, value, sync)
 end
 
 --- Return the Players's state bag.
