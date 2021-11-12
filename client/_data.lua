@@ -73,7 +73,7 @@ end
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
 function c.data.SetPlayerState(key, value, sync)
-    LocalPlayer.state:Set(key, value, sync)
+    LocalPlayer.state:set(key, value, sync)
 end
 
 --- Set the Players's state bag.

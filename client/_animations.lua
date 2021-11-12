@@ -31,11 +31,11 @@ AddEventHandler("Client:Animation:CrossedArms", function(Bool, Ped)
     --
     if Bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetPlayerState(PlayerId(), "Animation", "CrossedArms", true)
+        c.data.SetPlayerState("Animation", "CrossedArms", true)
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetPlayerState(PlayerId(), "Animation", false, true)
+        c.data.SetPlayerState("Animation", false, true)
         RemoveAnimDict(dict)
     end
 end)
@@ -53,11 +53,11 @@ AddEventHandler("Client:Animation:HandsUp", function(Bool, Ped)
     --
     if Bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetPlayerState(PlayerId(), "Animation", "HandsUp", true)
+        c.data.SetPlayerState("Animation", "HandsUp", true)
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetPlayerState(PlayerId(), "Animation", false, true)
+        c.data.SetPlayerState("Animation", false, true)
         RemoveAnimDict(dict)
     end
 end)
@@ -75,11 +75,11 @@ AddEventHandler("Client:Animation:ArmHold", function(Bool, Ped)
     --
     if Bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetPlayerState(PlayerId(), "Animation", "ArmHold", true)
+        c.data.SetPlayerState("Animation", "ArmHold", true)
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetPlayerState(PlayerId(), "Animation", false, true)
+        c.data.SetPlayerState("Animation", false, true)
         RemoveAnimDict(dict)
     end
 end)
