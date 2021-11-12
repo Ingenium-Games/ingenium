@@ -69,12 +69,11 @@ end
 
 -- Please do not use this other than for animations or such...
 --- Set the Players's state bag.
----@param id any "Player's Server Id"
 ---@param key string "The key"
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
-function c.data.SetPlayerState(id, key, value, sync)
-    Player(id).state:Set(key, value, sync)
+function c.data.SetPlayerState(key, value, sync)
+    LocalPlayer.state:Set(key, value, sync)
 end
 
 --- Set the Players's state bag.
@@ -82,8 +81,8 @@ end
 ---@param key string "The key"
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
-function c.SetPlayerState(id, key, value, sync)  
-    c.data.SetPlayerState(id, key, value, sync)
+function c.SetPlayerState(key, value, sync)  
+    c.data.SetPlayerState(key, value, sync)
 end
 
 --- Return the Players's state bag.
