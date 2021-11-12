@@ -8,7 +8,7 @@ NOTES.
     - at a specific time each day, to run on a schedual.
     - 
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 -- Pulls all characters with loans and deducts money to pay the loan, can go negitive.

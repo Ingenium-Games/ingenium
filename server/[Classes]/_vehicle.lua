@@ -5,7 +5,7 @@
 NOTES
     - Fuck yeh onesync creation event boi.
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 function c.class.CreateVehicle(net, bool)

@@ -12,7 +12,7 @@ NOTES.
     - Here will be the modifiers to the _status.lua, please note that hunger/thirst/stress
     - are the only ones currently supported. Please utilize the formentioned and expand upon it.
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 local _min = 1

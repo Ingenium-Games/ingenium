@@ -8,7 +8,7 @@ NOTES.
     -
     -
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 -- Reserve channles 20001 - 20064 for instances. (63 total)
 -- default channle is 0.

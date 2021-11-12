@@ -7,7 +7,7 @@ NOTES.
     -
     -
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 RegisterNetEvent("Client:Character:Death")
 AddEventHandler("Client:Character:Death", function(data)

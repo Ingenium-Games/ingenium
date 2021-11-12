@@ -9,7 +9,7 @@ NOTES.
     - 
     -
 ]] --
-math.randomseed(c.Seed)
+
 SetThisScriptCanRemoveBlipsCreatedByAnyScript(true)
 -- ====================================================================================--
 -- https://docs.fivem.net/docs/game-references/blips/

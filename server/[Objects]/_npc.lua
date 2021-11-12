@@ -11,7 +11,7 @@ NOTES.
     - Network ID should be for the server and entity for the individual user is different.
     - data getters within the _data file.
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 ---@param net integer "Network ID 16 bit integer"

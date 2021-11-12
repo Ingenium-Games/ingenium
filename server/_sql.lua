@@ -9,5 +9,5 @@ NOTES
     TO FIND AND USE FUNCTIONS, BECAUSE I GAVE UP PAST 1500 LINES. YEET
 
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--

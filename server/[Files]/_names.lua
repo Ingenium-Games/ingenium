@@ -8,7 +8,7 @@ NOTES.
     - The file loading also has country breakdowns, but really, up to you to make that
     - if you want to only load spefici county names.
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 local gender = {["m"] = {},["f"] = {},["u"] = {}}
 

@@ -6,7 +6,7 @@
 NOTES
 
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 RegisterNetEvent('Client:Doors:Set')

@@ -2,7 +2,7 @@
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
 c.door = {} -- functions
-c.doors = {} -- doors
+c.doors = {}
 --[[
 NOTES
     -

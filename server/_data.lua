@@ -10,7 +10,7 @@ NOTES.
     -
 ]]--
 
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 --- Used on startup prior to the server really running.
@@ -75,17 +75,6 @@ function c.data.Initilize()
     c.Loading = false
     c.debug_1('Loading Sequence Complete.')
     c.Running = true
-
-    -- Testing Table builds from SQL builds.
-    -- print(c.table.Dump(c.jobs))
-    
-    -- this is to test the table locker function.
-    conf.lock = c.rng.chars(10)  
-    SetTimeout(c.min, function()
-        print(conf.lock)
-        c.debug_1("locking tables...")
-    end)
-    --
 end
 
 -- ====================================================================================--

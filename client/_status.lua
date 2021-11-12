@@ -13,7 +13,7 @@ NOTES.
     - additions to them from items etc as we can set max values, and have a default min
     - of 0.
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 local _min = 0

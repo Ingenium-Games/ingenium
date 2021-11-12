@@ -8,7 +8,7 @@ NOTES.
     -
     -
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 function c.check.Number(num, min, max)

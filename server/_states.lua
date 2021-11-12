@@ -9,7 +9,7 @@ NOTES:
     -
     -
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 ---- Add States to the Table prior to being locked on server boot.

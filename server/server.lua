@@ -8,7 +8,7 @@ SetConvarServerInfo("Game Mode", conf.gamemode)
 SetMapName(conf.mapname)
 SetConvarServerInfo("Map Name", conf.mapname)
 --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 AddEventHandler('onResourceStart', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then

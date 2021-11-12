@@ -5,7 +5,7 @@
 NOTES.
     - Updated to PMC callbacks v2, with alerations to ensure it works?
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 local DataPacket = RegisterClientCallback({

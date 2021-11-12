@@ -9,7 +9,7 @@ NOTES.
     - To really be used with PolyZones, to make sections of the city gang affiliated
     - for more and vast interactions. 
 ]] --
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 local defaultgroups = {

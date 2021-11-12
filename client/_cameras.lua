@@ -11,7 +11,7 @@ NOTES.
     - You have overlapping issues when ending cameras from different angles rather than snapping to the ped
     - Even if you don't destroy the camera, if its a different name, it should resolve the issues of weird cam shit happening.
 ]]--
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 function c.camera.NewName(t)

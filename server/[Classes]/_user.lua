@@ -8,7 +8,7 @@ NOTES.
         - Not using the Player State, as still testing.
 ]] --
 
-math.randomseed(c.Seed)
+
 -- ====================================================================================--
 
 function c.class.CreateUser(source)

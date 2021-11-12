@@ -1,9 +1,10 @@
 -- ====================================================================================--
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
+-- Globals and Require/Replace
 math = require('glm')
-c.Seed = 1
+math.randomseed(GetGameTimer())
+--
 c.Locale = conf.locale
-
 c.Running = false
 c.Loading = true
