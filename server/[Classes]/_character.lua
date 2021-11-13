@@ -442,6 +442,15 @@ function c.class.CreateCharacter(source, character_id)
         self.State.Wanted = self.Wanted
     end
     --
+    self.GetInventory = function()
+        return self.State.Inventory or self.Inventory
+    end
+    --
+    self.SetInventory = function(t)
+        self.Inventory = t
+        self.State.Inventory = self.Inventory
+    end
+    --
     self.AddItem = function(name)
         if c.item.Exists(name) then
             table.insert(self.Inventory, name)
