@@ -1,51 +1,280 @@
 {
-  "SNS": {
-    "Cost": 160,
-    "Meta": {
-      "Ammo": "9mm",
-      "SerialNumber": "",
-      "BatchNumber": "",
-      "Registered": false,
-      "Crafted": false
+  "WEAPON_NIGHTSTICK": {
+    "Quality": 100,
+    "Cost": 30,
+    "Recipe": true,
+    "Data": {
+      "HashKey": "WEAPON_NIGHTSTICK",
+      "ModelHashKey": "w_me_nightstick",
+      "Name": "Nightstick",
+      "DefaultClipSize": 0,
+      "Tints": [],
+      "Components": [],
+      "Group": "GROUP_MELEE",
+      "DescriptionGXT": "WTD_NGTSTK",
+      "LiveryColors": [],
+      "NameGXT": "WT_NGTSTK",
+      "DLC": "core",
+      "Description": "24\" polycarbonate side-handled nightstick."
     },
+    "Quantity": 1,
+    "DegradeRate": 0.0,
+    "Weight": 2,
+    "Weapon": "1737195953",
+    "Hotkey": true,
+    "Name": "Nightstick",
+    "Image": "WEAPON_NIGHTSTICK.png",
+    "Stackable": false,
+    "Materials": [
+      { "Quantity": 1, "ItemRequired": "Rubber" },
+      { "Quantity": 1, "ItemRequired": "Metal Rod" }
+    ],
+    "Craftable": true,
+    "Degrade": false,
+    "Meta": {
+      "Crafted": false,
+      "BatchNumber": false,
+      "SerialNumber": false,
+      "Registered": false,
+      "Ammo": false
+    },
+    "Value": 50
+  },
+  "WEAPON_GOLFCLUB": {
+    "Quality": 100,
+    "Cost": 65,
+    "Recipe": true,
+    "Data": {
+      "HashKey": "WEAPON_GOLFCLUB",
+      "ModelHashKey": "w_me_gclub",
+      "Name": "Golf Club",
+      "DefaultClipSize": 0,
+      "Tints": [],
+      "Components": [],
+      "Group": "GROUP_MELEE",
+      "DescriptionGXT": "WTD_GOLFCLUB",
+      "LiveryColors": [],
+      "NameGXT": "WT_GOLFCLUB",
+      "DLC": "core",
+      "Description": "Standard length, mid iron golf club with rubber grip for a lethal short game."
+    },
+    "Quantity": 1,
+    "DegradeRate": 0.0,
+    "Weight": 1.65000000000009,
+    "Weapon": "1141786504",
+    "Hotkey": true,
+    "Name": "Golf Club",
+    "Image": "WEAPON_GOLFCLUB.png",
+    "Stackable": false,
+    "Materials": [
+      { "Quantity": 1, "ItemRequired": "Rubber" },
+      { "Quantity": 1, "ItemRequired": "Metal Rod" },
+      { "Quantity": 2, "ItemRequired": "Scrap Metal" }
+    ],
+    "Craftable": true,
+    "Degrade": false,
+    "Meta": {
+      "Crafted": false,
+      "BatchNumber": false,
+      "SerialNumber": false,
+      "Registered": false,
+      "Ammo": false
+    },
+    "Value": 100
+  },
+  "WEAPON_SNSPISTOL": {
+    "Quality": 100,
+    "Cost": 160,
     "Recipe": true,
     "Data": "",
-    "Weapon": "3218215474",
-    "Weight": 1,
-    "Quality": 100,
-    "Image": "SNS.png",
+    "Quantity": 1,
     "DegradeRate": 0.0,
-    "Name": "SNS",
-    "Degrade": false,
+    "Weight": 1,
+    "Weapon": "3218215474",
+    "Hotkey": true,
+    "Name": "SNS Pistol",
+    "Image": "WEAPON_SNSPISTOL.png",
+    "Stackable": false,
     "Materials": [
       { "Quantity": 2, "ItemRequired": "Rubber" },
       { "Quantity": 1, "ItemRequired": "PistolPin" },
       { "Quantity": 1, "ItemRequired": "PistolFrame" }
     ],
-    "Stackable": false,
-    "Hotkey": true,
     "Craftable": true,
-    "Value": 324,
-    "Quantity": 1
-  },
-  "Pistol": {
-    "Cost": 285,
-    "Meta": {
-      "Ammo": "9mm",
-      "SerialNumber": "",
-      "BatchNumber": "",
-      "Registered": false,
-      "Crafted": false
-    },
-    "Recipe": true,
-    "Data": "",
-    "Weapon": "-1075685676",
-    "Weight": 3,
-    "Quality": 100,
-    "Image": "Pistol.png",
-    "DegradeRate": 0.0,
-    "Name": "Pistol",
     "Degrade": false,
+    "Meta": {
+      "Crafted": false,
+      "BatchNumber": "",
+      "SerialNumber": "",
+      "Registered": false,
+      "Ammo": "9mm"
+    },
+    "Value": 324
+  },
+  "WEAPON_KNIFE": {
+    "Quality": 100,
+    "Cost": 20,
+    "Recipe": true,
+    "Data": {
+      "HashKey": "WEAPON_KNIFE",
+      "ModelHashKey": "w_me_knife_01",
+      "Name": "Knife",
+      "DefaultClipSize": 0,
+      "Tints": [],
+      "Components": [],
+      "Group": "GROUP_MELEE",
+      "DescriptionGXT": "WTD_KNIFE",
+      "LiveryColors": [],
+      "NameGXT": "WT_KNIFE",
+      "DLC": "core",
+      "Description": "This carbon steel 7\" bladed knife is dual edged with a serrated spine to provide improved stabbing and thrusting capabilities."
+    },
+    "Quantity": 1,
+    "DegradeRate": 0.0,
+    "Weight": 1,
+    "Weapon": "2578778090",
+    "Hotkey": true,
+    "Name": "Knife",
+    "Image": "WEAPON_KNIFE.png",
+    "Stackable": false,
+    "Materials": [
+      { "Quantity": 1, "ItemRequired": "Rubber" },
+      { "Quantity": 1, "ItemRequired": "Blade" }
+    ],
+    "Craftable": true,
+    "Degrade": false,
+    "Meta": {
+      "Crafted": false,
+      "BatchNumber": false,
+      "SerialNumber": false,
+      "Registered": false,
+      "Ammo": false
+    },
+    "Value": 35
+  },
+  "WEAPON_BAT": {
+    "Quality": 100,
+    "Cost": 30,
+    "Recipe": true,
+    "Data": {
+      "HashKey": "WEAPON_BAT",
+      "ModelHashKey": "w_me_bat",
+      "Name": "Baseball Bat",
+      "DefaultClipSize": 0,
+      "Tints": [],
+      "Components": [],
+      "Group": "GROUP_MELEE",
+      "DescriptionGXT": "WTD_BAT",
+      "LiveryColors": [],
+      "NameGXT": "WT_BAT",
+      "DLC": "core",
+      "Description": "Aluminum baseball bat with leather grip. Lightweight yet powerful for all you big hitters out there."
+    },
+    "Quantity": 1,
+    "DegradeRate": 0.0,
+    "Weight": 2,
+    "Weapon": "2508868239",
+    "Hotkey": true,
+    "Name": "Baseball Bat",
+    "Image": "WEAPON_BAT.png",
+    "Stackable": false,
+    "Materials": [
+      { "Quantity": 1, "ItemRequired": "Rubber" },
+      { "Quantity": 1, "ItemRequired": "Scrap Metal" }
+    ],
+    "Craftable": true,
+    "Degrade": false,
+    "Meta": {
+      "Crafted": false,
+      "BatchNumber": false,
+      "SerialNumber": false,
+      "Registered": false,
+      "Ammo": false
+    },
+    "Value": 50
+  },
+  "WEAPON_PISTOL": {
+    "Quality": 100,
+    "Cost": 285,
+    "Recipe": true,
+    "Data": {
+      "HashKey": "WEAPON_PISTOL",
+      "ModelHashKey": "W_PI_PISTOL",
+      "Tints": [
+        { "NameGXT": "WM_TINT0", "Name": "Black tint" },
+        { "NameGXT": "WM_TINT1", "Name": "Green tint" },
+        { "NameGXT": "WM_TINT2", "Name": "Gold tint" },
+        { "NameGXT": "WM_TINT3", "Name": "Pink tint" },
+        { "NameGXT": "WM_TINT4", "Name": "Army tint" },
+        { "NameGXT": "WM_TINT5", "Name": "LSPD tint" },
+        { "NameGXT": "WM_TINT6", "Name": "Orange tint" },
+        { "NameGXT": "WM_TINT7", "Name": "Platinum tint" }
+      ],
+      "DLC": "core",
+      "DefaultClipSize": 12,
+      "DescriptionGXT": "WT_PIST_DESC",
+      "Components": {
+        "3978713628": {
+          "HashKey": "COMPONENT_PISTOL_CLIP_02",
+          "ModelHashKey": "w_pi_pistol_mag2",
+          "IsDefault": false,
+          "NameGXT": "WCT_CLIP2",
+          "DescriptionGXT": "WCD_P_CLIP2",
+          "Name": "Extended Clip",
+          "Description": "Extended capacity for Pistol."
+        },
+        "899381934": {
+          "HashKey": "COMPONENT_AT_PI_FLSH",
+          "ModelHashKey": "w_at_pi_flsh",
+          "IsDefault": false,
+          "NameGXT": "WCT_FLASH",
+          "DescriptionGXT": "WCD_FLASH",
+          "Name": "Flashlight",
+          "Description": "Aids low light target acquisition."
+        },
+        "3610841222": {
+          "HashKey": "COMPONENT_PISTOL_VARMOD_LUXE",
+          "ModelHashKey": "W_PI_Pistol_Luxe",
+          "IsDefault": false,
+          "NameGXT": "WCT_VAR_GOLD",
+          "DescriptionGXT": "WCD_VAR_P",
+          "Name": "Yusuf Amir Luxury Finish",
+          "Description": ""
+        },
+        "4275109233": {
+          "HashKey": "COMPONENT_PISTOL_CLIP_01",
+          "ModelHashKey": "w_pi_pistol_mag1",
+          "IsDefault": true,
+          "NameGXT": "WCT_CLIP1",
+          "DescriptionGXT": "WCD_P_CLIP1",
+          "Name": "Default Clip",
+          "Description": "Standard capacity for Pistol."
+        },
+        "1709866683": {
+          "HashKey": "COMPONENT_AT_PI_SUPP_02",
+          "ModelHashKey": "w_at_pi_supp_2",
+          "IsDefault": false,
+          "NameGXT": "WCT_SUPP",
+          "DescriptionGXT": "WCD_PI_SUPP",
+          "Name": "Suppressor",
+          "Description": "Reduces noise and muzzle flash."
+        }
+      },
+      "Group": "GROUP_PISTOL",
+      "NameGXT": "WT_PIST",
+      "AmmoType": "AMMO_PISTOL",
+      "LiveryColors": [],
+      "Name": "Pistol",
+      "Description": "Standard handgun. A .45 caliber pistol with a magazine capacity of 12 rounds that can be extended to 16."
+    },
+    "Quantity": 1,
+    "DegradeRate": 0.0,
+    "Weight": 3,
+    "Weapon": "453432689",
+    "Hotkey": true,
+    "Name": "Pistol",
+    "Image": "WEAPON_PISTOL.png",
+    "Stackable": false,
     "Materials": [
       { "Quantity": 2, "ItemRequired": "Rubber" },
       { "Quantity": 1, "ItemRequired": "CarbonAlloy" },
@@ -54,10 +283,97 @@
       { "Quantity": 1, "ItemRequired": "PistolFrame" },
       { "Quantity": 1, "ItemRequired": "Reciever" }
     ],
-    "Stackable": false,
-    "Hotkey": true,
     "Craftable": true,
-    "Value": 425,
-    "Quantity": 1
+    "Degrade": false,
+    "Meta": {
+      "Crafted": false,
+      "BatchNumber": "",
+      "SerialNumber": "",
+      "Registered": false,
+      "Ammo": "9mm"
+    },
+    "Value": 425
+  },
+  "WEAPON_CROWBAR": {
+    "Quality": 100,
+    "Cost": 45,
+    "Recipe": true,
+    "Data": {
+      "HashKey": "WEAPON_BAT",
+      "ModelHashKey": "w_me_bat",
+      "Name": "Baseball Bat",
+      "DefaultClipSize": 0,
+      "Tints": [],
+      "Components": [],
+      "Group": "GROUP_MELEE",
+      "DescriptionGXT": "WTD_BAT",
+      "LiveryColors": [],
+      "NameGXT": "WT_BAT",
+      "DLC": "core",
+      "Description": "Aluminum baseball bat with leather grip. Lightweight yet powerful for all you big hitters out there."
+    },
+    "Quantity": 1,
+    "DegradeRate": 0.0,
+    "Weight": 3,
+    "Weapon": "2508868239",
+    "Hotkey": true,
+    "Name": "Crowbar",
+    "Image": "WEAPON_CROWBAR.png",
+    "Stackable": false,
+    "Materials": [
+      { "Quantity": 1, "ItemRequired": "Metal Rod" },
+      { "Quantity": 2, "ItemRequired": "Scrap Metal" }
+    ],
+    "Craftable": true,
+    "Degrade": false,
+    "Meta": {
+      "Crafted": false,
+      "BatchNumber": false,
+      "SerialNumber": false,
+      "Registered": false,
+      "Ammo": false
+    },
+    "Value": 85
+  },
+  "WEAPON_HAMMER": {
+    "Quality": 100,
+    "Cost": 20,
+    "Recipe": true,
+    "Data": {
+      "HashKey": "WEAPON_HAMMER",
+      "ModelHashKey": "w_me_hammer",
+      "Name": "Hammer",
+      "DefaultClipSize": 0,
+      "Tints": [],
+      "Components": [],
+      "Group": "GROUP_MELEE",
+      "DescriptionGXT": "WTD_HAMMER",
+      "LiveryColors": [],
+      "NameGXT": "WT_HAMMER",
+      "DLC": "core",
+      "Description": "A robust, multi-purpose hammer with wooden handle and curved claw, this old classic still nails the competition."
+    },
+    "Quantity": 1,
+    "DegradeRate": 0.0,
+    "Weight": 1.3499999999999,
+    "Weapon": "1317494643",
+    "Hotkey": true,
+    "Name": "Hammer",
+    "Image": "WEAPON_HAMMER.png",
+    "Stackable": false,
+    "Materials": [
+      { "Quantity": 1, "ItemRequired": "Rubber" },
+      { "Quantity": 1, "ItemRequired": "Scrap Metal" }
+    ],
+    "Craftable": true,
+    "Degrade": false,
+    "Meta": {
+      "Crafted": false,
+      "BatchNumber": false,
+      "SerialNumber": false,
+      "Registered": false,
+      "Ammo": false
+    },
+    "Value": 32
   }
 }
