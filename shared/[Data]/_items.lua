@@ -78,7 +78,7 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
 
 -- ====================================================================================--
 
-local weapon_dump = exports["ig.weapon_dump"].GetWeapons()
+local weapon_dump = exports["ig.dump"].GetWeapons()
 
 c.items = { -- table of items
 
@@ -373,3 +373,8 @@ c.items = { -- table of items
 
 
 }
+
+if IsDuplicityVersion() then
+    c.json.Write(conf.file.items, c.items)
+end
+setmetatable(c.items, c.meta)
