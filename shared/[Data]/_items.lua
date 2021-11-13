@@ -79,10 +79,6 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
 -- ====================================================================================--
 
 local weapon_dump = exports["ig.dump"].GetWeapons()
-print(c.table.Dump(weapon_dump))
-
-print(c.table.Dump(exports["ig.dump"].GetWeapons()))
-
 
 c.items = { -- table of items
 
