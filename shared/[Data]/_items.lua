@@ -24,7 +24,20 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
             Crafted = false,
             Registered = false
         },
-        Data = "",  -- Displayable string on inventory.
+        Data = {  -- This is the generic game data such as 
+            "HashKey": "WEAPON_KNIFE",
+            "NameGXT": "WT_KNIFE",
+            "DescriptionGXT": "WTD_KNIFE",
+            "Name": "Knife",
+            "Description": "This carbon steel 7\" bladed knife is dual edged with a serrated spine to provide improved stabbing and thrusting capabilities.",
+            "Group": "GROUP_MELEE",
+            "ModelHashKey": "w_me_knife_01",
+            "DefaultClipSize": 0,
+            "Components": {},
+            "Tints": [],
+            "LiveryColors": [],
+            "DLC": "core"
+        }
         Craftable = true,   -- can this be made? if so, add materials.
         Recipe = true, -- require the know how
         Materials = {{
@@ -65,12 +78,258 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
 
 -- ====================================================================================--
 
+local weapon_dump = exports["ig.weapon_dump"].GetWeapons()
+
 c.items = { -- table of items
 
+-- ====================================================================================--
 -- Weapons
+-- ====================================================================================--
 
-    ["SNS"] = {
-        Name = "SNS",
+    -- ====================================================================================--
+    -- Melee
+    -- ====================================================================================--
+    ["WEAPON_KNIFE"] = {
+        Name = "Knife",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 20,
+        Value = 35,
+        Weight = 1,
+        Weapon = "2578778090",
+        Meta = {
+            Ammo = false,
+            SerialNumber = false,
+            BatchNumber = false,
+            Crafted = false,
+            Registered = false
+        },
+        Data = weapon_dump["2578778090"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 1
+        }, {
+            ItemRequired = "Blade",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_KNIFE.png",
+    },
+    ["WEAPON_NIGHTSTICK"] = {
+        Name = "Nightstick",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 30,
+        Value = 50,
+        Weight = 2,
+        Weapon = "1737195953",
+        Meta = {
+            Ammo = false,
+            SerialNumber = false,
+            BatchNumber = false,
+            Crafted = false,
+            Registered = false
+        },
+        Data = weapon_dump["1737195953"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 1
+        }, {
+            ItemRequired = "Metal Rod",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_NIGHTSTICK.png",
+    },
+    ["WEAPON_HAMMER"] = {
+        Name = "Hammer",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 20,
+        Value = 32,
+        Weight = 1.35,
+        Weapon = "1317494643",
+        Meta = {
+            Ammo = false,
+            SerialNumber = false,
+            BatchNumber = false,
+            Crafted = false,
+            Registered = false
+        },
+        Data = weapon_dump["1317494643"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 1
+        }, {
+            ItemRequired = "Scrap Metal",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_HAMMER.png",
+    },
+    ["WEAPON_BAT"] = {
+        Name = "Baseball Bat",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 30,
+        Value = 50,
+        Weight = 2,
+        Weapon = "2508868239",
+        Meta = {
+            Ammo = false,
+            SerialNumber = false,
+            BatchNumber = false,
+            Crafted = false,
+            Registered = false
+        },
+        Data = weapon_dump["2508868239"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 1
+        }, {
+            ItemRequired = "Scrap Metal",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_BAT.png",
+    },
+    ["WEAPON_GOLFCLUB"] = {
+        Name = "Golf Club",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 65,
+        Value = 100,
+        Weight = 1.65,
+        Weapon = "2508868239",
+        Meta = {
+            Ammo = false,
+            SerialNumber = false,
+            BatchNumber = false,
+            Crafted = false,
+            Registered = false
+        },
+        Data = weapon_dump["2508868239"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 1
+        }, {
+            ItemRequired = "Metal Rod",
+            Quantity = 1
+        }, {
+            ItemRequired = "Scrap Metal",
+            Quantity = 2
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_GOLFCLUB.png",
+    },
+    ["WEAPON_CROWBAR"] = {
+        Name = "Crowbar",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 45,
+        Value = 85,
+        Weight = 3,
+        Weapon = "2508868239",
+        Meta = {
+            Ammo = false,
+            SerialNumber = false,
+            BatchNumber = false,
+            Crafted = false,
+            Registered = false
+        },
+        Data = weapon_dump["2508868239"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Metal Rod",
+            Quantity = 1
+        }, {
+            ItemRequired = "Scrap Metal",
+            Quantity = 2
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_CROWBAR.png",
+    },
+
+    -- ====================================================================================--
+    -- Pistol
+    -- ====================================================================================--
+
+    ["WEAPON_PISTOL"] = {
+        Name = "Pistol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 285,
+        Value = 425,
+        Weight = 3,
+        Weapon = "453432689",
+        Meta = {
+            Ammo = "9mm",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false
+        },
+        Data = weapon_dump["453432689"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 2
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 1
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_PISTOL.png",
+    },
+
+
+    ["WEAPON_SNSPISTOL"] = {
+        Name = "SNS Pistol",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -101,52 +360,10 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
-        Image = "SNS.png",
+        Image = "WEAPON_SNSPISTOL.png",
     },
 
-    ["Pistol"] = {
-        Name = "Pistol",
-        Degrade = false,
-        DegradeRate = 0.0,
-        Quality = 100,
-        Quantity = 1,
-        Cost = 285,
-        Value = 425,
-        Weight = 3,
-        Weapon = "-1075685676",
-        Meta = {
-            Ammo = "9mm",
-            SerialNumber = "",
-            BatchNumber = "",
-            Crafted = false,
-            Registered = false
-        },
-        Data = "",
-        Craftable = true,
-        Recipe = true,
-        Materials = {{
-            ItemRequired = "Rubber",
-            Quantity = 2
-        }, {
-            ItemRequired = "CarbonAlloy",
-            Quantity = 1
-        }, {
-            ItemRequired = "ShortBarrel",
-            Quantity = 1
-        }, {
-            ItemRequired = "PistolPin",
-            Quantity = 1
-        }, {
-            ItemRequired = "PistolFrame",
-            Quantity = 1
-        }, {
-            ItemRequired = "Reciever",
-            Quantity = 1
-        }},
-        Stackable = false,
-        Hotkey = true,
-        Image = "Pistol.png",
-    },
+
 
 
 

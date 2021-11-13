@@ -36,6 +36,8 @@ function c.sql.save.User(data, cb)
         local Coords = json.encode(data.GetCoords())
         local Accounts = json.encode(data.GetAccounts())
         local Modifiers = json.encode(data.GetModifiers())
+        local Inventory = json.encode(data.GetInventory())
+        local Hotbar = json.encode(data.GetHotbar())
         local Job = json.encode(data.GetJob())
         -- 
         local Character_ID = data.GetCharacter_ID()
@@ -48,8 +50,10 @@ function c.sql.save.User(data, cb)
             ['@Stress'] = Stress,
             -- Table Informaiton.
             ['@Coords'] = Coords,
-            ['@Modifiers'] = Modifiers,
             ['@Accounts'] = Accounts,
+            ['@Modifiers'] = Modifiers,
+            ['@Inventory'] = Inventory,
+            ['@Hotbar'] = Hotbar,
             ['@Job'] = Job,
             --
             ['@Character_ID'] = Character_ID
@@ -79,6 +83,8 @@ function c.sql.save.Users(cb)
             local Coords = json.encode(data.GetCoords())
             local Accounts = json.encode(data.GetAccounts())
             local Modifiers = json.encode(data.GetModifiers())
+            local Inventory = json.encode(data.GetInventory())
+            local Hotbar = json.encode(data.GetHotbar())
             local Job = json.encode(data.GetJob())
             -- 
             local Character_ID = data.GetCharacter_ID()
@@ -91,8 +97,10 @@ function c.sql.save.Users(cb)
                 ['@Stress'] = Stress,
                 -- Table Informaiton.
                 ['@Coords'] = Coords,
-                ['@Modifiers'] = Modifiers,
                 ['@Accounts'] = Accounts,
+                ['@Modifiers'] = Modifiers,
+                ['@Inventory'] = Inventory,
+                ['@Hotbar'] = Hotbar,
                 ['@Job'] = Job,
                 --
                 ['@Character_ID'] = Character_ID

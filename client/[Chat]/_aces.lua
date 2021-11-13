@@ -50,6 +50,11 @@ c.ace.admin = function()
         name = "1",
         help = "Server ID"
     }})
+
+    TriggerEvent("chat:addSuggestion", "/openinventory", "Admin Permission(s) Required.", {{
+        name = "1",
+        help = "Server ID"
+    }})
 end
 
 c.ace.superadmin = function()   

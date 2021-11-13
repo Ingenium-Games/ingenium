@@ -19,6 +19,6 @@ exports {"c", "RegisterClientCallback", "UnregisterClientCallback", "TriggerClie
 ------------------------------------------------------------------------------
 server_exports {"c", "RegisterServerCallback", "UnregisterServerCallback", "TriggerClientCallback", "TriggerServerCallback"}
 ------------------------------------------------------------------------------
-dependencies {"/onesync", "mysql-async", "discordroles"}
+dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump"}
 ------------------------------------------------------------------------------
 files {"data/Peds.json","data/Names.json", "data/Jobs.json", "data/Drops.json", "data/GSR.json", "data/Items.json", "data/Notes.json", "data/Pickups.json"}

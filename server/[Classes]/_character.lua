@@ -86,6 +86,9 @@ function c.class.CreateCharacter(source, character_id)
     self.Inventory = json.decode(data.Inventory)
     self.State.Inventory = self.Inventory
     --
+    self.Hotbar = json.decode(data.Hotbar)
+    self.State.Hotbar = self.Hotbar
+    --
     self.Modifiers = json.decode(data.Modifiers)    
     self.State.Modifiers = self.Modifiers
     --
@@ -420,6 +423,15 @@ function c.class.CreateCharacter(source, character_id)
         self.State.Coords = self.Coords
     end
     --
+    self.GetHotbar = function()
+        return self.State.Hotbar or self.Hotbar
+    end
+    --
+    self.SetHotbar = function(t)
+        self.Hotbar = t
+        self.State.Hotbar = self.Hotbar
+    end
+    --
     self.GetWanted = function()
         return self.State.Wanted or self.Wanted
     end
@@ -436,7 +448,6 @@ function c.class.CreateCharacter(source, character_id)
             self.State.Inventory = self.Inventory
         end
     end
-    --
     -- 
     self.RemoveItem = function(name)
         if self.HasItem(name) then
