@@ -78,7 +78,11 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
 
 -- ====================================================================================--
 
-local weapon_dump = exports["ig.dump"]:GetWeapons()
+local weapon_dump = exports["ig.dump"].GetWeapons()
+c.debug_1(c.table.Dump(weapon_dump))
+
+c.debug_1(c.table.Dump(exports["ig.dump"].GetWeapons()))
+
 
 c.items = { -- table of items
 
@@ -222,7 +226,7 @@ c.items = { -- table of items
         Cost = 65,
         Value = 100,
         Weight = 1.65,
-        Weapon = "2508868239",
+        Weapon = "1141786504",
         Meta = {
             Ammo = false,
             SerialNumber = false,
@@ -230,7 +234,7 @@ c.items = { -- table of items
             Crafted = false,
             Registered = false
         },
-        Data = weapon_dump["2508868239"],
+        Data = weapon_dump["1141786504"],
         Craftable = true,
         Recipe = true,
         Materials = {{
