@@ -22,7 +22,8 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "A tangable form of currency.",
         },
         Data = {  -- This is the generic game data such as 
             "HashKey": "WEAPON_KNIFE",
@@ -83,6 +84,37 @@ local weapon_dump = exports["ig.dump"].GetWeapons()
 c.items = { -- table of items
 
 -- ====================================================================================--
+-- Misc
+-- ====================================================================================--
+
+    ["Cash"] = {
+        Name = "Cash",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            Ammo = false,
+            SerialNumber = false,
+            BatchNumber = false,
+            Crafted = false,
+            Registered = false,
+            About = "A tangable form of currency.",
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Hotkey = false,
+        Image = "Cash.png",
+    },
+
+-- ====================================================================================--
 -- Weapons
 -- ====================================================================================--
 
@@ -104,7 +136,8 @@ c.items = { -- table of items
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "A sharp tool used for skinning.",
         },
         Data = weapon_dump["2578778090"],
         Craftable = true,
@@ -135,7 +168,8 @@ c.items = { -- table of items
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "A beat stick, for the typical beat cop.",
         },
         Data = weapon_dump["1737195953"],
         Craftable = true,
@@ -166,7 +200,8 @@ c.items = { -- table of items
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "Crafty and useful for many situations.",
         },
         Data = weapon_dump["1317494643"],
         Craftable = true,
@@ -197,7 +232,8 @@ c.items = { -- table of items
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "Home invader? Hit them like a home run!.",
         },
         Data = weapon_dump["2508868239"],
         Craftable = true,
@@ -228,7 +264,8 @@ c.items = { -- table of items
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "PGA certified for an extra $50.",
         },
         Data = weapon_dump["1141786504"],
         Craftable = true,
@@ -262,7 +299,8 @@ c.items = { -- table of items
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "Tool of choice for many.",
         },
         Data = weapon_dump["2508868239"],
         Craftable = true,
@@ -298,7 +336,8 @@ c.items = { -- table of items
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "Fires standard 9mm rounds.",
         },
         Data = weapon_dump["453432689"],
         Craftable = true,
@@ -343,9 +382,10 @@ c.items = { -- table of items
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
-            Registered = false
+            Registered = false,
+            About = "Commonly contained in a cigerrete packet.",
         },
-        Data = "",
+        Data = weapon_dump["3218215474"],
         Craftable = true,
         Recipe = true,
         Materials = {{
