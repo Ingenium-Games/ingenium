@@ -61,6 +61,10 @@ function c.class.CreateCharacter(source, character_id)
     self.Stress = data.Stress
     self.State.Stress = self.Stress
     --
+    self.Weight = 0
+    self.MaxWeight = 25
+    self.State.Weight = self.Weight
+    --
     -- Booleans
     self.Wanted = data.Wanted
     self.State.Wanted = self.Wanted
@@ -83,7 +87,7 @@ function c.class.CreateCharacter(source, character_id)
     self.Licenses = json.decode(data.Licenses)
     self.State.Licenses = self.Licenses
     --
-    self.Inventory = json.decode(data.Inventory)
+    self.Inventory = c.class.CreateInventory(json.decode(data.Inventory))
     self.State.Inventory = self.Inventory
     --
     self.Hotbar = json.decode(data.Hotbar)
@@ -202,6 +206,7 @@ function c.class.CreateCharacter(source, character_id)
                 acc = 0
                 CancelEvent()
                 self.Kick("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
+                c.debug_1("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for "..self.ID)
             else
                 self.SetAccount("Cash", acc)
             end    
@@ -217,6 +222,7 @@ function c.class.CreateCharacter(source, character_id)
                 acc = 0
                 CancelEvent()
                 self.Kick("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
+                c.debug_1("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for "..self.ID)
             else
                 self.SetAccount("Cash", acc)
             end
@@ -232,6 +238,7 @@ function c.class.CreateCharacter(source, character_id)
                 acc = 0
                 CancelEvent()
                 self.Kick("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
+                c.debug_1("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for "..self.ID)
             else
                 self.SetAccount("Cash", acc)
             end
@@ -297,7 +304,7 @@ function c.class.CreateCharacter(source, character_id)
             TriggerEvent('Server:Character:SetJob', self.ID, self.Job)
             TriggerClientEvent('Client:Character:SetJob', self.ID, self.Job)
         else
-            c.debug_1("Ignoring invalid .SetJob()")
+            c.debug_1("Ignoring invalid .SetJob() for "..self.ID)
         end
     end
     --
@@ -442,53 +449,107 @@ function c.class.CreateCharacter(source, character_id)
         self.State.Wanted = self.Wanted
     end
     --
+        --[[ Items are stored as such in the DB
+            Will be stored as this
+
+                1:{"item", 1, 100, false, {metadata}}
+
+            Will be used as this.
+                self[k] = {
+                    ["Item"] = v[1],
+                    ["Quantity"] = v[2],
+                    ["Quality"] = v[3],
+                    ["Weapon"] = v[4],
+                    ["Meta"] = v[5]
+                }
+        ]]--
     self.GetInventory = function()
         return self.State.Inventory or self.Inventory
     end
     --
-    self.SetInventory = function(t)
-        self.Inventory = t
-        self.State.Inventory = self.Inventory
-    end
-    --
-    self.AddItem = function(name)
-        if c.item.Exists(name) then
-            table.insert(self.Inventory, name)
-            self.State.Inventory = self.Inventory
-        end
-    end
-    -- 
-    self.RemoveItem = function(name)
-        if self.HasItem(name) then
-            for k,v in ipairs(self.Inventory) do
-                if k == name then
-                    self.Inventory[k] = false
-                end
-            end
-        end
-    end
-    --
     self.HasItem = function(name)
         for k,v in ipairs(self.Inventory) do
-            if k == name then
-                return true
+            if v.Item == name then
+                return true, k 
             end
         end
         return false
     end
     --
-    self.MoveItemToSlot = function(old, new)
-        if self.Inventory[new] == false or self.Inventory[new] == nil then
-            self.Inventory[new] = self.Inventory[old]
-            self.Inventory[old] = false
+    --
+    self.GetWeight = function()
+        self.Weight = 0
+        for k,v in ipairs(self.Inventory) do
+            if c.item.Exists(v.Item) then
+                local item = c.items[v.Item]
+                self.Weight = self.Weight + item.Weight
+            else
+                c.debug_1("Ignoring invalid item within .GetWeight()")
+            end
+        end
+        return self.Weight
+    end
+    --
+    --- [Internal] func desc
+    ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
+    self.SteralizeItem = function(v)
+        if type(v) ~= "table" then 
+            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC, NetID: "..self.Net)
+            return 
+        end
+        local info = {
+            ["Item"] = c.check.String(v[1]), -- string
+            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
+            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
+            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
+            ["Meta"] = (v[5] or c.items[v[1]].Meta),
+        }
+        return info
+    end
+    --
+    --- func desc
+    ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
+    self.AddItem = function(tbl)
+        local item = self.SteralizeItem(tbl)
+        if c.item.Exists(item) then
+            local weapon = c.item.IsWeapon(item.Item)
+            local stackable = c.item.CanStack(item.Item)
+            local has, key = self.HasItem(item.Item)
+            if (weapon and type(item.Weapon) == "string") or (not stackable and has) then
+                self.Inventory[#self.Inventory + 1] = item
+                self.State.Inventory = self.Inventory
+            elseif (stackable and has) then
+                self.Inventory[key].Quantity = self.Inventory[key].Quantity + item.Quantity
+                self.State.Inventory = self.Inventory
+            else
+                self.Inventory[#self.Inventory + 1] = item
+                self.State.Inventory = self.Inventory
+            end
+        else
+            c.debug_1("Ignoring invalid .AddItem() for "..self.ID)
+        end
+    end
+    -- 
+    self.RemoveItem = function(name, slot)
+        local has, position = self.HasItem(name)
+        if has and slot == position then
+            table.remove(self.Inventory, position)
+            self.State.Inventory = self.Inventory
         end
     end
     --
-    self.CraftItem = function()
-        
+    self.RearrangeItems = function(new, old)
+        table.insert(self.Inventory, new, table.remove(self.Inventory, old))
+        self.State.Inventory = self.Inventory
     end
     --
-
+    self.CompileInventory = function()
+        local inv = {}
+        for k,v in ipairs(self.Inventory) do
+            inv[k] = {v.Item, v.Quanitity, v.Quality, v.Weapon, v.Meta}
+        end
+        return inv
+    end
     --
     c.debug_2("Generated Character")
     return self
