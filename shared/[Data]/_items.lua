@@ -326,8 +326,6 @@ c.items = { -- table of items
         Hotkey = true,
         Image = "WEAPON_PISTOL.png",
     },
-
-
     ["WEAPON_SNSPISTOL"] = {
         Name = "SNS Pistol",
         Degrade = false,
