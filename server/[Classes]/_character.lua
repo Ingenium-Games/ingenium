@@ -462,6 +462,9 @@ function c.class.CreateCharacter(source, character_id)
                     ["Weapon"] = v[4],
                     ["Meta"] = v[5]
                 }
+
+            You shouldnt need any other front end data to show on an nui etc.
+        
         ]]--
     self.GetInventory = function()
         return self.State.Inventory or self.Inventory
@@ -473,7 +476,7 @@ function c.class.CreateCharacter(source, character_id)
                 return true, k 
             end
         end
-        return false
+        return false, nil
     end
     --
     --
@@ -511,11 +514,11 @@ function c.class.CreateCharacter(source, character_id)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item) then
+        if c.item.Exists(item.Item) then
             local weapon = c.item.IsWeapon(item.Item)
             local stackable = c.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
-            if (weapon and type(item.Weapon) == "string") or (not stackable and has) then
+            if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
                 self.State.Inventory = self.Inventory
             elseif (stackable and has) then
@@ -543,10 +546,10 @@ function c.class.CreateCharacter(source, character_id)
         self.State.Inventory = self.Inventory
     end
     --
-    self.CompileInventory = function()
+    self.CompressInventory = function()
         local inv = {}
         for k,v in ipairs(self.Inventory) do
-            inv[k] = {v.Item, v.Quanitity, v.Quality, v.Weapon, v.Meta}
+            inv[k] = {v.Item, v.Quantity, v.Quality, v.Weapon, v.Meta}
         end
         return inv
     end

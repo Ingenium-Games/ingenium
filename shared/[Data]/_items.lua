@@ -3,70 +3,6 @@
 -- ====================================================================================--
 --[[
 
-Ok so this is the block of code for all you people to copy, paste, and prefill at the bottom of this page.
-
-    COPY START BELOW HERE!
-
-    ["Scorpion"] = {
-        Label = "Scorpion", -- name
-        Degrade = false,    -- boolean
-        DegradeRate = 0.0,  -- rate
-        Quality = 100,  -- Starting Quality
-        Quantity = 1,   -- Is one? or many?
-        Cost = 850,    -- Cost to make
-        Value = 1520,   -- Sell Value
-        Weight = 4, -- Weight
-        Weapon = "-1121678507", -- Becasue anything other than false or 0 is true. G G
-        Meta = {    -- Any data you want, Weapons MUST have the three below.
-            Ammo = "9mm",
-            SerialNumber = "",
-            BatchNumber = "",
-            Crafted = false,
-            Registered = false,
-            About = "A tangable form of currency.",
-        },
-        Data = {  -- This is the generic game data such as 
-            "HashKey": "WEAPON_KNIFE",
-            "NameGXT": "WT_KNIFE",
-            "DescriptionGXT": "WTD_KNIFE",
-            "Name": "Knife",
-            "Description": "This carbon steel 7\" bladed knife is dual edged with a serrated spine to provide improved stabbing and thrusting capabilities.",
-            "Group": "GROUP_MELEE",
-            "ModelHashKey": "w_me_knife_01",
-            "DefaultClipSize": 0,
-            "Components": {},
-            "Tints": [],
-            "LiveryColors": [],
-            "DLC": "core"
-        }
-        Craftable = true,   -- can this be made? if so, add materials.
-        Recipe = true, -- require the know how
-        Materials = {{
-            ItemRequired = "Rubber",
-            Quantity = 4
-        }, {
-            ItemRequired = "CarbonAlloy",
-            Quantity = 2
-        }, {
-            ItemRequired = "ShortBarrel",
-            Quantity = 1
-        }, {
-            ItemRequired = "PistolPin",
-            Quantity = 1
-        }, {
-            ItemRequired = "PistolFrame",
-            Quantity = 1
-        }, {
-            ItemRequired = "AutoReciever",
-            Quantity = 1
-        }},
-        Stackable = false, -- Can you put them on top of each other?
-        Hotkey = false, -- can it be used with 1-5 slots?
-        Image = "Scorpion.png", -- image to render client side.
-    },
-
-    ^ COPY END HERE OK, OK!
-
     Let me break it down for you guys, becasue all your economy servers are a joke.
     Life needs to be hard. People need to struggle to make a story real and genuine.
     Stop giving your players a million dollars a day, because they are self entitled pricks.
@@ -415,4 +351,3 @@ c.items = { -- table of items
 if IsDuplicityVersion() then
     c.json.Write(conf.file.items, c.items)
 end
-setmetatable(c.items, c.meta)

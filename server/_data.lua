@@ -200,9 +200,9 @@ end
 -- ====================================================================================--
 -- NPC's 
     
-function c.data.AddNpc(net)
+function c.data.AddNpc(net, cb, ...)
     if not c.npc.Find(net) then
-        c.ndex[net] = c.class.Npc(net)
+        c.ndex[net] = cb(...)
     end
 end
 
@@ -236,9 +236,9 @@ end
 -- ====================================================================================--
 -- NPC's 
     
-function c.data.AddObject(net)
+function c.data.AddObject(net, cb, ...)
     if not c.object.Find(net) then
-        c.odex[net] = c.class.Object(net)
+        c.odex[net] = cb(...)
     end
 end
 
@@ -412,7 +412,7 @@ end
 --- Return the Players's state bag.
 ---@param id any "Typically a number or string"
 function c.data.GetPlayerState(id)    
-    return Player(net).state
+    return Player(id).state
 end
 
 --- Return the Players's state bag.

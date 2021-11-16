@@ -3,13 +3,9 @@
 -- ====================================================================================--
 c.item = {} -- function level
 --[[
-NOTES.
-    -
-    -
+NOTES
     -
 ]] --
-
-
 -- ====================================================================================--
 
 function c.item.Exists(name)
@@ -49,8 +45,4 @@ function c.item.ReturnPosition(name)
         end
     end
     return false
-end
-
-function c.item.CreateDrop()
-
 end

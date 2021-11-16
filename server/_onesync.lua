@@ -42,9 +42,7 @@ AddEventHandler('entityCreated', function(ent)
         -- Object
         if type == 3 then
             if not conf.disable.objects[model] then
-                if c.object.Find(net) then
-
-                end                       
+                c.data.AddObject(net, c.class.CreateObject, net)                      
             else
                 DeleteEntity(ent)
                 c.debug_1('Object has been Deleted.')
@@ -64,10 +62,10 @@ AddEventHandler('entityCreated', function(ent)
             if not conf.disable.peds[model] then                        
                 -- not a human player
                 if not IsPedAPlayer(ent) then
-                    c.class.CreateNpc(net)
+                    c.data.AddNpc(net, c.class.CreateNpc, net)
                 else
                 -- is a player
-                
+                    
                 end
             else
                 DeleteEntity(ent)

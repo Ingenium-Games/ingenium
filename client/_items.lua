@@ -1,16 +1,12 @@
---====================================================================================--
+-- ====================================================================================--
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
---====================================================================================--
+-- ====================================================================================--
 c.item = {} -- function level
 --[[
-NOTES.
-    -
-    -
+NOTES
     -
 ]] --
-
-
---====================================================================================--
+-- ====================================================================================--
 
 function c.item.Exists(name)
     if c.items[name] then
@@ -42,6 +38,11 @@ function c.item.CanStack(name)
     return c.items[name].Stackable
 end
 
-function c.item.CreateDrop()
-
+function c.item.ReturnPosition(name)
+    for k,v in ipairs(c.items) do
+        if v == name then
+            return k
+        end
+    end
+    return false
 end

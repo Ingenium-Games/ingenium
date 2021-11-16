@@ -9,7 +9,7 @@ lua54 "yes"
 loadscreen "https://www.ingenium.games/"
 loadscreen_cursor "yes"
 ------------------------------------------------------------------------------
-shared_scripts {"conf.lua", "conf.default.lua", "conf.vehicles.lua", "conf.disable.lua", "conf.file.lua", "conf.peds.lua", "shared/_c.lua"}
+shared_scripts {"conf.lua", "conf.default.lua", "conf.vehicles.lua", "conf.disable.lua", "conf.file.lua", "conf.peds.lua", "data/*.json", "shared/_c.lua"}
 ------------------------------------------------------------------------------
 client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Credits]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "client/_functions.lua", "client/**/*.lua"}
 ------------------------------------------------------------------------------
@@ -21,4 +21,4 @@ server_exports {"c", "RegisterServerCallback", "UnregisterServerCallback", "Trig
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump"}
 ------------------------------------------------------------------------------
-files {"data/Peds.json","data/Names.json", "data/Jobs.json", "data/Drops.json", "data/GSR.json", "data/Items.json", "data/Notes.json", "data/Pickups.json"}
+files {"data/Peds.json", "data/Names.json", "data/Jobs.json", "data/Drops.json", "data/GSR.json", "data/Items.json", "data/Notes.json", "data/Pickups.json"}
