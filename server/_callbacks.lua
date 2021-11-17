@@ -7,6 +7,13 @@ NOTES
 ]] --
 -- ====================================================================================--
 
+local GetItems = RegisterServerCallback({
+    eventName = 'GetItems',
+    eventCallback = function(source, ...)
+        return c.items
+    end
+})
+
 local GetInventory = RegisterServerCallback({
     eventName = 'GetInventory',
     eventCallback = function(source, net)
