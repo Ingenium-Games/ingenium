@@ -161,7 +161,7 @@ function c.class.CreateNpc(net)
                 self.State.Inventory = self.Inventory
             end
         else
-            c.debug_1("Ignoring invalid .AddItem() for "..self.ID)
+            c.debug_1("Ignoring invalid .AddItem() for "..self.Net)
         end
     end
     -- 
