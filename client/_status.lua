@@ -165,6 +165,15 @@ function c.status.StartStressIncrease()
     SetTimeout(_stress, Do)
 end
 
+function c.status.SendNUI(ped)
+    local function Do()
+        local data = {Health = c.status.GetHealth(ped), Armour = c.status.GetArmour(ped), Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
+        TriggerEvent("Client:Status", data)
+        SetTimeout(c.sec, Do)
+    end
+    SetTimeout(c.sec, Do)
+end
+
 -- ====================================================================================--
 
 function c.status.SetPlayer(data)
@@ -197,6 +206,7 @@ function c.status.SetPlayer(data)
     c.status.StartHungerDecrease()
     c.status.StartThirstDecrease()
     c.status.StartStressIncrease()
+    c.status.SendNUI(ped)
 end
 
 --[[
