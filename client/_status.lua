@@ -24,26 +24,26 @@ local _stress = c.min * 5
 
 -- ====================================================================================--
 
-function c.status.GetHealth(ped)
-    return GetEntityHealth(ped)
+function c.status.GetHealth()
+    return GetEntityHealth(PlayerPedId())
 end
 
-function c.status.SetHealth(ped, health)
-    SetEntityHealth(ped, health)
+function c.status.SetHealth(health)
+    SetEntityHealth(PlayerPedId(), health)
 end
 
 -- ====================================================================================--
 
-function c.status.GetArmour(ped)
-    return GetPedArmour(ped)
+function c.status.GetArmour()
+    return GetPedArmour(PlayerPedId())
 end
 
-function c.status.SetArmour(ped, armour)
-    SetPedArmour(ped, armour)
+function c.status.SetArmour(armour)
+    SetPedArmour(PlayerPedId(), armour)
 end
 
-function c.status.AddArmour(ped, armour)
-    AddArmourToPed(ped, armour) 
+function c.status.AddArmour(armour)
+    AddArmourToPed(PlayerPedId(), armour) 
 end
 
 -- ====================================================================================--
@@ -165,9 +165,10 @@ function c.status.StartStressIncrease()
     SetTimeout(_stress, Do)
 end
 
-function c.status.SendNUI(ped)
+function c.status.SendNUI()
     local function Do()
-        local data = {Health = (c.status.GetHealth(ped) / conf.defaulthelth) * 100, Armour = (c.status.GetArmour(ped) / conf.defaultarmour) * 100, Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
+        local ped = PlayerPedId()
+        local data = {Health = (c.status.GetHealth(ped) / conf.defaulthealth) * 100, Armour = (c.status.GetArmour(ped) / conf.defaultarmour) * 100, Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
         TriggerEvent("Client:Status", data)
         SetTimeout(c.sec, Do)
     end
@@ -183,11 +184,11 @@ function c.status.SetPlayer(data)
     -- Set default hp to 400 on spawn
     SetPedMaxHealth(ped, conf.defaulthealth)
     SetEntityMaxHealth(ped, conf.defaulthealth)
-    c.status.SetHealth(ped, conf.defaulthealth)
+    c.status.SetHealth(conf.defaulthealth)
     --
     -- Set default armour to 0 on spawn
     SetPlayerMaxArmour(ply, conf.defaultarmour)
-    c.status.SetArmour(ped, 0)
+    c.status.SetArmour(0)
     --
     -- These will be usesd in healing items.
     SetPlayerHealthRechargeLimit(ply, 0)
@@ -198,8 +199,8 @@ function c.status.SetPlayer(data)
     SetPlayerInvincible(ply, false)
     --
     -- time to gain our data from the server.
-    c.status.SetHealth(ped, (data.Health or conf.defaulthealth))
-    c.status.SetArmour(ped, (data.Armour or conf.defaultarmour))
+    c.status.SetHealth((data.Health or conf.defaulthealth))
+    c.status.SetArmour((data.Armour or conf.defaultarmour))
     c.status.SetHunger((data.Hunger or _max))
     c.status.SetThirst((data.Thirst or _max))
     c.status.SetStress((data.Stress or _min))
@@ -207,7 +208,7 @@ function c.status.SetPlayer(data)
     c.status.StartHungerDecrease()
     c.status.StartThirstDecrease()
     c.status.StartStressIncrease()
-    c.status.SendNUI(ped)
+    c.status.SendNUI()
 end
 
 --[[
