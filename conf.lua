@@ -104,8 +104,8 @@ conf.loaninterest = {h = 15, m = 0}
 PLAYER HUNGER / THIRST / HP / ARMOUR: 
     -- Values and times.
 ]]--
-conf.defaulthealth = 400 --(DOUBE BOI)
-conf.defaultarmour = 300 --(Oh Baby a TRIPPLE)
+conf.defaulthealth = 200
+conf.defaultarmour = 100
 conf.hungertime = conf.min * 4.1
 conf.thirsttime = conf.min * 3.2
 conf.clientnuisync = conf.sec
