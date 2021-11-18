@@ -167,7 +167,7 @@ end
 
 function c.status.SendNUI(ped)
     local function Do()
-        local data = {Health = c.status.GetHealth(ped), Armour = c.status.GetArmour(ped), Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
+        local data = {Health = (c.status.GetHealth(ped) / conf.defaulthelth) * 100, Armour = (c.status.GetArmour(ped) / conf.defaultarmour) * 100, Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
         TriggerEvent("Client:Status", data)
         SetTimeout(c.sec, Do)
     end
@@ -182,6 +182,7 @@ function c.status.SetPlayer(data)
     --
     -- Set default hp to 400 on spawn
     SetPedMaxHealth(ped, conf.defaulthealth)
+    SetEntityMaxHealth(ped, conf.defaulthealth)
     c.status.SetHealth(ped, conf.defaulthealth)
     --
     -- Set default armour to 0 on spawn
