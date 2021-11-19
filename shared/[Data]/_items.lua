@@ -628,9 +628,4 @@ if IsDuplicityVersion() then
 
     }
     c.json.Write(conf.file.items, c.items)
-else
-    c.items = TriggerServerCallback({
-        eventName = 'GetItems',
-    })
-    print(c.table.Dump(c.items))
 end
