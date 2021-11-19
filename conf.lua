@@ -106,6 +106,7 @@ PLAYER HUNGER / THIRST / HP / ARMOUR:
 ]]--
 conf.hungertime = conf.min * 4.1
 conf.thirsttime = conf.min * 3.2
+conf.nui = {}
 conf.nui.sync = 200
 --[[
 TIMEZONE ADJUSTMENT: 
