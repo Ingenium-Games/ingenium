@@ -168,12 +168,13 @@ end
 function c.status.SendNUI()
     local function Do()
         local ped = PlayerPedId()
-        local data = {Health = (c.status.GetHealth(ped) / conf.defaulthealth) * 100, Armour = (c.status.GetArmour(ped) / conf.defaultarmour) * 100, Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
+        local data = {Health = (c.status.GetHealth(ped) / 175) * 100, Armour = (c.status.GetArmour(ped) / 100) * 100, Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
         TriggerEvent("Client:Status", data)
-        SetTimeout(c.sec, Do)
+        SetTimeout(conf.nui.sync, Do)
     end
-    SetTimeout(c.sec, Do)
+    SetTimeout(conf.nui.sync, Do)
 end
+
 
 -- ====================================================================================--
 

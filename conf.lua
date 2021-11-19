@@ -104,11 +104,9 @@ conf.loaninterest = {h = 15, m = 0}
 PLAYER HUNGER / THIRST / HP / ARMOUR: 
     -- Values and times.
 ]]--
-conf.defaulthealth = 200
-conf.defaultarmour = 100
 conf.hungertime = conf.min * 4.1
 conf.thirsttime = conf.min * 3.2
-conf.clientnuisync = conf.sec
+conf.nui.sync = 200
 --[[
 TIMEZONE ADJUSTMENT: 
     -- Takes the server time, and change it based on -23,23 hours. 

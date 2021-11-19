@@ -10,6 +10,10 @@ NOTES
 ]] --
 -- ====================================================================================--
 -- character
+
+conf.default.health = 175
+conf.default.armour = 100
+
 conf.default.cash = 125
 conf.default.bank = 2500
 conf.default.accounts = {["Cash"] = conf.default.cash, ["Bank"] = conf.default.bank}
