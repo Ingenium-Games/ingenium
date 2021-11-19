@@ -168,7 +168,7 @@ end
 function c.status.SendNUI()
     local function Do()
         local ped = PlayerPedId()
-        local data = {Health = (c.status.GetHealth(ped) / conf.default.health) * 100, Armour = (c.status.GetArmour(ped) / conf.default.armour) * 100, Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
+        local data = {Health = (c.status.GetHealth(ped) - 100), Armour = c.status.GetArmour(ped), Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
         TriggerEvent("Client:Status", data)
         SetTimeout(conf.nui.sync, Do)
     end
@@ -182,7 +182,7 @@ function c.status.SetPlayer(data)
     local ply = PlayerId()
     local ped = PlayerPedId()
     --
-    SetPedMaxHealth(ped, conf.default.health)
+    SetEntityMaxHealth(ped, conf.default.health)
     SetPlayerMaxArmour(ply, conf.default.armour)
     -- These will be usesd in healing items.
     SetPlayerHealthRechargeLimit(ply, 0)
@@ -209,9 +209,9 @@ end
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        local ped = GetPlayerPed(-1)
+        local ped = PlayerPedId()
         if GetEntityMaxHealth(ped) ~= 200 then
-            SetPedMaxHealth(ped, conf.default.health)
+            SetEntityMaxHealth(ped, conf.default.health)
         end
     end
 end)
