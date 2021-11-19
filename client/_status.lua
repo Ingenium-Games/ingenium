@@ -179,12 +179,11 @@ end
 -- ====================================================================================--
 
 function c.status.SetPlayer(data)
-    local ped = PlayerPedId()
     local ply = PlayerId()
+    local ped = PlayerPedId()
     --
-    c.status.SetHealth(conf.default.health)
-    c.status.SetArmour(0)
-    --
+    SetPedMaxHealth(ped, conf.default.health)
+    SetPlayerMaxArmour(ply, conf.default.armour)
     -- These will be usesd in healing items.
     SetPlayerHealthRechargeLimit(ply, 0)
     SetPlayerHealthRechargeMultiplier(ply, 0)
@@ -206,13 +205,14 @@ function c.status.SetPlayer(data)
     c.status.SendNUI()
 end
 
+-- Why the fuck does this need to be a loop?
 Citizen.CreateThread(function()
     while true do
-        local ped = PlayerPedId()
-        local ply = PlayerId()
-        SetPedMaxHealth(ped, conf.default.health)
-        SetPlayerMaxArmour(ply, conf.default.armour)
         Citizen.Wait(0)
+        local ped = GetPlayerPed(-1)
+        if GetEntityMaxHealth(ped) ~= 200 then
+            SetPedMaxHealth(ped, conf.default.health)
+        end
     end
 end)
 
