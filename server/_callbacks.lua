@@ -11,6 +11,7 @@ local GetItems = RegisterServerCallback({
     eventName = 'GetItems',
     eventCallback = function(source, ...)
         local items = c.item.GetItems()
+        print(c.table.Dump(items))
         return items
     end
 })
