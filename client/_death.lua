@@ -7,9 +7,8 @@ NOTES.
     -
     -
 ]] --
-
-
 -- ====================================================================================--
+IsDead = false
 
 local function PlayerKilled()
     local ply = PlayerId()
@@ -56,7 +55,6 @@ local function PlayerKilled()
 end
 
 Citizen.CreateThread(function()
-    local IsDead = false
     while true do
         Citizen.Wait(0)
         if c.data.GetLoadedStatus() then
@@ -77,3 +75,9 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+local function Dead()
+    return IsDead
+end
+
+exports("IsDead", Dead)

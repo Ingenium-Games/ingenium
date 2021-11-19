@@ -185,8 +185,11 @@ function c.status.SetPlayer(data)
     if GetEntityMaxHealth(ped) ~= 200 then
         SetEntityMaxHealth(ped, conf.default.health)
     end
+    --
+    -- Set to max prior to getting data from xplayer table.
     SetEntityHealth(ped, conf.default.health)
     SetPlayerMaxArmour(ply, conf.default.armour)
+    --
     -- These will be usesd in healing items.
     SetPlayerHealthRechargeLimit(ply, 0)
     SetPlayerHealthRechargeMultiplier(ply, 0)

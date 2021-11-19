@@ -16,6 +16,12 @@ function c.data.Initilize(cb)
     -- Get time and update every minute.
     c.time.UpdateTime()
     --
+    local items = TriggerServerCallback {
+        eventName = "GetItems",
+        args = {}
+    }
+    c.item.Setitems(items)
+    --
     if cb then
         cb()
     end

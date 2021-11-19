@@ -2,11 +2,18 @@
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
 c.item = {} -- function level
+c.items = false
 --[[
 NOTES
     -
 ]] --
 -- ====================================================================================--
+
+function c.item.SetItems(items)
+    if not c.items then
+        c.items = items
+    end
+end
 
 function c.item.GetItems()
     return c.items
