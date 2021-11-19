@@ -8,6 +8,10 @@ NOTES
 ]] --
 -- ====================================================================================--
 
+function c.item.GetItems()
+    return c.items
+end
+
 function c.item.Exists(name)
     if c.items[name] then
         return true

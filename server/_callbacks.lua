@@ -10,7 +10,7 @@ NOTES
 local GetItems = RegisterServerCallback({
     eventName = 'GetItems',
     eventCallback = function(source, ...)
-        local items = c.items
+        local items = c.item.GetItems()
         return items
     end
 })
