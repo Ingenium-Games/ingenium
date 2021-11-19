@@ -16,8 +16,6 @@ function c.data.Initilize(cb)
     -- Get time and update every minute.
     c.time.UpdateTime()
     --
-    TriggerServerEvent('Server:PlayerConnecting')
-    --
     if cb then
         cb()
     end

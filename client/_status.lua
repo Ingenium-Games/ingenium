@@ -168,7 +168,7 @@ end
 function c.status.SendNUI()
     local function Do()
         local ped = PlayerPedId()
-        local data = {Health = (c.status.GetHealth(ped) / 175) * 100, Armour = (c.status.GetArmour(ped) / 100) * 100, Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
+        local data = {Health = (c.status.GetHealth(ped) / conf.default.health) * 100, Armour = (c.status.GetArmour(ped) / conf.default.armour) * 100, Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
         TriggerEvent("Client:Status", data)
         SetTimeout(conf.nui.sync, Do)
     end
@@ -182,13 +182,7 @@ function c.status.SetPlayer(data)
     local ped = PlayerPedId()
     local ply = PlayerId()
     --
-    -- Set default hp to 400 on spawn
-    SetPedMaxHealth(ped, conf.defaulthealth)
-    SetEntityMaxHealth(ped, conf.defaulthealth)
-    c.status.SetHealth(conf.defaulthealth)
-    --
-    -- Set default armour to 0 on spawn
-    SetPlayerMaxArmour(ply, conf.defaultarmour)
+    c.status.SetHealth(conf.default.health)
     c.status.SetArmour(0)
     --
     -- These will be usesd in healing items.
@@ -200,8 +194,8 @@ function c.status.SetPlayer(data)
     SetPlayerInvincible(ply, false)
     --
     -- time to gain our data from the server.
-    c.status.SetHealth((data.Health or conf.defaulthealth))
-    c.status.SetArmour((data.Armour or conf.defaultarmour))
+    c.status.SetHealth((data.Health or conf.default.health))
+    c.status.SetArmour((data.Armour or _min))
     c.status.SetHunger((data.Hunger or _max))
     c.status.SetThirst((data.Thirst or _max))
     c.status.SetStress((data.Stress or _min))
@@ -211,6 +205,16 @@ function c.status.SetPlayer(data)
     c.status.StartStressIncrease()
     c.status.SendNUI()
 end
+
+Citizen.CreateThread(function()
+    while true do
+        local ped = PlayerPedId()
+        local ply = PlayerId()
+        SetPedMaxHealth(ped, conf.default.health)
+        SetPlayerMaxArmour(ply, conf.default.armour)
+        Citizen.Wait(0)
+    end
+end)
 
 --[[
 Things to make into variables for items or buffs.

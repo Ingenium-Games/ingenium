@@ -5,4 +5,4 @@
     This is returned on loading intot the server by the server
 ]]--
 -- ====================================================================================--
-c.items = {}
+c.items = false

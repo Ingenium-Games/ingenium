@@ -65,7 +65,7 @@ AddEventHandler('Server:PlayerConnecting', function()
         end
     else
         DropPlayer(src, 'No License Identifier, No Entry.')
-    end
+    end    
 end)
 -- ====================================================================================--
 AddEventHandler('playerDropped', function()

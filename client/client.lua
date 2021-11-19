@@ -15,13 +15,8 @@ Citizen.CreateThread(function()
             --    
             c.data.Initilize(function()
                 DisplayRadar(false)
-                c.items = TriggerServerCallback({
-                    eventName = 'GetItems',
-                    eventCallback = function(data)
-                        return data
-                    end
-                })
-                print(c.table.Dump(c.items))
+                --
+                TriggerServerEvent('Server:PlayerConnecting')
             end)
             --
             return

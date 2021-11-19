@@ -11,7 +11,6 @@ local GetItems = RegisterServerCallback({
     eventName = 'GetItems',
     eventCallback = function(source, ...)
         local items = c.item.GetItems()
-        print(c.table.Dump(items))
         return items
     end
 })
@@ -53,7 +52,6 @@ local GetInventory = RegisterServerCallback({
 local GetJobs = RegisterServerCallback({
     eventName = 'GetJobs',
     eventCallback = function(source, ...)
-        local jobs = c.job.ActiveMembers()
-        return jobs
+        return c.job.ActiveMembers()
     end
 })

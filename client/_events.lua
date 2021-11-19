@@ -38,6 +38,13 @@ AddEventHandler('Client:Character:Loaded', function()
     -- 
     TriggerEvent("Client:LoadSkin", xPlayer.Appearance)
     TriggerEvent('Client:Character:Ready')
+    --
+    if c.items == false then
+        c.items = TriggerServerCallback({
+            eventName = 'GetItems',
+        })
+        print(c.table.Dump(c.items))
+    end
 end)
 
 -- Event to trigger other resources once the client has received the chosen characters data from the server.
