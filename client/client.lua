@@ -15,10 +15,10 @@ Citizen.CreateThread(function()
             --    
             c.data.Initilize(function()
                 DisplayRadar(false)
-                TriggerServerCallback({
+                c.items = TriggerServerCallback({
                     eventName = 'GetItems',
                     eventCallback = function(data)
-                        c.items = data
+                        return data
                     end
                 })
                 print(c.table.Dump(c.items))
