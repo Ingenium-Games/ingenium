@@ -72,7 +72,7 @@ if IS_SERVER then
 		-- save the event data to return
 		local eventData = RegisterNetEvent('Server:Callback:'..eventName, function(packed, src, cb)
 			-- save the source on this call
-			local source = tonumber(src)
+			local source = tonumber(source)
 			-- check if this is a simulated callback (TriggerServerCallback)
 			if not source then
 				-- return the simulated data
@@ -145,9 +145,9 @@ if IS_SERVER then
 
 			-- check if this call was async
 			if not eventCallback then
-				Citizen.Await(prom)
+				local result = Citizen.Await(prom)
 				RemoveEventHandler(eventData)
-				return prom.value
+				return result
 			end
 	end
 
@@ -291,9 +291,9 @@ if not IS_SERVER then
 
 		-- check if this call is async
 		if not eventCallback then
-			Citizen.Await(prom)
+			local result = Citizen.Await(prom)
 			RemoveEventHandler(eventData)
-			return prom.value
+			return result
 		end
 	end
 
