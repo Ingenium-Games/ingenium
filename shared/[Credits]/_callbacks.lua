@@ -72,7 +72,7 @@ if IS_SERVER then
 		-- save the event data to return
 		local eventData = RegisterNetEvent('Server:Callback:'..eventName, function(packed, src, cb)
 			-- save the source on this call
-			local source = tonumber(source)
+			local source = tonumber(src)
 			-- check if this is a simulated callback (TriggerServerCallback)
 			if not source then
 				-- return the simulated data

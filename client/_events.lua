@@ -35,6 +35,12 @@ AddEventHandler('Client:Character:Loaded', function()
     c.chat.AddSuggestions(xPlayer)
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
+        --
+    local items = TriggerServerCallback {
+        eventName = "GetItems",
+        args = {}
+    }
+    c.item.Setitems(items)
     -- 
     TriggerEvent("Client:LoadSkin", xPlayer.Appearance)
     TriggerEvent('Client:Character:Ready')
