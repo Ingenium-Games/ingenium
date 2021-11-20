@@ -16,8 +16,7 @@ function c.data.Initilize(cb)
     -- Get time and update every minute.
     c.time.UpdateTime()
     --
-    c.item.SetItems(TriggerServerCallback({eventName = "GetItems"}))
-    print(c.table.Dump(c.items))
+    TriggerServerEvent('Server:PlayerConnecting')
     if cb then
         cb()
     end

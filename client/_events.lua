@@ -37,7 +37,7 @@ AddEventHandler('Client:Character:Loaded', function()
     c.modifier.SetModifiers(xPlayer)
     -- 
     TriggerEvent("Client:LoadSkin", xPlayer.Appearance)
-    TriggerEvent('Client:Character:Ready')    
+    TriggerEvent('Client:Character:Ready')
 end)
 
 -- Event to trigger other resources once the client has received the chosen characters data from the server.
