@@ -9,23 +9,15 @@ c.json = {}
 -- ====================================================================================--
 
 function c.json.Exists(file)
-    local f = io.open(GetResourcePath(GetCurrentResourceName()).."/data/"..file..".json", "r")
-    if f then f:close() f = true else f = false end
-    return f
+    return c.file.Exists(file..".json")
 end
 
 function c.json.Read(file)
-    local f = io.open(GetResourcePath(GetCurrentResourceName()).."/data/"..file..".json", "r")
-    local content = f:read("a")
-    f:close()
+    local content = c.file.Read(file..".json")
     return json.decode(content)
 end
   
--- Write a string to a file.
 function c.json.Write(file, content)
-    local steralize = json.encode(content)
-    local f = io.open(GetResourcePath(GetCurrentResourceName()).."/data/"..file..".json",  "w+")
-    f:write(steralize)
-    f:flush()
-    f:close()
+    local data = json.encode(content)
+    c.file.Write(file..".json", data)
 end
