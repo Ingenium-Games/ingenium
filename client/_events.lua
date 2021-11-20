@@ -35,16 +35,9 @@ AddEventHandler('Client:Character:Loaded', function()
     c.chat.AddSuggestions(xPlayer)
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
-    --
-    local items = TriggerServerCallback {
-        eventName = "GetItems",
-        args = {},
-    }
-    c.item.SetItems(items)
-    print(c.table.Dump(c.items))
     -- 
     TriggerEvent("Client:LoadSkin", xPlayer.Appearance)
-    TriggerEvent('Client:Character:Ready')
+    TriggerEvent('Client:Character:Ready')    
 end)
 
 -- Event to trigger other resources once the client has received the chosen characters data from the server.
