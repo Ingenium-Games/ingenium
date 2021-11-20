@@ -36,11 +36,14 @@ AddEventHandler('Client:Character:Loaded', function()
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
         --
-    local items = TriggerServerCallback {
+    TriggerServerCallback {
         eventName = "GetItems",
-        args = {}
+        eventCallback = function(data)
+            c.item.Setitems(data)
+        end,
+        args = {},
     }
-    c.item.Setitems(items)
+    print(c.table.Dump(c.items))
     -- 
     TriggerEvent("Client:LoadSkin", xPlayer.Appearance)
     TriggerEvent('Client:Character:Ready')
