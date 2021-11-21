@@ -165,17 +165,6 @@ function c.status.StartStressIncrease()
     SetTimeout(_stress, Do)
 end
 
-function c.status.SendNUI()
-    local function Do()
-        local ped = PlayerPedId()
-        local data = {Health = (c.status.GetHealth(ped) - 100), Armour = c.status.GetArmour(ped), Hunger = c.status.GetHunger(), Thirst = c.status.GetThirst(), Stress = c.status.GetStress()}
-        TriggerEvent("Client:Status", data)
-        SetTimeout(conf.nui.sync, Do)
-    end
-    SetTimeout(conf.nui.sync, Do)
-end
-
-
 -- ====================================================================================--
 
 function c.status.SetPlayer(data)
@@ -208,7 +197,6 @@ function c.status.SetPlayer(data)
     c.status.StartHungerDecrease()
     c.status.StartThirstDecrease()
     c.status.StartStressIncrease()
-    c.status.SendNUI()
 end
 
 --[[
