@@ -65,10 +65,7 @@ AddEventHandler('entityCreated', function(ent)
                     c.data.AddNpc(net, c.class.CreateNpc, net)
                 else
                 -- is a player
-                    if GetEntityMaxHealth(ent) >= 200 then
-                        SetPedMaxHealth(ent, 175)
-                        SetEntityHealth(ent, 175)
-                    end
+
                 end
             else
                 DeleteEntity(ent)
