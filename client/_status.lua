@@ -165,24 +165,6 @@ function c.status.StartStressIncrease()
     SetTimeout(_stress, Do)
 end
 
-function c.status.UpdateNUI()
-    local function Do()
-        if c.data.GetLoadedStatus() then
-            local ped = PlayerPedId()
-            local data = {
-                Health = c.status.GetHealth(ped) - 100,
-                Armour = c.status.GetArmour(ped),
-                Hunger = c.status.GetHunger(),
-                Thirst = c.status.GetThirst(),
-                Stress = c.status.GetStress()
-            }
-            TriggerEvent("Client:Status", data)
-        end
-        SetTimeout(395, Do)
-    end
-    SetTimeout(395, Do)
-end
-
 -- ====================================================================================--
 
 function c.status.SetPlayer(data)
