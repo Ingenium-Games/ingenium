@@ -172,7 +172,7 @@ function c.status.SetPlayer(data)
     local ped = PlayerPedId()
     --
     if GetEntityMaxHealth(ped) ~= 200 then
-        SetEntityMaxHealth(ped, conf.default.health)
+        SetPedMaxHealth(ped, conf.default.health)
     end
     --
     -- Set to max prior to getting data from xplayer table.
