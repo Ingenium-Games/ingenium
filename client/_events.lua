@@ -53,6 +53,7 @@ RegisterNetEvent("Client:Character:Switch")
 AddEventHandler("Client:Character:Switch", function()
     --
     c.data.SetLoadedStatus(false)
+    TriggerEvent("Client:HideHud")
 end)
 
 RegisterNetEvent("Client:Character:OffDuty")
