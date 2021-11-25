@@ -25,25 +25,25 @@ local _stress = c.min * 5
 -- ====================================================================================--
 
 function c.status.GetHealth()
-    return GetEntityHealth(PlayerPedId())
+    return GetEntityHealth(GetPlayerPed(-1))
 end
 
 function c.status.SetHealth(health)
-    SetEntityHealth(PlayerPedId(), health)
+    SetEntityHealth(GetPlayerPed(-1), health)
 end
 
 -- ====================================================================================--
 
 function c.status.GetArmour()
-    return GetPedArmour(PlayerPedId())
+    return GetPedArmour(GetPlayerPed(-1))
 end
 
 function c.status.SetArmour(armour)
-    SetPedArmour(PlayerPedId(), armour)
+    SetPedArmour(GetPlayerPed(-1), armour)
 end
 
 function c.status.AddArmour(armour)
-    AddArmourToPed(PlayerPedId(), armour) 
+    AddArmourToPed(GetPlayerPed(-1), armour) 
 end
 
 -- ====================================================================================--
@@ -169,15 +169,16 @@ end
 
 function c.status.SetPlayer(data)
     local ply = PlayerId()
-    local ped = PlayerPedId()
+    local ped = GetPlayerPed(-1)
     --
     if GetPedMaxHealth(ped) >= 200 then
         SetPedMaxHealth(ped, conf.default.health)
     end
-    --
+    --[[
     if GetEntityMaxHealth(ped) >= 200 then
         SetEntityMaxHealth(ped, conf.default.health)
     end
+    ]]--
     -- Set to max prior to getting data from xplayer table.
     SetEntityHealth(ped, conf.default.health)
     SetPlayerMaxArmour(ply, conf.default.armour)
@@ -241,7 +242,7 @@ timer to recieve end to be elivered from server.
 
 -- Quicker
 function c.status.SetHaste(bool, dec)
-    local ped = PlayerPedId()
+    local ped = GetPlayerPed(-1)
     if bool then
         if not dec then dec = 2.0 end
         local dec = c.math.Decimals(dec, 1)
@@ -255,7 +256,7 @@ end
 
 -- Slower
 function c.status.SetSlow(bool, dec)
-    local ped = PlayerPedId()
+    local ped = GetPlayerPed(-1)
     if bool then
         if not dec then dec = 0.5 end
         local dec = c.math.Decimals(dec, 1)
