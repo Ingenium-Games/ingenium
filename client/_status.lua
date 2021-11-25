@@ -171,7 +171,7 @@ function c.status.SetPlayer(data)
     local ply = PlayerId()
     local ped = PlayerPedId()
     --
-    if GetEntityMaxHealth(ped) ~= 200 then
+    if GetEntityMaxHealth(ped) >= 200 then
         SetPedMaxHealth(ped, conf.default.health)
     end
     --

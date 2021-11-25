@@ -11,7 +11,7 @@ NOTES
 -- ====================================================================================--
 -- character
 
-conf.default.health = 200
+conf.default.health = 175
 conf.default.armour = 100
 
 conf.default.cash = 125
