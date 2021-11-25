@@ -1,26 +1,26 @@
 -- ====================================================================================--
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
-c.stats = {    
+c.stats = {
     ["Hunger"] = 100, -- Min 0 Max 100
     ["Thirst"] = 100, -- Min 0 Max 100
-    ["Stress"] = 0, -- Min 0 Max 100
-    }
+    ["Stress"] = 0 -- Min 0 Max 100
+}
 c.status = {}
 --[[
 NOTES.
     - As health and armour are natives for the game, we dont need to worry much about the
     - additions to them from items etc as we can set max values, and have a default min
     - of 0.
-]]--
+]] --
 
 -- ====================================================================================--
 
-local _min = 0
-local _max = 100
-local _hunger = c.min * 3.25
-local _thirst = c.min * 2.35
-local _stress = c.min * 5
+local _min = 0.00
+local _max = 100.00
+local _hunger = c.sec * 3.25
+local _thirst = c.sec * 2
+local _stress = c.sec * 4.25
 
 -- ====================================================================================--
 
@@ -43,7 +43,7 @@ function c.status.SetArmour(armour)
 end
 
 function c.status.AddArmour(armour)
-    AddArmourToPed(PlayerPedId(), armour) 
+    AddArmourToPed(PlayerPedId(), armour)
 end
 
 -- ====================================================================================--
@@ -61,8 +61,8 @@ function c.status.AddHunger(v)
     local calc = c.stats.Hunger + val
     if calc >= 100 then
         c.stats.Hunger = _max
-    else 
-        c.stats.Hunger = c.stats.Hunger + val
+    else
+        c.stats.Hunger = c.math.Decimals(c.stats.Hunger + val, 2)
     end
 end
 
@@ -71,8 +71,8 @@ function c.status.RemoveHunger(v)
     local calc = c.stats.Hunger - val
     if calc <= 0 then
         c.stats.Hunger = _min
-    else 
-        c.stats.Hunger = c.stats.Hunger - val
+    else
+        c.stats.Hunger = c.math.Decimals(c.stats.Hunger - val, 2)
     end
 end
 
@@ -83,7 +83,7 @@ function c.status.GetThirst()
 end
 
 function c.status.SetThirst(v)
-    c.stats.Thirst = v 
+    c.stats.Thirst = v
 end
 
 function c.status.AddThirst(v)
@@ -91,8 +91,8 @@ function c.status.AddThirst(v)
     local calc = c.stats.Thirst + val
     if calc >= 100 then
         c.stats.Thirst = _max
-    else 
-        c.stats.Thirst = c.stats.Thirst + val
+    else
+        c.stats.Thirst = c.math.Decimals(c.stats.Thirst + val, 2)
     end
 end
 
@@ -101,8 +101,8 @@ function c.status.RemoveThirst(v)
     local calc = c.stats.Thirst - val
     if calc <= 0 then
         c.stats.Thirst = _min
-    else 
-        c.stats.Thirst = c.stats.Thirst - val
+    else
+        c.stats.Thirst = c.math.Decimals(c.stats.Thirst - val, 2)
     end
 end
 
@@ -113,7 +113,7 @@ function c.status.GetStress()
 end
 
 function c.status.SetStress(v)
-     c.stats.Stress = v
+    c.stats.Stress = v
 end
 
 function c.status.AddStress(v)
@@ -121,8 +121,8 @@ function c.status.AddStress(v)
     local calc = c.stats.Stress + val
     if calc >= 100 then
         c.stats.Stress = _max
-    else 
-        c.stats.Stress = c.stats.Stress + val
+    else
+        c.stats.Stress = c.math.Decimals(c.stats.Stress + val, 2)
     end
 end
 
@@ -131,8 +131,8 @@ function c.status.RemoveStress(v)
     local calc = c.stats.Stress - val
     if calc <= 0 then
         c.stats.Stress = _min
-    else 
-        c.stats.Stress = c.stats.Stress - val
+    else
+        c.stats.Stress = c.math.Decimals(c.stats.Stress - val, 2)
     end
 end
 
@@ -140,28 +140,46 @@ end
 
 function c.status.StartHungerDecrease()
     local function Do()
-        local default = 1 * c.modifier.GetHungerModifier()
-        c.status.RemoveHunger(default)
-        SetTimeout(_hunger, Do)
+        if c.data.GetLoadedStatus() then
+            local default = (1 * c.modifier.GetHungerModifier()) / 100
+            c.status.RemoveHunger(default)
+            SetTimeout(_hunger, Do)
+        else
+            -- this is to break the loop if switching between characters.
+            return
+        end
     end
+    --
     SetTimeout(_hunger, Do)
 end
 
 function c.status.StartThirstDecrease()
     local function Do()
-        local default = 1 * c.modifier.GetThirstModifier()
-        c.status.RemoveThirst(default)
-        SetTimeout(_thirst, Do)
+        if c.data.GetLoadedStatus() then
+            local default = (1 * c.modifier.GetThirstModifier()) / 100
+            c.status.RemoveThirst(default)
+            SetTimeout(_thirst, Do)
+        else
+            -- this is to break the loop if switching between characters.
+            return
+        end
     end
+    --
     SetTimeout(_thirst, Do)
 end
 
 function c.status.StartStressIncrease()
     local function Do()
-        local default = 1 * c.modifier.GetStressModifier()
-        c.status.AddStress(default)
-        SetTimeout(_stress, Do)
+        if c.data.GetLoadedStatus() then
+            local default = (1 * c.modifier.GetStressModifier()) / 100
+            c.status.AddStress(default)
+            SetTimeout(_stress, Do)
+        else
+            -- this is to break the loop if switching between characters.
+            return
+        end
     end
+    --
     SetTimeout(_stress, Do)
 end
 
@@ -220,9 +238,7 @@ ROAD_VIBRATION_SHAKE
 SKY_DIVING_SHAKE  
 VIBRATE_SHAKE
 
-]]--
-
-
+]] --
 
 --[[
 
@@ -230,13 +246,15 @@ Callbacks for status aliments
 NUI icons for aliments or buffs.
 timer to recieve end to be elivered from server.
 
-]]--
+]] --
 
 -- Quicker
 function c.status.SetHaste(bool, dec)
     local ped = PlayerPedId()
     if bool then
-        if not dec then dec = 2.0 end
+        if not dec then
+            dec = 2.0
+        end
         local dec = c.math.Decimals(dec, 1)
         if dec >= 1.0 then
             SetPedMoveRateOverride(ped, dec)
@@ -250,7 +268,9 @@ end
 function c.status.SetSlow(bool, dec)
     local ped = PlayerPedId()
     if bool then
-        if not dec then dec = 0.5 end
+        if not dec then
+            dec = 0.5
+        end
         local dec = c.math.Decimals(dec, 1)
         if dec <= 1.0 then
             SetPedMoveRateOverride(ped, dec)
@@ -288,7 +308,6 @@ end
 function c.status.SetInjury(bool, dec)
 
 end
-
 
 -- One of three, first person only, third person only, out of body experiance. FP, TP, OB
 function c.status.Camera(type)

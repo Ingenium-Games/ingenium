@@ -25,14 +25,16 @@ RegisterCommand('switch', function(source, args, rawCommand)
     local Primary_ID = c.identifier(src)
     local Character_ID = xPlayer.GetCharacter_ID()
     -- Send the client/sever the events once the character has changed to inactive on the db. 
+    TriggerClientEvent("Client:Character:Pre-Switch")
     c.sql.char.SetActive(Character_ID, false, function()
-        TriggerClientEvent('Client:Character:OpeningMenu', src)
-        TriggerEvent('Server:Character:List', src, Primary_ID)
         c.data.RemovePlayer(src)
         p:resolve()
     end)
     --
     Citizen.Await(p)
+    Citizen.Wait((c.sec * 4500))
+    TriggerClientEvent('Client:Character:OpeningMenu', src)
+    TriggerEvent('Server:Character:List', src, Primary_ID)
     -- Events to handle character removeal.
     TriggerClientEvent("Client:Character:Switch")
     TriggerEvent("Server:Character:Switch")
