@@ -25,25 +25,25 @@ local _stress = c.min * 5
 -- ====================================================================================--
 
 function c.status.GetHealth()
-    return GetEntityHealth(GetPlayerPed(-1))
+    return GetEntityHealth(PlayerPedId())
 end
 
 function c.status.SetHealth(health)
-    SetEntityHealth(GetPlayerPed(-1), health)
+    SetEntityHealth(PlayerPedId(), health)
 end
 
 -- ====================================================================================--
 
 function c.status.GetArmour()
-    return GetPedArmour(GetPlayerPed(-1))
+    return GetPedArmour(PlayerPedId())
 end
 
 function c.status.SetArmour(armour)
-    SetPedArmour(GetPlayerPed(-1), armour)
+    SetPedArmour(PlayerPedId(), armour)
 end
 
 function c.status.AddArmour(armour)
-    AddArmourToPed(GetPlayerPed(-1), armour) 
+    AddArmourToPed(PlayerPedId(), armour) 
 end
 
 -- ====================================================================================--
@@ -169,14 +169,8 @@ end
 
 function c.status.SetPlayer(data)
     local ply = PlayerId()
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     --
-    if GetPedMaxHealth(ped) >= 200 then
-        SetPedMaxHealth(ped, conf.default.health)
-    end
-    if GetEntityMaxHealth(ped) >= 200 then
-        SetEntityMaxHealth(ped, conf.default.health)
-    end
     -- Set to max prior to getting data from xplayer table.
     SetEntityHealth(ped, conf.default.health)
     SetPlayerMaxArmour(ply, conf.default.armour)
@@ -240,7 +234,7 @@ timer to recieve end to be elivered from server.
 
 -- Quicker
 function c.status.SetHaste(bool, dec)
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     if bool then
         if not dec then dec = 2.0 end
         local dec = c.math.Decimals(dec, 1)
@@ -254,7 +248,7 @@ end
 
 -- Slower
 function c.status.SetSlow(bool, dec)
-    local ped = GetPlayerPed(-1)
+    local ped = PlayerPedId()
     if bool then
         if not dec then dec = 0.5 end
         local dec = c.math.Decimals(dec, 1)
