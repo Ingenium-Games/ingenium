@@ -110,6 +110,29 @@ function c.GetPlayerPedState(ped,key)
     return c.data.GetPlayerPedState(ped,key)
 end
 
+--- func desc
+---@param type number "1-3"
+---@param ent any "The passed client entity"
+---@param key any "The state bag key you want to get the data from."
+function c.data.GetEntityState(type, ent, key)
+    --
+    -- Object
+    if type == 3 then
+        return c.data.GetEntityState(ent, key) 
+    --
+    -- Vehicle
+    elseif type == 2 then
+        return c.data.GetEntityState(ent, key) 
+    --
+    -- Ped
+    elseif type == 1 then
+        if IsPedAPlayer(ent) then
+            return c.data.GetPlayerPedState(ent, key)
+        else
+            return c.data.GetEntityState(ent, key)
+        end
+    end
+end
 
 -- ====================================================================================--
 

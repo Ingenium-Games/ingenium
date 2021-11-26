@@ -121,7 +121,7 @@ function c.eventban(source, event)
     local id = c.identifer(src)
     local name = GetPlayerName(src)
     TriggerEvent('txaLogger:CommandExecuted', "Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
-    c.debug_1("Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
+    c.debug_2("Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
     c.sql.user.SetBan(c.identifier(src), true, function() DropPlayer(src, "Banned for attmpting to exploit event, this has been logged in txAdmin.") end)
     return CancelEvent()
 end

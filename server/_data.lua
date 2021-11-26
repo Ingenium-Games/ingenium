@@ -8,8 +8,7 @@ NOTES.
     -
     -
     -
-]]--
-
+]] --
 
 -- ====================================================================================--
 
@@ -26,8 +25,8 @@ function c.data.Initilize()
         [6] = 'DB: Loading Data File - GSR;',
         [7] = 'DB: Loading Data File - Drops;',
         [8] = 'DB: Loading Data File - Pickups;',
-        [9] = 'DB: Loading Data File - Notes;',        
-        [10] = 'DB: Loading Data File - Names;',
+        [9] = 'DB: Loading Data File - Notes;',
+        [10] = 'DB: Loading Data File - Names;'
     }
     --
     local function cb()
@@ -71,7 +70,7 @@ function c.data.Initilize()
     while not loaded do
         Wait(250)
     end
-    
+
     c.Loading = false
     c.debug_1('Loading Sequence Complete.')
     c.Running = true
@@ -79,14 +78,12 @@ end
 
 -- ====================================================================================--
 
-
 --- Adds player to the player index.
 ---@param source number "source [server_id]"
 function c.data.AddPlayer(source)
     local num = tonumber(source)
     c.pdex[num] = false
 end
-
 
 --- Gets player from the player table.
 ---@param source number
@@ -107,7 +104,7 @@ end
 --- Same as above.
 ---@param source number
 function c.GetPlayerFromId(source)
-	return c.data.GetPlayer(tonumber(source))
+    return c.data.GetPlayer(tonumber(source))
 end
 
 --- Set the player id to the table.
@@ -136,7 +133,7 @@ end
 --- Return corresponding player data from character_id
 ---@param id string "Character_ID"
 function c.data.GetPlayerByIdentifier(id)
-    for k,v in pairs(c.pdex) do
+    for k, v in pairs(c.pdex) do
         if v then
             if v.Character_ID == id then
                 return c.GetPlayer(k)
@@ -153,7 +150,7 @@ end
 
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
-    
+
 function c.data.AddVehicle(net, cb, ...)
     if not c.vehicle.Find(net) then
         c.vdex[net] = cb(...)
@@ -163,7 +160,7 @@ end
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
 function c.data.GetVehicle(net)
-    return c.vdex[net]
+    return c.vdex[net] or false
 end
 
 --- Same as above.
@@ -189,7 +186,7 @@ end
 
 ---@param plate string "Plate of vehicle."
 function c.data.GetVehicleByPlate(plate)
-   return c.vehicle.GetByPlate(plate)
+    return c.vehicle.GetByPlate(plate)
 end
 
 ---@param plate string "Plate of vehicle."
@@ -199,7 +196,7 @@ end
 
 -- ====================================================================================--
 -- NPC's 
-    
+
 function c.data.AddNpc(net, cb, ...)
     if not c.npc.Find(net) then
         c.ndex[net] = cb(...)
@@ -209,7 +206,7 @@ end
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
 function c.data.GetNpc(net)
-    return c.ndex[net]
+    return c.ndex[net] or false
 end
 
 --- Same as above.
@@ -235,7 +232,7 @@ end
 
 -- ====================================================================================--
 -- NPC's 
-    
+
 function c.data.AddObject(net, cb, ...)
     if not c.object.Find(net) then
         c.odex[net] = cb(...)
@@ -245,7 +242,7 @@ end
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
 function c.data.GetObject(net)
-    return c.odex[net]
+    return c.odex[net] or false
 end
 
 --- Same as above.
@@ -269,14 +266,13 @@ function c.data.RemoveObject(net)
     c.odex[net] = false
 end
 
-
 -- ====================================================================================--
 -- Jobs - c.jdex = Object table, c.jobs = table built from the DB, c.job = functions.
 
- --- func desc
+--- func desc
 function c.data.CreateJobObjects()
     local jobs = c.job.GetJobs()
-    for k,v in pairs(jobs) do
+    for k, v in pairs(jobs) do
         if not c.jdex[k] then
             c.jdex[k] = c.class.CreateJob(v)
         end
@@ -297,7 +293,41 @@ function c.GetJob(str)
 end
 
 -- ====================================================================================--
-
+--
+function c.data.GetEntityObject(type, net)
+    --
+    -- Object
+    if type == 3 then
+        return c.data.GetObject(net)
+    --
+    -- Vehicle
+    elseif type == 2 then
+        return c.data.GetVehicle(net)
+    --
+    -- Ped
+    elseif type == 1 then
+        local ent = NetworkGetEntityFromNetworkId(net)
+        local owner = NetworkGetEntityOwner(ent)
+        if IsPedAPlayer(ent) then
+            -- should be the player of the ped that it is???
+            if owner >= 1 then
+                return c.data.GetPlayer(owner)
+            else
+                return false
+            end
+        else
+            return c.data.GetNpc(net)
+        end
+    else
+        -- no other types // fin    
+    end
+end
+--
+--
+function c.GetEntityObject(t,n)
+    return c.data.GetEntityObject(t,n)
+end
+--
 function c.data.Save(str)
     print("   ^7[^5Saved^7]:  ==    ", str)
 end
@@ -305,13 +335,13 @@ end
 -- Server to DB routine.
 function c.data.ServerSync()
     local function Do()
-                c.sql.save.Users()
-                Citizen.Wait(conf.sec * 5)
-                c.sql.save.Vehicles()
-                Citizen.Wait(conf.sec * 5)
-                c.sql.save.Jobs()
-                Citizen.Wait(conf.sec * 5)
-                c.data.Save("Users, Vehicles, Jobs, ")
+        c.sql.save.Users()
+        Citizen.Wait(conf.sec * 5)
+        c.sql.save.Vehicles()
+        Citizen.Wait(conf.sec * 5)
+        c.sql.save.Jobs()
+        Citizen.Wait(conf.sec * 5)
+        c.data.Save("Users, Vehicles, Jobs, ")
         SetTimeout(conf.serversync, Do)
     end
     SetTimeout(conf.serversync, Do)
@@ -344,14 +374,12 @@ function c.data.UpdatePacket(source, data)
     end
     if data.Coords then
         xPlayer.SetCoords(data.Coords)
-    end                    
-    
-    
+    end
+
     --
     -- Run Additional Functions post data update.
     c.state.UpdateStates(src)
 end
-
 
 --- Create xPlayer table and pass to client.
 ---@param source number
@@ -373,7 +401,6 @@ function c.data.LoadPlayer(source, Character_ID)
     Citizen.Await(p)
     TriggerClientEvent('Client:Character:Loaded', src)
 end
-
 
 function c.data.ClientSync()
     local function Do()
@@ -399,24 +426,24 @@ end
 
 --- Return the Entity"s state bag.
 ---@param net any "Network ID 16 bit integer"
-function c.data.GetEntityState(net)    
+function c.data.GetEntityState(net)
     return Entity(NetworkGetEntityFromNetworkId(net)).state
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "Network ID 16 bit integer"
-function c.GetEntityState(net)    
+function c.GetEntityState(net)
     return c.data.GetEntityState(net)
 end
 
 --- Return the Players's state bag.
 ---@param id any "Typically a number or string"
-function c.data.GetPlayerState(id)    
+function c.data.GetPlayerState(id)
     return Player(id).state
 end
 
 --- Return the Players's state bag.
 ---@param id any "Typically a number or string"
-function c.GetPlayerState(id)    
+function c.GetPlayerState(id)
     return c.data.GetPlayerState(id)
 end
