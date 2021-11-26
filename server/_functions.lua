@@ -116,6 +116,16 @@ function c.discord(url, color, name, message, footer)
     PerformHttpRequest(url, function(err, text, headers) end, 'POST', json.encode({username = name, embeds = embed}), { ['Content-Type'] = 'application/json' })
 end
 
+function c.eventban(source, event)
+    local src = source
+    local id = c.identifer(src)
+    local name = GetPlayerName(src)
+    TriggerEvent('txaLogger:CommandExecuted', "Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
+    c.debug_1("Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
+    c.sql.user.SetBan(c.identifier(src), true, function() DropPlayer(src, "Banned for attmpting to exploit event, this has been logged in txAdmin.") end)
+    return CancelEvent()
+end
+
 -- ====================================================================================--
 
 function c.CreateVehicle(name, x, y, z, h)

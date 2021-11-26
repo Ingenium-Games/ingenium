@@ -12,57 +12,54 @@ NOTES.
 -- ====================================================================================--
 --  Get Character Info for the NUI to allow character selection.
 -- [C+S]
-RegisterNetEvent('Server:Character:List')
-AddEventHandler('Server:Character:List', function(req, Primary_ID)
+RegisterNetEvent("Server:Character:List")
+AddEventHandler("Server:Character:List", function(req, Primary_ID)
     local src = tonumber(req) or source
     local Characters = c.sql.char.GetAll(Primary_ID)
     local Command = "OnJoin"
     -- Send the data table to the client that requested it...
-    TriggerClientEvent('Client:Character:Open', src, Command, Characters)
+    TriggerClientEvent("Client:Character:Open", src, Command, Characters)
     -- Place the user in their own instance until the user has joined and loaded.
     c.inst.SetPlayer(src, c.inst.New(), true)
 end)
 
 -- [C]
-RegisterNetEvent('Server:Character:Join')
-AddEventHandler('Server:Character:Join', function(Character_ID)
+RegisterNetEvent("Server:Character:Join")
+AddEventHandler("Server:Character:Join", function(Character_ID)
     local src = tonumber(source)
     -- If the User selected the NEW button on the NUI, the Character_ID will be listed as NEW, if this is the case, trigger the registration NUI?
-    if (Character_ID == 'New') then
+    if (Character_ID == "New") then
         local message = "OnNew"
-        TriggerClientEvent('Client:Character:Open', src, message)
+        TriggerClientEvent("Client:Character:Open", src, message)
     elseif Character_ID ~= nil then
         local Coords = c.sql.char.GetCoords(Character_ID)
         c.data.LoadPlayer(src, Character_ID)
-        TriggerClientEvent('Client:Character:ReSpawn', src, Character_ID, Coords)
+        TriggerClientEvent("Client:Character:ReSpawn", src, Character_ID, Coords)
     elseif Character_ID == nil then
         local message = "OnNew"
-        TriggerClientEvent('Client:Character:Open', src, message)
+        TriggerClientEvent("Client:Character:Open", src, message)
     end
 end)
 
 -- [C]
-RegisterNetEvent('Server:Character:Delete')
-AddEventHandler('Server:Character:Delete', function(Character_ID)
+RegisterNetEvent("Server:Character:Delete")
+AddEventHandler("Server:Character:Delete", function(Character_ID)
     local src = tonumber(source)
     local primary_id = c.identifier(src)
     c.sql.char.Delete(Character_ID, function()
-        TriggerEvent('Server:Character:List', src, primary_id)
+        TriggerEvent("Server:Character:List", src, primary_id)
     end)
 end)
 
 
 -- Need to move this and clean it the fuck up, its gross atm.
 -- [S]
-RegisterNetEvent('Server:Character:Create')
-AddEventHandler('Server:Character:Create', function(first_name, last_name, height, birth_date)
+RegisterNetEvent("Server:Character:Create")
+AddEventHandler("Server:Character:Create", function(first_name, last_name, height, birth_date)
     local src = tonumber(source)
     -- Run a check to see if it being exploited.
     if c.data.GetPlayer(src) ~= false then
-        TriggerEvent('txaLogger:CommandExecuted', src.." / "..c.identifer(src).." / "..GetPlayerName(src).." : Attempted to abuse [E] Server:Character:Create")
-        c.debug_1("User attempting to exploit character creation??: "..src)
-        c.sql.user.SetBan(c.identifier(src), true, function() DropPlayer(src, "Banned for attmpting to exploit event") end)
-        return CancelEvent()
+        c.eventban(src, "Server:Character:Create")
     end
     local p = promise.new()
     local character_id = c.sql.gen.CharacterID()
@@ -137,7 +134,7 @@ AddEventHandler("Server:Character:Ready", function()
     -- update what instance they are in.
     c.inst.SetPlayer(src, xPlayer.GetInstance())
     -- Remove from current ACL Job Group
-    ExecuteCommand(('remove_principal identifier.%s job.%s'):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
+    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
     --
     xPlayer.SetJob(xPlayer.GetJob())
 end)
@@ -149,7 +146,7 @@ AddEventHandler("Server:Character:Switch", function(req)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
     -- Remove Player Identifier from job as entity if no longer existing.
-    ExecuteCommand(('remove_principal identifier.%s job.%s'):format(xPlayer.License_ID, xPlayer.GetJob().Name))
+    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.License_ID, xPlayer.GetJob().Name))
     --
 
 end)
@@ -175,20 +172,20 @@ AddEventHandler("Server:Character:Death", function(data)
 end)
 
 --@ req = server_id or source
---@ t = {'name'='police','grade'=0}
+--@ t = {"name"="police","grade"=0}
 -- [C+S]
 RegisterNetEvent("Server:Character:SetJob")
 AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
     -- Add New Job command permissions for ACL system
-    ExecuteCommand(('add_principal identifier.%s job.%s'):format(xPlayer.License_ID, xPlayer.GetJob().Name))
+    ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.License_ID, xPlayer.GetJob().Name))
 end)
 
 -- Default player to instance listed in conf.defaultinstance
 -- [C+S]
-RegisterNetEvent('Server:Instance:Player:Default')
-AddEventHandler('Server:Instance:Player:Default', function(req)
+RegisterNetEvent("Server:Instance:Player:Default")
+AddEventHandler("Server:Instance:Player:Default", function(req)
     local src = req or source
     c.inst.SetPlayerDefault(src)
 end)
