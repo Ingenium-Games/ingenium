@@ -114,7 +114,7 @@ end
 ---@param type number "1-3"
 ---@param ent any "The passed client entity"
 ---@param key any "The state bag key you want to get the data from."
-function c.data.GetEntityState(type, ent, key)
+function c.data.GetEntityStateByType(type, ent, key)
     --
     -- Object
     if type == 3 then
