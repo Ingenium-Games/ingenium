@@ -94,7 +94,7 @@ function c.class.CreateUser(source)
     end
     --
     self.JobAllowed = function(ace)
-        if IsPrincipalAceAllowed(("%s"):format(self.License_ID), ("job.%s"):format(ace)) then
+        if IsPrincipalAceAllowed(("job.%s"):format(ace), ("identifier.%s"):format(self.License_ID)) then
             return true
         else
             return false
