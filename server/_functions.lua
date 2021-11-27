@@ -66,13 +66,11 @@ end
 ---@param source number "license: etc..."
 function c.identifier(source)
     local src = tonumber(source)
-    local id = nil
     for k, v in ipairs(GetPlayerIdentifiers(src)) do
         if string.match(v, conf.identifier) then
-            id = v
+            return v
         end
     end
-    return id
 end
 
 --- Returns Steam, FiveM, License, Discord and IP identifiers in that order. Strings
@@ -118,7 +116,7 @@ end
 
 function c.eventban(source, event)
     local src = source
-    local id = c.identifer(src)
+    local id = c.identifier(src)
     local name = GetPlayerName(src)
     TriggerEvent('txaLogger:CommandExecuted', "Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
     c.debug_2("Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)

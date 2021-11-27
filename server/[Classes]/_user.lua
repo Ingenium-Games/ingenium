@@ -93,36 +93,13 @@ function c.class.CreateUser(source)
         return self.IP_Address
     end
     --
-    self.JobAllowed = function(ace)
-        if IsPrincipalAceAllowed(("job.%s"):format(ace), ("identifier.%s"):format(self.License_ID)) then
+    self.EventAllowed = function(event)
+        if IsPrincipalAceAllowed(("identifier.%s"):format(self.License_ID), ("event.%s"):format(event)) then
             print("true")
+            return true
         else
             print("false")
-        end    
-        if IsPrincipalAceAllowed(("identifier.%s"):format(self.License_ID), ("job.%s"):format(ace)) then
-            print("true")
-        else
-            print("false")
-        end    
-        if IsPrincipalAceAllowed(("job.%s"):format(ace), ("%s"):format(self.License_ID)) then
-            print("true")
-        else
-            print("false")
-        end    
-        if IsPrincipalAceAllowed(("%s"):format(self.License_ID), ("job.%s"):format(ace)) then
-            print("true")
-        else
-            print("false")
-        end    
-        if IsPlayerAceAllowed(tostring(self.ID), ("job.%s"):format(ace)) then
-            print("true")
-        else
-            print("false")
-        end    
-        if IsPlayerAceAllowed(("job.%s"):format(ace), tostring(self.ID)) then
-            print("true")
-        else
-            print("false")
+            return false
         end    
     end
     --
