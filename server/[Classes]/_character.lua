@@ -309,7 +309,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.JobAllowed = function(ace)
-        if IsPrincipalAceAllowed(("%s"):format(self.GetLicense_ID()), ("job.%s"):format(ace)) then
+        if IsPrincipalAceAllowed(("identifier.%s"):format(self.License_ID), ("job.%s"):format(ace)) then
             return true
         else
             return false
