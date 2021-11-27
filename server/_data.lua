@@ -293,7 +293,7 @@ function c.GetJob(str)
 end
 
 -- ====================================================================================--
---
+--[[ THis one was to be a swiss army knife, but may need more work...
 function c.data.GetEntityObject(type, net)
     --
     -- Object
@@ -322,7 +322,7 @@ function c.data.GetEntityObject(type, net)
         -- no other types // fin    
     end
 end
---
+]]--
 --
 function c.GetEntityObject(t,n)
     return c.data.GetEntityObject(t,n)
