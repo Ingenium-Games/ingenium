@@ -179,7 +179,7 @@ AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
     -- Add New Job command permissions for ACL system
-    ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.License_ID, xPlayer.GetJob().Name))
+    ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
 end)
 
 -- Default player to instance listed in conf.defaultinstance
