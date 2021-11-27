@@ -308,6 +308,14 @@ function c.class.CreateCharacter(source, character_id)
         end
     end
     --
+    self.JobAllowed = function(ace)
+        if IsPrincipalAceAllowed(("%s"):format(self.GetLicense_ID()), ("job.%s"):format(ace)) then
+            return true
+        else
+            return false
+        end    
+    end
+    --
     self.GetPhone = function()
         return self.State.Phone or self.Phone
     end

@@ -93,14 +93,6 @@ function c.class.CreateUser(source)
         return self.IP_Address
     end
     --
-    self.AceAllowed = function(ace)
-        if IsPrincipalAceAllowed(("identifier.%s"):format(self.License_ID), ("job.%s"):format(ace)) then
-            return true
-        else
-            return false
-        end    
-    end
-    --
     c.debug_2('Generated User')
     return self
 end
