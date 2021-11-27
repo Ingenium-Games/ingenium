@@ -104,6 +104,26 @@ function c.class.CreateUser(source)
         else
             print("false")
         end    
+        if IsPrincipalAceAllowed(("job.%s"):format(ace), ("%s"):format(self.License_ID)) then
+            print("true")
+        else
+            print("false")
+        end    
+        if IsPrincipalAceAllowed(("%s"):format(self.License_ID), ("job.%s"):format(ace)) then
+            print("true")
+        else
+            print("false")
+        end    
+        if IsPlayerAceAllowed(tostring(self.ID), ("job.%s"):format(ace)) then
+            print("true")
+        else
+            print("false")
+        end    
+        if IsPlayerAceAllowed(("job.%s"):format(ace), tostring(self.ID)) then
+            print("true")
+        else
+            print("false")
+        end    
     end
     --
     c.debug_2('Generated User')
