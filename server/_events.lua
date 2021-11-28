@@ -42,7 +42,7 @@ function c.event.AddInteractEvent(job, name, cb)
             local entity = NetworkGetEntityFromNetworkId(net)
             -- 
             -- Does Invoker have permissions to trigger this event, ig.target checks thier job prior to permiting
-            if xPlayer.JobAllowed(job) then
+            if xPlayer.AceAllowedsa(eventname) then
                 -- Do Actions...
                 --[[    
                     local src = source -- The ID of the person triggering the event
