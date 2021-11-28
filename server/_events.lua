@@ -23,7 +23,7 @@ function c.event.AddInteractEvent(job, name, cb)
         --
         table.insert(c.events, eventname)
         --
-        ExecuteCommand(("add_ace events.%s Server:Interact:%s allow"):format(job,name))
+        ExecuteCommand(("add_ace job.%s Server:Interact:%s allow"):format(job,name))
         RegisterNetEvent(eventname, function(o)
             -- Invoker
             local src = source
@@ -42,7 +42,7 @@ function c.event.AddInteractEvent(job, name, cb)
             local entity = NetworkGetEntityFromNetworkId(net)
             -- 
             -- Does Invoker have permissions to trigger this event, ig.target checks thier job prior to permiting
-            if xPlayer.EventAllowed(job) then
+            if xPlayer.JobAllowed(job) then
                 -- Do Actions...
                 --[[    
                     local src = source -- The ID of the person triggering the event
