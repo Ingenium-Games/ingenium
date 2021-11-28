@@ -212,7 +212,7 @@ function c.sql.user.SetBan(license_id, bool, cb)
     if type(bool) ~= "boolean" then c.debug_1("c.sql.user.SetBan, boolean was not passed") return end
     local License_ID = license_id
     local Bool = bool
-    MySQL.Async.execute('UPDATE `users` SET `Ban` = @Bool TRUE WHERE `License_ID` = @License_ID LIMIT 1;', {
+    MySQL.Async.execute('UPDATE `users` SET `Ban` = @Bool WHERE `License_ID` = @License_ID LIMIT 1;', {
         ['@Bool'] = Bool,
         ['@License_ID'] = License_ID
     }, function(data)
