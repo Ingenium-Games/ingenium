@@ -56,7 +56,7 @@ function c.status.SetHunger(v)
     c.stats.Hunger = v
 end
 
-function c.status.RemoveHunger(v)
+function c.status.AddHunger(v)
     local val = c.check.Number(v, _min, _max)
     local calc = c.stats.Hunger + val
     if calc >= 100 then
@@ -66,7 +66,7 @@ function c.status.RemoveHunger(v)
     end
 end
 
-function c.status.AddHunger(v)
+function c.status.RemoveHunger(v)
     local val = c.check.Number(v, _min, _max)
     local calc = c.stats.Hunger - val
     if calc <= 0 then
@@ -86,7 +86,7 @@ function c.status.SetThirst(v)
     c.stats.Thirst = v
 end
 
-function c.status.RemoveThirst(v)
+function c.status.AddThirst(v)
     local val = c.check.Number(v, _min, _max)
     local calc = c.stats.Thirst + val
     if calc >= 100 then
@@ -96,7 +96,7 @@ function c.status.RemoveThirst(v)
     end
 end
 
-function c.status.AddThirst(v)
+function c.status.RemoveThirst(v)
     local val = c.check.Number(v, _min, _max)
     local calc = c.stats.Thirst - val
     if calc <= 0 then
