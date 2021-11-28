@@ -275,7 +275,6 @@ function c.data.CreateJobObjects()
     for k, v in pairs(jobs) do
         if not c.jdex[k] then
             c.jdex[k] = c.class.CreateJob(v)
-            ExecuteCommand(('add_principal job.%s event.%s'):format(k, k))
         end
     end
     c.json.Write(conf.file.jobs, c.jobs)

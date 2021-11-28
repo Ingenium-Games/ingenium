@@ -93,8 +93,8 @@ function c.class.CreateUser(source)
         return self.IP_Address
     end
     --
-    self.EventAllowed = function(event)
-        if IsPrincipalAceAllowed(("identifier.%s"):format(self.License_ID), ("event.%s"):format(event)) then
+    self.EventAllowed = function(job)
+        if IsPrincipalAceAllowed(("identifier.%s"):format(self.License_ID), ("event.%s"):format(job)) then
             print("true")
             return true
         else

@@ -29,23 +29,26 @@ function c.event.AddInteractEvent(job, name, cb)
             local src = source
             local xPlayer = c.data.GetPlayer(src)
             -- Options Passed
+            --[[
             local o = o
-            local net = o.net
-            local job = o.job
-            local type = o.type
-            local event = o.event
-            local label = o.label
+                local net = o.net
+                local job = o.job
+                local type = o.type
+                local event = o.event
+                local label = o.label
+            ]]--
             -- Target
             -- Server side entity
             local entity = NetworkGetEntityFromNetworkId(net)
             -- 
             -- Does Invoker have permissions to trigger this event, ig.target checks thier job prior to permiting
-            if xPlayer.EventAllowed(event) then
+            if xPlayer.EventAllowed(job) then
                 -- Do Actions...
                 --[[    
                     local src = source -- The ID of the person triggering the event
                     local entity = entity -- Server Sided Entity
                     local o = o -- the options table passed to the event
+
                         local net = o.net -- the net id of the entity triggering the event
                         local job = o.job -- the job required 
                         local type = o.type -- the entity type
