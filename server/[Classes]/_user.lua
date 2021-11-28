@@ -95,10 +95,8 @@ function c.class.CreateUser(source)
     --
     self.AceAllowed = function(eventname)
         if IsPlayerAceAllowed(self.ID, eventname) then
-            print("true")
             return true
         else
-            print("false")
             return false
         end    
     end
