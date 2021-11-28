@@ -17,10 +17,12 @@ NOTES.
 ---@param job string "Jobname used fro role permissions"
 ---@param name string "The final argument f the event"
 ---@param cb function "Trigger event once confirmed user is able to action event."
-function c.event.AddRestrictedEvent(job, name, cb)
+function c.event.AddInteractEvent(job, name, cb)
     local eventname = ("Server:Interact:%s"):format(name)
     if not c.events[eventname] then
-        c.events[eventname] = true
+        --
+        table.insert(c.events, eventname)
+        --
         ExecuteCommand(("add_ace job.%s 'event.Server:Interact:%s' allow"):format(job,name))
         RegisterNetEvent(eventname, function(o)
             -- Invoker

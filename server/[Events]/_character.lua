@@ -174,23 +174,3 @@ AddEventHandler("Server:Character:SetJob", function(req, data)
     -- Add New Job command permissions for ACL system
     ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
 end)
-
--- Default player to instance listed in conf.defaultinstance
--- [C+S]
-RegisterNetEvent("Server:Instance:Player:Default")
-AddEventHandler("Server:Instance:Player:Default", function(req)
-    local src = req or source
-    c.inst.SetPlayerDefault(src)
-end)
-
--- [C+S]
-RegisterNetEvent("Server:Vehicle:Create")
-AddEventHandler("Server:Vehicle:Create", function(net, plate, stolen)
-    local src = source
-    if not stolen then stolen = false end
-    if plate then
-        c.data.AddVehicle(net, c.class.CreatePlayerVehicle, plate, stolen)
-    else
-        c.data.AddVehicle(net, c.class.CreateVehicle, net, stolen)
-    end
-end)
