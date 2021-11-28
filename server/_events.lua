@@ -1,6 +1,8 @@
 -- ====================================================================================--
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
+c.event = {}
+c.events = {}
 --[[
 NOTES.
     -
@@ -10,194 +12,51 @@ NOTES.
 
 
 -- ====================================================================================--
---  Get Character Info for the NUI to allow character selection.
--- [C+S]
-RegisterNetEvent("Server:Character:List")
-AddEventHandler("Server:Character:List", function(req, Primary_ID)
-    local src = tonumber(req) or source
-    local Characters = c.sql.char.GetAll(Primary_ID)
-    local Command = "OnJoin"
-    -- Send the data table to the client that requested it...
-    TriggerClientEvent("Client:Character:Open", src, Command, Characters)
-    -- Place the user in their own instance until the user has joined and loaded.
-    c.inst.SetPlayer(src, c.inst.New(), true)
-end)
 
--- [C]
-RegisterNetEvent("Server:Character:Join")
-AddEventHandler("Server:Character:Join", function(Character_ID)
-    local src = tonumber(source)
-    -- If the User selected the NEW button on the NUI, the Character_ID will be listed as NEW, if this is the case, trigger the registration NUI?
-    if (Character_ID == "New") then
-        local message = "OnNew"
-        TriggerClientEvent("Client:Character:Open", src, message)
-    elseif Character_ID ~= nil then
-        local Coords = c.sql.char.GetCoords(Character_ID)
-        c.data.LoadPlayer(src, Character_ID)
-        TriggerClientEvent("Client:Character:ReSpawn", src, Character_ID, Coords)
-    elseif Character_ID == nil then
-        local message = "OnNew"
-        TriggerClientEvent("Client:Character:Open", src, message)
-    end
-end)
-
--- [C]
-RegisterNetEvent("Server:Character:Delete")
-AddEventHandler("Server:Character:Delete", function(Character_ID)
-    local src = tonumber(source)
-    local primary_id = c.identifier(src)
-    c.sql.char.Delete(Character_ID, function()
-        TriggerEvent("Server:Character:List", src, primary_id)
-    end)
-end)
-
-
--- Need to move this and clean it the fuck up, its gross atm.
--- [S]
-RegisterNetEvent("Server:Character:Create")
-AddEventHandler("Server:Character:Create", function(first_name, last_name, height, birth_date)
-    local src = tonumber(source)
-    -- Run a check to see if it being exploited.
-    if c.data.GetPlayer(src) ~= false then
-        c.eventban(src, "Server:Character:Create")
-    end
-    local p = promise.new()
-    local character_id = c.sql.gen.CharacterID()
-    local city_id = c.sql.gen.CityID()
-    local phone_number = c.sql.gen.PhoneNumber()
-    local bank_number = c.sql.gen.AccountNumber()
-    local primary_id = c.identifier(src)
-    local data = {}
-    
-    data.Primary_ID = primary_id -- Owner
-    data.Character_ID = character_id -- Unique ID
-    data.First_Name = first_name
-    data.Last_Name = last_name
-    data.Height = height
-    data.Birth_Date = birth_date
-    data.City_ID = city_id
-    data.Phone = phone_number
-    data.Coords = json.encode(conf.spawn)
-    data.Job = json.encode(conf.default.job)
-    data.Accounts = json.encode(conf.default.accounts)
-    data.Modifiers = json.encode(conf.default.modifiers)
-    
-    c.sql.char.Add(data, function()
-        -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etc.
-        c.sql.bank.AddAccount(character_id, bank_number)
-        
-        --
-        p:resolve()
-    end)
-    --
-    c.data.LoadPlayer(src, character_id)
-    --
-    Citizen.Await(p)    
-    
-    --[[
-            ADD YOUR CHARACTER CREATION EVENT BELOW
-    ]]--
-    
-
-    
-    --[[
-            ADD YOUR CHARACTER CREATION EVENT ABOVE
-    ]]--
-end)
-
-
--- Triggered after character has been loaded from db and informaiton is passed to client
--- [C]
-RegisterNetEvent("Server:Character:Loaded")
-AddEventHandler("Server:Character:Loaded", function()
-    local src = source
-    local ped = GetPlayerPed(src)
-    local xPlayer = c.data.GetPlayer(src)
-
-    -- CPED_CONFIG_FLAG_DontInfluenceWantedLevel = 42,
-    -- CPED_CONFIG_FLAG_CanPerformArrest = 155, CPED_CONFIG_FLAG_CanPerformUncuff = 156, CPED_CONFIG_FLAG_CanBeArrested = 157
-    -- CPED_CONFIG_FLAG_IgnoreBeingOnFire = 430,
-    -- CPED_CONFIG_FLAG_DisableHomingMissileLockon = 434,
-
-    local nums = {42,155,156,157,430,434}
-    for _,v in pairs(nums) do
-        SetPedConfigFlag(ped, v, false)
-    end
-end)
-
--- Triggered by the client after it has recieved its character data.
--- [C] 
-RegisterNetEvent("Server:Character:Ready")
-AddEventHandler("Server:Character:Ready", function()
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    -- update what instance they are in.
-    c.inst.SetPlayer(src, xPlayer.GetInstance())
-    -- Remove from current ACL Job Group
-    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
-    --
-    xPlayer.SetJob(xPlayer.GetJob())
-end)
-
--- Use this to remove any things connected to Characters like police blips etc.
--- [C+S]
-RegisterNetEvent("Server:Character:Switch")
-AddEventHandler("Server:Character:Switch", function(req)
-    local src = req or source
-    local xPlayer = c.data.GetPlayer(src)
-    -- Remove Player Identifier from job as entity if no longer existing.
-    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.License_ID, xPlayer.GetJob().Name))
-    --
-
-end)
-
--- Server Death Handler - if was killed by a player or not.
--- [C]
-RegisterNetEvent("Server:Character:Death")
-AddEventHandler("Server:Character:Death", function(data)
-    local src = source
-    if data.Log then
-        -- agro = source id or -1 for server.
-        local agro = data.Log.Source
-        if data.Cause == "Weapon" then
-            
-        elseif data.Cause == "Vehicle" then
-
-        elseif data.Cause == "Obejct" then
-            
-        end
+--- func desc
+---@param job string "Jobname used fro role permissions"
+---@param name string "The final argument f the event"
+---@param cb function "Trigger event once confirmed user is able to action event."
+function c.event.AddRestrictedEvent(job, name, cb)
+    local eventname = ("Server:Interact:%s"):format(name)
+    if not c.events[eventname] then
+        c.events[eventname] = true
+        ExecuteCommand(("add_ace job.%s 'event.Server:Interact:%s' allow"):format(job,name))
+        RegisterNetEvent(eventname, function(o)
+            -- Invoker
+            local src = source
+            local xPlayer = c.data.GetPlayer(src)
+            -- Options Passed
+            local o = o
+            local net = o.net
+            local job = o.job
+            local type = o.type
+            local event = o.event
+            local label = o.label
+            -- Target
+            -- Server side entity
+            local entity = NetworkGetEntityFromNetworkId(net)
+            -- 
+            -- Does Invoker have permissions to trigger this event, ig.target checks thier job prior to permiting
+            if xPlayer.EventAllowed(event) then
+                -- Do Actions...
+                --[[    
+                    local src = source -- The ID of the person triggering the event
+                    local entity = entity -- Server Sided Entity
+                    local o = o -- the options table passed to the event
+                        local net = o.net -- the net id of the entity triggering the event
+                        local job = o.job -- the job required 
+                        local type = o.type -- the entity type
+                        local event = o.event -- the event name
+                        local label = o.label -- the label
+                ]]--
+                cb(src, entity, o)
+            else
+                c.eventban(src, eventname)
+            end
+        end)
+        return eventname
     else
-
+        print("event name already taken")
     end
-end)
-
---@ req = server_id or source
---@ t = {"name"="police","grade"=0}
--- [C+S]
-RegisterNetEvent("Server:Character:SetJob")
-AddEventHandler("Server:Character:SetJob", function(req, data)
-    local src = req or source
-    local xPlayer = c.data.GetPlayer(src)
-    -- Add New Job command permissions for ACL system
-    ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
-end)
-
--- Default player to instance listed in conf.defaultinstance
--- [C+S]
-RegisterNetEvent("Server:Instance:Player:Default")
-AddEventHandler("Server:Instance:Player:Default", function(req)
-    local src = req or source
-    c.inst.SetPlayerDefault(src)
-end)
-
--- [C+S]
-RegisterNetEvent("Server:Vehicle:Create")
-AddEventHandler("Server:Vehicle:Create", function(net, plate, stolen)
-    local src = source
-    if not stolen then stolen = false end
-    if plate then
-        c.data.AddVehicle(net, c.class.CreatePlayerVehicle, plate, stolen)
-    else
-        c.data.AddVehicle(net, c.class.CreateVehicle, net, stolen)
-    end
-end)
+end
