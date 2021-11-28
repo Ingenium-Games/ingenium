@@ -23,7 +23,7 @@ function c.event.AddInteractEvent(job, name, cb)
         --
         table.insert(c.events, eventname)
         --
-        ExecuteCommand(("add_ace job.%s 'event.Server:Interact:%s' allow"):format(job,name))
+        ExecuteCommand(("add_ace job.%s 'event.%s.Server:Interact:%s' allow"):format(job,job,name))
         RegisterNetEvent(eventname, function(o)
             -- Invoker
             local src = source
