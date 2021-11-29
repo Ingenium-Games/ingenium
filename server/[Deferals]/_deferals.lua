@@ -18,14 +18,21 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     table.insert(connecting.body, DeferralCards.Container:Create({
         items = {
             DeferralCards.CardElement:TextBlock({
-                size = 'Medium',
-                weight = 'Bolder',
-                text = 'Welcome '..name,
+                size = "Medium",
+                weight = "Bolder",
+                text = "Welcome "..name,
             }),
             DeferralCards.CardElement:TextBlock({
-                text = '__**Notice:**__ If you see any _Issues_ below this line, then you may need to take a screenshot and report it to __**THIS SERVER**__, as they are preventing you from joining. General Contact information can be found here: '..conf.discordlink,
+                text = "Discord Link - "..conf.discordlink,
                 wrap = true
-            })
+            }),
+            DeferralCards.Container:Create({
+                items = {
+                    DeferralCards.CardElement:TextBlock({
+                        text = "",
+                        wrap = true
+                    })
+                }})
         }})
     )
     local id = c.identifier(src)
@@ -34,7 +41,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     if namecheck then
         drop = true
         table.insert(facts.facts, DeferralCards.Container:Fact({
-            title = "Issue",
+            title = "Issue ⁉️",
             value = "Your name contains forbidden characters."
         }))
     end
@@ -43,7 +50,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     if ban then
         drop = true
         table.insert(facts.facts, DeferralCards.Container:Fact({
-            title = "Issue",
+            title = "Issue ⁉️",
             value = "You have been banned by command or automatic event."
         }))
     end
@@ -60,7 +67,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 discord = false
                 drop = true
                 table.insert(facts.facts, DeferralCards.Container:Fact({
-                    title = "Issue",
+                    title = "Issue ⁉️",
                     value = "You have not joined our discord."
                 }))
             end
@@ -76,8 +83,8 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         DeferralCards.Container:ActionSet({
             actions = {
                 DeferralCards.Action:Submit({
-                    id = 'Submit',
-                    title = 'Click to Join',
+                    id = "Submit",
+                    title = " 👋 - Click to Join",
                     data = {Submit = true}
                 })
             }
@@ -87,8 +94,8 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         DeferralCards.Container:ActionSet({
             actions = {
                 DeferralCards.Action:Submit({
-                    id = 'Submit',
-                    title = 'Click to Leave',
+                    id = "Submit",
+                    title = " ✋ - Click to Leave",
                     data = {Submit = true}
                 })
             }
