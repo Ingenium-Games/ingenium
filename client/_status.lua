@@ -29,7 +29,10 @@ function c.status.GetHealth()
 end
 
 function c.status.SetHealth(health)
-    SetEntityHealth(PlayerPedId(), health)
+    if health <= 0 then
+        IsDead = true
+    end
+    SetEntityHealth(PlayerPedId(), 0)
 end
 
 -- ====================================================================================--
@@ -202,11 +205,11 @@ function c.status.SetPlayer(data)
     SetPlayerInvincible(ply, false)
     --
     -- time to gain our data from the server.
-    c.status.SetHealth((data.Health or conf.default.health))
-    c.status.SetArmour((data.Armour or _min))
-    c.status.SetHunger((data.Hunger or _max))
-    c.status.SetThirst((data.Thirst or _max))
-    c.status.SetStress((data.Stress or _min))
+    c.status.SetHealth(data.Health)
+    c.status.SetArmour(data.Armour)
+    c.status.SetHunger(data.Hunger)
+    c.status.SetThirst(data.Thirst)
+    c.status.SetStress(data.Stress)
     -- Begin Routines / Timeouts
     c.status.StartHungerDecrease()
     c.status.StartThirstDecrease()
