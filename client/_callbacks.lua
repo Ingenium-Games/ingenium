@@ -63,9 +63,13 @@ local TeleportOnMarker = RegisterClientCallback({
         local wp = GetFirstBlipInfoId(8)
         if DoesBlipExist(wp) then
             local ords = vec(GetBlipInfoIdCoord(wp))
-            local found, z GetGroundZFor_3dCoord(ords)
-            if found then
-                SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], z + 0.0)
+            for height = 1,1000 do 
+                SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
+                local found, z GetGroundZFor_3dCoord(ords)
+                if found then
+                    SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
+                    break
+                end
             end
         end
     end
