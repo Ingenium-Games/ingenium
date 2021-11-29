@@ -31,6 +31,7 @@ end
 function c.status.SetHealth(health)
     if health <= 0 then
         IsDead = true
+        PlayerKilled()
     end
     SetEntityHealth(PlayerPedId(), 0)
 end

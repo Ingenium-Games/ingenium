@@ -8,9 +8,10 @@ NOTES.
     -
 ]] --
 -- ====================================================================================--
-IsDead = false
 
-local function PlayerKilled()
+_G.IsDead = false
+
+function PlayerKilled()
     local ply = PlayerId()
     local ped = PlayerPedId()
     local log = false
