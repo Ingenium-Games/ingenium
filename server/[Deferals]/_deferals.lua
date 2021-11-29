@@ -107,7 +107,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         if data.Submit then
             if drop then
                 Citizen.Wait(0)
-                reject("You saw the reasons a moment ago, on an adaptive card. It renders all the reasons why you cannot join.")
+                d.done("You saw the reasons a moment ago, on an adaptive card. It renders all the reasons why you cannot join.")
                 CancelEvent()
             else
                 -- Send to the queue.

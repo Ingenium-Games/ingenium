@@ -62,14 +62,15 @@ local TeleportOnMarker = RegisterClientCallback({
     eventCallback = function() 
         local wp = GetFirstBlipInfoId(8)
         if DoesBlipExist(wp) then
-            local ords = vec(GetBlipInfoIdCoord(wp))
-            for height = 1,1000 do 
+            local ords = GetBlipInfoIdCoord(wp)
+            for height = 1,1000 do
                 SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
-                local found, z GetGroundZFor_3dCoord(ords)
+                local found, z GetGroundZFor_3dCoord(ords["x"], ords["y"], height + 0.0)
                 if found then
                     SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
                     break
                 end
+                Citizen.Wait(1)
             end
         end
     end
