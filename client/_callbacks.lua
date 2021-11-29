@@ -70,7 +70,7 @@ local TeleportOnMarker = RegisterClientCallback({
                     SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
                     break
                 end
-                Citizen.Wait(1)
+                Citizen.Wait(10)
             end
         end
     end
