@@ -17,6 +17,7 @@ end, false)
 
 -- ====================================================================================--
 
+ExecuteCommand("add_ace group.public command.switch allow")
 RegisterCommand('switch', function(source, args, rawCommand)
     TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
     local src = source
@@ -42,6 +43,7 @@ end, true)
 
 -- ====================================================================================--
 
+ExecuteCommand("add_ace group.admin command.ban allow")
 RegisterCommand('ban', function(source, args, rawCommand)
     TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
     local src = source
@@ -60,6 +62,7 @@ end, true)
 
 -- ====================================================================================--
 
+ExecuteCommand("add_ace group.admin command.kick allow")
 RegisterCommand('kick', function(source, args, rawCommand)
     TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
     local src = source
@@ -74,6 +77,7 @@ end, true)
 
 -- ====================================================================================--
 
+ExecuteCommand("add_ace group.mod command.setjob allow")
 RegisterCommand('setjob', function(source, args, rawCommand)
     TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
     local src = source
@@ -89,3 +93,14 @@ RegisterCommand('setjob', function(source, args, rawCommand)
 end, true)
 
 -- ====================================================================================--
+
+ExecuteCommand("add_ace group.mod command.tpm allow")
+RegisterCommand('tpm', function(source, args, rawCommand)
+    TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
+    local src = source
+    TriggerClientCallback({
+        source = src,
+        eventName = 'TeleportOnMarker',
+        args = {}
+    })    
+end, true)

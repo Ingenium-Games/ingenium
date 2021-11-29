@@ -17,7 +17,7 @@ NOTES.
 ---@param job string "Jobname used fro role permissions"
 ---@param name string "The final argument f the event"
 ---@param cb function "Trigger event once confirmed user is able to action event."
-function c.event.AddInteractEvent(job, name, cb)
+function c.event.AddInteractJobEvent(job, name, cb)
     local eventname = ("Server:Interact:%s"):format(name)
     if not c.events[eventname] then
         --

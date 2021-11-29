@@ -9,7 +9,7 @@ NOTES.
 -- ====================================================================================--
 
 local DataPacket = RegisterClientCallback({
-    eventName = 'DataPacket',
+    eventName = "DataPacket",
     eventCallback = function()
         local data = false
         if c.data.GetLoadedStatus() then
@@ -24,7 +24,7 @@ local DataPacket = RegisterClientCallback({
 })
 
 local GetVehicleCondition = RegisterClientCallback({
-    eventName = 'GetVehicleCondition',
+    eventName = "GetVehicleCondition",
     eventCallback = function(net)
         local entity = NetToVeh(net)
         return c.GetVehicleCondition(entity)
@@ -32,7 +32,7 @@ local GetVehicleCondition = RegisterClientCallback({
 })
 
 local SetVehicleCondition = RegisterClientCallback({
-    eventName = 'SetVehicleCondition',
+    eventName = "SetVehicleCondition",
     eventCallback = function(net, con)
         local entity = NetToVeh(net)
         c.SetVehicleCondition(entity, con)
@@ -41,7 +41,7 @@ local SetVehicleCondition = RegisterClientCallback({
 })
 
 local GetVehicleModifications = RegisterClientCallback({
-    eventName = 'GetVehicleModifications',
+    eventName = "GetVehicleModifications",
     eventCallback = function(net)
         local entity = NetToVeh(net)
         return c.GetVehicleModifications(entity)
@@ -49,10 +49,24 @@ local GetVehicleModifications = RegisterClientCallback({
 })
 
 local SetVehicleModifications = RegisterClientCallback({
-    eventName = 'SetVehicleModifications',
+    eventName = "SetVehicleModifications",
     eventCallback = function(net, mods) 
         local entity = NetToVeh(net)
         c.SetVehicleModifications(entity, mods)
         return true
+    end
+})
+
+local TeleportOnMarker = RegisterClientCallback({
+    eventName = "TeleportOnMarker",
+    eventCallback = function() 
+        local wp = GetFirstBlipInfoId(8)
+        if DoesBlipExist(wp) then
+            local ords = vec(GetBlipInfoIdCoord(wp))
+            local found, z GetGroundZFor_3dCoord(ords)
+            if found then
+                SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], z + 0.0)
+            end
+        end
     end
 })
