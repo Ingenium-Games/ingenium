@@ -3,6 +3,7 @@
 -- ====================================================================================--
 c.animation = {}
 c.animations = {}
+
 --[[
 NOTES.
     - Animations are registered as events, this can be useful for creating scripts that force a level of immersion.
@@ -10,6 +11,8 @@ NOTES.
     - If they aim at an ARMED ped, the ped does not have to raise hands.
 ]] --
 -- ====================================================================================--
+local bools = {}
+
 local function Getped(ped)
     if ped == nil then
         ped = GetPlayerped(-1)
@@ -21,11 +24,14 @@ end
 
 function c.animation.AddAnimation(dict, anim, name)
     if not c.animations[name] then
-        c.animations[name] = function(bool, ped, step, cb)
+        bools[name] = false
+        c.animations[name] = function(ped, step, cb)
+            bools[name] = not bools[name]
             local p = promise.new()
             local ped = Getped(ped)
             local dict = c.check.String(dict)
             local anim = c.check.String(anim)
+            local bool = bools[name]
             --
             if not DoesAnimDictExist(dict) then
                 c.debug_1("DoesAnimDictExist - "..dict.." Does not exist, please check the name.")
@@ -38,7 +44,7 @@ function c.animation.AddAnimation(dict, anim, name)
                 Citizen.Wait(100)
             end
             --
-            if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
+            if bool and (not IsEntityPlayingAnim(ped, dict, anim, 3)) then
                 TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
                 c.data.SetPlayerState("Animation", name, true)
                 Citizen.Wait(duration)
@@ -47,6 +53,10 @@ function c.animation.AddAnimation(dict, anim, name)
                     RemoveAnimDict(dict)
                 end
                 Citizen.Await(p)
+                c.data.SetPlayerState("Animation", false, true)
+                if cb then
+                    cb()
+                end
             else
                 ClearpedTasks(ped)
                 c.data.SetPlayerState("Animation", false, true)
@@ -56,18 +66,22 @@ function c.animation.AddAnimation(dict, anim, name)
             end
         end
         RegisterNetEvent("Client:Animation:"..name)
-        AddEventHandler("Client:Animation:"..name, function(bool, ped, step, cb)
-            c.animations[name](bool, ped, step, cb)
+        AddEventHandler("Client:Animation:"..name, function(ped, step, cb)
+            c.animations[name](ped, step, cb)
         end)
     end
 end
 
 -- ====================================================================================--
+
+bools["CrossedArms"] = false
 RegisterNetEvent("Client:Animation:CrossedArms")
-AddEventHandler("Client:Animation:CrossedArms", function(bool, ped)
+AddEventHandler("Client:Animation:CrossedArms", function(ped)
+    bools["CrossedArms"] = not bools["CrossedArms"]
     local ped = Getped(ped)
     local dict = "amb@world_human_hang_out_street@female_arms_crossed@base" 
     local anim = "base" 
+    local bool = bools["CrossedArms"]
     --
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
@@ -85,11 +99,15 @@ AddEventHandler("Client:Animation:CrossedArms", function(bool, ped)
     end
 end)
 -- ====================================================================================--
+
+bools["HandsUp"] = false
 RegisterNetEvent("Client:Animation:HandsUp")
-AddEventHandler("Client:Animation:HandsUp", function(bool, ped)
+AddEventHandler("Client:Animation:HandsUp", function(ped)
+    bools["HandsUp"] = not bools["HandsUp"]
     local ped = Getped(ped)
     local dict = "missminuteman_1ig_2"
     local anim = "handsup_enter"
+    local bool = bools["HandsUp"]
     --
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
@@ -107,11 +125,15 @@ AddEventHandler("Client:Animation:HandsUp", function(bool, ped)
     end
 end)
 -- ====================================================================================--
+
+bools["ArmHold"] = false
 RegisterNetEvent("Client:Animation:ArmHold")
-AddEventHandler("Client:Animation:ArmHold", function(bool, ped)
+AddEventHandler("Client:Animation:ArmHold", function(ped)
+    bools["ArmHold"] = not bools["ArmHold"]
     local ped = Getped(ped)
     local dict = "anim@amb@nightclub@peds@"
     local anim = "amb_world_human_hang_out_street_female_hold_arm_idle_b"
+    local bool = bools["ArmHold"]
     --
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
@@ -129,11 +151,15 @@ AddEventHandler("Client:Animation:ArmHold", function(bool, ped)
     end
 end)
 -- ====================================================================================--
+
+bools["Mugging"] = false
 RegisterNetEvent("Client:Animation:Mugging")
-AddEventHandler("Client:Animation:Mugging", function(bool, ped)
+AddEventHandler("Client:Animation:Mugging", function(ped)
+    bools["Mugging"] = not bools["Mugging"]
     local ped = Getped(ped)
     local dict = "random@mugging5"
     local anim = "ig_1_guy_handoff"
+    local bool = bools["Mugging"]
     --
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
@@ -152,11 +178,15 @@ AddEventHandler("Client:Animation:Mugging", function(bool, ped)
     end
 end)
 -- ====================================================================================--
+
+bools["PickUp"] = false
 RegisterNetEvent("Client:Animation:PickUp")
-AddEventHandler("Client:Animation:PickUp", function(bool, ped)
+AddEventHandler("Client:Animation:PickUp", function(ped)
+    bools["PickUp"] = not bools["PickUp"]
     local ped = Getped(ped)
     local dict = "pickup_object"
     local anim = "putdown_low"
+    local bool = bools["PickUp"]
     --
     RequestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do
