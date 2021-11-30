@@ -53,7 +53,12 @@ end
 
 --- Returns the Player state
 function c.data.GetPlayer()
-    return Player(GetPlayerServerId(PlayerId())).state
+    return Player(GetPlayerServerId(PlayerId())).state[]
+end
+
+--- Returns the Player state
+function c.GetPlayer()
+    return c.data.GetPlayer()
 end
 
 --- Return the Entity"s state bag.
