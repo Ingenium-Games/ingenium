@@ -503,7 +503,7 @@ function c.class.CreateCharacter(source, character_id)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then 
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC, NetID: "..self.Net)
+            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: "..self.ID)
             return 
         end
         local info = {
