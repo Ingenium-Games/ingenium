@@ -17,7 +17,10 @@ NOTES.
 ---@param v number "A number to select corresponding local array value."
 ---@param ords table "a vector3() or {x,y,z}"
 function c.marker.SelectMarker(v, ords)
-    if not v then v = 1 end
+    if not v then v = 0 end
+    if v == 0 then
+        return
+    end
     if type(ords) ~= vector3 then
         local ords = {
             [1] = ords.x,

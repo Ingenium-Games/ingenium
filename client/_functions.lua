@@ -106,7 +106,7 @@ function c.CompareCoords(coords, arrays, style)
             end
             if comparedst < 7.5 then
                 if style then
-                    c.marker.SelectMarker(style, ords)
+                    c.marker.SelectMarker(ords,style)
                 end
             end
         end
@@ -118,7 +118,7 @@ function c.CompareCoords(coords, arrays, style)
         end
         if comparedst < 7.5 then
             if style then
-                c.marker.SelectMarker(style, arrays)
+                c.marker.SelectMarker(arrays, style)
             end
         end
         return dstchecked
