@@ -9,8 +9,6 @@ NOTES.
 ]] --
 -- ====================================================================================--
 
-_G.IsDead = false
-
 function PlayerKilled()
     local ply = PlayerId()
     local ped = PlayerPedId()
@@ -61,14 +59,14 @@ Citizen.CreateThread(function()
         if c.data.GetLoadedStatus() then
             local ply = PlayerId()
             local ped = PlayerPedId()
-            while IsDead and IsPlayerDead() do
+            while c.data.GetPlayerState("IsDead") and IsPlayerDead() do
                 Citizen.Wait(250)
             end
             if (IsPedFatallyInjured(ped) and not IsDead) or IsPlayerDead() then
-                IsDead = true
+                c.data.SetPlayerState("IsDead", true, true)
                 PlayerKilled()
             elseif not IsPedFatallyInjured(ped) and IsPlayerPlaying(ply) then
-                IsDead = false
+                c.data.SetPlayerState("IsDead", false, true)
                 Citizen.Wait(50)
             end
         else
@@ -76,9 +74,3 @@ Citizen.CreateThread(function()
         end
     end
 end)
-
-local function Dead()
-    return IsDead
-end
-
-exports("IsDead", Dead)

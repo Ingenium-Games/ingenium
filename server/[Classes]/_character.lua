@@ -16,6 +16,12 @@ function c.class.CreateCharacter(source, character_id)
     local data = c.sql.char.Get(character_id)
     local self = {}
     --
+    -- local data points
+    self.IsDead = false
+    self.IsCuffed = false
+    self.IsDragged = false
+    self.IsSwimming = false
+    --    
     -- For the State to work
     self.ID = src
     self.State = Player(self.ID).state

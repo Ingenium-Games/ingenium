@@ -61,6 +61,36 @@ function c.GetPlayer()
     return c.data.GetPlayer()
 end
 
+--- Returns the Player state
+function c.data.GetPlayerState(key)
+    return LocalPlayer.state[key]
+end
+
+--- Returns the Player state
+function c.GetPlayerState(key)
+    return LocalPlayer.state[key]
+end
+
+-- Please do not use this other than for animations or such...
+--- Set the Players's state bag.
+---@param key string "The key"
+---@param value any "Just not a table"
+---@param sync boolean "Sync to Server, default is false"
+function c.data.SetPlayerState(key, value, sync)
+    if sync == nil then sync = false end
+    LocalPlayer.state:set(key, value, sync)
+end
+
+-- Please do not use this other than for animations or such...
+--- Set the Players's state bag.
+---@param key string "The key"
+---@param value any "Just not a table"
+---@param sync boolean "Sync to Server, default is false"
+function c.SetPlayerState(key, value, sync)
+    if sync == nil then sync = false end
+    LocalPlayer.state:set(key, value, sync)
+end
+
 --- Return the Entity"s state bag.
 ---@param ent any "Entity"
 function c.data.GetEntityState(ent,key)    
@@ -71,15 +101,6 @@ end
 ---@param ent any "Entity"
 function c.GetEntityState(ent,key)    
     return c.data.GetEntityState(ent,key)
-end
-
--- Please do not use this other than for animations or such...
---- Set the Players's state bag.
----@param key string "The key"
----@param value any "Just not a table"
----@param sync boolean "Sync to Server, default is false"
-function c.data.SetPlayerState(key, value, sync)
-    LocalPlayer.state:set(key, value, sync)
 end
 
 --- Set the Players's state bag.
