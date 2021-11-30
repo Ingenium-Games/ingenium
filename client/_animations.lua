@@ -21,7 +21,8 @@ end
 
 function c.animation.AddAnimation(dict, anim, name)
     if not c.animations[name] then
-        c.animations[name] = function(bool, ped, step, cb)
+        c.animations[name] = function(bool, ped, cb, once)
+            if once == nil then once = false end
             local p = promise.new()
             local ped = Getped(ped)
             local dict = c.check.String(dict)
@@ -41,15 +42,18 @@ function c.animation.AddAnimation(dict, anim, name)
             if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
                 TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
                 c.data.SetPlayerState("Animation", name, true)
-                Citizen.Wait(duration)
-                if HasEntityAnimFinished(ped, dict, anim, 3) then
-                    p:resolve()
-                    RemoveAnimDict(dict)
-                end
-                Citizen.Await(p)
-                c.data.SetPlayerState("Animation", false, true)
                 if cb then
-                    cb()
+                    cb(duration)
+                end
+                if once then
+                    Citizen.Wait(duration)
+                    if HasEntityAnimFinished(ped, dict, anim, 3) then
+                        p:resolve()
+                        RemoveAnimDict(dict)
+                        ClearPedTasks(ped)
+                    end
+                    Citizen.Await(p)
+                    c.data.SetPlayerState("Animation", false, true)
                 end
             else
                 ClearPedTasks(ped)
@@ -60,8 +64,8 @@ function c.animation.AddAnimation(dict, anim, name)
             end
         end
         RegisterNetEvent("Client:Animation:"..name)
-        AddEventHandler("Client:Animation:"..name, function(bool, ped, step, cb)
-            c.animations[name](bool, ped, step, cb)
+        AddEventHandler("Client:Animation:"..name, function(bool, ped, cb, once)
+            c.animations[name](bool, ped, cb, once)
         end)
     end
 end
@@ -148,7 +152,6 @@ AddEventHandler("Client:Animation:Mugging", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         c.data.SetPlayerState("Animation", "Mugging", true)
         RemoveAnimDict(dict)
-
     else
         ClearPedTasks(ped)
         c.data.SetPlayerState("Animation", false, true)
@@ -178,3 +181,12 @@ AddEventHandler("Client:Animation:PickUp", function(bool, ped)
     end
 end)
 -- ====================================================================================--
+
+c.animation.AddAnimation("random@getawaydriver", "gesture_nod_yes_hard", "Nod")
+c.animation.AddAnimation("mini@repair", "fixing_a_player", "Lockpick")
+c.animation.AddAnimation("mini@repair", "fixing_a_player", "RepairCar")
+c.animation.AddAnimation("random@arrests", "idle_c", "PhoneCall")
+c.animation.AddAnimation("random@car_thief@agitated@idle_a", "agitated_idle_a", "FacePalm")
+-- Drag Player
+c.animation.AddAnimation("missfinale_c2mcs_1", "fin_c2_mcs_1_camman", "Dragging")
+c.animation.AddAnimation("amb@world_human_bum_slumped@male@laying_on_left_side@base", "base", "Dragged")
