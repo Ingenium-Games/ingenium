@@ -44,10 +44,12 @@ function c.class.CreateInventory(inv)
                 break
             end
             -- Validate Meta data
-            if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
+            --[[
+                if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
                 c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
-            end
+                end
+            ]]--
             -- If the Quality is below 0, then destroy the item.
             if self[i].Quality <= 0 then
                 table.remove(self, k)
