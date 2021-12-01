@@ -44,7 +44,7 @@ function c.class.CreateInventory(inv)
                 break
             end
             -- Validate Meta data
-            if type(self[i].Meta) ~= "table" or self[i].Meta ~= false then
+            if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
                 c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
             end
