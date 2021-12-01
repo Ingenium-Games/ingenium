@@ -146,7 +146,7 @@ function c.class.CreateNpc(net)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item) then
+        if c.item.Exists(item.Item) then
             local weapon = c.item.IsWeapon(item.Item)
             local stackable = c.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
