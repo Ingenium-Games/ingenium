@@ -83,7 +83,7 @@ function c.sql.save.Users(cb)
             local Coords = json.encode(data.GetCoords())
             local Accounts = json.encode(data.GetAccounts())
             local Modifiers = json.encode(data.GetModifiers())
-            local Inventory = json.encode(data.GetInventory())
+            local Inventory = json.encode(data.CompressInventory())
             local Hotbar = json.encode(data.GetHotbar())
             local Job = json.encode(data.GetJob())
             -- 

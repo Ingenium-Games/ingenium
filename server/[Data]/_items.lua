@@ -31,14 +31,7 @@ c.items = { -- table of items
         Value = 1,
         Weight = 0,
         Weapon = false,
-        Meta = {
-            Ammo = false,
-            SerialNumber = false,
-            BatchNumber = false,
-            Crafted = false,
-            Registered = false,
-            About = "A tangable form of currency."
-        },
+        Meta = false,
         Data = false,
         Craftable = false,
         Recipe = false,

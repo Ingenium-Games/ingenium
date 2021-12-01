@@ -22,7 +22,6 @@ NOTES.
 
 function c.class.CreateInventory(inv)
     local self = {}
-    local function BuildInventory(inv)
         for k,v in ipairs(inv) do
             self[k] = {
                 ["Item"] = v[1],
@@ -53,6 +52,5 @@ function c.class.CreateInventory(inv)
                 table.remove(self, k)
             end
         end
-    end
     return self
 end
