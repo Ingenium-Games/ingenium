@@ -52,7 +52,7 @@ function c.class.CreateInventory(inv)
             ]]--
             -- If the Quality is below 0, then destroy the item.
             if self[i].Quality <= 0 then
-                table.remove(self, k)
+                table.remove(self, i)
             end
         end
     return self
