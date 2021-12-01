@@ -16,7 +16,7 @@ NOTES.
 
 local PlayerSaveData = -1
 MySQL.Async.store(
-"UPDATE `characters` SET `Health` = @Health, `Armour` = @Armour, `Hunger` = @Hunger, `Thirst` = @Thirst, `Stress` = @Stress, `Coords` = @Coords, `Accounts` = @Accounts, `Modifiers` = @Modifiers, `Job` = @Job WHERE `Character_ID` = @Character_ID;",
+"UPDATE `characters` SET `Health` = @Health, `Armour` = @Armour, `Hunger` = @Hunger, `Thirst` = @Thirst, `Stress` = @Stress, `Coords` = @Coords, `Accounts` = @Accounts, `Modifiers` = @Modifiers, `Inventory` = @Inventory, `Job` = @Job WHERE `Character_ID` = @Character_ID;",
 function(id)
     PlayerSaveData = id
 end)
