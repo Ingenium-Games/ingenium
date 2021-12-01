@@ -22,8 +22,9 @@ NOTES.
 
 function c.class.CreateInventory(inv)
     local self = {}
-        for k,v in ipairs(inv) do
-            self[k] = {
+        for i=1, #inv do
+            table.insert(self, i)
+            self[i] = {
                 ["Item"] = v[1],
                 ["Quantity"] = v[2],
                 ["Quality"] = v[3],
