@@ -18,6 +18,13 @@ RegisterCommand('test', function(source, args, rawCommand)
     print(c.table.Dump(xPlayer.GetInventory()))
 end, false)
 
+RegisterCommand('test2', function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    xPlayer.AddItem({"WEAPON_KNIFE", 1, 100})
+    print(c.table.Dump(xPlayer.GetInventory()))
+end, false)
+
 -- ====================================================================================--
 
 ExecuteCommand("add_ace group.public command.switch allow")
