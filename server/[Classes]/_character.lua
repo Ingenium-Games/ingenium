@@ -93,7 +93,8 @@ function c.class.CreateCharacter(source, character_id)
     self.Licenses = json.decode(data.Licenses)
     self.State.Licenses = self.Licenses
     --
-    self.Inventory = c.class.CreateInventory(json.decode(data.Inventory))
+    local tempinv = json.decode(data.Inventory)
+    self.Inventory = c.class.CreateInventory(tempinv)
     self.State.Inventory = self.Inventory
     --
     self.Hotbar = json.decode(data.Hotbar)
