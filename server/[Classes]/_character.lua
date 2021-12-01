@@ -554,8 +554,9 @@ function c.class.CreateCharacter(source, character_id)
     --
     self.CompressInventory = function()
         local inv = {}
-        for k,v in ipairs(self.Inventory) do
-            inv[k] = {v.Item, v.Quantity, v.Quality, v.Weapon, v.Meta}
+        for i=1, #self.Inventory do
+            table.insert(inv, i)
+            inv[i] = {v.Item, v.Quanitity, v.Quality, v.Weapon, v.Meta}
         end
         return inv
     end
