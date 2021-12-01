@@ -557,7 +557,7 @@ function c.class.CreateCharacter(source, character_id)
         local inv = {}
         for i=1, #self.Inventory do
             table.insert(inv, i)
-            inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quanitity, self.Inventory[i].Quality, self.Inventory[i].Weapon, self.Inventory[i].Meta}
+            inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality, self.Inventory[i].Weapon, self.Inventory[i].Meta}
         end
         return inv
     end
