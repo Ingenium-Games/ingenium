@@ -25,31 +25,31 @@ function c.class.CreateInventory(inv)
         for i=1, #inv do
             table.insert(self, i)
             self[i] = {
-                ["Item"] = v[1],
-                ["Quantity"] = v[2],
-                ["Quality"] = v[3],
-                ["Weapon"] = v[4],
-                ["Meta"] = v[5]
+                ["Item"] = inv[i][1],
+                ["Quantity"] = inv[i][2],
+                ["Quality"] = inv[i][3],
+                ["Weapon"] = inv[i][4],
+                ["Meta"] = inv[i][5]
             }
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
-            if self[k].Weapon == true then
-                if type(c.item.IsWeapon(self[k].Item)) ~= "string" or self[k].Quantity >= 1 then
+            if self[i].Weapon == true then
+                if type(c.item.IsWeapon(self[i].Item)) ~= "string" or self[i].Quantity >= 1 then
                     c.debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Meta data
-            if type(self[k].Quantity) ~= "number" or type(self[k].Quality) ~= "number" then
+            if type(self[i].Quantity) ~= "number" or type(self[i].Quality) ~= "number" then
                 c.debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- Validate Meta data
-            if type(self[k].Meta) ~= "table" or self[k].Meta ~= false then
+            if type(self[i].Meta) ~= "table" or self[i].Meta ~= false then
                 c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
             end
             -- If the Quality is below 0, then destroy the item.
-            if self[k].Quality <= 0 then
+            if self[i].Quality <= 0 then
                 table.remove(self, k)
             end
         end
