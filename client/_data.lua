@@ -114,14 +114,14 @@ end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.data.GetPlayerState(id,key)
+function c.data.GetOtherPlayerState(id,key)
     return Player(id).state[key]
 end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.GetPlayerState(id,key)   
-    return c.data.GetPlayerState(id,key)
+function c.GetOtherPlayerState(id,key)   
+    return c.data.GetOtherPlayerState(id,key)
 end
 
 --- Return the Players's state bag.

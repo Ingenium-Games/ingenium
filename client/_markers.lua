@@ -16,7 +16,7 @@ NOTES.
 --- Select a premade marker style.
 ---@param v number "A number to select corresponding local array value."
 ---@param ords table "a vector3() or {x,y,z}"
-function c.marker.SelectMarker(v, ords)
+function c.marker.SelectMarker(ords, v)
     if not v then v = 0 end
     if v == 0 then
         return
