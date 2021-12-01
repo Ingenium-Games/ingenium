@@ -14,7 +14,7 @@ NOTES.
 RegisterCommand('test', function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    xPlayer.AddItem("Cash", 1, 100, false, false)
+    xPlayer.AddItem({"Cash", 1, 100, false, false})
     print(c.table.Dump(xPlayer.GetInventory()))
 end, false)
 
