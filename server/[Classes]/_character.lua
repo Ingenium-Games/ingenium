@@ -264,7 +264,7 @@ function c.class.CreateCharacter(source, character_id)
         end
     end
     self.State.Bank = 0
-    AddStateBagChangeHandler("Bank", nil, function(bagName, key, value, reserved, replicated) 
+    AddStateBagChangeHandler("Bank", Player(self.ID), function(bag, key, value, reserved, replicated)
         TriggerClientEvent("Client:Notify", "Bank: "..value)
     end)
     --
