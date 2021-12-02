@@ -16,6 +16,9 @@ function c.class.CreateCharacter(source, character_id)
     local data = c.sql.char.Get(character_id)
     local self = {}
     --
+    -- For State Change Handlers
+    self.Cookies = {}
+    --
     -- local data points
     self.IsDead = false
     self.IsCuffed = false
@@ -197,9 +200,15 @@ function c.class.CreateCharacter(source, character_id)
         end
     end
     --
+    self.State.Cash = 0
+    AddStateBagChangeHandler("Cash", nil, function(bagName, key, value, reserved, replicated) 
+        TriggerClientEvent("Client:Notify", "Cash: "..value)
+    end)
+    --
     self.GetCash = function()
         local acc = self.GetAccount("Cash")
         if acc then
+            self.State.Cash = acc
             return acc
         end
     end
@@ -216,6 +225,7 @@ function c.class.CreateCharacter(source, character_id)
                 c.debug_1("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for "..self.ID)
             else
                 self.SetAccount("Cash", acc)
+                self.State.Cash = acc
             end    
         end
     end
@@ -232,6 +242,7 @@ function c.class.CreateCharacter(source, character_id)
                 c.debug_1("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for "..self.ID)
             else
                 self.SetAccount("Cash", acc)
+                self.State.Cash = acc
             end
         end
     end
@@ -248,13 +259,19 @@ function c.class.CreateCharacter(source, character_id)
                 c.debug_1("A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for "..self.ID)
             else
                 self.SetAccount("Cash", acc)
+                self.State.Cash = acc
             end
         end
     end
+    self.State.Bank = 0
+    AddStateBagChangeHandler("Bank", nil, function(bagName, key, value, reserved, replicated) 
+        TriggerClientEvent("Client:Notify", "Bank: "..value)
+    end)
     --
     self.GetBank = function()
         local acc = self.GetAccount("Bank")
         if acc then
+            self.State.Bank = acc
             return acc 
         end
     end
@@ -265,8 +282,10 @@ function c.class.CreateCharacter(source, character_id)
         if acc then 
             if acc < 0 then
                 self.SetAccount("Bank", acc)
+                self.State.Bank = acc
             else
                 self.SetAccount("Bank", acc)
+                self.State.Bank = acc
             end
         end
     end
@@ -278,8 +297,10 @@ function c.class.CreateCharacter(source, character_id)
             acc = acc + c.math.Decimals(num, 0)
             if acc < 0 then
                 self.SetAccount("Bank", acc)
+                self.State.Bank = acc
             else
                 self.SetAccount("Bank", acc)
+                self.State.Bank = acc
             end
         end
     end
@@ -291,8 +312,10 @@ function c.class.CreateCharacter(source, character_id)
                 acc = acc - c.math.Decimals(num, 0)
             if acc < 0 then
                 self.SetAccount("Bank", acc)
+                self.State.Bank = acc
             else
                 self.SetAccount("Bank", acc)
+                self.State.Bank = acc
             end
         end
     end
