@@ -327,3 +327,4 @@ end
 function c.status.WalkType(type)
 
 end
+

@@ -22,7 +22,8 @@ function c.class.CreateCharacter(source, character_id)
     -- local data points
     self.IsDead = false
     self.IsCuffed = false
-    self.IsDragged = false
+    self.IsEscorted = false
+    self.IsEscorting = false
     self.IsSwimming = false
     --    
     -- For the State to work

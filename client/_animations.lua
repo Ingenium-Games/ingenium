@@ -187,6 +187,9 @@ c.animation.AddAnimation("mini@repair", "fixing_a_player", "Lockpick")
 c.animation.AddAnimation("mini@repair", "fixing_a_player", "RepairCar")
 c.animation.AddAnimation("random@arrests", "idle_c", "PhoneCall")
 c.animation.AddAnimation("random@car_thief@agitated@idle_a", "agitated_idle_a", "FacePalm")
--- Drag Player
-c.animation.AddAnimation("missfinale_c2mcs_1", "fin_c2_mcs_1_camman", "Dragging")
-c.animation.AddAnimation("amb@world_human_bum_slumped@male@laying_on_left_side@base", "base", "Dragged")
+-- Escort Player
+c.animation.AddAnimation("missfinale_c2mcs_1", "fin_c2_mcs_1_camman", "Escorting")
+c.animation.AddAnimation("amb@world_human_bum_slumped@male@laying_on_left_side@base", "base", "Escorted")
+-- Cuff animation
+c.animation.AddAnimation("mp_arrest_paired", "crook_p2_back_right", "Cuffed")
+c.animation.AddAnimation("mp_arrest_paired", "cop_p2_back_right", "Cuffer")
