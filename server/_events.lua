@@ -18,12 +18,12 @@ NOTES.
 ---@param name string "The final argument f the event"
 ---@param cb function "Trigger event once confirmed user is able to action event."
 function c.event.AddInteractJobEvent(job, name, cb)
-    local eventname = ("Server:Interact:%s"):format(name)
+    local eventname = ("Server:Interact:%s:%s"):format(name,job)
     if not c.events[eventname] then
         --
         table.insert(c.events, eventname)
         --
-        ExecuteCommand(("add_ace job.%s Server:Interact:%s allow"):format(job,name))
+        ExecuteCommand(("add_ace job.%s Server:Interact:%s:%s allow"):format(job,name,job))
         RegisterNetEvent(eventname, function(o)
             -- Invoker
             local src = source
