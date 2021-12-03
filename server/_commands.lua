@@ -28,7 +28,7 @@ end, false)
 RegisterCommand('test3', function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    xPlayer.SetSupporter(true)
+    xPlayer.SetSupporter(not c.data.GetPlayerState(src,"IsSupporter"))
 end, false)
 
 -- ====================================================================================--

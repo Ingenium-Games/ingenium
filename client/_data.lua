@@ -52,22 +52,22 @@ function c.data.IsPlayerLoaded()
 end
 
 --- Returns the Player state
-function c.data.GetPlayer()
+function c.data.GetLocalPlayer()
     return LocalPlayer.state
 end
 
 --- Returns the Player state
-function c.GetPlayer()
+function c.GetLocalPlayer()
     return c.data.GetPlayer()
 end
 
 --- Returns the Player state
-function c.data.GetPlayerState(key)
+function c.data.GetLocalPlayerState(key)
     return LocalPlayer.state[key]
 end
 
 --- Returns the Player state
-function c.GetPlayerState(key)
+function c.GetLocalPlayerState(key)
     return LocalPlayer.state[key]
 end
 
@@ -76,7 +76,7 @@ end
 ---@param key string "The key"
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
-function c.data.SetPlayerState(key, value, sync)
+function c.data.SetLocalPlayerState(key, value, sync)
     if sync == nil then sync = false end
     LocalPlayer.state:set(key, value, sync)
 end
@@ -86,7 +86,7 @@ end
 ---@param key string "The key"
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
-function c.SetPlayerState(key, value, sync)
+function c.SetLocalPlayerState(key, value, sync)
     if sync == nil then sync = false end
     LocalPlayer.state:set(key, value, sync)
 end
@@ -103,25 +103,16 @@ function c.GetEntityState(ent,key)
     return c.data.GetEntityState(ent,key)
 end
 
---- Set the Players's state bag.
----@param id any "Player's Server Id"
----@param key string "The key"
----@param value any "Just not a table"
----@param sync boolean "Sync to Server, default is false"
-function c.SetPlayerState(key, value, sync)  
-    c.data.SetPlayerState(key, value, sync)
-end
-
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.data.GetOtherPlayerState(id,key)
+function c.data.GetPlayerState(id,key)
     return Player(id).state[key]
 end
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
-function c.GetOtherPlayerState(id,key)   
-    return c.data.GetOtherPlayerState(id,key)
+function c.GetPlayerState(id,key)   
+    return c.data.GetPlayerState(id,key)
 end
 
 --- Return the Players's state bag.
