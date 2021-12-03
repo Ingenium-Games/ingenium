@@ -18,17 +18,11 @@ RegisterCommand('test', function(source, args, rawCommand)
     print(c.table.Dump(xPlayer.GetInventory()))
 end, false)
 
-RegisterCommand('test2', function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    xPlayer.AddItem({"WEAPON_KNIFE", 1, 100})
-    print(c.table.Dump(xPlayer.GetInventory()))
-end, false)
-
 RegisterCommand('test3', function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    xPlayer.SetSupporter(true)
+    local bool = xPlayer.GetSupporter()
+    xPlayer.SetSupporter(not bool)
 end, false)
 
 -- ====================================================================================--
