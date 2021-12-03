@@ -68,7 +68,7 @@ function c.class.CreateCharacter(source, character_id)
     self.State.IsWanted = self.IsWanted
     --    
     self.IsSupporter = data.Supporter
-    self.State.Supporter = self.IsSupporter
+    self.State.IsSupporter = self.IsSupporter
     --
     self.IsDead = false
     self.State.IsDead = self.IsDead

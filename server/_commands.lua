@@ -28,7 +28,7 @@ end, false)
 RegisterCommand('test3', function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    local bool = not xPlayer.GetSupporter()
+    local bool = xPlayer.GetSupporter()
     xPlayer.SetSupporter(bool)
 end, false)
 
