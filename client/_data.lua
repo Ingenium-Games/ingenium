@@ -58,7 +58,7 @@ end
 
 --- Returns the Player state
 function c.GetLocalPlayer()
-    return c.data.GetPlayer()
+    return c.data.GetLocalPlayer()
 end
 
 --- Returns the Player state
@@ -103,16 +103,11 @@ function c.GetEntityState(ent,key)
     return c.data.GetEntityState(ent,key)
 end
 
---- Returns the Player state
-function c.data.GetPlayer()
-    return Player(PlayerId()).state
+--- Return the Players's state bag.
+---@param id any "Player's Server Id"
+function c.data.GetPlayer(id)
+    return Player(id).state
 end
-
---- Returns the Player state
-function c.GetPlayer()
-    return c.data.GetPlayer()
-end
-
 
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
