@@ -49,7 +49,7 @@ function c.class.CreateUser(source)
     self.State.Temp = self.Temp
     --    
     self.IsSupporter = data.Supporter
-    self.State.IsSupporter = IsSupporter
+    self.State.IsSupporter = self.IsSupporter
     --
     ExecuteCommand(('remove_principal identifier.%s group.%s'):format(self.License_ID, self.Ace))
     ExecuteCommand(('add_principal identifier.%s group.%s'):format(self.License_ID, self.Ace))
