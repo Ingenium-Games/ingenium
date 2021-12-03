@@ -14,8 +14,7 @@ NOTES.
 function c.class.CreateUser(source)
     local src = tonumber(source)
     local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = c.identifiers(src)
-    local Ace = c.sql.user.GetAce(License_ID)
-    local Locale = c.sql.user.GetLocale(License_ID)
+    local data = c.sql.user.Get(License_ID)
     local self = {}
     --
     -- For the State to work
@@ -40,14 +39,17 @@ function c.class.CreateUser(source)
     --
     self.IP_Address = IP_Address -- Does not need to be within states.
     --
-    self.Ace = Ace
+    self.Ace = data.Ace
     self.State.Ace = self.Ace
     --
-    self.Locale = Locale
+    self.Locale = data.Locale
     self.State.Locale = self.Locale
     --
     self.Temp = c.rng.chars(15)
     self.State.Temp = self.Temp
+    --    
+    self.IsSupporter = data.Supporter
+    self.State.IsSupporter = self.IsSupporter
     --
     ExecuteCommand(('remove_principal identifier.%s group.%s'):format(self.License_ID, self.Ace))
     ExecuteCommand(('add_principal identifier.%s group.%s'):format(self.License_ID, self.Ace))
@@ -91,6 +93,16 @@ function c.class.CreateUser(source)
     --
     self.GetIP_Address = function()
         return self.IP_Address
+    end
+    --
+    self.GetSupporter = function()
+        return self.State.IsSupporter or self.IsSupporter
+    end
+    --    
+    self.SetSupporter = function(bool)
+        local bool = c.check.Boolean(bool)
+        self.IsSupporter = bool
+        self.State.IsSupporter = self.IsSupporter
     end
     --
     c.debug_2('Generated User')

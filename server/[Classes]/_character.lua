@@ -66,9 +66,6 @@ function c.class.CreateCharacter(source, character_id)
     -- Booleans
     self.IsWanted = data.Wanted
     self.State.IsWanted = self.IsWanted
-    --    
-    self.IsSupporter = data.Supporter
-    self.State.IsSupporter = self.IsSupporter
     --
     self.IsDead = false
     self.State.IsDead = self.IsDead
@@ -121,16 +118,6 @@ function c.class.CreateCharacter(source, character_id)
     self.State.Animation = false
     --
     -- Functions
-    self.GetSupporter = function()
-        return self.State.IsSupporter or self.IsSupporter
-    end
-    --    
-    self.SetSupporter = function(bool)
-        local bool = c.check.Boolean(bool)
-        self.IsSupporter = bool
-        self.State.IsSupporter = self.IsSupporter
-    end
-    --
     self.GetIdentifier = function()
         return self.State.Character_ID or self.Character_ID
     end

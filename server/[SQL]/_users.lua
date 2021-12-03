@@ -86,6 +86,27 @@ function c.sql.user.Update(usermame, license_id, fivem_id, steam_id, discord_id,
     end
 end
 
+--- Get - The entire ROW of data from Characters table where the Character_ID is the character id.
+-- @Primary_ID
+function c.sql.user.Get(license_id, cb)
+    local License_ID = license_id
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchAll('SELECT * FROM `users` WHERE `License_ID` = @License_ID LIMIT 1;', {
+        ['@License_ID'] = License_ID
+    }, function(data)
+        result = data[1]
+        IsBusy = false
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+    return result
+end
+
 --- Get - `Locale` from the users License_ID
 -- @License_ID
 function c.sql.user.GetLastLogin(license_id, cb)
