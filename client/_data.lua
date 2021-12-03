@@ -103,6 +103,17 @@ function c.GetEntityState(ent,key)
     return c.data.GetEntityState(ent,key)
 end
 
+--- Returns the Player state
+function c.data.GetPlayer()
+    return Player(PlayerId()).state
+end
+
+--- Returns the Player state
+function c.GetPlayer()
+    return c.data.GetPlayer()
+end
+
+
 --- Return the Players's state bag.
 ---@param id any "Player's Server Id"
 function c.data.GetPlayerState(id,key)
