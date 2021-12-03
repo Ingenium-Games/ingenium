@@ -63,7 +63,7 @@ Citizen.CreateThread(function()
             while isdead and IsPlayerDead() do
                 Citizen.Wait(250)
             end
-            if (IsPedFatallyInjured(ped) and not IsDead) or IsPlayerDead() then
+            if (IsPedFatallyInjured(ped) and not isdead) or IsPlayerDead() then
                 c.data.SetLocalPlayerState("IsDead", true, true)
                 PlayerKilled()
             elseif not IsPedFatallyInjured(ped) and IsPlayerPlaying(ply) then
