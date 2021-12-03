@@ -87,20 +87,7 @@ end
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
 function c.SetLocalPlayerState(key, value, sync)
-    if sync == nil then sync = false end
-    LocalPlayer.state:set(key, value, sync)
-end
-
---- Return the Entity"s state bag.
----@param ent any "Entity"
-function c.data.GetEntityState(ent,key)    
-    return Entity(ent).state[key]
-end
-
---- Return the Entity"s state bag.
----@param ent any "Entity"
-function c.GetEntityState(ent,key)    
-    return c.data.GetEntityState(ent,key)
+    c.data.SetLocalPlayerState(key, value, sync)
 end
 
 --- Return the Players's state bag.
@@ -131,6 +118,18 @@ end
 ---@param ped any "Player's Ped Entity"
 function c.GetPlayerPedState(ped,key)    
     return c.data.GetPlayerPedState(ped,key)
+end
+
+--- Return the Entity"s state bag.
+---@param ent any "Entity"
+function c.data.GetEntityState(ent,key)    
+    return Entity(ent).state[key]
+end
+
+--- Return the Entity"s state bag.
+---@param ent any "Entity"
+function c.GetEntityState(ent,key)    
+    return c.data.GetEntityState(ent,key)
 end
 
 --- func desc
