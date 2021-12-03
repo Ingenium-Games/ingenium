@@ -59,7 +59,7 @@ Citizen.CreateThread(function()
         if c.data.GetLoadedStatus() then
             local ply = PlayerId()
             local ped = PlayerPedId()
-            local isdead = c.data.GetPlayerState(,"IsDead")
+            local isdead = c.data.GetPlayerState(PlayerId(),"IsDead")
             while isdead and IsPlayerDead() do
                 Citizen.Wait(250)
             end
