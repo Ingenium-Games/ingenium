@@ -7,8 +7,6 @@ NOTES.
     - Becasue a player has different data to the character being played.
     - Not using the Player State, as still testing.
 ]] --
-
-
 -- ====================================================================================--
 
 function c.class.CreateCharacter(source, character_id)
@@ -16,16 +14,6 @@ function c.class.CreateCharacter(source, character_id)
     local data = c.sql.char.Get(character_id)
     local self = {}
     --
-    -- For State Change Handlers
-    self.Cookies = {}
-    --
-    -- local data points
-    self.IsDead = false
-    self.IsCuffed = false
-    self.IsEscorted = false
-    self.IsEscorting = false
-    self.IsSwimming = false
-    --    
     -- For the State to work
     self.ID = src
     self.State = Player(self.ID).state
@@ -74,13 +62,28 @@ function c.class.CreateCharacter(source, character_id)
     self.Weight = 0
     self.MaxWeight = 25
     self.State.Weight = self.Weight
-    --
+    --         
     -- Booleans
-    self.Wanted = data.Wanted
-    self.State.Wanted = self.Wanted
+    self.IsWanted = data.Wanted
+    self.State.IsWanted = self.IsWanted
+    --    
+    self.IsSupporter = data.Supporter
+    self.State.Supporter = self.IsSupporter
     --
-    self.Supporter = data.Supporter
-    self.State.Supporter = self.Supporter
+    self.IsDead = false
+    self.State.IsDead = self.IsDead
+    --
+    self.IsCuffed = false
+    self.State.IsCuffed = self.IsCuffed
+    --
+    self.IsEscorted = false
+    self.State.IsEscorted = self.IsEscorted
+    --
+    self.IsEscorting = false
+    self.State.IsEscorting = self.IsEscorting
+    --
+    self.IsSwimming = false
+    self.State.IsSwimming = self.IsSwimming
     --
     -- Tables (JSONIZE)
     -- Uncertain if these table valeus are actually stored on the state bags as they are nieve...
@@ -97,8 +100,7 @@ function c.class.CreateCharacter(source, character_id)
     self.Licenses = json.decode(data.Licenses)
     self.State.Licenses = self.Licenses
     --
-    local tempinv = json.decode(data.Inventory)
-    self.Inventory = c.class.CreateInventory(tempinv)
+    self.Inventory = c.class.CreateInventory(json.decode(data.Inventory))
     self.State.Inventory = self.Inventory
     --
     self.Hotbar = json.decode(data.Hotbar)
@@ -119,8 +121,14 @@ function c.class.CreateCharacter(source, character_id)
     self.State.Animation = false
     --
     -- Functions
-    self.IsSupporter = function()
-        return self.State.Supporter or self.Supporter
+    self.GetSupporter = function()
+        return self.State.IsSupporter or self.IsSupporter
+    end
+    --    
+    self.SetSupporter = function(bool)
+        local bool = c.check.Boolean(bool)
+        self.IsSupporter = bool
+        self.State.IsSupporter = self.IsSupporter
     end
     --
     self.GetIdentifier = function()
