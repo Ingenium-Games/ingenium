@@ -25,6 +25,7 @@ end
 ---@param source number ""
 ---@param num number "The number of the istance/routing bucket"
 function c.inst.SetPlayer(source, num)
+    if not num then num = source end
     local src = tonumber(source)
     local xPlayer = c.data.GetPlayer(src)
     local current = GetPlayerRoutingBucket(src)

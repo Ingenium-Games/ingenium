@@ -26,7 +26,7 @@ function c.class.CreateVehicle(net, bool)
     self.State.Model = self.Model
     --
     self.GetModel = function()
-        return self.State.Model or self.Model
+        return self.Model
     end
     --    
 
@@ -35,7 +35,7 @@ function c.class.CreateVehicle(net, bool)
     self.State.Plate = self.Plate
     --
     self.GetPlate = function()
-        return self.State.Plate or self.Plate
+        return self.Plate
     end
 
     -- Coords
@@ -65,7 +65,7 @@ function c.class.CreateVehicle(net, bool)
     self.State.Inventory = self.Inventory
     --
     self.GetInventory = function()
-        return self.State.Inventory or self.Inventory
+        return self.Inventory
     end
     --
     self.HasItem = function(name)
@@ -74,15 +74,16 @@ function c.class.CreateVehicle(net, bool)
                 return true, k 
             end
         end
-        return false
+        return false, nil
     end
+    --
     --
     self.GetWeight = function()
         self.Weight = 0
         for k,v in ipairs(self.Inventory) do
             if c.item.Exists(v.Item) then
                 local item = c.items[v.Item]
-                self.Weight = self.Weight + (item.Weight * v.Quantity)
+                self.Weight = self.Weight + item.Weight
             else
                 c.debug_1("Ignoring invalid item within .GetWeight()")
             end
@@ -94,7 +95,7 @@ function c.class.CreateVehicle(net, bool)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then 
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC, NetID: "..self.Net)
+            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: "..self.ID)
             return 
         end
         local info = {
@@ -111,11 +112,11 @@ function c.class.CreateVehicle(net, bool)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item) then
+        if c.item.Exists(item.Item) then
             local weapon = c.item.IsWeapon(item.Item)
             local stackable = c.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
-            if (weapon and type(item.Weapon) == "string") or (not stackable and has) then
+            if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
                 self.State.Inventory = self.Inventory
             elseif (stackable and has) then
@@ -132,7 +133,7 @@ function c.class.CreateVehicle(net, bool)
     -- 
     self.RemoveItem = function(name, slot)
         local has, position = self.HasItem(name)
-        if has and (slot == position) then
+        if has and slot == position then
             table.remove(self.Inventory, position)
             self.State.Inventory = self.Inventory
         end
@@ -143,21 +144,21 @@ function c.class.CreateVehicle(net, bool)
         self.State.Inventory = self.Inventory
     end
     --
-    self.CompileInventory = function()
+    self.CompressInventory = function()
         local inv = {}
-        for k,v in ipairs(self.Inventory) do
-            inv[k] = {v.Item, v.Quanitity, v.Quality, v.Weapon, v.Meta}
+        for i=1, #self.Inventory do
+            table.insert(inv, i)
+            inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality, self.Inventory[i].Weapon, self.Inventory[i].Meta}
         end
         return inv
     end
     --
-
     -- Keys
     self.Keys = {}
     self.State.Keys = self.Keys
     --
     self.GetKeys = function()
-        return self.State.Keys or self.Keys
+        return self.Keys
     end
     --
     self.SetKeys = function(t)
@@ -199,7 +200,7 @@ function c.class.CreateVehicle(net, bool)
     self.State.Condition = self.Condition
     --
     self.GetCondition = function()
-        return self.State.Condition or self.Condition
+        return self.Condition
     end
     --
     self.SetCondition = function(conditions)
@@ -237,7 +238,7 @@ function c.class.CreateVehicle(net, bool)
     self.State.Modifications = self.Condition
     --
     self.GetModifications = function()
-        return self.State.Modifications or self.Modifications
+        return self.Modifications
     end
     --
     self.SetModifications = function(modifications)
@@ -276,7 +277,7 @@ function c.class.CreateVehicle(net, bool)
     self.State.Fuel = self.Fuel
     --
     self.GetFuel = function()
-        return self.State.Fuel or self.Fuel
+        return self.Fuel
     end
     --
     self.SetFuel = function(v)
@@ -322,7 +323,7 @@ function c.class.CreateVehicle(net, bool)
     self.State.Owner = self.Owner
     --
     self.GetOwner = function()
-        return self.State.Owner or self.Owner
+        return self.Owner
     end
     --
 
@@ -331,7 +332,7 @@ function c.class.CreateVehicle(net, bool)
     self.State.Wanted = self.Wanted
     --
     self.GetWanted = function()
-        return self.State.Wanted or self.Wanted
+        return self.Wanted
     end
     --
     
@@ -357,7 +358,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Model = self.Model
     --
     self.GetModel = function()
-        return self.State.Model or self.Model
+        return self.Model
     end
     --    
 
@@ -366,7 +367,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Plate = self.Plate
     --
     self.GetPlate = function()
-        return self.State.Plate or self.Plate
+        return self.Plate
     end
 
     -- Coords
@@ -397,7 +398,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Inventory = self.Inventory
     --
     self.GetInventory = function()
-        return self.State.Inventory or self.Inventory
+        return self.Inventory
     end
     --
     self.HasItem = function(name)
@@ -406,8 +407,9 @@ function c.class.CreatePlayerVehicle(net, plate)
                 return true, k 
             end
         end
-        return false
+        return false, nil
     end
+    --
     --
     self.GetWeight = function()
         self.Weight = 0
@@ -416,7 +418,7 @@ function c.class.CreatePlayerVehicle(net, plate)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.debug_1("Ignoring invalid item within .GetWeight")
+                c.debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -426,7 +428,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then 
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC, NetID: "..self.Net)
+            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: "..self.ID)
             return 
         end
         local info = {
@@ -443,11 +445,11 @@ function c.class.CreatePlayerVehicle(net, plate)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item) then
+        if c.item.Exists(item.Item) then
             local weapon = c.item.IsWeapon(item.Item)
             local stackable = c.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
-            if (weapon and type(item.Weapon) == "string") or (not stackable and has) then
+            if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
                 self.State.Inventory = self.Inventory
             elseif (stackable and has) then
@@ -464,7 +466,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     -- 
     self.RemoveItem = function(name, slot)
         local has, position = self.HasItem(name)
-        if has and (slot == position) then
+        if has and slot == position then
             table.remove(self.Inventory, position)
             self.State.Inventory = self.Inventory
         end
@@ -475,10 +477,11 @@ function c.class.CreatePlayerVehicle(net, plate)
         self.State.Inventory = self.Inventory
     end
     --
-    self.CompileInventory = function()
+    self.CompressInventory = function()
         local inv = {}
-        for k,v in ipairs(self.Inventory) do
-            inv[k] = {v.Item, v.Quanitity, v.Quality, v.Weapon, v.Meta}
+        for i=1, #self.Inventory do
+            table.insert(inv, i)
+            inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality, self.Inventory[i].Weapon, self.Inventory[i].Meta}
         end
         return inv
     end
@@ -489,7 +492,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Keys = self.Keys
     --
     self.GetKeys = function()
-        return self.State.Keys or self.Keys
+        return self.Keys
     end
     --
     self.SetKeys = function(t)
@@ -531,7 +534,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Condition = self.Condition
     --
     self.GetCondition = function()
-        return self.State.Condition or self.Condition
+        return self.Condition
     end
     --
     self.SetCondition = function(conditions)
@@ -565,7 +568,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Modifications = self.Condition
     --
     self.GetModifications = function()
-        return self.State.Modifications or self.Modifications
+        return self.Modifications
     end
     --
     self.SetModifications = function(modifications)
@@ -612,7 +615,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Fuel = self.Fuel
     --
     self.GetFuel = function()
-        return self.State.Fuel or self.Fuel
+        return self.Fuel
     end
     --
     self.SetFuel = function(v)
@@ -651,7 +654,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Owner = self.Owner
     --
     self.GetOwner = function()
-        return self.State.Owner or self.Owner
+        return self.Owner
     end
     --
 
@@ -660,7 +663,7 @@ function c.class.CreatePlayerVehicle(net, plate)
     self.State.Wanted = self.Wanted
     --
     self.GetWanted = function()
-        return self.State.Wanted or self.Wanted
+        return self.Wanted
     end
     --
 

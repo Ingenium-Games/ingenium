@@ -60,15 +60,15 @@ function c.class.CreateUser(source)
     end
     --
     self.GetName = function()
-        return self.State.Name or self.Name
+        return self.Name
     end
     --
     self.GetAce = function()
-        return self.State.Ace or self.Ace
+        return self.Ace
     end
     --
     self.GetLocale = function()
-        return self.State.Locale or self.Locale
+        return self.Locale
     end
     --
     self.GetID = function()
@@ -76,19 +76,19 @@ function c.class.CreateUser(source)
     end
     --
     self.GetSteam_ID = function()
-        return self.State.Steam_ID or self.Steam_ID
+        return self.Steam_ID
     end
     --
     self.GetFiveM_ID = function()
-        return self.State.FiveM_ID or self.FiveM_ID
+        return self.FiveM_ID
     end
     --
     self.GetLicense_ID = function()
-        return self.State.License_ID or self.License_ID
+        return self.License_ID
     end
     --
     self.GetDiscord_ID = function()
-        return self.State.Discord_ID or self.Discord_ID
+        return self.Discord_ID
     end
     --
     self.GetIP_Address = function()

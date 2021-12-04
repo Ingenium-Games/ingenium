@@ -119,31 +119,31 @@ function c.class.CreateCharacter(source, character_id)
     --
     -- Functions
     self.GetIdentifier = function()
-        return self.State.Character_ID or self.Character_ID
+        return self.Character_ID
     end
     --
     self.GetCharacter_ID = function()
-        return self.State.Character_ID or self.Character_ID
+        return self.Character_ID
     end
     --
     self.GetCity_ID = function()
-        return self.State.City_ID or self.City_ID
+        return self.City_ID
     end
     --
     self.GetBirth_Date = function()
-        return self.State.Birth_Date or self.Birth_Date
+        return self.Birth_Date
     end
     --
     self.GetFirst_Name = function()
-        return self.State.First_Name or self.First_Name
+        return self.First_Name
     end
     --
     self.GetLast_Name = function()
-        return self.State.Last_Name or self.Last_Name
+        return self.Last_Name
     end
     --
     self.GetFull_Name = function()
-        return self.State.Full_Name or self.Full_Name
+        return self.Full_Name
     end
     --
     self.Get = function(k)
@@ -163,7 +163,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetAccounts = function()
-        return self.State.Accounts or self.Accounts
+        return self.Accounts
     end
     --
     self.GetAccount = function(acc)
@@ -185,7 +185,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetLicenses = function()
-        return self.State.Licenses or self.Licenses
+        return self.Licenses
     end
     --
     self.GetLicense = function(license)
@@ -330,7 +330,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetPhone = function()
-        return self.State.Phone or self.Phone
+        return self.Phone
     end
     --
     self.SetPhone = function(s)
@@ -340,7 +340,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     -- 
     self.GetInstance = function()
-        return self.State.Instance or self.Instance
+        return self.Instance
     end
     --
     self.SetInstance = function(v)
@@ -353,7 +353,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     -- 
     self.GetHealth = function()
-        return self.State.Health or self.Health
+        return self.Health
     end
     --
     self.SetHealth = function(v)
@@ -363,7 +363,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetArmour = function()
-        return self.State.Armour or self.Armour
+        return self.Armour
     end
     --
     self.SetArmour = function(v)
@@ -373,7 +373,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetHunger = function()
-        return self.State.Hunger or self.Hunger
+        return self.Hunger
     end
     --
     self.SetHunger = function(v)
@@ -383,7 +383,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetThirst = function()
-        return self.State.Thirst or self.Thirst
+        return self.Thirst
     end
     --
     self.SetThirst = function(v)
@@ -393,7 +393,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetStress = function()
-        return self.State.Stress or self.Stress
+        return self.Stress
     end
     --
     self.SetStress = function(v)
@@ -407,7 +407,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetModifiers = function()
-        return self.State.Modifiers or self.Modifiers
+        return self.Modifiers
     end
     --
     self.SetModifiers = function(t)
@@ -418,7 +418,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetAppearance = function()
-        return self.State.Appearance or self.Appearance
+        return self.Appearance
     end
     --
     self.SetAppearance = function(t)
@@ -428,7 +428,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetTattoos = function()
-        return self.State.Tattoos or self.Tattoos
+        return self.Tattoos
     end
     --
     self.SetTattoos = function(t)
@@ -438,7 +438,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetCoords = function()
-        return self.State.Coords or self.Coords
+        return self.Coords
     end
     --
     self.SetCoords = function(t)
@@ -452,7 +452,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetHotbar = function()
-        return self.State.Hotbar or self.Hotbar
+        return self.Hotbar
     end
     --
     self.SetHotbar = function(t)
@@ -461,7 +461,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.GetWanted = function()
-        return self.State.Wanted or self.Wanted
+        return self.IsWanted
     end
     --
     self.SetWanted = function(b)
@@ -498,7 +498,7 @@ function c.class.CreateCharacter(source, character_id)
         
         ]]--
     self.GetInventory = function()
-        return self.State.Inventory or self.Inventory
+        return self.Inventory
     end
     --
     self.HasItem = function(name)

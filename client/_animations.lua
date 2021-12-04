@@ -193,3 +193,5 @@ c.animation.AddAnimation("amb@world_human_bum_slumped@male@laying_on_left_side@b
 -- Cuff animation
 c.animation.AddAnimation("mp_arrest_paired", "crook_p2_back_right", "Cuffed")
 c.animation.AddAnimation("mp_arrest_paired", "cop_p2_back_right", "Cuffer")
+-- surrender
+c.animation.AddAnimation("random@arrests@busted", "enter", "Surrender")

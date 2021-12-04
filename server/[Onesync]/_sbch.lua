@@ -2,50 +2,51 @@
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
 -- player is the state used for _user.lua and _character.lua as they are merged into one.
-if not c.cookies then
-    c.cookies = {}
+if not c.sbch then
+    c.sbch = {}
 end
-c.cookies.player = {}
+-- c.sbch.
 -- ====================================================================================--
+c.sbch.player = {}
 --
 
-c.cookies.player.IsWanted = AddStateBagChangeHandler('IsWanted', nil, function(bagName, key, value, _, _)
+c.sbch.player.IsWanted = AddStateBagChangeHandler('IsWanted', nil, function(bagName, key, value, _, _)
     local src = bagName:gsub('player:', '')
     TriggerClientEvent("Client:RunChecks:IsWanted", src)
 end)
 --
 
-c.cookies.player.IsSupporter = AddStateBagChangeHandler('IsSupporter', nil, function(bagName, key, value, _, _)
+c.sbch.player.IsSupporter = AddStateBagChangeHandler('IsSupporter', nil, function(bagName, key, value, _, _)
     local src = bagName:gsub('player:', '')
     TriggerClientEvent("Client:RunChecks:IsSupporter", src)
 end)
 --
 
-c.cookies.player.IsDead = AddStateBagChangeHandler('IsDead', nil, function(bagName, key, value, _, _)
+c.sbch.player.IsDead = AddStateBagChangeHandler('IsDead', nil, function(bagName, key, value, _, _)
     local src = bagName:gsub('player:', '')
     TriggerClientEvent("Client:RunChecks:IsDead", src)
 end)
 --
 
-c.cookies.player.IsCuffed = AddStateBagChangeHandler('IsCuffed', nil, function(bagName, key, value, _, _)
+c.sbch.player.IsCuffed = AddStateBagChangeHandler('IsCuffed', nil, function(bagName, key, value, _, _)
     local src = bagName:gsub('player:', '')
     TriggerClientEvent("Client:RunChecks:IsCuffed", src)
 end)
 -- 
 
-c.cookies.player.IsEscorted = AddStateBagChangeHandler('IsEscorted', nil, function(bagName, key, value, _, _)
+c.sbch.player.IsEscorted = AddStateBagChangeHandler('IsEscorted', nil, function(bagName, key, value, _, _)
     local src = bagName:gsub('player:', '')
     TriggerClientEvent("Client:RunChecks:IsEscorted", src)
 end)
 --    
 
-c.cookies.player.IsEscorting = AddStateBagChangeHandler('IsEscorting', nil, function(bagName, key, value, _, _)
+c.sbch.player.IsEscorting = AddStateBagChangeHandler('IsEscorting', nil, function(bagName, key, value, _, _)
     local src = bagName:gsub('player:', '')
     TriggerClientEvent("Client:RunChecks:IsEscorting", src)
 end)
 --
 
-c.cookies.player.IsSwimming = AddStateBagChangeHandler('IsSwimming', nil, function(bagName, key, value, _, _)
+c.sbch.player.IsSwimming = AddStateBagChangeHandler('IsSwimming', nil, function(bagName, key, value, _, _)
     local src = bagName:gsub('player:', '')
     TriggerClientEvent("Client:RunChecks:IsSwimming", src)
 end)
