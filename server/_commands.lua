@@ -18,11 +18,18 @@ RegisterCommand('test', function(source, args, rawCommand)
     print(c.table.Dump(xPlayer.GetInventory()))
 end, false)
 
-RegisterCommand('test3', function(source, args, rawCommand)
+RegisterCommand('test2', function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     local bool = xPlayer.GetSupporter()
     xPlayer.SetSupporter(not bool)
+end, false)
+
+RegisterCommand('test3', function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    local bool = xPlayer.GetCuffed()
+    xPlayer.SetCuffed(not bool)
 end, false)
 
 -- ====================================================================================--

@@ -466,9 +466,19 @@ function c.class.CreateCharacter(source, character_id)
     --
     self.SetWanted = function(b)
         local b = c.check.Boolean(b)
-        self.Wanted = b
-        self.State.Wanted = self.Wanted
+        self.IsWanted = b
+        self.State.IsWanted = self.IsWanted
     end
+    --
+    self.GetCuffed = function()
+        return self.IsCuffed
+    end
+    --
+    self.SetCuffed = function(b)
+        local b = c.check.Boolean(b)
+        self.IsCuffed = b
+        self.State.IsCuffed = self.IsCuffed
+    end    
     --
         --[[ Items are stored as such in the DB
             Will be stored as this
