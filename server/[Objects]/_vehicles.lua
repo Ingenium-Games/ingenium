@@ -34,11 +34,12 @@ function c.vehicle.GetByPlate(plate)
     return false
 end
 
----@param plate string "Plate of vehicle."
-function c.vehicle.GetDumpedHashes(plate)
+function c.vehicle.GetDumpedHashes()
     local t = {}
     for k,v in pairs(c.vehicles) do
         table.insert(t,v.SignedHashes)
     end 
+    
+    print(c.table.Dump(t))
     return t
 end
