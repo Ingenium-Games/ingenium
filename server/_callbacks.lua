@@ -15,6 +15,14 @@ local GetItems = RegisterServerCallback({
     end
 })
 
+local GetVehicleHashes = RegisterServerCallback({
+    eventName = 'GetVehicleHashes',
+    eventCallback = function(source, ...)
+        local items = c.vehicle.GetAllByHash()
+        return items
+    end
+})
+
 local GetInventory = RegisterServerCallback({
     eventName = 'GetInventory',
     eventCallback = function(source, net)

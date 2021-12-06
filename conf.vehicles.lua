@@ -33,3 +33,4 @@ conf.vehicles.classes = {
 [20] = "Commercial",
 [21] = "Train",
 }
+
