@@ -2,7 +2,7 @@
 --  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
 -- ====================================================================================--
 c.vehicle = {} -- function level
-c.vehicles = {} -- database pull - If ever used?	
+c.vehicles = exports["ig.dump"]:GetVehicles()
 c.vdex = {} -- the index/store for currently used vehciles prior to writing to db.
 --[[
 NOTES.
@@ -32,4 +32,13 @@ function c.vehicle.GetByPlate(plate)
         end
     end 
     return false
+end
+
+---@param plate string "Plate of vehicle."
+function c.vehicle.GetDumpedHashes(plate)
+    local t = {}
+    for k,v in pairs(c.vehicles) do
+        table.insert(t,v.SignedHashes)
+    end 
+    return t
 end

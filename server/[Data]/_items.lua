@@ -13,7 +13,7 @@
 
 ]] --
 -- ====================================================================================--
-local weapon_dump = exports["ig.dump"].GetWeapons()
+local weapon_dump = exports["ig.dump"]:GetWeapons()
 
 c.items = { -- table of items
 

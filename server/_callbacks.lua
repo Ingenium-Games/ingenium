@@ -15,10 +15,10 @@ local GetItems = RegisterServerCallback({
     end
 })
 
-local GetVehicleHashes = RegisterServerCallback({
-    eventName = 'GetVehicleHashes',
+local GetDumpedHashes = RegisterServerCallback({
+    eventName = 'GetDumpedHashes',
     eventCallback = function(source, ...)
-        local items = c.vehicle.GetAllByHash()
+        local items = c.vehicle.GetDumpedHashes()
         return items
     end
 })
