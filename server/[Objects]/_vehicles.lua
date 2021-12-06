@@ -37,7 +37,7 @@ end
 function c.vehicle.GetDumpedHashes()
     local t = {}
     for k,v in pairs(c.vehicles) do
-        table.insert(t,v.SignedHashes)
+        table.insert(t, v.SignedHash)
     end 
     
     print(c.table.Dump(t))
