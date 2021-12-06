@@ -43,3 +43,5 @@ function c.vehicle.GetDumpedHashes()
     print(c.table.Dump(t))
     return t
 end
+
+print(c.table.Dump(c.vehicles))
