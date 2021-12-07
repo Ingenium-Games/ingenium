@@ -1,19 +1,11 @@
 -- ====================================================================================--
-
 c.tebex = {}
 --[[
-NOTES.
-    -
-    -
+NOTES
     -
 ]] --
-
-
 -- ====================================================================================--
-
 --[[
-FiveM Specific Variables
---
 {id} - fivem:var id
 {sid} - LIVE SERVER ID IF IN SERVER
 {hexid} - This returns the Hex ID (e.g. steam:110000abf6b0001) for the player.
@@ -32,5 +24,25 @@ FiveM Specific Variables
 {purchaserName} - The name of the player who purchased a gift package. 
 {purchaserUuid} - The UUID of the player who purchased a gift package.
 {purchaseQuantity} - The quantity of the package that was purchased.
---
 ]]-- 
+
+RegisterCommand('AddPriority', function(source, args, rawCommand)
+    local id = args[1]
+    c.sql.user.SetPriority(id, true)
+end, true)
+
+RegisterCommand('RemovePriority', function(source, args, rawCommand)
+    local id = args[1]
+    c.sql.user.SetPriority(id, false)
+end, true)
+
+RegisterCommand('AddCharacterSlot', function(source, args, rawCommand)
+    local id = args[1]
+    c.sql.user.AddCharacterSlot(id, false)
+end, true)
+
+RegisterCommand('TestingCommand', function(source, args, rawCommand)
+    local id = args[1]
+    print("TestingCommand from Tebex")
+    print(table.unpack(args))
+end, true)

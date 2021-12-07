@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 if not c.sql then c.sql = {} end
 --
 c.sql.user = {}
@@ -238,6 +237,37 @@ function c.sql.user.SetBan(license_id, bool, cb)
     }, function(data)
         if data then
             TriggerEvent('txaLogger:CommandExecuted', "Ban set to "..tostring(Bool).." on Primary ID :"..License_ID)
+        end
+        if cb then
+            cb()
+        end
+    end)
+end
+
+function c.sql.user.SetPriority(license_id, bool, cb)
+    if type(bool) ~= "boolean" then c.debug_1("c.sql.user.SetBan, boolean was not passed") return end
+    local License_ID = license_id
+    local Bool = bool
+    MySQL.Async.execute('UPDATE `users` SET `Priority` = @Bool WHERE `License_ID` = @License_ID LIMIT 1;', {
+        ['@Bool'] = Bool,
+        ['@License_ID'] = License_ID
+    }, function(data)
+        if data then
+            TriggerEvent('txaLogger:CommandExecuted', "Priority set to "..tostring(Bool).." on Primary ID :"..License_ID)
+        end
+        if cb then
+            cb()
+        end
+    end)
+end
+
+function c.sql.user.AddCharacterSlot(license_id, cb)
+    local License_ID = license_id
+    MySQL.Async.execute('UPDATE `users` SET `Slots` = Slots + 1 WHERE `License_ID` = @License_ID LIMIT 1;', {
+        ['@License_ID'] = License_ID
+    }, function(data)
+        if data then
+            TriggerEvent('txaLogger:CommandExecuted', "AddCharacterSlot + 1 on Primary ID :"..License_ID)
         end
         if cb then
             cb()
