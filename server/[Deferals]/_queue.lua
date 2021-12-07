@@ -1,5 +1,5 @@
 -- ====================================================================================--
-
+--[[
 local maxplayers = GetConvar(sv_maxclients, 0)
 local queue = {} 
 local priority = {}
@@ -81,3 +81,5 @@ local QueueUpdate = RegisterServerCallback({
         RemoveFromQueue(source)
     end
 })
+
+]]--

@@ -225,7 +225,7 @@ function c.sql.user.GetBan(license_id, cb)
     return result
 end
 
---- Set - `Ban` = bool from the users License_ID identifier
+--- Get/Set - `Ban` = bool from the users License_ID identifier
 -- @License_ID
 function c.sql.user.SetBan(license_id, bool, cb)
     if type(bool) ~= "boolean" then c.debug_1("c.sql.user.SetBan, boolean was not passed") return end
@@ -244,13 +244,16 @@ function c.sql.user.SetBan(license_id, bool, cb)
     end)
 end
 
-function c.sql.user.SetPriority(license_id, bool, cb)
+
+--- Get/Set
+-- @FiveM_ID
+function c.sql.user.SetPriority(fivem_id, bool, cb)
     if type(bool) ~= "boolean" then c.debug_1("c.sql.user.SetBan, boolean was not passed") return end
-    local License_ID = license_id
+    local FiveM_ID = fivem_id
     local Bool = bool
-    MySQL.Async.execute('UPDATE `users` SET `Priority` = @Bool WHERE `License_ID` = @License_ID LIMIT 1;', {
+    MySQL.Async.execute('UPDATE `users` SET `Priority` = @Bool WHERE `FiveM_ID` = @FiveM_ID LIMIT 1;', {
         ['@Bool'] = Bool,
-        ['@License_ID'] = License_ID
+        ['@FiveM_ID'] = FiveM_ID
     }, function(data)
         if data then
             TriggerEvent('txaLogger:CommandExecuted', "Priority set to "..tostring(Bool).." on Primary ID :"..License_ID)
@@ -261,10 +264,12 @@ function c.sql.user.SetPriority(license_id, bool, cb)
     end)
 end
 
-function c.sql.user.AddCharacterSlot(license_id, cb)
-    local License_ID = license_id
-    MySQL.Async.execute('UPDATE `users` SET `Slots` = Slots + 1 WHERE `License_ID` = @License_ID LIMIT 1;', {
-        ['@License_ID'] = License_ID
+--- Add
+-- @FiveM_ID
+function c.sql.user.AddCharacterSlot(fivem_id, cb)
+    local FiveM_ID = fivem_id
+    MySQL.Async.execute('UPDATE `users` SET `Slots` = Slots + 1 WHERE `FiveM_ID` = @FiveM_ID LIMIT 1;', {
+        ['@FiveM_ID'] = FiveM_ID
     }, function(data)
         if data then
             TriggerEvent('txaLogger:CommandExecuted', "AddCharacterSlot + 1 on Primary ID :"..License_ID)
