@@ -133,3 +133,6 @@ conf.paycycle = conf.min * 15
 
 conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
 conf.lock = nil
+
+
+test
