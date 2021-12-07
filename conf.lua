@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 conf = {}
 -- Just some time, because fuck maths.
 conf.sec = 1000
@@ -132,6 +131,3 @@ conf.paycycle = conf.min * 15
 
 conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
 conf.lock = nil
-
-
-test
