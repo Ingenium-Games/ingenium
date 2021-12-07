@@ -1,13 +1,8 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
---[[
- 
-EXPERIMENTAL, DO NOT USE.
-
 
 local maxplayers = GetConvar(sv_maxclients, 0)
 local queue = {} 
+local priority = {}
 
 function AddToQueue(source)
     local num = tonumber(source)
@@ -25,6 +20,25 @@ function PlaceInQueue(source)
     end
     return count
 end
+
+function Queue(src, name, data, d)
+    Citizen.Wait(0)
+    d.update("Adding to queue")
+    AddToQueue(src)
+    if data.Priority then
+        table.insert(queue, src)
+    end
+    Citizen.Wait(0)
+
+
+
+
+
+
+
+
+end
+
 
 function TriggerQueueUpdate(d)
     local place = PlaceInQueue() 
@@ -50,7 +64,7 @@ function TriggerQueueUpdate(d)
             Citizen.Wait(0)    
             d.upate("Joining...")
             Citizen.Wait(1000)
-            d.done("")
+            d.done()
         end
     end)
 end
@@ -67,6 +81,3 @@ local QueueUpdate = RegisterServerCallback({
         RemoveFromQueue(source)
     end
 })
-
-
-]]--

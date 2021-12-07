@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 c.note = {} -- function level
 c.notes = false -- dropped items table
 --[[

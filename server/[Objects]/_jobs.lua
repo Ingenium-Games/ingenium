@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 c.job = {} -- Function Table
 c.jobs = {} -- DB Pull
 c.jdex = {} -- Job Index for xJobs functions.

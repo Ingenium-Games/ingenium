@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 c.vehicle = {} -- function level
 c.vehicles = exports["ig.dump"]:GetVehicles()
 c.vdex = {} -- the index/store for currently used vehciles prior to writing to db.

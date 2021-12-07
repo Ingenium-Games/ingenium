@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 c.item = {} -- function level
 -- c.items is found in /[Data]/_items.lua as dumped from ig.dump
 --[[

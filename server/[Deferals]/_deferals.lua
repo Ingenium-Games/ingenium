@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 
 AddEventHandler("playerConnecting", function(name, reject, d)
     local src = source
@@ -35,7 +34,11 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 }})
         }})
     )
+    --
+
     local id = c.identifier(src)
+    local data = c.sql.user.Get(id)
+
     --    
     local namecheck = name:match("%W")
     if namecheck then
@@ -46,8 +49,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         }))
     end
 
-    local ban = c.sql.user.GetBan(id)
-    if ban then
+    if data.Ban then
         drop = true
         table.insert(facts.facts, DeferralCards.Container:Fact({
             title = "Issue ⁉️",
@@ -103,8 +105,8 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     end
     --
     Citizen.Wait(2000)
-    d.presentCard(json.encode(connecting), function(data, raw)
-        if data.Submit then
+    d.presentCard(json.encode(connecting), function(dete, raw)
+        if dete.Submit then
             if drop then
                 Citizen.Wait(0)
                 d.done("You saw the reasons a moment ago, on an adaptive card. It renders all the reasons why you cannot join.")
@@ -113,8 +115,9 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 -- Send to the queue.
                 Citizen.Wait(0)
                 -- Too alter and present cards from _queue.lua
-                d.done()
+                Queue(src, name, data, d)
             end
         end 
     end)
 end)
+

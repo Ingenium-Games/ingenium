@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 --[[
 NOTES.
     - Create job as object to check for ownership, permit account or safe access or to 

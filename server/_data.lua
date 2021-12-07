@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 c.data = {} -- data table for funcitons.
 c.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
 --[[

@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 c.json = {}
 --[[
     I only use these for data files in Json, anyone can and should change them to a more 

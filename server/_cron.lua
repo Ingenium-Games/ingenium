@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 c.cron = {} -- functions
 c.crons = {} -- table of jobs to action @ times.
 --[[

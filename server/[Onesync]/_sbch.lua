@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 -- player is the state used for _user.lua and _character.lua as they are merged into one.
 if not c.sbch then
     c.sbch = {}

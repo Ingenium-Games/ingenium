@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 --[[
     Turn the shared data into a Metatable with locked to prevent tampering.
     Call it with setmetatable to local tables for shared uses.

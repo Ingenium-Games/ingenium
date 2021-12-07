@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 c.modifier = {} -- function level
 c.modifiers = {    -- taken from server too.
     ["Hunger"] = 1,

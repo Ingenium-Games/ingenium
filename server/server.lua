@@ -1,6 +1,5 @@
 -- ====================================================================================--
---  MIT License : Ingenium-Games (Twiitchter) : https://www.ingenium.games
--- ====================================================================================--
+
 --
 SetGameType(conf.gamemode)
 SetConvarServerInfo("Game Mode", conf.gamemode)
