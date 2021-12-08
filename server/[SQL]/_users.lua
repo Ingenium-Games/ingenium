@@ -251,7 +251,7 @@ function c.sql.user.SetPriority(fivem_id, bool, cb)
     if type(bool) ~= "boolean" then c.debug_1("c.sql.user.SetBan, boolean was not passed") return end
     local FiveM_ID = ("fivem:%s"):format(fivem_id)
     local Bool = bool
-    MySQL.Async.execute('UPDATE `users` SET `Priority` = @Bool WHERE `FiveM_ID` = fivem:@FiveM_ID LIMIT 1;', {
+    MySQL.Async.execute('UPDATE `users` SET `Priority` = @Bool WHERE `FiveM_ID` = @FiveM_ID LIMIT 1;', {
         ['@Bool'] = Bool,
         ['@FiveM_ID'] = FiveM_ID
     }, function(data)
