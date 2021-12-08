@@ -42,8 +42,31 @@ function c.sql.char.GetAll(primary_id, cb)
     local Primary_ID = primary_id
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchAll('SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID LIMIT 100;', {
+    MySQL.Async.fetchAll('SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID;', {
         ['@Primary_ID'] = Primary_ID
+    }, function(data)
+        result = data
+        IsBusy = false
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+    return result
+end
+
+--- Get - Info on the characters owned to prefill the multicharacter selection
+-- @License_ID
+function c.sql.char.GetAllPermited(primary_id, slots, cb)
+    local Primary_ID = primary_id
+    local Slots = slots
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchAll('SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID LIMIT @Slots;', {
+        ['@Primary_ID'] = Primary_ID,
+        ['@Slots'] = Slots, 
     }, function(data)
         result = data
         IsBusy = false

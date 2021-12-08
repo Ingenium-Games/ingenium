@@ -7,12 +7,17 @@
 RegisterNetEvent("Server:Character:List")
 AddEventHandler("Server:Character:List", function(req, Primary_ID)
     local src = tonumber(req) or source
-    local Characters = c.sql.char.GetAll(Primary_ID)
+    local Slots, Characters
+    --
+    Slots = c.sql.user.GetSlots(Primary_ID, function()
+        Characters = c.sql.char.GetAllPermited(Primary_ID, Slots)
+    end)
+    --
     local Command = "OnJoin"
     -- Send the data table to the client that requested it...
     TriggerClientEvent("Client:Character:Open", src, Command, Characters)
     -- Place the user in their own instance until the user has joined and loaded.
-    c.inst.SetPlayer(src, c.inst.New(), true)
+    c.inst.SetPlayer(src, src, true)
 end)
 
 -- [C]

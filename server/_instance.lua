@@ -1,24 +1,11 @@
 -- ====================================================================================--
-
 c.inst = {}
 --[[
-NOTES.
-    -
-    - In theroy this could be added to all entity objects.. To Do...
+NOTES
     -
 ]] --
 
-
 -- ====================================================================================--
-
-local count = 1
-
--- There is no longer a limit on instaces/buckets.
---- Rotate through a list of numbers to generate a new instance with.
-function c.inst.New()
-    count = count + 1
-    return count
-end
 
 --- Sets the player and their ped entity to a routing bucket.
 ---@param source number ""

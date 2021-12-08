@@ -244,6 +244,26 @@ function c.sql.user.SetBan(license_id, bool, cb)
     end)
 end
 
+--- Get - `Ban` from the users License_ID identifier
+-- @License_ID
+function c.sql.user.GetPriority(license_id, cb)
+    local License_ID = license_id
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchScalar('SELECT `Priority` FROM `users` WHERE `License_ID` = @License_ID LIMIT 1;', {
+        ['@License_ID'] = License_ID
+    }, function(data)
+        result = data
+        IsBusy = false
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+    return result
+end
 
 --- Get/Set
 -- @FiveM_ID
@@ -262,6 +282,27 @@ function c.sql.user.SetPriority(fivem_id, bool, cb)
             cb()
         end
     end)
+end
+
+--- Get - `Ban` from the users License_ID identifier
+-- @License_ID
+function c.sql.user.GetSlots(license_id, cb)
+    local License_ID = license_id
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchScalar('SELECT `Slots` FROM `users` WHERE `License_ID` = @License_ID LIMIT 1;', {
+        ['@License_ID'] = License_ID
+    }, function(data)
+        result = data
+        IsBusy = false
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+    return result
 end
 
 --- Add

@@ -50,6 +50,8 @@ function PlayerKilled()
     }
     TriggerEvent("Client:Character:Death", data)
     TriggerServerEvent("Server:Character:Death", data)
+    Wait(2500)
+    SetEntityCoords(ped, data.Coords)
 end
 
 Citizen.CreateThread(function()
