@@ -9,11 +9,14 @@ AddEventHandler("Server:Character:List", function(req, Primary_ID)
     local src = tonumber(req) or source
     local p = promise.new()
     local Slots = c.sql.user.GetSlots(Primary_ID)
-    local Characters = c.sql.char.GetAllPermited(Primary_ID, Slots)
-    local Command = "OnJoin"
-    local Data = {["Characters"] = Characters, ["Slots"] = Slots}
     p:resolve()
     Citizen.Await(p)
+    local p = promise.new()
+    local Characters = c.sql.char.GetAllPermited(Primary_ID, Slots)
+    p:resolve()
+    Citizen.Await(p)
+    local Command = "OnJoin"
+    local Data = {["Characters"] = Characters, ["Slots"] = Slots}
     -- Send the data table to the client that requested it...
     TriggerClientEvent("Client:Character:Open", src, Command, Data)
     -- Place the user in their own instance until the user has joined and loaded.
