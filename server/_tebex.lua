@@ -40,9 +40,3 @@ RegisterCommand('AddCharacterSlot', function(source, args, rawCommand)
     local id = args[1]
     c.sql.user.AddCharacterSlot(id, false)
 end, true)
-
-RegisterCommand('TestingCommand', function(source, args, rawCommand)
-    local id = args[1]
-    print("TestingCommand from Tebex",args[1],args[2])
-    print(table.unpack(args))
-end, true)

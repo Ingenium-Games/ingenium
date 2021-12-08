@@ -256,7 +256,7 @@ function c.sql.user.SetPriority(fivem_id, bool, cb)
         ['@FiveM_ID'] = FiveM_ID
     }, function(data)
         if data then
-            TriggerEvent('txaLogger:CommandExecuted', "Priority set to "..tostring(Bool).." on FiveM_ID : fivem:"..FiveM_ID)
+            TriggerEvent('txaLogger:CommandExecuted', "Priority set to "..tostring(Bool).." on FiveM_ID : "..FiveM_ID)
         end
         if cb then
             cb()
@@ -279,3 +279,4 @@ function c.sql.user.AddCharacterSlot(fivem_id, cb)
         end
     end)
 end
+
