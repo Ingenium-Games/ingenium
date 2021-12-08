@@ -8,14 +8,19 @@ RegisterNetEvent("Server:Character:List")
 AddEventHandler("Server:Character:List", function(req, Primary_ID)
     local src = tonumber(req) or source
     local Slots, Characters
+    local p = promise.new()
     --
     Slots = c.sql.user.GetSlots(Primary_ID, function()
-        Characters = c.sql.char.GetAllPermited(Primary_ID, Slots)
+        Characters = c.sql.char.GetAllPermited(Primary_ID, Slots, function()
+            p:resolve()
+        end)
     end)
     --
     local Command = "OnJoin"
+    local Data = {["Characters"] = Characters, ["Slots"] = Slots}
+    Citizen.Await(p)
     -- Send the data table to the client that requested it...
-    TriggerClientEvent("Client:Character:Open", src, Command, Characters)
+    TriggerClientEvent("Client:Character:Open", src, Command, Data)
     -- Place the user in their own instance until the user has joined and loaded.
     c.inst.SetPlayer(src, src, true)
 end)
