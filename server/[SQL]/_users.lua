@@ -249,14 +249,14 @@ end
 -- @FiveM_ID
 function c.sql.user.SetPriority(fivem_id, bool, cb)
     if type(bool) ~= "boolean" then c.debug_1("c.sql.user.SetBan, boolean was not passed") return end
-    local FiveM_ID = fivem_id
+    local FiveM_ID = ("fivem:%s"):format(fivem_id)
     local Bool = bool
-    MySQL.Async.execute('UPDATE `users` SET `Priority` = @Bool WHERE `FiveM_ID` = @FiveM_ID LIMIT 1;', {
+    MySQL.Async.execute('UPDATE `users` SET `Priority` = @Bool WHERE `FiveM_ID` = fivem:@FiveM_ID LIMIT 1;', {
         ['@Bool'] = Bool,
         ['@FiveM_ID'] = FiveM_ID
     }, function(data)
         if data then
-            TriggerEvent('txaLogger:CommandExecuted', "Priority set to "..tostring(Bool).." on Primary ID :"..License_ID)
+            TriggerEvent('txaLogger:CommandExecuted', "Priority set to "..tostring(Bool).." on FiveM_ID : fivem:"..FiveM_ID)
         end
         if cb then
             cb()
@@ -267,12 +267,12 @@ end
 --- Add
 -- @FiveM_ID
 function c.sql.user.AddCharacterSlot(fivem_id, cb)
-    local FiveM_ID = fivem_id
+    local FiveM_ID = ("fivem:%s"):format(fivem_id)
     MySQL.Async.execute('UPDATE `users` SET `Slots` = Slots + 1 WHERE `FiveM_ID` = @FiveM_ID LIMIT 1;', {
         ['@FiveM_ID'] = FiveM_ID
     }, function(data)
         if data then
-            TriggerEvent('txaLogger:CommandExecuted', "AddCharacterSlot + 1 on Primary ID :"..License_ID)
+            TriggerEvent('txaLogger:CommandExecuted', "AddCharacterSlot + 1 on FiveM_ID : "..FiveM_ID)
         end
         if cb then
             cb()
