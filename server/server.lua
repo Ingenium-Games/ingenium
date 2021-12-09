@@ -37,6 +37,7 @@ AddEventHandler('onResourceStart', function(resourceName)
     c.pick.CleanUp()
     c.note.CleanUp()
     --
+    Queue.OnReady()
 end)
 -- ====================================================================================--
 RegisterNetEvent('Server:PlayerConnecting')

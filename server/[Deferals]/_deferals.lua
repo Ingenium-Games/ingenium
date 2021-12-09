@@ -115,8 +115,8 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 -- Send to the queue.
                 Citizen.Wait(0)
                 -- Too alter and present cards from _queue.lua
-                d.done()
-                -- Queue(src, name, data, d)
+                --d.done()
+                core_Queue(src, name, data, d)
             end
         end 
     end)
