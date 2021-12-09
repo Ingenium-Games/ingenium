@@ -13,12 +13,12 @@ shared_scripts {"conf.lua", "conf.default.lua", "conf.vehicles.lua", "conf.disab
 ------------------------------------------------------------------------------
 client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Credits]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "client/_functions.lua", "client/**/*.lua"}
 ------------------------------------------------------------------------------
-server_scripts {"@mysql-async/lib/MySQL.lua", "@connectqueue/connectqueue.lua", "server/_var.lua", "shared/[Tools]/*.lua", "shared/[Credits]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "server/_functions.lua", "server/**/*.lua"}
+server_scripts {"@mysql-async/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]/*.lua", "shared/[Credits]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "server/_functions.lua", "server/**/*.lua"}
 ------------------------------------------------------------------------------
 exports {"c", "RegisterClientCallback", "UnregisterClientCallback", "TriggerClientCallback", "TriggerServerCallback"}
 ------------------------------------------------------------------------------
 server_exports {"c", "RegisterServerCallback", "UnregisterServerCallback", "TriggerClientCallback", "TriggerServerCallback"}
 ------------------------------------------------------------------------------
-dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump", "connectqueue"}
+dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump"}
 ------------------------------------------------------------------------------
 files {"data/*.json"}
