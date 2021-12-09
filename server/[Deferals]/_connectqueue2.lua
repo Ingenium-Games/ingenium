@@ -428,7 +428,7 @@ function Queue:OnJoin(cb, resource)
 end
 
 
-function joiningqueue(name, setKickReason, deferrals)
+function joiningqueue(source, name, setKickReason, deferrals)
     local src = source
     local ids = Queue:GetIds(src)
     local name = GetPlayerName(src)

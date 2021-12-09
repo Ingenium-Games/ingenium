@@ -38,7 +38,6 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     local id = c.identifier(src)
     local data = c.sql.user.Get(id)
     if data.Priority then
-        print(name.." Adding Prio")
         Queue.AddPriority(data.Steam_ID)
     end
     --    
@@ -115,7 +114,8 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             else
                 -- Send to the queue.
                 Citizen.Wait(0)
-                joiningqueue(src, reject, d)
+                d.done()
+                joiningqueue(src, name, reject, d)
             end
         end 
     end)
