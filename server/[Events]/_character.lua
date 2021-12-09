@@ -47,7 +47,7 @@ AddEventHandler("Server:Character:Delete", function(Character_ID)
     local src = tonumber(source)
     local primary_id = c.identifier(src)
     c.sql.char.Delete(Character_ID, function()
-        TriggerEvent("Server:Character:List", src, primary_id)
+        DropPlayer(src, 'Character with id: '..Character_ID..' was Deleted Successfully, please rejoin.')
     end)
 end)
 
