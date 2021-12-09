@@ -35,10 +35,12 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         }})
     )
     --
-
     local id = c.identifier(src)
     local data = c.sql.user.Get(id)
-
+    if data.Priority then
+        print(name.." Adding Prio")
+        Queue.AddPriority(data.Steam_ID)
+    end
     --    
     local namecheck = name:match("%W")
     if namecheck then
@@ -48,7 +50,6 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             value = "Your name contains forbidden characters."
         }))
     end
-
     if data.Ban then
         drop = true
         table.insert(facts.facts, DeferralCards.Container:Fact({
@@ -114,7 +115,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             else
                 -- Send to the queue.
                 Citizen.Wait(0)
-                core_Queue(src, name, data, reject, d)
+                joiningqueue(src, reject, d)
             end
         end 
     end)

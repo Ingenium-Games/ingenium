@@ -4,11 +4,6 @@ Queue.Exports = nil
 Queue.ReadyCbs = {}
 Queue.CurResource = GetCurrentResourceName()
 
-
-exports("GetQueueExports", function()
-    return Queue
-end)
-
 function Queue.OnReady(cb)
     if not cb then return end
     if Queue.IsReady() then cb() return end
@@ -35,7 +30,7 @@ function Queue.IsReady()
 end
 
 function Queue.LoadExports()
-    Queue.Exports = exports[Queue.CurResource]:GetQueueExports()
+    Queue.Exports = GetQueueExports()
     Queue.Ready = true
     Queue.ReadyCallbacks()
 end

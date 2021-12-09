@@ -5,9 +5,6 @@ function core_Queue(source, name, data, reject, defferals)
     local name = name
     Citizen.Wait(0)
     defferals.update("Adding "..name..", to queue system and checking for priotity")
-    if data.Priority then
-        Queue:AddPriority(tostring(data.Steam_ID), 1)
-    end
     Citizen.Wait(1000)
     local ids = Queue:GetIds(src)
     local connectTime = os_time()
@@ -21,6 +18,9 @@ function core_Queue(source, name, data, reject, defferals)
         end
     end)
 
+    if data.Priority then
+        Queue:AddPriority(tostring(data.Steam_ID), 1)
+    end
     Citizen.Wait(500)
 
     local function done(msg, _deferrals)

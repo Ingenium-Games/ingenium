@@ -1,16 +1,3 @@
-if not IsDuplicityVersion() then
-    Citizen.CreateThread(function()
-        while true do
-            Citizen.Wait(0)
-            if NetworkIsSessionStarted() then
-                TriggerServerEvent("Queue:playerActivated")
-                return
-            end
-        end
-    end)
-    return
-end
-
 local Queue = {}
 -- EDIT THESE IN SERVER.CFG + OTHER OPTIONS IN QConfig.LUA
 Queue.MaxPlayers = GetConvarInt("sv_maxclients", 48)
@@ -18,6 +5,9 @@ Queue.Debug = GetConvar("sv_debugqueue", "true") == "true" and true or false
 Queue.DisplayQueue = GetConvar("sv_displayqueue", "true") == "true" and true or false
 Queue.InitHostName = GetConvar("sv_hostname")
 
+function GetQueueExports()
+    return Queue
+end
 
 -- This is needed because msgpack will break when tables are too large
 local _Queue = {}
@@ -438,7 +428,7 @@ function Queue:OnJoin(cb, resource)
 end
 
 
-local function playerConnect(name, setKickReason, deferrals)
+function joiningqueue(name, setKickReason, deferrals)
     local src = source
     local ids = Queue:GetIds(src)
     local name = GetPlayerName(src)
