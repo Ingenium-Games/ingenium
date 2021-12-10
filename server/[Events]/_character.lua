@@ -135,8 +135,10 @@ AddEventHandler("Server:Character:Ready", function()
     c.inst.SetPlayer(src, xPlayer.GetInstance())
     -- Remove from current ACL Job Group
     ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
-    --
+    -- to trigger state updates for clients
     xPlayer.SetJob(xPlayer.GetJob())
+    xPlayer.GetCash() -- this triggers state chagnes
+    xPlayer.GetBank() -- this triggers state chagnes
 end)
 
 -- Use this to remove any things connected to Characters like police blips etc.
