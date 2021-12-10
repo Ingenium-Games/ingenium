@@ -26,17 +26,17 @@ QConfig.ConnectTimeOut = 600
 QConfig.QueueTimeOut = 90
 
 -- will give players temporary priority when they disconnect and when they start loading in
-QConfig.EnableGrace = false
+QConfig.EnableGrace = true
 
 -- how much priority power grace time will give
-QConfig.GracePower = 5
+QConfig.GracePower = 2
 
 -- how long grace time lasts in seconds
 QConfig.GraceTime = 480
 
 -- on resource start, players can join the queue but will not let them join for __ milliseconds
 -- this will let the queue settle and lets other resources finish initializing
-QConfig.JoinDelay = 5000
+QConfig.JoinDelay = 30000
 
 -- will show how many people have temporary priority in the connection message
 QConfig.ShowTemp = false

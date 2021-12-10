@@ -435,8 +435,6 @@ function joiningqueue(source, name, setKickReason, deferrals)
     local connectTime = os_time()
     local connecting = true
 
-    deferrals.defer()
-
     Citizen.CreateThread(function()
         while connecting do
             Citizen.Wait(100)
