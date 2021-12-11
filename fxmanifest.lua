@@ -6,6 +6,7 @@ description "Ingenium Games - Core"
 version "0.8.0"
 ------------------------------------------------------------------------------
 lua54 "yes"
+ui_page "nui/index.html"
 loadscreen "https://www.ingenium.games/"
 loadscreen_cursor "yes"
 ------------------------------------------------------------------------------
@@ -21,4 +22,4 @@ server_exports {"c", "RegisterServerCallback", "UnregisterServerCallback", "Trig
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump"}
 ------------------------------------------------------------------------------
-files {"data/*.json"}
+files {"data/*.json", "nui/index.html", "nui/index.css", "nui/index.js", "nui/img/*.png", "nui/libs/*.js"}

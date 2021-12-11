@@ -63,5 +63,7 @@ function c.camera.Advanced(type, px, py, pz, rx, ry, rz, fov)
 end
 
 function c.camera.CleanUp(camera)
+    SetCamActive(camera, false)
+    DestroyCam(camera)
     table.remove(c.cameras, camera)
 end

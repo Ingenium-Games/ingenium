@@ -30,14 +30,13 @@ AddEventHandler("Server:Character:Join", function(Character_ID)
     -- If the User selected the NEW button on the NUI, the Character_ID will be listed as NEW, if this is the case, trigger the registration NUI?
     if (Character_ID == "New") then
         local message = "OnNew"
-        TriggerClientEvent("Client:Character:Open", src, message)
+        TriggerClientEvent("Client:Character:Create", src)
     elseif Character_ID ~= nil then
         local Coords = c.sql.char.GetCoords(Character_ID)
         c.data.LoadPlayer(src, Character_ID)
-        TriggerClientEvent("Client:Character:ReSpawn", src, Character_ID, Coords)
+        TriggerClientEvent("Client:Character:ReSpawn", src, Coords)
     elseif Character_ID == nil then
-        local message = "OnNew"
-        TriggerClientEvent("Client:Character:Open", src, message)
+        DropPlayer(src, "You dont have a character selected, this is impossible, bye.")
     end
 end)
 
@@ -51,15 +50,21 @@ AddEventHandler("Server:Character:Delete", function(Character_ID)
     end)
 end)
 
+RegisterNetEvent("Server:Character:Failed")
+AddEventHandler("Server:Character:Failed", function()
+    local src = tonumber(source)
+    DropPlayer(src, "Actually make a character...")
+end)
+
 
 -- Need to move this and clean it the fuck up, its gross atm.
 -- [S]
-RegisterNetEvent("Server:Character:Create")
-AddEventHandler("Server:Character:Create", function(first_name, last_name, height, birth_date)
+RegisterNetEvent("Server:Character:Register")
+AddEventHandler("Server:Character:Register", function(first_name, last_name, height, birth_date, appearance)
     local src = tonumber(source)
     -- Run a check to see if it being exploited.
     if c.data.GetPlayer(src) ~= false then
-        c.eventban(src, "Server:Character:Create")
+        c.eventban(src, "Server:Character:Register")
     end
     local p = promise.new()
     local character_id = c.sql.gen.CharacterID()
@@ -81,6 +86,7 @@ AddEventHandler("Server:Character:Create", function(first_name, last_name, heigh
     data.Job = json.encode(conf.default.job)
     data.Accounts = json.encode(conf.default.accounts)
     data.Modifiers = json.encode(conf.default.modifiers)
+    data.Appearance = json.encode(appearance)
     
     c.sql.char.Add(data, function()
         -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etc.
@@ -98,7 +104,7 @@ AddEventHandler("Server:Character:Create", function(first_name, last_name, heigh
     --[[
             ADD YOUR CHARACTER CREATION EVENT BELOW
     ]]--
-    TriggerClientEvent("Client:Character:Create", src)
+    TriggerClientEvent('Client:Character:ReSpawn', src, data.Coords)
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
     ]]--
@@ -109,11 +115,17 @@ AddEventHandler("Server:Character:SaveSkin", function(appearance, bool)
 	local src = source
 	local xPlayer = c.data.GetPlayer(src)
 	local identifier = xPlayer.GetIdentifier()
-	c.sql.char.SetAppearance(identifier, appearance, function()
-		xPlayer.SetAppearance(appearance)
-	end)
-    if type(bool) == "boolean" and bool == true then
-        c.inst.SetPlayerDefault(src)
+    if appearance == false then
+        c.sql.char.Delete(identifier, function()
+            xPlayer.Kick("You didn't make a Character, try again.")
+        end)
+    else
+        c.sql.char.SetAppearance(identifier, appearance, function()
+            xPlayer.SetAppearance(appearance)
+        end)
+        if type(bool) == "boolean" and bool == true then
+            c.inst.SetPlayerDefault(src)
+        end
     end
 end)
 
