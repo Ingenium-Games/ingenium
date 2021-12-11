@@ -21,22 +21,14 @@ function OnJoin(data) {
     };
 };
 
-function OnAction(data) {
-    if (data !== null) {
-        $.each(data, function (index, value) {
-            $('#' + value.Character_ID).remove();
-        });
-    }
-};
-
 function Selected(key) {
-    if (key === 'New') {
-        Character_ID = 'New'
-        document.getElementById('name').innerText = 'New Character'
-        document.getElementById('created').innerText = 'Click the tick'
-        document.getElementById('lastseen').innerText = 'Click the tick'
-        document.getElementById('city').innerText = 'Click the tick'
-        document.getElementById('phone').innerText = 'Click the tick'
+    if (key === "New") {
+        Character_ID = "New"
+        document.getElementById("name").innerText = "New Character"
+        document.getElementById("created").innerText = "Click the tick"
+        document.getElementById("lastseen").innerText = "Click the tick"
+        document.getElementById("city").innerText = "Click the tick"
+        document.getElementById("phone").innerText = "Click the tick"
     } else {
         Character_ID = Characters[key].Character_ID
         Key = Characters[key]
@@ -46,17 +38,17 @@ function Selected(key) {
         let Login = Characters[key].Last_Seen
         let Phone = Characters[key].Phone
         let City = Characters[key].City_ID
-        document.getElementById('name').innerText = First + ' ' + Last;
-        document.getElementById('created').innerText = new Date(Created).toISOString().slice(0, 19).replace('T', ' ')
-        document.getElementById('lastseen').innerText = new Date(Login).toISOString().slice(0, 19).replace('T', ' ')
-        document.getElementById('city').innerText = City
-        document.getElementById('phone').innerText = Phone
+        document.getElementById("name").innerText = First + " " + Last;
+        document.getElementById("created").innerText = new Date(Created).toISOString().slice(0, 19).replace("T", " ")
+        document.getElementById("lastseen").innerText = new Date(Login).toISOString().slice(0, 19).replace("T", " ")
+        document.getElementById("city").innerText = City
+        document.getElementById("phone").innerText = Phone
     }
 };
 
 function CharacterDelete() {
     if (Character_ID !== null) {
-        $.post('https://ig.core/Client:Character:Delete', JSON.stringify({
+        $.post("https://ig.core/Client:Character:Delete", JSON.stringify({
             ID: Character_ID,
         }));
     };
@@ -64,12 +56,11 @@ function CharacterDelete() {
 
 function CharacterJoin() {
     if (Character_ID !== null) {
-        $.post('https://ig.core/Client:Character:Join', JSON.stringify({
+        $.post("https://ig.core/Client:Character:Join", JSON.stringify({
             ID: Character_ID,
         }));
-        $("#Sidebar").hide();
-        $("#CharacterList").hide();
-        OnAction(Characters);
+        $("#Sidebar").remove();
+        $("#CharacterList").remove();
     };
 };
 
@@ -79,21 +70,20 @@ function CharacterMake() {
     var ln = document.getElementById("LastName").value;
     var cm = document.getElementById("Height").value;
     var dob = document.getElementById("DateOfBirth").value;
-    $.post('https://ig.core/Client:Character:Register', JSON.stringify({
+    $.post("https://ig.core/Client:Character:Register", JSON.stringify({
         First_Name: fn,
         Last_Name: ln,
         Height: cm,
         Birth_Date: dob,
     }));
-    $("#CharacterMake").hide();
-    OnAction(Characters);
+    $("#CharacterMake").remove();
 };
 
 $(document).ready(function () {
     window.onload = (e) => {
-        $('#DateOfBirth').mask('00-00-0000', { clearIfNotMatch: true });
-        $('#Height').mask('000', { clearIfNotMatch: true });
-        $('#CharacterMake').submit((e) => {
+        $("#DateOfBirth").mask("00-00-0000", { clearIfNotMatch: true });
+        $("#Height").mask("000", { clearIfNotMatch: true });
+        $("#CharacterMake").submit((e) => {
             if (e.defaultPrevented) {
                 return; // Do nothing if the event was already processed
             }
@@ -127,27 +117,24 @@ $(document).ready(function () {
             }
         });
 
-        window.addEventListener('message', (e) => {
+        window.addEventListener("message", (e) => {
             if (e.defaultPrevented) {
                 return; // Do nothing if the event was already processed
             }
             let message = e.data.message
             let data = e.data.data;
             switch (message) {
-                case 'OnJoin':
+                case "Joining":
                     Characters = data.Characters;
                     Slots = data.Slots;
                     $("#Sidebar").show();
                     $("#CharacterList").show();
-                    $("#CharacterMake").hide();
                     OnJoin(Characters);
                     break;
-                case 'OnNew':
-                    $("#Sidebar").hide();
-                    $("#CharacterList").hide();
+                case "Register":
                     $("#CharacterMake").show();
                     break;
-                case 'default':
+                case "default":
                     break;
             }
             e.preventDefault();

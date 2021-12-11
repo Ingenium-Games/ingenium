@@ -16,7 +16,7 @@ AddEventHandler("Server:Character:List", function(req, Primary_ID)
     p:resolve()
     Citizen.Await(p)
     -- Send the data table to the client that requested it...
-    TriggerClientEvent("Client:Core:UI", src, "OnJoin", {["Characters"] = Characters, ["Slots"] = Slots})
+    TriggerClientEvent("Client:Core:UI", src, "Joining", {["Characters"] = Characters, ["Slots"] = Slots})
     -- Place the user in their own instance until the user has joined and loaded.
     c.inst.SetPlayer(src)
 end)

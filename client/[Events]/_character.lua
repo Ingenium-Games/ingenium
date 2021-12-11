@@ -34,6 +34,7 @@ AddEventHandler("Client:Character:Create", function()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
     DoScreenFadeIn(2000)
+    c.IsBusyPleaseWait(2000)
     local config = {
         ped = true,
         headBlend = true,
@@ -45,9 +46,11 @@ AddEventHandler("Client:Character:Create", function()
       exports["fivem-appearance"]:startPlayerCustomization(function(appearance)
         if (appearance) then
             DoScreenFadeOut(2000)
+            c.IsBusyPleaseWait(2000)
             TriggerEvent("Client:Character:OpeningMenu")
             DoScreenFadeIn(2000)
-            TriggerEvent("Client:Core:UI", "OnNew")
+            c.IsBusyPleaseWait(2000)
+            TriggerEvent("Client:Core:UI", "Register")
         else
             TriggerServerEvent("Server:Character:Failed")
         end
