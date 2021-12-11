@@ -20,7 +20,7 @@ AddEventHandler("Server:Character:List", function(req, Primary_ID)
     -- Send the data table to the client that requested it...
     TriggerClientEvent("Client:Character:Open", src, Command, Data)
     -- Place the user in their own instance until the user has joined and loaded.
-    c.inst.SetPlayer(src, src, true)
+    c.inst.SetPlayer(src)
 end)
 
 -- [C]
@@ -93,14 +93,12 @@ AddEventHandler("Server:Character:Create", function(first_name, last_name, heigh
     c.data.LoadPlayer(src, character_id)
     --
     Citizen.Await(p)    
-    
+    --
+    c.inst.SetPlayer(src)
     --[[
             ADD YOUR CHARACTER CREATION EVENT BELOW
     ]]--
-
-
     TriggerClientEvent("Client:Character:Create", src)
-
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
     ]]--
