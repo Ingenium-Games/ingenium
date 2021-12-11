@@ -421,8 +421,7 @@ function c.class.CreateCharacter(source, character_id)
     end
     --
     self.SetAppearance = function(t)
-        local tab = c.check.Table(t)
-        self.Appearance = tab
+        self.Appearance = t
         self.State.Appearance = self.Appearance
     end
     --

@@ -97,14 +97,35 @@ AddEventHandler("Server:Character:Create", function(first_name, last_name, heigh
     --[[
             ADD YOUR CHARACTER CREATION EVENT BELOW
     ]]--
-    
 
-    
+
+    TriggerClientEvent("Client:Character:Create", src)
+
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
     ]]--
 end)
 
+RegisterServerEvent("Server:Character:SaveSkin")
+AddEventHandler("Server:Character:SaveSkin", function(appearance, bool)
+	local src = source
+	local xPlayer = c.data.GetPlayer(src)
+	local identifier = xPlayer.GetIdentifier()
+	c.sql.char.SetAppearance(identifier, appearance, function()
+		xPlayer.SetAppearance(appearance)
+	end)
+    if type(bool) == "boolean" and bool == true then
+        c.inst.SetPlayerDefault(src)
+    end
+end)
+
+RegisterServerEvent("Server:Character:LoadSkin")
+AddEventHandler("Server:Character:LoadSkin", function()
+	local src = source
+	local xPlayer = c.data.GetPlayer(src)
+	local appearance = xPlayer.GetAppearance()
+	TriggerClientEvent("Client:Character:LoadSkin", src, appearance)
+end)
 
 -- Triggered after character has been loaded from db and informaiton is passed to client
 -- [C]

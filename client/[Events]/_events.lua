@@ -25,6 +25,16 @@ AddEventHandler("Client:Character:Death", function(data)
     end
 end)
 
+RegisterNetEvent("Client:Character:LoadSkin")
+AddEventHandler("Client:Character:LoadSkin", function(appearance)
+    exports['fivem-appearance']:setPedAppearance(PlayerPedId(), json.encode(appearance))
+end)
+
+RegisterNetEvent("Client:Character:SaveSkin")
+AddEventHandler("Client:Character:SaveSkin", function(appearance)
+    local appearance = exports['fivem-appearance']:getPedAppearance(PlayerPedId())
+end)
+
 -- Event to receive the data of the chosen character for the client.
 RegisterNetEvent('Client:Character:Loaded')
 AddEventHandler('Client:Character:Loaded', function()
@@ -35,7 +45,6 @@ AddEventHandler('Client:Character:Loaded', function()
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
     -- 
-    TriggerEvent("Client:LoadSkin", xPlayer.Appearance)
     TriggerEvent('Client:Character:Ready')
 end)
 
@@ -87,4 +96,26 @@ end)
 RegisterNetEvent("Client:Character:SetJob")
 AddEventHandler("Client:Character:SetJob", function(data)
 
+end)
+
+RegisterNetEvent("Client:Character:Create")
+AddEventHandler("Client:Character:Create", function()
+    local plyped = PlayerPedId()
+    SetEntityCoords(plyped, -703.9, -152.62, 37.42)
+    SetEntityHeading(plyped, 62)
+    DoScreenFadeIn(2000)
+    c.IsBusyPleaseWait(2000)
+    local config = {
+        ped = true,
+        headBlend = true,
+        faceFeatures = true,
+        headOverlays = true,
+        components = true,
+        props = true,
+      }
+      exports['fivem-appearance']:startPlayerCustomization(function(appearance)
+        if (appearance) then
+            TriggerServerEvent("Server:Character:SaveSkin", appearance, true)
+        end
+      end, config)
 end)
