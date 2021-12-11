@@ -27,7 +27,7 @@ end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
 AddEventHandler("Client:Character:LoadSkin", function(appearance)
-    exports['fivem-appearance']:setPedAppearance(PlayerPedId(), json.encode(appearance))
+    exports['fivem-appearance']:setPlayerAppearance(appearance)
 end)
 
 RegisterNetEvent("Client:Character:SaveSkin")
