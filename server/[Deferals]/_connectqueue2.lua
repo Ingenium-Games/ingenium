@@ -689,8 +689,8 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterServerEvent("Queue:playerActivated")
-AddEventHandler("Queue:playerActivated", function()
+RegisterServerEvent("Server:Queue:ConfirmedPlayer")
+AddEventHandler("Server:Queue:ConfirmedPlayer", function()
     local src = source
     local ids = Queue:GetIds(src)
 

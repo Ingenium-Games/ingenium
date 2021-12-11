@@ -58,7 +58,7 @@ function c.class.CreateNpc(net)
         self.Last_Name = c.name.RandomMale()
         self.State.Last_Name = self.Last_Name
         --
-        self.Full_Name = self.First_Name..' '.. self.Last_Name
+        self.Full_Name = self.First_Name.." ".. self.Last_Name
         self.State.Full_Name = self.Full_Name
     elseif not self.Gender and self.IsHuman then
         -- is not male but is human
@@ -68,7 +68,7 @@ function c.class.CreateNpc(net)
         self.Last_Name = c.name.RandomMale()
         self.State.Last_Name = self.Last_Name
         --
-        self.Full_Name = self.First_Name..' '.. self.Last_Name
+        self.Full_Name = self.First_Name.." ".. self.Last_Name
         self.State.Full_Name = self.Full_Name
     end
 
@@ -76,21 +76,21 @@ function c.class.CreateNpc(net)
         if self.IsHuman then
             return self.First_Name
         end
-        return ''
+        return ""
     end
     --
     self.GetLast_Name = function()
         if self.IsHuman then
             return self.Last_Name
         end
-        return ''
+        return ""
     end
     --
     self.GetFull_Name = function()
         if self.IsHuman then
             return self.Full_Name
         end
-        return ''
+        return ""
     end
     --
     self.Weight = 0
@@ -187,7 +187,7 @@ function c.class.CreateNpc(net)
         return inv
     end
     --
-    -- Add items at random onto the NPC's at creation of table data.
+    -- Add items at random onto the NPC"s at creation of table data.
     -- self.AddItem({"Cash",math.random(5,65),100,false,false})
     self.AddItem({"Cash", math.random(25,89), 100, false, false})
     --

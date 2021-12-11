@@ -15,8 +15,8 @@ NOTES.
 function c.sql.veh.GetAll(Character_ID, cb)
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchAll('SELECT * FROM vehicles WHERE `Character_ID` = @Character_ID;', {
-        ['@Character_ID'] = Character_ID
+    MySQL.Async.fetchAll("SELECT * FROM vehicles WHERE `Character_ID` = @Character_ID;", {
+        ["@Character_ID"] = Character_ID
     }, function(data)
         result = data
         IsBusy = false
@@ -34,8 +34,8 @@ end
 function c.sql.veh.GetByPlate(Plate, cb)
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchScalar('SELECT * FROM vehicles WHERE `Plate` = @Plate LIMIT 1;', {
-        ['@Plate'] = Plate
+    MySQL.Async.fetchScalar("SELECT * FROM vehicles WHERE `Plate` = @Plate LIMIT 1;", {
+        ["@Plate"] = Plate
     }, function(data)
         result = data
         IsBusy = false

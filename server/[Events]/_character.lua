@@ -18,7 +18,7 @@ AddEventHandler("Server:Character:List", function(req, Primary_ID)
     local Command = "OnJoin"
     local Data = {["Characters"] = Characters, ["Slots"] = Slots}
     -- Send the data table to the client that requested it...
-    TriggerClientEvent("Client:Character:Open", src, Command, Data)
+    TriggerClientEvent("Client:Core:UI", src, Command, Data)
     -- Place the user in their own instance until the user has joined and loaded.
     c.inst.SetPlayer(src)
 end)
@@ -46,7 +46,7 @@ AddEventHandler("Server:Character:Delete", function(Character_ID)
     local src = tonumber(source)
     local primary_id = c.identifier(src)
     c.sql.char.Delete(Character_ID, function()
-        DropPlayer(src, 'Character with id: '..Character_ID..' was Deleted Successfully, please rejoin.')
+        DropPlayer(src, "Character with id: "..Character_ID.." was Deleted Successfully, please rejoin.")
     end)
 end)
 
@@ -104,7 +104,7 @@ AddEventHandler("Server:Character:Register", function(first_name, last_name, hei
     --[[
             ADD YOUR CHARACTER CREATION EVENT BELOW
     ]]--
-    TriggerClientEvent('Client:Character:ReSpawn', src, data.Coords)
+    TriggerClientEvent("Client:Character:ReSpawn", src, data.Coords)
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
     ]]--

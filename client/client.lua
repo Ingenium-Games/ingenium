@@ -12,7 +12,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         if NetworkIsSessionStarted() then
             --    
-            TriggerServerEvent("Queue:playerActivated")
+            TriggerServerEvent("Server:Queue:ConfirmedPlayer")
             c.data.Initilize(function()
                 --
                 DisplayRadar(false)

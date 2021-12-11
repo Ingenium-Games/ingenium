@@ -16,7 +16,7 @@ NOTES.
 function c.sql.jobs.GetAll(cb)
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchAll('SELECT * FROM `jobs`', {
+    MySQL.Async.fetchAll("SELECT * FROM `jobs`", {
     }, function(data)
         for i=1, #data, 1 do
             local i = data[i]
@@ -41,7 +41,7 @@ end
 ---@param cb function "Callback function if any, called after the SQL statement."
 function c.sql.jobs.Setup(cb)
     local IsBusy = true
-    MySQL.Async.fetchAll('SELECT * FROM `job_accounts`', {
+    MySQL.Async.fetchAll("SELECT * FROM `job_accounts`", {
     }, function(data)
             for k,v in pairs(c.jobs) do
                 local found = false
@@ -52,12 +52,12 @@ function c.sql.jobs.Setup(cb)
                     end 
                 end
                 if not found then -- if not found within the job_accounts
-                    MySQL.Async.execute('INSERT INTO `job_accounts` (`Name`, `Description`, `Boss`, `Members`, `Accounts`) VALUES (@Name, @Description, @Boss, @Members, @Accounts);', {
-                        ['@Name'] = k,
-                        ['@Description'] = v.Label.." : Description for role here.",
-                        ['@Boss'] = "Not Owned",
-                        ['@Members'] = json.encode({}),
-                        ['@Accounts'] = json.encode(conf.default.jobaccounts),
+                    MySQL.Async.execute("INSERT INTO `job_accounts` (`Name`, `Description`, `Boss`, `Members`, `Accounts`) VALUES (@Name, @Description, @Boss, @Members, @Accounts);", {
+                        ["@Name"] = k,
+                        ["@Description"] = v.Label.." : Description for role here.",
+                        ["@Boss"] = "Not Owned",
+                        ["@Members"] = json.encode({}),
+                        ["@Accounts"] = json.encode(conf.default.jobaccounts),
                     }, function(_data)
                         if _data then
                             --
@@ -80,7 +80,7 @@ end
 function c.sql.jobs.Accounts(cb)
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchAll('SELECT * FROM `job_accounts`', {
+    MySQL.Async.fetchAll("SELECT * FROM `job_accounts`", {
     }, function(data)
         for i=1, #data, 1 do
             local i = data[i]

@@ -99,7 +99,7 @@ end
 
 local H = {[1] = {"Is that a cookie?"}, [2] = {"Feeling peckish"}, [3] = {"Could go a snack"},[4] = {"Feeling slightly hungry"}, [5] = {"I missed lunch.."}, [6] = {"Getting really hungry"}, [7] = {"Famished"}, [8] = {"Starving"}, [9] = {"Are you food?"}, [10] = {"Malnurished"}}
 
-local T = {[1] = {"",function() print('this is a effect') end, function() print('this is a action') end}, [2] = {""}, [3] = {""},[4] = {""}, [5] = {""}, [6] = {""},[7] = {""}, [8] = {""}, [9] = {""}, [10] = {""}}
+local T = {[1] = {"",function() print("this is a effect") end, function() print("this is a action") end}, [2] = {""}, [3] = {""},[4] = {""}, [5] = {""}, [6] = {""},[7] = {""}, [8] = {""}, [9] = {""}, [10] = {""}}
 
 local S = {[1] = {""}, [2] = {""}, [3] = {""},[4] = {""}, [5] = {""}, [6] = {""},[7] = {""}, [8] = {""}, [9] = {""}, [10] = {""}}
 

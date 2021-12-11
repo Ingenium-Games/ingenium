@@ -15,7 +15,7 @@ function c.data.Initilize(cb)
     -- Get time and update every minute.
     c.time.UpdateTime()
     --
-    TriggerServerEvent('Server:PlayerConnecting')
+    TriggerServerEvent("Server:PlayerConnecting")
     if cb then
         cb()
     end
@@ -35,7 +35,7 @@ end
 --- Sets the client as receieved the character data. Boolean
 ---@param bool boolean "Set loaded status to true or false."
 function c.data.SetLoadedStatus(bool)
-    if type(bool) == 'boolean' then
+    if type(bool) == "boolean" then
         c.CharacterLoaded = bool
     end
 end
@@ -71,7 +71,7 @@ function c.GetLocalPlayerState(key)
 end
 
 -- Please do not use this other than for animations or such...
---- Set the Players's state bag.
+--- Set the Players"s state bag.
 ---@param key string "The key"
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
@@ -81,7 +81,7 @@ function c.data.SetLocalPlayerState(key, value, sync)
 end
 
 -- Please do not use this other than for animations or such...
---- Set the Players's state bag.
+--- Set the Players"s state bag.
 ---@param key string "The key"
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
@@ -89,32 +89,32 @@ function c.SetLocalPlayerState(key, value, sync)
     c.data.SetLocalPlayerState(key, value, sync)
 end
 
---- Return the Players's state bag.
----@param id any "Player's Server Id"
+--- Return the Players"s state bag.
+---@param id any "Player"s Server Id"
 function c.data.GetPlayer(id)
     return Player(id).state
 end
 
---- Return the Players's state bag.
----@param id any "Player's Server Id"
+--- Return the Players"s state bag.
+---@param id any "Player"s Server Id"
 function c.data.GetPlayerState(id,key)
     return Player(id).state[key]
 end
 
---- Return the Players's state bag.
----@param id any "Player's Server Id"
+--- Return the Players"s state bag.
+---@param id any "Player"s Server Id"
 function c.GetPlayerState(id,key)   
     return c.data.GetPlayerState(id,key)
 end
 
---- Return the Players's state bag.
----@param ped any "Player's Ped Entity"
+--- Return the Players"s state bag.
+---@param ped any "Player"s Ped Entity"
 function c.data.GetPlayerPedState(ped,key)
     return Player(GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))).state[key]
 end
 
---- Return the Players's state bag.
----@param ped any "Player's Ped Entity"
+--- Return the Players"s state bag.
+---@param ped any "Player"s Ped Entity"
 function c.GetPlayerPedState(ped,key)    
     return c.data.GetPlayerPedState(ped,key)
 end

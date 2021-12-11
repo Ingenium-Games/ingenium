@@ -11,8 +11,8 @@ NOTES.
 local cam, cam2, cam3
 
 -- [C+S]
-RegisterNetEvent('Client:Character:OpeningMenu')
-AddEventHandler('Client:Character:OpeningMenu', function()
+RegisterNetEvent("Client:Character:OpeningMenu")
+AddEventHandler("Client:Character:OpeningMenu", function()
     -- Set false for switch command.
     c.data.SetLoadedStatus(false)
     SetEntityCoords(GetPlayerPed(-1), 0, 0, 0)
@@ -41,7 +41,7 @@ AddEventHandler("Client:Character:Create", function()
         components = true,
         props = true,
       }
-      exports['fivem-appearance']:startPlayerCustomization(function(appearance)
+      exports["fivem-appearance"]:startPlayerCustomization(function(appearance)
         if (appearance) then
             DoScreenFadeOut(2000)
             TriggerEvent("Client:Character:OpeningMenu")
@@ -55,8 +55,8 @@ end)
 
 -- Respawn in on last saved coords.
 -- [S]
-RegisterNetEvent('Client:Character:ReSpawn')
-AddEventHandler('Client:Character:ReSpawn', function(Coords)
+RegisterNetEvent("Client:Character:ReSpawn")
+AddEventHandler("Client:Character:ReSpawn", function(Coords)
     c.IsBusyPleaseWait(1500)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
     cam2 = c.camera.Basic(313.78, -1403.07, 189.53, 0.00, 0.00, 45.00, 100.00)
@@ -89,17 +89,17 @@ end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
 AddEventHandler("Client:Character:LoadSkin", function(appearance)
-    exports['fivem-appearance']:setPlayerAppearance(appearance)
+    exports["fivem-appearance"]:setPlayerAppearance(appearance)
 end)
 
 RegisterNetEvent("Client:Character:SaveSkin")
 AddEventHandler("Client:Character:SaveSkin", function(appearance)
-    local appearance = exports['fivem-appearance']:getPedAppearance(PlayerPedId())
+    local appearance = exports["fivem-appearance"]:getPedAppearance(PlayerPedId())
 end)
 
 -- Event to receive the data of the chosen character for the client.
-RegisterNetEvent('Client:Character:Loaded')
-AddEventHandler('Client:Character:Loaded', function()
+RegisterNetEvent("Client:Character:Loaded")
+AddEventHandler("Client:Character:Loaded", function()
     local xPlayer = c.data.GetLocalPlayer()
     c.data.SetLoadedStatus(true)
     --
@@ -107,12 +107,12 @@ AddEventHandler('Client:Character:Loaded', function()
     c.status.SetPlayer(xPlayer)
     c.modifier.SetModifiers(xPlayer)
     -- 
-    TriggerEvent('Client:Character:Ready')
+    TriggerEvent("Client:Character:Ready")
 end)
 
 -- Event to trigger other resources once the client has received the chosen characters data from the server.
-RegisterNetEvent('Client:Character:Ready')
-AddEventHandler('Client:Character:Ready', function()
+RegisterNetEvent("Client:Character:Ready")
+AddEventHandler("Client:Character:Ready", function()
     -- Character has loaded in, no need to respawn any more.
     exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")

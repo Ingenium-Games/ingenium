@@ -65,9 +65,9 @@ function c.affil.GetGroups()
 end
 
 --- [Internal] Add the created group to a table.
----@param name string "Name of group : 'NAME'"
----@param grouphash string "Hash number of the group, typically starts with: '0x'"
----@param relations table "'Table of relations to iterate over : {["Companion"] = {}, ["Respect"] = {}, ["Like"] = {}, ["Nutral"] = {}, ["Dislike"] = {}, ["Hate"] = {}}'"
+---@param name string "Name of group : "NAME""
+---@param grouphash string "Hash number of the group, typically starts with: "0x""
+---@param relations table ""Table of relations to iterate over : {["Companion"] = {}, ["Respect"] = {}, ["Like"] = {}, ["Nutral"] = {}, ["Dislike"] = {}, ["Hate"] = {}}""
 function c.affil.AddGroupToTable(name, grouphash, relations)
     if not groups[name] then
         groups[name] = {["hash"] = grouphash, ["relations"] = relations} 
@@ -76,7 +76,7 @@ end
 
 --- Returns the cappitalized name as entered and hash of the new group.
 ---@param str string "Can be lower case, will convert to UPPERCASE"
----@param relations table "'Table of relations to iterate over : {["Companion"] = {}, ["Respect"] = {}, ["Like"] = {}, ["Nutral"] = {}, ["Dislike"] = {}, ["Hate"] = {}}'"
+---@param relations table ""Table of relations to iterate over : {["Companion"] = {}, ["Respect"] = {}, ["Like"] = {}, ["Nutral"] = {}, ["Dislike"] = {}, ["Hate"] = {}}""
 function c.affil.CreateGroup(str, relations)
     local name = c.check.String(string.upper(str))
     local _, grouphash = AddRelationshipGroup(name)

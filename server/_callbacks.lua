@@ -7,7 +7,7 @@ NOTES
 -- ====================================================================================--
 
 local GetItems = RegisterServerCallback({
-    eventName = 'GetItems',
+    eventName = "GetItems",
     eventCallback = function(source, ...)
         local items = c.item.GetItems()
         return items
@@ -15,7 +15,7 @@ local GetItems = RegisterServerCallback({
 })
 
 local GetDumpedHashes = RegisterServerCallback({
-    eventName = 'GetDumpedHashes',
+    eventName = "GetDumpedHashes",
     eventCallback = function(source, ...)
         local items = c.vehicle.GetDumpedHashes()
         return items
@@ -23,7 +23,7 @@ local GetDumpedHashes = RegisterServerCallback({
 })
 
 local GetInventory = RegisterServerCallback({
-    eventName = 'GetInventory',
+    eventName = "GetInventory",
     eventCallback = function(source, net)
         local src = source
         local entity = NetworkGetEntityFromNetworkId(net)
@@ -57,7 +57,7 @@ local GetInventory = RegisterServerCallback({
 })
 
 local GetJobs = RegisterServerCallback({
-    eventName = 'GetJobs',
+    eventName = "GetJobs",
     eventCallback = function(source, ...)
         return c.job.ActiveMembers()
     end

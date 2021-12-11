@@ -43,13 +43,13 @@ local REJECTED = 4
 local function ensure(obj, typeof, opt_typeof, errMessage)
 	local objtype = type(obj)
 	local di = debug_getinfo(2)
-	local errMessage = errMessage or (opt_typeof == nil and (di.name .. ' expected %s, but got %s') or (di.name .. ' expected %s or %s, but got %s'))
-	if typeof ~= 'function' then
+	local errMessage = errMessage or (opt_typeof == nil and (di.name .. " expected %s, but got %s") or (di.name .. " expected %s or %s, but got %s"))
+	if typeof ~= "function" then
 		if objtype ~= typeof and objtype ~= opt_typeof then
 			error((errMessage):format(typeof, (opt_typeof == nil and objtype or opt_typeof), objtype))
 		end
 	else
-		if objtype == 'table' and not rawget(obj, '__cfx_functionReference') then
+		if objtype == "table" and not rawget(obj, "__cfx_functionReference") then
 			error((errMessage):format(typeof, (opt_typeof == nil and objtype or opt_typeof), objtype))
 		end
 	end
@@ -63,14 +63,14 @@ if IS_SERVER then
 	-- @string eventName - The name of the event to be registered
 	-- @function eventCallback - The function to be executed when event is fired
 	RegisterServerCallback = function(args)
-		ensure(args, 'table'); ensure(args.eventName, 'string'); ensure(args.eventCallback, 'function')
+		ensure(args, "table"); ensure(args.eventName, "string"); ensure(args.eventCallback, "function")
 
 		-- save the callback function on this call
 		local eventCallback = args.eventCallback
 		-- save the event name on this call
 		local eventName = args.eventName
 		-- save the event data to return
-		local eventData = RegisterNetEvent('Server:Callback:'..eventName, function(packed, src, cb)
+		local eventData = RegisterNetEvent("Server:Callback:"..eventName, function(packed, src, cb)
 			-- save the source on this call
 			local source = tonumber(source)
 			-- check if this is a simulated callback (TriggerServerCallback)
@@ -79,7 +79,7 @@ if IS_SERVER then
 				cb( msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ) )
 			else
 				-- return the data
-				TriggerClientEvent(('Client:Callback:Response:%s:%s'):format(eventName, source), source, msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ))
+				TriggerClientEvent(("Client:Callback:Response:%s:%s"):format(eventName, source), source, msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ))
 			end
 		end)
 		-- return the event data to UnregisterServerCallback
@@ -104,7 +104,7 @@ if IS_SERVER then
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
 	TriggerClientCallback = function(args)
-		ensure(args, 'table'); ensure(args.source, 'string', 'number'); ensure(args.eventName, 'string'); ensure(args.args, 'table', 'nil'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
+		ensure(args, "table"); ensure(args.source, "string", "number"); ensure(args.eventName, "string"); ensure(args.args, "table", "nil"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 
 			-- create a new ticket
 			local ticket = c.rng.chars(10)
@@ -113,21 +113,21 @@ if IS_SERVER then
 			-- save the callback function on this call
 			local eventCallback = args.callback
 			-- save the event data on this call
-			local eventData = RegisterNetEvent(('Callback:Return:%s:%s:%s'):format(args.source, args.eventName, ticket), function(packed)
+			local eventData = RegisterNetEvent(("Callback:Return:%s:%s:%s"):format(args.source, args.eventName, ticket), function(packed)
 				-- check if this call was async
-				-- & if promise wasn't rejected or resolved
+				-- & if promise wasn"t rejected or resolved
 				if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 				prom:resolve( table_unpack(msgpack_unpack(packed)) )
 			end)
 
 			-- request the callback
-			TriggerClientEvent(('Client:Callback:%s'):format(args.eventName), args.source, msgpack_pack(args.args or {}), ticket)
+			TriggerClientEvent(("Client:Callback:%s"):format(args.eventName), args.source, msgpack_pack(args.args or {}), ticket)
 
 			-- timeout response
 			if args.timeout ~= nil and args.timedout then
 				local timedout = args.timedout
 				SetTimeout(args.timeout * 1000, function()
-					-- check if promise wasn't resolved
+					-- check if promise wasn"t resolved
 					if
 						prom.state == PENDING or
 						prom.state == REJECTED or
@@ -162,7 +162,7 @@ if IS_SERVER then
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
 	TriggerServerCallback = function(args)
-		ensure(args, 'table'); ensure(args.source, 'string', 'number'); ensure(args.eventName, 'string'); ensure(args.args, 'table', 'nil'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
+		ensure(args, "table"); ensure(args.source, "string", "number"); ensure(args.eventName, "string"); ensure(args.args, "table", "nil"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 
 		-- create a new promise
 		local prom = promise.new()
@@ -170,10 +170,10 @@ if IS_SERVER then
 		local eventCallback = args.callback
 		-- save the event name on this call
 		local eventName = args.eventName
-		TriggerEvent('Server:Callback:'..eventName, msgpack_pack(args.args or {}), args.source,
+		TriggerEvent("Server:Callback:"..eventName, msgpack_pack(args.args or {}), args.source,
 		function(packed)
 			-- check if this call was async
-			-- & if promise wasn't rejected or resolved
+			-- & if promise wasn"t rejected or resolved
 			if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 			prom:resolve( table_unpack(msgpack_unpack(packed)) )
 		end)
@@ -182,7 +182,7 @@ if IS_SERVER then
 		if args.timeout ~= nil and args.timedout then
 			local timedout = args.timedout
 			SetTimeout(args.timeout * 1000, function()
-				-- check if promise wasn't resolved
+				-- check if promise wasn"t resolved
 				if
 					prom.state == PENDING or
 					prom.state == REJECTED or
@@ -213,21 +213,21 @@ if not IS_SERVER then
 	-- @string eventName - The name of the event to be fired
 	-- @function eventCallback - The function to be executed when event is fired
 	RegisterClientCallback = function(args)
-		ensure(args, 'table'); ensure(args.eventName, 'string'); ensure(args.eventCallback, 'function')
+		ensure(args, "table"); ensure(args.eventName, "string"); ensure(args.eventCallback, "function")
 		
 		-- save the callback function on this call
 		local eventCallback = args.eventCallback
 		-- save the event name on this call
 		local eventName = args.eventName
 		-- save the event data to return
-		local eventData = RegisterNetEvent('Client:Callback:'..eventName, function(packed, ticket)
+		local eventData = RegisterNetEvent("Client:Callback:"..eventName, function(packed, ticket)
 			-- check if this call is simulated (TriggerClientCallback)
-			if type(ticket) == 'function' then
+			if type(ticket) == "function" then
 				-- return the data to the simulated call
 				ticket( msgpack_pack_args( eventCallback( table_unpack(msgpack_unpack(packed)) ) ) )
 			else
 				-- return the data to the call
-				TriggerServerEvent(('Callback:Return:%s:%s:%s'):format(SERVER_ID, eventName, ticket), msgpack_pack_args( eventCallback( table_unpack(msgpack_unpack(packed)) ) ))
+				TriggerServerEvent(("Callback:Return:%s:%s:%s"):format(SERVER_ID, eventName, ticket), msgpack_pack_args( eventCallback( table_unpack(msgpack_unpack(packed)) ) ))
 			end
 		end)
 		-- return event data so you can UnregisterClientCallback
@@ -251,29 +251,29 @@ if not IS_SERVER then
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
 	TriggerServerCallback = function(args)
-		ensure(args, 'table'); ensure(args.args, 'table', 'nil'); ensure(args.eventName, 'string'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
+		ensure(args, "table"); ensure(args.args, "table", "nil"); ensure(args.eventName, "string"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 		
 		-- create a new promise
 		local prom = promise.new()
 		-- save the callback function on this call
 		local eventCallback = args.callback
 		-- save the event data to remove it when resolved
-		local eventData = RegisterNetEvent(('Client:Callback:Response:%s:%s'):format(args.eventName, SERVER_ID),
+		local eventData = RegisterNetEvent(("Client:Callback:Response:%s:%s"):format(args.eventName, SERVER_ID),
 		function(packed)
 			-- check if this call is async
-			-- & the promise wasn't rejected or resolved
+			-- & the promise wasn"t rejected or resolved
 			if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 			prom:resolve( table_unpack(msgpack_unpack(packed)) )
 		end)
 
 		-- fire the callback event
-		TriggerServerEvent('Server:Callback:'..args.eventName, msgpack_pack( args.args ))
+		TriggerServerEvent("Server:Callback:"..args.eventName, msgpack_pack( args.args ))
 
 		-- timeout response
 		if args.timeout ~= nil and args.timedout then
 			local timedout = args.timedout
 			SetTimeout(args.timeout * 1000, function()
-				-- check if the promise wasn't resolved yet
+				-- check if the promise wasn"t resolved yet
 				if
 					prom.state == PENDING or
 					prom.state == REJECTED or
@@ -281,7 +281,7 @@ if not IS_SERVER then
 				then
 					-- call the timeout callback
 					timedout(prom.state)
-					-- reject the promise if it wasn't rejected
+					-- reject the promise if it wasn"t rejected
 					if prom.state == PENDING then prom:reject() end
 					-- remove the event handler
 					RemoveEventHandler(eventData)
@@ -307,7 +307,7 @@ if not IS_SERVER then
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
 	TriggerClientCallback = function(args)
-		ensure(args, 'table'); ensure(args.eventName, 'string'); ensure(args.args, 'table', 'nil'); ensure(args.timeout, 'number', 'nil'); ensure(args.timedout, 'function', 'nil'); ensure(args.callback, 'function', 'nil')
+		ensure(args, "table"); ensure(args.eventName, "string"); ensure(args.args, "table", "nil"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 
 		-- create a new promise for this call
 		local prom = promise.new()
@@ -316,10 +316,10 @@ if not IS_SERVER then
 		-- save the event name on this call
 		local eventName = args.eventName
 		-- trigger the callback
-		TriggerEvent('Client:Callback:'..eventName, msgpack_pack(args.args or {}),
+		TriggerEvent("Client:Callback:"..eventName, msgpack_pack(args.args or {}),
 		function(packed)
 			-- check if it was an async call
-			-- & if the promise wasn't rejected or already resolved
+			-- & if the promise wasn"t rejected or already resolved
 			if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
 			prom:resolve( table_unpack(msgpack_unpack(packed)) )
 		end)
@@ -328,7 +328,7 @@ if not IS_SERVER then
 		if args.timeout ~= nil and args.timedout then
 			local timedout = args.timedout
 			SetTimeout(args.timeout * 1000, function()
-				-- check if the promise wasn't resolved
+				-- check if the promise wasn"t resolved
 				if
 					prom.state == PENDING or
 					prom.state == REJECTED or
@@ -336,7 +336,7 @@ if not IS_SERVER then
 				then
 					-- call timeout callback
 					timedout(prom.state)
-					-- check if it's pending and reject
+					-- check if it"s pending and reject
 					if prom.state == PENDING then prom:reject() end
 				end
 			end)

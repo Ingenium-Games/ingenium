@@ -10,32 +10,13 @@ NOTES.
 
 -- ====================================================================================--
 
-RegisterCommand('test', function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    xPlayer.AddItem({"Cash", 1, 100, false, false, false})
-    print(c.table.Dump(xPlayer.GetInventory()))
-end, false)
 
-RegisterCommand('test2', function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    local bool = xPlayer.GetSupporter()
-    xPlayer.SetSupporter(not bool)
-end, false)
-
-RegisterCommand('test3', function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    local bool = xPlayer.GetCuffed()
-    xPlayer.SetCuffed(not bool)
-end, false)
 
 -- ====================================================================================--
 
 ExecuteCommand("add_ace group.public command.switch allow")
-RegisterCommand('switch', function(source, args, rawCommand)
-    TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
+RegisterCommand("switch", function(source, args, rawCommand)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand) -- txAdmin logging Callback
     local src = source
     local p = promise.new()
     local xPlayer = c.data.GetPlayer(src)
@@ -50,8 +31,8 @@ RegisterCommand('switch', function(source, args, rawCommand)
     --
     Citizen.Await(p)
     Citizen.Wait((c.sec * 4500))
-    TriggerClientEvent('Client:Character:OpeningMenu', src)
-    TriggerEvent('Server:Character:List', src, Primary_ID)
+    TriggerClientEvent("Client:Character:OpeningMenu", src)
+    TriggerEvent("Server:Character:List", src, Primary_ID)
     -- Events to handle character removeal.
     TriggerClientEvent("Client:Character:Switch")
     TriggerEvent("Server:Character:Switch")
@@ -60,18 +41,18 @@ end, true)
 -- ====================================================================================--
 
 ExecuteCommand("add_ace group.admin command.ban allow")
-RegisterCommand('ban', function(source, args, rawCommand)
-    TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
+RegisterCommand("ban", function(source, args, rawCommand)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand) -- txAdmin logging Callback
     local src = source
     if (args[1] == src) then
-        TriggerClientEvent("Client:Notify", src, 'You cannot /ban yourself.')
+        TriggerClientEvent("Client:Notify", src, "You cannot /ban yourself.")
     else
         local Primary_ID = c.identifier(args[1])
         local xPlayer = c.data.GetPlayer(args[1])
         local ban = true -- should probably add a check but meh.
         c.sql.user.SetBan(Primary_ID, ban, function()
-            xPlayer.Kick('You have been banned.')
-            TriggerClientEvent("Client:Notify", src, 'TargetID: ' .. args[1] .. ', has been banned.')
+            xPlayer.Kick("You have been banned.")
+            TriggerClientEvent("Client:Notify", src, "TargetID: " .. args[1] .. ", has been banned.")
         end)
     end
 end, true)
@@ -79,44 +60,44 @@ end, true)
 -- ====================================================================================--
 
 ExecuteCommand("add_ace group.admin command.kick allow")
-RegisterCommand('kick', function(source, args, rawCommand)
-    TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
+RegisterCommand("kick", function(source, args, rawCommand)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand) -- txAdmin logging Callback
     local src = source
     if (args[1] == src) then
-        TriggerClientEvent("Client:Notify", src, 'You cannot /kick yourself.')
+        TriggerClientEvent("Client:Notify", src, "You cannot /kick yourself.")
     else
         local xPlayer = c.data.GetPlayer(args[1])
-        xPlayer.Kick('You have been kicked.')
-        TriggerClientEvent("Client:Notify", src, 'TargetID: ' .. args[1] .. ', has been kicked.')
+        xPlayer.Kick("You have been kicked.")
+        TriggerClientEvent("Client:Notify", src, "TargetID: " .. args[1] .. ", has been kicked.")
     end
 end, true)
 
 -- ====================================================================================--
 
 ExecuteCommand("add_ace group.mod command.setjob allow")
-RegisterCommand('setjob', function(source, args, rawCommand)
-    TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
+RegisterCommand("setjob", function(source, args, rawCommand)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand) -- txAdmin logging Callback
     local src = source
     if c.job.Exist(args[2], args[3]) then
         local xPlayer = c.data.GetPlayer(args[1])
         xPlayer.SetJob(args[2], args[3])
-        TriggerClientEvent("Client:Notify", src, 'Set ID:'..args[1]..', as Job: '..args[2]..', Grade: '..args[3]..'.')
-        TriggerClientEvent("Client:Notify", args[1], 'Set ID:'..args[1]..', as Job: '..args[2]..', Grade: '..args[3]..'.')
+        TriggerClientEvent("Client:Notify", src, "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
+        TriggerClientEvent("Client:Notify", args[1], "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
     else
-        TriggerClientEvent("Client:Notify", src, 'JobName: '..args[2]..' or JobGrade: '..args[3]..', does not exist.')
-        TriggerClientEvent("Client:Notify", args[1], 'JobName: '..args[2]..' or JobGrade: '..args[3]..', does not exist.')
+        TriggerClientEvent("Client:Notify", src, "JobName: "..args[2].." or JobGrade: "..args[3]..", does not exist.")
+        TriggerClientEvent("Client:Notify", args[1], "JobName: "..args[2].." or JobGrade: "..args[3]..", does not exist.")
     end
 end, true)
 
 -- ====================================================================================--
 
 ExecuteCommand("add_ace group.mod command.tpm allow")
-RegisterCommand('tpm', function(source, args, rawCommand)
-    TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
+RegisterCommand("tpm", function(source, args, rawCommand)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand) -- txAdmin logging Callback
     local src = source
     TriggerClientCallback({
         source = src,
-        eventName = 'TeleportOnMarker',
+        eventName = "TeleportOnMarker",
         args = {}
     })    
 end, true)

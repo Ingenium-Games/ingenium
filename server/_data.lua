@@ -13,19 +13,19 @@ NOTES.
 
 --- Used on startup prior to the server really running.
 function c.data.Initilize()
-    c.debug_1('Loading Sequence Begin.')
+    c.debug_1("Loading Sequence Begin.")
     local num, loaded = 0, false
     local t = {
-        [1] = 'DB: Characters marked as In-Active;',
-        [2] = 'DB: Jobs have been Generated;',
-        [3] = 'DB: Finding Job Accounts or Creating them;',
-        [4] = 'DB: Job Accounts have been Generated;',
-        [5] = 'DB: Job Objects Created and Added;',
-        [6] = 'DB: Loading Data File - GSR;',
-        [7] = 'DB: Loading Data File - Drops;',
-        [8] = 'DB: Loading Data File - Pickups;',
-        [9] = 'DB: Loading Data File - Notes;',
-        [10] = 'DB: Loading Data File - Names;'
+        [1] = "DB: Characters marked as In-Active;",
+        [2] = "DB: Jobs have been Generated;",
+        [3] = "DB: Finding Job Accounts or Creating them;",
+        [4] = "DB: Job Accounts have been Generated;",
+        [5] = "DB: Job Objects Created and Added;",
+        [6] = "DB: Loading Data File - GSR;",
+        [7] = "DB: Loading Data File - Drops;",
+        [8] = "DB: Loading Data File - Pickups;",
+        [9] = "DB: Loading Data File - Notes;",
+        [10] = "DB: Loading Data File - Names;"
     }
     --
     local function cb()
@@ -71,7 +71,7 @@ function c.data.Initilize()
     end
 
     c.Loading = false
-    c.debug_1('Loading Sequence Complete.')
+    c.debug_1("Loading Sequence Complete.")
     c.Running = true
 end
 
@@ -87,7 +87,7 @@ end
 --- Gets player from the player table.
 ---@param source number
 function c.data.GetPlayer(source)
-    if type(c.pdex[tonumber(source)]) == 'table' then
+    if type(c.pdex[tonumber(source)]) == "table" then
         return c.pdex[tonumber(source)]
     else
         return false
@@ -194,7 +194,7 @@ function c.GetVehicleByPlate(plate)
 end
 
 -- ====================================================================================--
--- NPC's 
+-- NPC"s 
 
 function c.data.AddNpc(net, cb, ...)
     if not c.npc.Find(net) then
@@ -230,7 +230,7 @@ function c.data.RemoveNpc(net)
 end
 
 -- ====================================================================================--
--- NPC's 
+-- NPC"s 
 
 function c.data.AddObject(net, cb, ...)
     if not c.object.Find(net) then
@@ -398,7 +398,7 @@ function c.data.LoadPlayer(source, Character_ID)
     end)
     -- Wait for the player to be loaded prior to sending the "ok" to load to the client.
     Citizen.Await(p)
-    TriggerClientEvent('Client:Character:Loaded', src)
+    TriggerClientEvent("Client:Character:Loaded", src)
 end
 
 function c.data.ClientSync()
@@ -410,7 +410,7 @@ function c.data.ClientSync()
                 local src = tonumber(source)
                 local data = TriggerClientCallback({
                     source = src,
-                    eventName = 'DataPacket',
+                    eventName = "DataPacket",
                     args = {}
                 })
                 c.data.UpdatePacket(source, data)
@@ -435,13 +435,13 @@ function c.GetEntityState(net)
     return c.data.GetEntityState(net)
 end
 
---- Return the Players's state bag.
+--- Return the Players"s state bag.
 ---@param id any "Typically a number or string"
 function c.data.GetPlayerState(id)
     return Player(id).state
 end
 
---- Return the Players's state bag.
+--- Return the Players"s state bag.
 ---@param id any "Typically a number or string"
 function c.GetPlayerState(id)
     return c.data.GetPlayerState(id)

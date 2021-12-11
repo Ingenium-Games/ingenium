@@ -50,8 +50,8 @@ function c.class.CreateUser(source)
     self.IsSupporter = data.Supporter
     self.State.IsSupporter = self.IsSupporter
     --
-    ExecuteCommand(('remove_principal identifier.%s group.%s'):format(self.License_ID, self.Ace))
-    ExecuteCommand(('add_principal identifier.%s group.%s'):format(self.License_ID, self.Ace))
+    ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
+    ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     --
     -- Functions
     self.Kick = function(reason)
@@ -104,6 +104,6 @@ function c.class.CreateUser(source)
         self.State.IsSupporter = self.IsSupporter
     end
     --
-    c.debug_2('Generated User')
+    c.debug_2("Generated User")
     return self
 end

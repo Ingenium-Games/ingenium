@@ -321,8 +321,8 @@ function c.class.CreateCharacter(source, character_id)
             self.State.Job = self.Job.Name
             self.State.Grade = self.Job.Grade
             --
-            TriggerEvent('Server:Character:SetJob', self.ID, self.Job)
-            TriggerClientEvent('Client:Character:SetJob', self.ID, self.Job)
+            TriggerEvent("Server:Character:SetJob", self.ID, self.Job)
+            TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job)
         else
             c.debug_1("Ignoring invalid .SetJob() for "..self.ID)
         end

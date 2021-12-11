@@ -9,7 +9,7 @@ SetConvarServerInfo("Map Name", conf.mapname)
 --
 
 -- ====================================================================================--
-AddEventHandler('onResourceStart', function(resourceName)
+AddEventHandler("onResourceStart", function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then
         return
     end
@@ -40,16 +40,16 @@ AddEventHandler('onResourceStart', function(resourceName)
     Queue.OnReady()
 end)
 -- ====================================================================================--
-RegisterNetEvent('Server:PlayerConnecting')
-AddEventHandler('Server:PlayerConnecting', function()
+RegisterNetEvent("Server:PlayerConnecting")
+AddEventHandler("Server:PlayerConnecting", function()
     local src = tonumber(source)
     local Username = GetPlayerName(src)
     local Primary_ID = c.identifier(src)
     local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = c.identifiers(src)
     --
     local function Startup()
-        TriggerClientEvent('Client:Character:OpeningMenu', src)
-        TriggerEvent('Server:Character:List', src, Primary_ID)
+        TriggerClientEvent("Client:Character:OpeningMenu", src)
+        TriggerEvent("Server:Character:List", src, Primary_ID)
     end
     --
     if License_ID then
@@ -64,17 +64,17 @@ AddEventHandler('Server:PlayerConnecting', function()
             c.sql.user.Update(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
         end
     else
-        DropPlayer(src, 'No License Identifier, No Entry.')
+        DropPlayer(src, "No License Identifier, No Entry.")
     end    
 end)
 -- ====================================================================================--
-AddEventHandler('playerDropped', function()
+AddEventHandler("playerDropped", function()
     local src = tonumber(source)
     local xPlayer = c.data.GetPlayer(src)
     -- if the data not false?
     if xPlayer then
         -- Remove Job Permissions
-        ExecuteCommand(('remove_principal identifier.%s job.%s'):format(xPlayer.License_ID, xPlayer.GetJob().Name))
+        ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.License_ID, xPlayer.GetJob().Name))
         -- Save Data
         c.sql.save.User(xPlayer, function()
             c.sql.char.SetActive(xPlayer.Character_ID, false, function()

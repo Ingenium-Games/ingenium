@@ -84,7 +84,7 @@ AddEventHandler("Server:Character:OnDuty", function(req)
 end)
 
 -- req = source or number id calling event if internal
--- t = {name = 'police', grade = 1}, Job and then Grade
+-- t = {name = "police", grade = 1}, Job and then Grade
 AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
     CurrentlyActive[src] = data
@@ -101,8 +101,8 @@ end)
 ---@param bool boolean "Use the Job funds to pay all employees?" 
 function c.job.Payroll(bool)
     for k,v in ipairs(CurrentlyActive) do
-        if type(v) == 'table' then
-            -- CurrentlyActive[1] = [Name='popo',Grade=2,etc,etc]
+        if type(v) == "table" then
+            -- CurrentlyActive[1] = [Name="popo",Grade=2,etc,etc]
             local xPlayer = c.data.GetPlayer(k)
             local xJob = c.data.GetJob(CurrentlyActive[k].Name)
             local pay = xJob.Grades[v.Grade].Grade_Salary

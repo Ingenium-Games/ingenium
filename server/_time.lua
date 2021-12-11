@@ -30,10 +30,10 @@ end
 
 --- func desc
 function c.time.Update()
-    local t = os.date('*t')
+    local t = os.date("*t")
     local newt = c.time.AlterTime(t.hour)
-    SetConvarReplicated('Time', string.format('%02d:%02d', newt, t.min))
-    SetConvarServerInfo('Server Time', string.format('%02d:%02d', t.hour, t.min))
+    SetConvarReplicated("Time", string.format("%02d:%02d", newt, t.min))
+    SetConvarServerInfo("Server Time", string.format("%02d:%02d", t.hour, t.min))
     -- Add Cron Handler into the Time Functions.
     c.cron.Action(newt, t.min)
 end

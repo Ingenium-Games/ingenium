@@ -1,7 +1,7 @@
 -- ====================================================================================--
 
 -- Globals and Require/Replace
-math = require('glm')
+math = require("glm")
 math.randomseed(GetNetworkTime())
 --
 c.Locale = conf.locale

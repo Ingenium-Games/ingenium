@@ -13,10 +13,10 @@ NOTES.
 
 function c.sql.bank.AddAccount(Character_ID, Account_Number, cb)
     MySQL.Async.execute(
-        'INSERT INTO `character_accounts` (`Character_ID`, `Account_Number`, `Bank`) VALUES (@Character_ID, @Account_Number, @Bank);',{
-            ['@Character_ID'] = Character_ID,
-            ['@Account_Number'] = Account_Number,
-            ['@Bank'] = conf.startingloan,
+        "INSERT INTO `character_accounts` (`Character_ID`, `Account_Number`, `Bank`) VALUES (@Character_ID, @Account_Number, @Bank);",{
+            ["@Character_ID"] = Character_ID,
+            ["@Account_Number"] = Account_Number,
+            ["@Bank"] = conf.startingloan,
         }, function(data)
             if data then
 
@@ -34,8 +34,8 @@ function c.sql.bank.GetBank(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchScalar('SELECT `Bank` FROM `character_accounts` WHERE `Character_ID` = @Character_ID;', {
-        ['@Character_ID'] = Character_ID
+    MySQL.Async.fetchScalar("SELECT `Bank` FROM `character_accounts` WHERE `Character_ID` = @Character_ID;", {
+        ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
             result = data
@@ -58,9 +58,9 @@ end
 function c.sql.bank.SetBank(character_id, bank, cb)
     local Character_ID = character_id
     local Bank = bank
-    MySQL.Async.execute('UPDATE `character_accounts` SET `Bank` = @Bank WHERE `Character_ID` = @Character_ID;', {
-        ['@Bank'] = Bank,
-        ['@Character_ID'] = Character_ID
+    MySQL.Async.execute("UPDATE `character_accounts` SET `Bank` = @Bank WHERE `Character_ID` = @Character_ID;", {
+        ["@Bank"] = Bank,
+        ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
             --
@@ -90,8 +90,8 @@ function c.sql.bank.GetLoan(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchScalar('SELECT `Loan` FROM `character_accounts` WHERE `Character_ID` = @Character_ID;', {
-        ['@Character_ID'] = Character_ID
+    MySQL.Async.fetchScalar("SELECT `Loan` FROM `character_accounts` WHERE `Character_ID` = @Character_ID;", {
+        ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
             result = data
@@ -116,11 +116,11 @@ function c.sql.bank.SetLoan(character_id, loan, duration, cb)
     local Loan = loan
     local Duration = duration
     MySQL.Async.execute(
-        'UPDATE `character_accounts` SET `Loan` = @Loan, `Duration` = @Duration, `Active` = TRUE WHERE `Character_ID` = @Character_ID;',
+        "UPDATE `character_accounts` SET `Loan` = @Loan, `Duration` = @Duration, `Active` = TRUE WHERE `Character_ID` = @Character_ID;",
         {
-            ['@Loan'] = Loan,
-            ['@Duration'] = Duration,
-            ['@Character_ID'] = Character_ID
+            ["@Loan"] = Loan,
+            ["@Duration"] = Duration,
+            ["@Character_ID"] = Character_ID
         }, function(data)
             if data then
                 --
@@ -133,7 +133,7 @@ end
 
 -- cb if any.
 function c.sql.bank.TickOverLoanInterest(cb)
-    MySQL.Async.execute('UPDATE `character_accounts` SET `Loan` = Loan * 3.5 WHERE `Duration` >= 1;', {}, function(data)
+    MySQL.Async.execute("UPDATE `character_accounts` SET `Loan` = Loan * 3.5 WHERE `Duration` >= 1;", {}, function(data)
         if data then
             --
         end
@@ -145,7 +145,7 @@ end
 
 -- cb if any.
 function c.sql.bank.TickOverLoanDuration(cb)
-    MySQL.Async.execute('UPDATE `character_accounts` SET `Duration` = Duration - 1 WHERE `Active` = TRUE;', {},
+    MySQL.Async.execute("UPDATE `character_accounts` SET `Duration` = Duration - 1 WHERE `Active` = TRUE;", {},
         function(data)
             if data then
                 --
@@ -158,7 +158,7 @@ end
 
 -- cb if any.
 function c.sql.bank.TickOverLoansInactive(cb)
-    MySQL.Async.execute('UPDATE `character_accounts` SET `Active` = FALSE WHERE `Duration` = 0;', {}, function(data)
+    MySQL.Async.execute("UPDATE `character_accounts` SET `Active` = FALSE WHERE `Duration` = 0;", {}, function(data)
         if data then
             --
         end

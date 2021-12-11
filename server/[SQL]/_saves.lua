@@ -22,7 +22,7 @@ end)
 
 --- Save Single User/Character
 ---@param data table "xPlayer table"
----@param cb function "To be called on SQL 'UPDATE' statement completion."
+---@param cb function "To be called on SQL "UPDATE" statement completion."
 function c.sql.save.User(data, cb)
     if data then
         -- Other Variables.
@@ -42,20 +42,20 @@ function c.sql.save.User(data, cb)
         local Character_ID = data.GetCharacter_ID()
         MySQL.Async.insert(PlayerSaveData, {
             -- Other Variables.
-            ['@Health'] = Health,
-            ['@Armour'] = Armour,
-            ['@Hunger'] = Hunger,
-            ['@Thirst'] = Thirst,
-            ['@Stress'] = Stress,
+            ["@Health"] = Health,
+            ["@Armour"] = Armour,
+            ["@Hunger"] = Hunger,
+            ["@Thirst"] = Thirst,
+            ["@Stress"] = Stress,
             -- Table Informaiton.
-            ['@Coords'] = Coords,
-            ['@Accounts'] = Accounts,
-            ['@Modifiers'] = Modifiers,
-            ['@Inventory'] = Inventory,
-            ['@Hotbar'] = Hotbar,
-            ['@Job'] = Job,
+            ["@Coords"] = Coords,
+            ["@Accounts"] = Accounts,
+            ["@Modifiers"] = Modifiers,
+            ["@Inventory"] = Inventory,
+            ["@Hotbar"] = Hotbar,
+            ["@Job"] = Job,
             --
-            ['@Character_ID'] = Character_ID
+            ["@Character_ID"] = Character_ID
         }, function(r)
             -- do
         end)
@@ -66,7 +66,7 @@ function c.sql.save.User(data, cb)
 end
 
 --- Save All Characters from the xPLayer Table.
----@param cb function "To be called on SQL 'UPDATE' statements are completed."
+---@param cb function "To be called on SQL "UPDATE" statements are completed."
 function c.sql.save.Users(cb)
     local xPlayers = c.data.GetPlayers()
     for k,v in pairs(xPlayers) do
@@ -89,20 +89,20 @@ function c.sql.save.Users(cb)
             local Character_ID = data.GetCharacter_ID()
             MySQL.Async.insert(PlayerSaveData, {
                 -- Other Variables.
-                ['@Health'] = Health,
-                ['@Armour'] = Armour,
-                ['@Hunger'] = Hunger,
-                ['@Thirst'] = Thirst,
-                ['@Stress'] = Stress,
+                ["@Health"] = Health,
+                ["@Armour"] = Armour,
+                ["@Hunger"] = Hunger,
+                ["@Thirst"] = Thirst,
+                ["@Stress"] = Stress,
                 -- Table Informaiton.
-                ['@Coords'] = Coords,
-                ['@Accounts'] = Accounts,
-                ['@Modifiers'] = Modifiers,
-                ['@Inventory'] = Inventory,
-                ['@Hotbar'] = Hotbar,
-                ['@Job'] = Job,
+                ["@Coords"] = Coords,
+                ["@Accounts"] = Accounts,
+                ["@Modifiers"] = Modifiers,
+                ["@Inventory"] = Inventory,
+                ["@Hotbar"] = Hotbar,
+                ["@Job"] = Job,
                 --
-                ['@Character_ID'] = Character_ID
+                ["@Character_ID"] = Character_ID
             }, function(r)
                 -- Do nothing.
             end)
@@ -124,7 +124,7 @@ end)
 
 --- Save Single User/Character
 ---@param data table "xCar table"
----@param cb function "To be called on SQL 'UPDATE' statement completion."
+---@param cb function "To be called on SQL "UPDATE" statement completion."
 function c.sql.save.Vehicle(data, cb)
     if data.GetOwner() then
         -- Other Variables.
@@ -143,18 +143,18 @@ function c.sql.save.Vehicle(data, cb)
         --
         MySQL.Async.insert(VehicleSaveData, {
             -- Other Variables.
-            ['@Garage'] = Garage,
+            ["@Garage"] = Garage,
             -- Booleans
-            ['@Impound'] = Impound,
-            ['@State'] = State,
-            ['@Wanted'] = Wanted,
+            ["@Impound"] = Impound,
+            ["@State"] = State,
+            ["@Wanted"] = Wanted,
             -- Table Informaiton.
-            ['@Keys'] = Keys,
-            ['@Coords'] = Coords,
-            ['@Condition'] = Condition,
-            ['@Modifications'] = Modifications,
+            ["@Keys"] = Keys,
+            ["@Coords"] = Coords,
+            ["@Condition"] = Condition,
+            ["@Modifications"] = Modifications,
             --
-            ['@Plate'] = Plate
+            ["@Plate"] = Plate
         }, function(r)
             -- do
         end)
@@ -165,7 +165,7 @@ function c.sql.save.Vehicle(data, cb)
 end
 
 --- Save All Characters from the xPLayer Table.
----@param cb function "To be called on SQL 'UPDATE' statements are completed."
+---@param cb function "To be called on SQL "UPDATE" statements are completed."
 function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for k,v in pairs(xVehicles) do
@@ -188,18 +188,18 @@ function c.sql.save.Vehicles(cb)
                 --
                 MySQL.Async.insert(VehicleSaveData, {
                     -- Other Variables.
-                    ['@Garage'] = Garage,
+                    ["@Garage"] = Garage,
                     -- Booleans
-                    ['@Impound'] = Impound,
-                    ['@State'] = State,
-                    ['@Wanted'] = Wanted,
+                    ["@Impound"] = Impound,
+                    ["@State"] = State,
+                    ["@Wanted"] = Wanted,
                     -- Table Informaiton.
-                    ['@Keys'] = Keys,
-                    ['@Coords'] = Coords,
-                    ['@Condition'] = Condition,
-                    ['@Modifications'] = Modifications,
+                    ["@Keys"] = Keys,
+                    ["@Coords"] = Coords,
+                    ["@Condition"] = Condition,
+                    ["@Modifications"] = Modifications,
                     --
-                    ['@Plate'] = Plate
+                    ["@Plate"] = Plate
                     }, function(r)
                         -- Do nothing.
                 end)
@@ -221,7 +221,7 @@ function(id)
 end)
 
 --- Save All Job Accounts
----@param cb function "To be called on SQL 'UPDATE' statements are completed."
+---@param cb function "To be called on SQL "UPDATE" statements are completed."
 function c.sql.save.Jobs(cb)
     local xJobs = c.data.GetJobs()
     for k,v in pairs(xJobs) do
@@ -230,9 +230,9 @@ function c.sql.save.Jobs(cb)
         -- 
         local Name = xJobs[k].GetName()
         MySQL.Async.insert(JobSaveData, {
-            ['@Accounts'] = Accounts,
+            ["@Accounts"] = Accounts,
             --
-            ['@Name'] = Name
+            ["@Name"] = Name
         }, function(r)
             -- Do nothing.
         end)

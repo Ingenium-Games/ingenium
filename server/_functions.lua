@@ -27,11 +27,11 @@ end
 
 function c.error(err)
     if conf.error then
-        if type(err) == 'string' then
+        if type(err) == "string" then
             print("   ^7[^3Error^7]:  ==    ", err)
             print(debug.traceback(_, 2))
         else
-            print("   ^7[^3Error^7]:  ==    ", 'Unable to type(err) == string. [err] = ', err)
+            print("   ^7[^3Error^7]:  ==    ", "Unable to type(err) == string. [err] = ", err)
             print(debug.traceback(_, 2))
         end
     end
@@ -110,14 +110,14 @@ function c.discord(url, color, name, message, footer)
               },
         }
     }
-    PerformHttpRequest(url, function(err, text, headers) end, 'POST', json.encode({username = name, embeds = embed}), { ['Content-Type'] = 'application/json' })
+    PerformHttpRequest(url, function(err, text, headers) end, "POST", json.encode({username = name, embeds = embed}), { ["Content-Type"] = "application/json" })
 end
 
 function c.eventban(source, event)
     local src = source
     local id = c.identifier(src)
     local name = GetPlayerName(src)
-    TriggerEvent('txaLogger:CommandExecuted', "Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
+    TriggerEvent("txaLogger:CommandExecuted", "Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
     c.debug_2("Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
     c.sql.user.SetBan(c.identifier(src), true, function() DropPlayer(src, "Banned for attmpting to exploit event, this has been logged in txAdmin.") end)
     return CancelEvent()

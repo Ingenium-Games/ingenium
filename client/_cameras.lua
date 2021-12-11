@@ -8,7 +8,7 @@ NOTES.
     - The purpose of this is simple. Everyone who scripts a camera makes the name CAM. I think that fucking stupid.
     - What happens when others all use the name CAM? It means that when they DONT DESTROY the CAM...
     - You have overlapping issues when ending cameras from different angles rather than snapping to the ped
-    - Even if you don't destroy the camera, if its a different name, it should resolve the issues of weird cam shit happening.
+    - Even if you don"t destroy the camera, if its a different name, it should resolve the issues of weird cam shit happening.
 ]]--
 
 -- ====================================================================================--
@@ -32,14 +32,14 @@ end
 
 function c.camera.Basic(px, py, pz, rx, ry, rz, fov)
     local t = {
-        ['type'] = "DEFAULT_SCRIPTED_CAMERA",
-        ['px'] = px,
-        ['py'] = py,
-        ['pz'] = pz,
-        ['rx'] = rx,
-        ['ry'] = ry,
-        ['rz'] = rz,
-        ['fov'] = fov
+        ["type"] = "DEFAULT_SCRIPTED_CAMERA",
+        ["px"] = px,
+        ["py"] = py,
+        ["pz"] = pz,
+        ["rx"] = rx,
+        ["ry"] = ry,
+        ["rz"] = rz,
+        ["fov"] = fov
     }
     local name = c.camera.NewName(t)
     name = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", px, py, pz, rx, ry, rz, fov, false, 0)
@@ -48,14 +48,14 @@ end
 
 function c.camera.Advanced(type, px, py, pz, rx, ry, rz, fov)
     local t = {
-        ['type'] = type,
-        ['px'] = px,
-        ['py'] = py,
-        ['pz'] = pz,
-        ['rx'] = rx,
-        ['ry'] = ry,
-        ['rz'] = rz,
-        ['fov'] = fov
+        ["type"] = type,
+        ["px"] = px,
+        ["py"] = py,
+        ["pz"] = pz,
+        ["rx"] = rx,
+        ["ry"] = ry,
+        ["rz"] = rz,
+        ["fov"] = fov
     }
     local name = c.camera.NewName(t)
     name = CreateCamWithParams(type, px, py, pz, rx, ry, rz, fov, false, 0)

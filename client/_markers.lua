@@ -61,7 +61,7 @@ end
 -- This one is for some reason broken, but, if you take it from the Citizen.Thread, it works fine. So ??
 
 --- Produce A loop of markers to generate based on criteria.
----@param t table 'Contains coords as vector3, number for marker selection with c.marker functions, notification for dynamic entry with c.text functions and a func for callback function to do. {["coords"] = vector3(), ["number"] = 0,X, ["notification"] = {"KEYBOARD_USE", "DO X Y Z"}, ["callback"] = cb()}'
+---@param t table "Contains coords as vector3, number for marker selection with c.marker functions, notification for dynamic entry with c.text functions and a func for callback function to do. {["coords"] = vector3(), ["number"] = 0,X, ["notification"] = {"KEYBOARD_USE", "DO X Y Z"}, ["callback"] = cb()}"
 function c.marker.CreateThreadLoop(t)
     local tab = c.check.Table(t)
     -- Create the loop based on the Coordinates and marker style provided.

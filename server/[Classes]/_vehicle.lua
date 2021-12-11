@@ -42,10 +42,10 @@ function c.class.CreateVehicle(net, bool)
         local x, y, z = GetEntityCoords(self.Entity)
         local h = GetEntityHeading(self.Entity)
         return {
-            ['x'] = c.math.Decimals(x, 2),
-            ['y'] = c.math.Decimals(y, 2),
-            ['z'] = c.math.Decimals(z, 2),
-            ['h'] = c.math.Decimals(h, 2)
+            ["x"] = c.math.Decimals(x, 2),
+            ["y"] = c.math.Decimals(y, 2),
+            ["z"] = c.math.Decimals(z, 2),
+            ["h"] = c.math.Decimals(h, 2)
         }
     end
     --
@@ -171,7 +171,7 @@ function c.class.CreateVehicle(net, bool)
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug_1('User: ' .. id .. ' Already has key to this vehicle.')
+            c.debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
     end
     --
@@ -181,7 +181,7 @@ function c.class.CreateVehicle(net, bool)
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug_1('User: ' .. id .. ' Never had a key to this vehicle.')
+            c.debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end
     end
     --
@@ -205,13 +205,13 @@ function c.class.CreateVehicle(net, bool)
     self.SetCondition = function(conditions)
         self.Condition = conditions or TriggerClientCallback({
             source = self.GetSource(),
-            eventName = 'GetVehicleCondition',
+            eventName = "GetVehicleCondition",
             args = {self.Net}
         })    
         self.State.Condition = self.Condition
         TriggerClientCallback({
             source = self.GetSource(),
-            eventName = 'SetVehicleCondition',
+            eventName = "SetVehicleCondition",
             args = {self.Net}
         })
     end
@@ -243,13 +243,13 @@ function c.class.CreateVehicle(net, bool)
     self.SetModifications = function(modifications)
         self.Modifications = modifications or TriggerClientCallback({
             source = self.GetSource(),
-            eventName = 'GetVehicleModifications',
+            eventName = "GetVehicleModifications",
             args = {self.Net}
         })
         self.State.Modifications = self.Modifications
         TriggerClientCallback({
             source = self.GetSource(),
-            eventName = 'SetVehicleModifications',
+            eventName = "SetVehicleModifications",
             args = {self.Net}
         })
     end
@@ -374,10 +374,10 @@ function c.class.CreatePlayerVehicle(net, plate)
         local x, y, z = GetEntityCoords(self.Entity)
         local h = GetEntityHeading(self.Entity)
         return {
-            ['x'] = c.math.Decimals(x, 2),
-            ['y'] = c.math.Decimals(y, 2),
-            ['z'] = c.math.Decimals(z, 2),
-            ['h'] = c.math.Decimals(h, 2)
+            ["x"] = c.math.Decimals(x, 2),
+            ["y"] = c.math.Decimals(y, 2),
+            ["z"] = c.math.Decimals(z, 2),
+            ["h"] = c.math.Decimals(h, 2)
         }
     end
     --
@@ -505,7 +505,7 @@ function c.class.CreatePlayerVehicle(net, plate)
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug_1('User: ' .. id .. ' Already has key to this vehicle.')
+            c.debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
     end
     --
@@ -515,7 +515,7 @@ function c.class.CreatePlayerVehicle(net, plate)
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug_1('User: ' .. id .. ' Never had a key to this vehicle.')
+            c.debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end
     end
     --
@@ -541,7 +541,7 @@ function c.class.CreatePlayerVehicle(net, plate)
         self.State.Condition = self.Condition
         TriggerClientCallback({
             source = self.GetSource(),
-            eventName = 'SetVehicleCondition',
+            eventName = "SetVehicleCondition",
             args = {self.Net}
         })
     end
@@ -575,7 +575,7 @@ function c.class.CreatePlayerVehicle(net, plate)
         self.State.Modifications = self.Modifications
         TriggerClientCallback({
             source = self.GetSource(),
-            eventName = 'SetVehicleModifications',
+            eventName = "SetVehicleModifications",
             args = {self.Net}
         })
     end

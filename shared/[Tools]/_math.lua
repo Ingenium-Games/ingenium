@@ -35,6 +35,6 @@ end
 -- http://richard.warburton.it
 
 function c.math.GroupDigits(val)
-	local left,num,right = string.match(val,'^([^%d]*%d)(%d*)(.-)$')
-	return left..(num:reverse():gsub('(%d%d%d)','%1,'):reverse())..right
+	local left,num,right = string.match(val,"^([^%d]*%d)(%d*)(.-)$")
+	return left..(num:reverse():gsub("(%d%d%d)","%1,"):reverse())..right
 end
