@@ -28,11 +28,12 @@ end)
 -- [C+S]
 RegisterNetEvent("Client:Character:Create")
 AddEventHandler("Client:Character:Create", function()
+    DoScreenFadeOut(2000)
+    c.IsBusyPleaseWait(2000)
     local plyped = PlayerPedId()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
     DoScreenFadeIn(2000)
-    c.IsBusyPleaseWait(2000)
     local config = {
         ped = true,
         headBlend = true,

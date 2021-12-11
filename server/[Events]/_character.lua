@@ -15,10 +15,8 @@ AddEventHandler("Server:Character:List", function(req, Primary_ID)
     local Characters = c.sql.char.GetAllPermited(Primary_ID, Slots)
     p:resolve()
     Citizen.Await(p)
-    local Command = "OnJoin"
-    local Data = {["Characters"] = Characters, ["Slots"] = Slots}
     -- Send the data table to the client that requested it...
-    TriggerClientEvent("Client:Core:UI", src, Command, Data)
+    TriggerClientEvent("Client:Core:UI", src, "OnJoin", {["Characters"] = Characters, ["Slots"] = Slots})
     -- Place the user in their own instance until the user has joined and loaded.
     c.inst.SetPlayer(src)
 end)
@@ -29,7 +27,6 @@ AddEventHandler("Server:Character:Join", function(Character_ID)
     local src = tonumber(source)
     -- If the User selected the NEW button on the NUI, the Character_ID will be listed as NEW, if this is the case, trigger the registration NUI?
     if (Character_ID == "New") then
-        local message = "OnNew"
         TriggerClientEvent("Client:Character:Create", src)
     elseif Character_ID ~= nil then
         local Coords = c.sql.char.GetCoords(Character_ID)
