@@ -8,7 +8,6 @@ NOTES.
 ]] --
 
 -- ====================================================================================--
-local cam, cam2, cam3
 
 -- [C+S]
 RegisterNetEvent("Client:Character:OpeningMenu")
@@ -16,27 +15,12 @@ AddEventHandler("Client:Character:OpeningMenu", function()
     -- Set false for switch command.
     c.data.SetLoadedStatus(false)
     SetFollowPedCamViewMode(4)
-    SetEntityCoords(GetPlayerPed(-1), -43.284084320068, 822.16571044922, 231.98182678223)
-    SetGameplayCamRelativeRotation(8.1538953781128,0.054131388664246,-70.471687316895)
-    SetGameplayCamRelativeHeading(-0.092658340930939)
-    SetGameplayCamRelativePitch(8.1538915634155, 1.0)
+    SetEntityCoords(GetPlayerPed(-1), -43.57, 821.86, 231.33)
+    SetGameplayCamRelativeRotation(8.1538953781128, 0.054131388664246, -70.471687316895)
+    SetGameplayCamRelativeHeading(-0.092091433703899)
+    SetGameplayCamRelativePitch(3.5341143608093 , 1.0)
     FreezeEntityPosition(GetPlayerPed(-1), true)
-    cam = c.camera.Basic(43.284084320068, 822.16571044922, 231.98182678223, 8.1538953781128, 0.054131388664246, -70.471687316895, 50.000007629395)
-    RenderScriptCams(false, false, 0, 1, 1)
 end)
-
---[[
-GetGameplayCamCoord() 
--43.284084320068,822.16571044922,231.98182678223 
-GetGameplayCamRelativeHeading() 
--0.092658340930939 
-GetGameplayCamRelativePitch() 
-8.1538915634155 
-FOV : 
-50.000007629395
-ptich rotation: 
-8.1538953781128,0.054131388664246,-70.471687316895
-]]--
 
 -- [C+S]
 RegisterNetEvent("Client:Character:Create")
@@ -78,34 +62,14 @@ end)
 -- [S]
 RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
-    c.IsBusyPleaseWait(1500)
+    SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
-    cam2 = c.camera.Basic(43.284084320068, 822.16571044922, 531.98182678223, 8.1538953781128, 0.054131388664246, -70.471687316895, 50.000007629395)
-    PointCamAtCoord(cam2, Coords.x, Coords.y, Coords.z + 200)
-    SetCamActiveWithInterp(cam2, cam, 900, 1, 1)
-    c.IsBusyPleaseWait(900)
-    cam3 = c.camera.Basic(Coords.x, Coords.y, Coords.z + 200, 300.00, 0.00, 0.00, 100.00)
-    PointCamAtCoord(cam, Coords.x, Coords.y, Coords.z + 2)
-    SetCamActiveWithInterp(cam3, cam2, 3700, 1, 1)
-    c.IsBusyPleaseWait(2700)
-    --[[
-            ADD YOUR RESPAWN SHIT BELOW
-    ]]--
-    
     TriggerServerEvent("Server:Character:LoadSkin")
-    
-    --[[
-            ADD YOUR RESPAWN SHIT ABOVE
-    ]]--
+    DoScreenFadeIn(2000)
     c.IsBusyPleaseWait(1000)
-    PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
-    RenderScriptCams(false, true, 500, 1, 1)
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
+    c.IsBusyPleaseWait(1000)
     FreezeEntityPosition(GetPlayerPed(-1), false)
-    c.camera.CleanUp(cam)
-    c.camera.CleanUp(cam2)
-    c.camera.CleanUp(cam3)
-    c.IsBusyPleaseWait(500)
 end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
@@ -136,7 +100,6 @@ end)
 RegisterNetEvent("Client:Character:Ready")
 AddEventHandler("Client:Character:Ready", function()
     -- Character has loaded in, no need to respawn any more.
-    SetFollowPedCamViewMode(0)
     exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")
 end)
