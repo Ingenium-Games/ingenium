@@ -42,8 +42,8 @@ body {
 
 #Information h1 {
   color: #fff;
-  font-size: 1.25em;
-  padding-top: 2vh;
+  font-size: 1.32em;
+  padding-top: 4vh;
   padding-left: 3vw;
   text-shadow: 4px 4px 10px #000000;
 }
@@ -98,7 +98,7 @@ body {
   z-index: 2;
   top: 0px !important;
   left: 25.55vw !important;
-  width: 9.80vw !important;
+  width: 6.80vw !important;
   height: 100vh !important;
   border-left: 4vw !important;
   border-left-color: black !important;
@@ -215,43 +215,4 @@ a img:hover {
   color:#fff;
   font-size: 14px;
   background-color: rgba(0, 0, 0, 0.35) !important;
-}
-
-/* Notifications Handler */
-
-#Notify-Window {
-  position: absolute;
-  top: 1vh;
-  right: 0vw;
-  width: 43vw;
-  height: 26vh;
-}
-
-.noty {
-  color: rgb(240, 240, 240);
-  margin: 2px;
-  text-align: left;
-  padding: 6px;
-  border-radius: 3px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  word-spacing: 1.2px;
-  font-size: 1em;
-  display: inline-block;
-}
-
-.normal {
-  background-color: rgba(20, 20, 20, 0.795);
-}
-
-.success {
-  background-color: rgba(0, 255, 106, 0.795);
-}
-
-.warn {
-  background-color: rgba(255, 102, 0, 0.795);
-}
-
-.error {
-  background-color: rgba(255, 0, 34, 0.795);
 }

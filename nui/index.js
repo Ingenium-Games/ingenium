@@ -23,6 +23,8 @@ function OnJoin(data) {
 
 function Selected(key) {
     if (key === "New") {
+        $("#Play").show()
+        $("#Kill").hide()
         Character_ID = "New"
         document.getElementById("name").innerText = "New Character"
         document.getElementById("created").innerText = "Click the tick"
@@ -30,6 +32,8 @@ function Selected(key) {
         document.getElementById("city").innerText = "Click the tick"
         document.getElementById("phone").innerText = "Click the tick"
     } else {
+        $("#Play").show()
+        $("#Kill").show()
         Character_ID = Characters[key].Character_ID
         Key = Characters[key]
         let Created = Characters[key].Created
