@@ -15,7 +15,7 @@ RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
     -- Set false for switch command.
     c.data.SetLoadedStatus(false)
-    SetEntityCoords(GetPlayerPed(-1), -44.18, 821.52, 230.83)
+    SetEntityCoords(GetPlayerPed(-1), -43.284084320068, 822.16571044922, 231.98182678223 )
     FreezeEntityPosition(GetPlayerPed(-1), true)
     cam = c.camera.Basic(43.284084320068, 822.16571044922, 231.98182678223, 8.1538953781128, 0.054131388664246, -70.471687316895, 50.000007629395)
     SetCamActive(cam, true)
