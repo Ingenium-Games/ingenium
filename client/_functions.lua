@@ -93,17 +93,18 @@ end
 -- @entity - the object
 -- @arrays - locations in a table format
 -- @style - c.SelectMarker() - Pick Marker type.
-function c.CompareCoords(coords, arrays, style)
+function c.CompareCoords(coords, arrays, style, range)
+    if not range then range = 10 end
     local dstchecked = 1000
     local pos = coords
     if type(arrays) == "table" then
         for i = 1, #arrays do
             local ords = arrays[i]
-            local comparedst = Vdist(pos - ords)
+            local comparedst = #(pos - ords)
             if comparedst < dstchecked then
                 dstchecked = comparedst
             end
-            if comparedst < 7.5 then
+            if comparedst < range then
                 if style then
                     c.marker.SelectMarker(ords, style)
                 end
@@ -111,11 +112,11 @@ function c.CompareCoords(coords, arrays, style)
         end
         return dstchecked
     else
-        local comparedst = Vdist(pos - arrays)
+        local comparedst = #(pos - arrays)
         if comparedst < dstchecked then
             dstchecked = comparedst
         end
-        if comparedst < 7.5 then
+        if comparedst < range then
             if style then
                 c.marker.SelectMarker(arrays, style)
             end

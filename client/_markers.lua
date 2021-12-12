@@ -65,9 +65,6 @@ end
 function c.marker.CreateThreadLoop(t)
     local tab = c.check.Table(t)
     -- Create the loop based on the Coordinates and marker style provided.
-    
-    
-    
     Citizen.CreateThread(function()
         local tab = tab
         while true do
@@ -84,7 +81,7 @@ function c.marker.CreateThreadLoop(t)
                     local text = tab[i].notification
                     local cb = tab[i].callback
                     -- no point calculating distance twice in a loop, derp me.
-                    local dist = Vdist(pos, ords)
+                    local dist = #(pos, ords)
                     if dist < 20 then
                         found = true
                         -- Draw marker
@@ -112,6 +109,4 @@ function c.marker.CreateThreadLoop(t)
             end
         end
     end)
-
-
-  end
+end
