@@ -43,7 +43,6 @@ AddEventHandler("Client:Character:Create", function()
         if (appearance) then
             DoScreenFadeOut(250)
             Wait(250)
-            SetEntityCoords(PlayerPedId(), 0, 0, 0)
             TriggerEvent("Client:Character:OpeningMenu")
             c.IsBusyPleaseWait(1000)
             DoScreenFadeIn(3000)
