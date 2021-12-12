@@ -13,13 +13,38 @@ NOTES.
 RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
     -- Set false for switch command.
+    local ped = PlayerPedId()
     c.data.SetLoadedStatus(false)
-    FreezeEntityPosition(GetPlayerPed(-1), true)
+    FreezeEntityPosition(ped, true)
     SetFollowPedCamViewMode(4)
-    SetGameplayCamRelativeRotation(8.1538953781128, 0.054131388664246, -70.471687316895)
-    SetGameplayCamRelativeHeading(-0.092091433703899)
-    SetGameplayCamRelativePitch(3.5341143608093 , 1.0)
+    Citizen.Wait(0)
+    SetEntityCoords(ped, -43.143894195557, 822.04595947266, 231.33236694336)
+    SetEntityHeading(ped, 288.78283691406)
+    Citizen.Wait(0)
+    SetGameplayCamRelativeRotation(4.0307750701904,0.054180480539799,-71.305198669434)
+    SetGameplayCamRelativeHeading(-0.091852381825447 )
+    SetGameplayCamRelativePitch(4.0307726860046, 1.0)
 end)
+
+--[[
+[    303234] [b2372_GTAProce]             MainThrd/  PLAYER 
+[    303234] [b2372_GTAProce]             MainThrd/  GetEntityCoords() 
+[    303234] [b2372_GTAProce]             MainThrd/  : -43.143894195557,822.04595947266,231.33236694336 
+[    303234] [b2372_GTAProce]             MainThrd/  GetEntityHeading() 
+[    303250] [b2372_GTAProce]             MainThrd/  :288.78283691406
+[    303250] [b2372_GTAProce]             MainThrd/ 
+[    303250] [b2372_GTAProce]             MainThrd/  GAMECAM 
+[    303250] [b2372_GTAProce]             MainThrd/  GetGameplayCamCoord() 
+[    303250] [b2372_GTAProce]             MainThrd/  : -43.096748352051,822.05139160156,231.98075866699 
+[    303250] [b2372_GTAProce]             MainThrd/  GetGameplayCamRelativeHeading() 
+[    303250] [b2372_GTAProce]             MainThrd/  : -0.091852381825447 
+[    303250] [b2372_GTAProce]             MainThrd/  GetGameplayCamRelativePitch() 
+[    303250] [b2372_GTAProce]             MainThrd/  : 4.0307726860046 
+[    303250] [b2372_GTAProce]             MainThrd/  GetGameplayCamFov() 
+[    303250] [b2372_GTAProce]             MainThrd/  : 50.0
+[    303250] [b2372_GTAProce]             MainThrd/  GetGameplayCamRot(0) 
+[    303250] [b2372_GTAProce]             MainThrd/  : 4.0307750701904,0.054180480539799,-71.305198669434
+]]--
 
 -- [C+S]
 RegisterNetEvent("Client:Character:Create")
