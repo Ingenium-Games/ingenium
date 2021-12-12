@@ -14,16 +14,11 @@ RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
     -- Set false for switch command.
     c.data.SetLoadedStatus(false)
-    Citizen.Wait(0)
-    SetEntityCoords(GetPlayerPed(-1), -43.57, 821.86, 231.33)
-    Citizen.Wait(0)
+    FreezeEntityPosition(GetPlayerPed(-1), true)
     SetFollowPedCamViewMode(4)
-    Citizen.Wait(0)
     SetGameplayCamRelativeRotation(8.1538953781128, 0.054131388664246, -70.471687316895)
     SetGameplayCamRelativeHeading(-0.092091433703899)
     SetGameplayCamRelativePitch(3.5341143608093 , 1.0)
-    Citizen.Wait(0)
-    FreezeEntityPosition(GetPlayerPed(-1), true)
 end)
 
 -- [C+S]
