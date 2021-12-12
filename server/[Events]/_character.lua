@@ -96,15 +96,20 @@ AddEventHandler("Server:Character:Register", function(first_name, last_name, hei
     c.data.LoadPlayer(src, character_id)
     --
     Citizen.Await(p)    
-    --
-    c.inst.SetPlayer(src)
     --[[
             ADD YOUR CHARACTER CREATION EVENT BELOW
     ]]--
-    TriggerClientEvent("Client:Character:ReSpawn", src, data.Coords)
+    TriggerEvent("Server:Character:Spawn", src)
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
     ]]--
+end)
+
+RegisterNetEvent("Server:Character:Spawn")
+AddEventHandler("Server:Character:Spawn", function(req)
+    local src = tonumber(req)
+    local xPlayer = c.data.GetPlayer(src)
+    TriggerClientEvent("Client:Character:ReSpawn", src, xPlayer.GetCoords())
 end)
 
 RegisterServerEvent("Server:Character:SaveSkin")
@@ -112,17 +117,11 @@ AddEventHandler("Server:Character:SaveSkin", function(appearance, bool)
 	local src = source
 	local xPlayer = c.data.GetPlayer(src)
 	local identifier = xPlayer.GetIdentifier()
-    if appearance == false then
-        c.sql.char.Delete(identifier, function()
-            xPlayer.Kick("You didn't make a Character, try again.")
-        end)
-    else
-        c.sql.char.SetAppearance(identifier, appearance, function()
-            xPlayer.SetAppearance(appearance)
-        end)
-        if type(bool) == "boolean" and bool == true then
-            c.inst.SetPlayerDefault(src)
-        end
+    c.sql.char.SetAppearance(identifier, appearance, function()
+        xPlayer.SetAppearance(appearance)
+    end)
+    if type(bool) == "boolean" and bool == true then
+        c.inst.SetPlayerDefault(src)
     end
 end)
 

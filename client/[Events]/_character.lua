@@ -17,9 +17,7 @@ AddEventHandler("Client:Character:OpeningMenu", function()
     c.data.SetLoadedStatus(false)
     SetEntityCoords(GetPlayerPed(-1), 0, 0, 0)
     FreezeEntityPosition(GetPlayerPed(-1), true)
-    if cam == nil then
-        cam = c.camera.Basic(313.78, -1403.07, 189.53, 0.00, 0.00, 45.00, 100.00)
-    end
+    cam = c.camera.Basic(313.78, -1403.07, 189.53, 0.00, 0.00, 45.00, 100.00)
     SetCamActive(cam, true)
     RenderScriptCams(true, false, 1, true, true)
 end)
@@ -28,13 +26,12 @@ end)
 -- [C+S]
 RegisterNetEvent("Client:Character:Create")
 AddEventHandler("Client:Character:Create", function()
-    DoScreenFadeOut(2000)
-    c.IsBusyPleaseWait(2000)
     local plyped = PlayerPedId()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
-    DoScreenFadeIn(2000)
-    c.IsBusyPleaseWait(2000)
+    DoScreenFadeOut(250)
+    Wait(250)
+    c.IsBusyPleaseWait(1000)
     local config = {
         ped = true,
         headBlend = true,
@@ -45,17 +42,21 @@ AddEventHandler("Client:Character:Create", function()
       }
       exports["fivem-appearance"]:startPlayerCustomization(function(appearance)
         if (appearance) then
-            DoScreenFadeOut(2000)
-            c.IsBusyPleaseWait(2000)
+            DoScreenFadeOut(250)
+            Wait(250)
+            SetEntityCoords(PlayerPedId(), 0, 0, 0)
             TriggerEvent("Client:Character:OpeningMenu")
-            SetEntityCoords(plyped, 0, 0, 0)
+            c.IsBusyPleaseWait(1000)
             DoScreenFadeIn(3000)
             c.IsBusyPleaseWait(2000)
             TriggerEvent("Client:Core:UI", "Register")
+            c.IsBusyPleaseWait(1000)
         else
             TriggerServerEvent("Server:Character:Failed")
         end
       end, config)
+      DoScreenFadeIn(3000)
+      c.IsBusyPleaseWait(2000)
 end)
 
 -- Respawn in on last saved coords.
@@ -98,8 +99,9 @@ AddEventHandler("Client:Character:LoadSkin", function(appearance)
 end)
 
 RegisterNetEvent("Client:Character:SaveSkin")
-AddEventHandler("Client:Character:SaveSkin", function(appearance)
+AddEventHandler("Client:Character:SaveSkin", function(bool)
     local appearance = exports["fivem-appearance"]:getPedAppearance(PlayerPedId())
+    TriggerServerEvent("Server:Character:SaveSkin", appearance, bool)
 end)
 
 -- Event to receive the data of the chosen character for the client.

@@ -27,8 +27,6 @@ end)
 
 RegisterNUICallback("Client:Character:Register", function(Data, cb)
     SetNuiFocus(false, false)
-    DoScreenFadeOut(2000)
-    c.IsBusyPleaseWait(2000)
     local appearance = exports["fivem-appearance"]:getPedAppearance(PlayerPedId())
     TriggerServerEvent("Server:Character:Register", Data.First_Name, Data.Last_Name, Data.Height, Data.Birth_Date, appearance)
     cb("ok")

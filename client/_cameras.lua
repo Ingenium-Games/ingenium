@@ -65,5 +65,4 @@ end
 function c.camera.CleanUp(camera)
     SetCamActive(camera, false)
     DestroyCam(camera)
-    table.remove(c.cameras, camera)
 end
