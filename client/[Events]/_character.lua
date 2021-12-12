@@ -15,13 +15,25 @@ RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
     -- Set false for switch command.
     c.data.SetLoadedStatus(false)
-    SetEntityCoords(GetPlayerPed(-1), -44.18, 821.52, 210.83)
+    SetEntityCoords(GetPlayerPed(-1), -44.18, 821.52, 230.83)
     FreezeEntityPosition(GetPlayerPed(-1), true)
-    cam = c.camera.Basic(-44.18, 821.52, 230.83, 15.00, 0.00, 0.00, 80.00)
+    cam = c.camera.Basic(43.284084320068, 822.16571044922, 231.98182678223, 8.1538953781128, 0.054131388664246, -70.471687316895, 50.000007629395)
     SetCamActive(cam, true)
     RenderScriptCams(true, false, 1, true, true)
 end)
 
+--[[
+GetGameplayCamCoord() 
+-43.284084320068,822.16571044922,231.98182678223 
+GetGameplayCamRelativeHeading() 
+-0.092658340930939 
+GetGameplayCamRelativePitch() 
+8.1538915634155 
+FOV : 
+50.000007629395
+ptich rotation: 
+8.1538953781128,0.054131388664246,-70.471687316895
+]]--
 
 -- [C+S]
 RegisterNetEvent("Client:Character:Create")
@@ -65,7 +77,7 @@ RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
     c.IsBusyPleaseWait(1500)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
-    cam2 = c.camera.Basic(313.78, -1403.07, 189.53, 0.00, 0.00, 45.00, 100.00)
+    cam2 = c.camera.Basic(43.284084320068, 822.16571044922, 531.98182678223, 8.1538953781128, 0.054131388664246, -70.471687316895, 50.000007629395)
     PointCamAtCoord(cam2, Coords.x, Coords.y, Coords.z + 200)
     SetCamActiveWithInterp(cam2, cam, 900, 1, 1)
     c.IsBusyPleaseWait(900)

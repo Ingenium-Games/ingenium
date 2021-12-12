@@ -30,7 +30,9 @@ end
 
 -- ====================================================================================--
 
-function c.camera.Basic(px, py, pz, rx, ry, rz, fov)
+function c.camera.Basic(px, py, pz, rx, ry, rz, fov, l1, l2)
+    if not l1 then l1 = false end
+    if not l2 then l2 = 0 end
     local t = {
         ["type"] = "DEFAULT_SCRIPTED_CAMERA",
         ["px"] = px,
@@ -42,11 +44,13 @@ function c.camera.Basic(px, py, pz, rx, ry, rz, fov)
         ["fov"] = fov
     }
     local name = c.camera.NewName(t)
-    name = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", px, py, pz, rx, ry, rz, fov, false, 0)
+    name = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", px, py, pz, rx, ry, rz, fov, l1,l2)
     return name
 end
 
-function c.camera.Advanced(type, px, py, pz, rx, ry, rz, fov)
+function c.camera.Advanced(type, px, py, pz, rx, ry, rz, fov, l1, l2)
+    if not l1 then l1 = false end
+    if not l2 then l2 = 0 end
     local t = {
         ["type"] = type,
         ["px"] = px,
@@ -58,7 +62,7 @@ function c.camera.Advanced(type, px, py, pz, rx, ry, rz, fov)
         ["fov"] = fov
     }
     local name = c.camera.NewName(t)
-    name = CreateCamWithParams(type, px, py, pz, rx, ry, rz, fov, false, 0)
+    name = CreateCamWithParams(type, px, py, pz, rx, ry, rz, fov, l1, l2)
     return name
 end
 

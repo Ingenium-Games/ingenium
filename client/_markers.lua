@@ -81,7 +81,7 @@ function c.marker.CreateThreadLoop(t)
                     local text = tab[i].notification
                     local cb = tab[i].callback
                     -- no point calculating distance twice in a loop, derp me.
-                    local dist = #(pos, ords)
+                    local dist = #(pos - ords)
                     if dist < 20 then
                         found = true
                         -- Draw marker
