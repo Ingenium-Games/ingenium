@@ -1,69 +1,97 @@
--- ====================================================================================--
+c.class.Player = {}
+c.class.Player._index = c.class.Player
 
---[[
-NOTES.
-    - Why have the user and character classes seperate?
-    - Becasue a player has different data to the character being played.
-    - Not using the Player State, as still testing.
-]] --
--- ====================================================================================--
-
-function c.class.CreateCharacter(source, character_id)
+function c.class.Player:Create(source, character_id)
     local src = tonumber(source)
-    local data = c.sql.char.Get(character_id)
+    local Steam_ID, FiveM_ID, License_ID, Discord_ID = c.identifiers(src)
+    local user = c.sql.user.Get(License_ID)
+    local char = c.sql.char.Get(character_id)
+    --
     local self = {}
     --
-    -- For the State to work
     self.ID = src
     self.State = Player(self.ID).state
     --
+    self.Entity = GetPlayerPed(src)
+    --
+    self.Model = GetEntityModel(self.Entity)
+    self.State.Model = self.Model
+    --
+    self.GetModel = function()
+        return self.Model
+    end
+    --
+    -- Animation?
+    self.State.Animation = false
+    --
+    self.InstanceID = tonumber(char.ID)
+    --
     -- Strings
-    self.Character_ID = data.Character_ID -- 50 Random Characters [Aa-Zz][0-9]
+        self.Name = GetPlayerName(self.ID)
+        self.State.Name = self.Name
+        --
+        self.Steam_ID = Steam_ID
+        self.State.Steam_ID = self.Steam_ID
+        --
+        self.FiveM_ID = FiveM_ID
+        self.State.FiveM_ID = self.FiveM_ID
+        --
+        self.License_ID = License_ID
+        self.State.License_ID = self.License_ID
+        --
+        self.Discord_ID = Discord_ID
+        self.State.Discord_ID = self.Discord_ID
+        --
+        self.Ace = user.Ace
+        self.State.Ace = self.Ace
+        --
+        self.Locale = user.Locale
+        self.State.Locale = self.Locale
+        --
+    self.Character_ID = char.Character_ID -- 50 Random Characters [Aa-Zz][0-9]
     self.State.Character_ID = self.Character_ID
     --
-    self.City_ID = data.City_ID -- X-00000
+    self.City_ID = char.City_ID -- X-00000
     self.State.City_ID = self.City_ID
     --
-    self.Birth_Date = data.Birth_Date
+    self.Birth_Date = char.Birth_Date
     self.State.Birth_Date = self.Birth_Date
     --
-    self.First_Name = data.First_Name
+    self.First_Name = char.First_Name
     self.State.First_Name = self.First_Name
     --
-    self.Last_Name = data.Last_Name
+    self.Last_Name = char.Last_Name
     self.State.Last_Name = self.Last_Name
     --
-    self.Full_Name = data.First_Name .. " " .. data.Last_Name
+    self.Full_Name = char.First_Name .. " " .. char.Last_Name
     self.State.Full_Name = self.Full_Name
     --
-    self.Phone = data.Phone -- 200000 - 699999
+    self.Phone = char.Phone -- 200000 - 699999
     self.State.Phone = self.Phone
     --
     -- Integers
-    self.Instance = data.Instance
+    self.Instance = char.Instance
     self.State.Instance = self.Instance
     --
-    self.Health = data.Health
+    self.Health = char.Health
     self.State.Health = self.Health
     --
-    self.Armour = data.Armour
+    self.Armour = char.Armour
     self.State.Armour = self.Armour
     --
-    self.Hunger = data.Hunger
+    self.Hunger = char.Hunger
     self.State.Hunger = self.Hunger
     --
-    self.Thirst = data.Thirst
+    self.Thirst = char.Thirst
     self.State.Thirst = self.Thirst
     --
-    self.Stress = data.Stress
+    self.Stress = char.Stress
     self.State.Stress = self.Stress
     --
-    self.Weight = 0
     self.MaxWeight = 25
-    self.State.Weight = self.Weight
     --         
     -- Booleans
-    self.IsWanted = data.Wanted
+    self.IsWanted = char.Wanted
     self.State.IsWanted = self.IsWanted
     --
     self.IsDead = false
@@ -80,43 +108,74 @@ function c.class.CreateCharacter(source, character_id)
     --
     self.IsSwimming = false
     self.State.IsSwimming = self.IsSwimming
+    --    
+    self.IsSupporter = user.Supporter
+    self.State.IsSupporter = self.IsSupporter
     --
     -- Tables (JSONIZE)
-    -- Uncertain if these table valeus are actually stored on the state bags as they are nieve...
-    self.Job = json.decode(data.Job)
+    self.Job = json.decode(char.Job)
     self.State.Job = self.Job.Name
     self.State.Grade = self.Job.Grade
     --
-    self.Coords = json.decode(data.Coords)
-    self.State.Coords = self.Coords
+    self.Coords = json.decode(char.Coords)
     --
-    self.Accounts = json.decode(data.Accounts)
-    self.State.Accounts = self.Accounts
+    self.Accounts = json.decode(char.Accounts)
     --
-    self.Licenses = json.decode(data.Licenses)
-    self.State.Licenses = self.Licenses
+    self.Licenses = json.decode(char.Licenses)
     --
-    self.Inventory = c.class.CreateInventory(json.decode(data.Inventory))
-    self.State.Inventory = self.Inventory
+    self.Inventory = c.class.Inventory.New(json.decode(char.Inventory))
     --
-    self.Hotbar = json.decode(data.Hotbar)
-    self.State.Hotbar = self.Hotbar
+    self.Hotbar = json.decode(char.Hotbar)
     --
-    self.Modifiers = json.decode(data.Modifiers)    
-    self.State.Modifiers = self.Modifiers
+    self.Modifiers = json.decode(char.Modifiers)    
     --
     self.OldModifiers = self.Modifiers
     --
-    self.Tattoos = json.decode(data.Tattoos)
-    self.State.Tattoos = self.Tattoos
+    self.Tattoos = json.decode(char.Tattoos)
     --    
-    self.Appearance = json.decode(data.Appearance)
-    self.State.Appearance = self.Appearance
+    self.Appearance = json.decode(char.Appearance)
     --
-    -- Animation?
-    self.State.Animation = false
+    ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
+    ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     --
     -- Functions
+    self.Kick = function(reason)
+        DropPlayer(self.ID, reason)
+        TriggerEvent("txaLogger:CommandExecuted", "xPlayer:DropPlayer: "..reason)
+    end
+    --
+    self.GetName = function()
+        return self.Name
+    end
+    --
+    self.GetAce = function()
+        return self.Ace
+    end
+    --
+    self.GetLocale = function()
+        return self.Locale
+    end
+    --
+    self.GetID = function()
+        return self.ID
+    end
+    --
+    self.GetSteam_ID = function()
+        return self.Steam_ID
+    end
+    --
+    self.GetFiveM_ID = function()
+        return self.FiveM_ID
+    end
+    --
+    self.GetLicense_ID = function()
+        return self.License_ID
+    end
+    --
+    self.GetDiscord_ID = function()
+        return self.Discord_ID
+    end
+    --
     self.GetIdentifier = function()
         return self.Character_ID
     end
@@ -145,21 +204,28 @@ function c.class.CreateCharacter(source, character_id)
         return self.Full_Name
     end
     --
-    self.Get = function(k)
-        return self[k]
+    self.GetSupporter = function()
+         return self.IsSupporter
+     end
+    --    
+    self.SetSupporter = function(bool)
+        local bool = c.check.Boolean(bool)
+        self.IsSupporter = bool
+        self.State.IsSupporter = self.IsSupporter
     end
     --
-    self.Set = function(k,v)
-        self[k] = v
+    -- Gender ("Male"/"Female")
+    self.Gender, self.GenderString = c.IsPedMale(self.Model)
+    self.State.Gender = self.Gender
+    self.State.GenderString = self.GenderString
+    --
+    self.GetGender =  function()
+        return self.Gender
     end
     --
-    self.GetGender = function()
-        if self.Appearance["sex"] ~= 0 then
-            return "Female"
-        else
-            return "Male"
-        end
-    end
+    -- Humaniod Model (true/false)
+    self.IsHuman = c.IsPedHuman(self.Model)
+    self.State.IsHuman = self.IsHuman
     --
     self.GetAccounts = function()
         return self.Accounts
@@ -173,11 +239,21 @@ function c.class.CreateCharacter(source, character_id)
         end
     end
     --
+    self.GetInstance = function()
+        return GetPlayerRoutingBucket(src)
+    end
+    --
+    self.SetInstance = function(id)
+        local id = id or self.InstanceID
+        SetPlayerRoutingBucket(self.ID, id)
+        SetEntityRoutingBucket(self.Entity, id)
+        c.sql.char.SetInstance(self.GetIdentifier(), num)
+    end
+    --
     self.SetAccount = function(acc, v)
         local num = c.check.Number(v)
         if self.Accounts[acc] then
             self.Accounts[acc] = c.math.Decimals(num, 0)
-            self.State.Accounts = self.Accounts
         else
             c.debug_1("Account entered does not exist")
         end
@@ -194,8 +270,6 @@ function c.class.CreateCharacter(source, character_id)
             end
         end
     end
-    --
-    self.State.Cash = 0
     --
     self.GetCash = function()
         local acc = self.GetAccount("Cash")
@@ -255,8 +329,6 @@ function c.class.CreateCharacter(source, character_id)
             end
         end
     end
-    --
-    self.State.Bank = 0
     --
     self.GetBank = function()
         local acc = self.GetAccount("Bank")
@@ -338,19 +410,6 @@ function c.class.CreateCharacter(source, character_id)
         self.State.Phone = self.Phone
     end
     -- 
-    self.GetInstance = function()
-        return self.Instance
-    end
-    --
-    self.SetInstance = function(v)
-        local num = c.check.Number(v)
-        if num ~= self.GetInstance() then
-            self.Instance = num
-            self.State.Instance = self.Instance
-            c.sql.char.SetInstance(self.GetIdentifier(), num)
-        end
-    end
-    -- 
     self.GetHealth = function()
         return self.Health
     end
@@ -413,7 +472,6 @@ function c.class.CreateCharacter(source, character_id)
         local tab = c.check.Table(t)
         self.OldModifiers = self.Modifiers
         self.Modifiers = tab
-        self.State.Modifiers = self.Modifiers
     end
     --
     self.GetAppearance = function()
@@ -422,7 +480,6 @@ function c.class.CreateCharacter(source, character_id)
     --
     self.SetAppearance = function(t)
         self.Appearance = t
-        self.State.Appearance = self.Appearance
     end
     --
     self.GetTattoos = function()
@@ -432,21 +489,26 @@ function c.class.CreateCharacter(source, character_id)
     self.SetTattoos = function(t)
         local tab = c.check.Table(t)
         self.Tattoos = tab
-        self.State.Tattoos = self.Tattoos
     end
     --
     self.GetCoords = function()
-        return self.Coords
+        local x, y, z = GetEntityCoords(self.Entity)
+        local h = GetEntityHeading(self.Entity)
+        return {
+            ["x"] = c.math.Decimals(x, 2),
+            ["y"] = c.math.Decimals(y, 2),
+            ["z"] = c.math.Decimals(z, 2),
+            ["h"] = c.math.Decimals(h, 2)
+        }
     end
     --
     self.SetCoords = function(t)
-        local tab = c.check.Table(t)
         self.Coords = {
-            x = c.math.Decimals(tab.x, 2),
-            y = c.math.Decimals(tab.y, 2),
-            z = c.math.Decimals(tab.z, 2)
+            x = c.math.Decimals(t.x, 2),
+            y = c.math.Decimals(t.y, 2),
+            z = c.math.Decimals(t.z, 2),
+            h = c.math.Decimals(t.h, 2),
         }
-        self.State.Coords = self.Coords
     end
     --
     self.GetHotbar = function()
@@ -455,7 +517,6 @@ function c.class.CreateCharacter(source, character_id)
     --
     self.SetHotbar = function(t)
         self.Hotbar = t
-        self.State.Hotbar = self.Hotbar
     end
     --
     self.GetWanted = function()
@@ -477,113 +538,10 @@ function c.class.CreateCharacter(source, character_id)
         self.IsCuffed = b
         self.State.IsCuffed = self.IsCuffed
     end    
-    --
-        --[[ Items are stored as such in the DB
-            Will be stored as this
+end
 
-                1:{"item", 1, 100, false, {metadata}}
-
-            Will be used as this.
-                self[k] = {
-                    ["Item"] = v[1],
-                    ["Quantity"] = v[2],
-                    ["Quality"] = v[3],
-                    ["Weapon"] = v[4],
-                    ["Meta"] = v[5]
-                }
-
-            You shouldnt need any other front end data to show on an nui etc.
-        
-        ]]--
-    self.GetInventory = function()
-        return self.Inventory
-    end
-    --
-    self.HasItem = function(name)
-        for k,v in ipairs(self.Inventory) do
-            if v.Item == name then
-                return true, k 
-            end
-        end
-        return false, nil
-    end
-    --
-    --
-    self.GetWeight = function()
-        self.Weight = 0
-        for k,v in ipairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
-                self.Weight = self.Weight + item.Weight
-            else
-                c.debug_1("Ignoring invalid item within .GetWeight()")
-            end
-        end
-        return self.Weight
-    end
-    --
-    --- [Internal] func desc
-    ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
-    self.SteralizeItem = function(v)
-        if type(v) ~= "table" then 
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: "..self.ID)
-            return 
-        end
-        local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta),
-        }
-        return info
-    end
-    --
-    --- func desc
-    ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
-    self.AddItem = function(tbl)
-        local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
-            local has, key = self.HasItem(item.Item)
-            if (weapon and type(item.Weapon) == "string") or (not stackable) then
-                self.Inventory[#self.Inventory + 1] = item
-                self.State.Inventory = self.Inventory
-            elseif (stackable and has) then
-                self.Inventory[key].Quantity = self.Inventory[key].Quantity + item.Quantity
-                self.State.Inventory = self.Inventory
-            else
-                self.Inventory[#self.Inventory + 1] = item
-                self.State.Inventory = self.Inventory
-            end
-        else
-            c.debug_1("Ignoring invalid .AddItem() for "..self.ID)
-        end
-    end
-    -- 
-    self.RemoveItem = function(name, slot)
-        local has, position = self.HasItem(name)
-        if has and slot == position then
-            table.remove(self.Inventory, position)
-            self.State.Inventory = self.Inventory
-        end
-    end
-    --
-    self.RearrangeItems = function(new, old)
-        table.insert(self.Inventory, new, table.remove(self.Inventory, old))
-        self.State.Inventory = self.Inventory
-    end
-    --
-    self.CompressInventory = function()
-        local inv = {}
-        for i=1, #self.Inventory do
-            table.insert(inv, i)
-            inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality, self.Inventory[i].Weapon, self.Inventory[i].Meta}
-        end
-        return inv
-    end
-    --
-    c.debug_2("Generated Character")
-    return self
+function c.class.Player.New(source, character_id)
+    local self = c.class.Player:Create(source, character_id)
+	setmetatable(self, c.class.Player)
+	return self
 end

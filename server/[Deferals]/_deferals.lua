@@ -37,8 +37,10 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     --
     local id = c.identifier(src)
     local data = c.sql.user.Get(id)
-    if data.Priority then
-        Queue.AddPriority(data.Steam_ID)
+    if data ~= nil then
+        if data.Priority ~= nil then
+            Queue.AddPriority(data.Steam_ID)
+        end
     end
     --    
     local namecheck = name:match("%W")
@@ -49,12 +51,14 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             value = "Your name contains forbidden characters."
         }))
     end
-    if data.Ban then
-        drop = true
-        table.insert(facts.facts, DeferralCards.Container:Fact({
-            title = "Issue ⁉️",
-            value = "You have been banned by command or automatic event."
-        }))
+    if data ~= nil then
+        if data.Ban then
+            drop = true
+            table.insert(facts.facts, DeferralCards.Container:Fact({
+                title = "Issue ⁉️",
+                value = "You have been banned by command or automatic event."
+            }))
+        end
     end
     --
     Citizen.Wait(0)

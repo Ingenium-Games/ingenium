@@ -9,7 +9,10 @@ NOTES.
 
 -- ====================================================================================--
 
-function c.class.CreateJob(tab)
+c.class.Job = {}
+c.class.Job._index = c.class.Job
+
+function c.class.Job:Create(tab)
     local self = {}
     --
     self.Name = tab.Name
@@ -197,4 +200,10 @@ function c.class.CreateJob(tab)
     --
     c.debug_2("Generated Job: "..self.Name)
     return self
+end
+
+function c.class.Job.New(tab)
+    local self = c.class.Job:Create(tab)
+	setmetatable(self, c.class.Job)
+	return self
 end

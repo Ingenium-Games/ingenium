@@ -28,8 +28,8 @@ AddEventHandler("respawnPlayerPedEvent", function()
 end)
 
 AddEventHandler("explosionEvent", function()
-    CancelEvent()
-    c.debug_1("Explosion has been Cancelled.")
+    --CancelEvent()
+    --c.debug_1("Explosion has been Cancelled.")
 end)
 
 AddEventHandler("entityCreated", function(ent)

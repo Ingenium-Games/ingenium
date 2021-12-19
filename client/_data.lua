@@ -156,25 +156,3 @@ function c.data.GetEntityStateByType(type, ent, key)
 end
 
 -- ====================================================================================--
-
---- Sends the packet of data to the server to register and update xPlayer
-function c.data.Packet()
-    local ped = PlayerPedId()
-    local data = {}
-    -- Stats / HP vs 
-    data.Health = c.math.Decimals(c.status.GetHealth(ped), 0)
-    data.Armour = c.math.Decimals(c.status.GetArmour(ped), 0)
-    data.Hunger = c.math.Decimals(c.status.GetHunger(), 0)
-    data.Thirst = c.math.Decimals(c.status.GetThirst(), 0)
-    data.Stress = c.math.Decimals(c.status.GetStress(), 0)
-    -- Modifiers
-    data.Modifiers = c.modifier.GetModifiers()
-    -- Coords
-    local loc = GetEntityCoords(ped)
-    data.Coords = {
-        x = c.math.Decimals(loc.x, 2),
-        y = c.math.Decimals(loc.y, 2),
-        z = c.math.Decimals(loc.z, 2)
-    }
-    return data
-end

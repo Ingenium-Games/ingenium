@@ -27,8 +27,6 @@ AddEventHandler("onResourceStart", function(resourceName)
     c.time.ServerSync()
     -- Players save to the DB.
     c.data.ServerSync()
-    -- Request data from clients.
-    c.data.ClientSync()
     -- Start Paying players based on conf.
     c.job.PayCycle()  
     -- Cleanup Cycles on files.

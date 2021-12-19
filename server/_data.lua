@@ -348,48 +348,13 @@ end
 
 -- ====================================================================================--
 
-function c.data.UpdatePacket(source, data)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    --
-    -- Place a check prior to running the update.
-    if data.Health then
-        xPlayer.SetHealth(data.Health)
-    end
-    if data.Armour then
-        xPlayer.SetArmour(data.Armour)
-    end
-    if data.Hunger then
-        xPlayer.SetHunger(data.Hunger)
-    end
-    if data.Thirst then
-        xPlayer.SetThirst(data.Thirst)
-    end
-    if data.Stress then
-        xPlayer.SetStress(data.Stress)
-    end
-    if data.Modifiers then
-        xPlayer.SetModifiers(data.Modifiers)
-    end
-    if data.Coords then
-        xPlayer.SetCoords(data.Coords)
-    end
-
-    --
-    -- Run Additional Functions post data update.
-    c.state.UpdateStates(src)
-end
-
 --- Create xPlayer table and pass to client.
 ---@param source number
 ---@param Character_ID string
 function c.data.LoadPlayer(source, Character_ID)
     local src = tonumber(source)
     local p = promise.new()
-    -- Fuck Metatable inheritance.
-    local xUser = c.class.CreateUser(src)
-    local xCharacter = c.class.CreateCharacter(src, Character_ID)
-    local xPlayer = c.table.Merge(xUser, xCharacter)
+    local xPlayer = c.class.Player.New(source, Character_ID)
     -- No need to pass data to the client anymore.
     c.sql.char.SetActive(Character_ID, true, function()
         c.data.SetPlayer(src, xPlayer)
@@ -399,26 +364,6 @@ function c.data.LoadPlayer(source, Character_ID)
     -- Wait for the player to be loaded prior to sending the "ok" to load to the client.
     Citizen.Await(p)
     TriggerClientEvent("Client:Character:Loaded", src)
-end
-
-function c.data.ClientSync()
-    local function Do()
-        local xPlayers = c.data.GetPlayers()
-        for source, xPlayer in pairs(xPlayers) do
-            -- Incase its false
-            if xPlayer then
-                local src = tonumber(source)
-                local data = TriggerClientCallback({
-                    source = src,
-                    eventName = "DataPacket",
-                    args = {}
-                })
-                c.data.UpdatePacket(source, data)
-            end
-        end
-        SetTimeout(conf.clientsync, Do)
-    end
-    SetTimeout(conf.clientsync, Do)
 end
 
 -- ====================================================================================--

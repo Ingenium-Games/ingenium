@@ -40,7 +40,7 @@ function c.animation.AddAnimation(dict, anim, name)
             --
             if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
                 TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-                c.data.SetPlayerState("Animation", name, true)
+                c.data.SetLocalPlayerState("Animation", name, true)
                 if cb then
                     cb(duration)
                 end
@@ -52,11 +52,11 @@ function c.animation.AddAnimation(dict, anim, name)
                         ClearPedTasks(ped)
                     end
                     Citizen.Await(p)
-                    c.data.SetPlayerState("Animation", false, true)
+                    c.data.SetLocalPlayerState("Animation", false, true)
                 end
             else
                 ClearPedTasks(ped)
-                c.data.SetPlayerState("Animation", false, true)
+                c.data.SetLocalPlayerState("Animation", false, true)
                 p:resolve()
                 RemoveAnimDict(dict)
                 Citizen.Await(p)
@@ -83,11 +83,11 @@ AddEventHandler("Client:Animation:CrossedArms", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetPlayerState("Animation", "CrossedArms", true)
+        c.data.SetLocalPlayerState("Animation", "CrossedArms", true)
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetPlayerState("Animation", false, true)
+        c.data.SetLocalPlayerState("Animation", false, true)
         RemoveAnimDict(dict)
     end
 end)
@@ -105,11 +105,11 @@ AddEventHandler("Client:Animation:HandsUp", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetPlayerState("Animation", "HandsUp", true)
+        c.data.SetLocalPlayerState("Animation", "HandsUp", true)
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetPlayerState("Animation", false, true)
+        c.data.SetLocalPlayerState("Animation", false, true)
         RemoveAnimDict(dict)
     end
 end)
@@ -127,11 +127,11 @@ AddEventHandler("Client:Animation:ArmHold", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetPlayerState("Animation", "ArmHold", true)
+        c.data.SetLocalPlayerState("Animation", "ArmHold", true)
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetPlayerState("Animation", false, true)
+        c.data.SetLocalPlayerState("Animation", false, true)
         RemoveAnimDict(dict)
     end
 end)
@@ -149,11 +149,11 @@ AddEventHandler("Client:Animation:Mugging", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetPlayerState("Animation", "Mugging", true)
+        c.data.SetLocalPlayerState("Animation", "Mugging", true)
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetPlayerState("Animation", false, true)
+        c.data.SetLocalPlayerState("Animation", false, true)
         RemoveAnimDict(dict)
     end
 end)
@@ -171,11 +171,11 @@ AddEventHandler("Client:Animation:PickUp", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetPlayerState("Animation", "PickUp", true)
+        c.data.SetLocalPlayerState("Animation", "PickUp", true)
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetPlayerState("Animation", false, true)
+        c.data.SetLocalPlayerState("Animation", false, true)
         RemoveAnimDict(dict)
     end
 end)

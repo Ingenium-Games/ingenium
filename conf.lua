@@ -35,7 +35,7 @@ conf.locale = 'en'
 ACE PERMISSIONS :
     -- The permissions are done inside the DB, so every time the User joins the ace gets set at the user level, the default level to assign to the DB on a new user joining is...
 ]]--
-conf.ace = 'public' 
+conf.ace = 'admin' 
 --[[
 PRIMARY_ID :
     -- This will be what you choose to identify as the owner of the characters table within the DB.
