@@ -256,7 +256,7 @@ end
 --- func desc
 ---@param net any
 ---@param bool any
-function c.class.Vehicle.Gen(net, bool)
+function c.class.Vehicle.Generate(net, bool)
     local self = {}
 	setmetatable(self, c.class.Vehicle:Create(net, bool))
 	return self
@@ -504,7 +504,7 @@ end
 --- func desc
 ---@param net any
 ---@param plate any
-function c.class.Vehicle.ReGen(net, plate)
+function c.class.Vehicle.ReGenerate(net, plate)
     local self = {}
 	setmetatable(self, c.class.Vehicle:Respawn(net, plate))
 	return self

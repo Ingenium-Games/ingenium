@@ -101,3 +101,27 @@ RegisterCommand("tpm", function(source, args, rawCommand)
         args = {}
     })    
 end, true)
+
+-- ====================================================================================--
+
+ExecuteCommand("add_ace group.admin command.car allow")
+RegisterCommand("car", function(source, args, rawCommand)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand) -- txAdmin logging Callback
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    local ords = xPlayer.GetCoords()
+    local entity = CreateVehicle(args[1], ords.x + 2.0, ords.y + 1.0, ords.z, ords.h, true, false)
+end, true)
+
+
+ExecuteCommand("add_ace group.admin command.bring allow")
+RegisterCommand("bring", function(source, args, rawCommand)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand) -- txAdmin logging Callback
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    local trg = tonumgber(args[1])
+    local zPlayer = c.data.GetPlayer(trg)
+    
+
+end, true)
+

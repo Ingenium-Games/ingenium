@@ -354,7 +354,6 @@ end
 -- https://forum.cfx.re/t/use-displayonscreenkeyboard-properly/51143
 
 function c.Keyboard(TextEntry, ExampleText, MaxStringLenght)
-
     -- TextEntry		-->	The Text above the typing field in the black square
     -- ExampleText		-->	An Example Text, what it should say in the typing field
     -- MaxStringLenght	-->	Maximum String Lenght

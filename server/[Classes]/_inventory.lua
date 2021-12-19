@@ -148,7 +148,7 @@ function c.class.Inventory:Create(inv)
 end
 
 function c.class.Inventory.New(inv)
-    local self = c.class.Inventory:Create(inv)
-    setmetatable(self, c.class.Inventory)
+    local self = {} 
+    setmetatable(self, c.class.Inventory:Create(inv))
     return self
 end

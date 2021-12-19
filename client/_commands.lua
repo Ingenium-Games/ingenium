@@ -33,10 +33,3 @@ TriggerEvent("chat:removeSuggestion", "/armhold")
 RegisterKeyMapping("armhold", "Arm Hold", "keyboard", "NumPad3")
 
 -- ====================================================================================--
-
-RegisterCommand("car", function(source, args, rawCommand)
-    local car = args[1]
-    local pos = GetEntityCoords(PlayerPedId())
-    local head = GetEntityHeading(PlayerPedId())
-    local entity, net = c.CreateVehicle(car, pos.x, pos.y, pos.z, head)
-end, false)

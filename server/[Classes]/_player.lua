@@ -541,7 +541,7 @@ function c.class.Player:Create(source, character_id)
 end
 
 function c.class.Player.New(source, character_id)
-    local self = c.class.Player:Create(source, character_id)
-	setmetatable(self, c.class.Player)
+    local self = {}
+	setmetatable(self, c.class.Player:Create(source, character_id))
 	return self
 end

@@ -30,13 +30,13 @@ function c.class.Object:Create(net)
     --
     self.Weight = 0
     --
-    self.Inventory = c.class.Inventory:Create()
+    self.Inventory = c.class.Inventory.New()
     --
     return self
 end
 
-function c.class.Object.New(net)
-    local self = c.class.Object:Create(net)
-	setmetatable(self, c.class.Object)
+function c.class.Object.Generate(net)
+    local self = {}
+	setmetatable(self, c.class.Object:Create(net))
 	return self
 end

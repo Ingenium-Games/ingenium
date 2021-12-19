@@ -203,7 +203,7 @@ function c.class.Job:Create(tab)
 end
 
 function c.class.Job.New(tab)
-    local self = c.class.Job:Create(tab)
-	setmetatable(self, c.class.Job)
+    local self = {}
+	setmetatable(self, c.class.Job:Create(tab))
 	return self
 end

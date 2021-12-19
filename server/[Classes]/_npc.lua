@@ -108,8 +108,8 @@ function c.class.Npc:Create(net)
     return self
 end
 
-function c.class.Npc.New(net)
-    local self = c.class.Npc:Create(net)
-	setmetatable(self, c.class.Npc)
+function c.class.Npc.Generate(net)
+    local self = {}
+	setmetatable(self, c.class.Npc:Create(net))
 	return self
 end
