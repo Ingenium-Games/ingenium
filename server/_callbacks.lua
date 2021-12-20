@@ -45,7 +45,7 @@ local GetInventory = RegisterServerCallback({
             elseif type == 1 then
                 if IsPedAPlayer(entity) then
                     local xPlayer = c.data.GetPlayer(net)
-                    return xPlayer.GetInventory()
+                    return xPlayer:GetInventory()
                 else
                     -- is an NPC
                     local xNpc = c.data.GetNpc(net)

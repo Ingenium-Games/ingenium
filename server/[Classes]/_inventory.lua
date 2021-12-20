@@ -1,25 +1,8 @@
 -- ====================================================================================--
---[[
-NOTES.
-    - Probably going to have to meta table this shit...
-    
-    EXAMPLE: 
-    
-    Inventory from DB: 
-    {1:{"item", 1, 100, false, {metadata}}, 2:false, 3:{"item", 1, 100, "-12321321", {metadata}}, 4:false, 5:{"item"}}
-    
-    
-    Slot 1, has a quntity of 1 and has 100 quality and is not a weapon.
-    Slot 2 is empty
-    Slot 3 has, a quantity of 1, quality of 100, and is a weapon based on its hash, with metadata about it after.
-
-]] --
--- ====================================================================================--
 c.class.Inventory = {}
 c.class.Inventory._index = c.class.Inventory
-
+-- ====================================================================================--
 function c.class.Inventory:Create(inv)
-    local self = {}
     self.Inventory = {}
     self.Weight = 0
     --
@@ -55,24 +38,7 @@ function c.class.Inventory:Create(inv)
         if self.Inventory[i].Quality <= 0 then
             table.remove(self.Inventory, i)
         end
-    end
-    --
-    self.GetInventory = function()
-        return self.Inventory
-    end
-    --
-    self.HasItem = function(name)
-        for k, v in ipairs(self.Inventory) do
-            if v.Item == name then
-                return true, k
-            end
-        end
-        return false, nil
-    end
-    --
-    --
-    self.GetWeight = function()
-        self.Weight = 0
+        -- adding weight into the generation
         for k, v in ipairs(self.Inventory) do
             if c.item.Exists(v.Item) then
                 local item = c.items[v.Item]
@@ -81,74 +47,107 @@ function c.class.Inventory:Create(inv)
                 c.debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
-        return self.Weight
-    end
-    --
-    --- [Internal] func desc
-    ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
-    self.SteralizeItem = function(v)
-        if type(v) ~= "table" then
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
-            return
-        end
-        local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta)
-        }
-        return info
-    end
-    --
-    --- func desc
-    ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
-    self.AddItem = function(tbl)
-        local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
-            local has, key = self.HasItem(item.Item)
-            if (weapon and type(item.Weapon) == "string") or (not stackable) then
-                self.Inventory[#self.Inventory + 1] = item
-
-            elseif (stackable and has) then
-                self.Inventory[key].Quantity = self.Inventory[key].Quantity + item.Quantity
-
-            else
-                self.Inventory[#self.Inventory + 1] = item
-
-            end
-        else
-            c.debug_1("Ignoring invalid .AddItem() for " .. self.ID)
-        end
-    end
-    -- 
-    self.RemoveItem = function(name, slot)
-        local has, position = self.HasItem(name)
-        if has and slot == position then
-            table.remove(self.Inventory, position)
-        end
-    end
-    --
-    self.RearrangeItems = function(new, old)
-        table.insert(self.Inventory, new, table.remove(self.Inventory, old))
-    end
-    --
-    self.CompressInventory = function()
-        local inv = {}
-        for i = 1, #self.Inventory do
-            table.insert(inv, i)
-            inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality,
-                      self.Inventory[i].Weapon, self.Inventory[i].Meta}
-        end
-        return inv
     end
     return self
 end
+--- func desc
+function c.class.Inventory:GetInventory()
+    return self.Inventory
+end
+--- func desc
+---@param name any
+function c.class.Inventory:HasItem(name)
+    for k, v in ipairs(self.Inventory) do
+        if v.Item == name then
+            return true, k
+        end
+    end
+    return false, nil
+end
+--
+--- func desc
+function c.class.Inventory:GetWeight()
+    self.Weight = 0
+    for k, v in ipairs(self.Inventory) do
+        if c.item.Exists(v.Item) then
+            local item = c.items[v.Item]
+            self.Weight = self.Weight + item.Weight
+        else
+            c.debug_1("Ignoring invalid item within .GetWeight()")
+        end
+    end
+    return self.Weight
+end
+--
+--- [Internal] func desc
+---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
+function c.class.Inventory:SteralizeItem(v)
+    if type(v) ~= "table" then
+        c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
+        return
+    end
+    local info = {
+        ["Item"] = c.check.String(v[1]), -- string
+        ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
+        ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
+        ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
+        ["Meta"] = (v[5] or c.items[v[1]].Meta)
+    }
+    return info
+end
+--
+--- func desc
+---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
+function c.class.Inventory:AddItem(tbl)
+    local item = self.SteralizeItem(tbl)
+    if c.item.Exists(item.Item) then
+        local weapon = c.item.IsWeapon(item.Item)
+        local stackable = c.item.CanStack(item.Item)
+        local has, key = self.HasItem(item.Item)
+        if (weapon and type(item.Weapon) == "string") or (not stackable) then
+            self.Inventory[#self.Inventory + 1] = item
 
+        elseif (stackable and has) then
+            self.Inventory[key].Quantity = self.Inventory[key].Quantity + item.Quantity
+
+        else
+            self.Inventory[#self.Inventory + 1] = item
+
+        end
+    else
+        c.debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+    end
+end
+--- func desc
+---@param name any
+---@param slot any
+function c.class.Inventory:RemoveItem(name, slot)
+    local has, position = self.HasItem(name)
+    if has and slot == position then
+        table.remove(self.Inventory, position)
+    end
+end
+--- func desc
+---@param new any
+---@param old any
+function c.class.Inventory:RearrangeItems(new, old)
+    table.insert(self.Inventory, new, table.remove(self.Inventory, old))
+end
+--- func desc
+function c.class.Inventory:CompressInventory()
+    local inv = {}
+    for i = 1, #self.Inventory do
+        table.insert(inv, i)
+        inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality,
+                  self.Inventory[i].Weapon, self.Inventory[i].Meta}
+    end
+    return inv
+end
+-- ====================================================================================--
+--- func desc
+---@param inv any
 function c.class.Inventory.New(inv)
-    local self = {} 
+    local self = {}
     setmetatable(self, c.class.Inventory:Create(inv))
     return self
 end

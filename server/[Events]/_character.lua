@@ -109,16 +109,16 @@ RegisterNetEvent("Server:Character:Spawn")
 AddEventHandler("Server:Character:Spawn", function(req)
     local src = tonumber(req)
     local xPlayer = c.data.GetPlayer(src)
-    TriggerClientEvent("Client:Character:ReSpawn", src, xPlayer.GetCoords())
+    TriggerClientEvent("Client:Character:ReSpawn", src, xPlayer:GetCoords())
 end)
 
 RegisterServerEvent("Server:Character:SaveSkin")
 AddEventHandler("Server:Character:SaveSkin", function(appearance, bool)
 	local src = source
 	local xPlayer = c.data.GetPlayer(src)
-	local identifier = xPlayer.GetIdentifier()
+	local identifier = xPlayer:GetIdentifier()
     c.sql.char.SetAppearance(identifier, appearance, function()
-        xPlayer.SetAppearance(appearance)
+        xPlayer:SetAppearance(appearance)
     end)
     if type(bool) == "boolean" and bool == true then
         c.inst.SetPlayerDefault(src)
@@ -129,7 +129,7 @@ RegisterServerEvent("Server:Character:LoadSkin")
 AddEventHandler("Server:Character:LoadSkin", function()
 	local src = source
 	local xPlayer = c.data.GetPlayer(src)
-	local appearance = xPlayer.GetAppearance()
+	local appearance = xPlayer:GetAppearance()
 	TriggerClientEvent("Client:Character:LoadSkin", src, appearance)
 end)
 
@@ -159,13 +159,13 @@ AddEventHandler("Server:Character:Ready", function()
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     -- update what instance they are in.
-    c.inst.SetPlayer(src, xPlayer.GetInstance())
+    c.inst.SetPlayer(src, xPlayer:GetInstance())
     -- Remove from current ACL Job Group
-    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
+    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer:GetIdentifier(), xPlayer:GetJob().Name))
     -- to trigger state updates for clients
-    xPlayer.SetJob(xPlayer.GetJob())
-    xPlayer.GetCash() -- this triggers state chagnes
-    xPlayer.GetBank() -- this triggers state chagnes
+    xPlayer:SetJob(xPlayer:GetJob())
+    xPlayer:GetCash() -- this triggers state chagnes
+    xPlayer:GetBank() -- this triggers state chagnes
 end)
 
 -- Use this to remove any things connected to Characters like police blips etc.
@@ -175,7 +175,7 @@ AddEventHandler("Server:Character:Switch", function(req)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
     -- Remove Player Identifier from job as entity if no longer existing.
-    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.License_ID, xPlayer.GetJob().Name))
+    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer:GetIdentifier(), xPlayer:GetJob().Name))
     --
 
 end)
@@ -208,5 +208,5 @@ AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
     -- Add New Job command permissions for ACL system
-    ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
+    ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer:GetLicense_ID(), xPlayer:GetJob().Name))
 end)

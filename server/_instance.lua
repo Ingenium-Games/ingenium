@@ -23,8 +23,8 @@ function c.inst.SetPlayer(source, num)
             -- to add mumble changes based on either pmavoice or frazzles mumble script
             SetPlayerRoutingBucket(src, num)
             SetEntityRoutingBucket(GetPlayerPed(src), num)
-            xPlayer.SetInstance(num)
-            c.debug_1(xPlayer.Name.." added to Instance: "..num)
+            xPlayer:SetInstance(num)
+            c.debug_1(xPlayer:GetName().." added to Instance: "..num)
         end
     end
 end
@@ -58,8 +58,8 @@ function c.inst.SetPlayerDefault(source)
     local xPlayer = c.data.GetPlayer(source)
     SetPlayerRoutingBucket(source, conf.instancedefault)
     SetEntityRoutingBucket(GetPlayerPed(source), conf.instancedefault)
-    xPlayer.SetInstance(conf.instancedefault)
-    c.debug_1(xPlayer.Name.." added to Global Instance.")
+    xPlayer:SetInstance(conf.instancedefault)
+    c.debug_1(xPlayer:GetName().." added to Global Instance.")
 end
 
 --- Set entity routing bucket

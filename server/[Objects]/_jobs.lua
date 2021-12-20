@@ -76,7 +76,7 @@ AddEventHandler("Server:Character:OnDuty", function(req)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
     if conf.enableduty then
-        CurrentlyActive[src] = xPlayer.GetJob()
+        CurrentlyActive[src] = xPlayer:GetJob()
         TriggerClientEvent("Client:Character:OnDuty",src)
     else
         c.debug_1("Ability to go on duty has ben disabled.")
@@ -107,7 +107,7 @@ function c.job.Payroll(bool)
             local xJob = c.data.GetJob(CurrentlyActive[k].Name)
             local pay = xJob.Grades[v.Grade].Grade_Salary
             --
-            xPlayer.AddBank(pay)
+            xPlayer:AddBank(pay)
             TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..pay.." deposided confirmed.")
             if bool then
                 xJob.RemoveBank(pay)

@@ -21,7 +21,7 @@ RegisterCommand("switch", function(source, args, rawCommand)
     local p = promise.new()
     local xPlayer = c.data.GetPlayer(src)
     local Primary_ID = c.identifier(src)
-    local Character_ID = xPlayer.GetCharacter_ID()
+    local Character_ID = xPlayer:GetCharacter_ID()
     -- Send the client/sever the events once the character has changed to inactive on the db. 
     TriggerClientEvent("Client:Character:Pre-Switch")
     c.sql.char.SetActive(Character_ID, false, function()
@@ -51,7 +51,7 @@ RegisterCommand("ban", function(source, args, rawCommand)
         local xPlayer = c.data.GetPlayer(args[1])
         local ban = true -- should probably add a check but meh.
         c.sql.user.SetBan(Primary_ID, ban, function()
-            xPlayer.Kick("You have been banned.")
+            xPlayer:Kick("You have been banned.")
             TriggerClientEvent("Client:Notify", src, "TargetID: " .. args[1] .. ", has been banned.")
         end)
     end
@@ -67,7 +67,7 @@ RegisterCommand("kick", function(source, args, rawCommand)
         TriggerClientEvent("Client:Notify", src, "You cannot /kick yourself.")
     else
         local xPlayer = c.data.GetPlayer(args[1])
-        xPlayer.Kick("You have been kicked.")
+        xPlayer:Kick("You have been kicked.")
         TriggerClientEvent("Client:Notify", src, "TargetID: " .. args[1] .. ", has been kicked.")
     end
 end, true)
@@ -80,7 +80,7 @@ RegisterCommand("setjob", function(source, args, rawCommand)
     local src = source
     if c.job.Exist(args[2], args[3]) then
         local xPlayer = c.data.GetPlayer(args[1])
-        xPlayer.SetJob(args[2], args[3])
+        xPlayer:SetJob(args[2], args[3])
         TriggerClientEvent("Client:Notify", src, "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
         TriggerClientEvent("Client:Notify", args[1], "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
     else
@@ -109,7 +109,7 @@ RegisterCommand("car", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand) -- txAdmin logging Callback
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    local ords = xPlayer.GetCoords()
+    local ords = xPlayer:GetCoords()
     local entity = CreateVehicle(args[1], ords.x + 2.0, ords.y + 1.0, ords.z, ords.h, true, false)
 end, true)
 

@@ -1,512 +1,271 @@
 -- ====================================================================================--
-
---[[
-NOTES
-    - Fuck yeh onesync creation event boi.
-]] --
-
--- ====================================================================================--
-
 c.class.Vehicle = {}
 c.class.Vehicle._index = c.class.Vehicle
+-- ====================================================================================--
 
-function c.class.Vehicle:Create(net, bool)
-    local stolen = c.check.Boolean(bool)
-    local fuel = math.random(25, 100)
-    --
-    local self = {}
-    self.Net = net
-    self.Entity = NetworkGetEntityFromNetworkId(net)
-    self.State = Entity(self.Entity).state
-    --
-    self.GetSource = function()
-        return NetworkGetEntityOwner(self.Entity)
-    end
-
-    -- Model
-    self.Model = GetEntityModel(self.Entity)
-    self.State.Model = self.Model
-    --
-    self.GetModel = function()
-        return self.Model
-    end
-    --    
-
-    -- Plate
-    self.Plate = GetVehicleNumberPlateText(self.Entity)
-    self.State.Plate = self.Plate
-    --
-    self.GetPlate = function()
-        return self.Plate
-    end
-
-    -- Coords
-    self.GetCoords = function()
-        local x, y, z = GetEntityCoords(self.Entity)
-        local h = GetEntityHeading(self.Entity)
+local function GetVeh(plate)
+    if plate then
+        return c.sql.GetVehicleByPlate(plate)
+    else
         return {
-            ["x"] = c.math.Decimals(x, 2),
-            ["y"] = c.math.Decimals(y, 2),
-            ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2)
+            Fuel = math.random(25, 89),
+            Keys = {},
+            Condition = {},
+            Modifications = {},
+            Instance = false,
+            Garage = false,
+            Status = false,
+            Impound = false,
+            Owner = false,
+            Wanted = false
         }
     end
-    --
-    self.SetCoords = function(coords)
-        if coords.x and coords.y and coords.z and coords.h then
-            SetEntityHeading(self.Entity, coords.h)
-            SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
-        else
-            c.debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
-        end
-    end
-
-    -- Inventory
-    --
-    self.Inventory = c.class.Inventory.New()
-    --
-    -- Keys
-    self.Keys = {}
-    self.State.Keys = self.Keys
-    --
-    self.GetKeys = function()
-        return self.Keys
-    end
-    --
-    self.SetKeys = function(t)
-        self.Keys = t
-        self.State.Keys = self.Keys
-    end
-    --
-    self.AddKey = function(id)
-        local t = self.GetKeys()
-        if not self.CheckKey(id) then
-            table.insert(self.Keys, id)
-            self.State.Keys = self.Keys
-        else
-            c.debug_1("User: " .. id .. " Already has key to this vehicle.")
-        end
-    end
-    --
-    self.RemoveKey = function(id)
-        local t = self.GetKeys()
-        if self.CheckKey(id) then
-            table.remove(self.Keys, id)
-            self.State.Keys = self.Keys
-        else
-            c.debug_1("User: " .. id .. " Never had a key to this vehicle.")
-        end
-    end
-    --
-    self.CheckKey = function(id)
-        local t = self.GetKeys()
-        if t[id] then
-            return true
-        else
-            return false
-        end
-    end
-
-    -- Condition
-    self.Condition = {}    
-    self.State.Condition = self.Condition
-    --
-    self.GetCondition = function()
-        return self.Condition
-    end
-    --
-    self.SetCondition = function(conditions)
-        self.Condition = conditions or TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "GetVehicleCondition",
-            args = {self.Net}
-        })    
-        self.State.Condition = self.Condition
-        TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "SetVehicleCondition",
-            args = {self.Net}
-        })
-    end
-    --
-    self.AlterCondition = function(id, v)
-        if self.CheckConds(id) then
-            self.Condition[id] = v
-            self.State.Condition = self.Condition
-        end
-    end
-    --
-    self.CheckConds = function(id)
-        local t = self.GetCondition()
-        if t[id] then
-            return true
-        else
-            return false
-        end
-    end
-
-    -- Modifications
-    self.Modifications = {}
-    self.State.Modifications = self.Condition
-    --
-    self.GetModifications = function()
-        return self.Modifications
-    end
-    --
-    self.SetModifications = function(modifications)
-        self.Modifications = modifications or TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "GetVehicleModifications",
-            args = {self.Net}
-        })
-        self.State.Modifications = self.Modifications
-        TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "SetVehicleModifications",
-            args = {self.Net}
-        })
-    end
-    --
-    self.AlterModification = function(id, v)
-        if self.CheckMods(id) then
-            self.Modifications[id] = v
-            self.State.Modifications = self.Modifications
-        end
-    end
-    --
-    self.CheckMods = function(id)
-        local t = self.GetModifications()
-        if t[id] then
-            return true
-        else
-            return false
-        end
-    end
-    --
-
-    -- Fuel
-    self.Fuel = fuel
-    self.State.Fuel = self.Fuel
-    --
-    self.GetFuel = function()
-        return self.Fuel
-    end
-    --
-    self.SetFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
-        self.State.Fuel = num
-        self.Fuel = num
-    end
-    --
-    self.AddFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
-        self.SetFuel((self.GetFuel() + num))
-        self.Fuel = self.GetFuel()
-        if self.GetFuel() >= 100 then
-            self.SetFuel(100)
-            self.Fuel = 100
-        end
-    end
-    --
-    self.RemoveFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
-        self.SetFuel((self.GetFuel() - num))
-        self.Fuel = self.GetFuel()
-        if self.GetFuel() <= 0 then
-            self.SetFuel(0)
-            self.Fuel = 0
-        end
-    end
-
-    self.Instance = false
-    self.State.Instance = self.Instance
-
-    self.Garage = false
-    self.State.Garage = self.Garage
-
-    self.Status = false
-    self.State.Status = self.Status
-
-    self.Impound = false
-    self.State.Impound = self.Impound
-
-    -- Owner
-    self.Owner = false
-    self.State.Owner = self.Owner
-    --
-    self.GetOwner = function()
-        return self.Owner
-    end
-    --
-
-    -- Wanted
-    self.Wanted = stolen
-    self.State.Wanted = self.Wanted
-    --
-    self.GetWanted = function()
-        return self.Wanted
-    end
-    --
-    
-    --
-    c.debug_2("Generated Vehicle State: "..net)
-    return self
 end
 
 --- func desc
 ---@param net any
 ---@param bool any
-function c.class.Vehicle.Generate(net, bool)
-    local self = {}
-	setmetatable(self, c.class.Vehicle:Create(net, bool))
-	return self
-end
-
--- ====================================================================================--
-
-function c.class.Vehicle:Respawn(net, plate)
-    local data = c.sql.GetVehicleByPlate(plate)
-    local self = {}
+function c.class.Vehicle:Create(net, plate)
+    local net = net or CancelEvent()
+    local plate = plate or false
+    local data = GetVeh(plate)
+    self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
-    --
-    self.GetSource = function()
-        return NetworkGetEntityOwner(self.Entity)
-    end
-
     -- Model
-    self.Model = data.Model
+    self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
-    --
-    self.GetModel = function()
-        return self.Model
-    end
-    --    
-
     -- Plate
-    self.Plate = data.Plate
+    self.Plate = GetVehicleNumberPlateText(self.Entity)
     self.State.Plate = self.Plate
-    --
-    self.GetPlate = function()
-        return self.Plate
-    end
-
-    -- Coords
-    self.GetCoords = function()
-        local x, y, z = GetEntityCoords(self.Entity)
-        local h = GetEntityHeading(self.Entity)
-        return {
-            ["x"] = c.math.Decimals(x, 2),
-            ["y"] = c.math.Decimals(y, 2),
-            ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2)
-        }
-    end
-    --
-    self.SetCoords = function(coords)
-        if coords.x and coords.y and coords.z and coords.h then
-            SetEntityHeading(self.Entity, coords.h)
-            SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
-        else
-            c.debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
-        end
-    end
-    -- 
     -- Inventory
-    self.Inventory = c.class.Inventory.New(json.decode(data.Inventory))
-    --
+    self.Inventory = c.class.Inventory.New()
+    -- Condition
+    self.Condition = data.Condition
+    -- Modifications
+    self.Modifications = data.Modifications
     -- Keys
     self.Keys = data.Keys
     self.State.Keys = self.Keys
-    --
-    self.GetKeys = function()
-        return self.Keys
-    end
-    --
-    self.SetKeys = function(t)
-        self.Keys = t
-        self.State.Keys = self.Keys
-    end
-    --
-    self.AddKey = function(id)
-        local t = self.GetKeys()
-        if not self.CheckKey(id) then
-            table.insert(self.Keys, id)
-            self.State.Keys = self.Keys
-        else
-            c.debug_1("User: " .. id .. " Already has key to this vehicle.")
-        end
-    end
-    --
-    self.RemoveKey = function(id)
-        local t = self.GetKeys()
-        if self.CheckKey(id) then
-            table.remove(self.Keys, id)
-            self.State.Keys = self.Keys
-        else
-            c.debug_1("User: " .. id .. " Never had a key to this vehicle.")
-        end
-    end
-    --
-    self.CheckKey = function(id)
-        local t = self.GetKeys()
-        if t[id] then
-            return true
-        else
-            return false
-        end
-    end
-
-    -- Condition
-    self.Condition = data.Condition
-    self.State.Condition = self.Condition
-    --
-    self.GetCondition = function()
-        return self.Condition
-    end
-    --
-    self.SetCondition = function(conditions)
-        self.Condition = conditions
-        self.State.Condition = self.Condition
-        TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "SetVehicleCondition",
-            args = {self.Net}
-        })
-    end
-    --
-    self.AlterCondition = function(id, v)
-        if self.CheckConds(id) then
-            self.Condition[id] = v
-            self.State.Condition = self.Condition
-        end
-    end
-    --
-    self.CheckConds = function(id)
-        local t = self.GetCondition()
-        if t[id] then
-            return true
-        else
-            return false
-        end
-    end
-
-    -- Modifications
-    self.Modifications = data.Modifications
-    self.State.Modifications = self.Condition
-    --
-    self.GetModifications = function()
-        return self.Modifications
-    end
-    --
-    self.SetModifications = function(modifications)
-        self.Modifications = modifications
-        self.State.Modifications = self.Modifications
-        TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "SetVehicleModifications",
-            args = {self.Net}
-        })
-    end
-    --
-    self.AlterModification = function(id, v)
-        if self.CheckMods(id) then
-            self.Modifications[id] = v
-            self.State.Modifications = self.Modifications
-        end
-    end
-    --
-    self.CheckMods = function(id)
-        local t = self.GetModifications()
-        if t[id] then
-            return true
-        else
-            return false
-        end
-    end
-    --
-
-    self.Instance = data.Instance
-    self.State.Instance = self.Instance
-
-    self.Garage = data.Garage
-    self.State.Garage = self.Garage
-
-    self.Status = data.Status
-    self.State.Status = self.Status
-
-    self.Impound = data.Impound
-    self.State.Impound = self.Impound
-
-    -- Fuel
-    self.Fuel = self.Modifications.Fuel
-    self.State.Fuel = self.Fuel
-    --
-    self.GetFuel = function()
-        return self.Fuel
-    end
-    --
-    self.SetFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
-        self.State.Fuel = num
-        self.Fuel = num
-        self.Modifications.Fuel = num
-    end
-    --
-    self.AddFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
-        self.SetFuel((self.GetFuel() + num))
-        self.Fuel = self.GetFuel()
-        self.Modifications.Fuel = self.GetFuel()
-        if self.GetFuel() >= 100 then
-            self.SetFuel(100)
-            self.Fuel = 100
-            self.Modifications.Fuel = 100
-        end
-    end
-    --
-    self.RemoveFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
-        self.SetFuel((self.GetFuel() - num))
-        self.Fuel = self.GetFuel()
-        self.Modifications.Fuel = self.GetFuel()
-        if self.GetFuel() <= 0 then
-            self.SetFuel(0)
-            self.Fuel = 0
-            self.Modifications.Fuel = 0
-        end
-    end
-
     -- Owner
-    self.Owner = data.Character_ID
+    self.Owner = data.Owner
     self.State.Owner = self.Owner
-    --
-    self.GetOwner = function()
-        return self.Owner
-    end
-    --
-
     -- Wanted
     self.Wanted = data.Wanted
     self.State.Wanted = self.Wanted
+    -- Fuel
+    self.Fuel = data.Fuel
+    self.State.Fuel = self.Fuel
     --
-    self.GetWanted = function()
-        return self.Wanted
+    self.Instance = data.Instance
+    self.State.Instance = self.Instance
+    --
+    self.Garage = data.Garage
+    self.State.Garage = self.Garage
+    --
+    self.Status = data.Status
+    self.State.Status = self.Status
+    --
+    self.Impound = data.Impound
+    self.State.Impound = self.Impound
+    --
+end
+--- func desc
+function c.class.Vehicle:GetSource()
+    return NetworkGetEntityOwner(self.Entity)
+end
+--- func desc
+function c.class.Vehicle:GetModel()
+    return self.Model
+end
+--- func desc
+function c.class.Vehicle:GetPlate()
+    return self.Plate
+end
+--- func desc
+function c.class.Vehicle:GetCoords()
+    local x, y, z = GetEntityCoords(self.Entity)
+    local h = GetEntityHeading(self.Entity)
+    return {
+        ["x"] = c.math.Decimals(x, 2),
+        ["y"] = c.math.Decimals(y, 2),
+        ["z"] = c.math.Decimals(z, 2),
+        ["h"] = c.math.Decimals(h, 2)
+    }
+end
+--- func desc
+---@param coords any
+function c.class.Vehicle:SetCoords(coords)
+    if coords.x and coords.y and coords.z and coords.h then
+        SetEntityHeading(self.Entity, coords.h)
+        SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
+    else
+        c.debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
     end
-    --
-
-    --
-    c.debug_2("Generated Player Vehicle State: "..net)
-    --
-    return self
 end
 
 --- func desc
----@param net any
----@param plate any
-function c.class.Vehicle.ReGenerate(net, plate)
-    local self = {}
-	setmetatable(self, c.class.Vehicle:Respawn(net, plate))
-	return self
+function c.class.Vehicle:GetKeys()
+    return self.Keys
 end
-
+--- func desc
+---@param t any
+function c.class.Vehicle:SetKeys(t)
+    self.Keys = t
+    self.State.Keys = self.Keys
+end
+--- func desc
+---@param id any
+function c.class.Vehicle:AddKey(id)
+    local t = self:GetKeys()
+    if not self:CheckKey(id) then
+        table.insert(self.Keys, id)
+        self.State.Keys = self.Keys
+    else
+        c.debug_1("User: " .. id .. " Already has key to this vehicle.")
+    end
+end
+--- func desc
+---@param id any
+function c.class.Vehicle:RemoveKey(id)
+    local t = self:GetKeys()
+    if self:CheckKey(id) then
+        table.remove(self.Keys, id)
+        self.State.Keys = self.Keys
+    else
+        c.debug_1("User: " .. id .. " Never had a key to this vehicle.")
+    end
+end
+--- func desc
+---@param id any
+function c.class.Vehicle:CheckKey(id)
+    local t = self:GetKeys()
+    if t[id] then
+        return true
+    else
+        return false
+    end
+end
+--- func desc
+function c.class.Vehicle:GetCondition()
+    return self.Condition
+end
+--- func desc
+---@param conditions any
+function c.class.Vehicle:SetCondition(conditions)
+    self.Condition = conditions or TriggerClientCallback({
+        source = self:GetSource(),
+        eventName = "GetVehicleCondition",
+        args = {self.Net}
+    })
+    TriggerClientCallback({
+        source = self:GetSource(),
+        eventName = "SetVehicleCondition",
+        args = {self.Net}
+    })
+end
+--- func desc
+---@param id any
+---@param v any
+function c.class.Vehicle:AlterCondition(id, v)
+    if self:CheckConds(id) then
+        self.Condition[id] = v
+    end
+end
+--- func desc
+---@param id any
+function c.class.Vehicle:CheckConds(id)
+    local t = self:GetCondition()
+    if t[id] then
+        return true
+    else
+        return false
+    end
+end
+--- func desc
+function c.class.Vehicle:GetModifications()
+    return self.Modifications
+end
+--- func desc
+---@param modifications any
+function c.class.Vehicle:SetModifications(modifications)
+    self.Modifications = modifications or TriggerClientCallback({
+        source = self:GetSource(),
+        eventName = "GetVehicleModifications",
+        args = {self.Net}
+    })
+    TriggerClientCallback({
+        source = self:GetSource(),
+        eventName = "SetVehicleModifications",
+        args = {self.Net}
+    })
+end
+--- func desc
+---@param id any
+---@param v any
+function c.class.Vehicle:AlterModification(id, v)
+    if self:CheckMods(id) then
+        self.Modifications[id] = v
+    end
+end
+--- func desc
+---@param id any
+function c.class.Vehicle:CheckMods(id)
+    local t = self:GetModifications()
+    if t[id] then
+        return true
+    else
+        return false
+    end
+end
+--- func desc
+function c.class.Vehicle:GetFuel()
+    return self.Fuel
+end
+--- func desc
+---@param v any
+function c.class.Vehicle:SetFuel(v)
+    local num = c.check.Number(v, 0, 100)
+    self.Fuel = num
+    self.State.Fuel = num
+end
+--- func desc
+---@param v any
+function c.class.Vehicle:AddFuel(v)
+    local num = c.check.Number(v, 0, 100)
+    self:SetFuel((self:GetFuel() + num))
+    self.Fuel = self:GetFuel()
+    if self:GetFuel() >= 100 then
+        self:SetFuel(100)
+        self.Fuel = 100
+    end
+end
+--- func desc
+---@param v any
+function c.class.Vehicle:RemoveFuel(v)
+    local num = c.check.Number(v, 0, 100)
+    self:SetFuel((self:GetFuel() - num))
+    self.Fuel = self:GetFuel()
+    if self:GetFuel() <= 0 then
+        self:SetFuel(0)
+        self.Fuel = 0
+    end
+end
+--- func desc
+function c.class.Vehicle:GetOwner()
+    return self.Owner
+end
+--- func desc
+function c.class.Vehicle:GetWanted()
+    return self.Wanted
+end
+-- ====================================================================================--
+--- func desc
+---@param net any
+---@param bool any
+function c.class.Vehicle.Generate(net, plate)
+    local self = {}
+    setmetatable(self, c.class.Vehicle:Create(net, plate))
+    return self
+end
+-- ====================================================================================--

@@ -68,8 +68,8 @@ end
 function c.state.UpdateStates(source)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    local mods = xPlayer.GetModifiers()    
-    local oldmods = xPlayer.GetOldModifiers()
+    local mods = xPlayer:GetModifiers()    
+    local oldmods = xPlayer:GetOldModifiers()
 
     for k,v in pairs(mods) do
         if mods.v ~= oldmods.v then
