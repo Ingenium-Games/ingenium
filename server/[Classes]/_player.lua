@@ -1,6 +1,6 @@
 -- ====================================================================================--
 c.class.Player = {}
-c.class.Player._index = c.class.Player
+c.class.Player.__index = c.class.Player
 -- ====================================================================================--
 function c.class.Player:Create(source, character_id)
     local src = tonumber(source)
@@ -127,7 +127,7 @@ function c.class.Player:Create(source, character_id)
     --
     self.Licenses = json.decode(char.Licenses)
     --
-    self.Inventory = c.class.Inventory.New(json.decode(char.Inventory))
+    self.Inventory = self:UnpackInventory(json.decode(char.Inventory))
     --
     self.Hotbar = json.decode(char.Hotbar)
     --
@@ -141,6 +141,7 @@ function c.class.Player:Create(source, character_id)
     --
     ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
+    return self
 end
 --
 function c.class.Player:GetModel()
@@ -227,14 +228,14 @@ function c.class.Player:GetGender()
 end
 --
 function c.class.Player:GetInstance()
-    return GetPlayerRoutingBucket(src)
+    return GetPlayerRoutingBucket(self.ID)
 end
 --
 function c.class.Player:SetInstance(id)
     local id = id or self.InstanceID
     SetPlayerRoutingBucket(self.ID, id)
     SetEntityRoutingBucket(self.Entity, id)
-    c.sql.char.SetInstance(self.GetIdentifier(), num)
+    c.sql.char.SetInstance(self.GetIdentifier(), id)
 end
 -- 
 function c.class.Player:GetHealth()
@@ -453,11 +454,12 @@ function c.class.Player:RemoveBank(v)
         end
     end
 end
--- esx style, except table format.
+--- func desc
 function c.class.Player:GetJob()
     return self.Job
 end
---
+--- func desc
+---@param t any
 function c.class.Player:SetJob(t)
     if c.job.Exist(t.Name, t.Grade) then
         self.Job.Name = t.Name
@@ -471,34 +473,37 @@ function c.class.Player:SetJob(t)
         c.debug_1("Ignoring invalid .SetJob() for " .. self.ID)
     end
 end
---
+--- func desc
 function c.class.Player:GetPhone()
     return self.Phone
 end
---
+--- func desc
+---@param s any
 function c.class.Player:SetPhone(s)
     local s = c.check.String(s)
     self.Phone = s
     self.State.Phone = self.Phone
 end
---
+--- func desc
 function c.class.Player:GetAppearance()
     return self.Appearance
 end
---
+--- func desc
+---@param t any
 function c.class.Player:SetAppearance(t)
     self.Appearance = t
 end
---
+--- func desc
 function c.class.Player:GetTattoos()
     return self.Tattoos
 end
---
+--- func desc
+---@param t any
 function c.class.Player:SetTattoos(t)
     local t = c.check.Table(t)
     self.Tattoos = t
 end
---
+--- func desc
 function c.class.Player:GetCoords()
     local x, y, z = GetEntityCoords(self.Entity)
     local h = GetEntityHeading(self.Entity)
@@ -509,7 +514,8 @@ function c.class.Player:GetCoords()
         ["h"] = c.math.Decimals(h, 2)
     }
 end
---
+--- func desc
+---@param t any
 function c.class.Player:SetCoords(t)
     self.Coords = {
         x = c.math.Decimals(t.x, 2),
@@ -518,38 +524,183 @@ function c.class.Player:SetCoords(t)
         h = c.math.Decimals(t.h, 2)
     }
 end
---
+--- func desc
 function c.class.Player:GetHotbar()
     return self.Hotbar
 end
---
+--- func desc
+---@param t any
 function c.class.Player:SetHotbar(t)
     local t = c.check.Table(t)
     self.Hotbar = t
 end
---
+--- func desc
 function c.class.Player:GetWanted()
     return self.IsWanted
 end
---
+--- func desc
+---@param b any
 function c.class.Player:SetWanted(b)
     local b = c.check.Boolean(b)
     self.IsWanted = b
     self.State.IsWanted = self.IsWanted
 end
---
+--- func desc
 function c.class.Player:GetCuffed()
     return self.IsCuffed
 end
---
+--- func desc
+---@param b any
 function c.class.Player:SetCuffed(b)
     local b = c.check.Boolean(b)
     self.IsCuffed = b
     self.State.IsCuffed = self.IsCuffed
 end
+--- func desc
+---@param inv any
+function c.class.Player:UnpackInventory(inv)
+    local inv = inv or {}
+    --
+    for i = 1, #inv do
+        table.insert(self.Inventory, i)
+        self.Inventory[i] = {
+            ["Item"] = inv[i][1],
+            ["Quantity"] = inv[i][2],
+            ["Quality"] = inv[i][3],
+            ["Weapon"] = inv[i][4],
+            ["Meta"] = inv[i][5]
+        }
+        -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
+        if self.Inventory[i].Weapon == true then
+            if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
+                c.debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                break
+            end
+        end
+        -- Validate Meta data
+        if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
+            c.debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+            break
+        end
+        -- Validate Meta data
+        --[[
+                if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
+                c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
+                break
+                end
+            ]] --
+        -- If the Quality is below 0, then destroy the item.
+        if self.Inventory[i].Quality <= 0 then
+            table.remove(self.Inventory, i)
+        end
+        -- adding weight into the generation
+        for k, v in ipairs(self.Inventory) do
+            if c.item.Exists(v.Item) then
+                local item = c.items[v.Item]
+                self.Weight = self.Weight + item.Weight
+            else
+                c.debug_1("Ignoring invalid item within .GetWeight()")
+            end
+        end
+    end
+end
+--- func desc
+function c.class.Player:GetInventory()
+    return self.Inventory
+end
+--- func desc
+---@param name any
+function c.class.Player:HasItem(name)
+    for k, v in ipairs(self.Inventory) do
+        if v.Item == name then
+            return true, k
+        end
+    end
+    return false, nil
+end
+--
+--- func desc
+function c.class.Player:GetWeight()
+    self.Weight = 0
+    for k, v in ipairs(self.Inventory) do
+        if c.item.Exists(v.Item) then
+            local item = c.items[v.Item]
+            self.Weight = self.Weight + item.Weight
+        else
+            c.debug_1("Ignoring invalid item within .GetWeight()")
+        end
+    end
+    return self.Weight
+end
+--
+--- [Internal] func desc
+---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
+function c.class.Player:SteralizeItem(v)
+    if type(v) ~= "table" then
+        c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
+        return
+    end
+    local info = {
+        ["Item"] = c.check.String(v[1]), -- string
+        ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
+        ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
+        ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
+        ["Meta"] = (v[5] or c.items[v[1]].Meta)
+    }
+    return info
+end
+--
+--- func desc
+---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
+function c.class.Player:AddItem(tbl)
+    local item = self.SteralizeItem(tbl)
+    if c.item.Exists(item.Item) then
+        local weapon = c.item.IsWeapon(item.Item)
+        local stackable = c.item.CanStack(item.Item)
+        local has, key = self.HasItem(item.Item)
+        if (weapon and type(item.Weapon) == "string") or (not stackable) then
+            self.Inventory[#self.Inventory + 1] = item
+
+        elseif (stackable and has) then
+            self.Inventory[key].Quantity = self.Inventory[key].Quantity + item.Quantity
+
+        else
+            self.Inventory[#self.Inventory + 1] = item
+
+        end
+    else
+        c.debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+    end
+end
+--- func desc
+---@param name any
+---@param slot any
+function c.class.Player:RemoveItem(name, slot)
+    local has, position = self.HasItem(name)
+    if has and slot == position then
+        table.remove(self.Inventory, position)
+    end
+end
+--- func desc
+---@param new any
+---@param old any
+function c.class.Player:RearrangeItems(new, old)
+    table.insert(self.Inventory, new, table.remove(self.Inventory, old))
+end
+--- func desc
+function c.class.Player:CompressInventory()
+    local inv = {}
+    for i = 1, #self.Inventory do
+        table.insert(inv, i)
+        inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality,
+                  self.Inventory[i].Weapon, self.Inventory[i].Meta}
+    end
+    return inv
+end
 -- ====================================================================================--
 function c.class.Player.New(source, character_id)
     local self = {}
-    setmetatable(self, c.class.Player:Create(source, character_id))
+    setmetatable(self, c.class.Player)
+    self:Create(source, character_id)
     return self
 end

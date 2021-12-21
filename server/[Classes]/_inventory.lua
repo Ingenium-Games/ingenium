@@ -1,10 +1,9 @@
 -- ====================================================================================--
 c.class.Inventory = {}
-c.class.Inventory._index = c.class.Inventory
+c.class.Inventory.__index = c.class.Inventory
 -- ====================================================================================--
-function c.class.Inventory:Create(inv)
-    self.Inventory = {}
-    self.Weight = 0
+function c.class.Inventory:UnpackInventory(inv)
+    local inv = inv or {}
     --
     for i = 1, #inv do
         table.insert(self.Inventory, i)
@@ -148,6 +147,7 @@ end
 ---@param inv any
 function c.class.Inventory.New(inv)
     local self = {}
-    setmetatable(self, c.class.Inventory:Create(inv))
+    setmetatable(self, c.class.Inventory)
+    self:Create(inv)
     return self
 end

@@ -1,6 +1,6 @@
 -- ====================================================================================--
 c.class.Job = {}
-c.class.Job._index = c.class.Job
+c.class.Job.__index = c.class.Job
 -- ====================================================================================--
 --- func desc
 ---@param tab any
@@ -12,6 +12,7 @@ function c.class.Job:Create(tab)
     self.Members = tab.Members
     self.Description = tab.Description
     self.Accounts = tab.Accounts
+    return self
 end
 --- func desc
 function c.class.Job:GetName()
@@ -206,6 +207,7 @@ end
 ---@param tab any
 function c.class.Job.New(tab)
     local self = {}
-    setmetatable(self, c.class.Job:Create(tab))
+    setmetatable(self, c.class.Job)
+    self:Create(tab)
     return self
 end

@@ -273,7 +273,7 @@ function c.data.CreateJobObjects()
     local jobs = c.job.GetJobs()
     for k, v in pairs(jobs) do
         if not c.jdex[k] then
-            c.jdex[k] = c.class.CreateJob(v)
+            c.jdex[k] = c.class.Job.New(v)
         end
     end
     c.json.Write(conf.file.jobs, c.jobs)
@@ -358,7 +358,6 @@ function c.data.LoadPlayer(source, Character_ID)
     -- No need to pass data to the client anymore.
     c.sql.char.SetActive(Character_ID, true, function()
         c.data.SetPlayer(src, xPlayer)
-        c.inst.SetPlayer(source, xPlayer:GetInstance())
         p:resolve()
     end)
     -- Wait for the player to be loaded prior to sending the "ok" to load to the client.
