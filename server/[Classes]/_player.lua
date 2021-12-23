@@ -4,14 +4,15 @@ c.class.Player.__index = c.class.Player
 -- ====================================================================================--
 function c.class.Player:Create(source, character_id)
     local src = tonumber(source)
+    local Character_ID = character_id
     local Steam_ID, FiveM_ID, License_ID, Discord_ID = c.identifiers(src)
     local user = c.sql.user.Get(License_ID)
-    local char = c.sql.char.Get(character_id)
+    local char = c.sql.char.Get(Character_ID)
     --
     self.ID = src
     self.State = Player(self.ID).state
     --
-    self.Entity = GetPlayerPed(src)
+    self.Entity = GetPlayerPed(tostring(src))
     --
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
@@ -127,7 +128,8 @@ function c.class.Player:Create(source, character_id)
     --
     self.Licenses = json.decode(char.Licenses)
     --
-    self.Inventory = self:UnpackInventory(json.decode(char.Inventory))
+    self.Inventory = json.decode(char.Inventory)
+    self:UnpackInventory(self.Inventory)
     --
     self.Hotbar = json.decode(char.Hotbar)
     --
@@ -336,7 +338,7 @@ function c.class.Player:SetAccount(acc, v)
 end
 --
 function c.class.Player:GetCash()
-    local acc = self.GetAccount("Cash")
+    local acc = self:GetAccount("Cash")
     if acc then
         self.State.Cash = acc
         return acc
@@ -345,7 +347,7 @@ end
 --
 function c.class.Player:SetCash(v)
     local num = c.check.Number(v)
-    local acc = self.GetAccount("Cash")
+    local acc = self:GetAccount("Cash")
     if acc then
         acc = c.math.Decimals(num, 0)
         if acc < 0 then
@@ -357,7 +359,7 @@ function c.class.Player:SetCash(v)
                 "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                     self.ID)
         else
-            self.SetAccount("Cash", acc)
+            self:SetAccount("Cash", acc)
             self.State.Cash = acc
         end
     end
@@ -365,7 +367,7 @@ end
 --
 function c.class.Player:AddCash(v)
     local num = c.check.Number(v)
-    local acc = self.GetAccount("Cash")
+    local acc = self:GetAccount("Cash")
     if acc then
         acc = acc + c.math.Decimals(num, 0)
         if acc < 0 then
@@ -377,7 +379,7 @@ function c.class.Player:AddCash(v)
                 "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                     self.ID)
         else
-            self.SetAccount("Cash", acc)
+            self:SetAccount("Cash", acc)
             self.State.Cash = acc
         end
     end
@@ -385,7 +387,7 @@ end
 --
 function c.class.Player:RemoveCash(v)
     local num = c.check.Number(v)
-    local acc = self.GetAccount("Cash")
+    local acc = self:GetAccount("Cash")
     if acc then
         acc = acc - c.math.Decimals(num, 0)
         if acc < 0 then
@@ -397,14 +399,14 @@ function c.class.Player:RemoveCash(v)
                 "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                     self.ID)
         else
-            self.SetAccount("Cash", acc)
+            self:SetAccount("Cash", acc)
             self.State.Cash = acc
         end
     end
 end
 --
 function c.class.Player:GetBank()
-    local acc = self.GetAccount("Bank")
+    local acc = self:GetAccount("Bank")
     if acc then
         self.State.Bank = acc
         return acc
@@ -416,10 +418,10 @@ function c.class.Player:SetBank(v)
     local acc = c.math.Decimals(num, 0)
     if acc then
         if acc < 0 then
-            self.SetAccount("Bank", acc)
+            self:SetAccount("Bank", acc)
             self.State.Bank = acc
         else
-            self.SetAccount("Bank", acc)
+            self:SetAccount("Bank", acc)
             self.State.Bank = acc
         end
     end
@@ -427,14 +429,14 @@ end
 --
 function c.class.Player:AddBank(v)
     local num = c.check.Number(v)
-    local acc = self.GetAccount("Bank")
+    local acc = self:GetAccount("Bank")
     if acc then
         acc = acc + c.math.Decimals(num, 0)
         if acc < 0 then
-            self.SetAccount("Bank", acc)
+            self:SetAccount("Bank", acc)
             self.State.Bank = acc
         else
-            self.SetAccount("Bank", acc)
+            self:SetAccount("Bank", acc)
             self.State.Bank = acc
         end
     end
@@ -442,14 +444,14 @@ end
 --
 function c.class.Player:RemoveBank(v)
     local num = c.check.Number(v)
-    local acc = self.GetAccount("Bank")
+    local acc = self:GetAccount("Bank")
     if acc then
         acc = acc - c.math.Decimals(num, 0)
         if acc < 0 then
-            self.SetAccount("Bank", acc)
+            self:SetAccount("Bank", acc)
             self.State.Bank = acc
         else
-            self.SetAccount("Bank", acc)
+            self:SetAccount("Bank", acc)
             self.State.Bank = acc
         end
     end
@@ -505,7 +507,7 @@ function c.class.Player:SetTattoos(t)
 end
 --- func desc
 function c.class.Player:GetCoords()
-    local x, y, z = GetEntityCoords(self.Entity)
+    local x, y, z = table.unpack(GetEntityCoords(self.Entity))
     local h = GetEntityHeading(self.Entity)
     return {
         ["x"] = c.math.Decimals(x, 2),
@@ -560,7 +562,7 @@ end
 ---@param inv any
 function c.class.Player:UnpackInventory(inv)
     local inv = inv or {}
-    --
+    self.Inventory = {}
     for i = 1, #inv do
         table.insert(self.Inventory, i)
         self.Inventory[i] = {
@@ -653,11 +655,11 @@ end
 --- func desc
 ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
 function c.class.Player:AddItem(tbl)
-    local item = self.SteralizeItem(tbl)
+    local item = self:SteralizeItem(tbl)
     if c.item.Exists(item.Item) then
         local weapon = c.item.IsWeapon(item.Item)
         local stackable = c.item.CanStack(item.Item)
-        local has, key = self.HasItem(item.Item)
+        local has, key = self:HasItem(item.Item)
         if (weapon and type(item.Weapon) == "string") or (not stackable) then
             self.Inventory[#self.Inventory + 1] = item
 
@@ -676,7 +678,7 @@ end
 ---@param name any
 ---@param slot any
 function c.class.Player:RemoveItem(name, slot)
-    local has, position = self.HasItem(name)
+    local has, position = self:HasItem(name)
     if has and slot == position then
         table.remove(self.Inventory, position)
     end
@@ -702,5 +704,6 @@ function c.class.Player.New(source, character_id)
     local self = {}
     setmetatable(self, c.class.Player)
     self:Create(source, character_id)
+    print(c.table.Dump(self))
     return self
 end

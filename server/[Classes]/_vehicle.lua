@@ -1,6 +1,6 @@
 -- ====================================================================================--
 c.class.Vehicle = {}
-c.class.Vehicle._index = c.class.Vehicle
+c.class.Vehicle.__index = c.class.Vehicle
 -- ====================================================================================--
 local function GetVeh(plate)
     if type(plate) == "string" then
@@ -8,10 +8,10 @@ local function GetVeh(plate)
     else
         return {
             Fuel = math.random(25, 89),
-            Keys = {},
-            Inventory = {},
-            Condition = {},
-            Modifications = {},
+            Keys = "{}",
+            Inventory = "{}",
+            Condition = "{}",
+            Modifications = "{}",
             Instance = false,
             Garage = false,
             Status = false,
@@ -26,7 +26,7 @@ end
 ---@param bool any
 function c.class.Vehicle:Create(net, plate)
     local net = net or CancelEvent()
-    local plate = plate or false
+    local plate = false or plate
     local data = GetVeh(plate)
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
@@ -40,7 +40,8 @@ function c.class.Vehicle:Create(net, plate)
     --
     self.Weight = 0
     -- Inventory
-    self.Inventory = self:UnpackInventory(json.decode(data.Inventory))
+    self.Inventory = json.decode(data.Inventory)
+    self:UnpackInventory(self.Inventory)
     -- Condition
     self.Condition = json.decode(data.Condition)
     -- Modifications
@@ -86,7 +87,7 @@ function c.class.Vehicle:GetPlate()
 end
 --- func desc
 function c.class.Vehicle:GetCoords()
-    local x, y, z = GetEntityCoords(self.Entity)
+    local x, y, z = table.unpack(GetEntityCoords(self.Entity))
     local h = GetEntityHeading(self.Entity)
     return {
         ["x"] = c.math.Decimals(x, 2),
@@ -270,6 +271,7 @@ end
 function c.class.Vehicle:UnpackInventory(inv)
     local inv = inv or {}
     --
+    self.Inventory = {}
     for i = 1, #inv do
         table.insert(self.Inventory, i)
         self.Inventory[i] = {
@@ -412,7 +414,9 @@ end
 ---@param bool any
 function c.class.Vehicle.Generate(net, plate)
     local self = {}
-    setmetatable(self, c.class.Vehicle:Create(net, plate))
+    setmetatable(self, c.class.Vehicle)
+    self:Create(net, plate)
+    print(c.table.Dump(self))
     return self
 end
 -- ====================================================================================--

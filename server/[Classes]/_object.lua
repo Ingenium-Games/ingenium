@@ -2,9 +2,29 @@
 c.class.Object = {}
 c.class.Object.__index = c.class.Object
 -- ====================================================================================--
+local function GetVeh(plate)
+    if type(plate) == "string" then
+        return c.sql.GetVehicleByPlate(plate)
+    else
+        return {
+            Fuel = math.random(25, 89),
+            Keys = "{}",
+            Inventory = "{}",
+            Condition = "{}",
+            Modifications = "{}",
+            Instance = false,
+            Garage = false,
+            Status = false,
+            Impound = false,
+            Owner = false,
+            Wanted = false,
+        }
+    end
+end
 --- func desc
 ---@param net any
-function c.class.Object:Create(net)
+function c.class.Object:Create(net,plate)
+    local data = GetVeh(plate)
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
@@ -12,7 +32,9 @@ function c.class.Object:Create(net)
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model    
     self.Weight = 0
-    self.Inventory = self:UnpackInventory()
+    -- Inventory
+    self.Inventory = json.decode(data.Inventory)
+    self:UnpackInventory(self.Inventory)
     return self
 end
 --- func desc
@@ -22,6 +44,27 @@ end
 --- func desc
 function c.class.Object:GetModel()
     return self.Model
+end
+--- func desc
+function c.class.Object:GetCoords()
+    local x, y, z = table.unpack(GetEntityCoords(self.Entity))
+    local h = GetEntityHeading(self.Entity)
+    return {
+        ["x"] = c.math.Decimals(x, 2),
+        ["y"] = c.math.Decimals(y, 2),
+        ["z"] = c.math.Decimals(z, 2),
+        ["h"] = c.math.Decimals(h, 2)
+    }
+end
+--- func desc
+---@param t any
+function c.class.Object:SetCoords(t)
+    self.Coords = {
+        x = c.math.Decimals(t.x, 2),
+        y = c.math.Decimals(t.y, 2),
+        z = c.math.Decimals(t.z, 2),
+        h = c.math.Decimals(t.h, 2)
+    }
 end
 --- func desc
 ---@param inv any
@@ -167,9 +210,9 @@ end
 -- ====================================================================================--
 --- func desc
 ---@param net any
-function c.class.Object.Generate(net)
+function c.class.Object.Generate(net,plate)
     local self = {}
     setmetatable(self, c.class.Object)
-    self:Create(net)
+    self:Create(net,plate)
     return self
 end

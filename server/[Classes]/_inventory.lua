@@ -98,11 +98,11 @@ end
 --- func desc
 ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
 function c.class.Inventory:AddItem(tbl)
-    local item = self.SteralizeItem(tbl)
+    local item = self:SteralizeItem(tbl)
     if c.item.Exists(item.Item) then
         local weapon = c.item.IsWeapon(item.Item)
         local stackable = c.item.CanStack(item.Item)
-        local has, key = self.HasItem(item.Item)
+        local has, key = self:HasItem(item.Item)
         if (weapon and type(item.Weapon) == "string") or (not stackable) then
             self.Inventory[#self.Inventory + 1] = item
 
@@ -121,7 +121,7 @@ end
 ---@param name any
 ---@param slot any
 function c.class.Inventory:RemoveItem(name, slot)
-    local has, position = self.HasItem(name)
+    local has, position = self:HasItem(name)
     if has and slot == position then
         table.remove(self.Inventory, position)
     end

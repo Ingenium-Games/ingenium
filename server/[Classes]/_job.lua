@@ -72,7 +72,7 @@ function c.class.Job:SetAccount(acc, v)
 end
 --- func desc
 function c.class.Job:GetSafe()
-    local acc = self.GetAccount("Safe")
+    local acc = self:GetAccount("Safe")
     if acc then
         return acc
     end
@@ -83,7 +83,7 @@ function c.class.Job:SetSafe(v)
     local num = c.check.Number(v)
     if num >= 0 then
         local acc = c.math.Decimals(num, 0)
-        self.SetAccount("Safe", acc)
+        self:SetAccount("Safe", acc)
     end
 end
 --- func desc
@@ -91,16 +91,16 @@ end
 function c.class.Job:AddSafe(v)
     local num = c.check.Number(v)
     if num > 0 then
-        local acc = self.GetAccount("Safe")
+        local acc = self:GetAccount("Safe")
         if acc then
             local bkp = acc
             acc = acc + c.math.Decimals(num, 0)
             if acc < 0 then
-                self.SetAccount("Safe", bkp)
+                self:SetAccount("Safe", bkp)
                 c.debug_1("Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
                 CancelEvent()
             else
-                self.SetAccount("Safe", acc)
+                self:SetAccount("Safe", acc)
             end
         end
     end
@@ -110,23 +110,23 @@ end
 function c.class.Job:RemoveSafe(v)
     local num = c.check.Number(v)
     if num > 0 then
-        local acc = self.GetAccount("Safe")
+        local acc = self:GetAccount("Safe")
         if acc then
             local bkp = acc
             acc = acc - c.math.Decimals(num, 0)
             if acc < 0 then
-                self.SetAccount("Safe", bkp)
+                self:SetAccount("Safe", bkp)
                 c.debug_1("Job " .. self.Name .. " has RemoveSafe() Cancelled due to Negative balance remaining.")
                 CancelEvent()
             else
-                self.SetAccount("Safe", acc)
+                self:SetAccount("Safe", acc)
             end
         end
     end
 end
 --- func desc
 function c.class.Job:GetBank()
-    local acc = self.GetAccount("Bank")
+    local acc = self:GetAccount("Bank")
     if acc then
         return acc
     end
@@ -136,20 +136,20 @@ end
 function c.class.Job:SetBank(v)
     local num = c.check.Number(v)
     local acc = c.math.Decimals(num, 0)
-    self.SetAccount("Bank", acc)
+    self:SetAccount("Bank", acc)
 end
 --- func desc
 ---@param v any
 function c.class.Job:AddBank(v)
     local num = c.check.Number(v)
     if num > 0 then
-        local acc = self.GetAccount("Bank")
+        local acc = self:GetAccount("Bank")
         if acc then
             acc = acc + c.math.Decimals(num, 0)
             if acc < 0 then
-                self.SetAccount("Bank", acc)
+                self:SetAccount("Bank", acc)
             else
-                self.SetAccount("Bank", acc)
+                self:SetAccount("Bank", acc)
             end
         end
     end
@@ -159,13 +159,13 @@ end
 function c.class.Job:RemoveBank(v)
     local num = c.check.Number(v)
     if num > 0 then
-        local acc = self.GetAccount("Bank")
+        local acc = self:GetAccount("Bank")
         if acc then
             acc = acc - c.math.Decimals(num, 0)
             if acc < 0 then
-                self.SetAccount("Bank", acc)
+                self:SetAccount("Bank", acc)
             else
-                self.SetAccount("Bank", acc)
+                self:SetAccount("Bank", acc)
             end
         end
     end
@@ -183,7 +183,7 @@ end
 --- func desc
 ---@param member any
 function c.class.Job:AddMember(member)
-    local check = self.FindMember(member)
+    local check = self:FindMember(member)
     if not check then
         table.insert(self.Members, member)
     end
@@ -191,7 +191,7 @@ end
 --- func desc
 ---@param member any
 function c.class.Job:RemoveMember(member)
-    local check = self.FindMember(member)
+    local check = self:FindMember(member)
     if check then
         table.remove(self.Members, member)
     end
@@ -207,7 +207,6 @@ end
 ---@param tab any
 function c.class.Job.New(tab)
     local self = {}
-    setmetatable(self, c.class.Job)
-    self:Create(tab)
+    setmetatable(self, c.class.Job:Create(tab))
     return self
 end

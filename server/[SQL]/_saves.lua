@@ -228,7 +228,7 @@ function c.sql.save.Jobs(cb)
         -- Tables require JSON Encoding.
         local Accounts = json.encode(xJobs[k]:GetAccounts(false))
         -- 
-        local Name = xJobs[k].GetName()
+        local Name = xJobs[k]:GetName()
         MySQL.Async.insert(JobSaveData, {
             ["@Accounts"] = Accounts,
             --
