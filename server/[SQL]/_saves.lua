@@ -22,7 +22,7 @@ end)
 
 --- Save Single User/Character
 ---@param data table "xPlayer table"
----@param cb function "To be called on SQL "UPDATE" statement completion."
+---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.User(data, cb)
     if data then
         -- Other Variables.
@@ -52,7 +52,7 @@ function c.sql.save.User(data, cb)
             ["@Accounts"] = Accounts,
             ["@Modifiers"] = Modifiers,
             ["@Inventory"] = Inventory,
-            ["@Hotbar"] = Hotbar,
+
             ["@Job"] = Job,
             --
             ["@Character_ID"] = Character_ID
@@ -66,7 +66,7 @@ function c.sql.save.User(data, cb)
 end
 
 --- Save All Characters from the xPLayer Table.
----@param cb function "To be called on SQL "UPDATE" statements are completed."
+---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Users(cb)
     local xPlayers = c.data.GetPlayers()
     for k,v in pairs(xPlayers) do
@@ -99,7 +99,7 @@ function c.sql.save.Users(cb)
                 ["@Accounts"] = Accounts,
                 ["@Modifiers"] = Modifiers,
                 ["@Inventory"] = Inventory,
-                ["@Hotbar"] = Hotbar,
+
                 ["@Job"] = Job,
                 --
                 ["@Character_ID"] = Character_ID
@@ -124,7 +124,7 @@ end)
 
 --- Save Single User/Character
 ---@param data table "xCar table"
----@param cb function "To be called on SQL "UPDATE" statement completion."
+---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.Vehicle(data, cb)
     if data:GetOwner() then
         -- Other Variables.
@@ -165,7 +165,7 @@ function c.sql.save.Vehicle(data, cb)
 end
 
 --- Save All Characters from the xPLayer Table.
----@param cb function "To be called on SQL "UPDATE" statements are completed."
+---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for k,v in pairs(xVehicles) do
@@ -221,7 +221,7 @@ function(id)
 end)
 
 --- Save All Job Accounts
----@param cb function "To be called on SQL "UPDATE" statements are completed."
+---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Jobs(cb)
     local xJobs = c.data.GetJobs()
     for k,v in pairs(xJobs) do

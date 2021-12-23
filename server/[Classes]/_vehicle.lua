@@ -416,7 +416,7 @@ function c.class.Vehicle.Generate(net, plate)
     local self = {}
     setmetatable(self, c.class.Vehicle)
     self:Create(net, plate)
-    print(c.table.Dump(self))
+    c.debug_2(c.table.Dump(self))
     return self
 end
 -- ====================================================================================--

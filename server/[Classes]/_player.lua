@@ -704,6 +704,6 @@ function c.class.Player.New(source, character_id)
     local self = {}
     setmetatable(self, c.class.Player)
     self:Create(source, character_id)
-    print(c.table.Dump(self))
+    c.debug_2(c.table.Dump(self))
     return self
 end

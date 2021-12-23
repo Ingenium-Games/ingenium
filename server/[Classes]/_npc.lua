@@ -238,6 +238,6 @@ function c.class.Npc.Generate(net)
     -- Add items at random onto the NPC"s at creation of table data.
     -- self.AddItem({"Cash",math.random(5,65),100,false,false})
     self:AddItem({"Cash", math.random(25, 89), 100, false, false})
-    print(c.table.Dump(self))
+    c.debug_2(c.table.Dump(self))
     return self
 end

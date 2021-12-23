@@ -2,9 +2,9 @@
 c.class.Object = {}
 c.class.Object.__index = c.class.Object
 -- ====================================================================================--
-local function GetVeh(plate)
+local function GetObj(plate)
     if type(plate) == "string" then
-        return c.sql.GetVehicleByPlate(plate)
+        return c.sql.GetObjectByName(plate)
     else
         return {
             Fuel = math.random(25, 89),
@@ -24,7 +24,7 @@ end
 --- func desc
 ---@param net any
 function c.class.Object:Create(net,plate)
-    local data = GetVeh(plate)
+    local data = GetObj(plate)
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
@@ -71,6 +71,7 @@ end
 function c.class.Object:UnpackInventory(inv)
     local inv = inv or {}
     --
+    self.Inventory = {}
     for i = 1, #inv do
         table.insert(self.Inventory, i)
         self.Inventory[i] = {
@@ -109,18 +110,18 @@ function c.class.Object:UnpackInventory(inv)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.debug_1("Ignoring invalid item within .GetWeight()")
+                c.debug_1("Ignoring invalid item within .GetWeight(), for Job: " .. self.Name)
             end
         end
     end
 end
 --- func desc
-function c.class.Object:GetInventory()
+function c.class.Job:GetInventory()
     return self.Inventory
 end
 --- func desc
 ---@param name any
-function c.class.Object:HasItem(name)
+function c.class.Job:HasItem(name)
     for k, v in ipairs(self.Inventory) do
         if v.Item == name then
             return true, k
@@ -130,14 +131,14 @@ function c.class.Object:HasItem(name)
 end
 --
 --- func desc
-function c.class.Object:GetWeight()
+function c.class.Job:GetWeight()
     self.Weight = 0
     for k, v in ipairs(self.Inventory) do
         if c.item.Exists(v.Item) then
             local item = c.items[v.Item]
             self.Weight = self.Weight + item.Weight
         else
-            c.debug_1("Ignoring invalid item within .GetWeight()")
+            c.debug_1("Ignoring invalid item within .GetWeight(), for Job: " .. self.Name)
         end
     end
     return self.Weight
@@ -145,9 +146,9 @@ end
 --
 --- [Internal] func desc
 ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
-function c.class.Object:SteralizeItem(v)
+function c.class.Job:SteralizeItem(v)
     if type(v) ~= "table" then
-        c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object: " .. self.Net)
+        c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Job: " .. self.Name)
         return
     end
     local info = {
@@ -162,7 +163,7 @@ end
 --
 --- func desc
 ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
-function c.class.Object:AddItem(tbl)
+function c.class.Job:AddItem(tbl)
     local item = self:SteralizeItem(tbl)
     if c.item.Exists(item.Item) then
         local weapon = c.item.IsWeapon(item.Item)
@@ -179,13 +180,13 @@ function c.class.Object:AddItem(tbl)
 
         end
     else
-        c.debug_1("Ignoring invalid .AddItem() for Object: " .. self.Net)
+        c.debug_1("Ignoring invalid .AddItem() for Job: " .. self.Name)
     end
 end
 --- func desc
 ---@param name any
 ---@param slot any
-function c.class.Object:RemoveItem(name, slot)
+function c.class.Job:RemoveItem(name, slot)
     local has, position = self:HasItem(name)
     if has and slot == position then
         table.remove(self.Inventory, position)
@@ -194,11 +195,11 @@ end
 --- func desc
 ---@param new any
 ---@param old any
-function c.class.Object:RearrangeItems(new, old)
+function c.class.Job:RearrangeItems(new, old)
     table.insert(self.Inventory, new, table.remove(self.Inventory, old))
 end
 --- func desc
-function c.class.Object:CompressInventory()
+function c.class.Job:CompressInventory()
     local inv = {}
     for i = 1, #self.Inventory do
         table.insert(inv, i)
@@ -214,5 +215,6 @@ function c.class.Object.Generate(net,plate)
     local self = {}
     setmetatable(self, c.class.Object)
     self:Create(net,plate)
+    c.debug_2(c.table.Dump(self))
     return self
 end
