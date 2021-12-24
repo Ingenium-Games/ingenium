@@ -109,7 +109,7 @@ RegisterCommand("bring", function(source, args, rawCommand)
     local trg = tonumber(args[1])
     local zPlayer = c.data.GetPlayer(trg)
     local ords = xPlayer:GetCoords()
-    zPlayer:SetCoords({ords.x + 1, ords.y + 1, ords.z, ords.h})
+    zPlayer:SetCoords({x = ords.x + 1, y = ords.y + 1, z = ords.z, h = ords.h})
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by "..xPlayer:GetName()) -- txAdmin logging Callback
 end, true)
 
