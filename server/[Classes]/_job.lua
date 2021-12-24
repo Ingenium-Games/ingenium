@@ -256,12 +256,12 @@ function c.class.Job:UnpackInventory(inv)
     end
 end
 --- func desc
-function c.class.Object:GetInventory()
+function c.class.Job:GetInventory()
     return self.Inventory
 end
 --- func desc
 ---@param name any
-function c.class.Object:HasItem(name)
+function c.class.Job:HasItem(name)
     for k, v in ipairs(self.Inventory) do
         if v.Item == name then
             return true, k
@@ -271,7 +271,7 @@ function c.class.Object:HasItem(name)
 end
 --
 --- func desc
-function c.class.Object:GetWeight()
+function c.class.Job:GetWeight()
     self.Weight = 0
     for k, v in ipairs(self.Inventory) do
         if c.item.Exists(v.Item) then
@@ -286,7 +286,7 @@ end
 --
 --- [Internal] func desc
 ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
-function c.class.Object:SteralizeItem(v)
+function c.class.Job:SteralizeItem(v)
     if type(v) ~= "table" then
         c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object: " .. self.Net)
         return
@@ -303,7 +303,7 @@ end
 --
 --- func desc
 ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
-function c.class.Object:AddItem(tbl)
+function c.class.Job:AddItem(tbl)
     local item = self:SteralizeItem(tbl)
     if c.item.Exists(item.Item) then
         local weapon = c.item.IsWeapon(item.Item)
