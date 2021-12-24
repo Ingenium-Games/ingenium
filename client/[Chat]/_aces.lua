@@ -31,6 +31,11 @@ c.ace.mod = function()
         name = "3",
         help = "Job Grade"
     }})
+
+    TriggerEvent("chat:addSuggestion", "/car", "Admin Permission(s) Required.", {{
+        name = "1",
+        help = "Vehicle Name or Hash"
+    }})
     
 end
 
@@ -50,10 +55,21 @@ c.ace.admin = function()
         help = "Server ID"
     }})
 
-    TriggerEvent("chat:addSuggestion", "/openinventory", "Admin Permission(s) Required.", {{
+    TriggerEvent("chat:addSuggestion", "/bring", "Admin Permission(s) Required.", {{
         name = "1",
         help = "Server ID"
     }})
+
+    TriggerEvent("chat:addSuggestion", "/return", "Admin Permission(s) Required.", {{
+        name = "1",
+        help = "Server ID"
+    }})
+
+    TriggerEvent("chat:addSuggestion", "/freeze", "Admin Permission(s) Required.", {{
+        name = "1",
+        help = "Server ID"
+    }})
+    
 end
 
 c.ace.superadmin = function()   
