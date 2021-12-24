@@ -108,6 +108,9 @@ function c.class.Player:Create(source, character_id)
     self.IsEscorted = false
     self.State.IsEscorted = self.IsEscorted
     --
+    self.IsFrozen = false
+    self.State.IsFrozen = self.IsFrozen
+    --
     self.IsEscorting = false
     self.State.IsEscorting = self.IsEscorting
     --
@@ -123,6 +126,7 @@ function c.class.Player:Create(source, character_id)
     self.State.Grade = self.Job.Grade
     --
     self.Coords = json.decode(char.Coords)
+    self.OldCoords = self.Coords
     --
     self.Accounts = json.decode(char.Accounts)
     --
@@ -506,6 +510,10 @@ function c.class.Player:SetTattoos(t)
     self.Tattoos = t
 end
 --- func desc
+function c.class.Player:GetOldCoords()
+    return self.OldCoords
+end
+--- func desc
 function c.class.Player:GetCoords()
     local x, y, z = table.unpack(GetEntityCoords(self.Entity))
     local h = GetEntityHeading(self.Entity)
@@ -519,13 +527,14 @@ end
 --- func desc
 ---@param t any
 function c.class.Player:SetCoords(t)
+    self.OldCoords = self:GetCoords()
     self.Coords = {
         x = c.math.Decimals(t.x, 2),
         y = c.math.Decimals(t.y, 2),
         z = c.math.Decimals(t.z, 2),
         h = c.math.Decimals(t.h, 2)
     }
-    SetEntityCoords(self.Entity,self.Coords.x,self.Coords.y,self.Coords.z)
+    SetEntityCoords(self.Entity, self.Coords.x, self.Coords.y, self.Coords.z)
     SetEntityHeading(self.Entity,self.Coords.h)
 end
 --- func desc
@@ -559,6 +568,17 @@ function c.class.Player:SetCuffed(b)
     local b = c.check.Boolean(b)
     self.IsCuffed = b
     self.State.IsCuffed = self.IsCuffed
+end
+--- func desc
+function c.class.Player:GetFrozen()
+    return self.IsFrozen
+end
+--- func desc
+---@param b any
+function c.class.Player:SetFrozen(b)
+    local b = c.check.Boolean(b)
+    self.IsFrozen = b
+    self.State.IsFrozen = self.IsFrozen
 end
 --- func desc
 ---@param inv any

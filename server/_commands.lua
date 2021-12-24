@@ -118,12 +118,34 @@ end, true)
 
 ExecuteCommand("add_ace group.admin command.bring allow")
 RegisterCommand("bring", function(source, args, rawCommand)
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     local trg = tonumgber(args[1])
     local zPlayer = c.data.GetPlayer(trg)
     local x,y,z,h = table.unpack(xPlayer:GetCoords())
     zPlayer:SetCoords({x + 1, y + 1, z, h - 15})
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by "..xPlayer:GetName()) -- txAdmin logging Callback
+end, true)
+
+ExecuteCommand("add_ace group.admin command.return allow")
+RegisterCommand("return", function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    local trg = tonumgber(args[1])
+    local zPlayer = c.data.GetPlayer(trg)
+    local tbl = zPlayer:GetOldCoords()
+    zPlayer:SetCoords(tbl)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by: "..xPlayer:GetName()) -- txAdmin logging Callback
+end, true)
+
+ExecuteCommand("add_ace group.admin command.freeze allow")
+RegisterCommand("freeze", function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    local trg = tonumgber(args[1])
+    local zPlayer = c.data.GetPlayer(trg)
+    local bool = zPlayer:GetFrozen()
+    zPlayer:SetFrozen(not bool)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by: "..xPlayer:GetName()) -- txAdmin logging Callback
 end, true)
 
