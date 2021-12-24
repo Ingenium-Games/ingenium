@@ -525,6 +525,8 @@ function c.class.Player:SetCoords(t)
         z = c.math.Decimals(t.z, 2),
         h = c.math.Decimals(t.h, 2)
     }
+    SetEntityCoords(self.Entity,self.Coords.x,self.Coords.y,self.Coords.z)
+    SetEntityHeading(self.Entity,self.Coords.h)
 end
 --- func desc
 function c.class.Player:GetHotbar()
