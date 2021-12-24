@@ -23,6 +23,10 @@ function c.class.Job:GetGrades()
     return self.Grades
 end
 --- func desc
+function c.class.Job:GetGradeSalery(Grade)
+    return self.Grades[Grade].Grade_Salary
+end
+--- func desc
 function c.class.Job:GetDescription()
     return self.Description
 end

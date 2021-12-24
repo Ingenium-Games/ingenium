@@ -105,12 +105,12 @@ function c.job.Payroll(bool)
             -- CurrentlyActive[1] = [Name="popo",Grade=2,etc,etc]
             local xPlayer = c.data.GetPlayer(k)
             local xJob = c.data.GetJob(CurrentlyActive[k].Name)
-            local pay = xJob.Grades[v.Grade].Grade_Salary
+            local pay = xJob:GetGradeSalery(v.Grade)
             --
             xPlayer:AddBank(pay)
             TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..pay.." deposided confirmed.")
             if bool then
-                xJob.RemoveBank(pay)
+                xJob:RemoveBank(pay)
             end
         elseif v == "OffDuty" then
             TriggerClientEvent("Client:Notify", k, "Payroll for active staff paid.")
