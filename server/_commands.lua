@@ -1,17 +1,5 @@
 -- ====================================================================================--
-
---[[
-NOTES.
-    -
-    -
-    -
-]] --
-
-
--- ====================================================================================--
-
-
-
+-- PUBLIC
 -- ====================================================================================--
 
 ExecuteCommand("add_ace group.public command.switch allow")
@@ -40,6 +28,49 @@ RegisterCommand("switch", function(source, args, rawCommand)
 end, true)
 
 -- ====================================================================================--
+-- MODERATOR
+-- ====================================================================================--
+
+ExecuteCommand("add_ace group.mod command.setjob allow")
+RegisterCommand("setjob", function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(args[1])
+    if c.job.Exist(args[2], args[3]) then
+        xPlayer:SetJob(args[2], args[3])
+        TriggerClientEvent("Client:Notify", src, "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
+        TriggerClientEvent("Client:Notify", args[1], "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
+    else
+        TriggerClientEvent("Client:Notify", src, "JobName: "..args[2].." or JobGrade: "..args[3]..", does not exist.")
+        TriggerClientEvent("Client:Notify", args[1], "JobName: "..args[2].." or JobGrade: "..args[3]..", does not exist.")
+    end
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
+end, true)
+
+ExecuteCommand("add_ace group.mod command.tpm allow")
+RegisterCommand("tpm", function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    TriggerClientCallback({
+        source = src,
+        eventName = "TeleportOnMarker",
+        args = {}
+    })    
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
+end, true)
+
+ExecuteCommand("add_ace group.mod command.car allow")
+RegisterCommand("car", function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    local ords = xPlayer:GetCoords()
+    local entity = CreateVehicle(args[1], ords.x + 2.0, ords.y + 1.0, ords.z, ords.h, true, false)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
+end, true)
+
+
+-- ====================================================================================--
+-- ADMIN
+-- ====================================================================================--
 
 ExecuteCommand("add_ace group.admin command.ban allow")
 RegisterCommand("ban", function(source, args, rawCommand)
@@ -58,8 +89,6 @@ RegisterCommand("ban", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
 end, true)
 
--- ====================================================================================--
-
 ExecuteCommand("add_ace group.admin command.kick allow")
 RegisterCommand("kick", function(source, args, rawCommand)
     local src = source
@@ -73,57 +102,14 @@ RegisterCommand("kick", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
 end, true)
 
--- ====================================================================================--
-
-ExecuteCommand("add_ace group.mod command.setjob allow")
-RegisterCommand("setjob", function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(args[1])
-    if c.job.Exist(args[2], args[3]) then
-        xPlayer:SetJob(args[2], args[3])
-        TriggerClientEvent("Client:Notify", src, "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
-        TriggerClientEvent("Client:Notify", args[1], "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
-    else
-        TriggerClientEvent("Client:Notify", src, "JobName: "..args[2].." or JobGrade: "..args[3]..", does not exist.")
-        TriggerClientEvent("Client:Notify", args[1], "JobName: "..args[2].." or JobGrade: "..args[3]..", does not exist.")
-    end
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
-end, true)
-
--- ====================================================================================--
-
-ExecuteCommand("add_ace group.mod command.tpm allow")
-RegisterCommand("tpm", function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    TriggerClientCallback({
-        source = src,
-        eventName = "TeleportOnMarker",
-        args = {}
-    })    
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
-end, true)
-
--- ====================================================================================--
-
-ExecuteCommand("add_ace group.admin command.car allow")
-RegisterCommand("car", function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    local ords = xPlayer:GetCoords()
-    local entity = CreateVehicle(args[1], ords.x + 2.0, ords.y + 1.0, ords.z, ords.h, true, false)
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer:GetName()) -- txAdmin logging Callback
-end, true)
-
-
 ExecuteCommand("add_ace group.admin command.bring allow")
 RegisterCommand("bring", function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    local trg = tonumgber(args[1])
+    local trg = tonumber(args[1])
     local zPlayer = c.data.GetPlayer(trg)
-    local x,y,z,h = table.unpack(xPlayer:GetCoords())
-    zPlayer:SetCoords({x + 1, y + 1, z, h - 15})
+    local ords = xPlayer:GetCoords()
+    zPlayer:SetCoords({ords.x + 1, ords.y + 1, ords.z, ords.h - 180})
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by "..xPlayer:GetName()) -- txAdmin logging Callback
 end, true)
 
@@ -131,7 +117,7 @@ ExecuteCommand("add_ace group.admin command.return allow")
 RegisterCommand("return", function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    local trg = tonumgber(args[1])
+    local trg = tonumber(args[1])
     local zPlayer = c.data.GetPlayer(trg)
     local tbl = zPlayer:GetOldCoords()
     zPlayer:SetCoords(tbl)
@@ -142,7 +128,7 @@ ExecuteCommand("add_ace group.admin command.freeze allow")
 RegisterCommand("freeze", function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    local trg = tonumgber(args[1])
+    local trg = tonumber(args[1])
     local zPlayer = c.data.GetPlayer(trg)
     local bool = zPlayer:GetFrozen()
     zPlayer:SetFrozen(not bool)

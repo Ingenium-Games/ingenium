@@ -6,6 +6,8 @@ conf.min = 60 * conf.sec
 conf.hour = 60 * conf.min
 conf.day = 24 * conf.hour
 -- ====================================================================================--
+conf.versioncheck = false
+-- ====================================================================================--
 conf.url = {}
 conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ig.core/main/version.txt"
 conf.url.webhook_1 = "Example"

@@ -47,7 +47,7 @@ function c.bank.CheckNegativeBalances()
             if bank < 0 then
                 TriggerClientEvent("Client:Notify", i, "Your Bank account is in negative. \nCurrent Balance is: $ "..bank..". \nOver Draw Fee Charged at: $"..conf.bankoverdraw..". \nThese fees apply every hour, on the hour, until balanced.", "error", 17500)
                 xPlayer:RemoveBank(conf.bankoverdraw)
-                xJob.AddBank(conf.bankoverdraw)
+                xJob:AddBank(conf.bankoverdraw)
             end
         end
     end

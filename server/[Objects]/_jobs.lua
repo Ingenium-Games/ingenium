@@ -116,6 +116,7 @@ function c.job.Payroll(bool)
             TriggerClientEvent("Client:Notify", k, "Payroll for active staff paid.")
         end
     end
+    c.debug_1("Jobs Payed.")
 end
 
 function c.job.PayCycle()
