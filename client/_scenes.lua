@@ -1,0 +1,173 @@
+local Scenes, Hidden, SettingScene = {}, true, false
+
+Keys = {
+    ["ESC"] = 200, --Esc/Backspace
+}
+
+RegisterNetEvent("Client:Scenes:Update", function(sent)
+    Scenes = sent
+end)
+
+SceneTarget = function()
+    local Cam = GetGameplayCamCoord()
+    local handle = StartShapeTestLosProbe(Cam, GetCoordsFromCam(10.0, Cam), -1, PlayerPedId(), 4)
+    local _, Hit, Coords, _, Entity = GetShapeTestResult(handle)
+    return Coords
+end
+
+GetCoordsFromCam = function(distance, coords)
+    local rotation = GetGameplayCamRot()
+    local adjustedRotation = vector3((math.pi / 180) * rotation.x, (math.pi / 180) * rotation.y, (math.pi / 180) * rotation.z)
+    local direction = vector3(-math.sin(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])), math.cos(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])), math.sin(adjustedRotation[1]))
+    return vector3(coords[1] + direction[1] * distance, coords[2] + direction[2] * distance, coords[3] + direction[3] * distance)
+end
+
+DrawScene = function(x, y, z, text)
+    if not text or not x or not y or not z then return end
+    local onScreen, gx, gy = GetScreenCoordFromWorldCoord(x, y, z)
+    local dist = #(GetGameplayCamCoord() - vector3(x, y, z))
+    
+    local scale = ((1 / dist) * 2) * (1 / GetGameplayCamFov()) * 55
+    
+        if onScreen then
+            BeginTextCommandDisplayText("STRING")
+            AddTextComponentSubstringKeyboardDisplay(text)
+            SetTextColour(211, 211, 211, 255)
+            SetTextScale(0.0 * scale, 0.50 * scale)
+            SetTextFont(0)
+            SetTextCentre(1)
+            SetTextDropshadow(1, 0, 0, 0, 155)
+            EndTextCommandDisplayText(gx, gy)
+            
+            local height = GetTextScaleHeight(1 * scale, 0) - 0.005
+            local length = string.len(text)
+            local limiter = 120
+            if length > 98 then
+                length = 98
+                limiter = 200
+            end
+            local width = length / limiter * scale
+            DrawRect(gx, (gy + scale / 50), width, height, 0, 0, 0, 90)
+        end
+end
+
+ClosestScene = function()
+    local closestscene = 1000.0
+    local ped = PlayerPedId()
+    for k,v in pairs(Scenes) do
+        local distance = #(GetOffsetFromEntityGivenWorldCoords(ped, vector3(Scenes[v].Coords.x, Scenes[v].Coords.y, Scenes[v].Coords.z)))
+        if (distance < closestscene) then
+            closestscene = distance
+        end
+    end
+    return closestscene
+end
+
+ClosestSceneLooking = function()
+    local closestscene = 1000.0
+    local scanid = nil
+    local coords = SceneTarget()
+    for k,v in pairs(Scenes) do
+        local distance = #(vector3(Scenes[v].Coords.x, Scenes[v].Coords.y, Scenes[v].Coords.z) - coords)
+        if (distance < closestscene and distance < 8.5) then
+            scanid = k
+            closestscene = distance
+        end
+    end
+    return scanid
+end
+
+CreateScene = function()
+    if SettingScene then SettingScene = false return end
+    CreateThread(function()
+        local x, y, z
+        SettingScene = true
+        
+        while SettingScene do
+            Wait(0)
+            DisableControlAction(2, Keys["ESC"], true)
+            x, y, z = table.unpack(SceneTarget())
+            DrawMarker(28, x, y, z, 0, 0, 0, 0, 0, 0, 0.05, 0.05, 0.05, 93, 17, 100, 255, false, false)
+            if IsDisabledControlJustReleased(2, Keys["ESC"]) then
+                SettingScene = false
+                return
+            end
+        end
+        
+        if x == nil or y == nil or z == nil then return end
+        
+        local keyboard, message, flag = exports["nh-keyboard"]:Keyboard({
+            header = "Add Scene",
+            rows = {
+                "Message",
+                "0 or 1: (1 is Permenant)"
+            }
+        })
+        
+        if not keyboard then return end
+        if not flag or flag ~= 0 or flag ~= 1 then flag = 0 end
+        TriggerServerEvent("Server:Scene:Add", x, y, z, message, flag)
+    end)
+end
+
+HideScenes = function()
+    Hidden = not Hidden
+    if Hidden then
+        TriggerEvent("Client:Notify","Scenes Disabled")
+    else
+        TriggerEvent("Client:Notify","Scenes Enabled")
+    end
+end
+
+DeleteScene = function()
+    local scene = ClosestSceneLooking()
+    if scene then
+        local Character_ID = c.GetLocalPlayerState("Character_ID")
+        local Ace = c.GetLocalPlayerState("Ace")
+        if scene.Ace == Ace or scene.Character_ID == Character_ID then
+            TriggerServerEvent("Server:Scenes:Delete", scene)
+        else
+            TriggerEvent("Client:Notify","Not permited to delete this scene.")
+        end
+    end
+end
+
+RegisterCommand("+scenecreate", function() end)
+RegisterCommand("-scenecreate", CreateScene)
+RegisterCommand("+scenehide", HideScenes)
+RegisterCommand("+scenedelete", DeleteScene)
+RegisterKeyMapping("+scenecreate", "(scenes): Place Scene", "keyboard", "")
+RegisterKeyMapping("+scenehide", "(scenes): Toggle Scenes", "keyboard", "")
+RegisterKeyMapping("+scenedelete", "(scenes): Delete Scene", "keyboard", "")
+
+Citizen.CreateThread(function()
+    TriggerServerEvent("Server:Scenes:Fetch")
+    while true do
+        local wait = 0
+        if #Scenes > 0 then
+            if not Hidden then
+                local closest = ClosestScene()
+                if closest > 8.6 then
+                    wait = 250
+                else
+                    for i = 1, #Scenes do
+                        local distance = #(GetOffsetFromEntityGivenWorldCoords(PlayerPedId(), vector3(Scenes[i].Coords.x, Scenes[i].Coords.y, Scenes[i].Coords.z)))
+                        if distance <= 8.5 then
+                            local success, err = pcall(function()
+                                return DrawScene(Scenes[i].Coords.x, Scenes[i].Coords.y, Scenes[i].Coords.z, Scenes[i].Message)
+                            end)
+                            if not success then
+                                print(err)
+                            end
+                        end
+                    end
+                end
+            else
+                wait = 250
+            end
+        else
+            wait = 250
+        end
+        Wait(wait)
+    end
+end)

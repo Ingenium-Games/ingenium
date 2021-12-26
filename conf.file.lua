@@ -14,6 +14,7 @@ conf.file.items = "Items"
 conf.file.notes = "Notes"
 conf.file.names = "Names"
 conf.file.drops = "Drops"
+conf.file.scenes = "Scenes"
 conf.file.pickups = "Pickups"
 --
 conf.file.clean = conf.hour -- after x time passes, remove the entry from the file.
