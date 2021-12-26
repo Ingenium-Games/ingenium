@@ -10,7 +10,7 @@ end)
 
 SceneTarget = function()
     local Cam = GetGameplayCamCoord()
-    local handle = StartShapeTestLosProbe(Cam, GetCoordsFromCam(10.0, Cam), -1, PlayerPedId(), 4)
+    local handle = StartExpensiveSynchronousShapeTestLosProbe(Cam, GetCoordsFromCam(10.0, Cam), -1, PlayerPedId(), 4)
     local _, Hit, Coords, _, Entity = GetShapeTestResult(handle)
     return Coords
 end
@@ -46,7 +46,7 @@ DrawScene = function(x, y, z, text)
                 length = 98
                 limiter = 200
             end
-            local width = length / limiter * scale
+            local width = (length + 1) / limiter * scale
             DrawRect(gx, (gy + scale / 50), width, height, 0, 0, 0, 90)
         end
 end
@@ -54,8 +54,8 @@ end
 ClosestScene = function()
     local closestscene = 1000.0
     local ped = PlayerPedId()
-    for k,v in pairs(Scenes) do
-        local distance = #(GetOffsetFromEntityGivenWorldCoords(ped, vector3(Scenes[v].Coords.x, Scenes[v].Coords.y, Scenes[v].Coords.z)))
+    for i=1, #Scenes do
+        local distance = #(GetOffsetFromEntityGivenWorldCoords(ped, vector3(Scenes[i].Coords.x, Scenes[i].Coords.y, Scenes[i].Coords.z)))
         if (distance < closestscene) then
             closestscene = distance
         end
@@ -67,10 +67,10 @@ ClosestSceneLooking = function()
     local closestscene = 1000.0
     local scanid = nil
     local coords = SceneTarget()
-    for k,v in pairs(Scenes) do
-        local distance = #(vector3(Scenes[v].Coords.x, Scenes[v].Coords.y, Scenes[v].Coords.z) - coords)
+    for i=1, #Scenes do
+        local distance = #(vector3(Scenes[i].Coords.x, Scenes[i].Coords.y, Scenes[i].Coords.z) - coords)
         if (distance < closestscene and distance < 8.5) then
-            scanid = k
+            scanid = i
             closestscene = distance
         end
     end
@@ -87,7 +87,7 @@ CreateScene = function()
             Wait(0)
             DisableControlAction(2, Keys["ESC"], true)
             x, y, z = table.unpack(SceneTarget())
-            DrawMarker(28, x, y, z, 0, 0, 0, 0, 0, 0, 0.05, 0.05, 0.05, 93, 17, 100, 255, false, false)
+            DrawMarker(28, x, y, z, 0, 0, 0, 0, 0, 0, 0.02, 0.02, 0.02, 15, 15, 15, 210, false, false)
             if IsDisabledControlJustReleased(2, Keys["ESC"]) then
                 SettingScene = false
                 return
@@ -106,7 +106,7 @@ CreateScene = function()
         
         if not keyboard then return end
         if not flag or flag ~= 0 or flag ~= 1 then flag = 0 end
-        TriggerServerEvent("Server:Scene:Add", x, y, z, message, flag)
+        TriggerServerEvent("Server:Scenes:Add", x, y, z, message, flag)
     end)
 end
 
@@ -122,20 +122,16 @@ end
 DeleteScene = function()
     local scene = ClosestSceneLooking()
     if scene then
-        local Character_ID = c.GetLocalPlayerState("Character_ID")
-        local Ace = c.GetLocalPlayerState("Ace")
-        if scene.Ace == Ace or scene.Character_ID == Character_ID then
-            TriggerServerEvent("Server:Scenes:Delete", scene)
-        else
-            TriggerEvent("Client:Notify","Not permited to delete this scene.")
-        end
+        TriggerServerEvent("Server:Scenes:Delete", scene)
     end
 end
 
 RegisterCommand("+scenecreate", function() end)
 RegisterCommand("-scenecreate", CreateScene)
 RegisterCommand("+scenehide", HideScenes)
+RegisterCommand("-scenehide", function() end)
 RegisterCommand("+scenedelete", DeleteScene)
+RegisterCommand("+scenedelete", function() end)
 RegisterKeyMapping("+scenecreate", "(scenes): Place Scene", "keyboard", "")
 RegisterKeyMapping("+scenehide", "(scenes): Toggle Scenes", "keyboard", "")
 RegisterKeyMapping("+scenedelete", "(scenes): Delete Scene", "keyboard", "")
@@ -150,7 +146,7 @@ Citizen.CreateThread(function()
                 if closest > 8.6 then
                     wait = 250
                 else
-                    for i = 1, #Scenes do
+                    for i=1, #Scenes do
                         local distance = #(GetOffsetFromEntityGivenWorldCoords(PlayerPedId(), vector3(Scenes[i].Coords.x, Scenes[i].Coords.y, Scenes[i].Coords.z)))
                         if distance <= 8.5 then
                             local success, err = pcall(function()

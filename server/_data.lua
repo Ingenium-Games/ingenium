@@ -25,7 +25,8 @@ function c.data.Initilize()
         [7] = "DB: Loading Data File - Drops;",
         [8] = "DB: Loading Data File - Pickups;",
         [9] = "DB: Loading Data File - Notes;",
-        [10] = "DB: Loading Data File - Names;"
+        [10] = "DB: Loading Data File - Names;",
+        [11] = "DB: Loading Data File - Scenes;"
     }
     --
     local function cb()
@@ -61,6 +62,9 @@ function c.data.Initilize()
         cb()
         -- [10] Load names for random names selection.
         c.name.Load()
+        cb()
+        -- [11] Load names for random names selection.
+        c.scene.Load()
         cb()
         --
         loaded = true
