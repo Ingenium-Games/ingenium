@@ -2,7 +2,7 @@
 c.drop = {} -- function level
 c.drops = false -- dropped items table
 -- ====================================================================================--
-    
+
 --[[    
         {
             [ID] = {
@@ -15,8 +15,8 @@ c.drops = false -- dropped items table
             },
 
         }
-]]--
-    
+]] --
+
 function c.drop.Load()
     if c.json.Exists(conf.file.drops) then
         local file = c.json.Read(conf.file.drops)
@@ -24,29 +24,24 @@ function c.drop.Load()
     else
         c.drops = {}
         c.json.Write(conf.file.drops, c.drops)
+        c.drop.Update()
     end
+end
+
+function c.drop.Update()
+    local function Do()
+        c.json.Write(conf.file.drops, c.drops)
+        SetTimeout(conf.file.save, Do)
+    end
+    SetTimeout(conf.file.save, Do)
 end
 
 function c.drop.Add(data)
-    local id = c.drop.NewID()
     if type(data) == "table" then
-        table.insert(c.drops, id)
-        c.drops[id] = data
+        table.insert(c.drops, data)
     else
         c.debug_1("Drop to be added, please check data sent.")
     end
-end
-
-function c.drop.NewID()
-    local found = false
-    local new = nil
-    repeat
-        new = c.rng.chars(20)
-        if c.drops[new] then
-            found = true
-        end
-    until found == false 
-    return new
 end
 
 function c.drop.Exist(id)
@@ -58,10 +53,10 @@ end
 
 function c.drop.Clean()
     if type(c.drops) == "table" then
-        for k,v in pairs(c.drops) do
-            if v then        
-                if (v.Time - os.time()) <= conf.file.clean then
-                    table.remove(c.drops, k)            
+        for k, v in pairs(c.drops) do
+            if v then
+                if (os.time() - v.Time) >= conf.file.cleanup then
+                    table.remove(c.drops, k)
                 end
             end
         end

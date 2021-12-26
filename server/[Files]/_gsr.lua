@@ -30,29 +30,24 @@ function c.gsr.Load()
     else
         c.gsrs = {}
         c.json.Write(conf.file.gsr, c.gsrs)
+        c.gsr.Update()
     end
+end
+
+function c.gsr.Update()
+    local function Do()
+        c.json.Write(conf.file.gsr, c.gsrs)
+        SetTimeout(conf.file.save, Do)
+    end
+    SetTimeout(conf.file.save, Do)
 end
 
 function c.gsr.Add(data)
-    local id = c.gsr.NewID()
     if type(data) == "table" then
-        table.insert(c.gsrs, id)
-        c.gsrs[id] = data
+        table.insert(c.gsrs, data)
     else
         c.debug_1("Drop to be added, please check data sent.")
     end
-end
-
-function c.gsr.NewID()
-    local found = false
-    local new = nil
-    repeat
-        new = c.rng.chars(20)
-        if c.gsrs[new] then
-            found = true
-        end
-    until found == false 
-    return new
 end
 
 function c.gsr.Exist(id)
@@ -66,7 +61,7 @@ function c.gsr.Clean()
     if type(c.gsrs) == "table" then
         for k,v in pairs(c.gsrs) do
             if v then
-                if (v.Time - os.time()) <= conf.file.clean then
+                if (os.time() - v.Time) >= conf.file.cleanup then
                     table.remove(c.gsrs, k)            
                 end
             end

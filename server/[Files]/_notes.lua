@@ -30,29 +30,24 @@ function c.note.Load()
     else
         c.notes = {}
         c.json.Write(conf.file.notes, c.notes)
+        c.note.Update()
     end
+end
+
+function c.note.Update()
+    local function Do()
+        c.json.Write(conf.file.notes, c.notes)
+        SetTimeout(conf.file.save, Do)
+    end
+    SetTimeout(conf.file.save, Do)
 end
 
 function c.note.Add(data)
-    local id = c.note.NewID()
     if type(data) == "table" then
-        table.insert(c.notes, id)
-        c.notes[id] = data
+        table.insert(c.notes, data)
     else
         c.debug_1("Drop to be added, please check data sent.")
     end
-end
-
-function c.note.NewID()
-    local found = false
-    local new = nil
-    repeat
-        new = c.rng.chars(20)
-        if c.notes[new] then
-            found = true
-        end
-    until found == false 
-    return new
 end
 
 function c.note.Exist(id)
@@ -66,7 +61,7 @@ function c.note.Clean()
     if type(c.notes) == "table" then
         for k,v in pairs(c.notes) do
             if v then
-                if (v.Time - os.time()) <= conf.file.clean then
+                if (os.time() - v.Time) >= conf.file.cleanup then
                     table.remove(c.notes, k)            
                 end
             end

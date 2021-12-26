@@ -1,14 +1,6 @@
 -- ====================================================================================--
-
 c.pick = {} -- function level
 c.picks = false -- dropped items table
---[[
-NOTES.
-    -
-    -
-    -
-]] --
-
 -- ====================================================================================--
     
 --[[    
@@ -30,29 +22,24 @@ function c.pick.Load()
     else
         c.picks = {}
         c.json.Write(conf.file.pickups, c.picks)
+        c.pick.Update()
     end
+end
+
+function c.pick.Update()
+    local function Do()
+        c.json.Write(conf.file.pickups, c.picks)
+        SetTimeout(conf.file.save, Do)
+    end
+    SetTimeout(conf.file.save, Do)
 end
 
 function c.pick.Add(data)
-    local id = c.pick.NewID()
     if type(data) == "table" then
-        table.insert(c.picks, id)
-        c.picks[id] = data
+        table.insert(c.picks, data)
     else
         c.debug_1("Drop to be added, please check data sent.")
     end
-end
-
-function c.pick.NewID()
-    local found = false
-    local new = nil
-    repeat
-        new = c.rng.chars(20)
-        if c.picks[new] then
-            found = true
-        end
-    until found == false 
-    return new
 end
 
 function c.pick.Exist(id)
@@ -66,7 +53,7 @@ function c.pick.Clean()
     if type(c.picks) == "table" then
         for k,v in pairs(c.picks) do
             if v then        
-                if (v.Time - os.time()) <= conf.file.clean then
+                if (os.time() - v.Time) >= conf.file.cleanup then
                     table.remove(c.picks, k)            
                 end
             end

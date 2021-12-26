@@ -2,18 +2,15 @@
 c.scene = {} -- function level
 c.scenes = false -- dropped items table
 -- ====================================================================================--
-
 --[[    
-            {
-                [ID] = {
-                    ["Coords"] = {0,0,0} -- Vecotr3
-                    ["Flag"] = NUMBER (0,1,2) -- 0 = normal, 1 = permenant,  
-                    ["Time"] = TIME  -- os.time() when created,
-                    ["Name"] = Character_ID,
-                    ["Ace"] = 
-                },
-    
-            }
+    {
+        [ID] = {
+            ["Coords"] = {["x"]=0,["y"]=0,["z"]=0} -- Vecotr3
+            ["Flag"] = NUMBER (0,1) -- 0 = normal, 1 = permenant,  
+            ["Time"] = TIME  -- os.time(),
+            ["Character"] = Character_ID, 
+        },
+    }
 ]]--
 
 function c.scene.Load()
@@ -30,9 +27,9 @@ end
 function c.scene.Update()
     local function Do()
         c.json.Write(conf.file.scenes, c.scenes)
-        SetTimeout(c.min, Do)    
+        SetTimeout(conf.file.save, Do)
     end
-    SetTimeout(c.min, Do)
+    SetTimeout(conf.file.save, Do)
 end
 
 function c.scene.Exist(id)
@@ -63,7 +60,7 @@ function c.scene.Clean()
         for k, v in pairs(c.scenes) do
             if v then
                 if v.Flag == 0 then
-                    if (v.Time - os.time()) <= conf.file.clean then
+                    if (os.time() - v.Time) >= conf.file.cleanup then
                         table.remove(c.scenes, k)
                     end
                 end
@@ -89,9 +86,21 @@ end)
 RegisterNetEvent("Server:Scenes:Add", function(x, y, z, message, flag)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    if not x or not y or not z or not message then return end
+    if not x or not y or not z or not message then
+        return
+    end
     local flag = flag or 0
-    c.scene.Add({Coords = {x=x,y=y,z=z}, Message = message, Flag = flag, Time = os.time(), Character = xPlayer.GetCharacter_ID()})
+    c.scene.Add({
+        Coords = {
+            x = x,
+            y = y,
+            z = z
+        },
+        Message = message,
+        Flag = flag,
+        Time = os.time(),
+        Character = xPlayer.GetCharacter_ID()
+    })
     TriggerClientEvent("Client:Scenes:Update", -1, c.scenes)
 end)
 
@@ -100,7 +109,8 @@ RegisterNetEvent("Server:Scenes:Delete", function(key)
     local xPlayer = c.data.GetPlayer(src)
     local Ace = xPlayer.GetAce()
     if c.scene.Exists(key) then
-        if c.scenes[key].Character == xPlayer.GetCharacter_ID() or Ace == "mod" or Ace == "admin" or Ace == "superadmin" or Ace == "developer" or Ace == "owner" then
+        if c.scenes[key].Character == xPlayer.GetCharacter_ID() or Ace == "mod" or Ace == "admin" or Ace == "superadmin" or
+            Ace == "developer" or Ace == "owner" then
             table.remove(c.scenes, key)
             TriggerClientEvent("Client:Scenes:Update", -1, c.scenes)
         else
