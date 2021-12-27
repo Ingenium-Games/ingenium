@@ -18,4 +18,4 @@ conf.file.scenes = "Scenes"
 conf.file.pickups = "Pickups"
 --
 conf.file.save = conf.min -- after 5 minutes, save the file agian
-conf.file.cleanup = conf.hour -- after x time passes, remove the entry from the file.
+conf.file.cleanup = 3600 -- after x seconds pass - (1 hour)
