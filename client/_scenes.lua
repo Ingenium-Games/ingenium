@@ -1,4 +1,4 @@
-local Scenes, Hidden, SettingScene = {}, true, false
+local Scenes, Hidden, SettingScene = {}, false, false
 
 Keys = {
     ["ESC"] = 200, --Esc/Backspace
@@ -100,12 +100,12 @@ CreateScene = function()
             header = "Add Scene",
             rows = {
                 "Message",
-                "0 or 1: (1 is Permenant)"
+                "Permanent?"
             }
         })
         
         if not keyboard then return end
-        if not flag or flag ~= 0 or flag ~= 1 then flag = 0 end
+        if not flag or flag == nil then flag = 0 else flag = 1 end
         TriggerServerEvent("Server:Scenes:Add", x, y, z, message, flag)
     end)
 end
