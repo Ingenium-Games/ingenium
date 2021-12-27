@@ -83,13 +83,14 @@ RegisterNetEvent("Server:Scenes:Fetch", function()
     TriggerClientEvent("Client:Scenes:Update", src, c.scenes)
 end)
 
-RegisterNetEvent("Server:Scenes:Add", function(x, y, z, message, flag)
+RegisterNetEvent("Server:Scenes:Add", function(x, y, z, message, color, bool)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     if not x or not y or not z or not message then
         return
     end
-    local flag = flag or 0
+    local flag = bool or 0
+    local colour = color or {r=211,g=211,b=211}
     c.scene.Add({
         Coords = {
             x = x,
@@ -97,6 +98,7 @@ RegisterNetEvent("Server:Scenes:Add", function(x, y, z, message, flag)
             z = z
         },
         Message = message,
+        Colour = color,
         Flag = flag,
         Time = os.time(),
         Character = xPlayer:GetCharacter_ID()

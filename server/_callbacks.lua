@@ -14,11 +14,18 @@ local GetItems = RegisterServerCallback({
     end
 })
 
-local GetDumpedHashes = RegisterServerCallback({
-    eventName = "GetDumpedHashes",
+local GetJobs = RegisterServerCallback({
+    eventName = "GetJobs",
     eventCallback = function(source, ...)
-        local items = c.vehicle.GetDumpedHashes()
-        return items
+        local jobs = c.job.GetJobs()
+        return jobs
+    end
+})
+
+local GetActiveWorkers = RegisterServerCallback({
+    eventName = "GetActiveWorkers",
+    eventCallback = function(source, ...)
+        return c.job.ActiveMembers()
     end
 })
 
@@ -34,12 +41,12 @@ local GetInventory = RegisterServerCallback({
             -- Object
             if type == 3 then   
                 local xObject = c.data.GetObject(net)
-                return xObject.GetInventory()
+                return xObject:GetInventory()
             --
             -- Vehicle
             elseif type == 2 then
                 local xVehicle = c.data.GetVehicle(net)
-                return xVehicle.GetInventory()
+                return xVehicle:GetInventory()
             --
             -- Ped
             elseif type == 1 then
@@ -49,16 +56,9 @@ local GetInventory = RegisterServerCallback({
                 else
                     -- is an NPC
                     local xNpc = c.data.GetNpc(net)
-                    return xNpc.GetInventory()
+                    return xNpc:GetInventory()
                 end
             end
         end
-    end
-})
-
-local GetJobs = RegisterServerCallback({
-    eventName = "GetJobs",
-    eventCallback = function(source, ...)
-        return c.job.ActiveMembers()
     end
 })

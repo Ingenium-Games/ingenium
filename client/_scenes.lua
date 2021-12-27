@@ -22,8 +22,9 @@ GetCoordsFromCam = function(distance, coords)
     return vector3(coords[1] + direction[1] * distance, coords[2] + direction[2] * distance, coords[3] + direction[3] * distance)
 end
 
-DrawScene = function(x, y, z, text)
+DrawScene = function(x, y, z, text, color)
     if not text or not x or not y or not z then return end
+    local color = color or {r=211, g=211, b=211}
     local onScreen, gx, gy = GetScreenCoordFromWorldCoord(x, y, z)
     local dist = #(GetGameplayCamCoord() - vector3(x, y, z))
     
@@ -32,7 +33,7 @@ DrawScene = function(x, y, z, text)
         if onScreen then
             BeginTextCommandDisplayText("STRING")
             AddTextComponentSubstringKeyboardDisplay(text)
-            SetTextColour(211, 211, 211, 255)
+            SetTextColour(color.r, color.g, color.b, 255)
             SetTextScale(0.0 * scale, 0.50 * scale)
             SetTextFont(0)
             SetTextCentre(1)
@@ -79,10 +80,12 @@ end
 
 CreateScene = function()
     if SettingScene then SettingScene = false return end
+    local job = LocalPlayer.state["Job"]
+    local grade = LocalPlayer.state["Grade"]
+    local maxgrade = #c.jobs[job].Grades
     CreateThread(function()
         local x, y, z
         SettingScene = true
-        
         while SettingScene do
             Wait(0)
             DisableControlAction(2, Keys["ESC"], true)
@@ -93,20 +96,30 @@ CreateScene = function()
                 return
             end
         end
-        
         if x == nil or y == nil or z == nil then return end
-        
-        local keyboard, message, flag = exports["nh-keyboard"]:Keyboard({
+        local keyboard, message, color, bool
+        if job ~= "none" and grade == maxgrade then
+            keyboard, message, color, bool = exports["ig.keyboard"]:Keyboard({
             header = "Add Scene",
             rows = {
-                "Message",
-                "Permanent?"
+                {"Message","text"},
+                {"Colour","color"},
+                {"Make Permanent?","checkbox"}
             }
         })
-        
+        else
+            keyboard, message, color = exports["ig.keyboard"]:Keyboard({
+                header = "Add Scene",
+                rows = {
+                    {"Message","text"},
+                    {"Colour","color"},
+                }
+            })
+        end
         if not keyboard then return end
-        if not flag or flag == nil then flag = 0 else flag = 1 end
-        TriggerServerEvent("Server:Scenes:Add", x, y, z, message, flag)
+        if not color then color = {r=211,g=211,b=211} end
+        if not bool or bool == nil then bool = 0 else bool = 1 end
+        TriggerServerEvent("Server:Scenes:Add", x, y, z, message, color, bool)
     end)
 end
 
@@ -150,7 +163,7 @@ Citizen.CreateThread(function()
                         local distance = #(GetOffsetFromEntityGivenWorldCoords(PlayerPedId(), vector3(Scenes[i].Coords.x, Scenes[i].Coords.y, Scenes[i].Coords.z)))
                         if distance <= 8.5 then
                             local success, err = pcall(function()
-                                return DrawScene(Scenes[i].Coords.x, Scenes[i].Coords.y, Scenes[i].Coords.z, Scenes[i].Message)
+                                return DrawScene(Scenes[i].Coords.x, Scenes[i].Coords.y, Scenes[i].Coords.z, Scenes[i].Message, Scenes[i].Colour)
                             end)
                             if not success then
                                 print(err)

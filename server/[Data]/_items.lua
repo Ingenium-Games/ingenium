@@ -1,19 +1,7 @@
 -- ====================================================================================--
-
---[[
-
-    Let me break it down for you guys, becasue all your economy servers are a joke.
-    Life needs to be hard. People need to struggle to make a story real and genuine.
-    Stop giving your players a million dollars a day, because they are self entitled pricks.
-    Im not important, you're not important, get over it.
-
-    Want to be different? - Find a cure for cancer cunt.
-    I'll suck your dick if you do.
-
-]] --
--- ====================================================================================--
 local weapon_dump = exports["ig.dump"]:GetWeapons()
-
+-- ====================================================================================--
+    
 c.items = { -- table of items
 
     -- ====================================================================================--
