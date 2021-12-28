@@ -80,9 +80,7 @@ end
 
 CreateScene = function()
     if SettingScene then SettingScene = false return end
-    local job = LocalPlayer.state["Job"]
-    local grade = LocalPlayer.state["Grade"]
-    local maxgrade = #c.jobs[job].Grades
+    local boss = LocalPlayer.state["Boss"]
     CreateThread(function()
         local x, y, z
         SettingScene = true
@@ -98,7 +96,7 @@ CreateScene = function()
         end
         if x == nil or y == nil or z == nil then return end
         local keyboard, message, color, bool
-        if job ~= "none" and grade == maxgrade then
+        if boss then
             keyboard, message, color, bool = exports["ig.keyboard"]:Keyboard({
             header = "Add Scene",
             rows = {

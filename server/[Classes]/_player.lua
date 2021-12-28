@@ -124,6 +124,7 @@ function c.class.Player:Create(source, character_id)
     self.Job = json.decode(char.Job)
     self.State.Job = self.Job.Name
     self.State.Grade = self.Job.Grade
+    self.State.Boss = false
     --
     self.Coords = json.decode(char.Coords)
     self.OldCoords = self.Coords
@@ -464,6 +465,7 @@ end
 function c.class.Player:GetJob()
     return self.Job
 end
+
 --- func desc
 ---@param t any
 function c.class.Player:SetJob(t)
@@ -472,6 +474,7 @@ function c.class.Player:SetJob(t)
         self.Job.Grade = t.Grade
         self.State.Job = self.Job.Name
         self.State.Grade = self.Job.Grade
+        self.State.Boss = c.job.IsBoss(self.Job.Name,self.Job.Grade) 
         --
         TriggerEvent("Server:Character:SetJob", self.ID, self.Job)
         TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job)

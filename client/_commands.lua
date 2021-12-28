@@ -33,3 +33,15 @@ TriggerEvent("chat:removeSuggestion", "/armhold")
 RegisterKeyMapping("armhold", "Arm Hold", "keyboard", "NumPad3")
 
 -- ====================================================================================--
+
+RegisterCommand("printcam", function(source, args, rawCommand)
+    local pos = GetEntityCoords(PlayerPedId())
+    local x,y,z = table.unpack(pos)
+    local head = GetEntityHeading(PlayerPedId())
+    local rx,ry,rz = table.unpack(GetGameplayCamCoord())
+    local pitchx, pitchy, pitchz = table.unpack(GetGameplayCamRot(0))
+    local rollx, rolly, rollz = table.unpack(GetGameplayCamRot(1))
+    local yawx, yawy, yawz = table.unpack(GetGameplayCamRot(2))
+    print('\n PLAYER \n GetEntityCoords() \n : '..x..','..y..','..z..' \n GetEntityHeading() \n :'..head)
+    print('\n GAMECAM \n GetGameplayCamCoord() \n : '..rx..','..ry..','..rz..' \n GetGameplayCamRelativeHeading() \n : '..GetGameplayCamRelativeHeading()..' \n GetGameplayCamRelativePitch() \n : '..GetGameplayCamRelativePitch()..' \n GetGameplayCamFov() \n : '..GetGameplayCamFov()..'\n GetGameplayCamRot(0) \n : '..pitchx..','..pitchy..','..pitchz)
+end, false)

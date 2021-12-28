@@ -20,6 +20,14 @@ function c.job.GetJobs()
     return c.jobs
 end
 
+function c.job.IsBoss(name,grade) 
+    if (#c.jobs[name].Grades == grade) then 
+        return true 
+    else 
+        return false 
+    end
+end
+
 local CurrentlyActive = {}
 
 --- Return 

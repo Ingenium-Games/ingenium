@@ -110,7 +110,7 @@ RegisterNetEvent("Server:Scenes:Delete", function(key)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     local Ace = xPlayer:GetAce()
-    if c.scene.Exists(key) then
+    if c.scene.Exist(key) then
         if c.scenes[key].Character == xPlayer:GetCharacter_ID() or Ace == "mod" or Ace == "admin" or Ace == "superadmin" or
             Ace == "developer" or Ace == "owner" then
             table.remove(c.scenes, key)

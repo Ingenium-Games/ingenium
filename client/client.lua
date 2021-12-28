@@ -20,9 +20,6 @@ Citizen.CreateThread(function()
                 local items = TriggerServerCallback({eventName = "GetItems", args = {}})
                 c.item.SetItems(items)
                 --
-                local jobs = TriggerServerCallback({eventName = "GetJobs", args = {}})
-                c.jobs.SetJobs(jobs)
-                --
             end)
             --
             return
