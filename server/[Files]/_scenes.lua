@@ -59,7 +59,7 @@ function c.scene.Clean()
     if type(c.scenes) == "table" then
         for k, v in pairs(c.scenes) do
             if v then
-                if v.Flag == 0 then
+                if v.Flag == false then
                     if (os.time() - v.Time) >= conf.file.cleanup then
                         table.remove(c.scenes, k)
                     end
@@ -89,7 +89,7 @@ RegisterNetEvent("Server:Scenes:Add", function(x, y, z, message, color, bool)
     if not x or not y or not z or not message then
         return
     end
-    local flag = bool or 0
+    local flag = bool or false
     local colour = color or {r=211,g=211,b=211}
     c.scene.Add({
         Coords = {

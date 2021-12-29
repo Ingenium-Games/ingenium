@@ -115,8 +115,9 @@ CreateScene = function()
             })
         end
         if not keyboard then return end
-        if not color then color = {r=211,g=211,b=211} end
-        if not bool or bool == nil then bool = 0 else bool = 1 end
+        if not message or message == "" then return end
+        if type(color) ~= "table" then return end
+        if type(bool) ~= "boolean" then return end
         TriggerServerEvent("Server:Scenes:Add", x, y, z, message, color, bool)
     end)
 end
