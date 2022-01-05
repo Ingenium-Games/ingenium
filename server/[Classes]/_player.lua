@@ -584,6 +584,17 @@ function c.class.Player:SetFrozen(b)
     self.State.IsFrozen = self.IsFrozen
 end
 --- func desc
+function c.class.Player:GetDragged()
+    return self.IsDragged
+end
+--- func desc
+---@param b any
+function c.class.Player:SetDragged(b)
+    local b = c.check.Boolean(b)
+    self.IsDragged = b
+    self.State.IsDragged = self.IsDragged
+end
+--- func desc
 ---@param inv any
 function c.class.Player:UnpackInventory(inv)
     local inv = inv or {}

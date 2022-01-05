@@ -17,10 +17,8 @@ AddEventHandler("Client:Character:OpeningMenu", function()
     c.data.SetLoadedStatus(false)
     FreezeEntityPosition(ped, true)
     SetFollowPedCamViewMode(4)
-    Citizen.Wait(100)
     SetEntityCoords(ped, -43.143894195557, 822.04595947266, 231.33236694336)
     SetEntityHeading(ped, 288.78283691406)
-    Citizen.Wait(100)
     SetGameplayCamRelativeRotation(4.0307750701904,0.054180480539799,-71.305198669434)
     SetGameplayCamRelativeHeading(-0.091852381825447 )
     SetGameplayCamRelativePitch(4.0307726860046, 1.0)
@@ -52,8 +50,7 @@ AddEventHandler("Client:Character:Create", function()
     local plyped = PlayerPedId()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
-    DoScreenFadeOut(250)
-    Wait(250)
+    c.FadeOut(1000)
     c.IsBusyPleaseWait(1000)
     local config = {
         ped = true,
@@ -65,35 +62,31 @@ AddEventHandler("Client:Character:Create", function()
       }
       exports["fivem-appearance"]:startPlayerCustomization(function(appearance)
         if (appearance) then
-            DoScreenFadeOut(250)
-            Wait(250)
+            c.FadeOut(1000)
+            c.IsBusyPleaseWait(1000)
+            c.FadeIn(1000)
             TriggerEvent("Client:Character:OpeningMenu")
-            c.IsBusyPleaseWait(1000)
-            DoScreenFadeIn(3000)
-            c.IsBusyPleaseWait(2000)
             TriggerEvent("Client:Core:UI", "Register")
-            c.IsBusyPleaseWait(1000)
         else
             TriggerServerEvent("Server:Character:Failed")
         end
       end, config)
-      DoScreenFadeIn(3000)
-      c.IsBusyPleaseWait(2000)
+      c.FadeIn(1000)
+      c.IsBusyPleaseWait(1000)
 end)
 
 -- Respawn in on last saved coords.
 -- [S]
 RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
+    c.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
     SetEntityHeading(GetPlayerPed(-1), Coords.h)
     TriggerServerEvent("Server:Character:LoadSkin")
-    DoScreenFadeIn(2000)
-    c.IsBusyPleaseWait(1000)
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
-    c.IsBusyPleaseWait(1000)
     FreezeEntityPosition(GetPlayerPed(-1), false)
+    c.FadeIn(2000)
 end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
@@ -131,10 +124,10 @@ end)
 RegisterNetEvent("Client:Character:Pre-Switch")
 AddEventHandler("Client:Character:Pre-Switch", function()
     --
-    DoScreenFadeOut(500)
-    c.IsBusyPleaseWait((c.sec * 5))
-    DoScreenFadeIn(500)
-    --    
+    c.FadeOut(1000)
+    --
+    c.FadeIn(2000)
+    --
 end)
 
 -- Use this to remove any things connected to Characters like police blips etc.

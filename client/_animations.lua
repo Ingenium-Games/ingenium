@@ -21,7 +21,7 @@ end
 function c.animation.AddAnimation(dict, anim, name)
     if not c.animations[name] then
         c.animations[name] = function(bool, ped, cb, once)
-            if once == nil then once = false end
+            local once = once or false
             local p = promise.new()
             local ped = Getped(ped)
             local dict = c.check.String(dict)

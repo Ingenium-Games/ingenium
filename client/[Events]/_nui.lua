@@ -1,5 +1,3 @@
-
-
 RegisterNetEvent("Client:Core:UI")
 AddEventHandler("Client:Core:UI", function(M, D)
     if not D then D = {} end
@@ -10,11 +8,9 @@ AddEventHandler("Client:Core:UI", function(M, D)
     })
     
     if M == "Joining" then
-        DoScreenFadeOut(1000)
-        c.IsBusyPleaseWait(1000)
+        c.FadeOut(1000)
         ShutdownLoadingScreenNui()
-        DoScreenFadeIn(1000)
-        c.IsBusyPleaseWait(1000)
+        c.FadeIn(2000)
         SetNuiFocus(true, true)
     else
         SetNuiFocus(true, true)
