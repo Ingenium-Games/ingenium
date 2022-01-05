@@ -345,7 +345,6 @@ end
 function c.class.Player:GetCash()
     local acc = self:GetAccount("Cash")
     if acc then
-        self.State.Cash = acc
         return acc
     end
 end
@@ -413,7 +412,6 @@ end
 function c.class.Player:GetBank()
     local acc = self:GetAccount("Bank")
     if acc then
-        self.State.Bank = acc
         return acc
     end
 end
@@ -585,14 +583,14 @@ function c.class.Player:SetFrozen(b)
 end
 --- func desc
 function c.class.Player:GetDragged()
-    return self.IsDragged
+    return self.IsEscorted
 end
 --- func desc
 ---@param b any
 function c.class.Player:SetDragged(b)
     local b = c.check.Boolean(b)
-    self.IsDragged = b
-    self.State.IsDragged = self.IsDragged
+    self.IsEscorted = b
+    self.State.IsEscorted = self.IsEscorted
 end
 --- func desc
 ---@param inv any
