@@ -735,7 +735,7 @@ function c.class.Player:CompressInventory()
 end
 -- ====================================================================================--
 function c.class.Player.New(source, character_id)
-    local self = {}
+    local self = {__index = self}
     setmetatable(self, c.class.Player)
     self:Create(source, character_id)
     c.debug_2(c.table.Dump(self))

@@ -413,7 +413,7 @@ end
 ---@param net any
 ---@param bool any
 function c.class.Vehicle.Generate(net, plate)
-    local self = {}
+    local self = {__index = self}
     setmetatable(self, c.class.Vehicle)
     self:Create(net, plate)
     c.debug_2(c.table.Dump(self))
