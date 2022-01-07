@@ -232,7 +232,7 @@ end
 --- func desc
 ---@param net any
 function c.class.Npc.Generate(net)
-    local self = {__index = self}
+    local self = {}
     setmetatable(self, c.class.Npc)
     self:Create(net)
     -- Add items at random onto the NPC"s at creation of table data.

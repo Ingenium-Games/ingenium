@@ -212,7 +212,7 @@ end
 --- func desc
 ---@param net any
 function c.class.Object.Generate(net,plate)
-    local self = {__index = self}
+    local self = {}
     setmetatable(self, c.class.Object)
     self:Create(net,plate)
     c.debug_2(c.table.Dump(self))

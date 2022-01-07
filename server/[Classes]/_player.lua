@@ -130,6 +130,8 @@ function c.class.Player:Create(source, character_id)
     self.OldCoords = self.Coords
     --
     self.Accounts = json.decode(char.Accounts)
+    self.State.Cash = self.Accounts.Cash
+    self.State.Bank = self.Accounts.Bank
     --
     self.Licenses = json.decode(char.Licenses)
     --
@@ -148,6 +150,7 @@ function c.class.Player:Create(source, character_id)
     --
     ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
+    --
     return self
 end
 --
@@ -735,9 +738,8 @@ function c.class.Player:CompressInventory()
 end
 -- ====================================================================================--
 function c.class.Player.New(source, character_id)
-    local self = {__index = self}
+    local self = {}
     setmetatable(self, c.class.Player)
     self:Create(source, character_id)
-    c.debug_2(c.table.Dump(self))
     return self
 end

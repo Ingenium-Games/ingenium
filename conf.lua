@@ -19,7 +19,7 @@ DEBUG :
     -- _3 is alterations of state, event triggers etc.
 ]]--
 conf.debug_1 = true
-conf.debug_2 = true
+conf.debug_2 = false
 conf.debug_3 = true
 --[[
 GENERIC :

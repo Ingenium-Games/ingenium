@@ -352,7 +352,7 @@ end
 --- func desc
 ---@param tab any
 function c.class.Job.New(tab)
-    local self = {__index = self}
+    local self = {}
     setmetatable(self, c.class.Job)
     self:Create(tab)
     c.debug_2(c.table.Dump(self))
