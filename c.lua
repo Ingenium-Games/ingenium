@@ -69,7 +69,7 @@ if IS_SERVER then
 	--
 	-- @string eventName - The name of the event to be registered
 	-- @function eventCallback - The function to be executed when event is fired
-	RegisterServerCallback = function(args)
+	_G.RegisterServerCallback = function(args)
 		ensure(args, "table"); ensure(args.eventName, "string"); ensure(args.eventCallback, "function")
 
 		-- save the callback function on this call
@@ -97,7 +97,7 @@ if IS_SERVER then
 	-- @void UnregisterServerCallback
 	--
 	-- @table eventData - The data from the RegisterServerCallback
-	UnregisterServerCallback = function(eventData)
+	_G.UnregisterServerCallback = function(eventData)
 		RemoveEventHandler(eventData)
 	end
 
@@ -110,7 +110,7 @@ if IS_SERVER then
 	-- [@number timeout - Seconds to wait for response]
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
-	TriggerClientCallback = function(args)
+	_G.TriggerClientCallback = function(args)
 		ensure(args, "table"); ensure(args.source, "string", "number"); ensure(args.eventName, "string"); ensure(args.args, "table", "nil"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 
 			-- create a new ticket
@@ -168,7 +168,7 @@ if IS_SERVER then
 	-- [@number timeout - Seconds to wait for response]
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
-	TriggerServerCallback = function(args)
+	_G.TriggerServerCallback = function(args)
 		ensure(args, "table"); ensure(args.source, "string", "number"); ensure(args.eventName, "string"); ensure(args.args, "table", "nil"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 
 		-- create a new promise
@@ -219,7 +219,7 @@ if not IS_SERVER then
 	--
 	-- @string eventName - The name of the event to be fired
 	-- @function eventCallback - The function to be executed when event is fired
-	RegisterClientCallback = function(args)
+	_G.RegisterClientCallback = function(args)
 		ensure(args, "table"); ensure(args.eventName, "string"); ensure(args.eventCallback, "function")
 		
 		-- save the callback function on this call
@@ -245,7 +245,7 @@ if not IS_SERVER then
 	-- @void UnregisterClientCallback
 	--
 	-- @table eventData - The data from RegisterClientCallback
-	UnregisterClientCallback = function(eventData)
+	_G.UnregisterClientCallback = function(eventData)
 		RemoveEventHandler(eventData)
 	end
 
@@ -257,7 +257,7 @@ if not IS_SERVER then
 	-- [@number timeout - Seconds to wait for response]
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
-	TriggerServerCallback = function(args)
+	_G.TriggerServerCallback = function(args)
 		ensure(args, "table"); ensure(args.args, "table", "nil"); ensure(args.eventName, "string"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 		
 		-- create a new promise
@@ -313,7 +313,7 @@ if not IS_SERVER then
 	-- [@number timeout - Seconds to wait for response]
 	-- [@function timedout - The function that will be executed if timeout is reached]
 	-- [@function callback - Asynchronous response]
-	TriggerClientCallback = function(args)
+	_G.TriggerClientCallback = function(args)
 		ensure(args, "table"); ensure(args.eventName, "string"); ensure(args.args, "table", "nil"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 
 		-- create a new promise for this call
