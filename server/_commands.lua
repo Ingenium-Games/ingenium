@@ -135,3 +135,11 @@ RegisterCommand("freeze", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by: "..xPlayer:GetName()) -- txAdmin logging Callback
 end, true)
 
+RegisterCommand("accounts", function(source, args, rawCommand)
+    local src = tonumber(source)
+    local xPlayer = c.data.GetPlayer(src)
+    if xPlayer then
+        TriggerClientEvent('Client:Notify', src, "Cash : $" .. xPlayer:GetCash())
+        TriggerClientEvent('Client:Notify', src, "Bank : $" .. xPlayer:GetBank())
+    end
+end, false)
