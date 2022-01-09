@@ -72,10 +72,10 @@ AddEventHandler("playerDropped", function()
     -- if the data not false?
     if xPlayer then
         -- Remove Job Permissions
-        ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer:GetLicense_ID(), xPlayer:GetJob().Name))
+        ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
         -- Save Data
         c.sql.save.User(xPlayer, function()
-            c.sql.char.SetActive(xPlayer:GetIdentifier(), false, function()
+            c.sql.char.SetActive(xPlayer.GetIdentifier(), false, function()
                 c.debug_1("[E] 'playerDropped' : Player Disconnection.")
                 c.data.RemovePlayer(src)
             end)

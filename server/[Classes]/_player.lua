@@ -158,7 +158,7 @@ function c.class.Player(source, character_id)
     -- Functions
     self.Kick = function(reason)
         DropPlayer(self.ID, reason)
-        TriggerEvent("txaLogger:CommandExecuted", "xPlayer:DropPlayer: " .. reason)
+        TriggerEvent("txaLogger:CommandExecuted", "xPlayer.DropPlayer: " .. reason)
     end
     --
     self.GetName = function()

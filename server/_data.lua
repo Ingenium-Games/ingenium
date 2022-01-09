@@ -277,7 +277,7 @@ function c.data.CreateJobObjects()
     local jobs = c.job.GetJobs()
     for k, v in pairs(jobs) do
         if not c.jdex[k] then
-            c.jdex[k] = c.class.Job.New(v)
+            c.jdex[k] = c.class.Job(v)
         end
     end
     c.json.Write(conf.file.jobs, c.jobs)
@@ -358,7 +358,7 @@ end
 function c.data.LoadPlayer(source, Character_ID)
     local src = tonumber(source)
     local p = promise.new()
-    local xPlayer = c.class.Player.New(source, Character_ID)
+    local xPlayer = c.class.Player(source, Character_ID)
     -- No need to pass data to the client anymore.
     c.sql.char.SetActive(Character_ID, true, function()
         c.data.SetPlayer(src, xPlayer)

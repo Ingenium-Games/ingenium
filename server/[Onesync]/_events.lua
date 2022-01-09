@@ -41,7 +41,7 @@ AddEventHandler("entityCreated", function(ent)
         -- Object
         if type == 3 then
             if not conf.disable.objects[model] then
-                c.data.AddObject(net, c.class.Object.Generate, net)                      
+                c.data.AddObject(net, c.class.Object, net)                      
             else
                 DeleteEntity(ent)
                 c.debug_1("Object has been Deleted.")
@@ -50,7 +50,7 @@ AddEventHandler("entityCreated", function(ent)
         -- Vehicle
         elseif type == 2 then
             if not conf.disable.vehicles[model] then                        
-                c.data.AddVehicle(net, c.class.Vehicle.Generate, net, false)
+                c.data.AddVehicle(net, c.class.Vehicle, net, false)
             else
                 DeleteEntity(ent)
                 c.debug_1("Vehicle has been Deleted.")
@@ -61,7 +61,7 @@ AddEventHandler("entityCreated", function(ent)
             if not conf.disable.peds[model] then                        
                 -- not a human player
                 if not IsPedAPlayer(ent) then
-                    c.data.AddNpc(net, c.class.Npc.Generate, net)
+                    c.data.AddNpc(net, c.class.Npc, net)
                 else
                 -- is a player
 

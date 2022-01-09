@@ -101,7 +101,7 @@ RegisterNetEvent("Server:Scenes:Add", function(x, y, z, message, color, bool)
         Colour = color,
         Flag = flag,
         Time = os.time(),
-        Character = xPlayer:GetCharacter_ID()
+        Character = xPlayer.GetCharacter_ID()
     })
     TriggerClientEvent("Client:Scenes:Update", -1, c.scenes)
 end)
@@ -109,9 +109,9 @@ end)
 RegisterNetEvent("Server:Scenes:Delete", function(key)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
-    local Ace = xPlayer:GetAce()
+    local Ace = xPlayer.GetAce()
     if c.scene.Exist(key) then
-        if c.scenes[key].Character == xPlayer:GetCharacter_ID() or Ace == "mod" or Ace == "admin" or Ace == "superadmin" or
+        if c.scenes[key].Character == xPlayer.GetCharacter_ID() or Ace == "mod" or Ace == "admin" or Ace == "superadmin" or
             Ace == "developer" or Ace == "owner" then
             table.remove(c.scenes, key)
             TriggerClientEvent("Client:Scenes:Update", -1, c.scenes)
