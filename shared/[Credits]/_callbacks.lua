@@ -1,6 +1,4 @@
 -- ====================================================================================--
-c = {}
--- ====================================================================================--
 
 -- Callbacks Section
 -- ====================================================================================--
@@ -93,6 +91,7 @@ if IS_SERVER then
 		return eventData
 	end
 
+	exports("RegisterServerCallback", RegisterServerCallback)
 	--
 	-- @void UnregisterServerCallback
 	--
@@ -101,6 +100,7 @@ if IS_SERVER then
 		RemoveEventHandler(eventData)
 	end
 
+	exports("UnregisterServerCallback", UnregisterServerCallback)
 	--
 	-- @any TriggerClientCallback
 	--
@@ -158,6 +158,8 @@ if IS_SERVER then
 			end
 	end
 
+	exports("TriggerClientCallback", TriggerClientCallback)
+
 	--
 	-- @any TriggerServerCallback
 	-- Simulate a client callback
@@ -208,6 +210,7 @@ if IS_SERVER then
 			return Citizen.Await(prom)
 		end
 	end
+	exports("TriggerServerCallback", TriggerServerCallback)
 end
 
 -- CLIENT-SIDE
@@ -241,6 +244,7 @@ if not IS_SERVER then
 		return eventData
 	end
 
+	exports("RegisterClientCallback", RegisterClientCallback)
 	--
 	-- @void UnregisterClientCallback
 	--
@@ -249,6 +253,7 @@ if not IS_SERVER then
 		RemoveEventHandler(eventData)
 	end
 
+	exports("UnregisterClientCallback", UnregisterClientCallback)
 	--
 	-- @any TriggerServerCallback
 	--
@@ -303,6 +308,7 @@ if not IS_SERVER then
 			return result
 		end
 	end
+	exports("TriggerServerCallback", TriggerServerCallback)
 
 	--
 	-- @any TriggerClientCallback
@@ -354,8 +360,8 @@ if not IS_SERVER then
 			return Citizen.Await(prom)
 		end
 	end
-end
 
--- ====================================================================================--
+	exports("TriggerClientCallback", TriggerClientCallback)
+end
 
 -- ====================================================================================--
