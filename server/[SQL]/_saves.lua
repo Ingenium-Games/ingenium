@@ -26,20 +26,20 @@ end)
 function c.sql.save.User(data, cb)
     if data then
         -- Other Variables.
-        local Health = data:GetHealth()
-        local Armour = data:GetArmour()
-        local Hunger = data:GetHunger()
-        local Thirst = data:GetThirst()
-        local Stress = data:GetStress()
+        local Health = data.GetHealth()
+        local Armour = data.GetArmour()
+        local Hunger = data.GetHunger()
+        local Thirst = data.GetThirst()
+        local Stress = data.GetStress()
         -- Tables require JSON Encoding.
-        local Coords = json.encode(data:GetCoords())
-        local Accounts = json.encode(data:GetAccounts())
-        local Modifiers = json.encode(data:GetModifiers())
-        local Inventory = json.encode(data:CompressInventory())
+        local Coords = json.encode(data.GetCoords())
+        local Accounts = json.encode(data.GetAccounts())
+        local Modifiers = json.encode(data.GetModifiers())
+        local Inventory = json.encode(data.CompressInventory())
 
-        local Job = json.encode(data:GetJob())
+        local Job = json.encode(data.GetJob())
         -- 
-        local Character_ID = data:GetCharacter_ID()
+        local Character_ID = data.GetCharacter_ID()
         MySQL.Async.insert(PlayerSaveData, {
             -- Other Variables.
             ["@Health"] = Health,
@@ -73,20 +73,20 @@ function c.sql.save.Users(cb)
         local data = c.data.GetPlayer(k)
         if data then
             -- Other Variables.
-            local Health = data:GetHealth()
-            local Armour = data:GetArmour()
-            local Hunger = data:GetHunger()
-            local Thirst = data:GetThirst()
-            local Stress = data:GetStress()
+            local Health = data.GetHealth()
+            local Armour = data.GetArmour()
+            local Hunger = data.GetHunger()
+            local Thirst = data.GetThirst()
+            local Stress = data.GetStress()
             -- Tables require JSON Encoding.
-            local Coords = json.encode(data:GetCoords())
-            local Accounts = json.encode(data:GetAccounts())
-            local Modifiers = json.encode(data:GetModifiers())
-            local Inventory = json.encode(data:CompressInventory())
+            local Coords = json.encode(data.GetCoords())
+            local Accounts = json.encode(data.GetAccounts())
+            local Modifiers = json.encode(data.GetModifiers())
+            local Inventory = json.encode(data.CompressInventory())
 
-            local Job = json.encode(data:GetJob())
+            local Job = json.encode(data.GetJob())
             -- 
-            local Character_ID = data:GetCharacter_ID()
+            local Character_ID = data.GetCharacter_ID()
             MySQL.Async.insert(PlayerSaveData, {
                 -- Other Variables.
                 ["@Health"] = Health,
@@ -126,20 +126,20 @@ end)
 ---@param data table "xCar table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.Vehicle(data, cb)
-    if data:GetOwner() then
+    if data.GetOwner() then
         -- Other Variables.
-        local Garage = data:GetGarage()
+        local Garage = data.GetGarage()
         -- Booleans
-        local State = data:GetState()
-        local Impound = data:GetImpound()
-        local Wanted = data:GetWanted()
+        local State = data.GetState()
+        local Impound = data.GetImpound()
+        local Wanted = data.GetWanted()
         -- Tables require JSON Encoding.
-        local Keys = json.encode(data:GetKeys())
-        local Coords = json.encode(data:GetCoords())
-        local Condition = json.encode(data:GetCondition())
-        local Modifications = json.encode(data:GetModifications())
+        local Keys = json.encode(data.GetKeys())
+        local Coords = json.encode(data.GetCoords())
+        local Condition = json.encode(data.GetCondition())
+        local Modifications = json.encode(data.GetModifications())
         -- The Key
-        local Plate = data:GetPlate()
+        local Plate = data.GetPlate()
         --
         MySQL.Async.insert(VehicleSaveData, {
             -- Other Variables.
@@ -173,18 +173,18 @@ function c.sql.save.Vehicles(cb)
         if data then
             if data.Owner then
                 -- Other Variables.
-                local Garage = data:GetGarage()
+                local Garage = data.GetGarage()
                 -- Booleans
-                local State = data:GetState()
-                local Impound = data:GetImpound()
-                local Wanted = data:GetWanted()
+                local State = data.GetState()
+                local Impound = data.GetImpound()
+                local Wanted = data.GetWanted()
                 -- Tables require JSON Encoding.
-                local Keys = json.encode(data:GetKeys())
-                local Coords = json.encode(data:GetCoords())
-                local Condition = json.encode(data:GetCondition())
-                local Modifications = json.encode(data:GetModifications())
+                local Keys = json.encode(data.GetKeys())
+                local Coords = json.encode(data.GetCoords())
+                local Condition = json.encode(data.GetCondition())
+                local Modifications = json.encode(data.GetModifications())
                 -- The Key
-                local Plate = data:GetPlate()
+                local Plate = data.GetPlate()
                 --
                 MySQL.Async.insert(VehicleSaveData, {
                     -- Other Variables.

@@ -29,6 +29,7 @@ function c.class.Vehicle(net, plate)
     local net = net or CancelEvent()
     local plate = false or plate
     local data = GetVeh(plate)
+    local self = {}
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state

@@ -6,6 +6,7 @@ end
 --- func desc
 ---@param tab any
 function c.class.Job(tab)
+    local self = {}
     self.Name = tab.Name
     self.Label = tab.Label
     self.Boss = tab.Boss

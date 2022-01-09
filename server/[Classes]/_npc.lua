@@ -6,6 +6,7 @@ end
 --- func desc
 ---@param net any
 function c.class.Npc(net)
+    local self = {}
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state

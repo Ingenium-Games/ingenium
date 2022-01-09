@@ -26,6 +26,7 @@ end
 ---@param net any
 function c.class.Object(net, id)
     local data = GetObj(id)
+    local self = {}
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state

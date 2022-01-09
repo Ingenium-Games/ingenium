@@ -9,6 +9,7 @@ function c.class.Player(source, character_id)
     local Steam_ID, FiveM_ID, License_ID, Discord_ID = c.identifiers(src)
     local user = c.sql.user.Get(License_ID)
     local char = c.sql.char.Get(Character_ID)
+    local self = {}
     --
     self.ID = src
     self.State = Player(self.ID).state
