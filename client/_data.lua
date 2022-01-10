@@ -92,6 +92,7 @@ end
 --- Return the Players"s state bag.
 ---@param id any "Player"s Server Id"
 function c.data.GetPlayer(id)
+    local id = id or -1
     return Player(id).state
 end
 
