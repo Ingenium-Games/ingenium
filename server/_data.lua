@@ -358,7 +358,7 @@ end
 function c.data.LoadPlayer(source, Character_ID)
     local src = tonumber(source)
     local p = promise.new()
-    local xPlayer = c.class.Player(source, Character_ID)
+    local xPlayer = c.class.Player(src, Character_ID)
     -- No need to pass data to the client anymore.
     c.sql.char.SetActive(Character_ID, true, function()
         c.data.SetPlayer(src, xPlayer)

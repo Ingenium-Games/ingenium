@@ -4,8 +4,8 @@ c.chats = {}
 -- ====================================================================================--
 ----
 ---@param group any "Check permissions and import the chat suggestions."
-function c.chat.AddSuggestions(xPlayer)
-    local ace = xPlayer.Ace
+function c.chat.AddSuggestions()
+    local ace = LocalPlayer.state.Ace
     if c.ace[ace] then
         c.ace[ace]()
         c.debug_1("Added chat suggestions for group: "..ace.." and below.")

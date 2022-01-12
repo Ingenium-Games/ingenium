@@ -28,8 +28,8 @@ end
 --- Sets the table of active modifiers.
 ---@param t table "Typically passed from the server as an internal table."
 function c.modifier.SetModifiers(t)
-    if t.Modifiers then
-        c.modifiers = t.Modifiers
+    if LocalPlayer.state.Modifiers ~= nil then
+        c.modifiers = LocalPlayer.state.Modifiers
     end
 end
 

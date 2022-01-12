@@ -103,16 +103,11 @@ end)
 -- Event to receive the data of the chosen character for the client.
 RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
-    local p = promise.new()
-    local xPlayer = c.data.GetLocalPlayer()
     c.data.SetLoadedStatus(true)
     --
-    p:resolve()
-    Citizen.Await(p)
-    --
-    c.chat.AddSuggestions(xPlayer)
-    c.status.SetPlayer(xPlayer)
-    c.modifier.SetModifiers(xPlayer)
+    c.chat.AddSuggestions()
+    c.status.SetPlayer()
+    c.modifier.SetModifiers()
     -- 
     TriggerEvent("Client:Character:Ready")
 end)

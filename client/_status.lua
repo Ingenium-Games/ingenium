@@ -201,11 +201,11 @@ function c.status.SetPlayer(data)
     SetPlayerInvincible(ply, false)
     --
     -- time to gain our data from the server.
-    c.status.SetHealth(data.Health)
-    c.status.SetArmour(data.Armour)
-    c.status.SetHunger(data.Hunger)
-    c.status.SetThirst(data.Thirst)
-    c.status.SetStress(data.Stress)
+    c.status.SetHealth(LocalPlayer.state.Health)
+    c.status.SetArmour(LocalPlayer.state.Armour)
+    c.status.SetHunger(LocalPlayer.state.Hunger)
+    c.status.SetThirst(LocalPlayer.state.Thirst)
+    c.status.SetStress(LocalPlayer.state.Stress)
     -- Begin Routines / Timeouts
     c.status.StartHungerDecrease()
     c.status.StartThirstDecrease()

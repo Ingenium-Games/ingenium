@@ -337,10 +337,23 @@ function c.class.Player(source, character_id)
     --
     self.SetAccount = function(acc, v)
         local num = c.check.Number(v)
+        num = c.math.Decimals(num, 0)
         if self.Accounts[acc] then
-            self.Accounts[acc] = c.math.Decimals(num, 0)
+            self.Accounts[acc] = num
         else
             c.debug_1("Account entered does not exist")
+        end
+    end
+    --
+    self.RefreshAccounts = function()
+        local cash = self.GetAccount("Cash")
+        local bank = self.GetAccount("Bank")
+        if cash then
+            self.State.Cash = cash
+        end
+        
+        if bank then
+            self.State.Bank = bank
         end
     end
     --
@@ -422,13 +435,8 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v)
         local acc = c.math.Decimals(num, 0)
         if acc then
-            if acc < 0 then
-                self.SetAccount("Bank", acc)
-                self.State.Bank = acc
-            else
-                self.SetAccount("Bank", acc)
-                self.State.Bank = acc
-            end
+            self.SetAccount("Bank", acc)
+            self.State.Bank = acc
         end
     end
     --
@@ -437,13 +445,8 @@ function c.class.Player(source, character_id)
         local acc = self.GetAccount("Bank")
         if acc then
             acc = acc + c.math.Decimals(num, 0)
-            if acc < 0 then
-                self.SetAccount("Bank", acc)
-                self.State.Bank = acc
-            else
-                self.SetAccount("Bank", acc)
-                self.State.Bank = acc
-            end
+            self.SetAccount("Bank", acc)
+            self.State.Bank = acc
         end
     end
     --
@@ -452,13 +455,8 @@ function c.class.Player(source, character_id)
         local acc = self.GetAccount("Bank")
         if acc then
             acc = acc - c.math.Decimals(num, 0)
-            if acc < 0 then
-                self.SetAccount("Bank", acc)
-                self.State.Bank = acc
-            else
-                self.SetAccount("Bank", acc)
-                self.State.Bank = acc
-            end
+            self.SetAccount("Bank", acc)
+            self.State.Bank = acc
         end
     end
     --- func desc
