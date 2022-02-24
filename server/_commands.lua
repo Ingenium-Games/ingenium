@@ -2,6 +2,15 @@
 -- PUBLIC
 -- ====================================================================================--
 
+RegisterCommand("accounts", function(source, args, rawCommand)
+    local src = tonumber(source)
+    local xPlayer = c.data.GetPlayer(src)
+    if xPlayer then
+        TriggerClientEvent('Client:Notify', src, "Cash : $" .. xPlayer.GetCash())
+        TriggerClientEvent('Client:Notify', src, "Bank : $" .. xPlayer.GetBank())
+    end
+end, false)
+
 ExecuteCommand("add_ace group.public command.switch allow")
 RegisterCommand("switch", function(source, args, rawCommand)
     local src = source
@@ -24,7 +33,6 @@ RegisterCommand("switch", function(source, args, rawCommand)
     TriggerClientEvent("Client:Character:Switch")
     TriggerEvent("Server:Character:Switch")
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
-
 end, true)
 
 -- ====================================================================================--
@@ -135,11 +143,12 @@ RegisterCommand("freeze", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by: "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
-RegisterCommand("accounts", function(source, args, rawCommand)
-    local src = tonumber(source)
+ExecuteCommand("add_ace group.admin command.additem allow")
+RegisterCommand("additem", function(source, args, rawCommand)
+    local src = source
     local xPlayer = c.data.GetPlayer(src)
-    if xPlayer then
-        TriggerClientEvent('Client:Notify', src, "Cash : $" .. xPlayer.GetCash())
-        TriggerClientEvent('Client:Notify', src, "Bank : $" .. xPlayer.GetBank())
-    end
-end, false)
+    local item = args[1]
+    xPlayer.AddItem({item})
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " item: "..item..", amount: "..amount..", by: "..xPlayer.GetName())
+    print(c.table.Dump(xPlayer.CompressInventory()))
+end, true)

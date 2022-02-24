@@ -73,7 +73,6 @@ function c.class.Object(net, id)
         --
         self.Inventory = {}
         for i = 1, #inv do
-            table.insert(self.Inventory, i)
             self.Inventory[i] = {
                 ["Item"] = inv[i][1],
                 ["Quantity"] = inv[i][2],

@@ -95,6 +95,7 @@ function c.class.Player(source, character_id)
     self.Stress = char.Stress
     self.State.Stress = self.Stress
     --
+    self.Weight = 0
     self.MaxWeight = 25
     --         
     -- Booleans
@@ -351,7 +352,7 @@ function c.class.Player(source, character_id)
         if cash then
             self.State.Cash = cash
         end
-        
+
         if bank then
             self.State.Bank = bank
         end
@@ -596,9 +597,9 @@ function c.class.Player(source, character_id)
     ---@param inv any
     self.UnpackInventory = function(inv)
         local inv = inv or {}
+        print(c.table.Dump(inv))
         self.Inventory = {}
         for i = 1, #inv do
-            table.insert(self.Inventory, i)
             self.Inventory[i] = {
                 ["Item"] = inv[i][1],
                 ["Quantity"] = inv[i][2],
