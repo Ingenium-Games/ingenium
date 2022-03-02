@@ -697,14 +697,12 @@ function c.class.Player(source, character_id)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
-
             elseif (stackable and has) then
                 self.Inventory[key].Quantity = self.Inventory[key].Quantity + item.Quantity
-
             else
                 self.Inventory[#self.Inventory + 1] = item
-
             end
+            TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
             c.debug_1("Ignoring invalid .AddItem() for " .. self.ID)
         end

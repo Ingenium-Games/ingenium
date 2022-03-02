@@ -148,6 +148,7 @@ RegisterCommand("additem", function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     local item = args[1]
+    local amount = args[2] or 1
     xPlayer.AddItem({item})
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " item: "..item..", amount: "..amount..", by: "..xPlayer.GetName())
     print(c.table.Dump(xPlayer.CompressInventory()))
