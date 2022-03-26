@@ -707,6 +707,31 @@ function c.class.Player(source, character_id)
             c.debug_1("Ignoring invalid .AddItem() for " .. self.ID)
         end
     end
+    --
+    self.GetItemQuality = function(name)
+        local has, position = self.HasItem(name)
+        if has then
+            return self.Inventory[position].Quality, position
+        else
+            return false
+        end
+    end
+    --
+    self.GetItemQuantity = function(name)
+        local has, position = self.HasItem(name)
+        if has then
+            return self.Inventory[position].Quantity, position
+        else
+            return false, false
+        end
+    end
+    --
+    self.ConsumeItem = function(name)
+        local quantity, position = self.GetItemQuantity(name)
+        if type(quantity) ~= "boolean" then
+            TriggerEvent("Inventory:Consume:"..name, quantity, position)
+        end
+    end
     --- func desc
     ---@param name any
     ---@param slot any

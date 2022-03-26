@@ -1,6 +1,7 @@
 -- ====================================================================================--
 
 c.item = {} -- function level
+c._itemcb = {}
 -- c.items is found in /[Data]/_items.lua as dumped from ig.dump
 --[[
 NOTES
@@ -49,4 +50,8 @@ function c.item.ReturnPosition(name)
         end
     end
     return false
+end
+
+function c.item.SetEvent(name)
+
 end
