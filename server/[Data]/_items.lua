@@ -1,7 +1,7 @@
 -- ====================================================================================--
 local weapon_dump = exports["ig.dump"]:GetWeapons()
 -- ====================================================================================--
-    
+
 c.items = { -- table of items
 
     -- ====================================================================================--
@@ -778,7 +778,7 @@ c.items = { -- table of items
         Image = "WEAPON_MICROSMG.png"
     },
     ["WEAPON_SMG"] = {
-        Name = "SMG",
+        Name = "Submachine Gun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -822,7 +822,7 @@ c.items = { -- table of items
         Image = "WEAPON_SMG.png"
     },
     ["WEAPON_ASSAULTSMG"] = {
-        Name = "SMG",
+        Name = "Assault Submachine Gun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -867,7 +867,7 @@ c.items = { -- table of items
     },
     -- Assualt Rifles
     ["WEAPON_ASSAULTRIFLE"] = {
-        Name = "SMG",
+        Name = "Assault Rifle",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -877,12 +877,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "3220176749",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "5.56mm",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "Fires standard 5.56mm rounds."
         },
         Data = weapon_dump["3220176749"],
         Craftable = true,
@@ -911,7 +911,7 @@ c.items = { -- table of items
         Image = "WEAPON_ASSAULTRIFLE.png"
     },
     ["WEAPON_CARBINERIFLE"] = {
-        Name = "SMG",
+        Name = "Carbine Assault Rifle",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -921,12 +921,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "2210333304",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "5.56mm",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "Fires standard 5.56mm rounds."
         },
         Data = weapon_dump["2210333304"],
         Craftable = true,
@@ -955,7 +955,7 @@ c.items = { -- table of items
         Image = "WEAPON_CARBINERIFLE.png"
     },
     ["WEAPON_ADVANCEDRIFLE"] = {
-        Name = "SMG",
+        Name = "Advanced Assualt Rifle",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -965,12 +965,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "2937143193",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "5.56mm",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "Fires standard 5.56mm rounds."
         },
         Data = weapon_dump["2937143193"],
         Craftable = true,
@@ -999,7 +999,7 @@ c.items = { -- table of items
         Image = "WEAPON_ADVANCEDRIFLE.png"
     },
     ["WEAPON_MG"] = {
-        Name = "SMG",
+        Name = "Machine Gun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1009,12 +1009,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "2634544996",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "5.56mm",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "Fires standard 5.56mm rounds."
         },
         Data = weapon_dump["2634544996"],
         Craftable = true,
@@ -1043,7 +1043,7 @@ c.items = { -- table of items
         Image = "WEAPON_MG.png"
     },
     ["WEAPON_COMBATMG"] = {
-        Name = "SMG",
+        Name = "Combat Machine Gun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1053,12 +1053,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "2144741730",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "5.56mm",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "Fires standard 5.56mm rounds."
         },
         Data = weapon_dump["2144741730"],
         Craftable = true,
@@ -1087,7 +1087,7 @@ c.items = { -- table of items
         Image = "WEAPON_COMBATMG.png"
     },
     ["WEAPON_PUMPSHOTGUN"] = {
-        Name = "SMG",
+        Name = "Pump Shotgun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1097,12 +1097,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "487013001",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "20g",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "."
         },
         Data = weapon_dump["487013001"],
         Craftable = true,
@@ -1131,7 +1131,7 @@ c.items = { -- table of items
         Image = "WEAPON_PUMPSHOTGUN.png"
     },
     ["WEAPON_SAWNOFFSHOTGUN"] = {
-        Name = "SMG",
+        Name = "Sawnoff Shotgun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1141,12 +1141,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "2017895192",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "20g",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = ""
         },
         Data = weapon_dump["2017895192"],
         Craftable = true,
@@ -1175,7 +1175,7 @@ c.items = { -- table of items
         Image = "WEAPON_SAWNOFFSHOTGUN.png"
     },
     ["WEAPON_ASSAULTSHOTGUN"] = {
-        Name = "SMG",
+        Name = "Assault Shotgun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1185,12 +1185,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "3800352039",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "20g",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "."
         },
         Data = weapon_dump["3800352039"],
         Craftable = true,
@@ -1219,7 +1219,7 @@ c.items = { -- table of items
         Image = "WEAPON_ASSAULTSHOTGUN.png"
     },
     ["WEAPON_BULLPUPSHOTGUN"] = {
-        Name = "SMG",
+        Name = "Bullpup Shotgun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1229,12 +1229,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "2640438543",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "20g",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "."
         },
         Data = weapon_dump["2640438543"],
         Craftable = true,
@@ -1263,7 +1263,7 @@ c.items = { -- table of items
         Image = "WEAPON_BULLPUPSHOTGUN.png"
     },
     ["WEAPON_STUNGUN"] = {
-        Name = "SMG",
+        Name = "Stun Gun",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1273,12 +1273,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "911657153",
         Meta = {
-            Ammo = "9mm",
+            Ammo = "Electrodes",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "."
         },
         Data = weapon_dump["911657153"],
         Craftable = true,
@@ -1307,7 +1307,7 @@ c.items = { -- table of items
         Image = "WEAPON_STUNGUN.png"
     },
     ["WEAPON_SNIPERRIFLE"] = {
-        Name = "SMG",
+        Name = "Sniper Rifle",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1317,12 +1317,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "100416529",
         Meta = {
-            Ammo = "9mm",
+            Ammo = ".223",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "."
         },
         Data = weapon_dump["100416529"],
         Craftable = true,
@@ -1351,7 +1351,7 @@ c.items = { -- table of items
         Image = "WEAPON_SNIPERRIFLE.png"
     },
     ["WEAPON_HEAVYSNIPER"] = {
-        Name = "SMG",
+        Name = "Heavy Sniper Rifle",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -1361,12 +1361,12 @@ c.items = { -- table of items
         Weight = 3,
         Weapon = "205991906",
         Meta = {
-            Ammo = "9mm",
+            Ammo = ".308",
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
             Registered = false,
-            About = "Fires standard 9mm rounds."
+            About = "."
         },
         Data = weapon_dump["205991906"],
         Craftable = true,
@@ -1394,6 +1394,2561 @@ c.items = { -- table of items
         Hotkey = true,
         Image = "WEAPON_HEAVYSNIPER.png"
     },
+    ["WEAPON_GRENADELAUNCHER"] = {
+        Name = "Grenade Launcher",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2726580491",
+        Meta = {
+            Ammo = "30oz",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2726580491"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_GRENADELAUNCHER.png"
+    },
+
+    ["WEAPON_GRENADELAUNCHER_SMOKE"] = {
+        Name = "Smoke Grenade Launcher",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1305664598",
+        Meta = {
+            Ammo = "30oz",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1305664598"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_GRENADELAUNCHER_SMOKE.png"
+    },
+
+    ["WEAPON_RPG"] = {
+        Name = "Rocket Propelled Grenade Launcher",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2982836145",
+        Meta = {
+            Ammo = "Rockets",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2982836145"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_RPG.png"
+    },
+    ["WEAPON_MINIGUN"] = {
+        Name = "Gattling Gun",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1119849093",
+        Meta = {
+            Ammo = "5mm",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1119849093"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_MINIGUN.png"
+    },
+    ["WEAPON_GRENADE"] = {
+        Name = "Grenade",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2481070269",
+        Meta = {
+            Ammo = "Grenade",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2481070269"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_GRENADE.png"
+    },
+    ["WEAPON_STICKYBOMB"] = {
+        Name = "Sticky Bombs",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "741814745",
+        Meta = {
+            Ammo = "Sticky Bombs",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["741814745"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_STICKYBOMB.png"
+    },
+    ["WEAPON_SMOKEGRENADE"] = {
+        Name = "Smoke Grenades",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "4256991824",
+        Meta = {
+            Ammo = "Smoke Grenades",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["4256991824"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_SMOKEGRENADE.png"
+    },
+    ["WEAPON_BZGAS"] = {
+        Name = "BZ Smoke Grenades",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2694266206",
+        Meta = {
+            Ammo = "BZ Gas",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2694266206"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_BZGAS.png"
+    },
+    ["WEAPON_MOLOTOV"] = {
+        Name = "Molotov",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "615608432",
+        Meta = {
+            Ammo = "Vodka",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["615608432"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_MOLOTOV.png"
+    },
+    ["WEAPON_FIREEXTINGUISHER"] = {
+        Name = "Fire Extinguisher",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "101631238",
+        Meta = {
+            Ammo = "Fire Extinguisher",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["101631238"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_FIREEXTINGUISHER.png"
+    },
+    ["WEAPON_PETROLCAN"] = {
+        Name = "Petrol Can",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "883325847",
+        Meta = {
+            Ammo = "Petrol",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["883325847"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_PETROLCAN.png"
+    },
+    ["WEAPON_BALL"] = {
+        Name = "Ball",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "600439132",
+        Meta = {
+            Ammo = "Balls",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["600439132"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_BALL.png"
+    },
+    ["WEAPON_REVOLVER"] = {
+        Name = "Heavy Revolver",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3249783761",
+        Meta = {
+            Ammo = ".308",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3249783761"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_REVOLVER.png"
+    },
+    ["WEAPON_AUTOSHOTGUN"] = {
+        Name = "Sweeper Shotgun",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "317205821",
+        Meta = {
+            Ammo = ".308",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["317205821"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_AUTOSHOTGUN.png"
+    },
+    ["WEAPON_COMPACTLAUNCHER"] = {
+        Name = "Compact Grenade Launcher",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "125959754",
+        Meta = {
+            Ammo = ".308",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["125959754"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_COMPACTLAUNCHER.png"
+    },
+    ["WEAPON_PIPEBOMB"] = {
+        Name = "Pipe Bomb",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3125143736",
+        Meta = {
+            Ammo = ".308",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3125143736"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_PIPEBOMB.png"
+    },
+    ["WEAPON_HEAVYPISTOL"] = {
+        Name = "Heavy Pistol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3523564046",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3523564046"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_HEAVYPISTOL.png"
+    },
+    ["WEAPON_SPECIALCARBINE"] = {
+        Name = "Special Carbine",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3231910285",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3231910285"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_SPECIALCARBINE.png"
+    },
+    ["WEAPON_BULLPUPRIFLE"] = {
+        Name = "Bullpup Rifle",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2132975508",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2132975508"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_BULLPUPRIFLE.png"
+    },
+    ["WEAPON_HOMINGLAUNCHER"] = {
+        Name = "Homing Launcher",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1672152130",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1672152130"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_HOMINGLAUNCHER.png"
+    },
+    ["WEAPON_PROXMINE"] = {
+        Name = "Proximity Mine",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2874559379",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2874559379"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_PROXMINE.png"
+    },
+    ["WEAPON_SNOWBALL"] = {
+        Name = "Snowball",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "126349499",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["126349499"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_SNOWBALL.png"
+    },
+    ["WEAPON_BULLPUPRIFLE_MK2"] = {
+        Name = "Bullpup Rifle Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2228681469",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2228681469"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_BULLPUPRIFLE_MK2.png"
+    },
+    ["WEAPON_DOUBLEACTION"] = {
+        Name = "Double-Action Revolver",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2548703416",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2548703416"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_DOUBLEACTION.png"
+    },
+    ["WEAPON_MARKSMANRIFLE_MK2"] = {
+        Name = "Marksman Rifle Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1785463520",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1785463520"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_MARKSMANRIFLE_MK2.png"
+    },
+    ["WEAPON_PUMPSHOTGUN_MK2"] = {
+        Name = "Pump Shotgun Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1432025498",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1432025498"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_PUMPSHOTGUN_MK2.png"
+    },
+    ["WEAPON_REVOLVER_MK2"] = {
+        Name = "Heavy Revolver Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3415619887",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3415619887"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_REVOLVER_MK2.png"
+    },
+    ["WEAPON_SNSPISTOL_MK2"] = {
+        Name = "SNS Pistol Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2285322324",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2285322324"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_SNSPISTOL_MK2.png"
+    },
+    ["WEAPON_SPECIALCARBINE_MK2"] = {
+        Name = "Special Carbine Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2526821735",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2526821735"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_SPECIALCARBINE_MK2.png"
+    },
+    ["WEAPON_RAYPISTOL"] = {
+        Name = "Up-n-Atomizer",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2939590305",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2939590305"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_RAYPISTOL.png"
+    },
+    ["WEAPON_RAYCARBINE"] = {
+        Name = "Unholy Hellbringer",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1198256469",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1198256469"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_RAYCARBINE.png"
+    },
+    ["WEAPON_RAYMINIGUN"] = {
+        Name = "Widowmaker",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3056410471",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3056410471"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_RAYMINIGUN.png"
+    },
+    ["WEAPON_ASSAULTRIFLE_MK2"] = {
+        Name = "Assault Rifle Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "961495388",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["961495388"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_ASSAULTRIFLE_MK2.png"
+    },
+    ["WEAPON_CARBINERIFLE_MK2"] = {
+        Name = "Carbine Rifle Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "4208062921",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["4208062921"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_CARBINERIFLE_MK2.png"
+    },
+    ["WEAPON_COMBATMG_MK2"] = {
+        Name = "Combat MG Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3686625920",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3686625920"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_COMBATMG_MK2.png"
+    },
+    ["WEAPON_HEAVYSNIPER_MK2"] = {
+        Name = "Heavy Sniper Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "177293209",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["177293209"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_HEAVYSNIPER_MK2.png"
+    },
+    ["WEAPON_PISTOL_MK2"] = {
+        Name = "Pistol Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3219281620",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3219281620"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_PISTOL_MK2.png"
+    },
+    ["WEAPON_SMG_MK2"] = {
+        Name = "SMG Mk II",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2024373456",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2024373456"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_SMG_MK2.png"
+    },
+    ["WEAPON_FLASHLIGHT"] = {
+        Name = "Flashlight",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2343591895",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2343591895"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_FLASHLIGHT.png"
+    },
+    ["WEAPON_FLAREGUN"] = {
+        Name = "Flare Gun",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1198879012",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1198879012"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_FLAREGUN.png"
+    },
+    ["WEAPON_CERAMICPISTOL"] = {
+        Name = "Ceramic Pistol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "727643628",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["727643628"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_CERAMICPISTOL.png"
+    },
+    ["WEAPON_HAZARDCAN"] = {
+        Name = "Hazardous Jerry Can",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3126027122",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3126027122"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_HAZARDCAN.png"
+    },
+    ["WEAPON_COMBATSHOTGUN"] = {
+        Name = "Combat Shotgun",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "94989220",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["94989220"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_COMBATSHOTGUN.png"
+    },
+    ["WEAPON_GADGETPISTOL"] = {
+        Name = "Perico Pistol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1470379660",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1470379660"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_GADGETPISTOL.png"
+    },
+    ["WEAPON_MILITARYRIFLE"] = {
+        Name = "Military Rifle",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2636060646",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2636060646"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_MILITARYRIFLE.png"
+    },
+    ["WEAPON_FIREWORK"] = {
+        Name = "Firework Launcher",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2138347493",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2138347493"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_FIREWORK.png"
+    },
+    ["WEAPON_VINTAGEPISTOL"] = {
+        Name = "Vintage Pistol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "137902532",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["137902532"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_VINTAGEPISTOL.png"
+    },
+    ["WEAPON_MUSKET"] = {
+        Name = "Musket",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "2828843422",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["2828843422"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_MUSKET.png"
+    },
+    ["WEAPON_MACHINEPISTOL"] = {
+        Name = "Machine Pistol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3675956304",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3675956304"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_MACHINEPISTOL.png"
+    },
+    ["WEAPON_COMPACTRIFLE"] = {
+        Name = "Compact Rifle",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1649403952",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1649403952"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_COMPACTRIFLE.png"
+    },
+    ["WEAPON_DBSHOTGUN"] = {
+        Name = "Double Barrel Shotgun",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "4019527611",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["4019527611"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_DBSHOTGUN.png"
+    },
+    ["WEAPON_HEAVYSHOTGUN"] = {
+        Name = "Heavy Shotgun",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "984333226",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["984333226"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_HEAVYSHOTGUN.png"
+    },
+    ["WEAPON_MARKSMANRIFLE"] = {
+        Name = "Marksman Rifle",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3342088282",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3342088282"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_MARKSMANRIFLE.png"
+    },
+    ["WEAPON_COMBATPDW"] = {
+        Name = "Combat PDW",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "171789620",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["171789620"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_COMBATPDW.png"
+    },
+    ["WEAPON_KNUCKLE"] = {
+        Name = "Knuckle Duster",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3638508604",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3638508604"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_KNUCKLE.png"
+    },
+    ["WEAPON_MARKSMANPISTOL"] = {
+        Name = "Marksman Pistol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "3696079510",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["3696079510"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_MARKSMANPISTOL.png"
+    },
+    ["WEAPON_GUSENBERG"] = {
+        Name = "Gusenberg Sweeper",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1627465347",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1627465347"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_GUSENBERG.png"
+    },
+    ["WEAPON_RAILGUN"] = {
+        Name = "Railgun",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 345,
+        Value = 525,
+        Weight = 3,
+        Weapon = "1834241177",
+        Meta = {
+            Ammo = "",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false,
+            About = "."
+        },
+        Data = weapon_dump["1834241177"],
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 3
+        }, {
+            ItemRequired = "CarbonAlloy",
+            Quantity = 2
+        }, {
+            ItemRequired = "ShortBarrel",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "SMGFrame",
+            Quantity = 1
+        }, {
+            ItemRequired = "Reciever",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "WEAPON_RAILGUN.png"
+    },
+
 }
 
 c.json.Write(conf.file.items, c.items)

@@ -52,6 +52,8 @@ function c.item.ReturnPosition(name)
     return false
 end
 
-function c.item.SetEvent(name)
-
+function c.item.SetCB(name, func)
+    if type(func) == "function" then
+        c._itemcb[name] = func
+    end
 end
