@@ -3091,22 +3091,16 @@ c.items = { -- table of items
         Recipe = true,
         Materials = {{
             ItemRequired = "Rubber",
-            Quantity = 3
+            Quantity = 1
         }, {
-            ItemRequired = "CarbonAlloy",
+            ItemRequired = "Steel",
+            Quantity = 1
+        }, {
+            ItemRequired = "SmallFuse",
+            Quantity = 1
+        }, {
+            ItemRequired = "Batteries",
             Quantity = 2
-        }, {
-            ItemRequired = "ShortBarrel",
-            Quantity = 1
-        }, {
-            ItemRequired = "PistolPin",
-            Quantity = 1
-        }, {
-            ItemRequired = "SMGFrame",
-            Quantity = 1
-        }, {
-            ItemRequired = "Reciever",
-            Quantity = 1
         }},
         Stackable = false,
         Hotkey = true,
@@ -3135,21 +3129,15 @@ c.items = { -- table of items
         Recipe = true,
         Materials = {{
             ItemRequired = "Rubber",
-            Quantity = 3
+            Quantity = 1
         }, {
             ItemRequired = "CarbonAlloy",
-            Quantity = 2
+            Quantity = 1
         }, {
             ItemRequired = "ShortBarrel",
             Quantity = 1
         }, {
             ItemRequired = "PistolPin",
-            Quantity = 1
-        }, {
-            ItemRequired = "SMGFrame",
-            Quantity = 1
-        }, {
-            ItemRequired = "Reciever",
             Quantity = 1
         }},
         Stackable = false,
@@ -3179,18 +3167,15 @@ c.items = { -- table of items
         Recipe = true,
         Materials = {{
             ItemRequired = "Rubber",
-            Quantity = 3
+            Quantity = 1
         }, {
-            ItemRequired = "CarbonAlloy",
+            ItemRequired = "CeramicShards",
             Quantity = 2
         }, {
             ItemRequired = "ShortBarrel",
             Quantity = 1
         }, {
             ItemRequired = "PistolPin",
-            Quantity = 1
-        }, {
-            ItemRequired = "SMGFrame",
             Quantity = 1
         }, {
             ItemRequired = "Reciever",
@@ -3222,23 +3207,8 @@ c.items = { -- table of items
         Craftable = true,
         Recipe = true,
         Materials = {{
-            ItemRequired = "Rubber",
-            Quantity = 3
-        }, {
-            ItemRequired = "CarbonAlloy",
+            ItemRequired = "Steel",
             Quantity = 2
-        }, {
-            ItemRequired = "ShortBarrel",
-            Quantity = 1
-        }, {
-            ItemRequired = "PistolPin",
-            Quantity = 1
-        }, {
-            ItemRequired = "SMGFrame",
-            Quantity = 1
-        }, {
-            ItemRequired = "Reciever",
-            Quantity = 1
         }},
         Stackable = false,
         Hotkey = true,
@@ -3272,7 +3242,7 @@ c.items = { -- table of items
             ItemRequired = "CarbonAlloy",
             Quantity = 2
         }, {
-            ItemRequired = "ShortBarrel",
+            ItemRequired = "LongBarrel",
             Quantity = 1
         }, {
             ItemRequired = "PistolPin",
