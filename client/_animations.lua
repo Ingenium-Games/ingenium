@@ -62,8 +62,7 @@ function c.animation.AddAnimation(dict, anim, name)
                 Citizen.Await(p)
             end
         end
-        RegisterNetEvent("Client:Animation:"..name)
-        AddEventHandler("Client:Animation:"..name, function(bool, ped, cb, once)
+        RegisterNetEvent("Client:Animation:"..name, function(bool, ped, cb, once)
             c.animations[name](bool, ped, cb, once)
         end)
     end
