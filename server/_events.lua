@@ -18,13 +18,13 @@ function c.event.AddInteractJobEvent(job, name, cb)
         table.insert(c.events, eventname)
         --
         ExecuteCommand(("add_ace job.%s Server:Interact:%s allow"):format(job,name))
-        RegisterNetEvent(eventname, function(...)
+        RegisterNetEvent(eventname, function(options)
             -- Invoker
             local src = source
             -- Does Invoker have permissions to trigger this event, ig.target checks thier job prior to permiting
             if IsPlayerAceAllowed(src, eventname) then
                 -- Do Actions...
-                cb(...)
+                cb(options)
             else
                 c.eventban(src, eventname)
             end
