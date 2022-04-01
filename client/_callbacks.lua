@@ -60,12 +60,15 @@ local TeleportOnMarker = RegisterClientCallback({
         if DoesBlipExist(wp) then
             c.FadeOut(1000)
             local ords = GetBlipInfoIdCoord(wp)
-            RequestAdditionalCollisionAtCoord(ords)
-            local found, z = GetGroundZFor_3dCoord(ords["x"], ords["y"], ords["z"], true)
-            while not found do
+            for height = 1, 1000 do
+                SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
+                local found, z = GetGroundZFor_3dCoord(ords["x"], ords["y"], height + 0.0)
+                if found then
+                    SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
+                    break
+                end
                 Citizen.Wait(1)
             end
-            SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], z)
             c.FadeIn(1000)
         end
     end
