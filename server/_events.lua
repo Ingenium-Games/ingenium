@@ -10,7 +10,7 @@ NOTES
 --- func desc
 ---@param job string "Jobname used fro role permissions"
 ---@param name string "The final argument f the event"
----@param cb function "Trigger event once confirmed user is able to action event."
+---@param cb function "The function to call post event being triggered and once confirmed user is able to action event."
 function c.event.AddInteractJobEvent(job, name, cb)
     local eventname = ("Server:Interact:%s:%s"):format(name,job)
     if not c.events[eventname] then
@@ -18,15 +18,13 @@ function c.event.AddInteractJobEvent(job, name, cb)
         table.insert(c.events, eventname)
         --
         ExecuteCommand(("add_ace job.%s Server:Interact:%s:%s allow"):format(job,name,job))
-        RegisterNetEvent(eventname, function(o)
+        RegisterNetEvent(eventname, function(...)
             -- Invoker
             local src = source
-            -- Server side entity
-            local entity = NetworkGetEntityFromNetworkId(o.net)
             -- Does Invoker have permissions to trigger this event, ig.target checks thier job prior to permiting
             if IsPlayerAceAllowed(src, eventname) then
                 -- Do Actions...
-                cb(src, entity, o)
+                cb(...)
             else
                 c.eventban(src, eventname)
             end
