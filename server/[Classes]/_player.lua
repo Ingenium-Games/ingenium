@@ -597,7 +597,7 @@ function c.class.Player(source, character_id)
     ---@param inv any
     self.UnpackInventory = function(inv)
         local inv = inv or {}
-        print(c.table.Dump(inv))
+        --print(c.table.Dump(inv))
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
