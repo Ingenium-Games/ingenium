@@ -1,7 +1,5 @@
 -- ====================================================================================--
-
 c.animation = {}
-c.animations = {}
 --[[
 NOTES.
     - Animations are registered as events, this can be useful for creating scripts that force a level of immersion.
@@ -17,57 +15,6 @@ local function Getped(ped)
         return ped
     end
 end
-
-function c.animation.AddAnimation(dict, anim, name)
-    if not c.animations[name] then
-        c.animations[name] = function(bool, ped, cb, once)
-            local once = once or false
-            local p = promise.new()
-            local ped = Getped(ped)
-            local dict = c.check.String(dict)
-            local anim = c.check.String(anim)
-            --
-            if not DoesAnimDictExist(dict) then
-                c.debug_1("DoesAnimDictExist - "..dict.." Does not exist, please check the name.")
-                return
-            end
-            --
-            local duration = GetAnimDuration(dict, anim)
-            RequestAnimDict(dict)
-            while not HasAnimDictLoaded(dict) do
-                Citizen.Wait(100)
-            end
-            --
-            if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
-                TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-                c.data.SetLocalPlayerState("Animation", name, true)
-                if cb then
-                    cb(duration)
-                end
-                if once then
-                    Citizen.Wait(duration)
-                    if HasEntityAnimFinished(ped, dict, anim, 3) then
-                        p:resolve()
-                        RemoveAnimDict(dict)
-                        ClearPedTasks(ped)
-                    end
-                    Citizen.Await(p)
-                    c.data.SetLocalPlayerState("Animation", false, true)
-                end
-            else
-                ClearPedTasks(ped)
-                c.data.SetLocalPlayerState("Animation", false, true)
-                p:resolve()
-                RemoveAnimDict(dict)
-                Citizen.Await(p)
-            end
-        end
-        RegisterNetEvent("Client:Animation:"..name, function(bool, ped, cb, once)
-            c.animations[name](bool, ped, cb, once)
-        end)
-    end
-end
-
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:CrossedArms")
 AddEventHandler("Client:Animation:CrossedArms", function(bool, ped)
@@ -82,11 +29,19 @@ AddEventHandler("Client:Animation:CrossedArms", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetLocalPlayerState("Animation", "CrossedArms", true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "CrossedArms", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "CrossedArms", true)    
+        end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetLocalPlayerState("Animation", false, true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)    
+        end
         RemoveAnimDict(dict)
     end
 end)
@@ -104,11 +59,19 @@ AddEventHandler("Client:Animation:HandsUp", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetLocalPlayerState("Animation", "HandsUp", true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "HandsUp", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "HandsUp", true)   
+        end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetLocalPlayerState("Animation", false, true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)    
+        end
         RemoveAnimDict(dict)
     end
 end)
@@ -126,11 +89,19 @@ AddEventHandler("Client:Animation:ArmHold", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetLocalPlayerState("Animation", "ArmHold", true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "ArmHold", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "ArmHold", true)   
+        end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetLocalPlayerState("Animation", false, true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)   
+        end
         RemoveAnimDict(dict)
     end
 end)
@@ -148,11 +119,19 @@ AddEventHandler("Client:Animation:Mugging", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetLocalPlayerState("Animation", "Mugging", true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "Mugging", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "Mugging", true)
+        end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetLocalPlayerState("Animation", false, true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
         RemoveAnimDict(dict)
     end
 end)
@@ -170,26 +149,229 @@ AddEventHandler("Client:Animation:PickUp", function(bool, ped)
     --
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
-        c.data.SetLocalPlayerState("Animation", "PickUp", true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "PickUp", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "PickUp", true)
+        end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
-        c.data.SetLocalPlayerState("Animation", false, true)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
         RemoveAnimDict(dict)
     end
 end)
 -- ====================================================================================--
-
-c.animation.AddAnimation("random@getawaydriver", "gesture_nod_yes_hard", "Nod")
-c.animation.AddAnimation("mini@repair", "fixing_a_player", "Lockpick")
-c.animation.AddAnimation("mini@repair", "fixing_a_player", "RepairCar")
-c.animation.AddAnimation("random@arrests", "idle_c", "PhoneCall")
-c.animation.AddAnimation("random@car_thief@agitated@idle_a", "agitated_idle_a", "FacePalm")
--- Escort Player
-c.animation.AddAnimation("missfinale_c2mcs_1", "fin_c2_mcs_1_camman", "Escorting")
-c.animation.AddAnimation("amb@world_human_bum_slumped@male@laying_on_left_side@base", "base", "Escorted")
--- Cuff animation
-c.animation.AddAnimation("mp_arrest_paired", "crook_p2_back_right", "Cuffed")
-c.animation.AddAnimation("mp_arrest_paired", "cop_p2_back_right", "Cuffer")
--- surrender
-c.animation.AddAnimation("random@arrests@busted", "enter", "Surrender")
+RegisterNetEvent("Client:Animation:Escorting")
+AddEventHandler("Client:Animation:Escorting", function(bool, ped)
+    local ped = Getped(ped)
+    local dict = "missfinale_c2mcs_1"
+    local anim = "fin_c2_mcs_1_camman"
+    --
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Citizen.Wait(100)
+    end
+    --
+    if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
+        TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "Escorting", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "Escorting", true)
+        end
+        RemoveAnimDict(dict)
+    else
+        ClearPedTasks(ped)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
+        RemoveAnimDict(dict)
+    end
+end)
+-- ====================================================================================--
+RegisterNetEvent("Client:Animation:Escorted")
+AddEventHandler("Client:Animation:Escorted", function(bool, ped)
+    local ped = Getped(ped)
+    local dict = "amb@world_human_bum_slumped@male@laying_on_left_side@base"
+    local anim = "base"
+    --
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Citizen.Wait(100)
+    end
+    --
+    if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
+        TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "Escorted", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "Escorted", true)
+        end
+        RemoveAnimDict(dict)
+    else
+        ClearPedTasks(ped)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
+        RemoveAnimDict(dict)
+    end
+end)
+-- ====================================================================================--
+RegisterNetEvent("Client:Animation:Nod")
+AddEventHandler("Client:Animation:Nod", function(bool, ped)
+    local ped = Getped(ped)
+    local dict = "random@getawaydriver"
+    local anim = "gesture_nod_yes_hard"
+    --
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Citizen.Wait(100)
+    end
+    --
+    if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
+        TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "Nod", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "Nod", true)
+        end
+        RemoveAnimDict(dict)
+    else
+        ClearPedTasks(ped)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
+        RemoveAnimDict(dict)
+    end
+end)
+-- ====================================================================================--
+RegisterNetEvent("Client:Animation:Lockpick")
+AddEventHandler("Client:Animation:Lockpick", function(bool, ped)
+    local ped = Getped(ped)
+    local dict = "mini@repair"
+    local anim = "fixing_a_player"
+    --
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Citizen.Wait(100)
+    end
+    --
+    if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
+        TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "Lockpick", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "Lockpick", true)
+        end
+        RemoveAnimDict(dict)
+    else
+        ClearPedTasks(ped)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
+        RemoveAnimDict(dict)
+    end
+end)
+-- ====================================================================================--
+RegisterNetEvent("Client:Animation:Repair")
+AddEventHandler("Client:Animation:Repair", function(bool, ped)
+    local ped = Getped(ped)
+    local dict = "mini@repair"
+    local anim = "fixing_a_player"
+    --
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Citizen.Wait(100)
+    end
+    --
+    if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
+        TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "Repair", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "Repair", true)
+        end
+        RemoveAnimDict(dict)
+    else
+        ClearPedTasks(ped)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
+        RemoveAnimDict(dict)
+    end
+end)
+-- ====================================================================================--
+RegisterNetEvent("Client:Animation:PhoneCall")
+AddEventHandler("Client:Animation:PhoneCall", function(bool, ped)
+    local ped = Getped(ped)
+    local dict = "random@arrests"
+    local anim = "idle_c"
+    --
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Citizen.Wait(100)
+    end
+    --
+    if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
+        TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "PhoneCall", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "PhoneCall", true)
+        end
+        RemoveAnimDict(dict)
+    else
+        ClearPedTasks(ped)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
+        RemoveAnimDict(dict)
+    end
+end)
+-- ====================================================================================--
+RegisterNetEvent("Client:Animation:FacePalm")
+AddEventHandler("Client:Animation:FacePalm", function(bool, ped)
+    local ped = Getped(ped)
+    local dict = "random@car_thief@agitated@idle_a"
+    local anim = "agitated_idle_a"
+    --
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Citizen.Wait(100)
+    end
+    --
+    if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
+        TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", "FacePalm", true)
+        else
+            c.data.SetEntityState(ped, "Animation", "FacePalm", true)
+        end
+        RemoveAnimDict(dict)
+    else
+        ClearPedTasks(ped)
+        if IsPedAPlayer(ped) then
+            c.data.SetLocalPlayerState("Animation", false, true)
+        else
+            c.data.SetEntityState(ped, "Animation", false, true)
+        end
+        RemoveAnimDict(dict)
+    end
+end)

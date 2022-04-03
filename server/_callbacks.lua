@@ -28,3 +28,10 @@ local GetActiveWorkers = RegisterServerCallback({
         return c.job.ActiveMembers()
     end
 })
+
+local UseItem = RegisterServerCallback({
+    eventName = "UseItem",
+    eventCallback = function(source, slot)
+        
+    end
+})
