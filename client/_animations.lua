@@ -30,17 +30,13 @@ AddEventHandler("Client:Animation:CrossedArms", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "CrossedArms", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "CrossedArms", true)    
+            c.data.SetLocalPlayerState("Animation", "CrossedArms", true) 
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)    
         end
         RemoveAnimDict(dict)
     end
@@ -61,16 +57,12 @@ AddEventHandler("Client:Animation:HandsUp", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "HandsUp", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "HandsUp", true)   
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)    
+            c.data.SetLocalPlayerState("Animation", false, true) 
         end
         RemoveAnimDict(dict)
     end
@@ -91,16 +83,12 @@ AddEventHandler("Client:Animation:ArmHold", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "ArmHold", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "ArmHold", true)   
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)   
         end
         RemoveAnimDict(dict)
     end
@@ -121,16 +109,12 @@ AddEventHandler("Client:Animation:Mugging", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "Mugging", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "Mugging", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -151,16 +135,12 @@ AddEventHandler("Client:Animation:PickUp", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "PickUp", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "PickUp", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -181,16 +161,12 @@ AddEventHandler("Client:Animation:Escorting", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "Escorting", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "Escorting", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -211,16 +187,12 @@ AddEventHandler("Client:Animation:Escorted", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "Escorted", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "Escorted", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -241,16 +213,12 @@ AddEventHandler("Client:Animation:Nod", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "Nod", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "Nod", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -271,16 +239,12 @@ AddEventHandler("Client:Animation:Lockpick", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "Lockpick", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "Lockpick", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -301,16 +265,12 @@ AddEventHandler("Client:Animation:Repair", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "Repair", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "Repair", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -331,16 +291,12 @@ AddEventHandler("Client:Animation:PhoneCall", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "PhoneCall", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "PhoneCall", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -361,16 +317,12 @@ AddEventHandler("Client:Animation:FacePalm", function(bool, ped)
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", "FacePalm", true)
-        else
-            c.data.SetEntityState(ped, "Animation", "FacePalm", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
             c.data.SetLocalPlayerState("Animation", false, true)
-        else
-            c.data.SetEntityState(ped, "Animation", false, true)
         end
         RemoveAnimDict(dict)
     end

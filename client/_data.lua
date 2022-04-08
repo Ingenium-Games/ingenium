@@ -126,12 +126,6 @@ function c.data.GetEntityState(ent,key)
     return Entity(ent).state[key]
 end
 
---- Set the Entity"s state bag.
----@param ent any "Entity"
-function c.data.SetEntityState(ent,key,value,sync)    
-    Entity(ent).state:set(key, value, sync)
-end
-
 --- Return the Entity"s state bag.
 ---@param ent any "Entity"
 function c.GetEntityState(ent,key)    
