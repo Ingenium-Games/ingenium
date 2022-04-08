@@ -15,6 +15,7 @@ function c.class.Job(tab)
     self.Description = tab.Description
     self.Accounts = tab.Accounts
     self.Inventory = tab.Inventory
+    self.Supplies = tab.Supplies
 
     --- func desc
     self.GetName = function()
@@ -208,6 +209,28 @@ function c.class.Job(tab)
         self.AddMember(member)
         self.Boss = member
     end
+    ---
+    self.GetSupplyLevel = function()
+        return self.Supplies
+    end
+    ---
+    ---
+    self.SetSupplyLevel = function(num)
+        local v = c.math.Decimals(num, 0)
+        self.Supplies = v
+    end
+    ---
+    ---
+    self.AddSupplies = function(num)
+        local v = c.math.Decimals(num, 0)
+        self.Supplies = self.Supplies + v
+    end
+    ---
+    ---
+    self.RemoveSupplies = function(num)
+        local v = c.math.Decimals(num, 0)
+        self.Supplies = self.Supplies - v
+    end
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
@@ -216,11 +239,11 @@ function c.class.Job(tab)
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
-                ["Item"] = inv[i][1],
-                ["Quantity"] = inv[i][2],
-                ["Quality"] = inv[i][3],
-                ["Weapon"] = inv[i][4],
-                ["Meta"] = inv[i][5]
+                ["Item"] = inv[i]["Item"] or inv[i][1],
+                ["Quantity"] = inv[i]["Quantity"] or inv[i][2],
+                ["Quality"] = inv[i]["Quality"] or inv[i][3],
+                ["Weapon"] = inv[i]["Weapon"] or inv[i][4],
+                ["Meta"] = inv[i]["Meta"] or inv[i][5]
             }
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then

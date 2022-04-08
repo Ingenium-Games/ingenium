@@ -274,11 +274,11 @@ function c.class.Vehicle(net, plate)
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
-                ["Item"] = inv[i][1],
-                ["Quantity"] = inv[i][2],
-                ["Quality"] = inv[i][3],
-                ["Weapon"] = inv[i][4],
-                ["Meta"] = inv[i][5]
+                ["Item"] = inv[i]["Item"] or inv[i][1],
+                ["Quantity"] = inv[i]["Quantity"] or inv[i][2],
+                ["Quality"] = inv[i]["Quality"] or inv[i][3],
+                ["Weapon"] = inv[i]["Weapon"] or inv[i][4],
+                ["Meta"] = inv[i]["Meta"] or inv[i][5]
             }
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
