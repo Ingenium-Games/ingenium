@@ -214,25 +214,31 @@ function c.class.Job(tab)
         return self.Supplies
     end
     ---
-    ---
+    --- func desc
+    ---@param num "number"
     self.SetSupplyLevel = function(num)
+        local num = c.check.Number(num)
         local v = c.math.Decimals(num, 0)
         self.Supplies = v
     end
     ---
-    ---
+    --- func desc
+    ---@param num "number"
     self.AddSupplies = function(num)
+        local num = c.check.Number(num)
         local v = c.math.Decimals(num, 0)
         self.Supplies = self.Supplies + v
     end
     ---
-    ---
+    --- func desc
+    ---@param num "number"
     self.RemoveSupplies = function(num)
+        local num = c.check.Number(num)
         local v = c.math.Decimals(num, 0)
         self.Supplies = self.Supplies - v
     end
     --- func desc
-    ---@param inv any
+    ---@param inv "table"
     self.UnpackInventory = function(inv)
         local inv = inv or {}
         --
