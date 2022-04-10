@@ -73,7 +73,7 @@ AddEventHandler("Server:Character:OffDuty", function(req)
     local src = req or source
     if conf.enableduty then
         CurrentlyActive[src] = "OffDuty"
-        TriggerClientEvent("Client:Character:OffDuty",src)
+        TriggerClientEvent("Client:Character:OffDuty", src)
     else
         c.debug_1("Ability to go off duty has ben disabled.")
     end
@@ -85,7 +85,7 @@ AddEventHandler("Server:Character:OnDuty", function(req)
     local xPlayer = c.data.GetPlayer(src)
     if conf.enableduty then
         CurrentlyActive[src] = xPlayer.GetJob()
-        TriggerClientEvent("Client:Character:OnDuty",src)
+        TriggerClientEvent("Client:Character:OnDuty", src, CurrentlyActive[src])
     else
         c.debug_1("Ability to go on duty has ben disabled.")
     end
@@ -95,7 +95,7 @@ end)
 -- t = {name = "police", grade = 1}, Job and then Grade
 AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
-    CurrentlyActive[src] = data
+    CurrentlyActive[src] = "OffDuty"
     -- print(c.table.Dump(CurrentlyActive))
 end)
 

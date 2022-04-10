@@ -148,10 +148,10 @@ AddEventHandler("Client:Character:OffDuty", function()
 end)
 
 RegisterNetEvent("Client:Character:OnDuty")
-AddEventHandler("Client:Character:OnDuty", function()
+AddEventHandler("Client:Character:OnDuty", function(job)
     if conf.enableduty then
         -- Add Functions or Hooks here!
-    
+        
     else
         c.debug_3("Ability to go on duty has ben disabled.")
     end
