@@ -11,6 +11,16 @@ RegisterCommand("accounts", function(source, args, rawCommand)
     end
 end, false)
 
+RegisterCommand("duty", function(source, args, rawCommand)
+    local src = tonumber(source)
+    local xPlayer = c.data.GetPlayer(src)
+    if xPlayer.OnDuty() then
+        TriggerEvent('Server:Character:OffDuty', src)
+    else
+        TriggerEvent('Server:Character:OnDuty', src)    
+    end
+end, false)
+
 ExecuteCommand("add_ace group.public command.switch allow")
 RegisterCommand("switch", function(source, args, rawCommand)
     local src = source

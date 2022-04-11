@@ -68,23 +68,23 @@ function c.DoesJobExist(name, grade)
     return c.job.Exist(name, grade)
 end
 
-RegisterNetEvent("Server:Character:OffDuty")
-AddEventHandler("Server:Character:OffDuty", function(req)
+RegisterNetEvent("Server:Character:OffDuty", function(req)
     local src = req or source
     if conf.enableduty then
         CurrentlyActive[src] = "OffDuty"
+        xPlayer.SetDuty(false)
         TriggerClientEvent("Client:Character:OffDuty", src)
     else
         c.debug_1("Ability to go off duty has ben disabled.")
     end
 end)
 
-RegisterNetEvent("Server:Character:OnDuty")
-AddEventHandler("Server:Character:OnDuty", function(req)
+RegisterNetEvent("Server:Character:OnDuty", function(req)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
     if conf.enableduty then
         CurrentlyActive[src] = xPlayer.GetJob()
+        xPlayer.SetDuty(true)
         TriggerClientEvent("Client:Character:OnDuty", src, CurrentlyActive[src])
     else
         c.debug_1("Ability to go on duty has ben disabled.")

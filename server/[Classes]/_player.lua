@@ -123,6 +123,8 @@ function c.class.Player(source, character_id)
     self.IsSupporter = user.Supporter
     self.State.IsSupporter = self.IsSupporter
     --
+    self.Duty = false
+    self.State.Duty = false
     -- Tables (JSONIZE)
     self.Job = json.decode(char.Job)
     self.State.Job = self.Job.Name
@@ -322,6 +324,15 @@ function c.class.Player(source, character_id)
                 return v
             end
         end
+    end
+    --
+    self.OnDuty = function()
+        return self.Duty
+    end
+    --
+    self.SetDuty = function(b)
+        local bool = c.check.Boolean(b)
+        self.Duty = bool
     end
     --
     self.GetAccounts = function()
