@@ -2,6 +2,29 @@
 local weapon_dump = exports["ig.dump"]:GetWeapons()
 -- ====================================================================================--
 
+--[[
+    [""] = {
+        Name = "",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = ".png"
+    },
+]] --
+
 c.items = { -- table of items
 
     -- ====================================================================================--
@@ -24,6 +47,7 @@ c.items = { -- table of items
         Recipe = false,
         Materials = false,
         Stackable = true,
+        Consumeable = false,
         Hotkey = false,
         Image = "Cash.png"
     },
@@ -48,6 +72,8 @@ c.items = { -- table of items
         Weapon = "2578778090",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -66,6 +92,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_KNIFE.png"
     },
     ["WEAPON_NIGHTSTICK"] = {
@@ -80,6 +107,8 @@ c.items = { -- table of items
         Weapon = "1737195953",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -98,6 +127,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_NIGHTSTICK.png"
     },
     ["WEAPON_HAMMER"] = {
@@ -112,6 +142,8 @@ c.items = { -- table of items
         Weapon = "1317494643",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -130,6 +162,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_HAMMER.png"
     },
     ["WEAPON_BAT"] = {
@@ -144,6 +177,8 @@ c.items = { -- table of items
         Weapon = "2508868239",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -162,6 +197,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_BAT.png"
     },
     ["WEAPON_GOLFCLUB"] = {
@@ -176,6 +212,8 @@ c.items = { -- table of items
         Weapon = "1141786504",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -197,6 +235,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_GOLFCLUB.png"
     },
     ["WEAPON_CROWBAR"] = {
@@ -211,6 +250,8 @@ c.items = { -- table of items
         Weapon = "2508868239",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -229,6 +270,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_CROWBAR.png"
     },
     ["WEAPON_SWITCHBLADE"] = {
@@ -243,6 +285,8 @@ c.items = { -- table of items
         Weapon = "3756226112",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -264,6 +308,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SWITCHBLADE.png"
     },
     ["WEAPON_STONE_HATCHET"] = {
@@ -278,6 +323,8 @@ c.items = { -- table of items
         Weapon = "940833800",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -299,6 +346,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_STONE_HATCHET.png"
     },
     ["WEAPON_BOTTLE"] = {
@@ -313,6 +361,8 @@ c.items = { -- table of items
         Weapon = "4192643659",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -334,6 +384,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_BOTTLE.png"
     },
     ["WEAPON_BATTLEAXE"] = {
@@ -348,6 +399,8 @@ c.items = { -- table of items
         Weapon = "4192643659",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -372,6 +425,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_BATTLEAXE.png"
     },
     ["WEAPON_POOLCUE"] = {
@@ -386,6 +440,8 @@ c.items = { -- table of items
         Weapon = "2484171525",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -410,6 +466,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_POOLCUE.png"
     },
     ["WEAPON_WRENCH"] = {
@@ -424,6 +481,8 @@ c.items = { -- table of items
         Weapon = "419712736",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -436,6 +495,7 @@ c.items = { -- table of items
         Materials = {},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_WRENCH.png"
     },
     ["WEAPON_DAGGER"] = {
@@ -450,6 +510,8 @@ c.items = { -- table of items
         Weapon = "2460120199",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -462,6 +524,7 @@ c.items = { -- table of items
         Materials = {},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_DAGGER.png"
     },
     ["WEAPON_MACHETE"] = {
@@ -476,6 +539,8 @@ c.items = { -- table of items
         Weapon = "3713923289",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -488,6 +553,7 @@ c.items = { -- table of items
         Materials = {},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MACHETE.png"
     },
     ["WEAPON_HATCHET"] = {
@@ -502,6 +568,8 @@ c.items = { -- table of items
         Weapon = "4191993645",
         Meta = {
             Ammo = false,
+            Attachments = {},
+
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -514,6 +582,7 @@ c.items = { -- table of items
         Materials = {},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_HATCHET.png"
     },
 
@@ -533,6 +602,8 @@ c.items = { -- table of items
         Weapon = "453432689",
         Meta = {
             Ammo = "9mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -563,6 +634,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_PISTOL.png"
     },
     ["WEAPON_SNSPISTOL"] = {
@@ -577,6 +649,8 @@ c.items = { -- table of items
         Weapon = "3218215474",
         Meta = {
             Ammo = "9mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -598,6 +672,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SNSPISTOL.png"
     },
     ["WEAPON_COMBATPISTOL"] = {
@@ -612,6 +687,8 @@ c.items = { -- table of items
         Weapon = "1593441988",
         Meta = {
             Ammo = "9mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -642,6 +719,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_COMBATPISTOL.png"
     },
     ["WEAPON_APPISTOL"] = {
@@ -656,6 +734,8 @@ c.items = { -- table of items
         Weapon = "584646201",
         Meta = {
             Ammo = "9mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -686,6 +766,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_APPISTOL.png"
     },
     ["WEAPON_PISTOL50"] = {
@@ -700,6 +781,8 @@ c.items = { -- table of items
         Weapon = "2578377531",
         Meta = {
             Ammo = "9mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -730,6 +813,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_PISTOL50.png"
     },
     -- SMG
@@ -745,6 +829,8 @@ c.items = { -- table of items
         Weapon = "324215364",
         Meta = {
             Ammo = "9mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -775,6 +861,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MICROSMG.png"
     },
     ["WEAPON_SMG"] = {
@@ -789,6 +876,8 @@ c.items = { -- table of items
         Weapon = "736523883",
         Meta = {
             Ammo = "9mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -819,6 +908,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SMG.png"
     },
     ["WEAPON_ASSAULTSMG"] = {
@@ -833,6 +923,8 @@ c.items = { -- table of items
         Weapon = "736523883",
         Meta = {
             Ammo = "9mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -863,6 +955,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_ASSAULTSMG.png"
     },
     -- Assualt Rifles
@@ -878,6 +971,8 @@ c.items = { -- table of items
         Weapon = "3220176749",
         Meta = {
             Ammo = "5.56mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -908,6 +1003,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_ASSAULTRIFLE.png"
     },
     ["WEAPON_CARBINERIFLE"] = {
@@ -922,6 +1018,8 @@ c.items = { -- table of items
         Weapon = "2210333304",
         Meta = {
             Ammo = "5.56mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -952,6 +1050,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_CARBINERIFLE.png"
     },
     ["WEAPON_ADVANCEDRIFLE"] = {
@@ -966,6 +1065,8 @@ c.items = { -- table of items
         Weapon = "2937143193",
         Meta = {
             Ammo = "5.56mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -996,6 +1097,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_ADVANCEDRIFLE.png"
     },
     ["WEAPON_MG"] = {
@@ -1010,6 +1112,8 @@ c.items = { -- table of items
         Weapon = "2634544996",
         Meta = {
             Ammo = "5.56mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1040,6 +1144,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MG.png"
     },
     ["WEAPON_COMBATMG"] = {
@@ -1054,6 +1159,8 @@ c.items = { -- table of items
         Weapon = "2144741730",
         Meta = {
             Ammo = "5.56mm",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1084,6 +1191,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_COMBATMG.png"
     },
     ["WEAPON_PUMPSHOTGUN"] = {
@@ -1098,6 +1206,8 @@ c.items = { -- table of items
         Weapon = "487013001",
         Meta = {
             Ammo = "20g",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1128,6 +1238,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_PUMPSHOTGUN.png"
     },
     ["WEAPON_SAWNOFFSHOTGUN"] = {
@@ -1142,6 +1253,8 @@ c.items = { -- table of items
         Weapon = "2017895192",
         Meta = {
             Ammo = "20g",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1172,6 +1285,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SAWNOFFSHOTGUN.png"
     },
     ["WEAPON_ASSAULTSHOTGUN"] = {
@@ -1186,6 +1300,8 @@ c.items = { -- table of items
         Weapon = "3800352039",
         Meta = {
             Ammo = "20g",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1216,6 +1332,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_ASSAULTSHOTGUN.png"
     },
     ["WEAPON_BULLPUPSHOTGUN"] = {
@@ -1230,6 +1347,8 @@ c.items = { -- table of items
         Weapon = "2640438543",
         Meta = {
             Ammo = "20g",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1260,6 +1379,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_BULLPUPSHOTGUN.png"
     },
     ["WEAPON_STUNGUN"] = {
@@ -1274,6 +1394,8 @@ c.items = { -- table of items
         Weapon = "911657153",
         Meta = {
             Ammo = "Electrodes",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1304,6 +1426,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_STUNGUN.png"
     },
     ["WEAPON_SNIPERRIFLE"] = {
@@ -1318,6 +1441,8 @@ c.items = { -- table of items
         Weapon = "100416529",
         Meta = {
             Ammo = ".223",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1348,6 +1473,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SNIPERRIFLE.png"
     },
     ["WEAPON_HEAVYSNIPER"] = {
@@ -1362,6 +1488,8 @@ c.items = { -- table of items
         Weapon = "205991906",
         Meta = {
             Ammo = ".308",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1392,6 +1520,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_HEAVYSNIPER.png"
     },
     ["WEAPON_GRENADELAUNCHER"] = {
@@ -1436,6 +1565,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_GRENADELAUNCHER.png"
     },
 
@@ -1481,6 +1611,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_GRENADELAUNCHER_SMOKE.png"
     },
 
@@ -1526,6 +1657,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_RPG.png"
     },
     ["WEAPON_MINIGUN"] = {
@@ -1570,6 +1702,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MINIGUN.png"
     },
     ["WEAPON_GRENADE"] = {
@@ -1614,6 +1747,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_GRENADE.png"
     },
     ["WEAPON_STICKYBOMB"] = {
@@ -1658,6 +1792,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_STICKYBOMB.png"
     },
     ["WEAPON_SMOKEGRENADE"] = {
@@ -1702,6 +1837,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SMOKEGRENADE.png"
     },
     ["WEAPON_BZGAS"] = {
@@ -1746,6 +1882,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_BZGAS.png"
     },
     ["WEAPON_MOLOTOV"] = {
@@ -1790,6 +1927,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MOLOTOV.png"
     },
     ["WEAPON_FIREEXTINGUISHER"] = {
@@ -1834,6 +1972,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_FIREEXTINGUISHER.png"
     },
     ["WEAPON_PETROLCAN"] = {
@@ -1878,6 +2017,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_PETROLCAN.png"
     },
     ["WEAPON_BALL"] = {
@@ -1922,6 +2062,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_BALL.png"
     },
     ["WEAPON_REVOLVER"] = {
@@ -1936,6 +2077,8 @@ c.items = { -- table of items
         Weapon = "3249783761",
         Meta = {
             Ammo = ".308",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -1966,6 +2109,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_REVOLVER.png"
     },
     ["WEAPON_AUTOSHOTGUN"] = {
@@ -1980,6 +2124,8 @@ c.items = { -- table of items
         Weapon = "317205821",
         Meta = {
             Ammo = ".308",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2010,6 +2156,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_AUTOSHOTGUN.png"
     },
     ["WEAPON_COMPACTLAUNCHER"] = {
@@ -2024,6 +2171,8 @@ c.items = { -- table of items
         Weapon = "125959754",
         Meta = {
             Ammo = ".308",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2054,6 +2203,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_COMPACTLAUNCHER.png"
     },
     ["WEAPON_PIPEBOMB"] = {
@@ -2068,6 +2218,8 @@ c.items = { -- table of items
         Weapon = "3125143736",
         Meta = {
             Ammo = ".308",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2098,6 +2250,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_PIPEBOMB.png"
     },
     ["WEAPON_HEAVYPISTOL"] = {
@@ -2112,6 +2265,8 @@ c.items = { -- table of items
         Weapon = "3523564046",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2142,6 +2297,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_HEAVYPISTOL.png"
     },
     ["WEAPON_SPECIALCARBINE"] = {
@@ -2156,6 +2312,8 @@ c.items = { -- table of items
         Weapon = "3231910285",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2186,6 +2344,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SPECIALCARBINE.png"
     },
     ["WEAPON_BULLPUPRIFLE"] = {
@@ -2200,6 +2359,8 @@ c.items = { -- table of items
         Weapon = "2132975508",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2230,6 +2391,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_BULLPUPRIFLE.png"
     },
     ["WEAPON_HOMINGLAUNCHER"] = {
@@ -2244,6 +2406,8 @@ c.items = { -- table of items
         Weapon = "1672152130",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2274,6 +2438,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_HOMINGLAUNCHER.png"
     },
     ["WEAPON_PROXMINE"] = {
@@ -2288,6 +2453,8 @@ c.items = { -- table of items
         Weapon = "2874559379",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2318,6 +2485,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_PROXMINE.png"
     },
     ["WEAPON_SNOWBALL"] = {
@@ -2332,6 +2500,8 @@ c.items = { -- table of items
         Weapon = "126349499",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2362,6 +2532,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SNOWBALL.png"
     },
     ["WEAPON_BULLPUPRIFLE_MK2"] = {
@@ -2376,6 +2547,8 @@ c.items = { -- table of items
         Weapon = "2228681469",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2406,6 +2579,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_BULLPUPRIFLE_MK2.png"
     },
     ["WEAPON_DOUBLEACTION"] = {
@@ -2420,6 +2594,8 @@ c.items = { -- table of items
         Weapon = "2548703416",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2450,6 +2626,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_DOUBLEACTION.png"
     },
     ["WEAPON_MARKSMANRIFLE_MK2"] = {
@@ -2464,6 +2641,8 @@ c.items = { -- table of items
         Weapon = "1785463520",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2494,6 +2673,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MARKSMANRIFLE_MK2.png"
     },
     ["WEAPON_PUMPSHOTGUN_MK2"] = {
@@ -2508,6 +2688,8 @@ c.items = { -- table of items
         Weapon = "1432025498",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2538,6 +2720,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_PUMPSHOTGUN_MK2.png"
     },
     ["WEAPON_REVOLVER_MK2"] = {
@@ -2552,6 +2735,8 @@ c.items = { -- table of items
         Weapon = "3415619887",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2582,6 +2767,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_REVOLVER_MK2.png"
     },
     ["WEAPON_SNSPISTOL_MK2"] = {
@@ -2596,6 +2782,8 @@ c.items = { -- table of items
         Weapon = "2285322324",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2626,6 +2814,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SNSPISTOL_MK2.png"
     },
     ["WEAPON_SPECIALCARBINE_MK2"] = {
@@ -2640,6 +2829,8 @@ c.items = { -- table of items
         Weapon = "2526821735",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2670,6 +2861,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SPECIALCARBINE_MK2.png"
     },
     ["WEAPON_RAYPISTOL"] = {
@@ -2684,6 +2876,8 @@ c.items = { -- table of items
         Weapon = "2939590305",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2714,6 +2908,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_RAYPISTOL.png"
     },
     ["WEAPON_RAYCARBINE"] = {
@@ -2728,6 +2923,8 @@ c.items = { -- table of items
         Weapon = "1198256469",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2758,6 +2955,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_RAYCARBINE.png"
     },
     ["WEAPON_RAYMINIGUN"] = {
@@ -2772,6 +2970,8 @@ c.items = { -- table of items
         Weapon = "3056410471",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2802,6 +3002,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_RAYMINIGUN.png"
     },
     ["WEAPON_ASSAULTRIFLE_MK2"] = {
@@ -2816,6 +3017,8 @@ c.items = { -- table of items
         Weapon = "961495388",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2846,6 +3049,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_ASSAULTRIFLE_MK2.png"
     },
     ["WEAPON_CARBINERIFLE_MK2"] = {
@@ -2860,6 +3064,8 @@ c.items = { -- table of items
         Weapon = "4208062921",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2890,6 +3096,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_CARBINERIFLE_MK2.png"
     },
     ["WEAPON_COMBATMG_MK2"] = {
@@ -2904,6 +3111,8 @@ c.items = { -- table of items
         Weapon = "3686625920",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2934,6 +3143,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_COMBATMG_MK2.png"
     },
     ["WEAPON_HEAVYSNIPER_MK2"] = {
@@ -2948,6 +3158,8 @@ c.items = { -- table of items
         Weapon = "177293209",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -2978,6 +3190,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_HEAVYSNIPER_MK2.png"
     },
     ["WEAPON_PISTOL_MK2"] = {
@@ -2992,6 +3205,8 @@ c.items = { -- table of items
         Weapon = "3219281620",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3022,6 +3237,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_PISTOL_MK2.png"
     },
     ["WEAPON_SMG_MK2"] = {
@@ -3036,6 +3252,8 @@ c.items = { -- table of items
         Weapon = "2024373456",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3066,6 +3284,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_SMG_MK2.png"
     },
     ["WEAPON_FLASHLIGHT"] = {
@@ -3080,6 +3299,8 @@ c.items = { -- table of items
         Weapon = "2343591895",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3104,6 +3325,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_FLASHLIGHT.png"
     },
     ["WEAPON_FLAREGUN"] = {
@@ -3118,6 +3340,8 @@ c.items = { -- table of items
         Weapon = "1198879012",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3142,6 +3366,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_FLAREGUN.png"
     },
     ["WEAPON_CERAMICPISTOL"] = {
@@ -3156,6 +3381,8 @@ c.items = { -- table of items
         Weapon = "727643628",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3183,6 +3410,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_CERAMICPISTOL.png"
     },
     ["WEAPON_HAZARDCAN"] = {
@@ -3197,6 +3425,8 @@ c.items = { -- table of items
         Weapon = "3126027122",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3212,6 +3442,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_HAZARDCAN.png"
     },
     ["WEAPON_COMBATSHOTGUN"] = {
@@ -3226,6 +3457,8 @@ c.items = { -- table of items
         Weapon = "94989220",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3256,6 +3489,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_COMBATSHOTGUN.png"
     },
     ["WEAPON_GADGETPISTOL"] = {
@@ -3270,6 +3504,8 @@ c.items = { -- table of items
         Weapon = "1470379660",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3300,6 +3536,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_GADGETPISTOL.png"
     },
     ["WEAPON_MILITARYRIFLE"] = {
@@ -3314,6 +3551,8 @@ c.items = { -- table of items
         Weapon = "2636060646",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3344,6 +3583,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MILITARYRIFLE.png"
     },
     ["WEAPON_FIREWORK"] = {
@@ -3358,6 +3598,8 @@ c.items = { -- table of items
         Weapon = "2138347493",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3388,6 +3630,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_FIREWORK.png"
     },
     ["WEAPON_VINTAGEPISTOL"] = {
@@ -3402,6 +3645,8 @@ c.items = { -- table of items
         Weapon = "137902532",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3432,6 +3677,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_VINTAGEPISTOL.png"
     },
     ["WEAPON_MUSKET"] = {
@@ -3446,6 +3692,8 @@ c.items = { -- table of items
         Weapon = "2828843422",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3476,6 +3724,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MUSKET.png"
     },
     ["WEAPON_MACHINEPISTOL"] = {
@@ -3490,6 +3739,8 @@ c.items = { -- table of items
         Weapon = "3675956304",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3520,6 +3771,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MACHINEPISTOL.png"
     },
     ["WEAPON_COMPACTRIFLE"] = {
@@ -3534,6 +3786,8 @@ c.items = { -- table of items
         Weapon = "1649403952",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3564,6 +3818,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_COMPACTRIFLE.png"
     },
     ["WEAPON_DBSHOTGUN"] = {
@@ -3578,6 +3833,8 @@ c.items = { -- table of items
         Weapon = "4019527611",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3608,6 +3865,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_DBSHOTGUN.png"
     },
     ["WEAPON_HEAVYSHOTGUN"] = {
@@ -3622,6 +3880,8 @@ c.items = { -- table of items
         Weapon = "984333226",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3652,6 +3912,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_HEAVYSHOTGUN.png"
     },
     ["WEAPON_MARKSMANRIFLE"] = {
@@ -3666,6 +3927,8 @@ c.items = { -- table of items
         Weapon = "3342088282",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3696,6 +3959,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MARKSMANRIFLE.png"
     },
     ["WEAPON_COMBATPDW"] = {
@@ -3710,6 +3974,8 @@ c.items = { -- table of items
         Weapon = "171789620",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3740,6 +4006,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_COMBATPDW.png"
     },
     ["WEAPON_KNUCKLE"] = {
@@ -3754,6 +4021,8 @@ c.items = { -- table of items
         Weapon = "3638508604",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3784,6 +4053,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_KNUCKLE.png"
     },
     ["WEAPON_MARKSMANPISTOL"] = {
@@ -3798,6 +4068,8 @@ c.items = { -- table of items
         Weapon = "3696079510",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3828,6 +4100,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_MARKSMANPISTOL.png"
     },
     ["WEAPON_GUSENBERG"] = {
@@ -3842,6 +4115,8 @@ c.items = { -- table of items
         Weapon = "1627465347",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3872,6 +4147,7 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_GUSENBERG.png"
     },
     ["WEAPON_RAILGUN"] = {
@@ -3886,6 +4162,8 @@ c.items = { -- table of items
         Weapon = "1834241177",
         Meta = {
             Ammo = "",
+            Attachments = {},
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3916,8 +4194,9 @@ c.items = { -- table of items
         }},
         Stackable = false,
         Hotkey = true,
+        Consumeable = false,
         Image = "WEAPON_RAILGUN.png"
-    },
+    }
 
 }
 

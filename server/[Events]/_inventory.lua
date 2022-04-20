@@ -10,14 +10,20 @@ for k,v in pairs (c.items) do
         local quantity = quantity or 1
         local postition = position
         --
-        if c.item[v].weapon == true then
-            TriggerClientCallback({
-                source = src,
-                eventName = "Client:Equip:Weapon",
-                args = {v}
-            })
+        if c.item[v].Weapon == true then
+            -- To Do
+            -- Ammo Count as item find callback
+
         end
         --
-        
+        if c.item[v].Consumeable == true then
+            TriggerClientCallback({
+                source = src,
+                eventName = "Client:Item:Consume",
+                args = {Name = v, Quantity = quantity}
+            })
+            return
+        end
+        --
     end)
 end
