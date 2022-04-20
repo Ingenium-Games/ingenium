@@ -15,6 +15,7 @@ function c.class.Player(source, character_id)
     self.State = Player(self.ID).state
     --
     self.Entity = GetPlayerPed(tostring(src))
+    self.Ped = self.Entity
     --
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
@@ -133,6 +134,8 @@ function c.class.Player(source, character_id)
     --
     self.Coords = json.decode(char.Coords)
     self.OldCoords = self.Coords
+    --
+    self.Ammo = json.decode(char.Ammo)
     --
     self.Accounts = json.decode(char.Accounts)
     self.State.Cash = self.Accounts.Cash
@@ -363,7 +366,6 @@ function c.class.Player(source, character_id)
         if cash then
             self.State.Cash = cash
         end
-
         if bank then
             self.State.Bank = bank
         end
@@ -383,12 +385,12 @@ function c.class.Player(source, character_id)
             acc = c.math.Decimals(num, 0)
             if acc < 0 then
                 acc = 0
-                CancelEvent()
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
                 c.debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
+                        CancelEvent()
             else
                 self.SetAccount("Cash", acc)
                 self.State.Cash = acc
@@ -403,12 +405,12 @@ function c.class.Player(source, character_id)
             acc = acc + c.math.Decimals(num, 0)
             if acc < 0 then
                 acc = 0
-                CancelEvent()
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
                 c.debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
+                        CancelEvent()
             else
                 self.SetAccount("Cash", acc)
                 self.State.Cash = acc
@@ -423,12 +425,12 @@ function c.class.Player(source, character_id)
             acc = acc - c.math.Decimals(num, 0)
             if acc < 0 then
                 acc = 0
-                CancelEvent()
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
                 c.debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
+                        CancelEvent()
             else
                 self.SetAccount("Cash", acc)
                 self.State.Cash = acc
@@ -470,6 +472,54 @@ function c.class.Player(source, character_id)
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
         end
+    end
+    --
+    self.GetAmmo = function(type)
+        for k, v in pairs(self.Ammo) do
+            if k == type then
+                return v
+            end
+        end
+        return 0
+    end
+    --
+    self.SetAmmo = function(type, v)
+        local num = c.check.Number(v)
+        local ammo = self.GetAmmo(type)
+        if num < 0 then
+            ammo = 0
+            self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
+            c.debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
+            CancelEvent()
+        end
+        ammo = num
+        self.State.Ammo = self.Ammo
+    end
+    --
+    self.AddAmmo = function(type, v)
+        local num = c.check.Number(v)
+        local ammo = self.GetAmmo(type)
+        ammo = ammo + num
+        if ammo < 0 then
+            ammo = 0
+            self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
+            c.debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
+            CancelEvent()
+        end
+        self.State.Ammo = self.Ammo
+    end
+    --
+    self.RemoveAmmo = function(type, v)
+        local num = c.check.Number(v)
+        local ammo = self.GetAmmo(type)
+        ammo = ammo - num
+        if ammo < 0 then
+            ammo = 0
+            self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
+            c.debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
+            CancelEvent()
+        end
+        self.State.Ammo = self.Ammo
     end
     --- func desc
     self.GetJob = function()
@@ -540,7 +590,7 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param t any
     self.SetCoords = function(t)
-        self.OldCoords = self:GetCoords()
+        self.OldCoords = self.GetCoords()
         self.Coords = {
             x = c.math.Decimals(t.x, 2),
             y = c.math.Decimals(t.y, 2),
