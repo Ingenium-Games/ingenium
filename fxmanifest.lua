@@ -19,4 +19,11 @@ server_scripts {"@mysql-async/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump"}
 ------------------------------------------------------------------------------
-files {"data/*.json", "nui/index.html", "nui/index.css", "nui/index.js", "nui/img/*.png", "nui/libs/*.js"}
+files {"data/*.json", "nui/index.html", "nui/index.css", "nui/index.js", "nui/img/*.png", "nui/libs/*.js", "theme/style.css"}
+------------------------------------------------------------------------------
+chat_theme "core" {
+    styleSheet = "theme/style.css",
+    msgTemplates = {
+        core = '<div id="notification" class="noisy"><div id="color-box" style="background-color: {0};" class="noisy"></div><div id="info"><div id="top-info"><div id="left-info"><h1 id="title"><i class="{1}"></i></h1><h2 id="sub-title">{2}</h2></div><h2 id="time">{3}</h2></div><div id="bottom-info"><br><p id="text">{4}</p></div></div>'
+    }
+}

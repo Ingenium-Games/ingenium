@@ -17,3 +17,12 @@ end
 function c.chat.SetPermissions()
     -- to remvoe permissions from cfg, to have them import via function to allow easier handling.
 end
+
+function c.chat.Msg(msg, colour, icon, subtitle, timestamp)
+    local msg = msg
+    local colour = colour or "#fff"
+    local icon = icon or "fa-solid fa-angle-right"
+    local subtitle = subtitle or ""
+    local timestamp = timestamp or GetConvar("Time", "00:00")
+    TriggerEvent('chat:addMessage', { templateId = 'core', multiline = false, args = { colour, icon, subtitle, timestamp, msg } })
+end

@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 c.ace = {}
 c.aces = {}
 --[[
@@ -12,6 +11,7 @@ NOTES
 c.ace.public = function()
     -- public
     TriggerEvent("chat:addSuggestion", "/switch", "Use to change your character(s).")
+    TriggerEvent('chat:addSuggestion', '/ooc', 'Out of character', {{ name="Message", help="The message you would like to send to the chat" }})
 
 end
 
