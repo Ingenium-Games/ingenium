@@ -24,6 +24,6 @@ files {"data/*.json", "nui/index.html", "nui/index.css", "nui/index.js", "nui/im
 chat_theme "core" {
     styleSheet = "theme/style.css",
     msgTemplates = {
-        core = '<div id="notification" class="noisy"><div id="color-box" style="background-color: {0};" class="noisy"></div><div id="info"><div id="top-info"><div id="left-info"><h1 id="title"><i class="{1}"></i></h1><h2 id="sub-title">{2}</h2></div><h2 id="time">{3}</h2></div><div id="bottom-info"><br><p id="text">{4}</p></div></div>'
+        core = '<div id="notification" class="noisy"><div id="color-box" style="background-color: {1};" class="noisy"></div><div id="info"><div id="top-info"><div id="left-info"><h1 id="title"><i class="{2}"></i></h1><h2 id="sub-title">{3}</h2></div><h2 id="time">{4}</h2></div><div id="bottom-info"><br><p id="text">{0}</p></div></div>'
     }
 }

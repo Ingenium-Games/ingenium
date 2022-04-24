@@ -1,4 +1,4 @@
-local DataPacket = RegisterClientCallback({
+local Weapon = RegisterClientCallback({
     eventName = "Client:Item:Weapon",
     eventCallback = function(data)
         local Name = data.Name
