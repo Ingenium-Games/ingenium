@@ -48,3 +48,40 @@ function c.sql.veh.GetByPlate(Plate, cb)
     end
     return result
 end
+
+function c.sql.veh.Add(data, cb)
+    local IsBusy = true
+    local Data = data
+    MySQL.Async.execute("INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`) VALUES (@Character_ID, @Model, @Plate);",{
+        ["@Character_ID"] = Data.Character_ID,
+        ["@Model"] = Data.Model,
+        ["@Plate"] = Data.Plate,
+    }, function(r)
+        IsBusy = false
+        TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Adding Vehicle: "..Data.Plate.." | Owner "..Data.Character_ID)
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+end
+
+function c.sql.veh.ChangeOwner(data, cb)
+    local IsBusy = true
+    local Data = data
+    MySQL.Async.execute("UPDATE `vehicles` SET `Character_ID` = @Character_ID WHERE `Plate` = @Plate;",{
+        ["@Character_ID"] = Data.Character_ID,
+        ["@Plate"] = Data.Plate,
+    }, function(r)
+        IsBusy = false
+        TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Changing Vehicle : "..Data.Plate.." | Owner "..Data.Character_ID)
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+end

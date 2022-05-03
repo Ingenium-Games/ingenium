@@ -4,9 +4,7 @@ if not c.class then
 end
 -- ====================================================================================--
 local function GetVeh(plate)
-    if type(plate) == "string" then
-        return c.sql.GetVehicleByPlate(plate)
-    else
+    if type(plate) == "boolean" then
         return {
             Fuel = math.random(25, 89),
             Keys = "{}",
@@ -20,6 +18,8 @@ local function GetVeh(plate)
             Owner = false,
             Wanted = false
         }
+    elseif type(plate) == "string" then
+        return c.sql.GetVehicleByPlate(plate)
     end
 end
 --- func desc
@@ -27,7 +27,7 @@ end
 ---@param bool any
 function c.class.Vehicle(net, plate)
     local net = net or CancelEvent()
-    local plate = false or plate
+    local plate = plate or false
     local data = GetVeh(plate)
     local self = {}
     self.Net = net
@@ -259,8 +259,23 @@ function c.class.Vehicle(net, plate)
         end
     end
     --- func desc
+    self.GetGarage = function()
+        return self.Garage
+    end
+    --- func desc
+    self.SetGarage = function(v)
+        local str = c.check.String(v)
+        self.Garage = str
+    end
+    --- func desc
     self.GetOwner = function()
         return self.Owner
+    end
+    --- func desc
+    self.SetOwner = function(id)
+        self.Owner = id
+        self.Keys = {}
+        self.Inventory = {}
     end
     --- func desc
     self.GetWanted = function()

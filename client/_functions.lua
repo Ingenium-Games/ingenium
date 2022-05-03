@@ -711,7 +711,7 @@ function c.GetVehicleModifications(vehicle)
         Colour_2 = Colour_2,
         Pearlescent = Pearlescent,
         WheelColor = WheelColor,
-        wheels = GetVehicleWheelType(vehicle),
+        Wheels = GetVehicleWheelType(vehicle),
         WindowTint = GetVehicleWindowTint(vehicle),
         NeonEnabled = {IsVehicleNeonLightEnabled(vehicle, 0), IsVehicleNeonLightEnabled(vehicle, 1),
                        IsVehicleNeonLightEnabled(vehicle, 2), IsVehicleNeonLightEnabled(vehicle, 3)},

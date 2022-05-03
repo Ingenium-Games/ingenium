@@ -23,3 +23,5 @@ conf.default.jobaccounts = {["Bank"] = 25000, ["Safe"] = 0}
 -- items
 conf.default.itemcraft = true
 conf.default.itemdegrade = false
+-- tax 
+conf.default.tax = 10

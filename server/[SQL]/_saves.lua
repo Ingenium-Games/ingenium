@@ -54,7 +54,7 @@ function c.sql.save.User(data, cb)
             ["@Inventory"] = Inventory,
 
             ["@Job"] = Job,
-            --
+            -- Where Conditions
             ["@Character_ID"] = Character_ID
         }, function(r)
             -- do
@@ -101,7 +101,7 @@ function c.sql.save.Users(cb)
                 ["@Inventory"] = Inventory,
 
                 ["@Job"] = Job,
-                --
+                -- Where Conditions
                 ["@Character_ID"] = Character_ID
             }, function(r)
                 -- Do nothing.
@@ -117,7 +117,7 @@ end
 
 local VehicleSaveData = -1
 MySQL.Async.store(
-"UPDATE `vehicles` SET `Coords` = @Coords, `Keys` = @Keys, `Condition` = @Condition, `Modifications` = @Modifications, `Garage` = @Garage, `State` = @State, `Impound` = @Impound, `Wanted` = @Wanted  WHERE `Plate` = @Plate;",
+"UPDATE `vehicles` SET `Coords` = @Coords, `Keys` = @Keys, `Condition` = @Condition, `Modifications` = @Modifications, `Garage` = @Garage, `State` = @State, `Impound` = @Impound, `Wanted` = @Wanted  WHERE `Plate` = @Plate AND `Status` = TRUE;",
 function(id)
     VehicleSaveData = id
 end)
@@ -126,40 +126,42 @@ end)
 ---@param data table "xCar table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.Vehicle(data, cb)
-    if data.GetOwner() then
-        -- Other Variables.
-        local Garage = data.GetGarage()
-        -- Booleans
-        local State = data.GetState()
-        local Impound = data.GetImpound()
-        local Wanted = data.GetWanted()
-        -- Tables require JSON Encoding.
-        local Keys = json.encode(data.GetKeys())
-        local Coords = json.encode(data.GetCoords())
-        local Condition = json.encode(data.GetCondition())
-        local Modifications = json.encode(data.GetModifications())
-        -- The Key
-        local Plate = data.GetPlate()
-        --
-        MySQL.Async.insert(VehicleSaveData, {
+    if data then
+        if data.GetOwner() then
             -- Other Variables.
-            ["@Garage"] = Garage,
+            local Garage = data.GetGarage()
             -- Booleans
-            ["@Impound"] = Impound,
-            ["@State"] = State,
-            ["@Wanted"] = Wanted,
-            -- Table Informaiton.
-            ["@Keys"] = Keys,
-            ["@Coords"] = Coords,
-            ["@Condition"] = Condition,
-            ["@Modifications"] = Modifications,
+            local State = data.GetState()
+            local Impound = data.GetImpound()
+            local Wanted = data.GetWanted()
+            -- Tables require JSON Encoding.
+            local Keys = json.encode(data.GetKeys())
+            local Coords = json.encode(data.GetCoords())
+            local Condition = json.encode(data.GetCondition())
+            local Modifications = json.encode(data.GetModifications())
+            -- The Key
+            local Plate = data.GetPlate()
             --
-            ["@Plate"] = Plate
-        }, function(r)
-            -- do
-        end)
-        if cb then
-            cb()
+            MySQL.Async.insert(VehicleSaveData, {
+                -- Other Variables.
+                ["@Garage"] = Garage,
+                -- Booleans
+                ["@Impound"] = Impound,
+                ["@State"] = State,
+                ["@Wanted"] = Wanted,
+                -- Table Informaiton.
+                ["@Keys"] = Keys,
+                ["@Coords"] = Coords,
+                ["@Condition"] = Condition,
+                ["@Modifications"] = Modifications,
+                -- Where conditions
+                ["@Plate"] = Plate
+            }, function(r)
+                -- do
+            end)
+            if cb then
+                cb()
+            end
         end
     end
 end
@@ -171,7 +173,7 @@ function c.sql.save.Vehicles(cb)
     for k,v in pairs(xVehicles) do
         local data = c.data.GetVehicle(k)
         if data then
-            if data.Owner then
+            if data.GetOwner() then
                 -- Other Variables.
                 local Garage = data.GetGarage()
                 -- Booleans
@@ -198,7 +200,7 @@ function c.sql.save.Vehicles(cb)
                     ["@Coords"] = Coords,
                     ["@Condition"] = Condition,
                     ["@Modifications"] = Modifications,
-                    --
+                    -- Where Conditions
                     ["@Plate"] = Plate
                     }, function(r)
                         -- Do nothing.
@@ -231,7 +233,7 @@ function c.sql.save.Jobs(cb)
         local Name = xJobs[k].GetName()
         MySQL.Async.insert(JobSaveData, {
             ["@Accounts"] = Accounts,
-            --
+            -- Where Conditions
             ["@Name"] = Name
         }, function(r)
             -- Do nothing.

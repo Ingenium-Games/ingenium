@@ -70,6 +70,7 @@ end
 
 RegisterNetEvent("Server:Character:OffDuty", function(req)
     local src = req or source
+    local xPlayer = c.data.GetPlayer(src)
     if conf.enableduty then
         CurrentlyActive[src] = "OffDuty"
         xPlayer.SetDuty(false)
@@ -108,6 +109,7 @@ end)
 --- func desc
 ---@param bool boolean "Use the Job funds to pay all employees?" 
 function c.job.Payroll(bool)
+    local xCity = c.data.GetJob("City")
     for k,v in ipairs(CurrentlyActive) do
         if type(v) == "table" then
             -- CurrentlyActive[1] = [Name="popo",Grade=2,etc,etc]
@@ -115,11 +117,14 @@ function c.job.Payroll(bool)
             if xPlayer then
                 local xJob = c.data.GetJob(CurrentlyActive[k].Name)
                 local pay = xJob.GetGradeSalery(v.Grade)
+                local tax = (pay / conf.default.tax) + 0.00
+                local net = pay - tax
                 --
-                xPlayer.AddBank(pay)
-                TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..pay.." deposided confirmed.")
+                xPlayer.AddBank(net)
+                TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..net.." deposided confirmed, city tax applied of: $"..tax..".")
                 if bool then
                     xJob.RemoveBank(pay)
+                    xCity.AddBank(tax)
                 end
             end
         elseif v == "OffDuty" then
