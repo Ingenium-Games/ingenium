@@ -30,7 +30,6 @@ function c.sql.veh.GetAll(Character_ID, cb)
     return result
 end
 
-
 function c.sql.veh.GetByPlate(Plate, cb)
     local IsBusy = true
     local result = nil

@@ -174,3 +174,29 @@ function c.blip.Remove(handle)
         RemoveBlip(blip["handle"])
     end
 end
+
+--[[
+-- Example for in resource useage to had a toggle for the blips.
+
+local store_blips = {}
+
+local Blips = {
+    {["coords"] = vector3(-1108.4, 2708.9, 18.1), ["sprite"] = 73, ["colour"] = 24, ["size"] = 0.7, ["title"] = "Clothes Store"},
+}
+
+function activateblips()
+    for i=1, #Blips do
+        local handle = c.blip.CreateBlip(Blips[i].coords, Blips[i].sprite, Blips[i].colour, Blips[i].title, Blips[i].size)
+        store_blips[Blips[i].title] = handle
+    end
+end
+
+function deactiveateblips()
+    for k,v in pairs(store_blips) do
+        c.blip.Remove(v)
+    end
+end
+
+activateblips()
+
+]]--

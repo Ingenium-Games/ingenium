@@ -3,9 +3,8 @@ if not c.class then
     c.class = {}
 end
 -- ====================================================================================--
-local function GetVeh(plate)
-    if type(plate) == "boolean" then
-        return {
+local function GetDefault()
+    return {
             Fuel = math.random(25, 89),
             Keys = "{}",
             Inventory = "{}",
@@ -17,18 +16,15 @@ local function GetVeh(plate)
             Impound = false,
             Owner = false,
             Wanted = false
-        }
-    elseif type(plate) == "string" then
-        return c.sql.GetVehicleByPlate(plate)
-    end
+    }
 end
 --- func desc
 ---@param net any
 ---@param bool any
-function c.class.Vehicle(net, plate)
+function c.class.Vehicle(net, plate, data)
     local net = net or CancelEvent()
     local plate = plate or false
-    local data = GetVeh(plate)
+    local data = data or GetDefault()
     local self = {}
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
