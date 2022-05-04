@@ -113,6 +113,8 @@ function c.discord(url, color, name, message, footer)
     PerformHttpRequest(url, function(err, text, headers) end, "POST", json.encode({username = name, embeds = embed}), { ["Content-Type"] = "application/json" })
 end
 
+--local "https://api.twitch.tv/helix/clips?broadcaster_id="..i.broadcaster
+
 function c.eventban(source, event)
     local src = source
     local id = c.identifier(src)
