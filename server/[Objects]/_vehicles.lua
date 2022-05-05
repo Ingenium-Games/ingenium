@@ -65,8 +65,11 @@ function c.vehicle.Respawn(plate, ords)
     local plate = plate
     local ords = ords
     local data = c.sql.veh.GetByPlate(plate)
-    if data then
-        local net = c.CreateVehicle(data.Model, data.Coords.x, data.Coords.y, data.Coords.z, data.Coords.h)
+    if data and (ords ~= nil) then
+        local net = c.CreateVehicle(data.Model, ords.x, ords.y, ords.z, ords.h)
+        c.data.AddVehicle(net, c.class.Vehicle, net, plate, data)
+    else
+        local net = c.CreateVehicle(data.Model, data.Cords.x, data.Cords.y, data.Cords.z, data.Cords.h)
         c.data.AddVehicle(net, c.class.Vehicle, net, plate, data)
     end
 end

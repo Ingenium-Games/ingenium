@@ -85,6 +85,14 @@ RegisterCommand("car", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
+ExecuteCommand("add_ace group.mod command.unpark allow")
+RegisterCommand("unpark", function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    local ords = xPlayer.GetCoords()
+    c.vehicle.Respawn(args[1], ords)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
+end, true)
 
 -- ====================================================================================--
 -- ADMIN
