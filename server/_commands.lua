@@ -85,14 +85,23 @@ RegisterCommand("car", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
+
 ExecuteCommand("add_ace group.mod command.unpark allow")
 RegisterCommand("unpark", function(source, args, rawCommand)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     local ords = xPlayer.GetCoords()
-    c.vehicle.Respawn(args[1], ords)
+    local plate = args[1]
+    local data = c.sql.veh.GetByPlate(plate)[1]
+    local ent = CreateVehicle(data.Model, ords.x + 2.0, ords.y + 1.0, ords.z, ords.h, true, false)
+    while not DoesEntityExist(ent) do
+        Citizen.Wait(0)
+    end
+    SetVehicleNumberPlateText(ent, data.Plate)
+    c.data.AddPlayerVehicle(data.Plate, c.class.PlayerVehicle, ent, data)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
+
 
 -- ====================================================================================--
 -- ADMIN
@@ -169,4 +178,34 @@ RegisterCommand("additem", function(source, args, rawCommand)
     local amount = args[2] or 1
     xPlayer.AddItem({item})
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " item: "..item..", amount: "..amount..", by: "..xPlayer.GetName())
+end, true)
+
+ExecuteCommand("add_ace group.admin command.vdex allow")
+RegisterCommand("vdex", function(source, args, rawCommand)
+    local src = source
+    print(c.table.Dump(c.vdex))
+end, true)
+
+ExecuteCommand("add_ace group.admin command.pvdex allow")
+RegisterCommand("pvdex", function(source, args, rawCommand)
+    local src = source
+    print(c.table.Dump(c.pvdex))
+end, true)
+
+ExecuteCommand("add_ace group.admin command.pdex allow")
+RegisterCommand("pdex", function(source, args, rawCommand)
+    local src = source
+    print(c.table.Dump(c.pdex))
+end, true)
+
+ExecuteCommand("add_ace group.admin command.odex allow")
+RegisterCommand("odex", function(source, args, rawCommand)
+    local src = source
+    print(c.table.Dump(c.odex))
+end, true)
+
+ExecuteCommand("add_ace group.admin command.ndex allow")
+RegisterCommand("ndex", function(source, args, rawCommand)
+    local src = source
+    print(c.table.Dump(c.ndex))
 end, true)

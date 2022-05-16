@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 c.data = {} -- data table for funcitons.
 c.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
 --[[
@@ -154,27 +153,71 @@ end
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
 
+---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
+function c.data.FindVehicle(arg)
+    if type(arg) == "string" and arg:len() == 8 then
+        for k, v in pairs(c.pvdex) do
+            if k == arg then
+                return true, v, k
+            end
+        end
+        return false, false, false
+    else
+        for k, v in ipairs(c.vdex) do
+            if k == arg and type(v) == "table" then
+                return true, v, k
+            end
+        end
+        return false, false, false
+    end
+end
+
+---@param plate string "Plate of vehicle."
+function c.data.GetVehicleByPlate(plate)
+    for k, v in pairs(c.pvdex) do
+        if k == plate then
+            return v
+        end
+    end
+    for k, v in pairs(c.vdex) do
+        if v then
+            if v.Plate == plate then
+                return v
+            end
+        end
+    end
+    return false
+end
+
 function c.data.AddVehicle(net, cb, ...)
-    if not c.vehicle.Find(net) then
-        c.vdex[net] = cb(...)
+    if not c.data.FindVehicle(net) then
+        c.vdex[tonumber(net)] = cb(...)
+    end
+end
+
+function c.data.AddPlayerVehicle(arg, cb, ...)
+    local arg = tostring(arg)
+    if not c.data.FindVehicle(arg) then
+        c.pvdex[arg] = cb(...)
     end
 end
 
 --- Get the xVehicle Data/Table
----@param net integer "Network ID 16 bit integer"
-function c.data.GetVehicle(net)
-    return c.vdex[net] or false
+---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
+function c.data.GetVehicle(arg)
+    local found, data = c.data.FindVehicle(arg)
+    return data
 end
 
 --- Same as above.
----@param net integer "Network ID 16 bit integer"
+---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
 function c.GetVehicle(net)
     return c.data.GetVehicle(net)
 end
 
 --- Get all xVehicles
 function c.data.GetVehicles()
-    return c.vdex
+    return c.pvdex
 end
 
 --- Get all xVehicles
@@ -183,13 +226,12 @@ function c.GetVehicles()
 end
 
 -- Set to false for cleanup function inside _vehicles.lua
-function c.data.RemoveVehicle(net)
-    c.vdex[net] = false
-end
-
----@param plate string "Plate of vehicle."
-function c.data.GetVehicleByPlate(plate)
-    return c.vehicle.GetByPlate(plate)
+function c.data.RemoveVehicle(arg)
+    if c.vdex[tonumber(arg)] then
+        c.vdex[tonumber(arg)] = false
+    else
+        c.pvdex[tonumber(arg)] = false
+    end
 end
 
 ---@param plate string "Plate of vehicle."
@@ -202,14 +244,14 @@ end
 
 function c.data.AddNpc(net, cb, ...)
     if not c.npc.Find(net) then
-        c.ndex[net] = cb(...)
+        c.ndex[tonumber(net)] = cb(...)
     end
 end
 
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
 function c.data.GetNpc(net)
-    return c.ndex[net] or false
+    return c.ndex[tonumber(net)] or false
 end
 
 --- Same as above.
@@ -230,7 +272,7 @@ end
 
 -- Set to false for cleanup function inside _vehicles.lua
 function c.data.RemoveNpc(net)
-    c.ndex[net] = false
+    c.ndex[tonumber(net)] = false
 end
 
 -- ====================================================================================--
@@ -238,14 +280,14 @@ end
 
 function c.data.AddObject(net, cb, ...)
     if not c.object.Find(net) then
-        c.odex[net] = cb(...)
+        c.odex[tonumber(net)] = cb(...)
     end
 end
 
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
 function c.data.GetObject(net)
-    return c.odex[net] or false
+    return c.odex[tonumber(net)] or false
 end
 
 --- Same as above.
@@ -266,7 +308,7 @@ end
 
 -- Set to false for cleanup function inside _vehicles.lua
 function c.data.RemoveObject(net)
-    c.odex[net] = false
+    c.odex[tonumber(net)] = false
 end
 
 -- ====================================================================================--
@@ -325,10 +367,10 @@ function c.data.GetEntityObject(type, net)
         -- no other types // fin    
     end
 end
-]]--
+]] --
 --
-function c.GetEntityObject(t,n)
-    return c.data.GetEntityObject(t,n)
+function c.GetEntityObject(t, n)
+    return c.data.GetEntityObject(t, n)
 end
 --
 function c.data.Save(str)

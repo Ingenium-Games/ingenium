@@ -127,7 +127,8 @@ end
 
 -- ====================================================================================--
 
-function c.CreateVehicle(name, x, y, z, h)
+function c.CreateVehicle(data)
+    local data = data
     local hash = nil
     if type(name) == "number" then
         hash = name

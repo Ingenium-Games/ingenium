@@ -129,6 +129,7 @@ function c.sql.save.Vehicle(data, cb)
     if data then
         if data.GetOwner() then
             -- Other Variables.
+            local Fuel = data.GetFuel()
             local Garage = data.GetGarage()
             -- Booleans
             local State = data.GetState()
@@ -175,8 +176,10 @@ function c.sql.save.Vehicles(cb)
         if data then
             if data.GetOwner() then
                 -- Other Variables.
+                local Fuel = data.GetFuel()
                 local Garage = data.GetGarage()
                 -- Booleans
+
                 local State = data.GetState()
                 local Impound = data.GetImpound()
                 local Wanted = data.GetWanted()

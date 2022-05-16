@@ -7,26 +7,26 @@ end
 --- func desc
 ---@param net any
 ---@param bool any
-function c.class.Vehicle(net)
+function c.class.PlayerVehicle(ent, data)
     local data = {
-        Fuel = math.random(25, 89),
-        Plate = "N"..c.rng.chars(7).."",
-        Instance = false,
-        Garage = false,
-        Status = false,
-        Impound = false,
-        Owner = false,
-        Wanted = false,
-    -- Json
-        Modifications = {},
-        Inventory = {},
-        Condition = {},
-        CarKeys = {},
-        Updated = os.time(),
-}
+        Fuel = data.Fuel,
+        Plate = data.Plate,
+        Instance = data.Instance,
+        Garage = data.Garage,
+        Status = data.Status,
+        Impound = data.Impound,
+        Owner = data.Owner,
+        Wanted = data.Wanted,
+        -- Json
+        Modifications = json.decode(data.Modifications),
+        Inventory = json.decode(data.Inventory),
+        Condition = json.decode(data.Condition),
+        CarKeys = json.decode(data.CarKeys),
+        Updated = data.Updated,
+    }
     local self = {}
-    self.Net = net
-    self.Entity = NetworkGetEntityFromNetworkId(net)
+    self.Net = NetworkGetNetworkIdFromEntity(ent)
+    self.Entity = ent
     self.State = Entity(self.Entity).state
     -- Model
     self.Model = GetEntityModel(self.Entity)
@@ -34,7 +34,6 @@ function c.class.Vehicle(net)
     -- Plate
     self.Plate = data.Plate
     self.State.Plate = self.Plate
-    SetVehicleNumberPlateText(self.Entity, self.Plate)
     --
     self.Weight = 0
     -- Owner
@@ -101,10 +100,9 @@ function c.class.Vehicle(net)
             c.debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
         end
     end
-
     --- func desc
     self.GetKeys = function()
-        return self.CarKeys
+        return self.Keys
     end
     --- func desc
     ---@param t any

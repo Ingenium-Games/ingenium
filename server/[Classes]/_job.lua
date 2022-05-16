@@ -190,7 +190,7 @@ function c.class.Job(tab)
     --- func desc
     ---@param member any
     self.AddMember = function(member)
-        local check = self:FindMember(member)
+        local check = self.FindMember(member)
         if not check then
             table.insert(self.Members, member)
         end
@@ -198,7 +198,7 @@ function c.class.Job(tab)
     --- func desc
     ---@param member any
     self.RemoveMember = function(member)
-        local check = self:FindMember(member)
+        local check = self.FindMember(member)
         if check then
             table.remove(self.Members, member)
         end

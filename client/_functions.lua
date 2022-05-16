@@ -407,9 +407,8 @@ function c.CreateObject(name, x, y, z, isdoor)
     return net
 end
 
-function c.CreateVehicle(name, x, y, z, h, plate, stolen)
-    if plate == nil then plate = false end
-    if stolen == nil then stolen = true end
+function c.CreateVehicle(name, x, y, z, h, data)
+    local data = data or {}
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -425,10 +424,11 @@ function c.CreateVehicle(name, x, y, z, h, plate, stolen)
     SetVehicleOnGroundProperly(entity)
     SetVehicleHasBeenOwnedByPlayer(entity, true)
     SetNetworkIdCanMigrate(net, true)
+    SetVehicleNeedsToBeHotwired(net, false)
     SetModelAsNoLongerNeeded(hash)
     if NetworkDoesEntityExistWithNetworkId(net) then
-        c.debug_1("Entity exists on network, id: "..net.." entity: "..entity)              
-        TriggerServerEvent("Server:Vehicle:Create", net, plate, stolen)
+        c.debug_1("Entity exists on network, id: "..net.." entity: "..entity)            
+        TriggerServerCallback({eventName = "ClientCreateVehicle", args={net, data}})  
     else
         c.debug_1("Entity DOES NOT exist on network.")
         DeleteEntity(entity)

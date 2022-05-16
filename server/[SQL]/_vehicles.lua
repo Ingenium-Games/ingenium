@@ -33,7 +33,7 @@ end
 function c.sql.veh.GetByPlate(Plate, cb)
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchScalar("SELECT * FROM vehicles WHERE `Plate` = @Plate LIMIT 1;", {
+    MySQL.Async.fetchAll("SELECT * FROM vehicles WHERE `Plate` = @Plate LIMIT 1;", {
         ["@Plate"] = Plate
     }, function(data)
         result = data
