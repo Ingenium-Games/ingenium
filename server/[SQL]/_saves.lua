@@ -117,7 +117,7 @@ end
 
 local VehicleSaveData = -1
 MySQL.Async.store(
-"UPDATE `vehicles` SET `Coords` = @Coords, `Keys` = @Keys, `Condition` = @Condition, `Modifications` = @Modifications, `Garage` = @Garage, `State` = @State, `Impound` = @Impound, `Wanted` = @Wanted  WHERE `Plate` = @Plate AND `Status` = TRUE;",
+"UPDATE `vehicles` SET `Coords` = @Coords, `Keys` = @Keys, `Condition` = @Condition, `Modifications` = @Modifications, `Garage` = @Garage, `Status` = @Status, `Impound` = @Impound, `Wanted` = @Wanted  WHERE `Plate` = @Plate", -- AND `Status` = TRUE;
 function(id)
     VehicleSaveData = id
 end)
@@ -132,7 +132,7 @@ function c.sql.save.Vehicle(data, cb)
             local Fuel = data.GetFuel()
             local Garage = data.GetGarage()
             -- Booleans
-            local State = data.GetState()
+            local Status = data.GetStatus()
             local Impound = data.GetImpound()
             local Wanted = data.GetWanted()
             -- Tables require JSON Encoding.
@@ -148,7 +148,7 @@ function c.sql.save.Vehicle(data, cb)
                 ["@Garage"] = Garage,
                 -- Booleans
                 ["@Impound"] = Impound,
-                ["@State"] = State,
+                ["@Status"] = Status,
                 ["@Wanted"] = Wanted,
                 -- Table Informaiton.
                 ["@Keys"] = Keys,
@@ -180,7 +180,7 @@ function c.sql.save.Vehicles(cb)
                 local Garage = data.GetGarage()
                 -- Booleans
 
-                local State = data.GetState()
+                local Status = data.GetStatus()
                 local Impound = data.GetImpound()
                 local Wanted = data.GetWanted()
                 -- Tables require JSON Encoding.
@@ -196,7 +196,7 @@ function c.sql.save.Vehicles(cb)
                     ["@Garage"] = Garage,
                     -- Booleans
                     ["@Impound"] = Impound,
-                    ["@State"] = State,
+                    ["@Status"] = Status,
                     ["@Wanted"] = Wanted,
                     -- Table Informaiton.
                     ["@Keys"] = Keys,

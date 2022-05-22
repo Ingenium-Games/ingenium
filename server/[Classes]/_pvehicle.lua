@@ -15,16 +15,17 @@ function c.class.PlayerVehicle(ent, data)
         Garage = data.Garage,
         Status = data.Status,
         Impound = data.Impound,
-        Owner = data.Owner,
+        Owner = data.Character_ID,
         Wanted = data.Wanted,
         -- Json
         Modifications = json.decode(data.Modifications),
         Inventory = json.decode(data.Inventory),
         Condition = json.decode(data.Condition),
-        CarKeys = json.decode(data.CarKeys),
+        Keys = json.decode(data.Keys),
         Updated = data.Updated,
     }
     local self = {}
+    self.Data = data
     self.Net = NetworkGetNetworkIdFromEntity(ent)
     self.Entity = ent
     self.State = Entity(self.Entity).state
@@ -65,8 +66,8 @@ function c.class.PlayerVehicle(ent, data)
     -- Modifications
     self.Modifications = data.Modifications
     -- Keys
-    self.CarKeys = data.CarKeys
-    self.State.CarKeys = self.CarKeys
+    self.Keys = data.Keys
+    self.State.Keys = self.Keys
     --- func desc
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
@@ -78,6 +79,12 @@ function c.class.PlayerVehicle(ent, data)
     --- func desc
     self.GetPlate = function()
         return self.Plate
+    end
+    self.GetStatus = function()
+        return self.Status
+    end
+    self.GetImpound = function()
+        return self.Impound
     end
     --- func desc
     self.GetCoords = function()
@@ -107,16 +114,16 @@ function c.class.PlayerVehicle(ent, data)
     --- func desc
     ---@param t any
     self.SetKeys = function(t)
-        self.CarKeys = t
-        self.State.CarKeys = self.CarKeys
+        self.Keys = t
+        self.State.Keys = self.Keys
     end
     --- func desc
     ---@param id any
     self.AddKey = function(id)
         local t = self.GetKeys()
         if not self.CheckKey(id) then
-            table.insert(self.CarKeys, id)
-            self.State.CarKeys = self.CarKeys
+            table.insert(self.Keys, id)
+            self.State.Keys = self.Keys
         else
             c.debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
@@ -126,8 +133,8 @@ function c.class.PlayerVehicle(ent, data)
     self.RemoveKey = function(id)
         local t = self.GetKeys()
         if self.CheckKey(id) then
-            table.remove(self.CarKeys, id)
-            self.State.CarKeys = self.CarKeys
+            table.remove(self.Keys, id)
+            self.State.Keys = self.Keys
         else
             c.debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end
@@ -416,6 +423,9 @@ function c.class.PlayerVehicle(ent, data)
     end
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
+    if not self.Keys[self.Owner] then
+        table.insert(self.Keys, self.Owner)
+    end
     -- ====================================================================================--
     return self
 end

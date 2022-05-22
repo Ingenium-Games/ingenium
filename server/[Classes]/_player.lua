@@ -162,6 +162,10 @@ function c.class.Player(source, character_id)
     self.GetModel = function()
         return self.Model
     end
+    --
+    self.GetPed = function()
+        return self.Ped
+    end
     -- Functions
     self.Kick = function(reason)
         DropPlayer(self.ID, reason)
