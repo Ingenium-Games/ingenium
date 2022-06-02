@@ -73,6 +73,10 @@ function c.class.Vehicle(net)
         return NetworkGetEntityOwner(self.Entity)
     end
     --- func desc
+    self.GetNet = function()
+        return self.Net
+    end
+    --- func desc
     self.GetModel = function()
         return self.Model
     end
