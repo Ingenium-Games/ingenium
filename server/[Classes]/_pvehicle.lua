@@ -437,6 +437,7 @@ function c.class.PlayerVehicle(ent, data)
     if not self.Keys[self.Owner] then
         table.insert(self.Keys, self.Owner)
     end
+    self.SetParked(false)
     -- ====================================================================================--
     return self
 end
