@@ -64,7 +64,7 @@ end
 function c.vehicle.Remove(xVehicle)
     if DoesEntityExist(xVehicle.GetEntity()) then
         DeleteEntity(xVehicle.GetEntity())
-        c.data.RemoveVehicle(xVehicle.GetNet())
+        c.data.RemoveVehicle(xVehicle.GetEntity())
     end
 end
 
