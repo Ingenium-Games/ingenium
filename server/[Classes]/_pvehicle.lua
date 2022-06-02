@@ -13,7 +13,7 @@ function c.class.PlayerVehicle(ent, data)
         Plate = data.Plate,
         Instance = data.Instance,
         Garage = data.Garage,
-        Status = data.Status,
+        Parked = data.Parked,
         Impound = data.Impound,
         Owner = data.Character_ID,
         Wanted = data.Wanted,
@@ -53,8 +53,8 @@ function c.class.PlayerVehicle(ent, data)
     self.Garage = data.Garage
     self.State.Garage = self.Garage
     --
-    self.Status = data.Status
-    self.State.Status = self.Status
+    self.Parked = data.Parked
+    self.State.Parked = self.Parked
     --
     self.Impound = data.Impound
     self.State.Impound = self.Impound
@@ -80,9 +80,16 @@ function c.class.PlayerVehicle(ent, data)
     self.GetPlate = function()
         return self.Plate
     end
-    self.GetStatus = function()
-        return self.Status
+    --
+    self.GetParked = function()
+        return self.Parked
     end
+    --
+    self.SetParked = function(b)
+        local bool = c.check.Boolean(b)
+        self.Parked = bool
+    end
+    --
     self.GetImpound = function()
         return self.Impound
     end

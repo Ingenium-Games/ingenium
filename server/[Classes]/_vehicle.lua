@@ -13,7 +13,7 @@ function c.class.Vehicle(net)
         Plate = "N"..c.rng.chars(7).."",
         Instance = false,
         Garage = false,
-        Status = false,
+        Parked = false,
         Impound = false,
         Owner = false,
         Wanted = false,
@@ -53,8 +53,8 @@ function c.class.Vehicle(net)
     self.Garage = data.Garage
     self.State.Garage = self.Garage
     --
-    self.Status = data.Status
-    self.State.Status = self.Status
+    self.Parked = data.Parked
+    self.State.Parked = self.Parked
     --
     self.Impound = data.Impound
     self.State.Impound = self.Impound
@@ -79,6 +79,15 @@ function c.class.Vehicle(net)
     --- func desc
     self.GetPlate = function()
         return self.Plate
+    end
+    --
+    self.GetParked = function()
+        return self.Parked
+    end
+    --
+    self.SetParked = function(b)
+        local bool = c.check.Boolean(b)
+        self.Parked = bool
     end
     --- func desc
     self.GetCoords = function()
