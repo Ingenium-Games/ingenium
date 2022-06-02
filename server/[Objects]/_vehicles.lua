@@ -61,18 +61,18 @@ function c.vehicle.Respawn(plate, ords)
 
 end
 
-function c.vehicle.Remove(net)
-    if DoesEntityExist(net) then
-        DeleteEntity(net)
-        c.data.RemoveVehicle(net)
+function c.vehicle.Remove(xVehicle)
+    if DoesEntityExist(xVehicle.GetEntity()) then
+        DeleteEntity(xVehicle.GetEntity())
+        c.data.RemoveVehicle(xVehicle.GetNet())
     end
 end
 
-function c.vehicle.AllExit(ent)
-    if DoesEntityExist(ent) then
+function c.vehicle.AllExit(xVehicle)
+    if DoesEntityExist(xVehicle.GetEntity()) then
         for i=-1, 8, 1 do
-            local ped = GetPedInVehicleSeat(ent, i)
-            TaskLeaveVehicle(ped, ent, 1)
+            local ped = GetPedInVehicleSeat(xVehicle.GetEntity(), i)
+            TaskLeaveVehicle(ped, xVehicle.GetEntity(), 1)
         end
     end
 end
