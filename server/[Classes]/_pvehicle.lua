@@ -80,6 +80,10 @@ function c.class.PlayerVehicle(ent, data)
     self.GetPlate = function()
         return self.Plate
     end
+    --- func desc
+    self.GetEntity = function()
+        return self.Entity
+    end
     --
     self.GetParked = function()
         return self.Parked

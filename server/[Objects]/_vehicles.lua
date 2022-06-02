@@ -67,3 +67,12 @@ function c.vehicle.Remove(net)
         c.data.RemoveVehicle(net)
     end
 end
+
+function c.vehicle.AllExit(ent)
+    if DoesEntityExist(ent) then
+        for i=-1, 8, 1 do
+            local ped = GetPedInVehicleSeat(ent, i)
+            TaskLeaveVehicle(ped, ent, 1)
+        end
+    end
+end
