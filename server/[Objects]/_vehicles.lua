@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 c.vehicle = {} -- function level
 c.vehicles = exports["ig.dump"]:GetVehicles()
 c.vdex = {} -- npc vehicles...

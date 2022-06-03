@@ -25,7 +25,8 @@ function c.data.Initilize()
         [8] = "DB: Loading Data File - Pickups;",
         [9] = "DB: Loading Data File - Notes;",
         [10] = "DB: Loading Data File - Names;",
-        [11] = "DB: Loading Data File - Scenes;"
+        [11] = "DB: Loading Data File - Scenes;";
+        [12] = "DB: Regenerating Vehicles - [^5LOADED^0]";
     }
     --
     local function cb()
@@ -65,6 +66,9 @@ function c.data.Initilize()
         -- [11] Load names for random names selection.
         c.scene.Load()
         cb()
+        -- [12]
+        c.sql.veh.Regenerate(cb)
+
         --
         loaded = true
     end)
@@ -150,6 +154,13 @@ function c.GetPlayerFromIdentifier(id)
     return c.data.GetPlayerByIdentifier(id)
 end
 
+function c.data.ArePlayersActive()
+    local ptbl = GetPlayers()    
+    if type(ptbl) == "table" and #ptbl > 1 then
+        return true                
+    end
+    return false
+end
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
 

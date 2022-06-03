@@ -165,10 +165,6 @@ function c.sql.save.Vehicle(data, cb)
                 if cb then
                     cb()
                 end
-                if data.GetParked() then
-                    c.vehicle.AllExit(data)
-                    c.vehicle.Remove(data)
-                end
             end
         end
     end
@@ -215,10 +211,6 @@ function c.sql.save.Vehicles(cb)
                     }, function(r)
                         -- Do nothing.
                     end)
-                end
-                if data.GetParked() then
-                    c.vehicle.AllExit(data)
-                    c.vehicle.Remove(data)
                 end
             end
         end

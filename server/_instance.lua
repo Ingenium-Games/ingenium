@@ -25,6 +25,11 @@ function c.inst.SetPlayer(source, num)
             SetEntityRoutingBucket(GetPlayerPed(src), num)
             xPlayer.SetInstance(num)
             c.debug_1(xPlayer.GetName().." added to Instance: "..num)
+            if num ~= conf.instancedefault then
+                SetRoutingBucketPopulationEnabled(num, false)
+            elseif num == conf.instancedefault then
+                SetRoutingBucketPopulationEnabled(num, true)
+            end
         end
     end
 end
@@ -59,6 +64,7 @@ function c.inst.SetPlayerDefault(source)
     SetPlayerRoutingBucket(source, conf.instancedefault)
     SetEntityRoutingBucket(GetPlayerPed(source), conf.instancedefault)
     xPlayer.SetInstance(conf.instancedefault)
+    SetRoutingBucketPopulationEnabled(conf.instancedefault, true)
     c.debug_1(xPlayer.GetName().." added to Global Instance.")
 end
 

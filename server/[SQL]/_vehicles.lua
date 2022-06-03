@@ -84,3 +84,29 @@ function c.sql.veh.ChangeOwner(data, cb)
         cb()
     end
 end
+
+---@param cb function "Callback function if any, called after the SQL statement."
+function c.sql.veh.Regenerate(cb)
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchAll("SELECT * FROM `vehicles`", {
+    }, function(data)
+        for i=1, #data, 1 do
+            local i = data[i]
+            local ords = i.Coords
+            local ent = CreateVehicle(i.Model, ords.x, ords.y, ords.z, ords.h, true, false)
+            while not DoesEntityExist(ent) do
+                Citizen.Wait(0)
+            end
+            SetVehicleNumberPlateText(ent, i.Plate)
+            c.data.AddPlayerVehicle(i.Plate, c.class.PlayerVehicle, ent, i)
+        end
+        IsBusy = false
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+end
