@@ -67,8 +67,8 @@ function c.data.Initilize()
         c.scene.Load()
         cb()
         -- [12]
-        c.sql.veh.Regenerate(cb)
-
+        c.sql.veh.Regenerate()
+        cb()
         --
         loaded = true
     end)
