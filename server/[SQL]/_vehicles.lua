@@ -91,6 +91,7 @@ function c.sql.veh.Regenerate(cb)
     local result = nil
     MySQL.Async.fetchAll("SELECT * FROM `vehicles`", {
     }, function(data)
+        result = data
         for i=1, #data, 1 do
             local i = data[i]
             local ords = i.Coords

@@ -69,6 +69,7 @@ function c.data.Initilize()
         -- [12]
         c.sql.veh.Regenerate()
         cb()
+        print(c.table.Dump(c.pvdex))
         --
         loaded = true
     end)
