@@ -136,7 +136,7 @@ function c.class.PlayerVehicle(ent, data)
     ---@param id any
     self.AddKey = function(id)
         local t = self.GetKeys()
-        if not self.CheckKey(id) then
+        if not self.CheckKeys(id) then
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
         else
@@ -147,7 +147,7 @@ function c.class.PlayerVehicle(ent, data)
     ---@param id any
     self.RemoveKey = function(id)
         local t = self.GetKeys()
-        if self.CheckKey(id) then
+        if self.CheckKeys(id) then
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
         else
@@ -438,9 +438,7 @@ function c.class.PlayerVehicle(ent, data)
     end
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
-    if not self.CheckKeys(self.Owner) then
-        table.insert(self.Keys, self.Owner)
-    end
+    self.AddKey(self.Owner)
     self.SetParked(false)
     -- ====================================================================================--
     return self
