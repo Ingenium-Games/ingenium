@@ -91,7 +91,8 @@ function c.sql.veh.Regenerate(cb)
     local result = nil
     MySQL.Async.fetchAll("SELECT * FROM `vehicles`", {
     }, function(data)
-        result = data
+        c.pvtemp = data
+        --[[
         for i=1, #data, 1 do
             local i = data[i]
             local ords = i.Coords
@@ -101,7 +102,9 @@ function c.sql.veh.Regenerate(cb)
             end
             SetVehicleNumberPlateText(ent, i.Plate)
             c.data.AddPlayerVehicle(i.Plate, c.class.PlayerVehicle, ent, i)
-        end
+        end]]--
+        print("pvtemp")
+        print(c.table.Dump(c.pvtemp))
         IsBusy = false
     end)
     while IsBusy do
