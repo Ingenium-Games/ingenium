@@ -102,7 +102,6 @@ function c.sql.veh.Regenerate(cb)
             SetVehicleNumberPlateText(ent, i.Plate)
             c.data.AddPlayerVehicle(i.Plate, c.class.PlayerVehicle, ent, i)
         end
-        print(c.table.Dump(c.pvdex))
         IsBusy = false
     end)
     while IsBusy do
