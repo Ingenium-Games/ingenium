@@ -97,7 +97,8 @@ function c.sql.veh.Regenerate(cb)
             local ords = i.Coords
             local ent = CreateVehicle(i.Model, ords.x, ords.y, ords.z, ords.h, true, false)
             while not DoesEntityExist(ent) do
-                Citizen.Wait(0)
+                print("Waiting")
+                Citizen.Wait(1000)
             end
             SetVehicleNumberPlateText(ent, i.Plate)
             c.data.AddPlayerVehicle(i.Plate, c.class.PlayerVehicle, ent, i)
