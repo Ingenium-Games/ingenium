@@ -95,7 +95,7 @@ function c.sql.veh.Regenerate(cb)
         for i=1, #c.pvtemp, 1 do
             local i = data[i]
             local ords = i.Coords
-            local ent = CreateVehicle(i.Model, ords.x, ords.y, ords.z, ords.h, true, false)
+            local ent = Citizen.InvokeNative(GetHashKey('CREATE_AUTOMOBILE'), modelHash, coords, heading, true, false)
             while not DoesEntityExist(ent) do
                 print("Waiting")
                 Citizen.Wait(1000)
