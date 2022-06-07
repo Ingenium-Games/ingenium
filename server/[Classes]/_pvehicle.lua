@@ -140,7 +140,7 @@ function c.class.PlayerVehicle(ent, data)
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug_1("User: " .. id .. " Already has key to this vehicle.")
+            c.debug_2("User: " .. id .. " Already has key to this vehicle.")
         end
     end
     --- func desc
@@ -151,7 +151,7 @@ function c.class.PlayerVehicle(ent, data)
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
         else
-            c.debug_1("User: " .. id .. " Never had a key to this vehicle.")
+            c.debug_2("User: " .. id .. " Never had a key to this vehicle.")
         end
     end
     --- func desc
