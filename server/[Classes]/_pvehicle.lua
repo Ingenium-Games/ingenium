@@ -438,7 +438,7 @@ function c.class.PlayerVehicle(ent, data)
     end
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
-    if not self.Keys[self.Owner] then
+    if not self.CheckKeys(self.Owner) then
         table.insert(self.Keys, self.Owner)
     end
     self.SetParked(false)
