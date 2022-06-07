@@ -174,6 +174,8 @@ end
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
+    -- To ensure vehicles can respawn orr be recreated by the server for persistance purposes, temp table to constantly be re-written.
+    c.pvtemp = xVehicles
     for k, v in pairs(xVehicles) do
         local data = c.data.GetVehicle(k)
         if data then
