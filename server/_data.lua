@@ -187,8 +187,10 @@ end
 ---@param plate string "Plate of vehicle."
 function c.data.GetVehicleByPlate(plate)
     for k, v in pairs(c.pvdex) do
-        if k == plate then
-            return v
+        if v then
+            if k == plate then
+                return v
+            end
         end
     end
     for k, v in pairs(c.vdex) do
