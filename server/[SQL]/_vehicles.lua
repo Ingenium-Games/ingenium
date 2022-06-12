@@ -93,14 +93,16 @@ function c.sql.veh.Regenerate(cb)
     }, function(data)
         c.pvtemp = data
         for i=1, #data, 1 do
-            local i = data[i]
-            local ords = i.Coords
-            local ent = Citizen.InvokeNative(GetHashKey('CREATE_AUTOMOBILE'), i.Model, {ords.x, ords.y, ords.z}, ords.h, true, false)
-            while not DoesEntityExist(ent) do
-                Citizen.Wait(0)
+            if data.Parked == false then
+                local i = data[i]
+                local ords = i.Coords
+                local ent = Citizen.InvokeNative(GetHashKey('CREATE_AUTOMOBILE'), i.Model, {ords.x, ords.y, ords.z}, ords.h, true, false)
+                while not DoesEntityExist(ent) do
+                    Citizen.Wait(0)
+                end
+                SetVehicleNumberPlateText(ent, i.Plate)
+                c.data.AddPlayerVehicle(i.Plate, c.class.PlayerVehicle, ent, i)
             end
-            SetVehicleNumberPlateText(ent, i.Plate)
-            c.data.AddPlayerVehicle(i.Plate, c.class.PlayerVehicle, ent, i)
         end
         IsBusy = false
     end)
