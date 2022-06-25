@@ -141,10 +141,8 @@ end
 ---@param id string "Character_ID"
 function c.data.GetPlayerByIdentifier(id)
     for k, v in pairs(c.pdex) do
-        if v then
-            if v.Character_ID == id then
-                return c.GetPlayer(k)
-            end
+        if v.GetCharacter_ID() == id then
+            return c.data.GetPlayer(k)
         end
     end
     return nil
