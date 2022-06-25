@@ -96,3 +96,26 @@ function c.sql.gen.AccountNumber(cb)
     end
     return new
 end
+
+function c.sql.gen.Iban(cb)
+    local bool = false
+    local new = nil
+    repeat
+        local s1 = c.rng.nums(4)
+        local s2 = c.rng.nums(4)
+        new = string.format("%s-%s", s1, s2)
+        MySQL.Async.fetchScalar("SELECT `Iban` FROM `characters` WHERE `Iban` = @Iban LIMIT 1;", {
+            ["@Iban"] = new
+        }, function(r)
+            if r then
+                bool = true
+            else
+                bool = false
+            end
+        end)
+    until bool == false
+    if cb then
+        cb()
+    end
+    return new
+end

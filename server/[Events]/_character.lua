@@ -62,6 +62,7 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, he
     local character_id = c.sql.gen.CharacterID()
     local city_id = c.sql.gen.CityID()
     local phone_number = c.sql.gen.PhoneNumber()
+    local iban = c.sql.gen.Iban()
     local bank_number = c.sql.gen.AccountNumber()
     local primary_id = c.identifier(src)
     local data = {}
@@ -74,6 +75,7 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, he
     data.Birth_Date = birth_date
     data.City_ID = city_id
     data.Phone = phone_number
+    data.Iban = iban
     data.Coords = json.encode(conf.spawn)
     data.Job = json.encode(conf.default.job)
     data.Accounts = json.encode(conf.default.accounts)
