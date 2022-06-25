@@ -380,6 +380,7 @@ function c.class.Job(tab)
     end
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
+    ExecuteCommand("add_ace group."..self.Name.." command.bill allow")
     -- ====================================================================================--
     return self
 end

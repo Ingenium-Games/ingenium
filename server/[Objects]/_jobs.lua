@@ -134,6 +134,11 @@ function c.job.Payroll(bool)
     c.debug_1("Jobs Payed.")
 end
 
+function c.job.PayJob(Job, Amount)
+    local xJob = c.data.GetJob(Job)
+    xJob.AddBank(Amount)
+end
+
 function c.job.PayCycle()
     local function Do()
         c.job.Payroll(conf.enablejobpayroll)     
