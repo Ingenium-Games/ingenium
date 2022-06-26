@@ -81,6 +81,6 @@ AddEventHandler("playerDropped", function()
             end)
         end)
         -- NPWD
-        exports["npwd"]:unloadPlayer(src)
+        --exports["npwd"]:unloadPlayer(src)
     end
 end)
