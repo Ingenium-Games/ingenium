@@ -159,7 +159,7 @@ RegisterNetEvent("Server:Character:Ready", function()
     xPlayer.GetCash() -- this triggers state chagnes
     xPlayer.GetBank() -- this triggers state chagnes    
     -- Enabe NPWD
-    exports["npwd"]:newPlayer({ source = src, firstname = xPlayer.GetFirst_Name(), lastname = xPlayer.GetLast_Name(), identifier = xPlayer.GetCharacter_ID(), phoneNumber = xPlayer.GetPhoneNumber() })
+    exports["npwd"]:newPlayer({ source = src, firstname = xPlayer.GetFirst_Name(), lastname = xPlayer.GetLast_Name(), identifier = xPlayer.GetCharacter_ID(), phoneNumber = xPlayer.GetPhone() })
 end)
 
 -- Use this to remove any things connected to Characters like police blips etc.
