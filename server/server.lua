@@ -80,5 +80,7 @@ AddEventHandler("playerDropped", function()
                 c.data.RemovePlayer(src)
             end)
         end)
+        -- NPWD
+        exports["npwd"]:unloadPlayer(src)
     end
 end)
