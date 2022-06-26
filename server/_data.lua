@@ -142,6 +142,7 @@ end
 function c.data.GetPlayerByIdentifier(id)
     for k, v in pairs(c.pdex) do
         if v.GetCharacter_ID() == id then
+            print("id: "..id.." Found with index: "..k)
             return c.data.GetPlayer(k)
         end
     end
@@ -152,6 +153,20 @@ end
 function c.GetPlayerFromIdentifier(id)
     return c.data.GetPlayerByIdentifier(id)
 end
+
+
+--- Return corresponding player data from character_id
+---@param id string "Character_ID"
+function c.data.GetPlayerIDByIdentifier(id)
+    for k, v in pairs(c.pdex) do
+        if v.GetCharacter_ID() == id then
+            print("id: "..id.." Found with index: "..k)
+            return k
+        end
+    end
+    return nil
+end
+
 
 function c.data.ArePlayersActive()
     local ptbl = GetPlayers()    
