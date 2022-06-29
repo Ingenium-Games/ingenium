@@ -170,6 +170,15 @@ RegisterCommand("freeze", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by: "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
+ExecuteCommand("add_ace group.admin command.noclip allow")
+RegisterCommand("noclip", function(source, args, rawCommand)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    TriggerClientEvent("Client:Noclip", src)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..xPlayer.GetName()) -- txAdmin logging Callback
+end, true)
+
+
 ExecuteCommand("add_ace group.admin command.additem allow")
 RegisterCommand("additem", function(source, args, rawCommand)
     local src = source

@@ -57,3 +57,20 @@ RegisterCommand("printcam", function(source, args, rawCommand)
     print('\n PLAYER \n GetEntityCoords() \n : '..x..','..y..','..z..' \n GetEntityHeading() \n :'..head)
     print('\n GAMECAM \n GetGameplayCamCoord() \n : '..rx..','..ry..','..rz..' \n GetGameplayCamRelativeHeading() \n : '..GetGameplayCamRelativeHeading()..' \n GetGameplayCamRelativePitch() \n : '..GetGameplayCamRelativePitch()..' \n GetGameplayCamFov() \n : '..GetGameplayCamFov()..'\n GetGameplayCamRot(0) \n : '..pitchx..','..pitchy..','..pitchz)
 end, false)
+
+
+local bool = false
+local Freecam = exports['fivem-freecam']
+AddEventHandler("Client:Noclip", function()
+    if bool then
+        bool = false
+        Freecam:SetActive(false)
+    else
+        bool = true
+        Freecam:SetActive(true)
+    end
+end)
+
+RegisterCommand("cam", function(source, args, rawCommand)
+    ""..args[1].."\n PLAYER \n GetFov() \n : "..Freecam:GetFov().."\n GetPosition() \n : "..Freecam:GetPosition().."\n GetRotation() \n : .".Freecam:GetRotation().."\n GetMatrix() \n : "..Freecam:GetMatrix().."\n GetTarget() \n : "..Freecam:GetTarget()..""
+end, false)
