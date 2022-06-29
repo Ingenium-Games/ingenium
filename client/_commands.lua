@@ -71,6 +71,10 @@ RegisterNetEvent("Client:Noclip", function()
     end
 end)
 
-RegisterCommand("cam", function(source, args, rawCommand)
-    print((args[1] or "No Name").."\n CAMERA SPECS \n GetFov() \n : "..Freecam:GetFov().."\n GetPosition() \n : "..Freecam:GetPosition().."\n GetRotation() \n : "..Freecam:GetRotation().."\n GetMatrix() \n : "..Freecam:GetMatrix().."\n GetTarget() \n : "..Freecam:GetTarget())
+RegisterCommand("pcam", function(source, args, rawCommand)
+    local fov = Freecam:GetFov()
+    local pos = Freecam:GetPosition()
+    local rot = Freecam:GetRotation()
+    local matrix = Freecam:GetMatrix()
+    print(args[1].."\n CAMERA SPECS \n GetFov() \n : "..fov.."\n GetPosition() \n : "..table.unpack(pos).."\n GetRotation() \n : "..table.unpack(rot).."\n GetMatrix() \n : "..table.unpack(matrix).."\n GetTarget() \n : "..Freecam:GetTarget())
 end, false)
