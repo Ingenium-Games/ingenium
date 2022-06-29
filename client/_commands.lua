@@ -72,5 +72,5 @@ AddEventHandler("Client:Noclip", function()
 end)
 
 RegisterCommand("cam", function(source, args, rawCommand)
-    ""..args[1].."\n PLAYER \n GetFov() \n : "..Freecam:GetFov().."\n GetPosition() \n : "..Freecam:GetPosition().."\n GetRotation() \n : .".Freecam:GetRotation().."\n GetMatrix() \n : "..Freecam:GetMatrix().."\n GetTarget() \n : "..Freecam:GetTarget()..""
+    print((args[1] or "No Name").."\n CAMERA SPECS \n GetFov() \n : "..Freecam:GetFov().."\n GetPosition() \n : "..Freecam:GetPosition().."\n GetRotation() \n : .".Freecam:GetRotation().."\n GetMatrix() \n : "..Freecam:GetMatrix().."\n GetTarget() \n : "..Freecam:GetTarget())
 end, false)
