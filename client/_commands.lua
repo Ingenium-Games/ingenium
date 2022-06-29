@@ -60,8 +60,8 @@ end, false)
 
 
 local bool = false
-local Freecam = exports['fivem-freecam']
-AddEventHandler("Client:Noclip", function()
+local Freecam = exports['freecam']
+RegisterNetEvent("Client:Noclip", function()
     if bool then
         bool = false
         Freecam:SetActive(false)
