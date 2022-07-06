@@ -167,7 +167,6 @@ function c.data.GetPlayerIDByIdentifier(id)
     return nil
 end
 
-
 function c.data.ArePlayersActive()
     local ptbl = GetPlayers()    
     if type(ptbl) == "table" and #ptbl > 1 then
@@ -175,6 +174,7 @@ function c.data.ArePlayersActive()
     end
     return false
 end
+
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
 
