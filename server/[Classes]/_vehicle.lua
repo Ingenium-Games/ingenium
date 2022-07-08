@@ -10,7 +10,7 @@ end
 function c.class.Vehicle(net)
     local data = {
         Fuel = math.random(25, 89),
-        Plate = "N"..c.rng.chars(7).."",
+        Plate = c.rng.chars(8),
         Instance = false,
         Garage = false,
         Parked = false,
