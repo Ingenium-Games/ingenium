@@ -21,8 +21,6 @@ AddEventHandler("onResourceStart", function(resourceName)
     while c.Loading do
         Wait(25)
     end
-    -- Create Channels for Instances
-    c.mumble.GenerateInstanceChannels()
     -- Time now updates
     c.time.ServerSync()
     -- Players save to the DB.

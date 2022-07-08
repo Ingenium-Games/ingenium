@@ -1,6 +1,6 @@
 -- ====================================================================================--
-
 c.bank = {}
+
 --[[
 NOTES.
     - These Banking functions utlizie the cron resource to plan and execute events or funtions 
