@@ -5,6 +5,14 @@ NOTES
     -
 ]] --
 -- ====================================================================================--
+local GetAuthorisedPeds = RegisterServerCallback({
+    eventName = "GetAuthorisedPeds",
+    eventCallback = function(source)
+        local License_ID = c.identifier(source)
+        local peds = MySQL.Sync.fetchScalar("SELECT `Permited_C` FROM `users` WHERE `License_ID` = @License_ID;")
+        return peds
+    end
+})
 
 local GetItems = RegisterServerCallback({
     eventName = "GetItems",
