@@ -247,7 +247,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.GetInstance = function()
-        return GetPlayerRoutingBucket(self.ID)
+        return self.Instance
     end
     --
     self.SetInstance = function(id)
