@@ -13,7 +13,7 @@ NOTES.
 -- SHould remake htis one..
 function c.sql.char.Add(t, cb)
     MySQL.Async.execute(
-        "INSERT INTO `characters` (`Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Height`, `Birth_Date`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`) VALUES (@Primary_ID, @Character_ID, @City_ID, @First_Name, @Last_Name, @Height, @Birth_Date, @Phone, @Coords, @Accounts, @Modifiers, @Appearance);",
+        "INSERT INTO `characters` (`Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Height`, `Birth_Date`, `Iban` `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`) VALUES (@Primary_ID, @Character_ID, @City_ID, @First_Name, @Last_Name, @Height, @Birth_Date, @Iban, @Phone, @Coords, @Accounts, @Modifiers, @Appearance);",
         {
             Primary_ID = t.Primary_ID,
             Character_ID = t.Character_ID,
@@ -22,6 +22,7 @@ function c.sql.char.Add(t, cb)
             Last_Name = t.Last_Name,
             Height = t.Height,
             Birth_Date = t.Birth_Date,
+            Iban = t.Iban,
             Phone = t.Phone,
             Coords = t.Coords,
             Accounts = t.Accounts,

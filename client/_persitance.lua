@@ -1,4 +1,12 @@
 --[[
+
+Recieve All Saved Car positions from Server,
+Find Plates corresponding to the vehicle that was Created
+if not plate then Create
+if vehicle does not exist repeat
+
+
+
 Creates a script vehicle generator at the given coordinates. Most parameters after the model hash are unknown.  
 Parameters:  
 a/w/s - Generator position  
@@ -27,3 +35,6 @@ local retval = DoesScriptVehicleGeneratorExist(vehicleGenerator)
 SetScriptVehicleGenerator(vehicleGenerator, enabled)
 
 ]] --
+
+
+
