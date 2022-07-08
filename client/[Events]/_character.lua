@@ -118,6 +118,7 @@ AddEventHandler("Client:Character:Ready", function()
     -- Character has loaded in, no need to respawn any more.
     exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")
+    exports["AdvancedParking"]:Enable(true)
 end)
 
 RegisterNetEvent("Client:Character:Pre-Switch")
