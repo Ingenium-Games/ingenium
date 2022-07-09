@@ -40,7 +40,7 @@ function c.class.Job(tab)
         if #str <= 1500 then
             self.Description = str
         else
-            c.debug_1("Unable to set description as length is too long. Must be less than 255 characters.")
+            c.func.Debug_1("Unable to set description as length is too long. Must be less than 255 characters.")
         end
     end
     --- func desc
@@ -74,7 +74,7 @@ function c.class.Job(tab)
         if self.Accounts[acc] then
             self.Accounts[acc] = c.math.Decimals(num, 0)
         else
-            c.debug_1("Account entered does not exist")
+            c.func.Debug_1("Account entered does not exist")
         end
     end
     --- func desc
@@ -104,7 +104,7 @@ function c.class.Job(tab)
                 acc = acc + c.math.Decimals(num, 0)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    c.debug_1("Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
+                    c.func.Debug_1("Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
                     self.SetAccount("Safe", acc)
@@ -123,7 +123,7 @@ function c.class.Job(tab)
                 acc = acc - c.math.Decimals(num, 0)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    c.debug_1("Job " .. self.Name .. " has RemoveSafe() Cancelled due to Negative balance remaining.")
+                    c.func.Debug_1("Job " .. self.Name .. " has RemoveSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
                     self.SetAccount("Safe", acc)
@@ -254,19 +254,19 @@ function c.class.Job(tab)
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
                 if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Meta data
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- Validate Meta data
             --[[
                 if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
-                c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
+                c.func.Debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
                 end
             ]] --
@@ -280,7 +280,7 @@ function c.class.Job(tab)
                     local item = c.items[v.Item]
                     self.Weight = self.Weight + item.Weight
                 else
-                    c.debug_1("Ignoring invalid item within .GetWeight()")
+                    c.func.Debug_1("Ignoring invalid item within .GetWeight()")
                 end
             end
         end
@@ -308,7 +308,7 @@ function c.class.Job(tab)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.debug_1("Ignoring invalid item within .GetWeight()")
+                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -318,7 +318,7 @@ function c.class.Job(tab)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object: " .. self.Net)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object: " .. self.Net)
             return
         end
         local info = {
@@ -350,7 +350,7 @@ function c.class.Job(tab)
 
             end
         else
-            c.debug_1("Ignoring invalid .AddItem() for Job: " .. self.Net)
+            c.func.Debug_1("Ignoring invalid .AddItem() for Job: " .. self.Net)
         end
     end
     --- func desc

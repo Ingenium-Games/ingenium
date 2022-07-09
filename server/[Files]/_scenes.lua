@@ -43,7 +43,7 @@ function c.scene.Add(data)
     if type(data) == "table" then
         table.insert(c.scenes, data)
     else
-        c.debug_1("Scene to be added, please check data sent.")
+        c.func.Debug_1("Scene to be added, please check data sent.")
     end
     return #c.scenes
 end

@@ -19,7 +19,7 @@ end
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
     c.cron.Add(conf.loanpayment.h, conf.loanpayment.m, c.bank.CalculatePayments)
-    -- c.debug_1("[E] Added Cron Job [F] c.bank.CalculatePayments()")
+    -- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculatePayments()")
 end)
 --
 
@@ -32,7 +32,7 @@ end
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
     c.cron.Add(conf.loaninterest.h, conf.loaninterest.m, c.bank.CalculateInterest)
-    -- c.debug_1("[E] Added Cron Job [F] c.bank.CalculateInterest()")
+    -- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculateInterest()")
 end)
 --
 
@@ -51,7 +51,7 @@ function c.bank.CheckNegativeBalances()
             end
         end
     end
-    -- c.debug_1("Active clients notified of negative bank balances and Fees charged at $"..conf.bankoverdraw)
+    -- c.func.Debug_1("Active clients notified of negative bank balances and Fees charged at $"..conf.bankoverdraw)
 end
 
 -- queued to add
@@ -60,5 +60,5 @@ AddEventHandler("onServerResourceStart", function()
     for i=0,23 do
         c.cron.Add(i, 0, c.bank.CheckNegativeBalances)
     end
-    -- c.debug_1("[E] Added Cron Job: [F] c.bank.CheckNegativeBalances()")
+    -- c.func.Debug_1("[E] Added Cron Job: [F] c.bank.CheckNegativeBalances()")
 end)

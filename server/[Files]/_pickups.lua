@@ -38,7 +38,7 @@ function c.pick.Add(data)
     if type(data) == "table" then
         table.insert(c.picks, data)
     else
-        c.debug_1("Drop to be added, please check data sent.")
+        c.func.Debug_1("Drop to be added, please check data sent.")
     end
 end
 

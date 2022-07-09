@@ -9,11 +9,11 @@ local DataPacket = RegisterClientCallback({
     eventCallback = function()
         local data = false
         if c.data.GetLoadedStatus() then
-            c.IsBusy()
+            c.func.IsBusy()
             Citizen.Wait(500)
             data = c.data.Packet()
             Citizen.Wait(500)
-            c.NotBusy()
+            c.func.NotBusy()
         end
         return data
     end
@@ -58,7 +58,7 @@ local TeleportOnMarker = RegisterClientCallback({
     eventCallback = function()
         local wp = GetFirstBlipInfoId(8)
         if DoesBlipExist(wp) then
-            c.FadeOut(1000)
+            c.func.FadeOut(1000)
             local ords = GetBlipInfoIdCoord(wp)
             for height = 1, 1000 do
                 SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
@@ -69,7 +69,7 @@ local TeleportOnMarker = RegisterClientCallback({
                 end
                 Citizen.Wait(1)
             end
-            c.FadeIn(1000)
+            c.func.FadeIn(1000)
         end
     end
 })
@@ -77,9 +77,9 @@ local TeleportOnMarker = RegisterClientCallback({
 local Teleport = RegisterClientCallback({
     eventName = "Teleport",
     eventCallback = function(ords)
-        c.FadeOut(1000)
+        c.func.FadeOut(1000)
         SetEntityCoords(PlayerPedId(), ords["x"], ords["y"], ords["z"])
         SetEntityHeading(PlayerPedId(), ords["h"])
-        c.FadeIn(1000)
+        c.func.FadeIn(1000)
     end
 })

@@ -169,7 +169,7 @@ end
 --- SET - The `Active` = BOOLEAN `Character_ID` from the Primary_ID identifier
 -- @`Character_ID`
 function c.sql.char.SetActive(character_id, bool, cb)
-    if type(bool) ~= "boolean" then c.debug_1("c.sql.char.SetActive, boolean was not passed") return end
+    if type(bool) ~= "boolean" then c.func.Debug_1("c.sql.char.SetActive, boolean was not passed") return end
     local Character_ID = character_id
     local Bool = bool
     MySQL.Async.execute("UPDATE `characters` SET `Active` = @Bool WHERE `Character_ID` = @Character_ID", {
@@ -235,7 +235,7 @@ end
 --- Set - The `Wanted` Boolean TRUE from the `Character_ID`
 -- @`Character_ID`
 function c.sql.char.SetWanted(character_id, bool, cb)
-    if type(bool) ~= "boolean" then c.debug_1("c.sql.char.SetActive, boolean was not passed") return end
+    if type(bool) ~= "boolean" then c.func.Debug_1("c.sql.char.SetActive, boolean was not passed") return end
     local Character_ID = character_id
     MySQL.Async.execute("UPDATE `characters` SET `Wanted` IS TRUE WHERE `Character_ID` = @Character_ID;", {
         ["@Character_ID"] = Character_ID

@@ -38,7 +38,7 @@ end)
 -- [C]
 RegisterNetEvent("Server:Character:Delete", function(Character_ID)
     local src = tonumber(source)
-    local primary_id = c.identifier(src)
+    local primary_id = c.func.identifier(src)
     c.sql.char.Delete(Character_ID, function()
         DropPlayer(src, "Character with id: "..Character_ID.." was Deleted Successfully, please rejoin.")
     end)
@@ -56,7 +56,7 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, he
     local src = tonumber(source)
     -- Run a check to see if it being exploited.
     if c.data.GetPlayer(src) ~= false then
-        c.eventban(src, "Server:Character:Register")
+        c.func.Eventban(src, "Server:Character:Register")
     end
     local p = promise.new()
     local character_id = c.sql.gen.CharacterID()
@@ -64,7 +64,7 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, he
     local phone_number = c.sql.gen.PhoneNumber()
     local iban = c.sql.gen.Iban()
     local bank_number = c.sql.gen.AccountNumber()
-    local primary_id = c.identifier(src)
+    local primary_id = c.func.identifier(src)
     local data = {}
     
     data.Primary_ID = primary_id -- Owner

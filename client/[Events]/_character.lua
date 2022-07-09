@@ -50,8 +50,8 @@ AddEventHandler("Client:Character:Create", function()
     local plyped = PlayerPedId()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
-    c.FadeOut(1000)
-    c.IsBusyPleaseWait(1000)
+    c.func.FadeOut(1000)
+    c.func.IsBusyPleaseWait(1000)
     local config = {
         ped = true,
         headBlend = true,
@@ -62,31 +62,31 @@ AddEventHandler("Client:Character:Create", function()
       }
       exports["fivem-appearance"]:startPlayerCustomization(function(appearance)
         if (appearance) then
-            c.FadeOut(1000)
-            c.IsBusyPleaseWait(1000)
-            c.FadeIn(1000)
+            c.func.FadeOut(1000)
+            c.func.IsBusyPleaseWait(1000)
+            c.func.FadeIn(1000)
             TriggerEvent("Client:Character:OpeningMenu")
             TriggerEvent("Client:Core:UI", "Register")
         else
             TriggerServerEvent("Server:Character:Failed")
         end
       end, config)
-      c.FadeIn(1000)
-      c.IsBusyPleaseWait(1000)
+      c.func.FadeIn(1000)
+      c.func.IsBusyPleaseWait(1000)
 end)
 
 -- Respawn in on last saved coords.
 -- [S]
 RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
-    c.FadeOut(1000)
+    c.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
     SetEntityHeading(GetPlayerPed(-1), Coords.h)
     TriggerServerEvent("Server:Character:LoadSkin")
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     FreezeEntityPosition(GetPlayerPed(-1), false)
-    c.FadeIn(2000)
+    c.func.FadeIn(2000)
 end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
@@ -124,9 +124,9 @@ end)
 RegisterNetEvent("Client:Character:Pre-Switch")
 AddEventHandler("Client:Character:Pre-Switch", function()
     --
-    c.FadeOut(1000)
+    c.func.FadeOut(1000)
     --
-    c.FadeIn(2000)
+    c.func.FadeIn(2000)
     --
 end)
 
@@ -144,7 +144,7 @@ AddEventHandler("Client:Character:OffDuty", function()
         -- Add Functions or Hooks here!
 
     else
-        c.debug_3("Ability to go off duty has ben disabled.")
+        c.func.Debug_3("Ability to go off duty has ben disabled.")
     end
 end)
 
@@ -154,7 +154,7 @@ AddEventHandler("Client:Character:OnDuty", function(job)
         -- Add Functions or Hooks here!
         
     else
-        c.debug_3("Ability to go on duty has ben disabled.")
+        c.func.Debug_3("Ability to go on duty has ben disabled.")
     end
 end)
 

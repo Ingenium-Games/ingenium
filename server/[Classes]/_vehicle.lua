@@ -115,7 +115,7 @@ function c.class.Vehicle(net)
             SetEntityHeading(self.Entity, coords.h)
             SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
         else
-            c.debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
+            c.func.Debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
         end
     end
 
@@ -137,7 +137,7 @@ function c.class.Vehicle(net)
             table.insert(self.CarKeys, id)
             self.State.CarKeys = self.CarKeys
         else
-            c.debug_1("User: " .. id .. " Already has key to this vehicle.")
+            c.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
     end
     --- func desc
@@ -148,7 +148,7 @@ function c.class.Vehicle(net)
             table.remove(self.CarKeys, id)
             self.State.CarKeys = self.CarKeys
         else
-            c.debug_1("User: " .. id .. " Never had a key to this vehicle.")
+            c.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end
     end
     --- func desc
@@ -309,19 +309,19 @@ function c.class.Vehicle(net)
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
                 if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Meta data
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- Validate Meta data
             --[[
                 if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
-                c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
+                c.func.Debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
                 end
             ]] --
@@ -335,7 +335,7 @@ function c.class.Vehicle(net)
                     local item = c.items[v.Item]
                     self.Weight = self.Weight + item.Weight
                 else
-                    c.debug_1("Ignoring invalid item within .GetWeight()")
+                    c.func.Debug_1("Ignoring invalid item within .GetWeight()")
                 end
             end
         end
@@ -363,7 +363,7 @@ function c.class.Vehicle(net)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.debug_1("Ignoring invalid item within .GetWeight()")
+                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -373,7 +373,7 @@ function c.class.Vehicle(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle: " .. self.Net)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle: " .. self.Net)
             return
         end
         local info = {
@@ -405,7 +405,7 @@ function c.class.Vehicle(net)
 
             end
         else
-            c.debug_1("Ignoring invalid .AddItem() for Vehicle: " .. self.Net)
+            c.func.Debug_1("Ignoring invalid .AddItem() for Vehicle: " .. self.Net)
         end
     end
     --- func desc

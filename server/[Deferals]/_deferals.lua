@@ -35,7 +35,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         }})
     )
     --
-    local id = c.identifier(src)
+    local id = c.func.identifier(src)
     local data = c.sql.user.Get(id)
     if data ~= nil then
         if data.Priority ~= nil then

@@ -83,19 +83,19 @@ function c.class.Object(net, id)
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
                 if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Meta data
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- Validate Meta data
             --[[
                 if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
-                c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
+                c.func.Debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
                 end
             ]] --
@@ -109,7 +109,7 @@ function c.class.Object(net, id)
                     local item = c.items[v.Item]
                     self.Weight = self.Weight + item.Weight
                 else
-                    c.debug_1("Ignoring invalid item within .GetWeight(), for Object: " .. self.Name)
+                    c.func.Debug_1("Ignoring invalid item within .GetWeight(), for Object: " .. self.Name)
                 end
             end
         end
@@ -137,7 +137,7 @@ function c.class.Object(net, id)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.debug_1("Ignoring invalid item within .GetWeight(), for Object: " .. self.Name)
+                c.func.Debug_1("Ignoring invalid item within .GetWeight(), for Object: " .. self.Name)
             end
         end
         return self.Weight
@@ -147,7 +147,7 @@ function c.class.Object(net, id)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object: " .. self.Name)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object: " .. self.Name)
             return
         end
         local info = {
@@ -179,7 +179,7 @@ function c.class.Object(net, id)
 
             end
         else
-            c.debug_1("Ignoring invalid .AddItem() for Object: " .. self.Name)
+            c.func.Debug_1("Ignoring invalid .AddItem() for Object: " .. self.Name)
         end
     end
     --- func desc

@@ -6,19 +6,19 @@ function c.version.Check(url, resourceName)
         local version = GetResourceMetadata(resourceName, "version")
         PerformHttpRequest(url, function(err, text, headers)
             --
-            c.debug_1("^0[ ^3Performing Update Check ^0: "..resourceName.." ] ")
+            c.func.Debug_1("^0[ ^3Performing Update Check ^0: "..resourceName.." ] ")
             if (text ~= nil) then
                 if version == text then
-                    c.debug_1("^0[ ^4Ok! ^0] ")
+                    c.func.Debug_1("^0[ ^4Ok! ^0] ")
                 else
                     print("\n")
-                    c.alert("Newer version of "..resourceName.." found")
-                    c.alert("[ Old : "..version.." ] ")
-                    c.alert("[ New : "..text.." ] ")        
+                    c.func.Alert("Newer version of "..resourceName.." found")
+                    c.func.Alert("[ Old : "..version.." ] ")
+                    c.func.Alert("[ New : "..text.." ] ")        
                     print("\n")
                 end
             else
-                c.debug_1("Unable to find version.txt on "..url)
+                c.func.Debug_1("Unable to find version.txt on "..url)
             end
         end, "GET", "", "")
     end

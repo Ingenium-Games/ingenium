@@ -21,7 +21,7 @@ function c.event.AddInteractJobEvent(job, name, cb)
             -- Do Actions...
             cb(src, o)
         else
-            c.eventban(src, eventname)
+            c.func.Eventban(src, eventname)
         end
     end)
     return eventname

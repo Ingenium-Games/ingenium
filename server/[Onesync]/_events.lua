@@ -29,7 +29,7 @@ end)
 
 AddEventHandler("explosionEvent", function()
     --CancelEvent()
-    --c.debug_1("Explosion has been Cancelled.")
+    --c.func.Debug_1("Explosion has been Cancelled.")
 end)
 
 AddEventHandler("entityCreated", function(ent)
@@ -44,7 +44,7 @@ AddEventHandler("entityCreated", function(ent)
                 c.data.AddObject(net, c.class.Object, net)                      
             else
                 DeleteEntity(ent)
-                c.debug_1("Object has been Deleted.")
+                c.func.Debug_1("Object has been Deleted.")
             end
         --
         -- Vehicle
@@ -53,7 +53,7 @@ AddEventHandler("entityCreated", function(ent)
                 c.data.AddVehicle(net, c.class.Vehicle, net, false)
             else
                 DeleteEntity(ent)
-                c.debug_1("Vehicle has been Deleted.")
+                c.func.Debug_1("Vehicle has been Deleted.")
             end
         --
         -- Ped
@@ -68,7 +68,7 @@ AddEventHandler("entityCreated", function(ent)
                 end
             else
                 DeleteEntity(ent)
-                c.debug_1("Ped has been Deleted.")
+                c.func.Debug_1("Ped has been Deleted.")
             end
         -- no other types // fin
         end
@@ -84,14 +84,14 @@ AddEventHandler("entityCreating", function(ent)
     if type == 3 then
         if conf.disable.objects[model] then
             CancelEvent()
-            c.debug_1("Object prevented from Spawning.")
+            c.func.Debug_1("Object prevented from Spawning.")
         end
     --
     -- Vehicle
     elseif type == 2 then            
         if conf.disable.vehicles[model] then
             CancelEvent()
-            c.debug_1("Vehicle prevented from Spawning.")
+            c.func.Debug_1("Vehicle prevented from Spawning.")
         end
     --
     -- Ped
@@ -100,7 +100,7 @@ AddEventHandler("entityCreating", function(ent)
         if not IsPedAPlayer(ent) then
             if conf.disable.peds[model] then
                 CancelEvent()
-                c.debug_1("Ped prevented from Spawning.")
+                c.func.Debug_1("Ped prevented from Spawning.")
             end
         else
         -- is a player

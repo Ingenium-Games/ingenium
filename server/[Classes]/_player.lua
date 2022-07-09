@@ -6,7 +6,7 @@ end
 function c.class.Player(source, character_id)
     local src = tonumber(source)
     local Character_ID = character_id
-    local Steam_ID, FiveM_ID, License_ID, Discord_ID = c.identifiers(src)
+    local Steam_ID, FiveM_ID, License_ID, Discord_ID = c.func.identifiers(src)
     local user = c.sql.user.Get(License_ID)
     local char = c.sql.char.Get(Character_ID)
     local self = {}
@@ -69,12 +69,12 @@ function c.class.Player(source, character_id)
     self.State.Phone = self.Phone
     --
     -- Gender ("Male"/"Female")
-    self.Gender, self.GenderString = c.IsPedMale(self.Model)
+    self.Gender, self.GenderString = c.func.IsPedMale(self.Model)
     self.State.Gender = self.Gender
     self.State.GenderString = self.GenderString
     --
     -- Humaniod Model (true/false)
-    self.IsHuman = c.IsPedHuman(self.Model)
+    self.IsHuman = c.func.IsPedHuman(self.Model)
     self.State.IsHuman = self.IsHuman
     --
     -- Integers
@@ -205,7 +205,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.GetIdentifier = function()
-        return c.identifier(self.ID)
+        return c.func.identifier(self.ID)
     end
     --
     self.GetCharacter_ID = function()
@@ -360,7 +360,7 @@ function c.class.Player(source, character_id)
         if self.Accounts[acc] then
             self.Accounts[acc] = num
         else
-            c.debug_1("Account entered does not exist")
+            c.func.Debug_1("Account entered does not exist")
         end
     end
     --
@@ -391,7 +391,7 @@ function c.class.Player(source, character_id)
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                c.debug_1(
+                c.func.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                         CancelEvent()
@@ -411,7 +411,7 @@ function c.class.Player(source, character_id)
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                c.debug_1(
+                c.func.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                         CancelEvent()
@@ -431,7 +431,7 @@ function c.class.Player(source, character_id)
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                c.debug_1(
+                c.func.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                         CancelEvent()
@@ -493,7 +493,7 @@ function c.class.Player(source, character_id)
         if num < 0 then
             ammo = 0
             self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            c.debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
+            c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
             CancelEvent()
         end
         ammo = num
@@ -507,7 +507,7 @@ function c.class.Player(source, character_id)
         if ammo < 0 then
             ammo = 0
             self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            c.debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
+            c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
             CancelEvent()
         end
         self.State.Ammo = self.Ammo
@@ -520,7 +520,7 @@ function c.class.Player(source, character_id)
         if ammo < 0 then
             ammo = 0
             self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            c.debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
+            c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
             CancelEvent()
         end
         self.State.Ammo = self.Ammo
@@ -543,7 +543,7 @@ function c.class.Player(source, character_id)
             TriggerEvent("Server:Character:SetJob", self.ID, self.Job)
             TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job)
         else
-            c.debug_1("Ignoring invalid .SetJob() for " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .SetJob() for " .. self.ID)
         end
     end
     --- func desc
@@ -675,19 +675,19 @@ function c.class.Player(source, character_id)
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
                 if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Meta data
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- Validate Meta data
             --[[
                 if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
-                c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
+                c.func.Debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
                 end
             ]] --
@@ -701,7 +701,7 @@ function c.class.Player(source, character_id)
                     local item = c.items[v.Item]
                     self.Weight = self.Weight + item.Weight
                 else
-                    c.debug_1("Ignoring invalid item within .GetWeight()")
+                    c.func.Debug_1("Ignoring invalid item within .GetWeight()")
                 end
             end
         end
@@ -729,7 +729,7 @@ function c.class.Player(source, character_id)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.debug_1("Ignoring invalid item within .GetWeight()")
+                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -739,7 +739,7 @@ function c.class.Player(source, character_id)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
             return
         end
         local info = {
@@ -769,7 +769,7 @@ function c.class.Player(source, character_id)
             end
             TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
-            c.debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
         end
     end
     --

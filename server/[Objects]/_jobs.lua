@@ -76,7 +76,7 @@ RegisterNetEvent("Server:Character:OffDuty", function(req)
         xPlayer.SetDuty(false)
         TriggerClientEvent("Client:Character:OffDuty", src)
     else
-        c.debug_1("Ability to go off duty has ben disabled.")
+        c.func.Debug_1("Ability to go off duty has ben disabled.")
     end
 end)
 
@@ -88,7 +88,7 @@ RegisterNetEvent("Server:Character:OnDuty", function(req)
         xPlayer.SetDuty(true)
         TriggerClientEvent("Client:Character:OnDuty", src, CurrentlyActive[src])
     else
-        c.debug_1("Ability to go on duty has ben disabled.")
+        c.func.Debug_1("Ability to go on duty has ben disabled.")
     end
 end)
 
@@ -131,7 +131,7 @@ function c.job.Payroll(bool)
             TriggerClientEvent("Client:Notify", k, "Payroll for active staff paid.")
         end
     end
-    c.debug_1("Jobs Payed.")
+    c.func.Debug_1("Jobs Payed.")
 end
 
 function c.job.PayJob(Job, Amount)

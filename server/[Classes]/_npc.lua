@@ -13,12 +13,12 @@ function c.class.Npc(net)
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
     -- Gender ("Male"/"Female")
-    self.Gender, self.GenderString = c.IsPedMale(self.Model)
+    self.Gender, self.GenderString = c.func.IsPedMale(self.Model)
     self.State.Gender = self.Gender
     self.State.GenderString = self.GenderString
     --
     -- Humaniod Model (true/false)
-    self.IsHuman = c.IsPedHuman(self.Model)
+    self.IsHuman = c.func.IsPedHuman(self.Model)
     self.State.IsHuman = self.IsHuman
     --
     -- Animation?
@@ -107,19 +107,19 @@ function c.class.Npc(net)
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
                 if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Meta data
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- Validate Meta data
             --[[
                 if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
-                c.debug_1("Error in Creating Inventory, Meta data is not false or a table.")
+                c.func.Debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
                 end
             ]] --
@@ -133,7 +133,7 @@ function c.class.Npc(net)
                     local item = c.items[v.Item]
                     self.Weight = self.Weight + item.Weight
                 else
-                    c.debug_1("Ignoring invalid item within .GetWeight()")
+                    c.func.Debug_1("Ignoring invalid item within .GetWeight()")
                 end
             end
         end
@@ -161,7 +161,7 @@ function c.class.Npc(net)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.debug_1("Ignoring invalid item within .GetWeight()")
+                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -171,7 +171,7 @@ function c.class.Npc(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC: " .. self.Net)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC: " .. self.Net)
             return
         end
         local info = {
@@ -200,7 +200,7 @@ function c.class.Npc(net)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            c.debug_1("Ignoring invalid .AddItem() for NPC: " .. self.Net)
+            c.func.Debug_1("Ignoring invalid .AddItem() for NPC: " .. self.Net)
         end
     end
     --- func desc
