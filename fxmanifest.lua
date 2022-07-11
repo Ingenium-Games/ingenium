@@ -7,7 +7,7 @@ version "0.9.0"
 ------------------------------------------------------------------------------
 lua54 "yes"
 ui_page "nui/index.html"
-loadscreen "https://www.ingenium.games/"
+loadscreen "https://ingenium.games/"
 loadscreen_cursor "yes"
 loadscreen_manual_shutdown 'yes'
 ------------------------------------------------------------------------------
