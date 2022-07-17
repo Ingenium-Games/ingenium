@@ -14,6 +14,7 @@ function PlayerKilled()
     local log = false
     local cause = GetPedCauseOfDeath(ped)
     local source = GetPedSourceOfDeath(ped)
+    local data
 
     if source ~= 0 then
         local type = GetEntityType(source)
@@ -42,8 +43,11 @@ function PlayerKilled()
             cause = "Object"
             log = {["Source"] = 0}
         end
+    elseif source == 0 then
+        cause = "Unknown"
+        log = {["Source"] = -1}
     end
-    local data = {
+    data = {
         Log = log,
         Cause = cause,
         Coords = vector3(GetEntityCoords(ped)),
@@ -51,7 +55,7 @@ function PlayerKilled()
     TriggerEvent("Client:Character:Death", data)
     TriggerServerEvent("Server:Character:Death", data)
     c.data.SetLocalPlayerState("IsDead", true, true)
-    Wait(2500)
+    Wait(1250)
     SetEntityCoords(ped, data.Coords)
 end
 

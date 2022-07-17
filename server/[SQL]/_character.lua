@@ -210,13 +210,15 @@ end
 
 --- SET - The `Active` = BOOLEAN `Character_ID` from the Primary_ID identifier
 -- @`Character_ID`
-function c.sql.char.SetDead(character_id, bool, cb)
+function c.sql.char.SetDead(character_id, bool, data, cb)
     if type(bool) ~= "boolean" then c.func.Debug_1("c.sql.char.SetDead, boolean was not passed") return end
     local Character_ID = character_id
     local Bool = bool
-    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = @Bool, `Dead_Time` = @Time WHERE `Character_ID` = @Character_ID", {
+    local Data = json.encode(data)
+    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = @Bool, `Dead_Time` = @Time, `Dead_Data` = @Data WHERE `Character_ID` = @Character_ID", {
         ["@Bool"] = Bool,
         ["@Time"] = c.func.Timestamp(),
+        ["@Data"] = Data,
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
