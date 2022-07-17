@@ -61,7 +61,7 @@ Citizen.CreateThread(function()
         if c.data.GetLoadedStatus() then
             local ply = PlayerId()
             local ped = PlayerPedId()
-            if IsPlayerDead(ply) then
+            if IsEntityDead(ped) then
                 if not c.data.GetLocalPlayerState("IsDead") then
                     PlayerKilled()
                 end
