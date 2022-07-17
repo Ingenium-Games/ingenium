@@ -178,7 +178,6 @@ RegisterCommand("noclip", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
-
 ExecuteCommand("add_ace group.admin command.additem allow")
 RegisterCommand("additem", function(source, args, rawCommand)
     local src = source
