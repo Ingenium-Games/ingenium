@@ -37,7 +37,9 @@ function c.sql.user.Add(usermame, license_id, fivem_id, steam_id, discord_id, ip
     local Discord_ID = discord_id
     local IP_Address = ip
     local IsBusy = true
-    MySQL.Async.execute("INSERT INTO `users` (`Username`, `Steam_ID`, `License_ID`, `FiveM_ID`, `Discord_ID`, `Ace`, `Locale`, `IP_Address`) VALUES (@Username, @Steam_ID, @License_ID, @FiveM_ID, @Discord_ID, @Ace, @Locale, @IP_Address);",{
+    MySQL.Async.execute("INSERT INTO `users` (`Join_Date`, `Last_Login`, `Username`, `Steam_ID`, `License_ID`, `FiveM_ID`, `Discord_ID`, `Ace`, `Locale`, `IP_Address`) VALUES (@Join_Date, @Last_Login, @Username, @Steam_ID, @License_ID, @FiveM_ID, @Discord_ID, @Ace, @Locale, @IP_Address);",{
+        ["@Join_Date"] = c.func.Timestamp(),
+        ["@Last_Login"] = c.func.Timestamp(),
         ["@Username"] = Username,
         ["@License_ID"] = License_ID,
         ["@FiveM_ID"] = FiveM_ID,
@@ -66,7 +68,8 @@ function c.sql.user.Update(usermame, license_id, fivem_id, steam_id, discord_id,
     local Discord_ID = discord_id
     local IP_Address = ip
     local IsBusy = true
-    MySQL.Async.execute("UPDATE `users` SET `Username` = @Username, `Steam_ID` = IFNULL(`Steam_ID`,@Steam_ID), `FiveM_ID` = IFNULL(`FiveM_ID`,@FiveM_ID), `Discord_ID` = IFNULL(`Discord_ID`,@Discord_ID), `IP_Address` = @IP_Address WHERE `License_ID` = @License_ID;", {
+    MySQL.Async.execute("UPDATE `users` SET `Last_Login` = @Last_Login, `Username` = @Username, `Steam_ID` = IFNULL(`Steam_ID`,@Steam_ID), `FiveM_ID` = IFNULL(`FiveM_ID`,@FiveM_ID), `Discord_ID` = IFNULL(`Discord_ID`,@Discord_ID), `IP_Address` = @IP_Address WHERE `License_ID` = @License_ID;", {
+        ["@Last_Login"] = c.func.Timestamp(),
         ["@Username"] = Username,
         ["@License_ID"] = License_ID,
         ["@FiveM_ID"] = FiveM_ID,
