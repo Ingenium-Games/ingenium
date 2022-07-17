@@ -43,8 +43,8 @@ function Selected(key) {
         let Phone = Characters[key].Phone
         let City = Characters[key].City_ID
         document.getElementById("name").innerText = First + " " + Last;
-        document.getElementById("created").innerText = new Date(Created).toISOString().slice(0, 19).replace("T", " ")
-        document.getElementById("lastseen").innerText = new Date(Login).toISOString().slice(0, 19).replace("T", " ")
+        document.getElementById("created").innerText = new Date(Created).toLocaleDateString('en-AU')
+        document.getElementById("lastseen").innerText = new Date(Login).toLocaleDateString('en-AU')
         document.getElementById("city").innerText = City
         document.getElementById("phone").innerText = Phone
     }
