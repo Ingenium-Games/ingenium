@@ -145,31 +145,6 @@ function c.data.GetOfflinePlayer(character_id)
     return nil
 end
 
-function c.sql.char.ReviveDeadCharacters(cb)
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = FALSE, `Coords` = @Coords, `Dead_Time` = NULL WHERE `Dead_Time` <= (@Time - '604800')", { -- 604800 is 7 days in seconds
-        ["@Coords"] = json.encode({["z"]=43.28,["h"]=337.32,["x"]=327.52,["y"]=-603.03}), -- Pillbox Elevators
-        ["@Time"] = c.func.Timestamp()
-    }, function(data)
-        if data then
-            --
-        end
-        if cb then
-            cb()
-        end
-    end)
-    c.func.Debug_1("SQL - ReviveDeadCharacters")
-end
-
-AddEventHandler("onServerResourceStart", function()
-    for h=0,23 do
-        for m=0, 59 do
-            c.cron.Add(h, m, c.sql.char.ReviveDeadCharacters)
-        end
-    end
-end)
-
 --- Return corresponding player data from character_id
 ---@param id string "Character_ID"
 function c.data.GetPlayerByIdentifier(id)
@@ -449,9 +424,23 @@ function c.data.ServerSync()
         c.sql.save.Jobs()
         Citizen.Wait(conf.sec * 5)
         c.data.Save("Users, Vehicles, Jobs, ")
+        Citizen.Wait(conf.sec * 5)
+        c.sql.char.ReviveDeadCharacters()
         SetTimeout(conf.serversync, Do)
     end
     SetTimeout(conf.serversync, Do)
+end
+
+-- Server to DB routine.
+function c.data.ReviveSync()
+    local function Do()
+        local result = c.sql.char.ReviveDeadCharacters()
+        if result then
+            c.func.Debug_2("Revived Characters")
+        end
+        SetTimeout(conf.revivesync, Do)
+    end
+    SetTimeout(conf.revivesync, Do)
 end
 
 -- ====================================================================================--

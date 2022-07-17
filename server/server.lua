@@ -25,6 +25,8 @@ AddEventHandler("onResourceStart", function(resourceName)
     c.time.ServerSync()
     -- Players save to the DB.
     c.data.ServerSync()
+    -- Start allowing dead characters to be revived - called every minute
+    c.data.ReviveSync()
     -- Start Paying players based on conf.
     c.job.PayCycle()  
     -- Cleanup Cycles on files.
@@ -32,6 +34,7 @@ AddEventHandler("onResourceStart", function(resourceName)
     c.drop.CleanUp()
     c.pick.CleanUp()
     c.note.CleanUp()
+    
     --
     Queue.OnReady()
 end)

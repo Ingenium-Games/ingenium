@@ -106,6 +106,23 @@ function c.sql.char.GetAllPermited(primary_id, slots, cb)
     return result
 end
 
+function c.sql.char.ReviveDeadCharacters(cb)
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = FALSE, `Coords` = @Coords, `Dead_Time` = NULL WHERE `Dead_Time` <= (@Time - '604800')", { -- 604800 is 7 days in seconds
+        ["@Coords"] = json.encode({["z"]=43.28,["h"]=337.32,["x"]=327.52,["y"]=-603.03}), -- Pillbox Elevators
+        ["@Time"] = c.func.Timestamp()
+    }, function(data)
+        if data then
+            result = true
+        end
+        if cb then
+            cb()
+        end
+    end)
+    return result
+end
+
 --- Get - The entire ROW of data from Characters table where the Character_ID is the character id.
 -- @Primary_ID
 function c.sql.char.Get(character_id, cb)

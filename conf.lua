@@ -55,6 +55,7 @@ UPDATE TIMES :
 conf.clientsync = 15 * conf.sec
 conf.serversync = 1.5 * conf.min
 conf.playersync = 2 * conf.min
+conf.revivesync = conf.min
 -- Recommended to not touch this one.
 -- As entities being removed from onesync trigger and event to clean up their respective tables, this is only used to ensure the data quaity of the tables, a checker if you will that will garbage collect as needed.
 conf.cleanup = 5 * conf.min
