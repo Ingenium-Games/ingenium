@@ -62,9 +62,10 @@ conf.cleanup = 5 * conf.min
 SPAWN LOCATION : Airport.
 ]]--
 conf.spawn = {
-    x = -1050.30,
-    y = -2740.95,
-    z = 14.6
+    x = 1037.71,
+    y = -2736.13,
+    z = 13.74,
+    h = 328.82,
 }
 --[[
 DEFERALS :

@@ -82,6 +82,7 @@ function c.sql.char.GetAllNotDead(primary_id, cb)
     return result
 end
 
+
 --- Get - Info on the characters owned to prefill the multicharacter selection
 -- @License_ID
 function c.sql.char.GetAllPermited(primary_id, slots, cb)

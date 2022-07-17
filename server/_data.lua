@@ -145,6 +145,28 @@ function c.data.GetOfflinePlayer(character_id)
     return nil
 end
 
+function c.sql.char.ReviveDeadCharacters(cb)
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = FALSE WHERE `Dead_Time` <= (@Time - '604800')", { -- 604800 is 7 days in seconds
+        ["@Time"] = c.func.Timestamp()
+    }, function(data)
+        if data then
+            --
+        end
+        if cb then
+            cb()
+        end
+    end)
+    c.func.Debug_1("SQL - ReviveDeadCharacters")
+end
+
+AddEventHandler("onServerResourceStart", function()
+    for i=0,23 do
+        c.cron.Add(i, 0, c.sql.char.ReviveDeadCharacters)
+    end
+end)
+
 --- Return corresponding player data from character_id
 ---@param id string "Character_ID"
 function c.data.GetPlayerByIdentifier(id)
