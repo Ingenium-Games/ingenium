@@ -134,6 +134,17 @@ function c.GetPlayers()
     return c.data.GetPlayers()
 end
 
+function c.data.GetOfflinePlayer(character_id)
+    if character_id then
+        local data = c.sql.char.Get(character_id)
+        if data then
+            local temp = c.class.OfflinePlayer(data)
+            return temp
+        end
+    end
+    return nil
+end
+
 --- Return corresponding player data from character_id
 ---@param id string "Character_ID"
 function c.data.GetPlayerByIdentifier(id)
