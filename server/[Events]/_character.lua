@@ -179,8 +179,6 @@ RegisterNetEvent("Server:Character:Death", function(data)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
     --
-    print(c.table.Dump(data))
-    --
     if data.Log then
         -- agro = source id or -1 for server.
         local agro = data.Log.Source
