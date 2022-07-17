@@ -7,9 +7,6 @@ version "0.9.0"
 ------------------------------------------------------------------------------
 lua54 "yes"
 ui_page "nui/index.html"
-loadscreen "https://ingenium.games/"
-loadscreen_cursor "yes"
-loadscreen_manual_shutdown 'yes'
 ------------------------------------------------------------------------------
 shared_scripts {"conf.lua", "conf.default.lua", "conf.vehicles.lua", "conf.disable.lua", "conf.file.lua", "conf.peds.lua", "shared/_c.lua"}
 ------------------------------------------------------------------------------
