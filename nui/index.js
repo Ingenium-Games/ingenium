@@ -36,10 +36,10 @@ function Selected(key) {
         $("#Kill").show()
         Character_ID = Characters[key].Character_ID
         Key = Characters[key]
-        let Created = Characters[key].Created
+        let Created = Number(Characters[key].Created) * 1000
         let First = Characters[key].First_Name
         let Last = Characters[key].Last_Name
-        let Login = Characters[key].Last_Seen
+        let Login = Number(Characters[key].Last_Seen) * 1000
         let Phone = Characters[key].Phone
         let City = Characters[key].City_ID
         document.getElementById("name").innerText = First + " " + Last;
