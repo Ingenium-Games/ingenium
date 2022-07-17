@@ -148,7 +148,8 @@ end
 function c.sql.char.ReviveDeadCharacters(cb)
     local IsBusy = true
     local result = nil
-    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = FALSE WHERE `Dead_Time` <= (@Time - '604800')", { -- 604800 is 7 days in seconds
+    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = FALSE, `Coords` = @Coords, `Dead_Time` = NULL WHERE `Dead_Time` <= (@Time - '604800')", { -- 604800 is 7 days in seconds
+        ["@Coords"] = json.encode({["z"]=43.28,["h"]=337.32,["x"]=327.52,["y"]=-603.03}), -- Pillbox Elevators
         ["@Time"] = c.func.Timestamp()
     }, function(data)
         if data then
@@ -162,8 +163,10 @@ function c.sql.char.ReviveDeadCharacters(cb)
 end
 
 AddEventHandler("onServerResourceStart", function()
-    for i=0,23 do
-        c.cron.Add(i, 0, c.sql.char.ReviveDeadCharacters)
+    for h=0,23 do
+        for m=0, 59 do
+            c.cron.Add(h, m, c.sql.char.ReviveDeadCharacters)
+        end
     end
 end)
 
