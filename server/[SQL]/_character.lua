@@ -87,7 +87,7 @@ function c.sql.char.GetAllPermited(primary_id, slots, cb)
     local Slots = slots
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID LIMIT @Slots;", {
+    MySQL.Async.fetchAll("SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID AND `Is_Dead` = FALSE LIMIT @Slots;", {
         ["@Primary_ID"] = Primary_ID,
         ["@Slots"] = Slots, 
     }, function(data)
