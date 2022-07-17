@@ -177,19 +177,21 @@ end)
 -- [C]
 RegisterNetEvent("Server:Character:Death", function(data)
     local src = source
+    local xPlayer = c.data.GetPlayer(src)
     if data.Log then
         -- agro = source id or -1 for server.
         local agro = data.Log.Source
         if data.Cause == "Weapon" then
-            
+            print(c.table.Dump(data))
         elseif data.Cause == "Vehicle" then
-
+            print(c.table.Dump(data))
         elseif data.Cause == "Obejct" then
-            
+            print(c.table.Dump(data))
         end
     else
 
     end
+    c.sql.char.SetDead(xPlayer.GetCharacter_ID(), true)
 end)
 
 --@ req = server_id or source

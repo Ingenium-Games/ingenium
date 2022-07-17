@@ -61,6 +61,27 @@ end
 
 --- Get - Info on the characters owned to prefill the multicharacter selection
 -- @License_ID
+function c.sql.char.GetAllNotDead(primary_id, cb)
+    local Primary_ID = primary_id
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchAll("SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID AND `Is_Dead` = FALSE;", {
+        ["@Primary_ID"] = Primary_ID
+    }, function(data)
+        result = data
+        IsBusy = false
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+    return result
+end
+
+--- Get - Info on the characters owned to prefill the multicharacter selection
+-- @License_ID
 function c.sql.char.GetAllPermited(primary_id, slots, cb)
     local Primary_ID = primary_id
     local Slots = slots
@@ -174,6 +195,26 @@ function c.sql.char.SetActive(character_id, bool, cb)
     local Bool = bool
     MySQL.Async.execute("UPDATE `characters` SET `Active` = @Bool WHERE `Character_ID` = @Character_ID", {
         ["@Bool"] = Bool,
+        ["@Character_ID"] = Character_ID
+    }, function(data)
+        if data then
+            --
+        end
+        if cb then
+            cb()
+        end
+    end)
+end
+
+--- SET - The `Active` = BOOLEAN `Character_ID` from the Primary_ID identifier
+-- @`Character_ID`
+function c.sql.char.SetDead(character_id, bool, cb)
+    if type(bool) ~= "boolean" then c.func.Debug_1("c.sql.char.SetDead, boolean was not passed") return end
+    local Character_ID = character_id
+    local Bool = bool
+    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = @Bool, `Dead_Time` = @Time WHERE `Character_ID` = @Character_ID", {
+        ["@Bool"] = Bool,
+        ["@Time"] = c.func.Timestamp(),
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then

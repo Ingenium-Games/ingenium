@@ -57,6 +57,15 @@ function c.func.Alert(str)
     print("   ^7[^3Alert^7]:  ==    ", str)
 end
 
+function c.func.Timestamp()
+    return os.time(os.date("*t"))
+end
+
+function c.func.Timestring(time)
+    local time = time or c.func.Timestamp()
+    return os.date("%c", time)
+end
+
 -- ====================================================================================--
 
 --- Returns Primary_ID as set by conf.lua. String

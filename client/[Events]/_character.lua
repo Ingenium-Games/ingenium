@@ -169,11 +169,11 @@ AddEventHandler("Client:Character:Death", function(data)
         -- agro = source id or -1 for server.
         local agro = data.Log.Source
         if data.Cause == "Weapon" then
-            
+            print(c.table.Dump(data))
         elseif data.Cause == "Vehicle" then
-
+            print(c.table.Dump(data))
         elseif data.Cause == "Obejct" then
-
+            print(c.table.Dump(data))
         end
     else
         
