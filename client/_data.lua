@@ -156,4 +156,14 @@ function c.data.GetEntityStateByType(type, ent, key)
     end
 end
 
+function c.data.Packet()
+    return {
+        Health = c.status.GetHealth(),
+        Armour = c.status.GetArmour(),
+        Hunger = c.status.GetHunger(),
+        Thirst = c.status.GetThirst(),
+        Stress = c.status.GetStress(),
+    }
+end
+
 -- ====================================================================================--
