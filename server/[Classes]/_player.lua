@@ -157,7 +157,10 @@ function c.class.Player(source, character_id)
     --
     ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
-
+    --
+    self.Notify = function(string)
+        TriggerClientEvent("Client:Notify", self.ID, string)
+    end
     --
     self.GetModel = function()
         return self.Model
@@ -770,6 +773,15 @@ function c.class.Player(source, character_id)
             TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+        end
+    end
+    --
+    self.GetItemFromPosition = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position]
+        else
+            return false
         end
     end
     --

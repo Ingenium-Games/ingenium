@@ -43,6 +43,10 @@ function c.item.CanStack(name)
     return c.items[name].Stackable
 end
 
+function c.item.CanHotkey(name)
+    return c.items[name].Hotkey
+end
+
 function c.item.ReturnPosition(name)
     for k,v in ipairs(c.items) do
         if v == name then

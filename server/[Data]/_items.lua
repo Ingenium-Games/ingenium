@@ -73,7 +73,6 @@ c.items = { -- table of items
         Meta = {
             Ammo = false,
             Attachments = {},
-
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
