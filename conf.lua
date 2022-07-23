@@ -53,6 +53,7 @@ UPDATE TIMES :
     [3] Server to Check players table every...
 ]]--
 conf.clientsync = 15 * conf.sec
+conf.charactersync = 30 * conf.sec
 conf.serversync = 1.5 * conf.min
 conf.playersync = 2 * conf.min
 conf.revivesync = conf.min

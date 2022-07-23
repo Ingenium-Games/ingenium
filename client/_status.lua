@@ -31,6 +31,10 @@ function c.status.SetHealth(health)
     SetEntityHealth(PlayerPedId(), health)
 end
 
+function c.status.GetMaxHealth()
+    return conf.default.health
+end
+
 -- ====================================================================================--
 
 function c.status.GetArmour()

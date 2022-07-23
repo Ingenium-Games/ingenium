@@ -185,6 +185,14 @@ function c.data.ArePlayersActive()
     return false
 end
 
+function c.data.CleanPlayersTable()
+    for k,v in pairs(c.pdex) do
+        if v == false then
+            table.remove(c.pdex, k)
+        end
+    end
+end
+
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
 
@@ -414,6 +422,32 @@ function c.data.Save(str)
     print("   ^7[^5Saved^7]:  ==    ", str)
 end
 
+-- Server to Datatable routine.
+function c.data.RetrievePackets()
+    local plys = c.data.GetPlayers()
+    for k,v in pairs(plys) do
+        if v then
+            local data = TriggerClientCallback({source = k, eventName = "DataPacket", args = {}})
+            if data then
+                local xPlayer = c.data.GetPlayer(k)
+                xPlayer.SetHealth(data.Health)
+                xPlayer.SetArmour(data.Armour)
+                xPlayer.SetHunger(data.Hunger)
+                xPlayer.SetThirst(data.Thirst)
+                xPlayer.SetStress(data.Stress)
+            end
+        end
+    end
+end
+
+function c.data.CharacterValues()
+    local function Do()
+        c.data.RetrievePackets()
+        SetTimeout(conf.charactersync, Do)
+    end
+    SetTimeout(conf.charactersync, Do)
+end
+
 -- Server to DB routine.
 function c.data.ServerSync()
     local function Do()
@@ -424,8 +458,7 @@ function c.data.ServerSync()
         c.sql.save.Jobs()
         Citizen.Wait(conf.sec * 5)
         c.data.Save("Users, Vehicles, Jobs, ")
-        Citizen.Wait(conf.sec * 5)
-        c.sql.char.ReviveDeadCharacters()
+        c.data.CleanPlayersTable()
         SetTimeout(conf.serversync, Do)
     end
     SetTimeout(conf.serversync, Do)
