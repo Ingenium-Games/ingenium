@@ -32,7 +32,7 @@ function c.status.SetHealth(health)
 end
 
 function c.status.GetMaxHealth()
-    return conf.default.health
+    return GetEntityMaxHealth(PlayerPedId())
 end
 
 -- ====================================================================================--
