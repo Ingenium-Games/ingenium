@@ -1,12 +1,5 @@
 -- ====================================================================================--
-
 c.item = {} -- function level
-c._itemcb = {}
--- c.items is found in /[Data]/_items.lua as dumped from ig.dump
---[[
-NOTES
-    -
-]] --
 -- ====================================================================================--
 
 function c.item.GetItems()
@@ -25,6 +18,10 @@ function c.item.GetItem(name)
     if c.item.Exists(name) then
         return c.items[name]
     end 
+end
+
+function c.item.IsConsumeable(name)
+    return c.items[name].Consumeable
 end
 
 function c.item.IsCraftable(name)
@@ -47,6 +44,14 @@ function c.item.CanHotkey(name)
     return c.items[name].Hotkey
 end
 
+function c.item.GetMeta(name)
+    return c.items[name].Meta
+end
+
+function c.item.GetData(name)
+    return c.items[name].Data
+end
+
 function c.item.ReturnPosition(name)
     for k,v in ipairs(c.items) do
         if v == name then
@@ -54,10 +59,4 @@ function c.item.ReturnPosition(name)
         end
     end
     return false
-end
-
-function c.item.SetCB(name, func)
-    if type(func) == "function" then
-        c._itemcb[name] = func
-    end
 end

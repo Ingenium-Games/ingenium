@@ -4216,8 +4216,17 @@ c.items = { -- table of items
         Value = 3,
         Weight = 0,
         Weapon = false,
-        Meta = false,
-        Data = false,
+        Meta = {
+            About = "Just a cup of Joe's finest."
+        },
+        Data = {    
+            Buff = true,
+            Nerf = false,
+            Type = "",
+            Hunger = -1,
+            Thirst = 18,
+            Stress = -5,
+        },
         Craftable = false,
         Recipe = false,
         Materials = false,

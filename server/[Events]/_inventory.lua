@@ -10,14 +10,19 @@ for k,v in pairs (c.items) do
         local position = position
         local quantity = quantity or 1
         --
-        if c.item[v].Weapon == true then
+        if c.item.IsWeapon() then
+            local meta = c.item.GetMeta()
+            local data = c.item.GetData()
+
             -- To Do
             -- Ammo Count as item find callback
 
             return
         end
         --
-        if c.item[v].Consumeable == true then
+        if c.item.IsConsumeable() then
+            local data = c.item.GetData()
+            
             TriggerClientCallback({
                 source = src,
                 eventName = "Client:Item:Consume",
