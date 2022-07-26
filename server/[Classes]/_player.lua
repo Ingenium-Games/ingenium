@@ -806,15 +806,17 @@ function c.class.Player(source, character_id)
     self.ConsumeItem = function(name)
         local quantity, position = self.GetItemQuantity(name)
         if type(quantity) ~= "boolean" then
-            TriggerEvent("Inventory:Consume:"..name, quantity, position)
+            TriggerEvent("Inventory:Consume:"..name, self.ID, quantity, position)
         end
     end
     --- func desc
     ---@param name any
     ---@param slot any
     self.RemoveItem = function(name, slot)
-        local has, position = self.HasItem(name)
-        if has and slot == position then
+        local quantity, position = self.GetItemQuantity(name)
+        if quantity >= 2 then
+            self.Inventory[position].Quantity = self.Inventory[position].Quantity - 1
+        elseif quantity <= 1 and slot == position then
             table.remove(self.Inventory, position)
         end
     end
