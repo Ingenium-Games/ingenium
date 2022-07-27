@@ -49,6 +49,13 @@ function c.status.AddArmour(armour)
     AddArmourToPed(PlayerPedId(), armour)
 end
 
+function c.status.AddArmourToAmount(amount)
+    local current = c.status.GetArmour()
+    if current < amount then
+        c.status.SetArmour(amount)
+    end
+end
+
 -- ====================================================================================--
 
 function c.status.GetHunger()
