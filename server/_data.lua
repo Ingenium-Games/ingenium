@@ -435,6 +435,7 @@ function c.data.RetrievePackets()
                 xPlayer.SetHunger(data.Hunger)
                 xPlayer.SetThirst(data.Thirst)
                 xPlayer.SetStress(data.Stress)
+                xPlayer.SetModifiers(data.Modifiers)
             end
         end
     end

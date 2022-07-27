@@ -27,6 +27,15 @@ local GetActiveWorkers = RegisterServerCallback({
     end
 })
 
+local GetModifiers = RegisterServerCallback({
+    eventName = "GetModifiers",
+    eventCallback = function(source, ...)
+        local xPlayer = c.data.GetPlayer(source)
+        local Modifiers = xPlayer.GetModifiers()
+        return Modifiers
+    end
+})
+
 local UseItem = RegisterServerCallback({
     eventName = "UseItem",
     eventCallback = function(source, name, position)

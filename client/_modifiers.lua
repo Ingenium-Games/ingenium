@@ -1,7 +1,7 @@
 -- ====================================================================================--
 
 c.modifier = {} -- function level
-c.modifiers = {    -- taken from server too.
+c.modifiers = { -- taken from server too.
     ["Hunger"] = 1,
     ["Thirst"] = 1,
     ["Stress"] = 1, 
@@ -27,9 +27,11 @@ end
 
 --- Sets the table of active modifiers.
 ---@param t table "Typically passed from the server as an internal table."
-function c.modifier.SetModifiers(t)
+function c.modifier.SetModifiers()
     if LocalPlayer.state.Modifiers ~= nil then
         c.modifiers = LocalPlayer.state.Modifiers
+    else
+        c.modifiers = TriggerServerCallback({eventName = "GetModifiers"})
     end
 end
 
@@ -43,8 +45,13 @@ end
 --- Sets the Hunger modifier between (1,10).
 ---@param v number "Can only be a number."
 function c.modifier.SetHungerModifier(v)
-    local val = c.check.Number(v, _min, _max)
-    c.modifiers.Hunger = val
+    c.modifiers.Hunger = c.check.Number(v, _min, _max)
+end
+
+--- Sets the Stress modifier between (1,10).
+---@param v number "Can only be a number."
+function c.modifier.AddHungerModifier(v)
+    c.modifiers.Hunger = c.check.Number((c.modifiers.Hunger + v),_min,_max)
 end
 
 -- ====================================================================================--
@@ -57,8 +64,13 @@ end
 --- Sets the Thirst modifier between (1,10)
 ---@param v number "Can only be a number." 
 function c.modifier.SetThirstModifier(v)
-    local val = c.check.Number(v, _min, _max)
-    c.modifiers.Thirst = val
+    c.modifiers.Thirst = c.check.Number(v, _min, _max)
+end
+
+--- Sets the Stress modifier between (1,10).
+---@param v number "Can only be a number."
+function c.modifier.AddThirstModifier(v)
+    c.modifiers.Thirst = c.check.Number((c.modifiers.Thirst + v),_min,_max)
 end
 
 -- ====================================================================================--
@@ -71,8 +83,13 @@ end
 --- Sets the Stress modifier between (1,10).
 ---@param v number "Can only be a number."
 function c.modifier.SetStressModifier(v)
-    local val = c.check.Number(v, _min, _max)
-    c.modifiers.Thirst = val
+    c.modifiers.Stress = c.check.Number(v, _min, _max)
+end
+
+--- Sets the Stress modifier between (1,10).
+---@param v number "Can only be a number."
+function c.modifier.AddStressModifier(v)
+    c.modifiers.Stress = c.check.Number((c.modifiers.Stress + v),_min,_max)
 end
 
 -- ====================================================================================--

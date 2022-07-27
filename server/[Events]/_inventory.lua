@@ -35,6 +35,7 @@ for k,v in pairs (c.items) do
                 eventName = "Client:Item:Consumeable",
                 args = {Name = k}
             })
+            --
             xPlayer.RemoveItem(k, position)
             return
         end

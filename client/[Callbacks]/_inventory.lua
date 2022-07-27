@@ -34,7 +34,10 @@ local Consumeable = RegisterClientCallback({
     eventName = "Client:Item:Consumeable",
     eventCallback = function(data)
         local Name = data.Name
-
-
+        local Meta = c.item.GetMeta(Name)
+        local Data = c.item.GetData(Name)
+        --
+        
+        --
     end
 })

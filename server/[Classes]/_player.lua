@@ -148,6 +148,7 @@ function c.class.Player(source, character_id)
     self.Hotbar = json.decode(char.Hotbar)
     --
     self.Modifiers = json.decode(char.Modifiers)
+    self.State.Modifiers = self.Modifiers
     --
     self.OldModifiers = self.Modifiers
     --
@@ -322,6 +323,7 @@ function c.class.Player(source, character_id)
         local tab = c.check.Table(t)
         self.OldModifiers = self.Modifiers
         self.Modifiers = tab
+        self.State.Modifiers = self.Modifiers
     end
     --
     self.GetLicenses = function()
@@ -846,7 +848,6 @@ function c.class.Player(source, character_id)
     self.CompressInventory = function()
         local inv = {}
         for i = 1, #self.Inventory do
-            table.insert(inv, i)
             inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality,
                       self.Inventory[i].Weapon, self.Inventory[i].Meta}
         end

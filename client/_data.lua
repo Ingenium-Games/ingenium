@@ -163,6 +163,7 @@ function c.data.Packet()
         Hunger = c.status.GetHunger(),
         Thirst = c.status.GetThirst(),
         Stress = c.status.GetStress(),
+        Modifiers = c.modifier.GetModifiers(),
     }
 end
 
