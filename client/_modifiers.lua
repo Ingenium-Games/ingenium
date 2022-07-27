@@ -6,6 +6,7 @@ c.modifiers = { -- taken from server too.
     ["Thirst"] = 1,
     ["Stress"] = 1, 
 }
+c.oldmodifiers = {}
 --[[
 NOTES.
     - Here will be the modifiers to the _status.lua, please note that hunger/thirst/stress
@@ -33,6 +34,7 @@ function c.modifier.SetModifiers()
     else
         c.modifiers = TriggerServerCallback({eventName = "GetModifiers"})
     end
+    c.oldmodifiers = c.modifiers
 end
 
 -- ====================================================================================--
@@ -45,13 +47,17 @@ end
 --- Sets the Hunger modifier between (1,10).
 ---@param v number "Can only be a number."
 function c.modifier.SetHungerModifier(v)
+    c.oldmodifiers = c.modifiers
     c.modifiers.Hunger = c.check.Number(v, _min, _max)
+    c.state.UpdateStates()
 end
 
 --- Sets the Stress modifier between (1,10).
 ---@param v number "Can only be a number."
 function c.modifier.AddHungerModifier(v)
+    c.oldmodifiers = c.modifiers
     c.modifiers.Hunger = c.check.Number((c.modifiers.Hunger + v),_min,_max)
+    c.state.UpdateStates()
 end
 
 -- ====================================================================================--
@@ -64,13 +70,17 @@ end
 --- Sets the Thirst modifier between (1,10)
 ---@param v number "Can only be a number." 
 function c.modifier.SetThirstModifier(v)
+    c.oldmodifiers = c.modifiers
     c.modifiers.Thirst = c.check.Number(v, _min, _max)
+    c.state.UpdateStates()
 end
 
 --- Sets the Stress modifier between (1,10).
 ---@param v number "Can only be a number."
 function c.modifier.AddThirstModifier(v)
+    c.oldmodifiers = c.modifiers
     c.modifiers.Thirst = c.check.Number((c.modifiers.Thirst + v),_min,_max)
+    c.state.UpdateStates()
 end
 
 -- ====================================================================================--
@@ -83,13 +93,17 @@ end
 --- Sets the Stress modifier between (1,10).
 ---@param v number "Can only be a number."
 function c.modifier.SetStressModifier(v)
+    c.oldmodifiers = c.modifiers
     c.modifiers.Stress = c.check.Number(v, _min, _max)
+    c.state.UpdateStates()
 end
 
 --- Sets the Stress modifier between (1,10).
 ---@param v number "Can only be a number."
 function c.modifier.AddStressModifier(v)
+    c.oldmodifiers = c.modifiers
     c.modifiers.Stress = c.check.Number((c.modifiers.Stress + v),_min,_max)
+    c.state.UpdateStates()
 end
 
 -- ====================================================================================--
