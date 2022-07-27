@@ -72,7 +72,7 @@ c.items = { -- table of items
         Weapon = "2578778090",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
             SerialNumber = false,
             BatchNumber = false,
             Crafted = false,
@@ -106,7 +106,7 @@ c.items = { -- table of items
         Weapon = "1737195953",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -141,7 +141,7 @@ c.items = { -- table of items
         Weapon = "1317494643",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -176,7 +176,7 @@ c.items = { -- table of items
         Weapon = "2508868239",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -211,7 +211,7 @@ c.items = { -- table of items
         Weapon = "1141786504",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -249,7 +249,7 @@ c.items = { -- table of items
         Weapon = "2508868239",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -284,7 +284,7 @@ c.items = { -- table of items
         Weapon = "3756226112",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -322,7 +322,7 @@ c.items = { -- table of items
         Weapon = "940833800",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -360,7 +360,7 @@ c.items = { -- table of items
         Weapon = "4192643659",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -398,7 +398,7 @@ c.items = { -- table of items
         Weapon = "4192643659",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -439,7 +439,7 @@ c.items = { -- table of items
         Weapon = "2484171525",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -480,7 +480,7 @@ c.items = { -- table of items
         Weapon = "419712736",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -509,7 +509,7 @@ c.items = { -- table of items
         Weapon = "2460120199",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -538,7 +538,7 @@ c.items = { -- table of items
         Weapon = "3713923289",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -567,7 +567,7 @@ c.items = { -- table of items
         Weapon = "4191993645",
         Meta = {
             Ammo = false,
-            Attachments = {},
+            Components = {},
 
             SerialNumber = false,
             BatchNumber = false,
@@ -601,7 +601,7 @@ c.items = { -- table of items
         Weapon = "453432689",
         Meta = {
             Ammo = "9mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -648,7 +648,7 @@ c.items = { -- table of items
         Weapon = "3218215474",
         Meta = {
             Ammo = "9mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -686,7 +686,7 @@ c.items = { -- table of items
         Weapon = "1593441988",
         Meta = {
             Ammo = "9mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -733,7 +733,7 @@ c.items = { -- table of items
         Weapon = "584646201",
         Meta = {
             Ammo = "9mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -780,7 +780,7 @@ c.items = { -- table of items
         Weapon = "2578377531",
         Meta = {
             Ammo = "9mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -828,7 +828,7 @@ c.items = { -- table of items
         Weapon = "324215364",
         Meta = {
             Ammo = "9mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -875,7 +875,7 @@ c.items = { -- table of items
         Weapon = "736523883",
         Meta = {
             Ammo = "9mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -922,7 +922,7 @@ c.items = { -- table of items
         Weapon = "736523883",
         Meta = {
             Ammo = "9mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -970,7 +970,7 @@ c.items = { -- table of items
         Weapon = "3220176749",
         Meta = {
             Ammo = "5.56mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1017,7 +1017,7 @@ c.items = { -- table of items
         Weapon = "2210333304",
         Meta = {
             Ammo = "5.56mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1064,7 +1064,7 @@ c.items = { -- table of items
         Weapon = "2937143193",
         Meta = {
             Ammo = "5.56mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1111,7 +1111,7 @@ c.items = { -- table of items
         Weapon = "2634544996",
         Meta = {
             Ammo = "5.56mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1158,7 +1158,7 @@ c.items = { -- table of items
         Weapon = "2144741730",
         Meta = {
             Ammo = "5.56mm",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1205,7 +1205,7 @@ c.items = { -- table of items
         Weapon = "487013001",
         Meta = {
             Ammo = "20g",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1252,7 +1252,7 @@ c.items = { -- table of items
         Weapon = "2017895192",
         Meta = {
             Ammo = "20g",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1299,7 +1299,7 @@ c.items = { -- table of items
         Weapon = "3800352039",
         Meta = {
             Ammo = "20g",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1346,7 +1346,7 @@ c.items = { -- table of items
         Weapon = "2640438543",
         Meta = {
             Ammo = "20g",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1393,7 +1393,7 @@ c.items = { -- table of items
         Weapon = "911657153",
         Meta = {
             Ammo = "Electrodes",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1440,7 +1440,7 @@ c.items = { -- table of items
         Weapon = "100416529",
         Meta = {
             Ammo = ".223",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -1487,7 +1487,7 @@ c.items = { -- table of items
         Weapon = "205991906",
         Meta = {
             Ammo = ".308",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2076,7 +2076,7 @@ c.items = { -- table of items
         Weapon = "3249783761",
         Meta = {
             Ammo = ".308",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2123,7 +2123,7 @@ c.items = { -- table of items
         Weapon = "317205821",
         Meta = {
             Ammo = ".308",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2170,7 +2170,7 @@ c.items = { -- table of items
         Weapon = "125959754",
         Meta = {
             Ammo = ".308",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2217,7 +2217,7 @@ c.items = { -- table of items
         Weapon = "3125143736",
         Meta = {
             Ammo = ".308",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2264,7 +2264,7 @@ c.items = { -- table of items
         Weapon = "3523564046",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2311,7 +2311,7 @@ c.items = { -- table of items
         Weapon = "3231910285",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2358,7 +2358,7 @@ c.items = { -- table of items
         Weapon = "2132975508",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2405,7 +2405,7 @@ c.items = { -- table of items
         Weapon = "1672152130",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2452,7 +2452,7 @@ c.items = { -- table of items
         Weapon = "2874559379",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2499,7 +2499,7 @@ c.items = { -- table of items
         Weapon = "126349499",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2546,7 +2546,7 @@ c.items = { -- table of items
         Weapon = "2228681469",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2593,7 +2593,7 @@ c.items = { -- table of items
         Weapon = "2548703416",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2640,7 +2640,7 @@ c.items = { -- table of items
         Weapon = "1785463520",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2687,7 +2687,7 @@ c.items = { -- table of items
         Weapon = "1432025498",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2734,7 +2734,7 @@ c.items = { -- table of items
         Weapon = "3415619887",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2781,7 +2781,7 @@ c.items = { -- table of items
         Weapon = "2285322324",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2828,7 +2828,7 @@ c.items = { -- table of items
         Weapon = "2526821735",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2875,7 +2875,7 @@ c.items = { -- table of items
         Weapon = "2939590305",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2922,7 +2922,7 @@ c.items = { -- table of items
         Weapon = "1198256469",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -2969,7 +2969,7 @@ c.items = { -- table of items
         Weapon = "3056410471",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3016,7 +3016,7 @@ c.items = { -- table of items
         Weapon = "961495388",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3063,7 +3063,7 @@ c.items = { -- table of items
         Weapon = "4208062921",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3110,7 +3110,7 @@ c.items = { -- table of items
         Weapon = "3686625920",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3157,7 +3157,7 @@ c.items = { -- table of items
         Weapon = "177293209",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3204,7 +3204,7 @@ c.items = { -- table of items
         Weapon = "3219281620",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3251,7 +3251,7 @@ c.items = { -- table of items
         Weapon = "2024373456",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3298,7 +3298,7 @@ c.items = { -- table of items
         Weapon = "2343591895",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3339,7 +3339,7 @@ c.items = { -- table of items
         Weapon = "1198879012",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3380,7 +3380,7 @@ c.items = { -- table of items
         Weapon = "727643628",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3424,7 +3424,7 @@ c.items = { -- table of items
         Weapon = "3126027122",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3456,7 +3456,7 @@ c.items = { -- table of items
         Weapon = "94989220",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3503,7 +3503,7 @@ c.items = { -- table of items
         Weapon = "1470379660",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3550,7 +3550,7 @@ c.items = { -- table of items
         Weapon = "2636060646",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3597,7 +3597,7 @@ c.items = { -- table of items
         Weapon = "2138347493",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3644,7 +3644,7 @@ c.items = { -- table of items
         Weapon = "137902532",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3691,7 +3691,7 @@ c.items = { -- table of items
         Weapon = "2828843422",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3738,7 +3738,7 @@ c.items = { -- table of items
         Weapon = "3675956304",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3785,7 +3785,7 @@ c.items = { -- table of items
         Weapon = "1649403952",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3832,7 +3832,7 @@ c.items = { -- table of items
         Weapon = "4019527611",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3879,8 +3879,8 @@ c.items = { -- table of items
         Weapon = "984333226",
         Meta = {
             Ammo = "",
-            Attachments = {},
-
+            Components = {},
+            
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -3926,7 +3926,7 @@ c.items = { -- table of items
         Weapon = "3342088282",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -3973,7 +3973,7 @@ c.items = { -- table of items
         Weapon = "171789620",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -4020,7 +4020,7 @@ c.items = { -- table of items
         Weapon = "3638508604",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -4067,7 +4067,7 @@ c.items = { -- table of items
         Weapon = "3696079510",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -4114,7 +4114,7 @@ c.items = { -- table of items
         Weapon = "1627465347",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",
@@ -4161,7 +4161,7 @@ c.items = { -- table of items
         Weapon = "1834241177",
         Meta = {
             Ammo = "",
-            Attachments = {},
+            Components = {},
 
             SerialNumber = "",
             BatchNumber = "",

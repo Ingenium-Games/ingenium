@@ -13,3 +13,5 @@ c.Locale = conf.locale
 --
 c.Character = nil
 c.CharacterLoaded = false
+--
+c.CurrentWeapon = nil

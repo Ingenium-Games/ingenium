@@ -5,37 +5,37 @@
 --  Get Character Info for the NUI to allow character selection.
 -- [C+S]
 for k,v in pairs (c.items) do
-    AddEventHandler(("Inventory:Consume:%s"):format(v), function(source, position, quantity) 
+    AddEventHandler(("Inventory:Consume:%s"):format(k), function(source, position, quantity) 
         local src = source
         local position = position
         local quantity = quantity or 1
         local xPlayer = c.data.GetPlayer(src)
         --
-        if c.item.IsWeapon() then
-            -- client should have this data as its provided on loading in, leaving as local var for now to test
-            local meta = c.item.GetMeta()
-            local data = c.item.GetData()
-            -- To Do
-            -- Ammo Count as item find callback
+        if c.item.IsWeapon(k) then
+            --
+            local ammo = xPlayer.GetAmmo()
+            local item = xPlayer.GetItemFromPosition(position)
+            local hash = item.Weapon
+            local components = item.Meta.Components
+            local ammotype = item.Meta.Ammo            
+            --
             TriggerClientCallback({
                 source = src,
                 eventName = "Client:Item:Weapon",
-                args = {Name = v, Meta = meta, Data = data}
+                args = {Name = k, Ammo = ammo, AmmoType = ammotype, Hash = hash, Components = components}
             })
+            --
             return
         end
         --
-        if c.item.IsConsumeable() then
-            -- client should have this data as its provided on loading in, leaving as local var for now to test
-            local meta = c.item.GetMeta()
-            local data = c.item.GetData()
+        if c.item.IsConsumeable(k) then
             --
             TriggerClientCallback({
                 source = src,
                 eventName = "Client:Item:Consumeable",
-                args = {Name = v, Meta = meta, Data = data}
+                args = {Name = k}
             })
-            xPlayer.RemoveItem(v, position)
+            xPlayer.RemoveItem(k, position)
             return
         end
         --

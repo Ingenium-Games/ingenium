@@ -785,6 +785,22 @@ function c.class.Player(source, character_id)
         end
     end
     --
+    self.GetItemMeta = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position].Meta
+        else
+            return false
+        end
+    --
+    self.GetItemData = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position].Data
+        else
+            return false
+        end
+    --
     self.GetItemQuality = function(name)
         local has, position = self.HasItem(name)
         if has then
