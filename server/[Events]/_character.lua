@@ -85,7 +85,6 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, he
     c.sql.char.Add(data, function()
         -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etc.
         c.sql.bank.AddAccount(character_id, bank_number)
-        
         --
         p:resolve()
     end)
@@ -156,10 +155,8 @@ RegisterNetEvent("Server:Character:Ready", function()
     ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetIdentifier(), xPlayer.GetJob().Name))
     -- to trigger state updates for clients
     xPlayer.SetJob(xPlayer.GetJob())
-    xPlayer.GetCash() -- this triggers state chagnes
-    xPlayer.GetBank() -- this triggers state chagnes    
-    -- Enabe NPWD
-    --exports["npwd"]:newPlayer({ source = src, firstname = xPlayer.GetFirst_Name(), lastname = xPlayer.GetLast_Name(), identifier = xPlayer.GetCharacter_ID(), phoneNumber = xPlayer.GetPhone() })
+    xPlayer.GetCash() -- this triggers state changes
+    xPlayer.GetBank() -- this triggers state changes    
 end)
 
 -- Use this to remove any things connected to Characters like police blips etc.
@@ -178,6 +175,8 @@ end)
 RegisterNetEvent("Server:Character:Death", function(data)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
+    -- Mark as dead within DB
+    c.sql.char.SetDead(xPlayer.GetCharacter_ID(), true, data)
     --
     if data.Log then
         -- agro = source id or -1 for server.
@@ -189,10 +188,9 @@ RegisterNetEvent("Server:Character:Death", function(data)
         elseif data.Cause == "Obejct" then
             
         end
-    else
-
     end
-    c.sql.char.SetDead(xPlayer.GetCharacter_ID(), true, data)
+    xPlayer.Notify("You have been downed, you must wait for someone to assist you.", "black", 60000)
+    xPlayer.Notify("If you do not wait, or leave, you will be unable to use this character for 7 days.", "red", 60000)
 end)
 
 --@ req = server_id or source

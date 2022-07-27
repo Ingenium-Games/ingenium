@@ -63,7 +63,8 @@ em {
 .chat-input {
   font-size: 1.65vh;
   position: absolute;
-
+  background-color: rgba(0, 0, 0, 0.6);
+  border: whitesmoke 1px solid;
   top: 2%;
   left: 35%;
   width: 30%;

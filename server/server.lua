@@ -36,7 +36,6 @@ AddEventHandler("onResourceStart", function(resourceName)
     c.drop.CleanUp()
     c.pick.CleanUp()
     c.note.CleanUp()
-    
     --
     Queue.OnReady()
 end)
@@ -83,7 +82,5 @@ AddEventHandler("playerDropped", function()
                 c.data.RemovePlayer(src)
             end)
         end)
-        -- NPWD
-        --exports["npwd"]:unloadPlayer(src)
     end
 end)

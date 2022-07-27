@@ -158,8 +158,8 @@ function c.class.Player(source, character_id)
     ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     --
-    self.Notify = function(string)
-        TriggerClientEvent("Client:Notify", self.ID, string)
+    self.Notify = function(string, colour, fade)
+        TriggerClientEvent("Client:Notify", self.ID, string, colour, fade)
     end
     --
     self.GetModel = function()

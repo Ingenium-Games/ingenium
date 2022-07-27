@@ -184,7 +184,5 @@ AddEventHandler("Client:Character:Death", function(data)
         elseif data.Cause == "Obejct" then
 
         end
-    else
-        
     end
 end)
