@@ -22,11 +22,11 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 text = "Welcome "..name,
             }),
             DeferralCards.CardElement:TextBlock({
-                text = "Discord Link - "..conf.discordlink.." \n Website - https://ingenium.games",
+                text = "\nWebsite - "..conf.websitelink.." \nDiscord - "..conf.discordlink,
                 wrap = true
             }),
             DeferralCards.CardElement:TextBlock({
-                text = "By joinging you have read and agreed to our rules found on our forum.",
+                text = "By joinging, you have agreed to our rules as found on our website. \n",
                 wrap = true
             }),
             DeferralCards.Container:Create({
