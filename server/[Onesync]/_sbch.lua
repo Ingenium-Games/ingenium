@@ -24,6 +24,11 @@ end)
 c.sbch.player.IsDead = AddStateBagChangeHandler("IsDead", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
     TriggerClientEvent("Client:RunChecks:IsDead", src)
+    --
+    local xPlayer = c.data.GetPlayer(src)
+    if value == false then
+        c.sql.char.SetDead(xPlayer.GetCharacter_ID(), false, {RevivedAt = c.func.TimeStamp()})
+    end
 end)
 --
 

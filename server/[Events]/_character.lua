@@ -175,6 +175,7 @@ end)
 RegisterNetEvent("Server:Character:Death", function(data)
     local src = source
     local xPlayer = c.data.GetPlayer(src)
+    -- Death SQL added the state bag change handler
     -- Mark as dead within DB
     c.sql.char.SetDead(xPlayer.GetCharacter_ID(), true, data)
     --
