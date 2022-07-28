@@ -803,6 +803,7 @@ function c.class.Player(source, character_id)
         else
             return false
         end
+    end
     --
     self.GetItemQuality = function(name)
         local has, position = self.HasItem(name)
