@@ -794,6 +794,7 @@ function c.class.Player(source, character_id)
         else
             return false
         end
+    end
     --
     self.GetItemData = function(position)
         local position = tonumber(position)
