@@ -11,8 +11,7 @@ NOTES
 c.ace.public = function()
     -- public
     TriggerEvent("chat:addSuggestion", "/switch", "Use to change your character(s).")
-    TriggerEvent('chat:addSuggestion', '/ooc', 'Out of character', {{ name="Message", help="The message you would like to send to the chat" }})
-
+ 
 end
 
 c.ace.mod = function()
@@ -21,7 +20,7 @@ c.ace.mod = function()
 
     -- mod
 
-    TriggerEvent("chat:addSuggestion", "/setjob", "Admin Permission(s) Required.", {{
+    TriggerEvent("chat:addSuggestion", "/setjob", "Mod Permission(s) Required.", {{
         name = "1",
         help = "Server ID"
     }, {
@@ -32,11 +31,21 @@ c.ace.mod = function()
         help = "Job Grade"
     }})
 
-    TriggerEvent("chat:addSuggestion", "/car", "Admin Permission(s) Required.", {{
+    TriggerEvent("chat:addSuggestion", "/car", "Mod Permission(s) Required.", {{
         name = "1",
         help = "Vehicle Name or Hash"
     }})
     
+    TriggerEvent("chat:addSuggestion", "/revive", "Mod Permission(s) Required.", {{
+        name = "1",
+        help = "Server ID or None"
+    }})
+
+    TriggerEvent("chat:addSuggestion", "/heal", "Mod Permission(s) Required.", {{
+        name = "1",
+        help = "Server ID or None"
+    }})
+
 end
 
 c.ace.admin = function()

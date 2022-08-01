@@ -102,6 +102,38 @@ RegisterCommand("unpark", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
+ExecuteCommand("add_ace group.mod command.revive allow")
+RegisterCommand("revive", function(source, args, rawCommand)
+    if #args > 1 then
+        local src = args[1]
+        local xPlayer = c.data.GetPlayer(src)
+        local ords = xPlayer.GetCoords()    
+        TriggerClientCallback({source = src, eventName="revive", args={ords}})
+    else
+        local src = source
+        local xPlayer = c.data.GetPlayer(src)
+        local ords = xPlayer.GetCoords()    
+        TriggerClientCallback({source = src, eventName="revive", args={ords}})
+    end
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
+end, true)
+
+ExecuteCommand("add_ace group.mod command.heal allow")
+RegisterCommand("heal", function(source, args, rawCommand)
+    if #args > 1 then
+        local src = args[1]
+        local xPlayer = c.data.GetPlayer(src)
+        local ords = xPlayer.GetCoords()    
+        TriggerClientCallback({source = src, eventName="heal", args={}})
+    else
+        local src = source
+        local xPlayer = c.data.GetPlayer(src)
+        local ords = xPlayer.GetCoords()    
+        TriggerClientCallback({source = src, eventName="heal", args={}})
+    end
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
+end, true)
+
 
 -- ====================================================================================--
 -- ADMIN
@@ -170,42 +202,4 @@ RegisterCommand("freeze", function(source, args, rawCommand)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by: "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
-ExecuteCommand("add_ace group.admin command.additem allow")
-RegisterCommand("additem", function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    local item = args[1]
-    local amount = args[2] or 1
-    xPlayer.AddItem({item})
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " item: "..item..", amount: "..amount..", by: "..xPlayer.GetName())
-end, true)
 
-ExecuteCommand("add_ace group.admin command.vdex allow")
-RegisterCommand("vdex", function(source, args, rawCommand)
-    local src = source
-    print(c.table.Dump(c.vdex))
-end, true)
-
-ExecuteCommand("add_ace group.admin command.pvdex allow")
-RegisterCommand("pvdex", function(source, args, rawCommand)
-    local src = source
-    print(c.table.Dump(c.pvdex))
-end, true)
-
-ExecuteCommand("add_ace group.admin command.pdex allow")
-RegisterCommand("pdex", function(source, args, rawCommand)
-    local src = source
-    print(c.table.Dump(c.pdex))
-end, true)
-
-ExecuteCommand("add_ace group.admin command.odex allow")
-RegisterCommand("odex", function(source, args, rawCommand)
-    local src = source
-    print(c.table.Dump(c.odex))
-end, true)
-
-ExecuteCommand("add_ace group.admin command.ndex allow")
-RegisterCommand("ndex", function(source, args, rawCommand)
-    local src = source
-    print(c.table.Dump(c.ndex))
-end, true)

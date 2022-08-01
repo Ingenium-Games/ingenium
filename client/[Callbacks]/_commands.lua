@@ -28,3 +28,21 @@ local Teleport = RegisterClientCallback({
         c.func.FadeIn(1000)
     end
 })
+
+local Revive = RegisterClientCallback({
+    eventName = "Revive",
+    eventCallback = function(ords)
+        c.func.FadeOut(1000)
+        NetworkResurrectLocalPlayer(ords.x, ords.y, ords.z, ords.h, true, false)
+        c.status.SetHealth(c.status.GetMaxHealth())
+        c.data.SetLocalPlayerState("IsDead", false, true)
+        c.func.FadeIn(1000)
+    end
+})
+
+local Heal = RegisterClientCallback({
+    eventName = "Heal",
+    eventCallback = function(ords)
+        c.status.SetHealth(c.status.GetMaxHealth())
+    end
+})
