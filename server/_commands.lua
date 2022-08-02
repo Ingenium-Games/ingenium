@@ -108,12 +108,12 @@ RegisterCommand("revive", function(source, args, rawCommand)
         local src = args[1]
         local xPlayer = c.data.GetPlayer(src)
         local ords = xPlayer.GetCoords()    
-        TriggerClientCallback({source = src, eventName="revive", args={ords}})
+        TriggerClientCallback({source = src, eventName="Revive", args={ords}})
     else
         local src = source
         local xPlayer = c.data.GetPlayer(src)
         local ords = xPlayer.GetCoords()    
-        TriggerClientCallback({source = src, eventName="revive", args={ords}})
+        TriggerClientCallback({source = src, eventName="Revive", args={ords}})
     end
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
@@ -124,12 +124,12 @@ RegisterCommand("heal", function(source, args, rawCommand)
         local src = args[1]
         local xPlayer = c.data.GetPlayer(src)
         local ords = xPlayer.GetCoords()    
-        TriggerClientCallback({source = src, eventName="heal", args={}})
+        TriggerClientCallback({source = src, eventName="Heal", args={}})
     else
         local src = source
         local xPlayer = c.data.GetPlayer(src)
         local ords = xPlayer.GetCoords()    
-        TriggerClientCallback({source = src, eventName="heal", args={}})
+        TriggerClientCallback({source = src, eventName="Heal", args={}})
     end
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
