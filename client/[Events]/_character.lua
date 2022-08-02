@@ -59,6 +59,7 @@ AddEventHandler("Client:Character:Create", function()
         headOverlays = true,
         components = true,
         props = true,
+        tattoos = true
       }
       exports["fivem-appearance"]:startPlayerCustomization(function(appearance)
         if (appearance) then
