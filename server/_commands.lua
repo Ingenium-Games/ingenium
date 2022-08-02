@@ -104,7 +104,7 @@ end, true)
 
 ExecuteCommand("add_ace group.mod command.revive allow")
 RegisterCommand("revive", function(source, args, rawCommand)
-    if #args > 1 then
+    if #args > 0 then
         local src = args[1]
         local xPlayer = c.data.GetPlayer(src)
         local ords = xPlayer.GetCoords()    
@@ -120,7 +120,7 @@ end, true)
 
 ExecuteCommand("add_ace group.mod command.heal allow")
 RegisterCommand("heal", function(source, args, rawCommand)
-    if #args > 1 then
+    if #args > 0 then
         local src = args[1]
         local xPlayer = c.data.GetPlayer(src)
         local ords = xPlayer.GetCoords()    
