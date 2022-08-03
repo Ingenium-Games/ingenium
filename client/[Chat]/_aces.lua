@@ -10,16 +10,16 @@ NOTES
 
 c.ace.public = function()
     -- public
+    --
     TriggerEvent("chat:addSuggestion", "/switch", "Use to change your character(s).")
- 
+    --
 end
 
 c.ace.mod = function()
     -- public
     c.ace.public()
-
     -- mod
-
+    --
     TriggerEvent("chat:addSuggestion", "/setjob", "Mod Permission(s) Required.", {{
         name = "1",
         help = "Server ID"
@@ -30,17 +30,17 @@ c.ace.mod = function()
         name = "3",
         help = "Job Grade"
     }})
-
+    --
     TriggerEvent("chat:addSuggestion", "/car", "Mod Permission(s) Required.", {{
         name = "1",
         help = "Vehicle Name or Hash"
     }})
-    
+    --
     TriggerEvent("chat:addSuggestion", "/revive", "Mod Permission(s) Required.", {{
         name = "1",
         help = "Server ID or None"
     }})
-
+    --
     TriggerEvent("chat:addSuggestion", "/heal", "Mod Permission(s) Required.", {{
         name = "1",
         help = "Server ID or None"
@@ -51,29 +51,28 @@ end
 c.ace.admin = function()
     -- mod
     c.ace.mod()
-
     -- admin
-
+    --
     TriggerEvent("chat:addSuggestion", "/ban", "Admin Permission(s) Required.", {{
         name = "1",
         help = "Server ID"
     }})
-
+    --
     TriggerEvent("chat:addSuggestion", "/kick", "Admin Permission(s) Required.", {{
         name = "1",
         help = "Server ID"
     }})
-
+    --
     TriggerEvent("chat:addSuggestion", "/bring", "Admin Permission(s) Required.", {{
         name = "1",
         help = "Server ID"
     }})
-
+    --
     TriggerEvent("chat:addSuggestion", "/return", "Admin Permission(s) Required.", {{
         name = "1",
         help = "Server ID"
     }})
-
+    --
     TriggerEvent("chat:addSuggestion", "/freeze", "Admin Permission(s) Required.", {{
         name = "1",
         help = "Server ID"
@@ -84,17 +83,35 @@ end
 c.ace.superadmin = function()   
     -- admin
     c.ace.admin()
+    -- superadmin
+    --
 
 end
 
 c.ace.developer = function()     
-    -- admin
+    -- superadmin
     c.ace.superadmin()
-    
+    -- developer
+    --       
+    TriggerEvent("chat:addSuggestion", "/fx", "Developer Permission(s) Required.", {{
+        name = "1",
+        help = "FX Name"
+    }, {
+        name = "2",
+        help = "Duration / None"
+    }})
+    --
+    TriggerEvent("chat:addSuggestion", "/noclip", "Developer Permission(s) Required.", {})
+    --
+    TriggerEvent("chat:addSuggestion", "/cam", "Developer Permission(s) Required.", {{
+        name = "1",
+        help = "Cam Name"
+    }})
 end
 
 c.ace.owner = function()     
-    -- admin
+    -- developer
+    --    
     c.ace.developer()
     
 
