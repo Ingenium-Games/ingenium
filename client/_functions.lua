@@ -118,14 +118,15 @@ function c.func.FadeIn(ms)
     end
 end
 
-
 -- ====================================================================================--
 
 -- @entity - the object
 -- @arrays - locations in a table format
 -- @style - c.SelectMarker() - Pick Marker type.
 function c.func.CompareCoords(coords, arrays, style, range)
-    if not range then range = 10 end
+    if not range then
+        range = 10
+    end
     local dstchecked = 1000
     local pos = coords
     if type(arrays) == "table" then
@@ -362,8 +363,10 @@ end
 -- base events.
 function c.func.GetVehicleSeatOfPed(ped)
     local vehicle = GetVehiclePedIsIn(ped, false)
-    for i=-2, GetVehicleMaxNumberOfPassengers(vehicle) do
-        if(GetPedInVehicleSeat(vehicle, i) == ped) then return i end
+    for i = -2, GetVehicleMaxNumberOfPassengers(vehicle) do
+        if (GetPedInVehicleSeat(vehicle, i) == ped) then
+            return i
+        end
     end
     return -2
 end
@@ -427,8 +430,11 @@ function c.func.CreateVehicle(name, x, y, z, h, data)
     SetVehicleNeedsToBeHotwired(net, false)
     SetModelAsNoLongerNeeded(hash)
     if NetworkDoesEntityExistWithNetworkId(net) then
-        c.func.Debug_1("Entity exists on network, id: "..net.." entity: "..entity)            
-        TriggerServerCallback({eventName = "ClientCreateVehicle", args={net, data}})  
+        c.func.Debug_1("Entity exists on network, id: " .. net .. " entity: " .. entity)
+        TriggerServerCallback({
+            eventName = "ClientCreateVehicle",
+            args = {net, data}
+        })
     else
         c.func.Debug_1("Entity DOES NOT exist on network.")
         DeleteEntity(entity)
@@ -452,6 +458,295 @@ function c.func.IsVehicleSpawnClear(coords, radius)
             closeVeh[#closeVeh + 1] = vehicles[i]
         end
     end
-    if #closeVeh > 0 then return false end
+    if #closeVeh > 0 then
+        return false
+    end
     return true
+end
+
+-- returns all Modifications of a vehicle
+function c.func.GetVehicleModifications(vehicle)
+    -- main colors
+    local primaryColor, secondaryColor = GetVehicleColours(vehicle)
+    local pearlescentColor, wheelColor = GetVehicleExtraColours(vehicle)
+    -- custom colors
+    local customPrimaryColor, customSecondaryColor
+    if (GetIsVehiclePrimaryColourCustom(vehicle)) then
+        local r, g, b = GetVehicleCustomPrimaryColour(vehicle)
+        customPrimaryColor = {r, g, b}
+    end
+    if (GetIsVehicleSecondaryColourCustom(vehicle)) then
+        local r, g, b = GetVehicleCustomSecondaryColour(vehicle)
+        customSecondaryColor = {r, g, b}
+    end
+    -- tire smoke color
+    r, g, b = GetVehicleTyreSmokeColor(vehicle)
+    local tireSmokeColor = {r, g, b}
+    -- neon lights color
+    local r, g, b = GetVehicleNeonLightsColour(vehicle)
+    local neonLightsColor = {r, g, b}
+    local enabledNeonLights = {IsVehicleNeonLightEnabled(vehicle, 0), IsVehicleNeonLightEnabled(vehicle, 1),
+                               IsVehicleNeonLightEnabled(vehicle, 2), IsVehicleNeonLightEnabled(vehicle, 3)}
+    return { -- 1
+    GetVehicleNumberPlateText(vehicle), -- 2
+    c.func.GetVehicleMods(vehicle), -- 3
+    primaryColor, -- 4
+    secondaryColor, -- 5
+    pearlescentColor, -- 6
+    wheelColor, -- 7
+    customPrimaryColor, -- 8
+    customSecondaryColor, -- 9
+    GetVehicleInteriorColor(vehicle), -- 10
+    GetVehicleDashboardColor(vehicle), -- 11
+    tireSmokeColor, -- 12
+    GetVehicleXenonLightsColour(vehicle), -- 13
+    neonLightsColor, -- 14
+    enabledNeonLights, -- 15
+    c.func.GetVehicleExtras(vehicle), -- 16
+    GetVehicleWheelType(vehicle), -- 17
+    GetVehicleModVariation(vehicle, 23), -- 18
+    GetVehicleModVariation(vehicle, 24), -- 19
+    not GetVehicleTyresCanBurst(vehicle), -- 20
+    (GetGameBuildNumber() >= 2372) and GetDriftTyresEnabled(vehicle), -- 21
+    GetVehicleNumberPlateTextIndex(vehicle), -- 22
+    GetVehicleWindowTint(vehicle), -- 23
+    GetVehicleLivery(vehicle), -- 24
+    GetVehicleRoofLivery(vehicle)}
+end
+-- apply all vehicle Modifications
+function c.func.SetVehicleModifications(vehicle, Modifications)
+    SetVehicleModKit(vehicle, 0)
+    -- 16 wheelType
+    SetVehicleWheelType(vehicle, Modifications[16])
+    -- 2 mods
+    c.func.SetVehicleMods(vehicle, Modifications[2], Modifications[17], Modifications[18])
+    -- 3-4 primary/secondaryColor
+    SetVehicleColours(vehicle, Modifications[3], Modifications[4])
+    -- 5-6 pearlescent/wheelColor
+    SetVehicleExtraColours(vehicle, Modifications[5], Modifications[6])
+    -- 7 customPrimaryColor
+    if (Modifications[7]) then
+        SetVehicleCustomPrimaryColour(vehicle, Modifications[7][1], Modifications[7][2], Modifications[7][3])
+    end
+    -- 8 customSecondaryColor
+    if (Modifications[8]) then
+        SetVehicleCustomSecondaryColour(vehicle, Modifications[8][1], Modifications[8][2], Modifications[8][3])
+    end
+    -- 9 interiorColor
+    SetVehicleInteriorColor(vehicle, Modifications[9])
+    -- 10 dashboardColor
+    SetVehicleDashboardColor(vehicle, Modifications[10])
+    -- 11 tireSmokeColor
+    SetVehicleTyreSmokeColor(vehicle, Modifications[11][1], Modifications[11][2], Modifications[11][3])
+    -- 12 xenonLightsColor
+    SetVehicleXenonLightsColour(vehicle, Modifications[12])
+    -- 13 neonLightsColor
+    SetVehicleNeonLightsColour(vehicle, Modifications[13][1], Modifications[13][2], Modifications[13][3])
+    -- 14 enabledNeonLights
+    for i = 0, 3, 1 do
+        SetVehicleNeonLightEnabled(vehicle, i, Modifications[14][i + 1])
+    end
+    -- 15 extras
+    c.func.SetVehicleExtras(vehicle, Modifications[15])
+    -- 19 bulletproofTires
+    SetVehicleTyresCanBurst(vehicle, not Modifications[19])
+    -- 20 driftTires
+    if (GetGameBuildNumber() >= 2372) then
+        SetDriftTyresEnabled(vehicle, Modifications[20])
+    end
+    -- 1 numberPlateText
+    SetVehicleNumberPlateText(vehicle, Modifications[1])
+    -- 21 numberPlateTextIndex
+    SetVehicleNumberPlateTextIndex(vehicle, Modifications[21])
+    -- 22 windowTint
+    SetVehicleWindowTint(vehicle, Modifications[22])
+    -- 23 livery
+    SetVehicleLivery(vehicle, Modifications[23])
+    -- 24 roofLivery
+    SetVehicleRoofLivery(vehicle, Modifications[24])
+end
+
+-- returns the status values of a vehicle
+function c.func.GetVehicleCondition(vehicle)
+    local fuelLevel = 65.0
+    fuelLevel = GetVehicleFuelLevel(vehicle)
+    fuelLevel = math.floor(fuelLevel * 10.0) / 10.0
+    return { -- 1 entity health
+    math.floor(GetEntityHealth(vehicle) * 10.0) / 10.0, -- 2 body health
+    math.floor(GetVehicleBodyHealth(vehicle) * 10.0) / 10.0, -- 3 engine health
+    math.floor(GetVehicleEngineHealth(vehicle) * 10.0) / 10.0, -- 4 petrol tank health
+    math.floor(GetVehiclePetrolTankHealth(vehicle) * 10.0) / 10.0, -- 5 dirt level
+    math.floor(GetVehicleDirtLevel(vehicle) * 10.0) / 10.0, -- 6 fuel level
+    fuelLevel, -- 7 lock status
+    c.func.GetVehicleDoorLockStatus(vehicle), -- 8 tire states
+    c.func.GetVehicleTireStates(vehicle), -- 9 door states
+    c.func.GetVehicleDoorStates(vehicle), -- 10 window states
+    c.func.GetVehicleWindowStates(vehicle)}
+end
+-- apply all vehicle status values
+function c.func.SetVehicleCondition(vehicle, Condition)
+    -- 1 entity health
+    SetEntityHealth(vehicle, Condition[1])
+    -- 2 body health
+    SetVehicleBodyHealth(vehicle, Condition[2])
+    -- 3 engine health
+    SetVehicleEngineHealth(vehicle, Condition[3])
+    -- 4 petrol tank health
+    SetVehiclePetrolTankHealth(vehicle, Condition[4])
+    if ((Condition[3] < -3999.0 or Condition[4] < -999.0)) then
+        TriggerServerEvent("AdvancedParking:renderScorched", NetworkGetNetworkIdFromEntity(vehicle), true)
+    end
+    -- 5 dirt level
+    SetVehicleDirtLevel(vehicle, Condition[5])
+    -- 6 fuel level
+    SetVehicleFuelLevel(vehicle, Condition[6])
+    -- 7 lock status
+    c.func.SetVehicleDoorsLocked(vehicle, Condition[7])
+    -- 8 tire states
+    c.func.SetVehicleTireStates(vehicle, Condition[8])
+    -- 9 door states
+    c.func.SetVehicleDoorStates(vehicle, Condition[9])
+    -- 10 window states
+    c.func.SetVehicleWindowStates(vehicle, Condition[10])
+end
+
+-- returns all non-stock vehicle mods
+function c.func.GetVehicleMods(vehicle)
+    local mods = {}
+    for i = 0, 49, 1 do
+        -- TODO check for 17, 19, 21 -- toggle or normal mods? -- currently not possible
+        if (i == 18 or i == 20 or i == 22) then
+            if (IsToggleModOn(vehicle, i)) then
+                table.insert(mods, { -- 1 index
+                i, -- 2 isToggledOn
+                true})
+            end
+        else
+            local modIndex = GetVehicleMod(vehicle, i)
+            if (modIndex ~= -1) then
+                table.insert(mods, { -- 1 index
+                i, -- 2 modIndex
+                modIndex})
+            end
+        end
+    end
+    return mods
+end
+-- apply all vehicle mods
+function c.func.SetVehicleMods(vehicle, mods, customFrontWheels, customRearWheels)
+    for i, mod in ipairs(mods) do
+        local id = mod[1]
+        local value = mod[2]
+
+        -- TODO check for 17, 19, 21 -- toggle or normal mods? -- currently not possible
+        if (id == 18 or id == 20 or id == 22) then
+            ToggleVehicleMod(vehicle, id, value)
+        else
+            SetVehicleMod(vehicle, id, value, (id == 24) and customRearWheels or customFrontWheels)
+        end
+    end
+end
+
+-- returns all vehicle extras
+function c.func.GetVehicleExtras(vehicle)
+    local extras = {}
+    for i = 0, 20, 1 do
+        if (DoesExtraExist(vehicle, i)) then
+            if (IsVehicleExtraTurnedOn(vehicle, i)) then
+                table.insert(extras, { -- 1 index
+                i, -- 2 isToggledOn
+                0})
+            else
+                table.insert(extras, { -- 1 index
+                i, -- 2 isToggledOn
+                1})
+            end
+        end
+    end
+    return extras
+end
+-- apply all vehicle extras
+function c.func.SetVehicleExtras(vehicle, extras)
+    for i, extra in ipairs(extras) do
+        SetVehicleExtra(vehicle, extra[1], extra[2])
+    end
+end
+
+-- returns all tire states
+function c.func.GetVehicleTireStates(vehicle)
+    local burstTires = {}
+    for i = 0, 5, 1 do
+        if (IsVehicleTyreBurst(vehicle, i, true)) then
+            table.insert(burstTires, { -- 1 index
+            i, -- 2 isBurst
+            true})
+        elseif (IsVehicleTyreBurst(vehicle, i, false)) then
+            table.insert(burstTires, { -- 1 index
+            i, -- 2 isBurst
+            false})
+        end
+    end
+    return burstTires
+end
+-- apply all tire states
+function c.func.SetVehicleTireStates(vehicle, tireStates)
+    for i, tireState in ipairs(tireStates) do
+        SetVehicleTyreBurst(vehicle, tireState[1], tireState[2], 1000.0)
+    end
+end
+
+-- returns all door states
+function c.func.GetVehicleDoorStates(vehicle)
+    local doorStates = {}
+    for i = 0, 7, 1 do
+        if (GetIsDoorValid(vehicle, i)) then
+            table.insert(doorStates, { -- 1 index
+            i, -- 2 missing
+            IsVehicleDoorDamaged(vehicle, i) -- 3 angle (unused, causes problems)
+            -- GetVehicleDoorAngleRatio(vehicle, i)
+            })
+        end
+    end
+    return doorStates
+end
+-- apply all door states
+function c.func.SetVehicleDoorStates(vehicle, doorStates)
+    for i, doorState in ipairs(doorStates) do
+        if (doorState[2]) then
+            SetVehicleDoorBroken(vehicle, doorState[1], true)
+            -- elseif (doorState[3] > 0.0) then
+            --	SetVehicleDoorControl(vehicle, doorState[1], 1000, doorState[3])
+        end
+    end
+end
+
+-- returns all window states
+function c.func.GetVehicleWindowStates(vehicle)
+    if (AreAllVehicleWindowsIntact(vehicle)) then
+        return {}
+    end
+    local windowStates = {}
+    for i = 0, 13, 1 do
+        if (not IsVehicleWindowIntact(vehicle, i)) then
+            table.insert(windowStates, i)
+        end
+    end
+    return windowStates
+end
+
+-- apply all window states
+function c.func.SetVehicleWindowStates(vehicle, windowStates)
+    for i, windowState in ipairs(windowStates) do
+        SmashVehicleWindow(vehicle, windowState)
+    end
+end
+
+function c.func.DeleteVehicle(vehicle)
+    if (not DoesEntityExist(vehicle)) then return end
+    if (GetResourceState("AdvancedParking") == "started") then
+        exports["AdvancedParking"]:DeleteVehicle(vehicle)
+        return
+    end
+    SetEntityAsMissionEntity(vehicle,  false,  true)
+    DeleteVehicle(vehicle)
 end

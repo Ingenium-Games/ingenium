@@ -51,10 +51,12 @@ end
 function c.sql.veh.Add(data, cb)
     local IsBusy = true
     local Data = data
-    MySQL.Async.execute("INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`) VALUES (@Character_ID, @Model, @Plate);",{
+    MySQL.Async.execute("INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`, `Condition` , `Modifications`) VALUES (@Character_ID, @Model, @Plate, @Condition, @Modifications);",{
         ["@Character_ID"] = Data.Character_ID,
         ["@Model"] = Data.Model,
         ["@Plate"] = Data.Plate,
+        ["@Condition"] = Data.Condition,
+        ["@Modifications"] = Data.Modifications,
     }, function(r)
         IsBusy = false
         TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Adding Vehicle: "..Data.Plate.." | Owner "..Data.Character_ID)
