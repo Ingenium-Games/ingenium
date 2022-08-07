@@ -51,12 +51,13 @@ end
 function c.sql.veh.Add(data, cb)
     local IsBusy = true
     local Data = data
-    MySQL.Async.execute("INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`, `Condition` , `Modifications`) VALUES (@Character_ID, @Model, @Plate, @Condition, @Modifications);",{
+    MySQL.Async.execute("INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`, `Condition` , `Modifications`, `Updated`) VALUES (@Character_ID, @Model, @Plate, @Condition, @Modifications, @Updated);",{
         ["@Character_ID"] = Data.Character_ID,
         ["@Model"] = Data.Model,
         ["@Plate"] = Data.Plate,
         ["@Condition"] = Data.Condition,
         ["@Modifications"] = Data.Modifications,
+        ["@Updated"] = c.func.Timestamp(),
     }, function(r)
         IsBusy = false
         TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Adding Vehicle: "..Data.Plate.." | Owner "..Data.Character_ID)
@@ -72,9 +73,11 @@ end
 function c.sql.veh.ChangeOwner(data, cb)
     local IsBusy = true
     local Data = data
-    MySQL.Async.execute("UPDATE `vehicles` SET `Character_ID` = @Character_ID WHERE `Plate` = @Plate;",{
+    MySQL.Async.execute("UPDATE `vehicles` SET `Character_ID` = @Character_ID, `Updated` = @Updated WHERE `Plate` = @Plate;",{
         ["@Character_ID"] = Data.Character_ID,
+        ["@Updated"] = c.func.Timestamp(),
         ["@Plate"] = Data.Plate,
+        
     }, function(r)
         IsBusy = false
         TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Changing Vehicle : "..Data.Plate.." | Owner "..Data.Character_ID)
