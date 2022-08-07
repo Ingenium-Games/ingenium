@@ -578,7 +578,7 @@ function c.func.GetVehicleCondition(vehicle)
     math.floor(GetVehiclePetrolTankHealth(vehicle) * 10.0) / 10.0, -- 5 dirt level
     math.floor(GetVehicleDirtLevel(vehicle) * 10.0) / 10.0, -- 6 fuel level
     fuelLevel, -- 7 lock status
-    c.func.GetVehicleDoorLockStatus(vehicle), -- 8 tire states
+    GetVehicleDoorLockStatus(vehicle), -- 8 tire states
     c.func.GetVehicleTireStates(vehicle), -- 9 door states
     c.func.GetVehicleDoorStates(vehicle), -- 10 window states
     c.func.GetVehicleWindowStates(vehicle)}
@@ -601,7 +601,7 @@ function c.func.SetVehicleCondition(vehicle, Condition)
     -- 6 fuel level
     SetVehicleFuelLevel(vehicle, Condition[6])
     -- 7 lock status
-    c.func.SetVehicleDoorsLocked(vehicle, Condition[7])
+    SetVehicleDoorsLocked(vehicle, Condition[7])
     -- 8 tire states
     c.func.SetVehicleTireStates(vehicle, Condition[8])
     -- 9 door states
