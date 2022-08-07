@@ -119,3 +119,25 @@ function c.sql.gen.Iban(cb)
     end
     return new
 end
+
+function c.sql.gen.CarPlate(cb)
+    local bool = false
+    local new = nil
+    repeat
+        new = c.rng.chars(8)
+        MySQL.Async.fetchScalar("SELECT `Plate` FROM `vehciles` WHERE `Plate` = @Plate LIMIT 1;",
+            {
+                ["@Plate"] = new
+            }, function(r)
+                if r then
+                    bool = true
+                else
+                    bool = false
+                end
+            end)
+    until bool == false
+    if cb then
+        cb()
+    end
+    return new
+end
