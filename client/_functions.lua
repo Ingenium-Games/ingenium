@@ -745,7 +745,6 @@ function c.func.DeleteVehicle(vehicle)
     if (not DoesEntityExist(vehicle)) then return end
     if (GetResourceState("AdvancedParking") == "started") then
         exports["AdvancedParking"]:DeleteVehicle(vehicle)
-        return
     end
     SetEntityAsMissionEntity(vehicle,  false,  true)
     DeleteVehicle(vehicle)
