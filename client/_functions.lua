@@ -742,9 +742,11 @@ function c.func.SetVehicleWindowStates(vehicle, windowStates)
 end
 
 function c.func.DeleteVehicle(vehicle)
-    if (not DoesEntityExist(vehicle)) then
+    if (not DoesEntityExist(vehicle)) then return end
+    if (GetResourceState("AdvancedParking") == "started") then
         exports["AdvancedParking"]:DeleteVehicle(vehicle)
-        SetEntityAsMissionEntity(vehicle, false, true)
-        DeleteVehicle(vehicle)
+        return
     end
+    SetEntityAsMissionEntity(vehicle,  false,  true)
+    DeleteVehicle(vehicle)
 end
