@@ -36,7 +36,7 @@ local Revive = RegisterClientCallback({
         local finished = exports["ig.taskbar"]:Start(time, treatment)
         if finished == 100 then
             c.func.FadeOut(1000)
-            ClearPedBloodDamage(PlayerPedID())
+            ClearPedBloodDamage(PlayerPedId())
             NetworkResurrectLocalPlayer(ords.x, ords.y, ords.z, ords.h, true, false)
             c.status.SetHealth(c.status.GetMaxHealth())
             c.data.SetLocalPlayerState("IsDead", false, true)
@@ -51,7 +51,7 @@ local Heal = RegisterClientCallback({
         local time, treatment = time or 1000, treatment or "Healing"
         local finished = exports["ig.taskbar"]:Start(time, treatment)
         if finished == 100 then
-            ClearPedBloodDamage(PlayerPedID())
+            ClearPedBloodDamage(PlayerPedId())
             c.status.SetHealth(c.status.GetMaxHealth())
         end
     end
