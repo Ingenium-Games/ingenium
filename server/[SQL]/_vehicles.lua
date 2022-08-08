@@ -77,7 +77,6 @@ function c.sql.veh.ChangeOwner(data, cb)
         ["@Character_ID"] = Data.Character_ID,
         ["@Updated"] = c.func.Timestamp(),
         ["@Plate"] = Data.Plate,
-        
     }, function(r)
         IsBusy = false
         TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Changing Vehicle : "..Data.Plate.." | Owner "..Data.Character_ID)
