@@ -444,6 +444,7 @@ function c.class.PlayerVehicle(ent, data)
     self.UnpackInventory(self.Inventory)
     self.AddKey(self.Owner)
     self.SetParked(false)
+    SetVehicleNumberPlateText(self.Entity, self.Plate)
     -- ====================================================================================--
     return self
 end
