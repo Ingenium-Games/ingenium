@@ -457,9 +457,6 @@ function c.func.CreateVehicle(name, x, y, z, h, cb)
     SetNetworkIdCanMigrate(net, true)
     SetVehicleNeedsToBeHotwired(net, false)
     SetModelAsNoLongerNeeded(hash)
-    if cb then
-        cb(entity, net)
-    end
     return entity, net
 end
 
