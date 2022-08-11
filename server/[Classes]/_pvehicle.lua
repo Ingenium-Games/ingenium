@@ -172,11 +172,13 @@ function c.class.PlayerVehicle(ent, data)
     --- func desc
     ---@param conditions any
     self.SetCondition = function(conditions)
+        -- Set Condition
         self.Condition = conditions or TriggerClientCallback({
             source = self.GetSource(),
             eventName = "GetVehicleCondition",
             args = {self.Net}
         })
+        -- Set Condition
         TriggerClientCallback({
             source = self.GetSource(),
             eventName = "SetVehicleCondition",
@@ -208,11 +210,13 @@ function c.class.PlayerVehicle(ent, data)
     --- func desc
     ---@param modifications any
     self.SetModifications = function(modifications)
+        -- Get Modifications
         self.Modifications = modifications or TriggerClientCallback({
             source = self.GetSource(),
             eventName = "GetVehicleModifications",
             args = {self.Net}
         })
+        -- Force Set Modifications
         TriggerClientCallback({
             source = self.GetSource(),
             eventName = "SetVehicleModifications",

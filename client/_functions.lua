@@ -360,6 +360,27 @@ function c.func.GetClosestVehicle()
     return closest, closestdist
 end
 
+-- returns closestVeh, closestdist
+function c.func.GetClosestPosition(positions)
+    local closest = -1
+    local closestdist = -1
+    local count = 0
+    local ply = PlayerPedId()
+    local coords = vector3(GetEntityCoords(ply))
+    local positions = positions
+    for i=1, #positions, 1 do
+        local targetcoords = vector3(positions[i].x,positions[i].y,positions[i].z)
+        local distance = #(targetcoords - coords)
+        if (closestdist == -1 or closestdist > distance) then
+            closest = positions[i]
+            closestdist = distance
+        end
+        count = count + 1
+    end
+    return closest, closestdist, count
+end
+
+
 -- base events.
 function c.func.GetVehicleSeatOfPed(ped)
     local vehicle = GetVehiclePedIsIn(ped, false)
@@ -385,18 +406,22 @@ function c.func.GetEntityFromRay()
     return false, false
 end
 
-function c.func.CreatePed(name, x, y, z, h)
+function c.func.CreatePed(name, x, y, z, h, cb)
     local hash = nil
     if type(name) == "number" then
         hash = name
     else
         hash = GetHashKey(name)
     end
-    local net = CreatePed(0, hash, x, y, z, h, true, false)
+    local entity = CreatePed(0, hash, x, y, z, h, true, false)
+    local net = PedToNet(entity)
+    if cb then
+        cb(entity, net)
+    end
     return net
 end
 
-function c.func.CreateObject(name, x, y, z, isdoor)
+function c.func.CreateObject(name, x, y, z, isdoor, cb)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -406,12 +431,15 @@ function c.func.CreateObject(name, x, y, z, isdoor)
     if type(isdoor) ~= "boolean" then
         isdoor = false
     end
-    local net = CreateObject(hash, x, y, z, true, isdoor)
+    local entity = CreateObject(hash, x, y, z, true, isdoor)
+    local net = ObjToNet(entity)
+    if cb then
+        cb(entity, net)
+    end
     return net
 end
 
-function c.func.CreateVehicle(name, x, y, z, h, data)
-    local data = data or {}
+function c.func.CreateVehicle(name, x, y, z, h, cb)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -422,23 +450,15 @@ function c.func.CreateVehicle(name, x, y, z, h, data)
     while not HasModelLoaded(hash) do
         Citizen.Wait(0)
     end
-    local entity = CreateVehicle(hash, x, y, z, h, true, false)
+    local entity = CreateVehicle(hash, x, y, z, h, true, true)
     local net = VehToNet(entity)
     SetVehicleOnGroundProperly(entity)
     SetVehicleHasBeenOwnedByPlayer(entity, true)
     SetNetworkIdCanMigrate(net, true)
     SetVehicleNeedsToBeHotwired(net, false)
     SetModelAsNoLongerNeeded(hash)
-    if NetworkDoesEntityExistWithNetworkId(net) then
-        c.func.Debug_1("Entity exists on network, id: " .. net .. " entity: " .. entity)
-        TriggerServerCallback({
-            eventName = "ClientCreateVehicle",
-            args = {net, data}
-        })
-    else
-        c.func.Debug_1("Entity DOES NOT exist on network.")
-        DeleteEntity(entity)
-        return false, false
+    if cb then
+        cb(entity, net)
     end
     return entity, net
 end

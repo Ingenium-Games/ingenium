@@ -134,16 +134,15 @@ end
 
 -- ====================================================================================--
 
-function c.func.CreateVehicle(data)
-    local data = data
+function c.func.CreateVehicle(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
         hash = name
     else
         hash = GetHashKey(name)
     end
-    local net = CreateVehicle(hash, x, y, z, h, true, true)
-    return net
+    local entity = CreateVehicle(hash, x, y, z, h, true, true)
+    return entity
 end
 
 function c.func.CreatePed(name, x, y, z, h)
@@ -153,8 +152,8 @@ function c.func.CreatePed(name, x, y, z, h)
     else
         hash = GetHashKey(name)
     end
-    local net = CreatePed(0, hash, x, y, z, h, true, false)
-    return net
+    local entity = CreatePed(0, hash, x, y, z, h, true, false)
+    return entity
 end
 
 function c.func.CreateObject(name, x, y, z, isdoor)
@@ -165,8 +164,8 @@ function c.func.CreateObject(name, x, y, z, isdoor)
         hash = GetHashKey(name)
     end
     if type(isdoor) ~= "boolean" then isdoor = false end
-    local net = CreateObject(hash, x, y, z, true, isdoor)
-    return net
+    local entity = CreateObject(hash, x, y, z, true, isdoor)
+    return entity
 end
 
 -- My own version of the native for the server to use.
