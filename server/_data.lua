@@ -185,14 +185,6 @@ function c.data.ArePlayersActive()
     return false
 end
 
-function c.data.CleanPlayersTable()
-    for k,v in pairs(c.pdex) do
-        if v == false then
-            table.remove(c.pdex, k)
-        end
-    end
-end
-
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
 
@@ -266,6 +258,11 @@ function c.data.GetVehicles()
 end
 
 --- Get all xVehicles
+function c.data.GetNPCVehicles()
+    return c.vdex
+end
+
+--- Get all xVehicles
 function c.GetVehicles()
     return c.data.GetVehicles()
 end
@@ -275,7 +272,7 @@ function c.data.RemoveVehicle(arg)
     if c.vdex[tonumber(arg)] then
         c.vdex[tonumber(arg)] = false
     else
-        c.pvdex[tonumber(arg)] = false
+        c.pvdex[arg] = false
     end
 end
 
@@ -459,7 +456,6 @@ function c.data.ServerSync()
         c.sql.save.Jobs()
         Citizen.Wait(conf.sec * 5)
         c.data.Save("Users, Vehicles, Jobs, ")
-        c.data.CleanPlayersTable()
         SetTimeout(conf.serversync, Do)
     end
     SetTimeout(conf.serversync, Do)

@@ -69,7 +69,7 @@ AddEventHandler("Server:PlayerConnecting", function()
 end)
 -- ====================================================================================--
 AddEventHandler("playerDropped", function()
-    local src = tonumber(source)
+    local src = source
     local xPlayer = c.data.GetPlayer(src)
     -- if the data not false?
     if xPlayer then

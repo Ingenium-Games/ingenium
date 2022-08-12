@@ -36,6 +36,8 @@ function c.class.PlayerVehicle(ent, data)
     self.Plate = data.Plate
     self.State.Plate = self.Plate
     --
+    SetVehicleNumberPlateText(self.Entity, self.Plate)
+    --
     self.Weight = 0
     -- Owner
     self.Owner = data.Owner
@@ -173,16 +175,12 @@ function c.class.PlayerVehicle(ent, data)
     ---@param conditions any
     self.SetCondition = function(conditions)
         -- Set Condition
-        self.Condition = conditions or TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "GetVehicleCondition",
-            args = {self.Net}
-        })
-        -- Set Condition
+        self.Condition = conditions
+        -- Force Set Modifications
         TriggerClientCallback({
             source = self.GetSource(),
             eventName = "SetVehicleCondition",
-            args = {self.Net}
+            args = {self.Net, self.Condition}
         })
     end
     --- func desc
@@ -211,16 +209,12 @@ function c.class.PlayerVehicle(ent, data)
     ---@param modifications any
     self.SetModifications = function(modifications)
         -- Get Modifications
-        self.Modifications = modifications or TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "GetVehicleModifications",
-            args = {self.Net}
-        })
+        self.Modifications = modifications
         -- Force Set Modifications
         TriggerClientCallback({
             source = self.GetSource(),
             eventName = "SetVehicleModifications",
-            args = {self.Net}
+            args = {self.Net, self.Modifications}
         })
     end
     --- func desc
@@ -444,7 +438,6 @@ function c.class.PlayerVehicle(ent, data)
     self.UnpackInventory(self.Inventory)
     self.AddKey(self.Owner)
     self.SetParked(false)
-    SetVehicleNumberPlateText(self.Entity, self.Plate)
     -- ====================================================================================--
     return self
 end
