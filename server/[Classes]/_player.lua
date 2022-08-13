@@ -823,10 +823,10 @@ function c.class.Player(source, character_id)
         end
     end
     --
-    self.ConsumeItem = function(name)
-        local quantity, position = self.GetItemQuantity(name)
-        if type(quantity) ~= "boolean" then
-            TriggerEvent("Inventory:Consume:"..name, self.ID, quantity, position)
+    self.ConsumeItem = function(number)
+        local item = self.GetItemFromPosition(number)
+        if type(item) ~= "boolean" then
+            TriggerEvent("Inventory:Consume:"..item.Item, self.ID, item.Quantity, number)
         end
     end
     --- func desc

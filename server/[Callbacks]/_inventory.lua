@@ -7,7 +7,7 @@ local UseItem = RegisterServerCallback({
         print(has, position)
         if has then
             print("has")
-            xPlayer.ConsumeItem(source, number)
+            xPlayer.ConsumeItem(number)
             return true
         else
             xPlayer.Notify("No Item Found...")
@@ -44,7 +44,7 @@ local UseItemQuick = RegisterServerCallback({
         if itemtbl then
             local useable = c.item.CanHotkey(itemtbl.Item)
             if useable then
-                xPlayer.ConsumeItem(source, number)
+                xPlayer.ConsumeItem(number)
                 return true
             else
                 xPlayer.Notify("Item is not useable via quickslot: " .. number)
