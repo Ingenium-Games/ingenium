@@ -15,7 +15,7 @@ for k,v in pairs (c.items) do
         if c.item.IsWeapon(k) then
             --
             local ammo = xPlayer.GetAmmo()
-            local item = xPlayer.GetItemFromPosition(position)
+            local item = c.item.GetItem(k)
             local hash = item.Weapon
             local components = item.Meta.Components
             local ammotype = item.Meta.Ammo            
