@@ -4229,8 +4229,8 @@ c.items = { -- table of items
             },
             -- Status removes or adds the amount as intended out of 100
             Status = {
-                Health = 5,
-                Armour = 0,
+                Health = 7,
+                Armour = 2,
                 Hunger = -1, -- number -100 - 100
                 Thirst = 18, -- number -100 - 100
                 Stress = -5 -- number -100 - 100
