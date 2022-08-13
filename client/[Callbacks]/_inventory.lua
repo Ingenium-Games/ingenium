@@ -56,14 +56,14 @@ local Consumeable = RegisterClientCallback({
                 c.status.AddArmourToAmount(c.check.Number(Data.Status.Armour, 1, 100))
             end
             if Data.Status.Hunger then
-                if Data.Status.Hunger < 0 then
+                if Data.Status.Hunger > 0 then
                     c.status.AddHunger(Data.Status.Hunger)
                 else
                     c.status.RemoveHunger(Data.Status.Hunger)
                 end
             end
             if Data.Status.Thirst then
-                if Data.Status.Thirst < 0 then
+                if Data.Status.Thirst > 0 then
                     c.status.AddThirst(Data.Status.Thirst)
                 else
                     c.status.RemoveThirst(Data.Status.Thirst)
