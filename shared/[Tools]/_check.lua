@@ -20,7 +20,7 @@ function c.check.Number(num, min, max)
             if num >= min and num <= max then
                 return num
             else
-                c.func.Debug_1("Unable to add value lesser than "..min..", or greater than"..max..". Returned 0.")
+                -- c.func.Debug_1("Unable to add value lesser than "..min..", or greater than"..max..". Returned 0.")
                 return v
             end
         end
