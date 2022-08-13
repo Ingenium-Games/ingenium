@@ -3880,7 +3880,7 @@ c.items = { -- table of items
         Meta = {
             Ammo = "",
             Components = {},
-            
+
             SerialNumber = "",
             BatchNumber = "",
             Crafted = false,
@@ -4234,7 +4234,7 @@ c.items = { -- table of items
                 Hunger = -1, -- number -100 - 100
                 Thirst = 18, -- number -100 - 100
                 Stress = -5 -- number -100 - 100
-            },
+            }
         },
         Craftable = false,
         Recipe = false,
@@ -4243,6 +4243,1838 @@ c.items = { -- table of items
         Consumeable = true,
         Hotkey = true,
         Image = "Coffee.png"
+    },
+
+    ["Apple"] = {
+        Name = "Apple",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0.2,
+        Weapon = false,
+        Meta = {
+            About = "Juicy red apple."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 5,
+                Armour = 0,
+                Hunger = 10, -- number -100 - 100
+                Thirst = 5, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Apple.png"
+    },
+
+    ["Avocado"] = {
+        Name = "Avocado",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh lovely Avocado."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 8, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Avocado.png"
+    },
+
+    ["Banana"] = {
+        Name = "Banana",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A fresh Banana."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 6,
+                Armour = 0,
+                Hunger = 7, -- number -100 - 100
+                Thirst = 3, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Banana.png"
+    },
+
+    ["Grapes"] = {
+        Name = "Grapes",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A bunch of Grapes."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 6,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 6, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Grapes.png"
+    },
+
+    ["Orange"] = {
+        Name = "Orange",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A Fresh Orange."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Orange.png"
+    },
+
+    ["Pear"] = {
+        Name = "Pear",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A Fresh Pear."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Pear.png"
+    },
+
+    ["Pinapple"] = {
+        Name = "Pinapple",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A fresh Pinapple."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Pinapple.png"
+    },
+
+    ["Strawberry"] = {
+        Name = "Strawberry",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A Fresh Strawberry."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Strawberry.png"
+    },
+
+    ["Tomatoe"] = {
+        Name = "Tomatoe",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A Fresh Tomatoe."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Tomatoe.png"
+    },
+
+    ["Peaches"] = {
+        Name = "Peaches",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A Fresh Peaches."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Peaches.png"
+    },
+
+    ["Coconut"] = {
+        Name = "Coconut",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A Fresh Coconut."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Coconut.png"
+    },
+
+    ["Lemon Blueberry"] = {
+        Name = "Lemon Blueberry",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A Nice lemon Blueberry."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Lemon Blueberry.png"
+    },
+
+    ["Grapefruit"] = {
+        Name = "Grapefruit",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A Nice lemon Blueberry."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Lemon Blueberry.png"
+    },
+
+    ["Rice"] = {
+        Name = "Rice",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "A bag of Rice."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Rice.png"
+    },
+
+    ["Corn"] = {
+        Name = "Corn",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Corn."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Corn.png"
+    },
+
+    ["Cucumber"] = {
+        Name = "Cucumber",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Cucumber."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Cucumber.png"
+    },
+
+    ["Carrot"] = {
+        Name = "Carrot",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Carrot."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Carrot.png"
+    },
+
+    ["Beetroot"] = {
+        Name = "Beetroot",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Beetroot."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Beetroot.png"
+    },
+
+    ["Brocolli"] = {
+        Name = "Brocolli",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Brocolli."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Brocolli.png"
+    },
+
+    ["Buttersquash"] = {
+        Name = "Buttersquash",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Buttersquash."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Buttersquash.png"
+    },
+
+    ["Cabbage"] = {
+        Name = "Cabbage",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Cabbage."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Cabbage.png"
+    },
+
+    ["Caulifla"] = {
+        Name = "Caulifla",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Caulifla."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Caulifla.png"
+    },
+
+    ["Asparagus"] = {
+        Name = "Asparagus",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Asparagus."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Asparagus.png"
+    },
+    ["Eggplant"] = {
+        Name = "Eggplant",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Eggplant."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Eggplant.png"
+    },
+
+    ["Leeks"] = {
+        Name = "Leeks",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Leeks."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Leeks.png"
+    },
+
+    ["Mushroom"] = {
+        Name = "Mushroom",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Mushroom."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Mushroom.png"
+    },
+
+    ["onion"] = {
+        Name = "onion",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh onion."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "onion.png"
+    },
+
+    ["Parsnip"] = {
+        Name = "Parsnip",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Parsnip."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Parsnip.png"
+    },
+
+    ["Peas"] = {
+        Name = "Peas",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Peas."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Peas.png"
+    },
+
+    ["Potatoe"] = {
+        Name = "Potatoe",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Potatoe."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Potatoe.png"
+    },
+
+    ["Pumpkin"] = {
+        Name = "Pumpkin",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Pumpkin."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Pumpkin.png"
+    },
+
+    ["Raddish"] = {
+        Name = "Raddish",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Raddish."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raddish.png"
+    },
+
+    ["Turnip"] = {
+        Name = "Turnip",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Turnip."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Turnip.png"
+    },
+
+    ["Raw Steak"] = {
+        Name = "Raw Steak",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Raw Steak."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raw Steak.png"
+    },
+
+    ["Cooked Steak"] = {
+        Name = "Cooked Steak",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Freshly Cooked Steak."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raw Cooked Steak.png"
+    },
+
+    ["Raw Ribeye"] = {
+        Name = "Raw Ribeye",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Raw Ribeye."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raw Ribeye.png"
+    },
+
+    ["Cooked Ribeye"] = {
+        Name = "Cooked Ribeye",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Cooked Ribeye."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Cooked Ribeye.png"
+    },
+
+    ["Raw wagyu"] = {
+        Name = "Raw wagyu",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Raw wagyu."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raw wagyu.png"
+    },
+
+    ["Cooked Wagyu"] = {
+        Name = "Cooked Wagyu",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Cooked Wagyu."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Cooked Wagyu.png"
+    },
+
+    ["Raw chicken"] = {
+        Name = "Raw chicken",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Raw chicken."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raw chicken.png"
+    },
+
+    ["Cooked Chicken"] = {
+        Name = "Cooked Chicken",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Cooked Chicken."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Cooked Chicken.png"
+    },
+
+    ["Raw fish"] = {
+        Name = "Raw fish",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Raw fish."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raw fish.png"
+    },
+
+    ["Cooked fish"] = {
+        Name = "Cooked fish",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Cooked fish."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Cooked fish.png"
+    },
+
+    ["Raw lambchops"] = {
+        Name = "Raw lambchops",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Raw lambchops."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raw lambchops.png"
+    },
+
+    ["Cooked lambchops"] = {
+        Name = "Cooked lambchops",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Cooked lambchops."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Cooked lambchops.png"
+    },
+
+    ["Raw Sausage"] = {
+        Name = "Raw Sausage",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Raw Sausage."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Raw Sausage.png"
+    },
+
+    ["Cooked sausage"] = {
+        Name = "Cooked sausage",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Cooked sausage."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Cooked sausage.png"
     }
 
 }

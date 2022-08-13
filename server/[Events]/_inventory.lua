@@ -6,7 +6,6 @@
 -- [C+S]
 for k,v in pairs (c.items) do
     AddEventHandler(("Inventory:Consume:%s"):format(k), function(source, position, quantity) 
-        print(source, position, quantity)
         local src = source
         local position = position
         local quantity = quantity or 1

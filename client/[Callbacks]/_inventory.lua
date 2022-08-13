@@ -1,19 +1,22 @@
 local Weapon = RegisterClientCallback({
     eventName = "Client:Item:Weapon",
     eventCallback = function(k, ammo, ammotype, hash, components)
+        print("Client:Item:Weapon", k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
         local Name = k
-        local Ammo = ammo or 0
+        -- TO DO WEAPON AMMO TYPE CHECK
+        local Ammo = tonumber(ammo) or 12
+
         local AmmoType = ammotype
-        local Hash = hash
+        local Hash = tonumber(hash)
         local Components = components
         --
-        if c.CurrentWeapon == Name then
+        if c.CurrentWeapon == Hash then
             SetCurrentPedWeapon(Ped, `WEAPON_UNARMED`, true)
             RemoveAllPedWeapons(Ped, true)
             c.CurrentWeapon = nil
         else
-            if Name == "WEAPON_PETROLCAN" or Name == "WEAPON_FIREEXTINGUISHER" then
+            if Hash == `WEAPON_PETROLCAN` or Hash == `WEAPON_FIREEXTINGUISHER` then
                 Ammo = 4000
             end
             GiveWeaponToPed(Ped, Hash, 0, false, false)
@@ -24,7 +27,7 @@ local Weapon = RegisterClientCallback({
                     GiveWeaponComponentToPed(Ped, Hash, GetHashKey(v))
                 end
             end
-            c.CurrentWeapon = Name
+            c.CurrentWeapon = Hash
         end
         --
     end
