@@ -4,7 +4,9 @@ local UseItem = RegisterServerCallback({
         local xPlayer = c.data.GetPlayer(source)
         local itemtbl = xPlayer.GetItemFromPosition(number)
         local has, position = xPlayer.HasItem(itemtbl.Item)
+        print(has, position)
         if has then
+            print("has")
             xPlayer.ConsumeItem(source, number)
             return true
         else
