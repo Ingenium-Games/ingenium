@@ -23,7 +23,7 @@ for k,v in pairs (c.items) do
             TriggerClientCallback({
                 source = src,
                 eventName = "Client:Item:Weapon",
-                args = {Name = k, Ammo = ammo, AmmoType = ammotype, Hash = hash, Components = components}
+                args = {k, ammo, ammotype, hash, components}
             })
             --
             return
@@ -34,7 +34,7 @@ for k,v in pairs (c.items) do
             TriggerClientCallback({
                 source = src,
                 eventName = "Client:Item:Consumeable",
-                args = {Name = k}
+                args = {k}
             })
             --
             xPlayer.RemoveItem(k, position)
