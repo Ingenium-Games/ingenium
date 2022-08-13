@@ -1,15 +1,36 @@
 local UseItem = RegisterServerCallback({
     eventName = "UseItem",
-    eventCallback = function(source, name, position)
+    eventCallback = function(source, number)
         local xPlayer = c.data.GetPlayer(source)
-        local has, position = xPlayer.HasItem(name)
+        local itemtbl = xPlayer.GetItemFromPosition(number)
+        local has, position = xPlayer.HasItem(itemtbl.Item)
         if has then
-            xPlayer.ConsumeItem(source, position)
+            xPlayer.ConsumeItem(source, number)
             return true
         else
             xPlayer.Notify("No Item Found...")
             return false
         end
+    end
+})
+
+local GiveItem = RegisterServerCallback({
+    eventName = "GiveItem",
+    eventCallback = function(source, number, target)
+        local xPlayer = c.data.GetPlayer(source)
+        local itemtbl = xPlayer.GetItemFromPosition(number)
+
+
+    end
+})
+
+local DropItem = RegisterServerCallback({
+    eventName = "DropItem",
+    eventCallback = function(source, number, position)
+        local xPlayer = c.data.GetPlayer(source)
+        local itemtbl = xPlayer.GetItemFromPosition(number)
+        
+
     end
 })
 

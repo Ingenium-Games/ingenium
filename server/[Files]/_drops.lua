@@ -70,3 +70,9 @@ function c.drop.CleanUp()
     end
     SetTimeout(conf.file.cleanup, Do)
 end
+
+function c.drop.Resync()
+    local drops = c.drops
+    TriggerClientEvent("Client:Drops:Update", -1, drops)
+end
+
