@@ -26,6 +26,7 @@ function c.data.Initilize()
         [9] = "DB: Loading Data File - Notes;",
         [10] = "DB: Loading Data File - Names;",
         [11] = "DB: Loading Data File - Scenes;";
+        [12] = "DB: Reset Cars to Parked;";
     }
     --
     local function cb()
@@ -66,7 +67,7 @@ function c.data.Initilize()
         c.scene.Load()
         cb()
         -- [12]
-
+        c.sql.veh.Reset(cb)
         --
         loaded = true
     end)

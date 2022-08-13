@@ -11,6 +11,17 @@ NOTES.
 
 -- ====================================================================================--
 
+function c.sql.veh.Reset(cb)
+    MySQL.Async.execute("UPDATE `vehicles` SET `Parked` = TRUE", {
+    }, function(data)
+        if data then
+            --
+        end
+        if cb then
+            cb()
+        end
+    end)
+end
 
 function c.sql.veh.GetAll(Character_ID, cb)
     local IsBusy = true
