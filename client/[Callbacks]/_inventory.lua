@@ -1,12 +1,12 @@
 local Weapon = RegisterClientCallback({
     eventName = "Client:Item:Weapon",
-    eventCallback = function(data)
+    eventCallback = function(k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
-        local Name = data.Name
-        local Ammo = data.Ammo or 0
-        local AmmoType = data.AmmoType
-        local Hash = data.Hash
-        local Components = data.Components
+        local Name = k
+        local Ammo = ammo or 0
+        local AmmoType = ammotype
+        local Hash = hash
+        local Components = components
         --
         if c.CurrentWeapon == Name then
             SetCurrentPedWeapon(Ped, `WEAPON_UNARMED`, true)
@@ -32,8 +32,8 @@ local Weapon = RegisterClientCallback({
 
 local Consumeable = RegisterClientCallback({
     eventName = "Client:Item:Consumeable",
-    eventCallback = function(data)
-        local Name = data.Name
+    eventCallback = function(k)
+        local Name = k
         local Data = c.item.GetData(Name)
         --
         if Data.Modifiers then
