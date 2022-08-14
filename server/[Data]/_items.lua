@@ -4596,8 +4596,8 @@ c.items = { -- table of items
         Image = "Tomatoe.png"
     },
 
-    ["Peaches"] = {
-        Name = "Peaches",
+    ["Peach"] = {
+        Name = "Peach",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -4607,7 +4607,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "A Fresh Peaches."
+            About = "A Fresh Peach."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -4632,7 +4632,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Peaches.png"
+        Image = "Peach.png"
     },
 
     ["Coconut"] = {
@@ -4724,7 +4724,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "A Nice lemon Blueberry."
+            About = "A Nice Grapefruit."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -4749,7 +4749,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Lemon Blueberry.png"
+        Image = "Grapefruit.png"
     },
 
     ["Rice"] = {
@@ -5064,8 +5064,8 @@ c.items = { -- table of items
         Image = "Cabbage.png"
     },
 
-    ["Caulifla"] = {
-        Name = "Caulifla",
+    ["Cauliflower"] = {
+        Name = "Cauliflower",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5075,7 +5075,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Fresh Caulifla."
+            About = "Fresh Cauliflower."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5100,7 +5100,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Caulifla.png"
+        Image = "Cauliflower.png"
     },
 
     ["Asparagus"] = {
@@ -5180,8 +5180,8 @@ c.items = { -- table of items
         Image = "Eggplant.png"
     },
 
-    ["Leeks"] = {
-        Name = "Leeks",
+    ["Leek"] = {
+        Name = "Leek",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5191,7 +5191,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Fresh Leeks."
+            About = "Fresh Leek."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5258,8 +5258,8 @@ c.items = { -- table of items
         Image = "Mushroom.png"
     },
 
-    ["onion"] = {
-        Name = "onion",
+    ["Onion"] = {
+        Name = "Onion",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5659,7 +5659,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Fresh Cooked Ribeye."
+            About = "Cooked Ribeye."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5687,8 +5687,8 @@ c.items = { -- table of items
         Image = "Cooked Ribeye.png"
     },
 
-    ["Raw wagyu"] = {
-        Name = "Raw wagyu",
+    ["Raw Wagyu"] = {
+        Name = "Raw Wagyu",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5698,7 +5698,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Raw wagyu."
+            About = "Raw Wagyu."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5723,7 +5723,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Raw wagyu.png"
+        Image = "Raw Wagyu.png"
     },
 
     ["Cooked Wagyu"] = {
@@ -5765,8 +5765,8 @@ c.items = { -- table of items
         Image = "Cooked Wagyu.png"
     },
 
-    ["Raw chicken"] = {
-        Name = "Raw chicken",
+    ["Raw Chicken"] = {
+        Name = "Raw Chicken",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5776,7 +5776,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Raw chicken."
+            About = "Raw Chicken."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5801,7 +5801,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Raw chicken.png"
+        Image = "Raw Chicken.png"
     },
 
     ["Cooked Chicken"] = {
@@ -5843,8 +5843,8 @@ c.items = { -- table of items
         Image = "Cooked Chicken.png"
     },
 
-    ["Raw fish"] = {
-        Name = "Raw fish",
+    ["Raw Fish"] = {
+        Name = "Raw Fish",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5854,7 +5854,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Raw fish."
+            About = "Raw Fish."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5879,11 +5879,11 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Raw fish.png"
+        Image = "Raw Fish.png"
     },
 
-    ["Cooked fish"] = {
-        Name = "Cooked fish",
+    ["Cooked Fish"] = {
+        Name = "Cooked Fish",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5893,7 +5893,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Cooked fish."
+            About = "Cooked Fish."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5918,11 +5918,11 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Cooked fish.png"
+        Image = "Cooked Fish.png"
     },
 
-    ["Raw lambchops"] = {
-        Name = "Raw lambchops",
+    ["Raw Lambchops"] = {
+        Name = "Raw Lambchops",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5932,7 +5932,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Raw lambchops."
+            About = "Raw Lambchops."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5957,11 +5957,11 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Raw lambchops.png"
+        Image = "Raw Lambchops.png"
     },
 
-    ["Cooked lambchops"] = {
-        Name = "Cooked lambchops",
+    ["Cooked Lambchops"] = {
+        Name = "Cooked Lambchops",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -5971,7 +5971,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Cooked lambchops."
+            About = "Cooked Lambchops."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -5996,7 +5996,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Cooked lambchops.png"
+        Image = "Cooked Lambchops.png"
     },
 
     ["Raw Sausage"] = {
@@ -6038,8 +6038,8 @@ c.items = { -- table of items
         Image = "Raw Sausage.png"
     },
 
-    ["Cooked sausage"] = {
-        Name = "Cooked sausage",
+    ["Cooked Sausage"] = {
+        Name = "Cooked Sausage",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -6074,7 +6074,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "Cooked sausage.png"
+        Image = "Cooked Sausage.png"
     }
 
 }

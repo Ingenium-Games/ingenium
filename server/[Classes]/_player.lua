@@ -838,6 +838,8 @@ function c.class.Player(source, character_id)
             self.Inventory[position].Quantity = self.Inventory[position].Quantity - 1
         elseif quantity <= 1 and slot == position then
             table.remove(self.Inventory, position)
+        else
+            table.remove(self.Inventory, position)
         end
     end
     --- func desc
