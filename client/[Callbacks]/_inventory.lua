@@ -4,17 +4,18 @@ local Weapon = RegisterClientCallback({
         print("Client:Item:Weapon", k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
         local Name = k
-        -- TO DO WEAPON AMMO TYPE CHECK
-        local Ammo = tonumber(ammo) or 12
 
+        c.ammo.SetAmmo(ammotype, ammo)
+        -- TO DO WEAPON AMMO TYPE CHECK
+        local Ammo = c.ammo.GetAmmo(ammotype)
         local AmmoType = ammotype
         local Hash = tonumber(hash)
         local Components = components
         --
-        if c.CurrentWeapon == Hash then
+        if c._weapon == Hash then
             SetCurrentPedWeapon(Ped, `WEAPON_UNARMED`, true)
             RemoveAllPedWeapons(Ped, true)
-            c.CurrentWeapon = nil
+            c._weapon = nil
         else
             if Hash == `WEAPON_PETROLCAN` or Hash == `WEAPON_FIREEXTINGUISHER` then
                 Ammo = 4000
@@ -27,9 +28,11 @@ local Weapon = RegisterClientCallback({
                     GiveWeaponComponentToPed(Ped, Hash, GetHashKey(v))
                 end
             end
-            c.CurrentWeapon = Hash
+            c._weapon = Hash
         end
         --
+
+        
     end
 })
 
