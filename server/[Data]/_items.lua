@@ -4830,6 +4830,46 @@ c.items = { -- table of items
         Image = "Corn.png"
     },
 
+    ["Watermelon"] = {
+        Name = "Watermelon",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Fresh Watermelon."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 4,
+                Armour = 0,
+                Hunger = 4, -- number -100 - 100
+                Thirst = 4, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Watermelon.png"
+    },
+
+
     ["Cucumber"] = {
         Name = "Cucumber",
         Degrade = false,
@@ -6000,8 +6040,8 @@ c.items = { -- table of items
         Image = "CookedLambchops.png"
     },
 
-    ["Raw Sausage"] = {
-        Name = "Raw Sausage",
+    ["Raw Sausages"] = {
+        Name = "Raw Sausages",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -6011,7 +6051,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Raw Sausage."
+            About = "Raw Sausages."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -6036,11 +6076,11 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "RawSausage.png"
+        Image = "RawSausages.png"
     },
 
-    ["Cooked Sausage"] = {
-        Name = "Cooked Sausage",
+    ["Cooked Sausages"] = {
+        Name = "Cooked Sausages",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -6050,7 +6090,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Cooked sausage."
+            About = "Cooked Sausages."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -6075,7 +6115,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = true,
         Hotkey = true,
-        Image = "CookedSausage.png"
+        Image = "CookedSausages.png"
     }
 
 }
