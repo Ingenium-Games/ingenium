@@ -5660,7 +5660,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "CookedRibeye."
+            About = "Cooked Ribeye."
         },
         Data = {
             -- Modifiers change the rate of degridation
