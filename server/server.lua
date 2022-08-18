@@ -18,7 +18,7 @@ AddEventHandler("onResourceStart", function(resourceName)
     -- Run setup / startup by loading data from files the database etc.
     c.data.Initilize()
     --
-    while c.Loading do
+    while c._loading do
         Wait(25)
     end
     -- Time now updates

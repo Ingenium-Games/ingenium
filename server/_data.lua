@@ -76,9 +76,9 @@ function c.data.Initilize()
         Wait(250)
     end
 
-    c.Loading = false
+    c._loading = false
     c.func.Debug_1("Loading Sequence Complete.")
-    c.Running = true
+    c._running = true
 end
 
 -- ====================================================================================--

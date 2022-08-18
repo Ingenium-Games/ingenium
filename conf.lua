@@ -81,6 +81,10 @@ conf.discordperms = true
 conf.discordrole = '834191331844030524'
 
 conf.websitelink = "https://ingenium.games"
+
+-- Discord richPresenceText
+conf.discordid = "770792728979046431"
+
 --[[
 SCREENSHOTS :
     -- Host URL like 

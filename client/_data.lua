@@ -36,18 +36,18 @@ end
 ---@param bool boolean "Set loaded status to true or false."
 function c.data.SetLoadedStatus(bool)
     if type(bool) == "boolean" then
-        c.CharacterLoaded = bool
+        c._loaded = bool
     end
 end
 
 --- Returns if the client has finished loading. Boolean
 function c.data.GetLoadedStatus()
-    return c.CharacterLoaded
+    return c._loaded
 end
 
 --- Returns if the client has finished loading. Boolean
 function c.data.IsPlayerLoaded()
-    return c.CharacterLoaded
+    return c._loaded
 end
 
 --- Returns the Player state

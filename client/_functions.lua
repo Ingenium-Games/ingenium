@@ -138,7 +138,7 @@ function c.func.CompareCoords(coords, arrays, style, range)
             end
             if comparedst < range then
                 if style then
-                    c.marker.SelectMarker(ords, style)
+                    c.marker.Place(ords, style)
                 end
             end
         end
@@ -150,7 +150,7 @@ function c.func.CompareCoords(coords, arrays, style, range)
         end
         if comparedst < range then
             if style then
-                c.marker.SelectMarker(arrays, style)
+                c.marker.Place(arrays, style)
             end
         end
         return dstchecked

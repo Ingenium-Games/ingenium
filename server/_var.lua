@@ -11,5 +11,6 @@ c.hour = conf.hour
 c.day = conf.day
 c.Locale = conf.locale
 --
-c.Running = false
-c.Loading = true
+-- _data.lua
+c._running = false
+c._loading = true

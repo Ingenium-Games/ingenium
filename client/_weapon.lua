@@ -1,8 +1,5 @@
 -- ====================================================================================--
-
 c.weapon = {}
-c._weapon = nil
-c._components = nil
 -- ====================================================================================--
 
 function c.weapon.Set(hash)
@@ -13,7 +10,7 @@ function c.weapon.Set(hash)
     end
 end
 
-function c.weapon.Get(type)
+function c.weapon.Get()
     return c._weapon
 end
 

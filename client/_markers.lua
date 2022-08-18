@@ -1,21 +1,13 @@
 -- ====================================================================================--
-
 c.marker = {}
 c.markers = {}
---[[
-NOTES.
-    -
-    -
-    -
-]] --
-
 -- ====================================================================================--
 -- https://docs.fivem.net/docs/game-references/markers/
 
 --- Select a premade marker style.
 ---@param v number "A number to select corresponding local array value."
 ---@param ords table "a vector3() or {x,y,z}"
-function c.marker.SelectMarker(ords, v)
+function c.marker.Place(ords, v)
     local v = v or 1
     if type(ords) ~= vector3 then
         local ords = {
@@ -55,16 +47,11 @@ function c.marker.SelectMarker(ords, v)
     end
 end
 
--- This one is for some reason broken, but, if you take it from the Citizen.Thread, it works fine. So ??
-
---- Produce A loop of markers to generate based on criteria.
----@param t table "Contains coords as vector3, number for marker selection with c.marker functions, notification for dynamic entry with c.text functions and a func for callback function to do. {["coords"] = vector3(), ["number"] = 0,X, ["notification"] = {"KEYBOARD_USE", "DO X Y Z"}, ["callback"] = cb()}"
-function c.marker.CreateThreadLoop(t)
-    local tab = c.check.Table(t)
-    -- Create the loop based on the Coordinates and marker style provided.
+--- Example to use it in a loop with other functions etc.
+--[[
     Citizen.CreateThread(function()
-        local tab = tab
         while true do
+            local tab = GETTABLEDATAHERE
             local ped = PlayerPedId()
             local pos = vector3(GetEntityCoords(ped))
             local found = false
@@ -82,7 +69,7 @@ function c.marker.CreateThreadLoop(t)
                     if dist < 20 then
                         found = true
                         -- Draw marker
-                        c.marker.SelectMarker(style, ords)
+                        c.marker.Place(style, ords)
                         if dist < 5 then
                             near = true
                             -- Show help
@@ -106,4 +93,4 @@ function c.marker.CreateThreadLoop(t)
             end
         end
     end)
-end
+]]-- 
