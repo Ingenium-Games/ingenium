@@ -4,13 +4,12 @@ local Weapon = RegisterClientCallback({
     eventCallback = function(k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
         local Name = k
-        -- c.weapon.SetComponents(components)
-        c.ammo.SetType(ammo, ammotype)
-        -- TO DO WEAPON AMMO TYPE CHECK
-        local Ammo = ammo -- c.ammo.GetAmmo(ammotype)
         local AmmoType = ammotype
+        c.ammo.SetType(ammo, AmmoType)
+        local Ammo = c.ammo.GetType(AmmoType)
         local Hash = tonumber(hash)
         local Components = components
+        c.weapon.SetComponents(components)
         --
         if c._weapon == Hash then
             SetCurrentPedWeapon(Ped, `WEAPON_UNARMED`, true)
