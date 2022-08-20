@@ -6,26 +6,28 @@ local Weapon = RegisterClientCallback({
         local Name = k
         local AmmoType = ammotype
         local Ammo = c.ammo.Check(ammo, AmmoType)
-        c.weapon.Set(hash)
+        local Hash = tonumber(hash)
+        local Components = components
         c.weapon.SetComponents(components)
+        c.weapon.Set(Hash)
         --
-        if c.weapon.Get() == hash then
+        if c._weapon == Hash then
             SetCurrentPedWeapon(Ped, `WEAPON_UNARMED`, true)
             RemoveAllPedWeapons(Ped, true)
-            c.weapon.Set()
+            c._weapon = nil
         else
-            if hash == `WEAPON_PETROLCAN` or hash == `WEAPON_FIREEXTINGUISHER` then
+            if Hash == `WEAPON_PETROLCAN` or Hash == `WEAPON_FIREEXTINGUISHER` then
                 Ammo = 4000
             end
-            GiveWeaponToPed(Ped, hash, 0, false, false)
-            SetPedAmmo(Ped, hash, Ammo)
-            SetCurrentPedWeapon(Ped, hash, true)
-            if components then
-                for _, v in pairs(components) do
-                    GiveWeaponComponentToPed(Ped, hash, GetHashKey(v))
+            GiveWeaponToPed(Ped, Hash, 0, false, false)
+            SetPedAmmo(Ped, Hash, Ammo)
+            SetCurrentPedWeapon(Ped, Hash, true)
+            if Components then
+                for _, v in pairs(Components) do
+                    GiveWeaponComponentToPed(Ped, Hash, GetHashKey(v))
                 end
             end
-            c.weapon.Set(hash)
+            c._weapon = Hash
         end
         --
 
