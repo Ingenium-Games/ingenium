@@ -6,8 +6,8 @@ function c.ammo.SetDefault()
     c._ammo = {["9mm"]=0,["5.56mm"]=0,["7.62mm"]=0,["20g"]=0,[".223"]=0,[".308"]=0}
 end
 
-function c.ammo.SetType(type, amount)
-    c._ammo[type] = c.check.Number(amount, 0, 500)
+function c.ammo.SetType(amount, type)
+    c._ammo[type] = c.check.Number(amount, 0, 300)
 end
 
 function c.ammo.GetType(type)

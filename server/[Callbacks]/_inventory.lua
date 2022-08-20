@@ -14,6 +14,15 @@ local UseItem = RegisterServerCallback({
     end
 })
 
+local UpdateAmmo = RegisterServerCallback({
+    eventName = "UpdateAmmo",
+    eventCallback = function(source, ammotbl)
+        local xPlayer = c.data.GetPlayer(source)
+        local itemtbl = ammotbl
+        
+    end
+})
+
 local GiveItem = RegisterServerCallback({
     eventName = "GiveItem",
     eventCallback = function(source, number, target)

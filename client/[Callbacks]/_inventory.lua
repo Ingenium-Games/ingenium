@@ -1,12 +1,11 @@
+
 local Weapon = RegisterClientCallback({
     eventName = "Client:Item:Weapon",
     eventCallback = function(k, ammo, ammotype, hash, components)
-        print("Client:Item:Weapon", k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
         local Name = k
-        
         -- c.weapon.SetComponents(components)
-        -- c.ammo.SetAmmo(ammotype, ammo)
+        c.ammo.SetType(ammo, ammotype)
         -- TO DO WEAPON AMMO TYPE CHECK
         local Ammo = ammo -- c.ammo.GetAmmo(ammotype)
         local AmmoType = ammotype
