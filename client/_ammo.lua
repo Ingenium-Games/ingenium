@@ -18,6 +18,16 @@ function c.ammo.Get()
     return c._ammo
 end
 
+function c.ammo.Check(amount, type)
+    local current = c.ammo.GetType(type)
+    if amount > current then
+        c.ammo.SetType(amount, type)
+        return amount
+    else
+        return current
+    end
+end
+
 function c.ammo.ServerSync()
     local ammo = c.ammo.Get()
     TriggerServerCallback({eventName = "UpdateAmmo", args = {ammo}})
