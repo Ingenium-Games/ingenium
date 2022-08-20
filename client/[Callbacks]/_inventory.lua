@@ -5,10 +5,10 @@ local Weapon = RegisterClientCallback({
         local Ped = PlayerPedId()
         local Name = k
         
-        c.weapon.SetComponents(components)
-        c.ammo.SetAmmo(ammotype, ammo)
+        -- c.weapon.SetComponents(components)
+        -- c.ammo.SetAmmo(ammotype, ammo)
         -- TO DO WEAPON AMMO TYPE CHECK
-        local Ammo = c.ammo.GetAmmo(ammotype)
+        local Ammo = ammo -- c.ammo.GetAmmo(ammotype)
         local AmmoType = ammotype
         local Hash = tonumber(hash)
         local Components = components
