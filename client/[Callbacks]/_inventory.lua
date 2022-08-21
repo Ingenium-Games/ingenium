@@ -4,8 +4,13 @@ local Weapon = RegisterClientCallback({
     eventCallback = function(k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
         local Name = k
-        local AmmoType = ammotype
+        local AmmoType = c._ammo[ammotype]
         local Ammo = ammo
+        if AmmoType > Ammo then
+            Ammo = c._ammo[ammotype]
+        else
+            c._ammo[ammotype] = Ammo
+        end
         local Hash = tonumber(hash)
         local Components = components
         --
@@ -28,8 +33,8 @@ local Weapon = RegisterClientCallback({
             c._weapon = Hash
         end
         --
-
-        
+        local dump = c.table.Dump(c._ammo)
+        print(dump)
     end
 })
 
