@@ -39,9 +39,3 @@ Citizen.CreateThread(function()
         end
     end
 end)
-
-AddEventHandler('gameEventTriggered', function (name, args)
-    if name == "CEventGunShot" then
-        print('game event ' .. name .. ' (' .. json.encode(args) .. ')')
-    end
-end)
