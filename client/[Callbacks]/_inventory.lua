@@ -3,15 +3,20 @@ local Weapon = RegisterClientCallback({
     eventName = "Client:Item:Weapon",
     eventCallback = function(k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
+        --
         local Name = k
         c._weaponname = Name
+        --
         local AmmoType = c._ammo[ammotype]
+        c._ammotype = AmmoType
+        --
         local Ammo = ammo
         if AmmoType > Ammo then
             Ammo = c._ammo[ammotype]
         else
             c._ammo[ammotype] = Ammo
         end
+        --
         local Hash = tonumber(hash)
         local Components = components
         --

@@ -22,6 +22,10 @@ function c.weapon.GetComponents()
     return c._components
 end
 
+function c.weapon.GetName()
+    return c._weaponname
+end
+
 --
 Citizen.CreateThread(function()
     while true do
@@ -33,9 +37,28 @@ Citizen.CreateThread(function()
             DisableControlAction(1, 142, true)
             if IsPedShooting(ped) then
                 Citizen.Wait(100)
-                print("shooting")
-                --TriggerServerEvent("Server:Character:UpdateAmmo", )
+                c._ammo[c._ammotype] = c._ammo[c._ammotype] - 1
             end
+            if IsPedReloading(ped) then
+                TriggerServerCallback({
+                    eventName = "UpdateAmmo",
+                    args = {c._ammotype, c._ammo[c._ammotype]}
+                })
+            end
+        end
+    end
+end)
+-- Update the server x time when shooting
+Citizen.CreateThread(function()
+    while true do
+        local ped = PlayerPedId()
+        Citizen.Wait(0)
+        if IsPedShooting(ped) then
+            Citizen.Wait(1250)
+            TriggerServerCallback({
+                eventName = "UpdateAmmo",
+                args = {c._ammotype, c._ammo[c._ammotype]}
+            })
         end
     end
 end)
