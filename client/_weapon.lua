@@ -21,3 +21,26 @@ end
 function c.weapon.GetComponents()
     return c._components
 end
+
+--
+Citizen.CreateThread(function()
+    while true do
+        local ped = PlayerPedId()
+        Citizen.Wait(0)
+        if IsPedArmed(ped, 4 | 2) then
+            DisableControlAction(1, 140, true)
+            DisableControlAction(1, 141, true)
+            DisableControlAction(1, 142, true)
+            if IsPedShooting(ped) then
+                Citizen.Wait(100)
+                print("shooting")
+                --TriggerServerEvent("Server:Character:UpdateAmmo", )
+            end
+        end
+    end
+end)
+
+local name = "CEventGunShot"
+AddEventHandler('gameEventTriggered', function (name, args)
+    print('game event ' .. name .. ' (' .. json.encode(args) .. ')')
+  end)

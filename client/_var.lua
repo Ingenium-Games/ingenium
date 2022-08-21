@@ -17,6 +17,7 @@ c._character = nil
 --
 -- _weapons.lua
 c._weapon = nil
+c._weaponname = nil
 c._components = nil
 --
 -- _ammo.lua

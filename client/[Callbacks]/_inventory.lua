@@ -4,6 +4,7 @@ local Weapon = RegisterClientCallback({
     eventCallback = function(k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
         local Name = k
+        c._weaponname = Name
         local AmmoType = c._ammo[ammotype]
         local Ammo = ammo
         if AmmoType > Ammo then
