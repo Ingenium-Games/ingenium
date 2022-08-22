@@ -23,3 +23,4 @@ c._components = nil
 -- _ammo.lua
 c._ammo = {["9mm"]=0,["5.56mm"]=0,["7.62mm"]=0,["20g"]=0,[".223"]=0,[".308"]=0}
 c._ammotype = nil
+--

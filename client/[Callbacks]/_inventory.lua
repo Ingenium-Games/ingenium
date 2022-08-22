@@ -3,22 +3,24 @@ local Weapon = RegisterClientCallback({
     eventName = "Client:Item:Weapon",
     eventCallback = function(k, ammo, ammotype, hash, components)
         local Ped = PlayerPedId()
-        --
+        -- _Weaponnameame
         local Name = k
         c._weaponname = Name
-        --
-        local AmmoType = c._ammo[ammotype]
+        -- _Type
+        local AmmoType = ammotype
         c._ammotype = AmmoType
-        --
+        -- _Ammo
         local Ammo = ammo
-        if AmmoType > Ammo then
-            Ammo = c._ammo[ammotype]
+        if c._ammo[AmmoType] > Ammo then
+            Ammo = c._ammo[AmmoType]
         else
-            c._ammo[ammotype] = Ammo
+            c._ammo[AmmoType] = Ammo
         end
-        --
+        -- _Weapon
         local Hash = tonumber(hash)
+        -- _Componenets
         local Components = components
+        c._components = Components
         --
         if c._weapon == Hash then
             SetCurrentPedWeapon(Ped, `WEAPON_UNARMED`, true)
@@ -39,8 +41,6 @@ local Weapon = RegisterClientCallback({
             c._weapon = Hash
         end
         --
-        local dump = c.table.Dump(c._ammo)
-        print(dump)
     end
 })
 
