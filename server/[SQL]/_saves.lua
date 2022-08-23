@@ -16,7 +16,7 @@ NOTES.
 
 local PlayerSaveData = -1
 MySQL.Async.store(
-    "UPDATE `characters` SET `Health` = @Health, `Armour` = @Armour, `Hunger` = @Hunger, `Thirst` = @Thirst, `Stress` = @Stress, `Coords` = @Coords, `Accounts` = @Accounts, `Modifiers` = @Modifiers, `Inventory` = @Inventory, `Job` = @Job WHERE `Character_ID` = @Character_ID;",
+    "UPDATE `characters` SET `Health` = @Health, `Armour` = @Armour, `Hunger` = @Hunger, `Thirst` = @Thirst, `Stress` = @Stress, `Coords` = @Coords, `Accounts` = @Accounts, `Modifiers` = @Modifiers, `Inventory` = @Inventory, `Ammo` = @Ammo, `Job` = @Job WHERE `Character_ID` = @Character_ID;",
     function(id)
         PlayerSaveData = id
     end)
@@ -37,7 +37,7 @@ function c.sql.save.User(data, cb)
         local Accounts = json.encode(data.GetAccounts())
         local Modifiers = json.encode(data.GetModifiers())
         local Inventory = json.encode(data.CompressInventory())
-
+        local Ammo = json.encoed(data.GetAmmo())
         local Job = json.encode(data.GetJob())
         -- 
         local Character_ID = data.GetCharacter_ID()
@@ -53,6 +53,7 @@ function c.sql.save.User(data, cb)
             ["@Accounts"] = Accounts,
             ["@Modifiers"] = Modifiers,
             ["@Inventory"] = Inventory,
+            ["@Ammo"] = Ammo,
 
             ["@Job"] = Job,
             -- Where Conditions
@@ -84,7 +85,7 @@ function c.sql.save.Users(cb)
             local Accounts = json.encode(data.GetAccounts())
             local Modifiers = json.encode(data.GetModifiers())
             local Inventory = json.encode(data.CompressInventory())
-
+            local Ammo = json.encoed(data.GetAmmo())
             local Job = json.encode(data.GetJob())
             -- 
             local Character_ID = data.GetCharacter_ID()
@@ -100,6 +101,7 @@ function c.sql.save.Users(cb)
                 ["@Accounts"] = Accounts,
                 ["@Modifiers"] = Modifiers,
                 ["@Inventory"] = Inventory,
+                ["@Ammo"] = Ammo,                
 
                 ["@Job"] = Job,
                 -- Where Conditions
