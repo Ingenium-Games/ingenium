@@ -483,6 +483,10 @@ function c.class.Player(source, character_id)
         end
     end
     --
+    self.GetAmmos = function()
+        return self.Ammo
+    end
+    --
     self.GetAmmo = function(type)
         for k, v in pairs(self.Ammo) do
             if k == type then
