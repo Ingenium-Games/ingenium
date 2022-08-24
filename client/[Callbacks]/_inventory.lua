@@ -23,6 +23,12 @@ local Weapon = RegisterClientCallback({
         c._components = Components
         --
         if c._weapon == Hash then
+            -- If putting the gun away, update the ammo
+            TriggerServerCallback({
+                eventName = "UpdateAmmo",
+                args = {c._ammotype, c._ammo[c._ammotype]}
+            })
+            --
             SetCurrentPedWeapon(Ped, `WEAPON_UNARMED`, true)
             RemoveAllPedWeapons(Ped, true)
             c._weapon = nil
