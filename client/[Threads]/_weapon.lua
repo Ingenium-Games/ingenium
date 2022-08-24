@@ -43,12 +43,12 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         if IsPedArmed(ped, 4 | 2) then
             if IsPedShooting(ped) then
-                Citizen.Wait(2500)
                 TriggerServerCallback({
                     eventName = "UpdateAmmo",
                     args = {c._ammotype, c._ammo[c._ammotype]}
                 })
             end
+            Citizen.Wait(375)
         end
     end
 end)

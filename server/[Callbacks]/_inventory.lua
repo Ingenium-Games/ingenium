@@ -17,7 +17,6 @@ local UseItem = RegisterServerCallback({
 local UpdateAmmo = RegisterServerCallback({
     eventName = "UpdateAmmo",
     eventCallback = function(source, ammotype, amount)
-        print(source, ammotype, amount)
         local xPlayer = c.data.GetPlayer(source)
         xPlayer.SetAmmo(tostring(ammotype), tonumber(amount))
     end

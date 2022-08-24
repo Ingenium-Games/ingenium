@@ -497,27 +497,24 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetAmmo = function(type, v)
-        local num = c.check.Number(v, 0, 500)
+        local num = c.check.Number(v)
         local ammo = self.GetAmmo(type)
-        print(ammo)
-        if ammo then
-            if num == 0 then
-                ammo = 0
-                self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-                c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
-                CancelEvent()
-            end
-            ammo = num
-            self.State.Ammo = self.Ammo
+        if num < 0 then
+            self.Ammo[type] = 0
+            self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
+            c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
+            CancelEvent()
         end
+        self.Ammo[type] = num
+        self.State.Ammo = self.Ammo
     end
     --
     self.AddAmmo = function(type, v)
         local num = c.check.Number(v)
         local ammo = self.GetAmmo(type)
-        ammo = ammo + num
-        if ammo < 0 then
-            ammo = 0
+        self.Ammo[type] = ammo + num
+        if self.Ammo[type] < 0 then
+            self.Ammo[type] = 0
             self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
             c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
             CancelEvent()
@@ -528,9 +525,9 @@ function c.class.Player(source, character_id)
     self.RemoveAmmo = function(type, v)
         local num = c.check.Number(v)
         local ammo = self.GetAmmo(type)
-        ammo = ammo - num
-        if ammo < 0 then
-            ammo = 0
+        self.Ammo[type] = ammo - num
+        if self.Ammo[type] < 0 then
+            self.Ammo[type] = 0
             self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
             c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
             CancelEvent()
