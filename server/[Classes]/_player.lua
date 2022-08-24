@@ -497,16 +497,18 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetAmmo = function(type, v)
-        local num = c.check.Number(v)
+        local num = c.check.Number(v, 0, 500)
         local ammo = self.GetAmmo(type)
-        if num < 0 then
-            ammo = 0
-            self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
-            CancelEvent()
+        if ammo then
+            if num == 0 then
+                ammo = 0
+                self.Kick("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
+                c.func.Debug_1("A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for "..self.ID)
+                CancelEvent()
+            end
+            ammo = num
+            self.State.Ammo = self.Ammo
         end
-        ammo = num
-        self.State.Ammo = self.Ammo
     end
     --
     self.AddAmmo = function(type, v)
