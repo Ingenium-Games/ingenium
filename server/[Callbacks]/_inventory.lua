@@ -19,7 +19,7 @@ local UpdateAmmo = RegisterServerCallback({
     eventCallback = function(source, ammotype, amount)
         print(source, ammotype, amount)
         local xPlayer = c.data.GetPlayer(source)
-        xPlayer.SetAmmo(ammotype, amount)
+        xPlayer.SetAmmo(tostring(ammotype), tonumber(amount))
     end
 })
 

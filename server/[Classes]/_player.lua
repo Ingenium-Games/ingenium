@@ -499,6 +499,7 @@ function c.class.Player(source, character_id)
     self.SetAmmo = function(type, v)
         local num = c.check.Number(v, 0, 500)
         local ammo = self.GetAmmo(type)
+        print(ammo)
         if ammo then
             if num == 0 then
                 ammo = 0
