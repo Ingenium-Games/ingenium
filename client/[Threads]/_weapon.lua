@@ -16,6 +16,7 @@ Citizen.CreateThread(function()
                         eventName = "UpdateAmmo",
                         args = {c._ammotype, c._ammo[c._ammotype]}
                     })
+                    Citizen.Wait(2000)
                 end
             end
         end
