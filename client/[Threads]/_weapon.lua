@@ -48,7 +48,7 @@ Citizen.CreateThread(function()
                     args = {c._ammotype, c._ammo[c._ammotype]}
                 })
             end
-            Citizen.Wait(375)
+            Citizen.Wait(500)
         end
     end
 end)
