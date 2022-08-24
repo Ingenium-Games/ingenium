@@ -34,7 +34,7 @@ local Weapon = RegisterClientCallback({
             c._weapon = nil
         else
             if c._weapon ~= nil then
-            -- If switching guns
+                -- If switching guns
                 TriggerServerCallback({
                     eventName = "UpdateAmmo",
                     args = {c._ammotype, c._ammo[c._ammotype]}
@@ -43,18 +43,14 @@ local Weapon = RegisterClientCallback({
             if Hash == `WEAPON_PETROLCAN` or Hash == `WEAPON_FIREEXTINGUISHER` then
                 Ammo = 4000
             end
-            GiveWeaponToPed(Ped, Hash, 0, false, false)
+            --
+            GiveWeaponToPed(Ped, Hash, Ammo, false, false)
             SetCurrentPedWeapon(Ped, Hash, true)
             --
             if Components then
                 for _, v in pairs(Components) do
                     GiveWeaponComponentToPed(Ped, Hash, GetHashKey(v))
                 end
-            end
-            --
-            SetPedAmmo(Ped, Hash, Ammo)
-            if Ammo == 0 then
-                SetAmmoInClip(Ped, Hash, Ammo)
             end
             --
             c._weapon = Hash

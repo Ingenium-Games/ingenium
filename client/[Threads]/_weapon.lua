@@ -11,6 +11,9 @@ Citizen.CreateThread(function()
                 end
             end
             if IsPedReloading(ped) then
+                if c._ammo[c._ammotype] < 0 then
+                    c._ammo[c._ammotype] = 0
+                end
                 if c._weapon ~= nil then
                     TriggerServerCallback({
                         eventName = "UpdateAmmo",
