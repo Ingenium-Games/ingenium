@@ -32,6 +32,9 @@ local Weapon = RegisterClientCallback({
             end
             GiveWeaponToPed(Ped, Hash, 0, false, false)
             SetPedAmmo(Ped, Hash, Ammo)
+            if Ammo == 0 then
+                SetAmmoInClip(Ped, Hash, Ammo)
+            end
             SetCurrentPedWeapon(Ped, Hash, true)
             if Components then
                 for _, v in pairs(Components) do
