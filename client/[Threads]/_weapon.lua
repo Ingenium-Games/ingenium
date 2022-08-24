@@ -52,3 +52,14 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+-- Update the server x time when shooting
+Citizen.CreateThread(function()
+    while true do
+        local ped = PlayerPedId()
+        Citizen.Wait(10000)
+        if IsPedArmed(ped, 4 | 2) then
+            print(c._ammotype,c._weapon)
+        end
+    end
+end)
