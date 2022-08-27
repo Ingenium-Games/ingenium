@@ -692,7 +692,7 @@ end
 
 function c.func.SetVehicleExtrasFalse(vehicle, extras)
     for i, extra in ipairs(extras) do
-        SetVehicleExtra(vehicle, extra[1], 0)
+        SetVehicleExtra(vehicle, extra[1], 1)
     end
 end
 
