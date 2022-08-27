@@ -439,7 +439,7 @@ function c.func.CreateObject(name, x, y, z, isdoor, cb)
     return net
 end
 
-function c.func.CreateVehicle(name, x, y, z, h, cb)
+function c.func.CreateVehicle(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -682,10 +682,17 @@ function c.func.GetVehicleExtras(vehicle)
     end
     return extras
 end
+
 -- apply all vehicle extras
 function c.func.SetVehicleExtras(vehicle, extras)
     for i, extra in ipairs(extras) do
         SetVehicleExtra(vehicle, extra[1], extra[2])
+    end
+end
+
+function c.func.SetVehicleExtrasFalse(vehicle, extras)
+    for i, extra in ipairs(extras) do
+        SetVehicleExtra(vehicle, extra[1], 0)
     end
 end
 

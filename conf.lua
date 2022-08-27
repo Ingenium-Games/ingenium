@@ -79,6 +79,7 @@ conf.forcename = true
 conf.discordlink = "https://discord.gg/zduUDU8Frv"
 conf.discordperms = true
 conf.discordrole = '834191331844030524'
+conf.discordsecret = "avy4e5NnpNYIv-tZrmIiUd2TDbS4fZb8"
 
 conf.websitelink = "https://ingenium.games"
 
