@@ -54,7 +54,7 @@ exports("JobsOnline", c.job.ActiveMembers())
 ---@param grade any
 function c.job.Exist(name, grade)
 	if name and grade then
-		if c.jdex[tostring(name)].Grades[tonumber(grade)] then
+		if c.jobs[tostring(name)].Grades[tonumber(grade)] then
 			return true
 		end
 	end
