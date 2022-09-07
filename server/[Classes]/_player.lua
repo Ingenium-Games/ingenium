@@ -552,7 +552,8 @@ function c.class.Player(source, character_id)
             TriggerEvent("Server:Character:SetJob", self.ID, self.Job)
             TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job)
         else
-            c.func.Debug_1("Ignoring invalid .SetJob() for " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .SetJob() :".. t.Name ..", ".. t.Grade .." for ".. self.ID)
+            print(c.table.Dump(c.jobs))
         end
     end
     --- func desc
