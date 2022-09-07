@@ -541,10 +541,10 @@ function c.class.Player(source, character_id)
 
     --- func desc
     ---@param t any
-    self.SetJob = function(t)
-        if c.job.Exist(t.Name, t.Grade) then
-            self.Job.Name = t.Name
-            self.Job.Grade = t.Grade
+    self.SetJob = function(Name, Grade)
+        if c.job.Exist(Name, Grade) then
+            self.Job.Name = Name
+            self.Job.Grade = Grade
             self.State.Job = self.Job.Name
             self.State.Grade = self.Job.Grade
             self.State.Boss = c.job.IsBoss(self.Job.Name, self.Job.Grade)
@@ -552,7 +552,7 @@ function c.class.Player(source, character_id)
             TriggerEvent("Server:Character:SetJob", self.ID, self.Job)
             TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job)
         else
-            c.func.Debug_1("Ignoring invalid .SetJob() :".. t.Name ..", ".. t.Grade .." for ".. self.ID)
+            c.func.Debug_1("Ignoring invalid .SetJob() :".. Name ..", ".. Grade .." for ".. self.ID)
             print(c.table.Dump(c.jobs))
         end
     end
