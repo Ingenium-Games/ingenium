@@ -154,7 +154,8 @@ RegisterNetEvent("Server:Character:Ready", function()
     -- Remove from current ACL Job Group
     ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetIdentifier(), xPlayer.GetJob().Name))
     -- to trigger state updates for clients
-    xPlayer.SetJob(xPlayer.GetJob())
+    local job = xPlayer.GetJob()
+    xPlayer.SetJob(job.Name, job.Grade)
     xPlayer.GetCash() -- this triggers state changes
     xPlayer.GetBank() -- this triggers state changes    
 end)
