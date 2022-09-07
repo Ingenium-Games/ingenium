@@ -25,7 +25,7 @@ function c.sql.jobs.GetAll(cb)
                 c.jobs[i.Name].Label = i.Label
                 c.jobs[i.Name].Grades = {}
             end
-            c.jobs[i.Name].Grades[i.Grade][i] = {["Grade_Label"] = i.Grade_Label, ["Grade_Salary"] = i.Grade_Salary}
+            c.jobs[i.Name].Grades[i.Grade] = {["Grade_Label"] = i.Grade_Label, ["Grade_Salary"] = i.Grade_Salary}
         end
         IsBusy = false
     end)
