@@ -27,6 +27,37 @@ local weapon_dump = exports["ig.dump"]:GetWeapons()
 
 c.items = { -- table of items
 
+
+    -- ====================================================================================--
+    -- Job Related
+    -- ====================================================================================--
+
+
+    -- Logistics
+    ["Package"] = {
+        Name = "Package",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Packaged Goods? I wonder what's inside...",
+            Contents = {}
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = false,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Package.png"
+    },
+
     -- ====================================================================================--
     -- Misc
     -- ====================================================================================--
