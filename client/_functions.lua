@@ -457,10 +457,6 @@ function c.func.CreateVehicle(name, x, y, z, h)
     SetNetworkIdCanMigrate(net, true)
     SetVehicleNeedsToBeHotwired(net, false)
     SetModelAsNoLongerNeeded(hash)
-    TriggerServerCallback({
-        eventName = "AddVehicle",
-        args = {net}
-    })
     return entity, net
 end
 

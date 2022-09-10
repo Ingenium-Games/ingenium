@@ -228,9 +228,15 @@ function c.data.GetVehicleByPlate(plate)
 end
 
 function c.data.AddVehicle(net, cb, ...)
-    if not c.data.FindVehicle(net) then
+    local aa, bb, cc = c.data.FindVehicle(net)
+    if not aa then
         c.vdex[tonumber(net)] = cb(...)
     end
+end
+
+function c.data.SetVehicle(net, cb, ...)
+    c.vdex[tonumber(net)] = cb(...)
+    return c.vdex[tonumber(net)]
 end
 
 function c.data.AddPlayerVehicle(arg, cb, ...)

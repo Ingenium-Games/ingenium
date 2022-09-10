@@ -1,6 +1,7 @@
-local AddVehicle = RegisterServerCallback({
-    eventName = "AddVehicle",
+local EnsureVehicle = RegisterServerCallback({
+    eventName = "EnsureVehicle",
     eventCallback = function(source, net)
-        c.data.AddVehicle(net, c.class.Vehicle, net, false)
+        
+        return true
     end
 })
