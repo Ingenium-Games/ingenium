@@ -23,6 +23,8 @@ function c.class.OfflinePlayer(data)
     self.Full_Name = data.First_Name .. " " .. data.Last_Name
     --
     self.Phone = data.Phone -- 200000 - 699999
+    --
+    self.Weight = 0
     --         
     -- Booleans
     self.IsWanted = data.Wanted

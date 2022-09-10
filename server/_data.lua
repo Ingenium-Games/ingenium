@@ -151,7 +151,7 @@ end
 function c.data.GetPlayerByIdentifier(id)
     for k, v in pairs(c.pdex) do
         if v then
-            if v.GetCharacter_ID() == id then
+            if v.GetCharacter_ID() == tosting(id) then
                 return c.data.GetPlayer(k)
             end
         end
@@ -244,7 +244,11 @@ end
 ---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
 function c.data.GetVehicle(arg)
     local found, data = c.data.FindVehicle(arg)
-    return data
+    if found then
+        return data
+    else
+        c.func.Debug_1("No Vehicle Found.")
+    end
 end
 
 --- Same as above.
