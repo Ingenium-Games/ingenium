@@ -457,13 +457,11 @@ function c.func.CreateVehicle(name, x, y, z, h)
     SetNetworkIdCanMigrate(net, true)
     SetVehicleNeedsToBeHotwired(net, false)
     SetModelAsNoLongerNeeded(hash)
-    local retval = TriggerServerCallback({
+    TriggerServerCallback({
         eventName = "AddVehicle",
         args = {net}
     })
-    if retval then
-        return entity, net
-    end
+    return entity, net
 end
 
 function c.func.IsVehicleSpawnClear(coords, radius)
