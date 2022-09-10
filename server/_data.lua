@@ -151,7 +151,7 @@ end
 function c.data.GetPlayerByIdentifier(id)
     for k, v in pairs(c.pdex) do
         if v then
-            if v.GetCharacter_ID() == tosting(id) then
+            if v.GetCharacter_ID() == tostring(id) then
                 return c.data.GetPlayer(k)
             end
         end
