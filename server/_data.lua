@@ -254,6 +254,7 @@ function c.data.GetVehicle(arg)
         return data
     else
         c.func.Debug_1("No Vehicle Found.")
+        return false
     end
 end
 

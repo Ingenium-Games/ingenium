@@ -168,7 +168,7 @@ function c.class.OfflinePlayer(data)
     ---@param inv any
     self.UnpackInventory = function(inv)
         local inv = inv or {}
-        -- print(c.table.Dump(inv))
+        --print(c.table.Dump(inv))
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
@@ -279,6 +279,33 @@ function c.class.OfflinePlayer(data)
         end
     end
     --
+    self.GetItemFromPosition = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position]
+        else
+            return false
+        end
+    end
+    --
+    self.GetItemMeta = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position].Meta
+        else
+            return false
+        end
+    end
+    --
+    self.GetItemData = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position].Data
+        else
+            return false
+        end
+    end
+    --
     self.GetItemQuality = function(name)
         local has, position = self.HasItem(name)
         if has then
@@ -297,18 +324,22 @@ function c.class.OfflinePlayer(data)
         end
     end
     --
-    self.ConsumeItem = function(name)
-        local quantity, position = self.GetItemQuantity(name)
-        if type(quantity) ~= "boolean" then
-            TriggerEvent("Inventory:Consume:" .. name, quantity, position)
+    self.ConsumeItem = function(number)
+        local item = self.GetItemFromPosition(number)
+        if type(item) ~= "boolean" then
+            TriggerEvent("Inventory:Consume:"..item.Item, self.ID, item.Quantity, number)
         end
     end
     --- func desc
     ---@param name any
     ---@param slot any
     self.RemoveItem = function(name, slot)
-        local has, position = self.HasItem(name)
-        if has and slot == position then
+        local quantity, position = self.GetItemQuantity(name)
+        if quantity >= 2 then
+            self.Inventory[position].Quantity = self.Inventory[position].Quantity - 1
+        elseif quantity <= 1 and slot == position then
+            table.remove(self.Inventory, position)
+        else
             table.remove(self.Inventory, position)
         end
     end
@@ -322,7 +353,6 @@ function c.class.OfflinePlayer(data)
     self.CompressInventory = function()
         local inv = {}
         for i = 1, #self.Inventory do
-            table.insert(inv, i)
             inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality,
                       self.Inventory[i].Weapon, self.Inventory[i].Meta}
         end
