@@ -293,6 +293,7 @@ function c.class.PlayerVehicle(ent, data)
     self.GetWanted = function()
         return self.Wanted
     end
+
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
@@ -336,7 +337,7 @@ function c.class.PlayerVehicle(ent, data)
                     local item = c.items[v.Item]
                     self.Weight = self.Weight + item.Weight
                 else
-                    c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                    c.func.Debug_1("Ignoring invalid item within .GetWeight(), for Networked ID: " .. self.Net)
                 end
             end
         end
@@ -364,7 +365,7 @@ function c.class.PlayerVehicle(ent, data)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                c.func.Debug_1("Ignoring invalid item within .GetWeight(), for Networked ID: " .. self.Net)
             end
         end
         return self.Weight
@@ -374,7 +375,7 @@ function c.class.PlayerVehicle(ent, data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Networked ID: " .. self.Net)
             return
         end
         local info = {
@@ -402,9 +403,8 @@ function c.class.PlayerVehicle(ent, data)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
-            TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .AddItem() for Networked ID: " .. self.Net)
         end
     end
     --
@@ -456,7 +456,7 @@ function c.class.PlayerVehicle(ent, data)
     self.ConsumeItem = function(number)
         local item = self.GetItemFromPosition(number)
         if type(item) ~= "boolean" then
-            TriggerEvent("Inventory:Consume:"..item.Item, self.ID, item.Quantity, number)
+            TriggerEvent("Inventory:Consume:"..item.Item, self.Net, item.Quantity, number)
         end
     end
     --- func desc

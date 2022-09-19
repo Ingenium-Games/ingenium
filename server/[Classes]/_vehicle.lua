@@ -21,7 +21,7 @@ function c.class.Vehicle(net)
         Modifications = {},
         Inventory = {},
         Condition = {},
-        CarKeys = {},
+        Keys = {},
         Updated = os.time(),
 }
     local self = {}
@@ -66,8 +66,8 @@ function c.class.Vehicle(net)
     -- Modifications
     self.Modifications = data.Modifications
     -- Keys
-    self.CarKeys = data.CarKeys
-    self.State.CarKeys = self.CarKeys
+    self.Keys = data.Keys
+    self.State.Keys = self.Keys
     --- func desc
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
@@ -121,21 +121,21 @@ function c.class.Vehicle(net)
 
     --- func desc
     self.GetKeys = function()
-        return self.CarKeys
+        return self.Keys
     end
     --- func desc
     ---@param t any
     self.SetKeys = function(t)
-        self.CarKeys = t
-        self.State.CarKeys = self.CarKeys
+        self.Keys = t
+        self.State.Keys = self.Keys
     end
     --- func desc
     ---@param id any
     self.AddKey = function(id)
         local t = self.GetKeys()
-        if not self.CheckKey(id) then
-            table.insert(self.CarKeys, id)
-            self.State.CarKeys = self.CarKeys
+        if not self.CheckKeys(id) then
+            table.insert(self.Keys, id)
+            self.State.Keys = self.Keys
         else
             c.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
@@ -144,9 +144,9 @@ function c.class.Vehicle(net)
     ---@param id any
     self.RemoveKey = function(id)
         local t = self.GetKeys()
-        if self.CheckKey(id) then
-            table.remove(self.CarKeys, id)
-            self.State.CarKeys = self.CarKeys
+        if self.CheckKeys(id) then
+            table.remove(self.Keys, id)
+            self.State.Keys = self.Keys
         else
             c.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end
@@ -335,7 +335,7 @@ function c.class.Vehicle(net)
                     local item = c.items[v.Item]
                     self.Weight = self.Weight + item.Weight
                 else
-                    c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                    c.func.Debug_1("Ignoring invalid item within .GetWeight(), for Networked ID: " .. self.Net)
                 end
             end
         end
@@ -363,7 +363,7 @@ function c.class.Vehicle(net)
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                c.func.Debug_1("Ignoring invalid item within .GetWeight(), for Networked ID: " .. self.Net)
             end
         end
         return self.Weight
@@ -373,7 +373,7 @@ function c.class.Vehicle(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Networked ID: " .. self.Net)
             return
         end
         local info = {
@@ -401,9 +401,8 @@ function c.class.Vehicle(net)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
-            TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .AddItem() for Networked ID: " .. self.Net)
         end
     end
     --
@@ -455,7 +454,7 @@ function c.class.Vehicle(net)
     self.ConsumeItem = function(number)
         local item = self.GetItemFromPosition(number)
         if type(item) ~= "boolean" then
-            TriggerEvent("Inventory:Consume:"..item.Item, self.ID, item.Quantity, number)
+            TriggerEvent("Inventory:Consume:"..item.Item, self.Net, item.Quantity, number)
         end
     end
     --- func desc
