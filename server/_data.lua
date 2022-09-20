@@ -199,7 +199,7 @@ function c.data.FindVehicle(arg)
         end
         return false, false, false
     else
-        for k, v in ipairs(c.vdex) do
+        for k, v in pairs(c.vdex) do
             if k == arg and type(v) == "table" then
                 return true, v, k
             end

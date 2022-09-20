@@ -141,8 +141,14 @@ function c.func.CreateVehicle(name, x, y, z, h)
     else
         hash = GetHashKey(name)
     end
-    local entity = CreateVehicle(hash, x, y, z, h, true, true)
-    return entity
+    local entity = CreateVehicle(hash, x, y, z, h, true, false)
+    while not DoesEntityExist(entity) do
+        Wait(100)
+    end
+    Wait(250)
+    local net = NetworkGetNetworkIdFromEntity(entity)
+    c.data.AddVehicle(net, c.class.Vehicle, net)
+    return entity, net
 end
 
 function c.func.CreatePed(name, x, y, z, h)
@@ -153,7 +159,13 @@ function c.func.CreatePed(name, x, y, z, h)
         hash = GetHashKey(name)
     end
     local entity = CreatePed(0, hash, x, y, z, h, true, false)
-    return entity
+    while not DoesEntityExist(entity) do
+        Wait(100)
+    end
+    Wait(250)
+    local net = NetworkGetNetworkIdFromEntity(entity)
+    c.data.AddPed(net, c.class.Npc, net)
+    return entity, net
 end
 
 function c.func.CreateObject(name, x, y, z, isdoor)
@@ -165,7 +177,13 @@ function c.func.CreateObject(name, x, y, z, isdoor)
     end
     if type(isdoor) ~= "boolean" then isdoor = false end
     local entity = CreateObject(hash, x, y, z, true, isdoor)
-    return entity
+    while not DoesEntityExist(entity) do
+        Wait(100)
+    end
+    Wait(250)
+    local net = NetworkGetNetworkIdFromEntity(entity)
+    c.data.AddObject(net, c.class.Object, net)
+    return entity, net
 end
 
 -- My own version of the native for the server to use.

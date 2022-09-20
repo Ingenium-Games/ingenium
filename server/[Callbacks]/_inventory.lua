@@ -103,33 +103,30 @@ local GetInventory = RegisterServerCallback({
 
 local OrganizeInventory = RegisterServerCallback({
     eventName = "OrganizeInventory",
-    eventCallback = function(source, net, inv)
+    eventCallback = function(source, net, inv1)
         local src = source
         local entity = NetworkGetEntityFromNetworkId(net)
         local type = GetEntityType(entity)
         -- Is it valid on the server?
         if DoesEntityExist(entity) then
-            --
             -- Object
             if type == 3 then
                 local xObject = c.data.GetObject(net)
                 local size = xObject.GetInventory()
-                if #size == #inv then
-                    xObject.UnpackInventory(inv)
+                if #size == #inv1 then
+                    xObject.UnpackInventory(inv1)
                 else
-                    c.func.Eventban(src,
-                        "Error in organizing invent, additional items or quanitty found, removed player.")
+                    c.func.Eventban(src, "Error in organizing invent, additional items or quanitty found, removed player.")
                 end
                 --
                 -- Vehicle
             elseif type == 2 then
                 local xVehicle = c.data.GetVehicle(net)
                 local size = xVehicle.GetInventory()
-                if #size == #inv then
-                    xVehicle.UnpackInventory(inv)
+                if #size == #inv1 then
+                    xVehicle.UnpackInventory(inv1)
                 else
-                    c.func.Eventban(src,
-                        "Error in organizing invent, additional items or quanitty found, removed player.")
+                    c.func.Eventban(src, "Error in organizing invent, additional items or quanitty found, removed player.")
                 end
                 --
                 -- Ped
@@ -137,24 +134,80 @@ local OrganizeInventory = RegisterServerCallback({
                 if IsPedAPlayer(entity) then
                     local xPlayer = c.data.GetPlayer(net)
                     local size = xPlayer.GetInventory()
-                    if #size == #inv then
-                        xPlayer.UnpackInventory(inv)
+                    if #size == #inv1 then
+                        xPlayer.UnpackInventory(inv1)
                     else
-                        c.func.Eventban(src,
-                            "Error in organizing invent, additional items or quanitty found, removed player.")
+                        c.func.Eventban(src, "Error in organizing invent, additional items or quanitty found, removed player.")
                     end
                 else
                     -- is an NPC
                     local xNpc = c.data.GetNpc(net)
                     local size = xNpc.GetInventory()
-                    if #size == #inv then
-                        xNpc.UnpackInventory(inv)
+                    if #size == #inv1 then
+                        xNpc.UnpackInventory(inv1)
                     else
-                        c.func.Eventban(src,
-                            "Error in organizing invent, additional items or quanitty found, removed player.")
+                        c.func.Eventban(src, "Error in organizing invent, additional items or quanitty found, removed player.")
                     end
                 end
             end
+        end
+        end
+    end
+})
+--
+
+local OrganizeInventories = RegisterServerCallback({
+    eventName = "OrganizeInventories",
+    eventCallback = function(source, net, inv1, inv2, Count)
+        local src = source
+        local entity = NetworkGetEntityFromNetworkId(net)
+        local type = GetEntityType(entity)
+        local count = Count
+        -- Is it valid on the server?
+        if DoesEntityExist(entity) then
+                -- Chcek number total prior to unpack.
+                local xPlayer = c.data.GetPlayer(src)
+                if type == 3 then
+                    local xObject = c.data.GetObject(net)
+                    local size = #inv1 + #inv2
+                    if size == Count then
+                        xPlayer.UnpackInventory(inv1)
+                        xObject.UnpackInventory(inv2)
+                    end
+                    --
+                    -- Vehicle
+                elseif type == 2 then
+                    local xVehicle = c.data.GetVehicle(net)
+                    local size = xVehicle.GetInventory()
+                    local size = #inv1 + #inv2
+                    if size == Count then
+                        xPlayer.UnpackInventory(inv1)
+                        xVehicle.UnpackInventory(inv2)
+                    end
+                    --
+                    -- Ped
+                elseif type == 1 then
+                    if IsPedAPlayer(entity) then
+                        local xTarget = c.data.GetPlayer(net)
+                        local size = xTarget.GetInventory()
+                        local size = #inv1 + #inv2
+                        if size == Count then
+                            xPlayer.UnpackInventory(inv1)
+                            xTarget.UnpackInventory(inv2)
+                        end
+                    else
+                        -- is an NPC
+                        local xNpc = c.data.GetNpc(net)
+                        local size = xNpc.GetInventory()
+                        local size = #inv1 + #inv2
+                        if size == Count then
+                            xPlayer.UnpackInventory(inv1)
+                            xNpc.UnpackInventory(inv2)
+                        end
+                    end
+                end
+
+        end
         end
     end
 })
