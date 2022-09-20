@@ -201,6 +201,24 @@ end)
 RegisterNetEvent("Server:Character:SetJob", function(req, data)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
+    -- Force set to false incase already employeed
+    xPlayer.SetDuty(false)
     -- Add New Job command permissions for ACL system
     ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
+    -- If unemployed
+    if data.Name == "none" then
+        xPlayer.SetDuty(true)
+    end
+end)
+
+RegisterNetEvent("Server:Character:Duty", function(boolean)
+    if conf.enableduty then
+        -- Add Functions or Hooks here!
+        local bool = boolean
+        local src = source
+        local xPlayer = c.data.GetPlayer(src)
+        xPlayer.SetDuty(bool)
+    else
+        c.func.Debug_3("Ability to go on/off duty has ben disabled.")
+    end
 end)

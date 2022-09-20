@@ -550,7 +550,7 @@ function c.class.Player(source, character_id)
             self.State.Boss = c.job.IsBoss(self.Job.Name, self.Job.Grade)
             --
             TriggerEvent("Server:Character:SetJob", self.ID, self.Job)
-            TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job)
+            TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job.Name, self.Job.Grade)
         else
             c.func.Debug_1("Ignoring invalid .SetJob() :".. Name ..", ".. Grade .." for ".. self.ID)
             print(c.table.Dump(c.jobs))

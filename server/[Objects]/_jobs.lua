@@ -115,16 +115,18 @@ function c.job.Payroll(bool)
             -- CurrentlyActive[1] = [Name="popo",Grade=2,etc,etc]
             local xPlayer = c.data.GetPlayer(k)
             if xPlayer then
-                local xJob = c.data.GetJob(CurrentlyActive[k].Name)
-                local pay = xJob.GetGradeSalery(v.Grade)
-                local tax = (pay / conf.default.tax) + 0.00
-                local net = pay - tax
-                --
-                xPlayer.AddBank(net)
-                TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..net.." deposided confirmed, city tax applied of: $"..tax..".")
-                if bool then
-                    xJob.RemoveBank(pay)
-                    xCity.AddBank(tax)
+                if xPlayer.OnDuty() then
+                    local xJob = c.data.GetJob(CurrentlyActive[k].Name)
+                    local pay = xJob.GetGradeSalery(v.Grade)
+                    local tax = (pay / conf.default.tax) + 0.00
+                    local net = pay - tax
+                    --
+                    xPlayer.AddBank(net)
+                    TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..net.." deposided confirmed, city tax applied of: $"..tax..".")
+                    if bool then
+                        xJob.RemoveBank(pay)
+                        xCity.AddBank(tax)
+                    end
                 end
             end
         elseif v == "OffDuty" then
