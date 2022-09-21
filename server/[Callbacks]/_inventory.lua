@@ -1,3 +1,4 @@
+--- 
 local UseItem = RegisterServerCallback({
     eventName = "UseItem",
     eventCallback = function(source, number)
@@ -13,6 +14,7 @@ local UseItem = RegisterServerCallback({
         end
     end
 })
+--
 
 local UpdateAmmo = RegisterServerCallback({
     eventName = "UpdateAmmo",
@@ -21,6 +23,7 @@ local UpdateAmmo = RegisterServerCallback({
         xPlayer.SetAmmo(tostring(ammotype), tonumber(amount))
     end
 })
+--
 
 local GiveItem = RegisterServerCallback({
     eventName = "GiveItem",
@@ -30,6 +33,7 @@ local GiveItem = RegisterServerCallback({
 
     end
 })
+--
 
 local DropItem = RegisterServerCallback({
     eventName = "DropItem",
@@ -39,6 +43,7 @@ local DropItem = RegisterServerCallback({
 
     end
 })
+--
 
 local UseItemQuick = RegisterServerCallback({
     eventName = "UseItemQuick",
@@ -59,6 +64,7 @@ local UseItemQuick = RegisterServerCallback({
         return false
     end
 })
+--
 
 local GetInventory = RegisterServerCallback({
     eventName = "GetInventory",
@@ -98,6 +104,7 @@ local GetInventory = RegisterServerCallback({
         end
     end
 })
+--
 
 local OrganizeInventory = RegisterServerCallback({
     eventName = "OrganizeInventory",
@@ -160,64 +167,47 @@ local OrganizeInventory = RegisterServerCallback({
 
 local OrganizeInventories = RegisterServerCallback({
     eventName = "OrganizeInventories",
-    eventCallback = function(source, net, inv1, inv2, count)
+    eventCallback = function(source, net, inv1, inv2)
         local src = source
         local entity = NetworkGetEntityFromNetworkId(net)
         local type = GetEntityType(entity)
-        local count = count
+        print(c.table.Dump(inv1))
+        print(c.table.Dump(inv2))
         -- Is it valid on the server?
         if DoesEntityExist(entity) then
             -- Chcek number total prior to unpack.
             local xPlayer = c.data.GetPlayer(src)
             if type == 3 then
-                local xObject = c.data.GetObject(net)
-                local size = #inv1 + #inv2
-                if size == count then
-                    xPlayer.UnpackInventory(inv1)
-                    xObject.UnpackInventory(inv2)
-                else
-                    c.func.Eventban(src,
-                        "Error in organizing invent, additional items or quanitty found, removed player.")
-                end
                 --
+                local xObject = c.data.GetObject(net)
+                xPlayer.UnpackInventory(inv1)
+                xObject.UnpackInventory(inv2)
+                --
+                print("Object Accessed")
                 -- Vehicle
             elseif type == 2 then
-                local xVehicle = c.data.GetVehicle(net)
-                local size = xVehicle.GetInventory()
-                local size = #inv1 + #inv2
-                if size == count then
-                    xPlayer.UnpackInventory(inv1)
-                    xVehicle.UnpackInventory(inv2)
-                else
-                    c.func.Eventban(src,
-                        "Error in organizing invent, additional items or quanitty found, removed player.")
-                end
                 --
+                local xVehicle = c.data.GetVehicle(net)
+                xPlayer.UnpackInventory(inv1)
+                xVehicle.UnpackInventory(inv2)
+                --
+                print("Vehicle Accessed")
                 -- Ped
             elseif type == 1 then
                 if IsPedAPlayer(entity) then
+                    --
                     local xTarget = c.data.GetPlayer(net)
-                    local size = xTarget.GetInventory()
-                    local size = #inv1 + #inv2
-                    if size == count then
-                        xPlayer.UnpackInventory(inv1)
-                        xTarget.UnpackInventory(inv2)
-                    else
-                        c.func.Eventban(src,
-                            "Error in organizing invent, additional items or quanitty found, removed player.")
-                    end
+                    xPlayer.UnpackInventory(inv1)
+                    xTarget.UnpackInventory(inv2)
+                    --
+                    print("Target Accessed")
                 else
-                    -- is an NPC
+                    --
                     local xNpc = c.data.GetNpc(net)
-                    local size = xNpc.GetInventory()
-                    local size = #inv1 + #inv2
-                    if size == count then
-                        xPlayer.UnpackInventory(inv1)
-                        xNpc.UnpackInventory(inv2)
-                    else
-                        c.func.Eventban(src,
-                            "Error in organizing invent, additional items or quanitty found, removed player.")
-                    end
+                    xPlayer.UnpackInventory(inv1)
+                    xNpc.UnpackInventory(inv2)
+                    --
+                    print("Npc Accessed")
                 end
             end
 
