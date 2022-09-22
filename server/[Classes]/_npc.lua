@@ -94,7 +94,7 @@ function c.class.Npc(net)
     --- func desc
     self.GetWeight = function()
         self.Weight = 0
-        for _, v in pairs(self.Inventory) do
+        for k, v in ipairs(self.Inventory) do
             if c.item.Exists(v.Item) then
                 local item = c.items[v.Item]
                 self.Weight = self.Weight + item.Weight
@@ -104,11 +104,12 @@ function c.class.Npc(net)
         end
         return self.Weight
     end
+    --
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
         local inv = inv or {}
-        -- print(c.table.Dump(inv))
+        --
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
@@ -125,14 +126,9 @@ function c.class.Npc(net)
                     break
                 end
             end
-            -- Validate Quuality and Quantity are numbers.
+            -- Validate Meta data
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
                 c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
-                break
-            end
-            -- Validate Meta data
-            if type(self.Inventory[i].Meta) ~= "table" or type(self.Inventory[i].Meta) ~= "boolean" then
-                c.func.Debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
             end
             -- If the Quality is below 0, then destroy the item.
@@ -156,22 +152,21 @@ function c.class.Npc(net)
         end
         return false, nil
     end
-    --
     --- [Internal] func desc
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC: " .. self.Net)
             return
         end
-        local item = {
+        local info = {
             ["Item"] = c.check.String(v[1]), -- string
             ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
             ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
             ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
             ["Meta"] = (v[5] or c.items[v[1]].Meta)
         }
-        return item
+        return info
     end
     --
     --- func desc
@@ -189,9 +184,8 @@ function c.class.Npc(net)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
-            TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+            c.func.Debug_1("Ignoring invalid .AddItem() for NPC: " .. self.Net)
         end
     end
     --

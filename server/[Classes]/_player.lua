@@ -712,17 +712,12 @@ function c.class.Player(source, character_id)
                     break
                 end
             end
-            -- Validate Quuality and Quantity are numbers.
+            -- Validate Quality and Quantity are numbers.
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
                 c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
-            -- Validate Meta data
-            if type(self.Inventory[i].Meta) ~= "table" or type(self.Inventory[i].Meta) ~= "boolean" then
-                c.func.Debug_1("Error in Creating Inventory, Meta data is not false or a table.")
-                break
-            end
-            -- If the Quality is below 0, then destroy the item.
+            -- If the Quality is below 0, then destroy the item on unpacking.
             if self.Inventory[i].Quality <= 0 then
                 table.remove(self.Inventory, i)
             end
@@ -744,25 +739,25 @@ function c.class.Player(source, character_id)
         return false, nil
     end
     --
-    --- [Internal] func desc
+    -- [Internal] func desc
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
             c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
             return
         end
-        local item = {
+        local info = {
             ["Item"] = c.check.String(v[1]), -- string
             ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
             ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
             ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
             ["Meta"] = (v[5] or c.items[v[1]].Meta)
         }
-        return item
+        return info
     end
     --
     --- func desc
-    ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
+    ---@param add table "Array Format {\"Name\", 1, math.random(65,100), ('String' or false), ({} or false)}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
         if c.item.Exists(item.Item) then

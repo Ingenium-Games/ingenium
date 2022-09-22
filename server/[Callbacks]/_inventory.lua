@@ -179,7 +179,11 @@ local OrganizeInventories = RegisterServerCallback({
                 --
                 local xObject = c.data.GetObject(net)
                 xPlayer.UnpackInventory(inv1)
-                xObject.UnpackInventory(inv2)
+                if #inv2 >= 1 then
+                    xObject.UnpackInventory(inv2)
+                else
+                    xObject.UnpackInventory()
+                end
                 --
                 print("Object Accessed")
                 -- Vehicle
@@ -187,7 +191,11 @@ local OrganizeInventories = RegisterServerCallback({
                 --
                 local xVehicle = c.data.GetVehicle(net)
                 xPlayer.UnpackInventory(inv1)
-                xVehicle.UnpackInventory(inv2)
+                if #inv2 >= 1 then
+                    xVehicle.UnpackInventory(inv2)
+                else
+                    xVehicle.UnpackInventory()
+                end
                 --
                 print("Vehicle Accessed")
                 -- Ped
@@ -196,14 +204,22 @@ local OrganizeInventories = RegisterServerCallback({
                     --
                     local xTarget = c.data.GetPlayer(net)
                     xPlayer.UnpackInventory(inv1)
-                    xTarget.UnpackInventory(inv2)
+                    if #inv2 >= 1 then
+                        xTarget.UnpackInventory(inv2)
+                    else
+                        xTarget.UnpackInventory()
+                    end
                     --
                     print("Target Accessed")
                 else
                     --
                     local xNpc = c.data.GetNpc(net)
                     xPlayer.UnpackInventory(inv1)
-                    xNpc.UnpackInventory(inv2)
+                    if #inv2 >= 1 then
+                        xNpc.UnpackInventory(inv2)
+                    else
+                        xNpc.UnpackInventory()
+                    end
                     --
                     print("Npc Accessed")
                 end
