@@ -171,8 +171,6 @@ local OrganizeInventories = RegisterServerCallback({
         local src = source
         local entity = NetworkGetEntityFromNetworkId(net)
         local type = GetEntityType(entity)
-        print(c.table.Dump(inv1))
-        print(c.table.Dump(inv2))
         -- Is it valid on the server?
         if DoesEntityExist(entity) then
             -- Chcek number total prior to unpack.

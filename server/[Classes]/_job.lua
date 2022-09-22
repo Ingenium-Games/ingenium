@@ -237,11 +237,25 @@ function c.class.Job(tab)
         local v = c.math.Decimals(num, 0)
         self.Supplies = self.Supplies - v
     end
+    --
     --- func desc
-    ---@param inv "table"
+    self.GetWeight = function()
+        self.Weight = 0
+        for _, v in pairs(self.Inventory) do
+            if c.item.Exists(v.Item) then
+                local item = c.items[v.Item]
+                self.Weight = self.Weight + item.Weight
+            else
+                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+            end
+        end
+        return self.Weight
+    end
+    --- func desc
+    ---@param inv any
     self.UnpackInventory = function(inv)
         local inv = inv or {}
-        --
+        -- print(c.table.Dump(inv))
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
@@ -258,32 +272,22 @@ function c.class.Job(tab)
                     break
                 end
             end
-            -- Validate Meta data
+            -- Validate Quuality and Quantity are numbers.
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
                 c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- Validate Meta data
-            --[[
-                if type(self[i].Meta) ~= "table" or type(self[i].Meta) ~= "boolean" then
+            if type(self.Inventory[i].Meta) ~= "table" or type(self.Inventory[i].Meta) ~= "boolean" then
                 c.func.Debug_1("Error in Creating Inventory, Meta data is not false or a table.")
                 break
-                end
-            ]] --
+            end
             -- If the Quality is below 0, then destroy the item.
             if self.Inventory[i].Quality <= 0 then
                 table.remove(self.Inventory, i)
             end
-            -- adding weight into the generation
-            for k, v in ipairs(self.Inventory) do
-                if c.item.Exists(v.Item) then
-                    local item = c.items[v.Item]
-                    self.Weight = self.Weight + item.Weight
-                else
-                    c.func.Debug_1("Ignoring invalid item within .GetWeight()")
-                end
-            end
         end
+        self.GetWeight()
     end
     --- func desc
     self.GetInventory = function()
@@ -300,35 +304,21 @@ function c.class.Job(tab)
         return false, nil
     end
     --
-    --- func desc
-    self.GetWeight = function()
-        self.Weight = 0
-        for k, v in ipairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
-                self.Weight = self.Weight + item.Weight
-            else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
-            end
-        end
-        return self.Weight
-    end
-    --
     --- [Internal] func desc
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object: " .. self.Net)
+            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
             return
         end
-        local info = {
+        local item = {
             ["Item"] = c.check.String(v[1]), -- string
             ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
             ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
             ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
             ["Meta"] = (v[5] or c.items[v[1]].Meta)
         }
-        return info
+        return item
     end
     --
     --- func desc
@@ -341,24 +331,78 @@ function c.class.Job(tab)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
-
             elseif (stackable and has) then
                 self.Inventory[key].Quantity = self.Inventory[key].Quantity + item.Quantity
-
             else
                 self.Inventory[#self.Inventory + 1] = item
-
             end
+            TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for Job: " .. self.Net)
+            c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+        end
+    end
+    --
+    self.GetItemFromPosition = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position]
+        else
+            return false
+        end
+    end
+    --
+    self.GetItemMeta = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position].Meta
+        else
+            return false
+        end
+    end
+    --
+    self.GetItemData = function(position)
+        local position = tonumber(position)
+        if self.Inventory[position] then
+            return self.Inventory[position].Data
+        else
+            return false
+        end
+    end
+    --
+    self.GetItemQuality = function(name)
+        local has, position = self.HasItem(name)
+        if has then
+            return self.Inventory[position].Quality, position
+        else
+            return false
+        end
+    end
+    --
+    self.GetItemQuantity = function(name)
+        local has, position = self.HasItem(name)
+        if has then
+            return self.Inventory[position].Quantity, position
+        else
+            return false, false
+        end
+    end
+    --
+    self.ConsumeItem = function(number)
+        local item = self.GetItemFromPosition(number)
+        if type(item) ~= "boolean" then
+            TriggerEvent("Inventory:Consume:" .. item.Item, self.ID, item.Quantity, number)
         end
     end
     --- func desc
     ---@param name any
     ---@param slot any
     self.RemoveItem = function(name, slot)
-        local has, position = self.HasItem(name)
-        if has and slot == position then
+        local quantity, position = self.GetItemQuantity(name)
+        if quantity >= 2 then
+            self.Inventory[position].Quantity = self.Inventory[position].Quantity - 1
+        elseif quantity <= 1 and slot == position then
+            table.remove(self.Inventory, position)
+        else
             table.remove(self.Inventory, position)
         end
     end
@@ -372,7 +416,6 @@ function c.class.Job(tab)
     self.CompressInventory = function()
         local inv = {}
         for i = 1, #self.Inventory do
-            table.insert(inv, i)
             inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality,
                       self.Inventory[i].Weapon, self.Inventory[i].Meta}
         end
