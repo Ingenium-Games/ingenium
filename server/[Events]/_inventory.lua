@@ -43,5 +43,33 @@ for k,v in pairs (c.items) do
             return
         end
         --
+        if k == "Package" then
+            -- Get the item inside the pacakge
+            local item = xPlayer.GetItemFromPosition(position)
+            local content = item.Meta.Contents
+            local name = k
+            local Meta
+            -- If Weapon add meta
+            if c.item.IsWeapon(content) then
+                Meta = {
+                    Ammo = c.item.GetWeaponAmmoType(content),
+                    Components = {},
+                    SerialNumber = c.rng.chars(6),
+                    BatchNumber = c.rng.nums(10),
+                    Crafted = false,
+                    Registered = true,
+                    About = c.item.GetAbout(content)
+                }
+            end
+            -- if consumeable get meta
+            if c.item.IsConsumeable(content) then
+                Meta = c.item.GetMeta()
+            end
+            --
+            xPlayer.RemoveItem(k, position)
+            xPlayer.AddItem({content,1,100,c.item.IsWeapon(content),(Meta or false)})
+            return
+        end
+        --
     end)
 end

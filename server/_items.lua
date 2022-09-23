@@ -36,6 +36,10 @@ function c.item.GetWeaponAmmoType(name)
     return c.items[name].Meta.Ammo
 end
 
+function c.item.GetAbout(name)
+    return c.items[name].Meta.About
+end
+
 function c.item.CanDegrade(name)
     return c.items[name].Degrade
 end

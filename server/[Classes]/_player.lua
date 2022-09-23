@@ -703,7 +703,8 @@ function c.class.Player(source, character_id)
                 ["Quantity"] = inv[i]["Quantity"] or inv[i][2],
                 ["Quality"] = inv[i]["Quality"] or inv[i][3],
                 ["Weapon"] = inv[i]["Weapon"] or inv[i][4],
-                ["Meta"] = inv[i]["Meta"] or inv[i][5]
+                ["Meta"] = inv[i]["Meta"] or inv[i][5],
+                ["Name"] = inv[i]["Name"] or inv[i][6]
             }
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
@@ -751,7 +752,8 @@ function c.class.Player(source, character_id)
             ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
             ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
             ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta)
+            ["Meta"] = (v[5] or c.items[v[1]].Meta),
+            ["Name"] = (v[6] or c.items[v[1]].Name)
         }
         return info
     end
@@ -825,7 +827,7 @@ function c.class.Player(source, character_id)
     self.ConsumeItem = function(number)
         local item = self.GetItemFromPosition(number)
         if type(item) ~= "boolean" then
-            TriggerEvent("Inventory:Consume:" .. item.Item, self.ID, item.Quantity, number)
+            TriggerEvent("Inventory:Consume:" .. item.Item, self.ID, number, item.Quantity)
         end
     end
     --- func desc
@@ -852,7 +854,7 @@ function c.class.Player(source, character_id)
         local inv = {}
         for i = 1, #self.Inventory do
             inv[i] = {self.Inventory[i].Item, self.Inventory[i].Quantity, self.Inventory[i].Quality,
-                      self.Inventory[i].Weapon, self.Inventory[i].Meta}
+                      self.Inventory[i].Weapon, self.Inventory[i].Meta, self.Inventory[i].Name}
         end
         return inv
     end

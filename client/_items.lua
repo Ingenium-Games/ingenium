@@ -19,9 +19,14 @@ end
 
 function c.item.Exists(name)
     if c.items[name] then
-        return true
+        return true, name
     else
-        return false
+        for k,v in pairs (c.items) do
+            if v.Item == name then
+                return true, k
+            end
+        end
+        return false, ""
     end
 end
 
@@ -37,6 +42,14 @@ end
 
 function c.item.IsWeapon(name)
     return c.items[name].Weapon
+end
+
+function c.item.GetWeaponAmmoType(name)
+    return c.items[name].Meta.Ammo
+end
+
+function c.item.GetAbout(name)
+    return c.items[name].Meta.About
 end
 
 function c.item.CanDegrade(name)

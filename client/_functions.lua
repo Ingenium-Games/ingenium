@@ -321,6 +321,10 @@ function c.func.GetPickupsInArea(coords, radius, minimal)
     return obj
 end
 
+function c.func.GetPlayers()
+    return GetActivePlayers()
+end
+
 -- returns closest, closestdist
 function c.func.GetClosestPlayer()
     local players = GetActivePlayers()
