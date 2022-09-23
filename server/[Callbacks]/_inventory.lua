@@ -185,7 +185,6 @@ local OrganizeInventories = RegisterServerCallback({
                     xObject.UnpackInventory()
                 end
                 --
-                print("Object Accessed")
                 -- Vehicle
             elseif type == 2 then
                 --
@@ -197,7 +196,6 @@ local OrganizeInventories = RegisterServerCallback({
                     xVehicle.UnpackInventory()
                 end
                 --
-                print("Vehicle Accessed")
                 -- Ped
             elseif type == 1 then
                 if IsPedAPlayer(entity) then
@@ -210,7 +208,6 @@ local OrganizeInventories = RegisterServerCallback({
                         xTarget.UnpackInventory()
                     end
                     --
-                    print("Target Accessed")
                 else
                     --
                     local xNpc = c.data.GetNpc(net)
@@ -221,7 +218,6 @@ local OrganizeInventories = RegisterServerCallback({
                         xNpc.UnpackInventory()
                     end
                     --
-                    print("Npc Accessed")
                 end
             end
 
