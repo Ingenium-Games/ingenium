@@ -308,13 +308,6 @@ function c.class.OfflinePlayer(data)
             return false, false
         end
     end
-    --
-    self.ConsumeItem = function(number)
-        local item = self.GetItemFromPosition(number)
-        if type(item) ~= "boolean" then
-            TriggerEvent("Inventory:Consume:" .. item.Item, self.ID, item.Quantity, number)
-        end
-    end
     --- func desc
     ---@param name any
     ---@param slot any

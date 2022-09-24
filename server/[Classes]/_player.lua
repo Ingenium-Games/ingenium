@@ -823,7 +823,7 @@ function c.class.Player(source, character_id)
             return false, false
         end
     end
-    --
+    -- Only Players can Consume
     self.ConsumeItem = function(number)
         local item = self.GetItemFromPosition(number)
         if type(item) ~= "boolean" then

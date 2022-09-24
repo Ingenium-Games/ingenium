@@ -107,28 +107,35 @@ end
 ---@param message any
 ---@param footer any
 function c.func.Discord(url, color, name, message, footer)
-    local embed = {
-        {
-              ["color"] = color,
-              ["title"] = "**".. name .."**",
-              ["description"] = message,
-              ["footer"] = {
-                  ["text"] = footer,
-              },
+    local embed = {{
+        ["color"] = color,
+        ["title"] = "**" .. name .. "**",
+        ["description"] = message,
+        ["footer"] = {
+            ["text"] = footer
         }
-    }
-    PerformHttpRequest(url, function(err, text, headers) end, "POST", json.encode({username = name, embeds = embed}), { ["Content-Type"] = "application/json" })
+    }}
+    PerformHttpRequest(url, function(err, text, headers)
+    end, "POST", json.encode({
+        username = name,
+        embeds = embed
+    }), {
+        ["Content-Type"] = "application/json"
+    })
 end
 
---local "https://api.twitch.tv/helix/clips?broadcaster_id="..i.broadcaster
+-- local "https://api.twitch.tv/helix/clips?broadcaster_id="..i.broadcaster
 
 function c.func.Eventban(source, event)
     local src = source
     local id = c.func.identifier(src)
     local name = GetPlayerName(src)
-    TriggerEvent("txaLogger:CommandExecuted", "Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
-    c.func.Debug_2("Player ID: "..src.." / "..id.." / "..name.." : Attempted to abuse [E] "..event)
-    c.sql.user.SetBan(c.func.identifier(src), true, function() DropPlayer(src, "Banned for attmpting to exploit event, this has been logged in txAdmin.") end)
+    TriggerEvent("txaLogger:CommandExecuted",
+        "Player ID: " .. src .. " / " .. id .. " / " .. name .. " : Attempted to abuse [E] " .. event)
+    c.func.Debug_2("Player ID: " .. src .. " / " .. id .. " / " .. name .. " : Attempted to abuse [E] " .. event)
+    c.sql.user.SetBan(c.func.identifier(src), true, function()
+        DropPlayer(src, "Banned for attmpting to exploit event, this has been logged in txAdmin.")
+    end)
     return CancelEvent()
 end
 
@@ -175,7 +182,9 @@ function c.func.CreateObject(name, x, y, z, isdoor)
     else
         hash = GetHashKey(name)
     end
-    if type(isdoor) ~= "boolean" then isdoor = false end
+    if type(isdoor) ~= "boolean" then
+        isdoor = false
+    end
     local entity = CreateObject(hash, x, y, z, true, isdoor)
     while not DoesEntityExist(entity) do
         Wait(100)
@@ -202,5 +211,13 @@ function c.func.IsPedHuman(hash)
         return false, "Animal"
     else
         return true, "Human"
+    end
+end
+
+function c.func.HasPlayers()
+    if (#GetPlayers() > 0) then
+        return true
+    else
+        return false
     end
 end

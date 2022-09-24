@@ -329,7 +329,7 @@ function c.class.PlayerVehicle(ent, data)
                     break
                 end
             end
-            -- Validate Quuality and Quantity are numbers.
+            -- Validate Quality and Quantity are numbers.
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
                 c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
@@ -435,13 +435,6 @@ function c.class.PlayerVehicle(ent, data)
             return self.Inventory[position].Quantity, position
         else
             return false, false
-        end
-    end
-    --
-    self.ConsumeItem = function(number)
-        local item = self.GetItemFromPosition(number)
-        if type(item) ~= "boolean" then
-            TriggerEvent("Inventory:Consume:" .. item.Item, self.ID, item.Quantity, number)
         end
     end
     --- func desc

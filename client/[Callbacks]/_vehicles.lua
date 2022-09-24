@@ -10,7 +10,7 @@ local SetVehicleCondition = RegisterClientCallback({
     eventName = "SetVehicleCondition",
     eventCallback = function(net, con)
         local entity = NetToVeh(net)
-        c.func.SetVehicleCondition(net, con)
+        c.func.SetVehicleCondition(entity, con)
         return true
     end
 })
