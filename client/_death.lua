@@ -55,8 +55,14 @@ function PlayerKilled()
     TriggerEvent("Client:Character:Death", data)
     TriggerServerEvent("Server:Character:Death", data)
     c.data.SetLocalPlayerState("IsDead", true, true)
-    Wait(1250)
-    SetEntityCoords(ped, data.Coords)
+    Wait(5850)
+    local pos = GetEntityCoords(ped)
+    local found, groundz = GetGroundZFor_3dCoord(pos.x, pos.y, pos.z, false)
+    if found then
+        SetEntityCoords(ped, vector3(pos.x, pos.y, groundz - 0.45))
+    else
+        SetEntityCoords(ped, vector3(pos.x, pos.y, pos.z - 0.45))
+    end
 end
 
 Citizen.CreateThread(function()

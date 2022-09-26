@@ -101,5 +101,14 @@ local Consumeable = RegisterClientCallback({
             end
         end
         --
+        if Data.Ammo then
+            local type = Data.Ammo.Type
+            local amount = Data.Ammo.Amount
+            c._ammo[type] = c._ammo[type] + amount
+            TriggerServerCallback({
+                eventName = "UpdateAmmo",
+                args = {type, c._ammo[type]}
+            })
+        end
     end
 })

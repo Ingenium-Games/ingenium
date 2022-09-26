@@ -23,15 +23,1484 @@ local weapon_dump = exports["ig.dump"]:GetWeapons()
         Hotkey = false,
         Image = ".png"
     },
-]] --
+]]--
 
 c.items = { -- table of items
 
+    -- ====================================================================================--
+    -- Basic Bitch Items
+    -- ====================================================================================--
+
+    ["Paper"] = {
+        Name = "Paper",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Paper.png"
+    },
+
+    ["Cardboard"] = {
+        Name = "Cardboard",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Cardboard.png"
+    },
+
+    ["Brass"] = {
+        Name = "Brass",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Brass.png"
+    },
+
+    ["Copper"] = {
+        Name = "Brass",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Brass.png"
+    },
+
+    ["Silver"] = {
+        Name = "Silver",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Silver.png"
+    },
+
+    ["Lead"] = {
+        Name = "Lead",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Lead.png"
+    },
+
+    ["GunPowder"] = {
+        Name = "Gun Powder",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "GunPowder.png"
+    },
+
+    ["Rubber"] = {
+        Name = "Rubber",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Rubber.png"
+    },
+
+    ["Blade"] = {
+        Name = "Blade",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Blade.png"
+    },
+
+    ["ScrapMetal"] = {
+        Name = "Scrap Metal",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "ScrapMetal.png"
+    },
+
+    ["MetalRod"] = {
+        Name = "Metal Rod",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "MetalRod.png"
+    },
+
+    ["Spring"] = {
+        Name = "Spring",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Spring.png"
+    },
+
+    ["Rock"] = {
+        Name = "Rock",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Rock.png"
+    },
+
+    ["AnimalParts"] = {
+        Name = "Animal Parts",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "AnimalParts.png"
+    },
+
+    ["CarbonAlloy"] = {
+        Name = "Carbon Alloy",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "CarbonAlloy.png"
+    },
+
+    ["ShortBarrel"] = {
+        Name = "Short Barrel",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "ShortBarrel.png"
+    },
+
+    ["PistolPin"] = {
+        Name = "Pistol Pin",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "PistolPin.png"
+    },
+
+    ["SMGFrame"] = {
+        Name = "SMG Frame",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "SMGFrame.png"
+    },
+
+    ["Reciever"] = {
+        Name = "Reciever",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Reciever.png"
+    },
+
+    ["Pin"] = {
+        Name = "Pin",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Pin.png"
+    },
+
+    ["ChemicalPowder"] = {
+        Name = "Chemical Powder",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "ChemicalPowder.png"
+    },
+
+    ["Cloth"] = {
+        Name = "Cloth",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Cloth.png"
+    },
+
+    ["Spirits"] = {
+        Name = "Spirits",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Spirits.png"
+    },
+
+    ["Petrol"] = {
+        Name = "Petrol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Petrol.png"
+    },
+
+    ["Alcahol"] = {
+        Name = "Alcahol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Alcahol.png"
+    },
+
+    ["CO2"] = {
+        Name = "CO2",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "CO2.png"
+    },
+
+    ["Leather"] = {
+        Name = "Leather",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Leather.png"
+    },
+
+    ["Grenade"] = {
+        Name = "Grenade",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Grenade.png"
+    },
+
+    ["Primer"] = {
+        Name = "Primer",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Primer.png"
+    },
+    
+    ["Styrophome"] = {
+        Name = "Styrophome",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Styrophome.png"
+    },
+
+    ["Snow"] = {
+        Name = "Snow",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Snow.png"
+    },
+
+    ["Battery"] = {
+        Name = "Battery",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Battery.png"
+    },
+
+    ["Globe"] = {
+        Name = "Globe",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Globe.png"
+    },
+
+    ["Ceramic"] = {
+        Name = "Ceramic",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Ceramic.png"
+    },
+
+    ["Can"] = {
+        Name = "Can",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Can.png"
+    },
+
+    
+    ["Foil"] = {
+        Name = "Foil",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Foil.png"
+    },
+    
+    ["Plastic"] = {
+        Name = "Plastic",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Plastic.png"
+    },
+
+    ["Electronics"] = {
+        Name = "Electronics",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Electronics.png"
+    },
+
+    ["Fabric"] = {
+        Name = "Fabric",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Fabric.png"
+    },
+
+    ["Lockpick"] = {
+        Name = "Lockpick",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Lockpick.png"
+    },
+
+    ["Crowbar"] = {
+        Name = "Crowbar",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Crowbar.png"
+    },
+
+    ["Screwdriver"] = {
+        Name = "Screwdriver",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Screwdriver.png"
+    },
+
+    ["Hammer"] = {
+        Name = "Hammer",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Hammer.png"
+    },
+
+    ["Nails"] = {
+        Name = "Nails",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Nails.png"
+    },
+
+    ["Screws"] = {
+        Name = "Screws",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Screws.png"
+    },
+
+    ["Nutsnbolts"] = {
+        Name = "Nuts and Bolts",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Nutsnbolts.png"
+    },
+    
+    ["Matches"] = {
+        Name = "Matches",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Matches.png"
+    },
+
+    ["Lighter"] = {
+        Name = "Lighter",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Lighter.png"
+    },
+
+    ["Aluminium"] = {
+        Name = "Aluminium",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Aluminium.png"
+    },
+    
+    ["Gold"] = {
+        Name = "Gold",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Gold.png"
+    },
+
+    ["Topaz"] = {
+        Name = "Topaz",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Topaz.png"
+    },
+    
+    ["Saphire"] = {
+        Name = "Saphire",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Saphire.png"
+    },
+
+    ["Emerald"] = {
+        Name = "Emerald",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Emerald.png"
+    },
+    
+    ["Opal"] = {
+        Name = "Opal",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Opal.png"
+    },
+    
+    ["Insulation"] = {
+        Name = "Insulation",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Insulation.png"
+    },
+    
+    ["Tape"] = {
+        Name = "Tape",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Tape.png"
+    },
+
+    ["Rope"] = {
+        Name = "Rope",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Rope.png"
+    },
+    
+    ["Handcuffs"] = {
+        Name = "Handcuffs",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Handcuffs.png"
+    },
+    
+    ["SocketSet"] = {
+        Name = "Socket Set",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "SocketSet.png"
+    },
+
+
+    -- ====================================================================================--
+    -- Ammo Boxes
+    -- ====================================================================================--
+
+    ["9mm"] = {
+        Name = "Box of 9mm",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 80,
+        Value = 195,
+        Weight = 2.05,
+        Weapon = false,
+        Meta = {
+            About = "Box of 9mm rounds, generally speaking, 60."
+        },
+        Data = {
+            Ammo = {
+                Type = "9mm",
+                Amount = 60
+            }
+        },
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "GunPowder",
+            Quantity = 5
+        }, {
+            ItemRequired = "Lead",
+            Quantity = 5
+        }, {
+            ItemRequired = "Brass",
+            Quantity = 5
+        }},
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = false,
+        Image = "9mm.png"
+    },
+
+    ["5.56mm"] = {
+        Name = "Box of 5.56mm",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 135,
+        Value = 345,
+        Weight = 3.25,
+        Weapon = false,
+        Meta = {
+            About = "Box of 5.56mm rounds, generally speaking, 30."
+        },
+        Data = {
+            Ammo = {
+                Type = "5.56mm",
+                Amount = 30
+            }
+        },
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "GunPowder",
+            Quantity = 15
+        }, {
+            ItemRequired = "Lead",
+            Quantity = 10
+        }, {
+            ItemRequired = "Brass",
+            Quantity = 15
+        }},
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = false,
+        Image = "5.56mm.png"
+    },
+
+    ["7.62mm"] = {
+        Name = "Box of 7.62mm",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 155,
+        Value = 386,
+        Weight = 3.85,
+        Weapon = false,
+        Meta = {
+            About = "Box of 7.62mm rounds, generally speaking, 30."
+        },
+        Data = {
+            Ammo = {
+                Type = "7.62mm",
+                Amount = 30
+            }
+        },
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "GunPowder",
+            Quantity = 20
+        }, {
+            ItemRequired = "Lead",
+            Quantity = 15
+        }, {
+            ItemRequired = "Brass",
+            Quantity = 20
+        }},
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = false,
+        Image = "7.62mm.png"
+    },
+
+    ["20g"] = {
+        Name = "Box of 20g",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 155,
+        Value = 340,
+        Weight = 4.55,
+        Weapon = false,
+        Meta = {
+            About = "Box of 20g rounds, generally speaking, 24."
+        },
+        Data = {
+            Ammo = {
+                Type = "20g",
+                Amount = 24
+            }
+        },
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "GunPowder",
+            Quantity = 30
+        }, {
+            ItemRequired = "Lead",
+            Quantity = 10
+        }, {
+            ItemRequired = "Cardboard",
+            Quantity = 24
+        }},
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = false,
+        Image = "20g.png"
+    },
+
+    [".223"] = {
+        Name = "Box of .223",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 160,
+        Value = 355,
+        Weight = 2.05,
+        Weapon = false,
+        Meta = {
+            About = "Box of .223 rounds, generally speaking, 18."
+        },
+        Data = {
+            Ammo = {
+                Type = ".223",
+                Amount = 18
+            }
+        },
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "GunPowder",
+            Quantity = 18
+        }, {
+            ItemRequired = "Lead",
+            Quantity = 18
+        }, {
+            ItemRequired = "Brass",
+            Quantity = 18
+        }},
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = false,
+        Image = ".223.png"
+    },
+
+    [".308"] = {
+        Name = "Box of .308",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 180,
+        Value = 385,
+        Weight = 2.25,
+        Weapon = false,
+        Meta = {
+            About = "Box of .308 rounds, generally speaking, 18."
+        },
+        Data = {
+            Ammo = {
+                Type = ".308",
+                Amount = 18
+            }
+        },
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "GunPowder",
+            Quantity = 36
+        }, {
+            ItemRequired = "Lead",
+            Quantity = 36
+        }, {
+            ItemRequired = "Brass",
+            Quantity = 36
+        }},
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = false,
+        Image = ".308.png"
+    },
 
     -- ====================================================================================--
     -- Job Related
     -- ====================================================================================--
-
 
     -- Logistics
     ["Package"] = {
@@ -4900,7 +6369,6 @@ c.items = { -- table of items
         Image = "Watermelon.png"
     },
 
-
     ["Cucumber"] = {
         Name = "Cucumber",
         Degrade = false,
@@ -5603,7 +7071,7 @@ c.items = { -- table of items
         Image = "Turnip.png"
     },
 
-    ["Raw Steak"] = {
+    ["RawSteak"] = {
         Name = "Raw Steak",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5642,7 +7110,7 @@ c.items = { -- table of items
         Image = "RawSteak.png"
     },
 
-    ["Cooked Steak"] = {
+    ["CookedSteak"] = {
         Name = "Cooked Steak",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5681,7 +7149,7 @@ c.items = { -- table of items
         Image = "RawCookedSteak.png"
     },
 
-    ["Raw Ribeye"] = {
+    ["RawRibeye"] = {
         Name = "Raw Ribeye",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5720,7 +7188,7 @@ c.items = { -- table of items
         Image = "RawRibeye.png"
     },
 
-    ["Cooked Ribeye"] = {
+    ["CookedRibeye"] = {
         Name = "Cooked Ribeye",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5759,7 +7227,7 @@ c.items = { -- table of items
         Image = "CookedRibeye.png"
     },
 
-    ["Raw Wagyu"] = {
+    ["RawWagyu"] = {
         Name = "Raw Wagyu",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5798,7 +7266,7 @@ c.items = { -- table of items
         Image = "RawWagyu.png"
     },
 
-    ["Cooked Wagyu"] = {
+    ["CookedWagyu"] = {
         Name = "Cooked Wagyu",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5837,7 +7305,7 @@ c.items = { -- table of items
         Image = "CookedWagyu.png"
     },
 
-    ["Raw Chicken"] = {
+    ["RawChicken"] = {
         Name = "Raw Chicken",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5876,7 +7344,7 @@ c.items = { -- table of items
         Image = "RawChicken.png"
     },
 
-    ["Cooked Chicken"] = {
+    ["CookedChicken"] = {
         Name = "Cooked Chicken",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5915,7 +7383,7 @@ c.items = { -- table of items
         Image = "CookedChicken.png"
     },
 
-    ["Raw Fish"] = {
+    ["RawFish"] = {
         Name = "Raw Fish",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5954,7 +7422,7 @@ c.items = { -- table of items
         Image = "RawFish.png"
     },
 
-    ["Cooked Fish"] = {
+    ["CookedFish"] = {
         Name = "Cooked Fish",
         Degrade = false,
         DegradeRate = 0.0,
@@ -5993,7 +7461,7 @@ c.items = { -- table of items
         Image = "CookedFish.png"
     },
 
-    ["Raw Lambchops"] = {
+    ["RawLambchops"] = {
         Name = "Raw Lambchops",
         Degrade = false,
         DegradeRate = 0.0,
@@ -6032,7 +7500,7 @@ c.items = { -- table of items
         Image = "RawLambchops.png"
     },
 
-    ["Cooked Lambchops"] = {
+    ["CookedLambchops"] = {
         Name = "Cooked Lambchops",
         Degrade = false,
         DegradeRate = 0.0,
@@ -6071,7 +7539,7 @@ c.items = { -- table of items
         Image = "CookedLambchops.png"
     },
 
-    ["Raw Sausages"] = {
+    ["RawSausages"] = {
         Name = "Raw Sausages",
         Degrade = false,
         DegradeRate = 0.0,
@@ -6110,7 +7578,7 @@ c.items = { -- table of items
         Image = "RawSausages.png"
     },
 
-    ["Cooked Sausages"] = {
+    ["CookedSausages"] = {
         Name = "Cooked Sausages",
         Degrade = false,
         DegradeRate = 0.0,
