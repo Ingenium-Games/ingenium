@@ -7,18 +7,9 @@ NOTES.
     - If they aim at an ARMED ped, the ped does not have to raise hands.
 ]] --
 -- ====================================================================================--
-local function Getped(ped)
-    if ped == nil then
-        ped = GetPlayerped(-1)
-        return ped
-    else
-        return ped
-    end
-end
--- ====================================================================================--
 RegisterNetEvent("Client:Animation:CrossedArms")
 AddEventHandler("Client:Animation:CrossedArms", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "amb@world_human_hang_out_street@female_arms_crossed@base" 
     local anim = "base" 
     --
@@ -44,7 +35,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:HandsUp")
 AddEventHandler("Client:Animation:HandsUp", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "missminuteman_1ig_2"
     local anim = "handsup_enter"
     --
@@ -70,7 +61,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:ArmHold")
 AddEventHandler("Client:Animation:ArmHold", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "anim@amb@nightclub@peds@"
     local anim = "amb_world_human_hang_out_street_female_hold_arm_idle_b"
     --
@@ -96,7 +87,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:Mugging")
 AddEventHandler("Client:Animation:Mugging", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "random@mugging5"
     local anim = "ig_1_guy_handoff"
     --
@@ -122,7 +113,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:PickUp")
 AddEventHandler("Client:Animation:PickUp", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "pickup_object"
     local anim = "putdown_low"
     --
@@ -148,7 +139,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:Escorting")
 AddEventHandler("Client:Animation:Escorting", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "missfinale_c2mcs_1"
     local anim = "fin_c2_mcs_1_camman"
     --
@@ -174,7 +165,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:Escorted")
 AddEventHandler("Client:Animation:Escorted", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "amb@world_human_bum_slumped@male@laying_on_left_side@base"
     local anim = "base"
     --
@@ -200,7 +191,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:Nod")
 AddEventHandler("Client:Animation:Nod", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "random@getawaydriver"
     local anim = "gesture_nod_yes_hard"
     --
@@ -226,7 +217,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:Lockpick")
 AddEventHandler("Client:Animation:Lockpick", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "mini@repair"
     local anim = "fixing_a_player"
     --
@@ -252,7 +243,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:Repair")
 AddEventHandler("Client:Animation:Repair", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "mini@repair"
     local anim = "fixing_a_player"
     --
@@ -278,7 +269,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:PhoneCall")
 AddEventHandler("Client:Animation:PhoneCall", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "random@arrests"
     local anim = "idle_c"
     --
@@ -304,7 +295,7 @@ end)
 -- ====================================================================================--
 RegisterNetEvent("Client:Animation:FacePalm")
 AddEventHandler("Client:Animation:FacePalm", function(bool, ped)
-    local ped = Getped(ped)
+    local ped = ped or GetPlayerPed(-1)
     local dict = "random@car_thief@agitated@idle_a"
     local anim = "agitated_idle_a"
     --
@@ -327,3 +318,4 @@ AddEventHandler("Client:Animation:FacePalm", function(bool, ped)
         RemoveAnimDict(dict)
     end
 end)
+-- ====================================================================================--
