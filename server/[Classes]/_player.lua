@@ -667,15 +667,26 @@ function c.class.Player(source, character_id)
         self.State.IsFrozen = self.IsFrozen
     end
     --- func desc
-    self.GetDragged = function()
+    self.GetEscorted = function()
         return self.IsEscorted
     end
     --- func desc
     ---@param b any
-    self.SetDragged = function(b)
+    self.SetEscorted = function(b)
         local b = c.check.Boolean(b)
         self.IsEscorted = b
         self.State.IsEscorted = self.IsEscorted
+    end
+    --- func desc
+    self.GetEscorting = function()
+        return self.IsEscorting
+    end
+    --- func desc
+    ---@param b any
+    self.SetEscorting = function(b)
+        local b = c.check.Boolean(b)
+        self.IsEscorting = b
+        self.State.IsEscorting = self.IsEscorting
     end
     --
     --- func desc

@@ -27,9 +27,10 @@ function c.class.Npc(net)
     self.IsCuffed = false
     self.State.IsCuffed = self.IsCuffed
     --
-    
+    self.IsEscorted = false
+    self.State.IsEscorted = self.IsEscorted 
+    --
     self.Inventory = {}
-
     self.Weight = 0
     --
     -- City_ID
@@ -120,6 +121,28 @@ function c.class.Npc(net)
         self.IsCuffed = b
         self.State.IsCuffed = self.IsCuffed
     end
+        --- func desc
+        self.GetEscorted = function()
+            return self.IsEscorted
+        end
+        --- func desc
+        ---@param b any
+        self.SetEscorted = function(b)
+            local b = c.check.Boolean(b)
+            self.IsEscorted = b
+            self.State.IsEscorted = self.IsEscorted
+        end
+        --- func desc
+        self.GetEscorting = function()
+            return self.IsEscorting
+        end
+        --- func desc
+        ---@param b any
+        self.SetEscorting = function(b)
+            local b = c.check.Boolean(b)
+            self.IsEscorting = b
+            self.State.IsEscorting = self.IsEscorting
+        end
     --
     --- func desc
     ---@param inv any
