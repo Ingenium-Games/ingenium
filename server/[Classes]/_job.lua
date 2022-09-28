@@ -283,7 +283,6 @@ function c.class.Job(tab)
                 table.remove(self.Inventory, i)
             end
         end
-        self.GetWeight()
     end
     --- func desc
     self.GetInventory = function()

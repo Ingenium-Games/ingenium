@@ -3,7 +3,6 @@ c.vehicle = {} -- function level
 c.vehicles = exports["ig.dump"]:GetVehicles()
 c.vdex = {} -- npc vehicles...
 c.pvdex = {} -- the index/store for currently used vehciles prior to writing to db.
-c.pvtemp = {} -- the index/store for initial load then deleted.
 --[[
 NOTES.
     - Some natives use entity

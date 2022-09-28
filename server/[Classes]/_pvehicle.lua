@@ -7,7 +7,7 @@ end
 --- func desc
 ---@param net any
 ---@param bool any
-function c.class.PlayerVehicle(ent, data)
+function c.class.PlayerVehicle(net, data)
     local data = {
         Fuel = data.Fuel,
         Plate = data.Plate,
@@ -26,8 +26,8 @@ function c.class.PlayerVehicle(ent, data)
     }
     local self = {}
     self.Data = data
-    self.Net = NetworkGetNetworkIdFromEntity(ent)
-    self.Entity = ent
+    self.Net = net
+    self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
     -- Model
     self.Model = GetEntityModel(self.Entity)
@@ -334,7 +334,7 @@ function c.class.PlayerVehicle(ent, data)
                 c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
-            -- If the Quality is below 0, then destroy the item.
+            -- If the Quality is below 0, then destroy the item on unpacking.
             if self.Inventory[i].Quality <= 0 then
                 table.remove(self.Inventory, i)
             end

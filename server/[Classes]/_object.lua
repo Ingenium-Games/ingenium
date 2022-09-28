@@ -112,7 +112,6 @@ function c.class.Object(net, id)
                 table.remove(self.Inventory, i)
             end
         end
-        self.GetWeight()
     end
     --- func desc
     self.GetInventory = function()

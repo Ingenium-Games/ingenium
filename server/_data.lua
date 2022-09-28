@@ -199,9 +199,21 @@ function c.data.FindVehicle(arg)
         end
         return false, false, false
     else
+        -- Find NET ID
+        -- Player Vehicle Dex
+        for k, v in pairs(c.pvdex) do
+            if v then
+                if k == arg then
+                    return true, v, k
+                end
+            end
+        end
+        -- NPC Vehicle Dex
         for k, v in pairs(c.vdex) do
-            if k == arg and type(v) == "table" then
-                return true, v, k
+            if v then
+                if k == arg and type(v) == "table" then
+                    return true, v, k
+                end
             end
         end
         return false, false, false
