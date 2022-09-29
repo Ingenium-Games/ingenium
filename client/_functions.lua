@@ -326,6 +326,24 @@ function c.func.GetPlayers()
 end
 
 -- returns closest, closestdist
+function c.func.GetClosestPed()
+    local closest = -1
+    local closestdist = -1
+    local ply = PlayerPedId()
+    local coords = vector3(GetEntityCoords(ply))
+    local peds = c.func.GetPedsInArea(coords, 20, true)
+    for _, value in pairs(peds) do
+        local targetcoords = vector3(GetEntityCoords(value))
+        local distance = #(targetcoords - coords)
+        if (closestdist == -1 or closestdist > distance) then
+            closest = value
+            closestdist = distance
+        end
+    end
+    return closest, closestdist
+end
+
+-- returns closest, closestdist
 function c.func.GetClosestPlayer()
     local players = GetActivePlayers()
     local closest = -1
