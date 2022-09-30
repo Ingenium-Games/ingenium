@@ -469,6 +469,8 @@ function c.class.PlayerVehicle(net, data)
     self.UnpackInventory(self.Inventory)
     self.AddKey(self.Owner)
     self.SetParked(false)
+    self.SetCondition(self.Condition)
+    self.SetModifications(self.Modifications)
     -- ====================================================================================--
     return self
 end
