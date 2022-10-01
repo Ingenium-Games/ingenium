@@ -7615,17 +7615,17 @@ c.items = { -- table of items
             -- Modifiers change the rate of degridation
             -- 1 - 10
             Modifiers = {
-                Hunger = 2, -- number 1-10
-                Thirst = 1, -- number 1-10
-                Stress = 2 -- number 1-10
+                Hunger = 1, -- number 1-10
+                Thirst = 4, -- number 1-10
+                Stress = 1 -- number 1-10
             },
             -- Status removes or adds the amount as intended out of 100
             Status = {
-                Health = 4,
-                Armour = 0,
-                Hunger = 4, -- number -100 - 100
-                Thirst = 4, -- number -100 - 100
-                Stress = -5 -- number -100 - 100
+                Health = 25,
+                Armour = 10,
+                Hunger = 30, -- number -100 - 100
+                Thirst = 2, -- number -100 - 100
+                Stress = -12 -- number -100 - 100
             }
         },
         Craftable = false,
@@ -7635,7 +7635,280 @@ c.items = { -- table of items
         Consumeable = true,
         Hotkey = true,
         Image = "CookedSausages.png"
-    }
+    },
+
+    ["Frunta"] = {
+        Name = "Frunta",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Comes in Orange & Grape, but not Watermelon."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 3, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 2,
+                Armour = 0,
+                Hunger = 3, -- number -100 - 100
+                Thirst = 22, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Frunta.png"
+    },
+
+    ["Sprunk"] = {
+        Name = "Sprunk",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "If lemonade was made in GTA..."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 3, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 2,
+                Armour = 0,
+                Hunger = 3, -- number -100 - 100
+                Thirst = 22, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Sprunk.png"
+    },
+
+    ["eCola"] = {
+        Name = "eCola",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "I wonder if Coke is still in these?"
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 3, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 2,
+                Armour = 0,
+                Hunger = 3, -- number -100 - 100
+                Thirst = 22, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "eCola.png"
+    },
+
+    ["Peanuts"] = {
+        Name = "Peanuts",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Elephants love em, good ol' stampy."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 6, -- number 1-10
+                Stress = 3 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 10,
+                Armour = 8,
+                Hunger = 12, -- number -100 - 100
+                Thirst = -5, -- number -100 - 100
+                Stress = 1 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Peanuts.png"
+    },
+
+    ["Chocolate"] = {
+        Name = "Chocolate",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Elephants love em, good ol' stampy."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 2, -- number 1-10
+                Thirst = 5, -- number 1-10
+                Stress = 1 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 20,
+                Armour = 4,
+                Hunger = 8, -- number -100 - 100
+                Thirst = -5, -- number -100 - 100
+                Stress = -20 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Chocolate.png"
+    },
+
+    ["Noodles"] = {
+        Name = "Noodles",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Nomrally 59c."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 3, -- number 1-10
+                Thirst = 3, -- number 1-10
+                Stress = 2 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 12,
+                Armour = 0,
+                Hunger = 18, -- number -100 - 100
+                Thirst = 6, -- number -100 - 100
+                Stress = -5 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Noodles.png"
+    },
+
+    ["Chips"] = {
+        Name = "Chips",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 3,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Salt is the main ingrediant."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 5, -- number 1-10
+                Thirst = 5, -- number 1-10
+                Stress = 3 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 25,
+                Armour = 5,
+                Hunger = 8, -- number -100 - 100
+                Thirst = -30, -- number -100 - 100
+                Stress = -20 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "Chips.png"
+    },
 
 }
 
