@@ -30,6 +30,26 @@ c.items = { -- table of items
     -- ====================================================================================--
     -- Basic Bitch Items
     -- ====================================================================================--
+    ["Newspaper"] = {
+        Name = "Newspaper",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Newspaper.png"
+    },
 
     ["Paper"] = {
         Name = "Paper",
