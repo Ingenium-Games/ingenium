@@ -66,6 +66,16 @@ local UseItemQuick = RegisterServerCallback({
 })
 --
 
+local GetItemQuantity = RegisterServerCallback({
+    eventName = "GetItemQuantity",
+    eventCallback = function(source, item)
+        local src = source
+        local xPlayer = c.data.GetPlayer(src)
+        local quantity, postiion = xPlayer.GetItemQuantity(item)
+        return quantity
+    end
+})
+
 local GetInventory = RegisterServerCallback({
     eventName = "GetInventory",
     eventCallback = function(source, net)

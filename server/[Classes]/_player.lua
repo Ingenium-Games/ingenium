@@ -821,7 +821,7 @@ function c.class.Player(source, character_id)
         if has then
             return self.Inventory[position].Quality, position
         else
-            return false
+            return 0, false
         end
     end
     --
@@ -830,7 +830,7 @@ function c.class.Player(source, character_id)
         if has then
             return self.Inventory[position].Quantity, position
         else
-            return false, false
+            return 0, false
         end
     end
     -- Only Players can Consume
