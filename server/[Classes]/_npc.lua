@@ -126,10 +126,9 @@ function c.class.Npc(net)
             return self.IsEscorted
         end
         --- func desc
-        ---@param b any
-        self.SetEscorted = function(b)
-            local b = c.check.Boolean(b)
-            self.IsEscorted = b
+        ---@param v any
+        self.SetEscorted = function(v)
+            self.IsEscorted = v
             self.State.IsEscorted = self.IsEscorted
         end
         --- func desc
@@ -137,10 +136,9 @@ function c.class.Npc(net)
             return self.IsEscorting
         end
         --- func desc
-        ---@param b any
-        self.SetEscorting = function(b)
-            local b = c.check.Boolean(b)
-            self.IsEscorting = b
+        ---@param v any
+        self.SetEscorting = function(v)
+            self.IsEscorting = v
             self.State.IsEscorting = self.IsEscorting
         end
     --
