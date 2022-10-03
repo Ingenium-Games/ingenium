@@ -338,6 +338,16 @@ function c.class.Player(source, character_id)
         end
     end
     --
+    self.GetDead = function()
+        return self.Dead
+    end
+    --
+    self.SetDead = function(b)
+        local bool = c.check.Boolean(b)
+        self.Dead = bool
+        self.State.IsDead = self.Dead
+    end
+    --
     self.OnDuty = function()
         return self.Duty
     end
@@ -345,6 +355,7 @@ function c.class.Player(source, character_id)
     self.SetDuty = function(b)
         local bool = c.check.Boolean(b)
         self.Duty = bool
+        self.State.Duty = self.Duty
     end
     --
     self.GetAccounts = function()
