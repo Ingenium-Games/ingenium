@@ -31,28 +31,20 @@ local Teleport = RegisterClientCallback({
 
 local Revive = RegisterClientCallback({
     eventName = "Revive",
-    eventCallback = function(ords, time, treatment)
-        local time, treatment = time or 9800, treatment or "Revive"
-        local finished = exports["ig.taskbar"]:Start(time, treatment)
-        if finished == 100 then
-            c.func.FadeOut(1000)
-            NetworkResurrectLocalPlayer(ords.x, ords.y, ords.z, ords.h, true, false)
-            c.status.SetHealth((c.status.GetMaxHealth() / 2))
-            c.data.SetLocalPlayerState("IsDead", false, true)
-            c.func.FadeIn(1000)
-        end
+    eventCallback = function(ords)
+        c.func.FadeOut(1000)
+        NetworkResurrectLocalPlayer(ords.x, ords.y, ords.z, ords.h, true, false)
+        c.status.SetHealth((c.status.GetMaxHealth() / 2))
+        c.data.SetLocalPlayerState("IsDead", false, true)
+        c.func.FadeIn(1000)
     end
 })
 
 local Heal = RegisterClientCallback({
     eventName = "Heal",
-    eventCallback = function(time, treatment)
-        local time, treatment = time or 6000, treatment or "Healing"
-        local finished = exports["ig.taskbar"]:Start(time, treatment)
-        if finished == 100 then
-            ClearPedBloodDamage(PlayerPedId())
-            c.status.SetHealth(c.status.GetMaxHealth())
-        end
+    eventCallback = function()
+        ClearPedBloodDamage(PlayerPedId())
+        c.status.SetHealth(c.status.GetMaxHealth())
     end
 })
 
