@@ -48,16 +48,12 @@ c.sbch.player.IsDead = AddStateBagChangeHandler("IsDead", nil, function(bagName,
     local xPlayer = c.data.GetPlayer(src)
     if xPlayer then
         if value == false then
-            --
-            xPlayer.SetDead(false)
             -- We want to know when they were revived.
             c.sql.char.SetDead(xPlayer.GetCharacter_ID(), value, {
                 RevivedAt = c.func.Timestamp()
             })
             --
         else
-            --
-            xPlayer.SetDead(true)
             --
         end
         --
