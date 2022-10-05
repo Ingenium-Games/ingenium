@@ -109,7 +109,7 @@ end)
 --- func desc
 ---@param bool boolean "Use the Job funds to pay all employees?" 
 function c.job.Payroll(bool)
-    local xCity = c.data.GetJob("City")
+    local xCity = c.data.GetJob("city")
     for k,v in ipairs(CurrentlyActive) do
         if type(v) == "table" then
             -- CurrentlyActive[1] = [Name="popo",Grade=2,etc,etc]
