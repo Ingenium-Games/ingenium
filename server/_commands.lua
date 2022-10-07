@@ -177,8 +177,8 @@ RegisterCommand("bring", function(source, args, rawCommand)
     local trg = tonumber(args[1])
     local zPlayer = c.data.GetPlayer(trg)
     local ords = xPlayer.GetCoords()
-    zPlayer:SetCoords({x = ords.x + 1, y = ords.y + 1, z = ords.z, h = ords.h})
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by "..xPlayer.GetName()) -- txAdmin logging Callback
+    zPlayer.SetCoords({x = ords.x + 1, y = ords.y + 1, z = ords.z, h = ords.h})
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer.GetName().." by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
 ExecuteCommand("add_ace group.admin command.return allow")
@@ -187,9 +187,9 @@ RegisterCommand("return", function(source, args, rawCommand)
     local xPlayer = c.data.GetPlayer(src)
     local trg = tonumber(args[1])
     local zPlayer = c.data.GetPlayer(trg)
-    local tbl = zPlayer:GetOldCoords()
-    zPlayer:SetCoords(tbl)
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by: "..xPlayer.GetName()) -- txAdmin logging Callback
+    local tbl = zPlayer.GetOldCoords()
+    zPlayer.SetCoords(tbl)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer.GetName().." by: "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
 ExecuteCommand("add_ace group.admin command.freeze allow")
@@ -198,9 +198,9 @@ RegisterCommand("freeze", function(source, args, rawCommand)
     local xPlayer = c.data.GetPlayer(src)
     local trg = tonumber(args[1])
     local zPlayer = c.data.GetPlayer(trg)
-    local bool = zPlayer:GetFrozen()
-    zPlayer:SetFrozen(not bool)
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer:GetName().." by: "..xPlayer.GetName()) -- txAdmin logging Callback
+    local bool = zPlayer.GetFrozen()
+    zPlayer.SetFrozen(not bool)
+    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " on: "..zPlayer.GetName().." by: "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 
 
