@@ -151,7 +151,7 @@ RegisterNetEvent("Client:Character:OffDuty")
 AddEventHandler("Client:Character:OffDuty", function()
     if conf.enableduty then
         -- Add Functions or Hooks here!
-        TriggerServerEvent("Server:Character:Duty", false)
+        
     else
         c.func.Debug_3("Ability to go off duty has ben disabled.")
     end
@@ -161,7 +161,7 @@ RegisterNetEvent("Client:Character:OnDuty")
 AddEventHandler("Client:Character:OnDuty", function(job)
     if conf.enableduty then
         -- Add Functions or Hooks here!
-        TriggerServerEvent("Server:Character:Duty", true)
+       
     else
         c.func.Debug_3("Ability to go on duty has ben disabled.")
     end
