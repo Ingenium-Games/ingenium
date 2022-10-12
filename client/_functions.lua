@@ -428,22 +428,30 @@ function c.func.GetEntityFromRay()
     return false, false
 end
 
-function c.func.CreatePed(name, x, y, z, h, cb)
+function c.func.CreatePed(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
         hash = name
     else
         hash = GetHashKey(name)
     end
-    local entity = CreatePed(0, hash, x, y, z, h, true, false)
-    local net = PedToNet(entity)
-    if cb then
-        cb(entity, net)
+    RequestModel(hash)
+    while not HasModelLoaded(hash) do
+        Citizen.Wait(0)
     end
-    return net
+    local check = DoesObjectOfTypeExistAtCoords(x, y, z, 1, hash, 0)
+    if not check then
+        local entity = CreatePed(0, hash, x, y, z, h, true, false)
+        local net = PedToNet(entity)
+        SetNetworkIdCanMigrate(net, true)
+        SetModelAsNoLongerNeeded(hash)
+        return entity, net
+    else
+        return false, false
+    end
 end
 
-function c.func.CreateObject(name, x, y, z, isdoor, cb)
+function c.func.CreateObject(name, x, y, z, isdoor)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -453,12 +461,20 @@ function c.func.CreateObject(name, x, y, z, isdoor, cb)
     if type(isdoor) ~= "boolean" then
         isdoor = false
     end
-    local entity = CreateObject(hash, x, y, z, true, isdoor)
-    local net = ObjToNet(entity)
-    if cb then
-        cb(entity, net)
+    RequestModel(hash)
+    while not HasModelLoaded(hash) do
+        Citizen.Wait(0)
     end
-    return net
+    local check = DoesObjectOfTypeExistAtCoords(x, y, z, 1, hash, 0)
+    if not check then
+        local entity = CreateObject(hash, x, y, z, true, isdoor)
+        local net = ObjToNet(entity)
+        SetNetworkIdCanMigrate(net, true)
+        SetModelAsNoLongerNeeded(hash)
+        return entity, net
+    else
+        return false, false
+    end
 end
 
 function c.func.CreateVehicle(name, x, y, z, h)
@@ -472,14 +488,19 @@ function c.func.CreateVehicle(name, x, y, z, h)
     while not HasModelLoaded(hash) do
         Citizen.Wait(0)
     end
-    local entity = CreateVehicle(hash, x, y, z, h, true, true)
-    local net = VehToNet(entity)
-    SetVehicleOnGroundProperly(entity)
-    SetVehicleHasBeenOwnedByPlayer(entity, true)
-    SetNetworkIdCanMigrate(net, true)
-    SetVehicleNeedsToBeHotwired(net, false)
-    SetModelAsNoLongerNeeded(hash)
-    return entity, net
+    local check = DoesObjectOfTypeExistAtCoords(x, y, z, 1, hash, 0)
+    if not check then
+        local entity = CreateVehicle(hash, x, y, z, h, true, true)
+        local net = VehToNet(entity)
+        SetVehicleOnGroundProperly(entity)
+        SetVehicleHasBeenOwnedByPlayer(entity, true)
+        SetNetworkIdCanMigrate(net, true)
+        SetVehicleNeedsToBeHotwired(net, false)
+        SetModelAsNoLongerNeeded(hash)
+        return entity, net
+    else
+        return false, false
+    end
 end
 
 function c.func.IsVehicleSpawnClear(coords, radius)
