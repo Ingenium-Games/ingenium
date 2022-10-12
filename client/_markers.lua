@@ -6,16 +6,9 @@ c.markers = {}
 
 --- Select a premade marker style.
 ---@param v number "A number to select corresponding local array value."
----@param ords table "a vector3() or {x,y,z}"
+---@param ords table "{x,y,z}"
 function c.marker.Place(ords, v)
     local v = v or 1
-    if type(ords) ~= vector3 then
-        local ords = {
-            [1] = ords.x,
-            [2] = ords.y,
-            [3] = ords.z
-        }
-    end
     if v == 1 then
         -- Blue Static Circle.
         DrawMarker(27, ords[1], ords[2], ords[3]-0.45, 0, 0, 0, 0, 0, 0, 1.0001, 1.0001, 1.7001, 0, 55, 240, 35, 0, 0, 2, 0)
