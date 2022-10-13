@@ -520,14 +520,14 @@ end
 
 --- Return the Entity"s state bag.
 ---@param net any "Network ID 16 bit integer"
-function c.data.GetEntityState(net)
-    return Entity(NetworkGetEntityFromNetworkId(net)).state
+function c.data.GetEntityStateBag(net)
+    return Entity(NetworkGetEntityFromNetworkId(net))
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "Network ID 16 bit integer"
 function c.GetEntityState(net)
-    return c.data.GetEntityState(net)
+    return c.data.GetEntityStateBag(net)
 end
 
 --- Return the Players"s state bag.

@@ -14,8 +14,13 @@ function c.class.Job(tab)
     self.Members = tab.Members
     self.Description = tab.Description
     self.Accounts = tab.Accounts
-    self.Inventory = tab.Inventory
-    self.Supplies = tab.Supplies
+
+    --
+    self.Inventory = json.decode(tab.Inventory)
+    self.Stock = json.decode(tab.Stock)
+
+
+    self.Contact = conf.phone[self.Name] or false
 
     --- func desc
     self.GetName = function()

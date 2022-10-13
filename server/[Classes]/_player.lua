@@ -471,6 +471,7 @@ function c.class.Player(source, character_id)
         if acc then
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
+            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Set to $"..num, "[]")
         end
     end
     --
@@ -481,6 +482,7 @@ function c.class.Player(source, character_id)
             acc = acc + c.math.Decimals(num, 0)
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
+            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Credited $"..num, "[]")
         end
     end
     --
@@ -491,6 +493,7 @@ function c.class.Player(source, character_id)
             acc = acc - c.math.Decimals(num, 0)
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
+            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Debited $"..num, "[]")
         end
     end
     --

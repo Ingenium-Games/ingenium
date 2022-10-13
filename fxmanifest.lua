@@ -8,7 +8,7 @@ version "0.9.0"
 lua54 "yes"
 ui_page "nui/index.html"
 ------------------------------------------------------------------------------
-shared_scripts {"conf.lua", "conf.default.lua", "conf.vehicles.lua", "conf.disable.lua", "conf.file.lua", "conf.peds.lua", "shared/_c.lua"}
+shared_scripts {"conf.lua", "conf.default.lua", "conf.vehicles.lua", "conf.disable.lua", "conf.file.lua", "conf.peds.lua", "conf.phone.lua", "shared/_c.lua"}
 ------------------------------------------------------------------------------
 client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Credits]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "client/_functions.lua", "client/**/*.lua"}
 ------------------------------------------------------------------------------
