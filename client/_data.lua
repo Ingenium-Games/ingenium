@@ -121,6 +121,7 @@ function c.GetPlayerPedState(ped,key)
 end
 
 
+
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
 function c.data.GetEntityState(net,key)    
@@ -136,7 +137,7 @@ end
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
 function c.data.SetEntityState(net,key,value)    
-    Entity(NetToObj(net)).state:set(tostring(key), value, true)
+    Entity(NetworkGetEntityFromNetworkId(net)).state:set(tostring(key), value, true)
 end
 
 --- Return the Entity"s state bag.
@@ -172,6 +173,7 @@ function c.SetObjectState(net,key,value)
 end
 
 
+
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
 function c.data.GetVehicleState(net,key)    
@@ -195,6 +197,7 @@ end
 function c.SetVehicleState(net,key,value)    
     c.data.SetVehicletate(net,key,value)   
 end
+
 
 
 --- Return the Entity"s state bag.
@@ -222,8 +225,7 @@ function c.SetPedState(net,key,value)
 end
 
 --- func desc
----@param type number "1-3"
----@param ent any "The passed client entity"
+---@param net any "The passed client entity"
 ---@param key any "The state bag key you want to get the data from."
 function c.data.GetEntityStateByType(net, key)
     local entity = NetworkGetEntityFromNetworkId(net)
