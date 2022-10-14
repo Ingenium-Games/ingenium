@@ -180,7 +180,7 @@ end
 
 function c.data.ArePlayersActive()
     local ptbl = GetPlayers()    
-    if type(ptbl) == "table" and #ptbl > 1 then
+    if type(ptbl) == "table" and #ptbl >= 1 then
         return true                
     end
     return false
