@@ -1,11 +1,7 @@
 -- ====================================================================================--
+
 c.animation = {}
---[[
-NOTES.
-    - Animations are registered as events, this can be useful for creating scripts that force a level of immersion.
-    - Example for RP, A police officer is aiming a weapon at an UNARMED ped, that ped is forced to raise their hands.
-    - If they aim at an ARMED ped, the ped does not have to raise hands.
-]] --
+
 -- ====================================================================================--
 RegisterNetEvent("Animation:General:ArmsCrossed")
 AddEventHandler("Animation:General:ArmsCrossed", function(bool, ped)

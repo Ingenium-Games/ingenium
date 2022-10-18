@@ -3,23 +3,23 @@
 c.job = {} -- Function Table
 c.jobs = {} -- DB Pull
 c.jdex = {} -- Job Index for xJobs functions.
---[[
-NOTES.
-    -
-    -
-    -
-]]--
 
 -- ====================================================================================--
 
+--- func desc
+---@param str any
 function c.job.GetJob(str)
     return c.jobs[str]
 end
 
+--- func desc
 function c.job.GetJobs()
     return c.jobs
 end
 
+--- func desc
+---@param name any
+---@param grade any
 function c.job.IsBoss(name,grade) 
     if (#c.jobs[name].Grades == grade) then 
         return true 
@@ -31,6 +31,7 @@ end
 local CurrentlyActive = {}
 
 --- Return 
+--- func desc
 function c.job.ActiveMembers()
     local tab = {}
     for k,v in ipairs(CurrentlyActive) do
@@ -136,11 +137,15 @@ function c.job.Payroll(bool)
     c.func.Debug_1("Jobs Payed.")
 end
 
+--- func desc
+---@param Job any
+---@param Amount any
 function c.job.PayJob(Job, Amount)
     local xJob = c.data.GetJob(Job)
     xJob.AddBank(Amount)
 end
 
+--- func desc
 function c.job.PayCycle()
     local function Do()
         c.job.Payroll(conf.enablejobpayroll)     

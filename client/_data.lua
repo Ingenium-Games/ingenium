@@ -1,12 +1,7 @@
 -- ====================================================================================--
 
 c.data = {}
---[[
-NOTES.
-    -
-    -
-    -
-]]--
+
 -- ====================================================================================--
 
 --- Upon joining, these are core functions to run internally prior to sending the join request to the server

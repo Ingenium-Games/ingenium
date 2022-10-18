@@ -1,16 +1,9 @@
 -- ====================================================================================--
-
 c.blip = {} -- functions
 c.blips = {} -- stored made blips.
---[[
-NOTES.
-    - 
-    - 
-    -
-]] --
-
 SetThisScriptCanRemoveBlipsCreatedByAnyScript(true)
 -- ====================================================================================--
+
 -- https://docs.fivem.net/docs/game-references/blips/
 -- https://runtime.fivem.net/doc/natives/?_0x9029B2F3DA924928
 

@@ -2,12 +2,6 @@
 
 c.gsr = {} -- function level
 c.gsrs = {} -- dropped items table
---[[
-NOTES.
-    -
-    -
-    -
-]] --
 
 -- ====================================================================================--
  
@@ -24,6 +18,8 @@ NOTES.
         }
 ]]--
     
+--- func desc
+---@param . any
 function c.gsr.Load()
     if c.json.Exists(conf.file.gsr) then
         c.gsrs = c.json.Read(conf.file.gsr)
@@ -34,6 +30,8 @@ function c.gsr.Load()
     end
 end
 
+
+--- func desc
 function c.gsr.Update()
     local function Do()
         c.json.Write(conf.file.gsr, c.gsrs)
@@ -42,6 +40,8 @@ function c.gsr.Update()
     SetTimeout(conf.file.save, Do)
 end
 
+--- func desc
+---@param data any
 function c.gsr.Add(data)
     if type(data) == "table" then
         table.insert(c.gsrs, data)
@@ -50,6 +50,8 @@ function c.gsr.Add(data)
     end
 end
 
+--- func desc
+---@param id any
 function c.gsr.Exist(id)
     if c.gsrs[id] then
         return true
@@ -57,6 +59,7 @@ function c.gsr.Exist(id)
     return false
 end
 
+--- func desc
 function c.gsr.Clean()
     if type(c.gsrs) == "table" then
         for k,v in pairs(c.gsrs) do
@@ -69,6 +72,7 @@ function c.gsr.Clean()
     end
 end
 
+--- func desc
 function c.gsr.CleanUp()
     local function Do()
         c.gsr.Clean()

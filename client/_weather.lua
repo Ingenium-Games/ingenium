@@ -1,4 +1,4 @@
-SetWeatherOwnedByNetwork()
+SetWeatherOwnedByNetwork(true)
 
 --[[
 Client functions

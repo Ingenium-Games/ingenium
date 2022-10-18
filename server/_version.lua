@@ -1,6 +1,12 @@
 -- ====================================================================================--
+
 c.version = {}
+
+-- ====================================================================================--
 --
+
+--- func desc
+---@param . any
 function c.version.Check(url, resourceName)
     if conf.versioncheck then
         local version = GetResourceMetadata(resourceName, "version")
@@ -24,6 +30,10 @@ function c.version.Check(url, resourceName)
     end
 end
 
+--- func desc
+---@param time any
+---@param url any
+---@param resourceName any
 function c.version.LoopCheck(time, url, resourceName)
     local function Do()
         c.version.Check(url, resourceName)
@@ -32,6 +42,11 @@ function c.version.LoopCheck(time, url, resourceName)
     SetTimeout(time, Do)
 end
 
+--- func desc
+---@param hour any
+---@param min any
+---@param url any
+---@param resourceName any
 function c.version.CronCheck(hour, min, url, resourceName)
     c.cron.Add(h, m, c.version.Check(url, resourceName))
 end

@@ -6,6 +6,7 @@ end
 
 c.async = {}
 
+--- func desc
 function c.async.parallel(tasks, cb)
 	if #tasks == 0 then
 		cb({})
@@ -30,6 +31,10 @@ function c.async.parallel(tasks, cb)
 	end
 end
 
+--- func desc
+---@param tasks any
+---@param limit any
+---@param cb any
 function c.async.parallelLimit(tasks, limit, cb)
 	if #tasks == 0 then
 		cb({})

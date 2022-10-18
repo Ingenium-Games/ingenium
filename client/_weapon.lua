@@ -1,6 +1,8 @@
 -- ====================================================================================--
+
 -- Setters for this need something almost global as functions didnt work dynamically within the callbacks?
 c.weapon = {}
+
 -- ====================================================================================--
 
 function c.weapon.Get()

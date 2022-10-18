@@ -2,22 +2,26 @@
 
 c.door = {} -- functions
 c.doors = {}
---[[
-NOTES
-    -
-]]--
+
 -- ====================================================================================--
 
+--- func desc
+---@param model any
+---@param coords any
+---@param locked any
 function c.door.Add(model, coords, locked)
     local tab = {model = model, coords = coords, locked = locked}
     table.insert(c.doors, tab)
 end
 
+--- func desc
 function c.door.Resync()
     local doors = c.doors
     TriggerClientEvent("Client:Doors:Initialize", -1, doors)
 end
 
+--- func desc
+---@param coords any
 function c.door.Find(coords)
     for k,v in pairs(c.doors) do
         -- is the door in the table?
@@ -28,6 +32,8 @@ function c.door.Find(coords)
     return false, false
 end
 
+--- func desc
+---@param coords any
 function c.door.Toggle(coords)
     local bool, door = c.door.Find(coords)
     if door then

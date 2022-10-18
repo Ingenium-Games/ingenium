@@ -1,8 +1,7 @@
 -- ====================================================================================--
---[[
-NOTES.
-    - Updated to PMC callbacks v2, with alerations to ensure it works?
-]] --
+
+
+
 -- ====================================================================================--
 local DataPacket = RegisterClientCallback({
     eventName = "DataPacket",

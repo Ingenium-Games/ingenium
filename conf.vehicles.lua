@@ -1,13 +1,9 @@
 -- ====================================================================================--
 
 conf.vehicles = {}
---[[
-NOTES
-	- Saves having to add them over and over
-	-
-	- conf.vehicles upto date as build 2149
-]] --
+
 -- ====================================================================================--
+
 conf.vehicles.classes = {
 [0] = "Compact",
 [1] = "Sedan",

@@ -1,7 +1,10 @@
 -- ====================================================================================--
 
 
+
+
 -- ====================================================================================--
+
 --  Get Character Info for the NUI to allow character selection.
 -- [C+S]
 RegisterNetEvent("Server:Character:List", function(req, Primary_ID)

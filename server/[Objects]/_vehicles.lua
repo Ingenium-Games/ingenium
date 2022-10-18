@@ -1,15 +1,9 @@
 -- ====================================================================================--
+
 c.vehicle = {} -- function level
 c.vehicles = exports["ig.dump"]:GetVehicles()
 c.vdex = {} -- npc vehicles...
 c.pvdex = {} -- the index/store for currently used vehciles prior to writing to db.
---[[
-NOTES.
-    - Some natives use entity
-    - Some natives use NetworkID.
-    - Network ID should be for the server and entity for the individual user is different.
-    - data getters within the _data file.
-]]--
 
 -- ====================================================================================--
 
@@ -28,6 +22,7 @@ function c.vehicle.GetByPlate(plate)
     return false
 end
 
+--- func desc
 function c.vehicle.GetDumpedHashes()
     local t = {}
     for k,v in pairs(c.vehicles) do
@@ -36,6 +31,10 @@ function c.vehicle.GetDumpedHashes()
     return t
 end
 
+--- func desc
+---@param source any
+---@param net any
+---@param playerid any
 function c.vehicle.ChangeOwner(source, net, playerid) 
     local src = source
     local xPlayer = c.data.GetPlayer(src)
@@ -56,17 +55,8 @@ function c.vehicle.ChangeOwner(source, net, playerid)
     end
 end
 
-function c.vehicle.Respawn(plate, ords)
-
-end
-
-function c.vehicle.Remove(xVehicle)
-    if DoesEntityExist(xVehicle.GetEntity()) then
-        DeleteEntity(xVehicle.GetEntity())
-        c.data.RemoveVehicle(xVehicle.GetEntity())
-    end
-end
-
+--- func desc
+---@param xVehicle any
 function c.vehicle.AllExit(xVehicle)
     if DoesEntityExist(xVehicle.GetEntity()) then
         for i=-1, 8, 1 do

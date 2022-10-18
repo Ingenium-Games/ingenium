@@ -8,12 +8,16 @@ NOTES.
 ]] --
 -- ====================================================================================--
 
+--- func desc
+---@param any any
 function c.func.Func(...)
     local arg = {...}
     local status, val = c.func.Err(unpack(arg))
     return val
 end
 
+--- func desc
+---@param func any
 function c.func.Err(func, ...)
     local arg = {...}
     return xpcall(function()
@@ -23,6 +27,8 @@ function c.func.Err(func, ...)
     end)
 end
 
+--- func desc
+---@param err any
 function c.func.Error(err)
     if conf.error then
         if type(err) == "string" then
@@ -35,32 +41,43 @@ function c.func.Error(err)
     end
 end
 
+--- func desc
+---@param str any
 function c.func.Debug_1(str)
     if conf.debug_1 then
         print("   ^7[^6Debug L1^7]:  ==    ", str)
     end
 end
 
+--- func desc
+---@param str any
 function c.func.Debug_2(str)
     if conf.debug_2 then
         print("   ^7[^6Debug L2^7]:  ==    ", str)
     end
 end
 
+--- func desc
+---@param str any
 function c.func.Debug_3(str)
     if conf.debug_3 then
         print("   ^7[^6Debug L3^7]:  ==    ", str)
     end
 end
 
+--- func desc
+---@param str any
 function c.func.Alert(str)
     print("   ^7[^3Alert^7]:  ==    ", str)
 end
 
+--- func desc
 function c.func.Timestamp()
     return os.time(os.date("*t"))
 end
 
+--- func desc
+---@param time any
 function c.func.Timestring(time)
     local time = time or c.func.Timestamp()
     return os.date("%c", time)
@@ -125,7 +142,9 @@ function c.func.Discord(url, color, name, message, footer)
 end
 
 -- local "https://api.twitch.tv/helix/clips?broadcaster_id="..i.broadcaster
-
+--- func desc
+---@param source any
+---@param event any
 function c.func.Eventban(source, event)
     local src = source
     local id = c.func.identifier(src)
@@ -141,6 +160,12 @@ end
 
 -- ====================================================================================--
 
+--- func desc
+---@param name any
+---@param x any
+---@param y any
+---@param z any
+---@param h any
 function c.func.CreateVehicle(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
@@ -158,6 +183,12 @@ function c.func.CreateVehicle(name, x, y, z, h)
     return entity, net
 end
 
+--- func desc
+---@param name any
+---@param x any
+---@param y any
+---@param z any
+---@param h any
 function c.func.CreatePed(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
@@ -175,6 +206,12 @@ function c.func.CreatePed(name, x, y, z, h)
     return entity, net
 end
 
+--- func desc
+---@param name any
+---@param x any
+---@param y any
+---@param z any
+---@param isdoor any
 function c.func.CreateObject(name, x, y, z, isdoor)
     local hash = nil
     if type(name) == "number" then
@@ -196,6 +233,8 @@ function c.func.CreateObject(name, x, y, z, isdoor)
 end
 
 -- My own version of the native for the server to use.
+--- func desc
+---@param hash any
 function c.func.IsPedMale(hash)
     if conf.peds.male[hash] then
         return true, "Male"
@@ -206,6 +245,8 @@ function c.func.IsPedMale(hash)
 end
 
 -- My own version of the native for the server to use.
+--- func desc
+---@param hash any
 function c.func.IsPedHuman(hash)
     if conf.peds.animals[hash] then
         return false, "Animal"
@@ -214,6 +255,7 @@ function c.func.IsPedHuman(hash)
     end
 end
 
+--- func desc
 function c.func.HasPlayers()
     if (#GetPlayers() > 0) then
         return true

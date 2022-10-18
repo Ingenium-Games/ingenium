@@ -1,6 +1,8 @@
 -- ====================================================================================--
+
 c.pick = {} -- function level
 c.picks = false -- dropped items table
+
 -- ====================================================================================--
     
 --[[    
@@ -15,6 +17,8 @@ c.picks = false -- dropped items table
         }
 ]]--
     
+--- func desc
+---@param . any
 function c.pick.Load()
     if c.json.Exists(conf.file.pickups) then
         local file = c.json.Read(conf.file.pickups)
@@ -26,6 +30,7 @@ function c.pick.Load()
     end
 end
 
+--- func desc
 function c.pick.Update()
     local function Do()
         c.json.Write(conf.file.pickups, c.picks)
@@ -34,6 +39,8 @@ function c.pick.Update()
     SetTimeout(conf.file.save, Do)
 end
 
+--- func desc
+---@param data any
 function c.pick.Add(data)
     if type(data) == "table" then
         table.insert(c.picks, data)
@@ -42,6 +49,8 @@ function c.pick.Add(data)
     end
 end
 
+--- func desc
+---@param id any
 function c.pick.Exist(id)
     if c.picks[id] then
         return true
@@ -49,6 +58,7 @@ function c.pick.Exist(id)
     return false
 end
 
+--- func desc
 function c.pick.Clean()
     if type(c.picks) == "table" then
         for k,v in pairs(c.picks) do
@@ -61,6 +71,7 @@ function c.pick.Clean()
     end
 end
 
+--- func desc
 function c.pick.CleanUp()
     local function Do()
         c.pick.Clean()

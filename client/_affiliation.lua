@@ -1,13 +1,6 @@
 -- ====================================================================================--
 
 c.affil = {}
---[[
-NOTES.
-    - This section is in relation to ped relationships based on roles or jobs.
-    - Imagin a vargo rollin into baller territory. EzClapps and Vice Versa.
-    - To really be used with PolyZones, to make sections of the city gang affiliated
-    - for more and vast interactions. 
-]] --
 
 -- ====================================================================================--
 
@@ -59,6 +52,8 @@ local defaultgroups = {
 local groups = {}
 
 --- Returns Groups after merging the default and Newly created groups.
+--- func desc
+---@param . any
 function c.affil.GetGroups()
     local newgroups = c.table.merge(groups, defaultgroups)
     return newgroups

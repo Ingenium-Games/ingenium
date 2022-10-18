@@ -1,6 +1,8 @@
 -- ====================================================================================--
+
 c.drop = {} -- function level
 c.drops = false -- dropped items table
+
 -- ====================================================================================--
 
 --[[    
@@ -17,6 +19,8 @@ c.drops = false -- dropped items table
         }
 ]] --
 
+--- func desc
+---@param . any
 function c.drop.Load()
     if c.json.Exists(conf.file.drops) then
         local file = c.json.Read(conf.file.drops)
@@ -28,6 +32,7 @@ function c.drop.Load()
     end
 end
 
+--- func desc
 function c.drop.Update()
     local function Do()
         c.json.Write(conf.file.drops, c.drops)
@@ -36,6 +41,8 @@ function c.drop.Update()
     SetTimeout(conf.file.save, Do)
 end
 
+--- func desc
+---@param data any
 function c.drop.Add(data)
     if type(data) == "table" then
         table.insert(c.drops, data)
@@ -44,6 +51,8 @@ function c.drop.Add(data)
     end
 end
 
+--- func desc
+---@param id any
 function c.drop.Exist(id)
     if c.drops[id] then
         return true
@@ -51,6 +60,7 @@ function c.drop.Exist(id)
     return false
 end
 
+--- func desc
 function c.drop.Clean()
     if type(c.drops) == "table" then
         for k, v in pairs(c.drops) do
@@ -63,6 +73,7 @@ function c.drop.Clean()
     end
 end
 
+--- func desc
 function c.drop.CleanUp()
     local function Do()
         c.drop.Clean()
@@ -71,6 +82,7 @@ function c.drop.CleanUp()
     SetTimeout(conf.file.cleanup, Do)
 end
 
+--- func desc
 function c.drop.Resync()
     local drops = c.drops
     TriggerClientEvent("Client:Drops:Update", -1, drops)

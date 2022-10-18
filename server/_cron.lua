@@ -1,12 +1,7 @@
 -- ====================================================================================--
+
 c.cron = {} -- functions
 c.crons = {} -- table of jobs to action @ times.
---[[
-NOTES.
-    - Simple Cron Handler based on hours and minutes only.
-    - No need to add days intot he mix as generally all time based events within
-    - FiveM Game modes are not relyant on days.
-]]--
 
 -- ====================================================================================--
 

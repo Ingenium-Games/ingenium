@@ -1,20 +1,19 @@
 -- ====================================================================================--
+
 c.func = {}
---[[
-NOTES.
-    -
-    -
-    -
-]] --
 
 -- ====================================================================================--
 
+--- func desc
+---@param . any
 function c.func.Func(...)
     local arg = {...}
     local status, val = c.func.Err(unpack(arg))
     return val
 end
 
+--- func desc
+---@param func any
 function c.func.Err(func, ...)
     local arg = {...}
     return xpcall(function()
@@ -24,6 +23,8 @@ function c.func.Err(func, ...)
     end)
 end
 
+--- func desc
+---@param err any
 function c.func.Error(err)
     if conf.error then
         if type(err) == "string" then
@@ -36,24 +37,32 @@ function c.func.Error(err)
     end
 end
 
+--- func desc
+---@param str any
 function c.func.Debug_1(str)
     if conf.debug_1 then
         print("   ^7[^6Debug L1^7]:  ==    ", str)
     end
 end
 
+--- func desc
+---@param str any
 function c.func.Debug_2(str)
     if conf.debug_2 then
         print("   ^7[^6Debug L2^7]:  ==    ", str)
     end
 end
 
+--- func desc
+---@param str any
 function c.func.Debug_3(str)
     if conf.debug_3 then
         print("   ^7[^6Debug L3^7]:  ==    ", str)
     end
 end
 
+--- func desc
+---@param str any
 function c.func.Alert(str)
     print("   ^7[^3Alert^7]:  ==    ", str)
 end
@@ -61,18 +70,21 @@ end
 -- ====================================================================================--
 
 --- Preduce a Busy Spinner
+--- func desc
 function c.func.IsBusy()
     BeginTextCommandBusyspinnerOn("FM_COR_AUTOD")
     EndTextCommandBusyspinnerOn(5)
 end
 
 --- Remvoe a Busy Spinner
+--- func desc
 function c.func.NotBusy()
     BusyspinnerOff()
     PreloadBusyspinner()
 end
 
 --- Produce a Busy Spinner with a "Please Wait"
+--- func desc
 function c.func.PleaseWait()
     BeginTextCommandBusyspinnerOn("PM_WAIT")
     EndTextCommandBusyspinnerOn(5)
@@ -326,6 +338,7 @@ function c.func.GetPlayers()
 end
 
 -- returns closest, closestdist
+--- func desc
 function c.func.GetClosestPed()
     local closest = -1
     local closestdist = -1
@@ -344,6 +357,7 @@ function c.func.GetClosestPed()
 end
 
 -- returns closest, closestdist
+--- func desc
 function c.func.GetClosestPlayer()
     local players = GetActivePlayers()
     local closest = -1
@@ -365,6 +379,7 @@ function c.func.GetClosestPlayer()
 end
 
 -- returns closestVeh, closestdist
+--- func desc
 function c.func.GetClosestVehicle()
     local closest = -1
     local closestdist = -1
@@ -383,6 +398,8 @@ function c.func.GetClosestVehicle()
 end
 
 -- returns closestVeh, closestdist
+--- func desc
+---@param positions any
 function c.func.GetClosestPosition(positions)
     local closest = -1
     local closestdist = -1
@@ -402,8 +419,9 @@ function c.func.GetClosestPosition(positions)
     return closest, closestdist, count
 end
 
-
 -- base events.
+--- func desc
+---@param ped any
 function c.func.GetVehicleSeatOfPed(ped)
     local vehicle = GetVehiclePedIsIn(ped, false)
     for i = -2, GetVehicleMaxNumberOfPassengers(vehicle) do
@@ -414,6 +432,7 @@ function c.func.GetVehicleSeatOfPed(ped)
     return -2
 end
 
+--- func desc
 function c.func.GetEntityFromRay()
     local ped = PlayerPedId()
     local coords = GetEntityCoords(ped)
@@ -428,6 +447,38 @@ function c.func.GetEntityFromRay()
     return false, false
 end
 
+--- func desc
+---@param networkId any
+---@param timeout any
+function c.func.WaitUntilNetIdExists(networkId, timeout)
+	local threshold = GetGameTimer() + (timeout or 5000)
+
+	while (not NetworkDoesEntityExistWithNetworkId(networkId) and GetGameTimer() < threshold) do
+		Citizen.Wait(0)
+	end
+
+	return NetworkDoesEntityExistWithNetworkId(networkId)
+end
+
+--- func desc
+---@param entityHandle any
+---@param timeout any
+function c.func.WaitUntilPlayerIsOwner(entityHandle, timeout)
+	local threshold = GetGameTimer() + (timeout or 5000)
+
+	while (DoesEntityExist(entityHandle) and NetworkGetEntityOwner(entityHandle) ~= PlayerId() and GetGameTimer() < threshold) do
+		Citizen.Wait(0)
+	end
+
+	return DoesEntityExist(entityHandle) and NetworkGetEntityOwner(entityHandle) == PlayerId()
+end
+
+--- func desc
+---@param name any
+---@param x any
+---@param y any
+---@param z any
+---@param h any
 function c.func.CreatePed(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
@@ -451,6 +502,12 @@ function c.func.CreatePed(name, x, y, z, h)
     end
 end
 
+--- func desc
+---@param name any
+---@param x any
+---@param y any
+---@param z any
+---@param isdoor any
 function c.func.CreateObject(name, x, y, z, isdoor)
     local hash = nil
     if type(name) == "number" then
@@ -477,6 +534,12 @@ function c.func.CreateObject(name, x, y, z, isdoor)
     end
 end
 
+--- func desc
+---@param name any
+---@param x any
+---@param y any
+---@param z any
+---@param h any
 function c.func.CreateVehicle(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
@@ -503,6 +566,10 @@ function c.func.CreateVehicle(name, x, y, z, h)
     end
 end
 
+
+--- func desc
+---@param coords any
+---@param radius any
 function c.func.IsVehicleSpawnClear(coords, radius)
     if coords then
         coords = type(coords) == 'table' and vec3(coords.x, coords.y, coords.z) or coords
@@ -524,7 +591,10 @@ function c.func.IsVehicleSpawnClear(coords, radius)
     return true
 end
 
+
 -- returns all Modifications of a vehicle
+--- func desc
+---@param vehicle any
 function c.func.GetVehicleModifications(vehicle)
     -- main colors
     local primaryColor, secondaryColor = GetVehicleColours(vehicle)
@@ -573,7 +643,11 @@ function c.func.GetVehicleModifications(vehicle)
     GetVehicleLivery(vehicle), -- 24
     GetVehicleRoofLivery(vehicle)}
 end
+
 -- apply all vehicle Modifications
+--- func desc
+---@param vehicle any
+---@param Modifications any
 function c.func.SetVehicleModifications(vehicle, Modifications)
     SetVehicleModKit(vehicle, 0)
     -- 16 wheelType
@@ -627,6 +701,8 @@ function c.func.SetVehicleModifications(vehicle, Modifications)
 end
 
 -- returns the status values of a vehicle
+--- func desc
+---@param vehicle any
 function c.func.GetVehicleCondition(vehicle)
     local fuelLevel = 65.0
     fuelLevel = GetVehicleFuelLevel(vehicle)
@@ -643,7 +719,11 @@ function c.func.GetVehicleCondition(vehicle)
     c.func.GetVehicleDoorStates(vehicle), -- 10 window states
     c.func.GetVehicleWindowStates(vehicle)}
 end
+
 -- apply all vehicle status values
+--- func desc
+---@param vehicle any
+---@param Condition any
 function c.func.SetVehicleCondition(vehicle, Condition)
     -- 1 entity health
     SetEntityHealth(vehicle, Condition[1])
@@ -671,6 +751,8 @@ function c.func.SetVehicleCondition(vehicle, Condition)
 end
 
 -- returns all non-stock vehicle mods
+--- func desc
+---@param vehicle any
 function c.func.GetVehicleMods(vehicle)
     local mods = {}
     for i = 0, 49, 1 do
@@ -692,7 +774,13 @@ function c.func.GetVehicleMods(vehicle)
     end
     return mods
 end
+
 -- apply all vehicle mods
+--- func desc
+---@param vehicle any
+---@param mods any
+---@param customFrontWheels any
+---@param customRearWheels any
 function c.func.SetVehicleMods(vehicle, mods, customFrontWheels, customRearWheels)
     for i, mod in ipairs(mods) do
         local id = mod[1]
@@ -708,6 +796,8 @@ function c.func.SetVehicleMods(vehicle, mods, customFrontWheels, customRearWheel
 end
 
 -- returns all vehicle extras
+--- func desc
+---@param vehicle any
 function c.func.GetVehicleExtras(vehicle)
     local extras = {}
     for i = 0, 20, 1 do
@@ -727,6 +817,9 @@ function c.func.GetVehicleExtras(vehicle)
 end
 
 -- apply all vehicle extras
+--- func desc
+---@param vehicle any
+---@param extras any
 function c.func.SetVehicleExtras(vehicle, extras)
     for i, extra in ipairs(extras) do
         SetVehicleExtra(vehicle, extra[1], extra[2])
@@ -740,6 +833,8 @@ function c.func.SetVehicleExtrasFalse(vehicle, extras)
 end
 
 -- returns all tire states
+--- func desc
+---@param vehicle any
 function c.func.GetVehicleTireStates(vehicle)
     local burstTires = {}
     for i = 0, 5, 1 do
@@ -755,7 +850,11 @@ function c.func.GetVehicleTireStates(vehicle)
     end
     return burstTires
 end
+
 -- apply all tire states
+--- func desc
+---@param vehicle any
+---@param tireStates any
 function c.func.SetVehicleTireStates(vehicle, tireStates)
     for i, tireState in ipairs(tireStates) do
         SetVehicleTyreBurst(vehicle, tireState[1], tireState[2], 1000.0)
@@ -763,6 +862,8 @@ function c.func.SetVehicleTireStates(vehicle, tireStates)
 end
 
 -- returns all door states
+--- func desc
+---@param vehicle any
 function c.func.GetVehicleDoorStates(vehicle)
     local doorStates = {}
     for i = 0, 7, 1 do
@@ -776,7 +877,11 @@ function c.func.GetVehicleDoorStates(vehicle)
     end
     return doorStates
 end
+
 -- apply all door states
+--- func desc
+---@param vehicle any
+---@param doorStates any
 function c.func.SetVehicleDoorStates(vehicle, doorStates)
     for i, doorState in ipairs(doorStates) do
         if (doorState[2]) then
@@ -788,6 +893,8 @@ function c.func.SetVehicleDoorStates(vehicle, doorStates)
 end
 
 -- returns all window states
+--- func desc
+---@param vehicle any
 function c.func.GetVehicleWindowStates(vehicle)
     if (AreAllVehicleWindowsIntact(vehicle)) then
         return {}
@@ -802,12 +909,17 @@ function c.func.GetVehicleWindowStates(vehicle)
 end
 
 -- apply all window states
+--- func desc
+---@param vehicle any
+---@param windowStates any
 function c.func.SetVehicleWindowStates(vehicle, windowStates)
     for i, windowState in ipairs(windowStates) do
         SmashVehicleWindow(vehicle, windowState)
     end
 end
 
+--- func desc
+---@param vehicle any
 function c.func.DeleteVehicle(vehicle)
     if (not DoesEntityExist(vehicle)) then return end
     if (GetResourceState("AdvancedParking") == "started") then

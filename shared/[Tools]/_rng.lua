@@ -10,16 +10,20 @@ NOTES.
 
 -- ====================================================================================--
 
+--- func desc
+---@param . any
 function c.rng.num()
     local rand = math.random(0, 9)
     return rand
 end
 
+--- func desc
 function c.rng.let()
     local rand = string.char(math.random(97, 122))
     return rand
 end
 
+--- func desc
 function c.rng.char()
     local rand = nil
     local rlet = c.rng.let()
@@ -32,6 +36,8 @@ function c.rng.char()
     return rand
 end
 
+--- func desc
+---@param num any
 function c.rng.nums(num)
     local rand = nil
     local len = num
@@ -50,6 +56,8 @@ function c.rng.nums(num)
     return rand
 end
 
+--- func desc
+---@param num any
 function c.rng.lets(num)
     local rand = nil
     local len = num
@@ -67,6 +75,8 @@ function c.rng.lets(num)
     return rand
 end
 
+--- func desc
+---@param num any
 function c.rng.chars(num)
     local rand = nil
     local len = num

@@ -1,12 +1,7 @@
 -- ====================================================================================--
+
 c.data = {} -- data table for funcitons.
 c.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
---[[
-NOTES.
-    -
-    -
-    -
-]] --
 
 -- ====================================================================================--
 
@@ -135,6 +130,8 @@ function c.GetPlayers()
     return c.data.GetPlayers()
 end
 
+--- func desc
+---@param character_id any
 function c.data.GetOfflinePlayer(character_id)
     if character_id then
         local data = c.sql.char.Get(character_id)
@@ -178,6 +175,7 @@ function c.data.GetPlayerIDByIdentifier(id)
     return nil
 end
 
+--- func desc
 function c.data.ArePlayersActive()
     local ptbl = GetPlayers()    
     if type(ptbl) == "table" and #ptbl >= 1 then
@@ -239,6 +237,9 @@ function c.data.GetVehicleByPlate(plate)
     return false
 end
 
+--- func desc
+---@param net any
+---@param cb any
 function c.data.AddVehicle(net, cb, ...)
     local aa, bb, cc = c.data.FindVehicle(net)
     if not aa then
@@ -246,11 +247,17 @@ function c.data.AddVehicle(net, cb, ...)
     end
 end
 
+--- func desc
+---@param net any
+---@param cb any
 function c.data.SetVehicle(net, cb, ...)
     c.vdex[tonumber(net)] = cb(...)
     return c.vdex[tonumber(net)]
 end
 
+--- func desc
+---@param arg any
+---@param cb any
 function c.data.AddPlayerVehicle(arg, cb, ...)
     local arg = tostring(arg)
     if not c.data.FindVehicle(arg) then
@@ -292,6 +299,8 @@ function c.GetVehicles()
 end
 
 -- Set to false for cleanup function inside _vehicles.lua
+--- func desc
+---@param arg any
 function c.data.RemoveVehicle(arg)
     if c.vdex[tonumber(arg)] then
         c.vdex[tonumber(arg)] = false
@@ -308,6 +317,9 @@ end
 -- ====================================================================================--
 -- NPC"s 
 
+--- func desc
+---@param net any
+---@param cb any
 function c.data.AddNpc(net, cb, ...)
     if not c.npc.Find(net) then
         c.ndex[tonumber(net)] = cb(...)
@@ -337,13 +349,18 @@ function c.GetNpcs()
 end
 
 -- Set to false for cleanup function inside _vehicles.lua
+--- func desc
+---@param net any
 function c.data.RemoveNpc(net)
     c.ndex[tonumber(net)] = false
 end
 
 -- ====================================================================================--
--- NPC"s 
+-- 
 
+--- func desc
+---@param net any
+---@param cb any
 function c.data.AddObject(net, cb, ...)
     if not c.object.Find(net) then
         c.odex[tonumber(net)] = cb(...)
@@ -373,6 +390,8 @@ function c.GetObjects()
 end
 
 -- Set to false for cleanup function inside _vehicles.lua
+--- func desc
+---@param net any
 function c.data.RemoveObject(net)
     c.odex[tonumber(net)] = false
 end
@@ -391,14 +410,19 @@ function c.data.CreateJobObjects()
     c.json.Write(conf.file.jobs, c.jobs)
 end
 
+--- func desc
 function c.data.GetJobs()
     return c.jdex
 end
 
+--- func desc
+---@param str any
 function c.data.GetJob(str)
     return c.jdex[str]
 end
 
+--- func desc
+---@param str any
 function c.GetJob(str)
     return c.data.GetJob(str)
 end
@@ -434,11 +458,16 @@ function c.data.GetEntityObject(type, net)
     end
 end
 ]] --
---
+
+--- func desc
+---@param t any
+---@param n any
 function c.GetEntityObject(t, n)
     return c.data.GetEntityObject(t, n)
 end
---
+
+--- func desc
+---@param str any
 function c.data.Save(str)
     print("   ^7[^5Saved^7]:  ==    ", str)
 end
@@ -462,6 +491,7 @@ function c.data.RetrievePackets()
     end
 end
 
+--- func desc
 function c.data.CharacterValues()
     local function Do()
         c.data.RetrievePackets()

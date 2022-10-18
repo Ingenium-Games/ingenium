@@ -3,6 +3,8 @@ if not c.class then
     c.class = {}
 end
 -- ====================================================================================--
+--- func desc
+---@param data any
 function c.class.OfflinePlayer(data)
     local Character_ID = data.Character_ID
     local License_ID = data.License_ID

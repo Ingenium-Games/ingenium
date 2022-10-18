@@ -1,10 +1,7 @@
 -- ====================================================================================--
 
 c.json = {}
---[[
-    I only use these for data files in Json, anyone can and should change them to a more 
-    appropriately named function. Like ReadJson etc.
-]]--
+
 -- ====================================================================================--
 
 function c.json.Exists(file)

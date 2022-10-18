@@ -10,6 +10,8 @@ NOTES.
 
 -- ====================================================================================--
 
+--- func desc
+---@param . any
 function c.table.MatchValue(t, v)
     for _, i in ipairs(t) do
         if (i == v) then
@@ -19,6 +21,9 @@ function c.table.MatchValue(t, v)
     return false
 end
 
+--- func desc
+---@param t any
+---@param k any
 function c.table.MatchKey(t, k)
     for i, _ in ipairs(t) do
         if (i == k) then
@@ -28,6 +33,8 @@ function c.table.MatchKey(t, k)
     return false
 end
 
+--- func desc
+---@param t any
 function c.table.Clone(t)
     local u = setmetatable({}, getmetatable(t))
     for i, v in pairs(t) do
@@ -57,7 +64,9 @@ function c.table.Merge(t, u, bool)
     return r
 end
 
-
+--- func desc
+---@param p any
+---@param t any
 function c.table.ReArrange(p, t)
     local r = c.table.Clone(t)
     for i, v in pairs(p) do
@@ -67,11 +76,15 @@ function c.table.ReArrange(p, t)
     return r
 end
 
+--- func desc
+---@param t any
 function c.table.Size(t)
     local r = #t
     return r
 end
 
+--- func desc
+---@param t any
 function c.table.SizeOf(t)
 	local count = 0
 
@@ -82,6 +95,9 @@ function c.table.SizeOf(t)
 	return count
 end
 
+--- func desc
+---@param table any
+---@param nb any
 function c.table.Dump(table, nb)
     if nb == nil then
         nb = 0

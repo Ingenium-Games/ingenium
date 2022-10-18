@@ -1,16 +1,11 @@
 -- ====================================================================================--
-c.bank = {}
 
---[[
-NOTES.
-    - These Banking functions utlizie the cron resource to plan and execute events or funtions 
-    - at a specific time each day, to run on a schedual.
-    - 
-]]--
+c.bank = {}
 
 -- ====================================================================================--
 
 -- Pulls all characters with loans and deducts money to pay the loan, can go negitive.
+--- func desc
 function c.bank.CalculatePayments()
     local xJob = c.data.GetJob("bank")
     -- To run independant of active players and debit accounts via sql.
@@ -24,6 +19,7 @@ end)
 --
 
 -- Updates the characters loan to add the interest on the outstanding amount each day.
+--- func desc
 function c.bank.CalculateInterest()
     local xJob = c.data.GetJob("bank")
     -- To run independant of active players and debit accounts via sql.

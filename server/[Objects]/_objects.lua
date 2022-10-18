@@ -3,13 +3,6 @@
 c.object = {} -- function level
 c.objects = {} -- database pull - If ever used?	
 c.odex = {} -- the iodex/store for currently used vehciles prior to writing to db.
---[[
-NOTES.
-    - Some natives use entity
-    - Some natives use NetworkID.
-    - Network ID should be for the server and entity for the individual user is different.
-    - data getters within the _data file.
-]]--
 
 -- ====================================================================================--
 

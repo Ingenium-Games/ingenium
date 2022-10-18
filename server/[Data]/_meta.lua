@@ -1,11 +1,5 @@
 -- ====================================================================================--
 
---[[
-    Turn the shared data into a Metatable with locked to prevent tampering.
-    Call it with setmetatable to local tables for shared uses.
-    rawset and rawget will still donkey fuck, but w/e
-]]--
-
 c.meta = {
     __index = self,
     __newindex = function() print("Locked") end,

@@ -1,6 +1,8 @@
 -- ====================================================================================--
+
 c.scene = {} -- function level
 c.scenes = false -- dropped items table
+
 -- ====================================================================================--
 --[[    
     {
@@ -13,6 +15,7 @@ c.scenes = false -- dropped items table
     }
 ]]--
 
+--- func desc
 function c.scene.Load()
     if c.json.Exists(conf.file.scenes) then
         local file = c.json.Read(conf.file.scenes)
@@ -24,6 +27,7 @@ function c.scene.Load()
     c.scene.Update()
 end
 
+--- func desc
 function c.scene.Update()
     local function Do()
         c.json.Write(conf.file.scenes, c.scenes)
@@ -32,6 +36,8 @@ function c.scene.Update()
     SetTimeout(conf.file.save, Do)
 end
 
+--- func desc
+---@param id any
 function c.scene.Exist(id)
     if c.scenes[id] then
         return true
@@ -39,6 +45,8 @@ function c.scene.Exist(id)
     return false
 end
 
+--- func desc
+---@param data any
 function c.scene.Add(data)
     if type(data) == "table" then
         table.insert(c.scenes, data)
@@ -48,6 +56,8 @@ function c.scene.Add(data)
     return #c.scenes
 end
 
+--- func desc
+---@param id any
 function c.scene.Remove(id)
     local found = c.scenes.Exist(id)
     if found then
@@ -55,6 +65,7 @@ function c.scene.Remove(id)
     end
 end
 
+--- func desc
 function c.scene.Clean()
     if type(c.scenes) == "table" then
         for k, v in pairs(c.scenes) do
@@ -69,6 +80,7 @@ function c.scene.Clean()
     end
 end
 
+--- func desc
 function c.scene.CleanUp()
     local function Do()
         c.scene.Clean()

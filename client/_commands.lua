@@ -1,6 +1,5 @@
 -- ====================================================================================--
 
-
 --[[
     Animations with Keybinding
 
@@ -8,6 +7,7 @@
     RegisterCommand("+cross", function() TriggerEvent("Animation:General:ArmsCrossed", true, GetPlayerPed(-1)) end, false)
     RegisterCommand("-cross", function() TriggerEvent("Animation:General:ArmsCrossed", false, GetPlayerPed(-1)) end, false)
     RegisterKeyMapping("+cross", "Cross arms", "keyboard", "z")
+    
 ]]--
 
 RegisterCommand("crossarms", function(source, args, rawCommand)

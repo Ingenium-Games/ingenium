@@ -3,16 +3,10 @@
 c.camera = {}
 c.cameras = {}
 
---[[
-NOTES.
-    - The purpose of this is simple. Everyone who scripts a camera makes the name CAM. I think that fucking stupid.
-    - What happens when others all use the name CAM? It means that when they DONT DESTROY the CAM...
-    - You have overlapping issues when ending cameras from different angles rather than snapping to the ped
-    - Even if you don"t destroy the camera, if its a different name, it should resolve the issues of weird cam shit happening.
-]]--
-
 -- ====================================================================================--
 
+--- func desc
+---@param . any
 function c.camera.NewName(t)
     local val
     local find = false
@@ -30,6 +24,16 @@ end
 
 -- ====================================================================================--
 
+--- func desc
+---@param px any
+---@param py any
+---@param pz any
+---@param rx any
+---@param ry any
+---@param rz any
+---@param fov any
+---@param l1 any
+---@param l2 any
 function c.camera.Basic(px, py, pz, rx, ry, rz, fov, l1, l2)
     if not l1 then l1 = false end
     if not l2 then l2 = 0 end
@@ -48,6 +52,17 @@ function c.camera.Basic(px, py, pz, rx, ry, rz, fov, l1, l2)
     return name
 end
 
+--- func desc
+---@param type any
+---@param px any
+---@param py any
+---@param pz any
+---@param rx any
+---@param ry any
+---@param rz any
+---@param fov any
+---@param l1 any
+---@param l2 any
 function c.camera.Advanced(type, px, py, pz, rx, ry, rz, fov, l1, l2)
     if not l1 then l1 = false end
     if not l2 then l2 = 0 end
@@ -66,6 +81,8 @@ function c.camera.Advanced(type, px, py, pz, rx, ry, rz, fov, l1, l2)
     return name
 end
 
+--- func desc
+---@param camera any
 function c.camera.CleanUp(camera)
     SetCamActive(camera, false)
     DestroyCam(camera)

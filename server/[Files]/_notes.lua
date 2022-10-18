@@ -2,12 +2,6 @@
 
 c.note = {} -- function level
 c.notes = false -- dropped items table
---[[
-NOTES.
-    -
-    -
-    -
-]] --
 
 -- ====================================================================================--
     
@@ -23,6 +17,7 @@ NOTES.
         }
 ]]--
 
+--- func desc
 function c.note.Load()
     if c.json.Exists(conf.file.notes) then
         local file = c.json.Read(conf.file.notes)
@@ -34,6 +29,7 @@ function c.note.Load()
     end
 end
 
+--- func desc
 function c.note.Update()
     local function Do()
         c.json.Write(conf.file.notes, c.notes)
@@ -42,6 +38,8 @@ function c.note.Update()
     SetTimeout(conf.file.save, Do)
 end
 
+--- func desc
+---@param data any
 function c.note.Add(data)
     if type(data) == "table" then
         table.insert(c.notes, data)
@@ -50,6 +48,8 @@ function c.note.Add(data)
     end
 end
 
+--- func desc
+---@param id any
 function c.note.Exist(id)
     if c.notes[id] then
         return true
@@ -57,6 +57,7 @@ function c.note.Exist(id)
     return false
 end
 
+--- func desc
 function c.note.Clean()
     if type(c.notes) == "table" then
         for k,v in pairs(c.notes) do
@@ -69,6 +70,7 @@ function c.note.Clean()
     end    
 end
 
+--- func desc
 function c.note.CleanUp()
     local function Do()
         c.note.Clean()

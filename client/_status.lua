@@ -6,12 +6,6 @@ c.stats = {
     ["Stress"] = 0 -- Min 0 Max 100
 }
 c.status = {}
---[[
-NOTES.
-    - As health and armour are natives for the game, we dont need to worry much about the
-    - additions to them from items etc as we can set max values, and have a default min
-    - of 0.
-]] --
 
 -- ====================================================================================--
 

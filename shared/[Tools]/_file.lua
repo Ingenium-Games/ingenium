@@ -1,11 +1,11 @@
 -- ====================================================================================--
 
 c.file = {}
---[[
 
-]]--
 -- ====================================================================================--
 
+--- func desc
+---@param . any
 function c.file.Exists(file)
     local f, err = io.open(GetResourcePath(GetCurrentResourceName()).."/data/"..file, "r")
     if not f then c.func.Debug_1(err) end
@@ -13,6 +13,8 @@ function c.file.Exists(file)
     return f
 end
 
+--- func desc
+---@param file any
 function c.file.Read(file)
     local f, err = io.open(GetResourcePath(GetCurrentResourceName()).."/data/"..file, "r")
     if not f then c.func.Debug_1(err) end
@@ -22,6 +24,9 @@ function c.file.Read(file)
 end
   
 -- Write a string to a file.
+--- func desc
+---@param file any
+---@param data any
 function c.file.Write(file, data)
     local f, err = io.open(GetResourcePath(GetCurrentResourceName()).."/data/"..file,  "w+")
     if not f then c.func.Debug_1(err) end
@@ -31,6 +36,9 @@ function c.file.Write(file, data)
 end
 
 -- Write a string to a file.
+--- func desc
+---@param file any
+---@param data any
 function c.file.Append(file, data)
     local f, err = io.open(GetResourcePath(GetCurrentResourceName()).."/data/"..file,  "a")
     if not f then c.func.Debug_1(err) end
