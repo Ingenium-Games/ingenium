@@ -83,15 +83,15 @@ AddEventHandler("entityCreating", function(ent)
     -- Object
     if type == 3 then
         if conf.disable.objects[model] then
-            CancelEvent()
             c.func.Debug_1("Object prevented from Spawning.")
+            CancelEvent()
         end
     --
     -- Vehicle
     elseif type == 2 then            
         if conf.disable.vehicles[model] then
-            CancelEvent()
             c.func.Debug_1("Vehicle prevented from Spawning.")
+            CancelEvent()
         end
     --
     -- Ped
@@ -99,8 +99,8 @@ AddEventHandler("entityCreating", function(ent)
         -- not a human player
         if not IsPedAPlayer(ent) then
             if conf.disable.peds[model] then
-                CancelEvent()
                 c.func.Debug_1("Ped prevented from Spawning.")
+                CancelEvent()
             end
         else
         -- is a player

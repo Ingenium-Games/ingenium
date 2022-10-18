@@ -8,7 +8,14 @@ NOTES
 	-
 ]] --
 -- ====================================================================================--
-conf.disable.peds = {}
+conf.disable.peds = {
+	`csb_cop`,
+	`s_f_y_cop_01`,
+	`s_m_m_snowcop_01`,
+	`s_m_y_cop_01`,
+	`s_m_y_hwaycop_01`,
+	`s_m_y_swat_01`,
+}
 conf.disable.weapons = {}
 conf.disable.objects = {}
 conf.disable.pickups = {}
