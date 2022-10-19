@@ -1,27 +1,65 @@
 -- ====================================================================================--
+
 if not c.class then
     c.class = {}
 end
+
 -- ====================================================================================--
+
+--- func desc
+---@param net any
+function c.class.BlankObject(net)
+    local self = {}
+    self.Net = net
+    self.Entity = NetworkGetEntityFromNetworkId(net)
+    self.State = Entity(self.Entity).state
+    -- Model (hash)
+    self.Model = GetEntityModel(self.Entity)
+    self.State.Model = self.Model
+    --- func desc
+    self.GetSource = function()
+        return NetworkGetEntityOwner(self.Entity)
+    end
+    --- func desc
+    self.GetModel = function()
+        return self.Model
+    end
+    --- func desc
+    self.GetCoords = function()
+        local x, y, z = table.unpack(GetEntityCoords(self.Entity))
+        local h = GetEntityHeading(self.Entity)
+        return {
+            ["x"] = c.math.Decimals(x, 2),
+            ["y"] = c.math.Decimals(y, 2),
+            ["z"] = c.math.Decimals(z, 2),
+            ["h"] = c.math.Decimals(h, 2)
+        }
+    end
+    --- func desc
+    ---@param t any
+    self.SetCoords = function(t)
+        self.Coords = {
+            x = c.math.Decimals(t.x, 2),
+            y = c.math.Decimals(t.y, 2),
+            z = c.math.Decimals(t.z, 2),
+            h = c.math.Decimals(t.h, 2)
+        }
+    end
+    --
+    return self
+end
+--
+
 local function GetObj(id)
     if type(id) == "string" then
         return c.sql.GetObjectByName(id)
     else
         return {
-            Fuel = math.random(25, 89),
-            Keys = "{}",
             Inventory = "{}",
-            Condition = "{}",
-            Modifications = "{}",
-            Instance = false,
-            Garage = false,
-            Status = false,
-            Impound = false,
-            Owner = false,
-            Wanted = false
         }
     end
 end
+
 --- func desc
 ---@param net any
 function c.class.Object(net, id)
@@ -36,7 +74,6 @@ function c.class.Object(net, id)
     self.Weight = 0
     -- Inventory
     self.Inventory = json.decode(data.Inventory)
-
     --- func desc
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)

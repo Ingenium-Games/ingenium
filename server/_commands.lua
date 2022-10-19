@@ -99,7 +99,7 @@ RegisterCommand("unpark", function(source, args, rawCommand)
     end
     local net = NetworkGetNetworkIdFromEntity(ent)
     SetVehicleNumberPlateText(ent, data.Plate)
-    c.data.AddPlayerVehicle(net, c.class.PlayerVehicle, net, data)
+    c.data.AddVehicle(net, c.class.OwnedVehicle, net, data)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 

@@ -33,13 +33,13 @@ for k,v in pairs (c.items) do
         --
         if c.item.IsConsumeable(k) then
             --
+            xPlayer.RemoveItem(k, position)
+            --
             TriggerClientCallback({
                 source = src,
                 eventName = "Client:Item:Consumeable",
                 args = {k}
             })
-            --
-            xPlayer.RemoveItem(k, position)
             return
         end
         --

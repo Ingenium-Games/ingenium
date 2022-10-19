@@ -189,44 +189,18 @@ end
 
 ---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
 function c.data.FindVehicle(arg)
-    if type(arg) == "string" and arg:len() == 8 then
-        for k, v in pairs(c.pvdex) do
-            if k == arg then
+    for k, v in pairs(c.vdex) do
+        if v then
+            if k == arg and type(v) == "table" then
                 return true, v, k
             end
         end
-        return false, false, false
-    else
-        -- Find NET ID
-        -- Player Vehicle Dex
-        for k, v in pairs(c.pvdex) do
-            if v then
-                if k == arg then
-                    return true, v, k
-                end
-            end
-        end
-        -- NPC Vehicle Dex
-        for k, v in pairs(c.vdex) do
-            if v then
-                if k == arg and type(v) == "table" then
-                    return true, v, k
-                end
-            end
-        end
-        return false, false, false
     end
+    return false, false, false
 end
 
 ---@param plate string "Plate of vehicle."
 function c.data.GetVehicleByPlate(plate)
-    for k, v in pairs(c.pvdex) do
-        if v then
-            if k == plate then
-                return v
-            end
-        end
-    end
     for k, v in pairs(c.vdex) do
         if v then
             if v.Plate == plate then
@@ -255,16 +229,6 @@ function c.data.SetVehicle(net, cb, ...)
     return c.vdex[tonumber(net)]
 end
 
---- func desc
----@param arg any
----@param cb any
-function c.data.AddPlayerVehicle(arg, cb, ...)
-    local arg = tostring(arg)
-    if not c.data.FindVehicle(arg) then
-        c.pvdex[arg] = cb(...)
-    end
-end
-
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
 function c.data.GetVehicle(arg)
@@ -285,11 +249,6 @@ end
 
 --- Get all xVehicles
 function c.data.GetVehicles()
-    return c.pvdex
-end
-
---- Get all xVehicles
-function c.data.GetNPCVehicles()
     return c.vdex
 end
 

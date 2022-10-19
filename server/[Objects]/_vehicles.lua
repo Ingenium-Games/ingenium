@@ -2,8 +2,7 @@
 
 c.vehicle = {} -- function level
 c.vehicles = exports["ig.dump"]:GetVehicles()
-c.vdex = {} -- npc vehicles...
-c.pvdex = {} -- the index/store for currently used vehciles prior to writing to db.
+c.vdex = {} -- vehicles...
 
 -- ====================================================================================--
 
@@ -11,11 +10,6 @@ c.pvdex = {} -- the index/store for currently used vehciles prior to writing to 
 function c.vehicle.GetByPlate(plate)
     for k,v in pairs(c.vdex) do
         if v.Plate == plate then
-            return v
-        end
-    end 
-    for k,v in pairs(c.pvdex) do
-        if k == plate then
             return v
         end
     end 

@@ -26,54 +26,7 @@ MySQL.Async.store(
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.User(data, cb)
     if data then
-        -- Other Variables.
-        local Health = data.GetHealth()
-        local Armour = data.GetArmour()
-        local Hunger = data.GetHunger()
-        local Thirst = data.GetThirst()
-        local Stress = data.GetStress()
-        -- Tables require JSON Encoding.
-        local Coords = json.encode(data.GetCoords())
-        local Accounts = json.encode(data.GetAccounts())
-        local Modifiers = json.encode(data.GetModifiers())
-        local Inventory = json.encode(data.CompressInventory())
-        local Ammo = json.encode(data.GetAmmos())
-        local Job = json.encode(data.GetJob())
-        -- 
-        local Character_ID = data.GetCharacter_ID()
-        MySQL.Async.insert(PlayerSaveData, {
-            -- Other Variables.
-            ["@Health"] = Health,
-            ["@Armour"] = Armour,
-            ["@Hunger"] = Hunger,
-            ["@Thirst"] = Thirst,
-            ["@Stress"] = Stress,
-            -- Table Informaiton.
-            ["@Coords"] = Coords,
-            ["@Accounts"] = Accounts,
-            ["@Modifiers"] = Modifiers,
-            ["@Inventory"] = Inventory,
-            ["@Ammo"] = Ammo,
-
-            ["@Job"] = Job,
-            -- Where Conditions
-            ["@Character_ID"] = Character_ID
-        }, function(r)
-            -- do
-        end)
-        if cb then
-            cb()
-        end
-    end
-end
-
---- Save All Characters from the xPLayer Table.
----@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.save.Users(cb)
-    local xPlayers = c.data.GetPlayers()
-    for k, v in pairs(xPlayers) do
-        local data = c.data.GetPlayer(k)
-        if data then
+        if DoesEntityExist(data.GetEntity()) then
             -- Other Variables.
             local Health = data.GetHealth()
             local Armour = data.GetArmour()
@@ -107,8 +60,59 @@ function c.sql.save.Users(cb)
                 -- Where Conditions
                 ["@Character_ID"] = Character_ID
             }, function(r)
-                -- Do nothing.
+                -- do
             end)
+            if cb then
+                cb()
+            end
+        end
+    end
+end
+
+--- Save All Characters from the xPLayer Table.
+---@param cb function "To be called on SQL 'UPDATE' statements are completed."
+function c.sql.save.Users(cb)
+    local xPlayers = c.data.GetPlayers()
+    for k, v in pairs(xPlayers) do
+        local data = c.data.GetPlayer(k)
+        if data then
+            if DoesEntityExist(data.GetEntity()) then
+                -- Other Variables.
+                local Health = data.GetHealth()
+                local Armour = data.GetArmour()
+                local Hunger = data.GetHunger()
+                local Thirst = data.GetThirst()
+                local Stress = data.GetStress()
+                -- Tables require JSON Encoding.
+                local Coords = json.encode(data.GetCoords())
+                local Accounts = json.encode(data.GetAccounts())
+                local Modifiers = json.encode(data.GetModifiers())
+                local Inventory = json.encode(data.CompressInventory())
+                local Ammo = json.encode(data.GetAmmos())
+                local Job = json.encode(data.GetJob())
+                -- 
+                local Character_ID = data.GetCharacter_ID()
+                MySQL.Async.insert(PlayerSaveData, {
+                    -- Other Variables.
+                    ["@Health"] = Health,
+                    ["@Armour"] = Armour,
+                    ["@Hunger"] = Hunger,
+                    ["@Thirst"] = Thirst,
+                    ["@Stress"] = Stress,
+                    -- Table Informaiton.
+                    ["@Coords"] = Coords,
+                    ["@Accounts"] = Accounts,
+                    ["@Modifiers"] = Modifiers,
+                    ["@Inventory"] = Inventory,
+                    ["@Ammo"] = Ammo,
+
+                    ["@Job"] = Job,
+                    -- Where Conditions
+                    ["@Character_ID"] = Character_ID
+                }, function(r)
+                    -- Do nothing.
+                end)
+            end
         end
     end
     if cb then
@@ -130,7 +134,7 @@ MySQL.Async.store(
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.Vehicle(data, cb)
     if data then
-        if DoesEntityExist(data.GetEntity()) then
+        if DoesEntityExist(data.GetEntity()) and data.GetOwner() ~= false then
             -- Other Variables.
             local Fuel = data.GetFuel()
             local Garage = data.GetGarage()
@@ -178,7 +182,7 @@ function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for k, data in pairs(xVehicles) do
         if data then
-            if DoesEntityExist(data.GetEntity()) then
+            if DoesEntityExist(data.GetEntity()) and data.GetOwner() ~= false then
                 -- Other Variables.
                 local Fuel = data.GetFuel()
                 local Garage = data.GetGarage()

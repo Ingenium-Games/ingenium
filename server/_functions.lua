@@ -166,7 +166,8 @@ end
 ---@param y any
 ---@param z any
 ---@param h any
-function c.func.CreateVehicle(name, x, y, z, h)
+function c.func.CreateVehicle(name, x, y, z, h, owned)
+    local data = owned or false
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -179,7 +180,11 @@ function c.func.CreateVehicle(name, x, y, z, h)
     end
     Wait(250)
     local net = NetworkGetNetworkIdFromEntity(entity)
-    c.data.AddVehicle(net, c.class.Vehicle, net)
+    if not data then
+        c.data.AddVehicle(net, c.class.Vehicle, net)
+    else
+        c.data.AddVehicle(net, c.class.OwnedVehicle, net, data)
+    end
     return entity, net
 end
 
@@ -212,7 +217,8 @@ end
 ---@param y any
 ---@param z any
 ---@param isdoor any
-function c.func.CreateObject(name, x, y, z, isdoor)
+function c.func.CreateObject(name, x, y, z, isdoor, owned)
+    local data = owned or false
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -228,7 +234,11 @@ function c.func.CreateObject(name, x, y, z, isdoor)
     end
     Wait(250)
     local net = NetworkGetNetworkIdFromEntity(entity)
-    c.data.AddObject(net, c.class.Object, net)
+    if not id then
+        c.data.AddObject(net, c.class.BlankObject, net)
+    else
+        c.data.AddObject(net, c.class.Object, net, data)
+    end
     return entity, net
 end
 
