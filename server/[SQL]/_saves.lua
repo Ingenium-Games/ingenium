@@ -19,7 +19,6 @@ MySQL.Async.store(
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.User(data, cb)
     if data then
-        if DoesEntityExist(data.GetEntity()) then
             -- Other Variables.
             local Health = data.GetHealth()
             local Armour = data.GetArmour()
@@ -58,7 +57,6 @@ function c.sql.save.User(data, cb)
             if cb then
                 cb()
             end
-        end
     end
 end
 
@@ -69,7 +67,6 @@ function c.sql.save.Users(cb)
     for k, v in pairs(xPlayers) do
         local data = c.data.GetPlayer(k)
         if data then
-            if DoesEntityExist(data.GetEntity()) then
                 -- Other Variables.
                 local Health = data.GetHealth()
                 local Armour = data.GetArmour()
@@ -105,7 +102,6 @@ function c.sql.save.Users(cb)
                 }, function(r)
                     -- Do nothing.
                 end)
-            end
         end
     end
     if cb then

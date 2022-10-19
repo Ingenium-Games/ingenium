@@ -617,6 +617,10 @@ function c.class.Player(source, character_id)
         return self.OldCoords
     end
     --- func desc
+    self.GetEntity = function()
+        return self.Entity
+    end
+    --- func desc
     self.GetCoords = function()
         local x, y, z = table.unpack(GetEntityCoords(self.Entity))
         local h = GetEntityHeading(self.Entity)
