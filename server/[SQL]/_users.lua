@@ -228,14 +228,37 @@ function c.sql.user.GetBan(license_id, cb)
     return result
 end
 
+--- Get - `Ban` from the users License_ID identifier
+-- @License_ID
+function c.sql.user.GetBanReason(license_id, cb)
+    local License_ID = license_id
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchScalar("SELECT `Ban_Reason` FROM `users` WHERE `License_ID` = @License_ID LIMIT 1;", {
+        ["@License_ID"] = License_ID
+    }, function(data)
+        result = json.decode(data)
+        IsBusy = false
+    end)
+    while IsBusy do
+        Wait(0)
+    end
+    if cb then
+        cb()
+    end
+    return result
+end
+
 --- Get/Set - `Ban` = bool from the users License_ID identifier
 -- @License_ID
-function c.sql.user.SetBan(license_id, bool, cb)
+function c.sql.user.SetBan(license_id, bool, reason, cb)
     if type(bool) ~= "boolean" then c.func.Debug_1("c.sql.user.SetBan, boolean was not passed") return end
     local License_ID = license_id
     local Bool = bool
-    MySQL.Async.execute("UPDATE `users` SET `Ban` = @Bool WHERE `License_ID` = @License_ID LIMIT 1;", {
+    local Ban_Reason = json.encode(reason)
+    MySQL.Async.execute("UPDATE `users` SET `Ban` = @Bool, `Ban_Reason` = @Ban_Reason WHERE `License_ID` = @License_ID LIMIT 1;", {
         ["@Bool"] = Bool,
+        ["@Ban_Reason"] = Ban_Reason,
         ["@License_ID"] = License_ID
     }, function(data)
         if data then
@@ -271,7 +294,7 @@ end
 --- Get/Set
 -- @FiveM_ID
 function c.sql.user.SetPriority(fivem_id, bool, cb)
-    if type(bool) ~= "boolean" then c.func.Debug_1("c.sql.user.SetBan, boolean was not passed") return end
+    if type(bool) ~= "boolean" then c.func.Debug_1("c.sql.user.SetPriority, boolean was not passed") return end
     local FiveM_ID = ("fivem:%s"):format(fivem_id)
     local Bool = bool
     MySQL.Async.execute("UPDATE `users` SET `Priority` = @Bool WHERE `FiveM_ID` = @FiveM_ID LIMIT 1;", {

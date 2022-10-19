@@ -143,13 +143,15 @@ end, true)
 ExecuteCommand("add_ace group.admin command.ban allow")
 RegisterCommand("ban", function(source, args, rawCommand)
     local src = source
+    local xInvoke = c.data.GetPlayer(src)
     local Primary_ID = c.func.identifier(args[1])
     local xPlayer = c.data.GetPlayer(args[1])
+    local reason = { Reason = tostring(args[2]), Time = tostring(c.func.Timestamp()), By = xInvoke.GetName(), }
     if (args[1] == src) then
         TriggerClientEvent("Client:Notify", src, "You cannot /ban yourself.")
     else
         local ban = true -- should probably add a check but meh.
-        c.sql.user.SetBan(Primary_ID, ban, function()
+        c.sql.user.SetBan(Primary_ID, ban, reason, function()
             xPlayer.Kick("You have been banned.")
             TriggerClientEvent("Client:Notify", src, "TargetID: " .. args[1] .. ", has been banned.")
         end)

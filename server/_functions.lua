@@ -141,21 +141,18 @@ function c.func.Discord(url, color, name, message, footer)
     })
 end
 
--- local "https://api.twitch.tv/helix/clips?broadcaster_id="..i.broadcaster
 --- func desc
 ---@param source any
 ---@param event any
 function c.func.Eventban(source, event)
     local src = source
-    local id = c.func.identifier(src)
-    local name = GetPlayerName(src)
-    TriggerEvent("txaLogger:CommandExecuted",
-        "Player ID: " .. src .. " / " .. id .. " / " .. name .. " : Attempted to abuse [E] " .. event)
-    c.func.Debug_2("Player ID: " .. src .. " / " .. id .. " / " .. name .. " : Attempted to abuse [E] " .. event)
-    c.sql.user.SetBan(c.func.identifier(src), true, function()
-        DropPlayer(src, "Banned for attmpting to exploit event, this has been logged in txAdmin.")
+    local time = c.func.Timestamp()
+    local reason = { ["Event"] = event, ["Timestamp"] = time, ["By"] = "Server" }
+    c.sql.user.SetBan(c.func.identifier(src), true, reason, function()
+        DropPlayer(src, "[AC] c.func.Eventban : Abuse of [E] " .. event.. ", at [T] "..time..". Please screenshot this for records sake")
+        TriggerEvent("txaLogger:CommandExecuted", "[AC] Eventban : Abuse of [E] " .. event.. ", at [T] "..time..".")
     end)
-    return CancelEvent()
+    CancelEvent()
 end
 
 -- ====================================================================================--

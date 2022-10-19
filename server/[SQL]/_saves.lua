@@ -1,18 +1,11 @@
 -- ====================================================================================--
-if not c.sql then
-    c.sql = {}
-end
---
+
+if not c.sql then c.sql = {} end
 c.sql.save = {}
---[[
-NOTES.
-    - All sql querys should have a call back as a function at the end to chain code execution upon completion.
-    - All data should be encoded or decoded here, if possible. the fetchALL commands are decoded in the _data.lua
-]] --
 
 -- ====================================================================================--
 
---[[    Players ]] --
+--[[ Players ]] --
 
 local PlayerSaveData = -1
 MySQL.Async.store(
@@ -120,7 +113,7 @@ function c.sql.save.Users(cb)
     end
 end
 
---[[    Vehicles ]] --
+--[[ Vehicles ]] --
 
 local VehicleSaveData = -1
 MySQL.Async.store(
@@ -225,7 +218,7 @@ function c.sql.save.Vehicles(cb)
     end
 end
 
---[[    Jobss ]] --
+--[[ Jobs ]] --
 
 local JobSaveData = -1
 MySQL.Async.store("UPDATE `job_accounts` SET `Accounts` = @Accounts WHERE `Name` = @Name;", function(id)

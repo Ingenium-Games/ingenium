@@ -1,13 +1,7 @@
 -- ====================================================================================--
 
 if not c.sql then c.sql = {} end
---
 c.sql.char = {}
---[[
-NOTES.
-    - All sql querys should have a call back as a function at the end to chain code execution upon completion.
-    - All data should be encoded or decoded here, if possible. the fetchALL commands are decoded in the _data.lua
-]] --
 
 -- ====================================================================================--
 -- SHould remake htis one..
