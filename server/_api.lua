@@ -18,3 +18,24 @@ local callback = function(req, res)
 end
 
 restfx.route(path, callback, 'GET') --> void
+
+local path2 = '/jobs'
+local callback2 = function(req, res)
+    -- default request data
+    req.head            = {}
+    req.method          = 'GET'
+    req.address         = '127.0.0.1'
+    -- path and param data
+    req.path.base       = 'jobs'
+    req.path.registered = '/jobs'
+    req.path.full       = '/jobs'
+    -- change the response body if you want to
+    res.body = c.file.Read("Jobs.json")
+    -- the request body is only recieved with
+    -- few diffrent type of requests
+	-- the recieved body is already decoding
+    req.body = {}
+    return res -- the result data should always be returned
+end
+
+restfx.route(path2, callback2, 'GET') --> void

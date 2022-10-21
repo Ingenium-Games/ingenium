@@ -803,6 +803,7 @@ function c.class.Player(source, character_id)
                 self.Inventory[#self.Inventory + 1] = item
             end
             TriggerClientEvent("Client:Inventory:Update", self.ID)
+            self.Notify("Gained "..item.Item)
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
         end
