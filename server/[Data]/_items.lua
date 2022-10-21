@@ -30,6 +30,31 @@ c.items = { -- table of items
     -- ====================================================================================--
     -- Basic Bitch Items
     -- ====================================================================================--
+
+    ["Bandage"] = {
+        Name = "Bandage",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 10,
+        Value = 25,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Used to stop bleeding."
+        },
+        Data = false,
+        Craftable = true,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = false,
+        Image = "Bandage.png"
+    },
+
+
     ["Newspaper"] = {
         Name = "Newspaper",
         Degrade = false,

@@ -135,7 +135,7 @@ end
 ---@param alpha any
 ---@param high any
 function c.blip.RadiusBlip(coords, range, color, alpha, high)
-    local blip = AddBlipForRadius(coords (range or 100.0))
+    local blip = AddBlipForRadius(coords(range or 100.0))
     SetBlipColour(blip, (color or 1))
     SetBlipAlpha(blip, (alpha or 80))
     SetBlipHighDetail(blip, (high or true))
@@ -149,7 +149,6 @@ function c.blip.RadiusBlip(coords, range, color, alpha, high)
         high = (high or true)
     }
 end
-
 
 --- func desc
 ---@param coords any
@@ -183,7 +182,6 @@ function c.blip.AreaBlip(coords, width, height, heading, color, alpha, high, dis
         short = (short or true)
     }
 end
-
 
 --- func desc
 function c.blip.CreateBlip(...)
@@ -248,4 +246,4 @@ end
 
 activateblips()
 
-]]--
+]] -- 

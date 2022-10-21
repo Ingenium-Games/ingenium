@@ -94,4 +94,21 @@ function c.rng.chars(num)
     return rand
 end
 
+--- func desc
+---@param min any
+---@param max any
+---@param amount any
+function c.rng.RandomValuesNoRepeats(min,max,amount)
+    if (max - min) <= amount then c.func.Debug_1("Unable to use values from [F] c.func.RandomValuesNoRepeats as min and max values do not allow for the amount required.") return end
+    --
+    local vars = {}
+    repeat
+        local new = math.random(min, max)
+        if not vars[new] then
+            table.insert(vars, new)
+        end
+    until #vars == amount
+    return vars
+end
+
 -- ====================================================================================--

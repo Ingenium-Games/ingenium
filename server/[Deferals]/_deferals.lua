@@ -22,7 +22,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 text = "Welcome "..name,
             }),
             DeferralCards.CardElement:TextBlock({
-                text = "\nWebsite - "..conf.websitelink.." \nDiscord - "..conf.discordlink,
+                text = "\n...",
                 wrap = true
             }),
             DeferralCards.CardElement:TextBlock({
