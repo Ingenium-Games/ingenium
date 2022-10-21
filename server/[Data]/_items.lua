@@ -26,10 +26,32 @@ local weapon_dump = exports["ig.dump"]:GetWeapons()
 ]]--
 
 c.items = { -- table of items
+    -- ====================================================================================--
+    -- Interactive Items
+    -- ====================================================================================--
 
-    -- ====================================================================================--
-    -- Basic Bitch Items
-    -- ====================================================================================--
+    ["Toolbox"] = {
+        Name = "Toolbox",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 100,
+        Value = 250,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Assorted Tools."
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = false,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Toolbox.png"
+    },
 
     ["Bandage"] = {
         Name = "Bandage",
@@ -53,6 +75,11 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Bandage.png"
     },
+
+    -- ====================================================================================--
+    -- Basic Bitch Items
+    -- ====================================================================================--
+
 
 
     ["Newspaper"] = {
