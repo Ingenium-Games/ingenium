@@ -26,26 +26,26 @@ GENERIC :
     [1] Map name.
     [2] Game mode. Use RP/GG/KOTH etc etc
 ]]--
-conf.mapname = 'Los Santos'
-conf.gamemode = 'RP'
+conf.mapname = "Los Santos"
+conf.gamemode = "RP"
 --[[
 LOCALISATION/INTERNATIONALISATION also known as.. i18n :
     -- Standard language selection.
 ]]--
-conf.locale = 'en'
+conf.locale = "en"
 --[[
 ACE PERMISSIONS :
     -- The permissions are done inside the DB, so every time the User joins the ace gets set at the user level, the default level to assign to the DB on a new user joining is...
 ]]--
-conf.ace = 'public' 
+conf.ace = "public" 
 --[[
 PRIMARY_ID :
     -- This will be what you choose to identify as the owner of the characters table within the DB.
     -- You can use any however I would leave it as the license as you need a legal copy of GTAV to
     -- play FiveM anyway, so everyone has a rockstar id, hence the license. But, up to you.
-    -- 'fivem:' / 'steam:' / 'discord:' / 'license:' / 'ip:'
+    -- "fivem:" / "steam:" / "discord:" / "license:" / "ip:"
 ]]--
-conf.identifier = 'license:'
+conf.identifier = "license:"
 --[[
 UPDATE TIMES :
     [1] Client updates the server every...
@@ -71,14 +71,14 @@ conf.spawn = {
 }
 --[[
 DEFERALS :
-    [1] Force the user name of joining player to be alpha numeric characters only. No '<_-(.</?\)' etc.
+    [1] Force the user name of joining player to be alpha numeric characters only. No "<_-(.</?\)" etc.
     [2] Use Discord for your community?  https://forum.cfx.re/t/discordroles-a-proper-attempt-this-time/1579427 
     [3] Discord role to confirm the player is apart of the required guild.
 ]]--
 conf.forcename = true
 conf.discordlink = "https://discord.gg/zduUDU8Frv"
 conf.discordperms = true
-conf.discordrole = '834191331844030524'
+conf.discordrole = "834191331844030524"
 conf.discordsecret = "avy4e5NnpNYIv-tZrmIiUd2TDbS4fZb8"
 
 conf.websitelink = "https://ingenium.games"
@@ -90,8 +90,8 @@ conf.discordid = "770792728979046431"
 SCREENSHOTS :
     -- Host URL like 
 ]]--
-conf.imagehost = ''
-conf.imagetoken = ''
+conf.imagehost = ""
+conf.imagetoken = ""
 --[[
 INSTANCE/ROUTINGBUCKET :
     -- Default world for all players.
@@ -133,7 +133,7 @@ JOBS AND DEFAULTS
     -- The time taken serverside to do pay runs.
 ]]--
 conf.enablejobpayroll = true
-conf.enablejobcenter = true
+conf.enablejobcenter = false
 conf.enableduty = true
 conf.paycycle = conf.min * 15
 

@@ -1,9 +1,9 @@
 conf.phone = {
-    ["police"] = 911,
-    ["medic"] = 919,
-    ["bank"] = 100,
-    ["mechanic"] = 800,
-    ["logistics"] = 660,
+    police = 911,
+    medic = 919,
+    bank = 100,
+    mechanic = 800,
+    logistics = 660,
 
     
 }

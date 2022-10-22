@@ -158,6 +158,8 @@ function c.class.Player(source, character_id)
     self.Tattoos = json.decode(char.Tattoos)
     --    
     self.Appearance = json.decode(char.Appearance)
+    --    
+    self.Skills = json.decode(char.Skills)
     --
     ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
@@ -360,6 +362,38 @@ function c.class.Player(source, character_id)
         self.Duty = bool
         self.State.Duty = self.Duty
     end
+    --
+    self.GetSkills = function()
+        return self.Skills
+    end
+    --
+    self.GetSkill = function(skill)
+        for k, v in pairs(self.Skills) do
+            if k == skill then
+                return v
+            end
+        end
+    end
+    --
+    self.SetSkill = function(skill, v)
+        local num = c.check.Number(v, 0, 255)
+        num = c.math.Decimals(num, 0)
+        if self.Skills[skill] then
+            self.Skills[skill] = num
+        else
+            c.func.Debug_1("Skill entered does not exist")
+        end
+    end
+    --
+    self.AddSkill = function(skill, v)
+        local num = c.check.Number(v, 0, 255)
+        num = c.math.Decimals(num, 0)
+        if self.Skills[skill] then
+            self.Skills[skill] = self.Skills[skill] + num
+        else
+            c.func.Debug_1("Skill entered does not exist")
+        end
+     end
     --
     self.GetAccounts = function()
         return self.Accounts

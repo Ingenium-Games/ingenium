@@ -123,7 +123,6 @@ function c.job.Payroll(bool)
                     local net = pay - tax
                     --
                     xPlayer.AddBank(net)
-                    TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..net.." deposided confirmed, city tax applied of: $"..tax..".")
                     if bool then
                         xJob.RemoveBank(pay)
                         xCity.AddBank(tax)

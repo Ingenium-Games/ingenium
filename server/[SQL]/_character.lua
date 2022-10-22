@@ -7,7 +7,7 @@ c.sql.char = {}
 -- SHould remake htis one..
 function c.sql.char.Add(t, cb)
     MySQL.Async.execute(
-        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Height`, `Birth_Date`, `Iban`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`) VALUES (@Created, @Last_Seen, @Primary_ID, @Character_ID, @City_ID, @First_Name, @Last_Name, @Height, @Birth_Date, @Iban, @Phone, @Coords, @Accounts, @Modifiers, @Appearance);",
+        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Height`, `Birth_Date`, `Iban`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`, `Skills`) VALUES (@Created, @Last_Seen, @Primary_ID, @Character_ID, @City_ID, @First_Name, @Last_Name, @Height, @Birth_Date, @Iban, @Phone, @Coords, @Accounts, @Modifiers, @Appearance, @Skills);",
         {
             Created = c.func.Timestamp(),
             Last_Seen = c.func.Timestamp(),
@@ -23,7 +23,8 @@ function c.sql.char.Add(t, cb)
             Coords = t.Coords,
             Accounts = t.Accounts,
             Modifiers = t.Modifiers,
-            Appearance = t.Appearance
+            Appearance = t.Appearance,
+            Skills = t.Skills
         }, function(data)
             if data then
                 TriggerEvent("txaLogger:CommandExecuted", "Adding new Character for Primary_ID: "..t.Primary_ID)

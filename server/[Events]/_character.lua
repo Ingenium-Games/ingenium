@@ -83,6 +83,7 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, he
     data.Job = json.encode(conf.default.job)
     data.Accounts = json.encode(conf.default.accounts)
     data.Modifiers = json.encode(conf.default.modifiers)
+    data.Skills = json.encode(conf.default.skills)
     data.Appearance = json.encode(appearance)
     
     c.sql.char.Add(data, function()
