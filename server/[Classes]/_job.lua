@@ -77,7 +77,7 @@ function c.class.Job(tab)
     self.SetAccount = function(acc, v)
         local num = c.check.Number(v)
         if self.Accounts[acc] then
-            self.Accounts[acc] = c.math.Decimals(num, 0)
+            self.Accounts[acc] = c.math.Decimals(num, 2)
         else
             c.func.Debug_1("Account entered does not exist")
         end
@@ -94,7 +94,7 @@ function c.class.Job(tab)
     self.SetSafe = function(v)
         local num = c.check.Number(v)
         if num >= 0 then
-            local acc = c.math.Decimals(num, 0)
+            local acc = c.math.Decimals(num, 2)
             self.SetAccount("Safe", acc)
         end
     end
@@ -106,7 +106,7 @@ function c.class.Job(tab)
             local acc = self.GetAccount("Safe")
             if acc then
                 local bkp = acc
-                acc = acc + c.math.Decimals(num, 0)
+                acc = acc + c.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
                     c.func.Debug_1("Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
@@ -125,7 +125,7 @@ function c.class.Job(tab)
             local acc = self.GetAccount("Safe")
             if acc then
                 local bkp = acc
-                acc = acc - c.math.Decimals(num, 0)
+                acc = acc - c.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
                     c.func.Debug_1("Job " .. self.Name .. " has RemoveSafe() Cancelled due to Negative balance remaining.")
@@ -157,7 +157,7 @@ function c.class.Job(tab)
         if num > 0 then
             local acc = self.GetAccount("Bank")
             if acc then
-                acc = acc + c.math.Decimals(num, 0)
+                acc = acc + c.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Bank", acc)
                 else
@@ -173,7 +173,7 @@ function c.class.Job(tab)
         if num > 0 then
             local acc = self.GetAccount("Bank")
             if acc then
-                acc = acc - c.math.Decimals(num, 0)
+                acc = acc - c.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Bank", acc)
                 else

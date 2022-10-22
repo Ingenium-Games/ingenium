@@ -24,17 +24,13 @@ function c.marker.Place(ords, v)
         DrawMarker(20, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 1.0001, 1.0001, 1.0001, 0, 55, 240, 100, 0, 0, 2, 0)
     elseif v == 5 then
         -- Small White Rotating Circle + Bouncing ? (on Ground)
-        DrawMarker(27, ords[1], ords[2], ords[3] - 1, 0, 0, 0, 0, 0, 0, 0.4001, 0.4001, 0.4001, 240, 240, 240, 100, 0,
-            0, 2, 1)
-        DrawMarker(32, ords[1], ords[2], ords[3] - 0.32, 0, 0, 0, 0, 0, 0, 1.0001, 1.0001, 1.0001, 240, 240, 240, 100, 1, 0, 2,
-          1)
+        DrawMarker(27, ords[1], ords[2], ords[3] - 0.90, 0, 0, 0, 0, 0, 0, 0.4001, 0.4001, 0.4001, 240, 240, 240, 100, 0, 0, 2, 1)
+        DrawMarker(32, ords[1], ords[2], ords[3] - 0.32, 0, 0, 0, 0, 0, 0, 1.0001, 1.0001, 1.0001, 240, 240, 240, 100, 1, 0, 2, 1)
     elseif v == 6 then
-        DrawMarker(32, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 0.2001, 1.0001, 0.8001, 240, 240, 240, 100, 1,
-            1, 2, 0)
+        DrawMarker(32, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 0.2001, 1.0001, 0.8001, 240, 240, 240, 100, 1, 1, 2, 0)
     elseif v == 7 then
         -- White Rotating Chevron Bouncing.
-        DrawMarker(29, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 1.0001, 1.0001, 1.0001, 240, 240, 240, 100, 1, 0, 2,
-            1)
+        DrawMarker(29, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 1.0001, 1.0001, 1.0001, 240, 240, 240, 100, 1, 0, 2, 1)
     elseif v == 8 then
         -- Blue Static $.
         DrawMarker(29, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 1.7001, 0, 55, 240, 100, 0, 0, 2, 0)

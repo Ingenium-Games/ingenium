@@ -375,7 +375,7 @@ function c.class.Player(source, character_id)
     --
     self.SetAccount = function(acc, v)
         local num = c.check.Number(v)
-        num = c.math.Decimals(num, 0)
+        num = c.math.Decimals(num, 2)
         if self.Accounts[acc] then
             self.Accounts[acc] = num
         else
@@ -405,7 +405,7 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
-            acc = c.math.Decimals(num, 0)
+            acc = c.math.Decimals(num, 2)
             if acc < 0 then
                 acc = 0
                 self.Kick(
@@ -425,7 +425,7 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
-            acc = acc + c.math.Decimals(num, 0)
+            acc = acc + c.math.Decimals(num, 2)
             if acc < 0 then
                 acc = 0
                 self.Kick(
@@ -445,7 +445,7 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
-            acc = acc - c.math.Decimals(num, 0)
+            acc = acc - c.math.Decimals(num, 2)
             if acc < 0 then
                 acc = 0
                 self.Kick(
@@ -470,7 +470,7 @@ function c.class.Player(source, character_id)
     --
     self.SetBank = function(v)
         local num = c.check.Number(v)
-        local acc = c.math.Decimals(num, 0)
+        local acc = c.math.Decimals(num, 2)
         if acc then
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
@@ -482,7 +482,7 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v)
         local acc = self.GetAccount("Bank")
         if acc then
-            acc = acc + c.math.Decimals(num, 0)
+            acc = acc + c.math.Decimals(num, 2)
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
             TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Credited $"..num, "[]")
@@ -493,7 +493,7 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v)
         local acc = self.GetAccount("Bank")
         if acc then
-            acc = acc - c.math.Decimals(num, 0)
+            acc = acc - c.math.Decimals(num, 2)
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
             TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Debited $"..num, "[]")
