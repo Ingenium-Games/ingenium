@@ -83,22 +83,4 @@ AddEventHandler("playerDropped", function()
             end)
         end)
     end
-    --[[
-    if not c.func.HasPlayers() then
-        c.sql.save.Vehicles(function()
-            c.func.Debug_1("Player Count 0, c.sql.save.Vehicles")
-        end)
-        c.sql.save.Jobs(function()
-            c.func.Debug_1("Player Count 0, c.sql.save.Jobs")
-        end)
-        --
-        c.pdex = {}
-        c.pvdex = {}
-        c.ndex = {}
-        c.vdex = {}
-        c.odex = {} 
-        --
-        c.func.Debug_1("Player Count 0, Reset Data Tables")
-    end
-    ]]--
 end)

@@ -1,7 +1,10 @@
 -- ====================================================================================--
+
 -- gets triggered via ig.nui to set the pulled current contents, then this can be used to confirm if items exist prior to menu activations.
+--
+
 c.inventory = {} -- functions
-c._inventory = {}
+c._inventory = {} -- from server
 
 -- ====================================================================================--
 

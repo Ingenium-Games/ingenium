@@ -4,6 +4,10 @@ c.text = {}
 c.texts = {}
 
 -- ====================================================================================--
+
+--- func desc
+---@param s1 any
+---@param s2 any
 function c.text.AddEntry(s1, s2)
     local str1 = string.upper(s1)
     local str2 = s2
@@ -15,6 +19,9 @@ function c.text.AddEntry(s1, s2)
     end    
 end
 
+--- func desc
+---@param s any
+---@param addon any
 function c.text.DisplayHelp(s, addon)
     SetTextComponentFormat(s)
     AddTextComponentSubstringPlayerName(addon)

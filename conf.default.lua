@@ -23,6 +23,11 @@ conf.default.modifiers = {
     Thirst = 1,
     Stress = 1
 }
+conf.default.stats = {
+    Hunger = 100, -- Min 0 Max 100
+    Thirst = 100, -- Min 0 Max 100
+    Stress = 0 -- Min 0 Max 100
+}
 -- jobs
 conf.default.job = {
     Name = "none",

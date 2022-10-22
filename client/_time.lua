@@ -4,7 +4,7 @@ c.time = {}
 
 -- I miss NetworkOverrideClockMillisecondsPerGameMinute()
 
-local time = {0,0}
+local time = {0, 0}
 
 --- Get the current server time based on the GetConvar("Time").
 function c.time.GetTime()

@@ -1,9 +1,5 @@
 -- ====================================================================================--
-
-
--- ====================================================================================--
---  Get Character Info for the NUI to allow character selection.
--- [C+S]
+--- [Internal] Server Side Only, used in combination with callbacks
 for k,v in pairs (c.items) do
     AddEventHandler(("Inventory:Consume:%s"):format(k), function(source, position, quantity) 
         local src = source

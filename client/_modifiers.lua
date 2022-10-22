@@ -1,11 +1,7 @@
 -- ====================================================================================--
 
 c.modifier = {} -- function level
-c.modifiers = { -- taken from server too.
-    ["Hunger"] = 1,
-    ["Thirst"] = 1,
-    ["Stress"] = 1, 
-}
+c.modifiers = conf.default.modifiers
 c.oldmodifiers = {}
 
 -- ====================================================================================--
@@ -26,8 +22,10 @@ end
 function c.modifier.SetModifiers()
     if LocalPlayer.state.Modifiers ~= nil then
         c.modifiers = LocalPlayer.state.Modifiers
+        print("Modifiers LocalState Used")
     else
         c.modifiers = TriggerServerCallback({eventName = "GetModifiers"})
+        print("Modifiers CB Used")
     end
     c.oldmodifiers = c.modifiers
 end

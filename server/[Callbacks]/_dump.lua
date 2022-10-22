@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 local GetDump = RegisterServerCallback({
     eventName = "GetDump",
     eventCallback = function(source, dump)

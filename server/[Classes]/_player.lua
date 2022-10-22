@@ -2,6 +2,7 @@
 if not c.class then
     c.class = {}
 end
+
 -- ====================================================================================--
 --- func desc
 ---@param source any
@@ -393,7 +394,16 @@ function c.class.Player(source, character_id)
         else
             c.func.Debug_1("Skill entered does not exist")
         end
-     end
+    end
+    --
+    self.CompareSkill = function(sk, level)
+        local skill = self.GetSkill(sk)
+        if skill < level then
+            return false
+        else
+            return true
+        end
+    end
     --
     self.GetAccounts = function()
         return self.Accounts
@@ -508,7 +518,8 @@ function c.class.Player(source, character_id)
         if acc then
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
-            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Set to $"..num, "[]")
+            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Set to $" .. num,
+                "[]")
         end
     end
     --
@@ -519,7 +530,8 @@ function c.class.Player(source, character_id)
             acc = acc + c.math.Decimals(num, 2)
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
-            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Credited $"..num, "[]")
+            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Credited $" .. num,
+                "[]")
         end
     end
     --
@@ -530,7 +542,8 @@ function c.class.Player(source, character_id)
             acc = acc - c.math.Decimals(num, 2)
             self.SetAccount("Bank", acc)
             self.State.Bank = acc
-            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Debited $"..num, "[]")
+            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Debited $" .. num,
+                "[]")
         end
     end
     --
@@ -837,7 +850,7 @@ function c.class.Player(source, character_id)
                 self.Inventory[#self.Inventory + 1] = item
             end
             TriggerClientEvent("Client:Inventory:Update", self.ID)
-            self.Notify("Gained "..item.Item)
+            self.Notify("Gained " .. item.Item)
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
         end
@@ -1159,7 +1172,9 @@ function c.class.OfflinePlayer(data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Offline Player License: " .. self.License_ID)
+            c.func.Debug_1(
+                "Ignoring invalid .SteralizeItem() while .AddItem() was called, for Offline Player License: " ..
+                    self.License_ID)
             return
         end
         local info = {
