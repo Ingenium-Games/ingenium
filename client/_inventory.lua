@@ -9,11 +9,11 @@ AddEventHandler("Client:Character:SetInventory", function(inv)
     c._inventory = inv
 end)
 
--- ====================================================================================--
-
 exports("GetInventory", function()
     return c._inventory
 end)
+
+-- ====================================================================================--
 
 --- func desc
 function c.inventory.GetWeight()
