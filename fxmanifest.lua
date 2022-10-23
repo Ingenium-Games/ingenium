@@ -10,9 +10,9 @@ ui_page "nui/index.html"
 ------------------------------------------------------------------------------
 shared_scripts {"conf.lua", "conf.default.lua", "conf.vehicles.lua", "conf.disable.lua", "conf.file.lua", "conf.peds.lua", "conf.phone.lua", "shared/_c.lua"}
 ------------------------------------------------------------------------------
-client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Credits]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "client/_functions.lua", "client/**/*.lua"}
+client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "client/_functions.lua", "client/**/*.lua"}
 ------------------------------------------------------------------------------
-server_scripts {"@restfx/build/import.lua", "@mysql-async/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]/*.lua", "shared/[Credits]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "server/_functions.lua", "server/**/*.lua"}
+server_scripts {"@restfx/build/import.lua", "@mysql-async/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "server/_functions.lua", "server/**/*.lua"}
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump"}
 ------------------------------------------------------------------------------
