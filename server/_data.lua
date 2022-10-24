@@ -276,11 +276,23 @@ end
 -- ====================================================================================--
 -- NPC"s 
 
+---@param net integer "Network ID 16 bit integer"
+function c.data.FindNpc(arg)
+    for k, v in pairs(c.ndex) do
+        if v then
+            if k == arg and type(v) == "table" then
+                return true, v, k
+            end
+        end
+    end
+    return false, false, false
+end
+
 --- func desc
 ---@param net any
 ---@param cb any
 function c.data.AddNpc(net, cb, ...)
-    if not c.npc.Find(net) then
+    if not c.data.FindNpc(net) then
         c.ndex[tonumber(net)] = cb(...)
     end
 end
@@ -317,11 +329,23 @@ end
 -- ====================================================================================--
 -- 
 
+---@param net integer "Network ID 16 bit integer"
+function c.data.FindObject(arg)
+    for k, v in pairs(c.ndex) do
+        if v then
+            if k == arg and type(v) == "table" then
+                return true, v, k
+            end
+        end
+    end
+    return false, false, false
+end
+
 --- func desc
 ---@param net any
 ---@param cb any
 function c.data.AddObject(net, cb, ...)
-    if not c.object.Find(net) then
+    if not c.data.FindObject(net) then
         c.odex[tonumber(net)] = cb(...)
     end
 end
