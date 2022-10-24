@@ -33,7 +33,7 @@ function PlayerKilled()
             if isplayer then
                 log = {["Source"] = NetworkGetPlayerIndexFromPed(attacker), ["Class"] = conf.vehicle.classes[class], ["Primary"] = primary, ["Secondary"] = secondary}
             else
-                log = {["Source"] = 0, ["Class"] = conf.vehicle.classes[class], ["Primary"] = primary, ["Secondary"] = secondary}
+                log = {["Source"] = 0, ["Class"] = conf.vehicle.classes[class] or 21, ["Primary"] = primary, ["Secondary"] = secondary}
             end 
         elseif type == 3 then
             -- Did a brick fall on your ped, wtf?
