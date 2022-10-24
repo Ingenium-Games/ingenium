@@ -73,27 +73,11 @@ function c.state.TriggerAction(name, value)
     end
 end
 
-function c.state.UpdateStates()
-    for k, v in pairs(c.modifiers) do
-        if v ~= c.oldmodifiers[k] then
-            c.state.TriggerState(k, v)
-        end
-    end
-    --[[
-        Add any other loops you might want for state triggers here,
-        Currently only the Thirst, Hunger and Stress Modifers will Imapct
-        The user based on these states, the states will provide a message to the user,
-        And Trigger their side, be it vision, recoil, speed or other factors and impact the fuck out of them.
-        Think of them like buffs or nerfs?
-        Hell if anyone wanyed to make an nui panel for buffs or nerfs, that would be cool asf.
-    ]] --
-end
-
 --[[
     Example of adding states for all 1-10 levels of hunger and thirst and stress,
     Note, the effect or action can be a function to alter stuff. be creative. if no function is present nothing will occour, 
     so the below will just display once the users status updates from the client side modifier update from the server packet. 
-]] --
+]]--
 
 local H = {
     [1] = {"Is that a cookie?", function()

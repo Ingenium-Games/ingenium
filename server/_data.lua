@@ -387,48 +387,11 @@ function c.GetJob(str)
 end
 
 -- ====================================================================================--
---[[ THis one was to be a swiss army knife, but may need more work...
-function c.data.GetEntityObject(type, net)
-    --
-    -- Object
-    if type == 3 then
-        return c.data.GetObject(net)
-    --
-    -- Vehicle
-    elseif type == 2 then
-        return c.data.GetVehicle(net)
-    --
-    -- Ped
-    elseif type == 1 then
-        local ent = NetworkGetEntityFromNetworkId(net)
-        local owner = NetworkGetEntityOwner(ent)
-        if IsPedAPlayer(ent) then
-            -- should be the player of the ped that it is???
-            if owner >= 1 then
-                return c.data.GetPlayer(owner)
-            else
-                return false
-            end
-        else
-            return c.data.GetNpc(net)
-        end
-    else
-        -- no other types // fin    
-    end
-end
-]] --
-
---- func desc
----@param t any
----@param n any
-function c.GetEntityObject(t, n)
-    return c.data.GetEntityObject(t, n)
-end
 
 --- func desc
 ---@param str any
 function c.data.Save(str)
-    print("   ^7[^5Saved^7]:  ==    ", str)
+    
 end
 
 -- Server to Datatable routine.
@@ -462,13 +425,20 @@ end
 -- Server to DB routine.
 function c.data.ServerSync()
     local function Do()
+        --
         c.sql.save.Users()
+        print("   ^7[^5SQL^7]: Users")
         Citizen.Wait(conf.sec * 5)
+        --
         c.sql.save.Vehicles()
+        print("   ^7[^5SQL^7]: Vehicles")
         Citizen.Wait(conf.sec * 5)
+        --
         c.sql.save.Jobs()
+        print("   ^7[^5SQL^7]: Jobs")
         Citizen.Wait(conf.sec * 5)
-        c.data.Save("Users, Vehicles, Jobs, ")
+        --
+        print("   ^7[^3Server Sync Completed^7]")
         SetTimeout(conf.serversync, Do)
     end
     SetTimeout(conf.serversync, Do)
@@ -510,7 +480,7 @@ end
 --- Return the Entity"s state bag.
 ---@param net any "Network ID 16 bit integer"
 function c.data.GetEntityStateBag(net)
-    return Entity(NetworkGetEntityFromNetworkId(net))
+    return Entity(NetworkGetEntityFromNetworkId(net)).state
 end
 
 --- Return the Entity"s state bag.

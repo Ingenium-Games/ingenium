@@ -108,8 +108,9 @@ end)
 RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
     c.data.SetLoadedStatus(true)
-    --
     c.chat.AddSuggestions()
+    --
+    c.skill.SetSkills()
     c.status.SetPlayer()
     c.modifier.SetModifiers()
     -- 

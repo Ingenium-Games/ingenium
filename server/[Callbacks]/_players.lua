@@ -15,12 +15,21 @@ local GetModifiers = RegisterServerCallback({
     end
 })
 
+local GetSkills = RegisterServerCallback({
+    eventName = "GetSkills",
+    eventCallback = function(source, ...)
+        local xPlayer = c.data.GetPlayer(source)
+        local Skills = xPlayer.GetSkills()
+        return Skills
+    end
+})
+
 local GetPlayerJob = RegisterServerCallback({
     eventName = "GetPlayerJob",
     eventCallback = function(source)
         local xPlayer = c.data.GetPlayer(source)
-        local job = xPlayer.GetJob()
-        return job
+        local Job = xPlayer.GetJob()
+        return Job
     end
 })
 

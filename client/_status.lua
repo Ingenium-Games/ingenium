@@ -185,7 +185,7 @@ end
 
 -- ====================================================================================--
 
-function c.status.SetPlayer(data)
+function c.status.SetPlayer()
     local ply = PlayerId()
     local ped = PlayerPedId()
     --

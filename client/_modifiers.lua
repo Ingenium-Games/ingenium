@@ -22,10 +22,12 @@ end
 function c.modifier.SetModifiers()
     if LocalPlayer.state.Modifiers ~= nil then
         c.modifiers = LocalPlayer.state.Modifiers
-        print("Modifiers LocalState Used")
+        c.func.Debug_2("[F] c.modifier.SetModifiers() LocalState Used")
+        print(c.modifiers)
+        print(c.table.Dump(c.modifiers))
     else
         c.modifiers = TriggerServerCallback({eventName = "GetModifiers"})
-        print("Modifiers CB Used")
+        c.func.Debug_2("[F] c.modifier.SetModifiers() Event Used")
     end
     c.oldmodifiers = c.modifiers
 end
@@ -42,7 +44,7 @@ end
 function c.modifier.SetHungerModifier(v)
     c.oldmodifiers = c.modifiers
     c.modifiers.Hunger = c.check.Number(v, _min, _max)
-    c.state.UpdateStates()
+    c.state.TriggerState("Hunger", c.modifiers.Hunger)
 end
 
 --- Sets the Stress modifier between (1,10).
@@ -50,7 +52,7 @@ end
 function c.modifier.AddHungerModifier(v)
     c.oldmodifiers = c.modifiers
     c.modifiers.Hunger = c.check.Number((c.modifiers.Hunger + v),_min,_max)
-    c.state.UpdateStates()
+    c.state.TriggerState("Hunger", c.modifiers.Hunger)
 end
 
 -- ====================================================================================--
@@ -65,7 +67,7 @@ end
 function c.modifier.SetThirstModifier(v)
     c.oldmodifiers = c.modifiers
     c.modifiers.Thirst = c.check.Number(v, _min, _max)
-    c.state.UpdateStates()
+    c.state.TriggerState("Thirst", c.modifiers.Thirst)
 end
 
 --- Sets the Stress modifier between (1,10).
@@ -73,7 +75,7 @@ end
 function c.modifier.AddThirstModifier(v)
     c.oldmodifiers = c.modifiers
     c.modifiers.Thirst = c.check.Number((c.modifiers.Thirst + v),_min,_max)
-    c.state.UpdateStates()
+    c.state.TriggerState("Thirst", c.modifiers.Thirst)
 end
 
 -- ====================================================================================--
@@ -88,7 +90,7 @@ end
 function c.modifier.SetStressModifier(v)
     c.oldmodifiers = c.modifiers
     c.modifiers.Stress = c.check.Number(v, _min, _max)
-    c.state.UpdateStates()
+    c.state.TriggerState("Stress", c.modifiers.Stress)
 end
 
 --- Sets the Stress modifier between (1,10).
@@ -96,7 +98,7 @@ end
 function c.modifier.AddStressModifier(v)
     c.oldmodifiers = c.modifiers
     c.modifiers.Stress = c.check.Number((c.modifiers.Stress + v),_min,_max)
-    c.state.UpdateStates()
+    c.state.TriggerState("Stress", c.modifiers.Stress)
 end
 
 -- ====================================================================================--

@@ -161,6 +161,7 @@ function c.class.Player(source, character_id)
     self.Appearance = json.decode(char.Appearance)
     --    
     self.Skills = json.decode(char.Skills)
+    self.State.Skills = self.Skills
     --
     ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
@@ -381,6 +382,7 @@ function c.class.Player(source, character_id)
         num = c.math.Decimals(num, 0)
         if self.Skills[skill] then
             self.Skills[skill] = num
+            self.State.Skills = self.Skills
         else
             c.func.Debug_1("Skill entered does not exist")
         end
@@ -391,8 +393,11 @@ function c.class.Player(source, character_id)
         num = c.math.Decimals(num, 0)
         if self.Skills[skill] then
             self.Skills[skill] = self.Skills[skill] + num
+            self.State.Skills = self.Skills
         else
-            c.func.Debug_1("Skill entered does not exist")
+            self.Skills[skill] = 0 + num
+            self.State.Skills = self.Skills
+            c.func.Debug_1("Skill did not exist, adding in now.")
         end
     end
     --

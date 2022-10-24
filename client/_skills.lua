@@ -9,18 +9,28 @@ AddEventHandler("Client:Character:SetSkills", function(skills)
     c._skills = skills
 end)
 
-exports("GetSkills", function()
-    return c._skills
-end)
+--- Sets the table of active modifiers.
+---@param t table "Typically passed from the server as an internal table."
+function c.skill.SetSkills()
+    if LocalPlayer.state.Skills ~= nil then
+        c._skills = LocalPlayer.state.Skills
+        c.func.Debug_2("[F] c.skill.SetSkills() LocalState Used")
+        print(c._skills)
+        print(c.table.Dump(c._skills))
+    else
+        c._skills = TriggerServerCallback({eventName = "GetSkills"})
+        c.func.Debug_2("[F] c.skill.SetSkills() Event Used")
+    end
+end
 
 -- ====================================================================================--
 
 --
-c.skill.GetSkills = function()
+function c.skill.GetSkills()
     return self.Skills
 end
 --
-c.skill.GetSkill = function(skill)
+function c.skill.GetSkill(skill)
     for k, v in pairs(self.Skills) do
         if k == skill then
             return v
@@ -28,7 +38,7 @@ c.skill.GetSkill = function(skill)
     end
 end
 --
-c.skill.CompareSkill = function(sk, level)
+function c.skill.CompareSkill(sk, level)
     local skill = c.skill.GetSkill(sk)
     if skill < level then
         return false

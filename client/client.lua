@@ -13,7 +13,7 @@ Citizen.CreateThread(function()
             c.data.Initilize(function()
                 --
                 DisplayRadar(false)
-                --
+                -- Grab the Items prior to characters loading, this way any checks wont impact them
                 local items = TriggerServerCallback({eventName = "GetItems", args = {}})
                 c.item.SetItems(items)
                 --
