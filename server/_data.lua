@@ -263,8 +263,6 @@ end
 function c.data.RemoveVehicle(arg)
     if c.vdex[tonumber(arg)] then
         c.vdex[tonumber(arg)] = false
-    else
-        c.pvdex[arg] = false
     end
 end
 

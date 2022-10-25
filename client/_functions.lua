@@ -433,18 +433,21 @@ function c.func.GetVehicleSeatOfPed(ped)
 end
 
 --- func desc
-function c.func.GetEntityFromRay()
-    local ped = PlayerPedId()
-    local coords = GetEntityCoords(ped)
-    local direction = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
-    local rayhandle = StartShapeTestLosProbe(coords, direction, 10, ped, 0)
-    local result, hit, endcoords, surface, entity = GetShapeTestResult(rayhandle)
-    if result == 2 then
-        if hit and entity then
-            return entity, endcoords
-        end
-    end
-    return false, false
+function c.func.GetEntityFromRay(flag)
+	local cam = GetGameplayCamCoord()
+	local direction = GetGameplayCamRot()
+	direction = vec2(math.rad(direction.x), math.rad(direction.z))
+	local num = math.abs(math.cos(direction.x))
+	direction = vec3((-math.sin(direction.y) * num), (math.cos(direction.y) * num), math.sin(direction.x))
+	local destination = vec3(cam.x + direction.x * 30, cam.y + direction.y * 30, cam.z + direction.z * 30)
+	local rayHandle = StartShapeTestLosProbe(cam, destination, flag or -1, ped, 0)
+	while true do
+		Wait(1)
+		local result, collision, endords, surface, material, entity = GetShapeTestResultIncludingMaterial(rayHandle)
+		if result ~= 1 then
+			return entity, collision, surface, material, endords
+		end
+	end
 end
 
 --- func desc
