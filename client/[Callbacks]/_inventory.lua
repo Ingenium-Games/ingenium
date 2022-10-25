@@ -61,13 +61,13 @@ local Consumeable = RegisterClientCallback({
         --
         if Data.Modifiers then
             if Data.Modifiers.Hunger then
-                c.modifier.AddHungerModifier(Data.Modifiers.Hunger)
+                c.modifier.SetHungerModifier(Data.Modifiers.Hunger)
             end
             if Data.Modifiers.Thirst then
-                c.modifier.AddThirstModifier(Data.Modifiers.Thirst)
+                c.modifier.SetThirstModifier(Data.Modifiers.Thirst)
             end
             if Data.Modifiers.Stress then
-                c.modifier.AddStressModifier(Data.Modifiers.Stress)
+                c.modifier.SetStressModifier(Data.Modifiers.Stress)
             end
         end
         --

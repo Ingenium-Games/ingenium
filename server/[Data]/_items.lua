@@ -23,7 +23,7 @@ local weapon_dump = exports["ig.dump"]:GetWeapons()
         Hotkey = false,
         Image = ".png"
     },
-]]--
+]] --
 
 c.items = { -- table of items
     -- ====================================================================================--
@@ -79,7 +79,6 @@ c.items = { -- table of items
     -- ====================================================================================--
     -- Basic Bitch Items
     -- ====================================================================================--
-
 
     ["Worm"] = {
         Name = "Worm",
@@ -752,7 +751,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Primer.png"
     },
-    
+
     ["Styrophome"] = {
         Name = "Styrophome",
         Degrade = false,
@@ -879,7 +878,6 @@ c.items = { -- table of items
         Image = "Can.png"
     },
 
-    
     ["Foil"] = {
         Name = "Foil",
         Degrade = false,
@@ -900,7 +898,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Foil.png"
     },
-    
+
     ["Plastic"] = {
         Name = "Plastic",
         Degrade = false,
@@ -1110,7 +1108,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Nutsnbolts.png"
     },
-    
+
     ["Matches"] = {
         Name = "Matches",
         Degrade = false,
@@ -1173,7 +1171,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Aluminium.png"
     },
-    
+
     ["Gold"] = {
         Name = "Gold",
         Degrade = false,
@@ -1215,7 +1213,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Topaz.png"
     },
-    
+
     ["Saphire"] = {
         Name = "Saphire",
         Degrade = false,
@@ -1257,7 +1255,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Emerald.png"
     },
-    
+
     ["Opal"] = {
         Name = "Opal",
         Degrade = false,
@@ -1278,7 +1276,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Opal.png"
     },
-    
+
     ["Insulation"] = {
         Name = "Insulation",
         Degrade = false,
@@ -1299,7 +1297,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Insulation.png"
     },
-    
+
     ["Tape"] = {
         Name = "Tape",
         Degrade = false,
@@ -1341,7 +1339,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Rope.png"
     },
-    
+
     ["Handcuffs"] = {
         Name = "Handcuffs",
         Degrade = false,
@@ -1362,7 +1360,7 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "Handcuffs.png"
     },
-    
+
     ["SocketSet"] = {
         Name = "Socket Set",
         Degrade = false,
@@ -1383,7 +1381,6 @@ c.items = { -- table of items
         Hotkey = false,
         Image = "SocketSet.png"
     },
-
 
     -- ====================================================================================--
     -- Ammo Boxes
@@ -8001,7 +7998,7 @@ c.items = { -- table of items
         Consumeable = true,
         Hotkey = true,
         Image = "Chips.png"
-    },
+    }
 
 }
 

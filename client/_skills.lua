@@ -15,8 +15,8 @@ function c.skill.SetSkills()
     if LocalPlayer.state.Skills ~= nil then
         c._skills = LocalPlayer.state.Skills
         c.func.Debug_2("[F] c.skill.SetSkills() LocalState Used")
-        print(c._skills)
-        print(c.table.Dump(c._skills))
+        -- print(c._skills)
+        -- print(c.table.Dump(c._skills))
     else
         c._skills = TriggerServerCallback({eventName = "GetSkills"})
         c.func.Debug_2("[F] c.skill.SetSkills() Event Used")

@@ -16,14 +16,14 @@ function c.state.AddState(name, value, description, effects, actions)
         c.states[name] = {}
         c.states[name][value] = {
             ["description"] = description,
-            ["effect"] = effects or nil,
-            ["action"] = actions or nil
+            ["effect"] = effects,
+            ["action"] = actions
         }
     else
         c.states[name][value] = {
             ["description"] = description,
-            ["effect"] = effects or nil,
-            ["action"] = actions or nil
+            ["effect"] = effects,
+            ["action"] = actions
         }
     end
 end

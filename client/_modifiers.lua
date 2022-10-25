@@ -23,8 +23,8 @@ function c.modifier.SetModifiers()
     if LocalPlayer.state.Modifiers ~= nil then
         c.modifiers = LocalPlayer.state.Modifiers
         c.func.Debug_2("[F] c.modifier.SetModifiers() LocalState Used")
-        print(c.modifiers)
-        print(c.table.Dump(c.modifiers))
+        -- print(c.modifiers)
+        -- print(c.table.Dump(c.modifiers))
     else
         c.modifiers = TriggerServerCallback({eventName = "GetModifiers"})
         c.func.Debug_2("[F] c.modifier.SetModifiers() Event Used")
