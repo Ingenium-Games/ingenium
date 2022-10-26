@@ -10,7 +10,6 @@ conf.file.items = "Items"
 conf.file.notes = "Notes"
 conf.file.names = "Names"
 conf.file.drops = "Drops"
-conf.file.doors = "Doors"
 conf.file.scenes = "Scenes"
 conf.file.pickups = "Pickups"
 --

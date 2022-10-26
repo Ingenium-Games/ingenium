@@ -2,11 +2,11 @@
 
 c.door = {} -- functions
 c.doors = {} -- cached doors
+c._doors = nil -- becasue something is fucked, temp obj returns values but the c.doors doesnt??
 
 -- ====================================================================================--
 
 --[[    
-
 {
     {
     ['Model'] = -903733315,
@@ -19,57 +19,11 @@ c.doors = {} -- cached doors
     ['Job'] = "fire",
     ['Name'] = "FireDept"
 },
-}
         {
             [#] = {joaat, model, coords, jobs, locked, time, item},
         }
 ]] --
 
---- func desc
----@param . any
-function c.door.Load()
-    if c.json.Exists(conf.file.doors) then
-        local file = c.json.Read(conf.file.doors)
-        c.doors = file
-        c.door.Update()
-    else
-        c.doors = {}
-        c.json.Write(conf.file.doors, c.doors)
-        c.door.Update()
-    end
-end
-
---- func desc
-function c.door.Update()
-    local function Do()
-        c.json.Write(conf.file.doors, c.doors)
-        SetTimeout(conf.file.save, Do)
-    end
-    SetTimeout(conf.file.save, Do)
-end
-
---- func desc
----@param model any
----@param coords any
----@param locked any
-function c.door.Add(Doors)
-    local hash, model, coords, jobs, locked, item, time
-    for k, v in pairs(Doors) do 
-        if not c.door.Find(v.Ords) then
-            local n = #c.doors + 1
-            hash, model, coords, jobs, locked, item, time = joaat("DOOR_"..n), v.Model, v.Ords, v.Job, false, false, false
-            c.doors[n] = {hash, model, coords, jobs, locked, item, time}
-        else
-            print("Ignoring duplicate door : "..c.table.Dump(v))
-        end
-    end
-end
-
---- func desc
-function c.door.Resync()
-    local doors = c.doors
-    TriggerClientEvent("Client:Doors:Initialize", -1, doors)
-end
 
 --- func desc
 ---@param coords any
@@ -85,10 +39,42 @@ end
 
 --- func desc
 ---@param coords any
-function c.door.Toggle(coords)
-    local bool, door = c.door.Find(coords)
-    if door then
-        c.doors[door].locked = not bool
-        TriggerClientEvent("Client:Doors:Set", -1, door, c.doors[door].locked)
+function c.door.FindHash(hash)
+    for k,v in pairs(c._doors) do
+        -- is the door in the table?
+        if v[1] == hash then
+            return true, k
+        end
+    end    
+    return false, false
+end
+
+--- func desc
+---@param model any
+---@param coords any
+---@param locked any
+function c.door.Add(Doors)
+    for k, v in pairs(Doors) do 
+        if not c.door.Find(v.Ords) then
+            local n = #c.doors + 1
+            local hash, model, coords, jobs, locked, item, time = joaat("DOOR_"..n), v.Model, v.Ords, v.Job, 1, false, false
+            c.doors[n] = {hash, model, coords, jobs, locked, item, time}
+        else
+            print("Ignoring duplicate door : "..c.table.Dump(v))
+        end
     end
 end
+
+--- func desc
+function c.door.GetDoors()
+    local doors = c._temp_doors
+    return doors
+end
+
+RegisterNetEvent("Server:Doors:State", function(hash, state)
+    local found, id = c.door.FindHash(hash)
+    if found then
+        c._doors[id][5] = state
+    end
+    TriggerClientEvent("Client:Doors:Sync", -1, hash, state)
+end)

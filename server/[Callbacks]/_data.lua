@@ -14,3 +14,11 @@ local GetJobs = RegisterServerCallback({
         return jobs
     end
 })
+
+local GetDoors = RegisterServerCallback({
+    eventName = "GetDoors",
+    eventCallback = function(source, ...)
+        local doors = c.door.GetDoors()
+        return doors
+    end
+})

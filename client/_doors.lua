@@ -5,18 +5,64 @@ c.doors = {} -- from server
 
 -- ====================================================================================--
 
-
 --[[
-0: UNLOCKED
-1: LOCKED
-2: DOORSTATE_FORCE_LOCKED_UNTIL_OUT_OF_AREA
-3: DOORSTATE_FORCE_UNLOCKED_THIS_FRAME
-4: DOORSTATE_FORCE_LOCKED_THIS_FRAME
-5: DOORSTATE_FORCE_OPEN_THIS_FRAME
-6: DOORSTATE_FORCE_CLOSED_THIS_FRAME
+[       script:ig.dev] [197] = {
+[       script:ig.dev]     [1] = 89357677,
+[       script:ig.dev]     [2] = 680601509,
+[       script:ig.dev]     [3] = vec3(1018.692322, 67.176483, 70.010086),
+[       script:ig.dev]     [4] = false,
+[       script:ig.dev]     [5] = false,
+[       script:ig.dev]     [6] = false,
+[       script:ig.dev]     [7] = false,
+[       script:ig.dev]     },
+[       script:ig.dev] }
 ]]--
-DoorSystemSetDoorState(doorHash, state, 1)
 
-local bool, doorHash = DoorSystemFindExistingDoor(x,y,z,modelHash)
-IsDoorRegisteredWithSystem(doorHash)
-AddDoorToSystem(doorHash, modelHash, x, y, z, false, false, false)
+function c.door.SetDoors(doors)
+    c.doors = doors
+end
+
+function c.door.ToggleLock(hash)
+    --
+    while DoorSystemSetOpenRatio(hash) ~= 0.0 do
+        Citizen.Wait(1000)
+    end
+    --
+    local state = DoorSystemGetDoorState(hash)
+    if DoorSystemGetDoorPendingState(hash) ~- state then
+        if state == 0 then
+            TriggerServerEvent("Server:Doors:SetState", hash, 1)
+        elseif state == 1 then 
+            TriggerServerEvent("Server:Doors:SetState", hash, 0)
+        end
+    end
+end
+
+function c.door.Add(d)
+    local hash, model, coords, jobs, locked, item, time = d[1], d[2], d[3], d[4], d[5], d[6], d[7]
+    AddDoorToSystem(d[1], d[2], d[3].x, d[3].y, d[3].z, false, false, false)
+end
+
+function c.door.Find(d)
+    local hash = d[1]
+    if IsDoorRegisteredWithSystem(hash) then
+        return true
+    else
+        return false
+    end
+end
+
+function c.door.AddDoorsToSystem(doors)
+    for k,v in pairs(doors) do
+        if not c.door.Find(v) then
+            c.door.Add(v)
+            print("Added "..k)
+        end
+    end
+end
+
+RegisterNetEvent("Client:Doors:Sync", function(hash, state)
+    if IsDoorRegisteredWithSystem(hash) then
+        DoorSystemSetDoorState(hash, state, 1)
+    end
+end)

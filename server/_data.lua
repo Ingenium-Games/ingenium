@@ -64,8 +64,6 @@ function c.data.Initilize()
         -- [12]
         c.sql.veh.Reset(cb)
         --
-        c.door.Load()
-        --
         loaded = true
     end)
 

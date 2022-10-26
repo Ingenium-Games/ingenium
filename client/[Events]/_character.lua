@@ -124,6 +124,7 @@ AddEventHandler("Client:Character:Ready", function()
     exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")
     exports["AdvancedParking"]:Enable(true)
+    --
 end)
 
 RegisterNetEvent("Client:Character:Pre-Switch")
