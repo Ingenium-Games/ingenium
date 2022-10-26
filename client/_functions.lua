@@ -170,17 +170,17 @@ function c.func.CompareCoords(coords, arrays, style, range)
 end
 
 --- Returns Players within the designated radius.
----@param ords table "Generally a {x,y,z} or vector3"
+---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.func.GetPlayersInArea(ords, radius, minimal)
-    local coords = vector3(ords)
+    local coords = vec3(ords)
     local objs = GetGamePool("CPed")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
             if IsPedAPlayer(v) then
-                local target = vector3(GetEntityCoords(v))
+                local target = vec3(GetEntityCoords(v))
                 local distance = #(target - coords)
                 if distance <= radius then
                     table.insert(obj, v)
@@ -191,12 +191,12 @@ function c.func.GetPlayersInArea(ords, radius, minimal)
         for _, v in pairs(objs) do
             if IsPedAPlayer(v) then
                 local model = GetEntityModel(v)
-                local target = vector3(GetEntityCoords(v))
+                local target = vec3(GetEntityCoords(v))
                 local distance = #(target - coords)
                 if distance <= radius then
                     obj[v] = {
-                        ["model"] = model,
-                        ["coords"] = target
+                        ["Model"] = model,
+                        ["Coords"] = target
                     }
                 end
             end
@@ -206,16 +206,16 @@ function c.func.GetPlayersInArea(ords, radius, minimal)
 end
 
 --- Returns All Peds (including Players) within the designated radius.
----@param ords table "Generally a {x,y,z} or vector3"
+---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.func.GetPedsInArea(ords, radius, minimal)
-    local coords = vector3(ords)
+    local coords = vec3(ords)
     local objs = GetGamePool("CPed")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
-            local target = vector3(GetEntityCoords(v))
+            local target = vec3(GetEntityCoords(v))
             local distance = #(target - coords)
             if distance <= radius then
                 table.insert(obj, v)
@@ -224,12 +224,12 @@ function c.func.GetPedsInArea(ords, radius, minimal)
     else
         for _, v in pairs(objs) do
             local model = GetEntityModel(v)
-            local target = vector3(GetEntityCoords(v))
+            local target = vec3(GetEntityCoords(v))
             local distance = #(target - coords)
             if distance <= radius then
                 obj[v] = {
-                    ["model"] = model,
-                    ["coords"] = target
+                    ["Model"] = model,
+                    ["Coords"] = target
                 }
             end
         end -- { [objectID] = {model = XYZ, coords=vec3}, [objectID] = {model = XYZ, coords=vec3} }
@@ -238,16 +238,16 @@ function c.func.GetPedsInArea(ords, radius, minimal)
 end
 
 --- Returns Objects within the designated radius.
----@param ords table "Generally a {x,y,z} or vector3"
+---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.func.GetObjectsInArea(ords, radius, minimal)
-    local coords = vector3(ords)
+    local coords = vec3(ords)
     local objs = GetGamePool("CObject")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
-            local target = vector3(GetEntityCoords(v))
+            local target = vec3(GetEntityCoords(v))
             local distance = #(target - coords)
             if distance <= radius then
                 table.insert(obj, v)
@@ -256,12 +256,12 @@ function c.func.GetObjectsInArea(ords, radius, minimal)
     else
         for _, v in pairs(objs) do
             local model = GetEntityModel(v)
-            local target = vector3(GetEntityCoords(v))
+            local target = vec3(GetEntityCoords(v))
             local distance = #(target - coords)
             if distance <= radius then
                 obj[v] = {
-                    ["model"] = model,
-                    ["coords"] = target
+                    ["Model"] = model,
+                    ["Coords"] = target
                 }
             end
         end -- { [objectID] = {model = XYZ, coords=vec3}, [objectID] = {model = XYZ, coords=vec3} }
@@ -270,16 +270,16 @@ function c.func.GetObjectsInArea(ords, radius, minimal)
 end
 
 --- Returns Vehicles within the designated radius.
----@param ords table "Generally a {x,y,z} or vector3"
+---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.func.GetVehiclesInArea(ords, radius, minimal)
-    local coords = vector3(ords)
+    local coords = vec3(ords)
     local objs = GetGamePool("CVehicle")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
-            local target = vector3(GetEntityCoords(v))
+            local target = vec3(GetEntityCoords(v))
             local distance = #(target - coords)
             if distance <= radius then
                 table.insert(obj, v)
@@ -288,12 +288,12 @@ function c.func.GetVehiclesInArea(ords, radius, minimal)
     else
         for _, v in pairs(objs) do
             local model = GetEntityModel(v)
-            local target = vector3(GetEntityCoords(v))
+            local target = vec3(GetEntityCoords(v))
             local distance = #(target - coords)
             if distance <= radius then
                 obj[v] = {
-                    ["model"] = model,
-                    ["coords"] = target
+                    ["Model"] = model,
+                    ["Coords"] = target
                 }
             end
         end -- { [objectID] = {model = XYZ, coords=vec3}, [objectID] = {model = XYZ, coords=vec3} }
@@ -302,16 +302,16 @@ function c.func.GetVehiclesInArea(ords, radius, minimal)
 end
 
 --- Returns Pickups within the designated radius.
----@param ords table "Generally a {x,y,z} or vector3"
+---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.func.GetPickupsInArea(coords, radius, minimal)
-    local coords = vector3(ords)
+    local coords = vec3(ords)
     local objs = GetGamePool("CPickup")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
-            local target = vector3(GetPickupCoords(v))
+            local target = vec3(GetPickupCoords(v))
             local distance = #(target - coords)
             if distance <= radius then
                 table.insert(obj, v)
@@ -320,12 +320,12 @@ function c.func.GetPickupsInArea(coords, radius, minimal)
     else
         for _, v in pairs(objs) do
             local model = GetPickupHash(v)
-            local target = vector3(GetPickupCoords(v))
+            local target = vec3(GetPickupCoords(v))
             local distance = #(target - coords)
             if distance <= radius then
                 obj[v] = {
-                    ["model"] = model,
-                    ["coords"] = target
+                    ["Model"] = model,
+                    ["Coords"] = target
                 }
             end
         end -- { [objectID] = {model = XYZ, coords=vec3}, [objectID] = {model = XYZ, coords=vec3} }
@@ -343,10 +343,10 @@ function c.func.GetClosestPed()
     local closest = -1
     local closestdist = -1
     local ply = PlayerPedId()
-    local coords = vector3(GetEntityCoords(ply))
+    local coords = vec3(GetEntityCoords(ply))
     local peds = c.func.GetPedsInArea(coords, 20, true)
     for _, value in pairs(peds) do
-        local targetcoords = vector3(GetEntityCoords(value))
+        local targetcoords = vec3(GetEntityCoords(value))
         local distance = #(targetcoords - coords)
         if (closestdist == -1 or closestdist > distance) then
             closest = value
@@ -363,11 +363,11 @@ function c.func.GetClosestPlayer()
     local closest = -1
     local closestdist = -1
     local ply = PlayerPedId()
-    local coords = vector3(GetEntityCoords(ply))
+    local coords = vec3(GetEntityCoords(ply))
     for _, value in pairs(players) do
         local target = GetPlayerPed(value)
         if target ~= ply then
-            local targetcoords = vector3(GetEntityCoords(target))
+            local targetcoords = vec3(GetEntityCoords(target))
             local distance = #(targetcoords - coords)
             if (closestdist == -1 or closestdist > distance) then
                 closest = value
@@ -384,10 +384,10 @@ function c.func.GetClosestVehicle()
     local closest = -1
     local closestdist = -1
     local ply = PlayerPedId()
-    local coords = vector3(GetEntityCoords(ply))
+    local coords = vec3(GetEntityCoords(ply))
     local vehicles = c.func.GetVehiclesInArea(coords, 20, true)
     for _, value in pairs(vehicles) do
-        local targetcoords = vector3(GetEntityCoords(value))
+        local targetcoords = vec3(GetEntityCoords(value))
         local distance = #(targetcoords - coords)
         if (closestdist == -1 or closestdist > distance) then
             closest = value
@@ -405,10 +405,10 @@ function c.func.GetClosestPosition(positions)
     local closestdist = -1
     local count = 0
     local ply = PlayerPedId()
-    local coords = vector3(GetEntityCoords(ply))
+    local coords = vec3(GetEntityCoords(ply))
     local positions = positions
     for i=1, #positions, 1 do
-        local targetcoords = vector3(positions[i].x,positions[i].y,positions[i].z)
+        local targetcoords = vec3(positions[i].x,positions[i].y,positions[i].z)
         local distance = #(targetcoords - coords)
         if (closestdist == -1 or closestdist > distance) then
             closest = positions[i]

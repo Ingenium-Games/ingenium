@@ -59,25 +59,20 @@ function c.door.Find(d)
     end
 end
 
-function c.door.GetDoorEntitiesInRadius(radius)
-    local retval = {}
-    local objs = c.func.GetObjectsInArea(GetEntityCoords(PlayerPedId()), radius, true)
-    for k,v in pairs(objs) do
-        if door_hashes[GetEntityModel(v)] then
-           table.insert(retval, v)
+--- func desc
+---@param coords any
+function c.door.FindHash(hash)
+    for k,v in pairs(c._doors) do
+        -- is the door in the table?
+        if v[1] == hash then
+            return true, k, v
         end
-    end
+    end    
+    return false, false
 end
 
-function c.door.RegisterDoorEntities()
-    for k, v in pairs(c.door_hashes) do
-        local model = GetEntityModel(entity)
-        local coords = GetEntityCoords(entity)
-        local hash = DoorSystemFindExistingDoor(coords.x, coords.y, coords.z, model)
-        c.door.ToggleLock(hash)
-    end
-end
-
+local start_scan = false
+local target_cache = {}
 
 function c.door.AddDoorsToSystem(doors)
     for k,v in pairs(doors) do
@@ -85,7 +80,93 @@ function c.door.AddDoorsToSystem(doors)
             c.door.Add(v)
         end
     end
-    c.door.RegisterDoorEntities()
+    if c.doors ~= doors then
+        c.door.SetDoors(doors)
+    end
+    start_scan = true
+end
+
+function c.door.SetDoorEntityHashInRadius(radius)
+    local entities = {}
+    local objs = c.func.GetObjectsInArea(GetEntityCoords(PlayerPedId()), radius, false)
+    for k, v in pairs(objs) do
+        if door_hashes[v.Model] then
+            local bool, hash = DoorSystemFindExistingDoor(v.Coords.x, v.Coords.y, v.Coords.z, v.Model)
+            if bool then
+                entities[k] = hash
+            end
+        end
+    end
+    for k, v in pairs(entities) do
+        if DoesEntityExist(k) and not target_cache[k] then
+            --
+            table.insert(target_cache, k)
+            --
+            local hash = v
+            Entity(k).state.Hash = hash
+            --
+            local bool, key, values = c.door.FindHash(hash)
+            --
+            exports['ig.target']:AddEntityZone(joaat("DOOR_"..key), k, {
+                name = joaat("DOOR_"..key),
+                heading = GetEntityHeading(k),
+                debugPoly = false,
+            }, {
+                options = {
+                {
+                    label = "Door",
+                    info = "Lock",
+                    job = values[4],
+                    interact = function(entity)
+                        local hash = Entity(entity).state.Hash
+                        local state = DoorSystemGetDoorState(hash)
+                        if state == 0 then
+                            return true
+                        end
+                    end,
+                    action = function(entity)
+                        local hash = Entity(entity).state.Hash
+                        c.door.ToggleLock(hash)
+                    end
+                },
+                {
+                    label = "Door",
+                    info = "Unlock",
+                    job = values[4],
+                    interact = function(entity)
+                        local hash = Entity(entity).state.Hash
+                        local state = DoorSystemGetDoorState(hash)
+                        if state == 1 then
+                            return true
+                        end
+                    end,
+                    action = function(entity)
+                        local hash = Entity(entity).state.Hash
+                        c.door.ToggleLock(hash)
+                    end
+                },
+                {
+                    label = "Door",
+                    info = "Lockpick",
+                    job = values[4],
+                    interact = function(entity)
+                        local hash = Entity(entity).state.Hash
+                        local state = DoorSystemGetDoorState(hash)
+                        if state == 1 then
+                            local Quantity = c.inventory.GetItemQuantity("Lockpick")
+                            return Quantity or false
+                        end
+                    end,
+                    action = function(entity)
+                        local hash = Entity(entity).state.Hash
+                        c.door.ToggleLock(hash)
+                    end
+                },
+            },
+                distance = 3.5
+            })
+        end
+    end
 end
 
 RegisterNetEvent("Client:Doors:Sync", function(hash, state)
@@ -94,3 +175,13 @@ RegisterNetEvent("Client:Doors:Sync", function(hash, state)
     end
 end)
 
+Citizen.CreateThread(function()
+    while true do
+        if start_scan then
+            c.door.SetDoorEntityHashInRadius(50)
+            Citizen.Wait(3000)
+        else
+            Citizen.Wait(3000)
+        end
+    end
+end)
