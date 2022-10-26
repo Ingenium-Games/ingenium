@@ -38,10 +38,16 @@ function c.door.ToggleLock(hash)
     end
 end
 
+local door_hashes = {}
+
 function c.door.Add(d)
     local hash, model, coords, jobs, locked, item, time = d[1], d[2], d[3], d[4], d[5], d[6], d[7]
     AddDoorToSystem(hash, model, coords.x, coords.y, coords.z, false, false, false)
     DoorSystemSetDoorState(hash, locked, 0)
+    --
+    if not door_hashes[model] then
+        table.insert(door_hashes, model)
+    end
 end
 
 function c.door.Find(d)
@@ -53,12 +59,33 @@ function c.door.Find(d)
     end
 end
 
+function c.door.GetDoorEntitiesInRadius(radius)
+    local retval = {}
+    local objs = c.func.GetObjectsInArea(GetEntityCoords(PlayerPedId()), radius, true)
+    for k,v in pairs(objs) do
+        if door_hashes[GetEntityModel(v)] then
+           table.insert(retval, v)
+        end
+    end
+end
+
+function c.door.RegisterDoorEntities()
+    for k, v in pairs(c.door_hashes) do
+        local model = GetEntityModel(entity)
+        local coords = GetEntityCoords(entity)
+        local hash = DoorSystemFindExistingDoor(coords.x, coords.y, coords.z, model)
+        c.door.ToggleLock(hash)
+    end
+end
+
+
 function c.door.AddDoorsToSystem(doors)
     for k,v in pairs(doors) do
         if not c.door.Find(v) then
             c.door.Add(v)
         end
     end
+    c.door.RegisterDoorEntities()
 end
 
 RegisterNetEvent("Client:Doors:Sync", function(hash, state)
@@ -66,3 +93,4 @@ RegisterNetEvent("Client:Doors:Sync", function(hash, state)
         DoorSystemSetDoorState(hash, state, 1)
     end
 end)
+
