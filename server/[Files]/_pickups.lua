@@ -26,8 +26,8 @@ function c.pick.Load()
     else
         c.picks = {}
         c.json.Write(conf.file.pickups, c.picks)
-        c.pick.Update()
     end
+    c.pick.Update()
 end
 
 --- func desc

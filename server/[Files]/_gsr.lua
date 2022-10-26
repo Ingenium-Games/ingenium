@@ -26,8 +26,8 @@ function c.gsr.Load()
     else
         c.gsrs = {}
         c.json.Write(conf.file.gsr, c.gsrs)
-        c.gsr.Update()
     end
+    c.gsr.Update()
 end
 
 

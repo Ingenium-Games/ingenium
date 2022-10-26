@@ -28,8 +28,8 @@ function c.drop.Load()
     else
         c.drops = {}
         c.json.Write(conf.file.drops, c.drops)
-        c.drop.Update()
     end
+    c.drop.Update()
 end
 
 --- func desc

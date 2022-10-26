@@ -25,8 +25,8 @@ function c.note.Load()
     else
         c.notes = {}
         c.json.Write(conf.file.notes, c.notes)
-        c.note.Update()
     end
+    c.note.Update()
 end
 
 --- func desc
