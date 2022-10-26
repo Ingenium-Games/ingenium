@@ -40,7 +40,8 @@ end
 
 function c.door.Add(d)
     local hash, model, coords, jobs, locked, item, time = d[1], d[2], d[3], d[4], d[5], d[6], d[7]
-    AddDoorToSystem(d[1], d[2], d[3].x, d[3].y, d[3].z, false, false, false)
+    AddDoorToSystem(hash, model, coords.x, coords.y, coords.z, false, false, false)
+    DoorSystemSetDoorState(hash, locked, 0)
 end
 
 function c.door.Find(d)
@@ -56,7 +57,6 @@ function c.door.AddDoorsToSystem(doors)
     for k,v in pairs(doors) do
         if not c.door.Find(v) then
             c.door.Add(v)
-            print("Added "..k)
         end
     end
 end
