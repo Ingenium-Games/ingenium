@@ -24,9 +24,9 @@ end
 
 function c.door.ToggleLock(hash)
     --
-    while DoorSystemSetOpenRatio(hash) ~= 0.0 do
-        Citizen.Wait(1000)
-    end
+    --while DoorSystemSetOpenRatio(hash) ~= 0.0 do
+    --    Citizen.Wait(1000)
+    --end
     --
     local state = DoorSystemGetDoorState(hash)
     if DoorSystemGetDoorPendingState(hash) ~- state then
@@ -45,9 +45,7 @@ function c.door.Add(d)
     AddDoorToSystem(hash, model, coords.x, coords.y, coords.z, false, false, false)
     DoorSystemSetDoorState(hash, locked, 0)
     --
-    if not door_hashes[model] then
-        table.insert(door_hashes, model)
-    end
+    table.insert(door_hashes, hash)
 end
 
 function c.door.Find(d)
@@ -59,12 +57,23 @@ function c.door.Find(d)
     end
 end
 
+function c.door.GetModels()
+    local models = {}
+    for k,v in pairs(c.doors) do
+        local model = v[2]
+        if not c.table.MatchValue(models, model) then
+            table.insert(models, model)
+        end
+    end    
+    return models
+end
+
 --- func desc
 ---@param coords any
 function c.door.FindHash(hash)
-    for k,v in pairs(c._doors) do
+    for k,v in pairs(c.doors) do
         -- is the door in the table?
-        if v[1] == hash then
+        if (v[1] == hash) then
             return true, k, v
         end
     end    
@@ -86,29 +95,40 @@ function c.door.AddDoorsToSystem(doors)
     start_scan = true
 end
 
-function c.door.SetDoorEntityHashInRadius(radius)
+local models_cache = false
+local zones = {}
+
+function c.door.GenerateDoorsInRadius()
+    if not models_cache then models_cache = c.door.GetModels() end
+    -- print("Checking Models")
+    -- print(c.table.Dump(models_cache))
     local entities = {}
-    local objs = c.func.GetObjectsInArea(GetEntityCoords(PlayerPedId()), radius, false)
+    local ords = GetEntityCoords(PlayerPedId())
+    local objs = c.func.GetObjectsInArea(ords, 10, false)
+    -- print("Checking Objects")
+    -- print(c.table.Dump(objs))
     for k, v in pairs(objs) do
-        if door_hashes[v.Model] then
+        if c.table.MatchValue(models_cache, v.Model) then
             local bool, hash = DoorSystemFindExistingDoor(v.Coords.x, v.Coords.y, v.Coords.z, v.Model)
             if bool then
                 entities[k] = hash
             end
         end
     end
+    -- print("Checking Entities")
+    -- print(c.table.Dump(entities))
     for k, v in pairs(entities) do
-        if DoesEntityExist(k) and not target_cache[k] then
+        if DoesEntityExist(k) and not c.table.MatchValue(target_cache, k) then
             --
+            --print("Adding to cache: "..k)
             table.insert(target_cache, k)
             --
-            local hash = v
-            Entity(k).state.Hash = hash
+            local bool, key, values = c.door.FindHash(v)
+            --print("Checking c.door.FindHash(hash) ")
+            --print(bool, key, c.table.Dump(values))
             --
-            local bool, key, values = c.door.FindHash(hash)
-            --
-            exports['ig.target']:AddEntityZone(joaat("DOOR_"..key), k, {
-                name = joaat("DOOR_"..key),
+            exports['ig.target']:AddEntityZone("DOOR_"..key, k, {
+                name = "DOOR_"..key,
                 heading = GetEntityHeading(k),
                 debugPoly = false,
             }, {
@@ -116,57 +136,38 @@ function c.door.SetDoorEntityHashInRadius(radius)
                 {
                     label = "Door",
                     info = "Lock",
-                    job = values[4],
-                    interact = function(entity)
-                        local hash = Entity(entity).state.Hash
-                        local state = DoorSystemGetDoorState(hash)
+                    --job = values[4],
+                    interact = function()
+                        local state = DoorSystemGetDoorState(v)
                         if state == 0 then
                             return true
                         end
                     end,
-                    action = function(entity)
-                        local hash = Entity(entity).state.Hash
-                        c.door.ToggleLock(hash)
+                    action = function()
+                        c.door.ToggleLock(v)
                     end
                 },
                 {
                     label = "Door",
                     info = "Unlock",
-                    job = values[4],
-                    interact = function(entity)
-                        local hash = Entity(entity).state.Hash
-                        local state = DoorSystemGetDoorState(hash)
+                    --job = values[4],
+                    interact = function()
+                        local state = DoorSystemGetDoorState(v)
                         if state == 1 then
                             return true
                         end
                     end,
-                    action = function(entity)
-                        local hash = Entity(entity).state.Hash
-                        c.door.ToggleLock(hash)
-                    end
-                },
-                {
-                    label = "Door",
-                    info = "Lockpick",
-                    job = values[4],
-                    interact = function(entity)
-                        local hash = Entity(entity).state.Hash
-                        local state = DoorSystemGetDoorState(hash)
-                        if state == 1 then
-                            local Quantity = c.inventory.GetItemQuantity("Lockpick")
-                            return Quantity or false
-                        end
-                    end,
-                    action = function(entity)
-                        local hash = Entity(entity).state.Hash
-                        c.door.ToggleLock(hash)
+                    action = function()
+                        c.door.ToggleLock(v)
                     end
                 },
             },
-                distance = 3.5
+                distance = 2.5
             })
         end
     end
+    -- print("Checking target_cache")
+    -- print(c.table.Dump(target_cache))
 end
 
 RegisterNetEvent("Client:Doors:Sync", function(hash, state)
@@ -178,10 +179,10 @@ end)
 Citizen.CreateThread(function()
     while true do
         if start_scan then
-            c.door.SetDoorEntityHashInRadius(50)
-            Citizen.Wait(3000)
+            c.door.GenerateDoorsInRadius()
+            Citizen.Wait(1000)
         else
-            Citizen.Wait(3000)
+            Citizen.Wait(1000)
         end
     end
 end)

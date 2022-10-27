@@ -40,13 +40,24 @@ end
 --- func desc
 ---@param coords any
 function c.door.FindHash(hash)
-    for k,v in pairs(c._doors) do
+    for k,v in pairs(c.doors) do
         -- is the door in the table?
         if v[1] == hash then
             return true, k
         end
     end    
     return false, false
+end
+
+--- func desc
+---@param coords any
+function c.door.SetState(hash, state)
+    for k,v in pairs(c.doors) do
+        -- is the door in the table?
+        if v[1] == hash then
+            v[5] = state
+        end
+    end    
 end
 
 --- func desc
@@ -71,10 +82,7 @@ function c.door.GetDoors()
     return doors
 end
 
-RegisterNetEvent("Server:Doors:State", function(hash, state)
-    local found, id = c.door.FindHash(hash)
-    if found then
-        c._doors[id][5] = state
-    end
+RegisterNetEvent("Server:Doors:SetState", function(hash, state)
+    c.door.SetState(hash, state)
     TriggerClientEvent("Client:Doors:Sync", -1, hash, state)
 end)
