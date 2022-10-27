@@ -2,7 +2,6 @@
 
 c.door = {} -- functions
 c.doors = {} -- cached doors
-c._doors = nil -- becasue something is fucked, temp obj returns values but the c.doors doesnt??
 
 -- ====================================================================================--
 
@@ -30,7 +29,7 @@ c._doors = nil -- becasue something is fucked, temp obj returns values but the c
 function c.door.Find(coords)
     for k,v in pairs(c.doors) do
         -- is the door in the table?
-        if v[3] == coords then
+        if (v[3] == coords) then
             return true, k
         end
     end    
@@ -42,7 +41,7 @@ end
 function c.door.FindHash(hash)
     for k,v in pairs(c.doors) do
         -- is the door in the table?
-        if v[1] == hash then
+        if (v[1] == hash) then
             return true, k
         end
     end    
@@ -52,10 +51,12 @@ end
 --- func desc
 ---@param coords any
 function c.door.SetState(hash, state)
-    for k,v in pairs(c.doors) do
+    local cache = c.json.Read("Doors")
+    for k,v in pairs(cache) do
         -- is the door in the table?
-        if v[1] == hash then
+        if (v[1] == hash) then
             v[5] = state
+            c.json.Write("Doors", cache)
         end
     end    
 end
@@ -74,12 +75,13 @@ function c.door.Add(Doors)
             print("Ignoring duplicate door : "..c.table.Dump(v))
         end
     end
+    c.json.Write("Doors", c.doors)
 end
 
 --- func desc
 function c.door.GetDoors()
-    local doors = c._temp_doors
-    return doors
+    local cache = c.json.Read("Doors")
+    return cache
 end
 
 RegisterNetEvent("Server:Doors:SetState", function(hash, state)

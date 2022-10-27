@@ -12,12 +12,12 @@ NOTES
 conf.default.health = 175
 conf.default.armour = 100
 
-conf.default.cash = 25.00
 conf.default.bank = 500.00
+
 conf.default.accounts = {
-    Cash = conf.default.cash,
     Bank = conf.default.bank
 }
+
 conf.default.modifiers = {
     Hunger = 1,
     Thirst = 1,

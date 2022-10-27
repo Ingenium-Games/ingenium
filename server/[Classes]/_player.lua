@@ -433,24 +433,39 @@ function c.class.Player(source, character_id)
     end
     --
     self.RefreshAccounts = function()
-        local cash = self.GetAccount("Cash")
+        --local cash = self.GetAccount("Cash")
         local bank = self.GetAccount("Bank")
+        --[[
         if cash then
             self.State.Cash = cash
         end
+        ]]--
         if bank then
             self.State.Bank = bank
         end
     end
     --
     self.GetCash = function()
-        local acc = self.GetAccount("Cash")
-        if acc then
-            return acc
+        local amount, position = self.GetItemQuantity("Cash")
+        if amount then
+            return amount
+        else
+            return 0
         end
     end
     --
     self.SetCash = function(v)
+        local amount, position = self.GetItemQuantity("Cash")
+        local num = c.check.Number(v)
+        if amount > 0 then
+            self.Inventory[position].Quantity = num
+            self.State.Cash = self.Inventory[position].Quantity
+        else
+            self.AddItem({"Cash", num, 100, false, false})
+            self.State.Cash = num
+        end
+        TriggerClientEvent("Client:Inventory:Update", self.ID)
+        --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
@@ -468,9 +483,21 @@ function c.class.Player(source, character_id)
                 self.State.Cash = acc
             end
         end
+        ]]--
     end
     --
     self.AddCash = function(v)
+        local amount, position = self.GetItemQuantity("Cash")
+        local num = c.check.Number(v)
+        if amount > 0 then
+            self.Inventory[position].Quantity = amount + num
+            self.State.Cash = self.Inventory[position].Quantity
+        else
+            self.AddItem({"Cash", num, 100, false, false})
+            self.State.Cash = num
+        end
+        TriggerClientEvent("Client:Inventory:Update", self.ID)
+        --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
@@ -488,9 +515,32 @@ function c.class.Player(source, character_id)
                 self.State.Cash = acc
             end
         end
+        ]]--
     end
     --
     self.RemoveCash = function(v)
+        local amount, position = self.GetItemQuantity("Cash")
+        local num = c.check.Number(v)
+        if amount > 0 then
+            if (amount - num) > 0 then
+                self.Inventory[position].Quantity = amount - c.math.Decimals(num, 2)
+                self.State.Cash = self.Inventory[position].Quantity
+            elseif (amount - num) == 0 then
+                self.Inventory[position].Quantity = 1
+                self.RemoveItem("Cash", position)
+            else
+                self.Kick(
+                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
+                c.func.Debug_1(
+                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
+                        self.ID)
+                CancelEvent()
+            end
+        else
+            CancelEvent()
+        end
+        TriggerClientEvent("Client:Inventory:Update", self.ID)
+        --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
@@ -508,6 +558,7 @@ function c.class.Player(source, character_id)
                 self.State.Cash = acc
             end
         end
+        ]]--
     end
     --
     self.GetBank = function()

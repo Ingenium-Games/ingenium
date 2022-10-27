@@ -136,7 +136,7 @@ function c.door.GenerateDoorsInRadius()
                 {
                     label = "Door",
                     info = "Lock",
-                    --job = values[4],
+                    job = values[4],
                     interact = function()
                         local state = DoorSystemGetDoorState(v)
                         if state == 0 then
@@ -150,7 +150,7 @@ function c.door.GenerateDoorsInRadius()
                 {
                     label = "Door",
                     info = "Unlock",
-                    --job = values[4],
+                    job = values[4],
                     interact = function()
                         local state = DoorSystemGetDoorState(v)
                         if state == 1 then
@@ -170,9 +170,21 @@ function c.door.GenerateDoorsInRadius()
     -- print(c.table.Dump(target_cache))
 end
 
+--- func desc
+---@param coords any
+function c.door.SetState(hash, state)
+    for k,v in pairs(c.doors) do
+        -- is the door in the table?
+        if v[1] == hash then
+            v[5] = state
+        end
+    end    
+end
+
 RegisterNetEvent("Client:Doors:Sync", function(hash, state)
     if IsDoorRegisteredWithSystem(hash) then
-        DoorSystemSetDoorState(hash, state, 1)
+        c.door.SetState(hash, state)
+        DoorSystemSetDoorState(hash, state, 0)
     end
 end)
 

@@ -24,8 +24,3 @@ local Doors = {
 }
 
 c.door.Add(Doors)
-
-print(c.doors)
-
-c._doors = c.table.Clone(c.doors)
-c._temp_doors = c.doors
