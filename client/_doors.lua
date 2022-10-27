@@ -104,7 +104,7 @@ function c.door.GenerateDoorsInRadius()
     -- print(c.table.Dump(models_cache))
     local entities = {}
     local ords = GetEntityCoords(PlayerPedId())
-    local objs = c.func.GetObjectsInArea(ords, 10, false)
+    local objs = c.func.GetObjectsInArea(ords, 16, false)
     -- print("Checking Objects")
     -- print(c.table.Dump(objs))
     for k, v in pairs(objs) do
@@ -180,9 +180,9 @@ Citizen.CreateThread(function()
     while true do
         if start_scan then
             c.door.GenerateDoorsInRadius()
-            Citizen.Wait(1000)
+            Citizen.Wait(2200)
         else
-            Citizen.Wait(1000)
+            Citizen.Wait(500)
         end
     end
 end)
