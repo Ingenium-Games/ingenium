@@ -13,7 +13,7 @@ end
 
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
-    c.cron.Add(conf.loanpayment.h, conf.loanpayment.m, c.bank.CalculatePayments)
+    c.cron.RunAt(conf.loanpayment.h, conf.loanpayment.m, c.bank.CalculatePayments)
     -- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculatePayments()")
 end)
 --
@@ -27,7 +27,7 @@ end
 
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
-    c.cron.Add(conf.loaninterest.h, conf.loaninterest.m, c.bank.CalculateInterest)
+    c.cron.RunAt(conf.loaninterest.h, conf.loaninterest.m, c.bank.CalculateInterest)
     -- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculateInterest()")
 end)
 --
@@ -54,7 +54,7 @@ end
 -- Set so the server will debit bank accounts on the hour every hour if in negative balance.
 AddEventHandler("onServerResourceStart", function()
     for i=0,23 do
-        c.cron.Add(i, 0, c.bank.CheckNegativeBalances)
+        c.cron.RunAt(i, 0, c.bank.CheckNegativeBalances)
     end
     -- c.func.Debug_1("[E] Added Cron Job: [F] c.bank.CheckNegativeBalances()")
 end)

@@ -48,5 +48,5 @@ end
 ---@param url any
 ---@param resourceName any
 function c.version.CronCheck(hour, min, url, resourceName)
-    c.cron.Add(h, m, c.version.Check(url, resourceName))
+    c.cron.RunAt(h, m, function() c.version.Check(url, resourceName) end)
 end

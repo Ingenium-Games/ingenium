@@ -28,8 +28,7 @@ function c.time.Update()
     local newt = c.time.AlterTime(t.hour)
     SetConvarReplicated("Time", string.format("%02d:%02d", newt, t.min))
     SetConvarServerInfo("Server Time", string.format("%02d:%02d", t.hour, t.min))
-    -- Add Cron Handler into the Time Functions, trigger at THIS time.
-    c.cron.Action(newt, t.min)
+    c.cron.OnTime(newt, t.min)
 end
 
 --- func desc

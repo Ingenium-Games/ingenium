@@ -8,7 +8,7 @@ local Doors = {{
     ['Ords'] = vec3(1017.637268, 65.477730, 70.010086),
     ['Job'] = "casino",
     ['Name'] = "CasinoManagement",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -21,7 +21,7 @@ local Doors = {{
     ['Ords'] = vec3(1018.692322, 67.176483, 70.010086),
     ['Job'] = "casino",
     ['Name'] = "CasinoManagement",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }}

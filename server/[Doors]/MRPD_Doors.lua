@@ -7,10 +7,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(434.744446, -980.755554, 30.815304),
     ['Job'] = "police",
-    ['Name'] = "NoName",
-    ['Default'] = 0,
+    ['Name'] = "mrpd",
+    ['State'] = 0,
     ['Item'] = false,
-    ['Time'] = {h = 13, m = 05, s = 1}
+    ['Time'] = false
 }, {
     ['Model'] = -1547307588,
     ['Info'] = {
@@ -21,7 +21,7 @@ local Doors = {{
     ['Ords'] = vec3(434.744446, -983.078125, 30.815304),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 0,
+    ['State'] = 0,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -34,7 +34,7 @@ local Doors = {{
     ['Ords'] = vec3(440.520081, -977.601074, 30.823193),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -47,7 +47,7 @@ local Doors = {{
     ['Ords'] = vec3(440.520081, -986.233459, 30.823193),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -60,7 +60,7 @@ local Doors = {{
     ['Ords'] = vec3(440.739197, -998.746216, 30.815304),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -73,7 +73,7 @@ local Doors = {{
     ['Ords'] = vec3(443.061768, -998.746216, 30.815304),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -86,7 +86,7 @@ local Doors = {{
     ['Ords'] = vec3(445.406708, -984.201416, 30.823193),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -99,7 +99,7 @@ local Doors = {{
     ['Ords'] = vec3(458.208740, -972.254272, 30.815308),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -112,7 +112,7 @@ local Doors = {{
     ['Ords'] = vec3(455.886169, -972.254272, 30.815308),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -125,7 +125,7 @@ local Doors = {{
     ['Ords'] = vec3(458.654327, -990.649780, 30.823193),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -138,7 +138,7 @@ local Doors = {{
     ['Ords'] = vec3(452.266266, -995.525391, 30.823193),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -151,7 +151,7 @@ local Doors = {{
     ['Ords'] = vec3(458.089417, -995.524658, 30.823193),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -164,7 +164,7 @@ local Doors = {{
     ['Ords'] = vec3(448.984558, -995.526367, 35.103764),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -177,7 +177,7 @@ local Doors = {{
     ['Ords'] = vec3(464.308563, -984.528442, 43.771240),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -190,7 +190,7 @@ local Doors = {{
     ['Ords'] = vec3(464.159058, -974.665588, 26.370705),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -203,7 +203,7 @@ local Doors = {{
     ['Ords'] = vec3(464.156555, -997.509277, 26.370705),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -216,7 +216,7 @@ local Doors = {{
     ['Ords'] = vec3(467.368622, -1014.406006, 26.483816),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -229,7 +229,7 @@ local Doors = {{
     ['Ords'] = vec3(469.774261, -1014.406006, 26.483816),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -242,7 +242,7 @@ local Doors = {{
     ['Ords'] = vec3(476.615692, -1008.875427, 26.480055),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -255,7 +255,7 @@ local Doors = {{
     ['Ords'] = vec3(475.953857, -1006.937805, 26.406385),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -268,7 +268,7 @@ local Doors = {{
     ['Ords'] = vec3(475.953857, -1010.819336, 26.406385),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -281,7 +281,7 @@ local Doors = {{
     ['Ords'] = vec3(477.912598, -1012.188660, 26.480055),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -294,7 +294,7 @@ local Doors = {{
     ['Ords'] = vec3(480.912811, -1012.188660, 26.480055),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -307,7 +307,7 @@ local Doors = {{
     ['Ords'] = vec3(483.912720, -1012.188660, 26.480055),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -320,7 +320,7 @@ local Doors = {{
     ['Ords'] = vec3(486.913116, -1012.188660, 26.480055),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -333,7 +333,7 @@ local Doors = {{
     ['Ords'] = vec3(484.176422, -1007.734375, 26.480055),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -346,7 +346,7 @@ local Doors = {{
     ['Ords'] = vec3(481.008362, -1004.117981, 26.480055),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -359,7 +359,7 @@ local Doors = {{
     ['Ords'] = vec3(479.059967, -1003.172974, 26.406504),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -372,7 +372,7 @@ local Doors = {{
     ['Ords'] = vec3(482.068573, -997.909973, 26.406504),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -385,7 +385,7 @@ local Doors = {{
     ['Ords'] = vec3(479.663757, -997.909973, 26.406504),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -398,7 +398,7 @@ local Doors = {{
     ['Ords'] = vec3(482.670258, -995.728516, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -411,7 +411,7 @@ local Doors = {{
     ['Ords'] = vec3(482.669922, -992.299133, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -424,7 +424,7 @@ local Doors = {{
     ['Ords'] = vec3(482.670135, -987.579163, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -437,7 +437,7 @@ local Doors = {{
     ['Ords'] = vec3(482.669434, -983.986816, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -450,7 +450,7 @@ local Doors = {{
     ['Ords'] = vec3(479.062408, -985.032349, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -463,7 +463,7 @@ local Doors = {{
     ['Ords'] = vec3(479.062408, -987.437561, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -476,7 +476,7 @@ local Doors = {{
     ['Ords'] = vec3(475.832336, -990.483948, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -489,7 +489,7 @@ local Doors = {{
     ['Ords'] = vec3(471.375305, -987.437378, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -502,7 +502,7 @@ local Doors = {{
     ['Ords'] = vec3(471.375305, -985.031921, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }, {
@@ -515,7 +515,7 @@ local Doors = {{
     ['Ords'] = vec3(478.289154, -997.910095, 26.405483),
     ['Job'] = "police",
     ['Name'] = "mrpd",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }}

@@ -82,18 +82,15 @@ function c.door.Add(Doors)
     for k, v in pairs(Doors) do 
         if not c.door.Find(v.Ords) then
             local n = #c.doors + 1
-            local hash, model, coords, jobs, locked, item, time = joaat("DOOR_"..n), v.Model, v.Ords, v.Job, (v.Default or 1), (v.Item or false), (v.Time or false)
+            local hash, model, coords, jobs, locked, item, time = joaat("DOOR_"..n), v.Model, v.Ords, v.Job, (v.State or 1), (v.Item or false), (v.Time or false)
             c.doors[n] = {hash, model, coords, jobs, locked, item, time}
             if v.Time then
                 if v.Time.h and v.Time.m and v.Time.s then
-                    c.cron.Add(v.Time.h, v.Time.m, function()
+                    c.cron.RunAt(v.Time.h, v.Time.m, function()
                         local hash = hash
                         local state = v.Time.s
                         c.door.SetState(hash, state)
-                        print("Door Test State Change to "..state)
                     end)
-                    print("Added Cron")
-                    print(hash, v.Time.h, v.Time.m, v.Time.s)
                 end
             end
         else

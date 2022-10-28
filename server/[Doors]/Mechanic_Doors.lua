@@ -8,7 +8,7 @@ local Doors = {{
     ['Ords'] = vec3(-44.188396, -1043.553833, 27.801605),
     ['Job'] = "mechanic",
     ['Name'] = "BennysMotorHub",
-    ['Default'] = 1,
+    ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
 }}
