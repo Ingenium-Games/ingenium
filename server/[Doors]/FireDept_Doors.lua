@@ -7,7 +7,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(200.405685, -1645.355225, 28.797325),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
+    ['Name'] = "FireDept",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = -903733315,
     ['Info'] = {
@@ -17,7 +20,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(201.885544, -1643.591431, 28.797325),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
+    ['Name'] = "FireDept",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = -585526495,
     ['Info'] = {
@@ -27,7 +33,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(199.292038, -1634.487305, 29.022600),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
+    ['Name'] = "FireDept",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1934132135,
     ['Info'] = {
@@ -37,7 +46,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(212.104355, -1643.714355, 30.815550),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
+    ['Name'] = "FireDept",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1934132135,
     ['Info'] = {
@@ -47,7 +59,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(215.249176, -1646.306152, 31.079149),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
+    ['Name'] = "FireDept",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1934132135,
     ['Info'] = {
@@ -57,7 +72,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(208.976593, -1641.090820, 30.812597),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
+    ['Name'] = "FireDept",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1934132135,
     ['Info'] = {
@@ -67,7 +85,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(208.989471, -1641.075439, 30.918621),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
+    ['Name'] = "FireDept",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1934132135,
     ['Info'] = {
@@ -77,7 +98,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(212.087646, -1643.734375, 31.621038),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
+    ['Name'] = "FireDept",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }}
 
 c.door.Add(Doors)

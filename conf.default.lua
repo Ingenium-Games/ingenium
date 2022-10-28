@@ -9,7 +9,7 @@ NOTES
 -- ====================================================================================--
 -- character
 
-conf.default.health = 175
+conf.default.health = 150
 conf.default.armour = 100
 
 conf.default.bank = 500.00
@@ -23,11 +23,15 @@ conf.default.modifiers = {
     Thirst = 1,
     Stress = 1
 }
+
 conf.default.stats = {
     Hunger = 100, -- Min 0 Max 100
     Thirst = 100, -- Min 0 Max 100
     Stress = 0 -- Min 0 Max 100
 }
+
+conf.default.selfdamage = 3
+
 -- jobs
 conf.default.job = {
     Name = "none",
@@ -37,11 +41,14 @@ conf.default.jobaccounts = {
     Bank = 5000.00,
     Safe = 0.00
 }
+
 -- items
 conf.default.itemcraft = true
 conf.default.itemdegrade = false
+
 -- tax 
-conf.default.tax = 10
+conf.default.tax = 10.00
+
 -- 
 conf.default.skills = {
     -- General Repair

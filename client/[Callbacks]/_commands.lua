@@ -34,7 +34,7 @@ local Revive = RegisterClientCallback({
     eventCallback = function(ords)
         c.func.FadeOut(1000)
         NetworkResurrectLocalPlayer(ords.x, ords.y, ords.z, ords.h, true, false)
-        c.status.SetHealth((c.status.GetMaxHealth() - 30.0))
+        c.status.SetHealth(150)
         c.data.SetLocalPlayerState("IsDead", false, true)
         c.func.FadeIn(1000)
     end

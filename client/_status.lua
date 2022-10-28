@@ -25,6 +25,11 @@ function c.status.GetMaxHealth()
     return GetEntityMaxHealth(PlayerPedId())
 end
 
+function c.status.SelfDamageHealth()
+    local health = c.status.GetHealth()
+    c.status.SetHealth((health - conf.default.selfdamage))
+end
+
 -- ====================================================================================--
 
 function c.status.GetArmour()
@@ -71,6 +76,7 @@ function c.status.RemoveHunger(v)
     local calc = c.stats.Hunger - val
     if calc <= 0 then
         c.stats.Hunger = _min
+        c.status.SelfDamageHealth()
     else
         c.stats.Hunger = c.math.Decimals(c.stats.Hunger - val, 2)
     end
@@ -101,6 +107,7 @@ function c.status.RemoveThirst(v)
     local calc = c.stats.Thirst - val
     if calc <= 0 then
         c.stats.Thirst = _min
+        c.status.SelfDamageHealth()
     else
         c.stats.Thirst = c.math.Decimals(c.stats.Thirst - val, 2)
     end
@@ -121,6 +128,7 @@ function c.status.AddStress(v)
     local calc = c.stats.Stress + val
     if calc >= 100 then
         c.stats.Stress = _max
+        c.status.SelfDamageHealth()
     else
         c.stats.Stress = c.math.Decimals(c.stats.Stress + val, 2)
     end

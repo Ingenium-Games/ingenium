@@ -7,7 +7,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(-32.642670, -1108.559204, 27.424587),
     ['Job'] = "pdm",
-    ['Name'] = "pdm"
+    ['Name'] = "pdm",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 2089009131,
     ['Info'] = {
@@ -17,7 +20,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(-30.428459, -1102.470215, 27.424587),
     ['Job'] = "pdm",
-    ['Name'] = "pdm"
+    ['Name'] = "pdm",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1010499530,
     ['Info'] = {
@@ -27,7 +33,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(-21.505678, -1089.383057, 28.191204),
     ['Job'] = "pdm",
-    ['Name'] = "pdm"
+    ['Name'] = "pdm",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 2089009131,
     ['Info'] = {
@@ -37,7 +46,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(-27.621048, -1094.762817, 27.424587),
     ['Job'] = "pdm",
-    ['Name'] = "pdm"
+    ['Name'] = "pdm",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 190770132,
     ['Info'] = {
@@ -47,7 +59,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(981.150513, -103.255249, 74.993576),
     ['Job'] = "lostmc",
-    ['Name'] = "lostmc"
+    ['Name'] = "lostmc",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = -822900180,
     ['Info'] = {
@@ -57,7 +72,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(968.729919, -112.076828, 76.122208),
     ['Job'] = "lostmc",
-    ['Name'] = "lostmc"
+    ['Name'] = "lostmc",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = -822900180,
     ['Info'] = {
@@ -67,7 +85,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(963.159302, -117.321877, 75.249420),
     ['Job'] = "lostmc",
-    ['Name'] = "lostmc"
+    ['Name'] = "lostmc",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1335311341,
     ['Info'] = {
@@ -77,7 +98,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(959.382324, -120.451164, 75.161575),
     ['Job'] = "lostmc",
-    ['Name'] = "lostmc"
+    ['Name'] = "lostmc",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = -197537718,
     ['Info'] = {
@@ -87,7 +111,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(982.387451, -125.371048, 74.993134),
     ['Job'] = "lostmc",
-    ['Name'] = "lostmc"
+    ['Name'] = "lostmc",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = -710818483,
     ['Info'] = {
@@ -97,7 +124,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(990.867310, -132.890823, 74.211250),
     ['Job'] = "lostmc",
-    ['Name'] = "lostmc"
+    ['Name'] = "lostmc",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }}
 
 c.door.Add(Doors)

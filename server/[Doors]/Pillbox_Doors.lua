@@ -7,7 +7,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(313.480072, -595.458313, 43.433910),
     ['Job'] = "medic",
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -17,7 +20,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(303.908691, -596.578003, 43.433910),
     ['Job'] = "medic",
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -27,7 +33,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(309.133728, -597.751465, 43.433910),
     ['Job'] = "medic",
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -37,7 +46,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(298.954803, -594.774963, 43.433910),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1327707740,
     ['Info'] = {
@@ -47,7 +59,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(332.829315, -590.778564, 43.511345),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1327707740,
     ['Info'] = {
@@ -57,7 +72,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(331.294281, -590.219910, 43.511345),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1327707740,
     ['Info'] = {
@@ -67,7 +85,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(329.760712, -589.661743, 43.511345),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1327707740,
     ['Info'] = {
@@ -77,7 +98,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(328.225311, -589.102844, 43.511345),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1327707740,
     ['Info'] = {
@@ -87,7 +111,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(335.778290, -587.099487, 43.511345),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1327707740,
     ['Info'] = {
@@ -97,7 +124,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(334.243896, -586.541077, 43.511345),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1327707740,
     ['Info'] = {
@@ -107,7 +137,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(332.710114, -585.982727, 43.511345),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 1327707740,
     ['Info'] = {
@@ -117,7 +150,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(331.175018, -585.424133, 43.511345),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -127,7 +163,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(340.781830, -581.821472, 43.433910),
     ['Job'] = "medic",
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -137,7 +176,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(339.004974, -586.703369, 43.433910),
     ['Job'] = "medic",
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -147,7 +189,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(336.866486, -592.578796, 43.433910),
     ['Job'] = "medic",
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -157,7 +202,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(345.519928, -597.351929, 43.433910),
     ['Job'] = false,
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -167,7 +215,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(303.959625, -572.557922, 43.433910),
     ['Job'] = "medic",
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }, {
     ['Model'] = 854291622,
     ['Info'] = {
@@ -177,8 +228,10 @@ local Doors = {{
     },
     ['Ords'] = vec3(307.118195, -569.568970, 43.433910),
     ['Job'] = "medic",
-    ['Name'] = "pillbox"
+    ['Name'] = "pillbox",
+    ['Default'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
 }}
-
 
 c.door.Add(Doors)
