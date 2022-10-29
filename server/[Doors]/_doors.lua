@@ -55,7 +55,6 @@ function c.door.SetState(hash, state)
         if (v[1] == hash) then
             v[5] = state
             c.json.Write("Doors", cache)
-            print(hash, state, "Updated Door")
         end
     end
 end

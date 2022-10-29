@@ -11,11 +11,21 @@ end
 function c.class.BlankObject(net)
     local self = {}
     self.Net = net
+    -- Data Sent
+    self.UUID = c.rng.UUID()
+    self.State.UUID = self.UUID
+    --
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
     -- Model (hash)
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
+    --
+    self.Created = c.func.Timestamp()
+    self.State.Created = self.Created
+    --
+    self.Updated = c.func.Timestamp()
+    self.State.Updated = self.Updated
     --- func desc
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
@@ -44,37 +54,69 @@ function c.class.BlankObject(net)
             z = c.math.Decimals(t.z, 2),
             h = c.math.Decimals(t.h, 2)
         }
+        SetEntityCoords(self.Entity, vec3(self.Coords.x,self.Coords.y,self.Coords.z))
+        SetEntityHeading(self.Entity, self.Coords.h)
+        self.SetUpdated()
     end
     --
     return self
 end
 --
 
-local function GetObj(id)
-    if type(id) == "string" then
-        return c.sql.GetObjectByName(id)
-    else
-        return {
-            Inventory = "{}",
-        }
-    end
-end
+--[[
+
+CREATE TABLE `objects` (
+	`ID` INT(11) NOT NULL,
+	`Character_ID` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`Model` VARCHAR(50) NULL DEFAULT NULL COMMENT 'Hash ID' COLLATE 'utf8mb4_unicode_ci',
+	`UUID` VARCHAR(36) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`Coords` VARCHAR(355) NOT NULL DEFAULT '{"x":0.00,"y":0.00,"z":0.00,"h":0.00}' COLLATE 'utf8mb4_unicode_ci',
+	`Inventory` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`Created` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`Updated` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	UNIQUE INDEX `UUID` (`UUID`) USING BTREE,
+	INDEX `Created` (`Created`) USING BTREE,
+	INDEX `Updated` (`Updated`) USING BTREE,
+	INDEX `Character_ID` (`Character_ID`) USING BTREE,
+	INDEX `Model` (`Model`) USING BTREE
+)
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+ROW_FORMAT=DYNAMIC
+;
+
+]]--
 
 --- func desc
 ---@param net any
-function c.class.Object(net, id)
-    local data = GetObj(id)
+function c.class.ObjectStorage(net, data)
     local self = {}
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
-    -- Model (hash)
-    self.Model = GetEntityModel(self.Entity)
-    self.State.Model = self.Model
-    self.Weight = 0
-    -- Inventory
+    -- Data Sent
+    self.UUID = data.UUID
+    self.State.UUID = self.UUID
+    --
     self.Inventory = json.decode(data.Inventory)
+    self.State.Inventory = self.Inventory
+    --
+    self.Created = data.Created
+    self.State.Created = self.Created
+    --
+    self.Updated = data.Updated
+    self.State.Updated = self.Updated
+    -- Model (hash)
+    self.Model = data.Model
+    self.State.Model = self.Model
+    --------------------------------------
     --- func desc
+    self.SetUpdated = function()
+        self.Updated = c.func.Timestamp()
+        self.State.Updated = self.Updated
+    end
+    --- func desc
+    ---@param return any
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
     end
@@ -102,6 +144,9 @@ function c.class.Object(net, id)
             z = c.math.Decimals(t.z, 2),
             h = c.math.Decimals(t.h, 2)
         }
+        SetEntityCoords(self.Entity, vec3(self.Coords.x,self.Coords.y,self.Coords.z))
+        SetEntityHeading(self.Entity, self.Coords.h)
+        self.SetUpdated()
     end
     --
     --- func desc
@@ -201,6 +246,7 @@ function c.class.Object(net, id)
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
+        self.SetUpdated()
     end
     --
     self.GetItemFromPosition = function(position)
@@ -260,12 +306,14 @@ function c.class.Object(net, id)
         else
             table.remove(self.Inventory, position)
         end
+        self.SetUpdated()
     end
     --- func desc
     ---@param new any
     ---@param old any
     self.RearrangeItems = function(new, old)
         table.insert(self.Inventory, new, table.remove(self.Inventory, old))
+        self.SetUpdated()
     end
     --- func desc
     self.CompressInventory = function()

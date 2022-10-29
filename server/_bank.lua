@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 c.bank = {}
 
 -- ====================================================================================--
@@ -17,9 +16,9 @@ end
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
     if not payments then
-    c.cron.RunAt(conf.loanpayment.h, conf.loanpayment.m, c.bank.CalculatePayments)
-    payments = true    
-    end-- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculatePayments()")
+        c.cron.RunAt(conf.loanpayment.h, conf.loanpayment.m, c.bank.CalculatePayments)
+        payments = true
+    end -- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculatePayments()")
 end)
 --
 
@@ -35,9 +34,9 @@ local interest = false
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
     if not interest then
-    c.cron.RunAt(conf.loaninterest.h, conf.loaninterest.m, c.bank.CalculateInterest)
+        c.cron.RunAt(conf.loaninterest.h, conf.loaninterest.m, c.bank.CalculateInterest)
         interest = true
-    end-- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculateInterest()")
+    end -- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculateInterest()")
 end)
 --
 
@@ -45,12 +44,15 @@ end)
 function c.bank.CheckNegativeBalances()
     local xJob = c.data.GetJob("bank")
     local xPlayers = c.data.GetPlayers()
-    for k,v in pairs(xPlayers) do
+    for k, v in pairs(xPlayers) do
         if v then
             local xPlayer = v
             local bank = xPlayer.GetBank()
             if bank < 0 then
-                TriggerClientEvent("Client:Notify", xPlayer.GetID(), "Your Bank account is in negative. \nCurrent Balance is: $ "..bank..". \nOver Draw Fee Charged at: $"..conf.bankoverdraw..". \nThese fees apply every hour, on the hour, until balanced.", "error", 17500)
+                TriggerClientEvent("Client:Notify", xPlayer.GetID(),
+                    "Your Bank account is in negative. \nCurrent Balance is: $ " .. bank ..
+                        ". \nOver Draw Fee Charged at: $" .. conf.bankoverdraw ..
+                        ". \nThese fees apply every hour, on the hour, until balanced.", "error", 17500)
                 xPlayer.RemoveBank(conf.bankoverdraw)
                 xJob.AddBank(conf.bankoverdraw)
             end
@@ -64,10 +66,10 @@ local negative = false
 -- Set so the server will debit bank accounts on the hour every hour if in negative balance.
 AddEventHandler("onServerResourceStart", function()
     if not negative then
-        for i=0, 23, 1 do
+        for i = 0, 23, 1 do
             c.cron.RunAt(i, 0, c.bank.CheckNegativeBalances)
         end
         negative = true
-    end 
+    end
     -- c.func.Debug_1("[E] Added Cron Job: [F] c.bank.CheckNegativeBalances()")
 end)
