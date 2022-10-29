@@ -13,4 +13,11 @@ local Doors = {{
     ['Time'] = false
 }}
 
-c.door.Add(Doors)
+
+local added = false
+AddEventHandler("onServerResourceStart", function()
+    if not added then
+        c.door.Add(Doors)
+    end
+    added = true
+end)

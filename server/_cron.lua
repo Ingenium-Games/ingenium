@@ -7,18 +7,19 @@ c.crons = {} -- table of jobs to action @ times.
 
 -- https://github.com/esx-framework/esx-legacy/blob/main/%5Besx%5D/cron/server/main.lua
 
-function c.cron.RunAt(h, m, cb)
+function c.cron.RunAt(h, m, cb, ...)
 	table.insert(c.crons, {
 		h  = h,
 		m  = m,
-		cb = cb
+		cb = cb,
+		args = {...}
 	})
 end
 
 function c.cron.OnTime(h, m)
 	for i=1, #c.crons, 1 do
 		if c.crons[i].h == h and c.crons[i].m == m then
-			c.crons[i].cb(h, m)
+			c.crons[i].cb(table.unpack(c.crons[i].args))
 		end
 	end
 end
