@@ -120,10 +120,10 @@ conf.nui = {}
 conf.nui.sync = 200
 --[[
 TIMEZONE ADJUSTMENT: 
-    -- Takes the server time, and change it based on -23,23 hours. 
+    -- Takes the server time, and change it based on 1 - 23 hours. 
     -- You can do greater, but it will break your game.
 ]]--
-conf.altertime = -6
+conf.altertime = 18
 --[[
 JOBS AND DEFAULTS
     -- DEFAULT STARTING BALANCES FOR ALL JOBS IPON INITIAL CREATION

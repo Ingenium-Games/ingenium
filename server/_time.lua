@@ -8,18 +8,12 @@ c.time = {} -- functions
 ---@param h number "Can do any, but really only 0,23 will work."
 function c.time.AlterTime(h)
     local h = c.check.Number(h, 0, 23)
-    local _min, _max = 0, 23
     local timealter = conf.altertime
-    if timealter <= -23 then timealter = -23 end
-    if timealter >= 23 then timealter = 23 end
-    local newhour = h + timealter
-    if newhour <= _min then
-        newhour = (_max - newhour)
+    local new
+    if (h + timealter) > 23 then
+        new = (h + timealter) - 24
     end
-    if newhour >= _max then
-        newhour = _min + (newhour - _max)
-    end
-    return newhour
+    return new
 end
 
 --- func desc

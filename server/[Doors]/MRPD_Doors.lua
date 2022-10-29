@@ -10,7 +10,7 @@ local Doors = {{
     ['Name'] = "mrpd",
     ['State'] = 0,
     ['Item'] = false,
-    ['Time'] = {h= 6, m= 35, s=1}
+    ['Time'] = false
 }, {
     ['Model'] = -1547307588,
     ['Info'] = {
