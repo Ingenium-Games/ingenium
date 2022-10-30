@@ -1,4 +1,5 @@
 -- ====================================================================================--
+
 c.bank = {}
 
 -- ====================================================================================--
@@ -9,8 +10,9 @@ local payments = false
 --- func desc
 function c.bank.CalculatePayments()
     local xJob = c.data.GetJob("bank")
-    print("Callbacked via RunAt")
+
     -- To run independant of active players and debit accounts via sql.
+    c.func.Debug_1("Pulls all characters with loans and deducts money to pay the loan, can go negitive.")
 end
 
 -- queued to add
@@ -26,8 +28,9 @@ end)
 --- func desc
 function c.bank.CalculateInterest()
     local xJob = c.data.GetJob("bank")
-    print("Callbacked via RunAt")
+
     -- To run independant of active players and debit accounts via sql.
+    c.func.Debug_1("Updates the characters loan to add the interest on the outstanding amount each day.")
 end
 
 local interest = false

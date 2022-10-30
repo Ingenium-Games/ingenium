@@ -1,23 +1,22 @@
 -- ====================================================================================--
-
 c.drop = {} -- function level
 c.drops = false -- dropped items table
 
 -- ====================================================================================--
 
 --[[    
-        {
-            [ID] = {
-                ["Coords"] = {0,0,0} -- Vecotr3
-                ["Cash"] = NUMBER
-                ["Inventory"] = {}
-                ["Time"] = TIME  -- os.time() when created.
-                ["Dropper"] = Character_ID
-                ["Event"] = Trigger() 
-            },
-
-        }
-]] --
+            {
+                [ID] = {
+                    ["Coords"] = {0,0,0} -- Vecotr3
+                    ["Cash"] = NUMBER
+                    ["Inventory"] = {}
+                    ["Time"] = TIME  -- os.time() when created.
+                    ["Dropper"] = Character_ID
+                    ["Event"] = Trigger() 
+                },
+    
+            }
+    ]] --
 
 --- func desc
 ---@param . any
@@ -28,8 +27,8 @@ function c.drop.Load()
     else
         c.drops = {}
         c.json.Write(conf.file.drops, c.drops)
+        c.drop.Update()
     end
-    c.drop.Update()
 end
 
 --- func desc

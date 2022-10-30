@@ -210,13 +210,13 @@ end
 ---@param y any
 ---@param z any
 ---@param isdoor any
-function c.func.CreateObject(name, x, y, z, isdoor, owned)
+function c.func.CreateObject(model, x, y, z, isdoor, owned)
     local data = owned or false
     local hash = nil
-    if type(name) == "number" then
-        hash = name
+    if type(model) == "number" then
+        hash = model
     else
-        hash = GetHashKey(name)
+        hash = GetHashKey(model)
     end
     if type(isdoor) ~= "boolean" then
         isdoor = false
@@ -227,10 +227,10 @@ function c.func.CreateObject(name, x, y, z, isdoor, owned)
     end
     Wait(250)
     local net = NetworkGetNetworkIdFromEntity(entity)
-    if not id then
+    if not owned then
         c.data.AddObject(net, c.class.BlankObject, net)
     else
-        c.data.AddObject(net, c.class.Object, net, data)
+        c.data.AddObject(net, c.class.StorageObject, net, data)
     end
     return entity, net
 end

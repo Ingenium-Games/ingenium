@@ -41,7 +41,7 @@ AddEventHandler("entityCreated", function(ent)
         -- Object
         if type == 3 then
             if not conf.disable.objects[model] then
-                c.data.AddObject(net, c.class.Object, net)                      
+                c.data.AddObject(net, c.class.BlankObject, net)                      
             else
                 DeleteEntity(ent)
                 c.func.Debug_1("Object has been Deleted.")

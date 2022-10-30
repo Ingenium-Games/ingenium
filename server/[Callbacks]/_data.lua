@@ -22,3 +22,11 @@ local GetDoors = RegisterServerCallback({
         return doors
     end
 })
+
+local GetObjects = RegisterServerCallback({
+    eventName = "GetObjects",
+    eventCallback = function(source, ...)
+        local objs = c.door.GetObjects()
+        return objs
+    end
+})

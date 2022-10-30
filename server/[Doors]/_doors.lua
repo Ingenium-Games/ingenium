@@ -1,26 +1,29 @@
 -- ====================================================================================--
+
 c.door = {} -- functions
 c.doors = {} -- cached doors
 
 -- ====================================================================================--
 
 --[[    
-{
     {
-    ['Model'] = -903733315,
+    ['Model'] = 1934132135,
     ['Info'] = {
-        ['Rotation'] = vec3(0.000000, -0.000000, -135.878677),
-        ['Arch'] = "gabz_firedept_wooden_door",
-        ['Matrix'] = vec3(0.696180, -0.717867, 0.000000)
+        ['Rotation'] = vec3(-5.235569, 0.000090, 140.000015),
+        ['Arch'] = "gabz_firedept_garage_door",
+        ['Matrix'] = vec3(-0.640105, -0.762849, -0.091251)
     },
-    ['Ords'] = vec3(200.405685, -1645.355225, 28.797325),
+    ['Ords'] = vec3(208.989471, -1641.075439, 30.918621),
     ['Job'] = "fire",
-    ['Name'] = "FireDept"
-},
-        {
-            [#] = {joaat, model, coords, jobs, locked, time, item},
-        }
-]] --
+    ['Name'] = "FireDept",
+    ['State'] = 1,
+    ['Item'] = false,
+    ['Time'] = false
+    }
+    {
+        [#] = {joaat, model, coords, jobs, locked, time, item},
+    }
+]]--
 
 --- func desc
 ---@param coords any
@@ -49,12 +52,11 @@ end
 --- func desc
 ---@param coords any
 function c.door.SetState(hash, state)
-    local cache = c.json.Read("Doors")
-    for k, v in pairs(cache) do
+    for k, v in pairs(c.doors) do
         -- is the door in the table?
         if (v[1] == hash) then
             v[5] = state
-            c.json.Write("Doors", cache)
+            c.json.Write("Doors", c.doors)
         end
     end
 end
@@ -62,12 +64,11 @@ end
 --- func desc
 ---@param coords any
 function c.door.ChangeState(hash)
-    local cache = c.json.Read("Doors")
-    for k, v in pairs(cache) do
+    for k, v in pairs(c.doors) do
         -- is the door in the table?
         if (v[1] == hash) then
             v[5] = not v[5]
-            c.json.Write("Doors", cache)
+            c.json.Write("Doors", c.doors)
         end
     end
 end
@@ -97,8 +98,7 @@ end
 
 --- func desc
 function c.door.GetDoors()
-    local cache = c.json.Read("Doors")
-    return cache
+    return c.table.Clone(c.doors)
 end
 
 RegisterNetEvent("Server:Doors:SetState", function(hash, state)

@@ -518,7 +518,64 @@ local Doors = {{
     ['State'] = 1,
     ['Item'] = false,
     ['Time'] = false
-}}
+}, {
+    ['Name'] = "NoName",
+    ['Model'] = -1868050792,
+    ['Ords'] = vec3(410.025787, -1024.225952, 29.220221),
+    ['Job'] = "restricted",
+    ['Time'] = false,
+    ['State'] = 0,
+    ['Item'] = false,
+    ['Info'] = {
+        ['Rotation'] = vec3(180.000000, -0.225788, -89.999977),
+        ['Arch'] = "gabz_mrpd_bollards1",
+        ['Matrix'] = vec3(-1.000000, -0.000000, 0.000000),
+        },
+    },
+    {
+    ['Name'] = "NoName",
+    ['Model'] = -1635161509,
+    ['Ords'] = vec3(410.025787, -1024.219971, 29.220200),
+    ['Job'] = "restricted",
+    ['Time'] = false,
+    ['State'] = 0,
+    ['Item'] = false,
+    ['Info'] = {
+        ['Rotation'] = vec3(180.000000, -0.225788, -89.999977),
+        ['Arch'] = "gabz_mrpd_bollards2",
+        ['Matrix'] = vec3(-1.000000, -0.000000, 0.000000),
+        },
+    },
+    {
+    ['Name'] = "NoName",
+    ['Model'] = 2130672747,
+    ['Ords'] = vec3(431.411926, -1000.771667, 26.696609),
+    ['Job'] = "police",
+    ['Time'] = false,
+    ['State'] = 1,
+    ['Item'] = false,
+    ['Info'] = {
+        ['Rotation'] = vec3(0.000000, -0.000000, 0.000000),
+        ['Arch'] = "gabz_mrpd_garage_door",
+        ['Matrix'] = vec3(0.000000, 1.000000, 0.000000),
+        },
+    },
+    {
+    ['Name'] = "NoName",
+    ['Model'] = 2130672747,
+    ['Ords'] = vec3(452.300507, -1000.771667, 26.696609),
+    ['Job'] = "police",
+    ['Time'] = false,
+    ['State'] = 1,
+    ['Item'] = false,
+    ['Info'] = {
+        ['Rotation'] = vec3(0.000000, -0.000000, 0.000000),
+        ['Arch'] = "gabz_mrpd_garage_door",
+        ['Matrix'] = vec3(0.000000, 1.000000, 0.000000),
+        },
+    },
+    
+}
 
 
 local added = false

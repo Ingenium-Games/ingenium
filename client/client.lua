@@ -21,6 +21,12 @@ Citizen.CreateThread(function()
                 c.door.SetDoors(doors)
                 c.door.AddDoorsToSystem(doors)
                 --                
+                local objects = TriggerServerCallback({eventName = "GetObjects", args = {}})
+                c.objects.SetObjects(objects)
+                c.objects.AddObjectsToEnviroment(objects)
+                --        
+
+
             end)
             --
             return

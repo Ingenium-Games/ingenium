@@ -64,6 +64,8 @@ function c.data.Initilize()
         -- [12]
         c.sql.veh.Reset(cb)
         --
+        c.sql.objects.GetAll()
+        --
         loaded = true
     end)
 
@@ -329,7 +331,7 @@ end
 
 ---@param net integer "Network ID 16 bit integer"
 function c.data.FindObject(arg)
-    for k, v in pairs(c.ndex) do
+    for k, v in pairs(c.odex) do
         if v then
             if k == arg and type(v) == "table" then
                 return true, v, k
@@ -342,22 +344,22 @@ end
 --- func desc
 ---@param net any
 ---@param cb any
-function c.data.AddObject(net, cb, ...)
-    if not c.data.FindObject(net) then
-        c.odex[tonumber(net)] = cb(...)
+function c.data.AddObject(uuid, cb, ...)
+    if not c.data.FindObject(uuid) then
+        c.odex[tostring(uuid)] = cb(...)
     end
 end
 
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
-function c.data.GetObject(net)
-    return c.odex[tonumber(net)] or false
+function c.data.GetObject(uuid)
+    return c.odex[tostring(uuid)] or false
 end
 
 --- Same as above.
 ---@param net integer "Network ID 16 bit integer"
-function c.GetObject(net)
-    return c.data.GetObject(net)
+function c.GetObject(uuid)
+    return c.data.GetObject(uuid)
 end
 
 --- Get all xVehicles
@@ -373,8 +375,8 @@ end
 -- Set to false for cleanup function inside _vehicles.lua
 --- func desc
 ---@param net any
-function c.data.RemoveObject(net)
-    c.odex[tonumber(net)] = false
+function c.data.RemoveObject(uuid)
+    c.odex[tostring(uuid)] = false
 end
 
 -- ====================================================================================--
