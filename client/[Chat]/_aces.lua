@@ -18,28 +18,23 @@ c.ace.mod = function()
     --
     TriggerEvent("chat:addSuggestion", "/setjob", "Mod Permission(s) Required.", {{
         name = "1",
-        help = "Server ID"
+        help = "ID"
     }, {
         name = "2",
-        help = "Job Name"
+        help = "Name"
     }, {
         name = "3",
-        help = "Job Grade"
-    }})
-    --
-    TriggerEvent("chat:addSuggestion", "/car", "Mod Permission(s) Required.", {{
-        name = "1",
-        help = "Vehicle Name or Hash"
+        help = "Grade"
     }})
     --
     TriggerEvent("chat:addSuggestion", "/revive", "Mod Permission(s) Required.", {{
         name = "1",
-        help = "Server ID or None"
+        help = "* ID"
     }})
     --
     TriggerEvent("chat:addSuggestion", "/heal", "Mod Permission(s) Required.", {{
         name = "1",
-        help = "Server ID or None"
+        help = "* ID"
     }})
 
 end
@@ -48,6 +43,11 @@ c.ace.admin = function()
     -- mod
     c.ace.mod()
     -- admin
+    --
+    TriggerEvent("chat:addSuggestion", "/car", "Mod Permission(s) Required.", {{
+        name = "1",
+        help = "Name or Hash"
+    }})
     --
     TriggerEvent("chat:addSuggestion", "/ban", "Admin Permission(s) Required.", {{
         name = "1",
@@ -94,34 +94,34 @@ c.ace.developer = function()
         help = "FX Name"
     }, {
         name = "2",
-        help = "Duration / None"
+        help = "* Duration"
     }})
     --
     TriggerEvent("chat:addSuggestion", "/noclip", "Developer Permission(s) Required.", {})
     --
     TriggerEvent("chat:addSuggestion", "/cam", "Developer Permission(s) Required.", {{
         name = "1",
-        help = "Name"
+        help = "* Name"
     }})
     --
     TriggerEvent("chat:addSuggestion", "/addoor", "Developer Permission(s) Required.", {{
         name = "1",
-        help = "Name"
+        help = "* Name"
     }, {
         name = "2",
-        help = "0 = Unlocked, 1 = Locked"
+        help = "* 0 = Unlocked, 1 = Locked"
     }, {
         name = "3",
-        help = "*Job"
+        help = "* Job"
     }, {
         name = "4",
-        help = "*Item"
+        help = "* Item"
     }, {
         name = "5",
-        help = "*Time"
+        help = "* Time"
     }, {
         name = "6",
-        help = "*At Time: 0 = Unlocked, 1 = Locked"
+        help = "* At Time: 0 = Unlocked, 1 = Locked"
     }})
 end
 

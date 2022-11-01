@@ -5,10 +5,6 @@ c._skills = {} -- Server sent to client
 
 -- ====================================================================================--
 
-AddEventHandler("Client:Character:SetSkills", function(skills)
-    c._skills = skills
-end)
-
 --- Sets the table of active modifiers.
 ---@param t table "Typically passed from the server as an internal table."
 function c.skill.SetSkills()
