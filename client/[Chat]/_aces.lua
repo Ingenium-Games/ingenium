@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 c.ace = {}
 c.aces = {}
 
@@ -74,10 +73,10 @@ c.ace.admin = function()
         name = "1",
         help = "Server ID"
     }})
-    
+
 end
 
-c.ace.superadmin = function()   
+c.ace.superadmin = function()
     -- admin
     c.ace.admin()
     -- superadmin
@@ -85,7 +84,7 @@ c.ace.superadmin = function()
 
 end
 
-c.ace.developer = function()     
+c.ace.developer = function()
     -- superadmin
     c.ace.superadmin()
     -- developer
@@ -102,19 +101,38 @@ c.ace.developer = function()
     --
     TriggerEvent("chat:addSuggestion", "/cam", "Developer Permission(s) Required.", {{
         name = "1",
-        help = "Cam Name"
+        help = "Name"
+    }})
+    --
+    TriggerEvent("chat:addSuggestion", "/addoor", "Developer Permission(s) Required.", {{
+        name = "1",
+        help = "Name"
+    }, {
+        name = "2",
+        help = "0 = Unlocked, 1 = Locked"
+    }, {
+        name = "3",
+        help = "*Job"
+    }, {
+        name = "4",
+        help = "*Item"
+    }, {
+        name = "5",
+        help = "*Time"
+    }, {
+        name = "6",
+        help = "*At Time: 0 = Unlocked, 1 = Locked"
     }})
 end
 
-c.ace.owner = function()     
+c.ace.owner = function()
     -- developer
     --    
     c.ace.developer()
-    
 
 end
 
-for k,v in pairs(c.ace) do
+for k, v in pairs(c.ace) do
     table.insert(c.aces, k)
 end
 

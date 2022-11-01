@@ -2,7 +2,7 @@
 
 c.object = {} -- function level
 c.objects = {} -- database pull 
-c.odex = {} -- the iodex/store for currently used vehciles prior to writing to db.
+c.odex = {} -- the odex/store for currently used objects prior to storage
 
 -- ====================================================================================--
 

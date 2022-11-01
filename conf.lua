@@ -75,14 +75,14 @@ DEFERALS :
     [2] Use Discord for your community?  https://forum.cfx.re/t/discordroles-a-proper-attempt-this-time/1579427 
     [3] Discord role to confirm the player is apart of the required guild.
 ]]--
-conf.forcename = true
+conf.forcename = false
 conf.discordlink = "https://discord.gg/zduUDU8Frv"
-conf.discordperms = true
+conf.discordperms = false
 conf.discordrole = "834191331844030524"
 conf.discordsecret = "avy4e5NnpNYIv-tZrmIiUd2TDbS4fZb8"
 
 conf.websitelink = "https://ingenium.games"
-
+ 
 -- Discord richPresenceText
 conf.discordid = "770792728979046431"
 
