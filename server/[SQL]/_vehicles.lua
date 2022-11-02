@@ -33,7 +33,7 @@ function c.sql.veh.GetAll(Character_ID, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -51,7 +51,7 @@ function c.sql.veh.GetByPlate(Plate, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -74,7 +74,7 @@ function c.sql.veh.Add(data, cb)
         TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Adding Vehicle: "..Data.Plate.." | Owner "..Data.Character_ID)
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -93,7 +93,7 @@ function c.sql.veh.ChangeOwner(data, cb)
         TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Changing Vehicle : "..Data.Plate.." | Owner "..Data.Character_ID)
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()

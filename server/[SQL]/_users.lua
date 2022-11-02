@@ -21,7 +21,7 @@ function c.sql.user.Find(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -53,7 +53,7 @@ function c.sql.user.Add(usermame, license_id, fivem_id, steam_id, discord_id, ip
         TriggerEvent("txaLogger:CommandExecuted", "Adding new User "..Username)
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -80,7 +80,7 @@ function c.sql.user.Update(usermame, license_id, fivem_id, steam_id, discord_id,
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -100,7 +100,7 @@ function c.sql.user.Get(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -121,7 +121,7 @@ function c.sql.user.GetLastLogin(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -142,7 +142,7 @@ function c.sql.user.GetLocale(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -181,7 +181,7 @@ function c.sql.user.GetAce(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -220,7 +220,7 @@ function c.sql.user.GetBan(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -241,7 +241,7 @@ function c.sql.user.GetBanReason(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -283,7 +283,7 @@ function c.sql.user.GetPriority(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -323,7 +323,7 @@ function c.sql.user.GetSlots(license_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()

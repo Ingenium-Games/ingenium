@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 if not c.class then
     c.class = {}
 end
@@ -26,6 +25,21 @@ function c.class.BlankObject(net)
     --
     self.Updated = c.func.Timestamp()
     self.State.Updated = self.Updated
+    --
+    self.Save = false
+    --- func desc
+    self.SetUpdated = function()
+        self.Updated = c.func.Timestamp()
+        self.Save = true
+    end
+    --- func desc
+    self.Saved = function()
+        self.Save = false
+    end
+    --- func desc
+    self.ShouldSave = function()
+         return self.Save
+    end
     --- func desc
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
@@ -54,11 +68,11 @@ function c.class.BlankObject(net)
             z = c.math.Decimals(t.z, 2),
             h = c.math.Decimals(t.h, 2)
         }
-        SetEntityCoords(self.Entity, vec3(self.Coords.x,self.Coords.y,self.Coords.z))
+        SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
         SetEntityHeading(self.Entity, self.Coords.h)
         self.SetUpdated()
     end
---
+    --
     --- func desc
     self.GetWeight = function()
         self.Weight = 0
@@ -244,9 +258,8 @@ end
 
 CREATE TABLE `objects` (
 	`ID` INT(11) NOT NULL,
-	`Character_ID` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`Model` VARCHAR(50) NULL DEFAULT NULL COMMENT 'Hash ID' COLLATE 'utf8mb4_unicode_ci',
 	`UUID` VARCHAR(36) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+    `Model` VARCHAR(50) NULL DEFAULT NULL COMMENT 'Hash ID' COLLATE 'utf8mb4_unicode_ci',
 	`Coords` VARCHAR(355) NOT NULL DEFAULT '{"x":0.00,"y":0.00,"z":0.00,"h":0.00}' COLLATE 'utf8mb4_unicode_ci',
 	`Inventory` LONGTEXT NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
 	`Created` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
@@ -262,16 +275,19 @@ ENGINE=InnoDB
 ROW_FORMAT=DYNAMIC
 ;
 
-]]--
+]] --
 
 --- func desc
 ---@param net any
-function c.class.ObjectStorage(net, data)
+function c.class.ExistingObject(net, data)
     local self = {}
     --
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
+    -- Model (hash)
+    self.Model = data.Model
+    self.State.Model = self.Model
     -- Data Sent
     self.UUID = data.UUID
     self.State.UUID = self.UUID
@@ -282,16 +298,22 @@ function c.class.ObjectStorage(net, data)
     self.Created = data.Created
     self.State.Created = self.Created
     --
-    self.Updated = data.Updated
+    self.Updated = c.func.Timestamp()
     self.State.Updated = self.Updated
-    -- Model (hash)
-    self.Model = data.Model
-    self.State.Model = self.Model
-    --------------------------------------
+    --
+    self.Save = false
     --- func desc
     self.SetUpdated = function()
         self.Updated = c.func.Timestamp()
-        self.State.Updated = self.Updated
+        self.Save = true
+    end
+    --- func desc
+    self.Saved = function()
+        self.Save = false
+    end
+    --- func desc
+    self.ShouldSave = function()
+         return self.Save
     end
     --- func desc
     ---@param return any
@@ -322,7 +344,7 @@ function c.class.ObjectStorage(net, data)
             z = c.math.Decimals(t.z, 2),
             h = c.math.Decimals(t.h, 2)
         }
-        SetEntityCoords(self.Entity, vec3(self.Coords.x,self.Coords.y,self.Coords.z))
+        SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
         SetEntityHeading(self.Entity, self.Coords.h)
         self.SetUpdated()
     end

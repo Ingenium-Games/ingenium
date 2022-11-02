@@ -7,7 +7,7 @@ c.sql.jobs = {}
 
 --- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
-function c.sql.jobs.GetAll(cb)
+function c.sql.jobs.Generate(cb)
     local IsBusy = true
     local result = nil
     MySQL.Async.fetchAll("SELECT * FROM `jobs`", {
@@ -24,7 +24,7 @@ function c.sql.jobs.GetAll(cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -62,7 +62,7 @@ function c.sql.jobs.Setup(cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -90,7 +90,7 @@ function c.sql.jobs.Accounts(cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()

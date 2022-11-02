@@ -19,13 +19,13 @@ function c.class.Vehicle(net)
         Impound = false,
         Owner = false,
         Wanted = false,
-    -- Json
+        -- Json
         Modifications = {},
         Inventory = {},
         Condition = {},
         Keys = {},
-        Updated = os.time(),
-}
+        Updated = c.func.Timestamp()
+    }
     local self = {}
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
@@ -70,6 +70,24 @@ function c.class.Vehicle(net)
     -- Keys
     self.Keys = data.Keys
     self.State.Keys = self.Keys
+    --
+    self.Updated = data.Updated
+    self.State.Updated = self.Updated
+    --
+    self.Save = false
+    --- func desc
+    self.SetUpdated = function()
+        self.Updated = c.func.Timestamp()
+        self.Save = true
+    end
+    --- func desc
+    self.Saved = function()
+        self.Save = false
+    end
+    --- func desc
+    self.ShouldSave = function()
+         return self.Save
+    end
     --- func desc
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
@@ -77,6 +95,11 @@ function c.class.Vehicle(net)
     --- func desc
     self.GetNet = function()
         return self.Net
+    end
+    --- func desc
+    self.SetUpdated = function()
+        self.Updated = c.func.Timestamp()
+        self.Update = true
     end
     --- func desc
     self.GetModel = function()
@@ -116,6 +139,7 @@ function c.class.Vehicle(net)
         if coords.x and coords.y and coords.z and coords.h then
             SetEntityHeading(self.Entity, coords.h)
             SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
+
         else
             c.func.Debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
         end
@@ -157,7 +181,7 @@ function c.class.Vehicle(net)
     ---@param id any
     self.CheckKeys = function(id)
         local t = self.GetKeys()
-        for k,v in pairs(t) do
+        for k, v in pairs(t) do
             if v == id then
                 return true
             end
@@ -360,7 +384,8 @@ function c.class.Vehicle(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
+            c.func
+                .Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
             return
         end
         local info = {
@@ -473,7 +498,6 @@ function c.class.Vehicle(net)
 end
 -- ====================================================================================--
 
-
 --- func desc
 ---@param net any
 ---@param bool any
@@ -492,7 +516,7 @@ function c.class.OwnedVehicle(net, data)
         Inventory = json.decode(data.Inventory),
         Condition = json.decode(data.Condition),
         Keys = json.decode(data.Keys),
-        Updated = data.Updated,
+        Updated = data.Updated
     }
     local self = {}
     self.Data = data
@@ -540,6 +564,24 @@ function c.class.OwnedVehicle(net, data)
     -- Keys
     self.Keys = data.Keys
     self.State.Keys = self.Keys
+    --
+    self.Updated = data.Updated
+    self.State.Updated = self.Updated
+    --
+    self.Save = false
+    --- func desc
+    self.SetUpdated = function()
+        self.Updated = c.func.Timestamp()
+        self.Save = true
+    end
+    --- func desc
+    self.Saved = function()
+        self.Save = false
+    end
+    --- func desc
+    self.ShouldSave = function()
+         return self.Save
+    end
     --- func desc
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
@@ -590,6 +632,7 @@ function c.class.OwnedVehicle(net, data)
         if coords.x and coords.y and coords.z and coords.h then
             SetEntityHeading(self.Entity, coords.h)
             SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
+            self.SetUpdated()
         else
             c.func.Debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
         end
@@ -603,6 +646,7 @@ function c.class.OwnedVehicle(net, data)
     self.SetKeys = function(t)
         self.Keys = t
         self.State.Keys = self.Keys
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -611,6 +655,7 @@ function c.class.OwnedVehicle(net, data)
         if not self.CheckKeys(id) then
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
+            self.SetUpdated()
         else
             c.func.Debug_2("User: " .. id .. " Already has key to this vehicle.")
         end
@@ -622,6 +667,7 @@ function c.class.OwnedVehicle(net, data)
         if self.CheckKeys(id) then
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
+            self.SetUpdated()
         else
             c.func.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
         end
@@ -630,7 +676,7 @@ function c.class.OwnedVehicle(net, data)
     ---@param id any
     self.CheckKeys = function(id)
         local t = self.GetKeys()
-        for k,v in pairs(t) do
+        for k, v in pairs(t) do
             if v == id then
                 return true
             end
@@ -652,6 +698,7 @@ function c.class.OwnedVehicle(net, data)
             eventName = "SetVehicleCondition",
             args = {self.Net, self.Condition}
         })
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -659,6 +706,7 @@ function c.class.OwnedVehicle(net, data)
     self.AlterCondition = function(id, v)
         if self.CheckConds(id) then
             self.Condition[id] = v
+            self.SetUpdated()
         end
     end
     --- func desc
@@ -686,6 +734,7 @@ function c.class.OwnedVehicle(net, data)
             eventName = "SetVehicleModifications",
             args = {self.Net, self.Modifications}
         })
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -693,6 +742,7 @@ function c.class.OwnedVehicle(net, data)
     self.AlterModification = function(id, v)
         if self.CheckMods(id) then
             self.Modifications[id] = v
+            self.SetUpdated()
         end
     end
     --- func desc
@@ -715,6 +765,7 @@ function c.class.OwnedVehicle(net, data)
         local num = c.check.Number(v, 0, 100)
         self.Fuel = num
         self.State.Fuel = num
+        self.SetUpdated()
     end
     --- func desc
     ---@param v any
@@ -728,6 +779,7 @@ function c.class.OwnedVehicle(net, data)
             self.Fuel = 100
             self.State.Fuel = 100
         end
+        self.SetUpdated()
     end
     --- func desc
     ---@param v any
@@ -741,6 +793,7 @@ function c.class.OwnedVehicle(net, data)
             self.Fuel = 0
             self.State.Fuel = 0
         end
+        self.SetUpdated()
     end
     --- func desc
     self.GetGarage = function()
@@ -750,6 +803,7 @@ function c.class.OwnedVehicle(net, data)
     self.SetGarage = function(v)
         local str = c.check.String(v)
         self.Garage = str
+        self.SetUpdated()
     end
     --- func desc
     self.GetOwner = function()
@@ -758,6 +812,7 @@ function c.class.OwnedVehicle(net, data)
     --- func desc
     self.SetOwner = function(id)
         self.Owner = id
+        self.SetUpdated()
     end
     --- func desc
     self.GetWanted = function()
@@ -829,7 +884,8 @@ function c.class.OwnedVehicle(net, data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
+            c.func
+                .Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
             return
         end
         local info = {
@@ -858,6 +914,7 @@ function c.class.OwnedVehicle(net, data)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
+            self.SetUpdated()
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
         end
@@ -919,6 +976,7 @@ function c.class.OwnedVehicle(net, data)
         else
             table.remove(self.Inventory, position)
         end
+        self.SetUpdated()
     end
     --- func desc
     ---@param new any

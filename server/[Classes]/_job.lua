@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 if not c.class then
     c.class = {}
 end
@@ -20,6 +19,22 @@ function c.class.Job(tab)
     self.Inventory = json.decode(tab.Inventory)
     self.Stock = json.decode(tab.Stock)
     self.Contact = conf.phone[self.Name] or false
+    --
+    self.Updated = tab.Updated
+    self.Save = false
+    --- func desc
+    self.SetUpdated = function()
+        self.Updated = c.func.Timestamp()
+        self.Save = true
+    end
+    --- func desc
+    self.Saved = function()
+        self.Save = false
+    end
+    --- func desc
+    self.ShouldSave = function()
+         return self.Save
+    end
     --- func desc
     self.GetName = function()
         return self.Name
@@ -42,6 +57,7 @@ function c.class.Job(tab)
         local str = tostring(s)
         if #str <= 1500 then
             self.Description = str
+            self.SetUpdated()
         else
             c.func.Debug_1("Unable to set description as length is too long. Must be less than 255 characters.")
         end
@@ -76,6 +92,7 @@ function c.class.Job(tab)
         local num = c.check.Number(v)
         if self.Accounts[acc] then
             self.Accounts[acc] = c.math.Decimals(num, 2)
+            self.SetUpdated()
         else
             c.func.Debug_1("Account entered does not exist")
         end
@@ -126,7 +143,8 @@ function c.class.Job(tab)
                 acc = acc - c.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    c.func.Debug_1("Job " .. self.Name .. " has RemoveSafe() Cancelled due to Negative balance remaining.")
+                    c.func.Debug_1("Job " .. self.Name ..
+                                       " has RemoveSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
                     self.SetAccount("Safe", acc)
@@ -196,6 +214,7 @@ function c.class.Job(tab)
         local check = self.FindMember(member)
         if not check then
             table.insert(self.Members, member)
+            self.SetUpdated()
         end
     end
     --- func desc
@@ -204,6 +223,7 @@ function c.class.Job(tab)
         local check = self.FindMember(member)
         if check then
             table.remove(self.Members, member)
+            self.SetUpdated()
         end
     end
     --- func desc
@@ -211,6 +231,7 @@ function c.class.Job(tab)
     self.SetBoss = function(member)
         self.AddMember(member)
         self.Boss = member
+        self.SetUpdated()
     end
     ---
     self.GetSupplyLevel = function()
@@ -223,6 +244,7 @@ function c.class.Job(tab)
         local num = c.check.Number(num)
         local v = c.math.Decimals(num, 0)
         self.Supplies = v
+        self.SetUpdated()
     end
     ---
     --- func desc
@@ -231,6 +253,7 @@ function c.class.Job(tab)
         local num = c.check.Number(num)
         local v = c.math.Decimals(num, 0)
         self.Supplies = self.Supplies + v
+        self.SetUpdated()
     end
     ---
     --- func desc
@@ -239,6 +262,7 @@ function c.class.Job(tab)
         local num = c.check.Number(num)
         local v = c.math.Decimals(num, 0)
         self.Supplies = self.Supplies - v
+        self.SetUpdated()
     end
     --
     --- func desc
@@ -335,6 +359,7 @@ function c.class.Job(tab)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
+            self.SetUpdated()
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for Job ID:  " .. self.Name)
         end
@@ -396,12 +421,14 @@ function c.class.Job(tab)
         else
             table.remove(self.Inventory, position)
         end
+        self.SetUpdated()
     end
     --- func desc
     ---@param new any
     ---@param old any
     self.RearrangeItems = function(new, old)
         table.insert(self.Inventory, new, table.remove(self.Inventory, old))
+        self.SetUpdated()
     end
     --- func desc
     self.CompressInventory = function()
@@ -415,7 +442,7 @@ function c.class.Job(tab)
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
     -- ====================================================================================--
-    ExecuteCommand("add_ace group."..self.Name.." command.bill allow")
+    ExecuteCommand("add_ace group." .. self.Name .. " command.bill allow")
     -- ====================================================================================--
     return self
 end

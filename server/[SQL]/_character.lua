@@ -48,7 +48,7 @@ function c.sql.char.GetAll(primary_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -69,7 +69,7 @@ function c.sql.char.GetAllNotDead(primary_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -93,7 +93,7 @@ function c.sql.char.GetAllPermited(primary_id, slots, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -131,7 +131,7 @@ function c.sql.char.Get(character_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -153,7 +153,7 @@ function c.sql.char.GetCount(primary_id, cb)
             IsBusy = false
         end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -194,7 +194,7 @@ function c.sql.char.Current(primary_id, cb)
             IsBusy = false
         end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -282,7 +282,7 @@ function c.sql.char.GetAllWanted(cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -320,7 +320,7 @@ function c.sql.char.GetFromPhone(phone, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -341,7 +341,7 @@ function c.sql.char.GetPhone(character_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -362,7 +362,7 @@ function c.sql.char.GetCityId(character_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -383,7 +383,7 @@ function c.sql.char.GetFromCityId(city_id, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -406,7 +406,7 @@ function c.sql.char.GetCoords(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -450,7 +450,7 @@ function c.sql.char.GetTattoos(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -494,7 +494,7 @@ function c.sql.char.GetAppearance(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -554,7 +554,7 @@ function c.sql.char.GetOutfitsAsCount(Character_ID, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -580,7 +580,7 @@ function c.sql.char.GetOutfitByNumber(Character_ID, Number, cb)
         IsBusy = false
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -609,7 +609,7 @@ function c.sql.char.GetHealth(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -653,7 +653,7 @@ function c.sql.char.GetArmour(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -697,7 +697,7 @@ function c.sql.char.GetHunger(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -741,7 +741,7 @@ function c.sql.char.GetThirst(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -785,7 +785,7 @@ function c.sql.char.GetStress(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()

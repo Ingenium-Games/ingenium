@@ -20,8 +20,8 @@ function c.data.Initilize()
         [8] = "DB: Loading Data File - Pickups;",
         [9] = "DB: Loading Data File - Notes;",
         [10] = "DB: Loading Data File - Names;",
-        [11] = "DB: Loading Data File - Scenes;";
-        [12] = "DB: Reset Cars to Parked;";
+        [11] = "DB: Reset Cars to Parked;";
+        [12] = "DB: ";
     }
     --
     local function cb()
@@ -35,7 +35,7 @@ function c.data.Initilize()
         -- [1]
         c.sql.ResetActiveCharacters(cb)
         -- [2]
-        c.sql.jobs.GetAll(cb)
+        c.sql.jobs.Generate(cb)
         -- [3]
         c.sql.jobs.Setup(cb)
         -- [4]
@@ -58,13 +58,11 @@ function c.data.Initilize()
         -- [10] Load names for random names selection.
         c.name.Load()
         cb()
-        -- [11] Load names for random names selection.
-        c.scene.Load()
-        cb()
+
         -- [12]
         c.sql.veh.Reset(cb)
         --
-        c.sql.objects.GetAll()
+        c.sql.objects.Generate()
         --
         loaded = true
     end)

@@ -37,7 +37,7 @@ function c.sql.bank.GetBank(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
@@ -93,7 +93,7 @@ function c.sql.bank.GetLoan(character_id, cb)
         end
     end)
     while IsBusy do
-        Wait(0)
+        Citizen.Wait(0)
     end
     if cb then
         cb()
