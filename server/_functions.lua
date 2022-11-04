@@ -153,6 +153,88 @@ end
 
 -- ====================================================================================--
 
+
+-- returns if any player is inside a given vehicle
+function c.func.IsAnyPlayerInsideVehicle(vehicle)
+	local playerPeds = c.func.GetAllPlayerPeds()
+	for i, playerPed in ipairs(playerPeds) do
+		local veh = GetVehiclePedIsIn(playerPed, false)
+
+		if (DoesEntityExist(veh) and veh == vehicle) then
+			return true
+		end
+	end
+
+	return false
+end
+
+-- return the id and distance of the closest player
+function c.func.GetClosestPlayer(position, maxRadius)
+	local closestDistance	= maxRadius and (maxRadius * maxRadius) or 1000000.0
+	local closestPlayer		= nil
+	local closestPos		= nil
+
+	for i, player in ipairs(GetPlayers()) do
+		if (GetPlayerRoutingBucket(player) == 0) then
+			local ped = GetPlayerPed(player)
+			if (DoesEntityExist(ped)) then
+				local pos = GetEntityCoords(ped)
+				local tempDistSquared = #(position - pos)
+
+				if (tempDistSquared < closestDistance) then
+					closestDistance	= tempDistSquared
+					closestPlayer	= player
+					closestPos		= pos
+				end
+			end
+		end
+	end
+
+	if (closestPos ~= nil) then
+		closestDistance = #(position - closestPos)
+	end
+
+	return closestPlayer, closestDistance
+end
+
+-- returns all currently loaded playerpeds
+function c.func.GetAllPlayerPeds()
+	local playerPeds = {}
+
+	local peds = GetAllPeds()
+	for i, ped in ipairs(peds) do
+		if (DoesEntityExist(ped) and IsPedAPlayer(ped)) then
+			table.insert(playerPeds, ped)
+		end
+	end
+
+	return playerPeds
+end
+
+-- return the ped of the closest player
+function c.func.GetClosestPlayerPed(position, maxRadius)
+	local closestDistance	= maxRadius and (maxRadius * maxRadius) or 1000000.0
+	local closestPlayerPed	= nil
+	local closestPos		= nil
+
+	for i, playerPed in ipairs(c.func.GetAllPlayerPeds()) do
+		local pos = GetEntityCoords(playerPed)
+		local distanceSquared = #(position - pos)
+
+		if (distanceSquared < closestDistance) then
+			closestDistance		= distanceSquared
+			closestPlayerPed	= playerPed
+			closestPos			= pos
+		end
+	end
+
+	if (closestPos ~= nil) then
+		closestDistance = #(position - closestPos)
+	end
+
+	return closestPlayerPed, closestDistance
+end
+
 --- func desc
 ---@param name any
 ---@param x any
@@ -230,7 +312,7 @@ function c.func.CreateObject(model, x, y, z, isdoor, owned)
     if not owned then
         c.data.AddObject(net, c.class.BlankObject, net)
     else
-        c.data.AddObject(net, c.class.StorageObject, net, data)
+        c.data.AddObject(net, c.class.ExistingObject, net, data)
     end
     return entity, net
 end

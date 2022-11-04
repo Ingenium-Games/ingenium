@@ -37,13 +37,14 @@ function c.sql.objects.Generate(cb)
     }, function(data)
         for i=1, #data, 1 do
             local i = data[i]
-            if not c.objects[i.UUID] then
-                c.objects[i.UUID] = {}
-                c.objects[i.UUID].Model = i.Model
-                c.objects[i.UUID].Coords = i.Coords
-                c.objects[i.UUID].Inventory = json.decode(i.Inventory)
-                c.objects[i.UUID].Created = i.Created
-                c.objects[i.UUID].Updated = i.Updated
+            if not c.objects[i] then
+                c.objects[i] = {}
+                c.objects[i].UUID = i.UUID                   
+                c.objects[i].Model = i.Model
+                c.objects[i].Coords = json.decode(i.Coords)
+                c.objects[i].Inventory = json.decode(i.Inventory)
+                c.objects[i].Created = i.Created
+                c.objects[i].Updated = i.Updated
             end
         end
         IsBusy = false
@@ -67,7 +68,7 @@ function c.sql.objects.Add(data, cb)
         ["@Model"] = Data.Model,
         ["@Coords"] = Data.Coords,
         ["@Inventory"] = Data.Inventory,
-        ["@Created"] = Data.Created,
+        ["@Created"] = c.func.Timestamp(),
         ["@Updated"] = c.func.Timestamp(),
     }, function(r)
         IsBusy = false
@@ -81,3 +82,4 @@ function c.sql.objects.Add(data, cb)
         cb()
     end
 end
+--

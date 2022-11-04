@@ -52,11 +52,15 @@ function c.class.BlankObject(net)
     self.GetCoords = function()
         local x, y, z = table.unpack(GetEntityCoords(self.Entity))
         local h = GetEntityHeading(self.Entity)
+        local rx, ry, rz = table.unpack(GetEntityRotation((self.Entity)))
         return {
             ["x"] = c.math.Decimals(x, 2),
             ["y"] = c.math.Decimals(y, 2),
             ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2)
+            ["h"] = c.math.Decimals(h, 2),
+            ["rx"] = c.math.Decimals(rx, 2),
+            ["ry"] = c.math.Decimals(ry, 2),
+            ["rz"] = c.math.Decimals(rz, 2)
         }
     end
     --- func desc
@@ -66,10 +70,16 @@ function c.class.BlankObject(net)
             x = c.math.Decimals(t.x, 2),
             y = c.math.Decimals(t.y, 2),
             z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2)
+            h = c.math.Decimals(t.h, 2),
+            rx = c.math.Decimals(t.rx, 2),
+            ry = c.math.Decimals(t.ry, 2),
+            rz = c.math.Decimals(t.rz, 2),
         }
+        --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
         SetEntityHeading(self.Entity, self.Coords.h)
+        SetEntityRotation(self.Entity, vec3(self.Coords.rx, self.Coords.ry, self.Coords.rz), 3)
+        ---
         self.SetUpdated()
     end
     --
@@ -292,7 +302,7 @@ function c.class.ExistingObject(net, data)
     self.UUID = data.UUID
     self.State.UUID = self.UUID
     --
-    self.Inventory = json.decode(data.Inventory)
+    self.Inventory = data.Inventory
     self.State.Inventory = self.Inventory
     --
     self.Created = data.Created
@@ -320,6 +330,11 @@ function c.class.ExistingObject(net, data)
     self.GetSource = function()
         return NetworkGetEntityOwner(self.Entity)
     end
+        --- func desc
+    ---@param return any
+    self.GetUUID = function()
+        return self.UUID
+    end
     --- func desc
     self.GetModel = function()
         return self.Model
@@ -328,11 +343,15 @@ function c.class.ExistingObject(net, data)
     self.GetCoords = function()
         local x, y, z = table.unpack(GetEntityCoords(self.Entity))
         local h = GetEntityHeading(self.Entity)
+        local rx, ry, rz = table.unpack(GetEntityRotation((self.Entity)))
         return {
             ["x"] = c.math.Decimals(x, 2),
             ["y"] = c.math.Decimals(y, 2),
             ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2)
+            ["h"] = c.math.Decimals(h, 2),
+            ["rx"] = c.math.Decimals(rx, 2),
+            ["ry"] = c.math.Decimals(ry, 2),
+            ["rz"] = c.math.Decimals(rz, 2)
         }
     end
     --- func desc
@@ -342,10 +361,16 @@ function c.class.ExistingObject(net, data)
             x = c.math.Decimals(t.x, 2),
             y = c.math.Decimals(t.y, 2),
             z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2)
+            h = c.math.Decimals(t.h, 2),
+            rx = c.math.Decimals(t.rx, 2),
+            ry = c.math.Decimals(t.ry, 2),
+            rz = c.math.Decimals(t.rz, 2),
         }
+        --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
         SetEntityHeading(self.Entity, self.Coords.h)
+        SetEntityRotation(self.Entity, vec3(self.Coords.rx, self.Coords.ry, self.Coords.rz), 3)
+        ---
         self.SetUpdated()
     end
     --

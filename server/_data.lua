@@ -328,7 +328,7 @@ end
 -- 
 
 ---@param net integer "Network ID 16 bit integer"
-function c.data.FindObject(arg)
+function c.data.FindObject(net)
     for k, v in pairs(c.odex) do
         if v then
             if k == arg and type(v) == "table" then
@@ -339,25 +339,35 @@ function c.data.FindObject(arg)
     return false, false, false
 end
 
+---@param net integer "Network ID 16 bit integer"
+function c.data.FindObjectFromUUID(uuid)
+    for k, v in pairs(c.odex) do
+        if v and (v.UUID == uuid) then
+            return true, v, k
+        end
+    end
+    return false, false, false
+end
+
 --- func desc
 ---@param net any
 ---@param cb any
-function c.data.AddObject(uuid, cb, ...)
-    if not c.data.FindObject(uuid) then
-        c.odex[tostring(uuid)] = cb(...)
+function c.data.AddObject(net, cb, ...)
+    if not c.data.FindObject(net) then
+        c.odex[tostring(net)] = cb(...)
     end
 end
 
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
-function c.data.GetObject(uuid)
-    return c.odex[tostring(uuid)] or false
+function c.data.GetObject(net)
+    return c.odex[tostring(net)] or false
 end
 
 --- Same as above.
 ---@param net integer "Network ID 16 bit integer"
-function c.GetObject(uuid)
-    return c.data.GetObject(uuid)
+function c.GetObject(net)
+    return c.data.GetObject(net)
 end
 
 --- Get all xVehicles
@@ -374,7 +384,7 @@ end
 --- func desc
 ---@param net any
 function c.data.RemoveObject(uuid)
-    c.odex[tostring(uuid)] = false
+    c.odex[tostring(net)] = false
 end
 
 -- ====================================================================================--
@@ -458,6 +468,10 @@ function c.data.ServerSync()
         --
         c.sql.save.Jobs()
         print("   ^7[^5SQL^7]: Jobs")
+        Citizen.Wait(conf.sec * 5)
+        --
+        c.sql.save.Objects()
+        print("   ^7[^5SQL^7]: Objects")
         Citizen.Wait(conf.sec * 5)
         --
         print("   ^7[^3Server Sync Completed^7]")

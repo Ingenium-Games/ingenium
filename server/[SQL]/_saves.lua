@@ -157,7 +157,7 @@ function c.sql.save.Vehicle(data, cb)
                     -- Where conditions
                     ["@Plate"] = Plate
                 }, function(r)
-                    -- do
+                    data.Saved()
                 end)
                 if cb then
                     cb()
@@ -207,7 +207,7 @@ function c.sql.save.Vehicles(cb)
                         -- Where Conditions
                         ["@Plate"] = Plate
                     }, function(r)
-                        -- Do nothing.
+                        data.Saved()
                     end)
                 end
             end
@@ -229,18 +229,18 @@ end)
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Jobs(cb)
     local xJobs = c.data.GetJobs()
-    for k, v in pairs(xJobs) do
-        if (v.ShouldSave() == true) then
+    for k, data in pairs(xJobs) do
+        if (data.ShouldSave() == true) then
             -- Tables require JSON Encoding.
-            local Accounts = json.encode(xJobs[k].GetAccounts(false))
+            local Accounts = json.encode(data.GetAccounts(false))
             -- 
-            local Name = xJobs[k].GetName()
+            local Name = data.GetName()
             MySQL.Async.insert(JobSaveData, {
                 ["@Accounts"] = Accounts,
                 -- Where Conditions
                 ["@Name"] = Name
             }, function(r)
-                -- Do nothing.
+                data.Saved()
             end)
         end
     end
@@ -259,24 +259,26 @@ MySQL.Async.store("UPDATE `objects` SET `Inventory` = @Inventory, `Coords` = @Co
 
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.save.Jobs(cb)
+function c.sql.save.Objects(cb)
     local xObjs = c.data.GetObjects()
     for k, data in pairs(xObjs) do
-        if (tonumber(c.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
-            -- Tables require JSON Encoding.
-            local Inventory = json.encode(v.CompressInventory())
-            local Coords = json.encode(v.GetCoords())
-            --
-            local UUID = data.UUID
-            -- 
-            MySQL.Async.insert(ObjectSaveData, {
-                ["@Inventory"] = Inventory,
-                ["@Coords"] = Coords,
-                -- Where Conditions
-                ["@UUID"] = UUID
-            }, function(r)
-                -- Do nothing.
-            end)
+        if data then
+            if (tonumber(c.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
+                -- Tables require JSON Encoding.
+                local Inventory = json.encode(data.CompressInventory())
+                local Coords = json.encode(data.GetCoords())
+                --
+                local UUID = data.UUID
+                -- 
+                MySQL.Async.insert(ObjectSaveData, {
+                    ["@Inventory"] = Inventory,
+                    ["@Coords"] = Coords,
+                    -- Where Conditions
+                    ["@UUID"] = UUID
+                }, function(r)
+                    data.Saved()
+                end)
+            end
         end
     end
     if cb then

@@ -38,6 +38,8 @@ AddEventHandler("onResourceStart", function(resourceName)
     c.note.CleanUp()
     --
     Queue.OnReady()
+    --
+    c.persistance.ObjectThread()
 end)
 -- ====================================================================================--
 RegisterNetEvent("Server:PlayerConnecting")
