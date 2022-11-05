@@ -11,6 +11,33 @@ NOTES.
 
 -- ====================================================================================--
 
+--- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
+---@param cb function "Callback function if any, called after the SQL statement."
+function c.sql.veh.Generate(cb)
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchAll("SELECT * FROM `vehicles`", {
+    }, function(data)
+
+        for i=1, #data, 1 do
+            local i = data[i]
+            c.vehicles[i.ID] = i
+        end
+
+        IsBusy = false
+    end)
+    --
+    while IsBusy do
+        Citizen.Wait(0)
+    end
+    --
+    if cb then
+        cb()
+    end
+end
+--
+
+
 function c.sql.veh.Reset(cb)
     MySQL.Async.execute("UPDATE `vehicles` SET `Parked` = TRUE", {
     }, function(data)

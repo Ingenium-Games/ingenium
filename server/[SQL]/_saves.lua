@@ -124,7 +124,7 @@ MySQL.Async.store(
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.Vehicle(data, cb)
     if data then
-        if DoesEntityExist(data.GetEntity()) and data.GetOwner() ~= false then
+        if data.GetOwner() ~= false then
             if (data.ShouldSave() == true) then -- Other Variables.
                 local Fuel = data.GetFuel()
                 local Garage = data.GetGarage()
@@ -253,9 +253,9 @@ end
 
 local ObjectSaveData = -1
 MySQL.Async.store("UPDATE `objects` SET `Inventory` = @Inventory, `Coords` = @Coords WHERE `UUID` = @UUID;",
-    function(id)
-        JobSaveData = id
-    end)
+function(id)
+    ObjectSaveData = id
+end)
 
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."

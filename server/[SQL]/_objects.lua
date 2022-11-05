@@ -1,7 +1,7 @@
 -- ====================================================================================--
 
 if not c.sql then c.sql = {} end
-c.sql.objects = {}
+c.sql.obj = {}
 
 -- ====================================================================================--
 
@@ -30,22 +30,14 @@ ROW_FORMAT=DYNAMIC
 
 --- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
-function c.sql.objects.Generate(cb)
+function c.sql.obj.Generate(cb)
     local IsBusy = true
     local result = nil
     MySQL.Async.fetchAll("SELECT * FROM `objects`", {
     }, function(data)
         for i=1, #data, 1 do
             local i = data[i]
-            if not c.objects[i] then
-                c.objects[i] = {}
-                c.objects[i].UUID = i.UUID                   
-                c.objects[i].Model = i.Model
-                c.objects[i].Coords = json.decode(i.Coords)
-                c.objects[i].Inventory = json.decode(i.Inventory)
-                c.objects[i].Created = i.Created
-                c.objects[i].Updated = i.Updated
-            end
+            c.objects[i.ID] = i
         end
         IsBusy = false
     end)
@@ -60,7 +52,7 @@ function c.sql.objects.Generate(cb)
 end
 --
 
-function c.sql.objects.Add(data, cb)
+function c.sql.obj.Add(data, cb)
     local IsBusy = true
     local Data = data
     MySQL.Async.execute("INSERT INTO `vehicles` (`UUID`, `Model`, `Coords`, `Inventory`, `Created`, `Updated`) VALUES (@UUID, @Model, @Coords, @Inventory, @Created, @Updated);",{

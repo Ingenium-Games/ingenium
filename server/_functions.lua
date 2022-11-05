@@ -241,8 +241,7 @@ end
 ---@param y any
 ---@param z any
 ---@param h any
-function c.func.CreateVehicle(name, x, y, z, h, owned)
-    local data = owned or false
+function c.func.CreateVehicle(name, x, y, z, h, data)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -255,7 +254,7 @@ function c.func.CreateVehicle(name, x, y, z, h, owned)
     end
     Wait(250)
     local net = NetworkGetNetworkIdFromEntity(entity)
-    if not data then
+    if not type(data) == "table" then
         c.data.AddVehicle(net, c.class.Vehicle, net)
     else
         c.data.AddVehicle(net, c.class.OwnedVehicle, net, data)

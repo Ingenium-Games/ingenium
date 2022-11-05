@@ -36,7 +36,6 @@ function c.class.Vehicle(net)
     -- Plate
     self.Plate = data.Plate
     self.State.Plate = self.Plate
-    SetVehicleNumberPlateText(self.Entity, self.Plate)
     --
     self.Weight = 0
     -- Owner
@@ -502,24 +501,8 @@ end
 ---@param net any
 ---@param bool any
 function c.class.OwnedVehicle(net, data)
-    local data = {
-        Fuel = data.Fuel,
-        Plate = data.Plate,
-        Instance = data.Instance,
-        Garage = data.Garage,
-        Parked = data.Parked,
-        Impound = data.Impound,
-        Owner = data.Character_ID,
-        Wanted = data.Wanted,
-        -- Json
-        Modifications = json.decode(data.Modifications),
-        Inventory = json.decode(data.Inventory),
-        Condition = json.decode(data.Condition),
-        Keys = json.decode(data.Keys),
-        Updated = data.Updated
-    }
     local self = {}
-    self.Data = data
+    --
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
@@ -530,11 +513,9 @@ function c.class.OwnedVehicle(net, data)
     self.Plate = data.Plate
     self.State.Plate = self.Plate
     --
-    SetVehicleNumberPlateText(self.Entity, self.Plate)
-    --
     self.Weight = 0
     -- Owner
-    self.Owner = data.Owner
+    self.Owner = data.Character_ID
     self.State.Owner = self.Owner
     -- Wanted
     self.Wanted = data.Wanted
@@ -556,13 +537,13 @@ function c.class.OwnedVehicle(net, data)
     self.State.Impound = self.Impound
     --
     -- Inventory
-    self.Inventory = data.Inventory
+    self.Inventory = json.decode(data.Inventory)
     -- Condition
-    self.Condition = data.Condition
+    self.Condition = json.decode(data.Condition)
     -- Modifications
-    self.Modifications = data.Modifications
+    self.Modifications = json.decode(data.Modifications)
     -- Keys
-    self.Keys = data.Keys
+    self.Keys = json.decode(data.Keys)
     self.State.Keys = self.Keys
     --
     self.Updated = data.Updated

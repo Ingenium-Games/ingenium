@@ -62,7 +62,8 @@ function c.data.Initilize()
         -- [12]
         c.sql.veh.Reset(cb)
         --
-        c.sql.objects.Generate()
+        c.sql.obj.Generate()
+        -- c.sql.veh.Generate()
         --
         loaded = true
     end)
@@ -187,7 +188,7 @@ end
 -- ====================================================================================--
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
 
----@param net integer "Network ID 16 bit integer or Plate (8 char string)"
+---@param net integer "Network ID 16 bit integer"
 function c.data.FindVehicle(arg)
     for k, v in pairs(c.vdex) do
         if v then
@@ -197,6 +198,16 @@ function c.data.FindVehicle(arg)
         end
     end
     return false, false, false
+end
+
+---@param plate string "Plate of vehicle."
+function c.data.FindVehicleFromPlate(plate)
+    for k, v in pairs(c.vdex) do
+        if (v and v.Plate == plate) then
+            return true
+        end
+    end
+    return false
 end
 
 ---@param plate string "Plate of vehicle."
@@ -216,7 +227,7 @@ end
 ---@param cb any
 function c.data.AddVehicle(net, cb, ...)
     local aa, bb, cc = c.data.FindVehicle(net)
-    if not aa then
+    if (not aa) then
         c.vdex[tonumber(net)] = cb(...)
     end
 end
@@ -347,6 +358,16 @@ function c.data.FindObjectFromUUID(uuid)
         end
     end
     return false, false, false
+end
+
+---@param net integer "Network ID 16 bit integer"
+function c.data.GetObjectFromUUID(uuid)
+    for k, v in pairs(c.odex) do
+        if v and (v.UUID == uuid) then
+            return v
+        end
+    end
+    return false
 end
 
 --- func desc

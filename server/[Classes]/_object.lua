@@ -302,7 +302,10 @@ function c.class.ExistingObject(net, data)
     self.UUID = data.UUID
     self.State.UUID = self.UUID
     --
-    self.Inventory = data.Inventory
+    self.Coords = json.decode(data.Coords)
+    self.State.Coords = self.Coords
+    --
+    self.Inventory = json.decode(data.Inventory)
     self.State.Inventory = self.Inventory
     --
     self.Created = data.Created
@@ -371,6 +374,7 @@ function c.class.ExistingObject(net, data)
         SetEntityHeading(self.Entity, self.Coords.h)
         SetEntityRotation(self.Entity, vec3(self.Coords.rx, self.Coords.ry, self.Coords.rz), 3)
         ---
+        self.State.Coords = self.Coords
         self.SetUpdated()
     end
     --

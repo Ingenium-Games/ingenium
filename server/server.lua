@@ -40,6 +40,7 @@ AddEventHandler("onResourceStart", function(resourceName)
     Queue.OnReady()
     --
     c.persistance.ObjectThread()
+    c.persistance.VehicleThread()
 end)
 -- ====================================================================================--
 RegisterNetEvent("Server:PlayerConnecting")
