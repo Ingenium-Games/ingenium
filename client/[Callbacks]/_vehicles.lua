@@ -9,9 +9,11 @@ local GetVehicleCondition = RegisterClientCallback({
 local SetVehicleCondition = RegisterClientCallback({
     eventName = "SetVehicleCondition",
     eventCallback = function(net, con)
-        local entity = NetToVeh(net)
-        c.func.SetVehicleCondition(entity, con)
-        return true
+        if (c.func.WaitUntilNetIdExists(net, 30000)) then
+            local entity = NetToVeh(net)
+            c.func.SetVehicleCondition(entity, con)
+            return true
+        end
     end
 })
 
@@ -26,8 +28,10 @@ local GetVehicleModifications = RegisterClientCallback({
 local SetVehicleModifications = RegisterClientCallback({
     eventName = "SetVehicleModifications",
     eventCallback = function(net, mods)
-        local entity = NetToVeh(net)
-        c.func.SetVehicleModifications(entity, mods)
-        return true
+        if (c.func.WaitUntilNetIdExists(net, 30000)) then
+            local entity = NetToVeh(net)
+            c.func.SetVehicleModifications(entity, mods)
+            return true
+        end
     end
 })

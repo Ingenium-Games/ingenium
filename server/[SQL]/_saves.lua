@@ -125,7 +125,7 @@ MySQL.Async.store(
 function c.sql.save.Vehicle(data, cb)
     if data then
         if data.GetOwner() ~= false then
-            if (data.ShouldSave() == true) then -- Other Variables.
+            if (tonumber(c.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
                 local Fuel = data.GetFuel()
                 local Garage = data.GetGarage()
                 -- Booleans
@@ -173,43 +173,42 @@ function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for k, data in pairs(xVehicles) do
         if data then
-            if DoesEntityExist(data.GetEntity()) and data.GetOwner() ~= false then
-                if (data.ShouldSave() == true) then
+            if (tonumber(c.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
+                -- Other Variables.
+                local Fuel = data.GetFuel()
+                local Garage = data.GetGarage()
+                -- Booleans
+                local Parked = data.GetParked()
+                local Impound = data.GetImpound()
+                local Wanted = data.GetWanted()
+                -- Tables require JSON Encoding.
+                local Keys = json.encode(data.GetKeys())
+                local Coords = json.encode(data.GetCoords())
+                local Condition = json.encode(data.GetCondition())
+                local Modifications = json.encode(data.GetModifications())
+                local Inventory = json.encode(data.CompressInventory())
+                -- The Key
+                local Plate = data.GetPlate()
+                --
+                MySQL.Async.insert(VehicleSaveData, {
                     -- Other Variables.
-                    local Fuel = data.GetFuel()
-                    local Garage = data.GetGarage()
+                    ["@Garage"] = Garage,
                     -- Booleans
-                    local Parked = data.GetParked()
-                    local Impound = data.GetImpound()
-                    local Wanted = data.GetWanted()
-                    -- Tables require JSON Encoding.
-                    local Keys = json.encode(data.GetKeys())
-                    local Coords = json.encode(data.GetCoords())
-                    local Condition = json.encode(data.GetCondition())
-                    local Modifications = json.encode(data.GetModifications())
-                    local Inventory = json.encode(data.CompressInventory())
-                    -- The Key
-                    local Plate = data.GetPlate()
-                    --
-                    MySQL.Async.insert(VehicleSaveData, {
-                        -- Other Variables.
-                        ["@Garage"] = Garage,
-                        -- Booleans
-                        ["@Impound"] = Impound,
-                        ["@Parked"] = Parked,
-                        ["@Wanted"] = Wanted,
-                        -- Table Informaiton.
-                        ["@Keys"] = Keys,
-                        ["@Coords"] = Coords,
-                        ["@Condition"] = Condition,
-                        ["@Modifications"] = Modifications,
-                        ["@Inventory"] = Inventory,
-                        -- Where Conditions
-                        ["@Plate"] = Plate
-                    }, function(r)
-                        data.Saved()
-                    end)
-                end
+                    ["@Impound"] = Impound,
+                    ["@Parked"] = Parked,
+                    ["@Wanted"] = Wanted,
+                    -- Table Informaiton.
+                    ["@Keys"] = Keys,
+                    ["@Coords"] = Coords,
+                    ["@Condition"] = Condition,
+                    ["@Modifications"] = Modifications,
+                    ["@Inventory"] = Inventory,
+                    -- Where Conditions
+                    ["@Plate"] = Plate
+                }, function(r)
+                    data.Saved()
+                end)
+
             end
         end
     end
@@ -253,9 +252,9 @@ end
 
 local ObjectSaveData = -1
 MySQL.Async.store("UPDATE `objects` SET `Inventory` = @Inventory, `Coords` = @Coords WHERE `UUID` = @UUID;",
-function(id)
-    ObjectSaveData = id
-end)
+    function(id)
+        ObjectSaveData = id
+    end)
 
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."

@@ -30,24 +30,10 @@ function c.object.Generate(timeout, distance)
                 -- vehicle not found, spawn it when player is close
                 Citizen.CreateThread(function()
                     local entity, net = c.func.CreateObject(data.Model, Coords.x, Coords.y, Coords.z, false, data)
+                    SetEntityRotation(Coords.rx, Coords.ry, Coords.rz)
                     FreezeEntityPosition(entity, true)
                 end)
             end
         end
 	end
-end
-
-function c.object.SyncCheck()
-    c.sql.obj.Generate()
-    Citizen.Wait(5000)
-    for uuid, data in pairs(c.objects) do
-        local Coords = json.decode(data.Coords)
-        local xObj = c.data.GetObjectFromUUID(data.UUID)
-        if xObj then
-            local EntityCoords = xObj.GetCoords()
-            if EntityCoords ~= Coords then
-                xObj.SetUpdated()
-            end
-        end
-    end
 end

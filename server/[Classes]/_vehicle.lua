@@ -674,12 +674,14 @@ function c.class.OwnedVehicle(net, data)
         -- Set Condition
         self.Condition = conditions
         -- Force Set Modifications
-        TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "SetVehicleCondition",
-            args = {self.Net, self.Condition}
-        })
-        self.SetUpdated()
+        if self.GetSource() ~= -1 then
+            TriggerClientCallback({
+                source = self.GetSource(),
+                eventName = "SetVehicleCondition",
+                args = {self.Net, self.Condition}
+            })
+            self.SetUpdated()
+        end
     end
     --- func desc
     ---@param id any
@@ -710,12 +712,14 @@ function c.class.OwnedVehicle(net, data)
         -- Get Modifications
         self.Modifications = modifications
         -- Force Set Modifications
-        TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "SetVehicleModifications",
-            args = {self.Net, self.Modifications}
-        })
-        self.SetUpdated()
+        if self.GetSource() ~= -1 then
+            TriggerClientCallback({
+                source = self.GetSource(),
+                eventName = "SetVehicleModifications",
+                args = {self.Net, self.Modifications}
+            })
+            self.SetUpdated()
+        end
     end
     --- func desc
     ---@param id any

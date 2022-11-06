@@ -39,8 +39,15 @@ AddEventHandler("onResourceStart", function(resourceName)
     --
     Queue.OnReady()
     --
+
+
+    -- TESTING
     c.persistance.ObjectThread()
-    c.persistance.VehicleThread()
+    
+    -- c.persistance.VehicleThread()
+
+    c.persistance.TableSync()
+    
 end)
 -- ====================================================================================--
 RegisterNetEvent("Server:PlayerConnecting")

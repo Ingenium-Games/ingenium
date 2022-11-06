@@ -153,8 +153,8 @@ end
 
 -- ====================================================================================--
 
-
--- returns if any player is inside a given vehicle
+--- func desc
+---@param vehicle any
 function c.func.IsAnyPlayerInsideVehicle(vehicle)
 	local playerPeds = c.func.GetAllPlayerPeds()
 	for i, playerPed in ipairs(playerPeds) do
@@ -168,7 +168,9 @@ function c.func.IsAnyPlayerInsideVehicle(vehicle)
 	return false
 end
 
--- return the id and distance of the closest player
+--- func desc
+---@param position any
+---@param maxRadius any
 function c.func.GetClosestPlayer(position, maxRadius)
 	local closestDistance	= maxRadius and (maxRadius * maxRadius) or 1000000.0
 	local closestPlayer		= nil
@@ -197,7 +199,7 @@ function c.func.GetClosestPlayer(position, maxRadius)
 	return closestPlayer, closestDistance
 end
 
--- returns all currently loaded playerpeds
+--- func desc
 function c.func.GetAllPlayerPeds()
 	local playerPeds = {}
 
@@ -211,7 +213,9 @@ function c.func.GetAllPlayerPeds()
 	return playerPeds
 end
 
--- return the ped of the closest player
+--- func desc
+---@param position any
+---@param maxRadius any
 function c.func.GetClosestPlayerPed(position, maxRadius)
 	local closestDistance	= maxRadius and (maxRadius * maxRadius) or 1000000.0
 	local closestPlayerPed	= nil
@@ -249,15 +253,14 @@ function c.func.CreateVehicle(name, x, y, z, h, data)
         hash = GetHashKey(name)
     end
     local entity = CreateVehicle(hash, x, y, z, h, true, false)
-    while not DoesEntityExist(entity) do
-        Wait(100)
+    while (not DoesEntityExist(entity)) or (NetworkGetNetworkIdFromEntity(entity) == 0) do
+        Wait(250)
     end
-    Wait(250)
     local net = NetworkGetNetworkIdFromEntity(entity)
-    if not type(data) == "table" then
-        c.data.AddVehicle(net, c.class.Vehicle, net)
-    else
+    if data then
         c.data.AddVehicle(net, c.class.OwnedVehicle, net, data)
+    else
+        c.data.AddVehicle(net, c.class.Vehicle, net)
     end
     return entity, net
 end
@@ -276,10 +279,9 @@ function c.func.CreatePed(name, x, y, z, h)
         hash = GetHashKey(name)
     end
     local entity = CreatePed(0, hash, x, y, z, h, true, false)
-    while not DoesEntityExist(entity) do
-        Wait(100)
+    while (not DoesEntityExist(entity)) or (NetworkGetNetworkIdFromEntity(entity) == 0) do
+        Wait(250)
     end
-    Wait(250)
     local net = NetworkGetNetworkIdFromEntity(entity)
     c.data.AddPed(net, c.class.Npc, net)
     return entity, net
@@ -291,8 +293,7 @@ end
 ---@param y any
 ---@param z any
 ---@param isdoor any
-function c.func.CreateObject(model, x, y, z, isdoor, owned)
-    local data = owned or false
+function c.func.CreateObject(model, x, y, z, isdoor, data)
     local hash = nil
     if type(model) == "number" then
         hash = model
@@ -303,15 +304,14 @@ function c.func.CreateObject(model, x, y, z, isdoor, owned)
         isdoor = false
     end
     local entity = CreateObject(hash, x, y, z, true, isdoor)
-    while not DoesEntityExist(entity) do
-        Wait(100)
+    while (not DoesEntityExist(entity)) or (NetworkGetNetworkIdFromEntity(entity) == 0) do
+        Wait(250)
     end
-    Wait(250)
     local net = NetworkGetNetworkIdFromEntity(entity)
-    if not owned then
-        c.data.AddObject(net, c.class.BlankObject, net)
-    else
+    if data then
         c.data.AddObject(net, c.class.ExistingObject, net, data)
+    else
+        c.data.AddObject(net, c.class.BlankObject, net)
     end
     return entity, net
 end

@@ -62,8 +62,8 @@ function c.data.Initilize()
         -- [12]
         c.sql.veh.Reset(cb)
         --
-        c.sql.obj.Generate()
-        -- c.sql.veh.Generate()
+        c.sql.obj.GetObjects()
+        c.sql.veh.GetVehicles()
         --
         loaded = true
     end)
@@ -189,10 +189,10 @@ end
 -- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
 
 ---@param net integer "Network ID 16 bit integer"
-function c.data.FindVehicle(arg)
+function c.data.FindVehicle(net)
     for k, v in pairs(c.vdex) do
         if v then
-            if k == arg and type(v) == "table" then
+            if k == net and type(v) == "table" then
                 return true, v, k
             end
         end
@@ -342,7 +342,7 @@ end
 function c.data.FindObject(net)
     for k, v in pairs(c.odex) do
         if v then
-            if k == arg and type(v) == "table" then
+            if k == net and type(v) == "table" then
                 return true, v, k
             end
         end

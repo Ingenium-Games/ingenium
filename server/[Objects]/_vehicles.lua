@@ -32,37 +32,38 @@ c.vdex = {} -- vehicles...
 function c.vehicle.Generate(timeout, distance)
 	for id, data in pairs(c.vehicles) do
         local found = c.data.FindVehicleFromPlate(data.Plate)
-        print(found)
         if (not found) then
-            print(data.Parked)
-            if (not data.Parked) then
-                print(data.Plate)
+            if data.Parked then
                 local Coords = json.decode(data.Coords)
+                local Condition = json.decode(data.Condition)
+                local Modificaitons = json.decode(data.Modificaitons)
                 if (c.func.GetClosestPlayer(vec3(Coords.x,Coords.y,Coords.z), distance)) then
-                    print('closest')
-                    -- vehicle not found, spawn it when player is close
                     Citizen.CreateThread(function()
-                        local entity, net = c.func.CreateVehicle(data.Model, Coords.x, Coords.y, Coords.z, Coords.h, data)
-                        SetVehicleNumberPlateText(entity, data.Plate)
-                        print('created')
+                        --
+                        local entity = CreateVehicle(data.Model, Coords.x, Coords.y, Coords.z, Coords.h, true, false)
+                        while (not DoesEntityExist(entity)) or (NetworkGetNetworkIdFromEntity(entity) == 0) do
+                            Wait(0)
+                        end
+                        
+                        --
+                        local ped = GetPedInVehicleSeat(entity, -1)
+                        if (ped and DoesEntityExist(ped) and not IsPedAPlayer(ped)) then
+                            DeleteEntity(ped)
+                        end
+
+                        --
+                        SetEntityCoords(entity, vec3(Coords.x, Coords.y, Coords.z))
+                        SetEntityHeading(entity, Coords.h)
+
+                        --
+                        SetVehicleDoorsLocked(entity, Condition[7])
+                        SetVehicleNumberPlateText(entity, Modificaitons[1])
+
+                        --
+                        c.data.AddVehicle(NetworkGetNetworkIdFromEntity(entity), c.class.OwnedVehicle, NetworkGetNetworkIdFromEntity(entity), data)
                     end)
                 end
             end
         end
 	end
-end
-
-function c.vehicle.SyncCheck()
-    c.sql.veh.Generate()
-    Citizen.Wait(5000)
-    for id, data in pairs(c.vehicles) do
-        local Coords = json.decode(data.Coords)
-        local xVehicle = c.data.GetVehicleByPlate(data.Plate)
-        if xVehicle then
-            local EntityCoords = xVehicle.GetCoords()
-            if EntityCoords ~= Coords then
-                xVehicle.SetUpdated()
-            end
-        end
-    end
 end

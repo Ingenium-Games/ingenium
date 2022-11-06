@@ -30,7 +30,7 @@ ROW_FORMAT=DYNAMIC
 
 --- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
-function c.sql.obj.Generate(cb)
+function c.sql.obj.GetObjects(cb)
     local IsBusy = true
     local result = nil
     MySQL.Async.fetchAll("SELECT * FROM `objects`", {
