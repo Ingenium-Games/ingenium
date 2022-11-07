@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 c.data = {} -- data table for funcitons.
 c.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
 
@@ -20,8 +19,8 @@ function c.data.Initilize()
         [8] = "DB: Loading Data File - Pickups;",
         [9] = "DB: Loading Data File - Notes;",
         [10] = "DB: Loading Data File - Names;",
-        [11] = "DB: Reset Cars to Parked;";
-        [12] = "DB: ";
+        [11] = "DB: Reset Cars to Parked;",
+        [12] = "DB: "
     }
     --
     local function cb()
@@ -162,7 +161,6 @@ function c.GetPlayerFromIdentifier(id)
     return c.data.GetPlayerByIdentifier(id)
 end
 
-
 --- Return corresponding player data from character_id
 ---@param id string "Character_ID"
 function c.data.GetPlayerIDByIdentifier(id)
@@ -178,9 +176,9 @@ end
 
 --- func desc
 function c.data.ArePlayersActive()
-    local ptbl = GetPlayers()    
+    local ptbl = GetPlayers()
     if type(ptbl) == "table" and #ptbl >= 1 then
-        return true                
+        return true
     end
     return false
 end
@@ -444,15 +442,19 @@ end
 --- func desc
 ---@param str any
 function c.data.Save(str)
-    
+
 end
 
 -- Server to Datatable routine.
 function c.data.RetrievePackets()
     local plys = c.data.GetPlayers()
-    for k,v in pairs(plys) do
+    for k, v in pairs(plys) do
         if v then
-            local data = TriggerClientCallback({source = k, eventName = "DataPacket", args = {}})
+            local data = TriggerClientCallback({
+                source = k,
+                eventName = "DataPacket",
+                args = {}
+            })
             if data then
                 local xPlayer = c.data.GetPlayer(k)
                 xPlayer.SetHealth(data.Health)
@@ -478,24 +480,26 @@ end
 -- Server to DB routine.
 function c.data.ServerSync()
     local function Do()
-        --
-        c.sql.save.Users()
-        print("   ^7[^5SQL^7]: Users")
-        Citizen.Wait(conf.sec * 5)
-        --
-        c.sql.save.Vehicles()
-        print("   ^7[^5SQL^7]: Vehicles")
-        Citizen.Wait(conf.sec * 5)
-        --
-        c.sql.save.Jobs()
-        print("   ^7[^5SQL^7]: Jobs")
-        Citizen.Wait(conf.sec * 5)
-        --
-        c.sql.save.Objects()
-        print("   ^7[^5SQL^7]: Objects")
-        Citizen.Wait(conf.sec * 5)
-        --
-        print("   ^7[^3Server Sync Completed^7]")
+        if c.data.ArePlayersActive() then
+            --
+            c.sql.save.Users()
+            print("   ^7[^5SQL^7]: Users")
+            Citizen.Wait(conf.sec * 5)
+            --
+            c.sql.save.Vehicles()
+            print("   ^7[^5SQL^7]: Vehicles")
+            Citizen.Wait(conf.sec * 5)
+            --
+            c.sql.save.Jobs()
+            print("   ^7[^5SQL^7]: Jobs")
+            Citizen.Wait(conf.sec * 5)
+            --
+            c.sql.save.Objects()
+            print("   ^7[^5SQL^7]: Objects")
+            Citizen.Wait(conf.sec * 5)
+            --
+            print("   ^7[^3Server Sync Completed^7]")
+        end
         SetTimeout(conf.serversync, Do)
     end
     SetTimeout(conf.serversync, Do)

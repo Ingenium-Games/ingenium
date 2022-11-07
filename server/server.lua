@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 --
 SetGameType(conf.gamemode)
 SetConvarServerInfo("Game Mode", conf.gamemode)
@@ -30,7 +29,7 @@ AddEventHandler("onResourceStart", function(resourceName)
     -- Get character values every x seconds.
     c.data.CharacterValues()
     -- Start Paying players based on conf.
-    c.job.PayCycle()  
+    c.job.PayCycle()
     -- Cleanup Cycles on files.
     c.gsr.CleanUp()
     c.drop.CleanUp()
@@ -40,14 +39,13 @@ AddEventHandler("onResourceStart", function(resourceName)
     Queue.OnReady()
     --
 
-
     -- TESTING
     c.persistance.ObjectThread()
-    
+
     -- c.persistance.VehicleThread()
 
     c.persistance.TableSync()
-    
+
 end)
 -- ====================================================================================--
 RegisterNetEvent("Server:PlayerConnecting")
@@ -66,7 +64,7 @@ AddEventHandler("Server:PlayerConnecting", function()
         c.data.AddPlayer(src)
         -- Lets see if the player exists.
         local exists = c.sql.user.Find(License_ID)
-        if (exists == nil) then            
+        if (exists == nil) then
             -- If no user present.    
             c.sql.user.Add(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
         else
@@ -75,7 +73,7 @@ AddEventHandler("Server:PlayerConnecting", function()
         end
     else
         DropPlayer(src, "No License Identifier, No Entry.")
-    end    
+    end
 end)
 -- ====================================================================================--
 AddEventHandler("playerDropped", function()
@@ -92,5 +90,21 @@ AddEventHandler("playerDropped", function()
                 c.data.RemovePlayer(src)
             end)
         end)
+    end
+    -- last player, force save data.
+    if not c.data.ArePlayersActive() then
+        --
+        c.sql.save.Vehicles()
+        print("   ^7[^5SQL^7]: Vehicles")
+        Citizen.Wait(conf.sec)
+        --
+        c.sql.save.Jobs()
+        print("   ^7[^5SQL^7]: Jobs")
+        Citizen.Wait(conf.sec)
+        --
+        c.sql.save.Objects()
+        print("   ^7[^5SQL^7]: Objects")
+        Citizen.Wait(conf.sec)
+        --
     end
 end)

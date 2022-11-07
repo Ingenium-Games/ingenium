@@ -179,8 +179,19 @@ end
 function c.status.StartStressIncrease()
     local function Do()
         if c.data.GetLoadedStatus() then
-            local default = (1 * c.modifier.GetStressModifier()) / 100
-            c.status.AddStress(default)
+            Wait(1)
+            local sitting = exports["sit"]:IsSitting()
+            local laying = exports["sit"]:IsLaying()
+            if (not sitting) and (not laying) then
+                local default = (1 * c.modifier.GetStressModifier()) / 100
+                c.status.AddStress(default)
+            elseif sitting then
+                local default = 0.95
+                c.status.RemoveStress(default)
+            elseif laying then
+                local default = 3.45
+                c.status.RemoveStress(default)
+            end
             SetTimeout(_stress, Do)
         else
             -- this is to break the loop if switching between characters.

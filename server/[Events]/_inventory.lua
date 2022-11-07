@@ -67,5 +67,15 @@ for k,v in pairs (c.items) do
             return
         end
         --
+        if k == "Skateboard" then
+            -- Get the item inside the pacakge
+            --
+            TriggerClientCallback({
+                source = src,
+                eventName = "Client:Item:Skateboard",
+                args = {}
+            })
+            return
+        end
     end)
 end

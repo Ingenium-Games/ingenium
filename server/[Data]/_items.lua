@@ -30,6 +30,30 @@ c.items = { -- table of items
     -- Interactive Items
     -- ====================================================================================--
 
+    ["Skateboard"] = {
+        Name = "Skateboard",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 38,
+        Value = 80,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Kick flippin good fun."
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = false,
+        Consumeable = false,
+        Hotkey = true,
+        Image = "Skateboard.png"
+    },
+
+
     ["Toolbox"] = {
         Name = "Toolbox",
         Degrade = false,

@@ -112,3 +112,11 @@ local Consumeable = RegisterClientCallback({
         end
     end
 })
+
+
+local Consumeable = RegisterClientCallback({
+    eventName = "Client:Item:Skateboard",
+    eventCallback = function()
+        ExecuteCommand("skate")
+    end
+})
