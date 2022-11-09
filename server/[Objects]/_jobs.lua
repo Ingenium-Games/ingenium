@@ -75,6 +75,7 @@ RegisterNetEvent("Server:Character:OffDuty", function(req)
     if conf.enableduty then
         CurrentlyActive[src] = "OffDuty"
         xPlayer.SetDuty(false)
+        xPlayer.Notify("Off Duty")
         TriggerClientEvent("Client:Character:OffDuty", src)
     else
         c.func.Debug_1("Ability to go off duty has ben disabled.")
@@ -87,6 +88,7 @@ RegisterNetEvent("Server:Character:OnDuty", function(req)
     if conf.enableduty then
         CurrentlyActive[src] = xPlayer.GetJob()
         xPlayer.SetDuty(true)
+        xPlayer.Notify("On Duty")
         TriggerClientEvent("Client:Character:OnDuty", src, CurrentlyActive[src])
     else
         c.func.Debug_1("Ability to go on duty has ben disabled.")

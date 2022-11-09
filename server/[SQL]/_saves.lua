@@ -125,14 +125,14 @@ MySQL.Async.store(
 function c.sql.save.Vehicle(data, cb)
     if data then
         if data.GetOwner() ~= false then
-            if (tonumber(c.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
+            if data.ShouldSave() == true then
                 if DoesEntityExist(data.Entity) then
                     local Fuel = data.GetFuel()
                     local Garage = data.GetGarage()
                     -- Booleans
-                    local Parked = data.GetParked() or false
-                    local Impound = data.GetImpound() or false
-                    local Wanted = data.GetWanted() or false
+                    local Parked = data.GetParked()
+                    local Impound = data.GetImpound()
+                    local Wanted = data.GetWanted()
                     -- Tables require JSON Encoding.
                     local Keys = json.encode(data.GetKeys())
                     local Coords = json.encode(data.GetCoords())
@@ -175,7 +175,7 @@ function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for k, data in pairs(xVehicles) do
         if data then
-            if (tonumber(c.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
+            if data.ShouldSave() == true then
                 if DoesEntityExist(data.Entity) then
                     -- Other Variables.
                     local Fuel = data.GetFuel()

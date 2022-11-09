@@ -53,6 +53,28 @@ c.items = { -- table of items
         Image = "Skateboard.png"
     },
 
+    ["Pickaxe"] = {
+        Name = "Pickaxe",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 10,
+        Value = 25,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Dwarf eh?"
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = false,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Pickaxe.png"
+    },
 
     ["Toolbox"] = {
         Name = "Toolbox",
@@ -103,6 +125,153 @@ c.items = { -- table of items
     -- ====================================================================================--
     -- Basic Bitch Items
     -- ====================================================================================--
+
+    ["Rock"] = {
+        Name = "Rock",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Rock.png"
+    },
+
+    ["Clay"] = {
+        Name = "Clay",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Clay.png"
+    },
+
+    ["RockSalt"] = {
+        Name = "Rock Salt",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "RockSalt.png"
+    },
+    
+    ["Copper"] = {
+        Name = "Copper",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Copper.png"
+    },
+
+    ["Iron"] = {
+        Name = "Iron",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Iron.png"
+    },
+
+    ["GoldNugget"] = {
+        Name = "Gold Nugget",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "GoldNugget.png"
+    },
+
+    ["SilverNugget"] = {
+        Name = "Silver Nugget",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 1,
+        Value = 1,
+        Weight = 0,
+        Weapon = false,
+        Meta = false,
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "SilverNugget.png"
+    },
 
     ["Worm"] = {
         Name = "Worm",
@@ -210,27 +379,6 @@ c.items = { -- table of items
     },
 
     ["Brass"] = {
-        Name = "Brass",
-        Degrade = false,
-        DegradeRate = 0.0,
-        Quality = 100,
-        Quantity = 1,
-        Cost = 1,
-        Value = 1,
-        Weight = 0,
-        Weapon = false,
-        Meta = false,
-        Data = false,
-        Craftable = false,
-        Recipe = false,
-        Materials = false,
-        Stackable = true,
-        Consumeable = false,
-        Hotkey = false,
-        Image = "Brass.png"
-    },
-
-    ["Copper"] = {
         Name = "Brass",
         Degrade = false,
         DegradeRate = 0.0,
