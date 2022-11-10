@@ -100,7 +100,7 @@ end)
 
 RegisterNetEvent("Client:Character:SaveSkin")
 AddEventHandler("Client:Character:SaveSkin", function(bool)
-    local appearance = exports["fivem-appearance"]:getPedAppearance(PlayerPedId())
+    local appearance = exports["fivem-appearance"]:getPedAppearance(GetPlayerPed(-1))
     TriggerServerEvent("Server:Character:SaveSkin", appearance, bool)
 end)
 

@@ -1052,11 +1052,11 @@ function c.class.OfflinePlayer(data)
         return self.License_ID
     end
     --
-    self.GetIdentifier = function()
-        return self.GetCharacter_ID()
+    self.GetCharacter_ID = function()
+        return self.Character_ID
     end
     --
-    self.GetCharacter_ID = function()
+    self.GetIdentifier = function()
         return self.Character_ID
     end
     --

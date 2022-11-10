@@ -53,6 +53,29 @@ c.items = { -- table of items
         Image = "Skateboard.png"
     },
 
+    ["Phone"] = {
+        Name = "iFruit Phone",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 110,
+        Value = 200,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Doesn't have snake.. FeelsBadMan."
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = false,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Phone.png"
+    },
+
     ["Pickaxe"] = {
         Name = "Pickaxe",
         Degrade = false,

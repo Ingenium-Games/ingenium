@@ -98,6 +98,8 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, he
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
     ]]--
+    local xPlayer = c.data.GetPlayer(src)
+    xPlayer.AddItem({"Phone",1,100})
 end)
 
 RegisterNetEvent("Server:Character:Spawn", function(req)
