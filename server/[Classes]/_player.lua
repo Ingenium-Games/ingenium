@@ -559,28 +559,33 @@ function c.class.Player(source, character_id)
                 self.Inventory[position].Quantity = 1
                 self.RemoveItem("Change", position)
                 -- If you got chash, break it into change.
-            elseif (amount - num) < 0 and (self.GetItemQuantity("Cash") >= 1) then
+            elseif (amount - num) < 0 then
                 local _a, position = self.GetItemQuantity("Cash")
                 if (_a - num) > 0 then
-                self.Inventory[position].Quantity = _a - c.math.Decimals(1, 0)
-                self.State.Cash = self.Inventory[position].Quantity
-                self.AddItem({"Change", 100, 100})
+                    self.Inventory[position].Quantity = _a - c.math.Decimals(1, 0)
+                    self.State.Cash = self.Inventory[position].Quantity
+                    self.AddItem({"Change", 100, 100})
+                    --
+                    local amount, position = self.GetItemQuantity("Change")
+                    local mod = math.fmod(num, 1)
+                    local num = mod * 100 -- each decimal is a cent
+                    self.Inventory[position].Quantity = amount - num
                 elseif (_a - num) == 0 then
-                self.Inventory[position].Quantity = 1
-                self.RemoveItem("Cash", position)
-                self.AddItem({"Change", 100, 100})
-                --
-                local amount, position = self.GetItemQuantity("Change")
-                local mod = math.fmod(num, 1)
-                local num = mod * 100 -- each decimal is a cent
-                self.Inventory[position].Quantity = amount - num
+                    self.Inventory[position].Quantity = 1
+                    self.RemoveItem("Cash", position)
+                    self.AddItem({"Change", 100, 100})
+                    --
+                    local amount, position = self.GetItemQuantity("Change")
+                    local mod = math.fmod(num, 1)
+                    local num = mod * 100 -- each decimal is a cent
+                    self.Inventory[position].Quantity = amount - num
                 else
-                self.Kick(
+                    self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                c.func.Debug_1(
+                    c.func.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
-                CancelEvent()
+                    CancelEvent()
                 end
             else
             self.Kick(
