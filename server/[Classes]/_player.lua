@@ -491,6 +491,9 @@ function c.class.Player(source, character_id)
         -- DollarBillz Yall
         local amount, position = self.GetItemQuantity("Cash")
         local num = c.check.Number(v)
+        local mod = math.fmod(num, 1) * 100 -- each decimal is a cent
+        
+        -- Dallar Billz
         if amount > 0 then
             self.Inventory[position].Quantity = amount + c.math.Decimals(num, 0)
             self.State.Cash = self.Inventory[position].Quantity
@@ -498,14 +501,15 @@ function c.class.Player(source, character_id)
             self.AddItem({"Cash", num, 100, false, false})
             self.State.Cash = num
         end
+
         -- Coins
-        local amount, position = self.GetItemQuantity("Change")
-        local mod = math.fmod(num, 1)
-        local num = mod * 100 -- each decimal is a cent
-        if amount > 0 then
-            self.Inventory[position].Quantity = amount + num
-        else
-            self.AddItem({"Change", num, 100, false, false})
+        if mod > 0 then
+            local a, p = self.GetItemQuantity("Change")
+            if a > 0 then
+                self.Inventory[p].Quantity = a + mod
+            else
+                self.AddItem({"Change", mod, 100, false, false})
+            end
         end
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         --[[
@@ -532,6 +536,8 @@ function c.class.Player(source, character_id)
     self.RemoveCash = function(v)
         local amount, position = self.GetItemQuantity("Cash")
         local num = c.check.Number(v)
+        local mod = math.fmod(num, 1) * 100 -- each decimal is a cent
+        -- Dollarr Billz
         if amount > 0 then
             if (amount - num) > 0 then
                 self.Inventory[position].Quantity = amount - c.math.Decimals(num, 0)
@@ -549,53 +555,30 @@ function c.class.Player(source, character_id)
             end
         end
         -- Coins
-        local amount, position = self.GetItemQuantity("Change")
-        local mod = math.fmod(num, 1)
-        local num = mod * 100 -- each decimal is a cent
-        if amount > 0 then
-            if (amount - num) > 0 then
-                self.Inventory[position].Quantity = amount - num
-            elseif (amount - num) == 0 then
-                self.Inventory[position].Quantity = 1
-                self.RemoveItem("Change", position)
-                -- If you got chash, break it into change.
-            elseif (amount - num) < 0 then
-                local _a, position = self.GetItemQuantity("Cash")
-                if (_a - num) > 0 then
-                    self.Inventory[position].Quantity = _a - c.math.Decimals(1, 0)
-                    self.State.Cash = self.Inventory[position].Quantity
-                    self.AddItem({"Change", 100, 100})
-                    --
-                    local amount, position = self.GetItemQuantity("Change")
-                    local mod = math.fmod(num, 1)
-                    local num = mod * 100 -- each decimal is a cent
-                    self.Inventory[position].Quantity = amount - num
-                elseif (_a - num) == 0 then
-                    self.Inventory[position].Quantity = 1
-                    self.RemoveItem("Cash", position)
-                    self.AddItem({"Change", 100, 100})
-                    --
-                    local amount, position = self.GetItemQuantity("Change")
-                    local mod = math.fmod(num, 1)
-                    local num = mod * 100 -- each decimal is a cent
-                    self.Inventory[position].Quantity = amount - num
-                else
-                    self.Kick(
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                    c.func.Debug_1(
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
-                        self.ID)
-                    CancelEvent()
+        if mod > 0 then
+            local a, p = self.GetItemQuantity("Change")
+            if a >= 0 then
+                if (a - mod) > 0 then
+                    self.Inventory[p].Quantity = a - mod
+                elseif (a - mod) == 0 then
+                    self.Inventory[p].Quantity = 1
+                    self.RemoveItem("Change", p)
+                    -- If you got chash, break it into change.
+                elseif (a - mod) <= 0 then
+                    local _a, _p = self.GetItemQuantity("Cash")
+                    if (_a - num) > 0 then
+                        self.Inventory[_p].Quantity = _a - c.math.Decimals(1, 0)
+                        self.State.Cash = self.Inventory[_p].Quantity
+                        self.AddItem({"Change", 100, 100})
+                        --
+                        local __a, __p = self.GetItemQuantity("Change")
+                        self.Inventory[__p].Quantity = __a - mod
+                    else
+                        CancelEvent()
+                    end
                 end
-            else
-            self.Kick(
-                "A bug has occoured to make your change a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-            c.func.Debug_1(
-                "A bug has occoured to make your change a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
-                    self.ID)
-            CancelEvent()
+            end
         end
-    end
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         --[[
         local num = c.check.Number(v)
