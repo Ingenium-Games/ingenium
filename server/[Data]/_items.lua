@@ -590,27 +590,6 @@ c.items = { -- table of items
         Image = "Spring.png"
     },
 
-    ["Rock"] = {
-        Name = "Rock",
-        Degrade = false,
-        DegradeRate = 0.0,
-        Quality = 100,
-        Quantity = 1,
-        Cost = 1,
-        Value = 1,
-        Weight = 0,
-        Weapon = false,
-        Meta = false,
-        Data = false,
-        Craftable = false,
-        Recipe = false,
-        Materials = false,
-        Stackable = true,
-        Consumeable = false,
-        Hotkey = false,
-        Image = "Rock.png"
-    },
-
     ["AnimalParts"] = {
         Name = "Animal Parts",
         Degrade = false,
@@ -1846,7 +1825,9 @@ c.items = { -- table of items
         Value = 1,
         Weight = 0,
         Weapon = false,
-        Meta = false,
+        Meta = {
+            About = "Benjamins."
+        },
         Data = false,
         Craftable = false,
         Recipe = false,
@@ -1855,6 +1836,29 @@ c.items = { -- table of items
         Consumeable = false,
         Hotkey = false,
         Image = "Cash.png"
+    },
+
+    ["Change"] = {
+        Name = "Change",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 0.01,
+        Value = 0.01,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Each cent counts."
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Change.png"
     },
 
     -- ====================================================================================--
