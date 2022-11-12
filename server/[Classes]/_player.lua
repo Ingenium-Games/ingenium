@@ -155,8 +155,6 @@ function c.class.Player(source, character_id)
     self.State.Modifiers = self.Modifiers
     --
     self.OldModifiers = self.Modifiers
-    --
-    self.Tattoos = json.decode(char.Tattoos)
     --    
     self.Appearance = json.decode(char.Appearance)
     --    
@@ -450,9 +448,9 @@ function c.class.Player(source, character_id)
         local a, p = self.GetItemQuantity("Change")
         if amount then
             if a > 0 then
-                return amount + (a / 100)
+                return c.math.Decimals((amount + (a / 100)), 2)
             else
-                return amount
+                return c.math.Decimals(amount, 2)
             end
         else
             return 0
@@ -460,13 +458,38 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetCash = function(v)
+        -- negative check first
+        if v < 0.00 then
+            self.Notify("Nope")
+            c.func.Debug_1(
+                "self.SetCash: for " ..
+                    self.ID)
+            CancelEvent()
+            return
+        end
+
+        -- DollarBillz Yall
         local amount, position = self.GetItemQuantity("Cash")
+        local a, p = self.GetItemQuantity("Change")
+
         local num = c.check.Number(v)
+        local mod = c.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+
         if amount > 0 then
-            self.Inventory[position].Quantity = num
+            self.Inventory[position].Quantity = c.math.Decimals(num, 0)
         else
             self.AddItem({"Cash", num, 100, false, false})
         end
+
+        -- Coins
+        if mod > 0 then
+            if a > 0 then
+                self.Inventory[p].Quantity = a + mod
+            else
+                self.AddItem({"Change", mod, 100, false, false})
+            end
+        end 
+
         self.State.Cash = self.GetCash()
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         --[[
@@ -491,12 +514,22 @@ function c.class.Player(source, character_id)
     end
     --
     self.AddCash = function(v)
+        -- negative check first
+        if v < 0 then
+            self.Notify("Nope")
+            c.func.Debug_1(
+                "self.AddCash: for " ..
+                    self.ID)
+            CancelEvent()
+            return
+        end
+
         -- DollarBillz Yall
         local amount, position = self.GetItemQuantity("Cash")
         local a, p = self.GetItemQuantity("Change")
 
         local num = c.check.Number(v)
-        local mod = math.fmod(num, 1) * 100 -- each decimal is a cent
+        local mod = c.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
 
         -- Dallar Billz
         if amount > 0 then
@@ -504,13 +537,13 @@ function c.class.Player(source, character_id)
         else
             self.AddItem({"Cash", c.math.Decimals(num, 0), 100, false, false})
         end
-        
+
         -- Coins
         if mod > 0 then
             if a > 0 then
                 self.Inventory[p].Quantity = a + mod
             else
-                self.AddItem({"Change", c.math.Decimals(mod, 0), 100, false, false})
+                self.AddItem({"Change", mod, 100, false, false})
             end
         end
 
@@ -538,11 +571,22 @@ function c.class.Player(source, character_id)
     end
     --
     self.RemoveCash = function(v)
+        -- negative check first
+        if self.GetCash() < c.math.Decimals(v, 2) then
+            self.Notify("Nope")
+            c.func.Debug_1(
+                "self.RemoveCash: for " ..
+                    self.ID)
+            CancelEvent()
+            return
+        end
+
         local amount, position = self.GetItemQuantity("Cash")
         local a, p = self.GetItemQuantity("Change")
+
         local num = c.check.Number(v)
-        local mod = math.fmod(num, 1) * 100 -- each decimal is a cent
-        
+        local mod = c.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+
         -- Dollarr Billz
         if amount > 0 then
             if (amount - num) > 0 then
@@ -550,13 +594,6 @@ function c.class.Player(source, character_id)
             elseif (amount - num) == 0 then
                 self.Inventory[position].Quantity = 1
                 self.RemoveItem("Cash", position)
-            else
-                self.Kick(
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                c.func.Debug_1(
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
-                        self.ID)
-                CancelEvent()
             end
         end
 
@@ -564,7 +601,7 @@ function c.class.Player(source, character_id)
         if mod > 0 then
             if a >= 0 then
                 if (a - mod) > 0 then
-                    self.Inventory[p].Quantity = a - c.math.Decimals(mod,0)
+                    self.Inventory[p].Quantity = a - mod
                 elseif (a - mod) == 0 then
                     self.Inventory[p].Quantity = 1
                     self.RemoveItem("Change", p)
@@ -572,22 +609,17 @@ function c.class.Player(source, character_id)
                 elseif (a - mod) <= 0 then
                     local _a, _p = self.GetItemQuantity("Cash")
                     if (_a - num) > 0 then
-                        self.Inventory[_p].Quantity = _a - c.math.Decimals(1, 0)
-                        if self.Inventory[_p].Quantity <= 0 then
-                            self.Inventory[position].Quantity = 1
-                            self.RemoveItem("Cash", position)
-                        end
-                        self.AddItem({"Change", c.math.Decimals(100, 0), 100})
+                        self.Inventory[_p].Quantity = self.Inventory[_p].Quantity - 1
+                        self.AddItem({"Change", 100, 100})
                         --
                         local __a, __p = self.GetItemQuantity("Change")
-                        self.Inventory[__p].Quantity = __a - c.math.Decimals(mod,0)
+                        self.Inventory[__p].Quantity = __a - mod
                     else
-                        self.Notify("You dont have the change...")
+                        self.Notify("You dont have the cash to break...")
                     end
                 end
             end
         end
-
 
         self.State.Cash = self.GetCash()
         TriggerClientEvent("Client:Inventory:Update", self.ID)
@@ -615,7 +647,7 @@ function c.class.Player(source, character_id)
     self.GetBank = function()
         local acc = self.GetAccount("Bank")
         if acc then
-            return acc
+            return c.math.Decimals(acc, 2)
         end
     end
     --
@@ -755,16 +787,6 @@ function c.class.Player(source, character_id)
     ---@param t any
     self.SetAppearance = function(t)
         self.Appearance = t
-    end
-    --- func desc
-    self.GetTattoos = function()
-        return self.Tattoos
-    end
-    --- func desc
-    ---@param t any
-    self.SetTattoos = function(t)
-        local t = c.check.Table(t)
-        self.Tattoos = t
     end
     --- func desc
     self.GetOldCoords = function()
