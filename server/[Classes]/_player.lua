@@ -588,7 +588,7 @@ function c.class.Player(source, character_id)
         local mod = c.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
 
         -- Dollarr Billz
-        if amount > 0 then
+        if num >= 1 and amount >= 1 then
             if (amount - num) > 0 then
                 self.Inventory[position].Quantity = amount - c.math.Decimals(num, 0)
             elseif (amount - num) == 0 then
