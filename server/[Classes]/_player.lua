@@ -448,8 +448,13 @@ function c.class.Player(source, character_id)
     --
     self.GetCash = function()
         local amount, position = self.GetItemQuantity("Cash")
+        local a, p = self.GetItemQuantity("Change")
         if amount then
-            return amount
+            if a > 0 then
+                return amount + (a / 100)
+            else
+                return amount
+            end
         else
             return 0
         end
@@ -537,6 +542,7 @@ function c.class.Player(source, character_id)
         local amount, position = self.GetItemQuantity("Cash")
         local num = c.check.Number(v)
         local mod = math.fmod(num, 1) * 100 -- each decimal is a cent
+
         -- Dollarr Billz
         if amount > 0 then
             if (amount - num) > 0 then
@@ -554,6 +560,7 @@ function c.class.Player(source, character_id)
                 CancelEvent()
             end
         end
+
         -- Coins
         if mod > 0 then
             local a, p = self.GetItemQuantity("Change")
@@ -569,12 +576,16 @@ function c.class.Player(source, character_id)
                     if (_a - num) > 0 then
                         self.Inventory[_p].Quantity = _a - c.math.Decimals(1, 0)
                         self.State.Cash = self.Inventory[_p].Quantity
+                        if self.Inventory[_p].Quantity <= 0 then       
+                            self.Inventory[position].Quantity = 1
+                            self.RemoveItem("Cash", position)
+                        end
                         self.AddItem({"Change", 100, 100})
                         --
                         local __a, __p = self.GetItemQuantity("Change")
                         self.Inventory[__p].Quantity = __a - mod
                     else
-                        CancelEvent()
+                        self.Notify("You dont have the change...")
                     end
                 end
             end
