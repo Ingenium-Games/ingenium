@@ -498,20 +498,20 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v)
         local mod = math.fmod(num, 1) * 100 -- each decimal is a cent
 
+        -- Dallar Billz
+        if amount > 0 then
+            self.Inventory[position].Quantity = amount + c.math.Decimals(num, 0)
+        else
+            self.AddItem({"Cash", c.math.Decimals(num, 0), 100, false, false})
+        end
+        
         -- Coins
         if mod > 0 then
             if a > 0 then
                 self.Inventory[p].Quantity = a + mod
             else
-                self.AddItem({"Change", mod, 100, false, false})
+                self.AddItem({"Change", c.math.Decimals(mod, 0), 100, false, false})
             end
-        end
-
-        -- Dallar Billz
-        if amount > 0 then
-            self.Inventory[position].Quantity = amount + c.math.Decimals(num, 0)
-        else
-            self.AddItem({"Cash", self.Inventory[position].Quantity, 100, false, false})
         end
 
         self.State.Cash = self.GetCash()
@@ -542,35 +542,7 @@ function c.class.Player(source, character_id)
         local a, p = self.GetItemQuantity("Change")
         local num = c.check.Number(v)
         local mod = math.fmod(num, 1) * 100 -- each decimal is a cent
-
-        -- Coins
-        if mod > 0 then
-            if a >= 0 then
-                if (a - mod) > 0 then
-                    self.Inventory[p].Quantity = a - mod
-                elseif (a - mod) == 0 then
-                    self.Inventory[p].Quantity = 1
-                    self.RemoveItem("Change", p)
-                    -- If you got chash, break it into change.
-                elseif (a - mod) <= 0 then
-                    local _a, _p = self.GetItemQuantity("Cash")
-                    if (_a - num) > 0 then
-                        self.Inventory[_p].Quantity = _a - c.math.Decimals(1, 0)
-                        if self.Inventory[_p].Quantity <= 0 then
-                            self.Inventory[position].Quantity = 1
-                            self.RemoveItem("Cash", position)
-                        end
-                        self.AddItem({"Change", 100, 100})
-                        --
-                        local __a, __p = self.GetItemQuantity("Change")
-                        self.Inventory[__p].Quantity = __a - mod
-                    else
-                        self.Notify("You dont have the change...")
-                    end
-                end
-            end
-        end
-
+        
         -- Dollarr Billz
         if amount > 0 then
             if (amount - num) > 0 then
@@ -587,6 +559,35 @@ function c.class.Player(source, character_id)
                 CancelEvent()
             end
         end
+
+        -- Coins
+        if mod > 0 then
+            if a >= 0 then
+                if (a - mod) > 0 then
+                    self.Inventory[p].Quantity = a - c.math.Decimals(mod,0)
+                elseif (a - mod) == 0 then
+                    self.Inventory[p].Quantity = 1
+                    self.RemoveItem("Change", p)
+                    -- If you got chash, break it into change.
+                elseif (a - mod) <= 0 then
+                    local _a, _p = self.GetItemQuantity("Cash")
+                    if (_a - num) > 0 then
+                        self.Inventory[_p].Quantity = _a - c.math.Decimals(1, 0)
+                        if self.Inventory[_p].Quantity <= 0 then
+                            self.Inventory[position].Quantity = 1
+                            self.RemoveItem("Cash", position)
+                        end
+                        self.AddItem({"Change", c.math.Decimals(100, 0), 100})
+                        --
+                        local __a, __p = self.GetItemQuantity("Change")
+                        self.Inventory[__p].Quantity = __a - c.math.Decimals(mod,0)
+                    else
+                        self.Notify("You dont have the change...")
+                    end
+                end
+            end
+        end
+
 
         self.State.Cash = self.GetCash()
         TriggerClientEvent("Client:Inventory:Update", self.ID)
