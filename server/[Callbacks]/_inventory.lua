@@ -181,37 +181,30 @@ local OrganizeInventories = RegisterServerCallback({
         local src = source
         local entity = NetworkGetEntityFromNetworkId(net)
         local type = GetEntityType(entity)
-        -- Is it valid on the server?
-        print(inv1, inv2)
-        print(c.table.Dump(inv1), c.table.Dump(inv2))
-        -- Chcek number total prior to unpack.
+        --
         local xPlayer = c.data.GetPlayer(src)
+        xPlayer.UnpackInventory(inv1)
+        --
         if type == 3 then
-            --
+            -- Object
             local xObject = c.data.GetObject(net)
             xObject.UnpackInventory(inv2)
-            --
-            -- Vehicle
         elseif type == 2 then
-            --
+            -- Vehicle
             local xVehicle = c.data.GetVehicle(net)
             xVehicle.UnpackInventory(inv2)
-            --
-            -- Ped
         elseif type == 1 then
+            -- Ped
             if IsPedAPlayer(entity) then
-                --
                 local xTarget = c.data.GetPlayer(net)
                 xTarget.UnpackInventory(inv2)
-                --
             else
-                --
                 local xNpc = c.data.GetNpc(net)
                 xNpc.UnpackInventory(inv2)
-                --
             end
         end
-        xPlayer.UnpackInventory(inv1)
+        --
+        return true
     end
 })
 --

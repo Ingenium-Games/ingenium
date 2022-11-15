@@ -126,7 +126,7 @@ function c.sql.save.Vehicle(data, cb)
     if data then
         if data.Owner ~= false then
             if data.Save == true then
-                if DoesEntityExist(data.Entity) then
+
                     local Fuel = data.GetFuel()
                     -- Booleans
                     local Parked = data.GetParked()
@@ -135,9 +135,11 @@ function c.sql.save.Vehicle(data, cb)
                     -- Tables require JSON Encoding.
                     local Keys = json.encode(data.GetKeys())
                     local Coords = json.encode(data.GetCoords())
+                    local Inventory = json.encode(data.CompressInventory())
+                    --
                     local Condition = json.encode(data.GetCondition())
                     local Modifications = json.encode(data.GetModifications())
-                    local Inventory = json.encode(data.CompressInventory())
+                    --
                     local Updated = c.func.Timestamp()
                     -- The Key
                     local Plate = data.GetPlate()
@@ -165,7 +167,6 @@ function c.sql.save.Vehicle(data, cb)
                         cb()
                     end
                 end
-            end
         end
     end
 end
@@ -188,16 +189,18 @@ function c.sql.save.Vehicles(cb)
                         -- Tables require JSON Encoding.
                         local Keys = json.encode(data.GetKeys())
                         local Coords = json.encode(data.GetCoords())
+                        local Inventory = json.encode(data.CompressInventory())
+                        --
                         local Condition = json.encode(data.GetCondition())
                         local Modifications = json.encode(data.GetModifications())
-                        local Inventory = json.encode(data.CompressInventory())
+                        --
                         local Updated = c.func.Timestamp()
                         -- The Key
                         local Plate = data.GetPlate()
                         --
                         MySQL.Async.insert(VehicleSaveData, {
                             -- Other Variables.
-                            
+                
                             -- Booleans
                             ["@Impound"] = Impound,
                             ["@Parked"] = Parked,
@@ -215,6 +218,8 @@ function c.sql.save.Vehicles(cb)
                         }, function(r)
                             data.Saved()
                         end)
+                    else
+                        c.data.RemoveVehicle(k)
                     end
                 end
             end

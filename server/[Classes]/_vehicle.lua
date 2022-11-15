@@ -206,27 +206,12 @@ function c.class.Vehicle(net)
     end
     --- func desc
     self.GetCondition = function()
-        if self.GetSource() ~= -1 then
-            self.Condition = TriggerClientCallback({
-                source = self.GetSource(),
-                eventName = "GetVehicleCondition",
-                args = {self.Net}
-            })
-        end
         return self.Condition
     end
     --- func desc
     ---@param conditions any
     self.SetCondition = function(conditions)
         self.Condition = conditions
-        -- Force Set Modifications
-        if self.GetSource() ~= -1 then
-            TriggerClientCallback({
-                source = self.GetSource(),
-                eventName = "SetVehicleCondition",
-                args = {self.Net, self.Condition}
-            })
-        end
         self.State.Condition = self.Condition
         self.SetUpdated()
     end
@@ -251,13 +236,6 @@ function c.class.Vehicle(net)
     end
     --- func desc
     self.GetModifications = function()
-        if self.GetSource() ~= -1 then
-            self.Modifications = TriggerClientCallback({
-                source = self.GetSource(),
-                eventName = "GetVehicleModifications",
-                args = {self.Net}
-            })
-        end
         return self.Modifications
     end
     --- func desc
@@ -724,13 +702,6 @@ function c.class.OwnedVehicle(net, data)
     end
     --- func desc
     self.GetCondition = function()
-        if self.GetSource() ~= -1 then
-            self.Condition = TriggerClientCallback({
-                source = self.GetSource(),
-                eventName = "GetVehicleCondition",
-                args = {self.Net}
-            })
-        end
         return self.Condition
     end
     --- func desc
@@ -762,13 +733,6 @@ function c.class.OwnedVehicle(net, data)
     end
     --- func desc
     self.GetModifications = function()
-        if self.GetSource() ~= -1 then
-            self.Modifications = TriggerClientCallback({
-                source = self.GetSource(),
-                eventName = "GetVehicleModifications",
-                args = {self.Net}
-            })
-        end
         return self.Modifications
     end
     --- func desc
@@ -878,8 +842,7 @@ function c.class.OwnedVehicle(net, data)
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
-        local inv = inv or {}
-        -- print(c.table.Dump(inv))
+        local inv = inv
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
@@ -907,6 +870,8 @@ function c.class.OwnedVehicle(net, data)
                 table.remove(self.Inventory, i)
             end
         end
+        self.State.Inventory = self.Inventory
+        print(c.table.Dump(self.Inventory))
     end
     --- func desc
     self.GetInventory = function()

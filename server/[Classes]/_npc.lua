@@ -176,6 +176,7 @@ function c.class.Npc(net)
                 table.remove(self.Inventory, i)
             end
         end
+        self.State.Inventory = self.Inventory
     end
     --- func desc
     self.GetInventory = function()

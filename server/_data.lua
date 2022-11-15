@@ -189,7 +189,7 @@ end
 function c.data.FindVehicle(net)
     for k, v in pairs(c.vdex) do
         if v then
-            if k == net and type(v) == "table" then
+            if v.Net == net then
                 return true, v, k
             end
         end
@@ -240,9 +240,8 @@ end
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
 function c.data.GetVehicle(arg)
-    local found, data = c.data.FindVehicle(arg)
-    if found then
-        return data
+    if c.vdex[tonumber(arg)] ~= false then
+        return c.vdex[tonumber(arg)]
     else
         c.func.Debug_1("No Vehicle Found.")
         return false

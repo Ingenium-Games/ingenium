@@ -17,4 +17,13 @@ local EnsureVehicle = RegisterServerCallback({
     end
 })
 
+local SetVehicleConMods = RegisterServerCallback({
+    eventName = "SetVehicleConMods",
+    eventCallback = function(source, net, con, mods)
+        local xVehicle = c.data.GetVehicle(net)
+        xVehicle.SetCondition(con)
+        xVehicle.SetModifications(mods)
+        return true
+    end
+})
 -- ====================================================================================--
