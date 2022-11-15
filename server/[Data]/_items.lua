@@ -54,7 +54,7 @@ c.items = { -- table of items
     },
 
     ["Phone"] = {
-        Name = "iFruit Phone",
+        Name = "iFruit X",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
@@ -72,7 +72,7 @@ c.items = { -- table of items
         Materials = false,
         Stackable = false,
         Consumeable = false,
-        Hotkey = false,
+        Hotkey = true,
         Image = "Phone.png"
     },
 

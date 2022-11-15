@@ -114,7 +114,7 @@ end
 
 local VehicleSaveData = -1
 MySQL.Async.store(
-    "UPDATE `vehicles` SET `Coords` = @Coords, `Keys` = @Keys, `Condition` = @Condition, `Modifications` = @Modifications, `Garage` = @Garage, `Parked` = @Parked, `Impound` = @Impound, `Wanted` = @Wanted  WHERE `Plate` = @Plate", -- AND `Parked` = TRUE;
+    "UPDATE `vehicles` SET `Coords` = @Coords, `Keys` = @Keys, `Condition` = @Condition, `Modifications` = @Modifications, `Parked` = @Parked, `Impound` = @Impound, `Wanted` = @Wanted  WHERE `Plate` = @Plate", -- AND `Parked` = TRUE;
     function(id)
         VehicleSaveData = id
     end)
@@ -124,11 +124,10 @@ MySQL.Async.store(
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.Vehicle(data, cb)
     if data then
-        if data.GetOwner() ~= false then
-            if data.ShouldSave() == true then
+        if data.Owner ~= false then
+            if data.Save == true then
                 if DoesEntityExist(data.Entity) then
                     local Fuel = data.GetFuel()
-                    local Garage = data.GetGarage()
                     -- Booleans
                     local Parked = data.GetParked()
                     local Impound = data.GetImpound()
@@ -145,7 +144,6 @@ function c.sql.save.Vehicle(data, cb)
                     --
                     MySQL.Async.insert(VehicleSaveData, {
                         -- Other Variables.
-                        ["@Garage"] = Garage,
                         -- Booleans
                         ["@Impound"] = Impound,
                         ["@Parked"] = Parked,
@@ -178,12 +176,11 @@ function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for k, data in pairs(xVehicles) do
         if data then
-            if data.GetOwner() ~= false then
-                if data.ShouldSave() == true then
+            if data.Owner ~= false then
+                if data.Save == true then
                     if DoesEntityExist(data.Entity) then
                         -- Other Variables.
                         local Fuel = data.GetFuel()
-                        local Garage = data.GetGarage()
                         -- Booleans
                         local Parked = data.GetParked()
                         local Impound = data.GetImpound()
@@ -200,7 +197,7 @@ function c.sql.save.Vehicles(cb)
                         --
                         MySQL.Async.insert(VehicleSaveData, {
                             -- Other Variables.
-                            ["@Garage"] = Garage,
+                            
                             -- Booleans
                             ["@Impound"] = Impound,
                             ["@Parked"] = Parked,

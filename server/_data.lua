@@ -223,10 +223,10 @@ end
 ---@param net any
 ---@param cb any
 function c.data.AddVehicle(net, cb, ...)
-    local aa, bb, cc = c.data.FindVehicle(net)
-    if (not aa) then
+    -- local aa, bb, cc = c.data.FindVehicle(net)
+    -- if (not aa) then
         c.vdex[tonumber(net)] = cb(...)
-    end
+    -- end
 end
 
 --- func desc

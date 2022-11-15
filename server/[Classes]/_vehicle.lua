@@ -99,7 +99,7 @@ function c.class.Vehicle(net)
     --- func desc
     self.SetUpdated = function()
         self.Updated = c.func.Timestamp()
-        self.Update = true
+        self.Save = true
     end
     --- func desc
     self.GetModel = function()
@@ -121,6 +121,7 @@ function c.class.Vehicle(net)
     self.SetParked = function(b)
         local bool = c.check.Boolean(b)
         self.Parked = bool
+        self.SetUpdated()
     end
     --- func desc
     self.GetCoords = function()
@@ -166,6 +167,7 @@ function c.class.Vehicle(net)
     self.SetKeys = function(t)
         self.Keys = t
         self.State.Keys = self.Keys
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -177,6 +179,7 @@ function c.class.Vehicle(net)
         else
             c.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -187,7 +190,8 @@ function c.class.Vehicle(net)
             self.State.Keys = self.Keys
         else
             c.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
-        end
+        end        
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -202,21 +206,29 @@ function c.class.Vehicle(net)
     end
     --- func desc
     self.GetCondition = function()
+        if self.GetSource() ~= -1 then
+            self.Condition = TriggerClientCallback({
+                source = self.GetSource(),
+                eventName = "GetVehicleCondition",
+                args = {self.Net}
+            })
+        end
         return self.Condition
     end
     --- func desc
     ---@param conditions any
     self.SetCondition = function(conditions)
-        self.Condition = conditions or TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "GetVehicleCondition",
-            args = {self.Net}
-        })
-        TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "SetVehicleCondition",
-            args = {self.Net}
-        })
+        self.Condition = conditions
+        -- Force Set Modifications
+        if self.GetSource() ~= -1 then
+            TriggerClientCallback({
+                source = self.GetSource(),
+                eventName = "SetVehicleCondition",
+                args = {self.Net, self.Condition}
+            })
+        end
+        self.State.Condition = self.Condition
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -224,6 +236,7 @@ function c.class.Vehicle(net)
     self.AlterCondition = function(id, v)
         if self.CheckConds(id) then
             self.Condition[id] = v
+            self.SetUpdated()
         end
     end
     --- func desc
@@ -238,21 +251,21 @@ function c.class.Vehicle(net)
     end
     --- func desc
     self.GetModifications = function()
+        if self.GetSource() ~= -1 then
+            self.Modifications = TriggerClientCallback({
+                source = self.GetSource(),
+                eventName = "GetVehicleModifications",
+                args = {self.Net}
+            })
+        end
         return self.Modifications
     end
     --- func desc
     ---@param modifications any
     self.SetModifications = function(modifications)
-        self.Modifications = modifications or TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "GetVehicleModifications",
-            args = {self.Net}
-        })
-        TriggerClientCallback({
-            source = self.GetSource(),
-            eventName = "SetVehicleModifications",
-            args = {self.Net}
-        })
+        self.Modifications = modifications
+        self.State.Modifications = self.Modifications
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -260,6 +273,7 @@ function c.class.Vehicle(net)
     self.AlterModification = function(id, v)
         if self.CheckMods(id) then
             self.Modifications[id] = v
+            self.SetUpdated()
         end
     end
     --- func desc
@@ -282,6 +296,7 @@ function c.class.Vehicle(net)
         local num = c.check.Number(v, 0, 100)
         self.Fuel = num
         self.State.Fuel = num
+        self.SetUpdated()
     end
     --- func desc
     ---@param v any
@@ -295,6 +310,7 @@ function c.class.Vehicle(net)
             self.Fuel = 100
             self.State.Fuel = 100
         end
+        self.SetUpdated()
     end
     --- func desc
     ---@param v any
@@ -308,6 +324,7 @@ function c.class.Vehicle(net)
             self.Fuel = 0
             self.State.Fuel = 0
         end
+        self.SetUpdated()
     end
     --- func desc
     self.GetGarage = function()
@@ -317,6 +334,7 @@ function c.class.Vehicle(net)
     self.SetGarage = function(v)
         local str = c.check.String(v)
         self.Garage = str
+        self.SetUpdated()
     end
     --- func desc
     self.GetOwner = function()
@@ -706,6 +724,13 @@ function c.class.OwnedVehicle(net, data)
     end
     --- func desc
     self.GetCondition = function()
+        if self.GetSource() ~= -1 then
+            self.Condition = TriggerClientCallback({
+                source = self.GetSource(),
+                eventName = "GetVehicleCondition",
+                args = {self.Net}
+            })
+        end
         return self.Condition
     end
     --- func desc
@@ -713,14 +738,6 @@ function c.class.OwnedVehicle(net, data)
     self.SetCondition = function(conditions)
         -- Set Condition
         self.Condition = conditions
-        -- Force Set Modifications
-        if self.GetSource() ~= -1 then
-            TriggerClientCallback({
-                source = self.GetSource(),
-                eventName = "SetVehicleCondition",
-                args = {self.Net, self.Condition}
-            })
-        end
         self.State.Condition = self.Condition
         self.SetUpdated()
     end
@@ -745,6 +762,13 @@ function c.class.OwnedVehicle(net, data)
     end
     --- func desc
     self.GetModifications = function()
+        if self.GetSource() ~= -1 then
+            self.Modifications = TriggerClientCallback({
+                source = self.GetSource(),
+                eventName = "GetVehicleModifications",
+                args = {self.Net}
+            })
+        end
         return self.Modifications
     end
     --- func desc
@@ -752,14 +776,6 @@ function c.class.OwnedVehicle(net, data)
     self.SetModifications = function(modifications)
         -- Get Modifications
         self.Modifications = modifications
-        -- Force Set Modifications
-        if self.GetSource() ~= -1 then
-            TriggerClientCallback({
-                source = self.GetSource(),
-                eventName = "SetVehicleModifications",
-                args = {self.Net, self.Modifications}
-            })
-        end
         self.State.Modifications = self.Modifications
         self.SetUpdated()
     end
@@ -1025,8 +1041,6 @@ function c.class.OwnedVehicle(net, data)
     self.UnpackInventory(self.Inventory)
     self.AddKey(self.Owner)
     self.SetParked(false)
-    self.SetCondition(self.Condition)
-    self.SetModifications(self.Modifications)
     self.SetUpdated()
     self.HasSpawned()
     -- ====================================================================================--

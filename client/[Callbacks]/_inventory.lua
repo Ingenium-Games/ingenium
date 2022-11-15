@@ -114,9 +114,16 @@ local Consumeable = RegisterClientCallback({
 })
 
 
-local Consumeable = RegisterClientCallback({
+local Skateboard = RegisterClientCallback({
     eventName = "Client:Item:Skateboard",
     eventCallback = function()
         ExecuteCommand("skate")
+    end
+})
+
+local Phone = RegisterClientCallback({
+    eventName = "Client:Item:Phone",
+    eventCallback = function()
+        exports["ig.phone"]:openPhone()
     end
 })
