@@ -41,12 +41,9 @@ AddEventHandler("onResourceStart", function(resourceName)
 
     -- TESTING
     c.persistance.ObjectThread()
-
-    -- c.persistance.VehicleThread()
-
-    c.persistance.TableSync()
-
+    
 end)
+
 -- ====================================================================================--
 RegisterNetEvent("Server:PlayerConnecting")
 AddEventHandler("Server:PlayerConnecting", function()

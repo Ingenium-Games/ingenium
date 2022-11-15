@@ -62,7 +62,6 @@ function c.data.Initilize()
         c.sql.veh.Reset(cb)
         --
         c.sql.obj.GetObjects()
-        c.sql.veh.GetVehicles()
         --
         loaded = true
     end)

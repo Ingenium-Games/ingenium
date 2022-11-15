@@ -253,8 +253,13 @@ function c.func.CreateVehicle(name, x, y, z, h, data)
         hash = GetHashKey(name)
     end
     local entity = CreateVehicle(hash, x, y, z, h, true, false)
-    while (not DoesEntityExist(entity)) or (NetworkGetNetworkIdFromEntity(entity) == 0) do
-        Wait(250)
+    local timer = GetGameTimer()
+	while (not DoesEntityExist(entity)) do
+        Citizen.Wait(0)
+        if ((timer + 3000) < GetGameTimer()) then
+            c.func.Debug_2("Timout Reached on creating vehicle")
+            return false, false
+        end
     end
     local net = NetworkGetNetworkIdFromEntity(entity)
     if data then
@@ -279,8 +284,13 @@ function c.func.CreatePed(name, x, y, z, h)
         hash = GetHashKey(name)
     end
     local entity = CreatePed(0, hash, x, y, z, h, true, false)
-    while (not DoesEntityExist(entity)) or (NetworkGetNetworkIdFromEntity(entity) == 0) do
-        Wait(250)
+	local timer = GetGameTimer()
+	while (not DoesEntityExist(entity)) do
+        Citizen.Wait(0)
+        if ((timer + 3000) < GetGameTimer()) then
+            c.func.Debug_2("Timout Reached on creating ped")
+            return false, false
+        end
     end
     local net = NetworkGetNetworkIdFromEntity(entity)
     c.data.AddPed(net, c.class.Npc, net)
@@ -304,8 +314,13 @@ function c.func.CreateObject(model, x, y, z, isdoor, data)
         isdoor = false
     end
     local entity = CreateObject(hash, x, y, z, true, isdoor)
-    while (not DoesEntityExist(entity)) or (NetworkGetNetworkIdFromEntity(entity) == 0) do
-        Wait(250)
+    local timer = GetGameTimer()
+	while (not DoesEntityExist(entity)) do
+        Citizen.Wait(0)
+        if ((timer + 3000) < GetGameTimer()) then
+            c.func.Debug_2("Timout Reached on creating object")
+            return false, false
+        end
     end
     local net = NetworkGetNetworkIdFromEntity(entity)
     if data then

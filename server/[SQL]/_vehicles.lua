@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 if not c.sql then c.sql = {} end
 --
 c.sql.veh = {}
@@ -18,10 +17,7 @@ function c.sql.veh.GetVehicles(cb)
     local result = nil
     MySQL.Async.fetchAll("SELECT * FROM `vehicles`", {
     }, function(data)
-        for i=1, #data, 1 do
-            local i = data[i]
-            c.vehicles[i.ID] = i
-        end
+        result = data
         IsBusy = false
     end)
     --
@@ -32,6 +28,7 @@ function c.sql.veh.GetVehicles(cb)
     if cb then
         cb()
     end
+    return result
 end
 --
 
@@ -66,10 +63,10 @@ function c.sql.veh.GetAll(Character_ID, cb)
     return result
 end
 
-function c.sql.veh.GetByPlate(Plate, cb)
+function c.sql.veh.GetID(Plate, cb)
     local IsBusy = true
     local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM vehicles WHERE `Plate` = @Plate LIMIT 1;", {
+    MySQL.Async.fetchScalar("SELECT `ID` FROM vehicles WHERE `Plate` = @Plate LIMIT 1;", {
         ["@Plate"] = Plate
     }, function(data)
         result = data
@@ -84,15 +81,33 @@ function c.sql.veh.GetByPlate(Plate, cb)
     return result
 end
 
+function c.sql.veh.GetByPlate(Plate, cb)
+    local IsBusy = true
+    local result = nil
+    MySQL.Async.fetchAll("SELECT * FROM vehicles WHERE `Plate` = @Plate LIMIT 1;", {
+        ["@Plate"] = Plate
+    }, function(data)
+        result = data[1]
+        IsBusy = false
+    end)
+    while IsBusy do
+        Citizen.Wait(0)
+    end
+    if cb then
+        cb()
+    end
+    return result
+end
+
 function c.sql.veh.Add(data, cb)
     local IsBusy = true
     local Data = data
-    MySQL.Async.execute("INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`, `Condition` , `Modifications`, `Updated`) VALUES (@Character_ID, @Model, @Plate, @Condition, @Modifications, @Updated);",{
+    MySQL.Async.execute("INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`, `Condition`, `Modifications`, `Updated`) VALUES (@Character_ID, @Model, @Plate, @Condition, @Modifications, @Updated);",{
         ["@Character_ID"] = Data.Character_ID,
         ["@Model"] = Data.Model,
         ["@Plate"] = Data.Plate,
-        ["@Condition"] = Data.Condition,
-        ["@Modifications"] = Data.Modifications,
+        ["@Condition"] = json.encode(Data.Condition),
+        ["@Modifications"] = json.encode(Data.Modifications),
         ["@Updated"] = c.func.Timestamp(),
     }, function(r)
         IsBusy = false
@@ -104,6 +119,7 @@ function c.sql.veh.Add(data, cb)
     if cb then
         cb()
     end
+    -- Regen the table.
 end
 
 function c.sql.veh.ChangeOwner(data, cb)

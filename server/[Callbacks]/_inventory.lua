@@ -182,40 +182,36 @@ local OrganizeInventories = RegisterServerCallback({
         local entity = NetworkGetEntityFromNetworkId(net)
         local type = GetEntityType(entity)
         -- Is it valid on the server?
-
-            -- Chcek number total prior to unpack.
-            local xPlayer = c.data.GetPlayer(src)
-            if type == 3 then
+        print(inv1, inv2)
+        print(c.table.Dump(inv1), c.table.Dump(inv2))
+        -- Chcek number total prior to unpack.
+        local xPlayer = c.data.GetPlayer(src)
+        if type == 3 then
+            --
+            local xObject = c.data.GetObject(net)
+            xObject.UnpackInventory(inv2)
+            --
+            -- Vehicle
+        elseif type == 2 then
+            --
+            local xVehicle = c.data.GetVehicle(net)
+            xVehicle.UnpackInventory(inv2)
+            --
+            -- Ped
+        elseif type == 1 then
+            if IsPedAPlayer(entity) then
                 --
-                local xObject = c.data.GetObject(net)
-                xPlayer.UnpackInventory(inv1)
-                xObject.UnpackInventory(inv2)
+                local xTarget = c.data.GetPlayer(net)
+                xTarget.UnpackInventory(inv2)
                 --
-                -- Vehicle
-            elseif type == 2 then
+            else
                 --
-                local xVehicle = c.data.GetVehicle(net)
-                xPlayer.UnpackInventory(inv1)
-                xVehicle.UnpackInventory(inv2)
-
+                local xNpc = c.data.GetNpc(net)
+                xNpc.UnpackInventory(inv2)
                 --
-                -- Ped
-            elseif type == 1 then
-                if IsPedAPlayer(entity) then
-                    --
-                    local xTarget = c.data.GetPlayer(net)
-                    xPlayer.UnpackInventory(inv1)
-                    xTarget.UnpackInventory(inv2)
-                    --
-                else
-                    --
-                    local xNpc = c.data.GetNpc(net)
-                    xPlayer.UnpackInventory(inv1)
-                    xNpc.UnpackInventory(inv2)
-                    --
-                end
             end
-
+        end
+        xPlayer.UnpackInventory(inv1)
     end
 })
 --

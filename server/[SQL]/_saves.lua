@@ -139,6 +139,7 @@ function c.sql.save.Vehicle(data, cb)
                     local Condition = json.encode(data.GetCondition())
                     local Modifications = json.encode(data.GetModifications())
                     local Inventory = json.encode(data.CompressInventory())
+                    local Updated = c.func.Timestamp()
                     -- The Key
                     local Plate = data.GetPlate()
                     --
@@ -155,6 +156,8 @@ function c.sql.save.Vehicle(data, cb)
                         ["@Condition"] = Condition,
                         ["@Modifications"] = Modifications,
                         ["@Inventory"] = Inventory,
+                        ["@Updated"] = Updated,
+
                         -- Where conditions
                         ["@Plate"] = Plate
                     }, function(r)
@@ -175,42 +178,47 @@ function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for k, data in pairs(xVehicles) do
         if data then
-            if data.ShouldSave() == true then
-                if DoesEntityExist(data.Entity) then
-                    -- Other Variables.
-                    local Fuel = data.GetFuel()
-                    local Garage = data.GetGarage()
-                    -- Booleans
-                    local Parked = data.GetParked()
-                    local Impound = data.GetImpound()
-                    local Wanted = data.GetWanted()
-                    -- Tables require JSON Encoding.
-                    local Keys = json.encode(data.GetKeys())
-                    local Coords = json.encode(data.GetCoords())
-                    local Condition = json.encode(data.GetCondition())
-                    local Modifications = json.encode(data.GetModifications())
-                    local Inventory = json.encode(data.CompressInventory())
-                    -- The Key
-                    local Plate = data.GetPlate()
-                    --
-                    MySQL.Async.insert(VehicleSaveData, {
+            if data.GetOwner() ~= false then
+                if data.ShouldSave() == true then
+                    if DoesEntityExist(data.Entity) then
                         -- Other Variables.
-                        ["@Garage"] = Garage,
+                        local Fuel = data.GetFuel()
+                        local Garage = data.GetGarage()
                         -- Booleans
-                        ["@Impound"] = Impound,
-                        ["@Parked"] = Parked,
-                        ["@Wanted"] = Wanted,
-                        -- Table Informaiton.
-                        ["@Keys"] = Keys,
-                        ["@Coords"] = Coords,
-                        ["@Condition"] = Condition,
-                        ["@Modifications"] = Modifications,
-                        ["@Inventory"] = Inventory,
-                        -- Where Conditions
-                        ["@Plate"] = Plate
-                    }, function(r)
-                        data.Saved()
-                    end)
+                        local Parked = data.GetParked()
+                        local Impound = data.GetImpound()
+                        local Wanted = data.GetWanted()
+                        -- Tables require JSON Encoding.
+                        local Keys = json.encode(data.GetKeys())
+                        local Coords = json.encode(data.GetCoords())
+                        local Condition = json.encode(data.GetCondition())
+                        local Modifications = json.encode(data.GetModifications())
+                        local Inventory = json.encode(data.CompressInventory())
+                        local Updated = c.func.Timestamp()
+                        -- The Key
+                        local Plate = data.GetPlate()
+                        --
+                        MySQL.Async.insert(VehicleSaveData, {
+                            -- Other Variables.
+                            ["@Garage"] = Garage,
+                            -- Booleans
+                            ["@Impound"] = Impound,
+                            ["@Parked"] = Parked,
+                            ["@Wanted"] = Wanted,
+                            -- Table Informaiton.
+                            ["@Keys"] = Keys,
+                            ["@Coords"] = Coords,
+                            ["@Condition"] = Condition,
+                            ["@Modifications"] = Modifications,
+                            ["@Inventory"] = Inventory,
+                            ["@Updated"] = Updated,
+
+                            -- Where Conditions
+                            ["@Plate"] = Plate
+                        }, function(r)
+                            data.Saved()
+                        end)
+                    end
                 end
             end
         end

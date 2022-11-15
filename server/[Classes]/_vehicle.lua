@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 if not c.class then
     c.class = {}
 end
@@ -12,13 +11,13 @@ end
 function c.class.Vehicle(net)
     local data = {
         Fuel = math.random(25, 89),
-        Plate = c.rng.chars(8),
+        Plate = string.upper(c.rng.chars(8)),
         Instance = false,
         Garage = false,
         Parked = false,
         Impound = false,
         Owner = false,
-        Wanted = false,
+        Wanted = true,
         -- Json
         Modifications = {},
         Inventory = {},
@@ -66,18 +65,18 @@ function c.class.Vehicle(net)
     self.Condition = data.Condition
     -- Modifications
     self.Modifications = data.Modifications
-    -- Keys
+    -- Key
     self.Keys = data.Keys
     self.State.Keys = self.Keys
     --
     self.Updated = data.Updated
     self.State.Updated = self.Updated
     --
-    self.Save = false
-    --- func desc
-    self.SetUpdated = function()
-        self.Updated = c.func.Timestamp()
-        self.Save = true
+    self.Spawned = false
+    --
+    self.HasSpawned = function()
+        self.Spawned = true
+        self.State.Spawned = self.Spawned
     end
     --- func desc
     self.Saved = function()
@@ -85,7 +84,7 @@ function c.class.Vehicle(net)
     end
     --- func desc
     self.ShouldSave = function()
-         return self.Save
+        return self.Save
     end
     --- func desc
     self.GetSource = function()
@@ -95,6 +94,8 @@ function c.class.Vehicle(net)
     self.GetNet = function()
         return self.Net
     end
+    --
+    self.Save = false
     --- func desc
     self.SetUpdated = function()
         self.Updated = c.func.Timestamp()
@@ -125,23 +126,35 @@ function c.class.Vehicle(net)
     self.GetCoords = function()
         local x, y, z = table.unpack(GetEntityCoords(self.Entity))
         local h = GetEntityHeading(self.Entity)
+        local rx, ry, rz = table.unpack(GetEntityRotation((self.Entity)))
         return {
             ["x"] = c.math.Decimals(x, 2),
             ["y"] = c.math.Decimals(y, 2),
             ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2)
+            ["h"] = c.math.Decimals(h, 2),
+            ["rx"] = c.math.Decimals(rx, 2),
+            ["ry"] = c.math.Decimals(ry, 2),
+            ["rz"] = c.math.Decimals(rz, 2)
         }
     end
     --- func desc
     ---@param coords any
     self.SetCoords = function(coords)
-        if coords.x and coords.y and coords.z and coords.h then
-            SetEntityHeading(self.Entity, coords.h)
-            SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
-
-        else
-            c.func.Debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
-        end
+        self.Coords = {
+            x = c.math.Decimals(t.x, 2),
+            y = c.math.Decimals(t.y, 2),
+            z = c.math.Decimals(t.z, 2),
+            h = c.math.Decimals(t.h, 2),
+            rx = c.math.Decimals(t.rx, 2),
+            ry = c.math.Decimals(t.ry, 2),
+            rz = c.math.Decimals(t.rz, 2),
+        }
+        --
+        SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
+        SetEntityHeading(self.Entity, self.Coords.h)
+        SetEntityRotation(self.Entity, vec3(self.Coords.rx, self.Coords.ry, self.Coords.rz), 3)
+        ---
+        self.SetUpdated()
     end
 
     --- func desc
@@ -312,6 +325,7 @@ function c.class.Vehicle(net)
     --- func desc
     self.SetOwner = function(id)
         self.Owner = id
+        self.SetUpdated()
     end
     --- func desc
     self.GetWanted = function()
@@ -491,7 +505,9 @@ function c.class.Vehicle(net)
         return inv
     end
     -- ====================================================================================--
+    SetVehicleNumberPlateText(self.Entity, self.Plate) 
     self.UnpackInventory(self.Inventory)
+    self.HasSpawned()
     -- ====================================================================================--
     return self
 end
@@ -510,10 +526,11 @@ function c.class.OwnedVehicle(net, data)
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
     -- Plate
-    self.Plate = data.Plate
+    self.Plate = string.upper(data.Plate)
     self.State.Plate = self.Plate
     --
     self.Weight = 0
+    self.State.Weight = 0
     -- Owner
     self.Owner = data.Character_ID
     self.State.Owner = self.Owner
@@ -533,15 +550,25 @@ function c.class.OwnedVehicle(net, data)
     self.Parked = data.Parked
     self.State.Parked = self.Parked
     --
+    self.Spawned = false
+    --
+    self.HasSpawned = function()
+        self.Spawned = true
+        self.State.Spawned = self.Spawned
+    end
+    --
     self.Impound = data.Impound
     self.State.Impound = self.Impound
     --
     -- Inventory
     self.Inventory = json.decode(data.Inventory)
+    self.State.Inventory = self.Inventory
     -- Condition
     self.Condition = json.decode(data.Condition)
+    self.State.Condition = self.Condition
     -- Modifications
     self.Modifications = json.decode(data.Modifications)
+    self.State.Modifications = self.Modifications
     -- Keys
     self.Keys = json.decode(data.Keys)
     self.State.Keys = self.Keys
@@ -561,7 +588,7 @@ function c.class.OwnedVehicle(net, data)
     end
     --- func desc
     self.ShouldSave = function()
-         return self.Save
+        return self.Save
     end
     --- func desc
     self.GetSource = function()
@@ -591,6 +618,7 @@ function c.class.OwnedVehicle(net, data)
     self.SetParked = function(b)
         local bool = c.check.Boolean(b)
         self.Parked = bool
+        self.SetUpdated()
     end
     --
     self.GetImpound = function()
@@ -600,23 +628,35 @@ function c.class.OwnedVehicle(net, data)
     self.GetCoords = function()
         local x, y, z = table.unpack(GetEntityCoords(self.Entity))
         local h = GetEntityHeading(self.Entity)
+        local rx, ry, rz = table.unpack(GetEntityRotation((self.Entity)))
         return {
             ["x"] = c.math.Decimals(x, 2),
             ["y"] = c.math.Decimals(y, 2),
             ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2)
+            ["h"] = c.math.Decimals(h, 2),
+            ["rx"] = c.math.Decimals(rx, 2),
+            ["ry"] = c.math.Decimals(ry, 2),
+            ["rz"] = c.math.Decimals(rz, 2)
         }
     end
     --- func desc
     ---@param coords any
     self.SetCoords = function(coords)
-        if coords.x and coords.y and coords.z and coords.h then
-            SetEntityHeading(self.Entity, coords.h)
-            SetEntityCoords(self.Entity, coords.x, coords.y, coords.z, false)
-            self.SetUpdated()
-        else
-            c.func.Debug_1("Table missing x,y,z,h referance, table dump below: " .. c.table.Dump(coords))
-        end
+        self.Coords = {
+            x = c.math.Decimals(t.x, 2),
+            y = c.math.Decimals(t.y, 2),
+            z = c.math.Decimals(t.z, 2),
+            h = c.math.Decimals(t.h, 2),
+            rx = c.math.Decimals(t.rx, 2),
+            ry = c.math.Decimals(t.ry, 2),
+            rz = c.math.Decimals(t.rz, 2),
+        }
+        --
+        SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
+        SetEntityHeading(self.Entity, self.Coords.h)
+        SetEntityRotation(self.Entity, vec3(self.Coords.rx, self.Coords.ry, self.Coords.rz), 3)
+        ---
+        self.SetUpdated()
     end
     --- func desc
     self.GetKeys = function()
@@ -680,8 +720,9 @@ function c.class.OwnedVehicle(net, data)
                 eventName = "SetVehicleCondition",
                 args = {self.Net, self.Condition}
             })
-            self.SetUpdated()
         end
+        self.State.Condition = self.Condition
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -718,8 +759,9 @@ function c.class.OwnedVehicle(net, data)
                 eventName = "SetVehicleModifications",
                 args = {self.Net, self.Modifications}
             })
-            self.SetUpdated()
         end
+        self.State.Modifications = self.Modifications
+        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -979,11 +1021,14 @@ function c.class.OwnedVehicle(net, data)
         return inv
     end
     -- ====================================================================================--
+    SetVehicleNumberPlateText(self.Entity, self.Plate) 
     self.UnpackInventory(self.Inventory)
     self.AddKey(self.Owner)
     self.SetParked(false)
     self.SetCondition(self.Condition)
     self.SetModifications(self.Modifications)
+    self.SetUpdated()
+    self.HasSpawned()
     -- ====================================================================================--
     return self
 end

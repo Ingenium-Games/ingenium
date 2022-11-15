@@ -119,7 +119,7 @@ function c.sql.gen.CarPlate(cb)
     local bool = false
     local new = nil
     repeat
-        new = c.rng.chars(8)
+        new = string.upper(c.rng.chars(8))
         MySQL.Async.fetchScalar("SELECT `Plate` FROM `vehicles` WHERE `Plate` = @Plate LIMIT 1;",
             {
                 ["@Plate"] = new

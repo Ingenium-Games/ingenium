@@ -21,7 +21,7 @@ c.odex = {} -- the odex/store for currently used objects prior to storage
 [       script:ig.dev] }
 ]]--
 
-function c.object.Generate(timeout, distance)
+function c.object.Generate(distance)
 	for uuid, data in pairs(c.objects) do
         local found = c.data.FindObjectFromUUID(data.UUID)
         if (not found) then

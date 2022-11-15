@@ -621,7 +621,7 @@ function c.func.GetVehicleModifications(vehicle)
     local enabledNeonLights = {IsVehicleNeonLightEnabled(vehicle, 0), IsVehicleNeonLightEnabled(vehicle, 1),
                                IsVehicleNeonLightEnabled(vehicle, 2), IsVehicleNeonLightEnabled(vehicle, 3)}
     return { -- 1
-    GetVehicleNumberPlateText(vehicle), -- 2
+    string.upper(GetVehicleNumberPlateText(vehicle)), -- 2
     c.func.GetVehicleMods(vehicle), -- 3
     primaryColor, -- 4
     secondaryColor, -- 5
@@ -692,7 +692,7 @@ function c.func.SetVehicleModifications(vehicle, Modifications)
         SetDriftTyresEnabled(vehicle, Modifications[20])
     end
     -- 1 numberPlateText
-    SetVehicleNumberPlateText(vehicle, Modifications[1])
+    SetVehicleNumberPlateText(vehicle, string.upper(Modifications[1]))
     -- 21 numberPlateTextIndex
     SetVehicleNumberPlateTextIndex(vehicle, Modifications[21])
     -- 22 windowTint
