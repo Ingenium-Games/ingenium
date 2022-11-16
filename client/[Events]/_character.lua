@@ -8,7 +8,7 @@
 RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
     -- Set false for switch command
-    local ped = PlayerPedId()
+    local ped = GetPlayerPed(-1)
     c.data.SetLoadedStatus(false)
     FreezeEntityPosition(ped, true)
     SetFollowPedCamViewMode(4)

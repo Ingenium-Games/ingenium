@@ -4,7 +4,7 @@ AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, net)
     local modifictions = c.func.GetVehicleModifications(vehicle)
     TriggerServerCallback({
         eventName = "SetVehicleConMods",
-        args = {net, condition}
+        args = {net, condition, modifictions}
     })
 end)
 -- [C]
@@ -13,6 +13,6 @@ AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, net)
     local modifictions = c.func.GetVehicleModifications(vehicle)
     TriggerServerCallback({
         eventName = "SetVehicleConMods",
-        args = {net, condition}
+        args = {net, condition, modifictions}
     })
 end)

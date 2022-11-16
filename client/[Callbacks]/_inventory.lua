@@ -117,13 +117,20 @@ local Consumeable = RegisterClientCallback({
 local Skateboard = RegisterClientCallback({
     eventName = "Client:Item:Skateboard",
     eventCallback = function()
-        ExecuteCommand("skate")
+        if IsPedOnFoot(PlayerPedId()) then
+            ExecuteCommand("skate")
+        end
     end
 })
 
 local Phone = RegisterClientCallback({
     eventName = "Client:Item:Phone",
     eventCallback = function()
-        exports["ig.phone"]:openPhone()
+        local isOpen = exports["ig.phone"]:isOpen()
+        if not isOpen then
+            exports["ig.phone"]:openPhone()
+        else
+            exports["ig.phone"]:closePhone()
+        end
     end
 })

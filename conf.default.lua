@@ -53,14 +53,18 @@ conf.default.tax = 10.00
 conf.default.skills = {
     -- General Repair
     Mechanics = 0,
-    -- Moulds and Building
-    Engineering = 0,
     -- Weaponry
     Gunsmithy = 0,
     -- Electrical goods
     Electronics = 0,
     -- Knowledge of plants
     Botany = 0,
-    -- Built by Labour
-    Physique = 0
+    -- Built by Physical Labour
+    Physique = 0,
+    -- Hunting
+    Hunting = 0,
+    --
+    Theivery = 0,
+    --
+    
 }
