@@ -12,6 +12,8 @@ conf.url = {}
 conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ig.core/main/version.txt"
 conf.url.webhook_1 = "Example"
 conf.url.feedback = "https://discord.com/api/webhooks/1042417856802992158/4K0yK3_beGvS4ouY7cJPwcopP8SijZ4zZc6co4dYoYfr8iiSs3_F4QUxD14lQj_SfouN"
+conf.url.discorse_posts = "https://ingenium.games/posts"
+conf.url.discorse_api = "e2218c85b236dcd8381b4238d6b6f59b8f1c0fef68daa6687f34e43a1ee45804"
 --[[
 DEBUG :
     -- Up to you if you want to see whats going on or not.

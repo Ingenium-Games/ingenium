@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 c.func = {}
 
 -- ====================================================================================--
@@ -138,15 +137,50 @@ function c.func.Discord(url, color, name, message, footer)
 end
 
 --- func desc
+---@param url any
+---@param color any
+---@param name any
+---@param message any
+---@param footer any
+function c.func.Discorse(message, url, name, coords)
+    --[[local post = json.encode({
+        raw = message,
+        title = "Feedback",
+        displayusername = "system",
+        topic_id = tonumber(c.func.Timestamp()),
+        category = 26
+    })]]--
+    PerformHttpRequest(conf.url.discorse_posts, function(err, text, headers)
+        print(err)
+        print(text)
+        print(c.table.Dump(headers))
+    end, "POST", [[{
+        "title": "string",
+        "raw": "string",
+        "topic_id": 0,
+        "category": 26,
+        }]], {
+        ["Api-Key"] = conf.url.discorse_api,
+        ["Api-Username"] = "system",
+        ["Content-Type"] = "application/json"
+    })
+end
+
+--- func desc
 ---@param source any
 ---@param event any
 function c.func.Eventban(source, event)
     local src = source
     local time = c.func.Timestamp()
-    local reason = { ["Event"] = event, ["Timestamp"] = time, ["By"] = "Server" }
+    local reason = {
+        ["Event"] = event,
+        ["Timestamp"] = time,
+        ["By"] = "Server"
+    }
     c.sql.user.SetBan(c.func.identifier(src), true, reason, function()
-        DropPlayer(src, "[AC] c.func.Eventban : Abuse of [E] " .. event.. ", at [T] "..time..". Please screenshot this for records sake")
-        TriggerEvent("txaLogger:CommandExecuted", "[AC] Eventban : Abuse of [E] " .. event.. ", at [T] "..time..".")
+        DropPlayer(src, "[AC] c.func.Eventban : Abuse of [E] " .. event .. ", at [T] " .. time ..
+            ". Please screenshot this for records sake")
+        TriggerEvent("txaLogger:CommandExecuted", "[AC] Eventban : Abuse of [E] " .. event .. ", at [T] " .. time .. ".")
     end)
     CancelEvent()
 end
@@ -156,87 +190,87 @@ end
 --- func desc
 ---@param vehicle any
 function c.func.IsAnyPlayerInsideVehicle(vehicle)
-	local playerPeds = c.func.GetAllPlayerPeds()
-	for i, playerPed in ipairs(playerPeds) do
-		local veh = GetVehiclePedIsIn(playerPed, false)
+    local playerPeds = c.func.GetAllPlayerPeds()
+    for i, playerPed in ipairs(playerPeds) do
+        local veh = GetVehiclePedIsIn(playerPed, false)
 
-		if (DoesEntityExist(veh) and veh == vehicle) then
-			return true
-		end
-	end
+        if (DoesEntityExist(veh) and veh == vehicle) then
+            return true
+        end
+    end
 
-	return false
+    return false
 end
 
 --- func desc
 ---@param position any
 ---@param maxRadius any
 function c.func.GetClosestPlayer(position, maxRadius)
-	local closestDistance	= maxRadius and (maxRadius * maxRadius) or 1000000.0
-	local closestPlayer		= nil
-	local closestPos		= nil
+    local closestDistance = maxRadius and (maxRadius * maxRadius) or 1000000.0
+    local closestPlayer = nil
+    local closestPos = nil
 
-	for i, player in ipairs(GetPlayers()) do
-		if (GetPlayerRoutingBucket(player) == 0) then
-			local ped = GetPlayerPed(player)
-			if (DoesEntityExist(ped)) then
-				local pos = GetEntityCoords(ped)
-				local tempDistSquared = #(position - pos)
+    for i, player in ipairs(GetPlayers()) do
+        if (GetPlayerRoutingBucket(player) == 0) then
+            local ped = GetPlayerPed(player)
+            if (DoesEntityExist(ped)) then
+                local pos = GetEntityCoords(ped)
+                local tempDistSquared = #(position - pos)
 
-				if (tempDistSquared < closestDistance) then
-					closestDistance	= tempDistSquared
-					closestPlayer	= player
-					closestPos		= pos
-				end
-			end
-		end
-	end
+                if (tempDistSquared < closestDistance) then
+                    closestDistance = tempDistSquared
+                    closestPlayer = player
+                    closestPos = pos
+                end
+            end
+        end
+    end
 
-	if (closestPos ~= nil) then
-		closestDistance = #(position - closestPos)
-	end
+    if (closestPos ~= nil) then
+        closestDistance = #(position - closestPos)
+    end
 
-	return closestPlayer, closestDistance
+    return closestPlayer, closestDistance
 end
 
 --- func desc
 function c.func.GetAllPlayerPeds()
-	local playerPeds = {}
+    local playerPeds = {}
 
-	local peds = GetAllPeds()
-	for i, ped in ipairs(peds) do
-		if (DoesEntityExist(ped) and IsPedAPlayer(ped)) then
-			table.insert(playerPeds, ped)
-		end
-	end
+    local peds = GetAllPeds()
+    for i, ped in ipairs(peds) do
+        if (DoesEntityExist(ped) and IsPedAPlayer(ped)) then
+            table.insert(playerPeds, ped)
+        end
+    end
 
-	return playerPeds
+    return playerPeds
 end
 
 --- func desc
 ---@param position any
 ---@param maxRadius any
 function c.func.GetClosestPlayerPed(position, maxRadius)
-	local closestDistance	= maxRadius and (maxRadius * maxRadius) or 1000000.0
-	local closestPlayerPed	= nil
-	local closestPos		= nil
+    local closestDistance = maxRadius and (maxRadius * maxRadius) or 1000000.0
+    local closestPlayerPed = nil
+    local closestPos = nil
 
-	for i, playerPed in ipairs(c.func.GetAllPlayerPeds()) do
-		local pos = GetEntityCoords(playerPed)
-		local distanceSquared = #(position - pos)
+    for i, playerPed in ipairs(c.func.GetAllPlayerPeds()) do
+        local pos = GetEntityCoords(playerPed)
+        local distanceSquared = #(position - pos)
 
-		if (distanceSquared < closestDistance) then
-			closestDistance		= distanceSquared
-			closestPlayerPed	= playerPed
-			closestPos			= pos
-		end
-	end
+        if (distanceSquared < closestDistance) then
+            closestDistance = distanceSquared
+            closestPlayerPed = playerPed
+            closestPos = pos
+        end
+    end
 
-	if (closestPos ~= nil) then
-		closestDistance = #(position - closestPos)
-	end
+    if (closestPos ~= nil) then
+        closestDistance = #(position - closestPos)
+    end
 
-	return closestPlayerPed, closestDistance
+    return closestPlayerPed, closestDistance
 end
 
 --- func desc
@@ -254,7 +288,7 @@ function c.func.CreateVehicle(name, x, y, z, h, data)
     end
     local entity = CreateVehicle(hash, x, y, z, h, true, false)
     local timer = GetGameTimer()
-	while (not DoesEntityExist(entity)) do
+    while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
             c.func.Debug_2("Timout Reached on creating vehicle")
@@ -284,8 +318,8 @@ function c.func.CreatePed(name, x, y, z, h)
         hash = GetHashKey(name)
     end
     local entity = CreatePed(0, hash, x, y, z, h, true, false)
-	local timer = GetGameTimer()
-	while (not DoesEntityExist(entity)) do
+    local timer = GetGameTimer()
+    while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
             c.func.Debug_2("Timout Reached on creating ped")
@@ -315,7 +349,7 @@ function c.func.CreateObject(model, x, y, z, isdoor, data)
     end
     local entity = CreateObject(hash, x, y, z, true, isdoor)
     local timer = GetGameTimer()
-	while (not DoesEntityExist(entity)) do
+    while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
             c.func.Debug_2("Timout Reached on creating object")
