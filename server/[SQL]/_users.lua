@@ -1,14 +1,15 @@
 -- ====================================================================================--
+
 if not c.sql then c.sql = {} end
---
 c.sql.user = {}
+
+-- ====================================================================================--
+
 --[[
 NOTES.
     - All sql querys should have a call back as a function at the end to chain code execution upon completion.
     - All data should be encoded or decoded here, if possible. the fetchALL commands are decoded in the _data.lua
 ]] --
-
--- ====================================================================================--
 
 function c.sql.user.Find(license_id, cb)
     local License_ID = license_id

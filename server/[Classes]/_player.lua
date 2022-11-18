@@ -686,6 +686,15 @@ function c.class.Player(source, character_id)
         end
     end
     --
+    self.PayBalance = function(v)
+        local num = c.check.Number(v)
+        if self.GetCash() >= num then
+            self.RemoveCash(num)
+        else
+            self.RemoveBank(num)
+        end
+    end
+    --
     self.GetAmmos = function()
         return self.Ammo
     end
@@ -1064,6 +1073,23 @@ function c.class.Player(source, character_id)
         end
         return inv
     end
+    --
+    self.FoundItems = function(reward)
+        local chance = math.random(0, 255)
+        for k, v in pairs(reward) do
+            if k <= chance then
+                local item = v.Item
+                local quanitity = math.random(v.Range[1], v.Range[2])
+                if quanitity == 1 then
+                    self.Notify("Found a "..item..".")
+                else
+                    self.Notify("Found "..quanitity.. " "..item)
+                end
+                self.AddItem({item, quanitity, 100})
+            end
+        end
+    end
+    --
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
     -- ====================================================================================--

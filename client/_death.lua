@@ -56,9 +56,9 @@ function PlayerKilled()
     local pos = GetEntityCoords(ped)
     local found, groundz = GetGroundZFor_3dCoord(pos.x, pos.y, pos.z, false)
     if found then
-        SetEntityCoords(ped, vector3(pos.x, pos.y, groundz - 0.45))
+        SetEntityCoords(ped, vector3(pos.x, pos.y, groundz - 0.42))
     else
-        SetEntityCoords(ped, vector3(pos.x, pos.y, pos.z - 0.45))
+        SetEntityCoords(ped, vector3(pos.x, pos.y, pos.z - 0.42))
     end
 end
 

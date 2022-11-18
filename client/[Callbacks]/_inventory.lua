@@ -119,6 +119,8 @@ local Skateboard = RegisterClientCallback({
     eventCallback = function()
         if IsPedOnFoot(PlayerPedId()) then
             ExecuteCommand("skate")
+        else
+            TriggerEvent("Client:Notify","You must be out of a vehicle to use this.")
         end
     end
 })

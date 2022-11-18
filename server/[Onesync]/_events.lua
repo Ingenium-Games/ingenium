@@ -11,8 +11,8 @@ GetEntityType( entity )
 1 = ped
 2 = vehicle
 3 = object
-
 ]] --
+
 -- ====================================================================================--
 
 AddEventHandler("weaponDamageEvent", function()
@@ -116,7 +116,7 @@ AddEventHandler("entityRemoved", function(ent)
     
     -- Object
     if type == 3 then
-        c.data.RemoveObject(net)
+        -- c.data.RemoveObject(net)
     -- Vehicle
     elseif type == 2 then            
         c.data.RemoveVehicle(net)

@@ -93,130 +93,53 @@ end
 
 --- Return the Players"s state bag.
 ---@param id any "Player"s Server Id"
-function c.data.GetPlayerState(id,key)
+function c.data.GetPlayerState(id, key)
     return Player(id).state[key]
 end
 
 --- Return the Players"s state bag.
 ---@param id any "Player"s Server Id"
-function c.GetPlayerState(id,key)   
-    return c.data.GetPlayerState(id,key)
+function c.GetPlayerState(id, key)   
+    return c.data.GetPlayerState(id, key)
 end
 
 --- Return the Players"s state bag.
 ---@param ped any "Player"s Ped Entity"
-function c.data.GetPlayerPedState(ped,key)
-    return Player(GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))).state[key]
+function c.data.GetPlayerPedState(ped, key)
+    local entity = GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))
+    return Player(entity).state[key]
 end
 
 --- Return the Players"s state bag.
 ---@param ped any "Player"s Ped Entity"
-function c.GetPlayerPedState(ped,key)    
-    return c.data.GetPlayerPedState(ped,key)
-end
-
-
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.data.GetEntityState(net,key)    
-    return Entity(NetworkGetEntityFromNetworkId(net)).state[key]
+function c.GetPlayerPedState(ped, key)    
+    return c.data.GetPlayerPedState(ped, key)
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function c.GetEntityState(net,key)    
-    return c.data.GetEntityState(net,key)
+function c.data.GetEntityState(net, key)
+    local entity = NetworkGetEntityFromNetworkId(net)
+    return Entity(entity).state[key]
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function c.data.SetEntityState(net,key,value)    
-    Entity(NetworkGetEntityFromNetworkId(net)).state:set(tostring(key), value, true)
+function c.GetEntityState(net, key)    
+    return c.data.GetEntityState(net, key)
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function c.SetEntityState(net,key,value)    
-    c.data.SetEntityState(net,key,value)   
-end
-
-
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.data.GetObjectState(net,key)    
-    return Entity(NetToObj(net)).state[key]
+function c.data.SetEntityState(net, key, value)   
+    local entity = NetworkGetEntityFromNetworkId(net) 
+    Entity(entity).state:set(tostring(key), value, true)
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function c.GetObjectState(net,key)    
-    return c.data.GetObjectState(net,key)
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.data.SetObjectState(net,key,value)    
-    Entity(NetToObj(net)).state:set(tostring(key), value, true)
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.SetObjectState(net,key,value)    
-    c.data.SetObjectState(net,key,value)   
-end
-
-
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.data.GetVehicleState(net,key)    
-    return Entity(NetToVeh(net)).state[key]
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.GetVehicleState(net,key)    
-    return c.data.GetVehicleState(net,key)
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.data.SetVehicleState(net,key,value)    
-    Entity(NetToVeh(net)).state:set(tostring(key), value, true)
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.SetVehicleState(net,key,value)    
-    c.data.SetVehicletate(net,key,value)   
-end
-
-
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.data.GetPedState(net,key)    
-    return Entity(NetToPed(net)).state[key]
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.GetPedState(net,key)    
-    return c.data.GetPedState(net,key)
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.data.SetPedState(net,key,value)    
-    Entity(NetToPed(net)).state:set(tostring(key), value, true)
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function c.SetPedState(net,key,value)    
-    c.data.SetPedState(net,key,value)   
+function c.SetEntityState(net, key, value)    
+    c.data.SetEntityState(net, key, value)   
 end
 
 --- func desc

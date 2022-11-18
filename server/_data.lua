@@ -1,4 +1,5 @@
 -- ====================================================================================--
+
 c.data = {} -- data table for funcitons.
 c.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
 
@@ -535,27 +536,3 @@ function c.data.LoadPlayer(source, Character_ID)
 end
 
 -- ====================================================================================--
-
---- Return the Entity"s state bag.
----@param net any "Network ID 16 bit integer"
-function c.data.GetEntityStateBag(net)
-    return Entity(NetworkGetEntityFromNetworkId(net)).state
-end
-
---- Return the Entity"s state bag.
----@param net any "Network ID 16 bit integer"
-function c.GetEntityState(net)
-    return c.data.GetEntityStateBag(net)
-end
-
---- Return the Players"s state bag.
----@param id any "Typically a number or string"
-function c.data.GetPlayerState(id)
-    return Player(id).state
-end
-
---- Return the Players"s state bag.
----@param id any "Typically a number or string"
-function c.GetPlayerState(id)
-    return c.data.GetPlayerState(id)
-end
