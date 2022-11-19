@@ -54,6 +54,7 @@ c.sbch.player.IsDead = AddStateBagChangeHandler("IsDead", nil, function(bagName,
             c.sql.char.SetDead(xPlayer.GetCharacter_ID(), value, {
                 RevivedAt = c.func.Timestamp()
             })
+            c.sql.char.SetHealth(xPlayer.GetCharacter_ID(), 150)
             --
         else
             --

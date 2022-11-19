@@ -192,8 +192,8 @@ RegisterNetEvent("Server:Character:Death", function(data)
             
         end
     end
-    xPlayer.Notify("You have been downed, you must wait for someone to assist you.", "black", 60000)
-    xPlayer.Notify("If you do not wait, or leave, you will be unable to use this character for 7 days.", "red", 60000)
+    xPlayer.Notify("You have been downed, you must wait for someone to assist you.", "black", 15000)
+    xPlayer.Notify("If you do not wait, or leave, you will be unable to use this character for 7 days.", "red", 10000)
 end)
 
 --@ req = server_id or source
