@@ -37,3 +37,7 @@ function c.object.Generate(distance)
         end
 	end
 end
+
+function c.object.AddObject(data)
+    local id = c.objects
+end

@@ -36,8 +36,8 @@ function c.sql.obj.GetObjects(cb)
     MySQL.Async.fetchAll("SELECT * FROM `objects`", {
     }, function(data)
         for i=1, #data, 1 do
-            local i = data[i]
-            c.objects[i.ID] = i
+            local j = data[i]
+            c.objects[i] = j
         end
         IsBusy = false
     end)
@@ -55,10 +55,12 @@ end
 function c.sql.obj.Add(data, cb)
     local IsBusy = true
     local Data = data
-    MySQL.Async.execute("INSERT INTO `vehicles` (`UUID`, `Model`, `Coords`, `Inventory`, `Created`, `Updated`) VALUES (@UUID, @Model, @Coords, @Inventory, @Created, @Updated);",{
+    MySQL.Async.execute("INSERT INTO `objects` (`UUID`, `Model`, `Coords`, `Meta`, `States`, `Inventory`, `Created`, `Updated`) VALUES (@UUID, @Model, @Coords, @Meta, @States, @Inventory, @Created, @Updated);",{
         ["@UUID"] = Data.UUID,
         ["@Model"] = Data.Model,
         ["@Coords"] = Data.Coords,
+        ["@Meta"] = Data.Meta,
+        ["@States"] = Data.States,
         ["@Inventory"] = Data.Inventory,
         ["@Created"] = c.func.Timestamp(),
         ["@Updated"] = c.func.Timestamp(),

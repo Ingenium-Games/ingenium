@@ -496,7 +496,15 @@ function c.func.CreatePed(name, x, y, z, h)
     local check = DoesObjectOfTypeExistAtCoords(x, y, z, 1, hash, 0)
     if not check then
         local entity = CreatePed(0, hash, x, y, z, h, true, false)
-        local net = PedToNet(entity)
+        local timer = GetGameTimer()
+        while (not DoesEntityExist(entity)) do
+            Citizen.Wait(0)
+            if ((timer + 3000) < GetGameTimer()) then
+                c.func.Debug_2("Timout Reached on creating object")
+                return false, false
+            end
+        end
+        local net = NetworkGetEntityFromNetworkId(entity)
         SetNetworkIdCanMigrate(net, true)
         SetModelAsNoLongerNeeded(hash)
         return entity, net
@@ -528,7 +536,15 @@ function c.func.CreateObject(name, x, y, z, isdoor)
     local check = DoesObjectOfTypeExistAtCoords(x, y, z, 1, hash, 0)
     if not check then
         local entity = CreateObject(hash, x, y, z, true, isdoor)
-        local net = ObjToNet(entity)
+        local timer = GetGameTimer()
+        while (not DoesEntityExist(entity)) do
+            Citizen.Wait(0)
+            if ((timer + 3000) < GetGameTimer()) then
+                c.func.Debug_2("Timout Reached on creating object")
+                return false, false
+            end
+        end
+        local net = NetworkGetEntityFromNetworkId(entity)
         SetNetworkIdCanMigrate(net, true)
         SetModelAsNoLongerNeeded(hash)
         return entity, net
@@ -557,7 +573,15 @@ function c.func.CreateVehicle(name, x, y, z, h)
     local check = DoesObjectOfTypeExistAtCoords(x, y, z, 1, hash, 0)
     if not check then
         local entity = CreateVehicle(hash, x, y, z, h, true, true)
-        local net = VehToNet(entity)
+        local timer = GetGameTimer()
+        while (not DoesEntityExist(entity)) do
+            Citizen.Wait(0)
+            if ((timer + 3000) < GetGameTimer()) then
+                c.func.Debug_2("Timout Reached on creating object")
+                return false, false
+            end
+        end
+        local net = NetworkGetEntityFromNetworkId(entity)
         SetVehicleOnGroundProperly(entity)
         SetVehicleHasBeenOwnedByPlayer(entity, true)
         SetNetworkIdCanMigrate(net, true)

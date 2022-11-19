@@ -1,5 +1,4 @@
 -- ====================================================================================--
-
 c.job = {} -- Function Table
 c.jobs = {} -- DB Pull
 c.jdex = {} -- Job Index for xJobs functions.
@@ -20,11 +19,11 @@ end
 --- func desc
 ---@param name any
 ---@param grade any
-function c.job.IsBoss(name,grade) 
-    if (#c.jobs[name].Grades == grade) then 
-        return true 
-    else 
-        return false 
+function c.job.IsBoss(name, grade)
+    if (#c.jobs[name].Grades == grade) then
+        return true
+    else
+        return false
     end
 end
 
@@ -34,12 +33,12 @@ local CurrentlyActive = {}
 --- func desc
 function c.job.ActiveMembers()
     local tab = {}
-    for k,v in ipairs(CurrentlyActive) do
+    for k, v in ipairs(CurrentlyActive) do
         if v then
             if not tab[v.Name] then
                 table.insert(tab, v.Name)
                 tab[v.Name] = 1
-            else    
+            else
                 tab[v.Name] = tab[v.Name] + 1
             end
         end
@@ -54,12 +53,12 @@ exports("JobsOnline", c.job.ActiveMembers())
 ---@param job string
 ---@param grade any
 function c.job.Exist(name, grade)
-	if name and grade then
-		if c.jobs[tostring(name)].Grades[tonumber(grade)] then
-			return true
-		end
-	end
-	return false
+    if name and grade then
+        if c.jobs[tostring(name)].Grades[tonumber(grade)] then
+            return true
+        end
+    end
+    return false
 end
 
 --- Same as above.
@@ -112,30 +111,30 @@ end)
 --- func desc
 ---@param bool boolean "Use the Job funds to pay all employees?" 
 function c.job.Payroll(bool)
-    local xCity = c.data.GetJob("city")
-    for k,v in ipairs(CurrentlyActive) do
-        if type(v) == "table" then
-            -- CurrentlyActive[1] = [Name="popo",Grade=2,etc,etc]
-            local xPlayer = c.data.GetPlayer(k)
-            if xPlayer then
-                if xPlayer.OnDuty() then
-                    local xJob = c.data.GetJob(CurrentlyActive[k].Name)
-                    local pay = xJob.GetGradeSalery(v.Grade)
-                    local tax = (pay / conf.default.tax) + 0.00
-                    local net = pay - tax
-                    --
-                    xPlayer.AddBank(net)
-                    if bool then
-                        xJob.RemoveBank(pay)
-                        xCity.AddBank(tax)
+    if c.data.ArePlayersActive() then
+        local xCity = c.data.GetJob("city")
+        for k, v in ipairs(CurrentlyActive) do
+            if type(v) == "table" then
+                -- CurrentlyActive[1] = [Name="popo",Grade=2,etc,etc]
+                local xPlayer = c.data.GetPlayer(k)
+                if xPlayer then
+                    if xPlayer.OnDuty() then
+                        local xJob = c.data.GetJob(CurrentlyActive[k].Name)
+                        local pay = xJob.GetGradeSalery(v.Grade)
+                        local tax = (pay / conf.default.tax) + 0.00
+                        local net = pay - tax
+                        --
+                        xPlayer.AddBank(net)
+                        if bool then
+                            xJob.RemoveBank(pay)
+                            xCity.AddBank(tax)
+                        end
                     end
                 end
             end
-        elseif v == "OffDuty" then
-            TriggerClientEvent("Client:Notify", k, "Payroll for active staff paid.")
         end
+        c.func.Debug_1("Jobs Payed.")
     end
-    c.func.Debug_1("Jobs Payed.")
 end
 
 --- func desc
@@ -149,9 +148,9 @@ end
 --- func desc
 function c.job.PayCycle()
     local function Do()
-        c.job.Payroll(conf.enablejobpayroll)     
+        c.job.Payroll(conf.enablejobpayroll)
         -- Adding cleanup of empty or false records.
-        for k,v in ipairs(CurrentlyActive) do
+        for k, v in ipairs(CurrentlyActive) do
             -- Really make sure its a false record.
             if v == false then
                 table.remove(CurrentlyActive, k)
