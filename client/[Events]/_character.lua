@@ -107,7 +107,9 @@ end)
 -- Event to receive the data of the chosen character for the client.
 RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
-    Wait(5000)
+    --
+    c.func.IsBusyPleaseWait(5000)
+    --
     -- Wait for state to be synced to local character
     c.data.SetLoadedStatus(true)
     c.chat.AddSuggestions()

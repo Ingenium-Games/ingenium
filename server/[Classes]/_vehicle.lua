@@ -871,7 +871,7 @@ function c.class.OwnedVehicle(net, data)
             end
         end
         self.State.Inventory = self.Inventory
-        print(c.table.Dump(self.Inventory))
+        -- print(c.table.Dump(self.Inventory))
     end
     --- func desc
     self.GetInventory = function()

@@ -104,8 +104,9 @@ end
 function c.sql.char.ReviveDeadCharacters(cb)
     local IsBusy = true
     local result = nil
-    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = FALSE, `Coords` = @Coords, `Dead_Time` = NULL WHERE `Dead_Time` <= (@Time - '604800')", { -- 604800 is 7 days in seconds
+    MySQL.Async.execute("UPDATE `characters` SET `Health` = 150, `Is_Dead` = FALSE, `Coords` = @Coords, `Dead_Time` = NULL, `Dead_Data` = @Dead_Data WHERE `Dead_Time` <= (@Time - '604800')", { -- 604800 is 7 days in seconds
         ["@Coords"] = json.encode({["z"]=43.28,["h"]=337.32,["x"]=327.52,["y"]=-603.03}), -- Pillbox Elevators
+        ["@Dead_Data"] = json.encode({["RevivedAt"]= c.func.Timestamp(), ["By"]="Server"}), 
         ["@Time"] = c.func.Timestamp()
     }, function(data)
         if data then

@@ -104,14 +104,15 @@ function c.GetPlayerState(id, key)
 end
 
 --- Return the Players"s state bag.
----@param ped any "Player"s Ped Entity"
+---@param ped any "Player's Ped Entity"
 function c.data.GetPlayerPedState(ped, key)
-    local entity = GetPlayerServerId(NetworkGetPlayerIndexFromPed(ped))
-    return Player(entity).state[key]
+    local player = NetworkGetPlayerIndexFromPed(ped)
+    local id = GetPlayerServerId(player)
+    return Player(id).state[key]
 end
 
 --- Return the Players"s state bag.
----@param ped any "Player"s Ped Entity"
+---@param ped any "Player's Ped Entity"
 function c.GetPlayerPedState(ped, key)    
     return c.data.GetPlayerPedState(ped, key)
 end
@@ -145,26 +146,17 @@ end
 --- func desc
 ---@param net any "The passed client entity"
 ---@param key any "The state bag key you want to get the data from."
-function c.data.GetEntityStateByType(net, key)
+function c.data.GetEntityState2(net, key)
     local entity = NetworkGetEntityFromNetworkId(net)
     local type = GetEntityType(entity)
     --
-    -- Object
-    if type == 3 then
-        return c.data.GetObjectState(net, key) 
-    --
-    -- Vehicle
-    elseif type == 2 then
-        return c.data.GetVehicleState(net, key) 
-    --
-    -- Ped
-    elseif type == 1 then
-        if IsPedAPlayer(ent) then
-            return c.data.GetPlayerPedState(net, key)
-        else
-            return c.data.GetPedState(net, key)
+    if type == 1 then
+        if IsPedAPlayer(entity) then
+            return c.data.GetPlayerPedState(entity, key)
         end
     end
+    --
+    return c.data.GetEntityState(net, key)
 end
 
 function c.data.Packet()
