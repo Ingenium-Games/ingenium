@@ -382,7 +382,9 @@ function c.class.Player(source, character_id)
             self.Skills[skill] = num
             self.State.Skills = self.Skills
         else
-            c.func.Debug_1("Skill entered does not exist")
+            self.Skills[skill] = num
+            self.State.Skills = self.Skills
+            c.func.Debug_1("Skill did not exist, adding in now.")
         end
     end
     --
@@ -395,7 +397,7 @@ function c.class.Player(source, character_id)
         else
             self.Skills[skill] = 0 + num
             self.State.Skills = self.Skills
-            c.func.Debug_1("Skill did not exist, adding in now.")
+            c.func.Debug_1("Skill did not exist on character, adding in now.")
         end
     end
     --

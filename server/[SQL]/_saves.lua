@@ -9,7 +9,7 @@ c.sql.save = {}
 
 local PlayerSaveData = -1
 MySQL.Async.store(
-    "UPDATE `characters` SET `Health` = @Health, `Armour` = @Armour, `Hunger` = @Hunger, `Thirst` = @Thirst, `Stress` = @Stress, `Coords` = @Coords, `Accounts` = @Accounts, `Modifiers` = @Modifiers, `Inventory` = @Inventory, `Ammo` = @Ammo, `Job` = @Job WHERE `Character_ID` = @Character_ID;",
+    "UPDATE `characters` SET `Health` = @Health, `Armour` = @Armour, `Hunger` = @Hunger, `Thirst` = @Thirst, `Stress` = @Stress, `Coords` = @Coords, `Skills` = @Skills, `Accounts` = @Accounts, `Modifiers` = @Modifiers, `Inventory` = @Inventory, `Ammo` = @Ammo, `Job` = @Job WHERE `Character_ID` = @Character_ID;",
     function(id)
         PlayerSaveData = id
     end)
@@ -26,6 +26,7 @@ function c.sql.save.User(data, cb)
         local Thirst = data.GetThirst()
         local Stress = data.GetStress()
         -- Tables require JSON Encoding.
+        local Skills = json.encode(data.GetSkills())
         local Coords = json.encode(data.GetCoords())
         local Accounts = json.encode(data.GetAccounts())
         local Modifiers = json.encode(data.GetModifiers())
@@ -42,6 +43,7 @@ function c.sql.save.User(data, cb)
             ["@Thirst"] = Thirst,
             ["@Stress"] = Stress,
             -- Table Informaiton.
+            ["@Skills"] = Skills,
             ["@Coords"] = Coords,
             ["@Accounts"] = Accounts,
             ["@Modifiers"] = Modifiers,
@@ -74,6 +76,7 @@ function c.sql.save.Users(cb)
             local Thirst = data.GetThirst()
             local Stress = data.GetStress()
             -- Tables require JSON Encoding.
+            local Skills = json.encode(data.GetSkills())
             local Coords = json.encode(data.GetCoords())
             local Accounts = json.encode(data.GetAccounts())
             local Modifiers = json.encode(data.GetModifiers())
@@ -90,6 +93,7 @@ function c.sql.save.Users(cb)
                 ["@Thirst"] = Thirst,
                 ["@Stress"] = Stress,
                 -- Table Informaiton.
+                ["@Skills"] = Skills,
                 ["@Coords"] = Coords,
                 ["@Accounts"] = Accounts,
                 ["@Modifiers"] = Modifiers,
