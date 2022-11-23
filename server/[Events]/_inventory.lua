@@ -88,5 +88,11 @@ for k,v in pairs (c.items) do
             })
             return
         end
+
+        if k == "FishingRod" then
+            TriggerClientEvent('wasabi_fishing:startFishing', src)
+            return
+        end
+        
     end)
 end

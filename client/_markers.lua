@@ -34,6 +34,9 @@ function c.marker.Place(ords, v)
     elseif v == 8 then
         -- Blue Static $.
         DrawMarker(29, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 1.7001, 0, 55, 240, 100, 0, 0, 2, 0)
+    elseif v == 9 then
+        -- White Rotating Chevron Bouncing.
+        DrawMarker(1, ords[1], ords[2], ords[3] - 0.90, 0, 0, 0, 0, 0, 0, 18.4001, 18.4001, 18.4001, 240, 240, 240, 255, 0, 0, 2, 1)
     end
 end
 

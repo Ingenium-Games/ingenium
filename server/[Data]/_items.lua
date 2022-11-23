@@ -30,18 +30,110 @@ c.items = { -- table of items
     -- Interactive Items
     -- ====================================================================================--
 
-    ["Skateboard"] = {
-        Name = "Skateboard",
+    ["Anchovy"] = {
+        Name = "Anchovy",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
         Quantity = 1,
-        Cost = 38,
-        Value = 80,
+        Cost = 2,
+        Value = 2,
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Kick flippin good fun."
+            About = "Lil Anchovy."
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Anchovy.png"
+    },
+
+    ["Trout"] = {
+        Name = "Trout",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 6,
+        Value = 6,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Ol'Trout."
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Trout.png"
+    },
+
+    ["Salmon"] = {
+        Name = "Salmon",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 10,
+        Value = 10,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Trusty Salmon."
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Salmon.png"
+    },
+
+    ["Tuna"] = {
+        Name = "Tuna",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 15,
+        Value = 15,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Big Tuna."
+        },
+        Data = false,
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = false,
+        Hotkey = false,
+        Image = "Tuna.png"
+    },
+
+    ["FishingRod"] = {
+        Name = "Fishing Rod",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 12,
+        Value = 25,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Big Bass Bonanza."
         },
         Data = false,
         Craftable = false,
@@ -50,7 +142,46 @@ c.items = { -- table of items
         Stackable = false,
         Consumeable = false,
         Hotkey = true,
-        Image = "Skateboard.png"
+        Image = "Fishingrod.png"
+    },
+
+    ["SenzuBean"] = {
+        Name = "Senzu Bean",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 9999,
+        Value = 9999,
+        Weight = 0,
+        Weapon = false,
+        Meta = {
+            About = "Dragon and BallZ'y."
+        },
+        Data = {
+            -- Modifiers change the rate of degridation
+            -- 1 - 10
+            Modifiers = {
+                Hunger = 1, -- number 1-10
+                Thirst = 1, -- number 1-10
+                Stress = 1 -- number 1-10
+            },
+            -- Status removes or adds the amount as intended out of 100
+            Status = {
+                Health = 200,
+                Armour = 100,
+                Hunger = 100, -- number -100 - 100
+                Thirst = 100, -- number -100 - 100
+                Stress = -50 -- number -100 - 100
+            }
+        },
+        Craftable = false,
+        Recipe = false,
+        Materials = false,
+        Stackable = true,
+        Consumeable = true,
+        Hotkey = true,
+        Image = "SenzuBean.png"
     },
 
     ["Phone"] = {
