@@ -588,25 +588,24 @@ function c.class.Player(source, character_id)
 
         local num = c.check.Number(v)
         local mod = c.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+        local billz = c.math.Decimals(num, 0)
 
         -- Dollarr Billz
-        if num >= 1 and amount >= 1 then
-            if (amount - num) > 0 then
-                self.Inventory[position].Quantity = amount - c.math.Decimals(num, 0)
-            elseif (amount - num) == 0 then
-                self.Inventory[position].Quantity = 1
-                self.RemoveItem("Cash", position)
+        if amount >= 1 then
+            if (amount - billz) == 0 then
+                self.RemoveItem("Cash", position, billz)
+            elseif (amount - billz) > 0 then
+                self.Inventory[position].Quantity = self.Inventory[position].Quantity - billz
             end
         end
 
         -- Coins
         if mod > 0 then
             if a >= 0 then
-                if (a - mod) > 0 then
+                if (a - mod) == 0 then
+                    self.RemoveItem("Change", p, mod)
+                elseif (a - mod) > 0 then
                     self.Inventory[p].Quantity = a - mod
-                elseif (a - mod) == 0 then
-                    self.Inventory[p].Quantity = 1
-                    self.RemoveItem("Change", p)
                     -- If you got chash, break it into change.
                 elseif (a - mod) <= 0 then
                     local _a, _p = self.GetItemQuantity("Cash")
@@ -1050,15 +1049,18 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param name any
     ---@param slot any
-    self.RemoveItem = function(name, slot)
+    self.RemoveItem = function(name, slot, amount)
         local quantity, position = self.GetItemQuantity(name)
-        if quantity >= 2 then
+        if quantity == amount then
+            table.remove(self.Inventory, position)
+        elseif quantity >= 2 then
             self.Inventory[position].Quantity = self.Inventory[position].Quantity - 1
         elseif quantity <= 1 and slot == position then
             table.remove(self.Inventory, position)
         else
             table.remove(self.Inventory, position)
         end
+        TriggerClientEvent("Client:Inventory:Update", self.ID)
     end
     --- func desc
     ---@param new any

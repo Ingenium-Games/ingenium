@@ -70,6 +70,13 @@ function c.item.GetData(name)
     return c.items[name].Data
 end
 
+--- func desc
+---@param name any
+function c.item.GetValue(name)
+    return c.items[name].Value
+end
+
+
 function c.item.ReturnPosition(name)
     for k,v in ipairs(c.items) do
         if v == name then
