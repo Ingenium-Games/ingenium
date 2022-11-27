@@ -11,11 +11,10 @@ NOTES
 
 conf.default.health = 150
 conf.default.armour = 100
-
 conf.default.bank = 500.00
-
 conf.default.accounts = {
     Bank = conf.default.bank
+    -- can add crpytos to accounts, just use GetAccount("NAME")
 }
 
 conf.default.modifiers = {
@@ -41,14 +40,11 @@ conf.default.jobaccounts = {
     Bank = 5000.00,
     Safe = 0.00
 }
-
 -- items
 conf.default.itemcraft = true
 conf.default.itemdegrade = false
-
 -- tax 
 conf.default.tax = 10.00
-
 -- 
 conf.default.skills = {
     --[[
