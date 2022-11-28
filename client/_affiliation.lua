@@ -1,6 +1,6 @@
 -- ====================================================================================--
 
-c.affil = {}
+c.affiliation = {}
 
 -- ====================================================================================--
 
@@ -54,7 +54,7 @@ local groups = {}
 --- Returns Groups after merging the default and Newly created groups.
 --- func desc
 ---@param . any
-function c.affil.GetGroups()
+function c.affiliation.GetGroups()
     local newgroups = c.table.merge(groups, defaultgroups)
     return newgroups
 end
@@ -63,7 +63,7 @@ end
 ---@param name string "Name of group : "NAME""
 ---@param grouphash string "Hash number of the group, typically starts with: "0x""
 ---@param relations table "Table of relations to iterate over : {['Companion'] = {}, ['Respect'] = {}, ['Like'] = {}, ['Nutral'] = {}, ['Dislike'] = {}, ['Hate'] = {}}"
-function c.affil.AddGroupToTable(name, grouphash, relations)
+function c.affiliation.AddGroupToTable(name, grouphash, relations)
     if not groups[name] then
         groups[name] = {["hash"] = grouphash, ["relations"] = relations} 
     end
@@ -72,10 +72,10 @@ end
 --- Returns the cappitalized name as entered and hash of the new group.
 ---@param str string "Can be lower case, will convert to UPPERCASE"
 ---@param relations table "Table of relations to iterate over : {['Companion'] = {}, ['Respect'] = {}, ['Like'] = {}, ['Nutral'] = {}, ['Dislike'] = {}, ['Hate'] = {}}"
-function c.affil.CreateGroup(str, relations)
+function c.affiliation.CreateGroup(str, relations)
     local name = c.check.String(string.upper(str))
     local _, grouphash = AddRelationshipGroup(name)
-    c.affil.AddGroupToTable(name, grouphash, relations)
+    c.affiliation.AddGroupToTable(name, grouphash, relations)
     return name, grouphash
 end
 
