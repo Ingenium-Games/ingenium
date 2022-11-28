@@ -24,12 +24,6 @@ function c.cron.OnTime(h, m)
 	end
 end
 
-
-RegisterCommand("crons", function()
-    print(c.table.Dump(c.crons))
-end, true)
-
-
 --[[
 local added = false
 AddEventHandler("onServerResourceStart", function()
