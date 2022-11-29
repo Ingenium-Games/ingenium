@@ -23,8 +23,7 @@ end
 
 --- Takes local information from the `user` SQL table and sets it for the client.
 function c.data.SetLocale()
-    local xPlayer = c.data.GetPlayer()
-    c.data.locale = xPlayer.Locale
+    c.locale = LocalPlayer.state.Locale
 end
 
 --- Sets the client as receieved the character data. Boolean

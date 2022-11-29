@@ -1,9 +1,6 @@
 -- ====================================================================================--
-
 conf.peds = {}
-
 -- ====================================================================================--
-
 conf.peds.gender = {
 	["a_c"] = -1,
 	["a_f_m"] = 1,
@@ -29,7 +26,6 @@ conf.peds.gender = {
 	["u_m_o"] = 0,
 	["u_m_y"] = 0,
 }
-
 conf.peds.description = {
 	{"a_c","Animal Character"},
 	{"a_f_m","Actor/Ambient Female Middleage"},
@@ -56,7 +52,6 @@ conf.peds.description = {
 	{"u_m_o","Unique Male Old"},
 	{"u_m_y","Unique Male Young"},
 }
-
 conf.peds.male = {	
 	[0x5442C66B] = {["name"] = "a_m_m_acult_01", ["description"] = "Altruist Cult Mid-Age Male"},
 	[0xD172497E] = {["name"] = "a_m_m_afriamer_01", ["description"] = "African American Male"},
@@ -414,7 +409,6 @@ conf.peds.male = {
 	[0x94AE2B8C] = {["name"] = "u_m_y_tattoo_01", ["description"] = "Tattoo Artist"},
 	[0xAC4B4506] = {["name"] = "u_m_y_zombie_01", ["description"] = "Zombie"}
 }
-
 conf.peds.female = {
 	[0x303638A7] = {["name"] = "a_f_m_beach_01", ["description"] = "Beach Female"},
 	[0xBE086EFD] = {["name"] = "a_f_m_bevhills_01", ["description"] = "Beverly Hills Female"},
@@ -555,7 +549,6 @@ conf.peds.female = {
 	[0xD2E3A284] = {["name"] = "u_f_y_princess", ["description"] = "Princess"},
 	[0x5B81D86C] = {["name"] = "u_f_y_spyactress", ["description"] = "Spy Actress"},
 }
-
 conf.peds.animals = {
 	[0xCE5FF074] = {["name"] = "a_c_boar", ["description"] = "Boar"},
 	[0x573201B8] = {["name"] = "a_c_cat_01", ["description"] = "Cat"},
@@ -590,7 +583,6 @@ conf.peds.animals = {
 	[0xA148614D] = {["name"] = "a_c_stingray", ["description"] = "Stingray"},
 	[0xAD7844BB] = {["name"] = "a_c_westy", ["description"] = "Westie"},
 }
-
 conf.peds.all = {
 	[0xCE5FF074] = {["name"] = "a_c_boar", ["description"] = "Boar"},
 	[0x573201B8] = {["name"] = "a_c_cat_01", ["description"] = "Cat"},

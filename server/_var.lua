@@ -9,7 +9,7 @@ c.sec = conf.sec
 c.min = conf.min
 c.hour = conf.hour
 c.day = conf.day
-c.Locale = conf.locale
+c.locale = conf.locale
 --
 -- _data.lua
 c._running = false

@@ -58,7 +58,6 @@ end
 function c.state.TriggerState(name, value)
     c.state.TriggerEffect(name, value)
     c.state.TriggerAction(name, value)
-    TriggerEvent("Client:Notify", c.states[name][value].description)
 end
 
 function c.state.TriggerEffect(name, value)
@@ -80,52 +79,52 @@ end
 ]]--
 
 local H = {
-    [1] = {"Is that a cookie?", function()
+    [1] = {"1", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [2] = {"Feeling peckish", function()
+    [2] = {"2", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [3] = {"Could go a snack", function()
+    [3] = {"3", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [4] = {"Feeling slightly hungry", function()
+    [4] = {"4", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [5] = {"I missed lunch..", function()
+    [5] = {"5", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [6] = {"Getting really hungry", function()
+    [6] = {"6", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [7] = {"Famished", function()
+    [7] = {"7", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [8] = {"Starving", function()
+    [8] = {"8", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [9] = {"Are you food?", function()
+    [9] = {"9", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [10] = {"Malnurished", function()
+    [10] = {"10", function()
         print("this is a effect")
     end, function()
         print("this is a action")
@@ -133,52 +132,52 @@ local H = {
 }
 
 local T = {
-    [1] = {"", function()
+    [1] = {"1", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [2] = {"", function()
+    [2] = {"2", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [3] = {"", function()
+    [3] = {"3", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [4] = {"", function()
+    [4] = {"4", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [5] = {"", function()
+    [5] = {"5", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [6] = {"", function()
+    [6] = {"6", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [7] = {"", function()
+    [7] = {"7", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [8] = {"", function()
+    [8] = {"8", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [9] = {"", function()
+    [9] = {"9", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [10] = {"", function()
+    [10] = {"10", function()
         print("this is a effect")
     end, function()
         print("this is a action")
@@ -186,52 +185,52 @@ local T = {
 }
 
 local S = {
-    [1] = {"", function()
+    [1] = {"1", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [2] = {"", function()
+    [2] = {"2", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [3] = {"", function()
+    [3] = {"3", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [4] = {"", function()
+    [4] = {"4", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [5] = {"", function()
+    [5] = {"5", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [6] = {"", function()
+    [6] = {"6", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [7] = {"", function()
+    [7] = {"7", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [8] = {"", function()
+    [8] = {"8", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [9] = {"", function()
+    [9] = {"9", function()
         print("this is a effect")
     end, function()
         print("this is a action")
     end},
-    [10] = {"", function()
+    [10] = {"10", function()
         print("this is a effect")
     end, function()
         print("this is a action")

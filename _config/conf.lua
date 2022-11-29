@@ -12,8 +12,6 @@ conf.url = {}
 conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ig.core/main/version.txt"
 conf.url.webhook_1 = "Example"
 conf.url.feedback = "https://discord.com/api/webhooks/1042417856802992158/4K0yK3_beGvS4ouY7cJPwcopP8SijZ4zZc6co4dYoYfr8iiSs3_F4QUxD14lQj_SfouN"
-conf.url.discorse_posts = "https://ingenium.games/posts"
-conf.url.discorse_api = "e2218c85b236dcd8381b4238d6b6f59b8f1c0fef68daa6687f34e43a1ee45804"
 --[[
 DEBUG :
     -- Up to you if you want to see whats going on or not.
@@ -81,14 +79,11 @@ DEFERALS :
 conf.forcename = true
 conf.discordlink = "https://discord.gg/zduUDU8Frv"
 conf.discordperms = true
-conf.discordrole = "834191331844030524"
-conf.discordsecret = "avy4e5NnpNYIv-tZrmIiUd2TDbS4fZb8"
-
+conf.discordrole = "1046933594767114250"
+conf.discordsecret = "vQxh5rpYe5ZqtgNv8FsR50MgcK3R8rXf"
 conf.websitelink = "https://ingenium.games"
- 
 -- Discord richPresenceText
 conf.discordid = "770792728979046431"
-
 --[[
 SCREENSHOTS :
     -- Host URL like 
@@ -124,9 +119,8 @@ conf.nui.sync = 200
 --[[
 TIMEZONE ADJUSTMENT: 
     -- Takes the server time, and change it based on 1 - 23 hours. 
-    -- You can do greater, but it will break your game.
 ]]--
-conf.altertime = 18
+conf.altertime = 0
 --[[
 JOBS AND DEFAULTS
     -- DEFAULT STARTING BALANCES FOR ALL JOBS IPON INITIAL CREATION
@@ -139,10 +133,6 @@ conf.enablejobpayroll = true
 conf.enablejobcenter = false
 conf.enableduty = true
 conf.paycycle = conf.min * 15
-
 -- ====================================================================================--
-
-
-
 conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
 conf.lock = nil

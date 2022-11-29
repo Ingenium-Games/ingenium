@@ -113,6 +113,7 @@ AddEventHandler("Client:Character:Loaded", function()
     -- Wait for state to be synced to local character
     c.data.SetLoadedStatus(true)
     c.chat.AddSuggestions()
+    c.data.SetLocale()
     --
     c.skill.SetSkills()
     c.status.SetPlayer()
