@@ -1,4 +1,4 @@
-SetDiscordAppId(conf.discordid)
+SetDiscordAppId(conf.discord.id)
 --[[
 Citizen.CreateThread(function()
 	while true do

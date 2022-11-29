@@ -179,7 +179,6 @@ end
 function c.status.StartStressIncrease()
     local function Do()
         if c.data.GetLoadedStatus() then
-            Wait(1)
             local sitting = exports["sit"]:IsSitting()
             local laying = exports["sit"]:IsLaying()
             if (not sitting) and (not laying) then
@@ -209,8 +208,8 @@ function c.status.SetPlayer()
     local ped = PlayerPedId()
     --
     -- Set to max prior to getting data from xplayer table.
-    SetEntityHealth(ped, conf.default.health)
-    SetPlayerMaxArmour(ply, conf.default.armour)
+    SetEntityHealth(ped, 150)
+    SetPlayerMaxArmour(ply, 100)
     --
     -- These will be usesd in healing items.
     SetPlayerHealthRechargeLimit(ply, 0)

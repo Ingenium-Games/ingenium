@@ -1,17 +1,11 @@
 -- ====================================================================================--
 conf = {}
--- Just some time, because fuck maths.
+-- ====================================================================================--
 conf.sec = 1000
 conf.min = 60 * conf.sec
 conf.hour = 60 * conf.min
 conf.day = 24 * conf.hour
 -- ====================================================================================--
-conf.versioncheck = false
--- ====================================================================================--
-conf.url = {}
-conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ig.core/main/version.txt"
-conf.url.webhook_1 = "Example"
-conf.url.feedback = "https://discord.com/api/webhooks/1042417856802992158/4K0yK3_beGvS4ouY7cJPwcopP8SijZ4zZc6co4dYoYfr8iiSs3_F4QUxD14lQj_SfouN"
 --[[
 DEBUG :
     -- Up to you if you want to see whats going on or not.
@@ -70,20 +64,6 @@ conf.spawn = {
     z = 13.74,
     h = 328.82,
 }
---[[
-DEFERALS :
-    [1] Force the user name of joining player to be alpha numeric characters only. No "<_-(.</?\)" etc.
-    [2] Use Discord for your community?  https://forum.cfx.re/t/discordroles-a-proper-attempt-this-time/1579427 
-    [3] Discord role to confirm the player is apart of the required guild.
-]]--
-conf.forcename = true
-conf.discordlink = "https://discord.gg/zduUDU8Frv"
-conf.discordperms = true
-conf.discordrole = "1046933594767114250"
-conf.discordsecret = "vQxh5rpYe5ZqtgNv8FsR50MgcK3R8rXf"
-conf.websitelink = "https://ingenium.games"
--- Discord richPresenceText
-conf.discordid = "770792728979046431"
 --[[
 SCREENSHOTS :
     -- Host URL like 

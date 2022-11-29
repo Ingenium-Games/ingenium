@@ -1,3 +1,6 @@
+--[[
+    Set numbers here to be used in your phone resources, if you want.
+]]--
 -- ====================================================================================--
 conf.phone = {
     police = 911,

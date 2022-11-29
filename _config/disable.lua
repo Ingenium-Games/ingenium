@@ -1,10 +1,9 @@
+--[[
+	Things to disable on your server, these are triggered via the onesync events
+	EntityCreating and EntityCreated
+]]--
 -- ====================================================================================--
 conf.disable = {}
---[[
-NOTES
-	- Things to disable on your server, these run in loops that either prevent the spawn
-	- or delete after the spawn has taken place.
-]] --
 -- ====================================================================================--
 conf.disable.peds = {}
 conf.disable.weapons = {}

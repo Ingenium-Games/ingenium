@@ -69,8 +69,8 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     d.update("If you get stuck here, please open Discord and try again...")
     --
     local discord = false
-    if conf.discordperms then
-        exports["discordroles"]:isRolePresent(src, conf.discordrole, function(hasRole, roles)
+    if conf.discord.permissions then
+        exports["discordroles"]:isRolePresent(src, conf.discord.role, function(hasRole, roles)
             if hasRole then
                 discord = true
             else

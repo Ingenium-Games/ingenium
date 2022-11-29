@@ -1,37 +1,17 @@
 -- ====================================================================================--
 conf.default = {}
---[[
-NOTES
-	-
-	-
-	-
-]] --
 -- ====================================================================================--
--- character
 
-conf.default.health = 150
-conf.default.armour = 100
-conf.default.bank = 500.00
+-- Accounts 
 conf.default.accounts = {
-    Bank = conf.default.bank
-    -- can add crpytos to accounts, just use GetAccount("NAME")
+    Bank = 500.00,
+    Bitcoin = 0.00,
 }
 
-conf.default.modifiers = {
-    Hunger = 1,
-    Thirst = 1,
-    Stress = 1
-}
+-- Default skills ever new character has.
+conf.default.skills = {}
 
-conf.default.stats = {
-    Hunger = 100, -- Min 0 Max 100
-    Thirst = 100, -- Min 0 Max 100
-    Stress = 0 -- Min 0 Max 100
-}
-
-conf.default.selfdamage = 3
-
--- jobs
+-- Default Job and Accounts for new jobs found in the DB.
 conf.default.job = {
     Name = "none",
     Grade = 1
@@ -40,28 +20,24 @@ conf.default.jobaccounts = {
     Bank = 5000.00,
     Safe = 0.00
 }
--- items
+
+-- Defaults for modifier and statuses of characters
+conf.default.modifiers = {
+    Hunger = 1,
+    Thirst = 1,
+    Stress = 1
+}
+conf.default.stats = {
+    Hunger = 100, -- Min 0 Max 100
+    Thirst = 100, -- Min 0 Max 100
+    Stress = 0 -- Min 0 Max 100
+}
+conf.default.selfdamage = 3
+
+
+-- Enable Item Craft / Degarde
 conf.default.itemcraft = true
 conf.default.itemdegrade = false
--- tax 
+
+-- City job tax rate on all payments
 conf.default.tax = 10.00
--- 
-conf.default.skills = {
-    --[[
-        -- General Repair
-        Mechanics = 0,
-        -- Weaponry
-        Gunsmithy = 0,
-        -- Electrical goods
-        Electronics = 0,
-        -- Knowledge of plants
-        Botany = 0,
-        -- Built by Physical Labour
-        Physique = 0,
-        -- Hunting
-        Hunting = 0,
-        --
-        Theivery = 0,
-        --
-    ]]--
-}
