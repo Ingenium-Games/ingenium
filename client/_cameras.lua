@@ -4,7 +4,7 @@ c.cameras = {}
 -- ====================================================================================--
 
 --- func desc
----@param . any
+---@param t any
 function c.camera.NewName(t)
     local val
     local find = false

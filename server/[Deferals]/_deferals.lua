@@ -45,7 +45,13 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             Queue.AddPriority(data.Steam_ID)
         end
     end
-    --    
+    --[[ 
+
+        This section detects any non alphanumeric characters in usernames. 
+        This was to help in conjunciton with the whole, people useing innerHTML rather than innerText in NUI resources. 
+        Becasue people would run scripts for names and crash your shit. 
+        Well, since this also stops people with spaces in their names from joining, Im commenting it out.
+    
     local namecheck = name:match("%W")
     if namecheck then
         drop = true
@@ -63,6 +69,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             }))
         end
     end
+    ]]--
     --
     Citizen.Wait(0)
     d.update("If you get stuck here, please open Discord and try again...")

@@ -1,3 +1,4 @@
+-- https://github.com/Nick78111/ConnectQueue/issues/25 Awaiting reply.
 local Queue = {}
 -- EDIT THESE IN SERVER.CFG + OTHER OPTIONS IN QConfig.LUA
 Queue.MaxPlayers = GetConvarInt("sv_maxclients", 48)

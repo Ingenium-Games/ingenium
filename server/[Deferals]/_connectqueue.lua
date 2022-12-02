@@ -1,3 +1,5 @@
+-- https://github.com/Nick78111/ConnectQueue/issues/25 Awaiting reply.
+
 QConfig = {}
 
 -- priority list can be any identifier. (hex steamid, steamid32, ip) Integer = power over other people with priority
