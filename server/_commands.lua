@@ -21,6 +21,7 @@ RegisterCommand("duty", function(source, args, rawCommand)
     end
 end, false)
 
+-- Experimental
 ExecuteCommand("add_ace group.public command.switch allow")
 RegisterCommand("switch", function(source, args, rawCommand)
     local src = source
@@ -82,24 +83,6 @@ RegisterCommand("car", function(source, args, rawCommand)
     local xPlayer = c.data.GetPlayer(src)
     local ords = xPlayer.GetCoords()
     local entity = CreateVehicle(args[1], ords.x + 2.0, ords.y + 1.0, ords.z, ords.h, true, false)
-    TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
-end, true)
-
-
-ExecuteCommand("add_ace group.mod command.unpark allow")
-RegisterCommand("unpark", function(source, args, rawCommand)
-    local src = source
-    local xPlayer = c.data.GetPlayer(src)
-    local ords = xPlayer.GetCoords()
-    local plate = args[1]
-    local data = c.sql.veh.GetByPlate(plate)[1]
-    local ent = CreateVehicle(data.Model, ords.x + 2.0, ords.y + 1.0, ords.z, ords.h, true, false)
-    while not DoesEntityExist(ent) do
-        Citizen.Wait(0)
-    end
-    local net = NetworkGetNetworkIdFromEntity(ent)
-    SetVehicleNumberPlateText(ent, data.Plate)
-    c.data.AddVehicle(net, c.class.OwnedVehicle, net, data)
     TriggerEvent("txaLogger:CommandExecuted", rawCommand.. " by "..xPlayer.GetName()) -- txAdmin logging Callback
 end, true)
 

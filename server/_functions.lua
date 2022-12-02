@@ -137,6 +137,8 @@ function c.func.Discord(url, color, name, message, footer)
     })
 end
 
+
+-- This one probably doesnt work, was testing with it for a while.
 --- func desc
 ---@param url any
 ---@param color any

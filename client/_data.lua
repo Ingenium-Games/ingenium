@@ -84,7 +84,7 @@ function c.SetLocalPlayerState(key, value, sync)
 end
 
 --- Return the Players"s state bag.
----@param id any "Player"s Server Id"
+---@param id any "Player's Server Id"
 function c.data.GetPlayer(id)
     local id = id or -1
     return Player(id).state
@@ -97,7 +97,7 @@ function c.data.GetPlayerState(id, key)
 end
 
 --- Return the Players"s state bag.
----@param id any "Player"s Server Id"
+---@param id any "Player's Server Id"
 function c.GetPlayerState(id, key)   
     return c.data.GetPlayerState(id, key)
 end
@@ -145,7 +145,7 @@ end
 --- func desc
 ---@param net any "The passed client entity"
 ---@param key any "The state bag key you want to get the data from."
-function c.data.GetEntityState2(net, key)
+function c.data.GetEntityStateCheck(net, key)
     local entity = NetworkGetEntityFromNetworkId(net)
     local type = GetEntityType(entity)
     --

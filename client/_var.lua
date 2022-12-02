@@ -14,8 +14,3 @@ c.locale = conf.locale
 -- _data.lua
 c._loaded = false
 c._character = nil
---
-function GetLocale()
-    return conf.locale
-end
-exports("GetLocale", GetLocale)

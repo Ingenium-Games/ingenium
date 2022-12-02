@@ -24,7 +24,7 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Disable Pistol Butting
+-- Disable Pistol Butting?
 Citizen.CreateThread(function()
     while true do
         local ped = PlayerPedId()
