@@ -1,3 +1,6 @@
+-- ====================================================================================--
+
+-- ====================================================================================--
 -- [C]
 AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, net)
     local condition = c.func.GetVehicleCondition(vehicle)

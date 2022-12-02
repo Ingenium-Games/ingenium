@@ -1,12 +1,10 @@
 -- ====================================================================================--
-
 -- Setters for this need something almost global as functions didnt work dynamically within the callbacks?
 c.weapon = {}
 -- _weapons.lua
 c._weapon = nil
 c._weaponname = nil
 c._components = nil
-
 -- ====================================================================================--
 
 function c.weapon.Get()

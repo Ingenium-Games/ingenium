@@ -1,8 +1,6 @@
 -- ====================================================================================--
-
 if not c.sql then c.sql = {} end
 c.sql.jobs = {}
-
 -- ====================================================================================--
 
 --- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.

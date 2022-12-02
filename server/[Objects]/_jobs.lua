@@ -2,7 +2,6 @@
 c.job = {} -- Function Table
 c.jobs = {} -- DB Pull
 c.jdex = {} -- Job Index for xJobs functions.
-
 -- ====================================================================================--
 
 --- func desc

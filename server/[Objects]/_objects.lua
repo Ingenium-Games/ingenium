@@ -1,9 +1,7 @@
 -- ====================================================================================--
-
 c.object = {} -- function level
 c.objects = {} -- database pull 
 c.odex = {} -- the odex/store for currently used objects prior to storage
-
 -- ====================================================================================--
 
 --[[

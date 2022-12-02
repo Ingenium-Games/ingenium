@@ -1,6 +1,5 @@
 --[[
 	
-
 c.persistance = {}
 
 AddStateBagChangeHandler("Condition", nil, function(bagName, key, value, _unused, replicated)

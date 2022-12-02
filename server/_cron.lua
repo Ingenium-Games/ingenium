@@ -1,8 +1,6 @@
 -- ====================================================================================--
-
 c.cron = {} -- functions
 c.crons = {} -- table of jobs to action @ times.
-
 -- ====================================================================================--
 
 -- https://github.com/esx-framework/esx-legacy/blob/main/%5Besx%5D/cron/server/main.lua

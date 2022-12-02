@@ -4,7 +4,6 @@ c.times = {
     Live = {0, 0},
     OT = false,
 }
-
 -- ====================================================================================--
 -- I miss NetworkOverrideClockMillisecondsPerGameMinute()
 

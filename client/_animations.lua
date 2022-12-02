@@ -1,7 +1,5 @@
 -- ====================================================================================--
-
 c.animation = {}
-
 -- ====================================================================================--
 RegisterNetEvent("Animation:General:ArmsCrossed")
 AddEventHandler("Animation:General:ArmsCrossed", function(bool, ped)

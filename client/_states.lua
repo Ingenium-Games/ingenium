@@ -1,8 +1,6 @@
 -- ====================================================================================--
-
 c.state = {} -- functions
 c.states = {} -- table of potential states to become etc.
-
 -- ====================================================================================--
 
 ---- Add States to the Table prior to being locked on server boot.

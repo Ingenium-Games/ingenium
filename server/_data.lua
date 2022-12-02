@@ -1,8 +1,6 @@
 -- ====================================================================================--
-
 c.data = {} -- data table for funcitons.
 c.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
-
 -- ====================================================================================--
 
 --- Used on startup prior to the server really running.

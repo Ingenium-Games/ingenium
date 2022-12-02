@@ -1,4 +1,6 @@
+-- ====================================================================================--
 
+-- ====================================================================================--
 local Weapon = RegisterClientCallback({
     eventName = "Client:Item:Weapon",
     eventCallback = function(k, ammo, ammotype, hash, components)

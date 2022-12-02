@@ -1,7 +1,5 @@
 -- ====================================================================================--
-
 c.func = {}
-
 -- ====================================================================================--
 
 --- func desc
@@ -77,6 +75,61 @@ end
 function c.func.Timestring(time)
     local time = time or c.func.Timestamp()
     return os.date("%c", time)
+end
+
+-- ====================================================================================--
+-- Credits to Linden
+-- 
+local intervals = {}
+--- Dream of a world where this PR gets accepted.
+---@param callback function | number
+---@param interval? number
+---@param ... any
+function c.func.SetInterval(callback, interval, ...)
+	interval = interval or 0
+
+    if type(interval) ~= 'number' then
+        return error(('Interval must be a number. Received %s'):format(json.encode(interval --[[@as unknown]])))
+    end
+
+	local cbType = type(callback)
+
+	if cbType == 'number' and intervals[callback] then
+		intervals[callback] = interval or 0
+		return
+	end
+
+    if cbType ~= 'function' then
+        return error(('Callback must be a function. Received %s'):format(cbType))
+    end
+
+	local args, id = { ... }
+
+	Citizen.CreateThreadNow(function(ref)
+		id = ref
+		intervals[id] = interval or 0
+		repeat
+			interval = intervals[id]
+			Wait(interval)
+			callback(table.unpack(args))
+		until interval < 0
+		intervals[id] = nil
+	end)
+
+	return id
+end
+
+---@param id number
+function c.func.ClearInterval(id)
+    if type(id) ~= 'number' then
+        return error(('Interval id must be a number. Received %s'):format(json.encode(id --[[@as unknown]])))
+	end
+
+    if not intervals[id] then
+        return error(('No interval exists with id %s'):format(id))
+	end
+
+	intervals[id] = -1
 end
 
 -- ====================================================================================--
