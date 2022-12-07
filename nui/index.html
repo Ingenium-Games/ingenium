@@ -29,13 +29,12 @@
             <p id="city"></p>
             <h3>Phone Number:</h3>
             <p id="phone"></p>
-            
             <br />
-            <div id="Options">
-                <a id="Play" class="Selector Character tooltip" onclick="CharacterJoin();" style="display: none;"><img src="img/icons8-checkmark-100.png" /><span class="tooltiptext">Enter</span></a>
-                <a id="Kill" class="Selector Character tooltip" onclick="CharacterDelete();"style="display: none;"><img src="img/icons8-trash-100.png" /><span class="tooltiptext">Delete</span></a>
-            </div>
         </div>
+    </div>
+    <div id="Options">
+        <a id="Play" class="Selector Character tooltip" onclick="CharacterJoin();" style="display: none;"><img src="img/icons8-checkmark-100.png" /><span class="tooltiptext">Enter</span></a>
+        <a id="Kill" class="Selector Character tooltip" onclick="CharacterDelete();"style="display: none;"><img src="img/icons8-trash-100.png" /><span class="tooltiptext">Delete</span></a>
     </div>
     <!-- Character Top Down Slider -->
     <div id="CharacterList" style="display: none;">
@@ -50,14 +49,10 @@
             <input name="FirstName" id="FirstName" placeholder="-" pattern="[A-Z/a-z]{1,25}" minlength="2" maxlength="25" type="text" required>
             <p>Last Name</p>
             <input name="LastName" id="LastName" placeholder="-" pattern="[A-Z/a-z]{1,25}" minlength="2" maxlength="25" type="text" required>
-            <p>Height</p>
-            <input name="Height" id="Height" type="text" placeholder="-" pattern="[0-9]{3,3}" maxlength="3" required>
-            <p>Date of Birth</p>
-            <input name="DateOfBirth" id="DateOfBirth" placeholder="DD-MM-YYYY" required>
             <br />
             <br />
             <br />
-            <input class="submit" type="submit" value="Submit">
+            <input class="submit" type="submit" value="Create">
             <br />
             <br />
             <br />

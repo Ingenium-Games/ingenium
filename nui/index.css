@@ -1,20 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 
-* {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-html {
-  width: 100vw !important;
-  height: 100vh !important;
-  background-color: rgba(0, 0, 0, 0) !important;
-  overflow: scroll;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 0.45vw;
 }
 
 /* Track */
@@ -28,121 +15,151 @@ html {
   border-radius: 0px;
 }
 
-input:invalid {
-  border-color: rgb(211, 31, 31);
+* {
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
-input, input:valid {
-  border-color: rgb(27, 24, 24);
+html {
+  width: 100vw;
+  height: 100vw;
+  background-color: rgba(0, 0, 0, 0);
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
+/* Body */
 body {
   background-color: rgba(0, 0, 0, 0);
 }
 
 #Information h1 {
   color: #fff;
-  font-size: 1.32em;
-  padding-top: 4vh;
+  font-size: 0.95vw;
+  padding-top: 4vw;
   padding-left: 3vw;
   text-shadow: 4px 4px 10px #000000;
 }
 
 #Information h3 {
   color: #fff;
-  font-size: 1.15em;
+  font-size: 0.65vw;
   padding-left: 3vw;
   text-shadow: 2px 2px 4px #000000;
 }
 
 #Information p {
   color: #fff;
-  font-size: 0.95em;
+  font-size: 0.55vw;
   padding-left: 3.5vw;
   text-shadow: 2px 2px 4px #000000;
 }
 
-#Play {
-  bottom: 2vh !important;
-  right: 2vw !important;
-  width: 5.35vw;
-  height: 13vh;
-  position: absolute !important;
-}
-
-#Kill {
-  bottom: 2vh !important;
-  right: 18vw !important;
-  width: 5.35vw;
-  height: 13vh;
-  position: absolute !important;
-}
+/* CharacterInfo Area */
 
 #Sidebar {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.75) !important;
+  background-color: rgba(0, 0, 0, 0.705);
   z-index: 1;
-  top: 0px !important;
-  left: 0px !important;
-  width: 25.55vw !important;
-  height: 100vh !important;
+  top: 0vw;
+  left: 0vw;
+  width: 18.55vw;
+  height: 100vh;
   white-space: nowrap;
   overflow-y: hidden;
-  bottom: 0px !important;
+  bottom: 0px;
   position: absolute;
 }
+
+/* The row for characters */
 
 #Row {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.75) !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 2;
-  top: 0px !important;
-  left: 25.55vw !important;
-  width: 6.80vw !important;
-  height: 100vh !important;
-  border-left: 4vw !important;
-  border-left-color: black !important;
+  top: 0vw;
+  left: 18.55vw;
+  width: 5.4vw;
+  height: 100vh;
+  border-left: 2vw;
+  border-left-color: black;
   white-space: pre-wrap;
   overflow-x: hidden;
   overflow-y: scroll;
-  bottom: 0px !important;
+  bottom: 0vw;
   position: absolute;
 }
 
-.Selector {
-  padding-top: 15px !important;
-  padding-left: 0px !important;
+/* CharacterInfo Area */
+
+#Options {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 1vw 1vw 0vw 0vw;
+  z-index: 3;
+  bottom: 0vw;
+  left: 40vw;
+  right: 40vw;
+  width: 20vw;
+  height: 6.2vw;
+  white-space: nowrap;
+  position: absolute;
 }
 
-.Character {
-  padding-top: 15px !important;
-  padding-left: 35px !important;
+#Play {
+  bottom: 2vw;
+  left: 1.72vw;
+  width: 2.72vw;
+  height: 2.72vw;
+  position: absolute;
 }
+
+#Kill {
+  bottom: 2vw;
+  right: 3.0vw;
+  width: 2.72vw;
+  height: 2.72vw;
+  position: absolute;
+}
+
+/* Selectors for characters */
 
 a {
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
 a img {
-  border: 0px !important;
-  margin: 0 !important;
-  max-width: 70px !important;
-  max-height: 70px !important;
-  border-color: rgba(0, 0, 0, 0) !important;
-  border: 0px solid rgba(0, 0, 0, 0.25) !important;
-  border-radius: 50% !important;
-  background-color: rgba(255, 255, 255, 0.25) !important;
+  border: 0px;
+  margin: 0;
+  max-width: 2.72vw;
+  max-height: 2.72vw;
+  border-color: rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 a img:hover {
-  border: 0px !important;
-  margin: 0 !important;
-  max-width: 70px !important;
-  max-height: 70px !important;
-  border-color: rgba(0, 0, 0, 0) !important;
-  border: 0px solid rgba(0, 0, 0, 0.25) !important;
-  border-radius: 50% !important;
-  background-color: rgba(0, 0, 0, 0.25) !important;
+  border: 0px;
+  margin: 0;
+  max-width: 2.72vw;
+  max-height: 2.72vw;
+  border-color: rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.Selector {
+  padding-top: 0.12vw;
+  padding-left: 0vw;
+}
+
+.Character {
+  padding-top: 0.12vw;
+  padding-left: 1.32vw;
 }
 
 /* Useful tooltip hover functions. */
@@ -154,17 +171,17 @@ a img:hover {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 100px;
+  width: 3.2vw;
   background-color: black;
   font-size: 12px;
   color: #fff;
   text-align: center;
-  padding: 9px 0;
-  border-radius: 6px;
+  padding: 0.32vw 0;
+  border-radius: 0.22vw;
   position: absolute;
   z-index: 30;
-  top: 100px;
-  left: 20px;
+  top: 3.45vw;
+  left: 1.05vw;
 }
 
 .tooltip:hover .tooltiptext {
@@ -182,20 +199,29 @@ a img:hover {
   border-color: transparent transparent black transparent;
 }
 
+/* Character Enter Info */
+
+input:invalid {
+  border-color: rgb(211, 31, 31);
+}
+
+input, input:valid {
+  border-color: rgb(27, 24, 24);
+}
+
 /* Character Data Input Field */
 
 .FeildSet {
-  background-color: rgba(0, 0, 0, 0.75) !important;
+  background-color: rgba(0, 0, 0, 0.75);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 12px;
   border-radius: 22px;
-  font-size: 1em;
+  font-size: 1vw;
   position: absolute;
   border: hidden;
-  width: 19vw;
+  width: 16vw;
   top: 25vh;
-  left:40vw;
-  right:40vw !important;
+  left: 42vw;
+  right: 42vw;
   z-index: 29;
 }
 
@@ -204,15 +230,18 @@ a img:hover {
   color: #fff;
   font-weight: 700;
   text-align: center;
+  margin-bottom: 0.45vw;
+  padding-top: 0.45vw;
 }
 
 .FeildSet input {
   text-align: center;
   position: relative;
-  width: 40%;
-  left:30%;
-  right:30%;
+  width: 60%;
+  left: 20%;
+  right: 20%;
   color:#fff;
-  font-size: 14px;
-  background-color: rgba(0, 0, 0, 0.35) !important;
+  font-size: 0.85vw;
+  margin-bottom: 0.45vw;
+  background-color: rgba(0, 0, 0, 0.35);
 }

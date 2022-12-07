@@ -3,7 +3,7 @@
 -- ====================================================================================--
 -- Character Selections
 
-RegisterNUICallback("Client:Character:Join", function(Data, cb)
+RegisterNUICallback("__Join", function(Data, cb)
     if not Data.ID then CancelEvent() return end
     SetNuiFocus(false, false)
     TriggerServerEvent("Server:Character:Join", Data.ID)
@@ -12,17 +12,17 @@ RegisterNUICallback("Client:Character:Join", function(Data, cb)
 end)
 
 -- Not currently in use...
-RegisterNUICallback("Client:Character:Delete", function(Data, cb)
+RegisterNUICallback("__Delete", function(Data, cb)
     if not Data.ID then CancelEvent() return end
     SetNuiFocus(false, false)
     TriggerServerEvent("Server:Character:Delete", Data.ID)
     cb("ok")
 end)
 
-RegisterNUICallback("Client:Character:Register", function(Data, cb)
+RegisterNUICallback("__Register", function(Data, cb)
     SetNuiFocus(false, false)
     SetFollowPedCamViewMode(0)
     local appearance = exports["fivem-appearance"]:getPedAppearance(PlayerPedId())
-    TriggerServerEvent("Server:Character:Register", Data.First_Name, Data.Last_Name, Data.Height, Data.Birth_Date, appearance)
+    TriggerServerEvent("Server:Character:Register", Data.First_Name, Data.Last_Name, appearance)
     cb("ok")
 end)

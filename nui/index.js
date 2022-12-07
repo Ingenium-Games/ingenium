@@ -52,7 +52,7 @@ function Selected(key) {
 
 function CharacterDelete() {
     if (Character_ID !== null) {
-        $.post("https://ig.core/Client:Character:Delete", JSON.stringify({
+        $.post("https://ig.core/__Delete", JSON.stringify({
             ID: Character_ID,
         }));
     };
@@ -60,7 +60,7 @@ function CharacterDelete() {
 
 function CharacterJoin() {
     if (Character_ID !== null) {
-        $.post("https://ig.core/Client:Character:Join", JSON.stringify({
+        $.post("https://ig.core/__Join", JSON.stringify({
             ID: Character_ID,
         }));
         $("#Sidebar").remove();
@@ -72,21 +72,15 @@ function CharacterMake() {
     // Prevent form from submitting 
     var fn = document.getElementById("FirstName").value;
     var ln = document.getElementById("LastName").value;
-    var cm = document.getElementById("Height").value;
-    var dob = document.getElementById("DateOfBirth").value;
-    $.post("https://ig.core/Client:Character:Register", JSON.stringify({
+    $.post("https://ig.core/__Register", JSON.stringify({
         First_Name: fn,
         Last_Name: ln,
-        Height: cm,
-        Birth_Date: dob,
     }));
     $("#CharacterMake").remove();
 };
 
 $(document).ready(function () {
     window.onload = (e) => {
-        $("#DateOfBirth").mask("00-00-0000", { clearIfNotMatch: true });
-        $("#Height").mask("000", { clearIfNotMatch: true });
         $("#CharacterMake").submit((e) => {
             if (e.defaultPrevented) {
                 return; // Do nothing if the event was already processed
@@ -102,16 +96,6 @@ $(document).ready(function () {
                 LastName: {
                     minlength: 1,
                     maxlength: 35,
-                    required: true
-                },
-                Height: {
-                    minlength: 3,
-                    maxlength: 3,
-                    required: true
-                },
-                DateOfBirth: {
-                    minlength: 10,
-                    maxlength: 10,
                     required: true
                 }
             },
