@@ -23,6 +23,7 @@ function OnJoin(data) {
 
 function Selected(key) {
     if (key === "New") {
+        $("#Options").show()
         $("#Play").show()
         $("#Kill").hide()
         Character_ID = "New"
@@ -32,6 +33,7 @@ function Selected(key) {
         document.getElementById("city").innerText = "Click the tick"
         document.getElementById("phone").innerText = "Click the tick"
     } else {
+        $("#Options").show()
         $("#Play").show()
         $("#Kill").show()
         Character_ID = Characters[key].Character_ID
