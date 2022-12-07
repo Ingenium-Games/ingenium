@@ -1,22 +1,26 @@
 -- ====================================================================================--
+-- https://github.com/sesipod/FiveM/blob/master/resources/%5BStart-3%5D/es_extended/locale.lua
 
-function Locale(key)
-    local locale = c.locale
-    local f, err = io.open(GetResourcePath(GetCurrentResourceName()).."/locale/"..locale, "r")
-    if not f then c.func.Debug_1(err) end
-    local data = json.decode(f:read("a"))
-    f:close()
-    return data[key]
+Locales = {}
+
+function _(str, ...)  -- Translate string
+
+  if Locales[c.locale] ~= nil then
+
+    if Locales[c.locale][str] ~= nil then
+      return string.format(Locales[c.locale][str], ...)
+    else
+      return 'Translation [' .. c.locale .. '][' .. str .. '] does not exists'
+    end
+
+  else
+    return 'Locale [' .. c.locale .. '] does not exists'
+  end
+
 end
 
-function _L(key)
-    return Locale(key)
+function _L(str, ...) -- Translate string first char uppercase
+  return tostring(_(str, ...):gsub("^%l", string.upper))
 end
 
-function L_(key)
-    return Locale(key)
-end
-
-export("Locale", Locale)
-export("_L", _L)
-export("L_", L_)
+exports("_L", _L)
