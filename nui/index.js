@@ -67,6 +67,7 @@ function CharacterJoin() {
         }));
         $("#Sidebar").remove();
         $("#CharacterList").remove();
+        $("#Options").remove();
     };
 };
 

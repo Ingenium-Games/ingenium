@@ -50,7 +50,7 @@ end)
 
 -- Need to move this and clean it the fuck up, its gross atm.
 -- [S]
-RegisterNetEvent("Server:Character:Register", function(first_name, last_name, height, birth_date, appearance)
+RegisterNetEvent("Server:Character:Register", function(first_name, last_name, appearance)
     local src = tonumber(source)
     -- Run a check to see if it being exploited.
     if c.data.GetPlayer(src) ~= false then
@@ -69,8 +69,6 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, he
     data.Character_ID = character_id -- Unique ID
     data.First_Name = first_name
     data.Last_Name = last_name
-    data.Height = height
-    data.Birth_Date = birth_date
     data.City_ID = city_id
     data.Phone = phone_number
     data.Iban = iban

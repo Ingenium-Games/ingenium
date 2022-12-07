@@ -5,7 +5,7 @@ c.sql.char = {}
 -- SHould remake htis one..
 function c.sql.char.Add(t, cb)
     MySQL.Async.execute(
-        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Height`, `Birth_Date`, `Iban`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`, `Skills`) VALUES (@Created, @Last_Seen, @Primary_ID, @Character_ID, @City_ID, @First_Name, @Last_Name, @Height, @Birth_Date, @Iban, @Phone, @Coords, @Accounts, @Modifiers, @Appearance, @Skills);",
+        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Iban`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`, `Skills`) VALUES (@Created, @Last_Seen, @Primary_ID, @Character_ID, @City_ID, @First_Name, @Last_Name, @Iban, @Phone, @Coords, @Accounts, @Modifiers, @Appearance, @Skills);",
         {
             Created = c.func.Timestamp(),
             Last_Seen = c.func.Timestamp(),
@@ -14,8 +14,6 @@ function c.sql.char.Add(t, cb)
             City_ID = t.City_ID,
             First_Name = t.First_Name,
             Last_Name = t.Last_Name,
-            Height = t.Height,
-            Birth_Date = t.Birth_Date,
             Iban = t.Iban,
             Phone = t.Phone,
             Coords = t.Coords,
