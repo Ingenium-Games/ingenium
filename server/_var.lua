@@ -14,4 +14,3 @@ c.locale = conf.locale
 -- _data.lua
 c._running = false
 c._loading = true
-c._tax = conf.default.tax 
