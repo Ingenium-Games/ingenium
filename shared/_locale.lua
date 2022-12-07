@@ -3,24 +3,21 @@
 
 Locales = {}
 
-function _(str, ...)  -- Translate string
-
-  if Locales[c.locale] ~= nil then
-
-    if Locales[c.locale][str] ~= nil then
-      return string.format(Locales[c.locale][str], ...)
+function _(key) -- Translate string
+    local locale = exports["ig.core"]:GetLocale()
+    if Locales[locale] ~= nil then
+        if Locales[locale][key] ~= nil then
+            return string.format(Locales[locale][key])
+        else
+            return 'Translation [' .. locale .. '][' .. key .. '] does not exists'
+        end
     else
-      return 'Translation [' .. c.locale .. '][' .. str .. '] does not exists'
+        return 'Locale [' .. locale .. '] does not exists'
     end
-
-  else
-    return 'Locale [' .. c.locale .. '] does not exists'
-  end
-
 end
 
-function _L(str, ...) -- Translate string first char uppercase
-  return tostring(_(str, ...):gsub("^%l", string.upper))
+function _L(key) -- Translate string first char uppercase
+    return tostring(_(key):gsub("^%l", string.upper))
 end
 
 exports("_L", _L)

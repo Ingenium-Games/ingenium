@@ -56,9 +56,6 @@ function c.class.Player(source, character_id)
     self.City_ID = char.City_ID -- X-00000
     self.State.City_ID = self.City_ID
     --
-    self.Birth_Date = char.Birth_Date
-    self.State.Birth_Date = self.Birth_Date
-    --
     self.First_Name = char.First_Name
     self.State.First_Name = self.First_Name
     --

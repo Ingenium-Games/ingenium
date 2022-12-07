@@ -11,6 +11,11 @@ c.hour = conf.hour
 c.day = conf.day
 c.locale = conf.locale
 --
+function GetLocale()
+    return c.locale
+end
+exports("GetLocale", GetLocale)
+--
 -- _data.lua
 c._loaded = false
 c._character = nil
