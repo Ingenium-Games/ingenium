@@ -8,12 +8,12 @@ version "0.9.0"
 lua54 "yes"
 ui_page "nui/index.html"
 ------------------------------------------------------------------------------
-shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_c.lua"}
+shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_c.lua", "shared/_locale.lua"}
 ------------------------------------------------------------------------------
-client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "client/_functions.lua",
+client_scripts {"client/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "client/_functions.lua",
                 "client/**/*.lua"}
 ------------------------------------------------------------------------------
-server_scripts {"@restfx/build/import.lua", "@oxmysql/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]/*.lua",
+server_scripts {"@restfx/build/import.lua", "@oxmysql/lib/MySQL.lua", "server/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua",
                 "shared/[Third Party]/*.lua", "server/_functions.lua", "server/_cron.lua", "server/[Doors]/_doors.lua",
                 "server/**/*.lua"}
 ------------------------------------------------------------------------------
