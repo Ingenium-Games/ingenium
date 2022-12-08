@@ -1,63 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
-
-::-webkit-scrollbar {
-  width: 0.45vw;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 0px 0px 0px 0px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: lightslategrey;
-  border-radius: 0px;
-}
-
-* {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-html {
-  width: 100vw;
-  height: 100vw;
-  background-color: rgba(0, 0, 0, 0);
-  overflow: scroll;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-/* Body */
-body {
-  background-color: rgba(0, 0, 0, 0);
-}
-
-#Information h1 {
+.character-select .character-select-information h1 {
   color: #fff;
   font-size: 0.95vw;
   padding-top: 4vw;
   padding-left: 3vw;
-  text-shadow: 4px 4px 10px #000000;
+  text-shadow: 4px 4px 10px .000000;
 }
 
-#Information h3 {
+.character-select .character-select-information h3 {
   color: #fff;
   font-size: 0.65vw;
   padding-left: 3vw;
-  text-shadow: 2px 2px 4px #000000;
+  text-shadow: 2px 2px 4px .000000;
 }
 
-#Information p {
+.character-select .character-select-information p {
   color: #fff;
   font-size: 0.55vw;
   padding-left: 3.5vw;
-  text-shadow: 2px 2px 4px #000000;
+  text-shadow: 2px 2px 4px .000000;
 }
 
 /* CharacterInfo Area */
 
-#Sidebar {
+.character-select .character-select-info {
   color: #fff;
   background-color: rgba(0, 0, 0, 0.705);
   z-index: 1;
@@ -73,7 +38,7 @@ body {
 
 /* The row for characters */
 
-#Row {
+.character-select .character-select-row {
   color: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: rgba(0, 0, 0, 0.75);
@@ -93,7 +58,7 @@ body {
 
 /* CharacterInfo Area */
 
-#Options {
+.character-select .character-select-options {
   color: #fff;
   background-color: rgba(0, 0, 0, 0.75);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -108,7 +73,7 @@ body {
   position: absolute;
 }
 
-#Play {
+.character-select .character-select-play {
   bottom: 2vw;
   left: 1.72vw;
   width: 2.72vw;
@@ -116,7 +81,7 @@ body {
   position: absolute;
 }
 
-#Kill {
+.character-select .character-select-kill {
   bottom: 2vw;
   right: 3.0vw;
   width: 2.72vw;
@@ -126,11 +91,11 @@ body {
 
 /* Selectors for characters */
 
-a {
+.character-select a {
   text-decoration: none;
 }
 
-a img {
+.character-select a img {
   border: 0px;
   margin: 0;
   max-width: 2.72vw;
@@ -141,7 +106,7 @@ a img {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-a img:hover {
+.character-select a img:hover {
   border: 0px;
   margin: 0;
   max-width: 2.72vw;
@@ -152,66 +117,29 @@ a img:hover {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.Selector {
+.character-select .celector {
   padding-top: 0.12vw;
   padding-left: 0vw;
 }
 
-.Character {
+.character-select .character {
   padding-top: 0.12vw;
   padding-left: 1.32vw;
 }
 
-/* Useful tooltip hover functions. */
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 3.2vw;
-  background-color: black;
-  font-size: 12px;
-  color: #fff;
-  text-align: center;
-  padding: 0.32vw 0;
-  border-radius: 0.22vw;
-  position: absolute;
-  z-index: 30;
-  top: 3.45vw;
-  left: 1.05vw;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-
-.tooltip .tooltiptext::after {
-  content: " ";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent black transparent;
-}
-
 /* Character Enter Info */
 
-input:invalid {
+.character-select input:invalid {
   border-color: rgb(211, 31, 31);
 }
 
-input, input:valid {
+.character-select input, input:valid {
   border-color: rgb(27, 24, 24);
 }
 
 /* Character Data Input Field */
 
-.FeildSet {
+.character-select .character-select-feildset {
   background-color: rgba(0, 0, 0, 0.75);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 22px;
@@ -225,8 +153,8 @@ input, input:valid {
   z-index: 29;
 }
 
-.FeildSet p {
-  text-shadow: 2px 2px 4px #000000;
+.character-select .character-select-feildset  p {
+  text-shadow: 2px 2px 4px .000000;
   color: #fff;
   font-weight: 700;
   text-align: center;
@@ -234,13 +162,13 @@ input, input:valid {
   padding-top: 0.45vw;
 }
 
-.FeildSet input {
+.character-select .character-select-feildset  input {
   text-align: center;
   position: relative;
   width: 60%;
   left: 20%;
   right: 20%;
-  color:#fff;
+  color: #fff;
   font-size: 0.85vw;
   margin-bottom: 0.45vw;
   background-color: rgba(0, 0, 0, 0.35);
