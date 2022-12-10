@@ -1,20 +1,64 @@
 /* 
-
+  Variables
 */
+
 let Key = null;
 let Slots = null;
 let Characters = null;
 let Character_ID = null;
+let Created = null;
+let First = null;
+let Last = null;
+let Login = null;
+let Phone = null;
+let City = null;
 
-function OnJoin(data) {
+/* 
+  Functions
+*/
+
+function character_select_register_events() {
+  character_select_namer()
+}
+
+function character_select_namer() {
+  $(".character-select-make").submit((e) => {
+    if (e.defaultPrevented) {
+      return; // Do nothing if the event was already processed
+    }
+    e.preventDefault();
+  })
+  .validate({
+    rules: {
+      FirstName: {
+        minlength: 1,
+        maxlength: 35,
+        required: true,
+      },
+      LastName: {
+        minlength: 1,
+        maxlength: 35,
+        required: true,
+      },
+    },
+    submitHandler: function (form) {
+      form.submit();
+      character_select_make();
+    },
+  });
+}
+
+
+
+function character_select_connected(data) {
   if (data !== null) {
     $.each(data, function (index, value) {
       let cc = index + 1;
       if (cc <= Slots) {
-        $("#Row").prepend(
+        $(".character-select-row").prepend(
           '<a id="' +
             value.Character_ID +
-            '" class="Character tooltip" onclick="Selected(' +
+            '" class=".character-select-character tooltip" onclick="character_select_selected(' +
             index +
             ')"><img src="' +
             value.Photo +
@@ -25,53 +69,55 @@ function OnJoin(data) {
             "</span></a>"
         );
       }
+      // Check permitted slot count vs already indexed.
+      // If reached, then remove new button.
       if (cc == Slots) {
-        $("#New").remove();
-        return false;
+        $(".character-select-new").remove();
+        return;
       }
     });
   }
 }
 
-function Selected(key) {
+function character_select_selected(key) {
   if (key === "New") {
-    $("#Options").show();
-    $("#Play").show();
-    $("#Kill").hide();
     Character_ID = "New";
-    document.getElementById("name").innerText = "New Character";
-    document.getElementById("created").innerText = "Click the tick";
-    document.getElementById("lastseen").innerText = "Click the tick";
-    document.getElementById("city").innerText = "Click the tick";
-    document.getElementById("phone").innerText = "Click the tick";
+    // Show or Hide elements
+    $(".character-select-options").show();
+    $(".character-select-play").show();
+    $(".character-select-kill").hide();
+    // Set info to nothing.
+    $(".character-select-name").text("New Character");
+    $(".character-select-created").text("Click the tick");
+    $(".character-select-lastseen").text("Click the tick");
+    $(".character-select-city").text("Click the tick");
+    $(".character-select-phone").text("Click the tick");
   } else {
-    $("#Options").show();
-    $("#Play").show();
-    $("#Kill").show();
     Character_ID = Characters[key].Character_ID;
     Key = Characters[key];
-    let Created = Number(Characters[key].Created) * 1000;
-    let First = Characters[key].First_Name;
-    let Last = Characters[key].Last_Name;
-    let Login = Number(Characters[key].Last_Seen) * 1000;
-    let Phone = Characters[key].Phone;
-    let City = Characters[key].City_ID;
-    document.getElementById("name").innerText = First + " " + Last;
-    document.getElementById("created").innerText = new Date(
-      Created
-    ).toLocaleDateString("en-AU");
-    document.getElementById("lastseen").innerText = new Date(
-      Login
-    ).toLocaleDateString("en-AU");
-    document.getElementById("city").innerText = City;
-    document.getElementById("phone").innerText = Phone;
+    Created = Number(Characters[key].Created) * 1000;
+    First = Characters[key].First_Name;
+    Last = Characters[key].Last_Name;
+    Login = Number(Characters[key].Last_Seen) * 1000;
+    Phone = Characters[key].Phone;
+    City = Characters[key].City_ID;
+    // Show or Hide elements
+    $(".character-select-options").show();
+    $(".character-select-play").show();
+    $(".character-select-kill").show();
+    // Set info to nothing.
+    $(".character-select-name").text(First + " " + Last);
+    $(".character-select-created").text(new Date(Created).toLocaleDateString("en-AU"));
+    $(".character-select-lastseen").text(new Date(Login).toLocaleDateString("en-AU"));
+    $(".character-select-city").text(City);
+    $(".character-select-phone").text(Phone);
   }
 }
 
-function CharacterDelete() {
+function character_select_delete() {
   if (Character_ID !== null) {
     $.post(
-      "https://ig.core/__Delete",
+      "https://ig.core/_character-select__delete",
       JSON.stringify({
         ID: Character_ID,
       })
@@ -79,62 +125,41 @@ function CharacterDelete() {
   }
 }
 
-function CharacterJoin() {
+function character_select_join() {
   if (Character_ID !== null) {
     $.post(
-      "https://ig.core/__Join",
+      "https://ig.core/_character-select__join",
       JSON.stringify({
         ID: Character_ID,
       })
     );
-    $("#Sidebar").remove();
-    $("#CharacterList").remove();
-    $("#Options").remove();
+    $(".character-select-info").remove();
+    $(".character-select-list").remove();
+    $(".character-select-options").remove();
   }
 }
 
-function CharacterMake() {
+function character_select_make() {
   // Prevent form from submitting
   var fn = document.getElementById("FirstName").value;
   var ln = document.getElementById("LastName").value;
   $.post(
-    "https://ig.core/__Register",
+    "https://ig.core/_character-select_register",
     JSON.stringify({
       First_Name: fn,
       Last_Name: ln,
     })
   );
-  $("#CharacterMake").remove();
+  $(".character-select-make").remove();
 }
 
+// Called once JQuery has loaded
 $(document).ready(function () {
+  // Called on window being loaded
   window.onload = (e) => {
-    $("#CharacterMake")
-      .submit((e) => {
-        if (e.defaultPrevented) {
-          return; // Do nothing if the event was already processed
-        }
-        e.preventDefault();
-      })
-      .validate({
-        rules: {
-          FirstName: {
-            minlength: 1,
-            maxlength: 35,
-            required: true,
-          },
-          LastName: {
-            minlength: 1,
-            maxlength: 35,
-            required: true,
-          },
-        },
-        submitHandler: function (form) {
-          form.submit();
-          CharacterMake();
-        },
-      });
-
+    // Add event handlers.
+    character_select_register_events()
+    // Adding listening event for data
     window.addEventListener("message", (e) => {
       if (e.defaultPrevented) {
         return; // Do nothing if the event was already processed
@@ -142,15 +167,18 @@ $(document).ready(function () {
       let message = e.data.message;
       let data = e.data.data;
       switch (message) {
-        case "Joining":
+        case "connected":
+          // Set Variabels from data provided
           Characters = data.Characters;
           Slots = data.Slots;
-          $("#Sidebar").show();
-          $("#CharacterList").show();
-          OnJoin(Characters);
+          // run onjoin to get data displayed prior to showing lists.
+          character_select_connected(Characters);
+          // Show info and list
+          $(".character-select-info").show();
+          $(".character-select-list").show();
           break;
-        case "Register":
-          $("#CharacterMake").show();
+        case "register":
+          $(".character-select-make").show();
           break;
         case "default":
           break;

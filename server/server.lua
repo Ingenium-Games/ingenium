@@ -54,6 +54,7 @@ AddEventHandler("Server:PlayerConnecting", function()
     --
     local function Startup()
         TriggerClientEvent("Client:Character:OpeningMenu", src)
+        ShutdownLoadingScreenNui()
         TriggerEvent("Server:Character:List", src, Primary_ID)
     end
     --

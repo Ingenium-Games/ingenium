@@ -117,7 +117,7 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.character-select .celector {
+.character-select .selector {
   padding-top: 0.12vw;
   padding-left: 0vw;
 }
@@ -162,7 +162,7 @@
   padding-top: 0.45vw;
 }
 
-.character-select .character-select-feildset  input {
+.character-select .character-select-feildset input {
   text-align: center;
   position: relative;
   width: 60%;

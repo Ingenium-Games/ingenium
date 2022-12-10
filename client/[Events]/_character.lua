@@ -59,7 +59,7 @@ AddEventHandler("Client:Character:Create", function()
       exports["fivem-appearance"]:startPlayerCustomization(function(appearance)
         if (appearance) then
             TriggerEvent("Client:Character:NewSpawn")
-            TriggerEvent("Client:Core:UI", "Register")
+            TriggerEvent("Client:Nui:Message", "register")
         else
             TriggerServerEvent("Server:Character:Failed")
         end

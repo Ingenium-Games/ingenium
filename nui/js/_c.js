@@ -10,7 +10,15 @@ $(document).ready(function () {
       let message = e.data.message;
       let data = e.data.data;
       switch (message) {
+        // message is returned as nil, thus completed.
         case "default":
+          break;
+        // message is returned as ok, thus completed.
+        case "ok":
+          break;
+        // message is returned as error, data is string.
+        case "error":
+          console.log(data)
           break;
       }
       e.preventDefault();
@@ -40,7 +48,7 @@ $(document).ready(function () {
 // Close Function
 function _c__close() {
   $.post(
-    "https://ig.core/__close",
-    JSON.stringify({ message: "__close", data:{}})
+    "https://ig.core/_c__close",
+    JSON.stringify({message: "_c__close", data: {} })
   );
 }
