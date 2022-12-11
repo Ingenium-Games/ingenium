@@ -87,11 +87,11 @@ function character_select_selected(key) {
     $(".character-select-play").show();
     $(".character-select-kill").hide();
     // Set info to nothing.
-    $(".character-select-name").text("New Character");
-    $(".character-select-created").text("Click the tick");
-    $(".character-select-lastseen").text("Click the tick");
-    $(".character-select-city").text("Click the tick");
-    $(".character-select-phone").text("Click the tick");
+    $(".character-select-information-name").text("New Character");
+    $(".character-select-information-created").text("Click the tick");
+    $(".character-select-information-lastseen").text("Click the tick");
+    $(".character-select-information-city").text("Click the tick");
+    $(".character-select-information-phone").text("Click the tick");
   } else {
     Character_ID = Characters[key].Character_ID;
     Key = Characters[key];
@@ -106,11 +106,11 @@ function character_select_selected(key) {
     $(".character-select-play").show();
     $(".character-select-kill").show();
     // Set info to nothing.
-    $(".character-select-name").text(First + " " + Last);
-    $(".character-select-created").text(new Date(Created).toLocaleDateString("en-AU"));
-    $(".character-select-lastseen").text(new Date(Login).toLocaleDateString("en-AU"));
-    $(".character-select-city").text(City);
-    $(".character-select-phone").text(Phone);
+    $(".character-select-information-name").text(First + " " + Last);
+    $(".character-select-information-created").text(new Date(Created).toLocaleDateString("en-AU"));
+    $(".character-select-information-lastseen").text(new Date(Login).toLocaleDateString("en-AU"));
+    $(".character-select-information-city").text(City);
+    $(".character-select-information-phone").text(Phone);
   }
 }
 

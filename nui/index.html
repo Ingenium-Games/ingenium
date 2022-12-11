@@ -1,21 +1,29 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <!-- Head -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- GTAV Jquery -->
     <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
-    <!--Adding some Useful Libs-->
+    <!-- Adding some Useful Libs -->
     <script src="libs/jquery-3.6.0.min.js" type="text/javascript"></script>
     <script src="libs/jquery.mask.min.js" type="text/javascript"></script>
     <script src="libs/jquery.validate.min.js" type="text/javascript"></script>
     <!--CSS-->
     <link href="css/_c.css" rel="stylesheet" type="text/css" />
     <link href="css/character-select.css" rel="stylesheet" type="text/css" />
+
+
     <!--JS-->
     <script src="js/_c.js" type="text/javascript"></script>
     <script src="js/character-select.js" type="text/javascript"></script>
+
+
+
+    <!-- /Head -->
 </head>
-<body id="body">
+<body>
     <!-- .character-select -->
     <div class="character-select">
     <div class="character-select-info" style="display: inline;">
@@ -23,25 +31,25 @@
             <h1>Character Information</h1>
             <br />
             <h3>Name:</h3>
-            <p class="character-select-name"></p>
+            <p class="character-select-information-name"></p>
             <h3>Created on:</h3>
-            <p class="character-select-created"></p>
+            <p class="character-select-information-created"></p>
             <h3>Last played:</h3>
-            <p class="character-select-lastseen"></p>
+            <p class="character-select-information-lastseen"></p>
             <h3>City ID:</h3>
-            <p class="character-select-city"></p>
+            <p class="character-select-information-city"></p>
             <h3>Phone Number:</h3>
-            <p class="character-select-phone"></p>
+            <p class="character-select-information-phone"></p>
             <br />
         </div>
     </div>
     <div class="character-select-options" style="display: inline;">
-        <a class="character-select-play" class="character-select-selector character-select-character tooltip" onclick="character_select_join();" style="display: inline;"><img src="img/icons8-exit-sign-96.png" /><span class="tooltiptext">Enter</span></a>
-        <a class="character-select-kill" class="character-select-selector character-select-character tooltip" onclick="character_select_delete();"style="display: inline;"><img src="img/icons8-remove-96.png" /><span class="tooltiptext">Delete</span></a>
+        <a class="character-select-play character-select-selector character-select-character tooltip" onclick="character_select_join();" style="display: inline;"><img src="img/icons8-exit-sign-96.png" /><span class="tooltiptext">Enter</span></a>
+        <a class="character-select-kill character-select-selector character-select-character tooltip" onclick="character_select_delete();" style="display: inline;"><img src="img/icons8-remove-96.png" /><span class="tooltiptext">Delete</span></a>
     </div>
     <div class="character-select-list" style="display: inline;">
         <div class="character-select-row">
-            <a class="character-select-new" class="character-select-character tooltip"onclick="character_select_selected('New');"><img src="img/icons8-team-96.png" /><span class="tooltiptext">New</span></a>
+            <a class="character-select-new character-select-character tooltip" onclick="character_select_selected('New');"><img src="img/icons8-team-96.png" /><span class="tooltiptext">New</span></a>
         </div>
     </div>
     <form class="character-select-make" style="display: inline;" autocomplete="off">

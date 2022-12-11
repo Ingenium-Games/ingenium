@@ -55,10 +55,13 @@ body {
   z-index: 30;
   top: 3.45vw;
   left: 1.05vw;
+  opacity: 0;
+  transition: opacity 1s;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+  opacity: 1;
 }
 
 .tooltip .tooltiptext::after {
