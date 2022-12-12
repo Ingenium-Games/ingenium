@@ -1,0 +1,59 @@
+/*
+    -- Notifications
+*/
+
+.notification-window {
+  position: absolute;
+  top: 0.85vh;
+  right: 0.85vw;
+  width: 60.35vw;
+  height: 28vh;
+}
+
+.notification {
+  color: rgb(240, 240, 240);
+  margin: 2px;
+  text-align: left;
+  padding: 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  word-spacing: 1.2px;
+  font-size: 1em;
+  display: inline-block;
+}
+
+.notification .black {
+  background-color: rgba(20, 20, 20, 0.595);
+}
+
+.notification .blue {
+  background-color: rgba(0, 60, 255, 0.595);
+}
+
+.notification .orange {
+  background-color: rgba(255, 102, 0, 0.595);
+  color: rgb(0, 0, 0);
+}
+
+.notification .red {
+  background-color: rgba(255, 0, 34, 0.595);
+}
+
+.notification .green {
+  background-color: rgba(60, 255, 0, 0.595);
+  color: rgb(0, 0, 0);
+}
+
+.notification .pink {
+  background-color: rgba(255, 0, 170, 0.595);
+}
+
+.notification .purple {
+  background-color: rgba(75, 0, 255, 0.595);
+}
+
+.notification .yellow {
+  background-color: rgba(255, 255, 0, 0.595);
+  color: rgb(0, 0, 0);
+}

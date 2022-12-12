@@ -53,24 +53,14 @@ body {
   border-radius: 0.22vw;
   position: absolute;
   z-index: 30;
-  top: 3.45vw;
-  left: 1.05vw;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, 50%);
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 0.75s;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-}
-
-.tooltip .tooltiptext::after {
-  content: " ";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent black transparent;
 }

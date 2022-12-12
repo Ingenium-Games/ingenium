@@ -1,0 +1,318 @@
+
+/*
+    -- Status Bars
+*/
+.status-window {
+    display: inline-block;
+    position: absolute;
+    left: 0vw;
+    bottom: 0vh;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--colour);
+    overflow: visible;
+    text-align: center;
+    flex-direction: row;
+    z-index: 1;
+  }
+  
+  .status {
+    cursor: move;
+    position: relative;
+    float: left;
+    width: 5.25vw;
+    margin-left: 4px;
+    height: 0.65vh;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--colour);
+    z-index: inherit;
+  }
+  
+  .status-bar {
+    position: absolute;
+    bottom: 0vh;
+    width: var(--percentage);
+    height: 0.65vh;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--colour);
+    transition: ease-in-out 0.5s;
+    z-index: 2;
+  }
+  
+  .status i {
+    position: relative;
+    text-align: center;
+    bottom: 2.30vh;
+    color:var(--colour);
+    font-size: 135%;
+    z-index: 3;
+  }
+  
+  .status-buff {
+    cursor: move;
+    position: relative;
+    float: left;
+    width: 3.85vw;
+    margin-left: 4px;
+    height: 0.65vh;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--colour);
+    z-index: inherit;
+  }
+  
+  .status-buff-bar {
+    position: absolute;
+    bottom: 0vh;
+    width: var(--percentage);
+    height: 0.65vh;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--colour);
+    transition: ease-in-out 0.5s;
+    z-index: 2;
+  }
+  
+  .status-buff i {
+    position: relative;
+    text-align: center;
+    bottom: 2.30vh;
+    color:var(--colour);
+    font-size: 135%;
+    z-index: 3;
+  }
+  
+  .status-nerf {
+    cursor: move;
+    position: relative;
+    float: left;
+    width: 3.85vw;
+    margin-left: 4px;
+    height: 0.65vh;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--colour);
+    z-index: inherit;
+  }
+  
+  .status-nerf-bar {
+    position: absolute;
+    bottom: 0vh;
+    width: var(--percentage);
+    height: 0.65vh;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--colour);
+    transition: ease-in-out 0.5s;
+    z-index: 2;
+  }
+  
+  .status-nerf i {
+    position: relative;
+    text-align: center;
+    bottom: 2.30vh;
+    color:var(--colour);
+    font-size: 135%;
+    z-index: 3;
+  }
+  /*
+      -- Button Window
+  */
+  
+  .button-window {
+    display: inline-block;
+    position: absolute;
+    right: 0.25vw;
+    bottom: 0vh;
+    width: 35vw;
+    overflow: visible;
+    text-align: center;
+    flex-direction: row;
+  }
+  
+  .button {
+    display: inline-block;
+    position: relative;
+    right: 0.25vw;
+    bottom: -0.15vh;
+    height: 2.55vh;
+    width: 2.2vw;
+    border-radius: 5px 5px 0px 0px;
+    background-color: rgba(85, 85, 85, 0.695);
+    color: rgba(255, 255, 255, 0.795);
+    font-size: 100%;
+    z-index: 2;
+    transition: ease-in-out 0.45s;
+  }
+  
+  .button:hover {
+    display: inline-block;
+    position: relative;
+    right: 0.25vw;
+    bottom: -0.15vh;
+    height: 2.55vh;
+    width: 2.2vw;
+    border-radius: 5px 5px 0px 0px;
+    background-color: rgba(201, 201, 201, 0.695);
+    color: rgba(128, 128, 128, 0.815);
+    font-size: 100%;
+    z-index: 2;
+    transition: ease-in-out 0.45s;
+  }
+  
+  .button i {
+    padding-top: 0.65vh;
+  }
+  
+  /*
+      -- Options Button
+  */
+  
+  .options-window {
+    cursor: move;
+    position: absolute;
+    display: inline-block;
+    bottom: 5vh;
+    left: 5vw;
+    height: 50vh;
+    width: 12vw;
+    border: solid 2px rgb(53, 53, 53);
+    border-radius: 15px 15px 15px 15px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color:white;
+    z-index: 9999;
+  }
+  
+  .skills-window {
+    cursor: move;
+    position: absolute;
+    display: inline-block;
+    height: auto;
+    width: 8vw;
+    border: solid 2px rgb(53, 53, 53);
+    border-radius: 15px 15px 15px 15px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color:white;
+    z-index: 9999;
+  }
+  
+  .skills-window p {
+    text-align: center;
+    font-size: 0.72vw;
+  }
+  
+  .skills-container {
+    padding: 0.13vw;
+  }
+  
+  .skill-spacer {
+    padding-bottom: 1.22vw;
+  }
+  
+  .skill-set {
+    padding-top: 0.22vw;
+    padding-bottom: 0.33vw;
+  }
+  
+  .skill-set p {
+    text-align: center;
+    font-size: 0.59vw;
+    top: 0.22vw;
+  }
+  
+  .skill {
+    position: absolute;
+    width: 6.45vw;
+    left: 0.68vw;
+    height: 0.65vh;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--colour);
+    z-index: inherit;
+  }
+  
+  .skill-bar {
+    position: absolute;
+    bottom: 0vh;
+    width: var(--percentage);
+    height: 0.65vh;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--colour);
+    transition: ease-in-out 0.5s;
+    z-index: 2;
+  }
+  
+  .feedback-window {
+    position: absolute;
+    display: inline-block;
+    bottom: 4vw;
+    right: 2vw;
+    height: 18vw;
+    width: 18vw;
+    border: solid 2px rgb(53, 53, 53);
+    border-radius: 15px 15px 15px 15px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color:white;
+    z-index: 9999;
+  }
+  
+  .feedback-message {
+    position: absolute;
+    left: 2vw;
+    top: 2vw;
+    height: 13vw;
+    width: 13vw;
+  }
+  
+  .feedback-submit {
+    position: absolute;
+    right: 3vw;
+    bottom: 1vw;
+    height: 1.22vw;
+    width: auto;
+  }
+  
+  .options-window p {
+    margin-left: 15px;
+    font-size:  0.85em;
+  }
+  
+  .options-window p strong {
+    text-align: center;
+    font-size:  1.00em;
+  }
+  
+  .colour-select {
+    position: absolute;
+    top: 0.5vh;
+    bottom: 1vh;
+    left: 1vw !important;
+    text-align: right;
+    border-left: 1px solid grey;
+  }
+  
+  .colour-select strong {
+    margin-right: 2vw;
+  }
+  
+  .colour-select .col-padding {
+    padding-top: 0.25vh;
+  }
+  
+  .hints {
+    position: absolute;
+    top: 1.5vh;
+    bottom: 1vh;
+    left: 1vw !important;
+    width: 72.00vw;
+    text-align: left;
+  }
+  
+  .hints strong {
+    margin-right: 2vw;
+  }
+  
+  .hints .col-padding {
+    padding-top: 0.15vh;
+  }
+  
+  .hints p strong {
+    text-align: center;
+    font-size:  1.25em;
+    font-style: italic;
+  }
