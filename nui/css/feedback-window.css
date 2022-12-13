@@ -1,0 +1,33 @@
+/*
+    Feedback Button
+*/
+
+.feedback-window {
+  position: absolute;
+  display: inline-block;
+  bottom: 4vw;
+  right: 2vw;
+  height: 18vw;
+  width: 18vw;
+  border: solid 2px rgb(53, 53, 53);
+  border-radius: 15px 15px 15px 15px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  z-index: 9999;
+}
+
+.feedback-message {
+  position: absolute;
+  left: 2vw;
+  top: 2vw;
+  height: 13vw;
+  width: 13vw;
+}
+
+.feedback-submit {
+  position: absolute;
+  right: 3vw;
+  bottom: 1vw;
+  height: 1.22vw;
+  width: auto;
+}
