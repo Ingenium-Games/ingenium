@@ -27,4 +27,3 @@ RegisterNUICallback("_c__close", function(data, cb)
         })
     end
 end)
-
