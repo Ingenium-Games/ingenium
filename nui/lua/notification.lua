@@ -1,16 +1,9 @@
 -- ====================================================================================--
--- Notifications 
-local colours = {"black", "blue", "orange", "red", "green", "pink", "purple", "yellow"}
--- Send Update to HTML NUI Notification - Still to make.
--- [C+S]
+-- [C + S]
 RegisterNetEvent("Client:Notify")
 AddEventHandler("Client:Notify", function(text, colour, fade)
-    if not colours[colour] then
-        colour = "black"
-    end
-    if not fade then
-        fade = 13500
-    end
+    local colour = colour or "black"
+    local fade = fade or 13500
     local data = {
         text = text,
         colour = colour,

@@ -11,7 +11,7 @@ ui_page "nui/index.html"
 shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_c.lua", "shared/_locale.lua"}
 ------------------------------------------------------------------------------
 client_scripts {"client/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "client/_functions.lua",
-                "client/**/*.lua"}
+                "client/**/*.lua", "nui/lua/*.lua"}
 ------------------------------------------------------------------------------
 server_scripts {"@restfx/build/import.lua", "@oxmysql/lib/MySQL.lua", "server/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua",
                 "shared/[Third Party]/*.lua", "server/_functions.lua", "server/_cron.lua", "server/[Doors]/_doors.lua",
