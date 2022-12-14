@@ -24,11 +24,12 @@
 
 .character-select .character-select-info {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.705);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.705), rgba(0, 0, 0, 0.405));
+  box-shadow: 0 6px 22px 0 rgba(0, 0, 0, 0.2), 0 6px 22px 0 rgba(0, 0, 0, 0.20);
   z-index: 1;
   top: 0vw;
   left: 0vw;
-  width: 18.55vw;
+  width: 25vw;
   height: 100vh;
   white-space: nowrap;
   overflow-y: hidden;
@@ -40,12 +41,12 @@
 
 .character-select .character-select-row {
   color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 6px 22px 0 rgba(0, 0, 0, 0.2), 0 6px 22px 0 rgba(0, 0, 0, 0.20);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.705), rgba(0, 0, 0, 0.405));
   z-index: 2;
   top: 0vw;
-  left: 18.55vw;
-  width: 5.4vw;
+  right: 0vw;
+  width: 6vw;
   height: 100vh;
   border-left: 2vw;
   border-left-color: black;
@@ -60,8 +61,8 @@
 
 .character-select .character-select-options {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.75);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.705), rgba(0, 0, 0, 0.405));
+  box-shadow: 0 6px 22px 0 rgba(0, 0, 0, 0.2), 0 6px 22px 0 rgba(0, 0, 0, 0.20);
   border-radius: 1vw 1vw 0vw 0vw;
   z-index: 3;
   bottom: 0vw;
@@ -74,18 +75,14 @@
 }
 
 .character-select .character-select-play {
-  bottom: 2vw;
-  left: 1.72vw;
-  width: 2.72vw;
-  height: 2.72vw;
+  left: 20%;
+  transform: translate(-50%, 50%);
   position: absolute;
 }
 
 .character-select .character-select-kill {
-  bottom: 2vw;
-  right: 3.0vw;
-  width: 2.72vw;
-  height: 2.72vw;
+  left: 80%;
+  transform: translate(-50%, 50%);
   position: absolute;
 }
 
@@ -117,14 +114,11 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.character-select .selector {
-  padding-top: 0.12vw;
-  padding-left: 0vw;
-}
-
-.character-select .character {
-  padding-top: 0.12vw;
-  padding-left: 1.32vw;
+.character-select .character-select-character {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 /* Character Enter Info */
@@ -140,7 +134,7 @@
 /* Character Data Input Field */
 
 .character-select .character-select-feildset {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.705), rgba(0, 0, 0, 0.405));
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 22px;
   font-size: 1vw;

@@ -1,65 +1,162 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
+  <head>
+    <!-- Head -->
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- GTAV Jquery -->
     <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
-    <!--Adding some Useful Libs-->
+    <!-- Adding some Useful Libs -->
     <script src="libs/jquery-3.6.0.min.js" type="text/javascript"></script>
     <script src="libs/jquery.mask.min.js" type="text/javascript"></script>
     <script src="libs/jquery.validate.min.js" type="text/javascript"></script>
     <!--CSS-->
     <link href="css/_c.css" rel="stylesheet" type="text/css" />
     <link href="css/character-select.css" rel="stylesheet" type="text/css" />
+
     <!--JS-->
     <script src="js/_c.js" type="text/javascript"></script>
     <script src="js/character-select.js" type="text/javascript"></script>
-</head>
-<body id="body">
+
+    <!-- /Head -->
+  </head>
+  <body>
     <!-- .character-select -->
     <div class="character-select">
-    <div class="character-select-info" style="display: inline;">
+      <div class="character-select-info" style="display: inline">
         <div class="character-select-information">
-            <h1>Character Information</h1>
-            <br />
-            <h3>Name:</h3>
-            <p class="character-select-name"></p>
-            <h3>Created on:</h3>
-            <p class="character-select-created"></p>
-            <h3>Last played:</h3>
-            <p class="character-select-lastseen"></p>
-            <h3>City ID:</h3>
-            <p class="character-select-city"></p>
-            <h3>Phone Number:</h3>
-            <p class="character-select-phone"></p>
-            <br />
+          <h1>Character Information</h1>
+          <br />
+          <h3>Name:</h3>
+          <p class="character-select-information-name"></p>
+          <h3>Created on:</h3>
+          <p class="character-select-information-created"></p>
+          <h3>Last played:</h3>
+          <p class="character-select-information-lastseen"></p>
+          <h3>City ID:</h3>
+          <p class="character-select-information-city"></p>
+          <h3>Phone Number:</h3>
+          <p class="character-select-information-phone"></p>
+          <br />
         </div>
-    </div>
-    <div class="character-select-options" style="display: inline;">
-        <a class="character-select-play" class="character-select-selector character-select-character tooltip" onclick="character_select_join();" style="display: inline;"><img src="img/icons8-exit-sign-96.png" /><span class="tooltiptext">Enter</span></a>
-        <a class="character-select-kill" class="character-select-selector character-select-character tooltip" onclick="character_select_delete();"style="display: inline;"><img src="img/icons8-remove-96.png" /><span class="tooltiptext">Delete</span></a>
-    </div>
-    <div class="character-select-list" style="display: inline;">
+      </div>
+      <div class="character-select-options" style="display: inline">
+        <a
+          class="character-select-play tooltip"
+          onclick="character_select_join();"
+          style="display: inline"
+          ><img src="img/icons8-exit-sign-96.png" /><span class="tooltiptext"
+            >Enter</span
+          ></a
+        >
+        <a
+          class="character-select-kill tooltip"
+          onclick="character_select_delete();"
+          style="display: inline"
+          ><img src="img/icons8-remove-96.png" /><span class="tooltiptext"
+            >Delete</span
+          ></a
+        >
+      </div>
+      <div class="character-select-list" style="display: inline">
         <div class="character-select-row">
-            <a class="character-select-new" class="character-select-character tooltip"onclick="character_select_selected('New');"><img src="img/icons8-team-96.png" /><span class="tooltiptext">New</span></a>
+          <a
+            class="character-select-new character-select-character tooltip"
+            onclick="character_select_selected('New');"
+            ><img src="img/icons8-team-96.png" /><span class="tooltiptext"
+              >New</span
+            ></a
+          >
         </div>
-    </div>
-    <form class="character-select-make" style="display: inline;" autocomplete="off">
+      </div>
+      <form
+        class="character-select-make"
+        style="display: inline"
+        autocomplete="off"
+      >
         <fieldset class="character-select-feildset">
-            <p>First Name</p>
-            <input name="FirstName" id="FirstName" placeholder="-" pattern="[A-Z/a-z]{1,25}" minlength="2" maxlength="25" type="text" required>
-            <p>Last Name</p>
-            <input name="LastName" id="LastName" placeholder="-" pattern="[A-Z/a-z]{1,25}" minlength="2" maxlength="25" type="text" required>
-            <br />
-            <br />
-            <br />
-            <input class="character-select-submit" type="submit" value="Create">
-            <br />
-            <br />
-            <br />
+          <p>First Name</p>
+          <input
+            name="FirstName"
+            id="FirstName"
+            placeholder="-"
+            pattern="[A-Z/a-z]{1,25}"
+            minlength="2"
+            maxlength="25"
+            type="text"
+            required
+          />
+          <p>Last Name</p>
+          <input
+            name="LastName"
+            id="LastName"
+            placeholder="-"
+            pattern="[A-Z/a-z]{1,25}"
+            minlength="2"
+            maxlength="25"
+            type="text"
+            required
+          />
+          <br />
+          <br />
+          <br />
+          <input class="character-select-submit" type="submit" value="Create" />
+          <br />
+          <br />
+          <br />
         </fieldset>
-    </form>
+      </form>
     </div>
     <!-- .character-select -->
-</body>
+
+    <!-- .notification-window -->
+    <div class="notification-window"></div>
+    <!-- .notification-window -->
+
+    <!-- .aio-menu -->
+    <!-- Shown by default -->
+    <div class="aio-menu">
+      <!-- Options window -->
+      <div class="aio-menu-button aio-menu-options">
+        <i class="fas fa-question-circle"></i>
+      </div>
+      <!-- Inventory window -->
+      <div class="aio-menu-button aio-menu-inventory">
+        <i class="fas fa-archive"></i>
+      </div>
+      <!-- skills window -->
+      <div class="aio-menu-button aio-menu-skills">
+        <i class="fas fa-chart-bar"></i>
+      </div>
+      <!-- emotes menu -->
+      <div class="aio-menu-button aio-menu-emotes">
+        <i class="fas fa-smile"></i>
+      </div>
+      <!-- feedback window -->
+      <div class="aio-menu-button aio-menu-feedback">
+        <i class="fas fa-comments"></i>
+      </div>
+    </div>
+    <!-- .aio-menu -->
+
+    <!-- .skills-window -->
+    <div class="skills-window" style="display: none">
+      <p><strong>Skills</strong></p>
+      <div class="skills-window-container">
+        <div class="skills-window-set">
+          <p>Test</p>
+          <div class="skills-window-skill" style="--colour: rgba(150, 150, 150, 0.425)">
+            <div
+              class="skills-window-bar"
+              style="--percentage: 50%; --colour: rgba(185, 250, 155, 0.5)"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="skill-spacer"></div>
+    </div>
+    <!-- .skills-window -->
+
+
+  </body>
 </html>
