@@ -17,39 +17,6 @@ let City = null;
   Functions
 */
 
-function character_select_register_events() {
-  character_select_namer()
-}
-
-function character_select_namer() {
-  $(".character-select-make").submit((e) => {
-    if (e.defaultPrevented) {
-      return; // Do nothing if the event was already processed
-    }
-    e.preventDefault();
-  })
-  .validate({
-    rules: {
-      FirstName: {
-        minlength: 1,
-        maxlength: 35,
-        required: true,
-      },
-      LastName: {
-        minlength: 1,
-        maxlength: 35,
-        required: true,
-      },
-    },
-    submitHandler: function (form) {
-      form.submit();
-      character_select_make();
-    },
-  });
-}
-
-
-
 function character_select_connected(data) {
   if (data !== null) {
     $.each(data, function (index, value) {
@@ -77,6 +44,44 @@ function character_select_connected(data) {
       }
     });
   }
+}
+
+/* 
+  Functions
+*/
+
+function character_select_register_events() {
+  character_select_join();
+  character_select_delete();
+  character_select_namer();
+}
+
+function character_select_namer() {
+  $(".character-select-make")
+    .submit((e) => {
+      if (e.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+      }
+      e.preventDefault();
+    })
+    .validate({
+      rules: {
+        FirstName: {
+          minlength: 1,
+          maxlength: 35,
+          required: true,
+        },
+        LastName: {
+          minlength: 1,
+          maxlength: 35,
+          required: true,
+        },
+      },
+      submitHandler: function (form) {
+        form.submit();
+        character_select_make();
+      },
+    });
 }
 
 function character_select_selected(key) {
@@ -107,36 +112,44 @@ function character_select_selected(key) {
     $(".character-select-kill").show();
     // Set info to nothing.
     $(".character-select-information-name").text(First + " " + Last);
-    $(".character-select-information-created").text(new Date(Created).toLocaleDateString("en-AU"));
-    $(".character-select-information-lastseen").text(new Date(Login).toLocaleDateString("en-AU"));
+    $(".character-select-information-created").text(
+      new Date(Created).toLocaleDateString("en-AU")
+    );
+    $(".character-select-information-lastseen").text(
+      new Date(Login).toLocaleDateString("en-AU")
+    );
     $(".character-select-information-city").text(City);
     $(".character-select-information-phone").text(Phone);
   }
 }
 
 function character_select_delete() {
-  if (Character_ID !== null) {
-    $.post(
-      "https://ig.core/_character-select__delete",
-      JSON.stringify({
-        ID: Character_ID,
-      })
-    );
-  }
+  $(".character-select-kill").click(function () {
+    if (Character_ID !== null) {
+      $.post(
+        "https://ig.core/_character-select__delete",
+        JSON.stringify({
+          ID: Character_ID,
+        })
+      );
+    }
+  });
 }
 
 function character_select_join() {
-  if (Character_ID !== null) {
-    $.post(
-      "https://ig.core/_character-select__join",
-      JSON.stringify({
-        ID: Character_ID,
-      })
-    );
-    $(".character-select-info").remove();
-    $(".character-select-list").remove();
-    $(".character-select-options").remove();
-  }
+  $(".character-select-play").click(function () {
+    if (Character_ID !== null) {
+      $.post(
+        "https://ig.core/_character-select__join",
+        JSON.stringify({
+          ID: Character_ID,
+        })
+      );
+      $(".character-select-info").remove();
+      $(".character-select-list").remove();
+      $(".character-select-options").remove();
+    }
+  })
 }
 
 function character_select_make() {
@@ -144,7 +157,7 @@ function character_select_make() {
   var fn = document.getElementById("FirstName").value;
   var ln = document.getElementById("LastName").value;
   $.post(
-    "https://ig.core/_character-select_register",
+    "https://ig.core/_character-select__register",
     JSON.stringify({
       First_Name: fn,
       Last_Name: ln,
@@ -158,7 +171,7 @@ $(document).ready(function () {
   // Called on window being loaded
   window.onload = (e) => {
     // Add event handlers.
-    character_select_register_events()
+    character_select_register_events();
     // Adding listening event for data
     window.addEventListener("message", (e) => {
       if (e.defaultPrevented) {
