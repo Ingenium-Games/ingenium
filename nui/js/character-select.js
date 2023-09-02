@@ -145,9 +145,9 @@ function character_select_join() {
           ID: Character_ID,
         })
       );
-      $(".character-select-info").remove();
-      $(".character-select-list").remove();
-      $(".character-select-options").remove();
+      $(".character-select-info").hide();
+      $(".character-select-list").hide();
+      $(".character-select-options").hide();
     }
   })
 }
@@ -163,15 +163,15 @@ function character_select_make() {
       Last_Name: ln,
     })
   );
-  $(".character-select-make").remove();
+  $(".character-select-make").hide();
 }
 
 // Called once JQuery has loaded
 $(document).ready(function () {
+  // Add event handlers.
+  character_select_register_events();
   // Called on window being loaded
   window.onload = (e) => {
-    // Add event handlers.
-    character_select_register_events();
     // Adding listening event for data
     window.addEventListener("message", (e) => {
       if (e.defaultPrevented) {
