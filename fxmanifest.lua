@@ -19,6 +19,5 @@ server_scripts {"@restfx/build/import.lua", "@oxmysql/lib/MySQL.lua", "server/_v
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump", "ox_lib"}
 ------------------------------------------------------------------------------
-files {"data/*.json", "nui/index.html", "nui/index.css", "nui/index.js", "nui/img/*.png", "nui/libs/*.js",
-       "theme/style.css"}
+files {"data/*.json", "nui/index.html", "nui/css/*.css", "nui/js/*.js", "nui/img/*.png", "nui/libs/*.js"}
 ------------------------------------------------------------------------------

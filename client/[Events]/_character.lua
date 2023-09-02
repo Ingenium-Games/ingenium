@@ -7,6 +7,7 @@
 -- [C+S]
 RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
+    ShutdownLoadingScreenNui()
     -- Set false for switch command
     local ped = GetPlayerPed(-1)
     c.data.SetLoadedStatus(false)
