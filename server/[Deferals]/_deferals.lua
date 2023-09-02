@@ -25,7 +25,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 wrap = true
             }),
             DeferralCards.CardElement:TextBlock({
-                text = "By joinging, you have agreed to our rules as found on our website. \n",
+                text = "By joining, you have agreed to our rules as found on our website. \n",
                 wrap = true
             }),
             DeferralCards.Container:Create({
