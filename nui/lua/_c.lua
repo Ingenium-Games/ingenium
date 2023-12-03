@@ -2,10 +2,10 @@
 RegisterNetEvent("Client:Nui:Message")
 AddEventHandler("Client:Nui:Message", function(M, D, FOCUS)
     -- Send message
-    SendNUIMessage({
+    SendNUIMessage(json.encode({
         message = M,
-        data = (D or {})
-    })
+        data = D or {}
+    }))
     -- 
     SetNuiFocus((FOCUS or true), (FOCUS or true))
 end)
