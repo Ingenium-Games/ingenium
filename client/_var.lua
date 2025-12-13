@@ -1,8 +1,7 @@
 -- ====================================================================================--
 -- Globals and Require/Replace
-math = require("glm")
 math.randomseed(GetNetworkTime())
-c = exports["ig.core"]:c()
+c = c or exports["ig.core"]:c()
 -- ====================================================================================--
 c.imagehost = conf.imagehost
 c.sec = conf.sec
@@ -19,3 +18,9 @@ exports("GetLocale", GetLocale)
 -- _data.lua
 c._loaded = false
 c._character = nil
+--
+local ok, glm = pcall(require, "glm")
+if ok and glm then
+    c = c or {}
+    c.glm = glm
+end

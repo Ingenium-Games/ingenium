@@ -1,0 +1,27 @@
+{
+  "Lua.runtime.version": "Lua 5.4",
+  "Lua.diagnostics.globals": [
+    "RegisterNetEvent",
+    "AddEventHandler",
+    "TriggerEvent",
+    "TriggerServerEvent",
+    "TriggerClientEvent",
+    "exports",
+    "Citizen",
+    "PlayerId",
+    "GetPlayerServerId",
+    "GetEntityCoords",
+    "CreateThread",
+    "Wait"
+  ],
+  "Lua.workspace.library": [
+    "${workspaceFolder}/client/fivem_natives.lua",
+    "${workspaceFolder}/annotations/ig_types.lua",
+    "${workspaceFolder}/[Stubs]/natives_client.lua",
+    "${workspaceFolder}/[Stubs]/natives_server.lua",
+    "${workspaceFolder}/[Stubs]/natives_shared.lua"
+  ],
+  "Lua.runtime.nonstandardSymbol": ["`"],
+  "Lua.diagnostics.disable": ["undefined-global"],
+  "Lua.telemetry.enable": false
+}
