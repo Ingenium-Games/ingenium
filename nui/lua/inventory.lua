@@ -9,11 +9,10 @@ local currentExternalNetId = nil
 -- Event Handlers for Opening Inventory
 -- ====================================================================================--
 
-/**
- * Open dual-panel inventory (player + external entity)
- * @param externalNetId Network ID of the external entity (vehicle, object, NPC, player)
- * @param externalTitle Title to display for external inventory
- */
+---
+-- Open dual-panel inventory (player + external entity)
+-- @param externalNetId Network ID of the external entity (vehicle, object, NPC, player)
+-- @param externalTitle Title to display for external inventory
 RegisterNetEvent("Client:Inventory:OpenDual")
 AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTitle)
     if inventoryOpen then return end
@@ -48,9 +47,8 @@ AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTit
     })
 end)
 
-/**
- * Open single-panel inventory (player only)
- */
+---
+-- Open single-panel inventory (player only)
 RegisterNetEvent("Client:Inventory:OpenSingle")
 AddEventHandler("Client:Inventory:OpenSingle", function()
     if inventoryOpen then return end
@@ -72,9 +70,8 @@ AddEventHandler("Client:Inventory:OpenSingle", function()
     SetNuiFocus(true, true)
 end)
 
-/**
- * Close inventory from server
- */
+---
+-- Close inventory from server
 RegisterNetEvent("Client:Inventory:Close")
 AddEventHandler("Client:Inventory:Close", function()
     if not inventoryOpen then return end
@@ -89,9 +86,8 @@ AddEventHandler("Client:Inventory:Close", function()
     currentExternalNetId = nil
 end)
 
-/**
- * Update inventory from server (live updates)
- */
+---
+-- Update inventory from server (live updates)
 RegisterNetEvent("Client:Inventory:Update")
 AddEventHandler("Client:Inventory:Update", function(playerInventory, externalInventory)
     if not inventoryOpen then return end
@@ -109,9 +105,8 @@ end)
 -- NUI Callbacks
 -- ====================================================================================--
 
-/**
- * Handle inventory close from NUI
- */
+---
+-- Handle inventory close from NUI
 RegisterNUICallback("inventory_close", function(data, cb)
     inventoryOpen = false
     SetNuiFocus(false, false)
@@ -157,9 +152,8 @@ RegisterNUICallback("inventory_close", function(data, cb)
     })
 end)
 
-/**
- * Handle item actions (Use, Give, Drop)
- */
+---
+-- Handle item actions (Use, Give, Drop)
 RegisterNUICallback("inventory_action", function(data, cb)
     local action = data.action
     local item = data.item
@@ -223,16 +217,14 @@ end)
 -- Exports
 -- ====================================================================================--
 
-/**
- * Export function to open dual inventory
- */
+---
+-- Export function to open dual inventory
 exports("OpenDualInventory", function(netId, title)
     TriggerEvent("Client:Inventory:OpenDual", netId, title)
 end)
 
-/**
- * Export function to open single inventory
- */
+---
+-- Export function to open single inventory
 exports("OpenSingleInventory", function()
     TriggerEvent("Client:Inventory:OpenSingle")
 end)
