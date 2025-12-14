@@ -343,35 +343,16 @@ function c.class.Vehicle(net)
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
-        local inv = inv or {}
-        -- print(c.table.Dump(inv))
-        self.Inventory = {}
-        for i = 1, #inv do
-            self.Inventory[i] = {
-                ["Item"] = inv[i]["Item"] or inv[i][1],
-                ["Quantity"] = inv[i]["Quantity"] or inv[i][2],
-                ["Quality"] = inv[i]["Quality"] or inv[i][3],
-                ["Weapon"] = inv[i]["Weapon"] or inv[i][4],
-                ["Meta"] = inv[i]["Meta"] or inv[i][5],
-                ["Name"] = inv[i]["Name"] or inv[i][6]
-            }
-            -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
-            if self.Inventory[i].Weapon == true then
-                if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
-                    break
-                end
-            end
-            -- Validate Quuality and Quantity are numbers.
-            if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
-                break
-            end
-            -- If the Quality is below 0, then destroy the item.
-            if self.Inventory[i].Quality <= 0 then
-                table.remove(self.Inventory, i)
-            end
+        -- Use unified validation function (no source for vehicles)
+        local processed, valid, error = c.validation.ValidateAndUnpack(nil, inv)
+        
+        if not valid then
+            c.func.Debug_1("Error unpacking vehicle inventory: " .. (error or "unknown"))
+            self.Inventory = {}
+            return
         end
+        
+        self.Inventory = processed
     end
     --- func desc
     self.GetInventory = function()
@@ -841,34 +822,17 @@ function c.class.OwnedVehicle(net, data)
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
-        local inv = inv
-        self.Inventory = {}
-        for i = 1, #inv do
-            self.Inventory[i] = {
-                ["Item"] = inv[i]["Item"] or inv[i][1],
-                ["Quantity"] = inv[i]["Quantity"] or inv[i][2],
-                ["Quality"] = inv[i]["Quality"] or inv[i][3],
-                ["Weapon"] = inv[i]["Weapon"] or inv[i][4],
-                ["Meta"] = inv[i]["Meta"] or inv[i][5],
-                ["Name"] = inv[i]["Name"] or inv[i][6]
-            }
-            -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
-            if self.Inventory[i].Weapon == true then
-                if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
-                    break
-                end
-            end
-            -- Validate Quality and Quantity are numbers.
-            if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
-                break
-            end
-            -- If the Quality is below 0, then destroy the item on unpacking.
-            if self.Inventory[i].Quality <= 0 then
-                table.remove(self.Inventory, i)
-            end
+        -- Use unified validation function (no source for owned vehicles)
+        local processed, valid, error = c.validation.ValidateAndUnpack(nil, inv)
+        
+        if not valid then
+            c.func.Debug_1("Error unpacking owned vehicle inventory: " .. (error or "unknown"))
+            self.Inventory = {}
+            self.State.Inventory = self.Inventory
+            return
         end
+        
+        self.Inventory = processed
         self.State.Inventory = self.Inventory
         -- print(c.table.Dump(self.Inventory))
     end

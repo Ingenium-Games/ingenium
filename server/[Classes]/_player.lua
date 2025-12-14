@@ -966,35 +966,17 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
-        local inv = inv or {}
-        -- print(c.table.Dump(inv))
-        self.Inventory = {}
-        for i = 1, #inv do
-            self.Inventory[i] = {
-                ["Item"] = inv[i]["Item"] or inv[i][1],
-                ["Quantity"] = inv[i]["Quantity"] or inv[i][2],
-                ["Quality"] = inv[i]["Quality"] or inv[i][3],
-                ["Weapon"] = inv[i]["Weapon"] or inv[i][4],
-                ["Meta"] = inv[i]["Meta"] or inv[i][5],
-                ["Name"] = inv[i]["Name"] or inv[i][6]
-            }
-            -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
-            if self.Inventory[i].Weapon == true then
-                if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
-                    break
-                end
-            end
-            -- Validate Quality and Quantity are numbers.
-            if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
-                break
-            end
-            -- If the Quality is below 0, then destroy the item on unpacking.
-            if self.Inventory[i].Quality <= 0 then
-                table.remove(self.Inventory, i)
-            end
+        -- Use unified validation function
+        local processed, valid, error = c.validation.ValidateAndUnpack(self.ID, inv)
+        
+        if not valid then
+            -- Error already logged and player kicked by ValidateAndUnpack
+            self.Inventory = {}
+            self.State.Inventory = self.Inventory
+            return
         end
+        
+        self.Inventory = processed
         self.State.Inventory = self.Inventory
     end
     --- func desc
@@ -1338,35 +1320,17 @@ function c.class.OfflinePlayer(data)
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
-        local inv = inv or {}
-        -- print(c.table.Dump(inv))
-        self.Inventory = {}
-        for i = 1, #inv do
-            self.Inventory[i] = {
-                ["Item"] = inv[i]["Item"] or inv[i][1],
-                ["Quantity"] = inv[i]["Quantity"] or inv[i][2],
-                ["Quality"] = inv[i]["Quality"] or inv[i][3],
-                ["Weapon"] = inv[i]["Weapon"] or inv[i][4],
-                ["Meta"] = inv[i]["Meta"] or inv[i][5],
-                ["Name"] = inv[i]["Name"] or inv[i][6]
-            }
-            -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
-            if self.Inventory[i].Weapon == true then
-                if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
-                    break
-                end
-            end
-            -- Validate Quuality and Quantity are numbers.
-            if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
-                break
-            end
-            -- If the Quality is below 0, then destroy the item.
-            if self.Inventory[i].Quality <= 0 then
-                table.remove(self.Inventory, i)
-            end
+        -- Use unified validation function (no source since this is for offline player)
+        local processed, valid, error = c.validation.ValidateAndUnpack(nil, inv)
+        
+        if not valid then
+            -- Log error but don't kick since player is offline
+            c.func.Debug_1("Error unpacking offline player inventory: " .. (error or "unknown"))
+            self.Inventory = {}
+            return
         end
+        
+        self.Inventory = processed
     end
     --- func desc
     self.GetInventory = function()
