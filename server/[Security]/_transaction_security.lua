@@ -85,6 +85,35 @@ function c.security.CheckRateLimit(playerId, transactionType)
     return false
 end
 
+--- Wrapper: Check transaction rate limit and notify player if limited
+---@param player table Player object
+---@param transactionType string Type of transaction
+---@return boolean isLimited True if rate limit is active
+function c.security.CheckTransactionRateLimit(player, transactionType)
+    if not player or not player.ID then
+        return false
+    end
+    
+    if c.security.CheckRateLimit(player.ID, transactionType) then
+        if player.Notify then
+            player.Notify("Transaction too fast. Please wait.")
+        end
+        return true
+    end
+    return false
+end
+
+--- Wrapper: Log a transaction with player object
+---@param player table Player object
+---@param transactionType string Type of transaction
+---@param amount number Transaction amount
+---@param reason string Reason for transaction
+function c.security.LogPlayerTransaction(player, transactionType, amount, reason)
+    if player then
+        c.security.LogTransaction(player, transactionType, amount, reason)
+    end
+end
+
 -- ====================================================================================--
 -- Fraud Detection
 -- ====================================================================================--
