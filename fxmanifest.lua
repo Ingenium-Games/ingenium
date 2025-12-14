@@ -6,7 +6,10 @@ description "Ingenium Games - Core"
 version "0.9.0"
 ------------------------------------------------------------------------------
 lua54 "yes"
-ui_page "nui/index.html"
+-- New Vue 3 NUI system (comment out to use old system)
+ui_page "nui/dist/index.html"
+-- Old NUI system (uncomment to use old system)
+-- ui_page "nui/index.html"
 ------------------------------------------------------------------------------
 shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_c.lua", "shared/_locale.lua"}
 ------------------------------------------------------------------------------
@@ -19,5 +22,17 @@ server_scripts {"@restfx/build/import.lua", "@oxmysql/lib/MySQL.lua", "server/_v
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump", "ox_lib"}
 ------------------------------------------------------------------------------
-files {"data/*.json", "nui/index.html", "nui/css/*.css", "nui/js/*.js", "nui/img/*.png", "nui/libs/*.js"}
+-- New Vue 3 NUI files
+files {
+    "data/*.json",
+    "nui/dist/index.html",
+    "nui/dist/assets/*.js",
+    "nui/dist/assets/*.css",
+    -- Old NUI files (kept for backwards compatibility during migration)
+    "nui/index.html",
+    "nui/css/*.css",
+    "nui/js/*.js",
+    "nui/img/*.png",
+    "nui/libs/*.js"
+}
 ------------------------------------------------------------------------------
