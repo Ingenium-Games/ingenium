@@ -4,17 +4,16 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: transparent;
-  overflow: hidden;
-}
-
-#app {
+#inventory-app {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+#inventory-app > * {
+  pointer-events: auto;
 }

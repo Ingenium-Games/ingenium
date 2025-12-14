@@ -18,15 +18,19 @@ This document provides comprehensive information about the Vue-based inventory s
 
 ## Architecture
 
-The inventory system consists of three main layers:
+The inventory system is integrated into ig.core's single NUI page approach and consists of three main layers:
 
 ### 1. Client-Side (Vue.js)
 - **Location**: `/nui/inventory/`
 - **Framework**: Vue 3 with Vite build system
+- **Integration**: Embedded into `/nui/index.html` as a module
+- **Mount Point**: `#inventory-app` div element
 - **Components**:
   - `App.vue` - Main application container, handles NUI messages
   - `InventoryPanel.vue` - Reusable panel component for both player and external inventories
   - `InventoryItem.vue` - Individual item display with context menu
+
+**Note**: The Vue inventory follows ig.core's "one NUI" pattern where all UI elements are loaded in a single `index.html` file. The inventory Vue app is compiled to `/nui/inventory/dist/assets/` and loaded as a module script.
 
 ### 2. Client-Side (Lua)
 - **Location**: `/nui/lua/inventory.lua`
@@ -87,13 +91,15 @@ The inventory system consists of three main layers:
 
 ### Building the Vue Application
 
+The Vue inventory is integrated into the main NUI page. To rebuild after making changes:
+
 ```bash
 cd nui/inventory
 npm install
 npm run build
 ```
 
-The built files will be output to `nui/inventory/dist/` and are automatically included via `fxmanifest.lua`.
+The built files (`index.css` and `index.js`) are output to `nui/inventory/dist/assets/` and are automatically loaded by `nui/index.html`.
 
 ### FiveM Server
 
