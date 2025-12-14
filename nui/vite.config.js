@@ -8,9 +8,10 @@ export default defineConfig({
     {
       name: 'rename-index',
       generateBundle(options, bundle) {
-        const indexVue = bundle['index-vue.html']
-        if (indexVue) {
-          indexVue.fileName = 'index.html'
+        // Safely rename index-vue.html to index.html if it exists
+        const indexVueKey = Object.keys(bundle).find(key => key === 'index-vue.html')
+        if (indexVueKey && bundle[indexVueKey]) {
+          bundle[indexVueKey].fileName = 'index.html'
         }
       }
     }

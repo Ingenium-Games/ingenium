@@ -5,14 +5,22 @@ import { useCharacterStore } from '../stores/character'
 /**
  * Send a message back to the client Lua script
  */
-export function sendNuiMessage(callback, data = {}) {
-  fetch(`https://${GetParentResourceName()}/${callback}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
+export async function sendNuiMessage(callback, data = {}) {
+  try {
+    const resourceName = await GetParentResourceName()
+    const response = await fetch(`https://${resourceName}/${callback}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    return response
+  } catch (error) {
+    if (!import.meta.env.DEV) {
+      console.error('Failed to send NUI message:', error)
+    }
+  }
 }
 
 /**
@@ -21,22 +29,28 @@ export function sendNuiMessage(callback, data = {}) {
 function GetParentResourceName() {
   // In development, return a dummy name
   if (import.meta.env.DEV) {
-    return 'ig.core'
+    return Promise.resolve('ig.core')
   }
   
-  let intervalId
-  let result = null
-  
-  const checkForResourceName = () => {
+  return new Promise((resolve) => {
     if (window.GetParentResourceName) {
-      result = window.GetParentResourceName()
-      clearInterval(intervalId)
+      resolve(window.GetParentResourceName())
+    } else {
+      // Wait for the function to be available
+      const checkInterval = setInterval(() => {
+        if (window.GetParentResourceName) {
+          clearInterval(checkInterval)
+          resolve(window.GetParentResourceName())
+        }
+      }, 100)
+      
+      // Timeout after 5 seconds
+      setTimeout(() => {
+        clearInterval(checkInterval)
+        resolve('ig.core') // Fallback
+      }, 5000)
     }
-  }
-  
-  intervalId = setInterval(checkForResourceName, 100)
-  
-  return result || 'ig.core'
+  })
 }
 
 /**

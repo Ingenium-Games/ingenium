@@ -53,7 +53,10 @@ import { useUIStore } from '../stores/ui'
 const uiStore = useUIStore()
 
 function formatMoney(value) {
-  return value.toLocaleString()
+  if (value === null || value === undefined || isNaN(value)) {
+    return '0'
+  }
+  return Number(value).toLocaleString()
 }
 </script>
 
