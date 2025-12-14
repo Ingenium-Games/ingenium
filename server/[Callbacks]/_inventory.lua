@@ -248,7 +248,7 @@ local OrganizeInventories = RegisterServerCallback({
         -- Get current inventories before changes
         local xPlayer = c.data.GetPlayer(src)
         local beforePlayer = xPlayer.GetInventory()
-        local beforeExternal = nil
+        local beforeExternal
         
         -- Get external inventory based on entity type
         if type == 3 then

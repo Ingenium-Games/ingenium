@@ -1,10 +1,13 @@
 -- ====================================================================================--
 -- Enhanced Inventory Validation System
 -- Server-Side Security Module
+-- 
+-- @module InventoryValidator
+-- @author ig.core Development Team
+-- @version 1.0.0
+-- @description Provides comprehensive validation to prevent inventory exploits
+--              including item duplication, quantity manipulation, and item injection
 -- ====================================================================================--
-
--- This module provides comprehensive validation to prevent inventory exploits
--- including item duplication, quantity manipulation, and item injection
 
 local InventoryValidator = {}
 
@@ -40,6 +43,11 @@ end
 -- @param itemName string - Name of the item to check
 -- @return boolean - True if item exists, false otherwise
 function InventoryValidator.IsValidItem(itemName)
+    -- Type check to prevent nil or non-string values
+    if type(itemName) ~= "string" or itemName == "" then
+        return false
+    end
+    
     return c.items[itemName] ~= nil
 end
 
@@ -184,12 +192,15 @@ end
 -- @param source number - Player source ID
 -- @param reason string - Detailed reason for ban
 function InventoryValidator.LogAndBanExploiter(source, reason)
+    -- Sanitize reason to prevent log injection
+    local sanitizedReason = tostring(reason):gsub("[\r\n]", " "):sub(1, 500)
+    
     local xPlayer = c.data.GetPlayer(source)
     if xPlayer then
         local logMessage = ("[INVENTORY EXPLOIT] Player: %s (%s) | Reason: %s"):format(
             xPlayer.Name,
             xPlayer.Character_ID,
-            reason
+            sanitizedReason
         )
         
         -- Log to server console
@@ -199,9 +210,9 @@ function InventoryValidator.LogAndBanExploiter(source, reason)
         TriggerEvent("txaLogger:CommandExecuted", logMessage)
         
         -- Use existing ban function
-        c.func.Eventban(source, "Inventory manipulation detected: " .. reason)
+        c.func.Eventban(source, "Inventory manipulation detected: " .. sanitizedReason)
     else
-        DropPlayer(source, "Inventory manipulation detected: " .. reason)
+        DropPlayer(source, "Inventory manipulation detected: " .. sanitizedReason)
     end
 end
 
