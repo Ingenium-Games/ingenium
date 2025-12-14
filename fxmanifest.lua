@@ -6,7 +6,10 @@ description "Ingenium Games - Core"
 version "0.9.0"
 ------------------------------------------------------------------------------
 lua54 "yes"
-ui_page "nui/index.html"
+-- New Vue 3 NUI system (comment out to use old system)
+ui_page "nui/dist/index.html"
+-- Old NUI system (uncomment to use old system)
+-- ui_page "nui/index.html"
 ------------------------------------------------------------------------------
 shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_c.lua", "shared/_locale.lua"}
 ------------------------------------------------------------------------------
@@ -15,7 +18,7 @@ client_scripts {"client/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua", "shar
 ------------------------------------------------------------------------------
 server_scripts {"@restfx/build/import.lua", "@oxmysql/lib/MySQL.lua", "server/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua",
                 "shared/[Third Party]/*.lua", "server/_functions.lua", "server/_cron.lua", "server/[Doors]/_doors.lua",
-                "server/[Validation]/*.lua", "server/**/*.lua"}
+                "server/[Security]/*.lua","server/[Validation]/*.lua", "server/**/*.lua"}
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump", "ox_lib"}
 ------------------------------------------------------------------------------

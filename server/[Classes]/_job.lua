@@ -58,7 +58,7 @@ function c.class.Job(tab)
             self.Description = str
             self.SetUpdated()
         else
-            c.func.Debug_1("Unable to set description as length is too long. Must be less than 255 characters.")
+            c.func.Debug_1("Unable to set description as length is too long. Must be less than 1500 characters.")
         end
     end
     --- func desc
