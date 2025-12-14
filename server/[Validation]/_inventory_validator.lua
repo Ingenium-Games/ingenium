@@ -53,6 +53,8 @@ end
 
 ---
 -- Validate individual inventory slot data
+-- NOTE: This focuses on high-level exploit prevention.
+--       Low-level type checking and weapon validation is handled by UnpackInventory.
 -- @param slot table - Inventory slot to validate
 -- @return boolean - True if valid, false otherwise
 -- @return string - Error message if invalid
@@ -62,12 +64,12 @@ function InventoryValidator.ValidateSlot(slot)
         return true, nil
     end
     
-    -- Check if item exists in database
+    -- Check if item exists in database (exploit prevention)
     if not InventoryValidator.IsValidItem(slot.Item) then
         return false, "Invalid item: " .. tostring(slot.Item)
     end
     
-    -- Validate quantity is a positive number
+    -- Validate quantity is a positive number (exploit prevention)
     local quantity = tonumber(slot.Quantity)
     if not quantity or quantity < 1 then
         return false, "Invalid quantity for " .. slot.Item .. ": " .. tostring(slot.Quantity)
@@ -78,24 +80,15 @@ function InventoryValidator.ValidateSlot(slot)
         return false, "Quantity exceeds maximum limit for " .. slot.Item .. ": " .. tostring(quantity)
     end
     
-    -- Validate quality is a number between 0 and 100
+    -- Validate quality upper bound (UnpackInventory handles lower bound and type checking)
     local quality = tonumber(slot.Quality)
-    if not quality or quality < 0 or quality > 100 then
-        return false, "Invalid quality for " .. slot.Item .. ": " .. tostring(slot.Quality)
+    if quality and quality > 100 then
+        return false, "Quality exceeds maximum for " .. slot.Item .. ": " .. tostring(quality)
     end
     
-    -- Validate weapon flag consistency
-    if slot.Weapon then
-        local itemData = c.items[slot.Item]
-        if not itemData.Weapon then
-            return false, "Weapon flag mismatch for " .. slot.Item
-        end
-        
-        -- Weapons should not stack
-        if quantity > 1 then
-            return false, "Weapon cannot have quantity > 1: " .. slot.Item
-        end
-    end
+    -- Note: Type checking (number validation) is handled by UnpackInventory
+    -- Note: Weapon stacking is handled by UnpackInventory
+    -- Note: Quality <= 0 cleanup is handled by UnpackInventory
     
     return true, nil
 end

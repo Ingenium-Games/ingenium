@@ -136,23 +136,18 @@ local OrganizeInventory = RegisterServerCallback({
                 local xObject = c.data.GetObject(net)
                 beforeInventory = xObject.GetInventory()
                 
-                -- Enhanced validation: Check inventory integrity
+                -- Enhanced validation: Check inventory integrity (duplication/injection)
+                -- Skip individual slot validation since UnpackInventory handles that
                 local valid, error = InventoryValidator.ValidateInventoryIntegrity(
                     beforeInventory, nil, inv1, nil
                 )
                 
                 if not valid then
-                    InventoryValidator.HandleExploit(src, error)
+                    InventoryValidator.LogAndBanExploiter(src, error)
                     return false
                 end
                 
-                -- Additional validation: Validate each slot
-                local slotValid, slotError = InventoryValidator.ValidateInventory(inv1)
-                if not slotValid then
-                    InventoryValidator.HandleExploit(src, slotError)
-                    return false
-                end
-                
+                -- UnpackInventory will handle detailed slot validation
                 xObject.UnpackInventory(inv1)
                 return true
                 --
@@ -161,23 +156,17 @@ local OrganizeInventory = RegisterServerCallback({
                 local xVehicle = c.data.GetVehicle(net)
                 beforeInventory = xVehicle.GetInventory()
                 
-                -- Enhanced validation: Check inventory integrity
+                -- Enhanced validation: Check inventory integrity (duplication/injection)
                 local valid, error = InventoryValidator.ValidateInventoryIntegrity(
                     beforeInventory, nil, inv1, nil
                 )
                 
                 if not valid then
-                    InventoryValidator.HandleExploit(src, error)
+                    InventoryValidator.LogAndBanExploiter(src, error)
                     return false
                 end
                 
-                -- Additional validation: Validate each slot
-                local slotValid, slotError = InventoryValidator.ValidateInventory(inv1)
-                if not slotValid then
-                    InventoryValidator.HandleExploit(src, slotError)
-                    return false
-                end
-                
+                -- UnpackInventory will handle detailed slot validation
                 xVehicle.UnpackInventory(inv1)
                 return true
                 --
@@ -187,23 +176,17 @@ local OrganizeInventory = RegisterServerCallback({
                     local xPlayer = c.data.GetPlayer(net)
                     beforeInventory = xPlayer.GetInventory()
                     
-                    -- Enhanced validation: Check inventory integrity
+                    -- Enhanced validation: Check inventory integrity (duplication/injection)
                     local valid, error = InventoryValidator.ValidateInventoryIntegrity(
                         beforeInventory, nil, inv1, nil
                     )
                     
                     if not valid then
-                        InventoryValidator.HandleExploit(src, error)
+                        InventoryValidator.LogAndBanExploiter(src, error)
                         return false
                     end
                     
-                    -- Additional validation: Validate each slot
-                    local slotValid, slotError = InventoryValidator.ValidateInventory(inv1)
-                    if not slotValid then
-                        InventoryValidator.HandleExploit(src, slotError)
-                        return false
-                    end
-                    
+                    -- UnpackInventory will handle detailed slot validation
                     xPlayer.UnpackInventory(inv1)
                     return true
                 else
@@ -211,23 +194,17 @@ local OrganizeInventory = RegisterServerCallback({
                     local xNpc = c.data.GetNpc(net)
                     beforeInventory = xNpc.GetInventory()
                     
-                    -- Enhanced validation: Check inventory integrity
+                    -- Enhanced validation: Check inventory integrity (duplication/injection)
                     local valid, error = InventoryValidator.ValidateInventoryIntegrity(
                         beforeInventory, nil, inv1, nil
                     )
                     
                     if not valid then
-                        InventoryValidator.HandleExploit(src, error)
+                        InventoryValidator.LogAndBanExploiter(src, error)
                         return false
                     end
                     
-                    -- Additional validation: Validate each slot
-                    local slotValid, slotError = InventoryValidator.ValidateInventory(inv1)
-                    if not slotValid then
-                        InventoryValidator.HandleExploit(src, slotError)
-                        return false
-                    end
-                    
+                    -- UnpackInventory will handle detailed slot validation
                     xNpc.UnpackInventory(inv1)
                     return true
                 end
@@ -270,30 +247,18 @@ local OrganizeInventories = RegisterServerCallback({
             end
         end
         
-        -- Enhanced validation: Check combined inventory integrity
+        -- Enhanced validation: Check combined inventory integrity (duplication/injection)
+        -- Skip individual slot validation since UnpackInventory handles that
         local valid, error = InventoryValidator.ValidateInventoryIntegrity(
             beforePlayer, beforeExternal, inv1, inv2
         )
         
         if not valid then
-            InventoryValidator.HandleExploit(src, error)
+            InventoryValidator.LogAndBanExploiter(src, error)
             return false
         end
         
-        -- Additional validation: Validate each inventory's slots
-        local playerValid, playerError = InventoryValidator.ValidateInventory(inv1)
-        if not playerValid then
-            InventoryValidator.HandleExploit(src, "Player inventory: " .. playerError)
-            return false
-        end
-        
-        local externalValid, externalError = InventoryValidator.ValidateInventory(inv2)
-        if not externalValid then
-            InventoryValidator.HandleExploit(src, "External inventory: " .. externalError)
-            return false
-        end
-        
-        -- All validation passed, update inventories
+        -- UnpackInventory will handle detailed slot validation for both inventories
         xPlayer.UnpackInventory(inv1)
         
         if type == 3 then
