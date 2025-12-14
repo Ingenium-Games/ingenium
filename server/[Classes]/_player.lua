@@ -456,6 +456,12 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetCash = function(v)
+        -- Rate limiting check
+        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "set_cash") then
+            self.Notify("Transaction too fast. Please wait.")
+            return
+        end
+        
         -- negative check first
         if v < 0.00 then
             self.Notify("Nope")
@@ -490,6 +496,11 @@ function c.class.Player(source, character_id)
 
         self.State.Cash = self.GetCash()
         TriggerClientEvent("Client:Inventory:Update", self.ID)
+        
+        -- Transaction logging
+        if c.security and c.security.LogTransaction then
+            c.security.LogTransaction(self, "set_cash", num, "SetCash API call")
+        end
         --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
@@ -512,6 +523,12 @@ function c.class.Player(source, character_id)
     end
     --
     self.AddCash = function(v)
+        -- Rate limiting check
+        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "add_cash") then
+            self.Notify("Transaction too fast. Please wait.")
+            return
+        end
+        
         -- negative check first
         if v < 0 then
             self.Notify("Nope")
@@ -547,6 +564,11 @@ function c.class.Player(source, character_id)
 
         self.State.Cash = self.GetCash()
         TriggerClientEvent("Client:Inventory:Update", self.ID)
+        
+        -- Transaction logging
+        if c.security and c.security.LogTransaction then
+            c.security.LogTransaction(self, "add_cash", num, "AddCash API call")
+        end
         --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
@@ -569,6 +591,12 @@ function c.class.Player(source, character_id)
     end
     --
     self.RemoveCash = function(v)
+        -- Rate limiting check
+        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "remove_cash") then
+            self.Notify("Transaction too fast. Please wait.")
+            return
+        end
+        
         -- negative check first
         if self.GetCash() < c.math.Decimals(v, 2) then
             self.Notify("Nope")
@@ -620,6 +648,11 @@ function c.class.Player(source, character_id)
 
         self.State.Cash = self.GetCash()
         TriggerClientEvent("Client:Inventory:Update", self.ID)
+        
+        -- Transaction logging
+        if c.security and c.security.LogTransaction then
+            c.security.LogTransaction(self, "remove_cash", num, "RemoveCash API call")
+        end
         --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
@@ -649,6 +682,12 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetBank = function(v)
+        -- Rate limiting check
+        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "set_bank") then
+            self.Notify("Transaction too fast. Please wait.")
+            return
+        end
+        
         local num = c.check.Number(v)
         local acc = c.math.Decimals(num, 2)
         if acc then
@@ -656,10 +695,21 @@ function c.class.Player(source, character_id)
             self.State.Bank = self.GetBank()
             TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Set to $" .. num,
                 "[]")
+            
+            -- Transaction logging
+            if c.security and c.security.LogTransaction then
+                c.security.LogTransaction(self, "set_bank", num, "SetBank API call")
+            end
         end
     end
     --
     self.AddBank = function(v)
+        -- Rate limiting check
+        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "add_bank") then
+            self.Notify("Transaction too fast. Please wait.")
+            return
+        end
+        
         local num = c.check.Number(v)
         local acc = self.GetAccount("Bank")
         if acc then
@@ -668,10 +718,21 @@ function c.class.Player(source, character_id)
             self.State.Bank = self.GetBank()
             TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Credited $" .. num,
                 "[]")
+            
+            -- Transaction logging
+            if c.security and c.security.LogTransaction then
+                c.security.LogTransaction(self, "add_bank", num, "AddBank API call")
+            end
         end
     end
     --
     self.RemoveBank = function(v)
+        -- Rate limiting check
+        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "remove_bank") then
+            self.Notify("Transaction too fast. Please wait.")
+            return
+        end
+        
         local num = c.check.Number(v)
         local acc = self.GetAccount("Bank")
         if acc then
@@ -680,6 +741,11 @@ function c.class.Player(source, character_id)
             self.State.Bank = self.GetBank()
             TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Debited $" .. num,
                 "[]")
+            
+            -- Transaction logging
+            if c.security and c.security.LogTransaction then
+                c.security.LogTransaction(self, "remove_bank", num, "RemoveBank API call")
+            end
         end
     end
     --

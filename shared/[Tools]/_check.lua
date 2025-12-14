@@ -9,12 +9,8 @@ function c.check.Number(num, min, max)
         if type(num) ~= "number" or num == nil then
             return v
         else
-            if num >= min and num <= max then
-                return num
-            else
-                -- c.func.Debug_1("Unable to add value lesser than "..min..", or greater than"..max..". Returned 0.")
-                return v
-            end
+            -- Explicit clamping: ensure value is within min-max range
+            return math.max(min, math.min(max, num))
         end
     else
         assert(type(num) == "number", "Invalid variable type at argument #1, expected number, got "..type(num))
