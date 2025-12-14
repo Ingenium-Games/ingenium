@@ -15,9 +15,10 @@ client_scripts {"client/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua", "shar
 ------------------------------------------------------------------------------
 server_scripts {"@restfx/build/import.lua", "@oxmysql/lib/MySQL.lua", "server/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua",
                 "shared/[Third Party]/*.lua", "server/_functions.lua", "server/_cron.lua", "server/[Doors]/_doors.lua",
-                "server/**/*.lua"}
+                "server/[Validation]/*.lua", "server/**/*.lua"}
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "mysql-async", "discordroles", "ig.dump", "ox_lib"}
 ------------------------------------------------------------------------------
-files {"data/*.json", "nui/index.html", "nui/css/*.css", "nui/js/*.js", "nui/img/*.png", "nui/libs/*.js"}
+files {"data/*.json", "nui/index.html", "nui/css/*.css", "nui/js/*.js", "nui/img/*.png", "nui/libs/*.js",
+       "nui/inventory/dist/index.html", "nui/inventory/dist/assets/*.css", "nui/inventory/dist/assets/*.js"}
 ------------------------------------------------------------------------------

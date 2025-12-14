@@ -1,4 +1,8 @@
 -- ====================================================================================--
+-- Load the inventory validator module for enhanced security
+local InventoryValidator = require('server/[Validation]/_inventory_validator')
+-- ====================================================================================--
+
 local UseItem = RegisterServerCallback({
     eventName = "UseItem",
     eventCallback = function(source, number)
@@ -124,53 +128,112 @@ local OrganizeInventory = RegisterServerCallback({
         local type = GetEntityType(entity)
         -- Is it valid on the server?
         if DoesEntityExist(entity) then
+            -- Get the current inventory (before changes)
+            local beforeInventory = nil
+            
             -- Object
             if type == 3 then
                 local xObject = c.data.GetObject(net)
-                local size = xObject.GetInventory()
-                if #size == #inv1 then
-                    xObject.UnpackInventory(inv1)
-                else
-                    c.func.Eventban(src,
-                        "Error in organizing invent, additional items or quanitty found, removed player.")
+                beforeInventory = xObject.GetInventory()
+                
+                -- Enhanced validation: Check inventory integrity
+                local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+                    beforeInventory, nil, inv1, nil
+                )
+                
+                if not valid then
+                    InventoryValidator.HandleExploit(src, error)
+                    return false
                 end
+                
+                -- Additional validation: Validate each slot
+                local slotValid, slotError = InventoryValidator.ValidateInventory(inv1)
+                if not slotValid then
+                    InventoryValidator.HandleExploit(src, slotError)
+                    return false
+                end
+                
+                xObject.UnpackInventory(inv1)
+                return true
                 --
                 -- Vehicle
             elseif type == 2 then
                 local xVehicle = c.data.GetVehicle(net)
-                local size = xVehicle.GetInventory()
-                if #size == #inv1 then
-                    xVehicle.UnpackInventory(inv1)
-                else
-                    c.func.Eventban(src,
-                        "Error in organizing invent, additional items or quanitty found, removed player.")
+                beforeInventory = xVehicle.GetInventory()
+                
+                -- Enhanced validation: Check inventory integrity
+                local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+                    beforeInventory, nil, inv1, nil
+                )
+                
+                if not valid then
+                    InventoryValidator.HandleExploit(src, error)
+                    return false
                 end
+                
+                -- Additional validation: Validate each slot
+                local slotValid, slotError = InventoryValidator.ValidateInventory(inv1)
+                if not slotValid then
+                    InventoryValidator.HandleExploit(src, slotError)
+                    return false
+                end
+                
+                xVehicle.UnpackInventory(inv1)
+                return true
                 --
                 -- Ped
             elseif type == 1 then
                 if IsPedAPlayer(entity) then
                     local xPlayer = c.data.GetPlayer(net)
-                    local size = xPlayer.GetInventory()
-                    if #size == #inv1 then
-                        xPlayer.UnpackInventory(inv1)
-                    else
-                        c.func.Eventban(src,
-                            "Error in organizing invent, additional items or quanitty found, removed player.")
+                    beforeInventory = xPlayer.GetInventory()
+                    
+                    -- Enhanced validation: Check inventory integrity
+                    local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+                        beforeInventory, nil, inv1, nil
+                    )
+                    
+                    if not valid then
+                        InventoryValidator.HandleExploit(src, error)
+                        return false
                     end
+                    
+                    -- Additional validation: Validate each slot
+                    local slotValid, slotError = InventoryValidator.ValidateInventory(inv1)
+                    if not slotValid then
+                        InventoryValidator.HandleExploit(src, slotError)
+                        return false
+                    end
+                    
+                    xPlayer.UnpackInventory(inv1)
+                    return true
                 else
                     -- is an NPC
                     local xNpc = c.data.GetNpc(net)
-                    local size = xNpc.GetInventory()
-                    if #size == #inv1 then
-                        xNpc.UnpackInventory(inv1)
-                    else
-                        c.func.Eventban(src,
-                            "Error in organizing invent, additional items or quanitty found, removed player.")
+                    beforeInventory = xNpc.GetInventory()
+                    
+                    -- Enhanced validation: Check inventory integrity
+                    local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+                        beforeInventory, nil, inv1, nil
+                    )
+                    
+                    if not valid then
+                        InventoryValidator.HandleExploit(src, error)
+                        return false
                     end
+                    
+                    -- Additional validation: Validate each slot
+                    local slotValid, slotError = InventoryValidator.ValidateInventory(inv1)
+                    if not slotValid then
+                        InventoryValidator.HandleExploit(src, slotError)
+                        return false
+                    end
+                    
+                    xNpc.UnpackInventory(inv1)
+                    return true
                 end
             end
-
         end
+        return false
     end
 })
 --
@@ -181,10 +244,58 @@ local OrganizeInventories = RegisterServerCallback({
         local src = source
         local entity = NetworkGetEntityFromNetworkId(net)
         local type = GetEntityType(entity)
-        --
+        
+        -- Get current inventories before changes
         local xPlayer = c.data.GetPlayer(src)
+        local beforePlayer = xPlayer.GetInventory()
+        local beforeExternal = nil
+        
+        -- Get external inventory based on entity type
+        if type == 3 then
+            -- Object
+            local xObject = c.data.GetObject(net)
+            beforeExternal = xObject.GetInventory()
+        elseif type == 2 then
+            -- Vehicle
+            local xVehicle = c.data.GetVehicle(net)
+            beforeExternal = xVehicle.GetInventory()
+        elseif type == 1 then
+            -- Ped
+            if IsPedAPlayer(entity) then
+                local xTarget = c.data.GetPlayer(net)
+                beforeExternal = xTarget.GetInventory()
+            else
+                local xNpc = c.data.GetNpc(net)
+                beforeExternal = xNpc.GetInventory()
+            end
+        end
+        
+        -- Enhanced validation: Check combined inventory integrity
+        local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+            beforePlayer, beforeExternal, inv1, inv2
+        )
+        
+        if not valid then
+            InventoryValidator.HandleExploit(src, error)
+            return false
+        end
+        
+        -- Additional validation: Validate each inventory's slots
+        local playerValid, playerError = InventoryValidator.ValidateInventory(inv1)
+        if not playerValid then
+            InventoryValidator.HandleExploit(src, "Player inventory: " .. playerError)
+            return false
+        end
+        
+        local externalValid, externalError = InventoryValidator.ValidateInventory(inv2)
+        if not externalValid then
+            InventoryValidator.HandleExploit(src, "External inventory: " .. externalError)
+            return false
+        end
+        
+        -- All validation passed, update inventories
         xPlayer.UnpackInventory(inv1)
-        --
+        
         if type == 3 then
             -- Object
             local xObject = c.data.GetObject(net)
@@ -203,7 +314,7 @@ local OrganizeInventories = RegisterServerCallback({
                 xNpc.UnpackInventory(inv2)
             end
         end
-        --
+        
         return true
     end
 })

@@ -6,3 +6,12 @@
 /.vs/ProjectSettings.json
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
+
+# FiveM
+cache/
+**.fxap
+server.cfg
+
+# Vue Build
+nui/inventory/node_modules/
+nui/inventory/package-lock.json
