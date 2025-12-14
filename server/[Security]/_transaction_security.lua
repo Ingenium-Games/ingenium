@@ -27,19 +27,27 @@ local playerTransactionHistory = {}
 ---@param reason string Reason for transaction
 function c.security.LogTransaction(player, transactionType, amount, reason)
     if not player then
+        print("^3[SECURITY WARNING] LogTransaction called with nil player^7")
         return
     end
     
     local log = {
         timestamp = os.time(),
-        player_id = player.GetCharacter_ID and player.GetCharacter_ID() or "unknown",
-        source = player.ID or "unknown",
+        player_id = player.GetCharacter_ID and player.GetCharacter_ID() or "no_character_id",
+        source = player.ID or "no_source_id",
         type = transactionType,
         amount = amount,
         reason = reason or "API call",
         before_cash = transactionType:match("cash") and player.GetCash and player.GetCash() or nil,
         before_bank = transactionType:match("bank") and player.GetBank and player.GetBank() or nil
     }
+    
+    -- Validate critical fields
+    if log.player_id == "no_character_id" or log.source == "no_source_id" then
+        print(("^3[SECURITY WARNING] Transaction logged with missing player info: %s from source %s^7"):format(
+            log.player_id, log.source
+        ))
+    end
     
     -- Store in memory (in production, write to database)
     table.insert(transactionLog, log)
@@ -165,11 +173,11 @@ CreateThread(function()
         
         -- Clean up old transaction logs (keep last 1000 entries)
         if #transactionLog > 1000 then
-            -- More efficient: create new table with last 1000 entries
+            -- More efficient: create new table with last 1000 entries using direct indexing
             local newLog = {}
             local startIdx = #transactionLog - 999
             for i = startIdx, #transactionLog do
-                table.insert(newLog, transactionLog[i])
+                newLog[i - startIdx + 1] = transactionLog[i]
             end
             transactionLog = newLog
         end

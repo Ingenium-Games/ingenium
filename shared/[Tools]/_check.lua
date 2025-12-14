@@ -8,6 +8,10 @@ function c.check.Number(num, min, max)
         if type(num) ~= "number" or num == nil then
             return v
         else
+            -- Check for NaN (NaN != NaN in Lua)
+            if num ~= num then
+                return v
+            end
             -- Explicit clamping: ensure value is within min-max range
             return math.max(min, math.min(max, num))
         end
@@ -15,6 +19,10 @@ function c.check.Number(num, min, max)
         if type(num) ~= "number" then
             return v
         else
+            -- Check for NaN (NaN != NaN in Lua)
+            if num ~= num then
+                return v
+            end
             return num
         end
     end

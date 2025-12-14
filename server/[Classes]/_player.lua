@@ -456,6 +456,7 @@ function c.class.Player(source, character_id)
     end
     --
     -- Helper function for rate limiting transaction operations
+    -- Note: Uses 'self' from enclosing Player class scope via closure
     local function checkTransactionRateLimit(transactionType)
         if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, transactionType) then
             self.Notify("Transaction too fast. Please wait.")
@@ -465,6 +466,7 @@ function c.class.Player(source, character_id)
     end
     --
     -- Helper function for logging transactions
+    -- Note: Uses 'self' from enclosing Player class scope via closure
     local function logTransaction(transactionType, amount, reason)
         if c.security and c.security.LogTransaction then
             c.security.LogTransaction(self, transactionType, amount, reason)
