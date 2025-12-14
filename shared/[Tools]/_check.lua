@@ -5,7 +5,7 @@ c.check = {}
 function c.check.Number(num, min, max)
     local v = 0
     if min and max then
-        if type(num) ~= "number" or num == nil then
+        if type(num) ~= "number" then
             return v
         else
             -- Check for NaN (NaN != NaN in Lua)

@@ -173,7 +173,9 @@ CreateThread(function()
         
         -- Clean up old transaction logs (keep last 1000 entries)
         if #transactionLog > 1000 then
-            -- More efficient: create new table with last 1000 entries using direct indexing
+            -- Efficient cleanup: Create new table with last 1000 entries
+            -- This is O(1000) vs table.remove in loop which would be O(n*n) 
+            -- due to shifting elements on each removal
             local newLog = {}
             local startIdx = #transactionLog - 999
             for i = startIdx, #transactionLog do
