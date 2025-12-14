@@ -5,7 +5,6 @@ c.check = {}
 function c.check.Number(num, min, max)
     local v = 0
     if min and max then
-        assert(type(num) == "number", "Invalid variable type at argument #1, expected number, got "..type(num))
         if type(num) ~= "number" or num == nil then
             return v
         else
@@ -13,7 +12,6 @@ function c.check.Number(num, min, max)
             return math.max(min, math.min(max, num))
         end
     else
-        assert(type(num) == "number", "Invalid variable type at argument #1, expected number, got "..type(num))
         if type(num) ~= "number" then
             return v
         else

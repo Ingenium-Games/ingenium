@@ -165,10 +165,13 @@ CreateThread(function()
         
         -- Clean up old transaction logs (keep last 1000 entries)
         if #transactionLog > 1000 then
-            -- Remove oldest entries
-            for i = 1, #transactionLog - 1000 do
-                table.remove(transactionLog, 1)
+            -- More efficient: create new table with last 1000 entries
+            local newLog = {}
+            local startIdx = #transactionLog - 999
+            for i = startIdx, #transactionLog do
+                table.insert(newLog, transactionLog[i])
             end
+            transactionLog = newLog
         end
     end
 end)

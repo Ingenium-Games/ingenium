@@ -455,10 +455,25 @@ function c.class.Player(source, character_id)
         end
     end
     --
+    -- Helper function for rate limiting transaction operations
+    local function checkTransactionRateLimit(transactionType)
+        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, transactionType) then
+            self.Notify("Transaction too fast. Please wait.")
+            return true
+        end
+        return false
+    end
+    --
+    -- Helper function for logging transactions
+    local function logTransaction(transactionType, amount, reason)
+        if c.security and c.security.LogTransaction then
+            c.security.LogTransaction(self, transactionType, amount, reason)
+        end
+    end
+    --
     self.SetCash = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "set_cash") then
-            self.Notify("Transaction too fast. Please wait.")
+        if checkTransactionRateLimit("set_cash") then
             return
         end
         
@@ -498,9 +513,7 @@ function c.class.Player(source, character_id)
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         
         -- Transaction logging
-        if c.security and c.security.LogTransaction then
-            c.security.LogTransaction(self, "set_cash", num, "SetCash API call")
-        end
+        logTransaction("set_cash", num, "SetCash API call")
         --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
@@ -524,8 +537,7 @@ function c.class.Player(source, character_id)
     --
     self.AddCash = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "add_cash") then
-            self.Notify("Transaction too fast. Please wait.")
+        if checkTransactionRateLimit("add_cash") then
             return
         end
         
@@ -566,9 +578,7 @@ function c.class.Player(source, character_id)
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         
         -- Transaction logging
-        if c.security and c.security.LogTransaction then
-            c.security.LogTransaction(self, "add_cash", num, "AddCash API call")
-        end
+        logTransaction("add_cash", num, "AddCash API call")
         --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
@@ -592,8 +602,7 @@ function c.class.Player(source, character_id)
     --
     self.RemoveCash = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "remove_cash") then
-            self.Notify("Transaction too fast. Please wait.")
+        if checkTransactionRateLimit("remove_cash") then
             return
         end
         
@@ -650,9 +659,7 @@ function c.class.Player(source, character_id)
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         
         -- Transaction logging
-        if c.security and c.security.LogTransaction then
-            c.security.LogTransaction(self, "remove_cash", num, "RemoveCash API call")
-        end
+        logTransaction("remove_cash", num, "RemoveCash API call")
         --[[
         local num = c.check.Number(v)
         local acc = self.GetAccount("Cash")
@@ -683,8 +690,7 @@ function c.class.Player(source, character_id)
     --
     self.SetBank = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "set_bank") then
-            self.Notify("Transaction too fast. Please wait.")
+        if checkTransactionRateLimit("set_bank") then
             return
         end
         
@@ -697,16 +703,13 @@ function c.class.Player(source, character_id)
                 "[]")
             
             -- Transaction logging
-            if c.security and c.security.LogTransaction then
-                c.security.LogTransaction(self, "set_bank", num, "SetBank API call")
-            end
+            logTransaction("set_bank", num, "SetBank API call")
         end
     end
     --
     self.AddBank = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "add_bank") then
-            self.Notify("Transaction too fast. Please wait.")
+        if checkTransactionRateLimit("add_bank") then
             return
         end
         
@@ -720,16 +723,13 @@ function c.class.Player(source, character_id)
                 "[]")
             
             -- Transaction logging
-            if c.security and c.security.LogTransaction then
-                c.security.LogTransaction(self, "add_bank", num, "AddBank API call")
-            end
+            logTransaction("add_bank", num, "AddBank API call")
         end
     end
     --
     self.RemoveBank = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckRateLimit and c.security.CheckRateLimit(self.ID, "remove_bank") then
-            self.Notify("Transaction too fast. Please wait.")
+        if checkTransactionRateLimit("remove_bank") then
             return
         end
         
@@ -743,9 +743,7 @@ function c.class.Player(source, character_id)
                 "[]")
             
             -- Transaction logging
-            if c.security and c.security.LogTransaction then
-                c.security.LogTransaction(self, "remove_bank", num, "RemoveBank API call")
-            end
+            logTransaction("remove_bank", num, "RemoveBank API call")
         end
     end
     --
