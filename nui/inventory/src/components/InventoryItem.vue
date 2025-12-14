@@ -36,6 +36,11 @@
 <script>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
+// Configuration constants
+const IMAGE_BASE_PATH = '../img/'
+const IMAGE_EXTENSION = '.png'
+const FALLBACK_IMAGE = '../img/placeholder.png'  // Optional: fallback for missing images
+
 export default {
   name: 'InventoryItem',
   props: {
@@ -58,8 +63,8 @@ export default {
      */
     const itemImage = computed(() => {
       if (!props.item) return ''
-      // Assuming images are stored in nui/img/ directory with item name
-      return `../img/${props.item.Item}.png`
+      // Build image path from configuration
+      return `${IMAGE_BASE_PATH}${props.item.Item}${IMAGE_EXTENSION}`
     })
 
     /**

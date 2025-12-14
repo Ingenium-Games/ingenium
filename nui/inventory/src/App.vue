@@ -28,6 +28,9 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import InventoryPanel from './components/InventoryPanel.vue'
 
+// Configuration constants
+const RESOURCE_NAME = 'ig.core'  // Can be changed if resource is renamed
+
 export default {
   name: 'App',
   components: {
@@ -208,7 +211,7 @@ export default {
      */
     const handleItemAction = ({ action, item, position, panelId }) => {
       // Send action to Lua backend
-      fetch(`https://ig.core/inventory_action`, {
+      fetch(`https://${RESOURCE_NAME}/inventory_action`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -233,7 +236,7 @@ export default {
       const compressedExternal = externalInventory.value.filter(item => item != null)
 
       // Send to server for validation and saving
-      fetch(`https://ig.core/inventory_close`, {
+      fetch(`https://${RESOURCE_NAME}/inventory_close`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

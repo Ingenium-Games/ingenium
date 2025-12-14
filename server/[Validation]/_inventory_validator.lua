@@ -65,6 +65,11 @@ function InventoryValidator.ValidateSlot(slot)
         return false, "Invalid quantity for " .. slot.Item .. ": " .. tostring(slot.Quantity)
     end
     
+    -- Prevent extremely large quantities that could cause overflow or performance issues
+    if quantity > 999999 then
+        return false, "Quantity exceeds maximum limit for " .. slot.Item .. ": " .. tostring(quantity)
+    end
+    
     -- Validate quality is a number between 0 and 100
     local quality = tonumber(slot.Quality)
     if not quality or quality < 0 or quality > 100 then
@@ -175,10 +180,10 @@ function InventoryValidator.ValidateInventory(inventory)
 end
 
 ---
--- Security action: Kick player for exploit attempt
+-- Security action: Log and ban player for exploit attempt
 -- @param source number - Player source ID
--- @param reason string - Detailed reason for kick
-function InventoryValidator.HandleExploit(source, reason)
+-- @param reason string - Detailed reason for ban
+function InventoryValidator.LogAndBanExploiter(source, reason)
     local xPlayer = c.data.GetPlayer(source)
     if xPlayer then
         local logMessage = ("[INVENTORY EXPLOIT] Player: %s (%s) | Reason: %s"):format(
@@ -199,6 +204,9 @@ function InventoryValidator.HandleExploit(source, reason)
         DropPlayer(source, "Inventory manipulation detected: " .. reason)
     end
 end
+
+-- Maintain backward compatibility
+InventoryValidator.HandleExploit = InventoryValidator.LogAndBanExploiter
 
 -- ====================================================================================--
 -- Export Module
