@@ -1,8 +1,4 @@
 -- ====================================================================================--
--- Load the inventory validator module for enhanced security
-local InventoryValidator = require('server/[Validation]/_inventory_validator')
--- ====================================================================================--
-
 local UseItem = RegisterServerCallback({
     eventName = "UseItem",
     eventCallback = function(source, number)
@@ -138,12 +134,12 @@ local OrganizeInventory = RegisterServerCallback({
                 
                 -- Enhanced validation: Check inventory integrity (duplication/injection)
                 -- Skip individual slot validation since UnpackInventory handles that
-                local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+                local valid, error = c.validation.ValidateInventoryIntegrity(
                     beforeInventory, nil, inv1, nil
                 )
                 
                 if not valid then
-                    InventoryValidator.LogAndBanExploiter(src, error)
+                    c.validation.LogAndBanExploiter(src, error)
                     return false
                 end
                 
@@ -157,12 +153,12 @@ local OrganizeInventory = RegisterServerCallback({
                 beforeInventory = xVehicle.GetInventory()
                 
                 -- Enhanced validation: Check inventory integrity (duplication/injection)
-                local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+                local valid, error = c.validation.ValidateInventoryIntegrity(
                     beforeInventory, nil, inv1, nil
                 )
                 
                 if not valid then
-                    InventoryValidator.LogAndBanExploiter(src, error)
+                    c.validation.LogAndBanExploiter(src, error)
                     return false
                 end
                 
@@ -177,12 +173,12 @@ local OrganizeInventory = RegisterServerCallback({
                     beforeInventory = xPlayer.GetInventory()
                     
                     -- Enhanced validation: Check inventory integrity (duplication/injection)
-                    local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+                    local valid, error = c.validation.ValidateInventoryIntegrity(
                         beforeInventory, nil, inv1, nil
                     )
                     
                     if not valid then
-                        InventoryValidator.LogAndBanExploiter(src, error)
+                        c.validation.LogAndBanExploiter(src, error)
                         return false
                     end
                     
@@ -195,12 +191,12 @@ local OrganizeInventory = RegisterServerCallback({
                     beforeInventory = xNpc.GetInventory()
                     
                     -- Enhanced validation: Check inventory integrity (duplication/injection)
-                    local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+                    local valid, error = c.validation.ValidateInventoryIntegrity(
                         beforeInventory, nil, inv1, nil
                     )
                     
                     if not valid then
-                        InventoryValidator.LogAndBanExploiter(src, error)
+                        c.validation.LogAndBanExploiter(src, error)
                         return false
                     end
                     
@@ -249,12 +245,12 @@ local OrganizeInventories = RegisterServerCallback({
         
         -- Enhanced validation: Check combined inventory integrity (duplication/injection)
         -- Skip individual slot validation since UnpackInventory handles that
-        local valid, error = InventoryValidator.ValidateInventoryIntegrity(
+        local valid, error = c.validation.ValidateInventoryIntegrity(
             beforePlayer, beforeExternal, inv1, inv2
         )
         
         if not valid then
-            InventoryValidator.LogAndBanExploiter(src, error)
+            c.validation.LogAndBanExploiter(src, error)
             return false
         end
         
