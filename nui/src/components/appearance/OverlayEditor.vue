@@ -46,7 +46,7 @@
             class="overlay-select"
             :aria-label="`${overlay.name} color`"
           >
-            <option v-for="i in 64" :key="i-1" :value="i-1">Color {{ i-1 }}</option>
+            <option v-for="i in MAX_OVERLAY_COLORS" :key="i-1" :value="i-1">Color {{ i-1 }}</option>
           </select>
         </div>
       </div>
@@ -59,6 +59,8 @@ import { computed } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
 
 const appearanceStore = useAppearanceStore()
+
+const MAX_OVERLAY_COLORS = 64
 
 const headOverlays = computed(() => {
   return appearanceStore.constants?.headOverlays || []

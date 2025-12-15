@@ -11,7 +11,7 @@
             class="parent-select"
             aria-label="Select mother"
           >
-            <option v-for="i in 46" :key="i-1" :value="i-1">{{ i-1 }}</option>
+            <option v-for="i in MAX_PARENT_HEADS" :key="i-1" :value="i-1">{{ i-1 }}</option>
           </select>
         </div>
         
@@ -23,7 +23,7 @@
             class="parent-select"
             aria-label="Select father"
           >
-            <option v-for="i in 46" :key="i-1" :value="i-1">{{ i-1 }}</option>
+            <option v-for="i in MAX_PARENT_HEADS" :key="i-1" :value="i-1">{{ i-1 }}</option>
           </select>
         </div>
       </div>
@@ -57,7 +57,7 @@
             class="parent-select"
             aria-label="Select mother skin"
           >
-            <option v-for="i in 46" :key="i-1" :value="i-1">{{ i-1 }}</option>
+            <option v-for="i in MAX_PARENT_HEADS" :key="i-1" :value="i-1">{{ i-1 }}</option>
           </select>
         </div>
         
@@ -69,7 +69,7 @@
             class="parent-select"
             aria-label="Select father skin"
           >
-            <option v-for="i in 46" :key="i-1" :value="i-1">{{ i-1 }}</option>
+            <option v-for="i in MAX_PARENT_HEADS" :key="i-1" :value="i-1">{{ i-1 }}</option>
           </select>
         </div>
       </div>
@@ -99,6 +99,8 @@ import { computed } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
 
 const appearanceStore = useAppearanceStore()
+
+const MAX_PARENT_HEADS = 46
 
 const headBlend = computed(() => {
   return appearanceStore.currentAppearance?.headBlend || {

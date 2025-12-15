@@ -134,7 +134,9 @@ function removeTattoo(tattoo) {
 }
 
 function clearAll() {
-  if (confirm('Are you sure you want to remove all tattoos?')) {
+  // TODO: Replace with custom modal component matching app design
+  // For now, using native confirm for functionality
+  if (window.confirm('Are you sure you want to remove all tattoos?')) {
     appearanceStore.clearAllTattoos()
   }
 }

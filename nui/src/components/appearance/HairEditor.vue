@@ -4,7 +4,7 @@
       <h3 class="section-title">Hair Style</h3>
       <div class="style-grid">
         <button
-          v-for="i in 73"
+          v-for="i in MAX_HAIR_STYLES"
           :key="i-1"
           @click="updateHairStyle(i-1)"
           :class="['style-btn', { active: currentHair.style === (i-1) }]"
@@ -68,6 +68,10 @@ import { computed } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
 
 const appearanceStore = useAppearanceStore()
+
+const MAX_HAIR_STYLES = 73
+
+const MAX_HAIR_COLORS = 64
 
 const hairColorCount = 64
 
