@@ -2,6 +2,9 @@
 -- Drop Integration: Client-side drop system integration
 -- ====================================================================================--
 
+-- Table to store blip handles for targeted drops (using existing c.blips system)
+local dropBlipHandles = {}
+
 --- Handle drop notification for targeted drops
 RegisterNetEvent('Client:Drop:Notify', function(data)
     local coords = data.coords
@@ -20,22 +23,25 @@ RegisterNetEvent('Client:Drop:Notify', function(data)
         }
     })
     
-    -- Create blip if not a dead drop
+    -- Create blip if not a dead drop using the existing blip system
     if not isDeadDrop then
-        local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
-        SetBlipSprite(blip, 478) -- Package icon
-        SetBlipDisplay(blip, 4)
-        SetBlipScale(blip, 0.8)
-        SetBlipColour(blip, 2) -- Green
-        SetBlipAsShortRange(blip, false)
-        BeginTextCommandSetBlipName("STRING")
-        AddTextComponentString("Drop Delivery")
-        EndTextCommandSetBlipName(blip)
+        local blipHandle = c.blip.CreateBlip(
+            vector3(coords.x, coords.y, coords.z),
+            478,  -- Package icon sprite
+            2,    -- Green color
+            "Drop Delivery",
+            0.8,  -- Scale
+            nil,  -- No flash
+            nil,  -- No fade
+            false, -- Not short range (visible from distance)
+            true,  -- High detail
+            4,     -- Display type
+            1,     -- Category
+            false  -- Not hidden on legend
+        )
         
-        -- Store blip reference for cleanup
-        if not c.drop then c.drop = {} end
-        if not c.drop.blips then c.drop.blips = {} end
-        c.drop.blips[uuid] = blip
+        -- Store blip handle for cleanup
+        dropBlipHandles[uuid] = blipHandle
         
         c.func.Debug_3("Created blip for drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
     end
@@ -68,9 +74,9 @@ end)
 
 --- Clean up blip when drop is removed
 RegisterNetEvent('Client:Drop:Removed', function(uuid)
-    if c.drop and c.drop.blips and c.drop.blips[uuid] then
-        RemoveBlip(c.drop.blips[uuid])
-        c.drop.blips[uuid] = nil
+    if dropBlipHandles[uuid] then
+        c.blip.Remove(dropBlipHandles[uuid])
+        dropBlipHandles[uuid] = nil
         c.func.Debug_3("Removed blip for drop " .. uuid)
     end
 end)
