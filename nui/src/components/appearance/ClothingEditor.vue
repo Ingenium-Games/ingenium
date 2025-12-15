@@ -5,7 +5,12 @@
       :key="component.id"
       class="clothing-section"
     >
-      <h4 class="component-title">{{ component.name }}</h4>
+      <div class="component-header">
+        <h4 class="component-title">{{ component.name }}</h4>
+        <span v-if="showPricing && getComponentPrice(component.id) > 0" class="component-price">
+          ${{ getComponentPrice(component.id) }}
+        </span>
+      </div>
       
       <div class="component-controls">
         <div class="control-row">
@@ -55,6 +60,16 @@ const appearanceStore = useAppearanceStore()
 const components = computed(() => {
   return appearanceStore.constants?.components || []
 })
+
+const showPricing = computed(() => {
+  return appearanceStore.pricingEnabled && 
+         appearanceStore.pricing?.pricing?.clothing?.enabled
+})
+
+function getComponentPrice(componentId) {
+  if (!showPricing.value) return 0
+  return appearanceStore.getItemPrice('clothing', componentId)
+}
 
 function getCurrentComponent(componentId) {
   const comps = appearanceStore.currentAppearance?.components || []
@@ -134,11 +149,28 @@ function decrementTexture(componentId) {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.component-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .component-title {
   font-size: 13px;
   font-weight: 600;
   color: white;
-  margin: 0 0 10px 0;
+  margin: 0;
+}
+
+.component-price {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4287f5;
+  padding: 3px 8px;
+  background: rgba(66, 135, 245, 0.1);
+  border-radius: 4px;
+  border: 1px solid rgba(66, 135, 245, 0.3);
 }
 
 .component-controls {
