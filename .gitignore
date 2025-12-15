@@ -15,3 +15,6 @@ server.cfg
 # Vue Build
 nui/inventory/node_modules/
 nui/inventory/package-lock.json
+nui/node_modules/
+nui/package-lock.json
+nui/dist/
