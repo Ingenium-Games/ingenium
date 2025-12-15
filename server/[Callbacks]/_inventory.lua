@@ -262,7 +262,7 @@ local OrganizeInventories = RegisterServerCallback({
             local xObject = c.data.GetObject(net)
             xObject.UnpackInventory(inv2)
             
-            -- Check if this is a drop and if it's now empty (compare model hash directly)
+            -- Check if this is a drop (model hash comparison - backtick notation auto-hashes)
             local model = GetEntityModel(entity)
             if model == conf.drops.default_model then
                 local inventory = xObject.GetInventory()

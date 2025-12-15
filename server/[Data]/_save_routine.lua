@@ -2,31 +2,39 @@
 -- Save dynamic JSON data periodically
 -- ====================================================================================--
 
+--- Helper function to merge active drops back into drops for saving
+---@return table dropsToSave Combined drops table
+local function MergeDropsForSave()
+    local dropsToSave = {}
+    
+    -- Copy c.drops
+    for uuid, drop in pairs(c.drops) do
+        dropsToSave[uuid] = drop
+    end
+    
+    -- Merge c.active_drops with updated inventory
+    for uuid, drop in pairs(c.active_drops) do
+        -- Update inventory from xObject before saving
+        local xObject = c.data.GetObject(drop.NetID)
+        if xObject then
+            drop.Inventory = xObject.CompressInventory()
+            drop.Updated = c.func.Timestamp()
+            dropsToSave[uuid] = drop
+        else
+            -- If xObject doesn't exist, skip this drop (will be cleaned up)
+            c.func.Debug_1("Skipping save for drop " .. uuid .. " - xObject not found")
+        end
+    end
+    
+    return dropsToSave
+end
+
 local function SaveDynamicData()
     if not c._loading then  -- Don't save during startup
         local startTime = os.clock()
         
-        -- Merge active drops back into drops for persistence
-        local dropsToSave = {}
-        
-        -- Copy c.drops
-        for uuid, drop in pairs(c.drops) do
-            dropsToSave[uuid] = drop
-        end
-        
-        -- Merge c.active_drops with updated inventory
-        for uuid, drop in pairs(c.active_drops) do
-            -- Update inventory from xObject before saving
-            local xObject = c.data.GetObject(drop.NetID)
-            if xObject then
-                drop.Inventory = xObject.CompressInventory()
-                drop.Updated = c.func.Timestamp()
-                dropsToSave[uuid] = drop
-            else
-                -- If xObject doesn't exist, skip this drop (will be cleaned up)
-                c.func.Debug_1("Skipping save for drop " .. uuid .. " - xObject not found")
-            end
-        end
+        -- Merge drops for persistence
+        local dropsToSave = MergeDropsForSave()
         
         c.json.Write('Drops', dropsToSave)
         c.json.Write('Pickups', c.picks)
@@ -57,27 +65,8 @@ AddEventHandler('onResourceStop', function(resource)
     if GetCurrentResourceName() == resource then
         print('^3[Shutdown] Saving all dynamic data...^7')
         
-        -- Merge active drops back into drops for persistence
-        local dropsToSave = {}
-        
-        -- Copy c.drops
-        for uuid, drop in pairs(c.drops) do
-            dropsToSave[uuid] = drop
-        end
-        
-        -- Merge c.active_drops with updated inventory
-        for uuid, drop in pairs(c.active_drops) do
-            -- Update inventory from xObject before saving
-            local xObject = c.data.GetObject(drop.NetID)
-            if xObject then
-                drop.Inventory = xObject.CompressInventory()
-                drop.Updated = c.func.Timestamp()
-                dropsToSave[uuid] = drop
-            else
-                -- If xObject doesn't exist, skip this drop
-                c.func.Debug_1("Skipping save for drop " .. uuid .. " on shutdown - xObject not found")
-            end
-        end
+        -- Use helper function to merge drops
+        local dropsToSave = MergeDropsForSave()
         
         c.json.Write('Drops', dropsToSave)
         c.json.Write('Pickups', c.picks)
@@ -93,27 +82,8 @@ RegisterCommand('savedata', function(source, args)
     if source == 0 or (c.func and c.func.IsAce and c.func.IsAce(source)) then
         print('^3[Manual Save] Saving dynamic data...^7')
         
-        -- Merge active drops back into drops for persistence
-        local dropsToSave = {}
-        
-        -- Copy c.drops
-        for uuid, drop in pairs(c.drops) do
-            dropsToSave[uuid] = drop
-        end
-        
-        -- Merge c.active_drops with updated inventory
-        for uuid, drop in pairs(c.active_drops) do
-            -- Update inventory from xObject before saving
-            local xObject = c.data.GetObject(drop.NetID)
-            if xObject then
-                drop.Inventory = xObject.CompressInventory()
-                drop.Updated = c.func.Timestamp()
-                dropsToSave[uuid] = drop
-            else
-                -- If xObject doesn't exist, skip this drop
-                c.func.Debug_1("Skipping save for drop " .. uuid .. " in manual save - xObject not found")
-            end
-        end
+        -- Use helper function to merge drops
+        local dropsToSave = MergeDropsForSave()
         
         c.json.Write('Drops', dropsToSave)
         c.json.Write('Pickups', c.picks)

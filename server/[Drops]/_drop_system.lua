@@ -365,9 +365,12 @@ RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, m
     )
     
     if netId then
-        -- Remove the specified quantity from player
+        -- Remove the specified quantity from player (recalculate slot each time)
         for i = 1, quantity do
-            xPlayer.RemoveItem(item, slot)
+            local _, currentSlot = xPlayer.HasItem(item)
+            if currentSlot then
+                xPlayer.RemoveItem(item, currentSlot)
+            end
         end
         c.func.Debug_3("Player " .. source .. " dropped " .. quantity .. "x " .. item)
     end

@@ -16,7 +16,7 @@ CreateThread(function()
         local entity = Entity(entityId)
         if not entity or not entity.state then return end
         
-        -- Check if this is a drop (compare model hash directly)
+        -- Check if this is a drop (model hash comparison - backtick notation auto-hashes)
         local model = GetEntityModel(entityId)
         if model == conf.drops.default_model then
             local netId = NetworkGetNetworkIdFromEntity(entityId)
@@ -33,6 +33,7 @@ end)
 --- Triggered when someone transfers items while UI is open
 RegisterNetEvent('Client:Inventory:UpdateLive', function(fromNetId, toNetId)
     -- Check if we currently have an inventory UI open for either of these entities
+    -- Use the export from inventory.lua
     local currentExternal = exports['ig.core']:GetCurrentExternalInventory()
     
     if currentExternal == fromNetId or currentExternal == toNetId then
@@ -72,11 +73,5 @@ end)
 RegisterNetEvent('Client:Drop:InventoryUpdated', function(netId, inventory)
     -- This event can be used for additional UI updates if needed
     -- The inventory UI handles updates via State Bags automatically
-end)
-
---- Export to get current external inventory NetID (for live update detection)
-exports('GetCurrentExternalInventory', function()
-    -- This would be tracked in the inventory.lua file
-    return currentExternalNetId or nil
 end)
 
