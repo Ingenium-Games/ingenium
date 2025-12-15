@@ -298,3 +298,135 @@ local OrganizeInventories = RegisterServerCallback({
 })
 --
 
+---
+-- Real-time inventory transfer callback for live State Bag updates
+-- Called during drag-and-drop operations while inventory UI is open
+-- This allows multiple players viewing the same inventory to see changes instantly
+local TransferInventoryItem = RegisterServerCallback({
+    eventName = "TransferInventoryItem",
+    eventCallback = function(source, fromNetId, toNetId, itemData, fromSlot, toSlot)
+        local src = source
+        
+        -- Validate source player
+        local xPlayer = c.data.GetPlayer(src)
+        if not xPlayer then
+            c.func.Debug_1("Player not found for item transfer")
+            return false
+        end
+        
+        -- Get source and destination entities/inventories
+        local fromEntity, fromInventory, fromType
+        local toEntity, toInventory, toType
+        
+        -- Source inventory
+        if fromNetId == GetPlayerPed(src) or fromNetId == src then
+            fromInventory = xPlayer
+            fromType = "player"
+        else
+            fromEntity = NetworkGetEntityFromNetworkId(fromNetId)
+            local entityType = GetEntityType(fromEntity)
+            if entityType == 3 then
+                fromInventory = c.data.GetObject(fromNetId)
+                fromType = "object"
+            elseif entityType == 2 then
+                fromInventory = c.data.GetVehicle(fromNetId)
+                fromType = "vehicle"
+            elseif entityType == 1 then
+                if IsPedAPlayer(fromEntity) then
+                    fromInventory = c.data.GetPlayer(fromNetId)
+                    fromType = "player"
+                else
+                    fromInventory = c.data.GetNpc(fromNetId)
+                    fromType = "npc"
+                end
+            end
+        end
+        
+        -- Destination inventory
+        if toNetId == GetPlayerPed(src) or toNetId == src then
+            toInventory = xPlayer
+            toType = "player"
+        else
+            toEntity = NetworkGetEntityFromNetworkId(toNetId)
+            local entityType = GetEntityType(toEntity)
+            if entityType == 3 then
+                toInventory = c.data.GetObject(toNetId)
+                toType = "object"
+            elseif entityType == 2 then
+                toInventory = c.data.GetVehicle(toNetId)
+                toType = "vehicle"
+            elseif entityType == 1 then
+                if IsPedAPlayer(toEntity) then
+                    toInventory = c.data.GetPlayer(toNetId)
+                    toType = "player"
+                else
+                    toInventory = c.data.GetNpc(toNetId)
+                    toType = "npc"
+                end
+            end
+        end
+        
+        if not fromInventory or not toInventory then
+            c.func.Debug_1("Invalid inventory in transfer")
+            return false
+        end
+        
+        -- Validate item exists in source inventory
+        local sourceItem = fromInventory.GetItemFromPosition(fromSlot)
+        if not sourceItem or sourceItem.Item ~= itemData.Item then
+            c.func.Debug_1("Item mismatch or not found in source inventory")
+            return false
+        end
+        
+        -- Validate quantity
+        if sourceItem.Quantity < itemData.Quantity then
+            c.func.Debug_1("Insufficient quantity in source inventory")
+            return false
+        end
+        
+        -- Perform the transfer
+        -- Remove from source
+        for i = 1, itemData.Quantity do
+            fromInventory.RemoveItem(itemData.Item, fromSlot)
+        end
+        
+        -- Add to destination
+        toInventory.AddItem({
+            itemData.Item,
+            itemData.Quantity,
+            itemData.Quality or 100,
+            itemData.Weapon or false,
+            itemData.Meta or {}
+        })
+        
+        -- CRITICAL: Update State Bags immediately for real-time sync
+        if fromType ~= "player" and fromInventory.State then
+            fromInventory.State.Inventory = fromInventory.GetInventory()
+        end
+        
+        if toType ~= "player" and toInventory.State then
+            toInventory.State.Inventory = toInventory.GetInventory()
+        end
+        
+        -- Notify all nearby players of the update (for UI refresh)
+        if fromType == "object" or toType == "object" then
+            local coords = fromType == "object" and GetEntityCoords(fromEntity) or GetEntityCoords(toEntity)
+            local nearbyPlayers = GetPlayers()
+            for _, playerId in ipairs(nearbyPlayers) do
+                local playerPed = GetPlayerPed(playerId)
+                local playerCoords = GetEntityCoords(playerPed)
+                local distance = #(coords - playerCoords)
+                
+                if distance < 10.0 then -- 10 meter range for updates
+                    TriggerClientEvent('Client:Inventory:UpdateLive', playerId, fromNetId, toNetId)
+                end
+            end
+        end
+        
+        c.func.Debug_3("Item transferred: " .. itemData.Item .. " x" .. itemData.Quantity)
+        
+        return true
+    end
+})
+--
+

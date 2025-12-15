@@ -21,18 +21,62 @@ CreateThread(function()
         if model == conf.drops.default_model then
             local netId = NetworkGetNetworkIdFromEntity(entityId)
             
-            -- If the inventory UI is open for this drop, update it
+            -- Update the UI if inventory is currently open
             TriggerEvent("Client:Drop:InventoryUpdated", netId, value)
             
-            c.func.Debug_3("Drop inventory updated for NetID: " .. tostring(netId))
+            c.func.Debug_3("Drop inventory updated via State Bag for NetID: " .. tostring(netId))
         end
     end)
 end)
 
---- Listen for when a drop's inventory is closed
---- This is triggered by the NUI inventory system
+--- Listen for real-time inventory updates from other players
+--- Triggered when someone transfers items while UI is open
+RegisterNetEvent('Client:Inventory:UpdateLive', function(fromNetId, toNetId)
+    -- Check if we currently have an inventory UI open for either of these entities
+    local currentExternal = exports['ig.core']:GetCurrentExternalInventory()
+    
+    if currentExternal == fromNetId or currentExternal == toNetId then
+        -- Fetch updated inventories from State Bags
+        local fromEntity = NetworkGetEntityFromNetworkId(fromNetId)
+        local toEntity = NetworkGetEntityFromNetworkId(toNetId)
+        
+        local fromInventory = nil
+        local toInventory = nil
+        
+        if DoesEntityExist(fromEntity) then
+            fromInventory = Entity(fromEntity).state.Inventory
+        end
+        
+        if DoesEntityExist(toEntity) then
+            toInventory = Entity(toEntity).state.Inventory
+        end
+        
+        -- Update the NUI with fresh inventory data
+        if fromInventory or toInventory then
+            SendNUIMessage({
+                message = "updateInventoryLive",
+                data = {
+                    fromNetId = fromNetId,
+                    toNetId = toNetId,
+                    fromInventory = fromInventory,
+                    toInventory = toInventory
+                }
+            })
+            
+            c.func.Debug_3("Live inventory update sent to NUI")
+        end
+    end
+end)
+
+--- Event for when a drop's inventory is closed
 RegisterNetEvent('Client:Drop:InventoryUpdated', function(netId, inventory)
     -- This event can be used for additional UI updates if needed
-    -- The inventory UI handles updates via Client:Inventory:Update automatically
+    -- The inventory UI handles updates via State Bags automatically
+end)
+
+--- Export to get current external inventory NetID (for live update detection)
+exports('GetCurrentExternalInventory', function()
+    -- This would be tracked in the inventory.lua file
+    return currentExternalNetId or nil
 end)
 

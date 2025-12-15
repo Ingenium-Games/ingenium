@@ -5,6 +5,11 @@
 local inventoryOpen = false
 local currentExternalNetId = nil
 
+-- Export current external inventory for live update detection
+exports('GetCurrentExternalInventory', function()
+    return currentExternalNetId
+end)
+
 -- ====================================================================================--
 -- Event Handlers for Opening Inventory
 -- ====================================================================================--
