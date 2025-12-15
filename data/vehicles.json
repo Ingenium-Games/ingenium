@@ -1,0 +1,7370 @@
+{
+  "3078201489": {
+    "hash": 3078201489,
+    "name": "adder",
+    "displayName": "Adder",
+    "manufacturer": "TRUFFADE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1283517198": {
+    "hash": 1283517198,
+    "name": "Airbus",
+    "displayName": "Airport Bus",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1560980623": {
+    "hash": 1560980623,
+    "name": "Airtug",
+    "displayName": "Airtug",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1181327175": {
+    "hash": 1181327175,
+    "name": "akula",
+    "displayName": "Akula",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1672195559": {
+    "hash": 1672195559,
+    "name": "akuma",
+    "displayName": "Akuma",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "4256087847": {
+    "hash": 4256087847,
+    "name": "aleutian",
+    "displayName": "Aleutian",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3929093893": {
+    "hash": 3929093893,
+    "name": "alkonost",
+    "displayName": "RO-86 Alkonost",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "767087018": {
+    "hash": 767087018,
+    "name": "alpha",
+    "displayName": "Alpha",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2771347558": {
+    "hash": 2771347558,
+    "name": "alphaz1",
+    "displayName": "Alpha-Z1",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1171614426": {
+    "hash": 1171614426,
+    "name": "AMBULANCE",
+    "displayName": "Ambulance",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "837858166": {
+    "hash": 837858166,
+    "name": "annihilator",
+    "displayName": "Annihilator",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "295054921": {
+    "hash": 295054921,
+    "name": "annihilator2",
+    "displayName": "Annihilator Stealth",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "562680400": {
+    "hash": 562680400,
+    "name": "apc",
+    "displayName": "APC",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "AMPHIBIOUS_AUTOMOBILE"
+  },
+  "1549009676": {
+    "hash": 1549009676,
+    "name": "arbitergt",
+    "displayName": "Arbiter GT",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "159274291": {
+    "hash": 159274291,
+    "name": "ardent",
+    "displayName": "Ardent",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3087536137": {
+    "hash": 3087536137,
+    "name": "armytanker",
+    "displayName": "Army Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2818520053": {
+    "hash": 2818520053,
+    "name": "armytrailer",
+    "displayName": "Army Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2657817814": {
+    "hash": 2657817814,
+    "name": "armytrailer2",
+    "displayName": "Army Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1118611807": {
+    "hash": 1118611807,
+    "name": "asbo",
+    "displayName": "Asbo",
+    "manufacturer": "MAXWELL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2485144969": {
+    "hash": 2485144969,
+    "name": "asea",
+    "displayName": "Asea",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2487343317": {
+    "hash": 2487343317,
+    "name": "asea2",
+    "displayName": "Asea",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2391954683": {
+    "hash": 2391954683,
+    "name": "asterope",
+    "displayName": "Asterope",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3553846961": {
+    "hash": 3553846961,
+    "name": "asterope2",
+    "displayName": "Asterope GZ",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1596736441": {
+    "hash": 1596736441,
+    "name": "astrale",
+    "displayName": "Astrale",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "629969764": {
+    "hash": 629969764,
+    "name": "astron",
+    "displayName": "Astron",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2803699023": {
+    "hash": 2803699023,
+    "name": "astron2",
+    "displayName": "Astron Custom",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3981782132": {
+    "hash": 3981782132,
+    "name": "autarch",
+    "displayName": "Autarch",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2179174271": {
+    "hash": 2179174271,
+    "name": "avarus",
+    "displayName": "Avarus",
+    "manufacturer": "LCC",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2176659152": {
+    "hash": 2176659152,
+    "name": "avenger",
+    "displayName": "Avenger",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "408970549": {
+    "hash": 408970549,
+    "name": "avenger2",
+    "displayName": "Avenger",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "3868033424": {
+    "hash": 3868033424,
+    "name": "avenger3",
+    "displayName": "Avenger",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "4225674290": {
+    "hash": 4225674290,
+    "name": "avenger4",
+    "displayName": "Avenger",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "2588363614": {
+    "hash": 2588363614,
+    "name": "avisa",
+    "displayName": "Avisa",
+    "manufacturer": "KRAKEN",
+    "class": "Unknown",
+    "type": "SUBMARINE"
+  },
+  "2154536131": {
+    "hash": 2154536131,
+    "name": "bagger",
+    "displayName": "Bagger",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3895125590": {
+    "hash": 3895125590,
+    "name": "baletrailer",
+    "displayName": "Baletrailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "3486135912": {
+    "hash": 3486135912,
+    "name": "Baller",
+    "displayName": "Baller",
+    "manufacturer": "GALLIVAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "142944341": {
+    "hash": 142944341,
+    "name": "baller2",
+    "displayName": "Baller",
+    "manufacturer": "GALLIVAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1878062887": {
+    "hash": 1878062887,
+    "name": "baller3",
+    "displayName": "Baller LE",
+    "manufacturer": "GALLIVAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "634118882": {
+    "hash": 634118882,
+    "name": "baller4",
+    "displayName": "Baller LE LWB",
+    "manufacturer": "GALLIVAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "470404958": {
+    "hash": 470404958,
+    "name": "baller5",
+    "displayName": "Baller LE (Armored)",
+    "manufacturer": "GALLIVAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "666166960": {
+    "hash": 666166960,
+    "name": "baller6",
+    "displayName": "Baller LE LWB (Armored)",
+    "manufacturer": "GALLIVAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "359875117": {
+    "hash": 359875117,
+    "name": "baller7",
+    "displayName": "Baller ST",
+    "manufacturer": "GALLIVAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3431608412": {
+    "hash": 3431608412,
+    "name": "baller8",
+    "displayName": "Baller ST-D",
+    "manufacturer": "GALLIVAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3253274834": {
+    "hash": 3253274834,
+    "name": "banshee",
+    "displayName": "Banshee",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "633712403": {
+    "hash": 633712403,
+    "name": "banshee2",
+    "displayName": "Banshee 900R",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3634959571": {
+    "hash": 3634959571,
+    "name": "banshee3",
+    "displayName": "Banshee GTS",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3471458123": {
+    "hash": 3471458123,
+    "name": "BARRACKS",
+    "displayName": "Barracks",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1074326203": {
+    "hash": 1074326203,
+    "name": "BARRACKS2",
+    "displayName": "Barracks Semi",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "630371791": {
+    "hash": 630371791,
+    "name": "BARRACKS3",
+    "displayName": "Barracks",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4081974053": {
+    "hash": 4081974053,
+    "name": "barrage",
+    "displayName": "Barrage",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4180675781": {
+    "hash": 4180675781,
+    "name": "bati",
+    "displayName": "Bati 801",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3403504941": {
+    "hash": 3403504941,
+    "name": "bati2",
+    "displayName": "Bati 801RR",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2053223216": {
+    "hash": 2053223216,
+    "name": "Benson",
+    "displayName": "Benson",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "728350375": {
+    "hash": 728350375,
+    "name": "benson2",
+    "displayName": "Benson (Cluckin' Bell)",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1824333165": {
+    "hash": 1824333165,
+    "name": "besra",
+    "displayName": "Besra",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1274868363": {
+    "hash": 1274868363,
+    "name": "bestiagts",
+    "displayName": "Bestia GTS",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "86520421": {
+    "hash": 86520421,
+    "name": "bf400",
+    "displayName": "BF400",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1126868326": {
+    "hash": 1126868326,
+    "name": "BfInjection",
+    "displayName": "Injection",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "850991848": {
+    "hash": 850991848,
+    "name": "Biff",
+    "displayName": "Biff",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3945366167": {
+    "hash": 3945366167,
+    "name": "bifta",
+    "displayName": "Bifta",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4278019151": {
+    "hash": 4278019151,
+    "name": "bison",
+    "displayName": "Bison",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2072156101": {
+    "hash": 2072156101,
+    "name": "Bison2",
+    "displayName": "Bison",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1739845664": {
+    "hash": 1739845664,
+    "name": "Bison3",
+    "displayName": "Bison",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "850565707": {
+    "hash": 850565707,
+    "name": "BjXL",
+    "displayName": "BeeJay XL",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3089165662": {
+    "hash": 3089165662,
+    "name": "blade",
+    "displayName": "Blade",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2166734073": {
+    "hash": 2166734073,
+    "name": "blazer",
+    "displayName": "Blazer",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "QUADBIKE"
+  },
+  "4246935337": {
+    "hash": 4246935337,
+    "name": "blazer2",
+    "displayName": "Blazer Lifeguard",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "QUADBIKE"
+  },
+  "3025077634": {
+    "hash": 3025077634,
+    "name": "blazer3",
+    "displayName": "Hot Rod Blazer",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "QUADBIKE"
+  },
+  "3854198872": {
+    "hash": 3854198872,
+    "name": "blazer4",
+    "displayName": "Street Blazer",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "QUADBIKE"
+  },
+  "2704629607": {
+    "hash": 2704629607,
+    "name": "blazer5",
+    "displayName": "Blazer Aqua",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "AMPHIBIOUS_QUADBIKE"
+  },
+  "4143991942": {
+    "hash": 4143991942,
+    "name": "BLIMP",
+    "displayName": "Atomic Blimp",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BLIMP"
+  },
+  "3681241380": {
+    "hash": 3681241380,
+    "name": "BLIMP2",
+    "displayName": "Xero Blimp",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BLIMP"
+  },
+  "3987008919": {
+    "hash": 3987008919,
+    "name": "blimp3",
+    "displayName": "Blimp",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BLIMP"
+  },
+  "3950024287": {
+    "hash": 3950024287,
+    "name": "blista",
+    "displayName": "Blista",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1039032026": {
+    "hash": 1039032026,
+    "name": "blista2",
+    "displayName": "Blista Compact",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3703315515": {
+    "hash": 3703315515,
+    "name": "blista3",
+    "displayName": "Go Go Monkey Blista",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1131912276": {
+    "hash": 1131912276,
+    "name": "BMX",
+    "displayName": "BMX",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "524108981": {
+    "hash": 524108981,
+    "name": "boattrailer",
+    "displayName": "Boat Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1835260592": {
+    "hash": 1835260592,
+    "name": "boattrailer2",
+    "displayName": "Boat Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1539159908": {
+    "hash": 1539159908,
+    "name": "boattrailer3",
+    "displayName": "Boat Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1069929536": {
+    "hash": 1069929536,
+    "name": "bobcatXL",
+    "displayName": "Bobcat XL",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2859047862": {
+    "hash": 2859047862,
+    "name": "Bodhi2",
+    "displayName": "Bodhi",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4262088844": {
+    "hash": 4262088844,
+    "name": "bombushka",
+    "displayName": "RM-10 Bombushka",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "996383885": {
+    "hash": 996383885,
+    "name": "boor",
+    "displayName": "Boor",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2307837162": {
+    "hash": 2307837162,
+    "name": "boxville",
+    "displayName": "Boxville",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4061868990": {
+    "hash": 4061868990,
+    "name": "boxville2",
+    "displayName": "Boxville",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "121658888": {
+    "hash": 121658888,
+    "name": "boxville3",
+    "displayName": "Boxville",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "444171386": {
+    "hash": 444171386,
+    "name": "boxville4",
+    "displayName": "Boxville",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "682434785": {
+    "hash": 682434785,
+    "name": "boxville5",
+    "displayName": "Armored Boxville",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3452201761": {
+    "hash": 3452201761,
+    "name": "boxville6",
+    "displayName": "Boxville (LSDS)",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2815302597": {
+    "hash": 2815302597,
+    "name": "brawler",
+    "displayName": "Brawler",
+    "manufacturer": "COIL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3989239879": {
+    "hash": 3989239879,
+    "name": "brickade",
+    "displayName": "Brickade",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2718380883": {
+    "hash": 2718380883,
+    "name": "brickade2",
+    "displayName": "Brickade 6x6",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3640468689": {
+    "hash": 3640468689,
+    "name": "brigham",
+    "displayName": "Brigham",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1549126457": {
+    "hash": 1549126457,
+    "name": "brioso",
+    "displayName": "Brioso R/A",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1429622905": {
+    "hash": 1429622905,
+    "name": "brioso2",
+    "displayName": "Brioso 300",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "15214558": {
+    "hash": 15214558,
+    "name": "brioso3",
+    "displayName": "Brioso 300 Widebody",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2361724968": {
+    "hash": 2361724968,
+    "name": "broadway",
+    "displayName": "Broadway",
+    "manufacturer": "CLASSIQUE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "668439077": {
+    "hash": 668439077,
+    "name": "bruiser",
+    "displayName": "Apocalypse Bruiser",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2600885406": {
+    "hash": 2600885406,
+    "name": "bruiser2",
+    "displayName": "Future Shock Bruiser",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2252616474": {
+    "hash": 2252616474,
+    "name": "bruiser3",
+    "displayName": "Nightmare Bruiser",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2139203625": {
+    "hash": 2139203625,
+    "name": "brutus",
+    "displayName": "Apocalypse Brutus",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2403970600": {
+    "hash": 2403970600,
+    "name": "brutus2",
+    "displayName": "Future Shock Brutus",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2038858402": {
+    "hash": 2038858402,
+    "name": "brutus3",
+    "displayName": "Nightmare Brutus",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "117401876": {
+    "hash": 117401876,
+    "name": "btype",
+    "displayName": "Roosevelt",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3463132580": {
+    "hash": 3463132580,
+    "name": "btype2",
+    "displayName": "Fr\u00e4nken Stange",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3692679425": {
+    "hash": 3692679425,
+    "name": "btype3",
+    "displayName": "Roosevelt Valor",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3612755468": {
+    "hash": 3612755468,
+    "name": "buccaneer",
+    "displayName": "Buccaneer",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3281516360": {
+    "hash": 3281516360,
+    "name": "buccaneer2",
+    "displayName": "Buccaneer Custom",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3990165190": {
+    "hash": 3990165190,
+    "name": "buffalo",
+    "displayName": "Buffalo",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "736902334": {
+    "hash": 736902334,
+    "name": "buffalo2",
+    "displayName": "Buffalo S",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "237764926": {
+    "hash": 237764926,
+    "name": "buffalo3",
+    "displayName": "Sprunk Buffalo",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3675036420": {
+    "hash": 3675036420,
+    "name": "buffalo4",
+    "displayName": "Buffalo STX",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "165968051": {
+    "hash": 165968051,
+    "name": "buffalo5",
+    "displayName": "Buffalo EVX",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1886712733": {
+    "hash": 1886712733,
+    "name": "bulldozer",
+    "displayName": "Dozer",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2598821281": {
+    "hash": 2598821281,
+    "name": "bullet",
+    "displayName": "Bullet",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2948279460": {
+    "hash": 2948279460,
+    "name": "Burrito",
+    "displayName": "Burrito",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3387490166": {
+    "hash": 3387490166,
+    "name": "burrito2",
+    "displayName": "Bugstars Burrito",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2551651283": {
+    "hash": 2551651283,
+    "name": "burrito3",
+    "displayName": "Burrito",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "893081117": {
+    "hash": 893081117,
+    "name": "Burrito4",
+    "displayName": "Burrito",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1132262048": {
+    "hash": 1132262048,
+    "name": "burrito5",
+    "displayName": "Burrito",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3581397346": {
+    "hash": 3581397346,
+    "name": "BUS",
+    "displayName": "Bus",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "788747387": {
+    "hash": 788747387,
+    "name": "buzzard",
+    "displayName": "Buzzard Attack Chopper",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "745926877": {
+    "hash": 745926877,
+    "name": "Buzzard2",
+    "displayName": "Buzzard",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "3334677549": {
+    "hash": 3334677549,
+    "name": "cablecar",
+    "displayName": "Cable Car",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "1147287684": {
+    "hash": 1147287684,
+    "name": "caddy",
+    "displayName": "Caddy",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3757070668": {
+    "hash": 3757070668,
+    "name": "Caddy2",
+    "displayName": "Caddy",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3525819835": {
+    "hash": 3525819835,
+    "name": "caddy3",
+    "displayName": "Caddy",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3101054893": {
+    "hash": 3101054893,
+    "name": "calico",
+    "displayName": "Calico GTF",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1876516712": {
+    "hash": 1876516712,
+    "name": "CAMPER",
+    "displayName": "Camper",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1254014755": {
+    "hash": 1254014755,
+    "name": "caracara",
+    "displayName": "Caracara",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2945871676": {
+    "hash": 2945871676,
+    "name": "caracara2",
+    "displayName": "Caracara 4x4",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2072687711": {
+    "hash": 2072687711,
+    "name": "carbonizzare",
+    "displayName": "Carbonizzare",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "11251904": {
+    "hash": 11251904,
+    "name": "carbonrs",
+    "displayName": "Carbon RS",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "4244420235": {
+    "hash": 4244420235,
+    "name": "Cargobob",
+    "displayName": "Cargobob",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1621617168": {
+    "hash": 1621617168,
+    "name": "cargobob2",
+    "displayName": "Cargobob",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1394036463": {
+    "hash": 1394036463,
+    "name": "Cargobob3",
+    "displayName": "Cargobob",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "2025593404": {
+    "hash": 2025593404,
+    "name": "Cargobob4",
+    "displayName": "Cargobob",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "3942284983": {
+    "hash": 3942284983,
+    "name": "cargobob5",
+    "displayName": "DH-7 Iron Mule",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "368211810": {
+    "hash": 368211810,
+    "name": "cargoplane",
+    "displayName": "Cargo Plane",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "2336777441": {
+    "hash": 2336777441,
+    "name": "cargoplane2",
+    "displayName": "Cargo Plane",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "941800958": {
+    "hash": 941800958,
+    "name": "casco",
+    "displayName": "Casco",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1307736079": {
+    "hash": 1307736079,
+    "name": "castigator",
+    "displayName": "Castigator",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2006918058": {
+    "hash": 2006918058,
+    "name": "cavalcade",
+    "displayName": "Cavalcade",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3505073125": {
+    "hash": 3505073125,
+    "name": "cavalcade2",
+    "displayName": "Cavalcade",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3265236814": {
+    "hash": 3265236814,
+    "name": "cavalcade3",
+    "displayName": "Cavalcade XL",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3493417227": {
+    "hash": 3493417227,
+    "name": "cerberus",
+    "displayName": "Apocalypse Cerberus",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "679453769": {
+    "hash": 679453769,
+    "name": "cerberus2",
+    "displayName": "Future Shock Cerberus",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1909700336": {
+    "hash": 1909700336,
+    "name": "cerberus3",
+    "displayName": "Nightmare Cerberus",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3379732821": {
+    "hash": 3379732821,
+    "name": "champion",
+    "displayName": "Champion",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1992041063": {
+    "hash": 1992041063,
+    "name": "chavosv6",
+    "displayName": "Chavos V6",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3306466016": {
+    "hash": 3306466016,
+    "name": "cheburek",
+    "displayName": "Cheburek",
+    "manufacturer": "RUNE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2983812512": {
+    "hash": 2983812512,
+    "name": "cheetah",
+    "displayName": "Cheetah",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "223240013": {
+    "hash": 223240013,
+    "name": "cheetah2",
+    "displayName": "Cheetah Classic",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "471399650": {
+    "hash": 471399650,
+    "name": "cheetah3",
+    "displayName": "LSCM Cheetah Classic",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3602674979": {
+    "hash": 3602674979,
+    "name": "chernobog",
+    "displayName": "Chernobog",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "6774487": {
+    "hash": 6774487,
+    "name": "chimera",
+    "displayName": "Chimera",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "QUADBIKE"
+  },
+  "349605904": {
+    "hash": 349605904,
+    "name": "chino",
+    "displayName": "Chino",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2933279331": {
+    "hash": 2933279331,
+    "name": "chino2",
+    "displayName": "Chino Custom",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2767531027": {
+    "hash": 2767531027,
+    "name": "cinquemila",
+    "displayName": "Cinquemila",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "390201602": {
+    "hash": 390201602,
+    "name": "cliffhanger",
+    "displayName": "Cliffhanger",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2728360112": {
+    "hash": 2728360112,
+    "name": "clique",
+    "displayName": "Clique",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3315674721": {
+    "hash": 3315674721,
+    "name": "clique2",
+    "displayName": "Clique Wagon",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2196012677": {
+    "hash": 2196012677,
+    "name": "club",
+    "displayName": "Club",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2222034228": {
+    "hash": 2222034228,
+    "name": "coach",
+    "displayName": "Dashound",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "906642318": {
+    "hash": 906642318,
+    "name": "cog55",
+    "displayName": "Cognoscenti 55",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "704435172": {
+    "hash": 704435172,
+    "name": "cog552",
+    "displayName": "Cognoscenti 55 (Armored)",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "330661258": {
+    "hash": 330661258,
+    "name": "cogcabrio",
+    "displayName": "Cognoscenti Cabrio",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2264796000": {
+    "hash": 2264796000,
+    "name": "cognoscenti",
+    "displayName": "Cognoscenti",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3690124666": {
+    "hash": 3690124666,
+    "name": "cognoscenti2",
+    "displayName": "Cognoscenti (Armored)",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3249425686": {
+    "hash": 3249425686,
+    "name": "comet2",
+    "displayName": "Comet",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2272483501": {
+    "hash": 2272483501,
+    "name": "comet3",
+    "displayName": "Comet Retro Custom",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1561920505": {
+    "hash": 1561920505,
+    "name": "comet4",
+    "displayName": "Comet Safari",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "661493923": {
+    "hash": 661493923,
+    "name": "comet5",
+    "displayName": "Comet SR",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2568944644": {
+    "hash": 2568944644,
+    "name": "comet6",
+    "displayName": "Comet S2",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1141395928": {
+    "hash": 1141395928,
+    "name": "comet7",
+    "displayName": "Comet S2 Cabrio",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3817135397": {
+    "hash": 3817135397,
+    "name": "conada",
+    "displayName": "Conada",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "2635962482": {
+    "hash": 2635962482,
+    "name": "conada2",
+    "displayName": "Weaponized Conada",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "683047626": {
+    "hash": 683047626,
+    "name": "contender",
+    "displayName": "Contender",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "108773431": {
+    "hash": 108773431,
+    "name": "coquette",
+    "displayName": "Coquette",
+    "manufacturer": "INVERTO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1011753235": {
+    "hash": 1011753235,
+    "name": "coquette2",
+    "displayName": "Coquette Classic",
+    "manufacturer": "INVERTO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "784565758": {
+    "hash": 784565758,
+    "name": "coquette3",
+    "displayName": "Coquette BlackFin",
+    "manufacturer": "INVERTO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2566281822": {
+    "hash": 2566281822,
+    "name": "coquette4",
+    "displayName": "Coquette D10",
+    "manufacturer": "INVERTO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2336538363": {
+    "hash": 2336538363,
+    "name": "coquette5",
+    "displayName": "Coquette D1",
+    "manufacturer": "INVERTO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "127317925": {
+    "hash": 127317925,
+    "name": "coquette6",
+    "displayName": "Coquette D5",
+    "manufacturer": "INVERTO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3540279623": {
+    "hash": 3540279623,
+    "name": "corsita",
+    "displayName": "Corsita",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "610429990": {
+    "hash": 610429990,
+    "name": "coureur",
+    "displayName": "La Coureuse",
+    "manufacturer": "PENAUD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "448402357": {
+    "hash": 448402357,
+    "name": "cruiser",
+    "displayName": "Cruiser",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "321739290": {
+    "hash": 321739290,
+    "name": "CRUSADER",
+    "displayName": "Crusader",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3650256867": {
+    "hash": 3650256867,
+    "name": "cuban800",
+    "displayName": "Cuban 800",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "3288047904": {
+    "hash": 3288047904,
+    "name": "cutter",
+    "displayName": "Cutter",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1392481335": {
+    "hash": 1392481335,
+    "name": "cyclone",
+    "displayName": "Cyclone",
+    "manufacturer": "COIL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "386089410": {
+    "hash": 386089410,
+    "name": "cyclone2",
+    "displayName": "Cyclone II",
+    "manufacturer": "COIL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1755697647": {
+    "hash": 1755697647,
+    "name": "cypher",
+    "displayName": "Cypher",
+    "manufacturer": "UBERMACHT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2006142190": {
+    "hash": 2006142190,
+    "name": "daemon",
+    "displayName": "Daemon",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2890830793": {
+    "hash": 2890830793,
+    "name": "daemon2",
+    "displayName": "Daemon Custom",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "4267640610": {
+    "hash": 4267640610,
+    "name": "deathbike",
+    "displayName": "Apocalypse Deathbike",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2482017624": {
+    "hash": 2482017624,
+    "name": "deathbike2",
+    "displayName": "Future Shock Deathbike",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2920466844": {
+    "hash": 2920466844,
+    "name": "deathbike3",
+    "displayName": "Nightmare Deathbike",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "822018448": {
+    "hash": 822018448,
+    "name": "defiler",
+    "displayName": "Defiler",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1532171089": {
+    "hash": 1532171089,
+    "name": "deity",
+    "displayName": "Deity",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1483171323": {
+    "hash": 1483171323,
+    "name": "deluxo",
+    "displayName": "Deluxo",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1591739866": {
+    "hash": 1591739866,
+    "name": "deveste",
+    "displayName": "Deveste Eight",
+    "manufacturer": "PRINCIPL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1279262537": {
+    "hash": 1279262537,
+    "name": "deviant",
+    "displayName": "Deviant",
+    "manufacturer": "SCHYSTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4055125828": {
+    "hash": 4055125828,
+    "name": "diablous",
+    "displayName": "Diabolus",
+    "manufacturer": "PRINCIPL",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1790834270": {
+    "hash": 1790834270,
+    "name": "diablous2",
+    "displayName": "Diabolus Custom",
+    "manufacturer": "PRINCIPL",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3164157193": {
+    "hash": 3164157193,
+    "name": "dilettante",
+    "displayName": "Dilettante",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1682114128": {
+    "hash": 1682114128,
+    "name": "dilettante2",
+    "displayName": "Dilettante",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1033245328": {
+    "hash": 1033245328,
+    "name": "Dinghy",
+    "displayName": "Dinghy",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "276773164": {
+    "hash": 276773164,
+    "name": "dinghy2",
+    "displayName": "Dinghy",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "509498602": {
+    "hash": 509498602,
+    "name": "dinghy3",
+    "displayName": "Dinghy",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "867467158": {
+    "hash": 867467158,
+    "name": "dinghy4",
+    "displayName": "Dinghy",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "3314393930": {
+    "hash": 3314393930,
+    "name": "dinghy5",
+    "displayName": "Weaponized Dinghy",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "1770332643": {
+    "hash": 1770332643,
+    "name": "dloader",
+    "displayName": "Duneloader",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2154757102": {
+    "hash": 2154757102,
+    "name": "docktrailer",
+    "displayName": "docktrailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "3410276810": {
+    "hash": 3410276810,
+    "name": "docktug",
+    "displayName": "Docktug",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3393804037": {
+    "hash": 3393804037,
+    "name": "dodo",
+    "displayName": "Dodo",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "80636076": {
+    "hash": 80636076,
+    "name": "Dominator",
+    "displayName": "Dominator",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1579902654": {
+    "hash": 1579902654,
+    "name": "dominator10",
+    "displayName": "Dominator FX",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3379262425": {
+    "hash": 3379262425,
+    "name": "dominator2",
+    "displayName": "Pisswasser Dominator",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3308022675": {
+    "hash": 3308022675,
+    "name": "dominator3",
+    "displayName": "Dominator GTX",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3606777648": {
+    "hash": 3606777648,
+    "name": "dominator4",
+    "displayName": "Apocalypse Dominator",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2919906639": {
+    "hash": 2919906639,
+    "name": "dominator5",
+    "displayName": "Future Shock Dominator",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3001042683": {
+    "hash": 3001042683,
+    "name": "dominator6",
+    "displayName": "Nightmare Dominator",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "426742808": {
+    "hash": 426742808,
+    "name": "dominator7",
+    "displayName": "Dominator ASP",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "736672010": {
+    "hash": 736672010,
+    "name": "dominator8",
+    "displayName": "Dominator GTT",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3853757601": {
+    "hash": 3853757601,
+    "name": "dominator9",
+    "displayName": "Dominator GT",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3526923154": {
+    "hash": 3526923154,
+    "name": "dorado",
+    "displayName": "Dorado",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2623969160": {
+    "hash": 2623969160,
+    "name": "double",
+    "displayName": "Double-T",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "686471183": {
+    "hash": 686471183,
+    "name": "drafter",
+    "displayName": "8F Drafter",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3526730918": {
+    "hash": 3526730918,
+    "name": "draugur",
+    "displayName": "Draugur",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "457814204": {
+    "hash": 457814204,
+    "name": "driftchavosv6",
+    "displayName": "Chavos V6",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2828274931": {
+    "hash": 2828274931,
+    "name": "driftcheburek",
+    "displayName": "Cheburek",
+    "manufacturer": "RUNE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "258105345": {
+    "hash": 258105345,
+    "name": "driftcypher",
+    "displayName": "Cypher",
+    "manufacturer": "UBERMACHT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3355365473": {
+    "hash": 3355365473,
+    "name": "driftdominator10",
+    "displayName": "Dominator FX",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3439117103": {
+    "hash": 3439117103,
+    "name": "driftdominator9",
+    "displayName": "Dominator GT",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "821121576": {
+    "hash": 821121576,
+    "name": "drifteuros",
+    "displayName": "Euros",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2815031719": {
+    "hash": 2815031719,
+    "name": "driftfr36",
+    "displayName": "FR36",
+    "manufacturer": "FATHOM",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4113404654": {
+    "hash": 4113404654,
+    "name": "driftfuto",
+    "displayName": "Futo GTX",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3005741670": {
+    "hash": 3005741670,
+    "name": "driftfuto2",
+    "displayName": "Futo",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3933619103": {
+    "hash": 3933619103,
+    "name": "driftgauntlet4",
+    "displayName": "Gauntlet Hellfire",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3893408850": {
+    "hash": 3893408850,
+    "name": "drifthardy",
+    "displayName": "Hardy",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2531693357": {
+    "hash": 2531693357,
+    "name": "driftjester",
+    "displayName": "Jester RR",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3932276298": {
+    "hash": 3932276298,
+    "name": "driftjester3",
+    "displayName": "Jester Classic",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2739875593": {
+    "hash": 2739875593,
+    "name": "driftkeitora",
+    "displayName": "Keitora",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2312533665": {
+    "hash": 2312533665,
+    "name": "driftl352",
+    "displayName": "Drift Walton L35",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1690421418": {
+    "hash": 1690421418,
+    "name": "driftnebula",
+    "displayName": "Nebula Turbo",
+    "manufacturer": "VULCAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2670883828": {
+    "hash": 2670883828,
+    "name": "driftremus",
+    "displayName": "Remus",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1730644782": {
+    "hash": 1730644782,
+    "name": "driftrt3000",
+    "displayName": "RT3000",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3308310822": {
+    "hash": 3308310822,
+    "name": "driftsentinel",
+    "displayName": "Sentinel Classic Widebody",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3288768346": {
+    "hash": 3288768346,
+    "name": "driftsentinel2",
+    "displayName": "Sentinel XS",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2598648200": {
+    "hash": 2598648200,
+    "name": "drifttampa",
+    "displayName": "Drift Tampa",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4151380270": {
+    "hash": 4151380270,
+    "name": "driftvorschlag",
+    "displayName": "Vorschlaghammer",
+    "manufacturer": "BENEFACTOR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2613313775": {
+    "hash": 2613313775,
+    "name": "driftyosemite",
+    "displayName": "Drift Yosemite",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1923534526": {
+    "hash": 1923534526,
+    "name": "driftzr350",
+    "displayName": "ZR350",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1177543287": {
+    "hash": 1177543287,
+    "name": "dubsta",
+    "displayName": "Dubsta",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3900892662": {
+    "hash": 3900892662,
+    "name": "dubsta2",
+    "displayName": "Dubsta",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3057713523": {
+    "hash": 3057713523,
+    "name": "dubsta3",
+    "displayName": "Dubsta 6x6",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "723973206": {
+    "hash": 723973206,
+    "name": "dukes",
+    "displayName": "Dukes",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3968823444": {
+    "hash": 3968823444,
+    "name": "dukes2",
+    "displayName": "Duke O'Death",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2134119907": {
+    "hash": 2134119907,
+    "name": "dukes3",
+    "displayName": "Beater Dukes",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2164484578": {
+    "hash": 2164484578,
+    "name": "dump",
+    "displayName": "Dump",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2633113103": {
+    "hash": 2633113103,
+    "name": "dune",
+    "displayName": "Dune Buggy",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "534258863": {
+    "hash": 534258863,
+    "name": "dune2",
+    "displayName": "Space Docker",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1897744184": {
+    "hash": 1897744184,
+    "name": "dune3",
+    "displayName": "Dune FAV",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3467805257": {
+    "hash": 3467805257,
+    "name": "dune4",
+    "displayName": "Ramp Buggy",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3982671785": {
+    "hash": 3982671785,
+    "name": "dune5",
+    "displayName": "Ramp Buggy",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "970356638": {
+    "hash": 970356638,
+    "name": "duster",
+    "displayName": "Duster",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "84351789": {
+    "hash": 84351789,
+    "name": "duster2",
+    "displayName": "Duster 300-H",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "310284501": {
+    "hash": 310284501,
+    "name": "Dynasty",
+    "displayName": "Dynasty",
+    "manufacturer": "WEENY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "196747873": {
+    "hash": 196747873,
+    "name": "elegy",
+    "displayName": "Elegy Retro Custom",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3728579874": {
+    "hash": 3728579874,
+    "name": "elegy2",
+    "displayName": "Elegy RH8",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3027423925": {
+    "hash": 3027423925,
+    "name": "ellie",
+    "displayName": "Ellie",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1323778901": {
+    "hash": 1323778901,
+    "name": "emerus",
+    "displayName": "Emerus",
+    "manufacturer": "PROGEN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3609690755": {
+    "hash": 3609690755,
+    "name": "emperor",
+    "displayName": "Emperor",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2411965148": {
+    "hash": 2411965148,
+    "name": "Emperor2",
+    "displayName": "Emperor",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3053254478": {
+    "hash": 3053254478,
+    "name": "emperor3",
+    "displayName": "Emperor",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1753414259": {
+    "hash": 1753414259,
+    "name": "enduro",
+    "displayName": "Enduro",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2174267100": {
+    "hash": 2174267100,
+    "name": "entity2",
+    "displayName": "Entity XXR",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1748565021": {
+    "hash": 1748565021,
+    "name": "entity3",
+    "displayName": "Entity MT",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3003014393": {
+    "hash": 3003014393,
+    "name": "entityxf",
+    "displayName": "Entity XF",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1121330119": {
+    "hash": 1121330119,
+    "name": "envisage",
+    "displayName": "Envisage",
+    "manufacturer": "BOLLOKAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2035069708": {
+    "hash": 2035069708,
+    "name": "esskey",
+    "displayName": "Esskey",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3045179290": {
+    "hash": 3045179290,
+    "name": "eudora",
+    "displayName": "Eudora",
+    "manufacturer": "WILLARD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2038480341": {
+    "hash": 2038480341,
+    "name": "Euros",
+    "displayName": "Euros",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3295372994": {
+    "hash": 3295372994,
+    "name": "eurosX32",
+    "displayName": "Euros X32",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2538945576": {
+    "hash": 2538945576,
+    "name": "everon",
+    "displayName": "Everon",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4163619118": {
+    "hash": 4163619118,
+    "name": "everon2",
+    "displayName": "Hotring Everon",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "554408685": {
+    "hash": 554408685,
+    "name": "everon3",
+    "displayName": "Everon RS",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4289813342": {
+    "hash": 4289813342,
+    "name": "exemplar",
+    "displayName": "Exemplar",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3703357000": {
+    "hash": 3703357000,
+    "name": "f620",
+    "displayName": "F620",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2175389151": {
+    "hash": 2175389151,
+    "name": "faction",
+    "displayName": "Faction",
+    "manufacturer": "WILLARD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2504420315": {
+    "hash": 2504420315,
+    "name": "faction2",
+    "displayName": "Faction Custom 1",
+    "manufacturer": "WILLARD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2255212070": {
+    "hash": 2255212070,
+    "name": "faction3",
+    "displayName": "Faction Custom Donk",
+    "manufacturer": "WILLARD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1617472902": {
+    "hash": 1617472902,
+    "name": "fagaloa",
+    "displayName": "Fagaloa",
+    "manufacturer": "VULCAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2452219115": {
+    "hash": 2452219115,
+    "name": "faggio",
+    "displayName": "Faggio Sport",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "55628203": {
+    "hash": 55628203,
+    "name": "faggio2",
+    "displayName": "Faggio",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3005788552": {
+    "hash": 3005788552,
+    "name": "faggio3",
+    "displayName": "Faggio Mod",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1127131465": {
+    "hash": 1127131465,
+    "name": "FBI",
+    "displayName": "FIB",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2647026068": {
+    "hash": 2647026068,
+    "name": "FBI2",
+    "displayName": "FIB",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "627535535": {
+    "hash": 627535535,
+    "name": "fcr",
+    "displayName": "FCR 1000",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3537231886": {
+    "hash": 3537231886,
+    "name": "fcr2",
+    "displayName": "FCR 1000 Custom",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3903372712": {
+    "hash": 3903372712,
+    "name": "felon",
+    "displayName": "Felon",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4205676014": {
+    "hash": 4205676014,
+    "name": "felon2",
+    "displayName": "Felon GT",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2299640309": {
+    "hash": 2299640309,
+    "name": "feltzer2",
+    "displayName": "Feltzer",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2728226064": {
+    "hash": 2728226064,
+    "name": "feltzer3",
+    "displayName": "Feltzer Classic",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3321950518": {
+    "hash": 3321950518,
+    "name": "firebolt",
+    "displayName": "Firebolt ASP",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1938952078": {
+    "hash": 1938952078,
+    "name": "firetruk",
+    "displayName": "Fire Truck",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3458454463": {
+    "hash": 3458454463,
+    "name": "fixter",
+    "displayName": "Fixter",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "3035832600": {
+    "hash": 3035832600,
+    "name": "flashgt",
+    "displayName": "Flash GT",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1353720154": {
+    "hash": 1353720154,
+    "name": "FLATBED",
+    "displayName": "Flatbed",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2412056353": {
+    "hash": 2412056353,
+    "name": "flatbed2",
+    "displayName": "Custom Flatbed",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1426219628": {
+    "hash": 1426219628,
+    "name": "fmj",
+    "displayName": "FMJ",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3287642921": {
+    "hash": 3287642921,
+    "name": "fmj2",
+    "displayName": "FMJ MK V",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1491375716": {
+    "hash": 1491375716,
+    "name": "FORKLIFT",
+    "displayName": "Forklift",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "340154634": {
+    "hash": 340154634,
+    "name": "formula",
+    "displayName": "PR4",
+    "manufacturer": "PROGEN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2334210311": {
+    "hash": 2334210311,
+    "name": "formula2",
+    "displayName": "R88",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3157435195": {
+    "hash": 3157435195,
+    "name": "fq2",
+    "displayName": "FQ 2",
+    "manufacturer": "FATHOM",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3829141989": {
+    "hash": 3829141989,
+    "name": "fr36",
+    "displayName": "FR36",
+    "manufacturer": "FATHOM",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4240635011": {
+    "hash": 4240635011,
+    "name": "freecrawler",
+    "displayName": "Freecrawler",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1030400667": {
+    "hash": 1030400667,
+    "name": "freight",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "3852738056": {
+    "hash": 3852738056,
+    "name": "freight2",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "184361638": {
+    "hash": 184361638,
+    "name": "freightcar",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "3186376089": {
+    "hash": 3186376089,
+    "name": "freightcar2",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "2420957787": {
+    "hash": 2420957787,
+    "name": "freightcar3",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "920453016": {
+    "hash": 920453016,
+    "name": "freightcont1",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "240201337": {
+    "hash": 240201337,
+    "name": "freightcont2",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "642617954": {
+    "hash": 642617954,
+    "name": "freightgrain",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "3517691494": {
+    "hash": 3517691494,
+    "name": "freighttrailer",
+    "displayName": "freighttrailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "744705981": {
+    "hash": 744705981,
+    "name": "Frogger",
+    "displayName": "Frogger",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1949211328": {
+    "hash": 1949211328,
+    "name": "frogger2",
+    "displayName": "Frogger",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1909141499": {
+    "hash": 1909141499,
+    "name": "fugitive",
+    "displayName": "Fugitive",
+    "manufacturer": "CHEVAL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "960812448": {
+    "hash": 960812448,
+    "name": "furia",
+    "displayName": "Furia",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3205927392": {
+    "hash": 3205927392,
+    "name": "furoregt",
+    "displayName": "Furore GT",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "499169875": {
+    "hash": 499169875,
+    "name": "fusilade",
+    "displayName": "Fusilade",
+    "manufacturer": "SCHYSTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2016857647": {
+    "hash": 2016857647,
+    "name": "futo",
+    "displayName": "Futo",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2787736776": {
+    "hash": 2787736776,
+    "name": "futo2",
+    "displayName": "Futo GTX",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "741090084": {
+    "hash": 741090084,
+    "name": "gargoyle",
+    "displayName": "Gargoyle",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2494797253": {
+    "hash": 2494797253,
+    "name": "Gauntlet",
+    "displayName": "Gauntlet",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "349315417": {
+    "hash": 349315417,
+    "name": "gauntlet2",
+    "displayName": "Redwood Gauntlet",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "722226637": {
+    "hash": 722226637,
+    "name": "gauntlet3",
+    "displayName": "Gauntlet Classic",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1934384720": {
+    "hash": 1934384720,
+    "name": "gauntlet4",
+    "displayName": "Gauntlet Hellfire",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2172320429": {
+    "hash": 2172320429,
+    "name": "gauntlet5",
+    "displayName": "Gauntlet Classic Custom",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1336514315": {
+    "hash": 1336514315,
+    "name": "gauntlet6",
+    "displayName": "Hotring Hellfire",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1909189272": {
+    "hash": 1909189272,
+    "name": "gb200",
+    "displayName": "GB200",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2549763894": {
+    "hash": 2549763894,
+    "name": "gburrito",
+    "displayName": "Gang Burrito",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "296357396": {
+    "hash": 296357396,
+    "name": "gburrito2",
+    "displayName": "Gang Burrito",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "75131841": {
+    "hash": 75131841,
+    "name": "glendale",
+    "displayName": "Glendale",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3381377750": {
+    "hash": 3381377750,
+    "name": "glendale2",
+    "displayName": "Glendale Custom",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1234311532": {
+    "hash": 1234311532,
+    "name": "gp1",
+    "displayName": "GP1",
+    "manufacturer": "PROGEN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1019737494": {
+    "hash": 1019737494,
+    "name": "graintrailer",
+    "displayName": "Graintrailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2519238556": {
+    "hash": 2519238556,
+    "name": "GRANGER",
+    "displayName": "Granger",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4033620423": {
+    "hash": 4033620423,
+    "name": "granger2",
+    "displayName": "Granger 3600LX",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "40817712": {
+    "hash": 40817712,
+    "name": "greenwood",
+    "displayName": "Greenwood",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2751205197": {
+    "hash": 2751205197,
+    "name": "gresley",
+    "displayName": "Gresley",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1304459735": {
+    "hash": 1304459735,
+    "name": "growler",
+    "displayName": "Growler",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2215179066": {
+    "hash": 2215179066,
+    "name": "gt500",
+    "displayName": "GT500",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1380582820": {
+    "hash": 1380582820,
+    "name": "gt750",
+    "displayName": "GT750",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2186977100": {
+    "hash": 2186977100,
+    "name": "guardian",
+    "displayName": "Guardian",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "884422927": {
+    "hash": 884422927,
+    "name": "habanero",
+    "displayName": "Habanero",
+    "manufacturer": "EMPEROR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1265391242": {
+    "hash": 1265391242,
+    "name": "hakuchou",
+    "displayName": "Hakuchou",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "4039289119": {
+    "hash": 4039289119,
+    "name": "hakuchou2",
+    "displayName": "Hakuchou Drag",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "4262731174": {
+    "hash": 4262731174,
+    "name": "halftrack",
+    "displayName": "Half-track",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "444583674": {
+    "hash": 444583674,
+    "name": "handler",
+    "displayName": "Dock Handler",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1580292663": {
+    "hash": 1580292663,
+    "name": "hardy",
+    "displayName": "Hardy",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1518533038": {
+    "hash": 1518533038,
+    "name": "Hauler",
+    "displayName": "Hauler",
+    "manufacturer": "JOBUILT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "387748548": {
+    "hash": 387748548,
+    "name": "Hauler2",
+    "displayName": "Hauler Custom",
+    "manufacturer": "JOBUILT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2310691317": {
+    "hash": 2310691317,
+    "name": "havok",
+    "displayName": "Havok",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "3932816511": {
+    "hash": 3932816511,
+    "name": "hellion",
+    "displayName": "Hellion",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "15219735": {
+    "hash": 15219735,
+    "name": "hermes",
+    "displayName": "Hermes",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "301427732": {
+    "hash": 301427732,
+    "name": "hexer",
+    "displayName": "Hexer",
+    "manufacturer": "LCC",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "37348240": {
+    "hash": 37348240,
+    "name": "hotknife",
+    "displayName": "Hotknife",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1115909093": {
+    "hash": 1115909093,
+    "name": "hotring",
+    "displayName": "Hotring Sabre",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3287439187": {
+    "hash": 3287439187,
+    "name": "howard",
+    "displayName": "Howard NX-25",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "4252008158": {
+    "hash": 4252008158,
+    "name": "hunter",
+    "displayName": "FH-1 Hunter",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "486987393": {
+    "hash": 486987393,
+    "name": "huntley",
+    "displayName": "Huntley S",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "600450546": {
+    "hash": 600450546,
+    "name": "hustler",
+    "displayName": "Hustler",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "970385471": {
+    "hash": 970385471,
+    "name": "hydra",
+    "displayName": "Hydra",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "2850852987": {
+    "hash": 2850852987,
+    "name": "ignus",
+    "displayName": "Ignus",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "956849991": {
+    "hash": 956849991,
+    "name": "ignus2",
+    "displayName": "Weaponized Ignus",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3162245632": {
+    "hash": 3162245632,
+    "name": "imorgon",
+    "displayName": "Imorgon",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2198276962": {
+    "hash": 2198276962,
+    "name": "impaler",
+    "displayName": "Impaler",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1009171724": {
+    "hash": 1009171724,
+    "name": "impaler2",
+    "displayName": "Apocalypse Impaler",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2370166601": {
+    "hash": 2370166601,
+    "name": "impaler3",
+    "displayName": "Future Shock Impaler",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2550461639": {
+    "hash": 2550461639,
+    "name": "impaler4",
+    "displayName": "Nightmare Impaler",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3816328113": {
+    "hash": 3816328113,
+    "name": "impaler5",
+    "displayName": "Impaler SZ",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4116524922": {
+    "hash": 4116524922,
+    "name": "impaler6",
+    "displayName": "Impaler LX",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "444994115": {
+    "hash": 444994115,
+    "name": "imperator",
+    "displayName": "Apocalypse Imperator",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1637620610": {
+    "hash": 1637620610,
+    "name": "imperator2",
+    "displayName": "Future Shock Imperator",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3539435063": {
+    "hash": 3539435063,
+    "name": "imperator3",
+    "displayName": "Nightmare Imperator",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3397143273": {
+    "hash": 3397143273,
+    "name": "inductor",
+    "displayName": "Inductor",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "2311345272": {
+    "hash": 2311345272,
+    "name": "inductor2",
+    "displayName": "Junk Energy Inductor",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "418536135": {
+    "hash": 418536135,
+    "name": "infernus",
+    "displayName": "Infernus",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2889029532": {
+    "hash": 2889029532,
+    "name": "infernus2",
+    "displayName": "Infernus Classic",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3005245074": {
+    "hash": 3005245074,
+    "name": "ingot",
+    "displayName": "Ingot",
+    "manufacturer": "VULCAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4135840458": {
+    "hash": 4135840458,
+    "name": "innovation",
+    "displayName": "Innovation",
+    "manufacturer": "LCC",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2434067162": {
+    "hash": 2434067162,
+    "name": "insurgent",
+    "displayName": "Insurgent Pick-Up",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2071877360": {
+    "hash": 2071877360,
+    "name": "insurgent2",
+    "displayName": "Insurgent",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2370534026": {
+    "hash": 2370534026,
+    "name": "insurgent3",
+    "displayName": "Insurgent Pick-Up Custom",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "886934177": {
+    "hash": 886934177,
+    "name": "intruder",
+    "displayName": "Intruder",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3117103977": {
+    "hash": 3117103977,
+    "name": "issi2",
+    "displayName": "Issi",
+    "manufacturer": "WEENY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "931280609": {
+    "hash": 931280609,
+    "name": "issi3",
+    "displayName": "Issi Classic",
+    "manufacturer": "WEENY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "628003514": {
+    "hash": 628003514,
+    "name": "issi4",
+    "displayName": "Apocalypse Issi",
+    "manufacturer": "WEENY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1537277726": {
+    "hash": 1537277726,
+    "name": "issi5",
+    "displayName": "Future Shock Issi",
+    "manufacturer": "WEENY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1239571361": {
+    "hash": 1239571361,
+    "name": "issi6",
+    "displayName": "Nightmare Issi",
+    "manufacturer": "WEENY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1854776567": {
+    "hash": 1854776567,
+    "name": "issi7",
+    "displayName": "Issi Sport",
+    "manufacturer": "WEENY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1550581940": {
+    "hash": 1550581940,
+    "name": "issi8",
+    "displayName": "Issi Rally",
+    "manufacturer": "WEENY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "893780296": {
+    "hash": 893780296,
+    "name": "itali2",
+    "displayName": "Itali Classic",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2246633323": {
+    "hash": 2246633323,
+    "name": "italigtb",
+    "displayName": "Itali GTB",
+    "manufacturer": "PROGEN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3812247419": {
+    "hash": 3812247419,
+    "name": "italigtb2",
+    "displayName": "Itali GTB Custom",
+    "manufacturer": "PROGEN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3963499524": {
+    "hash": 3963499524,
+    "name": "italigto",
+    "displayName": "Itali GTO",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3145241962": {
+    "hash": 3145241962,
+    "name": "italirsx",
+    "displayName": "Itali RSX",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "662793086": {
+    "hash": 662793086,
+    "name": "iwagen",
+    "displayName": "I-Wagen",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3670438162": {
+    "hash": 3670438162,
+    "name": "jackal",
+    "displayName": "Jackal",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1051415893": {
+    "hash": 1051415893,
+    "name": "jb700",
+    "displayName": "JB 700",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "394110044": {
+    "hash": 394110044,
+    "name": "jb7002",
+    "displayName": "JB 700W",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2997294755": {
+    "hash": 2997294755,
+    "name": "jester",
+    "displayName": "Jester",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3188613414": {
+    "hash": 3188613414,
+    "name": "jester2",
+    "displayName": "Jester (Racecar)",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4080061290": {
+    "hash": 4080061290,
+    "name": "jester3",
+    "displayName": "Jester Classic",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2712905841": {
+    "hash": 2712905841,
+    "name": "jester4",
+    "displayName": "Jester RR",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1484920335": {
+    "hash": 1484920335,
+    "name": "jester5",
+    "displayName": "Jester RR Widebody",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1058115860": {
+    "hash": 1058115860,
+    "name": "jet",
+    "displayName": "Jet",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "861409633": {
+    "hash": 861409633,
+    "name": "jetmax",
+    "displayName": "Jetmax",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "4174679674": {
+    "hash": 4174679674,
+    "name": "journey",
+    "displayName": "Journey",
+    "manufacturer": "ZIRCONIU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2667889793": {
+    "hash": 2667889793,
+    "name": "journey2",
+    "displayName": "Journey II",
+    "manufacturer": "ZIRCONIU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "461465043": {
+    "hash": 461465043,
+    "name": "jubilee",
+    "displayName": "Jubilee",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4086055493": {
+    "hash": 4086055493,
+    "name": "jugular",
+    "displayName": "Jugular",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "92612664": {
+    "hash": 92612664,
+    "name": "kalahari",
+    "displayName": "Kalahari",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4173521127": {
+    "hash": 4173521127,
+    "name": "kamacho",
+    "displayName": "Kamacho",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "409049982": {
+    "hash": 409049982,
+    "name": "kanjo",
+    "displayName": "Blista Kanjo",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4230891418": {
+    "hash": 4230891418,
+    "name": "kanjosj",
+    "displayName": "Kanjo SJ",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3892551591": {
+    "hash": 3892551591,
+    "name": "keitora",
+    "displayName": "Keitora",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "544021352": {
+    "hash": 544021352,
+    "name": "khamelion",
+    "displayName": "Khamelion",
+    "manufacturer": "HIJAK",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2859440138": {
+    "hash": 2859440138,
+    "name": "khanjali",
+    "displayName": "TM-02 Khanjali",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3460613305": {
+    "hash": 3460613305,
+    "name": "komoda",
+    "displayName": "Komoda",
+    "manufacturer": "LAMPADATI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1336872304": {
+    "hash": 1336872304,
+    "name": "kosatka",
+    "displayName": "Kosatka",
+    "manufacturer": "RUNE",
+    "class": "Unknown",
+    "type": "SUBMARINE"
+  },
+  "3630826055": {
+    "hash": 3630826055,
+    "name": "krieger",
+    "displayName": "Krieger",
+    "manufacturer": "BENEFACTOR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2922118804": {
+    "hash": 2922118804,
+    "name": "kuruma",
+    "displayName": "Kuruma",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "410882957": {
+    "hash": 410882957,
+    "name": "kuruma2",
+    "displayName": "Kuruma (Armored)",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2531292011": {
+    "hash": 2531292011,
+    "name": "l35",
+    "displayName": "Walton L35",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "691148275": {
+    "hash": 691148275,
+    "name": "l352",
+    "displayName": "Walton L35 Stock",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1269098716": {
+    "hash": 1269098716,
+    "name": "landstalker",
+    "displayName": "Landstalker",
+    "manufacturer": "DUNDREAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3456868130": {
+    "hash": 3456868130,
+    "name": "landstalker2",
+    "displayName": "Landstalker XL",
+    "manufacturer": "DUNDREAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3013282534": {
+    "hash": 3013282534,
+    "name": "Lazer",
+    "displayName": "P-996 LAZER",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "3062131285": {
+    "hash": 3062131285,
+    "name": "le7b",
+    "displayName": "RE-7B",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "640818791": {
+    "hash": 640818791,
+    "name": "lectro",
+    "displayName": "Lectro",
+    "manufacturer": "PRINCIPL",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "469291905": {
+    "hash": 469291905,
+    "name": "lguard",
+    "displayName": "Lifeguard",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4180339789": {
+    "hash": 4180339789,
+    "name": "limo2",
+    "displayName": "Turreted Limo",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4284049613": {
+    "hash": 4284049613,
+    "name": "lm87",
+    "displayName": "LM87",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3353694737": {
+    "hash": 3353694737,
+    "name": "locust",
+    "displayName": "Locust",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1861786828": {
+    "hash": 1861786828,
+    "name": "longfin",
+    "displayName": "Longfin",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "3356898886": {
+    "hash": 3356898886,
+    "name": "luiva",
+    "displayName": "Luiva",
+    "manufacturer": "PROGEN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2068293287": {
+    "hash": 2068293287,
+    "name": "lurcher",
+    "displayName": "Lurcher",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "621481054": {
+    "hash": 621481054,
+    "name": "luxor",
+    "displayName": "Luxor",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "3080673438": {
+    "hash": 3080673438,
+    "name": "luxor2",
+    "displayName": "Luxor Deluxe",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "482197771": {
+    "hash": 482197771,
+    "name": "lynx",
+    "displayName": "Lynx",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2634021974": {
+    "hash": 2634021974,
+    "name": "mamba",
+    "displayName": "Mamba",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2548391185": {
+    "hash": 2548391185,
+    "name": "mammatus",
+    "displayName": "Mammatus",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "2170765704": {
+    "hash": 2170765704,
+    "name": "manana",
+    "displayName": "Manana",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1717532765": {
+    "hash": 1717532765,
+    "name": "manana2",
+    "displayName": "Manana Custom",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2771538552": {
+    "hash": 2771538552,
+    "name": "manchez",
+    "displayName": "Manchez",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1086534307": {
+    "hash": 1086534307,
+    "name": "manchez2",
+    "displayName": "Manchez Scout",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1384502824": {
+    "hash": 1384502824,
+    "name": "manchez3",
+    "displayName": "Manchez Scout C",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3251507587": {
+    "hash": 3251507587,
+    "name": "marquis",
+    "displayName": "Marquis",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "1233534620": {
+    "hash": 1233534620,
+    "name": "marshall",
+    "displayName": "Marshall",
+    "manufacturer": "CHEVAL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4152024626": {
+    "hash": 4152024626,
+    "name": "massacro",
+    "displayName": "Massacro",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3663206819": {
+    "hash": 3663206819,
+    "name": "massacro2",
+    "displayName": "Massacro (Racecar)",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2634305738": {
+    "hash": 2634305738,
+    "name": "maverick",
+    "displayName": "Maverick",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "347619240": {
+    "hash": 347619240,
+    "name": "maverick2",
+    "displayName": "Higgins Helitours Maverick",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "2044532910": {
+    "hash": 2044532910,
+    "name": "menacer",
+    "displayName": "Menacer",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "914654722": {
+    "hash": 914654722,
+    "name": "MESA",
+    "displayName": "Mesa",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3546958660": {
+    "hash": 3546958660,
+    "name": "mesa2",
+    "displayName": "Mesa",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2230595153": {
+    "hash": 2230595153,
+    "name": "MESA3",
+    "displayName": "Mesa",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "868868440": {
+    "hash": 868868440,
+    "name": "metrotrain",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "1046206681": {
+    "hash": 1046206681,
+    "name": "michelli",
+    "displayName": "Michelli GT",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2531412055": {
+    "hash": 2531412055,
+    "name": "microlight",
+    "displayName": "Ultralight",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "165154707": {
+    "hash": 165154707,
+    "name": "Miljet",
+    "displayName": "Miljet",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "3193860278": {
+    "hash": 3193860278,
+    "name": "minimus",
+    "displayName": "Minimus",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3040635986": {
+    "hash": 3040635986,
+    "name": "minitank",
+    "displayName": "Invade and Persuade Tank",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3984502180": {
+    "hash": 3984502180,
+    "name": "minivan",
+    "displayName": "Minivan",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3168702960": {
+    "hash": 3168702960,
+    "name": "minivan2",
+    "displayName": "Minivan Custom",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3510150843": {
+    "hash": 3510150843,
+    "name": "Mixer",
+    "displayName": "Mixer",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "475220373": {
+    "hash": 475220373,
+    "name": "Mixer2",
+    "displayName": "Mixer",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3545667823": {
+    "hash": 3545667823,
+    "name": "mogul",
+    "displayName": "Mogul",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1565978651": {
+    "hash": 1565978651,
+    "name": "molotok",
+    "displayName": "V-65 Molotok",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "3861591579": {
+    "hash": 3861591579,
+    "name": "monroe",
+    "displayName": "Monroe",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3449006043": {
+    "hash": 3449006043,
+    "name": "monster",
+    "displayName": "Monster",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1721676810": {
+    "hash": 1721676810,
+    "name": "monster3",
+    "displayName": "Apocalypse Sasquatch",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "840387324": {
+    "hash": 840387324,
+    "name": "monster4",
+    "displayName": "Future Shock Sasquatch",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3579220348": {
+    "hash": 3579220348,
+    "name": "monster5",
+    "displayName": "Nightmare Sasquatch",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "802856453": {
+    "hash": 802856453,
+    "name": "monstrociti",
+    "displayName": "MonstroCiti",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "525509695": {
+    "hash": 525509695,
+    "name": "moonbeam",
+    "displayName": "Moonbeam",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1896491931": {
+    "hash": 1896491931,
+    "name": "moonbeam2",
+    "displayName": "Moonbeam Custom",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1783355638": {
+    "hash": 1783355638,
+    "name": "Mower",
+    "displayName": "Lawn Mower",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "904750859": {
+    "hash": 904750859,
+    "name": "Mule",
+    "displayName": "Mule",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3244501995": {
+    "hash": 3244501995,
+    "name": "Mule2",
+    "displayName": "Mule",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2242229361": {
+    "hash": 2242229361,
+    "name": "Mule3",
+    "displayName": "Mule",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1945374990": {
+    "hash": 1945374990,
+    "name": "mule4",
+    "displayName": "Mule Custom",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1343932732": {
+    "hash": 1343932732,
+    "name": "mule5",
+    "displayName": "Mule",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3412338231": {
+    "hash": 3412338231,
+    "name": "nebula",
+    "displayName": "Nebula Turbo",
+    "manufacturer": "VULCAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3660088182": {
+    "hash": 3660088182,
+    "name": "nemesis",
+    "displayName": "Nemesis",
+    "manufacturer": "PRINCIPL",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2674840994": {
+    "hash": 2674840994,
+    "name": "neo",
+    "displayName": "Neo",
+    "manufacturer": "VYSSER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2445973230": {
+    "hash": 2445973230,
+    "name": "neon",
+    "displayName": "Neon",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1034187331": {
+    "hash": 1034187331,
+    "name": "nero",
+    "displayName": "Nero",
+    "manufacturer": "TRUFFADE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1093792632": {
+    "hash": 1093792632,
+    "name": "nero2",
+    "displayName": "Nero Custom",
+    "manufacturer": "TRUFFADE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2688780135": {
+    "hash": 2688780135,
+    "name": "nightblade",
+    "displayName": "Nightblade",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2351681756": {
+    "hash": 2351681756,
+    "name": "nightshade",
+    "displayName": "Nightshade",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "433954513": {
+    "hash": 433954513,
+    "name": "nightshark",
+    "displayName": "Nightshark",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2999939664": {
+    "hash": 2999939664,
+    "name": "nimbus",
+    "displayName": "Nimbus",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1032823388": {
+    "hash": 1032823388,
+    "name": "ninef",
+    "displayName": "9F",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2833484545": {
+    "hash": 2833484545,
+    "name": "ninef2",
+    "displayName": "9F Cabrio",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1881415402": {
+    "hash": 1881415402,
+    "name": "niobe",
+    "displayName": "Niobe",
+    "manufacturer": "UBERMACHT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1036591958": {
+    "hash": 1036591958,
+    "name": "nokota",
+    "displayName": "P-45 Nokota",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "2465530446": {
+    "hash": 2465530446,
+    "name": "Novak",
+    "displayName": "Novak",
+    "manufacturer": "LAMPADATI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3517794615": {
+    "hash": 3517794615,
+    "name": "omnis",
+    "displayName": "Omnis",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3789743831": {
+    "hash": 3789743831,
+    "name": "omnisegt",
+    "displayName": "Omnis e-GT",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1492612435": {
+    "hash": 1492612435,
+    "name": "openwheel1",
+    "displayName": "BR8",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1181339704": {
+    "hash": 1181339704,
+    "name": "openwheel2",
+    "displayName": "DR1",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "884483972": {
+    "hash": 884483972,
+    "name": "oppressor",
+    "displayName": "Oppressor",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2069146067": {
+    "hash": 2069146067,
+    "name": "oppressor2",
+    "displayName": "Oppressor Mk II",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1348744438": {
+    "hash": 1348744438,
+    "name": "oracle",
+    "displayName": "Oracle XS",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3783366066": {
+    "hash": 3783366066,
+    "name": "oracle2",
+    "displayName": "Oracle",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1987142870": {
+    "hash": 1987142870,
+    "name": "osiris",
+    "displayName": "Osiris",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "408825843": {
+    "hash": 408825843,
+    "name": "outlaw",
+    "displayName": "Outlaw",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "569305213": {
+    "hash": 569305213,
+    "name": "Packer",
+    "displayName": "Packer",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2100457220": {
+    "hash": 2100457220,
+    "name": "panthere",
+    "displayName": "Panthere",
+    "manufacturer": "TOUNDRA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3863274624": {
+    "hash": 3863274624,
+    "name": "panto",
+    "displayName": "Panto",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1488164764": {
+    "hash": 1488164764,
+    "name": "paradise",
+    "displayName": "Paradise",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3847255899": {
+    "hash": 3847255899,
+    "name": "paragon",
+    "displayName": "Paragon R",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1416466158": {
+    "hash": 1416466158,
+    "name": "paragon2",
+    "displayName": "Paragon R (Armored)",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3348919626": {
+    "hash": 3348919626,
+    "name": "paragon3",
+    "displayName": "Paragon S",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "867799010": {
+    "hash": 867799010,
+    "name": "pariah",
+    "displayName": "Pariah",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3486509883": {
+    "hash": 3486509883,
+    "name": "patriot",
+    "displayName": "Patriot",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3874056184": {
+    "hash": 3874056184,
+    "name": "patriot2",
+    "displayName": "Patriot Stretch",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3624880708": {
+    "hash": 3624880708,
+    "name": "patriot3",
+    "displayName": "Patriot Mil-Spec",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4018222598": {
+    "hash": 4018222598,
+    "name": "patrolboat",
+    "displayName": "Kurtz 31 Patrol Boat",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "2287941233": {
+    "hash": 2287941233,
+    "name": "pbus",
+    "displayName": "Police Prison Bus",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "345756458": {
+    "hash": 345756458,
+    "name": "pbus2",
+    "displayName": "Festival Bus",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3385765638": {
+    "hash": 3385765638,
+    "name": "pcj",
+    "displayName": "PCJ 600",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2536829930": {
+    "hash": 2536829930,
+    "name": "penetrator",
+    "displayName": "Penetrator",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3917501776": {
+    "hash": 3917501776,
+    "name": "penumbra",
+    "displayName": "Penumbra",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3663644634": {
+    "hash": 3663644634,
+    "name": "penumbra2",
+    "displayName": "Penumbra FF",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1830407356": {
+    "hash": 1830407356,
+    "name": "peyote",
+    "displayName": "Peyote",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2490551588": {
+    "hash": 2490551588,
+    "name": "peyote2",
+    "displayName": "Peyote Gasser",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1107404867": {
+    "hash": 1107404867,
+    "name": "peyote3",
+    "displayName": "Peyote Custom",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2465164804": {
+    "hash": 2465164804,
+    "name": "pfister811",
+    "displayName": "811",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2157618379": {
+    "hash": 2157618379,
+    "name": "Phantom",
+    "displayName": "Phantom",
+    "manufacturer": "JOBUILT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2645431192": {
+    "hash": 2645431192,
+    "name": "phantom2",
+    "displayName": "Phantom Wedge",
+    "manufacturer": "JOBUILT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "177270108": {
+    "hash": 177270108,
+    "name": "phantom3",
+    "displayName": "Phantom Custom",
+    "manufacturer": "JOBUILT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4165683409": {
+    "hash": 4165683409,
+    "name": "Phantom4",
+    "displayName": "Phantom",
+    "manufacturer": "JOBUILT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2199527893": {
+    "hash": 2199527893,
+    "name": "Phoenix",
+    "displayName": "Phoenix",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1507916787": {
+    "hash": 1507916787,
+    "name": "picador",
+    "displayName": "Picador",
+    "manufacturer": "CHEVAL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1078682497": {
+    "hash": 1078682497,
+    "name": "pigalle",
+    "displayName": "Pigalle",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4071505793": {
+    "hash": 4071505793,
+    "name": "pipistrello",
+    "displayName": "Pipistrello",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1968807591": {
+    "hash": 1968807591,
+    "name": "pizzaboy",
+    "displayName": "Pizza Boy",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "287906327": {
+    "hash": 287906327,
+    "name": "polbuffalo",
+    "displayName": "Buffalo Cruiser",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "617517171": {
+    "hash": 617517171,
+    "name": "polbuffalo6",
+    "displayName": "Buffalo STX Pursuit",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2346018232": {
+    "hash": 2346018232,
+    "name": "polcaracara",
+    "displayName": "Caracara Pursuit",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2042703219": {
+    "hash": 2042703219,
+    "name": "polcoquette4",
+    "displayName": "Coquette D10 Pursuit",
+    "manufacturer": "INVERTO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3521165271": {
+    "hash": 3521165271,
+    "name": "poldominator10",
+    "displayName": "Dominator FX Interceptor",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2666966727": {
+    "hash": 2666966727,
+    "name": "poldorado",
+    "displayName": "Dorado Cruiser",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1891140410": {
+    "hash": 1891140410,
+    "name": "polfaction2",
+    "displayName": "Outreach Faction",
+    "manufacturer": "WILLARD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3061199846": {
+    "hash": 3061199846,
+    "name": "polgauntlet",
+    "displayName": "Gauntlet Interceptor",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1737348074": {
+    "hash": 1737348074,
+    "name": "polgreenwood",
+    "displayName": "Greenwood Cruiser",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2046537925": {
+    "hash": 2046537925,
+    "name": "police",
+    "displayName": "Police Cruiser",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2667966721": {
+    "hash": 2667966721,
+    "name": "police2",
+    "displayName": "Police Cruiser",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1912215274": {
+    "hash": 1912215274,
+    "name": "police3",
+    "displayName": "Police Cruiser",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2321795001": {
+    "hash": 2321795001,
+    "name": "police4",
+    "displayName": "Unmarked Cruiser",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2620582743": {
+    "hash": 2620582743,
+    "name": "police5",
+    "displayName": "Stanier LE Cruiser",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4260343491": {
+    "hash": 4260343491,
+    "name": "policeb",
+    "displayName": "Police Bike",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2373455159": {
+    "hash": 2373455159,
+    "name": "policeb2",
+    "displayName": "Police Bike",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2758042359": {
+    "hash": 2758042359,
+    "name": "policeold1",
+    "displayName": "Police Rancher",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2515846680": {
+    "hash": 2515846680,
+    "name": "policeold2",
+    "displayName": "Police Roadcruiser",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "456714581": {
+    "hash": 456714581,
+    "name": "policet",
+    "displayName": "Police Transporter",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2850111293": {
+    "hash": 2850111293,
+    "name": "policet3",
+    "displayName": "Burrito (Bail Enforcement)",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1249425552": {
+    "hash": 1249425552,
+    "name": "polimpaler5",
+    "displayName": "Impaler SZ Cruiser",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1452003510": {
+    "hash": 1452003510,
+    "name": "polimpaler6",
+    "displayName": "Impaler LX Cruiser",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "353883353": {
+    "hash": 353883353,
+    "name": "polmav",
+    "displayName": "Police Maverick",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "2973836112": {
+    "hash": 2973836112,
+    "name": "polterminus",
+    "displayName": "Terminus Patrol",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4175309224": {
+    "hash": 4175309224,
+    "name": "pony",
+    "displayName": "Pony",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "943752001": {
+    "hash": 943752001,
+    "name": "pony2",
+    "displayName": "Pony",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4000288633": {
+    "hash": 4000288633,
+    "name": "postlude",
+    "displayName": "Postlude",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2112052861": {
+    "hash": 2112052861,
+    "name": "Pounder",
+    "displayName": "Pounder",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1653666139": {
+    "hash": 1653666139,
+    "name": "pounder2",
+    "displayName": "Pounder Custom",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2908631255": {
+    "hash": 2908631255,
+    "name": "powersurge",
+    "displayName": "Powersurge",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2844316578": {
+    "hash": 2844316578,
+    "name": "prairie",
+    "displayName": "Prairie",
+    "manufacturer": "BOLLOKAN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "741586030": {
+    "hash": 741586030,
+    "name": "pRanger",
+    "displayName": "Park Ranger",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3806844075": {
+    "hash": 3806844075,
+    "name": "Predator",
+    "displayName": "Police Predator",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "2411098011": {
+    "hash": 2411098011,
+    "name": "premier",
+    "displayName": "Premier",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1416471345": {
+    "hash": 1416471345,
+    "name": "previon",
+    "displayName": "Previon",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3144368207": {
+    "hash": 3144368207,
+    "name": "primo",
+    "displayName": "Primo",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2254540506": {
+    "hash": 2254540506,
+    "name": "primo2",
+    "displayName": "Primo Custom",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "356391690": {
+    "hash": 356391690,
+    "name": "proptrailer",
+    "displayName": "proptrailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2123327359": {
+    "hash": 2123327359,
+    "name": "prototipo",
+    "displayName": "X80 Proto",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2908775872": {
+    "hash": 2908775872,
+    "name": "pyro",
+    "displayName": "Pyro",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1076201208": {
+    "hash": 1076201208,
+    "name": "r300",
+    "displayName": "300R",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2643899483": {
+    "hash": 2643899483,
+    "name": "radi",
+    "displayName": "Radius",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2765724541": {
+    "hash": 2765724541,
+    "name": "raiden",
+    "displayName": "Raiden",
+    "manufacturer": "COIL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "239897677": {
+    "hash": 239897677,
+    "name": "raiju",
+    "displayName": "F-160 Raiju",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "390902130": {
+    "hash": 390902130,
+    "name": "raketrailer",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2191146052": {
+    "hash": 2191146052,
+    "name": "rallytruck",
+    "displayName": "Dune",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1645267888": {
+    "hash": 1645267888,
+    "name": "RancherXL",
+    "displayName": "Rancher XL",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1933662059": {
+    "hash": 1933662059,
+    "name": "rancherxl2",
+    "displayName": "Rancher XL",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2360515092": {
+    "hash": 2360515092,
+    "name": "RapidGT",
+    "displayName": "Rapid GT",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1737773231": {
+    "hash": 1737773231,
+    "name": "RapidGT2",
+    "displayName": "Rapid GT",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2049897956": {
+    "hash": 2049897956,
+    "name": "rapidgt3",
+    "displayName": "Rapid GT Classic",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1761301369": {
+    "hash": 1761301369,
+    "name": "rapidgt4",
+    "displayName": "Rapid GT X",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3620039993": {
+    "hash": 3620039993,
+    "name": "raptor",
+    "displayName": "Raptor",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1873600305": {
+    "hash": 1873600305,
+    "name": "ratbike",
+    "displayName": "Rat Bike",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3758861739": {
+    "hash": 3758861739,
+    "name": "ratel",
+    "displayName": "Ratel",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3627815886": {
+    "hash": 3627815886,
+    "name": "ratloader",
+    "displayName": "Rat-Loader",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3705788919": {
+    "hash": 3705788919,
+    "name": "ratloader2",
+    "displayName": "Rat-Truck",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4008920556": {
+    "hash": 4008920556,
+    "name": "rcbandito",
+    "displayName": "RC Bandito",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "234062309": {
+    "hash": 234062309,
+    "name": "reaper",
+    "displayName": "Reaper",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3087195462": {
+    "hash": 3087195462,
+    "name": "Rebel",
+    "displayName": "Rusty Rebel",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2249373259": {
+    "hash": 2249373259,
+    "name": "rebel2",
+    "displayName": "Rebel",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "83136452": {
+    "hash": 83136452,
+    "name": "rebla",
+    "displayName": "Rebla GTS",
+    "manufacturer": "UBERMACHT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1993851908": {
+    "hash": 1993851908,
+    "name": "reever",
+    "displayName": "Reever",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "4280472072": {
+    "hash": 4280472072,
+    "name": "regina",
+    "displayName": "Regina",
+    "manufacturer": "DUNDREAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1377217886": {
+    "hash": 1377217886,
+    "name": "remus",
+    "displayName": "Remus",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3196165219": {
+    "hash": 3196165219,
+    "name": "Rentalbus",
+    "displayName": "Rental Shuttle Bus",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1841130506": {
+    "hash": 1841130506,
+    "name": "retinue",
+    "displayName": "Retinue",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2031587082": {
+    "hash": 2031587082,
+    "name": "retinue2",
+    "displayName": "Retinue Mk II",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3884762073": {
+    "hash": 3884762073,
+    "name": "revolter",
+    "displayName": "Revolter",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "841808271": {
+    "hash": 841808271,
+    "name": "rhapsody",
+    "displayName": "Rhapsody",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2439462158": {
+    "hash": 2439462158,
+    "name": "rhinehart",
+    "displayName": "Rhinehart",
+    "manufacturer": "UBERMACHT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "782665360": {
+    "hash": 782665360,
+    "name": "RHINO",
+    "displayName": "Rhino Tank",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2762269779": {
+    "hash": 2762269779,
+    "name": "riata",
+    "displayName": "Riata",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3089277354": {
+    "hash": 3089277354,
+    "name": "RIOT",
+    "displayName": "Police Riot",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2601952180": {
+    "hash": 2601952180,
+    "name": "riot2",
+    "displayName": "RCV",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3448987385": {
+    "hash": 3448987385,
+    "name": "Ripley",
+    "displayName": "Ripley",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2136773105": {
+    "hash": 2136773105,
+    "name": "rocoto",
+    "displayName": "Rocoto",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3319621991": {
+    "hash": 3319621991,
+    "name": "rogue",
+    "displayName": "Rogue",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "627094268": {
+    "hash": 627094268,
+    "name": "romero",
+    "displayName": "Romero Hearse",
+    "manufacturer": "CHARIOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "916547552": {
+    "hash": 916547552,
+    "name": "rrocket",
+    "displayName": "Rampant Rocket",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "QUADBIKE"
+  },
+  "3842363289": {
+    "hash": 3842363289,
+    "name": "rt3000",
+    "displayName": "RT3000",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2589662668": {
+    "hash": 2589662668,
+    "name": "Rubble",
+    "displayName": "Rubble",
+    "manufacturer": "JOBUILT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3401388520": {
+    "hash": 3401388520,
+    "name": "ruffian",
+    "displayName": "Ruffian",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "4067225593": {
+    "hash": 4067225593,
+    "name": "ruiner",
+    "displayName": "Ruiner",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "941494461": {
+    "hash": 941494461,
+    "name": "ruiner2",
+    "displayName": "Ruiner 2000",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "777714999": {
+    "hash": 777714999,
+    "name": "ruiner3",
+    "displayName": "Ruiner",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1706945532": {
+    "hash": 1706945532,
+    "name": "ruiner4",
+    "displayName": "Ruiner ZZ-8",
+    "manufacturer": "IMPONTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1162065741": {
+    "hash": 1162065741,
+    "name": "rumpo",
+    "displayName": "Rumpo",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2518351607": {
+    "hash": 2518351607,
+    "name": "rumpo2",
+    "displayName": "Rumpo",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1475773103": {
+    "hash": 1475773103,
+    "name": "rumpo3",
+    "displayName": "Rumpo Custom",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "719660200": {
+    "hash": 719660200,
+    "name": "ruston",
+    "displayName": "Ruston",
+    "manufacturer": "HIJAK",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3970348707": {
+    "hash": 3970348707,
+    "name": "s80",
+    "displayName": "S80RR",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1133471123": {
+    "hash": 1133471123,
+    "name": "s95",
+    "displayName": "S95",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2609945748": {
+    "hash": 2609945748,
+    "name": "sabregt",
+    "displayName": "Sabre Turbo",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "223258115": {
+    "hash": 223258115,
+    "name": "sabregt2",
+    "displayName": "Sabre Turbo Custom",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3695398481": {
+    "hash": 3695398481,
+    "name": "Sadler",
+    "displayName": "Sadler",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "734217681": {
+    "hash": 734217681,
+    "name": "sadler2",
+    "displayName": "Sadler",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "788045382": {
+    "hash": 788045382,
+    "name": "Sanchez",
+    "displayName": "Sanchez (livery)",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "2841686334": {
+    "hash": 2841686334,
+    "name": "sanchez2",
+    "displayName": "Sanchez",
+    "manufacturer": "MAIBATSU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1491277511": {
+    "hash": 1491277511,
+    "name": "sanctus",
+    "displayName": "Sanctus",
+    "manufacturer": "LCC",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3105951696": {
+    "hash": 3105951696,
+    "name": "sandking",
+    "displayName": "Sandking XL",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "989381445": {
+    "hash": 989381445,
+    "name": "sandking2",
+    "displayName": "Sandking SWB",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4212341271": {
+    "hash": 4212341271,
+    "name": "savage",
+    "displayName": "Savage",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "903794909": {
+    "hash": 903794909,
+    "name": "savestra",
+    "displayName": "Savestra",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1352136073": {
+    "hash": 1352136073,
+    "name": "sc1",
+    "displayName": "SC1",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3147997943": {
+    "hash": 3147997943,
+    "name": "scarab",
+    "displayName": "Apocalypse Scarab",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1542143200": {
+    "hash": 1542143200,
+    "name": "scarab2",
+    "displayName": "Future Shock Scarab",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3715219435": {
+    "hash": 3715219435,
+    "name": "scarab3",
+    "displayName": "Nightmare Scarab",
+    "manufacturer": "HVY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3039514899": {
+    "hash": 3039514899,
+    "name": "schafter2",
+    "displayName": "Schafter",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2809443750": {
+    "hash": 2809443750,
+    "name": "schafter3",
+    "displayName": "Schafter V12",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1489967196": {
+    "hash": 1489967196,
+    "name": "schafter4",
+    "displayName": "Schafter LWB",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3406724313": {
+    "hash": 3406724313,
+    "name": "schafter5",
+    "displayName": "Schafter V12 (Armored)",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1922255844": {
+    "hash": 1922255844,
+    "name": "schafter6",
+    "displayName": "Schafter LWB (Armored)",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3787471536": {
+    "hash": 3787471536,
+    "name": "schlagen",
+    "displayName": "Schlagen GT",
+    "manufacturer": "BENEFACTOR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3548084598": {
+    "hash": 3548084598,
+    "name": "schwarzer",
+    "displayName": "Schwartzer",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4108429845": {
+    "hash": 4108429845,
+    "name": "scorcher",
+    "displayName": "Scorcher",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "3656405053": {
+    "hash": 3656405053,
+    "name": "scramjet",
+    "displayName": "Scramjet",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2594165727": {
+    "hash": 2594165727,
+    "name": "scrap",
+    "displayName": "Scrap Truck",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3902291871": {
+    "hash": 3902291871,
+    "name": "seabreeze",
+    "displayName": "Seabreeze",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "3264692260": {
+    "hash": 3264692260,
+    "name": "seashark",
+    "displayName": "Seashark",
+    "manufacturer": "SPEEDOPH",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "3678636260": {
+    "hash": 3678636260,
+    "name": "seashark2",
+    "displayName": "Seashark",
+    "manufacturer": "SPEEDOPH",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "3983945033": {
+    "hash": 3983945033,
+    "name": "seashark3",
+    "displayName": "Seashark",
+    "manufacturer": "SPEEDOPH",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "3568198617": {
+    "hash": 3568198617,
+    "name": "seasparrow",
+    "displayName": "Sea Sparrow",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1229411063": {
+    "hash": 1229411063,
+    "name": "seasparrow2",
+    "displayName": "Sparrow",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1593933419": {
+    "hash": 1593933419,
+    "name": "seasparrow3",
+    "displayName": "Sparrow",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1221512915": {
+    "hash": 1221512915,
+    "name": "Seminole",
+    "displayName": "Seminole",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2484160806": {
+    "hash": 2484160806,
+    "name": "seminole2",
+    "displayName": "Seminole Frontier",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1349725314": {
+    "hash": 1349725314,
+    "name": "sentinel",
+    "displayName": "Sentinel XS",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "873639469": {
+    "hash": 873639469,
+    "name": "sentinel2",
+    "displayName": "Sentinel",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1104234922": {
+    "hash": 1104234922,
+    "name": "sentinel3",
+    "displayName": "Sentinel",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2938086457": {
+    "hash": 2938086457,
+    "name": "sentinel4",
+    "displayName": "Sentinel Classic Widebody",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2709293299": {
+    "hash": 2709293299,
+    "name": "sentinel5",
+    "displayName": "Sentinel GTS",
+    "manufacturer": "UBERMACHT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3936328504": {
+    "hash": 3936328504,
+    "name": "sentinel6",
+    "displayName": "Sentinel XS4",
+    "manufacturer": "Ubermacht",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1337041428": {
+    "hash": 1337041428,
+    "name": "serrano",
+    "displayName": "Serrano",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2537130571": {
+    "hash": 2537130571,
+    "name": "SEVEN70",
+    "displayName": "Seven-70",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3080461301": {
+    "hash": 3080461301,
+    "name": "Shamal",
+    "displayName": "Shamal",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "819197656": {
+    "hash": 819197656,
+    "name": "sheava",
+    "displayName": "ETR1",
+    "manufacturer": "EMPEROR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2611638396": {
+    "hash": 2611638396,
+    "name": "SHERIFF",
+    "displayName": "Sheriff Cruiser",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1922257928": {
+    "hash": 1922257928,
+    "name": "sheriff2",
+    "displayName": "Sheriff SUV",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1353120668": {
+    "hash": 1353120668,
+    "name": "shinobi",
+    "displayName": "Shinobi",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3889340782": {
+    "hash": 3889340782,
+    "name": "shotaro",
+    "displayName": "Shotaro",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1044954915": {
+    "hash": 1044954915,
+    "name": "skylift",
+    "displayName": "Skylift",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "3249056020": {
+    "hash": 3249056020,
+    "name": "slamtruck",
+    "displayName": "Slamtruck",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "729783779": {
+    "hash": 729783779,
+    "name": "slamvan",
+    "displayName": "Slamvan",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "833469436": {
+    "hash": 833469436,
+    "name": "slamvan2",
+    "displayName": "Lost Slamvan",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1119641113": {
+    "hash": 1119641113,
+    "name": "slamvan3",
+    "displayName": "Slamvan Custom",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2233918197": {
+    "hash": 2233918197,
+    "name": "slamvan4",
+    "displayName": "Apocalypse Slamvan",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "373261600": {
+    "hash": 373261600,
+    "name": "slamvan5",
+    "displayName": "Future Shock Slamvan",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1742022738": {
+    "hash": 1742022738,
+    "name": "slamvan6",
+    "displayName": "Nightmare Slamvan",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "775514032": {
+    "hash": 775514032,
+    "name": "sm722",
+    "displayName": "SM722",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "743478836": {
+    "hash": 743478836,
+    "name": "sovereign",
+    "displayName": "Sovereign",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1886268224": {
+    "hash": 1886268224,
+    "name": "SPECTER",
+    "displayName": "Specter",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1074745671": {
+    "hash": 1074745671,
+    "name": "SPECTER2",
+    "displayName": "Specter Custom",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "231083307": {
+    "hash": 231083307,
+    "name": "speeder",
+    "displayName": "Speeder",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "437538602": {
+    "hash": 437538602,
+    "name": "speeder2",
+    "displayName": "Speeder",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "3484649228": {
+    "hash": 3484649228,
+    "name": "speedo",
+    "displayName": "Speedo",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "728614474": {
+    "hash": 728614474,
+    "name": "speedo2",
+    "displayName": "Clown Van",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "219613597": {
+    "hash": 219613597,
+    "name": "speedo4",
+    "displayName": "Speedo Custom",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4250167832": {
+    "hash": 4250167832,
+    "name": "speedo5",
+    "displayName": "Speedo Custom",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4192631813": {
+    "hash": 4192631813,
+    "name": "squaddie",
+    "displayName": "Squaddie",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "400514754": {
+    "hash": 400514754,
+    "name": "squalo",
+    "displayName": "Squalo",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "321186144": {
+    "hash": 321186144,
+    "name": "stafford",
+    "displayName": "Stafford",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1923400478": {
+    "hash": 1923400478,
+    "name": "stalion",
+    "displayName": "Stallion",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3893323758": {
+    "hash": 3893323758,
+    "name": "stalion2",
+    "displayName": "Burger Shot Stallion",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2817386317": {
+    "hash": 2817386317,
+    "name": "stanier",
+    "displayName": "Stanier",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2594093022": {
+    "hash": 2594093022,
+    "name": "starling",
+    "displayName": "LF-22 Starling",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1545842587": {
+    "hash": 1545842587,
+    "name": "stinger",
+    "displayName": "Stinger",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2196019706": {
+    "hash": 2196019706,
+    "name": "stingergt",
+    "displayName": "Stinger GT",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1447690049": {
+    "hash": 1447690049,
+    "name": "stingertt",
+    "displayName": "Itali GTO Stinger TT",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1747439474": {
+    "hash": 1747439474,
+    "name": "stockade",
+    "displayName": "Stockade",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4080511798": {
+    "hash": 4080511798,
+    "name": "stockade3",
+    "displayName": "Stockade",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1089816240": {
+    "hash": 1089816240,
+    "name": "stockade4",
+    "displayName": "Bobcat Security Stockade",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1723137093": {
+    "hash": 1723137093,
+    "name": "stratum",
+    "displayName": "Stratum",
+    "manufacturer": "ZIRCONIU",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "191916658": {
+    "hash": 191916658,
+    "name": "streamer216",
+    "displayName": "Streamer216",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1741861769": {
+    "hash": 1741861769,
+    "name": "streiter",
+    "displayName": "Streiter",
+    "manufacturer": "BENEFACTOR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2333339779": {
+    "hash": 2333339779,
+    "name": "stretch",
+    "displayName": "Stretch",
+    "manufacturer": "DUNDREAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1692272545": {
+    "hash": 1692272545,
+    "name": "strikeforce",
+    "displayName": "B-11 Strikeforce",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "886810209": {
+    "hash": 886810209,
+    "name": "stromberg",
+    "displayName": "Stromberg",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "SUBMARINECAR"
+  },
+  "301304410": {
+    "hash": 301304410,
+    "name": "Stryder",
+    "displayName": "Stryder",
+    "manufacturer": "NAGASAKI",
+    "class": "Unknown",
+    "type": "QUADBIKE"
+  },
+  "2172210288": {
+    "hash": 2172210288,
+    "name": "Stunt",
+    "displayName": "Mallard",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "771711535": {
+    "hash": 771711535,
+    "name": "submersible",
+    "displayName": "Submersible",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "SUBMARINE"
+  },
+  "3228633070": {
+    "hash": 3228633070,
+    "name": "submersible2",
+    "displayName": "Kraken",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "SUBMARINE"
+  },
+  "987469656": {
+    "hash": 987469656,
+    "name": "Sugoi",
+    "displayName": "Sugoi",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "970598228": {
+    "hash": 970598228,
+    "name": "sultan",
+    "displayName": "Sultan",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "872704284": {
+    "hash": 872704284,
+    "name": "sultan2",
+    "displayName": "Sultan Classic",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4003946083": {
+    "hash": 4003946083,
+    "name": "sultan3",
+    "displayName": "Sultan RS Classic",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3999278268": {
+    "hash": 3999278268,
+    "name": "sultanrs",
+    "displayName": "Sultan RS",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4012021193": {
+    "hash": 4012021193,
+    "name": "Suntrap",
+    "displayName": "Suntrap",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "1123216662": {
+    "hash": 1123216662,
+    "name": "superd",
+    "displayName": "Super Diamond",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "710198397": {
+    "hash": 710198397,
+    "name": "supervolito",
+    "displayName": "SuperVolito",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "2623428164": {
+    "hash": 2623428164,
+    "name": "supervolito2",
+    "displayName": "SuperVolito Carbon",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "384071873": {
+    "hash": 384071873,
+    "name": "Surano",
+    "displayName": "Surano",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "699456151": {
+    "hash": 699456151,
+    "name": "SURFER",
+    "displayName": "Surfer",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2983726598": {
+    "hash": 2983726598,
+    "name": "Surfer2",
+    "displayName": "Surfer",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3259477733": {
+    "hash": 3259477733,
+    "name": "surfer3",
+    "displayName": "Surfer Custom",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2400073108": {
+    "hash": 2400073108,
+    "name": "surge",
+    "displayName": "Surge",
+    "manufacturer": "CHEVAL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "687627128": {
+    "hash": 687627128,
+    "name": "suzume",
+    "displayName": "Suzume",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3955379698": {
+    "hash": 3955379698,
+    "name": "swift",
+    "displayName": "Swift",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1075432268": {
+    "hash": 1075432268,
+    "name": "swift2",
+    "displayName": "Swift Deluxe",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "500482303": {
+    "hash": 500482303,
+    "name": "swinger",
+    "displayName": "Swinger",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1663218586": {
+    "hash": 1663218586,
+    "name": "t20",
+    "displayName": "T20",
+    "manufacturer": "PROGEN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1951180813": {
+    "hash": 1951180813,
+    "name": "Taco",
+    "displayName": "Taco Van",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3833117047": {
+    "hash": 3833117047,
+    "name": "tahoma",
+    "displayName": "Tahoma Coupe",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3286105550": {
+    "hash": 3286105550,
+    "name": "tailgater",
+    "displayName": "Tailgater",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3050505892": {
+    "hash": 3050505892,
+    "name": "tailgater2",
+    "displayName": "Tailgater S",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3160260734": {
+    "hash": 3160260734,
+    "name": "taipan",
+    "displayName": "Taipan",
+    "manufacturer": "CHEVAL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "972671128": {
+    "hash": 972671128,
+    "name": "tampa",
+    "displayName": "Tampa",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3223586949": {
+    "hash": 3223586949,
+    "name": "tampa2",
+    "displayName": "Drift Tampa",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3084515313": {
+    "hash": 3084515313,
+    "name": "tampa3",
+    "displayName": "Weaponized Tampa",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2786546796": {
+    "hash": 2786546796,
+    "name": "tampa4",
+    "displayName": "Tampa GT",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3564062519": {
+    "hash": 3564062519,
+    "name": "tanker",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1956216962": {
+    "hash": 1956216962,
+    "name": "tanker2",
+    "displayName": "tanker2",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "586013744": {
+    "hash": 586013744,
+    "name": "tankercar",
+    "displayName": "Freight Train",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAIN"
+  },
+  "3338918751": {
+    "hash": 3338918751,
+    "name": "taxi",
+    "displayName": "Taxi",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2198148358": {
+    "hash": 2198148358,
+    "name": "technical",
+    "displayName": "Technical",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1180875963": {
+    "hash": 1180875963,
+    "name": "technical2",
+    "displayName": "Technical Aqua",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "AMPHIBIOUS_AUTOMOBILE"
+  },
+  "1356124575": {
+    "hash": 1356124575,
+    "name": "technical3",
+    "displayName": "Technical Custom",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "272929391": {
+    "hash": 272929391,
+    "name": "tempesta",
+    "displayName": "Tempesta",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3400983137": {
+    "hash": 3400983137,
+    "name": "tenf",
+    "displayName": "10F",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "274946574": {
+    "hash": 274946574,
+    "name": "tenf2",
+    "displayName": "10F Widebody",
+    "manufacturer": "OBEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2306538597": {
+    "hash": 2306538597,
+    "name": "terbyte",
+    "displayName": "Terrorbyte",
+    "manufacturer": "BENEFACTOR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "167522317": {
+    "hash": 167522317,
+    "name": "terminus",
+    "displayName": "Terminus",
+    "manufacturer": "CANIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1031562256": {
+    "hash": 1031562256,
+    "name": "tezeract",
+    "displayName": "Tezeract",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1044193113": {
+    "hash": 1044193113,
+    "name": "thrax",
+    "displayName": "Thrax",
+    "manufacturer": "TRUFFADE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1836027715": {
+    "hash": 1836027715,
+    "name": "thrust",
+    "displayName": "Thrust",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1489874736": {
+    "hash": 1489874736,
+    "name": "thruster",
+    "displayName": "Thruster",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "2936769864": {
+    "hash": 2936769864,
+    "name": "tigon",
+    "displayName": "Tigon",
+    "manufacturer": "LAMPADATI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "48339065": {
+    "hash": 48339065,
+    "name": "TipTruck",
+    "displayName": "Tipper",
+    "manufacturer": "BRUTE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3347205726": {
+    "hash": 3347205726,
+    "name": "TipTruck2",
+    "displayName": "Tipper",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1981688531": {
+    "hash": 1981688531,
+    "name": "titan",
+    "displayName": "Titan",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "858355070": {
+    "hash": 858355070,
+    "name": "titan2",
+    "displayName": "Titan 250 D",
+    "manufacturer": "EBERHARD",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1455990255": {
+    "hash": 1455990255,
+    "name": "toreador",
+    "displayName": "Toreador",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "SUBMARINECAR"
+  },
+  "1504306544": {
+    "hash": 1504306544,
+    "name": "torero",
+    "displayName": "Torero",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4129572538": {
+    "hash": 4129572538,
+    "name": "torero2",
+    "displayName": "Torero XO",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "464687292": {
+    "hash": 464687292,
+    "name": "tornado",
+    "displayName": "Tornado",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1531094468": {
+    "hash": 1531094468,
+    "name": "tornado2",
+    "displayName": "Tornado",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1762279763": {
+    "hash": 1762279763,
+    "name": "tornado3",
+    "displayName": "Tornado",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2261744861": {
+    "hash": 2261744861,
+    "name": "tornado4",
+    "displayName": "Tornado",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2497353967": {
+    "hash": 2497353967,
+    "name": "tornado5",
+    "displayName": "Tornado Custom",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2736567667": {
+    "hash": 2736567667,
+    "name": "tornado6",
+    "displayName": "Tornado Rat Rod",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1070967343": {
+    "hash": 1070967343,
+    "name": "toro",
+    "displayName": "Toro",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "908897389": {
+    "hash": 908897389,
+    "name": "toro2",
+    "displayName": "Toro",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "3126015148": {
+    "hash": 3126015148,
+    "name": "toros",
+    "displayName": "Toros",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1941029835": {
+    "hash": 1941029835,
+    "name": "TOURBUS",
+    "displayName": "Tour Bus",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2971866336": {
+    "hash": 2971866336,
+    "name": "TOWTRUCK",
+    "displayName": "Tow Truck",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3852654278": {
+    "hash": 3852654278,
+    "name": "Towtruck2",
+    "displayName": "Tow Truck",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3623402354": {
+    "hash": 3623402354,
+    "name": "towtruck3",
+    "displayName": "Tow Truck",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3392937977": {
+    "hash": 3392937977,
+    "name": "towtruck4",
+    "displayName": "Tow Truck",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2078290630": {
+    "hash": 2078290630,
+    "name": "tr2",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1784254509": {
+    "hash": 1784254509,
+    "name": "tr3",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2091594960": {
+    "hash": 2091594960,
+    "name": "tr4",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1641462412": {
+    "hash": 1641462412,
+    "name": "TRACTOR",
+    "displayName": "Tractor",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2218488798": {
+    "hash": 2218488798,
+    "name": "tractor2",
+    "displayName": "Fieldmaster",
+    "manufacturer": "STANLEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1445631933": {
+    "hash": 1445631933,
+    "name": "tractor3",
+    "displayName": "Fieldmaster",
+    "manufacturer": "STANLEY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1502869817": {
+    "hash": 1502869817,
+    "name": "trailerlarge",
+    "displayName": "Mobile Operations Center",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2016027501": {
+    "hash": 2016027501,
+    "name": "trailerlogs",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "3417488910": {
+    "hash": 3417488910,
+    "name": "trailers",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2715434129": {
+    "hash": 2715434129,
+    "name": "trailers2",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2236089197": {
+    "hash": 2236089197,
+    "name": "trailers3",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "3194418602": {
+    "hash": 3194418602,
+    "name": "trailers4",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2960513480": {
+    "hash": 2960513480,
+    "name": "trailers5",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "712162987": {
+    "hash": 712162987,
+    "name": "trailersmall",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "2413121211": {
+    "hash": 2413121211,
+    "name": "trailersmall2",
+    "displayName": "Anti-Aircraft Trailer",
+    "manufacturer": "VOMFEUER",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1917016601": {
+    "hash": 1917016601,
+    "name": "Trash",
+    "displayName": "Trashmaster",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3039269212": {
+    "hash": 3039269212,
+    "name": "trash2",
+    "displayName": "Trashmaster",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2942498482": {
+    "hash": 2942498482,
+    "name": "trflat",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "1127861609": {
+    "hash": 1127861609,
+    "name": "tribike",
+    "displayName": "Whippet Race Bike",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "3061159916": {
+    "hash": 3061159916,
+    "name": "tribike2",
+    "displayName": "Endurex Race Bike",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "3894672200": {
+    "hash": 3894672200,
+    "name": "tribike3",
+    "displayName": "Tri-Cycles Race Bike",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BICYCLE"
+  },
+  "101905590": {
+    "hash": 101905590,
+    "name": "trophytruck",
+    "displayName": "Trophy Truck",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3631668194": {
+    "hash": 3631668194,
+    "name": "trophytruck2",
+    "displayName": "Desert Raid",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "290013743": {
+    "hash": 290013743,
+    "name": "tropic",
+    "displayName": "Tropic",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "1448677353": {
+    "hash": 1448677353,
+    "name": "tropic2",
+    "displayName": "Tropic",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "1887331236": {
+    "hash": 1887331236,
+    "name": "tropos",
+    "displayName": "Tropos Rallye",
+    "manufacturer": "LAMPADA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2194326579": {
+    "hash": 2194326579,
+    "name": "tug",
+    "displayName": "Tug",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "BOAT"
+  },
+  "1043222410": {
+    "hash": 1043222410,
+    "name": "tula",
+    "displayName": "Tula",
+    "manufacturer": "MAMMOTH",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1456744817": {
+    "hash": 1456744817,
+    "name": "tulip",
+    "displayName": "Tulip",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "268758436": {
+    "hash": 268758436,
+    "name": "tulip2",
+    "displayName": "Tulip M-100",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3312836369": {
+    "hash": 3312836369,
+    "name": "turismo2",
+    "displayName": "Turismo Classic",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4171974011": {
+    "hash": 4171974011,
+    "name": "turismo3",
+    "displayName": "Turismo Omaggio",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "408192225": {
+    "hash": 408192225,
+    "name": "turismor",
+    "displayName": "Turismo R",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2524324030": {
+    "hash": 2524324030,
+    "name": "tvtrailer",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "471034616": {
+    "hash": 471034616,
+    "name": "tvtrailer2",
+    "displayName": "Trailer",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "TRAILER"
+  },
+  "3918533058": {
+    "hash": 3918533058,
+    "name": "tyrant",
+    "displayName": "Tyrant",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2067820283": {
+    "hash": 2067820283,
+    "name": "tyrus",
+    "displayName": "Tyrus",
+    "manufacturer": "PROGEN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1534326199": {
+    "hash": 1534326199,
+    "name": "uranus",
+    "displayName": "Uranus LozSpeed",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "516990260": {
+    "hash": 516990260,
+    "name": "utillitruck",
+    "displayName": "Utility Truck",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "887537515": {
+    "hash": 887537515,
+    "name": "utillitruck2",
+    "displayName": "Utility Truck",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2132890591": {
+    "hash": 2132890591,
+    "name": "Utillitruck3",
+    "displayName": "Utility Truck",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "338562499": {
+    "hash": 338562499,
+    "name": "vacca",
+    "displayName": "Vacca",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4154065143": {
+    "hash": 4154065143,
+    "name": "Vader",
+    "displayName": "Vader",
+    "manufacturer": "SHITZU",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1939284556": {
+    "hash": 1939284556,
+    "name": "vagner",
+    "displayName": "Vagner",
+    "manufacturer": "DEWBAUCH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "740289177": {
+    "hash": 740289177,
+    "name": "vagrant",
+    "displayName": "Vagrant",
+    "manufacturer": "MAXWELL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2694714877": {
+    "hash": 2694714877,
+    "name": "valkyrie",
+    "displayName": "Valkyrie",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "1543134283": {
+    "hash": 1543134283,
+    "name": "valkyrie2",
+    "displayName": "Valkyrie MOD.0",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "4245851645": {
+    "hash": 4245851645,
+    "name": "vamos",
+    "displayName": "Vamos",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2754593701": {
+    "hash": 2754593701,
+    "name": "vectre",
+    "displayName": "Vectre",
+    "manufacturer": "EMPEROR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2621610858": {
+    "hash": 2621610858,
+    "name": "velum",
+    "displayName": "Velum",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1077420264": {
+    "hash": 1077420264,
+    "name": "velum2",
+    "displayName": "Velum 5-Seater",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "1102544804": {
+    "hash": 1102544804,
+    "name": "verlierer2",
+    "displayName": "Verlierer",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "298565713": {
+    "hash": 298565713,
+    "name": "verus",
+    "displayName": "Verus",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "QUADBIKE"
+  },
+  "1341619767": {
+    "hash": 1341619767,
+    "name": "vestra",
+    "displayName": "Vestra",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "2014313426": {
+    "hash": 2014313426,
+    "name": "vetir",
+    "displayName": "Vetir",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3437611258": {
+    "hash": 3437611258,
+    "name": "veto",
+    "displayName": "Veto Classic",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2802050217": {
+    "hash": 2802050217,
+    "name": "veto2",
+    "displayName": "Veto Modern",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3469130167": {
+    "hash": 3469130167,
+    "name": "vigero",
+    "displayName": "Vigero",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2536587772": {
+    "hash": 2536587772,
+    "name": "vigero2",
+    "displayName": "Vigero ZX",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "372621319": {
+    "hash": 372621319,
+    "name": "vigero3",
+    "displayName": "Vigero ZX Convertible",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3052358707": {
+    "hash": 3052358707,
+    "name": "vigilante",
+    "displayName": "Vigilante",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2941886209": {
+    "hash": 2941886209,
+    "name": "vindicator",
+    "displayName": "Vindicator",
+    "manufacturer": "DINKA",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3796912450": {
+    "hash": 3796912450,
+    "name": "virgo",
+    "displayName": "Virgo",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3395457658": {
+    "hash": 3395457658,
+    "name": "virgo2",
+    "displayName": "Virgo Classic Custom",
+    "manufacturer": "DUNDREAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "16646064": {
+    "hash": 16646064,
+    "name": "virgo3",
+    "displayName": "Virgo Classic",
+    "manufacturer": "DUNDREAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "669204833": {
+    "hash": 669204833,
+    "name": "virtue",
+    "displayName": "Virtue",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3903371924": {
+    "hash": 3903371924,
+    "name": "viseris",
+    "displayName": "Viseris",
+    "manufacturer": "LAMPADATI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3296789504": {
+    "hash": 3296789504,
+    "name": "visione",
+    "displayName": "Visione",
+    "manufacturer": "GROTTI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2922168362": {
+    "hash": 2922168362,
+    "name": "vivanite",
+    "displayName": "Vivanite",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "507621923": {
+    "hash": 507621923,
+    "name": "vivanite2",
+    "displayName": "Vivanite",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "447548909": {
+    "hash": 447548909,
+    "name": "volatol",
+    "displayName": "Volatol",
+    "manufacturer": "Unknown",
+    "class": "Unknown",
+    "type": "PLANE"
+  },
+  "2449479409": {
+    "hash": 2449479409,
+    "name": "volatus",
+    "displayName": "Volatus",
+    "manufacturer": "BUCKING",
+    "class": "Unknown",
+    "type": "HELI"
+  },
+  "2672523198": {
+    "hash": 2672523198,
+    "name": "voltic",
+    "displayName": "Voltic",
+    "manufacturer": "COIL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "989294410": {
+    "hash": 989294410,
+    "name": "voltic2",
+    "displayName": "Rocket Voltic",
+    "manufacturer": "COIL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2006667053": {
+    "hash": 2006667053,
+    "name": "voodoo",
+    "displayName": "Voodoo Custom",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "523724515": {
+    "hash": 523724515,
+    "name": "voodoo2",
+    "displayName": "Voodoo",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3054795149": {
+    "hash": 3054795149,
+    "name": "vorschlaghammer",
+    "displayName": "Vorschlaghammer",
+    "manufacturer": "BENEFACTOR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3685342204": {
+    "hash": 3685342204,
+    "name": "vortex",
+    "displayName": "Vortex",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1456336509": {
+    "hash": 1456336509,
+    "name": "vstr",
+    "displayName": "V-STR",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1373123368": {
+    "hash": 1373123368,
+    "name": "warrener",
+    "displayName": "Warrener",
+    "manufacturer": "VULCAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "579912970": {
+    "hash": 579912970,
+    "name": "warrener2",
+    "displayName": "Warrener HKR",
+    "manufacturer": "VULCAR",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1777363799": {
+    "hash": 1777363799,
+    "name": "washington",
+    "displayName": "Washington",
+    "manufacturer": "ALBANY",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2382949506": {
+    "hash": 2382949506,
+    "name": "wastelander",
+    "displayName": "Wastelander",
+    "manufacturer": "MTL",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1644055914": {
+    "hash": 1644055914,
+    "name": "weevil",
+    "displayName": "Weevil",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3300595976": {
+    "hash": 3300595976,
+    "name": "weevil2",
+    "displayName": "Weevil Custom",
+    "manufacturer": "BF",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1581459400": {
+    "hash": 1581459400,
+    "name": "windsor",
+    "displayName": "Windsor",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2364918497": {
+    "hash": 2364918497,
+    "name": "windsor2",
+    "displayName": "Windsor Drop",
+    "manufacturer": "ENUS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "4084658662": {
+    "hash": 4084658662,
+    "name": "winky",
+    "displayName": "Winky",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3676349299": {
+    "hash": 3676349299,
+    "name": "wolfsbane",
+    "displayName": "Wolfsbane",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "1966698497": {
+    "hash": 1966698497,
+    "name": "woodlander",
+    "displayName": "Woodlander",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "917809321": {
+    "hash": 917809321,
+    "name": "xa21",
+    "displayName": "XA-21",
+    "manufacturer": "OCELOT",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1203490606": {
+    "hash": 1203490606,
+    "name": "xls",
+    "displayName": "XLS",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3862958888": {
+    "hash": 3862958888,
+    "name": "xls2",
+    "displayName": "XLS (Armored)",
+    "manufacturer": "BENEFAC",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2515968713": {
+    "hash": 2515968713,
+    "name": "xtreme",
+    "displayName": "X-treme",
+    "manufacturer": "PFISTER",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1871995513": {
+    "hash": 1871995513,
+    "name": "yosemite",
+    "displayName": "Yosemite",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2398479240": {
+    "hash": 2398479240,
+    "name": "yosemite1500",
+    "displayName": "Yosemite 1500",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1693751655": {
+    "hash": 1693751655,
+    "name": "yosemite2",
+    "displayName": "Drift Yosemite",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "67753863": {
+    "hash": 67753863,
+    "name": "yosemite3",
+    "displayName": "Yosemite Rancher",
+    "manufacturer": "DECLASSE",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "65402552": {
+    "hash": 65402552,
+    "name": "youga",
+    "displayName": "Youga",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1026149675": {
+    "hash": 1026149675,
+    "name": "youga2",
+    "displayName": "Youga Classic",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1802742206": {
+    "hash": 1802742206,
+    "name": "youga3",
+    "displayName": "Youga Classic 4x4",
+    "manufacturer": "BRAVADO",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1486521356": {
+    "hash": 1486521356,
+    "name": "youga4",
+    "displayName": "Youga Custom",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2266063097": {
+    "hash": 2266063097,
+    "name": "youga5",
+    "displayName": "Youga Custom",
+    "manufacturer": "VAPID",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "838982985": {
+    "hash": 838982985,
+    "name": "z190",
+    "displayName": "190z",
+    "manufacturer": "KARIN",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "655665811": {
+    "hash": 655665811,
+    "name": "zeno",
+    "displayName": "Zeno",
+    "manufacturer": "OVERFLOD",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2891838741": {
+    "hash": 2891838741,
+    "name": "zentorno",
+    "displayName": "Zentorno",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1284356689": {
+    "hash": 1284356689,
+    "name": "zhaba",
+    "displayName": "Zhaba",
+    "manufacturer": "RUNE",
+    "class": "Unknown",
+    "type": "AMPHIBIOUS_AUTOMOBILE"
+  },
+  "3172678083": {
+    "hash": 3172678083,
+    "name": "zion",
+    "displayName": "Zion",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3101863448": {
+    "hash": 3101863448,
+    "name": "zion2",
+    "displayName": "Zion Cabrio",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "1862507111": {
+    "hash": 1862507111,
+    "name": "zion3",
+    "displayName": "Zion Classic",
+    "manufacturer": "UBERMACH",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3285698347": {
+    "hash": 3285698347,
+    "name": "zombiea",
+    "displayName": "Zombie Bobber",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3724934023": {
+    "hash": 3724934023,
+    "name": "zombieb",
+    "displayName": "Zombie Chopper",
+    "manufacturer": "WESTERN",
+    "class": "Unknown",
+    "type": "BIKE"
+  },
+  "3612858749": {
+    "hash": 3612858749,
+    "name": "zorrusso",
+    "displayName": "Zorrusso",
+    "manufacturer": "PEGASSI",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2436313176": {
+    "hash": 2436313176,
+    "name": "zr350",
+    "displayName": "ZR350",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "540101442": {
+    "hash": 540101442,
+    "name": "zr380",
+    "displayName": "Apocalypse ZR380",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "3188846534": {
+    "hash": 3188846534,
+    "name": "zr3802",
+    "displayName": "Future Shock ZR380",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "2816263004": {
+    "hash": 2816263004,
+    "name": "zr3803",
+    "displayName": "Nightmare ZR380",
+    "manufacturer": "ANNIS",
+    "class": "Unknown",
+    "type": "CAR"
+  },
+  "758895617": {
+    "hash": 758895617,
+    "name": "Ztype",
+    "displayName": "Z-Type",
+    "manufacturer": "TRUFFADE",
+    "class": "Unknown",
+    "type": "CAR"
+  }
+}

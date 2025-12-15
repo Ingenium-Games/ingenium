@@ -24,6 +24,32 @@ export async function sendNuiMessage(callback, data = {}) {
 }
 
 /**
+ * Call a client callback and wait for response
+ */
+export async function callClientCallback(callback, ...args) {
+  try {
+    const resourceName = await GetParentResourceName()
+    const response = await fetch(`https://${resourceName}/${callback}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(args)
+    })
+    
+    if (response.ok) {
+      return await response.json()
+    }
+    return null
+  } catch (error) {
+    if (!import.meta.env.DEV) {
+      console.error('Failed to call client callback:', error)
+    }
+    return null
+  }
+}
+
+/**
  * Get the parent resource name (for NUI callbacks)
  */
 function GetParentResourceName() {
