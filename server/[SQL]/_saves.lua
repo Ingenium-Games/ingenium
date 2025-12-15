@@ -16,71 +16,77 @@ MySQL.Async.store(
 ---@param data table "xPlayer table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.User(data, cb)
-    if data then
+    if not data or not data.GetIsDirty() then 
+        if cb then cb() end
+        return 
+    end
+    
+    -- Other Variables.
+    local Health = data.GetHealth()
+    local Armour = data.GetArmour()
+    local Hunger = data.GetHunger()
+    local Thirst = data.GetThirst()
+    local Stress = data.GetStress()
+    -- Tables require JSON Encoding - Use cached versions
+    local Skills = data.GetEncodedSkills()
+    local Coords = data.GetEncodedCoords()
+    local Accounts = data.GetEncodedAccounts()
+    local Modifiers = data.GetEncodedModifiers()
+    local Inventory = data.GetEncodedInventory()
+    local Ammo = data.GetEncodedAmmo()
+    local Job = data.GetEncodedJob()
+    -- 
+    local Character_ID = data.GetCharacter_ID()
+    MySQL.Async.insert(PlayerSaveData, {
         -- Other Variables.
-        local Health = data.GetHealth()
-        local Armour = data.GetArmour()
-        local Hunger = data.GetHunger()
-        local Thirst = data.GetThirst()
-        local Stress = data.GetStress()
-        -- Tables require JSON Encoding.
-        local Skills = json.encode(data.GetSkills())
-        local Coords = json.encode(data.GetCoords())
-        local Accounts = json.encode(data.GetAccounts())
-        local Modifiers = json.encode(data.GetModifiers())
-        local Inventory = json.encode(data.CompressInventory())
-        local Ammo = json.encode(data.GetAmmos())
-        local Job = json.encode(data.GetJob())
-        -- 
-        local Character_ID = data.GetCharacter_ID()
-        MySQL.Async.insert(PlayerSaveData, {
-            -- Other Variables.
-            ["@Health"] = Health,
-            ["@Armour"] = Armour,
-            ["@Hunger"] = Hunger,
-            ["@Thirst"] = Thirst,
-            ["@Stress"] = Stress,
-            -- Table Informaiton.
-            ["@Skills"] = Skills,
-            ["@Coords"] = Coords,
-            ["@Accounts"] = Accounts,
-            ["@Modifiers"] = Modifiers,
-            ["@Inventory"] = Inventory,
-            ["@Ammo"] = Ammo,
+        ["@Health"] = Health,
+        ["@Armour"] = Armour,
+        ["@Hunger"] = Hunger,
+        ["@Thirst"] = Thirst,
+        ["@Stress"] = Stress,
+        -- Table Informaiton.
+        ["@Skills"] = Skills,
+        ["@Coords"] = Coords,
+        ["@Accounts"] = Accounts,
+        ["@Modifiers"] = Modifiers,
+        ["@Inventory"] = Inventory,
+        ["@Ammo"] = Ammo,
 
-            ["@Job"] = Job,
-            -- Where Conditions
-            ["@Character_ID"] = Character_ID
-        }, function(r)
-            -- do
-        end)
-        if cb then
-            cb()
-        end
+        ["@Job"] = Job,
+        -- Where Conditions
+        ["@Character_ID"] = Character_ID
+    }, function(r)
+        data.ClearDirty()
+    end)
+    if cb then
+        cb()
     end
 end
 
 --- Save All Characters from the xPLayer Table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Users(cb)
+    local startTime = os.clock()
+    local saveCount = 0
     local xPlayers = c.data.GetPlayers()
     for k, v in pairs(xPlayers) do
         local data = c.data.GetPlayer(k)
-        if data then
+        if data and data.GetIsDirty() then
+            saveCount = saveCount + 1
             -- Other Variables.
             local Health = data.GetHealth()
             local Armour = data.GetArmour()
             local Hunger = data.GetHunger()
             local Thirst = data.GetThirst()
             local Stress = data.GetStress()
-            -- Tables require JSON Encoding.
-            local Skills = json.encode(data.GetSkills())
-            local Coords = json.encode(data.GetCoords())
-            local Accounts = json.encode(data.GetAccounts())
-            local Modifiers = json.encode(data.GetModifiers())
-            local Inventory = json.encode(data.CompressInventory())
-            local Ammo = json.encode(data.GetAmmos())
-            local Job = json.encode(data.GetJob())
+            -- Tables require JSON Encoding - Use cached versions
+            local Skills = data.GetEncodedSkills()
+            local Coords = data.GetEncodedCoords()
+            local Accounts = data.GetEncodedAccounts()
+            local Modifiers = data.GetEncodedModifiers()
+            local Inventory = data.GetEncodedInventory()
+            local Ammo = data.GetEncodedAmmo()
+            local Job = data.GetEncodedJob()
             -- 
             local Character_ID = data.GetCharacter_ID()
             MySQL.Async.insert(PlayerSaveData, {
@@ -102,10 +108,12 @@ function c.sql.save.Users(cb)
                 -- Where Conditions
                 ["@Character_ID"] = Character_ID
             }, function(r)
-                -- Do nothing.
+                data.ClearDirty()
             end)
         end
     end
+    local elapsed = (os.clock() - startTime) * 1000
+    print(string.format("^2[SQL] Saved %d players in %.2fms^7", saveCount, elapsed))
     if cb then
         cb()
     end

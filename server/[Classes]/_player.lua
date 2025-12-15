@@ -157,6 +157,18 @@ function c.class.Player(source, character_id)
     self.Skills = json.decode(char.Skills)
     self.State.Skills = self.Skills
     --
+    -- Dirty Flag System for Database Optimization
+    self.IsDirty = false
+    self.DirtyFields = {}
+    --
+    -- Cached JSON Encoding for Performance
+    self.EncodedInventory = nil
+    self.EncodedAccounts = nil
+    self.EncodedModifiers = nil
+    self.EncodedSkills = nil
+    self.EncodedAmmo = nil
+    self.EncodedJob = nil
+    --
     ExecuteCommand(("remove_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     ExecuteCommand(("add_principal identifier.%s group.%s"):format(self.License_ID, self.Ace))
     --
@@ -268,8 +280,12 @@ function c.class.Player(source, character_id)
     --
     self.SetHealth = function(v)
         local n = c.check.Number(v, 0, conf.defaulthealth)
-        self.Health = n
-        self.State.Health = self.Health
+        if self.Health ~= n then
+            self.Health = n
+            self.State.Health = self.Health
+            self.IsDirty = true
+            self.DirtyFields.Health = true
+        end
     end
     --
     self.GetArmour = function()
@@ -278,8 +294,12 @@ function c.class.Player(source, character_id)
     --
     self.SetArmour = function(v)
         local n = c.check.Number(v, 0, conf.defaultarmour)
-        self.Armour = n
-        self.State.Armour = self.Armour
+        if self.Armour ~= n then
+            self.Armour = n
+            self.State.Armour = self.Armour
+            self.IsDirty = true
+            self.DirtyFields.Armour = true
+        end
     end
     --
     self.GetHunger = function()
@@ -288,8 +308,12 @@ function c.class.Player(source, character_id)
     --
     self.SetHunger = function(v)
         local n = c.check.Number(v, 0, 100)
-        self.Hunger = n
-        self.State.Hunger = self.Hunger
+        if self.Hunger ~= n then
+            self.Hunger = n
+            self.State.Hunger = self.Hunger
+            self.IsDirty = true
+            self.DirtyFields.Hunger = true
+        end
     end
     --
     self.GetThirst = function()
@@ -298,8 +322,12 @@ function c.class.Player(source, character_id)
     --
     self.SetThirst = function(v)
         local n = c.check.Number(v, 0, 100)
-        self.Thirst = n
-        self.State.Thirst = self.Thirst
+        if self.Thirst ~= n then
+            self.Thirst = n
+            self.State.Thirst = self.Thirst
+            self.IsDirty = true
+            self.DirtyFields.Thirst = true
+        end
     end
     --
     self.GetStress = function()
@@ -308,8 +336,12 @@ function c.class.Player(source, character_id)
     --
     self.SetStress = function(v)
         local n = c.check.Number(v, 0, 100)
-        self.Stress = n
-        self.State.Stress = self.Stress
+        if self.Stress ~= n then
+            self.Stress = n
+            self.State.Stress = self.Stress
+            self.IsDirty = true
+            self.DirtyFields.Stress = true
+        end
     end
     --
     self.GetOldModifiers = function()
@@ -325,6 +357,9 @@ function c.class.Player(source, character_id)
         self.OldModifiers = self.Modifiers
         self.Modifiers = tab
         self.State.Modifiers = self.Modifiers
+        self.IsDirty = true
+        self.DirtyFields.Modifiers = true
+        self.EncodedModifiers = nil
     end
     --
     self.GetLicenses = function()
@@ -375,11 +410,19 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v, 0, 255)
         num = c.math.Decimals(num, 0)
         if self.Skills[skill] then
-            self.Skills[skill] = num
-            self.State.Skills = self.Skills
+            if self.Skills[skill] ~= num then
+                self.Skills[skill] = num
+                self.State.Skills = self.Skills
+                self.IsDirty = true
+                self.DirtyFields.Skills = true
+                self.EncodedSkills = nil
+            end
         else
             self.Skills[skill] = num
             self.State.Skills = self.Skills
+            self.IsDirty = true
+            self.DirtyFields.Skills = true
+            self.EncodedSkills = nil
             c.func.Debug_1("Skill did not exist, adding in now.")
         end
     end
@@ -390,9 +433,15 @@ function c.class.Player(source, character_id)
         if self.Skills[skill] then
             self.Skills[skill] = self.Skills[skill] + num
             self.State.Skills = self.Skills
+            self.IsDirty = true
+            self.DirtyFields.Skills = true
+            self.EncodedSkills = nil
         else
             self.Skills[skill] = 0 + num
             self.State.Skills = self.Skills
+            self.IsDirty = true
+            self.DirtyFields.Skills = true
+            self.EncodedSkills = nil
             c.func.Debug_1("Skill did not exist on character, adding in now.")
         end
     end
@@ -422,7 +471,12 @@ function c.class.Player(source, character_id)
         local num = c.check.Number(v)
         num = c.math.Decimals(num, 2)
         if self.Accounts[acc] then
-            self.Accounts[acc] = num
+            if self.Accounts[acc] ~= num then
+                self.Accounts[acc] = num
+                self.IsDirty = true
+                self.DirtyFields.Accounts = true
+                self.EncodedAccounts = nil
+            end
         else
             c.func.Debug_1("Account entered does not exist")
         end
@@ -777,8 +831,13 @@ function c.class.Player(source, character_id)
                     self.ID)
             CancelEvent()
         end
-        self.Ammo[type] = num
-        self.State.Ammo = self.Ammo
+        if self.Ammo[type] ~= num then
+            self.Ammo[type] = num
+            self.State.Ammo = self.Ammo
+            self.IsDirty = true
+            self.DirtyFields.Ammo = true
+            self.EncodedAmmo = nil
+        end
     end
     --
     self.AddAmmo = function(type, v)
@@ -795,6 +854,9 @@ function c.class.Player(source, character_id)
             CancelEvent()
         end
         self.State.Ammo = self.Ammo
+        self.IsDirty = true
+        self.DirtyFields.Ammo = true
+        self.EncodedAmmo = nil
     end
     --
     self.RemoveAmmo = function(type, v)
@@ -811,6 +873,9 @@ function c.class.Player(source, character_id)
             CancelEvent()
         end
         self.State.Ammo = self.Ammo
+        self.IsDirty = true
+        self.DirtyFields.Ammo = true
+        self.EncodedAmmo = nil
     end
     --- func desc
     self.GetJob = function()
@@ -821,14 +886,19 @@ function c.class.Player(source, character_id)
     ---@param t any
     self.SetJob = function(Name, Grade)
         if c.job.Exist(Name, Grade) then
-            self.Job.Name = Name
-            self.Job.Grade = Grade
-            self.State.Job = self.Job.Name
-            self.State.Grade = self.Job.Grade
-            self.State.Boss = c.job.IsBoss(self.Job.Name, self.Job.Grade)
-            --
-            TriggerEvent("Server:Character:SetJob", self.ID, self.Job)
-            TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job.Name, self.Job.Grade)
+            if self.Job.Name ~= Name or self.Job.Grade ~= Grade then
+                self.Job.Name = Name
+                self.Job.Grade = Grade
+                self.State.Job = self.Job.Name
+                self.State.Grade = self.Job.Grade
+                self.State.Boss = c.job.IsBoss(self.Job.Name, self.Job.Grade)
+                self.IsDirty = true
+                self.DirtyFields.Job = true
+                self.EncodedJob = nil
+                --
+                TriggerEvent("Server:Character:SetJob", self.ID, self.Job)
+                TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job.Name, self.Job.Grade)
+            end
         else
             c.func.Debug_1("Ignoring invalid .SetJob() :" .. Name .. ", " .. Grade .. " for " .. self.ID)
             print(c.table.Dump(c.jobs))
@@ -877,12 +947,19 @@ function c.class.Player(source, character_id)
     ---@param t any
     self.SetCoords = function(t)
         self.OldCoords = self.GetCoords()
-        self.Coords = {
+        local newCoords = {
             x = c.math.Decimals(t.x, 2),
             y = c.math.Decimals(t.y, 2),
             z = c.math.Decimals(t.z, 2),
             h = c.math.Decimals(t.h, 2)
         }
+        -- Check if coords actually changed
+        if self.Coords.x ~= newCoords.x or self.Coords.y ~= newCoords.y or 
+           self.Coords.z ~= newCoords.z or self.Coords.h ~= newCoords.h then
+            self.Coords = newCoords
+            self.IsDirty = true
+            self.DirtyFields.Coords = true
+        end
         SetEntityCoords(self.Entity, self.Coords.x, self.Coords.y, self.Coords.z)
         SetEntityHeading(self.Entity, self.Coords.h)
     end
@@ -1027,6 +1104,9 @@ function c.class.Player(source, character_id)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
+            self.IsDirty = true
+            self.DirtyFields.Inventory = true
+            self.EncodedInventory = nil
             TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
@@ -1098,6 +1178,9 @@ function c.class.Player(source, character_id)
         else
             table.remove(self.Inventory, position)
         end
+        self.IsDirty = true
+        self.DirtyFields.Inventory = true
+        self.EncodedInventory = nil
         TriggerClientEvent("Client:Inventory:Update", self.ID)
     end
     --- func desc
@@ -1130,6 +1213,79 @@ function c.class.Player(source, character_id)
                 self.AddItem({item, quanitity, 100})
             end
         end
+    end
+    --
+    -- ====================================================================================--
+    -- Dirty Flag Helper Methods
+    -- ====================================================================================--
+    self.GetIsDirty = function()
+        return self.IsDirty
+    end
+    --
+    self.ClearDirty = function()
+        self.IsDirty = false
+        self.DirtyFields = {}
+    end
+    --
+    self.MarkDirty = function(fieldName)
+        self.IsDirty = true
+        self.DirtyFields[fieldName] = true
+    end
+    --
+    -- ====================================================================================--
+    -- Cached JSON Encoding Methods
+    -- ====================================================================================--
+    self.GetEncodedInventory = function()
+        if not self.EncodedInventory or self.DirtyFields.Inventory then
+            self.EncodedInventory = json.encode(self.CompressInventory())
+            self.DirtyFields.Inventory = false
+        end
+        return self.EncodedInventory
+    end
+    --
+    self.GetEncodedAccounts = function()
+        if not self.EncodedAccounts or self.DirtyFields.Accounts then
+            self.EncodedAccounts = json.encode(self.GetAccounts())
+            self.DirtyFields.Accounts = false
+        end
+        return self.EncodedAccounts
+    end
+    --
+    self.GetEncodedModifiers = function()
+        if not self.EncodedModifiers or self.DirtyFields.Modifiers then
+            self.EncodedModifiers = json.encode(self.GetModifiers())
+            self.DirtyFields.Modifiers = false
+        end
+        return self.EncodedModifiers
+    end
+    --
+    self.GetEncodedSkills = function()
+        if not self.EncodedSkills or self.DirtyFields.Skills then
+            self.EncodedSkills = json.encode(self.GetSkills())
+            self.DirtyFields.Skills = false
+        end
+        return self.EncodedSkills
+    end
+    --
+    self.GetEncodedAmmo = function()
+        if not self.EncodedAmmo or self.DirtyFields.Ammo then
+            self.EncodedAmmo = json.encode(self.GetAmmos())
+            self.DirtyFields.Ammo = false
+        end
+        return self.EncodedAmmo
+    end
+    --
+    self.GetEncodedJob = function()
+        if not self.EncodedJob or self.DirtyFields.Job then
+            self.EncodedJob = json.encode(self.GetJob())
+            self.DirtyFields.Job = false
+        end
+        return self.EncodedJob
+    end
+    --
+    self.GetEncodedCoords = function()
+        -- Coords don't have a dedicated cache field, encode fresh each time
+        return json.encode(self.GetCoords())
     end
     --
     -- ====================================================================================--
