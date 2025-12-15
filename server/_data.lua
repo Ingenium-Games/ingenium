@@ -13,13 +13,14 @@ function c.data.Initilize()
         [3] = "DB: Finding Job Accounts or Creating them;",
         [4] = "DB: Job Accounts have been Generated;",
         [5] = "DB: Job Objects Created and Added;",
-        [6] = "DB: Loading Data File - GSR;",
-        [7] = "DB: Loading Data File - Drops;",
-        [8] = "DB: Loading Data File - Pickups;",
-        [9] = "DB: Loading Data File - Notes;",
-        [10] = "DB: Loading Data File - Names;",
-        [11] = "DB: Reset Cars to Parked;",
-        [12] = "DB: "
+        [6] = "DB: Loading JSON Data Files;",
+        [7] = "DB: Loading Data File - GSR;",
+        [8] = "DB: Loading Data File - Drops;",
+        [9] = "DB: Loading Data File - Pickups;",
+        [10] = "DB: Loading Data File - Notes;",
+        [11] = "DB: Loading Data File - Names;",
+        [12] = "DB: Reset Cars to Parked;",
+        [13] = "DB: "
     }
     --
     local function cb()
@@ -41,6 +42,8 @@ function c.data.Initilize()
         -- [5] -- Not so much a SQL function, but dependant on it being conducted in order.
         c.data.CreateJobObjects()
         cb()
+        -- [5.5] -- Load JSON data files synchronously before individual loaders
+        c.data.LoadJSONData(cb)
         -- [6] gunshot residue data table
         c.gsr.Load()
         cb()
@@ -112,10 +115,10 @@ function c.data.SetPlayer(source, data)
     c.pdex[tonumber(source)] = data
 end
 
---- Set to false.
+--- Set to nil for garbage collection.
 ---@param source number
 function c.data.RemovePlayer(source)
-    c.pdex[tonumber(source)] = false
+    c.pdex[tonumber(source)] = nil
 end
 
 --- Get the player table
@@ -263,12 +266,12 @@ function c.GetVehicles()
     return c.data.GetVehicles()
 end
 
--- Set to false for cleanup function inside _vehicles.lua
+-- Set to nil for garbage collection
 --- func desc
 ---@param arg any
 function c.data.RemoveVehicle(arg)
     if c.vdex[tonumber(arg)] then
-        c.vdex[tonumber(arg)] = false
+        c.vdex[tonumber(arg)] = nil
     end
 end
 
@@ -323,11 +326,11 @@ function c.GetNpcs()
     return c.data.GetNpcs()
 end
 
--- Set to false for cleanup function inside _vehicles.lua
+-- Set to nil for garbage collection
 --- func desc
 ---@param net any
 function c.data.RemoveNpc(net)
-    c.ndex[tonumber(net)] = false
+    c.ndex[tonumber(net)] = nil
 end
 
 -- ====================================================================================--
@@ -396,11 +399,11 @@ function c.GetObjects()
     return c.data.GetObjects()
 end
 
--- Set to false for cleanup function inside _vehicles.lua
+-- Set to nil for garbage collection
 --- func desc
----@param net any
+---@param uuid any
 function c.data.RemoveObject(uuid)
-    c.odex[tostring(net)] = false
+    c.odex[tostring(uuid)] = nil
 end
 
 -- ====================================================================================--
