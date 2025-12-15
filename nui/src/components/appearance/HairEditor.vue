@@ -1,7 +1,10 @@
 <template>
   <div class="hair-editor">
     <div class="section">
-      <h3 class="section-title">Hair Style</h3>
+      <div class="section-header">
+        <h3 class="section-title">Hair Style</h3>
+        <span v-if="showPricing && hairPrice > 0" class="section-price">${{ hairPrice }}</span>
+      </div>
       <div class="style-grid">
         <button
           v-for="i in MAX_HAIR_STYLES"
@@ -11,6 +14,7 @@
           :aria-label="`Hair style ${i-1}`"
         >
           {{ i-1 }}
+          <span v-if="showPricing && getStylePrice(i-1) > 0" class="item-price-tag">${{ getStylePrice(i-1) }}</span>
         </button>
       </div>
     </div>
@@ -91,6 +95,21 @@ const eyeColors = computed(() => {
   return appearanceStore.constants?.eyeColors || []
 })
 
+const showPricing = computed(() => {
+  return appearanceStore.pricingEnabled && 
+         appearanceStore.pricing?.pricing?.hair?.enabled
+})
+
+const hairPrice = computed(() => {
+  if (!showPricing.value) return 0
+  return appearanceStore.getItemPrice('hair', currentHair.value.style)
+})
+
+function getStylePrice(styleId) {
+  if (!showPricing.value) return 0
+  return appearanceStore.getItemPrice('hair', styleId)
+}
+
 function updateHairStyle(style) {
   appearanceStore.updateHair({
     ...currentHair.value,
@@ -151,11 +170,27 @@ function updateEyeColor(color) {
   gap: 12px;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .section-title {
   font-size: 14px;
   font-weight: 600;
   color: white;
   margin: 0;
+}
+
+.section-price {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4287f5;
+  padding: 3px 8px;
+  background: rgba(66, 135, 245, 0.1);
+  border-radius: 4px;
+  border: 1px solid rgba(66, 135, 245, 0.3);
 }
 
 .style-grid {
@@ -173,6 +208,20 @@ function updateEyeColor(color) {
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.item-price-tag {
+  font-size: 9px;
+  font-weight: 600;
+  color: #4287f5;
+  background: rgba(66, 135, 245, 0.15);
+  padding: 2px 4px;
+  border-radius: 3px;
 }
 
 .style-btn:hover {

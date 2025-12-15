@@ -1,0 +1,36 @@
+{
+  "shopInfo": {
+    "name": "Default Clothing Store",
+    "jobName": "_default",
+    "description": "Standard pricing for appearance customization"
+  },
+  "pricing": {
+    "enabled": false,
+    "hair": {
+      "enabled": false,
+      "default": 50,
+      "styles": {}
+    },
+    "clothing": {
+      "enabled": false,
+      "default": 100,
+      "components": {}
+    },
+    "overlays": {
+      "enabled": false,
+      "default": 75,
+      "items": {}
+    },
+    "accessories": {
+      "enabled": false,
+      "default": 50,
+      "items": {}
+    },
+    "tattoos": {
+      "enabled": false,
+      "default": 200,
+      "items": {}
+    }
+  },
+  "modifiers": {}
+}

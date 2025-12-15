@@ -1,0 +1,71 @@
+{
+  "shopInfo": {
+    "name": "Suburban Clothing",
+    "jobName": "suburban",
+    "owner": "CHAR_abc123",
+    "description": "Premium clothing customization with job-specific pricing"
+  },
+  "pricing": {
+    "enabled": true,
+    "hair": {
+      "enabled": true,
+      "default": 150,
+      "styles": {
+        "1": 250,
+        "5": 300,
+        "10": 200
+      }
+    },
+    "clothing": {
+      "enabled": true,
+      "default": 200,
+      "components": {
+        "3": {
+          "1": 250,
+          "2": 275,
+          "default": 200
+        },
+        "4": {
+          "default": 350
+        },
+        "6": {
+          "default": 400
+        },
+        "8": {
+          "default": 150
+        },
+        "11": {
+          "1": 500,
+          "default": 300
+        }
+      }
+    },
+    "overlays": {
+      "enabled": true,
+      "default": 100,
+      "items": {
+        "1": 150,
+        "2": 125,
+        "4": 175
+      }
+    },
+    "accessories": {
+      "enabled": true,
+      "default": 75,
+      "items": {
+        "0": 100,
+        "1": 150,
+        "2": 200
+      }
+    },
+    "tattoos": {
+      "enabled": true,
+      "default": 500,
+      "items": {}
+    }
+  },
+  "modifiers": {
+    "employee_discount": 0.9,
+    "vip_discount": 0.85
+  }
+}
