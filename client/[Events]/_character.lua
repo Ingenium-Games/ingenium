@@ -48,25 +48,20 @@ AddEventHandler("Client:Character:Create", function()
     SetEntityHeading(plyped, 62)
     c.func.FadeOut(1000)
     c.func.IsBusyPleaseWait(1000)
+    
+    -- Use native appearance system
     local config = {
-        ped = true,
-        headBlend = true,
-        faceFeatures = true,
-        headOverlays = true,
-        components = true,
-        props = true,
-        tattoos = true
-      }
-      exports["fivem-appearance"]:startPlayerCustomization(function(appearance)
-        if (appearance) then
-            TriggerEvent("Client:Character:NewSpawn")
-            TriggerEvent("Client:Nui:Message", "register")
-        else
-            TriggerServerEvent("Server:Character:Failed")
-        end
-      end, config)
-      c.func.FadeIn(1000)
-      c.func.IsBusyPleaseWait(1000)
+        allowModelChange = true,
+        allowTattoos = true,
+        isCharacterCreation = true,
+        title = "Create Your Character"
+    }
+    
+    -- Open appearance customization via callback
+    c.callback.TriggerCallback('Client:Appearance:Open', config)
+    
+    c.func.FadeIn(1000)
+    c.func.IsBusyPleaseWait(1000)
 end)
 
 -- Respawn in on last saved coords.
@@ -96,7 +91,10 @@ end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
 AddEventHandler("Client:Character:LoadSkin", function(appearance)
-    exports["fivem-appearance"]:setPlayerAppearance(appearance)
+    -- Use native appearance system
+    if appearance then
+        c.appearance.SetAppearance(appearance)
+    end
 end)
 
 RegisterNetEvent("Client:Character:SaveSkin")

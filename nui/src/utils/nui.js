@@ -24,6 +24,32 @@ export async function sendNuiMessage(callback, data = {}) {
 }
 
 /**
+ * Call a client callback and wait for response
+ */
+export async function callClientCallback(callback, ...args) {
+  try {
+    const resourceName = await GetParentResourceName()
+    const response = await fetch(`https://${resourceName}/${callback}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(args)
+    })
+    
+    if (response.ok) {
+      return await response.json()
+    }
+    return null
+  } catch (error) {
+    if (!import.meta.env.DEV) {
+      console.error('Failed to call client callback:', error)
+    }
+    return null
+  }
+}
+
+/**
  * Get the parent resource name (for NUI callbacks)
  */
 function GetParentResourceName() {
@@ -60,6 +86,9 @@ export function setupNuiHandlers() {
   const uiStore = useUIStore()
   const notificationStore = useNotificationStore()
   const characterStore = useCharacterStore()
+  
+  // Import appearance store dynamically to avoid circular dependencies
+  let appearanceStore = null
   
   window.addEventListener('message', (event) => {
     const { message, data } = event.data
@@ -122,6 +151,25 @@ export function setupNuiHandlers() {
       
       case 'context:hide':
         uiStore.showContextMenu = false
+        break
+      
+      // Appearance customization
+      case 'appearance:open':
+        if (!appearanceStore) {
+          // Lazy load appearance store
+          import('../stores/appearance.js').then(module => {
+            appearanceStore = module.useAppearanceStore()
+            appearanceStore.open(data)
+          })
+        } else {
+          appearanceStore.open(data)
+        }
+        break
+      
+      case 'appearance:close':
+        if (appearanceStore) {
+          appearanceStore.close()
+        }
         break
       
       default:

@@ -1,0 +1,1474 @@
+{
+  "2725352035": {
+    "hash": 2725352035,
+    "name": "WEAPON_UNARMED",
+    "displayName": "WEAPON_UNARMED",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4194021054": {
+    "hash": 4194021054,
+    "name": "WEAPON_ANIMAL",
+    "displayName": "WEAPON_ANIMAL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "148160082": {
+    "hash": 148160082,
+    "name": "WEAPON_COUGAR",
+    "displayName": "WEAPON_COUGAR",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2578778090": {
+    "hash": 2578778090,
+    "name": "WEAPON_KNIFE",
+    "displayName": "WEAPON_KNIFE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1737195953": {
+    "hash": 1737195953,
+    "name": "WEAPON_NIGHTSTICK",
+    "displayName": "WEAPON_NIGHTSTICK",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1317494643": {
+    "hash": 1317494643,
+    "name": "WEAPON_HAMMER",
+    "displayName": "WEAPON_HAMMER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2508868239": {
+    "hash": 2508868239,
+    "name": "WEAPON_BAT",
+    "displayName": "WEAPON_BAT",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1141786504": {
+    "hash": 1141786504,
+    "name": "WEAPON_GOLFCLUB",
+    "displayName": "WEAPON_GOLFCLUB",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2227010557": {
+    "hash": 2227010557,
+    "name": "WEAPON_CROWBAR",
+    "displayName": "WEAPON_CROWBAR",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "453432689": {
+    "hash": 453432689,
+    "name": "WEAPON_PISTOL",
+    "displayName": "WEAPON_PISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1593441988": {
+    "hash": 1593441988,
+    "name": "WEAPON_COMBATPISTOL",
+    "displayName": "WEAPON_COMBATPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "584646201": {
+    "hash": 584646201,
+    "name": "WEAPON_APPISTOL",
+    "displayName": "WEAPON_APPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2578377531": {
+    "hash": 2578377531,
+    "name": "WEAPON_PISTOL50",
+    "displayName": "WEAPON_PISTOL50",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "324215364": {
+    "hash": 324215364,
+    "name": "WEAPON_MICROSMG",
+    "displayName": "WEAPON_MICROSMG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "736523883": {
+    "hash": 736523883,
+    "name": "WEAPON_SMG",
+    "displayName": "WEAPON_SMG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4024951519": {
+    "hash": 4024951519,
+    "name": "WEAPON_ASSAULTSMG",
+    "displayName": "WEAPON_ASSAULTSMG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3220176749": {
+    "hash": 3220176749,
+    "name": "WEAPON_ASSAULTRIFLE",
+    "displayName": "WEAPON_ASSAULTRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2210333304": {
+    "hash": 2210333304,
+    "name": "WEAPON_CARBINERIFLE",
+    "displayName": "WEAPON_CARBINERIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2937143193": {
+    "hash": 2937143193,
+    "name": "WEAPON_ADVANCEDRIFLE",
+    "displayName": "WEAPON_ADVANCEDRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2634544996": {
+    "hash": 2634544996,
+    "name": "WEAPON_MG",
+    "displayName": "WEAPON_MG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2144741730": {
+    "hash": 2144741730,
+    "name": "WEAPON_COMBATMG",
+    "displayName": "WEAPON_COMBATMG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "487013001": {
+    "hash": 487013001,
+    "name": "WEAPON_PUMPSHOTGUN",
+    "displayName": "WEAPON_PUMPSHOTGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2017895192": {
+    "hash": 2017895192,
+    "name": "WEAPON_SAWNOFFSHOTGUN",
+    "displayName": "WEAPON_SAWNOFFSHOTGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3800352039": {
+    "hash": 3800352039,
+    "name": "WEAPON_ASSAULTSHOTGUN",
+    "displayName": "WEAPON_ASSAULTSHOTGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2640438543": {
+    "hash": 2640438543,
+    "name": "WEAPON_BULLPUPSHOTGUN",
+    "displayName": "WEAPON_BULLPUPSHOTGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "911657153": {
+    "hash": 911657153,
+    "name": "WEAPON_STUNGUN",
+    "displayName": "WEAPON_STUNGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "100416529": {
+    "hash": 100416529,
+    "name": "WEAPON_SNIPERRIFLE",
+    "displayName": "WEAPON_SNIPERRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "205991906": {
+    "hash": 205991906,
+    "name": "WEAPON_HEAVYSNIPER",
+    "displayName": "WEAPON_HEAVYSNIPER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "856002082": {
+    "hash": 856002082,
+    "name": "WEAPON_REMOTESNIPER",
+    "displayName": "WEAPON_REMOTESNIPER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2726580491": {
+    "hash": 2726580491,
+    "name": "WEAPON_GRENADELAUNCHER",
+    "displayName": "WEAPON_GRENADELAUNCHER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1305664598": {
+    "hash": 1305664598,
+    "name": "WEAPON_GRENADELAUNCHER_SMOKE",
+    "displayName": "WEAPON_GRENADELAUNCHER_SMOKE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2982836145": {
+    "hash": 2982836145,
+    "name": "WEAPON_RPG",
+    "displayName": "WEAPON_RPG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "375527679": {
+    "hash": 375527679,
+    "name": "WEAPON_PASSENGER_ROCKET",
+    "displayName": "WEAPON_PASSENGER_ROCKET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "324506233": {
+    "hash": 324506233,
+    "name": "WEAPON_AIRSTRIKE_ROCKET",
+    "displayName": "WEAPON_AIRSTRIKE_ROCKET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1752584910": {
+    "hash": 1752584910,
+    "name": "WEAPON_STINGER",
+    "displayName": "WEAPON_STINGER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1119849093": {
+    "hash": 1119849093,
+    "name": "WEAPON_MINIGUN",
+    "displayName": "WEAPON_MINIGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2481070269": {
+    "hash": 2481070269,
+    "name": "WEAPON_GRENADE",
+    "displayName": "WEAPON_GRENADE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "741814745": {
+    "hash": 741814745,
+    "name": "WEAPON_STICKYBOMB",
+    "displayName": "WEAPON_STICKYBOMB",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4256991824": {
+    "hash": 4256991824,
+    "name": "WEAPON_SMOKEGRENADE",
+    "displayName": "WEAPON_SMOKEGRENADE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2694266206": {
+    "hash": 2694266206,
+    "name": "WEAPON_BZGAS",
+    "displayName": "WEAPON_BZGAS",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "615608432": {
+    "hash": 615608432,
+    "name": "WEAPON_MOLOTOV",
+    "displayName": "WEAPON_MOLOTOV",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "101631238": {
+    "hash": 101631238,
+    "name": "WEAPON_FIREEXTINGUISHER",
+    "displayName": "WEAPON_FIREEXTINGUISHER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "883325847": {
+    "hash": 883325847,
+    "name": "WEAPON_PETROLCAN",
+    "displayName": "WEAPON_PETROLCAN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4256881901": {
+    "hash": 4256881901,
+    "name": "WEAPON_DIGISCANNER",
+    "displayName": "WEAPON_DIGISCANNER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2803906140": {
+    "hash": 2803906140,
+    "name": "GADGET_NIGHTVISION",
+    "displayName": "GADGET_NIGHTVISION",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4222310262": {
+    "hash": 4222310262,
+    "name": "GADGET_PARACHUTE",
+    "displayName": "GADGET_PARACHUTE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "966099553": {
+    "hash": 966099553,
+    "name": "OBJECT",
+    "displayName": "OBJECT",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2294779575": {
+    "hash": 2294779575,
+    "name": "WEAPON_BRIEFCASE",
+    "displayName": "WEAPON_BRIEFCASE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "28811031": {
+    "hash": 28811031,
+    "name": "WEAPON_BRIEFCASE_02",
+    "displayName": "WEAPON_BRIEFCASE_02",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "600439132": {
+    "hash": 600439132,
+    "name": "WEAPON_BALL",
+    "displayName": "WEAPON_BALL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1233104067": {
+    "hash": 1233104067,
+    "name": "WEAPON_FLARE",
+    "displayName": "WEAPON_FLARE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1945616459": {
+    "hash": 1945616459,
+    "name": "VEHICLE_WEAPON_TANK",
+    "displayName": "VEHICLE_WEAPON_TANK",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4171469727": {
+    "hash": 4171469727,
+    "name": "VEHICLE_WEAPON_SPACE_ROCKET",
+    "displayName": "VEHICLE_WEAPON_SPACE_ROCKET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3473446624": {
+    "hash": 3473446624,
+    "name": "VEHICLE_WEAPON_PLANE_ROCKET",
+    "displayName": "VEHICLE_WEAPON_PLANE_ROCKET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4026335563": {
+    "hash": 4026335563,
+    "name": "VEHICLE_WEAPON_PLAYER_LASER",
+    "displayName": "VEHICLE_WEAPON_PLAYER_LASER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1259576109": {
+    "hash": 1259576109,
+    "name": "VEHICLE_WEAPON_PLAYER_BULLET",
+    "displayName": "VEHICLE_WEAPON_PLAYER_BULLET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1186503822": {
+    "hash": 1186503822,
+    "name": "VEHICLE_WEAPON_PLAYER_BUZZARD",
+    "displayName": "VEHICLE_WEAPON_PLAYER_BUZZARD",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2669318622": {
+    "hash": 2669318622,
+    "name": "VEHICLE_WEAPON_PLAYER_HUNTER",
+    "displayName": "VEHICLE_WEAPON_PLAYER_HUNTER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3800181289": {
+    "hash": 3800181289,
+    "name": "VEHICLE_WEAPON_PLAYER_LAZER",
+    "displayName": "VEHICLE_WEAPON_PLAYER_LAZER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1566990507": {
+    "hash": 1566990507,
+    "name": "VEHICLE_WEAPON_ENEMY_LASER",
+    "displayName": "VEHICLE_WEAPON_ENEMY_LASER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3450622333": {
+    "hash": 3450622333,
+    "name": "VEHICLE_WEAPON_SEARCHLIGHT",
+    "displayName": "VEHICLE_WEAPON_SEARCHLIGHT",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3530961278": {
+    "hash": 3530961278,
+    "name": "VEHICLE_WEAPON_RADAR",
+    "displayName": "VEHICLE_WEAPON_RADAR",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3204302209": {
+    "hash": 3204302209,
+    "name": "WEAPON_VEHICLE_ROCKET",
+    "displayName": "WEAPON_VEHICLE_ROCKET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1223143800": {
+    "hash": 1223143800,
+    "name": "WEAPON_BARBED_WIRE",
+    "displayName": "WEAPON_BARBED_WIRE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4284007675": {
+    "hash": 4284007675,
+    "name": "WEAPON_DROWNING",
+    "displayName": "WEAPON_DROWNING",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1936677264": {
+    "hash": 1936677264,
+    "name": "WEAPON_DROWNING_IN_VEHICLE",
+    "displayName": "WEAPON_DROWNING_IN_VEHICLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2339582971": {
+    "hash": 2339582971,
+    "name": "WEAPON_BLEEDING",
+    "displayName": "WEAPON_BLEEDING",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2461879995": {
+    "hash": 2461879995,
+    "name": "WEAPON_ELECTRIC_FENCE",
+    "displayName": "WEAPON_ELECTRIC_FENCE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "539292904": {
+    "hash": 539292904,
+    "name": "WEAPON_EXPLOSION",
+    "displayName": "WEAPON_EXPLOSION",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3452007600": {
+    "hash": 3452007600,
+    "name": "WEAPON_FALL",
+    "displayName": "WEAPON_FALL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "910830060": {
+    "hash": 910830060,
+    "name": "WEAPON_EXHAUSTION",
+    "displayName": "WEAPON_EXHAUSTION",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3425972830": {
+    "hash": 3425972830,
+    "name": "WEAPON_HIT_BY_WATER_CANNON",
+    "displayName": "WEAPON_HIT_BY_WATER_CANNON",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "133987706": {
+    "hash": 133987706,
+    "name": "WEAPON_RAMMED_BY_CAR",
+    "displayName": "WEAPON_RAMMED_BY_CAR",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2741846334": {
+    "hash": 2741846334,
+    "name": "WEAPON_RUN_OVER_BY_CAR",
+    "displayName": "WEAPON_RUN_OVER_BY_CAR",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "341774354": {
+    "hash": 341774354,
+    "name": "WEAPON_HELI_CRASH",
+    "displayName": "WEAPON_HELI_CRASH",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2971687502": {
+    "hash": 2971687502,
+    "name": "VEHICLE_WEAPON_ROTORS",
+    "displayName": "VEHICLE_WEAPON_ROTORS",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3750660587": {
+    "hash": 3750660587,
+    "name": "WEAPON_FIRE",
+    "displayName": "WEAPON_FIRE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3854032506": {
+    "hash": 3854032506,
+    "name": "WEAPON_ANIMAL_RETRIEVER",
+    "displayName": "WEAPON_ANIMAL_RETRIEVER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3146768957": {
+    "hash": 3146768957,
+    "name": "WEAPON_SMALL_DOG",
+    "displayName": "WEAPON_SMALL_DOG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "743550225": {
+    "hash": 743550225,
+    "name": "WEAPON_TIGER_SHARK",
+    "displayName": "WEAPON_TIGER_SHARK",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3030980043": {
+    "hash": 3030980043,
+    "name": "WEAPON_HAMMERHEAD_SHARK",
+    "displayName": "WEAPON_HAMMERHEAD_SHARK",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4198358245": {
+    "hash": 4198358245,
+    "name": "WEAPON_KILLER_WHALE",
+    "displayName": "WEAPON_KILLER_WHALE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "861723357": {
+    "hash": 861723357,
+    "name": "WEAPON_BOAR",
+    "displayName": "WEAPON_BOAR",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1205296881": {
+    "hash": 1205296881,
+    "name": "WEAPON_PIG",
+    "displayName": "WEAPON_PIG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1161062353": {
+    "hash": 1161062353,
+    "name": "WEAPON_COYOTE",
+    "displayName": "WEAPON_COYOTE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4106648222": {
+    "hash": 4106648222,
+    "name": "WEAPON_DEER",
+    "displayName": "WEAPON_DEER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "955837630": {
+    "hash": 955837630,
+    "name": "WEAPON_HEN",
+    "displayName": "WEAPON_HEN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2793925639": {
+    "hash": 2793925639,
+    "name": "WEAPON_RABBIT",
+    "displayName": "WEAPON_RABBIT",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3799318422": {
+    "hash": 3799318422,
+    "name": "WEAPON_CAT",
+    "displayName": "WEAPON_CAT",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "94548753": {
+    "hash": 94548753,
+    "name": "WEAPON_COW",
+    "displayName": "WEAPON_COW",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1834887169": {
+    "hash": 1834887169,
+    "name": "WEAPON_BIRD_CRAP",
+    "displayName": "WEAPON_BIRD_CRAP",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4192643659": {
+    "hash": 4192643659,
+    "name": "WEAPON_BOTTLE",
+    "displayName": "WEAPON_BOTTLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3218215474": {
+    "hash": 3218215474,
+    "name": "WEAPON_SNSPISTOL",
+    "displayName": "WEAPON_SNSPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3523564046": {
+    "hash": 3523564046,
+    "name": "WEAPON_HEAVYPISTOL",
+    "displayName": "WEAPON_HEAVYPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2132975508": {
+    "hash": 2132975508,
+    "name": "WEAPON_BULLPUPRIFLE",
+    "displayName": "WEAPON_BULLPUPRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3231910285": {
+    "hash": 3231910285,
+    "name": "WEAPON_SPECIALCARBINE",
+    "displayName": "WEAPON_SPECIALCARBINE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2285322324": {
+    "hash": 2285322324,
+    "name": "WEAPON_SNSPISTOL_MK2",
+    "displayName": "WEAPON_SNSPISTOL_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1785463520": {
+    "hash": 1785463520,
+    "name": "WEAPON_MARKSMANRIFLE_MK2",
+    "displayName": "WEAPON_MARKSMANRIFLE_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1432025498": {
+    "hash": 1432025498,
+    "name": "WEAPON_PUMPSHOTGUN_MK2",
+    "displayName": "WEAPON_PUMPSHOTGUN_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2228681469": {
+    "hash": 2228681469,
+    "name": "WEAPON_BULLPUPRIFLE_MK2",
+    "displayName": "WEAPON_BULLPUPRIFLE_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2526821735": {
+    "hash": 2526821735,
+    "name": "WEAPON_SPECIALCARBINE_MK2",
+    "displayName": "WEAPON_SPECIALCARBINE_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4159824478": {
+    "hash": 4159824478,
+    "name": "WEAPON_ACIDPACKAGE",
+    "displayName": "WEAPON_ACIDPACKAGE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "889061222": {
+    "hash": 889061222,
+    "name": "WEAPON_ARENA_MACHINE_GUN",
+    "displayName": "WEAPON_ARENA_MACHINE_GUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1686798800": {
+    "hash": 1686798800,
+    "name": "WEAPON_ARENA_HOMING_MISSILE",
+    "displayName": "WEAPON_ARENA_HOMING_MISSILE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1703483498": {
+    "hash": 1703483498,
+    "name": "WEAPON_CANDYCANE",
+    "displayName": "WEAPON_CANDYCANE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4272043364": {
+    "hash": 4272043364,
+    "name": "WEAPON_RAILGUNXM3",
+    "displayName": "WEAPON_RAILGUNXM3",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "465894841": {
+    "hash": 465894841,
+    "name": "WEAPON_PISTOLXM3",
+    "displayName": "WEAPON_PISTOLXM3",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2939590305": {
+    "hash": 2939590305,
+    "name": "WEAPON_RAYPISTOL",
+    "displayName": "WEAPON_RAYPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1198256469": {
+    "hash": 1198256469,
+    "name": "WEAPON_RAYCARBINE",
+    "displayName": "WEAPON_RAYCARBINE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3056410471": {
+    "hash": 3056410471,
+    "name": "WEAPON_RAYMINIGUN",
+    "displayName": "WEAPON_RAYMINIGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2548703416": {
+    "hash": 2548703416,
+    "name": "WEAPON_DOUBLEACTION",
+    "displayName": "WEAPON_DOUBLEACTION",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "126349499": {
+    "hash": 126349499,
+    "name": "WEAPON_SNOWBALL",
+    "displayName": "WEAPON_SNOWBALL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2874559379": {
+    "hash": 2874559379,
+    "name": "WEAPON_PROXMINE",
+    "displayName": "WEAPON_PROXMINE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1672152130": {
+    "hash": 1672152130,
+    "name": "WEAPON_HOMINGLAUNCHER",
+    "displayName": "WEAPON_HOMINGLAUNCHER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3415619887": {
+    "hash": 3415619887,
+    "name": "WEAPON_REVOLVER_MK2",
+    "displayName": "WEAPON_REVOLVER_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1627465347": {
+    "hash": 1627465347,
+    "name": "WEAPON_GUSENBERG",
+    "displayName": "WEAPON_GUSENBERG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2460120199": {
+    "hash": 2460120199,
+    "name": "WEAPON_DAGGER",
+    "displayName": "WEAPON_DAGGER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "137902532": {
+    "hash": 137902532,
+    "name": "WEAPON_VINTAGEPISTOL",
+    "displayName": "WEAPON_VINTAGEPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2828843422": {
+    "hash": 2828843422,
+    "name": "WEAPON_MUSKET",
+    "displayName": "WEAPON_MUSKET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2138347493": {
+    "hash": 2138347493,
+    "name": "WEAPON_FIREWORK",
+    "displayName": "WEAPON_FIREWORK",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4191993645": {
+    "hash": 4191993645,
+    "name": "WEAPON_HATCHET",
+    "displayName": "WEAPON_HATCHET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1834241177": {
+    "hash": 1834241177,
+    "name": "WEAPON_RAILGUN",
+    "displayName": "WEAPON_RAILGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "984333226": {
+    "hash": 984333226,
+    "name": "WEAPON_HEAVYSHOTGUN",
+    "displayName": "WEAPON_HEAVYSHOTGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3342088282": {
+    "hash": 3342088282,
+    "name": "WEAPON_MARKSMANRIFLE",
+    "displayName": "WEAPON_MARKSMANRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3794977420": {
+    "hash": 3794977420,
+    "name": "WEAPON_GARBAGEBAG",
+    "displayName": "WEAPON_GARBAGEBAG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3494679629": {
+    "hash": 3494679629,
+    "name": "WEAPON_HANDCUFFS",
+    "displayName": "WEAPON_HANDCUFFS",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "727643628": {
+    "hash": 727643628,
+    "name": "WEAPON_CERAMICPISTOL",
+    "displayName": "WEAPON_CERAMICPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2636060646": {
+    "hash": 2636060646,
+    "name": "WEAPON_MILITARYRIFLE",
+    "displayName": "WEAPON_MILITARYRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "94989220": {
+    "hash": 94989220,
+    "name": "WEAPON_COMBATSHOTGUN",
+    "displayName": "WEAPON_COMBATSHOTGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "849905853": {
+    "hash": 849905853,
+    "name": "WEAPON_TRANQUILIZER",
+    "displayName": "WEAPON_TRANQUILIZER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3126027122": {
+    "hash": 3126027122,
+    "name": "WEAPON_HAZARDCAN",
+    "displayName": "WEAPON_HAZARDCAN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1097917585": {
+    "hash": 1097917585,
+    "name": "VEHICLE_WEAPON_NOSE_TURRET_VALKYRIE",
+    "displayName": "VEHICLE_WEAPON_NOSE_TURRET_VALKYRIE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2756787765": {
+    "hash": 2756787765,
+    "name": "VEHICLE_WEAPON_TURRET_VALKYRIE",
+    "displayName": "VEHICLE_WEAPON_TURRET_VALKYRIE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1198879012": {
+    "hash": 1198879012,
+    "name": "WEAPON_FLAREGUN",
+    "displayName": "WEAPON_FLAREGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2144528907": {
+    "hash": 2144528907,
+    "name": "VEHICLE_WEAPON_TURRET_TECHNICAL",
+    "displayName": "VEHICLE_WEAPON_TURRET_TECHNICAL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1155224728": {
+    "hash": 1155224728,
+    "name": "VEHICLE_WEAPON_TURRET_INSURGENT",
+    "displayName": "VEHICLE_WEAPON_TURRET_INSURGENT",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1470379660": {
+    "hash": 1470379660,
+    "name": "WEAPON_GADGETPISTOL",
+    "displayName": "WEAPON_GADGETPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2441047180": {
+    "hash": 2441047180,
+    "name": "WEAPON_NAVYREVOLVER",
+    "displayName": "WEAPON_NAVYREVOLVER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1638077257": {
+    "hash": 1638077257,
+    "name": "VEHICLE_WEAPON_PLAYER_SAVAGE",
+    "displayName": "VEHICLE_WEAPON_PLAYER_SAVAGE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3638508604": {
+    "hash": 3638508604,
+    "name": "WEAPON_KNUCKLE",
+    "displayName": "WEAPON_KNUCKLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "171789620": {
+    "hash": 171789620,
+    "name": "WEAPON_COMBATPDW",
+    "displayName": "WEAPON_COMBATPDW",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3696079510": {
+    "hash": 3696079510,
+    "name": "WEAPON_MARKSMANPISTOL",
+    "displayName": "WEAPON_MARKSMANPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4019527611": {
+    "hash": 4019527611,
+    "name": "WEAPON_DBSHOTGUN",
+    "displayName": "WEAPON_DBSHOTGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3713923289": {
+    "hash": 3713923289,
+    "name": "WEAPON_MACHETE",
+    "displayName": "WEAPON_MACHETE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3675956304": {
+    "hash": 3675956304,
+    "name": "WEAPON_MACHINEPISTOL",
+    "displayName": "WEAPON_MACHINEPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1649403952": {
+    "hash": 1649403952,
+    "name": "WEAPON_COMPACTRIFLE",
+    "displayName": "WEAPON_COMPACTRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2343591895": {
+    "hash": 2343591895,
+    "name": "WEAPON_FLASHLIGHT",
+    "displayName": "WEAPON_FLASHLIGHT",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "729375873": {
+    "hash": 729375873,
+    "name": "VEHICLE_WEAPON_TURRET_LIMO",
+    "displayName": "VEHICLE_WEAPON_TURRET_LIMO",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "738733437": {
+    "hash": 738733437,
+    "name": "WEAPON_AIR_DEFENCE_GUN",
+    "displayName": "WEAPON_AIR_DEFENCE_GUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3756226112": {
+    "hash": 3756226112,
+    "name": "WEAPON_SWITCHBLADE",
+    "displayName": "WEAPON_SWITCHBLADE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3249783761": {
+    "hash": 3249783761,
+    "name": "WEAPON_REVOLVER",
+    "displayName": "WEAPON_REVOLVER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3041872152": {
+    "hash": 3041872152,
+    "name": "VEHICLE_WEAPON_TURRET_BOXVILLE",
+    "displayName": "VEHICLE_WEAPON_TURRET_BOXVILLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3959029566": {
+    "hash": 3959029566,
+    "name": "VEHICLE_WEAPON_CANNON_BLAZER",
+    "displayName": "VEHICLE_WEAPON_CANNON_BLAZER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "50118905": {
+    "hash": 50118905,
+    "name": "VEHICLE_WEAPON_RUINER_BULLET",
+    "displayName": "VEHICLE_WEAPON_RUINER_BULLET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "84788907": {
+    "hash": 84788907,
+    "name": "VEHICLE_WEAPON_RUINER_ROCKET",
+    "displayName": "VEHICLE_WEAPON_RUINER_ROCKET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "125959754": {
+    "hash": 125959754,
+    "name": "WEAPON_COMPACTLAUNCHER",
+    "displayName": "WEAPON_COMPACTLAUNCHER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3173288789": {
+    "hash": 3173288789,
+    "name": "WEAPON_MINISMG",
+    "displayName": "WEAPON_MINISMG",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "419712736": {
+    "hash": 419712736,
+    "name": "WEAPON_WRENCH",
+    "displayName": "WEAPON_WRENCH",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "317205821": {
+    "hash": 317205821,
+    "name": "WEAPON_AUTOSHOTGUN",
+    "displayName": "WEAPON_AUTOSHOTGUN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2484171525": {
+    "hash": 2484171525,
+    "name": "WEAPON_POOLCUE",
+    "displayName": "WEAPON_POOLCUE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3441901897": {
+    "hash": 3441901897,
+    "name": "WEAPON_BATTLEAXE",
+    "displayName": "WEAPON_BATTLEAXE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3125143736": {
+    "hash": 3125143736,
+    "name": "WEAPON_PIPEBOMB",
+    "displayName": "WEAPON_PIPEBOMB",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "4208062921": {
+    "hash": 4208062921,
+    "name": "WEAPON_CARBINERIFLE_MK2",
+    "displayName": "WEAPON_CARBINERIFLE_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3686625920": {
+    "hash": 3686625920,
+    "name": "WEAPON_COMBATMG_MK2",
+    "displayName": "WEAPON_COMBATMG_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2024373456": {
+    "hash": 2024373456,
+    "name": "WEAPON_SMG_MK2",
+    "displayName": "WEAPON_SMG_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "961495388": {
+    "hash": 961495388,
+    "name": "WEAPON_ASSAULTRIFLE_MK2",
+    "displayName": "WEAPON_ASSAULTRIFLE_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "177293209": {
+    "hash": 177293209,
+    "name": "WEAPON_HEAVYSNIPER_MK2",
+    "displayName": "WEAPON_HEAVYSNIPER_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3219281620": {
+    "hash": 3219281620,
+    "name": "WEAPON_PISTOL_MK2",
+    "displayName": "WEAPON_PISTOL_MK2",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "940833800": {
+    "hash": 940833800,
+    "name": "WEAPON_STONE_HATCHET",
+    "displayName": "WEAPON_STONE_HATCHET",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3520460075": {
+    "hash": 3520460075,
+    "name": "WEAPON_TACTICALRIFLE",
+    "displayName": "WEAPON_TACTICALRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3684886537": {
+    "hash": 3684886537,
+    "name": "WEAPON_METALDETECTOR",
+    "displayName": "WEAPON_METALDETECTOR",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1853742572": {
+    "hash": 1853742572,
+    "name": "WEAPON_PRECISIONRIFLE",
+    "displayName": "WEAPON_PRECISIONRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3347935668": {
+    "hash": 3347935668,
+    "name": "WEAPON_HEAVYRIFLE",
+    "displayName": "WEAPON_HEAVYRIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "406929569": {
+    "hash": 406929569,
+    "name": "WEAPON_FERTILIZERCAN",
+    "displayName": "WEAPON_FERTILIZERCAN",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3676729658": {
+    "hash": 3676729658,
+    "name": "WEAPON_EMPLAUNCHER",
+    "displayName": "WEAPON_EMPLAUNCHER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1171102963": {
+    "hash": 1171102963,
+    "name": "WEAPON_STUNGUN_MP",
+    "displayName": "WEAPON_STUNGUN_MP",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "350597077": {
+    "hash": 350597077,
+    "name": "WEAPON_TECPISTOL",
+    "displayName": "WEAPON_TECPISTOL",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "62870901": {
+    "hash": 62870901,
+    "name": "WEAPON_SNOWLAUNCHER",
+    "displayName": "WEAPON_SNOWLAUNCHER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "1924557585": {
+    "hash": 1924557585,
+    "name": "WEAPON_BATTLERIFLE",
+    "displayName": "WEAPON_BATTLERIFLE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "485882440": {
+    "hash": 485882440,
+    "name": "WEAPON_HACKINGDEVICE",
+    "displayName": "WEAPON_HACKINGDEVICE",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3670016037": {
+    "hash": 3670016037,
+    "name": "WEAPON_STUNROD",
+    "displayName": "WEAPON_STUNROD",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2378080583": {
+    "hash": 2378080583,
+    "name": "WEAPON_STRICKLER",
+    "displayName": "WEAPON_STRICKLER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "3094580364": {
+    "hash": 3094580364,
+    "name": "WEAPON_BRIEFCASE_03",
+    "displayName": "WEAPON_BRIEFCASE_03",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  },
+  "2663087251": {
+    "hash": 2663087251,
+    "name": "WEAPON_NEWSPAPER",
+    "displayName": "WEAPON_NEWSPAPER",
+    "type": "Unknown",
+    "damage": 0,
+    "group": "Unknown"
+  }
+}
