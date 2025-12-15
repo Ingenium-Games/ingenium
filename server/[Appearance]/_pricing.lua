@@ -7,6 +7,10 @@ c.appearance = c.appearance or {}
 c.appearance_pricing = c.appearance_pricing or {}
 c.appearance_pricing_dirty = c.appearance_pricing_dirty or {}
 
+-- Constants
+local DEFAULT_PRICING_PATH = "appearance/pricing_default"
+local JOB_PRICING_PATH_TEMPLATE = "[Jobs]/%s/data/appearance/pricing"
+
 -- ====================================================================================--
 -- LAZY LOADING
 -- ====================================================================================--
@@ -21,7 +25,7 @@ function c.appearance.LoadJobPricing(jobName)
     end
     
     -- Construct path to job-specific pricing file
-    local path = ("[Jobs]/%s/data/appearance/pricing"):format(jobName)
+    local path = JOB_PRICING_PATH_TEMPLATE:format(jobName)
     
     -- Check if file exists and load it
     if c.json.Exists(path) then
@@ -59,9 +63,8 @@ end
 function c.appearance.GetDefaultPricing()
     -- Load default pricing if not already loaded
     if not c.appearance_pricing["_default"] then
-        local path = "appearance/pricing_default"
-        if c.json.Exists(path) then
-            c.appearance_pricing["_default"] = c.json.Read(path)
+        if c.json.Exists(DEFAULT_PRICING_PATH) then
+            c.appearance_pricing["_default"] = c.json.Read(DEFAULT_PRICING_PATH)
             print("^2[Appearance Pricing] Loaded default pricing^0")
         else
             -- Create minimal default if file doesn't exist
@@ -135,7 +138,7 @@ function c.appearance.SaveAllDirtyPricing()
     local saved = 0
     for jobName, _ in pairs(c.appearance_pricing_dirty) do
         if c.appearance_pricing[jobName] and jobName ~= "_default" then
-            local path = ("[Jobs]/%s/data/appearance/pricing"):format(jobName)
+            local path = JOB_PRICING_PATH_TEMPLATE:format(jobName)
             c.json.Write(path, c.appearance_pricing[jobName])
             c.appearance_pricing_dirty[jobName] = nil
             saved = saved + 1
@@ -152,7 +155,7 @@ function c.appearance.SaveAllPricing()
     local saved = 0
     for jobName, pricingData in pairs(c.appearance_pricing) do
         if jobName ~= "_default" then
-            local path = ("[Jobs]/%s/data/appearance/pricing"):format(jobName)
+            local path = JOB_PRICING_PATH_TEMPLATE:format(jobName)
             c.json.Write(path, pricingData)
             saved = saved + 1
         end
@@ -190,6 +193,17 @@ end)
 -- PRICE CALCULATION AND VALIDATION
 -- ====================================================================================--
 
+---Check if pricing is enabled for a specific category
+---@param pricing table The pricing data
+---@param category string The category to check
+---@return boolean True if pricing is enabled for the category
+local function isPricingEnabled(pricing, category)
+    return pricing.pricing and 
+           pricing.pricing.enabled and 
+           pricing.pricing[category] and 
+           pricing.pricing[category].enabled
+end
+
 ---Calculate the total cost for appearance changes
 ---@param jobName string|nil The job name for pricing
 ---@param oldAppearance table The original appearance
@@ -219,7 +233,7 @@ function c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
     end
     
     -- Check hair changes
-    if pricing.pricing.hair and pricing.pricing.hair.enabled then
+    if isPricingEnabled(pricing, "hair") then
         local oldHair = oldAppearance.hair or {}
         local newHair = newAppearance.hair or {}
         
@@ -233,7 +247,7 @@ function c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
     end
     
     -- Check clothing components
-    if pricing.pricing.clothing and pricing.pricing.clothing.enabled then
+    if isPricingEnabled(pricing, "clothing") then
         local oldComponents = oldAppearance.components or {}
         local newComponents = newAppearance.components or {}
         
@@ -268,7 +282,7 @@ function c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
     end
     
     -- Check overlays
-    if pricing.pricing.overlays and pricing.pricing.overlays.enabled then
+    if isPricingEnabled(pricing, "overlays") then
         local oldOverlays = oldAppearance.headOverlays or {}
         local newOverlays = newAppearance.headOverlays or {}
         
@@ -285,7 +299,7 @@ function c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
     end
     
     -- Check accessories (props)
-    if pricing.pricing.accessories and pricing.pricing.accessories.enabled then
+    if isPricingEnabled(pricing, "accessories") then
         local oldProps = oldAppearance.props or {}
         local newProps = newAppearance.props or {}
         
@@ -314,7 +328,7 @@ function c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
     end
     
     -- Check tattoos
-    if pricing.pricing.tattoos and pricing.pricing.tattoos.enabled then
+    if isPricingEnabled(pricing, "tattoos") then
         local oldTattoos = oldAppearance.tattoos or {}
         local newTattoos = newAppearance.tattoos or {}
         

@@ -37,7 +37,8 @@ RegisterServerCallback({
         end
         
         -- Check if player has enough money
-        -- This is a placeholder - replace with your actual economy system
+        -- TODO: Integrate with your economy system
+        -- The following is a placeholder implementation
         local player = c.func.GetPlayer(source)
         if not player then
             return {
@@ -47,26 +48,18 @@ RegisterServerCallback({
             }
         end
         
-        -- Get player's cash (adjust this based on your economy system)
-        local playerCash = player.cash or 0
+        -- TODO: Replace with actual economy system
+        -- Example: local playerCash = player.cash or 0
+        -- Example: if playerCash < totalCost then return error end
+        -- Example: player.cash = player.cash - totalCost
+        -- Example: c.func.SavePlayer(source, player)
         
-        if playerCash < totalCost then
-            return {
-                success = false,
-                cost = totalCost,
-                message = string.format("Insufficient funds. Need $%d, have $%d", totalCost, playerCash)
-            }
-        end
-        
-        -- Deduct money (adjust this based on your economy system)
-        -- player.cash = player.cash - totalCost
-        -- c.func.SavePlayer(source, player)
-        
+        -- For now, allow all purchases (implement economy integration above)
         return {
             success = true,
             cost = totalCost,
             itemizedCosts = itemizedCosts,
-            message = string.format("Appearance updated. Charged $%d", totalCost)
+            message = string.format("Appearance updated. Cost: $%d (not charged - integrate economy system)", totalCost)
         }
     end
 })

@@ -69,7 +69,7 @@
         <div class="appearance-footer">
           <div v-if="appearanceStore.pricingEnabled" class="cost-summary">
             <span class="cost-label">Estimated Cost:</span>
-            <span class="cost-amount">${{ appearanceStore.currentCost.toLocaleString() }}</span>
+            <span class="cost-amount">{{ formatCurrency(appearanceStore.currentCost) }}</span>
           </div>
           <div class="footer-actions">
             <button
@@ -101,6 +101,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
+import { formatCurrency } from '../../utils/currency'
 import ModelSelector from './ModelSelector.vue'
 import HeritageEditor from './HeritageEditor.vue'
 import FaceFeaturesEditor from './FaceFeaturesEditor.vue'

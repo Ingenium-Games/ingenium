@@ -19,13 +19,13 @@
               class="cost-item"
             >
               <span class="item-description">{{ item.description }}</span>
-              <span class="item-price">${{ item.price.toLocaleString() }}</span>
+              <span class="item-price">{{ formatCurrency(item.price) }}</span>
             </div>
           </div>
           
           <div class="total-cost">
             <span class="total-label">Total Cost:</span>
-            <span class="total-amount">${{ appearanceStore.currentCost.toLocaleString() }}</span>
+            <span class="total-amount">{{ formatCurrency(appearanceStore.currentCost) }}</span>
           </div>
           
           <p v-if="hasDiscount" class="discount-notice">
@@ -58,6 +58,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
+import { formatCurrency } from '../../utils/currency'
 
 const appearanceStore = useAppearanceStore()
 
