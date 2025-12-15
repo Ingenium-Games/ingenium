@@ -452,3 +452,23 @@ function c.func.HasPlayers()
         return false
     end
 end
+
+-- ====================================================================================--
+-- Item and Door Helper Functions
+-- ====================================================================================--
+
+--- Get item data from loaded JSON
+---@param itemName string
+---@return table|nil
+function c.item.Get(itemName)
+    return c.items and c.items[itemName] or nil
+end
+exports('GetItem', c.item.Get)
+
+--- Get door data from loaded JSON
+---@param doorId any
+---@return table|nil
+function c.door.Get(doorId)
+    return c.doors and c.doors[doorId] or nil
+end
+exports('GetDoor', c.door.Get)
