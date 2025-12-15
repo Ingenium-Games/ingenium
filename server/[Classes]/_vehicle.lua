@@ -152,13 +152,13 @@ function c.class.Vehicle(net)
     ---@param coords any
     self.SetCoords = function(coords)
         self.Coords = {
-            x = c.math.Decimals(t.x, 2),
-            y = c.math.Decimals(t.y, 2),
-            z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2),
-            rx = c.math.Decimals(t.rx, 2),
-            ry = c.math.Decimals(t.ry, 2),
-            rz = c.math.Decimals(t.rz, 2),
+            x = c.math.Decimals(coords.x, 2),
+            y = c.math.Decimals(coords.y, 2),
+            z = c.math.Decimals(coords.z, 2),
+            h = c.math.Decimals(coords.h, 2),
+            rx = c.math.Decimals(coords.rx, 2),
+            ry = c.math.Decimals(coords.ry, 2),
+            rz = c.math.Decimals(coords.rz, 2),
         }
         --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
@@ -177,6 +177,8 @@ function c.class.Vehicle(net)
     self.SetKeys = function(t)
         self.Keys = t
         self.State.Keys = self.Keys
+        self.DirtyFields.Keys = true
+        self.EncodedKeys = nil
         self.SetUpdated()
     end
     --- func desc
@@ -186,6 +188,8 @@ function c.class.Vehicle(net)
         if not self.CheckKeys(id) then
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
+            self.DirtyFields.Keys = true
+            self.EncodedKeys = nil
         else
             c.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
@@ -198,6 +202,8 @@ function c.class.Vehicle(net)
         if self.CheckKeys(id) then
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
+            self.DirtyFields.Keys = true
+            self.EncodedKeys = nil
         else
             c.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end        
@@ -286,9 +292,12 @@ function c.class.Vehicle(net)
     ---@param v any
     self.SetFuel = function(v)
         local num = c.check.Number(v, 0, 100)
-        self.Fuel = num
-        self.State.Fuel = num
-        self.SetUpdated()
+        if self.Fuel ~= num then
+            self.Fuel = num
+            self.State.Fuel = num
+            self.DirtyFields.Fuel = true
+            self.SetUpdated()
+        end
     end
     --- func desc
     ---@param v any
@@ -703,13 +712,13 @@ function c.class.OwnedVehicle(net, data)
     ---@param coords any
     self.SetCoords = function(coords)
         self.Coords = {
-            x = c.math.Decimals(t.x, 2),
-            y = c.math.Decimals(t.y, 2),
-            z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2),
-            rx = c.math.Decimals(t.rx, 2),
-            ry = c.math.Decimals(t.ry, 2),
-            rz = c.math.Decimals(t.rz, 2),
+            x = c.math.Decimals(coords.x, 2),
+            y = c.math.Decimals(coords.y, 2),
+            z = c.math.Decimals(coords.z, 2),
+            h = c.math.Decimals(coords.h, 2),
+            rx = c.math.Decimals(coords.rx, 2),
+            ry = c.math.Decimals(coords.ry, 2),
+            rz = c.math.Decimals(coords.rz, 2),
         }
         --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
@@ -727,6 +736,8 @@ function c.class.OwnedVehicle(net, data)
     self.SetKeys = function(t)
         self.Keys = t
         self.State.Keys = self.Keys
+        self.DirtyFields.Keys = true
+        self.EncodedKeys = nil
         self.SetUpdated()
     end
     --- func desc
@@ -736,6 +747,8 @@ function c.class.OwnedVehicle(net, data)
         if not self.CheckKeys(id) then
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
+            self.DirtyFields.Keys = true
+            self.EncodedKeys = nil
             self.SetUpdated()
         else
             c.func.Debug_2("User: " .. id .. " Already has key to this vehicle.")
@@ -748,6 +761,8 @@ function c.class.OwnedVehicle(net, data)
         if self.CheckKeys(id) then
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
+            self.DirtyFields.Keys = true
+            self.EncodedKeys = nil
             self.SetUpdated()
         else
             c.func.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
@@ -774,6 +789,8 @@ function c.class.OwnedVehicle(net, data)
         -- Set Condition
         self.Condition = conditions
         self.State.Condition = self.Condition
+        self.DirtyFields.Condition = true
+        self.EncodedCondition = nil
         self.SetUpdated()
     end
     --- func desc
@@ -805,6 +822,8 @@ function c.class.OwnedVehicle(net, data)
         -- Get Modifications
         self.Modifications = modifications
         self.State.Modifications = self.Modifications
+        self.DirtyFields.Modifications = true
+        self.EncodedModifications = nil
         self.SetUpdated()
     end
     --- func desc
@@ -834,9 +853,12 @@ function c.class.OwnedVehicle(net, data)
     ---@param v any
     self.SetFuel = function(v)
         local num = c.check.Number(v, 0, 100)
-        self.Fuel = num
-        self.State.Fuel = num
-        self.SetUpdated()
+        if self.Fuel ~= num then
+            self.Fuel = num
+            self.State.Fuel = num
+            self.DirtyFields.Fuel = true
+            self.SetUpdated()
+        end
     end
     --- func desc
     ---@param v any
