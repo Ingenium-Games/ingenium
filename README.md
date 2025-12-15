@@ -1,3 +1,5 @@
+For any and all data related things, please review the https://github.com/DurtyFree/gta-v-data-dumps repo as the source of truth.
+
 # ig.core
 
 Please only use the releases, cloneing may result in errors.
