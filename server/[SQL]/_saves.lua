@@ -3,6 +3,27 @@ if not c.sql then c.sql = {} end
 c.sql.save = {}
 -- ====================================================================================--
 
+--[[ Performance Monitoring Wrapper ]] --
+
+--- Wrapper for monitoring save operation performance
+---@param saveName string "Name of the save operation"
+---@param saveFunc function "The save function to execute"
+---@param cb function "Callback to execute after save"
+local function MonitoredSave(saveName, saveFunc, cb)
+    local startTime = os.clock()
+    local originalCb = cb
+    
+    saveFunc(function()
+        local elapsed = (os.clock() - startTime) * 1000
+        if elapsed > 100 then
+            print(string.format("^3[SQL WARNING] %s took %.2fms^7", saveName, elapsed))
+        else
+            print(string.format("^2[SQL] %s completed in %.2fms^7", saveName, elapsed))
+        end
+        if originalCb then originalCb() end
+    end)
+end
+
 --[[ Players ]] --
 
 local PlayerSaveData = -1
@@ -16,71 +37,77 @@ MySQL.Async.store(
 ---@param data table "xPlayer table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.User(data, cb)
-    if data then
+    if not data or not data.GetIsDirty() then 
+        if cb then cb() end
+        return 
+    end
+    
+    -- Other Variables.
+    local Health = data.GetHealth()
+    local Armour = data.GetArmour()
+    local Hunger = data.GetHunger()
+    local Thirst = data.GetThirst()
+    local Stress = data.GetStress()
+    -- Tables require JSON Encoding - Use cached versions
+    local Skills = data.GetEncodedSkills()
+    local Coords = data.GetEncodedCoords()
+    local Accounts = data.GetEncodedAccounts()
+    local Modifiers = data.GetEncodedModifiers()
+    local Inventory = data.GetEncodedInventory()
+    local Ammo = data.GetEncodedAmmo()
+    local Job = data.GetEncodedJob()
+    -- 
+    local Character_ID = data.GetCharacter_ID()
+    MySQL.Async.insert(PlayerSaveData, {
         -- Other Variables.
-        local Health = data.GetHealth()
-        local Armour = data.GetArmour()
-        local Hunger = data.GetHunger()
-        local Thirst = data.GetThirst()
-        local Stress = data.GetStress()
-        -- Tables require JSON Encoding.
-        local Skills = json.encode(data.GetSkills())
-        local Coords = json.encode(data.GetCoords())
-        local Accounts = json.encode(data.GetAccounts())
-        local Modifiers = json.encode(data.GetModifiers())
-        local Inventory = json.encode(data.CompressInventory())
-        local Ammo = json.encode(data.GetAmmos())
-        local Job = json.encode(data.GetJob())
-        -- 
-        local Character_ID = data.GetCharacter_ID()
-        MySQL.Async.insert(PlayerSaveData, {
-            -- Other Variables.
-            ["@Health"] = Health,
-            ["@Armour"] = Armour,
-            ["@Hunger"] = Hunger,
-            ["@Thirst"] = Thirst,
-            ["@Stress"] = Stress,
-            -- Table Informaiton.
-            ["@Skills"] = Skills,
-            ["@Coords"] = Coords,
-            ["@Accounts"] = Accounts,
-            ["@Modifiers"] = Modifiers,
-            ["@Inventory"] = Inventory,
-            ["@Ammo"] = Ammo,
+        ["@Health"] = Health,
+        ["@Armour"] = Armour,
+        ["@Hunger"] = Hunger,
+        ["@Thirst"] = Thirst,
+        ["@Stress"] = Stress,
+        -- Table Informaiton.
+        ["@Skills"] = Skills,
+        ["@Coords"] = Coords,
+        ["@Accounts"] = Accounts,
+        ["@Modifiers"] = Modifiers,
+        ["@Inventory"] = Inventory,
+        ["@Ammo"] = Ammo,
 
-            ["@Job"] = Job,
-            -- Where Conditions
-            ["@Character_ID"] = Character_ID
-        }, function(r)
-            -- do
-        end)
-        if cb then
-            cb()
-        end
+        ["@Job"] = Job,
+        -- Where Conditions
+        ["@Character_ID"] = Character_ID
+    }, function(r)
+        data.ClearDirty()
+    end)
+    if cb then
+        cb()
     end
 end
 
 --- Save All Characters from the xPLayer Table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.save.Users(cb)
+    local startTime = os.clock()
+    local saveCount = 0
     local xPlayers = c.data.GetPlayers()
     for k, v in pairs(xPlayers) do
         local data = c.data.GetPlayer(k)
-        if data then
+        if data and data.GetIsDirty() then
+            saveCount = saveCount + 1
             -- Other Variables.
             local Health = data.GetHealth()
             local Armour = data.GetArmour()
             local Hunger = data.GetHunger()
             local Thirst = data.GetThirst()
             local Stress = data.GetStress()
-            -- Tables require JSON Encoding.
-            local Skills = json.encode(data.GetSkills())
-            local Coords = json.encode(data.GetCoords())
-            local Accounts = json.encode(data.GetAccounts())
-            local Modifiers = json.encode(data.GetModifiers())
-            local Inventory = json.encode(data.CompressInventory())
-            local Ammo = json.encode(data.GetAmmos())
-            local Job = json.encode(data.GetJob())
+            -- Tables require JSON Encoding - Use cached versions
+            local Skills = data.GetEncodedSkills()
+            local Coords = data.GetEncodedCoords()
+            local Accounts = data.GetEncodedAccounts()
+            local Modifiers = data.GetEncodedModifiers()
+            local Inventory = data.GetEncodedInventory()
+            local Ammo = data.GetEncodedAmmo()
+            local Job = data.GetEncodedJob()
             -- 
             local Character_ID = data.GetCharacter_ID()
             MySQL.Async.insert(PlayerSaveData, {
@@ -102,10 +129,12 @@ function c.sql.save.Users(cb)
                 -- Where Conditions
                 ["@Character_ID"] = Character_ID
             }, function(r)
-                -- Do nothing.
+                data.ClearDirty()
             end)
         end
     end
+    local elapsed = (os.clock() - startTime) * 1000
+    print(string.format("^2[SQL] Saved %d players in %.2fms^7", saveCount, elapsed))
     if cb then
         cb()
     end
@@ -124,21 +153,77 @@ MySQL.Async.store(
 ---@param data table "xCar table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.Vehicle(data, cb)
-    if data then
-        if data.Owner ~= false then
-            if data.Save == true then
+    if not data or data.Owner == false or not data.Save or not data.GetIsDirty() then
+        if cb then cb() end
+        return
+    end
+    
+    local Fuel = data.GetFuel()
+    -- Booleans
+    local Parked = data.GetParked()
+    local Impound = data.GetImpound()
+    local Wanted = data.GetWanted()
+    -- Tables require JSON Encoding - Use cached versions
+    local Keys = data.GetEncodedKeys()
+    local Coords = data.GetEncodedCoords()
+    local Inventory = data.GetEncodedInventory()
+    --
+    local Condition = data.GetEncodedCondition()
+    local Modifications = data.GetEncodedModifications()
+    --
+    local Updated = c.func.Timestamp()
+    -- The Key
+    local Plate = data.GetPlate()
+    --
+    MySQL.Async.insert(VehicleSaveData, {
+        -- Other Variables.
+        ["@Fuel"] = Fuel,
+        -- Booleans
+        ["@Impound"] = Impound,
+        ["@Parked"] = Parked,
+        ["@Wanted"] = Wanted,
+        -- Table Informaiton.
+        ["@Keys"] = Keys,
+        ["@Coords"] = Coords,
+        ["@Condition"] = Condition,
+        ["@Modifications"] = Modifications,
+        ["@Inventory"] = Inventory,
+        ["@Updated"] = Updated,
+
+        -- Where conditions
+        ["@Plate"] = Plate
+    }, function(r)
+        data.Saved()
+        data.ClearDirty()
+    end)
+    if cb then
+        cb()
+    end
+end
+
+--- Save All Characters from the xPLayer Table.
+---@param cb function "To be called on SQL 'UPDATE' statements are completed."
+function c.sql.save.Vehicles(cb)
+    local startTime = os.clock()
+    local saveCount = 0
+    local xVehicles = c.data.GetVehicles()
+    for k, data in pairs(xVehicles) do
+        if data and data.Owner ~= false and data.Save == true and data.GetIsDirty() then
+            if DoesEntityExist(data.Entity) then
+                saveCount = saveCount + 1
+                -- Other Variables.
                 local Fuel = data.GetFuel()
                 -- Booleans
                 local Parked = data.GetParked()
                 local Impound = data.GetImpound()
                 local Wanted = data.GetWanted()
-                -- Tables require JSON Encoding.
-                local Keys = json.encode(data.GetKeys())
-                local Coords = json.encode(data.GetCoords())
-                local Inventory = json.encode(data.CompressInventory())
+                -- Tables require JSON Encoding - Use cached versions
+                local Keys = data.GetEncodedKeys()
+                local Coords = data.GetEncodedCoords()
+                local Inventory = data.GetEncodedInventory()
                 --
-                local Condition = json.encode(data.GetCondition())
-                local Modifications = json.encode(data.GetModifications())
+                local Condition = data.GetEncodedCondition()
+                local Modifications = data.GetEncodedModifications()
                 --
                 local Updated = c.func.Timestamp()
                 -- The Key
@@ -159,73 +244,19 @@ function c.sql.save.Vehicle(data, cb)
                     ["@Inventory"] = Inventory,
                     ["@Updated"] = Updated,
 
-                    -- Where conditions
+                    -- Where Conditions
                     ["@Plate"] = Plate
                 }, function(r)
                     data.Saved()
+                    data.ClearDirty()
                 end)
-                if cb then
-                    cb()
-                end
+            else
+                c.data.RemoveVehicle(k)
             end
         end
     end
-end
-
---- Save All Characters from the xPLayer Table.
----@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.save.Vehicles(cb)
-    local xVehicles = c.data.GetVehicles()
-    for k, data in pairs(xVehicles) do
-        if data then
-            if data.Owner ~= false then
-                if data.Save == true then
-                    if DoesEntityExist(data.Entity) then
-                        -- Other Variables.
-                        local Fuel = data.GetFuel()
-                        -- Booleans
-                        local Parked = data.GetParked()
-                        local Impound = data.GetImpound()
-                        local Wanted = data.GetWanted()
-                        -- Tables require JSON Encoding.
-                        local Keys = json.encode(data.GetKeys())
-                        local Coords = json.encode(data.GetCoords())
-                        local Inventory = json.encode(data.CompressInventory())
-                        --
-                        local Condition = json.encode(data.GetCondition())
-                        local Modifications = json.encode(data.GetModifications())
-                        --
-                        local Updated = c.func.Timestamp()
-                        -- The Key
-                        local Plate = data.GetPlate()
-                        --
-                        MySQL.Async.insert(VehicleSaveData, {
-                            -- Other Variables.
-                            ["@Fuel"] = Fuel,
-                            -- Booleans
-                            ["@Impound"] = Impound,
-                            ["@Parked"] = Parked,
-                            ["@Wanted"] = Wanted,
-                            -- Table Informaiton.
-                            ["@Keys"] = Keys,
-                            ["@Coords"] = Coords,
-                            ["@Condition"] = Condition,
-                            ["@Modifications"] = Modifications,
-                            ["@Inventory"] = Inventory,
-                            ["@Updated"] = Updated,
-
-                            -- Where Conditions
-                            ["@Plate"] = Plate
-                        }, function(r)
-                            data.Saved()
-                        end)
-                    else
-                        c.data.RemoveVehicle(k)
-                    end
-                end
-            end
-        end
-    end
+    local elapsed = (os.clock() - startTime) * 1000
+    print(string.format("^2[SQL] Saved %d vehicles in %.2fms^7", saveCount, elapsed))
     if cb then
         cb()
     end

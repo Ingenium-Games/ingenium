@@ -46,12 +46,18 @@ UPDATE TIMES :
     [1] Client updates the server every...
     [2] Server updates the Database every...
     [3] Server to Check players table every...
+    [4] Vehicle saves (less critical, parked state)
+    [5] Job account saves (rarely change)
+    [6] Object saves (world persistence)
 ]]--
 conf.clientsync = 15 * conf.sec
 conf.charactersync = 30 * conf.sec
 conf.serversync = 1.5 * conf.min
 conf.playersync = 2 * conf.min
 conf.revivesync = conf.min
+conf.vehiclesync = 5 * conf.min      -- Vehicles save less frequently
+conf.jobsync = 10 * conf.min         -- Jobs change infrequently
+conf.objectsync = 5 * conf.min       -- Objects change less often
 -- Recommended to not touch this one.
 -- As entities being removed from onesync trigger and event to clean up their respective tables, this is only used to ensure the data quaity of the tables, a checker if you will that will garbage collect as needed.
 conf.cleanup = 5 * conf.min

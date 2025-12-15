@@ -73,6 +73,16 @@ function c.class.Vehicle(net)
     --
     self.Spawned = false
     --
+    -- Dirty Flag System for Database Optimization
+    self.IsDirty = false
+    self.DirtyFields = {}
+    --
+    -- Cached JSON Encoding for Performance
+    self.EncodedInventory = nil
+    self.EncodedCondition = nil
+    self.EncodedModifications = nil
+    self.EncodedKeys = nil
+    --
     self.HasSpawned = function()
         self.Spawned = true
         self.State.Spawned = self.Spawned
@@ -99,6 +109,7 @@ function c.class.Vehicle(net)
     self.SetUpdated = function()
         self.Updated = c.func.Timestamp()
         self.Save = true
+        self.IsDirty = true
     end
     --- func desc
     self.GetModel = function()
@@ -141,13 +152,13 @@ function c.class.Vehicle(net)
     ---@param coords any
     self.SetCoords = function(coords)
         self.Coords = {
-            x = c.math.Decimals(t.x, 2),
-            y = c.math.Decimals(t.y, 2),
-            z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2),
-            rx = c.math.Decimals(t.rx, 2),
-            ry = c.math.Decimals(t.ry, 2),
-            rz = c.math.Decimals(t.rz, 2),
+            x = c.math.Decimals(coords.x, 2),
+            y = c.math.Decimals(coords.y, 2),
+            z = c.math.Decimals(coords.z, 2),
+            h = c.math.Decimals(coords.h, 2),
+            rx = c.math.Decimals(coords.rx, 2),
+            ry = c.math.Decimals(coords.ry, 2),
+            rz = c.math.Decimals(coords.rz, 2),
         }
         --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
@@ -166,6 +177,8 @@ function c.class.Vehicle(net)
     self.SetKeys = function(t)
         self.Keys = t
         self.State.Keys = self.Keys
+        self.DirtyFields.Keys = true
+        self.EncodedKeys = nil
         self.SetUpdated()
     end
     --- func desc
@@ -175,6 +188,8 @@ function c.class.Vehicle(net)
         if not self.CheckKeys(id) then
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
+            self.DirtyFields.Keys = true
+            self.EncodedKeys = nil
         else
             c.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
@@ -187,6 +202,8 @@ function c.class.Vehicle(net)
         if self.CheckKeys(id) then
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
+            self.DirtyFields.Keys = true
+            self.EncodedKeys = nil
         else
             c.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end        
@@ -212,6 +229,8 @@ function c.class.Vehicle(net)
     self.SetCondition = function(conditions)
         self.Condition = conditions
         self.State.Condition = self.Condition
+        self.DirtyFields.Condition = true
+        self.EncodedCondition = nil
         self.SetUpdated()
     end
     --- func desc
@@ -242,6 +261,8 @@ function c.class.Vehicle(net)
     self.SetModifications = function(modifications)
         self.Modifications = modifications
         self.State.Modifications = self.Modifications
+        self.DirtyFields.Modifications = true
+        self.EncodedModifications = nil
         self.SetUpdated()
     end
     --- func desc
@@ -271,9 +292,12 @@ function c.class.Vehicle(net)
     ---@param v any
     self.SetFuel = function(v)
         local num = c.check.Number(v, 0, 100)
-        self.Fuel = num
-        self.State.Fuel = num
-        self.SetUpdated()
+        if self.Fuel ~= num then
+            self.Fuel = num
+            self.State.Fuel = num
+            self.DirtyFields.Fuel = true
+            self.SetUpdated()
+        end
     end
     --- func desc
     ---@param v any
@@ -481,6 +505,63 @@ function c.class.Vehicle(net)
         return inv
     end
     -- ====================================================================================--
+    -- Dirty Flag Helper Methods
+    -- ====================================================================================--
+    self.GetIsDirty = function()
+        return self.IsDirty
+    end
+    --
+    self.ClearDirty = function()
+        self.IsDirty = false
+        self.DirtyFields = {}
+    end
+    --
+    self.MarkDirty = function(fieldName)
+        self.IsDirty = true
+        self.DirtyFields[fieldName] = true
+    end
+    --
+    -- ====================================================================================--
+    -- Cached JSON Encoding Methods
+    -- ====================================================================================--
+    self.GetEncodedInventory = function()
+        if not self.EncodedInventory or self.DirtyFields.Inventory then
+            self.EncodedInventory = json.encode(self.CompressInventory())
+            self.DirtyFields.Inventory = false
+        end
+        return self.EncodedInventory
+    end
+    --
+    self.GetEncodedCondition = function()
+        if not self.EncodedCondition or self.DirtyFields.Condition then
+            self.EncodedCondition = json.encode(self.GetCondition())
+            self.DirtyFields.Condition = false
+        end
+        return self.EncodedCondition
+    end
+    --
+    self.GetEncodedModifications = function()
+        if not self.EncodedModifications or self.DirtyFields.Modifications then
+            self.EncodedModifications = json.encode(self.GetModifications())
+            self.DirtyFields.Modifications = false
+        end
+        return self.EncodedModifications
+    end
+    --
+    self.GetEncodedKeys = function()
+        if not self.EncodedKeys or self.DirtyFields.Keys then
+            self.EncodedKeys = json.encode(self.GetKeys())
+            self.DirtyFields.Keys = false
+        end
+        return self.EncodedKeys
+    end
+    --
+    self.GetEncodedCoords = function()
+        -- Coords don't have a dedicated cache field, encode fresh each time
+        return json.encode(self.GetCoords())
+    end
+    --
+    -- ====================================================================================--
     SetVehicleNumberPlateText(self.Entity, self.Plate) 
     self.UnpackInventory(self.Inventory)
     self.HasSpawned()
@@ -553,10 +634,22 @@ function c.class.OwnedVehicle(net, data)
     self.State.Updated = self.Updated
     --
     self.Save = false
+    --
+    -- Dirty Flag System for Database Optimization
+    self.IsDirty = false
+    self.DirtyFields = {}
+    --
+    -- Cached JSON Encoding for Performance
+    self.EncodedInventory = nil
+    self.EncodedCondition = nil
+    self.EncodedModifications = nil
+    self.EncodedKeys = nil
+    --
     --- func desc
     self.SetUpdated = function()
         self.Updated = c.func.Timestamp()
         self.Save = true
+        self.IsDirty = true
     end
     --- func desc
     self.Saved = function()
@@ -619,13 +712,13 @@ function c.class.OwnedVehicle(net, data)
     ---@param coords any
     self.SetCoords = function(coords)
         self.Coords = {
-            x = c.math.Decimals(t.x, 2),
-            y = c.math.Decimals(t.y, 2),
-            z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2),
-            rx = c.math.Decimals(t.rx, 2),
-            ry = c.math.Decimals(t.ry, 2),
-            rz = c.math.Decimals(t.rz, 2),
+            x = c.math.Decimals(coords.x, 2),
+            y = c.math.Decimals(coords.y, 2),
+            z = c.math.Decimals(coords.z, 2),
+            h = c.math.Decimals(coords.h, 2),
+            rx = c.math.Decimals(coords.rx, 2),
+            ry = c.math.Decimals(coords.ry, 2),
+            rz = c.math.Decimals(coords.rz, 2),
         }
         --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
@@ -643,6 +736,8 @@ function c.class.OwnedVehicle(net, data)
     self.SetKeys = function(t)
         self.Keys = t
         self.State.Keys = self.Keys
+        self.DirtyFields.Keys = true
+        self.EncodedKeys = nil
         self.SetUpdated()
     end
     --- func desc
@@ -652,6 +747,8 @@ function c.class.OwnedVehicle(net, data)
         if not self.CheckKeys(id) then
             table.insert(self.Keys, id)
             self.State.Keys = self.Keys
+            self.DirtyFields.Keys = true
+            self.EncodedKeys = nil
             self.SetUpdated()
         else
             c.func.Debug_2("User: " .. id .. " Already has key to this vehicle.")
@@ -664,6 +761,8 @@ function c.class.OwnedVehicle(net, data)
         if self.CheckKeys(id) then
             table.remove(self.Keys, id)
             self.State.Keys = self.Keys
+            self.DirtyFields.Keys = true
+            self.EncodedKeys = nil
             self.SetUpdated()
         else
             c.func.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
@@ -690,6 +789,8 @@ function c.class.OwnedVehicle(net, data)
         -- Set Condition
         self.Condition = conditions
         self.State.Condition = self.Condition
+        self.DirtyFields.Condition = true
+        self.EncodedCondition = nil
         self.SetUpdated()
     end
     --- func desc
@@ -721,6 +822,8 @@ function c.class.OwnedVehicle(net, data)
         -- Get Modifications
         self.Modifications = modifications
         self.State.Modifications = self.Modifications
+        self.DirtyFields.Modifications = true
+        self.EncodedModifications = nil
         self.SetUpdated()
     end
     --- func desc
@@ -750,9 +853,12 @@ function c.class.OwnedVehicle(net, data)
     ---@param v any
     self.SetFuel = function(v)
         local num = c.check.Number(v, 0, 100)
-        self.Fuel = num
-        self.State.Fuel = num
-        self.SetUpdated()
+        if self.Fuel ~= num then
+            self.Fuel = num
+            self.State.Fuel = num
+            self.DirtyFields.Fuel = true
+            self.SetUpdated()
+        end
     end
     --- func desc
     ---@param v any
@@ -885,6 +991,8 @@ function c.class.OwnedVehicle(net, data)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
+            self.DirtyFields.Inventory = true
+            self.EncodedInventory = nil
             self.SetUpdated()
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
@@ -947,6 +1055,8 @@ function c.class.OwnedVehicle(net, data)
         else
             table.remove(self.Inventory, position)
         end
+        self.DirtyFields.Inventory = true
+        self.EncodedInventory = nil
         self.SetUpdated()
     end
     --- func desc
@@ -964,6 +1074,63 @@ function c.class.OwnedVehicle(net, data)
         end
         return inv
     end
+    -- ====================================================================================--
+    -- Dirty Flag Helper Methods
+    -- ====================================================================================--
+    self.GetIsDirty = function()
+        return self.IsDirty
+    end
+    --
+    self.ClearDirty = function()
+        self.IsDirty = false
+        self.DirtyFields = {}
+    end
+    --
+    self.MarkDirty = function(fieldName)
+        self.IsDirty = true
+        self.DirtyFields[fieldName] = true
+    end
+    --
+    -- ====================================================================================--
+    -- Cached JSON Encoding Methods
+    -- ====================================================================================--
+    self.GetEncodedInventory = function()
+        if not self.EncodedInventory or self.DirtyFields.Inventory then
+            self.EncodedInventory = json.encode(self.CompressInventory())
+            self.DirtyFields.Inventory = false
+        end
+        return self.EncodedInventory
+    end
+    --
+    self.GetEncodedCondition = function()
+        if not self.EncodedCondition or self.DirtyFields.Condition then
+            self.EncodedCondition = json.encode(self.GetCondition())
+            self.DirtyFields.Condition = false
+        end
+        return self.EncodedCondition
+    end
+    --
+    self.GetEncodedModifications = function()
+        if not self.EncodedModifications or self.DirtyFields.Modifications then
+            self.EncodedModifications = json.encode(self.GetModifications())
+            self.DirtyFields.Modifications = false
+        end
+        return self.EncodedModifications
+    end
+    --
+    self.GetEncodedKeys = function()
+        if not self.EncodedKeys or self.DirtyFields.Keys then
+            self.EncodedKeys = json.encode(self.GetKeys())
+            self.DirtyFields.Keys = false
+        end
+        return self.EncodedKeys
+    end
+    --
+    self.GetEncodedCoords = function()
+        -- Coords don't have a dedicated cache field, encode fresh each time
+        return json.encode(self.GetCoords())
+    end
+    --
     -- ====================================================================================--
     SetVehicleNumberPlateText(self.Entity, self.Plate) 
     self.UnpackInventory(self.Inventory)

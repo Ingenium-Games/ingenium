@@ -476,30 +476,43 @@ end
 
 -- Server to DB routine.
 function c.data.ServerSync()
-    local function Do()
+    -- Separate sync threads for different data types with different intervals
+    
+    -- User sync - most frequent (1.5 min)
+    local function UserSync()
         if c.data.ArePlayersActive() then
-            --
             c.sql.save.Users()
-            print("   ^7[^5SQL^7]: Users")
-            Citizen.Wait(conf.sec * 5)
-            --
-            c.sql.save.Vehicles()
-            print("   ^7[^5SQL^7]: Vehicles")
-            Citizen.Wait(conf.sec * 5)
-            --
-            c.sql.save.Jobs()
-            print("   ^7[^5SQL^7]: Jobs")
-            Citizen.Wait(conf.sec * 5)
-            --
-            c.sql.save.Objects()
-            print("   ^7[^5SQL^7]: Objects")
-            Citizen.Wait(conf.sec * 5)
-            --
-            print("   ^7[^3Server Sync Completed^7]")
         end
-        SetTimeout(conf.serversync, Do)
+        SetTimeout(conf.serversync, UserSync)
     end
-    SetTimeout(conf.serversync, Do)
+    SetTimeout(conf.serversync, UserSync)
+    
+    -- Vehicle sync - less frequent (5 min)
+    local function VehicleSync()
+        if c.data.ArePlayersActive() then
+            c.sql.save.Vehicles()
+        end
+        SetTimeout(conf.vehiclesync, VehicleSync)
+    end
+    SetTimeout(conf.vehiclesync, VehicleSync)
+    
+    -- Job sync - least frequent (10 min)
+    local function JobSync()
+        if c.data.ArePlayersActive() then
+            c.sql.save.Jobs()
+        end
+        SetTimeout(conf.jobsync, JobSync)
+    end
+    SetTimeout(conf.jobsync, JobSync)
+    
+    -- Object sync - moderate frequency (5 min)
+    local function ObjectSync()
+        if c.data.ArePlayersActive() then
+            c.sql.save.Objects()
+        end
+        SetTimeout(conf.objectsync, ObjectSync)
+    end
+    SetTimeout(conf.objectsync, ObjectSync)
 end
 
 -- Server to DB routine.
