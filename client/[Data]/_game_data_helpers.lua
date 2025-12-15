@@ -1,0 +1,161 @@
+--[[
+    Game Data Helper Functions (Client-side)
+    Requests data from server authority via callbacks
+    Clients cache data locally for performance
+--]]
+
+-- Local caches (populated on-demand from server)
+local tattooCache = nil
+local weaponCache = nil
+local vehicleCache = nil
+local modkitCache = nil
+
+-- ============================================
+-- TATTOO HELPERS (Client)
+-- ============================================
+
+---Get all tattoo data (cached from server)
+---@param callback function Callback function(tattoos)
+function c.tattoo.GetAll(callback)
+    if tattooCache then
+        callback(tattooCache)
+    else
+        c.callback.Await('ig:GameData:GetTattoos', function(data)
+            tattooCache = data
+            callback(data)
+        end)
+    end
+end
+
+---Get tattoos by zone
+---@param zone string Zone name
+---@param callback function Callback function(tattoos)
+function c.tattoo.GetByZone(zone, callback)
+    c.callback.Await('ig:GameData:GetTattoosByZone', function(data)
+        callback(data)
+    end, zone)
+end
+
+---Clear tattoo cache (force refresh from server)
+function c.tattoo.ClearCache()
+    tattooCache = nil
+end
+
+
+-- ============================================
+-- WEAPON HELPERS (Client)
+-- ============================================
+
+---Get all weapon data (cached from server)
+---@param callback function Callback function(weapons)
+function c.weapon.GetAll(callback)
+    if weaponCache then
+        callback(weaponCache)
+    else
+        c.callback.Await('ig:GameData:GetWeapons', function(data)
+            weaponCache = data
+            callback(data)
+        end)
+    end
+end
+
+---Get weapon by hash (from cache)
+---@param hash number Weapon hash
+---@return table|nil Weapon data or nil
+function c.weapon.GetByHash(hash)
+    if not weaponCache then return nil end
+    return weaponCache[tostring(hash)]
+end
+
+---Get weapon display name
+---@param hash number Weapon hash
+---@return string Display name or "Unknown"
+function c.weapon.GetDisplayName(hash)
+    if not weaponCache then return "Unknown" end
+    local weapon = weaponCache[tostring(hash)]
+    return weapon and weapon.label or "Unknown"
+end
+
+---Clear weapon cache (force refresh from server)
+function c.weapon.ClearCache()
+    weaponCache = nil
+end
+
+
+-- ============================================
+-- VEHICLE HELPERS (Client)
+-- ============================================
+
+---Get all vehicle data (cached from server)
+---@param callback function Callback function(vehicles)
+function c.vehicle.GetAll(callback)
+    if vehicleCache then
+        callback(vehicleCache)
+    else
+        c.callback.Await('ig:GameData:GetVehicles', function(data)
+            vehicleCache = data
+            callback(data)
+        end)
+    end
+end
+
+---Get vehicle by hash
+---@param hash number Vehicle hash
+---@param callback function Callback function(vehicle)
+function c.vehicle.GetByHash(hash, callback)
+    if vehicleCache and vehicleCache[tostring(hash)] then
+        callback(vehicleCache[tostring(hash)])
+    else
+        c.callback.Await('ig:GameData:GetVehicleByHash', function(data)
+            callback(data)
+        end, hash)
+    end
+end
+
+---Get vehicle display name (from cache)
+---@param hash number Vehicle hash
+---@return string Display name or "Unknown"
+function c.vehicle.GetDisplayName(hash)
+    if not vehicleCache then return "Unknown" end
+    local vehicle = vehicleCache[tostring(hash)]
+    return vehicle and vehicle.label or "Unknown"
+end
+
+---Clear vehicle cache (force refresh from server)
+function c.vehicle.ClearCache()
+    vehicleCache = nil
+end
+
+
+-- ============================================
+-- MODKIT HELPERS (Client)
+-- ============================================
+
+---Get all modkit data (cached from server)
+---@param callback function Callback function(modkits)
+function c.modkit.GetAll(callback)
+    if modkitCache then
+        callback(modkitCache)
+    else
+        c.callback.Await('ig:GameData:GetModkits', function(data)
+            modkitCache = data
+            callback(data)
+        end)
+    end
+end
+
+---Get modkit for vehicle
+---@param vehicleHash number Vehicle hash
+---@param callback function Callback function(modkit)
+function c.modkit.GetForVehicle(vehicleHash, callback)
+    c.callback.Await('ig:GameData:GetModkitForVehicle', function(data)
+        callback(data)
+    end, vehicleHash)
+end
+
+---Clear modkit cache (force refresh from server)
+function c.modkit.ClearCache()
+    modkitCache = nil
+end
+
+print('^2[Game Data] Client-side helpers loaded^7')
