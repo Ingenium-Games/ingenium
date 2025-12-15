@@ -73,6 +73,16 @@ function c.class.Vehicle(net)
     --
     self.Spawned = false
     --
+    -- Dirty Flag System for Database Optimization
+    self.IsDirty = false
+    self.DirtyFields = {}
+    --
+    -- Cached JSON Encoding for Performance
+    self.EncodedInventory = nil
+    self.EncodedCondition = nil
+    self.EncodedModifications = nil
+    self.EncodedKeys = nil
+    --
     self.HasSpawned = function()
         self.Spawned = true
         self.State.Spawned = self.Spawned
@@ -99,6 +109,7 @@ function c.class.Vehicle(net)
     self.SetUpdated = function()
         self.Updated = c.func.Timestamp()
         self.Save = true
+        self.IsDirty = true
     end
     --- func desc
     self.GetModel = function()
@@ -212,6 +223,8 @@ function c.class.Vehicle(net)
     self.SetCondition = function(conditions)
         self.Condition = conditions
         self.State.Condition = self.Condition
+        self.DirtyFields.Condition = true
+        self.EncodedCondition = nil
         self.SetUpdated()
     end
     --- func desc
@@ -242,6 +255,8 @@ function c.class.Vehicle(net)
     self.SetModifications = function(modifications)
         self.Modifications = modifications
         self.State.Modifications = self.Modifications
+        self.DirtyFields.Modifications = true
+        self.EncodedModifications = nil
         self.SetUpdated()
     end
     --- func desc
@@ -481,6 +496,63 @@ function c.class.Vehicle(net)
         return inv
     end
     -- ====================================================================================--
+    -- Dirty Flag Helper Methods
+    -- ====================================================================================--
+    self.GetIsDirty = function()
+        return self.IsDirty
+    end
+    --
+    self.ClearDirty = function()
+        self.IsDirty = false
+        self.DirtyFields = {}
+    end
+    --
+    self.MarkDirty = function(fieldName)
+        self.IsDirty = true
+        self.DirtyFields[fieldName] = true
+    end
+    --
+    -- ====================================================================================--
+    -- Cached JSON Encoding Methods
+    -- ====================================================================================--
+    self.GetEncodedInventory = function()
+        if not self.EncodedInventory or self.DirtyFields.Inventory then
+            self.EncodedInventory = json.encode(self.CompressInventory())
+            self.DirtyFields.Inventory = false
+        end
+        return self.EncodedInventory
+    end
+    --
+    self.GetEncodedCondition = function()
+        if not self.EncodedCondition or self.DirtyFields.Condition then
+            self.EncodedCondition = json.encode(self.GetCondition())
+            self.DirtyFields.Condition = false
+        end
+        return self.EncodedCondition
+    end
+    --
+    self.GetEncodedModifications = function()
+        if not self.EncodedModifications or self.DirtyFields.Modifications then
+            self.EncodedModifications = json.encode(self.GetModifications())
+            self.DirtyFields.Modifications = false
+        end
+        return self.EncodedModifications
+    end
+    --
+    self.GetEncodedKeys = function()
+        if not self.EncodedKeys or self.DirtyFields.Keys then
+            self.EncodedKeys = json.encode(self.GetKeys())
+            self.DirtyFields.Keys = false
+        end
+        return self.EncodedKeys
+    end
+    --
+    self.GetEncodedCoords = function()
+        -- Coords don't have a dedicated cache field, encode fresh each time
+        return json.encode(self.GetCoords())
+    end
+    --
+    -- ====================================================================================--
     SetVehicleNumberPlateText(self.Entity, self.Plate) 
     self.UnpackInventory(self.Inventory)
     self.HasSpawned()
@@ -553,10 +625,22 @@ function c.class.OwnedVehicle(net, data)
     self.State.Updated = self.Updated
     --
     self.Save = false
+    --
+    -- Dirty Flag System for Database Optimization
+    self.IsDirty = false
+    self.DirtyFields = {}
+    --
+    -- Cached JSON Encoding for Performance
+    self.EncodedInventory = nil
+    self.EncodedCondition = nil
+    self.EncodedModifications = nil
+    self.EncodedKeys = nil
+    --
     --- func desc
     self.SetUpdated = function()
         self.Updated = c.func.Timestamp()
         self.Save = true
+        self.IsDirty = true
     end
     --- func desc
     self.Saved = function()
@@ -885,6 +969,8 @@ function c.class.OwnedVehicle(net, data)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
+            self.DirtyFields.Inventory = true
+            self.EncodedInventory = nil
             self.SetUpdated()
         else
             c.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
@@ -947,6 +1033,8 @@ function c.class.OwnedVehicle(net, data)
         else
             table.remove(self.Inventory, position)
         end
+        self.DirtyFields.Inventory = true
+        self.EncodedInventory = nil
         self.SetUpdated()
     end
     --- func desc
@@ -964,6 +1052,63 @@ function c.class.OwnedVehicle(net, data)
         end
         return inv
     end
+    -- ====================================================================================--
+    -- Dirty Flag Helper Methods
+    -- ====================================================================================--
+    self.GetIsDirty = function()
+        return self.IsDirty
+    end
+    --
+    self.ClearDirty = function()
+        self.IsDirty = false
+        self.DirtyFields = {}
+    end
+    --
+    self.MarkDirty = function(fieldName)
+        self.IsDirty = true
+        self.DirtyFields[fieldName] = true
+    end
+    --
+    -- ====================================================================================--
+    -- Cached JSON Encoding Methods
+    -- ====================================================================================--
+    self.GetEncodedInventory = function()
+        if not self.EncodedInventory or self.DirtyFields.Inventory then
+            self.EncodedInventory = json.encode(self.CompressInventory())
+            self.DirtyFields.Inventory = false
+        end
+        return self.EncodedInventory
+    end
+    --
+    self.GetEncodedCondition = function()
+        if not self.EncodedCondition or self.DirtyFields.Condition then
+            self.EncodedCondition = json.encode(self.GetCondition())
+            self.DirtyFields.Condition = false
+        end
+        return self.EncodedCondition
+    end
+    --
+    self.GetEncodedModifications = function()
+        if not self.EncodedModifications or self.DirtyFields.Modifications then
+            self.EncodedModifications = json.encode(self.GetModifications())
+            self.DirtyFields.Modifications = false
+        end
+        return self.EncodedModifications
+    end
+    --
+    self.GetEncodedKeys = function()
+        if not self.EncodedKeys or self.DirtyFields.Keys then
+            self.EncodedKeys = json.encode(self.GetKeys())
+            self.DirtyFields.Keys = false
+        end
+        return self.EncodedKeys
+    end
+    --
+    self.GetEncodedCoords = function()
+        -- Coords don't have a dedicated cache field, encode fresh each time
+        return json.encode(self.GetCoords())
+    end
+    --
     -- ====================================================================================--
     SetVehicleNumberPlateText(self.Entity, self.Plate) 
     self.UnpackInventory(self.Inventory)

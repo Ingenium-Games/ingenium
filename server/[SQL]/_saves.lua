@@ -132,21 +132,77 @@ MySQL.Async.store(
 ---@param data table "xCar table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function c.sql.save.Vehicle(data, cb)
-    if data then
-        if data.Owner ~= false then
-            if data.Save == true then
+    if not data or data.Owner == false or not data.Save or not data.GetIsDirty() then
+        if cb then cb() end
+        return
+    end
+    
+    local Fuel = data.GetFuel()
+    -- Booleans
+    local Parked = data.GetParked()
+    local Impound = data.GetImpound()
+    local Wanted = data.GetWanted()
+    -- Tables require JSON Encoding - Use cached versions
+    local Keys = data.GetEncodedKeys()
+    local Coords = data.GetEncodedCoords()
+    local Inventory = data.GetEncodedInventory()
+    --
+    local Condition = data.GetEncodedCondition()
+    local Modifications = data.GetEncodedModifications()
+    --
+    local Updated = c.func.Timestamp()
+    -- The Key
+    local Plate = data.GetPlate()
+    --
+    MySQL.Async.insert(VehicleSaveData, {
+        -- Other Variables.
+        ["@Fuel"] = Fuel,
+        -- Booleans
+        ["@Impound"] = Impound,
+        ["@Parked"] = Parked,
+        ["@Wanted"] = Wanted,
+        -- Table Informaiton.
+        ["@Keys"] = Keys,
+        ["@Coords"] = Coords,
+        ["@Condition"] = Condition,
+        ["@Modifications"] = Modifications,
+        ["@Inventory"] = Inventory,
+        ["@Updated"] = Updated,
+
+        -- Where conditions
+        ["@Plate"] = Plate
+    }, function(r)
+        data.Saved()
+        data.ClearDirty()
+    end)
+    if cb then
+        cb()
+    end
+end
+
+--- Save All Characters from the xPLayer Table.
+---@param cb function "To be called on SQL 'UPDATE' statements are completed."
+function c.sql.save.Vehicles(cb)
+    local startTime = os.clock()
+    local saveCount = 0
+    local xVehicles = c.data.GetVehicles()
+    for k, data in pairs(xVehicles) do
+        if data and data.Owner ~= false and data.Save == true and data.GetIsDirty() then
+            if DoesEntityExist(data.Entity) then
+                saveCount = saveCount + 1
+                -- Other Variables.
                 local Fuel = data.GetFuel()
                 -- Booleans
                 local Parked = data.GetParked()
                 local Impound = data.GetImpound()
                 local Wanted = data.GetWanted()
-                -- Tables require JSON Encoding.
-                local Keys = json.encode(data.GetKeys())
-                local Coords = json.encode(data.GetCoords())
-                local Inventory = json.encode(data.CompressInventory())
+                -- Tables require JSON Encoding - Use cached versions
+                local Keys = data.GetEncodedKeys()
+                local Coords = data.GetEncodedCoords()
+                local Inventory = data.GetEncodedInventory()
                 --
-                local Condition = json.encode(data.GetCondition())
-                local Modifications = json.encode(data.GetModifications())
+                local Condition = data.GetEncodedCondition()
+                local Modifications = data.GetEncodedModifications()
                 --
                 local Updated = c.func.Timestamp()
                 -- The Key
@@ -167,73 +223,19 @@ function c.sql.save.Vehicle(data, cb)
                     ["@Inventory"] = Inventory,
                     ["@Updated"] = Updated,
 
-                    -- Where conditions
+                    -- Where Conditions
                     ["@Plate"] = Plate
                 }, function(r)
                     data.Saved()
+                    data.ClearDirty()
                 end)
-                if cb then
-                    cb()
-                end
+            else
+                c.data.RemoveVehicle(k)
             end
         end
     end
-end
-
---- Save All Characters from the xPLayer Table.
----@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.save.Vehicles(cb)
-    local xVehicles = c.data.GetVehicles()
-    for k, data in pairs(xVehicles) do
-        if data then
-            if data.Owner ~= false then
-                if data.Save == true then
-                    if DoesEntityExist(data.Entity) then
-                        -- Other Variables.
-                        local Fuel = data.GetFuel()
-                        -- Booleans
-                        local Parked = data.GetParked()
-                        local Impound = data.GetImpound()
-                        local Wanted = data.GetWanted()
-                        -- Tables require JSON Encoding.
-                        local Keys = json.encode(data.GetKeys())
-                        local Coords = json.encode(data.GetCoords())
-                        local Inventory = json.encode(data.CompressInventory())
-                        --
-                        local Condition = json.encode(data.GetCondition())
-                        local Modifications = json.encode(data.GetModifications())
-                        --
-                        local Updated = c.func.Timestamp()
-                        -- The Key
-                        local Plate = data.GetPlate()
-                        --
-                        MySQL.Async.insert(VehicleSaveData, {
-                            -- Other Variables.
-                            ["@Fuel"] = Fuel,
-                            -- Booleans
-                            ["@Impound"] = Impound,
-                            ["@Parked"] = Parked,
-                            ["@Wanted"] = Wanted,
-                            -- Table Informaiton.
-                            ["@Keys"] = Keys,
-                            ["@Coords"] = Coords,
-                            ["@Condition"] = Condition,
-                            ["@Modifications"] = Modifications,
-                            ["@Inventory"] = Inventory,
-                            ["@Updated"] = Updated,
-
-                            -- Where Conditions
-                            ["@Plate"] = Plate
-                        }, function(r)
-                            data.Saved()
-                        end)
-                    else
-                        c.data.RemoveVehicle(k)
-                    end
-                end
-            end
-        end
-    end
+    local elapsed = (os.clock() - startTime) * 1000
+    print(string.format("^2[SQL] Saved %d vehicles in %.2fms^7", saveCount, elapsed))
     if cb then
         cb()
     end
