@@ -1,0 +1,166 @@
+-- ====================================================================================--
+-- Client Run Checks - State Bag Change Handlers
+-- These events are triggered from server/[Onesync]/_sbch.lua when StateBags change
+-- Server enforces state updates to prevent client manipulation
+-- ====================================================================================--
+
+-- ====================================================================================--
+-- Player State Checks
+-- ====================================================================================--
+
+--- IsWanted State Check
+--- Triggered when the player's wanted status changes
+RegisterNetEvent("Client:RunChecks:IsWanted")
+AddEventHandler("Client:RunChecks:IsWanted", function()
+    local wanted = LocalPlayer.state.IsWanted
+    -- Handle wanted status changes
+    -- Example: Update UI, trigger wanted effects, etc.
+    if wanted then
+        -- Player is now wanted
+        c.func.Debug_3("Player is now wanted")
+    else
+        -- Player is no longer wanted
+        c.func.Debug_3("Player wanted status cleared")
+    end
+end)
+
+--- IsSupporter State Check
+--- Triggered when the player's supporter status changes
+RegisterNetEvent("Client:RunChecks:IsSupporter")
+AddEventHandler("Client:RunChecks:IsSupporter", function()
+    local isSupporter = LocalPlayer.state.IsSupporter
+    -- Handle supporter status changes
+    -- Example: Enable supporter features, update UI, etc.
+    if isSupporter then
+        c.func.Debug_3("Player is now a supporter")
+    else
+        c.func.Debug_3("Player supporter status removed")
+    end
+end)
+
+--- IsDead State Check
+--- Triggered when the player's death status changes
+RegisterNetEvent("Client:RunChecks:IsDead")
+AddEventHandler("Client:RunChecks:IsDead", function()
+    local isDead = LocalPlayer.state.IsDead
+    -- Handle death status changes
+    -- Example: Show death screen, respawn options, etc.
+    if isDead then
+        c.func.Debug_2("Player died")
+        -- Death handling is already in client/_death.lua
+    else
+        c.func.Debug_2("Player revived")
+        -- Revive handling
+    end
+end)
+
+--- IsCuffed State Check
+--- Triggered when the player's cuffed status changes
+RegisterNetEvent("Client:RunChecks:IsCuffed")
+AddEventHandler("Client:RunChecks:IsCuffed", function()
+    local isCuffed = LocalPlayer.state.IsCuffed
+    -- Handle cuffed status changes
+    -- Example: Restrict movement, play animations, etc.
+    if isCuffed then
+        c.func.Debug_3("Player cuffed")
+        -- Apply cuffed effects
+        local ped = PlayerPedId()
+        SetEnableHandcuffs(ped, true)
+        SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
+    else
+        c.func.Debug_3("Player uncuffed")
+        -- Remove cuffed effects
+        local ped = PlayerPedId()
+        SetEnableHandcuffs(ped, false)
+    end
+end)
+
+--- IsEscorted State Check
+--- Triggered when the player's escorted status changes
+RegisterNetEvent("Client:RunChecks:IsEscorted")
+AddEventHandler("Client:RunChecks:IsEscorted", function()
+    local isEscorted = LocalPlayer.state.IsEscorted
+    -- Handle escorted status changes
+    -- Example: Attach to escorting player, restrict actions, etc.
+    if isEscorted then
+        c.func.Debug_3("Player is being escorted")
+        -- Handle escort attachment
+    else
+        c.func.Debug_3("Player is no longer being escorted")
+        -- Detach from escort
+    end
+end)
+
+--- IsEscorting State Check
+--- Triggered when the player's escorting status changes
+RegisterNetEvent("Client:RunChecks:IsEscorting")
+AddEventHandler("Client:RunChecks:IsEscorting", function()
+    local isEscorting = LocalPlayer.state.IsEscorting
+    -- Handle escorting status changes
+    -- Example: Attach escorted player, restrict actions, etc.
+    if isEscorting then
+        c.func.Debug_3("Player is escorting someone")
+        -- Handle escort attachment
+    else
+        c.func.Debug_3("Player stopped escorting")
+        -- Detach escorted player
+    end
+end)
+
+--- IsSwimming State Check
+--- Triggered when the player's swimming status changes
+RegisterNetEvent("Client:RunChecks:IsSwimming")
+AddEventHandler("Client:RunChecks:IsSwimming", function()
+    local isSwimming = LocalPlayer.state.IsSwimming
+    -- Handle swimming status changes
+    -- Example: Apply swimming effects, update UI, etc.
+    if isSwimming then
+        c.func.Debug_3("Player is swimming")
+    else
+        c.func.Debug_3("Player stopped swimming")
+    end
+end)
+
+-- ====================================================================================--
+-- Banking/Economy State Checks
+-- ====================================================================================--
+
+--- Bank Account State Check
+--- Triggered when the player's bank balance changes
+RegisterNetEvent("Client:RunChecks:Bank")
+AddEventHandler("Client:RunChecks:Bank", function()
+    local bank = LocalPlayer.state.Bank
+    -- Handle bank balance changes
+    -- Example: Update UI, show notifications, etc.
+    c.func.Debug_3("Bank balance updated: $" .. tostring(bank or 0))
+    -- Trigger UI update event
+    TriggerEvent("Client:HUD:UpdateBank", bank)
+end)
+
+--- Cash State Check
+--- Triggered when the player's cash amount changes
+RegisterNetEvent("Client:RunChecks:Cash")
+AddEventHandler("Client:RunChecks:Cash", function()
+    local cash = LocalPlayer.state.Cash
+    -- Handle cash changes
+    -- Example: Update UI, show notifications, etc.
+    c.func.Debug_3("Cash updated: $" .. tostring(cash or 0))
+    -- Trigger UI update event
+    TriggerEvent("Client:HUD:UpdateCash", cash)
+end)
+
+--- Phone State Check
+--- Triggered when the player's phone number changes
+RegisterNetEvent("Client:RunChecks:Phone")
+AddEventHandler("Client:RunChecks:Phone", function()
+    local phone = LocalPlayer.state.Phone
+    -- Handle phone changes
+    -- Example: Update phone app, sync contacts, etc.
+    if phone then
+        c.func.Debug_3("Phone number updated: " .. tostring(phone))
+        -- Trigger phone system update
+        TriggerEvent("Client:Phone:UpdateNumber", phone)
+    end
+end)
+
+-- ====================================================================================--

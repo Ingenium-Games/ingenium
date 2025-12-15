@@ -130,6 +130,23 @@ AddEventHandler("Client:Character:Ready", function()
     exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")
     exports["AdvancedParking"]:Enable(true)
+    
+    -- RP Mode specific initialization (migrated from ig.base)
+    if conf.gamemode == "RP" then
+        local ped = PlayerPedId()
+        local ply = PlayerId()
+        
+        -- Set RP-specific native configurations
+        SetMaxWantedLevel(0)
+        SetPedMinGroundTimeForStungun(ped, 12500)
+        SetCanAttackFriendly(ped, true, false)
+        NetworkSetFriendlyFireOption(true)
+        SetWeaponsNoAutoswap(true)
+        SetWeaponsNoAutoreload(true)
+        RemoveMultiplayerHudCash()
+        
+        c.func.Debug_1("RP Mode character initialization complete")
+    end
     --
 end)
 
