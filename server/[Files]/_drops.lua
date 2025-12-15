@@ -5,38 +5,28 @@ c.drops = false -- dropped items table
 
 --[[    
             {
-                [ID] = {
-                    ["Coords"] = {0,0,0} -- Vecotr3
-                    ["Cash"] = NUMBER
-                    ["Inventory"] = {}
-                    ["Time"] = TIME  -- os.time() when created.
-                    ["Dropper"] = Character_ID
-                    ["Event"] = Trigger() 
+                [UUID] = {
+                    ["UUID"] = UUID String
+                    ["NetID"] = Network ID
+                    ["Coords"] = {x, y, z, h}
+                    ["Model"] = Model hash
+                    ["Inventory"] = [{Item, Quantity, Quality, Weapon, Meta}]
+                    ["Created"] = Timestamp
+                    ["Updated"] = Timestamp
                 },
     
             }
     ]] --
 
---- func desc
+--- Load drops from JSON (now handled by c.data.LoadJSONData)
 ---@param . any
 function c.drop.Load()
-    if c.json.Exists(conf.file.drops) then
-        local file = c.json.Read(conf.file.drops)
-        c.drops = file
-    else
+    -- Data is already loaded by c.data.LoadJSONData
+    -- This function kept for compatibility
+    if not c.drops then
         c.drops = {}
-        c.json.Write(conf.file.drops, c.drops)
-        c.drop.Update()
     end
-end
-
---- func desc
-function c.drop.Update()
-    local function Do()
-        c.json.Write(conf.file.drops, c.drops)
-        SetTimeout(conf.file.save, Do)
-    end
-    SetTimeout(conf.file.save, Do)
+    c.func.Debug_1("Drop system initialized")
 end
 
 --- func desc
@@ -59,30 +49,7 @@ function c.drop.Exist(id)
 end
 
 --- func desc
-function c.drop.Clean()
-    if type(c.drops) == "table" then
-        for k, v in pairs(c.drops) do
-            if v then
-                if (os.time() - v.Time) >= conf.file.cleanup then
-                    table.remove(c.drops, k)
-                end
-            end
-        end
-    end
-end
-
---- func desc
-function c.drop.CleanUp()
-    local function Do()
-        c.drop.Clean()
-        SetTimeout(conf.file.cleanup, Do)
-    end
-    SetTimeout(conf.file.cleanup, Do)
-end
-
---- func desc
 function c.drop.Resync()
     local drops = c.drops
     TriggerClientEvent("Client:Drops:Update", -1, drops)
 end
-

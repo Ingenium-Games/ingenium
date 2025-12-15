@@ -138,6 +138,14 @@ conf.callback.maxRequestsPerSecond = 10         -- Max 10 requests/second per pl
 conf.callback.rateLimitWindow = 1 * conf.sec    -- 1 second window
 conf.callback.cleanupInterval = 60 * conf.sec   -- Cleanup every 60 seconds
 conf.callback.staleThreshold = 60 * conf.sec    -- 60 seconds of inactivity
+--[[
+DROP SYSTEM CONFIGURATION
+]]--
+conf.drops = {}
+conf.drops.cleanup_enabled = false              -- Do not auto-delete old drops by default
+conf.drops.cleanup_time = 30 * conf.min         -- Time before cleanup if enabled (30 minutes)
+conf.drops.default_model = `v_ret_gc_box1`      -- Default prop model (backticks auto-hash)
+conf.drops.active_timeout = 5 * conf.min        -- Time before moving back to c.drops if no players nearby
 -- ====================================================================================--
 conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
 conf.lock = nil
