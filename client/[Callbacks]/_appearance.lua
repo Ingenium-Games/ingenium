@@ -38,13 +38,20 @@ RegisterServerCallback({
             tattoos = c.callback.Await('ig:GameData:GetTattoos')
         end
         
+        -- Get pricing data from server if pricing enabled
+        local pricing = nil
+        if config.jobName then
+            pricing = c.callback.Await('Server:Appearance:GetPricing', config.jobName)
+        end
+        
         -- Send data to NUI
         TriggerEvent("Client:Nui:Message", "appearance:open", {
             appearance = currentAppearance,
             constants = constants,
             peds = peds,
             tattoos = tattoos,
-            config = config
+            config = config,
+            pricing = pricing
         })
     end
 })

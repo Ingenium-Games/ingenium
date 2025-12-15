@@ -67,24 +67,33 @@
         
         <!-- Action Buttons -->
         <div class="appearance-footer">
-          <button
-            @click="handleCancel"
-            class="action-btn cancel-btn"
-            :disabled="appearanceStore.isLoading"
-            aria-label="Cancel"
-          >
-            Cancel
-          </button>
-          <button
-            @click="handleSave"
-            class="action-btn save-btn"
-            :disabled="appearanceStore.isLoading"
-            aria-label="Save"
-          >
-            Save
-          </button>
+          <div v-if="appearanceStore.pricingEnabled" class="cost-summary">
+            <span class="cost-label">Estimated Cost:</span>
+            <span class="cost-amount">${{ appearanceStore.currentCost.toLocaleString() }}</span>
+          </div>
+          <div class="footer-actions">
+            <button
+              @click="handleCancel"
+              class="action-btn cancel-btn"
+              :disabled="appearanceStore.isLoading"
+              aria-label="Cancel"
+            >
+              Cancel
+            </button>
+            <button
+              @click="handleSave"
+              class="action-btn save-btn"
+              :disabled="appearanceStore.isLoading"
+              aria-label="Save"
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
+      
+      <!-- Cost Confirmation Modal -->
+      <CostConfirmationModal />
     </div>
   </Transition>
 </template>
@@ -101,6 +110,7 @@ import ClothingEditor from './ClothingEditor.vue'
 import AccessoriesEditor from './AccessoriesEditor.vue'
 import TattooEditor from './TattooEditor.vue'
 import CameraControls from './CameraControls.vue'
+import CostConfirmationModal from './CostConfirmationModal.vue'
 
 const appearanceStore = useAppearanceStore()
 
@@ -354,7 +364,35 @@ function handleCancel() {
   padding: 16px 25px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.cost-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(66, 135, 245, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(66, 135, 245, 0.3);
+}
+
+.cost-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cost-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4287f5;
+}
+
+.footer-actions {
+  display: flex;
   gap: 12px;
 }
 
