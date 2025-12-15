@@ -29,21 +29,11 @@ ROW_FORMAT=DYNAMIC
 --- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
 function c.sql.obj.GetObjects(cb)
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM `objects`", {
-    }, function(data)
-        for i=1, #data, 1 do
-            local j = data[i]
-            c.objects[i] = j
-        end
-        IsBusy = false
-    end)
-    --
-    while IsBusy do
-        Citizen.Wait(0)
+    local result = c.sql.Query("SELECT * FROM `objects`", {})
+    for i=1, #result, 1 do
+        local j = result[i]
+        c.objects[i] = j
     end
-    --
     if cb then
         cb()
     end
@@ -51,27 +41,14 @@ end
 --
 
 function c.sql.obj.Add(data, cb)
-    local IsBusy = true
     local Data = data
-    MySQL.Async.execute("INSERT INTO `objects` (`UUID`, `Model`, `Coords`, `Meta`, `States`, `Inventory`, `Created`, `Updated`) VALUES (@UUID, @Model, @Coords, @Meta, @States, @Inventory, @Created, @Updated);",{
-        ["@UUID"] = Data.UUID,
-        ["@Model"] = Data.Model,
-        ["@Coords"] = Data.Coords,
-        ["@Meta"] = Data.Meta,
-        ["@States"] = Data.States,
-        ["@Inventory"] = Data.Inventory,
-        ["@Created"] = c.func.Timestamp(),
-        ["@Updated"] = c.func.Timestamp(),
-    }, function(r)
-        IsBusy = false
-    end)
-    --
-    while IsBusy do
-        Citizen.Wait(0)
-    end
-    --
-    if cb then
-        cb()
-    end
+    c.sql.Insert(
+        "INSERT INTO `objects` (`UUID`, `Model`, `Coords`, `Meta`, `States`, `Inventory`, `Created`, `Updated`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
+        {Data.UUID, Data.Model, Data.Coords, Data.Meta, Data.States, Data.Inventory, c.func.Timestamp(), c.func.Timestamp()},
+        function(insertId)
+            if cb then
+                cb(insertId)
+            end
+        end)
 end
 --
