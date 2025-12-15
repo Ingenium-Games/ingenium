@@ -13,13 +13,14 @@ function c.data.Initilize()
         [3] = "DB: Finding Job Accounts or Creating them;",
         [4] = "DB: Job Accounts have been Generated;",
         [5] = "DB: Job Objects Created and Added;",
-        [6] = "DB: Loading Data File - GSR;",
-        [7] = "DB: Loading Data File - Drops;",
-        [8] = "DB: Loading Data File - Pickups;",
-        [9] = "DB: Loading Data File - Notes;",
-        [10] = "DB: Loading Data File - Names;",
-        [11] = "DB: Reset Cars to Parked;",
-        [12] = "DB: "
+        [6] = "DB: Loading JSON Data Files;",
+        [7] = "DB: Loading Data File - GSR;",
+        [8] = "DB: Loading Data File - Drops;",
+        [9] = "DB: Loading Data File - Pickups;",
+        [10] = "DB: Loading Data File - Notes;",
+        [11] = "DB: Loading Data File - Names;",
+        [12] = "DB: Reset Cars to Parked;",
+        [13] = "DB: "
     }
     --
     local function cb()
@@ -41,6 +42,8 @@ function c.data.Initilize()
         -- [5] -- Not so much a SQL function, but dependant on it being conducted in order.
         c.data.CreateJobObjects()
         cb()
+        -- [5.5] -- Load JSON data files synchronously before individual loaders
+        c.data.LoadJSONData(cb)
         -- [6] gunshot residue data table
         c.gsr.Load()
         cb()

@@ -37,30 +37,24 @@ function c.json.Write(filename, data)
     print(('^3[Data] Saved %s (%d bytes)^7'):format(path, #encoded))
 end
 
--- Load all static data on resource start
-CreateThread(function()
-    print('^3[Data] Loading JSON files into memory...^7')
+--- Load data from JSON or fallback to defaults
+--- This function is called during initialization and runs synchronously
+---@param callback function Optional callback to execute after loading
+function c.data.LoadJSONData(callback)
+    print('^3[Data] Loading dynamic JSON files into memory...^7')
     
-    -- Static reference data (loaded once, never modified)
-    c.items = c.json.Load('Items') or {}
-    c.doors = c.json.Load('Doors') or {}
-    c.names = c.json.Load('Names') or {}
-    c.jobs_data = c.json.Load('Jobs') or {}
+    -- Note: Static data (Items, Doors) are defined in their respective Lua files
+    -- and written to JSON during script load. They don't need to be loaded here.
     
     -- Dynamic runtime data (loaded and saved periodically)
+    -- If JSON doesn't exist, initialize with empty tables
     c.drops = c.json.Load('Drops') or {}
     c.picks = c.json.Load('Pickups') or {}
     c.scenes = c.json.Load('Scenes') or {}
     c.notes = c.json.Load('Notes') or {}
     c.gsrs = c.json.Load('GSR') or {}
     
-    -- Count items loaded
-    local itemCount = 0
-    for _ in pairs(c.items) do itemCount = itemCount + 1 end
+    print('^2[Data] Dynamic JSON data loading complete^7')
     
-    local doorCount = 0
-    for _ in pairs(c.doors) do doorCount = doorCount + 1 end
-    
-    print(('^2[Data] Loaded %d items, %d doors into memory^7'):format(itemCount, doorCount))
-    print('^2[Data] All JSON files loaded successfully^7')
-end)
+    if callback then callback() end
+end
