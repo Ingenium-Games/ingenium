@@ -65,14 +65,14 @@ if IS_SERVER then
 	-- Ticket Validation System
 	-- ====================================================================================--
 	local issuedTickets = {}
-	local TICKET_VALIDITY_MS = 30000 -- 30 seconds
-	local TICKET_LENGTH = 20
+	local TICKET_VALIDITY_MS = conf.callback.ticketValidity
+	local TICKET_LENGTH = conf.callback.ticketLength
 	
 	-- Rate Limiting Configuration
 	local rateLimitConfig = {
-		enabled = true,
-		maxRequestsPerSecond = 10,
-		windowMs = 1000
+		enabled = conf.callback.rateLimitEnabled,
+		maxRequestsPerSecond = conf.callback.maxRequestsPerSecond,
+		windowMs = conf.callback.rateLimitWindow
 	}
 	local requestCounts = {}
 	
@@ -100,7 +100,7 @@ if IS_SERVER then
 	-- Clean up stale rate limit data
 	local function cleanupRateLimitData()
 		local now = GetGameTimer()
-		local STALE_THRESHOLD = 60000 -- 60 seconds of inactivity
+		local STALE_THRESHOLD = conf.callback.staleThreshold
 		for key, data in pairs(requestCounts) do
 			if now - data.windowStart > STALE_THRESHOLD then
 				requestCounts[key] = nil
@@ -185,10 +185,10 @@ if IS_SERVER then
 		return true
 	end
 	
-	-- Periodic cleanup of expired tickets and stale rate limit data (every 60 seconds)
+	-- Periodic cleanup of expired tickets and stale rate limit data
 	CreateThread(function()
 		while true do
-			Wait(60000)
+			Wait(conf.callback.cleanupInterval)
 			cleanupExpiredTickets()
 			cleanupRateLimitData()
 		end

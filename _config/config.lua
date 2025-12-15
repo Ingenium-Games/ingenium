@@ -119,6 +119,25 @@ conf.enablejobpayroll = true
 conf.enablejobcenter = false
 conf.enableduty = true
 conf.paycycle = conf.min * 15
+--[[
+CALLBACK SECURITY:
+    -- Ticket validation settings for secure callbacks
+    -- [1] Ticket validity duration (how long before a ticket expires)
+    -- [2] Ticket length (number of characters in generated tickets)
+    -- [3] Rate limiting enabled (set to false to disable)
+    -- [4] Maximum callback requests per second per player
+    -- [5] Rate limit window duration
+    -- [6] Cleanup interval for expired tickets and stale data
+    -- [7] Stale data threshold (inactivity period before cleanup)
+]]--
+conf.callback = {}
+conf.callback.ticketValidity = 30 * conf.sec    -- 30 seconds
+conf.callback.ticketLength = 20                 -- 20 character tickets
+conf.callback.rateLimitEnabled = true           -- Enable rate limiting
+conf.callback.maxRequestsPerSecond = 10         -- Max 10 requests/second per player
+conf.callback.rateLimitWindow = 1 * conf.sec    -- 1 second window
+conf.callback.cleanupInterval = 60 * conf.sec   -- Cleanup every 60 seconds
+conf.callback.staleThreshold = 60 * conf.sec    -- 60 seconds of inactivity
 -- ====================================================================================--
 conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
 conf.lock = nil
