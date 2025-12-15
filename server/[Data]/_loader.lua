@@ -60,25 +60,33 @@ function c.data.LoadJSONData(callback)
     c.weapons = c.json.Load('weapons') or {}
     c.vehicles = c.json.Load('vehicles') or {}
     c.modkits = c.json.Load('modkits') or {}
+    c.peds = c.json.Load('peds') or {}
+    c.appearance_constants = c.json.Load('appearance-constants') or {}
     
     -- Count loaded items
     local counts = {
         tattoos = 0,
         weapons = 0,
         vehicles = 0,
-        modkits = 0
+        modkits = 0,
+        peds = 0
     }
     for _ in pairs(c.tattoos) do counts.tattoos = counts.tattoos + 1 end
     for _ in pairs(c.weapons) do counts.weapons = counts.weapons + 1 end
     for _ in pairs(c.vehicles) do counts.vehicles = counts.vehicles + 1 end
     for _ in pairs(c.modkits) do counts.modkits = counts.modkits + 1 end
+    for _ in pairs(c.peds) do counts.peds = counts.peds + 1 end
     
-    if counts.tattoos > 0 or counts.weapons > 0 or counts.vehicles > 0 or counts.modkits > 0 then
+    if counts.tattoos > 0 or counts.weapons > 0 or counts.vehicles > 0 or counts.modkits > 0 or counts.peds > 0 then
         print('^2[Data] Game data loaded:^7')
         if counts.tattoos > 0 then print(('  ^3- Tattoos: %d^7'):format(counts.tattoos)) end
         if counts.weapons > 0 then print(('  ^3- Weapons: %d^7'):format(counts.weapons)) end
         if counts.vehicles > 0 then print(('  ^3- Vehicles: %d^7'):format(counts.vehicles)) end
         if counts.modkits > 0 then print(('  ^3- Mod Kits: %d^7'):format(counts.modkits)) end
+        if counts.peds > 0 then print(('  ^3- Peds: %d^7'):format(counts.peds)) end
+        if c.appearance_constants and c.appearance_constants.eyeColors then 
+            print(('  ^3- Appearance Constants: Loaded^7')) 
+        end
     end
     
     print('^2[Data] Dynamic JSON data loading complete^7')

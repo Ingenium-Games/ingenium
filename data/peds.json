@@ -1,0 +1,5742 @@
+{
+  "1413662315": {
+    "hash": 1413662315,
+    "name": "a_m_m_acult_01",
+    "displayName": "Altruist Cult Mid-Age Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3513928062": {
+    "hash": 3513928062,
+    "name": "a_m_m_afriamer_01",
+    "displayName": "African American Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1077785853": {
+    "hash": 1077785853,
+    "name": "a_m_m_beach_01",
+    "displayName": "Beach Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2021631368": {
+    "hash": 2021631368,
+    "name": "a_m_m_beach_02",
+    "displayName": "Beach Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1423699487": {
+    "hash": 1423699487,
+    "name": "a_m_m_bevhills_01",
+    "displayName": "Beverly Hills Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1068876755": {
+    "hash": 1068876755,
+    "name": "a_m_m_bevhills_02",
+    "displayName": "Beverly Hills Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2120901815": {
+    "hash": 2120901815,
+    "name": "a_m_m_business_01",
+    "displayName": "Business Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4188468543": {
+    "hash": 4188468543,
+    "name": "a_m_m_eastsa_01",
+    "displayName": "East SA Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "131961260": {
+    "hash": 131961260,
+    "name": "a_m_m_eastsa_02",
+    "displayName": "East SA Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2488675799": {
+    "hash": 2488675799,
+    "name": "a_m_m_farmer_01",
+    "displayName": "Farmer",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1641152947": {
+    "hash": 1641152947,
+    "name": "a_m_m_fatlatin_01",
+    "displayName": "Fat Latino Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "115168927": {
+    "hash": 115168927,
+    "name": "a_m_m_genfat_01",
+    "displayName": "General Fat Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "330231874": {
+    "hash": 330231874,
+    "name": "a_m_m_genfat_02",
+    "displayName": "General Fat Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2850754114": {
+    "hash": 2850754114,
+    "name": "a_m_m_golfer_01",
+    "displayName": "Golfer Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1809430156": {
+    "hash": 1809430156,
+    "name": "a_m_m_hasjew_01",
+    "displayName": "Hasidic Jew Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1822107721": {
+    "hash": 1822107721,
+    "name": "a_m_m_hillbilly_01",
+    "displayName": "Hillbilly Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2064532783": {
+    "hash": 2064532783,
+    "name": "a_m_m_hillbilly_02",
+    "displayName": "Hillbilly Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3721046572": {
+    "hash": 3721046572,
+    "name": "a_m_m_indian_01",
+    "displayName": "Indian Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3512565361": {
+    "hash": 3512565361,
+    "name": "a_m_m_ktown_01",
+    "displayName": "Korean Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "803106487": {
+    "hash": 803106487,
+    "name": "a_m_m_malibu_01",
+    "displayName": "Malibu Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3716251309": {
+    "hash": 3716251309,
+    "name": "a_m_m_mexcntry_01",
+    "displayName": "Mexican Rural",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2992445106": {
+    "hash": 2992445106,
+    "name": "a_m_m_mexlabor_01",
+    "displayName": "Mexican Labourer",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1746653202": {
+    "hash": 1746653202,
+    "name": "a_m_m_og_boss_01",
+    "displayName": "OG Boss",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3972697109": {
+    "hash": 3972697109,
+    "name": "a_m_m_paparazzi_01",
+    "displayName": "Paparazzi Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2849617566": {
+    "hash": 2849617566,
+    "name": "a_m_m_polynesian_01",
+    "displayName": "Polynesian",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2534589327": {
+    "hash": 2534589327,
+    "name": "a_m_m_prolhost_01",
+    "displayName": "Prologue Host Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1001210244": {
+    "hash": 1001210244,
+    "name": "a_m_m_rurmeth_01",
+    "displayName": "Rural Meth Addict Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1328415626": {
+    "hash": 1328415626,
+    "name": "a_m_m_salton_01",
+    "displayName": "Salton Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1626646295": {
+    "hash": 1626646295,
+    "name": "a_m_m_salton_02",
+    "displayName": "Salton Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2995538501": {
+    "hash": 2995538501,
+    "name": "a_m_m_salton_03",
+    "displayName": "Salton Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2521108919": {
+    "hash": 2521108919,
+    "name": "a_m_m_salton_04",
+    "displayName": "Salton Male 4",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3654768780": {
+    "hash": 3654768780,
+    "name": "a_m_m_skater_01",
+    "displayName": "Skater Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "32417469": {
+    "hash": 32417469,
+    "name": "a_m_m_skidrow_01",
+    "displayName": "Skid Row Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "193817059": {
+    "hash": 193817059,
+    "name": "a_m_m_socenlat_01",
+    "displayName": "South Central Latino Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1750583735": {
+    "hash": 1750583735,
+    "name": "a_m_m_soucent_01",
+    "displayName": "South Central Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2674735073": {
+    "hash": 2674735073,
+    "name": "a_m_m_soucent_02",
+    "displayName": "South Central Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2346291386": {
+    "hash": 2346291386,
+    "name": "a_m_m_soucent_03",
+    "displayName": "South Central Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3271294718": {
+    "hash": 3271294718,
+    "name": "a_m_m_soucent_04",
+    "displayName": "South Central Male 4",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3265820418": {
+    "hash": 3265820418,
+    "name": "a_m_m_stlat_02",
+    "displayName": "Latino Street Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1416254276": {
+    "hash": 1416254276,
+    "name": "a_m_m_tennis_01",
+    "displayName": "Tennis Player Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3365863812": {
+    "hash": 3365863812,
+    "name": "a_m_m_tourist_01",
+    "displayName": "Tourist Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "516505552": {
+    "hash": 516505552,
+    "name": "a_m_m_tramp_01",
+    "displayName": "Tramp Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1404403376": {
+    "hash": 1404403376,
+    "name": "a_m_m_trampbeac_01",
+    "displayName": "Beach Tramp Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3773208948": {
+    "hash": 3773208948,
+    "name": "a_m_m_tranvest_01",
+    "displayName": "Transvestite Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4144940484": {
+    "hash": 4144940484,
+    "name": "a_m_m_tranvest_02",
+    "displayName": "Transvestite Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1430544400": {
+    "hash": 1430544400,
+    "name": "a_m_o_acult_01",
+    "displayName": "Altruist Cult Old Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1268862154": {
+    "hash": 1268862154,
+    "name": "a_m_o_acult_02",
+    "displayName": "Altruist Cult Old Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2217202584": {
+    "hash": 2217202584,
+    "name": "a_m_o_beach_01",
+    "displayName": "Beach Old Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2908022696": {
+    "hash": 2908022696,
+    "name": "a_m_o_genstreet_01",
+    "displayName": "General Street Old Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "355916122": {
+    "hash": 355916122,
+    "name": "a_m_o_ktown_01",
+    "displayName": "Korean Old Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "539004493": {
+    "hash": 539004493,
+    "name": "a_m_o_salton_01",
+    "displayName": "Salton Old Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "718836251": {
+    "hash": 718836251,
+    "name": "a_m_o_soucent_01",
+    "displayName": "South Central Old Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1082572151": {
+    "hash": 1082572151,
+    "name": "a_m_o_soucent_02",
+    "displayName": "South Central Old Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "238213328": {
+    "hash": 238213328,
+    "name": "a_m_o_soucent_03",
+    "displayName": "South Central Old Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "390939205": {
+    "hash": 390939205,
+    "name": "a_m_o_tramp_01",
+    "displayName": "Tramp Old Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3043264555": {
+    "hash": 3043264555,
+    "name": "a_m_y_acult_01",
+    "displayName": "Altruist Cult Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2162532142": {
+    "hash": 2162532142,
+    "name": "a_m_y_acult_02",
+    "displayName": "Altruist Cult Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3523131524": {
+    "hash": 3523131524,
+    "name": "a_m_y_beach_01",
+    "displayName": "Beach Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "600300561": {
+    "hash": 600300561,
+    "name": "a_m_y_beach_02",
+    "displayName": "Beach Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3886638041": {
+    "hash": 3886638041,
+    "name": "a_m_y_beach_03",
+    "displayName": "Beach Young Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2114544056": {
+    "hash": 2114544056,
+    "name": "a_m_y_beachvesp_01",
+    "displayName": "Vespucci Beach Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3394697810": {
+    "hash": 3394697810,
+    "name": "a_m_y_beachvesp_02",
+    "displayName": "Vespucci Beach Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1982350912": {
+    "hash": 1982350912,
+    "name": "a_m_y_bevhills_01",
+    "displayName": "Beverly Hills Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1720428295": {
+    "hash": 1720428295,
+    "name": "a_m_y_bevhills_02",
+    "displayName": "Beverly Hills Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "933205398": {
+    "hash": 933205398,
+    "name": "a_m_y_breakdance_01",
+    "displayName": "Breakdancer Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2597531625": {
+    "hash": 2597531625,
+    "name": "a_m_y_busicas_01",
+    "displayName": "Business Casual",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3382649284": {
+    "hash": 3382649284,
+    "name": "a_m_y_business_01",
+    "displayName": "Business Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3014915558": {
+    "hash": 3014915558,
+    "name": "a_m_y_business_02",
+    "displayName": "Business Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2705543429": {
+    "hash": 2705543429,
+    "name": "a_m_y_business_03",
+    "displayName": "Business Young Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2813792322": {
+    "hash": 2813792322,
+    "name": "a_m_y_clubcust_01",
+    "displayName": "a_m_y_clubcust_01",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3324988722": {
+    "hash": 3324988722,
+    "name": "a_m_y_clubcust_02",
+    "displayName": "a_m_y_clubcust_02",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3572886207": {
+    "hash": 3572886207,
+    "name": "a_m_y_clubcust_03",
+    "displayName": "a_m_y_clubcust_03",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4257633223": {
+    "hash": 4257633223,
+    "name": "a_m_y_cyclist_01",
+    "displayName": "Cyclist Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4282288299": {
+    "hash": 4282288299,
+    "name": "a_m_y_dhill_01",
+    "displayName": "Downhill Cyclist",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "766375082": {
+    "hash": 766375082,
+    "name": "a_m_y_downtown_01",
+    "displayName": "Downtown Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2756120947": {
+    "hash": 2756120947,
+    "name": "a_m_y_eastsa_01",
+    "displayName": "East SA Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "377976310": {
+    "hash": 377976310,
+    "name": "a_m_y_eastsa_02",
+    "displayName": "East SA Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2010389054": {
+    "hash": 2010389054,
+    "name": "a_m_y_epsilon_01",
+    "displayName": "Epsilon Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2860711835": {
+    "hash": 2860711835,
+    "name": "a_m_y_epsilon_02",
+    "displayName": "Epsilon Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3519864886": {
+    "hash": 3519864886,
+    "name": "a_m_y_gay_01",
+    "displayName": "Gay Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2775713665": {
+    "hash": 2775713665,
+    "name": "a_m_y_gay_02",
+    "displayName": "Gay Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2557996913": {
+    "hash": 2557996913,
+    "name": "a_m_y_genstreet_01",
+    "displayName": "General Street Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "891398354": {
+    "hash": 891398354,
+    "name": "a_m_y_genstreet_02",
+    "displayName": "General Street Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3609190705": {
+    "hash": 3609190705,
+    "name": "a_m_y_golfer_01",
+    "displayName": "Golfer Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3782053633": {
+    "hash": 3782053633,
+    "name": "a_m_y_hasjew_01",
+    "displayName": "Hasidic Jew Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1358380044": {
+    "hash": 1358380044,
+    "name": "a_m_y_hiker_01",
+    "displayName": "Hiker Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2097407511": {
+    "hash": 2097407511,
+    "name": "a_m_y_hippy_01",
+    "displayName": "Hippie Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "587703123": {
+    "hash": 587703123,
+    "name": "a_m_y_hipster_01",
+    "displayName": "Hipster Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "349505262": {
+    "hash": 349505262,
+    "name": "a_m_y_hipster_02",
+    "displayName": "Hipster Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1312913862": {
+    "hash": 1312913862,
+    "name": "a_m_y_hipster_03",
+    "displayName": "Hipster Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "706935758": {
+    "hash": 706935758,
+    "name": "a_m_y_indian_01",
+    "displayName": "Indian Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "767028979": {
+    "hash": 767028979,
+    "name": "a_m_y_jetski_01",
+    "displayName": "Jetskier",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2445950508": {
+    "hash": 2445950508,
+    "name": "a_m_y_juggalo_01",
+    "displayName": "Juggalo Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "452351020": {
+    "hash": 452351020,
+    "name": "a_m_y_ktown_01",
+    "displayName": "Korean Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "696250687": {
+    "hash": 696250687,
+    "name": "a_m_y_ktown_02",
+    "displayName": "Korean Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "321657486": {
+    "hash": 321657486,
+    "name": "a_m_y_latino_01",
+    "displayName": "Latino Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1768677545": {
+    "hash": 1768677545,
+    "name": "a_m_y_methhead_01",
+    "displayName": "Meth Addict",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "810804565": {
+    "hash": 810804565,
+    "name": "a_m_y_mexthug_01",
+    "displayName": "Mexican Thug",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1694362237": {
+    "hash": 1694362237,
+    "name": "a_m_y_motox_01",
+    "displayName": "Motocross Biker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2007797722": {
+    "hash": 2007797722,
+    "name": "a_m_y_motox_02",
+    "displayName": "Motocross Biker 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1264920838": {
+    "hash": 1264920838,
+    "name": "a_m_y_musclbeac_01",
+    "displayName": "Beach Muscle Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3374523516": {
+    "hash": 3374523516,
+    "name": "a_m_y_musclbeac_02",
+    "displayName": "Beach Muscle Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2206530719": {
+    "hash": 2206530719,
+    "name": "a_m_y_polynesian_01",
+    "displayName": "Polynesian Young",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4116817094": {
+    "hash": 4116817094,
+    "name": "a_m_y_roadcyc_01",
+    "displayName": "Road Cyclist",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "623927022": {
+    "hash": 623927022,
+    "name": "a_m_y_runner_01",
+    "displayName": "Jogger Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2218630415": {
+    "hash": 2218630415,
+    "name": "a_m_y_runner_02",
+    "displayName": "Jogger Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3613420592": {
+    "hash": 3613420592,
+    "name": "a_m_y_salton_01",
+    "displayName": "Salton Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3250873975": {
+    "hash": 3250873975,
+    "name": "a_m_y_skater_01",
+    "displayName": "Skater Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2952446692": {
+    "hash": 2952446692,
+    "name": "a_m_y_skater_02",
+    "displayName": "Skater Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3877027275": {
+    "hash": 3877027275,
+    "name": "a_m_y_soucent_01",
+    "displayName": "South Central Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2896414922": {
+    "hash": 2896414922,
+    "name": "a_m_y_soucent_02",
+    "displayName": "South Central Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3287349092": {
+    "hash": 3287349092,
+    "name": "a_m_y_soucent_03",
+    "displayName": "South Central Young Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2318861297": {
+    "hash": 2318861297,
+    "name": "a_m_y_soucent_04",
+    "displayName": "South Central Young Male 4",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3482496489": {
+    "hash": 3482496489,
+    "name": "a_m_y_stbla_01",
+    "displayName": "Black Street Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2563194959": {
+    "hash": 2563194959,
+    "name": "a_m_y_stbla_02",
+    "displayName": "Black Street Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2255803900": {
+    "hash": 2255803900,
+    "name": "a_m_y_stlat_01",
+    "displayName": "Latino Street Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "605602864": {
+    "hash": 605602864,
+    "name": "a_m_y_stwhi_01",
+    "displayName": "White Street Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "919005580": {
+    "hash": 919005580,
+    "name": "a_m_y_stwhi_02",
+    "displayName": "White Street Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3072929548": {
+    "hash": 3072929548,
+    "name": "a_m_y_sunbathe_01",
+    "displayName": "Sunbather Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3938633710": {
+    "hash": 3938633710,
+    "name": "a_m_y_surfer_01",
+    "displayName": "Surfer",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3247667175": {
+    "hash": 3247667175,
+    "name": "a_m_y_vindouche_01",
+    "displayName": "Vinewood Douche",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1264851357": {
+    "hash": 1264851357,
+    "name": "a_m_y_vinewood_01",
+    "displayName": "Vinewood Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1561705728": {
+    "hash": 1561705728,
+    "name": "a_m_y_vinewood_02",
+    "displayName": "Vinewood Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "534725268": {
+    "hash": 534725268,
+    "name": "a_m_y_vinewood_03",
+    "displayName": "Vinewood Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "835315305": {
+    "hash": 835315305,
+    "name": "a_m_y_vinewood_04",
+    "displayName": "Vinewood Male 4",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2869588309": {
+    "hash": 2869588309,
+    "name": "a_m_y_yoga_01",
+    "displayName": "Yoga Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3164785898": {
+    "hash": 3164785898,
+    "name": "g_m_importexport_01",
+    "displayName": "Gang Male (Import-Export)",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4058522530": {
+    "hash": 4058522530,
+    "name": "g_m_m_armboss_01",
+    "displayName": "Armenian Boss",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4255728232": {
+    "hash": 4255728232,
+    "name": "g_m_m_armgoon_01",
+    "displayName": "Armenian Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3882958867": {
+    "hash": 3882958867,
+    "name": "g_m_m_armlieut_01",
+    "displayName": "Armenian Lieutenant",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2640813814": {
+    "hash": 2640813814,
+    "name": "g_m_m_chemwork_01_p",
+    "displayName": "Chemical Plant Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4128603535": {
+    "hash": 4128603535,
+    "name": "g_m_m_chemwork_01",
+    "displayName": "Chemical Plant Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3118269184": {
+    "hash": 3118269184,
+    "name": "g_m_m_chiboss_01",
+    "displayName": "Chinese Boss",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2571603661": {
+    "hash": 2571603661,
+    "name": "g_m_m_chiboss_01_p",
+    "displayName": "Chinese Boss",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "275618457": {
+    "hash": 275618457,
+    "name": "g_m_m_chicold_01",
+    "displayName": "Chinese Goon Older",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3603652786": {
+    "hash": 3603652786,
+    "name": "g_m_m_chicold_01_p",
+    "displayName": "Chinese Goon Older",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2119136831": {
+    "hash": 2119136831,
+    "name": "g_m_m_chigoon_01",
+    "displayName": "Chinese Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4038565857": {
+    "hash": 4038565857,
+    "name": "g_m_m_chigoon_01_p",
+    "displayName": "Chinese Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4285659174": {
+    "hash": 4285659174,
+    "name": "g_m_m_chigoon_02",
+    "displayName": "Chinese Goon 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "891945583": {
+    "hash": 891945583,
+    "name": "g_m_m_korboss_01",
+    "displayName": "Korean Boss",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1466037421": {
+    "hash": 1466037421,
+    "name": "g_m_m_mexboss_01",
+    "displayName": "Mexican Boss",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1226102803": {
+    "hash": 1226102803,
+    "name": "g_m_m_mexboss_02",
+    "displayName": "Mexican Boss 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3310258058": {
+    "hash": 3310258058,
+    "name": "g_m_y_armgoon_02",
+    "displayName": "Armenian Goon 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1752208920": {
+    "hash": 1752208920,
+    "name": "g_m_y_azteca_01",
+    "displayName": "Azteca",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4096714883": {
+    "hash": 4096714883,
+    "name": "g_m_y_ballaeast_01",
+    "displayName": "Ballas East Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "588969535": {
+    "hash": 588969535,
+    "name": "g_m_y_ballaorig_01",
+    "displayName": "Ballas Original Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "599294057": {
+    "hash": 599294057,
+    "name": "g_m_y_ballasout_01",
+    "displayName": "Ballas South Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3896218551": {
+    "hash": 3896218551,
+    "name": "g_m_y_famca_01",
+    "displayName": "Families CA Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3681718840": {
+    "hash": 3681718840,
+    "name": "g_m_y_famdnf_01",
+    "displayName": "Families DNF Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2217749257": {
+    "hash": 2217749257,
+    "name": "g_m_y_famfor_01",
+    "displayName": "Families FOR Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "611648169": {
+    "hash": 611648169,
+    "name": "g_m_y_korean_01",
+    "displayName": "Korean Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2414729609": {
+    "hash": 2414729609,
+    "name": "g_m_y_korean_02",
+    "displayName": "Korean Young Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2093736314": {
+    "hash": 2093736314,
+    "name": "g_m_y_korlieut_01",
+    "displayName": "Korean Lieutenant",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1330042375": {
+    "hash": 1330042375,
+    "name": "g_m_y_lost_01",
+    "displayName": "The Lost MC Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1032073858": {
+    "hash": 1032073858,
+    "name": "g_m_y_lost_02",
+    "displayName": "The Lost MC Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "850468060": {
+    "hash": 850468060,
+    "name": "g_m_y_lost_03",
+    "displayName": "The Lost MC Male 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3185399110": {
+    "hash": 3185399110,
+    "name": "g_m_y_mexgang_01",
+    "displayName": "Mexican Gang Member",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "653210662": {
+    "hash": 653210662,
+    "name": "g_m_y_mexgoon_01",
+    "displayName": "Mexican Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "832784782": {
+    "hash": 832784782,
+    "name": "g_m_y_mexgoon_02",
+    "displayName": "Mexican Goon 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2521633500": {
+    "hash": 2521633500,
+    "name": "g_m_y_mexgoon_03",
+    "displayName": "Mexican Goon 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "983335309": {
+    "hash": 983335309,
+    "name": "g_m_y_mexgoon_03_p",
+    "displayName": "Mexican Goon 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2455730232": {
+    "hash": 2455730232,
+    "name": "g_m_y_pologoon_01_p",
+    "displayName": "Polynesian Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1329576454": {
+    "hash": 1329576454,
+    "name": "g_m_y_pologoon_01",
+    "displayName": "Polynesian Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1495768715": {
+    "hash": 1495768715,
+    "name": "g_m_y_pologoon_02_p",
+    "displayName": "Polynesian Goon 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2733138262": {
+    "hash": 2733138262,
+    "name": "g_m_y_pologoon_02",
+    "displayName": "Polynesian Goon 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2422005962": {
+    "hash": 2422005962,
+    "name": "g_m_y_salvaboss_01",
+    "displayName": "Salvadoran Boss",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "663522487": {
+    "hash": 663522487,
+    "name": "g_m_y_salvagoon_01",
+    "displayName": "Salvadoran Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "846439045": {
+    "hash": 846439045,
+    "name": "g_m_y_salvagoon_02",
+    "displayName": "Salvadoran Goon 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1892098224": {
+    "hash": 1892098224,
+    "name": "g_m_y_salvagoon_03_p",
+    "displayName": "Salvadoran Goon 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "62440720": {
+    "hash": 62440720,
+    "name": "g_m_y_salvagoon_03",
+    "displayName": "Salvadoran Goon 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4246489531": {
+    "hash": 4246489531,
+    "name": "g_m_y_strpunk_01",
+    "displayName": "Street Punk",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "228715206": {
+    "hash": 228715206,
+    "name": "g_m_y_strpunk_02",
+    "displayName": "Street Punk 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1822283721": {
+    "hash": 1822283721,
+    "name": "mp_g_m_pros_01",
+    "displayName": "Pros",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "1173958009": {
+    "hash": 1173958009,
+    "name": "mp_headtargets",
+    "displayName": "mp_headtargets",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "2618542997": {
+    "hash": 2618542997,
+    "name": "mp_m_avongoon",
+    "displayName": "Avon Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3361671816": {
+    "hash": 3361671816,
+    "name": "mp_m_boatstaff_01",
+    "displayName": "Boat-Staff Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1297520375": {
+    "hash": 1297520375,
+    "name": "mp_m_bogdangoon",
+    "displayName": "Bogdan Goon",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3237179831": {
+    "hash": 3237179831,
+    "name": "mp_m_claude_01",
+    "displayName": "Claude Speed",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1456705429": {
+    "hash": 1456705429,
+    "name": "mp_m_cocaine_01",
+    "displayName": "Biker Cocaine Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2555758964": {
+    "hash": 2555758964,
+    "name": "mp_m_counterfeit_01",
+    "displayName": "Biker Counterfeit Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1161072059": {
+    "hash": 1161072059,
+    "name": "mp_m_exarmy_01",
+    "displayName": "Ex-Army Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1048844220": {
+    "hash": 1048844220,
+    "name": "mp_m_execpa_01",
+    "displayName": "Executive PA Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "866411749": {
+    "hash": 866411749,
+    "name": "mp_m_famdd_01",
+    "displayName": "Families DD Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1558115333": {
+    "hash": 1558115333,
+    "name": "mp_m_fibsec_01",
+    "displayName": "FIB Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1631482011": {
+    "hash": 1631482011,
+    "name": "mp_m_forgery_01",
+    "displayName": "Biker Forgery Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1885233650": {
+    "hash": 1885233650,
+    "name": "mp_m_freemode_01",
+    "displayName": "Freemode Male",
+    "gender": "male",
+    "type": "freemode"
+  },
+  "3299219389": {
+    "hash": 3299219389,
+    "name": "mp_m_g_vagfun_01",
+    "displayName": "Vagos Funeral",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "943915367": {
+    "hash": 943915367,
+    "name": "mp_m_marston_01",
+    "displayName": "John Marston",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3988008767": {
+    "hash": 3988008767,
+    "name": "mp_m_meth_01",
+    "displayName": "Biker Meth Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4007317449": {
+    "hash": 4007317449,
+    "name": "mp_m_niko_01",
+    "displayName": "Niko Bellic",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3660355662": {
+    "hash": 3660355662,
+    "name": "mp_m_securoguard_01",
+    "displayName": "Securoserve Guard",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "416176080": {
+    "hash": 416176080,
+    "name": "mp_m_shopkeep_01",
+    "displayName": "Shopkeeper",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4154933561": {
+    "hash": 4154933561,
+    "name": "mp_m_waremech_01",
+    "displayName": "Vehicle Warehouse Mechanic",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "921328393": {
+    "hash": 921328393,
+    "name": "mp_m_weapexp_01",
+    "displayName": "Weapon Exp",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2677218194": {
+    "hash": 2677218194,
+    "name": "mp_m_weapexp_01_p",
+    "displayName": "Weapon Exp p",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1099321454": {
+    "hash": 1099321454,
+    "name": "mp_m_weapwork_01",
+    "displayName": "Weapon Work",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3720001058": {
+    "hash": 3720001058,
+    "name": "mp_m_weapwork_01_p",
+    "displayName": "Weapon Work p",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2441008217": {
+    "hash": 2441008217,
+    "name": "mp_m_weed_01",
+    "displayName": "Biker Weed Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3455013896": {
+    "hash": 3455013896,
+    "name": "mp_s_m_armoured_01",
+    "displayName": "Armoured Van Security Male",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "2602752943": {
+    "hash": 2602752943,
+    "name": "player_one",
+    "displayName": "Franklin",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2608926626": {
+    "hash": 2608926626,
+    "name": "player_two",
+    "displayName": "Trevor",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "225514697": {
+    "hash": 225514697,
+    "name": "player_zero",
+    "displayName": "Michael",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "233415434": {
+    "hash": 233415434,
+    "name": "s_m_m_ammucountry",
+    "displayName": "Ammu-Nation Rural Clerk",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2512875213": {
+    "hash": 2512875213,
+    "name": "s_m_m_armoured_01",
+    "displayName": "Armoured Van Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1669696074": {
+    "hash": 1669696074,
+    "name": "s_m_m_armoured_02",
+    "displayName": "Armoured Van Security 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "68070371": {
+    "hash": 68070371,
+    "name": "s_m_m_autoshop_01",
+    "displayName": "Autoshop Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4033578141": {
+    "hash": 4033578141,
+    "name": "s_m_m_autoshop_02",
+    "displayName": "Autoshop Worker 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2681481517": {
+    "hash": 2681481517,
+    "name": "s_m_m_bouncer_01",
+    "displayName": "Bouncer",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3387290987": {
+    "hash": 3387290987,
+    "name": "s_m_m_ccrew_01",
+    "displayName": "Crew Member",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "788443093": {
+    "hash": 788443093,
+    "name": "s_m_m_chemsec_01",
+    "displayName": "Chemical Plant Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1650288984": {
+    "hash": 1650288984,
+    "name": "s_m_m_ciasec_01",
+    "displayName": "IAA Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "436345731": {
+    "hash": 436345731,
+    "name": "s_m_m_cntrybar_01",
+    "displayName": "Bartender (Rural)",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "349680864": {
+    "hash": 349680864,
+    "name": "s_m_m_dockwork_01",
+    "displayName": "Dock Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3564307372": {
+    "hash": 3564307372,
+    "name": "s_m_m_doctor_01",
+    "displayName": "Doctor",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3988550982": {
+    "hash": 3988550982,
+    "name": "s_m_m_fiboffice_01",
+    "displayName": "FIB Office Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "653289389": {
+    "hash": 653289389,
+    "name": "s_m_m_fiboffice_02",
+    "displayName": "FIB Office Worker 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2072724299": {
+    "hash": 2072724299,
+    "name": "s_m_m_fibsec_01",
+    "displayName": "FIB Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2841034142": {
+    "hash": 2841034142,
+    "name": "s_m_m_gaffer_01",
+    "displayName": "Gaffer",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1240094341": {
+    "hash": 1240094341,
+    "name": "s_m_m_gardener_01",
+    "displayName": "Gardener",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "411102470": {
+    "hash": 411102470,
+    "name": "s_m_m_gentransport",
+    "displayName": "Transport Worker Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1099825042": {
+    "hash": 1099825042,
+    "name": "s_m_m_hairdress_01",
+    "displayName": "Hairdresser Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4049719826": {
+    "hash": 4049719826,
+    "name": "s_m_m_highsec_01",
+    "displayName": "High Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "691061163": {
+    "hash": 691061163,
+    "name": "s_m_m_highsec_02",
+    "displayName": "High Security 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2842417644": {
+    "hash": 2842417644,
+    "name": "s_m_m_janitor",
+    "displayName": "Janitor",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2659242702": {
+    "hash": 2659242702,
+    "name": "s_m_m_lathandy_01",
+    "displayName": "Latino Handyman Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3724572669": {
+    "hash": 3724572669,
+    "name": "s_m_m_lifeinvad_01",
+    "displayName": "Life Invader Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3684436375": {
+    "hash": 3684436375,
+    "name": "s_m_m_linecook",
+    "displayName": "Line Cook",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1985653476": {
+    "hash": 1985653476,
+    "name": "s_m_m_lsmetro_01",
+    "displayName": "LS Metro Worker Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2124742566": {
+    "hash": 2124742566,
+    "name": "s_m_m_mariachi_01",
+    "displayName": "Mariachi",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4074414829": {
+    "hash": 4074414829,
+    "name": "s_m_m_marine_01",
+    "displayName": "Marine",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4028996995": {
+    "hash": 4028996995,
+    "name": "s_m_m_marine_02",
+    "displayName": "Marine 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3977045190": {
+    "hash": 3977045190,
+    "name": "s_m_m_migrant_01",
+    "displayName": "Migrant Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1684083350": {
+    "hash": 1684083350,
+    "name": "s_m_m_movalien_01",
+    "displayName": "Alien",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3630066984": {
+    "hash": 3630066984,
+    "name": "s_m_m_movprem_01",
+    "displayName": "Movie Premiere Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3887273010": {
+    "hash": 3887273010,
+    "name": "s_m_m_movspace_01",
+    "displayName": "Movie Astronaut",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3008586398": {
+    "hash": 3008586398,
+    "name": "s_m_m_paramedic_01",
+    "displayName": "Paramedic",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3881519900": {
+    "hash": 3881519900,
+    "name": "s_m_m_pilot_01",
+    "displayName": "Pilot",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4131252449": {
+    "hash": 4131252449,
+    "name": "s_m_m_pilot_02",
+    "displayName": "Pilot 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1650036788": {
+    "hash": 1650036788,
+    "name": "s_m_m_postal_01",
+    "displayName": "Postal Worker Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1936142927": {
+    "hash": 1936142927,
+    "name": "s_m_m_postal_02",
+    "displayName": "Postal Worker Male 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1456041926": {
+    "hash": 1456041926,
+    "name": "s_m_m_prisguard_01",
+    "displayName": "Prison Guard",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1092080539": {
+    "hash": 1092080539,
+    "name": "s_m_m_scientist_01",
+    "displayName": "Scientist",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3613962792": {
+    "hash": 3613962792,
+    "name": "s_m_m_security_01",
+    "displayName": "Security Guard",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "451459928": {
+    "hash": 451459928,
+    "name": "s_m_m_snowcop_01",
+    "displayName": "Snow Cop Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2035992488": {
+    "hash": 2035992488,
+    "name": "s_m_m_strperf_01",
+    "displayName": "Street Performer",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "469792763": {
+    "hash": 469792763,
+    "name": "s_m_m_strpreach_01",
+    "displayName": "Street Preacher",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3465614249": {
+    "hash": 3465614249,
+    "name": "s_m_m_strvend_01",
+    "displayName": "Street Vendor",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1498487404": {
+    "hash": 1498487404,
+    "name": "s_m_m_trucker_01",
+    "displayName": "Trucker Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2680389410": {
+    "hash": 2680389410,
+    "name": "s_m_m_ups_01",
+    "displayName": "UPS Driver",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3502104854": {
+    "hash": 3502104854,
+    "name": "s_m_m_ups_02",
+    "displayName": "UPS Driver 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2912874939": {
+    "hash": 2912874939,
+    "name": "s_m_o_busker_01",
+    "displayName": "Busker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1644266841": {
+    "hash": 1644266841,
+    "name": "s_m_y_airworker",
+    "displayName": "Air Worker Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2651349821": {
+    "hash": 2651349821,
+    "name": "s_m_y_ammucity_01",
+    "displayName": "Ammu-Nation City Clerk",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1657546978": {
+    "hash": 1657546978,
+    "name": "s_m_y_armymech_01",
+    "displayName": "Army Mechanic",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2988916046": {
+    "hash": 2988916046,
+    "name": "s_m_y_autopsy_01",
+    "displayName": "Autopsy Tech",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3852538118": {
+    "hash": 3852538118,
+    "name": "s_m_y_barman_01",
+    "displayName": "Barman",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "189425762": {
+    "hash": 189425762,
+    "name": "s_m_y_baywatch_01",
+    "displayName": "Baywatch Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3019107892": {
+    "hash": 3019107892,
+    "name": "s_m_y_blackops_01",
+    "displayName": "Black Ops Soldier",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2047212121": {
+    "hash": 2047212121,
+    "name": "s_m_y_blackops_02",
+    "displayName": "Black Ops Soldier 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1349953339": {
+    "hash": 1349953339,
+    "name": "s_m_y_blackops_03",
+    "displayName": "Black Ops Soldier 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3640249671": {
+    "hash": 3640249671,
+    "name": "s_m_y_busboy_01",
+    "displayName": "Busboy",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "261586155": {
+    "hash": 261586155,
+    "name": "s_m_y_chef_01",
+    "displayName": "Chef",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "71929310": {
+    "hash": 71929310,
+    "name": "s_m_y_clown_01",
+    "displayName": "Clown",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1299424319": {
+    "hash": 1299424319,
+    "name": "s_m_y_clubbar_01",
+    "displayName": "s_m_y_clubbar_01",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3621428889": {
+    "hash": 3621428889,
+    "name": "s_m_y_construct_01",
+    "displayName": "construction Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3321821918": {
+    "hash": 3321821918,
+    "name": "s_m_y_construct_02",
+    "displayName": "construction Worker 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1581098148": {
+    "hash": 1581098148,
+    "name": "s_m_y_cop_01",
+    "displayName": "Cop Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3835149295": {
+    "hash": 3835149295,
+    "name": "s_m_y_dealer_01",
+    "displayName": "Dealer",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2606068340": {
+    "hash": 2606068340,
+    "name": "s_m_y_devinsec_01",
+    "displayName": "Devin's Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2255894993": {
+    "hash": 2255894993,
+    "name": "s_m_y_dockwork_01",
+    "displayName": "Dock Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "579932932": {
+    "hash": 579932932,
+    "name": "s_m_y_doorman_01",
+    "displayName": "Doorman",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1976765073": {
+    "hash": 1976765073,
+    "name": "s_m_y_dwservice_01",
+    "displayName": "DW Airport Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4119890438": {
+    "hash": 4119890438,
+    "name": "s_m_y_dwservice_02",
+    "displayName": "DW Airport Worker 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1097048408": {
+    "hash": 1097048408,
+    "name": "s_m_y_factory_01",
+    "displayName": "Factory Worker Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3065114024": {
+    "hash": 3065114024,
+    "name": "s_m_y_fireman_01",
+    "displayName": "Fireman Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4000686095": {
+    "hash": 4000686095,
+    "name": "s_m_y_garbage",
+    "displayName": "Garbage Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "815693290": {
+    "hash": 815693290,
+    "name": "s_m_y_grip_01",
+    "displayName": "Grip",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1939545845": {
+    "hash": 1939545845,
+    "name": "s_m_y_hwaycop_01",
+    "displayName": "Highway Cop",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1702441027": {
+    "hash": 1702441027,
+    "name": "s_m_y_marine_01",
+    "displayName": "Marine Young",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1490458366": {
+    "hash": 1490458366,
+    "name": "s_m_y_marine_02",
+    "displayName": "Marine Young 2",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1925237458": {
+    "hash": 1925237458,
+    "name": "s_m_y_marine_03",
+    "displayName": "Marine Young 3",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1021093698": {
+    "hash": 1021093698,
+    "name": "s_m_y_mime",
+    "displayName": "Mime Artist",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1209091352": {
+    "hash": 1209091352,
+    "name": "s_m_y_pestcont_01",
+    "displayName": "Pest Control",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2872052743": {
+    "hash": 2872052743,
+    "name": "s_m_y_pilot_01",
+    "displayName": "Pilot",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1596003233": {
+    "hash": 1596003233,
+    "name": "s_m_y_prismuscl_01",
+    "displayName": "Prisoner (Muscular)",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2981862233": {
+    "hash": 2981862233,
+    "name": "s_m_y_prisoner_01",
+    "displayName": "Prisoner",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4017173934": {
+    "hash": 4017173934,
+    "name": "s_m_y_ranger_01",
+    "displayName": "Ranger Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3227390873": {
+    "hash": 3227390873,
+    "name": "s_m_y_robber_01",
+    "displayName": "Robber",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2974087609": {
+    "hash": 2974087609,
+    "name": "s_m_y_sheriff_01",
+    "displayName": "Sheriff Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1846684678": {
+    "hash": 1846684678,
+    "name": "s_m_y_shop_mask",
+    "displayName": "Sales Assistant (Mask Stall)",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2457805603": {
+    "hash": 2457805603,
+    "name": "s_m_y_strvend_01",
+    "displayName": "Street Vendor Young",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2374966032": {
+    "hash": 2374966032,
+    "name": "s_m_y_swat_01",
+    "displayName": "SWAT",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3389018345": {
+    "hash": 3389018345,
+    "name": "s_m_y_uscg_01",
+    "displayName": "US Coastguard",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "999748158": {
+    "hash": 999748158,
+    "name": "s_m_y_valet_01",
+    "displayName": "Valet",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2907468364": {
+    "hash": 2907468364,
+    "name": "s_m_y_waiter_01",
+    "displayName": "Waiter",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1221043248": {
+    "hash": 1221043248,
+    "name": "s_m_y_waretech_01",
+    "displayName": "s_m_y_waretech_01",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1426951581": {
+    "hash": 1426951581,
+    "name": "s_m_y_winclean_01",
+    "displayName": "Window Cleaner",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1142162924": {
+    "hash": 1142162924,
+    "name": "s_m_y_xmech_01",
+    "displayName": "Mechanic",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1762949645": {
+    "hash": 1762949645,
+    "name": "s_m_y_xmech_02_mp",
+    "displayName": "s_m_y_xmech_02_mp",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3189832196": {
+    "hash": 3189832196,
+    "name": "s_m_y_xmech_02",
+    "displayName": "MC Clubhouse Mechanic",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4042020578": {
+    "hash": 4042020578,
+    "name": "u_m_m_aldinapoli",
+    "displayName": "Al Di Napoli Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3272005365": {
+    "hash": 3272005365,
+    "name": "u_m_m_bankman",
+    "displayName": "Bank Manager Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1984382277": {
+    "hash": 1984382277,
+    "name": "u_m_m_bikehire_01",
+    "displayName": "Bike Hire Guy",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1646160893": {
+    "hash": 1646160893,
+    "name": "u_m_m_doa_01",
+    "displayName": "DOA Man",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "712602007": {
+    "hash": 712602007,
+    "name": "u_m_m_edtoh",
+    "displayName": "Ed Toh",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "874722259": {
+    "hash": 874722259,
+    "name": "u_m_m_fibarchitect",
+    "displayName": "FIB Architect",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "728636342": {
+    "hash": 728636342,
+    "name": "u_m_m_filmdirector",
+    "displayName": "Movie Director",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1169888870": {
+    "hash": 1169888870,
+    "name": "u_m_m_glenstank_01",
+    "displayName": "Glen-Stank Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3293887675": {
+    "hash": 3293887675,
+    "name": "u_m_m_griff_01",
+    "displayName": "Griff",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3459037009": {
+    "hash": 3459037009,
+    "name": "u_m_m_jesus_01",
+    "displayName": "Jesus",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2899099062": {
+    "hash": 2899099062,
+    "name": "u_m_m_jewelsec_01",
+    "displayName": "Jeweller Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3872144604": {
+    "hash": 3872144604,
+    "name": "u_m_m_jewelthief",
+    "displayName": "Jewel Thief",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "479578891": {
+    "hash": 479578891,
+    "name": "u_m_m_markfost",
+    "displayName": "Mark Fostenburg",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2180468199": {
+    "hash": 2180468199,
+    "name": "u_m_m_partytarget",
+    "displayName": "Party Target",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1888624839": {
+    "hash": 1888624839,
+    "name": "u_m_m_prolsec_01",
+    "displayName": "Prologue Security",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3465937675": {
+    "hash": 3465937675,
+    "name": "u_m_m_promourn_01",
+    "displayName": "Prologue Mourner Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1624626906": {
+    "hash": 1624626906,
+    "name": "u_m_m_rivalpap",
+    "displayName": "Rival Paparazzo",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2886641112": {
+    "hash": 2886641112,
+    "name": "u_m_m_spyactor",
+    "displayName": "Spy Actor",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1813637474": {
+    "hash": 1813637474,
+    "name": "u_m_m_streetart_01",
+    "displayName": "Street Art Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2423691919": {
+    "hash": 2423691919,
+    "name": "u_m_m_willyfist",
+    "displayName": "Love Fist Willy",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "732742363": {
+    "hash": 732742363,
+    "name": "u_m_o_filmnoir",
+    "displayName": "Movie Corpse (Suited)",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1189322339": {
+    "hash": 1189322339,
+    "name": "u_m_o_finguru_01",
+    "displayName": "Financial Guru",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2585681490": {
+    "hash": 2585681490,
+    "name": "u_m_o_taphillbilly",
+    "displayName": "Jesco White (Tapdancing Hillbilly)",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1787764635": {
+    "hash": 1787764635,
+    "name": "u_m_o_tramp_01",
+    "displayName": "Tramp Old Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4037813798": {
+    "hash": 4037813798,
+    "name": "u_m_y_abner",
+    "displayName": "Abner",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3479321132": {
+    "hash": 3479321132,
+    "name": "u_m_y_antonb",
+    "displayName": "Anton Beaudelaire",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3658575486": {
+    "hash": 3658575486,
+    "name": "u_m_y_babyd",
+    "displayName": "Baby D",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1380197501": {
+    "hash": 1380197501,
+    "name": "u_m_y_baygor",
+    "displayName": "Kifflom Guy",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2340239206": {
+    "hash": 2340239206,
+    "name": "u_m_y_burgerdrug_01",
+    "displayName": "Burger Drug Worker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "610290475": {
+    "hash": 610290475,
+    "name": "u_m_y_chip",
+    "displayName": "Chip",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2495782975": {
+    "hash": 2495782975,
+    "name": "u_m_y_corpse_01",
+    "displayName": "Dead Courier",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "755956971": {
+    "hash": 755956971,
+    "name": "u_m_y_cyclist_01",
+    "displayName": "Cyclist Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1443057394": {
+    "hash": 1443057394,
+    "name": "u_m_y_danceburl_01",
+    "displayName": "u_m_y_danceburl_01",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4202382694": {
+    "hash": 4202382694,
+    "name": "u_m_y_dancelthr_01",
+    "displayName": "u_m_y_dancelthr_01",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2145639711": {
+    "hash": 2145639711,
+    "name": "u_m_y_dancerave_01",
+    "displayName": "u_m_y_dancerave_01",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2243544680": {
+    "hash": 2243544680,
+    "name": "u_m_y_fibmugger_01",
+    "displayName": "FIB Mugger",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3333724719": {
+    "hash": 3333724719,
+    "name": "u_m_y_guido_01",
+    "displayName": "Guido",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3005388626": {
+    "hash": 3005388626,
+    "name": "u_m_y_gunvend_01",
+    "displayName": "Gun Vendor",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "4030826507": {
+    "hash": 4030826507,
+    "name": "u_m_y_hippie_01",
+    "displayName": "Hippie Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "880829941": {
+    "hash": 880829941,
+    "name": "u_m_y_imporage",
+    "displayName": "Impotent Rage",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2431602996": {
+    "hash": 2431602996,
+    "name": "u_m_y_juggernaut_01",
+    "displayName": "Avon Juggernaut",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2109968527": {
+    "hash": 2109968527,
+    "name": "u_m_y_justin",
+    "displayName": "Justin",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3367706194": {
+    "hash": 3367706194,
+    "name": "u_m_y_mani",
+    "displayName": "Mani",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1191548746": {
+    "hash": 1191548746,
+    "name": "u_m_y_militarybum",
+    "displayName": "Ex-Mil Bum",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1346941736": {
+    "hash": 1346941736,
+    "name": "u_m_y_paparazzi",
+    "displayName": "Paparazzi Young Male",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "921110016": {
+    "hash": 921110016,
+    "name": "u_m_y_party_01",
+    "displayName": "Partygoer",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3696858125": {
+    "hash": 3696858125,
+    "name": "u_m_y_pogo_01",
+    "displayName": "Pogo the Monkey",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2073775040": {
+    "hash": 2073775040,
+    "name": "u_m_y_prisoner_01",
+    "displayName": "Prisoner",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2237544099": {
+    "hash": 2237544099,
+    "name": "u_m_y_proldriver_01",
+    "displayName": "Prologue Driver",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1011059922": {
+    "hash": 1011059922,
+    "name": "u_m_y_rsranger_01",
+    "displayName": "Republican Space Ranger",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "1794381917": {
+    "hash": 1794381917,
+    "name": "u_m_y_sbike",
+    "displayName": "Sports Biker",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "3446096293": {
+    "hash": 3446096293,
+    "name": "u_m_y_smugmech_01",
+    "displayName": "Hangar Mechanic",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2442448387": {
+    "hash": 2442448387,
+    "name": "u_m_y_staggrm_01",
+    "displayName": "Stag Party Groom",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2494442380": {
+    "hash": 2494442380,
+    "name": "u_m_y_tattoo_01",
+    "displayName": "Tattoo Artist",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "2890614022": {
+    "hash": 2890614022,
+    "name": "u_m_y_zombie_01",
+    "displayName": "Zombie",
+    "gender": "male",
+    "type": "ambient"
+  },
+  "808859815": {
+    "hash": 808859815,
+    "name": "a_f_m_beach_01",
+    "displayName": "Beach Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3188223741": {
+    "hash": 3188223741,
+    "name": "a_f_m_bevhills_01",
+    "displayName": "Beverly Hills Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2688103263": {
+    "hash": 2688103263,
+    "name": "a_f_m_bevhills_02",
+    "displayName": "Beverly Hills Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1004114196": {
+    "hash": 1004114196,
+    "name": "a_f_m_bodybuild_01",
+    "displayName": "Bodybuilder Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "532905404": {
+    "hash": 532905404,
+    "name": "a_f_m_business_02",
+    "displayName": "Business Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1699403886": {
+    "hash": 1699403886,
+    "name": "a_f_m_downtown_01",
+    "displayName": "Downtown Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2638072698": {
+    "hash": 2638072698,
+    "name": "a_f_m_eastsa_01",
+    "displayName": "East SA Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1674107025": {
+    "hash": 1674107025,
+    "name": "a_f_m_eastsa_02",
+    "displayName": "East SA Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "4206136267": {
+    "hash": 4206136267,
+    "name": "a_f_m_fatbla_01",
+    "displayName": "Fat Black Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3050275044": {
+    "hash": 3050275044,
+    "name": "a_f_m_fatcult_01",
+    "displayName": "Fat Cult Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "951767867": {
+    "hash": 951767867,
+    "name": "a_f_m_fatwhite_01",
+    "displayName": "Fat White Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1388848350": {
+    "hash": 1388848350,
+    "name": "a_f_m_ktown_01",
+    "displayName": "Korean Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1090617681": {
+    "hash": 1090617681,
+    "name": "a_f_m_ktown_02",
+    "displayName": "Korean Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "379310561": {
+    "hash": 379310561,
+    "name": "a_f_m_prolhost_01",
+    "displayName": "Prologue Host Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3725461865": {
+    "hash": 3725461865,
+    "name": "a_f_m_salton_01",
+    "displayName": "Salton Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2962707003": {
+    "hash": 2962707003,
+    "name": "a_f_m_skidrow_01",
+    "displayName": "Skid Row Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1951946145": {
+    "hash": 1951946145,
+    "name": "a_f_m_soucent_01",
+    "displayName": "South Central Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "4079145784": {
+    "hash": 4079145784,
+    "name": "a_f_m_soucent_02",
+    "displayName": "South Central Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3454621138": {
+    "hash": 3454621138,
+    "name": "a_f_m_soucentmc_01",
+    "displayName": "South Central MC Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1347814329": {
+    "hash": 1347814329,
+    "name": "a_f_m_tourist_01",
+    "displayName": "Tourist Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1224306523": {
+    "hash": 1224306523,
+    "name": "a_f_m_tramp_01",
+    "displayName": "Tramp Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2359345766": {
+    "hash": 2359345766,
+    "name": "a_f_m_trampbeac_01",
+    "displayName": "Beach Tramp Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1640504453": {
+    "hash": 1640504453,
+    "name": "a_f_o_genstreet_01",
+    "displayName": "General Street Old Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3134700416": {
+    "hash": 3134700416,
+    "name": "a_f_o_indian_01",
+    "displayName": "Indian Old Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1204772502": {
+    "hash": 1204772502,
+    "name": "a_f_o_ktown_01",
+    "displayName": "Korean Old Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3439295882": {
+    "hash": 3439295882,
+    "name": "a_f_o_salton_01",
+    "displayName": "Salton Old Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1039800368": {
+    "hash": 1039800368,
+    "name": "a_f_o_soucent_01",
+    "displayName": "South Central Old Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2775443222": {
+    "hash": 2775443222,
+    "name": "a_f_o_soucent_02",
+    "displayName": "South Central Old Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3349113128": {
+    "hash": 3349113128,
+    "name": "a_f_y_beach_01",
+    "displayName": "Beach Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1146800212": {
+    "hash": 1146800212,
+    "name": "a_f_y_bevhills_01",
+    "displayName": "Beverly Hills Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1546450936": {
+    "hash": 1546450936,
+    "name": "a_f_y_bevhills_02",
+    "displayName": "Beverly Hills Young Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "549978415": {
+    "hash": 549978415,
+    "name": "a_f_y_bevhills_03",
+    "displayName": "Beverly Hills Young Female 3",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "920595805": {
+    "hash": 920595805,
+    "name": "a_f_y_bevhills_04",
+    "displayName": "Beverly Hills Young Female 4",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "664399832": {
+    "hash": 664399832,
+    "name": "a_f_y_business_01",
+    "displayName": "Business Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "826475330": {
+    "hash": 826475330,
+    "name": "a_f_y_business_02",
+    "displayName": "Business Young Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2928082356": {
+    "hash": 2928082356,
+    "name": "a_f_y_business_03",
+    "displayName": "Business Young Female 3",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3083210802": {
+    "hash": 3083210802,
+    "name": "a_f_y_business_04",
+    "displayName": "Business Young Female 4",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1744231373": {
+    "hash": 1744231373,
+    "name": "a_f_y_clubcust_01",
+    "displayName": "a_f_y_clubcust_01",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "357447289": {
+    "hash": 357447289,
+    "name": "a_f_y_clubcust_02",
+    "displayName": "a_f_y_clubcust_02",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "10751269": {
+    "hash": 10751269,
+    "name": "a_f_y_clubcust_03",
+    "displayName": "a_f_y_clubcust_03",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "4121954205": {
+    "hash": 4121954205,
+    "name": "a_f_y_eastsa_01",
+    "displayName": "East SA Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "70821038": {
+    "hash": 70821038,
+    "name": "a_f_y_eastsa_02",
+    "displayName": "East SA Young Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1371553700": {
+    "hash": 1371553700,
+    "name": "a_f_y_eastsa_03",
+    "displayName": "East SA Young Female 3",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1755064960": {
+    "hash": 1755064960,
+    "name": "a_f_y_epsilon_01",
+    "displayName": "Epsilon Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1348537411": {
+    "hash": 1348537411,
+    "name": "a_f_y_femaleagent",
+    "displayName": "Female Agent",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1165780219": {
+    "hash": 1165780219,
+    "name": "a_f_y_fitness_01",
+    "displayName": "Fitness Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "331645324": {
+    "hash": 331645324,
+    "name": "a_f_y_fitness_02",
+    "displayName": "Fitness Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "793439294": {
+    "hash": 793439294,
+    "name": "a_f_y_genhot_01",
+    "displayName": "General Hot Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2111372120": {
+    "hash": 2111372120,
+    "name": "a_f_y_golfer_01",
+    "displayName": "Golfer Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "813893651": {
+    "hash": 813893651,
+    "name": "a_f_y_hiker_01",
+    "displayName": "Hiker Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "343259175": {
+    "hash": 343259175,
+    "name": "a_f_y_hippie_01",
+    "displayName": "Hippie Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2185745201": {
+    "hash": 2185745201,
+    "name": "a_f_y_hipster_01",
+    "displayName": "Hipster Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2549481101": {
+    "hash": 2549481101,
+    "name": "a_f_y_hipster_02",
+    "displayName": "Hipster Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2780469782": {
+    "hash": 2780469782,
+    "name": "a_f_y_hipster_03",
+    "displayName": "Hipster Female 3",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "429425116": {
+    "hash": 429425116,
+    "name": "a_f_y_hipster_04",
+    "displayName": "Hipster Female 4",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "153984193": {
+    "hash": 153984193,
+    "name": "a_f_y_indian_01",
+    "displayName": "Indian Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3675473203": {
+    "hash": 3675473203,
+    "name": "a_f_y_juggalo_01",
+    "displayName": "Juggalo Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3343476521": {
+    "hash": 3343476521,
+    "name": "a_f_y_runner_01",
+    "displayName": "Jogger Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1064866854": {
+    "hash": 1064866854,
+    "name": "a_f_y_rurmeth_01",
+    "displayName": "Rural Meth Addict Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3680420864": {
+    "hash": 3680420864,
+    "name": "a_f_y_scdressy_01",
+    "displayName": "Dressy Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1767892582": {
+    "hash": 1767892582,
+    "name": "a_f_y_skater_01",
+    "displayName": "Skater Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "744758650": {
+    "hash": 744758650,
+    "name": "a_f_y_soucent_01",
+    "displayName": "South Central Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1519319503": {
+    "hash": 1519319503,
+    "name": "a_f_y_soucent_02",
+    "displayName": "South Central Young Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2276611093": {
+    "hash": 2276611093,
+    "name": "a_f_y_soucent_03",
+    "displayName": "South Central Young Female 3",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1426880966": {
+    "hash": 1426880966,
+    "name": "a_f_y_tennis_01",
+    "displayName": "Tennis Player Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2633130371": {
+    "hash": 2633130371,
+    "name": "a_f_y_topless_01",
+    "displayName": "Topless",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1446741360": {
+    "hash": 1446741360,
+    "name": "a_f_y_tourist_01",
+    "displayName": "Tourist Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2435054400": {
+    "hash": 2435054400,
+    "name": "a_f_y_tourist_02",
+    "displayName": "Tourist Young Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "435429221": {
+    "hash": 435429221,
+    "name": "a_f_y_vinewood_01",
+    "displayName": "Vinewood Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3669401835": {
+    "hash": 3669401835,
+    "name": "a_f_y_vinewood_02",
+    "displayName": "Vinewood Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "933092024": {
+    "hash": 933092024,
+    "name": "a_f_y_vinewood_03",
+    "displayName": "Vinewood Female 3",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "4209271110": {
+    "hash": 4209271110,
+    "name": "a_f_y_vinewood_04",
+    "displayName": "Vinewood Female 4",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3290105390": {
+    "hash": 3290105390,
+    "name": "a_f_y_yoga_01",
+    "displayName": "Yoga Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2225189146": {
+    "hash": 2225189146,
+    "name": "g_f_importexport_01",
+    "displayName": "Gang Female (Import-Export)",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "361513884": {
+    "hash": 361513884,
+    "name": "g_f_y_ballas_01",
+    "displayName": "Ballas Female",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "1309468115": {
+    "hash": 1309468115,
+    "name": "g_f_y_families_01",
+    "displayName": "Families Female",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "4250220510": {
+    "hash": 4250220510,
+    "name": "g_f_y_lost_01",
+    "displayName": "The Lost MC Female",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "1520708641": {
+    "hash": 1520708641,
+    "name": "g_f_y_vagos_01",
+    "displayName": "Vagos Female",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "848542158": {
+    "hash": 848542158,
+    "name": "mp_f_boatstaff_01",
+    "displayName": "Boat-Staff Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "606876839": {
+    "hash": 606876839,
+    "name": "mp_f_cardesign_01",
+    "displayName": "Office Garage Mechanic",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3287737221": {
+    "hash": 3287737221,
+    "name": "mp_f_chbar_01",
+    "displayName": "Clubhouse Bar Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1264941816": {
+    "hash": 1264941816,
+    "name": "mp_f_cocaine_01",
+    "displayName": "Biker Cocaine Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3079205365": {
+    "hash": 3079205365,
+    "name": "mp_f_counterfeit_01",
+    "displayName": "Biker Counterfeit Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1943971979": {
+    "hash": 1943971979,
+    "name": "mp_f_deadhooker",
+    "displayName": "Dead Hooker",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1126998116": {
+    "hash": 1126998116,
+    "name": "mp_f_execpa_01",
+    "displayName": "Executive PA Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1500695792": {
+    "hash": 1500695792,
+    "name": "mp_f_execpa_02",
+    "displayName": "Executive PA Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2014985464": {
+    "hash": 2014985464,
+    "name": "mp_f_forgery_01",
+    "displayName": "Biker Forgery Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2627665880": {
+    "hash": 2627665880,
+    "name": "mp_f_freemode_01",
+    "displayName": "Freemode Female",
+    "gender": "female",
+    "type": "freemode"
+  },
+  "431423238": {
+    "hash": 431423238,
+    "name": "mp_f_helistaff_01",
+    "displayName": "Heli-Staff Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3534913217": {
+    "hash": 3534913217,
+    "name": "mp_f_meth_01",
+    "displayName": "Biker Meth Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3509125021": {
+    "hash": 3509125021,
+    "name": "mp_f_misty_01",
+    "displayName": "Misty",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "695248020": {
+    "hash": 695248020,
+    "name": "mp_f_stripperlite",
+    "displayName": "Stripper Lite",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2992993187": {
+    "hash": 2992993187,
+    "name": "mp_f_weed_01",
+    "displayName": "Biker Weed Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "373000027": {
+    "hash": 373000027,
+    "name": "s_f_m_fembarber",
+    "displayName": "Barber Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3767780806": {
+    "hash": 3767780806,
+    "name": "s_f_m_maid_01",
+    "displayName": "Maid",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2923947184": {
+    "hash": 2923947184,
+    "name": "s_f_m_shop_high",
+    "displayName": "Sales Assistant (High-End)",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "824925120": {
+    "hash": 824925120,
+    "name": "s_f_m_sweatshop_01",
+    "displayName": "Sweatshop Worker",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1567728751": {
+    "hash": 1567728751,
+    "name": "s_f_y_airhostess_01",
+    "displayName": "Air Hostess",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2014052797": {
+    "hash": 2014052797,
+    "name": "s_f_y_bartender_01",
+    "displayName": "Bartender",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1250841910": {
+    "hash": 1250841910,
+    "name": "s_f_y_baywatch_01",
+    "displayName": "Baywatch Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3240507723": {
+    "hash": 3240507723,
+    "name": "s_f_y_clubbar_01",
+    "displayName": "s_f_y_clubbar_01",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "368603149": {
+    "hash": 368603149,
+    "name": "s_f_y_cop_01",
+    "displayName": "Cop Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1777626099": {
+    "hash": 1777626099,
+    "name": "s_f_y_factory_01",
+    "displayName": "Factory Worker Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "42647445": {
+    "hash": 42647445,
+    "name": "s_f_y_hooker_01",
+    "displayName": "Hooker",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "348382215": {
+    "hash": 348382215,
+    "name": "s_f_y_hooker_02",
+    "displayName": "Hooker 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "51789996": {
+    "hash": 51789996,
+    "name": "s_f_y_hooker_03",
+    "displayName": "Hooker 3",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3579522037": {
+    "hash": 3579522037,
+    "name": "s_f_y_migrant_01",
+    "displayName": "Migrant Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "587253782": {
+    "hash": 587253782,
+    "name": "s_f_y_movprem_01",
+    "displayName": "Movie Premiere Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2680682039": {
+    "hash": 2680682039,
+    "name": "s_f_y_ranger_01",
+    "displayName": "Ranger Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2874755766": {
+    "hash": 2874755766,
+    "name": "s_f_y_scrubs_01",
+    "displayName": "Hospital Scrubs Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1096929346": {
+    "hash": 1096929346,
+    "name": "s_f_y_sheriff_01",
+    "displayName": "Sheriff Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2842568196": {
+    "hash": 2842568196,
+    "name": "s_f_y_shop_low",
+    "displayName": "Sales Assistant (Low-End)",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1055701597": {
+    "hash": 1055701597,
+    "name": "s_f_y_shop_mid",
+    "displayName": "Sales Assistant (Mid-Price)",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1381498905": {
+    "hash": 1381498905,
+    "name": "s_f_y_stripper_01",
+    "displayName": "Stripper",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1846523796": {
+    "hash": 1846523796,
+    "name": "s_f_y_stripper_02",
+    "displayName": "Stripper 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1544875514": {
+    "hash": 1544875514,
+    "name": "s_f_y_stripperlite",
+    "displayName": "Stripper Lite",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2231547570": {
+    "hash": 2231547570,
+    "name": "s_f_y_sweatshop_01",
+    "displayName": "Sweatshop Worker Young",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "773063444": {
+    "hash": 773063444,
+    "name": "u_f_m_corpse_01",
+    "displayName": "Corpse Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3623056905": {
+    "hash": 3623056905,
+    "name": "u_f_m_drowned_01",
+    "displayName": "u_f_m_drowned_01",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1095737979": {
+    "hash": 1095737979,
+    "name": "u_f_m_miranda",
+    "displayName": "Miranda",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3954904244": {
+    "hash": 3954904244,
+    "name": "u_f_m_miranda_02",
+    "displayName": "Miranda",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2718472679": {
+    "hash": 2718472679,
+    "name": "u_f_m_promourn_01",
+    "displayName": "Prologue Mourner Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "894928436": {
+    "hash": 894928436,
+    "name": "u_f_o_moviestar",
+    "displayName": "Movie Star Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3306347811": {
+    "hash": 3306347811,
+    "name": "u_f_o_prolhost_01",
+    "displayName": "Prologue Host Old Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "4198014287": {
+    "hash": 4198014287,
+    "name": "u_f_y_bikerchic",
+    "displayName": "Biker Chic Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3064628686": {
+    "hash": 3064628686,
+    "name": "u_f_y_comjane",
+    "displayName": "Jane",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2624589981": {
+    "hash": 2624589981,
+    "name": "u_f_y_corpse_01",
+    "displayName": "Corpse Young Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "228356856": {
+    "hash": 228356856,
+    "name": "u_f_y_corpse_02",
+    "displayName": "Corpse Young Female 2",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "222643882": {
+    "hash": 222643882,
+    "name": "u_f_y_danceburl_01",
+    "displayName": "u_f_y_danceburl_01",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "130590395": {
+    "hash": 130590395,
+    "name": "u_f_y_dancelthr_01",
+    "displayName": "u_f_y_dancelthr_01",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2900533745": {
+    "hash": 2900533745,
+    "name": "u_f_y_dancerave_01",
+    "displayName": "u_f_y_dancerave_01",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "2526768638": {
+    "hash": 2526768638,
+    "name": "u_f_y_hotposh_01",
+    "displayName": "Hot Posh Female",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "4040474158": {
+    "hash": 4040474158,
+    "name": "u_f_y_jewelass_01",
+    "displayName": "Jeweller Assistant",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1573528872": {
+    "hash": 1573528872,
+    "name": "u_f_y_mistress",
+    "displayName": "Mistress",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "602513566": {
+    "hash": 602513566,
+    "name": "u_f_y_poppymich",
+    "displayName": "Poppy Mitchell",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1823868411": {
+    "hash": 1823868411,
+    "name": "u_f_y_poppymich_02",
+    "displayName": "Poppy Mitchell",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3538133636": {
+    "hash": 3538133636,
+    "name": "u_f_y_princess",
+    "displayName": "Princess",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "1535236204": {
+    "hash": 1535236204,
+    "name": "u_f_y_spyactress",
+    "displayName": "Spy Actress",
+    "gender": "female",
+    "type": "ambient"
+  },
+  "3462393972": {
+    "hash": 3462393972,
+    "name": "a_c_boar",
+    "displayName": "Boar",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1462895032": {
+    "hash": 1462895032,
+    "name": "a_c_cat_01",
+    "displayName": "Cat",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2864127842": {
+    "hash": 2864127842,
+    "name": "a_c_chickenhawk",
+    "displayName": "Hawk",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2825402133": {
+    "hash": 2825402133,
+    "name": "a_c_chimp",
+    "displayName": "Chimp",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "351016938": {
+    "hash": 351016938,
+    "name": "a_c_chop",
+    "displayName": "Chop",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1457690978": {
+    "hash": 1457690978,
+    "name": "a_c_cormorant",
+    "displayName": "Cormorant",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "4244282910": {
+    "hash": 4244282910,
+    "name": "a_c_cow",
+    "displayName": "Cow",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1682622302": {
+    "hash": 1682622302,
+    "name": "a_c_coyote",
+    "displayName": "Coyote",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "402729631": {
+    "hash": 402729631,
+    "name": "a_c_crow",
+    "displayName": "Crow",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "3630914197": {
+    "hash": 3630914197,
+    "name": "a_c_deer",
+    "displayName": "Deer",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2344268885": {
+    "hash": 2344268885,
+    "name": "a_c_dolphin",
+    "displayName": "Dolphin",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "802685111": {
+    "hash": 802685111,
+    "name": "a_c_fish",
+    "displayName": "Fish",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1794449327": {
+    "hash": 1794449327,
+    "name": "a_c_hen",
+    "displayName": "Hen",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1193010354": {
+    "hash": 1193010354,
+    "name": "a_c_humpback",
+    "displayName": "Humpback",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1318032802": {
+    "hash": 1318032802,
+    "name": "a_c_husky",
+    "displayName": "Husky",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2374682809": {
+    "hash": 2374682809,
+    "name": "a_c_killerwhale",
+    "displayName": "Killer Whale",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "307287994": {
+    "hash": 307287994,
+    "name": "a_c_mtlion",
+    "displayName": "Mountain Lion",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2971380566": {
+    "hash": 2971380566,
+    "name": "a_c_pig",
+    "displayName": "Pig",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "111281960": {
+    "hash": 111281960,
+    "name": "a_c_pigeon",
+    "displayName": "Pigeon",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1125994524": {
+    "hash": 1125994524,
+    "name": "a_c_poodle",
+    "displayName": "Poodle",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1832265812": {
+    "hash": 1832265812,
+    "name": "a_c_pug",
+    "displayName": "Pug",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "3753204865": {
+    "hash": 3753204865,
+    "name": "a_c_rabbit_01",
+    "displayName": "Rabbit",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "3283429734": {
+    "hash": 3283429734,
+    "name": "a_c_rat",
+    "displayName": "Rat",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "882848737": {
+    "hash": 882848737,
+    "name": "a_c_retriever",
+    "displayName": "Retriever",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "3268439891": {
+    "hash": 3268439891,
+    "name": "a_c_rhesus",
+    "displayName": "Rhesus",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2506301981": {
+    "hash": 2506301981,
+    "name": "a_c_rottweiler",
+    "displayName": "Rottweiler",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "3549666813": {
+    "hash": 3549666813,
+    "name": "a_c_seagull",
+    "displayName": "Seagull",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1015224100": {
+    "hash": 1015224100,
+    "name": "a_c_sharkhammer",
+    "displayName": "Hammerhead Shark",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "113504370": {
+    "hash": 113504370,
+    "name": "a_c_sharktiger",
+    "displayName": "Tiger Shark",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "1126154828": {
+    "hash": 1126154828,
+    "name": "a_c_shepherd",
+    "displayName": "Australian Shepherd",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2705875277": {
+    "hash": 2705875277,
+    "name": "a_c_stingray",
+    "displayName": "Stingray",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2910340283": {
+    "hash": 2910340283,
+    "name": "a_c_westy",
+    "displayName": "Westie",
+    "gender": "unknown",
+    "type": "animal"
+  },
+  "2259833526": {
+    "hash": 2259833526,
+    "name": "comp_peds_generic",
+    "displayName": "comp_peds_generic",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "1955694561": {
+    "hash": 1955694561,
+    "name": "comp_peds_helmets_moped",
+    "displayName": "comp_peds_helmets_moped",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "487781586": {
+    "hash": 487781586,
+    "name": "comp_peds_helmets_motox",
+    "displayName": "comp_peds_helmets_motox",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "2275662466": {
+    "hash": 2275662466,
+    "name": "comp_peds_helmets_shorty",
+    "displayName": "comp_peds_helmets_shorty",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "597211963": {
+    "hash": 597211963,
+    "name": "comp_peds_helmets_sports",
+    "displayName": "comp_peds_helmets_sports",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "3078551403": {
+    "hash": 3078551403,
+    "name": "comp_peds_marine",
+    "displayName": "comp_peds_marine",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "2515474659": {
+    "hash": 2515474659,
+    "name": "cs_amandatownley",
+    "displayName": "Amanda De Santa",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3881194279": {
+    "hash": 3881194279,
+    "name": "cs_andreas",
+    "displayName": "Andreas Sanchez",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "650367097": {
+    "hash": 650367097,
+    "name": "cs_ashley",
+    "displayName": "Ashley Butler",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2539657518": {
+    "hash": 2539657518,
+    "name": "cs_bankman",
+    "displayName": "Bank Manager",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1767447799": {
+    "hash": 1767447799,
+    "name": "cs_barry",
+    "displayName": "Barry",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2072274194": {
+    "hash": 2072274194,
+    "name": "cs_barry_p",
+    "displayName": "Barry",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3027157846": {
+    "hash": 3027157846,
+    "name": "cs_beverly",
+    "displayName": "Beverly Felton",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2425194132": {
+    "hash": 2425194132,
+    "name": "cs_beverly_p",
+    "displayName": "Beverly Felton",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4024807398": {
+    "hash": 4024807398,
+    "name": "cs_brad",
+    "displayName": "Brad",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1915268960": {
+    "hash": 1915268960,
+    "name": "cs_bradcadaver",
+    "displayName": "Brad's Cadaver",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2362341647": {
+    "hash": 2362341647,
+    "name": "cs_carbuyer",
+    "displayName": "Car Buyer",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3935738944": {
+    "hash": 3935738944,
+    "name": "cs_casey",
+    "displayName": "Casey",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "819699067": {
+    "hash": 819699067,
+    "name": "cs_chengsr",
+    "displayName": "Wei Cheng",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3253960934": {
+    "hash": 3253960934,
+    "name": "cs_chrisformage",
+    "displayName": "Cris Formage",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3687553076": {
+    "hash": 3687553076,
+    "name": "cs_clay",
+    "displayName": "Clay Simons (The Lost)",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "216536661": {
+    "hash": 216536661,
+    "name": "cs_dale",
+    "displayName": "Dale",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2240226444": {
+    "hash": 2240226444,
+    "name": "cs_davenorton",
+    "displayName": "Dave Norton",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3973074921": {
+    "hash": 3973074921,
+    "name": "cs_debra",
+    "displayName": "Debra",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1870669624": {
+    "hash": 1870669624,
+    "name": "cs_denise",
+    "displayName": "Denise",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "788622594": {
+    "hash": 788622594,
+    "name": "cs_devin",
+    "displayName": "Devin",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1198698306": {
+    "hash": 1198698306,
+    "name": "cs_dom",
+    "displayName": "Dom Beasley",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1012965715": {
+    "hash": 1012965715,
+    "name": "cs_dreyfuss",
+    "displayName": "Peter Dreyfuss",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2745392175": {
+    "hash": 2745392175,
+    "name": "cs_drfriedlander",
+    "displayName": "Dr. Friedlander",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1191403201": {
+    "hash": 1191403201,
+    "name": "cs_fabien",
+    "displayName": "Fabien",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1482427218": {
+    "hash": 1482427218,
+    "name": "cs_fbisuit_01",
+    "displayName": "FIB Suit",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "103106535": {
+    "hash": 103106535,
+    "name": "cs_floyd",
+    "displayName": "Floyd Hebert",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "261428209": {
+    "hash": 261428209,
+    "name": "cs_guadalope",
+    "displayName": "Guadalope",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3272931111": {
+    "hash": 3272931111,
+    "name": "cs_gurk",
+    "displayName": "GURK?",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1531218220": {
+    "hash": 1531218220,
+    "name": "cs_hunter",
+    "displayName": "Hunter",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "808778210": {
+    "hash": 808778210,
+    "name": "cs_janet",
+    "displayName": "Janet",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1145088004": {
+    "hash": 1145088004,
+    "name": "cs_jewelass",
+    "displayName": "Jeweller Assistant",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "60192701": {
+    "hash": 60192701,
+    "name": "cs_jimmyboston",
+    "displayName": "Jimmy Boston",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3100414644": {
+    "hash": 3100414644,
+    "name": "cs_jimmydisanto",
+    "displayName": "Jimmy De Santa",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4036845097": {
+    "hash": 4036845097,
+    "name": "cs_joeminuteman",
+    "displayName": "Minuteman Joe",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4203395201": {
+    "hash": 4203395201,
+    "name": "cs_johnnyklebitz",
+    "displayName": "Johnny Klebitz",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1167549130": {
+    "hash": 1167549130,
+    "name": "cs_josef",
+    "displayName": "Josef",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1158606749": {
+    "hash": 1158606749,
+    "name": "cs_josh",
+    "displayName": "Josh",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1269774364": {
+    "hash": 1269774364,
+    "name": "cs_karen_daniels",
+    "displayName": "Karen Daniels",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1162230285": {
+    "hash": 1162230285,
+    "name": "cs_lamardavis",
+    "displayName": "Lamar Davis",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "949295643": {
+    "hash": 949295643,
+    "name": "cs_lazlow",
+    "displayName": "Lazlow",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3046438339": {
+    "hash": 3046438339,
+    "name": "cs_lestercrest",
+    "displayName": "Lester Crest",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1918178165": {
+    "hash": 1918178165,
+    "name": "cs_lifeinvad_01",
+    "displayName": "Life Invader",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1477887514": {
+    "hash": 1477887514,
+    "name": "cs_magenta",
+    "displayName": "Magenta",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4222842058": {
+    "hash": 4222842058,
+    "name": "cs_manuel",
+    "displayName": "Manuel",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1464721716": {
+    "hash": 1464721716,
+    "name": "cs_marnie",
+    "displayName": "Marnie Allen",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1129928304": {
+    "hash": 1129928304,
+    "name": "cs_martinmadrazo",
+    "displayName": "Martin Madrazo",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "161007533": {
+    "hash": 161007533,
+    "name": "cs_maryann",
+    "displayName": "Mary-Ann Quinn",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1890499016": {
+    "hash": 1890499016,
+    "name": "cs_michelle",
+    "displayName": "Michelle",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3077190415": {
+    "hash": 3077190415,
+    "name": "cs_milton",
+    "displayName": "Milton McIlroy",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1167167044": {
+    "hash": 1167167044,
+    "name": "cs_molly",
+    "displayName": "Molly",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1270514905": {
+    "hash": 1270514905,
+    "name": "cs_movpremf_01",
+    "displayName": "Movie Premiere Female",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2372398717": {
+    "hash": 2372398717,
+    "name": "cs_movpremmale",
+    "displayName": "Movie Premiere Male",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3284966005": {
+    "hash": 3284966005,
+    "name": "cs_mrk",
+    "displayName": "Ferdinand Kerimov (Mr. K)",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1334976110": {
+    "hash": 1334976110,
+    "name": "cs_mrs_thornhill",
+    "displayName": "Mrs. Thornhill",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3422397391": {
+    "hash": 3422397391,
+    "name": "cs_mrsphillips",
+    "displayName": "Mrs. Phillips",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1325314544": {
+    "hash": 1325314544,
+    "name": "cs_natalia",
+    "displayName": "Natalia",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2023152276": {
+    "hash": 2023152276,
+    "name": "cs_nervousron",
+    "displayName": "Nervous Ron",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3779566603": {
+    "hash": 3779566603,
+    "name": "cs_nigel",
+    "displayName": "Nigel",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "518814684": {
+    "hash": 518814684,
+    "name": "cs_old_man1a",
+    "displayName": "Old Man 1",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2566514544": {
+    "hash": 2566514544,
+    "name": "cs_old_man2",
+    "displayName": "Old Man 2",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2339419141": {
+    "hash": 2339419141,
+    "name": "cs_omega",
+    "displayName": "Omega",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2905870170": {
+    "hash": 2905870170,
+    "name": "cs_orleans",
+    "displayName": "Bigfoot",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1798879480": {
+    "hash": 1798879480,
+    "name": "cs_paper",
+    "displayName": "United Paper Man",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3464001928": {
+    "hash": 3464001928,
+    "name": "cs_paper_p",
+    "displayName": "United Paper Man",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3750433537": {
+    "hash": 3750433537,
+    "name": "cs_patricia",
+    "displayName": "Patricia",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1299047806": {
+    "hash": 1299047806,
+    "name": "cs_priest",
+    "displayName": "Priest",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "512955554": {
+    "hash": 512955554,
+    "name": "cs_prolsec_02",
+    "displayName": "Prologue Security 2",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1179785778": {
+    "hash": 1179785778,
+    "name": "cs_russiandrunk",
+    "displayName": "Russian Drunk",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3230888450": {
+    "hash": 3230888450,
+    "name": "cs_siemonyetarian",
+    "displayName": "Simeon Yetarian",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4140949582": {
+    "hash": 4140949582,
+    "name": "cs_solomon",
+    "displayName": "Solomon Richards",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2766184958": {
+    "hash": 2766184958,
+    "name": "cs_stevehains",
+    "displayName": "Steve Haines",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2302502917": {
+    "hash": 2302502917,
+    "name": "cs_stretch",
+    "displayName": "Stretch",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1123963760": {
+    "hash": 1123963760,
+    "name": "cs_tanisha",
+    "displayName": "Tanisha",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2288257085": {
+    "hash": 2288257085,
+    "name": "cs_taocheng",
+    "displayName": "Tao Cheng",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1397974313": {
+    "hash": 1397974313,
+    "name": "cs_taostranslator",
+    "displayName": "Tao's Translator",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1545995274": {
+    "hash": 1545995274,
+    "name": "cs_tenniscoach",
+    "displayName": "Tennis Coach",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "978452933": {
+    "hash": 978452933,
+    "name": "cs_terry",
+    "displayName": "Terry",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1776856003": {
+    "hash": 1776856003,
+    "name": "cs_tom",
+    "displayName": "Tom",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2349847778": {
+    "hash": 2349847778,
+    "name": "cs_tomepsilon",
+    "displayName": "Epsilon Tom",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "101298480": {
+    "hash": 101298480,
+    "name": "cs_tracydisanto",
+    "displayName": "Tracey De Santa",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3529955798": {
+    "hash": 3529955798,
+    "name": "cs_wade",
+    "displayName": "Wade",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3937184496": {
+    "hash": 3937184496,
+    "name": "cs_zimbor",
+    "displayName": "Zimbor",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2306246977": {
+    "hash": 2306246977,
+    "name": "csb_abigail",
+    "displayName": "Abigail Mathers",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3614493108": {
+    "hash": 3614493108,
+    "name": "csb_agent",
+    "displayName": "Agent",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "117698822": {
+    "hash": 117698822,
+    "name": "csb_anita",
+    "displayName": "Anita Mendoza",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2781317046": {
+    "hash": 2781317046,
+    "name": "csb_anton",
+    "displayName": "Anton Beaudelaire",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "406009421": {
+    "hash": 406009421,
+    "name": "csb_avon",
+    "displayName": "Avon Hertz",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2884567044": {
+    "hash": 2884567044,
+    "name": "csb_ballasog",
+    "displayName": "Ballas OG",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1594283837": {
+    "hash": 1594283837,
+    "name": "csb_bogdan",
+    "displayName": "Bogdan",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2193587873": {
+    "hash": 2193587873,
+    "name": "csb_bride",
+    "displayName": "Bride",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2363277399": {
+    "hash": 2363277399,
+    "name": "csb_burgerdrug",
+    "displayName": "Burger Drug Worker",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "71501447": {
+    "hash": 71501447,
+    "name": "csb_car3guy1",
+    "displayName": "Car 3 Guy 1",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "327394568": {
+    "hash": 327394568,
+    "name": "csb_car3guy2",
+    "displayName": "Car 3 Guy 2",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2925257274": {
+    "hash": 2925257274,
+    "name": "csb_chef2",
+    "displayName": "Chef",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2739391114": {
+    "hash": 2739391114,
+    "name": "csb_chef",
+    "displayName": "Chef",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2831296918": {
+    "hash": 2831296918,
+    "name": "csb_chin_goon",
+    "displayName": "Chinese Goon",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3404326357": {
+    "hash": 3404326357,
+    "name": "csb_cletus",
+    "displayName": "Cletus",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2595446627": {
+    "hash": 2595446627,
+    "name": "csb_cop",
+    "displayName": "Cop",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2756669323": {
+    "hash": 2756669323,
+    "name": "csb_customer",
+    "displayName": "Customer",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3045926185": {
+    "hash": 3045926185,
+    "name": "csb_denise_friend",
+    "displayName": "Denise's Friend",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3957337349": {
+    "hash": 3957337349,
+    "name": "csb_dix",
+    "displayName": "csb_dix",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1835399538": {
+    "hash": 1835399538,
+    "name": "csb_djblamadon",
+    "displayName": "csb_djblamadon",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3533210174": {
+    "hash": 3533210174,
+    "name": "csb_englishdave",
+    "displayName": "csb_englishdave",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "466359675": {
+    "hash": 466359675,
+    "name": "csb_fos_rep",
+    "displayName": "FOS Rep?",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2727244247": {
+    "hash": 2727244247,
+    "name": "csb_g",
+    "displayName": "Gerald",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2058033618": {
+    "hash": 2058033618,
+    "name": "csb_groom",
+    "displayName": "Groom",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3898166818": {
+    "hash": 3898166818,
+    "name": "csb_grove_str_dlr",
+    "displayName": "Grove Street Dealer",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3969814300": {
+    "hash": 3969814300,
+    "name": "csb_hao",
+    "displayName": "Hao",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1863555924": {
+    "hash": 1863555924,
+    "name": "csb_hugh",
+    "displayName": "Hugh Welsh",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3812756443": {
+    "hash": 3812756443,
+    "name": "csb_imran",
+    "displayName": "Imran Shinowa",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1153203121": {
+    "hash": 1153203121,
+    "name": "csb_jackhowitzer",
+    "displayName": "Jack Howitzer",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3254803008": {
+    "hash": 3254803008,
+    "name": "csb_janitor",
+    "displayName": "Janitor",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3166991819": {
+    "hash": 3166991819,
+    "name": "csb_maude",
+    "displayName": "Maude",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2560490906": {
+    "hash": 2560490906,
+    "name": "csb_money",
+    "displayName": "Money Man",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1841036427": {
+    "hash": 1841036427,
+    "name": "csb_mp_agent14",
+    "displayName": "Agent 14",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2642001958": {
+    "hash": 2642001958,
+    "name": "csb_mrs_r",
+    "displayName": "Mrs. Rackman",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1631478380": {
+    "hash": 1631478380,
+    "name": "csb_mweather",
+    "displayName": "Merryweather Merc",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3235579087": {
+    "hash": 3235579087,
+    "name": "csb_ortega",
+    "displayName": "Ortega",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4095687067": {
+    "hash": 4095687067,
+    "name": "csb_oscar",
+    "displayName": "Oscar",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1528799427": {
+    "hash": 1528799427,
+    "name": "csb_paige",
+    "displayName": "Paige Harris",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1635617250": {
+    "hash": 1635617250,
+    "name": "csb_popov",
+    "displayName": "Dima Popov",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "793443893": {
+    "hash": 793443893,
+    "name": "csb_porndudes",
+    "displayName": "Porn Dude",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2323814650": {
+    "hash": 2323814650,
+    "name": "csb_porndudes_p",
+    "displayName": "Porn Dude",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4027271643": {
+    "hash": 4027271643,
+    "name": "csb_prologuedriver",
+    "displayName": "Prologue Driver",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2141384740": {
+    "hash": 2141384740,
+    "name": "csb_prolsec",
+    "displayName": "Prologue Security",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3263172030": {
+    "hash": 3263172030,
+    "name": "csb_ramp_gang",
+    "displayName": "Families Gang Member?",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2240582840": {
+    "hash": 2240582840,
+    "name": "csb_ramp_hic",
+    "displayName": "Hick",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "569740212": {
+    "hash": 569740212,
+    "name": "csb_ramp_hipster",
+    "displayName": "Hipster",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1634506681": {
+    "hash": 1634506681,
+    "name": "csb_ramp_marine",
+    "displayName": "Marine",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4132362192": {
+    "hash": 4132362192,
+    "name": "csb_ramp_mex",
+    "displayName": "Mexican",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "411081129": {
+    "hash": 411081129,
+    "name": "csb_rashcosvki",
+    "displayName": "Maxim Rashkovsky",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "776079908": {
+    "hash": 776079908,
+    "name": "csb_reporter",
+    "displayName": "Reporter",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2858686092": {
+    "hash": 2858686092,
+    "name": "csb_roccopelosi",
+    "displayName": "Rocco Pelosi",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2346790124": {
+    "hash": 2346790124,
+    "name": "csb_screen_writer",
+    "displayName": "Screenwriter",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1324952405": {
+    "hash": 1324952405,
+    "name": "csb_sol",
+    "displayName": "csb_sol",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2934601397": {
+    "hash": 2934601397,
+    "name": "csb_stripper_01",
+    "displayName": "Stripper",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2168724337": {
+    "hash": 2168724337,
+    "name": "csb_stripper_02",
+    "displayName": "Stripper 2",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3392144504": {
+    "hash": 3392144504,
+    "name": "csb_talcc",
+    "displayName": "csb_talcc",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3785408493": {
+    "hash": 3785408493,
+    "name": "csb_talmm",
+    "displayName": "csb_talmm",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1665391897": {
+    "hash": 1665391897,
+    "name": "csb_tonya",
+    "displayName": "Tonya",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1566545691": {
+    "hash": 1566545691,
+    "name": "csb_tonyprince",
+    "displayName": "csb_tonyprince",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3727243251": {
+    "hash": 3727243251,
+    "name": "csb_trafficwarden",
+    "displayName": "Traffic Warden",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4017642090": {
+    "hash": 4017642090,
+    "name": "csb_undercover",
+    "displayName": "Undercover Cop",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1224690857": {
+    "hash": 1224690857,
+    "name": "csb_vagspeak",
+    "displayName": "Vagos Speak",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "994527967": {
+    "hash": 994527967,
+    "name": "hc_driver",
+    "displayName": "Jewel Heist Driver",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "193469166": {
+    "hash": 193469166,
+    "name": "hc_gunman",
+    "displayName": "Jewel Heist Gunman",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "2579169528": {
+    "hash": 2579169528,
+    "name": "hc_hacker",
+    "displayName": "Jewel Heist Hacker",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "1074457665": {
+    "hash": 1074457665,
+    "name": "ig_abigail",
+    "displayName": "Abigail Mathers",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "610988552": {
+    "hash": 610988552,
+    "name": "ig_agent",
+    "displayName": "Agent",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1830688247": {
+    "hash": 1830688247,
+    "name": "ig_amandatownley",
+    "displayName": "Amanda De Santa",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1206185632": {
+    "hash": 1206185632,
+    "name": "ig_andreas",
+    "displayName": "Andreas Sanchez",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2129936603": {
+    "hash": 2129936603,
+    "name": "ig_ashley",
+    "displayName": "Ashley Butler",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4242698434": {
+    "hash": 4242698434,
+    "name": "ig_avon",
+    "displayName": "Avon Hertz",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2802535058": {
+    "hash": 2802535058,
+    "name": "ig_ballasog",
+    "displayName": "Ballas OG",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2426248831": {
+    "hash": 2426248831,
+    "name": "ig_bankman",
+    "displayName": "Bank Manager",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "797459875": {
+    "hash": 797459875,
+    "name": "ig_barry",
+    "displayName": "Barry",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1809880969": {
+    "hash": 1809880969,
+    "name": "ig_barry_p",
+    "displayName": "Barry",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3300333010": {
+    "hash": 3300333010,
+    "name": "ig_benny",
+    "displayName": "Benny",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1464257942": {
+    "hash": 1464257942,
+    "name": "ig_bestmen",
+    "displayName": "Best Man",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3181518428": {
+    "hash": 3181518428,
+    "name": "ig_beverly",
+    "displayName": "Beverly Felton",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3526461799": {
+    "hash": 3526461799,
+    "name": "ig_beverly_p",
+    "displayName": "Beverly Felton",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3183167778": {
+    "hash": 3183167778,
+    "name": "ig_brad",
+    "displayName": "Brad",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1633872967": {
+    "hash": 1633872967,
+    "name": "ig_bride",
+    "displayName": "Bride",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2230970679": {
+    "hash": 2230970679,
+    "name": "ig_car3guy1",
+    "displayName": "Car 3 Guy 1",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1975732938": {
+    "hash": 1975732938,
+    "name": "ig_car3guy2",
+    "displayName": "Car 3 Guy 2",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3774489940": {
+    "hash": 3774489940,
+    "name": "ig_casey",
+    "displayName": "Casey",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2240322243": {
+    "hash": 2240322243,
+    "name": "ig_chef2",
+    "displayName": "Chef",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1240128502": {
+    "hash": 1240128502,
+    "name": "ig_chef",
+    "displayName": "Chef",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2867128955": {
+    "hash": 2867128955,
+    "name": "ig_chengsr",
+    "displayName": "Wei Cheng",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "678319271": {
+    "hash": 678319271,
+    "name": "ig_chrisformage",
+    "displayName": "Cris Formage",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1825562762": {
+    "hash": 1825562762,
+    "name": "ig_clay",
+    "displayName": "Clay Simons (The Lost)",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2634057640": {
+    "hash": 2634057640,
+    "name": "ig_claypain",
+    "displayName": "Clay Jackson (The Pain Giver)",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3865252245": {
+    "hash": 3865252245,
+    "name": "ig_cletus",
+    "displayName": "Cletus",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1182012905": {
+    "hash": 1182012905,
+    "name": "ig_dale",
+    "displayName": "Dale",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "365775923": {
+    "hash": 365775923,
+    "name": "ig_davenorton",
+    "displayName": "Dave Norton",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2181772221": {
+    "hash": 2181772221,
+    "name": "ig_denise",
+    "displayName": "Denise",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1952555184": {
+    "hash": 1952555184,
+    "name": "ig_devin",
+    "displayName": "Devin",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4207997581": {
+    "hash": 4207997581,
+    "name": "ig_dix",
+    "displayName": "ig_dix",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4219210853": {
+    "hash": 4219210853,
+    "name": "ig_djblamadon",
+    "displayName": "ig_djblamadon",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "914073350": {
+    "hash": 914073350,
+    "name": "ig_djblamrupert",
+    "displayName": "ig_djblamrupert",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "400495475": {
+    "hash": 400495475,
+    "name": "ig_djblamryanh",
+    "displayName": "ig_djblamryanh",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3057799231": {
+    "hash": 3057799231,
+    "name": "ig_djblamryans",
+    "displayName": "ig_djblamryans",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4221366718": {
+    "hash": 4221366718,
+    "name": "ig_djdixmanager",
+    "displayName": "ig_djdixmanager",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2580849741": {
+    "hash": 2580849741,
+    "name": "ig_djgeneric_01",
+    "displayName": "ig_djgeneric_01",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1241432569": {
+    "hash": 1241432569,
+    "name": "ig_djsolfotios",
+    "displayName": "ig_djsolfotios",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2486302027": {
+    "hash": 2486302027,
+    "name": "ig_djsoljakob",
+    "displayName": "ig_djsoljakob",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2123514453": {
+    "hash": 2123514453,
+    "name": "ig_djsolmanager",
+    "displayName": "ig_djsolmanager",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "795497466": {
+    "hash": 795497466,
+    "name": "ig_djsolmike",
+    "displayName": "ig_djsolmike",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1194880004": {
+    "hash": 1194880004,
+    "name": "ig_djsolrobt",
+    "displayName": "ig_djsolrobt",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2972453492": {
+    "hash": 2972453492,
+    "name": "ig_djtalaurelia",
+    "displayName": "ig_djtalaurelia",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2787461577": {
+    "hash": 2787461577,
+    "name": "ig_djtalignazio",
+    "displayName": "ig_djtalignazio",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2620240008": {
+    "hash": 2620240008,
+    "name": "ig_dom",
+    "displayName": "Dom Beasley",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3666413874": {
+    "hash": 3666413874,
+    "name": "ig_dreyfuss",
+    "displayName": "Peter Dreyfuss",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3422293493": {
+    "hash": 3422293493,
+    "name": "ig_drfriedlander",
+    "displayName": "Dr. Friedlander",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "205318924": {
+    "hash": 205318924,
+    "name": "ig_englishdave",
+    "displayName": "ig_englishdave",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3499148112": {
+    "hash": 3499148112,
+    "name": "ig_fabien",
+    "displayName": "Fabien",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "988062523": {
+    "hash": 988062523,
+    "name": "ig_fbisuit_01",
+    "displayName": "FIB Suit",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2981205682": {
+    "hash": 2981205682,
+    "name": "ig_floyd",
+    "displayName": "Floyd Hebert",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2216405299": {
+    "hash": 2216405299,
+    "name": "ig_g",
+    "displayName": "Gerald",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4274948997": {
+    "hash": 4274948997,
+    "name": "ig_groom",
+    "displayName": "Groom",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1704428387": {
+    "hash": 1704428387,
+    "name": "ig_hao",
+    "displayName": "Hao",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3457361118": {
+    "hash": 3457361118,
+    "name": "ig_hunter",
+    "displayName": "Hunter",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "225287241": {
+    "hash": 225287241,
+    "name": "ig_janet",
+    "displayName": "Janet",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2050158196": {
+    "hash": 2050158196,
+    "name": "ig_jay_norris",
+    "displayName": "Jay Norris",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "257763003": {
+    "hash": 257763003,
+    "name": "ig_jewelass",
+    "displayName": "Jeweller Assistant",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3986688045": {
+    "hash": 3986688045,
+    "name": "ig_jimmyboston",
+    "displayName": "Jimmy Boston",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1135976220": {
+    "hash": 1135976220,
+    "name": "ig_jimmyboston_02",
+    "displayName": "Jimmy Boston",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1459905209": {
+    "hash": 1459905209,
+    "name": "ig_jimmydisanto",
+    "displayName": "Jimmy De Santa",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3189787803": {
+    "hash": 3189787803,
+    "name": "ig_joeminuteman",
+    "displayName": "Minuteman Joe",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2278195374": {
+    "hash": 2278195374,
+    "name": "ig_johnnyklebitz",
+    "displayName": "Johnny Klebitz",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3776618420": {
+    "hash": 3776618420,
+    "name": "ig_josef",
+    "displayName": "Josef",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2040438510": {
+    "hash": 2040438510,
+    "name": "ig_josh",
+    "displayName": "Josh",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3948009817": {
+    "hash": 3948009817,
+    "name": "ig_karen_daniels",
+    "displayName": "Karen Daniels",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1530648845": {
+    "hash": 1530648845,
+    "name": "ig_kerrymcintosh",
+    "displayName": "Kerry McIntosh",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3628252818": {
+    "hash": 3628252818,
+    "name": "ig_kerrymcintosh_02",
+    "displayName": "Kerry McIntosh",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3426139884": {
+    "hash": 3426139884,
+    "name": "ig_lacey_jones_02",
+    "displayName": "ig_lacey_jones_02",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1706635382": {
+    "hash": 1706635382,
+    "name": "ig_lamardavis",
+    "displayName": "Lamar Davis",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3756278757": {
+    "hash": 3756278757,
+    "name": "ig_lazlow",
+    "displayName": "Lazlow",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2231650028": {
+    "hash": 2231650028,
+    "name": "ig_lazlow_2",
+    "displayName": "Lazlow",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1302784073": {
+    "hash": 1302784073,
+    "name": "ig_lestercrest",
+    "displayName": "Lester Crest",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1849883942": {
+    "hash": 1849883942,
+    "name": "ig_lestercrest_2",
+    "displayName": "Lester Crest (Doomsday Heist)",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1401530684": {
+    "hash": 1401530684,
+    "name": "ig_lifeinvad_01",
+    "displayName": "Life Invader",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "666718676": {
+    "hash": 666718676,
+    "name": "ig_lifeinvad_02",
+    "displayName": "Life Invader 2",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4242313482": {
+    "hash": 4242313482,
+    "name": "ig_magenta",
+    "displayName": "Magenta",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4055673113": {
+    "hash": 4055673113,
+    "name": "ig_malc",
+    "displayName": "Malc",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4248931856": {
+    "hash": 4248931856,
+    "name": "ig_manuel",
+    "displayName": "Manuel",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "411185872": {
+    "hash": 411185872,
+    "name": "ig_marnie",
+    "displayName": "Marnie Allen",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2741999622": {
+    "hash": 2741999622,
+    "name": "ig_maryann",
+    "displayName": "Mary-Ann Quinn",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1005070462": {
+    "hash": 1005070462,
+    "name": "ig_maude",
+    "displayName": "Maude",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3214308084": {
+    "hash": 3214308084,
+    "name": "ig_michelle",
+    "displayName": "Michelle",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3408943538": {
+    "hash": 3408943538,
+    "name": "ig_milton",
+    "displayName": "Milton McIlroy",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2936266209": {
+    "hash": 2936266209,
+    "name": "ig_molly",
+    "displayName": "Molly",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "939183526": {
+    "hash": 939183526,
+    "name": "ig_money",
+    "displayName": "Money Man",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4227433577": {
+    "hash": 4227433577,
+    "name": "ig_mp_agent14",
+    "displayName": "Agent 14",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3990661997": {
+    "hash": 3990661997,
+    "name": "ig_mrk",
+    "displayName": "Ferdinand Kerimov (Mr. K)",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "503621995": {
+    "hash": 503621995,
+    "name": "ig_mrs_thornhill",
+    "displayName": "Mrs. Thornhill",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "946007720": {
+    "hash": 946007720,
+    "name": "ig_mrsphillips",
+    "displayName": "Mrs. Phillips",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3726105915": {
+    "hash": 3726105915,
+    "name": "ig_natalia",
+    "displayName": "Natalia",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3170921201": {
+    "hash": 3170921201,
+    "name": "ig_nervousron",
+    "displayName": "Nervous Ron",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3367442045": {
+    "hash": 3367442045,
+    "name": "ig_nigel",
+    "displayName": "Nigel",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1906124788": {
+    "hash": 1906124788,
+    "name": "ig_old_man1a",
+    "displayName": "Old Man 1",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4011150407": {
+    "hash": 4011150407,
+    "name": "ig_old_man2",
+    "displayName": "Old Man 2",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1625728984": {
+    "hash": 1625728984,
+    "name": "ig_omega",
+    "displayName": "Omega",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "768005095": {
+    "hash": 768005095,
+    "name": "ig_oneil",
+    "displayName": "O'Neil Brothers",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1641334641": {
+    "hash": 1641334641,
+    "name": "ig_orleans",
+    "displayName": "Bigfoot",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "648372919": {
+    "hash": 648372919,
+    "name": "ig_ortega",
+    "displayName": "Ortega",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "357551935": {
+    "hash": 357551935,
+    "name": "ig_paige",
+    "displayName": "Paige Harris",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2577072326": {
+    "hash": 2577072326,
+    "name": "ig_paper",
+    "displayName": "United Paper Man",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3312325004": {
+    "hash": 3312325004,
+    "name": "ig_patricia",
+    "displayName": "Patricia",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "645279998": {
+    "hash": 645279998,
+    "name": "ig_popov",
+    "displayName": "Dima Popov",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1681385341": {
+    "hash": 1681385341,
+    "name": "ig_priest",
+    "displayName": "Priest",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "666086773": {
+    "hash": 666086773,
+    "name": "ig_prolsec_02",
+    "displayName": "Prologue Security 2",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3845001836": {
+    "hash": 3845001836,
+    "name": "ig_ramp_gang",
+    "displayName": "Families Gang Member?",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1165307954": {
+    "hash": 1165307954,
+    "name": "ig_ramp_hic",
+    "displayName": "Hick",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3740245870": {
+    "hash": 3740245870,
+    "name": "ig_ramp_hipster",
+    "displayName": "Hipster",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3870061732": {
+    "hash": 3870061732,
+    "name": "ig_ramp_mex",
+    "displayName": "Mexican",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "940330470": {
+    "hash": 940330470,
+    "name": "ig_rashcosvki",
+    "displayName": "Maxim Rashkovsky",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3585757951": {
+    "hash": 3585757951,
+    "name": "ig_roccopelosi",
+    "displayName": "Rocco Pelosi",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1024089777": {
+    "hash": 1024089777,
+    "name": "ig_russiandrunk",
+    "displayName": "Russian Drunk",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4293277303": {
+    "hash": 4293277303,
+    "name": "ig_screen_writer",
+    "displayName": "Screenwriter",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1283141381": {
+    "hash": 1283141381,
+    "name": "ig_siemonyetarian",
+    "displayName": "Simeon Yetarian",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3786117468": {
+    "hash": 3786117468,
+    "name": "ig_sol",
+    "displayName": "ig_sol",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2260598310": {
+    "hash": 2260598310,
+    "name": "ig_solomon",
+    "displayName": "Solomon Richards",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "941695432": {
+    "hash": 941695432,
+    "name": "ig_stevehains",
+    "displayName": "Steve Haines",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "915948376": {
+    "hash": 915948376,
+    "name": "ig_stretch",
+    "displayName": "Stretch",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3828621987": {
+    "hash": 3828621987,
+    "name": "ig_talcc",
+    "displayName": "ig_talcc",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3885222120": {
+    "hash": 3885222120,
+    "name": "ig_talina",
+    "displayName": "Talina",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1182156569": {
+    "hash": 1182156569,
+    "name": "ig_talmm",
+    "displayName": "ig_talmm",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "226559113": {
+    "hash": 226559113,
+    "name": "ig_tanisha",
+    "displayName": "Tanisha",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3697041061": {
+    "hash": 3697041061,
+    "name": "ig_taocheng",
+    "displayName": "Tao Cheng",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2089096292": {
+    "hash": 2089096292,
+    "name": "ig_taostranslator",
+    "displayName": "Tao's Translator",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "567567415": {
+    "hash": 567567415,
+    "name": "ig_taostranslator_p",
+    "displayName": "Tao's Translator",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2721800023": {
+    "hash": 2721800023,
+    "name": "ig_tenniscoach",
+    "displayName": "Tennis Coach",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1728056212": {
+    "hash": 1728056212,
+    "name": "ig_terry",
+    "displayName": "Terry",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3447159466": {
+    "hash": 3447159466,
+    "name": "ig_tomepsilon",
+    "displayName": "Epsilon Tom",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3402126148": {
+    "hash": 3402126148,
+    "name": "ig_tonya",
+    "displayName": "Tonya",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "761829301": {
+    "hash": 761829301,
+    "name": "ig_tonyprince",
+    "displayName": "ig_tonyprince",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "3728026165": {
+    "hash": 3728026165,
+    "name": "ig_tracydisanto",
+    "displayName": "Tracey De Santa",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1461287021": {
+    "hash": 1461287021,
+    "name": "ig_trafficwarden",
+    "displayName": "Traffic Warden",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1382414087": {
+    "hash": 1382414087,
+    "name": "ig_tylerdix",
+    "displayName": "Tyler Dixon",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1511543927": {
+    "hash": 1511543927,
+    "name": "ig_tylerdix_02",
+    "displayName": "Tyler Dixon",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "4194109068": {
+    "hash": 4194109068,
+    "name": "ig_vagspeak",
+    "displayName": "Vagos Funeral Speaker",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "2459507570": {
+    "hash": 2459507570,
+    "name": "ig_wade",
+    "displayName": "Wade",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "188012277": {
+    "hash": 188012277,
+    "name": "ig_zimbor",
+    "displayName": "Zimbor",
+    "gender": "unknown",
+    "type": "story"
+  },
+  "1057201338": {
+    "hash": 1057201338,
+    "name": "slod_human",
+    "displayName": "slod_human",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "2238511874": {
+    "hash": 2238511874,
+    "name": "slod_large_quadped",
+    "displayName": "slod_large_quadped",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "762327283": {
+    "hash": 762327283,
+    "name": "slod_small_quadped",
+    "displayName": "slod_small_quadped",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "1090333183": {
+    "hash": 1090333183,
+    "name": "strm_peds_mpshare",
+    "displayName": "strm_peds_mpshare",
+    "gender": "unknown",
+    "type": "ambient"
+  },
+  "3771447892": {
+    "hash": 3771447892,
+    "name": "strm_peds_mptattrts",
+    "displayName": "strm_peds_mptattrts",
+    "gender": "unknown",
+    "type": "ambient"
+  }
+}

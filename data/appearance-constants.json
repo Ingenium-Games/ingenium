@@ -1,0 +1,154 @@
+{
+  "eyeColors": [
+    { "id": 0, "name": "Green", "color": "#87BC4D" },
+    { "id": 1, "name": "Blue", "color": "#5BA5CF" },
+    { "id": 2, "name": "Brown", "color": "#825F46" },
+    { "id": 3, "name": "Dark Brown", "color": "#3D2817" },
+    { "id": 4, "name": "Hazel", "color": "#B8935A" },
+    { "id": 5, "name": "Gray", "color": "#6B7C92" },
+    { "id": 6, "name": "Light Blue", "color": "#95C5E3" },
+    { "id": 7, "name": "Light Green", "color": "#A8D4A0" },
+    { "id": 8, "name": "Amber", "color": "#D6A952" },
+    { "id": 9, "name": "Dark Gray", "color": "#4A545C" },
+    { "id": 10, "name": "Pale Blue", "color": "#C5D8E5" },
+    { "id": 11, "name": "Pale Green", "color": "#CAE3C5" },
+    { "id": 12, "name": "Honey", "color": "#E0AD57" },
+    { "id": 13, "name": "Black", "color": "#1C1C1C" },
+    { "id": 14, "name": "Ice Blue", "color": "#DFEEF5" },
+    { "id": 15, "name": "Mint", "color": "#D5F0E5" },
+    { "id": 16, "name": "Yellow", "color": "#F5E05C" },
+    { "id": 17, "name": "Purple", "color": "#9370DB" },
+    { "id": 18, "name": "Red", "color": "#DC143C" },
+    { "id": 19, "name": "Orange", "color": "#FF8C00" },
+    { "id": 20, "name": "Pink", "color": "#FFB6C1" },
+    { "id": 21, "name": "Violet", "color": "#EE82EE" },
+    { "id": 22, "name": "Turquoise", "color": "#40E0D0" },
+    { "id": 23, "name": "Lime", "color": "#32CD32" },
+    { "id": 24, "name": "Cyan", "color": "#00FFFF" },
+    { "id": 25, "name": "Magenta", "color": "#FF00FF" },
+    { "id": 26, "name": "Crimson", "color": "#DC143C" },
+    { "id": 27, "name": "Gold", "color": "#FFD700" },
+    { "id": 28, "name": "Silver", "color": "#C0C0C0" },
+    { "id": 29, "name": "Bronze", "color": "#CD7F32" },
+    { "id": 30, "name": "Peach", "color": "#FFDAB9" },
+    { "id": 31, "name": "Teal", "color": "#008080" }
+  ],
+  "hairDecorations": {
+    "male": [
+      { "id": 0, "name": "None" },
+      { "id": 1, "name": "Band 1" },
+      { "id": 2, "name": "Band 2" },
+      { "id": 3, "name": "Band 3" }
+    ],
+    "female": [
+      { "id": 0, "name": "None" },
+      { "id": 1, "name": "Flower 1" },
+      { "id": 2, "name": "Flower 2" },
+      { "id": 3, "name": "Flower 3" },
+      { "id": 4, "name": "Band 1" },
+      { "id": 5, "name": "Band 2" },
+      { "id": 6, "name": "Band 3" }
+    ]
+  },
+  "faceFeatures": [
+    { "id": 0, "name": "Nose Width", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 1, "name": "Nose Peak Height", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 2, "name": "Nose Peak Length", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 3, "name": "Nose Bone Height", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 4, "name": "Nose Peak Lowering", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 5, "name": "Nose Bone Twist", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 6, "name": "Eyebrows Height", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 7, "name": "Eyebrows Depth", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 8, "name": "Cheekbones Height", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 9, "name": "Cheekbones Width", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 10, "name": "Cheeks Width", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 11, "name": "Eyes Opening", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 12, "name": "Lips Thickness", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 13, "name": "Jaw Bone Width", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 14, "name": "Jaw Bone Length", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 15, "name": "Chin Height", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 16, "name": "Chin Length", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 17, "name": "Chin Width", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 18, "name": "Chin Hole Size", "min": -1.0, "max": 1.0, "default": 0.0 },
+    { "id": 19, "name": "Neck Thickness", "min": -1.0, "max": 1.0, "default": 0.0 }
+  ],
+  "headOverlays": [
+    { "id": 0, "name": "Blemishes", "hasColor": false, "maxStyle": 23 },
+    { "id": 1, "name": "Facial Hair", "hasColor": true, "maxStyle": 28 },
+    { "id": 2, "name": "Eyebrows", "hasColor": true, "maxStyle": 33 },
+    { "id": 3, "name": "Ageing", "hasColor": false, "maxStyle": 14 },
+    { "id": 4, "name": "Makeup", "hasColor": true, "maxStyle": 74 },
+    { "id": 5, "name": "Blush", "hasColor": true, "maxStyle": 6 },
+    { "id": 6, "name": "Complexion", "hasColor": false, "maxStyle": 11 },
+    { "id": 7, "name": "Sun Damage", "hasColor": false, "maxStyle": 10 },
+    { "id": 8, "name": "Lipstick", "hasColor": true, "maxStyle": 9 },
+    { "id": 9, "name": "Moles/Freckles", "hasColor": false, "maxStyle": 17 },
+    { "id": 10, "name": "Chest Hair", "hasColor": true, "maxStyle": 16 },
+    { "id": 11, "name": "Body Blemishes", "hasColor": false, "maxStyle": 11 },
+    { "id": 12, "name": "Add Body Blemishes", "hasColor": false, "maxStyle": 1 }
+  ],
+  "components": [
+    { "id": 0, "name": "Face" },
+    { "id": 1, "name": "Mask" },
+    { "id": 2, "name": "Hair" },
+    { "id": 3, "name": "Torso" },
+    { "id": 4, "name": "Legs" },
+    { "id": 5, "name": "Bag" },
+    { "id": 6, "name": "Shoes" },
+    { "id": 7, "name": "Accessories" },
+    { "id": 8, "name": "Undershirt" },
+    { "id": 9, "name": "Body Armor" },
+    { "id": 10, "name": "Decals" },
+    { "id": 11, "name": "Tops" }
+  ],
+  "props": [
+    { "id": 0, "name": "Hat" },
+    { "id": 1, "name": "Glasses" },
+    { "id": 2, "name": "Earrings" },
+    { "id": 6, "name": "Watch" },
+    { "id": 7, "name": "Bracelet" }
+  ],
+  "hairColors": {
+    "primary": 64,
+    "highlight": 64
+  },
+  "defaultAppearance": {
+    "model": "mp_m_freemode_01",
+    "headBlend": {
+      "shapeFirst": 0,
+      "shapeSecond": 0,
+      "skinFirst": 0,
+      "skinSecond": 0,
+      "shapeMix": 0.5,
+      "skinMix": 0.5,
+      "thirdMix": 0.0
+    },
+    "faceFeatures": {
+      "0": 0.0, "1": 0.0, "2": 0.0, "3": 0.0, "4": 0.0,
+      "5": 0.0, "6": 0.0, "7": 0.0, "8": 0.0, "9": 0.0,
+      "10": 0.0, "11": 0.0, "12": 0.0, "13": 0.0, "14": 0.0,
+      "15": 0.0, "16": 0.0, "17": 0.0, "18": 0.0, "19": 0.0
+    },
+    "headOverlays": {
+      "0": { "style": 0, "opacity": 0.0, "color": 0 },
+      "1": { "style": 0, "opacity": 0.0, "color": 0 },
+      "2": { "style": 0, "opacity": 1.0, "color": 0 },
+      "3": { "style": 0, "opacity": 0.0, "color": 0 },
+      "4": { "style": 0, "opacity": 0.0, "color": 0 },
+      "5": { "style": 0, "opacity": 0.0, "color": 0 },
+      "6": { "style": 0, "opacity": 0.0, "color": 0 },
+      "7": { "style": 0, "opacity": 0.0, "color": 0 },
+      "8": { "style": 0, "opacity": 0.0, "color": 0 },
+      "9": { "style": 0, "opacity": 0.0, "color": 0 },
+      "10": { "style": 0, "opacity": 0.0, "color": 0 },
+      "11": { "style": 0, "opacity": 0.0, "color": 0 },
+      "12": { "style": 0, "opacity": 0.0, "color": 0 }
+    },
+    "hair": {
+      "style": 0,
+      "color": 0,
+      "highlight": 0
+    },
+    "eyeColor": 0
+  }
+}
