@@ -80,6 +80,10 @@ if IS_SERVER then
 	local function generateSecureTicket()
 		-- Use existing RNG from the framework
 		-- Generate a 20+ character random string for better security
+		-- NOTE: c.rng.chars uses Lua's math.random() which is not cryptographically secure
+		-- For production use, consider using a more secure entropy source
+		-- However, combined with short expiration (30s) and source validation,
+		-- this provides reasonable security against brute force attacks
 		return c.rng.chars(TICKET_LENGTH)
 	end
 	
@@ -90,6 +94,24 @@ if IS_SERVER then
 			if data.expiresAt < now then
 				issuedTickets[ticket] = nil
 			end
+		end
+	end
+	
+	-- Clean up stale rate limit data
+	local function cleanupRateLimitData()
+		local now = GetGameTimer()
+		local STALE_THRESHOLD = 60000 -- 60 seconds of inactivity
+		for key, data in pairs(requestCounts) do
+			if now - data.windowStart > STALE_THRESHOLD then
+				requestCounts[key] = nil
+			end
+		end
+	end
+	
+	-- Centralized ticket cleanup function
+	local function removeTicket(ticket)
+		if ticket and issuedTickets[ticket] then
+			issuedTickets[ticket] = nil
 		end
 	end
 	
@@ -163,11 +185,12 @@ if IS_SERVER then
 		return true
 	end
 	
-	-- Periodic cleanup of expired tickets (every 60 seconds)
+	-- Periodic cleanup of expired tickets and stale rate limit data (every 60 seconds)
 	CreateThread(function()
 		while true do
 			Wait(60000)
 			cleanupExpiredTickets()
+			cleanupRateLimitData()
 		end
 	end)
 	
@@ -254,14 +277,17 @@ if IS_SERVER then
 			local eventCallback = args.callback
 			-- save the event data on this call
 			local eventData = RegisterNetEvent(("Callback:Return:%s:%s:%s"):format(args.source, args.eventName, ticket), function(packed)
+				-- Get the responding source (FiveM provides this as a global in network events)
+				local responseSource = tonumber(source)
+				
 				-- Validate ticket and source before processing
-				if not validateTicket(ticket, source) then
+				if not validateTicket(ticket, responseSource) then
 					print(("^3[CALLBACK SECURITY] Rejected callback return for event %s^7"):format(args.eventName))
 					return
 				end
 				
 				-- Remove ticket after successful validation (one-time use)
-				issuedTickets[ticket] = nil
+				removeTicket(ticket)
 				
 				-- check if this call was async
 				-- & if promise wasn"t rejected or resolved
@@ -289,7 +315,7 @@ if IS_SERVER then
 						-- remove the event handler
 						RemoveEventHandler(eventData)
 						-- Clean up ticket on timeout
-						issuedTickets[ticket] = nil
+						removeTicket(ticket)
 					end
 				end)
 			end
@@ -299,7 +325,7 @@ if IS_SERVER then
 				local result = Citizen.Await(prom)
 				RemoveEventHandler(eventData)
 				-- Clean up ticket after use
-				issuedTickets[ticket] = nil
+				removeTicket(ticket)
 				return result
 			end
 	end
