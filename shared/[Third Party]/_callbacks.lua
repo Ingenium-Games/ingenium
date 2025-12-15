@@ -61,11 +61,151 @@ end
 
 -- SERVER-SIDE
 if IS_SERVER then
+	-- ====================================================================================--
+	-- Ticket Validation System
+	-- ====================================================================================--
+	local issuedTickets = {}
+	local TICKET_VALIDITY_MS = conf.callback.ticketValidity
+	local TICKET_LENGTH = conf.callback.ticketLength
+	
+	-- Rate Limiting Configuration
+	local rateLimitConfig = {
+		enabled = conf.callback.rateLimitEnabled,
+		maxRequestsPerSecond = conf.callback.maxRequestsPerSecond,
+		windowMs = conf.callback.rateLimitWindow
+	}
+	local requestCounts = {}
+	
+	-- Generate cryptographically secure ticket
+	local function generateSecureTicket()
+		-- Use existing RNG from the framework
+		-- Generate a 20+ character random string for better security
+		-- NOTE: c.rng.chars uses Lua's math.random() which is not cryptographically secure
+		-- For production use, consider using a more secure entropy source
+		-- However, combined with short expiration (30s) and source validation,
+		-- this provides reasonable security against brute force attacks
+		return c.rng.chars(TICKET_LENGTH)
+	end
+	
+	-- Clean up expired tickets
+	local function cleanupExpiredTickets()
+		local now = GetGameTimer()
+		for ticket, data in pairs(issuedTickets) do
+			if data.expiresAt < now then
+				issuedTickets[ticket] = nil
+			end
+		end
+	end
+	
+	-- Clean up stale rate limit data
+	local function cleanupRateLimitData()
+		local now = GetGameTimer()
+		local STALE_THRESHOLD = conf.callback.staleThreshold
+		for key, data in pairs(requestCounts) do
+			if now - data.windowStart > STALE_THRESHOLD then
+				requestCounts[key] = nil
+			end
+		end
+	end
+	
+	-- Centralized ticket cleanup function
+	local function removeTicket(ticket)
+		if ticket and issuedTickets[ticket] then
+			issuedTickets[ticket] = nil
+		end
+	end
+	
+	-- Rate limiting check
+	local function checkRateLimit(source)
+		if not rateLimitConfig.enabled then
+			return true
+		end
+		
+		local now = GetGameTimer()
+		local key = tostring(source)
+		
+		-- Initialize if first request
+		if not requestCounts[key] then
+			requestCounts[key] = {
+				count = 0,
+				windowStart = now
+			}
+		end
+		
+		local data = requestCounts[key]
+		
+		-- Reset window if expired
+		if now - data.windowStart >= rateLimitConfig.windowMs then
+			data.count = 0
+			data.windowStart = now
+		end
+		
+		-- Check if rate limit exceeded
+		if data.count >= rateLimitConfig.maxRequestsPerSecond then
+			print(("^3[CALLBACK SECURITY] Rate limit exceeded for source %s (max: %d/sec)^7"):format(
+				source, rateLimitConfig.maxRequestsPerSecond
+			))
+			return false
+		end
+		
+		data.count = data.count + 1
+		return true
+	end
+	
+	-- Validate ticket and source
+	local function validateTicket(ticket, source)
+		if not ticket then
+			print("^3[CALLBACK SECURITY] Missing ticket in callback return^7")
+			return false
+		end
+		
+		local ticketData = issuedTickets[ticket]
+		
+		if not ticketData then
+			print(("^3[CALLBACK SECURITY] Invalid or expired ticket: %s from source %s^7"):format(ticket, source))
+			return false
+		end
+		
+		-- Check expiration
+		local now = GetGameTimer()
+		if ticketData.expiresAt < now then
+			print(("^3[CALLBACK SECURITY] Expired ticket: %s from source %s^7"):format(ticket, source))
+			issuedTickets[ticket] = nil
+			return false
+		end
+		
+		-- Check source match
+		if ticketData.source ~= source then
+			print(("^3[CALLBACK SECURITY] Source mismatch - ticket source: %s, actual source: %s^7"):format(
+				ticketData.source, source
+			))
+			return false
+		end
+		
+		return true
+	end
+	
+	-- Periodic cleanup of expired tickets and stale rate limit data
+	CreateThread(function()
+		while true do
+			Wait(conf.callback.cleanupInterval)
+			cleanupExpiredTickets()
+			cleanupRateLimitData()
+		end
+	end)
+	
+	-- ====================================================================================--
 	--
 	-- @table RegisterServerCallback
 	--
 	-- @string eventName - The name of the event to be registered
 	-- @function eventCallback - The function to be executed when event is fired
+	-- 
+	-- ACL Permission Example:
+	-- For sensitive callbacks (e.g., money, inventory, admin), consider adding:
+	--   if not IsPlayerAceAllowed(source, 'callback.eventName') then
+	--     return nil, "Permission denied"
+	--   end
 	_G.RegisterServerCallback = function(args)
 		ensure(args, "table"); ensure(args.eventName, "string"); ensure(args.eventCallback, "function")
 
@@ -112,14 +252,43 @@ if IS_SERVER then
 	_G.TriggerClientCallback = function(args)
 		ensure(args, "table"); ensure(args.source, "string", "number"); ensure(args.eventName, "string"); ensure(args.args, "table", "nil"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 
+			-- Check rate limit
+			if not checkRateLimit(args.source) then
+				if args.timedout then
+					args.timedout("rate_limited")
+				end
+				return nil
+			end
+
 			-- create a new ticket
-			local ticket = c.rng.chars(10)
+			local ticket = generateSecureTicket()
+			-- Store ticket with metadata
+			local now = GetGameTimer()
+			issuedTickets[ticket] = {
+				source = tonumber(args.source),
+				eventName = args.eventName,
+				createdAt = now,
+				expiresAt = now + TICKET_VALIDITY_MS
+			}
+			
 			-- create a new promise
 			local prom = promise.new()
 			-- save the callback function on this call
 			local eventCallback = args.callback
 			-- save the event data on this call
 			local eventData = RegisterNetEvent(("Callback:Return:%s:%s:%s"):format(args.source, args.eventName, ticket), function(packed)
+				-- Get the responding source (FiveM provides this as a global in network events)
+				local responseSource = tonumber(source)
+				
+				-- Validate ticket and source before processing
+				if not validateTicket(ticket, responseSource) then
+					print(("^3[CALLBACK SECURITY] Rejected callback return for event %s^7"):format(args.eventName))
+					return
+				end
+				
+				-- Remove ticket after successful validation (one-time use)
+				removeTicket(ticket)
+				
 				-- check if this call was async
 				-- & if promise wasn"t rejected or resolved
 				if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
@@ -145,6 +314,8 @@ if IS_SERVER then
 						if prom.state == PENDING then prom:reject() end
 						-- remove the event handler
 						RemoveEventHandler(eventData)
+						-- Clean up ticket on timeout
+						removeTicket(ticket)
 					end
 				end)
 			end
@@ -153,6 +324,8 @@ if IS_SERVER then
 			if not eventCallback then
 				local result = Citizen.Await(prom)
 				RemoveEventHandler(eventData)
+				-- Clean up ticket after use
+				removeTicket(ticket)
 				return result
 			end
 	end
