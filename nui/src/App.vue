@@ -17,6 +17,9 @@
     
     <!-- Context Menu -->
     <ContextMenu v-if="uiStore.showContextMenu" />
+    
+    <!-- Appearance Customization -->
+    <AppearanceCustomization />
   </div>
 </template>
 
@@ -30,6 +33,7 @@ import NotificationContainer from './components/NotificationContainer.vue'
 import InputDialog from './components/InputDialog.vue'
 import Menu from './components/Menu.vue'
 import ContextMenu from './components/ContextMenu.vue'
+import AppearanceCustomization from './components/appearance/AppearanceCustomization.vue'
 
 const uiStore = useUIStore()
 
