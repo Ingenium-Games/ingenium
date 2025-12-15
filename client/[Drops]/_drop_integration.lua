@@ -2,6 +2,79 @@
 -- Drop Integration: Client-side drop system integration
 -- ====================================================================================--
 
+--- Handle drop notification for targeted drops
+RegisterNetEvent('Client:Drop:Notify', function(data)
+    local coords = data.coords
+    local isDeadDrop = data.isDeadDrop
+    local netId = data.netId
+    local uuid = data.uuid
+    
+    -- Send NUI notification
+    SendNUIMessage({
+        message = "dropNotification",
+        data = {
+            title = isDeadDrop and "Dead Drop" or "Drop Delivery",
+            description = isDeadDrop and "A package has been left for you" or "A drop has been marked on your map",
+            coords = coords,
+            isDeadDrop = isDeadDrop
+        }
+    })
+    
+    -- Create blip if not a dead drop
+    if not isDeadDrop then
+        local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
+        SetBlipSprite(blip, 478) -- Package icon
+        SetBlipDisplay(blip, 4)
+        SetBlipScale(blip, 0.8)
+        SetBlipColour(blip, 2) -- Green
+        SetBlipAsShortRange(blip, false)
+        BeginTextCommandSetBlipName("STRING")
+        AddTextComponentString("Drop Delivery")
+        EndTextCommandSetBlipName(blip)
+        
+        -- Store blip reference for cleanup
+        if not c.drop then c.drop = {} end
+        if not c.drop.blips then c.drop.blips = {} end
+        c.drop.blips[uuid] = blip
+        
+        c.func.Debug_3("Created blip for drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
+    end
+    
+    -- Trigger hook for custom scripts (phone notifications, etc.)
+    TriggerEvent('Client:Drop:Received', {
+        coords = coords,
+        isDeadDrop = isDeadDrop,
+        netId = netId,
+        uuid = uuid
+    })
+    
+    c.func.Debug_1("Received drop notification" .. (isDeadDrop and " (dead drop)" or " (with blip)"))
+end)
+
+--- Handle access denied
+RegisterNetEvent('Client:Drop:AccessDenied', function(data)
+    -- Send NUI notification
+    SendNUIMessage({
+        message = "notification",
+        data = {
+            type = "error",
+            title = "Access Denied",
+            description = data.message or "This drop is not for you"
+        }
+    })
+    
+    c.func.Debug_1("Access denied to restricted drop")
+end)
+
+--- Clean up blip when drop is removed
+RegisterNetEvent('Client:Drop:Removed', function(uuid)
+    if c.drop and c.drop.blips and c.drop.blips[uuid] then
+        RemoveBlip(c.drop.blips[uuid])
+        c.drop.blips[uuid] = nil
+        c.func.Debug_3("Removed blip for drop " .. uuid)
+    end
+end)
+
 --- Handle State Bag changes for drop inventories
 --- This provides real-time updates when other players modify the drop
 CreateThread(function()

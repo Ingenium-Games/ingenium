@@ -8,8 +8,10 @@ c.active_drops = {} -- Drops currently being accessed by players
 ---@param coords table {x, y, z, h}
 ---@param items table Array of items to add [{Item, Quantity, Quality, Weapon, Meta}]
 ---@param model string|nil Optional model hash, uses default if nil
+---@param targetPlayer number|nil Optional target player source to notify
+---@param isDeadDrop boolean|nil If true, notifies player without blip (for secret drops)
 ---@return number|boolean netId Network ID of created drop or false on failure
-function c.drop.Create(coords, items, model)
+function c.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
     if type(coords) ~= "table" or not coords.x or not coords.y or not coords.z then
         c.func.Debug_1("Invalid coords provided to c.drop.Create")
         return false
@@ -77,8 +79,36 @@ function c.drop.Create(coords, items, model)
         Model = dropModel,
         Inventory = xObject.CompressInventory(),
         Created = timestamp,
-        Updated = timestamp
+        Updated = timestamp,
+        TargetPlayer = targetPlayer or nil,
+        IsDeadDrop = isDeadDrop or false
     }
+    
+    -- Notify target player if specified
+    if targetPlayer and type(targetPlayer) == "number" then
+        local xPlayer = c.data.GetPlayer(targetPlayer)
+        if xPlayer then
+            -- Send notification to target player
+            TriggerClientEvent('Client:Drop:Notify', targetPlayer, {
+                coords = coords,
+                isDeadDrop = isDeadDrop or false,
+                netId = netId,
+                uuid = uuid
+            })
+            
+            c.func.Debug_3("Notified player " .. targetPlayer .. " of drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
+            
+            -- Trigger hook event for custom scripts (phone systems, etc.)
+            TriggerEvent('Server:Drop:Created:Targeted', {
+                targetPlayer = targetPlayer,
+                coords = coords,
+                netId = netId,
+                uuid = uuid,
+                isDeadDrop = isDeadDrop or false,
+                items = items
+            })
+        end
+    end
     
     c.func.Debug_1("Created drop with UUID: " .. uuid .. " NetID: " .. netId)
     
@@ -96,9 +126,11 @@ function c.drop.Remove(netId)
     
     -- Find the drop by NetID
     local dropUUID = nil
+    local dropData = nil
     for uuid, drop in pairs(c.drops) do
         if drop.NetID == netId then
             dropUUID = uuid
+            dropData = drop
             break
         end
     end
@@ -108,6 +140,7 @@ function c.drop.Remove(netId)
         for uuid, drop in pairs(c.active_drops) do
             if drop.NetID == netId then
                 dropUUID = uuid
+                dropData = drop
                 break
             end
         end
@@ -116,6 +149,11 @@ function c.drop.Remove(netId)
     if not dropUUID then
         c.func.Debug_1("Drop not found for NetID: " .. netId)
         return false
+    end
+    
+    -- Notify target player to remove blip if this was a targeted drop
+    if dropData and dropData.TargetPlayer then
+        TriggerClientEvent('Client:Drop:Removed', dropData.TargetPlayer, dropUUID)
     end
     
     -- Remove from both tables
@@ -278,6 +316,41 @@ RegisterNetEvent("Server:Drop:Access", function(netId)
     if not xPlayer then
         c.func.Debug_1("Player not found for drop access event")
         return
+    end
+    
+    -- Check if drop has restricted access
+    local dropUUID = nil
+    local dropData = nil
+    
+    -- Find drop in both active and inactive states
+    for uuid, drop in pairs(c.drops) do
+        if drop.NetID == netId then
+            dropUUID = uuid
+            dropData = drop
+            break
+        end
+    end
+    
+    if not dropUUID then
+        for uuid, drop in pairs(c.active_drops) do
+            if drop.NetID == netId then
+                dropUUID = uuid
+                dropData = drop
+                break
+            end
+        end
+    end
+    
+    -- Validate access permissions
+    if dropData and dropData.TargetPlayer then
+        if dropData.TargetPlayer ~= source then
+            -- Not authorized to access this drop
+            TriggerClientEvent('Client:Drop:AccessDenied', source, {
+                message = "This drop is not for you"
+            })
+            c.func.Debug_1("Player " .. source .. " denied access to restricted drop (target: " .. dropData.TargetPlayer .. ")")
+            return
+        end
     end
     
     -- Activate the drop (move to active state)
