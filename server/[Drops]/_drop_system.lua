@@ -270,7 +270,51 @@ end
 -- Events
 -- ====================================================================================--
 
---- Handle player dropping items
+--- Handle player accessing a drop (opening inventory UI)
+RegisterNetEvent("Server:Drop:Access", function(netId)
+    local source = source
+    local xPlayer = c.GetPlayer(source)
+    
+    if not xPlayer then
+        c.func.Debug_1("Player not found for drop access event")
+        return
+    end
+    
+    -- Activate the drop (move to active state)
+    c.drop.Activate(netId)
+    
+    c.func.Debug_3("Player " .. source .. " accessed drop NetID: " .. netId)
+end)
+
+--- Handle when inventory UI is closed for a drop
+--- The OrganizeInventories callback already handles saving, this is for cleanup
+RegisterNetEvent("Server:Drop:Close", function(netId)
+    local source = source
+    
+    -- Get the drop object
+    local xObject = c.data.GetObject(netId)
+    if not xObject then
+        c.func.Debug_1("Drop object not found for NetID: " .. tostring(netId))
+        return
+    end
+    
+    -- Update state bag with current inventory
+    xObject.State.Inventory = xObject.GetInventory()
+    
+    -- Check if inventory is empty, if so remove the drop
+    local inventory = xObject.GetInventory()
+    if not inventory or #inventory == 0 then
+        c.drop.Remove(netId)
+        c.func.Debug_3("Drop removed (empty) after close by player " .. source)
+    else
+        -- Move back to inactive state
+        c.drop.Deactivate(netId)
+        c.func.Debug_3("Drop deactivated after close by player " .. source)
+    end
+end)
+
+--- Handle player dropping items from inventory UI
+--- This is called when items are dragged out of inventory in the UI
 RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, meta)
     local source = source
     local xPlayer = c.GetPlayer(source)
@@ -326,58 +370,6 @@ RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, m
             xPlayer.RemoveItem(item, slot)
         end
         c.func.Debug_3("Player " .. source .. " dropped " .. quantity .. "x " .. item)
-    end
-end)
-
---- Handle player picking up items from a drop
-RegisterNetEvent("Server:Item:Pickup", function(netId)
-    local source = source
-    local xPlayer = c.GetPlayer(source)
-    
-    if not xPlayer then
-        c.func.Debug_1("Player not found for pickup event")
-        return
-    end
-    
-    -- Get the drop object
-    local xObject = c.data.GetObject(netId)
-    if not xObject then
-        c.func.Debug_1("Drop object not found for NetID: " .. tostring(netId))
-        return
-    end
-    
-    -- Activate the drop if not already active
-    c.drop.Activate(netId)
-    
-    -- Get inventory
-    local inventory = xObject.GetInventory()
-    if not inventory or #inventory == 0 then
-        c.func.Debug_1("Drop inventory is empty")
-        c.drop.Remove(netId)
-        return
-    end
-    
-    -- Transfer all items to player
-    local transferredCount = 0
-    for i = #inventory, 1, -1 do
-        local item = inventory[i]
-        -- Try to add to player
-        xPlayer.AddItem({item.Item, item.Quantity, item.Quality, item.Weapon, item.Meta})
-        -- Remove from drop
-        xObject.RemoveItem(item.Item, i)
-        transferredCount = transferredCount + 1
-    end
-    
-    -- Update state bag
-    xObject.State.Inventory = xObject.GetInventory()
-    
-    c.func.Debug_3("Transferred " .. transferredCount .. " items to player " .. source)
-    
-    -- Remove the drop if empty
-    if #xObject.GetInventory() == 0 then
-        c.drop.Remove(netId)
-    else
-        c.drop.Deactivate(netId)
     end
 end)
 

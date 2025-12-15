@@ -12,12 +12,16 @@ CreateThread(function()
     exports['ig.target']:AddModel(conf.drops.default_model, {
         options = {
             {
-                icon = 'fa-solid fa-hand-holding',
-                label = 'Pick Up Items',
+                icon = 'fa-solid fa-box-open',
+                label = 'Open Drop',
                 action = function(entity)
                     local netId = NetworkGetNetworkIdFromEntity(entity)
                     if netId then
-                        TriggerServerEvent('Server:Item:Pickup', netId)
+                        -- Open dual-panel inventory UI for the drop
+                        TriggerEvent("Client:Inventory:OpenDual", netId, "Ground Drop")
+                        
+                        -- Notify server that drop is being accessed
+                        TriggerServerEvent('Server:Drop:Access', netId)
                     end
                 end,
             },

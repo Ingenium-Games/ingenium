@@ -261,6 +261,23 @@ local OrganizeInventories = RegisterServerCallback({
             -- Object
             local xObject = c.data.GetObject(net)
             xObject.UnpackInventory(inv2)
+            
+            -- Check if this is a drop and if it's now empty (compare model hash directly)
+            local model = GetEntityModel(entity)
+            if model == conf.drops.default_model then
+                local inventory = xObject.GetInventory()
+                if not inventory or #inventory == 0 then
+                    -- Drop is empty, remove it
+                    if c.drop and c.drop.Remove then
+                        c.drop.Remove(net)
+                    end
+                else
+                    -- Drop still has items, deactivate it
+                    if c.drop and c.drop.Deactivate then
+                        c.drop.Deactivate(net)
+                    end
+                end
+            end
         elseif type == 2 then
             -- Vehicle
             local xVehicle = c.data.GetVehicle(net)
