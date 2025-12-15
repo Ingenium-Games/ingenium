@@ -3,6 +3,27 @@ if not c.sql then c.sql = {} end
 c.sql.save = {}
 -- ====================================================================================--
 
+--[[ Performance Monitoring Wrapper ]] --
+
+--- Wrapper for monitoring save operation performance
+---@param saveName string "Name of the save operation"
+---@param saveFunc function "The save function to execute"
+---@param cb function "Callback to execute after save"
+local function MonitoredSave(saveName, saveFunc, cb)
+    local startTime = os.clock()
+    local originalCb = cb
+    
+    saveFunc(function()
+        local elapsed = (os.clock() - startTime) * 1000
+        if elapsed > 100 then
+            print(string.format("^3[SQL WARNING] %s took %.2fms^7", saveName, elapsed))
+        else
+            print(string.format("^2[SQL] %s completed in %.2fms^7", saveName, elapsed))
+        end
+        if originalCb then originalCb() end
+    end)
+end
+
 --[[ Players ]] --
 
 local PlayerSaveData = -1

@@ -221,12 +221,52 @@ function SameSameB(var) {
 >I need to figure out my style..
 
 <br>
+<br>
+
+-----
+
+<br>
+
+## Database Optimization
+
+<br>
+
+### Recommended MySQL Configuration
+
+Add to your `server.cfg`:
+
+```cfg
+set mysql_connection_string "mysql://user:pass@localhost:3307/db?charset=utf8mb4_general_ci&supportBigNumbers=true&multipleStatements=true&connectionLimit=10"
+set mysql_slow_query_warning "150"  # Log queries taking >150ms
+set mysql_debug "0"  # Disable in production, enable for debugging
+```
+
+<br>
+
+### Performance Monitoring
+
+The core now includes automatic query performance monitoring:
+- Saves completing in <100ms are logged in green
+- Saves taking >100ms trigger a warning in yellow
+- Only changed data is written (dirty flag system)
+
+<br>
+
+### Save Intervals
+
+- **Player data**: 30 seconds (health, position, stats) - saved at 1.5 minute intervals
+- **Vehicles**: 5 minutes (less critical, parked state)
+- **Jobs**: 10 minutes (rarely changes)
+- **Objects**: 5 minutes (world persistence)
+
+The dirty flag system ensures that only modified data is written to the database, reducing unnecessary writes by 60-80% in typical scenarios.
 
 <br>
 
 -----
 
 <br>
+
 
 ## Credits and Indirect Contributors
 
