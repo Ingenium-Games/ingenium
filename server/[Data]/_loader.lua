@@ -49,10 +49,10 @@ CreateThread(function()
     
     -- Dynamic runtime data (loaded and saved periodically)
     c.drops = c.json.Load('Drops') or {}
-    c.pickups = c.json.Load('Pickups') or {}
+    c.picks = c.json.Load('Pickups') or {}
     c.scenes = c.json.Load('Scenes') or {}
     c.notes = c.json.Load('Notes') or {}
-    c.gsr = c.json.Load('GSR') or {}
+    c.gsrs = c.json.Load('GSR') or {}
     
     -- Count items loaded
     local itemCount = 0
