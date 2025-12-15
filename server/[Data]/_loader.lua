@@ -100,10 +100,16 @@ function c.data.RestoreDrops()
                     FreezeEntityPosition(xObject.Entity, true)
                     SetEntityCollision(xObject.Entity, true, true)
                     
-                    -- Add inventory items
+                    -- Add inventory items with validation
                     if type(drop.Inventory) == "table" then
                         for _, item in ipairs(drop.Inventory) do
-                            xObject.AddItem(item)
+                            -- Validate item exists in the database before adding
+                            local itemName = item[1] or item.Item
+                            if itemName and c.item.Exists(itemName) then
+                                xObject.AddItem(item)
+                            else
+                                c.func.Debug_1("Skipping invalid item in drop restore: " .. tostring(itemName))
+                            end
                         end
                     end
                     

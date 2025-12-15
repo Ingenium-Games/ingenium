@@ -258,11 +258,12 @@ function c.drop.StartCleanupRoutine()
     
     local function DoCleanup()
         c.drop.CleanupOld()
-        SetTimeout(conf.drops.cleanup_time, DoCleanup)
+        -- Run cleanup every 5 minutes, but respect cleanup_time for age comparison
+        SetTimeout(5 * conf.min, DoCleanup)
     end
     
-    SetTimeout(conf.drops.cleanup_time, DoCleanup)
-    c.func.Debug_1("Drop cleanup routine started")
+    SetTimeout(5 * conf.min, DoCleanup)
+    c.func.Debug_1("Drop cleanup routine started (runs every 5 minutes)")
 end
 
 -- ====================================================================================--
@@ -285,10 +286,22 @@ RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, m
         return
     end
     
-    -- Check if player has the item
+    -- Default values
+    quantity = quantity or 1
+    quality = quality or 100
+    weapon = weapon or false
+    meta = meta or {}
+    
+    -- Check if player has the item with sufficient quantity
     local hasItem, slot = xPlayer.HasItem(item)
     if not hasItem then
         c.func.Debug_1("Player does not have item: " .. item)
+        return
+    end
+    
+    local playerQuantity = xPlayer.GetItemQuantity(item)
+    if playerQuantity < quantity then
+        c.func.Debug_1("Player does not have enough quantity: " .. item .. " (has " .. playerQuantity .. ", needs " .. quantity .. ")")
         return
     end
     
@@ -302,23 +315,17 @@ RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, m
     local forwardY = coords.y + math.sin(math.rad(heading)) * 1.0
     
     -- Create the drop
-    local itemData = {
-        Item = item,
-        Quantity = quantity or 1,
-        Quality = quality or 100,
-        Weapon = weapon or false,
-        Meta = meta or {}
-    }
-    
     local netId = c.drop.Create(
         {x = forwardX, y = forwardY, z = coords.z - 0.9, h = heading},
-        {{item, quantity or 1, quality or 100, weapon or false, meta or {}}}
+        {{item, quantity, quality, weapon, meta}}
     )
     
     if netId then
-        -- Remove item from player
-        xPlayer.RemoveItem(item, slot)
-        c.func.Debug_3("Player " .. source .. " dropped " .. item)
+        -- Remove the specified quantity from player
+        for i = 1, quantity do
+            xPlayer.RemoveItem(item, slot)
+        end
+        c.func.Debug_3("Player " .. source .. " dropped " .. quantity .. "x " .. item)
     end
 end)
 

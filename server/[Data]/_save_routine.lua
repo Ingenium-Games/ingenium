@@ -14,15 +14,18 @@ local function SaveDynamicData()
             dropsToSave[uuid] = drop
         end
         
-        -- Merge c.active_drops
+        -- Merge c.active_drops with updated inventory
         for uuid, drop in pairs(c.active_drops) do
             -- Update inventory from xObject before saving
             local xObject = c.data.GetObject(drop.NetID)
             if xObject then
                 drop.Inventory = xObject.CompressInventory()
                 drop.Updated = c.func.Timestamp()
+                dropsToSave[uuid] = drop
+            else
+                -- If xObject doesn't exist, skip this drop (will be cleaned up)
+                c.func.Debug_1("Skipping save for drop " .. uuid .. " - xObject not found")
             end
-            dropsToSave[uuid] = drop
         end
         
         c.json.Write('Drops', dropsToSave)
@@ -62,15 +65,18 @@ AddEventHandler('onResourceStop', function(resource)
             dropsToSave[uuid] = drop
         end
         
-        -- Merge c.active_drops
+        -- Merge c.active_drops with updated inventory
         for uuid, drop in pairs(c.active_drops) do
             -- Update inventory from xObject before saving
             local xObject = c.data.GetObject(drop.NetID)
             if xObject then
                 drop.Inventory = xObject.CompressInventory()
                 drop.Updated = c.func.Timestamp()
+                dropsToSave[uuid] = drop
+            else
+                -- If xObject doesn't exist, skip this drop
+                c.func.Debug_1("Skipping save for drop " .. uuid .. " on shutdown - xObject not found")
             end
-            dropsToSave[uuid] = drop
         end
         
         c.json.Write('Drops', dropsToSave)
@@ -95,15 +101,18 @@ RegisterCommand('savedata', function(source, args)
             dropsToSave[uuid] = drop
         end
         
-        -- Merge c.active_drops
+        -- Merge c.active_drops with updated inventory
         for uuid, drop in pairs(c.active_drops) do
             -- Update inventory from xObject before saving
             local xObject = c.data.GetObject(drop.NetID)
             if xObject then
                 drop.Inventory = xObject.CompressInventory()
                 drop.Updated = c.func.Timestamp()
+                dropsToSave[uuid] = drop
+            else
+                -- If xObject doesn't exist, skip this drop
+                c.func.Debug_1("Skipping save for drop " .. uuid .. " in manual save - xObject not found")
             end
-            dropsToSave[uuid] = drop
         end
         
         c.json.Write('Drops', dropsToSave)
