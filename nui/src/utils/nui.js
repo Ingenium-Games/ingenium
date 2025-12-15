@@ -87,6 +87,9 @@ export function setupNuiHandlers() {
   const notificationStore = useNotificationStore()
   const characterStore = useCharacterStore()
   
+  // Import appearance store dynamically to avoid circular dependencies
+  let appearanceStore = null
+  
   window.addEventListener('message', (event) => {
     const { message, data } = event.data
     
@@ -148,6 +151,25 @@ export function setupNuiHandlers() {
       
       case 'context:hide':
         uiStore.showContextMenu = false
+        break
+      
+      // Appearance customization
+      case 'appearance:open':
+        if (!appearanceStore) {
+          // Lazy load appearance store
+          import('../stores/appearance.js').then(module => {
+            appearanceStore = module.useAppearanceStore()
+            appearanceStore.open(data)
+          })
+        } else {
+          appearanceStore.open(data)
+        }
+        break
+      
+      case 'appearance:close':
+        if (appearanceStore) {
+          appearanceStore.close()
+        }
         break
       
       default:

@@ -14,6 +14,9 @@ RegisterServerCallback({
     eventCallback = function(config)
         config = config or {}
         
+        -- Store if this is character creation
+        c.appearance.IsCharacterCreation = config.isCharacterCreation or false
+        
         -- Activate customization mode
         c.appearance.SetCustomizationActive(true)
         
@@ -25,7 +28,7 @@ RegisterServerCallback({
         
         -- Get ped data from server if needed
         local peds = nil
-        if config.allowModelChange then
+        if config.allowModelChange ~= false then
             peds = c.callback.Await('ig:GameData:GetPeds')
         end
         
@@ -234,12 +237,28 @@ RegisterServerCallback({
     eventCallback = function()
         local appearance = c.appearance.GetAppearance()
         
-        -- Send to server for validation and saving
-        TriggerServerEvent("Server:Character:SaveAppearance", appearance)
+        -- Check if this is character creation
+        local isCharacterCreation = c.appearance.IsCharacterCreation or false
         
-        -- Close customization
-        c.appearance.SetCustomizationActive(false)
-        TriggerEvent("Client:Nui:Message", "appearance:close", {})
+        if isCharacterCreation then
+            -- Store appearance temporarily for character registration
+            c.appearance.PendingAppearance = appearance
+            
+            -- Close customization
+            c.appearance.SetCustomizationActive(false)
+            TriggerEvent("Client:Nui:Message", "appearance:close", {})
+            
+            -- Trigger character registration NUI
+            TriggerEvent("Client:Character:NewSpawn")
+            TriggerEvent("Client:Nui:Message", "register")
+        else
+            -- Send to server for validation and saving
+            TriggerServerEvent("Server:Character:SaveAppearance", appearance)
+            
+            -- Close customization
+            c.appearance.SetCustomizationActive(false)
+            TriggerEvent("Client:Nui:Message", "appearance:close", {})
+        end
         
         return true
     end

@@ -24,5 +24,5 @@ server_scripts {"@restfx/build/import.lua", "@oxmysql/lib/MySQL.lua", "server/_v
 dependencies {"/onesync", "mysql-async", "discordroles", "ox_lib"}
 ------------------------------------------------------------------------------
 files {"data/*.json", "nui/index.html", "nui/css/*.css", "nui/js/*.js", "nui/img/*.png", "nui/libs/*.js",
-       "nui/inventory/dist/assets/*.css", "nui/inventory/dist/assets/*.js"}
+       "nui/inventory/dist/assets/*.css", "nui/inventory/dist/assets/*.js", "nui/dist/*.html", "nui/dist/assets/*.css", "nui/dist/assets/*.js"}
 ------------------------------------------------------------------------------

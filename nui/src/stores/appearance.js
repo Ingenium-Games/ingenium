@@ -235,7 +235,15 @@ export const useAppearanceStore = defineStore('appearance', () => {
     isLoading.value = true
     try {
       await callClientCallback('Client:Appearance:Save')
-      close()
+      
+      // If this was character creation, trigger registration
+      if (config.value.isCharacterCreation) {
+        // Character creation will be handled by the NUI
+        // The appearance is already saved, now show registration form
+        close()
+      } else {
+        close()
+      }
     } finally {
       isLoading.value = false
     }

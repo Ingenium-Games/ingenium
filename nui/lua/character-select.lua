@@ -60,7 +60,11 @@ RegisterNUICallback("_character-select__register", function(data, cb)
         -- Remove Focus
         SetNuiFocus(false, false)
         SetFollowPedCamViewMode(0)
-        local appearance = exports["fivem-appearance"]:getPedAppearance(PlayerPedId())
+        
+        -- Get appearance from our native system
+        local appearance = c.appearance.PendingAppearance or c.appearance.GetAppearance()
+        c.appearance.PendingAppearance = nil -- Clear pending appearance
+        
         TriggerServerEvent("Server:Character:Register", data.First_Name, data.Last_Name, appearance)
         cb({
             message = "ok",

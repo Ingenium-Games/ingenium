@@ -115,6 +115,36 @@ RegisterNetEvent("Server:Character:SaveSkin", function(appearance, bool)
     end
 end)
 
+-- Save appearance with validation (new system)
+RegisterNetEvent("Server:Character:SaveAppearance", function(appearance)
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    
+    if not xPlayer then
+        print('^1[Appearance] No xPlayer found for source: ' .. src .. '^0')
+        return
+    end
+    
+    -- Validate appearance data
+    local isValid, errorMsg = c.appearance.ValidateAppearance(appearance)
+    if not isValid then
+        print('^1[Appearance] Invalid appearance data for ' .. xPlayer.GetIdentifier() .. ': ' .. errorMsg .. '^0')
+        TriggerClientEvent('Client:Nui:Message', src, 'notification', {
+            text = 'Invalid appearance data: ' .. errorMsg,
+            color = 'red',
+            fade = 5000
+        })
+        return
+    end
+    
+    -- Save to database
+    local identifier = xPlayer.GetIdentifier()
+    c.sql.char.SetAppearance(identifier, appearance, function()
+        xPlayer.SetAppearance(appearance)
+        print('^2[Appearance] Saved appearance for ' .. identifier .. '^0')
+    end)
+end)
+
 RegisterNetEvent("Server:Character:LoadSkin", function()
 	local src = source
 	local xPlayer = c.data.GetPlayer(src)
