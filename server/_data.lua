@@ -50,6 +50,8 @@ function c.data.Initilize()
         -- [7] dropped items data table
         c.drop.Load()
         cb()
+        -- [7.5] Restore physical drops from persistence
+        c.data.RestoreDrops()
         -- [8] pickups data table (not items script)
         c.pick.Load()
         cb()

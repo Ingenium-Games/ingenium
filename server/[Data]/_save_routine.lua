@@ -6,7 +6,26 @@ local function SaveDynamicData()
     if not c._loading then  -- Don't save during startup
         local startTime = os.clock()
         
-        c.json.Write('Drops', c.drops)
+        -- Merge active drops back into drops for persistence
+        local dropsToSave = {}
+        
+        -- Copy c.drops
+        for uuid, drop in pairs(c.drops) do
+            dropsToSave[uuid] = drop
+        end
+        
+        -- Merge c.active_drops
+        for uuid, drop in pairs(c.active_drops) do
+            -- Update inventory from xObject before saving
+            local xObject = c.data.GetObject(drop.NetID)
+            if xObject then
+                drop.Inventory = xObject.CompressInventory()
+                drop.Updated = c.func.Timestamp()
+            end
+            dropsToSave[uuid] = drop
+        end
+        
+        c.json.Write('Drops', dropsToSave)
         c.json.Write('Pickups', c.picks)
         c.json.Write('Scenes', c.scenes)
         c.json.Write('Notes', c.notes)
@@ -34,7 +53,27 @@ end)
 AddEventHandler('onResourceStop', function(resource)
     if GetCurrentResourceName() == resource then
         print('^3[Shutdown] Saving all dynamic data...^7')
-        c.json.Write('Drops', c.drops)
+        
+        -- Merge active drops back into drops for persistence
+        local dropsToSave = {}
+        
+        -- Copy c.drops
+        for uuid, drop in pairs(c.drops) do
+            dropsToSave[uuid] = drop
+        end
+        
+        -- Merge c.active_drops
+        for uuid, drop in pairs(c.active_drops) do
+            -- Update inventory from xObject before saving
+            local xObject = c.data.GetObject(drop.NetID)
+            if xObject then
+                drop.Inventory = xObject.CompressInventory()
+                drop.Updated = c.func.Timestamp()
+            end
+            dropsToSave[uuid] = drop
+        end
+        
+        c.json.Write('Drops', dropsToSave)
         c.json.Write('Pickups', c.picks)
         c.json.Write('Scenes', c.scenes)
         c.json.Write('Notes', c.notes)
@@ -47,7 +86,27 @@ end)
 RegisterCommand('savedata', function(source, args)
     if source == 0 or (c.func and c.func.IsAce and c.func.IsAce(source)) then
         print('^3[Manual Save] Saving dynamic data...^7')
-        c.json.Write('Drops', c.drops)
+        
+        -- Merge active drops back into drops for persistence
+        local dropsToSave = {}
+        
+        -- Copy c.drops
+        for uuid, drop in pairs(c.drops) do
+            dropsToSave[uuid] = drop
+        end
+        
+        -- Merge c.active_drops
+        for uuid, drop in pairs(c.active_drops) do
+            -- Update inventory from xObject before saving
+            local xObject = c.data.GetObject(drop.NetID)
+            if xObject then
+                drop.Inventory = xObject.CompressInventory()
+                drop.Updated = c.func.Timestamp()
+            end
+            dropsToSave[uuid] = drop
+        end
+        
+        c.json.Write('Drops', dropsToSave)
         c.json.Write('Pickups', c.picks)
         c.json.Write('Scenes', c.scenes)
         c.json.Write('Notes', c.notes)
