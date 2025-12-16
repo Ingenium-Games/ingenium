@@ -49,7 +49,7 @@ server_scripts {
     "server/**/*.lua"
 }
 ------------------------------------------------------------------------------
-dependencies {"/onesync", "discordroles", "ox_lib"}
+dependencies {"/onesync", "discordroles", "restfx"}
 ------------------------------------------------------------------------------
 files {"data/*.json", "nui/index.html", "nui/css/*.css", "nui/js/*.js", "nui/img/*.png", "nui/libs/*.js",
        "nui/inventory/dist/assets/*.css", "nui/inventory/dist/assets/*.js", "nui/dist/*.html", "nui/dist/assets/*.css", "nui/dist/assets/*.js"}
