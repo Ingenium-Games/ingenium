@@ -91,6 +91,11 @@ All architecture and implementation documents are organized in this `Documentati
 - Improved prepared statement handling
 - Full backward compatibility layer
 
+## Related Resources
+
+- [Implementation Documentation](../Implementations/README.md) - Technical details on how features were built
+- [Contributing Guidelines](../CONTRIBUTING.md) - How to contribute to this project
+
 ---
 
 **Note**: This documentation is actively maintained. Last updated: 2025-12-15
