@@ -9,21 +9,10 @@ NOTES.
     - All data should be encoded or decoded here, if possible. the fetchALL commands are decoded in the _data.lua
 ]] --
 
---- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
+--- Takes Vehicle information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
 function c.sql.veh.GetVehicles(cb)
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM `vehicles`", {
-    }, function(data)
-        result = data
-        IsBusy = false
-    end)
-    --
-    while IsBusy do
-        Citizen.Wait(0)
-    end
-    --
+    local result = c.sql.Query("SELECT * FROM `vehicles`", {})
     if cb then
         cb()
     end
@@ -33,29 +22,15 @@ end
 
 
 function c.sql.veh.Reset(cb)
-    MySQL.Async.execute("UPDATE `vehicles` SET `Parked` = TRUE", {
-    }, function(data)
-        if data then
-            --
-        end
+    c.sql.Update("UPDATE `vehicles` SET `Parked` = TRUE", {}, function(affectedRows)
         if cb then
-            cb()
+            cb(affectedRows)
         end
     end)
 end
 
 function c.sql.veh.GetAll(Character_ID, cb)
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM vehicles WHERE `Character_ID` = @Character_ID;", {
-        ["@Character_ID"] = Character_ID
-    }, function(data)
-        result = data
-        IsBusy = false
-    end)
-    while IsBusy do
-        Citizen.Wait(0)
-    end
+    local result = c.sql.Query("SELECT * FROM vehicles WHERE `Character_ID` = ?;", {Character_ID})
     if cb then
         cb()
     end
@@ -63,17 +38,7 @@ function c.sql.veh.GetAll(Character_ID, cb)
 end
 
 function c.sql.veh.GetID(Plate, cb)
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.fetchScalar("SELECT `ID` FROM vehicles WHERE `Plate` = @Plate LIMIT 1;", {
-        ["@Plate"] = Plate
-    }, function(data)
-        result = data
-        IsBusy = false
-    end)
-    while IsBusy do
-        Citizen.Wait(0)
-    end
+    local result = c.sql.FetchScalar("SELECT `ID` FROM vehicles WHERE `Plate` = ? LIMIT 1;", {Plate})
     if cb then
         cb()
     end
@@ -81,17 +46,8 @@ function c.sql.veh.GetID(Plate, cb)
 end
 
 function c.sql.veh.GetByPlate(Plate, cb)
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM vehicles WHERE `Plate` = @Plate LIMIT 1;", {
-        ["@Plate"] = Plate
-    }, function(data)
-        result = data[1]
-        IsBusy = false
-    end)
-    while IsBusy do
-        Citizen.Wait(0)
-    end
+    local data = c.sql.Query("SELECT * FROM vehicles WHERE `Plate` = ? LIMIT 1;", {Plate})
+    local result = data[1]
     if cb then
         cb()
     end
@@ -99,43 +55,27 @@ function c.sql.veh.GetByPlate(Plate, cb)
 end
 
 function c.sql.veh.Add(data, cb)
-    local IsBusy = true
     local Data = data
-    MySQL.Async.execute("INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`, `Condition`, `Modifications`, `Updated`) VALUES (@Character_ID, @Model, @Plate, @Condition, @Modifications, @Updated);",{
-        ["@Character_ID"] = Data.Character_ID,
-        ["@Model"] = Data.Model,
-        ["@Plate"] = Data.Plate,
-        ["@Condition"] = json.encode(Data.Condition),
-        ["@Modifications"] = json.encode(Data.Modifications),
-        ["@Updated"] = c.func.Timestamp(),
-    }, function(r)
-        IsBusy = false
-        TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Adding Vehicle: "..Data.Plate.." | Owner "..Data.Character_ID)
-    end)
-    while IsBusy do
-        Citizen.Wait(0)
-    end
-    if cb then
-        cb()
-    end
-    -- Regen the table.
+    c.sql.Insert(
+        "INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`, `Condition`, `Modifications`, `Updated`) VALUES (?, ?, ?, ?, ?, ?);",
+        {Data.Character_ID, Data.Model, Data.Plate, json.encode(Data.Condition), json.encode(Data.Modifications), c.func.Timestamp()},
+        function(insertId)
+            TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Adding Vehicle: "..Data.Plate.." | Owner "..Data.Character_ID)
+            if cb then
+                cb(insertId)
+            end
+        end)
 end
 
 function c.sql.veh.ChangeOwner(data, cb)
-    local IsBusy = true
     local Data = data
-    MySQL.Async.execute("UPDATE `vehicles` SET `Character_ID` = @Character_ID, `Updated` = @Updated WHERE `Plate` = @Plate;",{
-        ["@Character_ID"] = Data.Character_ID,
-        ["@Updated"] = c.func.Timestamp(),
-        ["@Plate"] = Data.Plate,
-    }, function(r)
-        IsBusy = false
-        TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Changing Vehicle : "..Data.Plate.." | Owner "..Data.Character_ID)
-    end)
-    while IsBusy do
-        Citizen.Wait(0)
-    end
-    if cb then
-        cb()
-    end
+    c.sql.Update(
+        "UPDATE `vehicles` SET `Character_ID` = ?, `Updated` = ? WHERE `Plate` = ?;",
+        {Data.Character_ID, c.func.Timestamp(), Data.Plate},
+        function(affectedRows)
+            TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Changing Vehicle : "..Data.Plate.." | Owner "..Data.Character_ID)
+            if cb then
+                cb(affectedRows)
+            end
+        end)
 end
