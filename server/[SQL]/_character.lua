@@ -4,29 +4,27 @@ c.sql.char = {}
 -- ====================================================================================--
 -- SHould remake htis one..
 function c.sql.char.Add(t, cb)
-    MySQL.Async.execute(
-        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Iban`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`, `Skills`) VALUES (@Created, @Last_Seen, @Primary_ID, @Character_ID, @City_ID, @First_Name, @Last_Name, @Iban, @Phone, @Coords, @Accounts, @Modifiers, @Appearance, @Skills);",
+    c.sql.Insert(
+        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Iban`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`, `Skills`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         {
-            Created = c.func.Timestamp(),
-            Last_Seen = c.func.Timestamp(),
-            Primary_ID = t.Primary_ID,
-            Character_ID = t.Character_ID,
-            City_ID = t.City_ID,
-            First_Name = t.First_Name,
-            Last_Name = t.Last_Name,
-            Iban = t.Iban,
-            Phone = t.Phone,
-            Coords = t.Coords,
-            Accounts = t.Accounts,
-            Modifiers = t.Modifiers,
-            Appearance = t.Appearance,
-            Skills = t.Skills
-        }, function(data)
-            if data then
-                TriggerEvent("txaLogger:CommandExecuted", "Adding new Character for Primary_ID: "..t.Primary_ID)
-            end
+            c.func.Timestamp(),
+            c.func.Timestamp(),
+            t.Primary_ID,
+            t.Character_ID,
+            t.City_ID,
+            t.First_Name,
+            t.Last_Name,
+            t.Iban,
+            t.Phone,
+            t.Coords,
+            t.Accounts,
+            t.Modifiers,
+            t.Appearance,
+            t.Skills
+        }, function(insertId)
+            TriggerEvent("txaLogger:CommandExecuted", "Adding new Character for Primary_ID: "..t.Primary_ID)
             if cb then
-                cb()
+                cb(insertId)
             end
         end)
 end
@@ -34,18 +32,7 @@ end
 --- Get - Info on the characters owned to prefill the multicharacter selection
 -- @License_ID
 function c.sql.char.GetAll(primary_id, cb)
-    local Primary_ID = primary_id
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID;", {
-        ["@Primary_ID"] = Primary_ID
-    }, function(data)
-        result = data
-        IsBusy = false
-    end)
-    while IsBusy do
-        Citizen.Wait(0)
-    end
+    local result = c.sql.Query("SELECT * FROM `characters` WHERE `Primary_ID` = ?;", {primary_id})
     if cb then
         cb()
     end
@@ -55,18 +42,7 @@ end
 --- Get - Info on the characters owned to prefill the multicharacter selection
 -- @License_ID
 function c.sql.char.GetAllNotDead(primary_id, cb)
-    local Primary_ID = primary_id
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID AND `Is_Dead` = FALSE;", {
-        ["@Primary_ID"] = Primary_ID
-    }, function(data)
-        result = data
-        IsBusy = false
-    end)
-    while IsBusy do
-        Citizen.Wait(0)
-    end
+    local result = c.sql.Query("SELECT * FROM `characters` WHERE `Primary_ID` = ? AND `Is_Dead` = FALSE;", {primary_id})
     if cb then
         cb()
     end
@@ -77,20 +53,7 @@ end
 --- Get - Info on the characters owned to prefill the multicharacter selection
 -- @License_ID
 function c.sql.char.GetAllPermited(primary_id, slots, cb)
-    local Primary_ID = primary_id
-    local Slots = slots
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.fetchAll("SELECT * FROM `characters` WHERE `Primary_ID` = @Primary_ID AND `Is_Dead` = FALSE LIMIT @Slots;", {
-        ["@Primary_ID"] = Primary_ID,
-        ["@Slots"] = Slots, 
-    }, function(data)
-        result = data
-        IsBusy = false
-    end)
-    while IsBusy do
-        Citizen.Wait(0)
-    end
+    local result = c.sql.Query("SELECT * FROM `characters` WHERE `Primary_ID` = ? AND `Is_Dead` = FALSE LIMIT ?;", {primary_id, slots})
     if cb then
         cb()
     end
@@ -98,20 +61,18 @@ function c.sql.char.GetAllPermited(primary_id, slots, cb)
 end
 
 function c.sql.char.ReviveDeadCharacters(cb)
-    local IsBusy = true
-    local result = nil
-    MySQL.Async.execute("UPDATE `characters` SET `Health` = 150, `Is_Dead` = FALSE, `Coords` = @Coords, `Dead_Time` = NULL, `Dead_Data` = @Dead_Data WHERE `Dead_Time` <= (@Time - '604800')", { -- 604800 is 7 days in seconds
-        ["@Coords"] = json.encode({["z"]=43.28,["h"]=337.32,["x"]=327.52,["y"]=-603.03}), -- Pillbox Elevators
-        ["@Dead_Data"] = json.encode({["RevivedAt"]= c.func.Timestamp(), ["By"]="Server"}), 
-        ["@Time"] = c.func.Timestamp()
-    }, function(data)
-        if data then
-            result = true
-        end
-        if cb then
-            cb()
-        end
-    end)
+    local result = c.sql.Update(
+        "UPDATE `characters` SET `Health` = 150, `Is_Dead` = FALSE, `Coords` = ?, `Dead_Time` = NULL, `Dead_Data` = ? WHERE `Dead_Time` <= (? - '604800')",
+        {
+            json.encode({["z"]=43.28,["h"]=337.32,["x"]=327.52,["y"]=-603.03}), -- Pillbox Elevators
+            json.encode({["RevivedAt"]= c.func.Timestamp(), ["By"]="Server"}),
+            c.func.Timestamp()
+        },
+        function(affectedRows)
+            if cb then
+                cb(affectedRows)
+            end
+        end)
     return result
 end
 
