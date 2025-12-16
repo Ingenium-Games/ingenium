@@ -58,6 +58,10 @@ Some natives are only client sided, so leverage the callbacks to request data wh
 
 **Complete documentation is now available in the [`Documentation/`](./Documentation/) folder.**
 
+- **[User Documentation](./Documentation/README.md)** - Guides and API references for using ig.core
+- **[Implementation Documentation](./Implementations/README.md)** - Technical details for contributors
+- **[Contributing Guidelines](./CONTRIBUTING.md)** - How to contribute to this project
+
 ### Quick Links
 
 - **[Documentation Index](./Documentation/README.md)** - Start here

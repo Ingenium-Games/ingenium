@@ -364,6 +364,71 @@ By contributing, you agree that your contributions will be licensed under the pr
 
 ---
 
+## Documentation Requirements
+
+### For New Features
+When implementing new features, you must provide two types of documentation:
+
+1. **User Documentation** (in `/Documentation/`)
+   - API references
+   - How-to guides
+   - Usage examples
+   - Migration guides (if applicable)
+
+2. **Implementation Documentation** (in `/Implementations/`)
+   - Technical decision records
+   - Implementation approach and rationale
+   - Challenges faced and solutions
+   - Architecture diagrams (if applicable)
+   - Testing approach
+
+### Documentation Structure
+
+- **`/Documentation/`** - User-facing guides and API references for those using ig.core
+- **`/Implementations/`** - Technical implementation details for contributors and maintainers
+
+### Implementation Document Template
+
+When creating implementation documentation, include:
+
+```markdown
+# [Feature Name] Implementation
+
+## Overview
+Brief description of what was implemented and why.
+
+## Technical Decisions
+Key architectural and technical decisions made during implementation.
+
+## Implementation Details
+How the feature was built, including:
+- File structure
+- Key functions/modules
+- Data flow
+- Integration points
+
+## Challenges and Solutions
+Problems encountered during implementation and how they were resolved.
+
+## Testing
+How the feature was tested and validated.
+
+## Related Documentation
+Links to user documentation, API references, and other relevant docs.
+```
+
+### Example Workflow
+
+1. Implement your feature
+2. Create user documentation in `/Documentation/`
+3. Create implementation documentation in `/Implementations/`
+4. Update relevant README files with links
+5. Submit PR with code + documentation
+
+Good documentation helps future contributors understand not just *what* the code does, but *why* decisions were made.
+
+---
+
 ## Quick Reference
 
 ### Before Every PR
