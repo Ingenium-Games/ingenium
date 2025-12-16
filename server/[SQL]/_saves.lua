@@ -27,8 +27,8 @@ end
 --[[ Players ]] --
 
 local PlayerSaveData = -1
-MySQL.Async.store(
-    "UPDATE `characters` SET `Health` = @Health, `Armour` = @Armour, `Hunger` = @Hunger, `Thirst` = @Thirst, `Stress` = @Stress, `Coords` = @Coords, `Skills` = @Skills, `Accounts` = @Accounts, `Modifiers` = @Modifiers, `Inventory` = @Inventory, `Ammo` = @Ammo, `Job` = @Job WHERE `Character_ID` = @Character_ID;",
+c.sql.PrepareQuery(
+    "UPDATE `characters` SET `Health` = ?, `Armour` = ?, `Hunger` = ?, `Thirst` = ?, `Stress` = ?, `Coords` = ?, `Skills` = ?, `Accounts` = ?, `Modifiers` = ?, `Inventory` = ?, `Ammo` = ?, `Job` = ? WHERE `Character_ID` = ?;",
     function(id)
         PlayerSaveData = id
     end)
@@ -58,24 +58,23 @@ function c.sql.save.User(data, cb)
     local Job = data.GetEncodedJob()
     -- 
     local Character_ID = data.GetCharacter_ID()
-    MySQL.Async.insert(PlayerSaveData, {
+    c.sql.ExecutePrepared(PlayerSaveData, {
         -- Other Variables.
-        ["@Health"] = Health,
-        ["@Armour"] = Armour,
-        ["@Hunger"] = Hunger,
-        ["@Thirst"] = Thirst,
-        ["@Stress"] = Stress,
+        Health,
+        Armour,
+        Hunger,
+        Thirst,
+        Stress,
         -- Table Informaiton.
-        ["@Skills"] = Skills,
-        ["@Coords"] = Coords,
-        ["@Accounts"] = Accounts,
-        ["@Modifiers"] = Modifiers,
-        ["@Inventory"] = Inventory,
-        ["@Ammo"] = Ammo,
-
-        ["@Job"] = Job,
+        Skills,
+        Coords,
+        Accounts,
+        Modifiers,
+        Inventory,
+        Ammo,
+        Job,
         -- Where Conditions
-        ["@Character_ID"] = Character_ID
+        Character_ID
     }, function(r)
         data.ClearDirty()
     end)
@@ -110,24 +109,23 @@ function c.sql.save.Users(cb)
             local Job = data.GetEncodedJob()
             -- 
             local Character_ID = data.GetCharacter_ID()
-            MySQL.Async.insert(PlayerSaveData, {
+            c.sql.ExecutePrepared(PlayerSaveData, {
                 -- Other Variables.
-                ["@Health"] = Health,
-                ["@Armour"] = Armour,
-                ["@Hunger"] = Hunger,
-                ["@Thirst"] = Thirst,
-                ["@Stress"] = Stress,
+                Health,
+                Armour,
+                Hunger,
+                Thirst,
+                Stress,
                 -- Table Informaiton.
-                ["@Skills"] = Skills,
-                ["@Coords"] = Coords,
-                ["@Accounts"] = Accounts,
-                ["@Modifiers"] = Modifiers,
-                ["@Inventory"] = Inventory,
-                ["@Ammo"] = Ammo,
-
-                ["@Job"] = Job,
+                Skills,
+                Coords,
+                Accounts,
+                Modifiers,
+                Inventory,
+                Ammo,
+                Job,
                 -- Where Conditions
-                ["@Character_ID"] = Character_ID
+                Character_ID
             }, function(r)
                 data.ClearDirty()
             end)
@@ -143,8 +141,8 @@ end
 --[[ Vehicles ]] --
 
 local VehicleSaveData = -1
-MySQL.Async.store(
-    "UPDATE `vehicles` SET `Fuel` = @Fuel, `Coords` = @Coords, `Keys` = @Keys, `Condition` = @Condition, `Modifications` = @Modifications, `Inventory` = @Inventory, `Parked` = @Parked, `Impound` = @Impound, `Wanted` = @Wanted  WHERE `Plate` = @Plate", -- AND `Parked` = TRUE;
+c.sql.PrepareQuery(
+    "UPDATE `vehicles` SET `Fuel` = ?, `Coords` = ?, `Keys` = ?, `Condition` = ?, `Modifications` = ?, `Inventory` = ?, `Parked` = ?, `Impound` = ?, `Wanted` = ?  WHERE `Plate` = ?", -- AND `Parked` = TRUE;
     function(id)
         VehicleSaveData = id
     end)
@@ -175,23 +173,21 @@ function c.sql.save.Vehicle(data, cb)
     -- The Key
     local Plate = data.GetPlate()
     --
-    MySQL.Async.insert(VehicleSaveData, {
+    c.sql.ExecutePrepared(VehicleSaveData, {
         -- Other Variables.
-        ["@Fuel"] = Fuel,
+        Fuel,
+        -- Tables
+        Coords,
+        Keys,
+        Condition,
+        Modifications,
+        Inventory,
         -- Booleans
-        ["@Impound"] = Impound,
-        ["@Parked"] = Parked,
-        ["@Wanted"] = Wanted,
-        -- Table Informaiton.
-        ["@Keys"] = Keys,
-        ["@Coords"] = Coords,
-        ["@Condition"] = Condition,
-        ["@Modifications"] = Modifications,
-        ["@Inventory"] = Inventory,
-        ["@Updated"] = Updated,
-
+        Parked,
+        Impound,
+        Wanted,
         -- Where conditions
-        ["@Plate"] = Plate
+        Plate
     }, function(r)
         data.Saved()
         data.ClearDirty()
@@ -229,23 +225,21 @@ function c.sql.save.Vehicles(cb)
                 -- The Key
                 local Plate = data.GetPlate()
                 --
-                MySQL.Async.insert(VehicleSaveData, {
+                c.sql.ExecutePrepared(VehicleSaveData, {
                     -- Other Variables.
-                    ["@Fuel"] = Fuel,
+                    Fuel,
+                    -- Tables
+                    Coords,
+                    Keys,
+                    Condition,
+                    Modifications,
+                    Inventory,
                     -- Booleans
-                    ["@Impound"] = Impound,
-                    ["@Parked"] = Parked,
-                    ["@Wanted"] = Wanted,
-                    -- Table Informaiton.
-                    ["@Keys"] = Keys,
-                    ["@Coords"] = Coords,
-                    ["@Condition"] = Condition,
-                    ["@Modifications"] = Modifications,
-                    ["@Inventory"] = Inventory,
-                    ["@Updated"] = Updated,
-
+                    Parked,
+                    Impound,
+                    Wanted,
                     -- Where Conditions
-                    ["@Plate"] = Plate
+                    Plate
                 }, function(r)
                     data.Saved()
                     data.ClearDirty()
@@ -265,7 +259,7 @@ end
 --[[ Jobs ]] --
 
 local JobSaveData = -1
-MySQL.Async.store("UPDATE `job_accounts` SET `Accounts` = @Accounts WHERE `Name` = @Name;", function(id)
+c.sql.PrepareQuery("UPDATE `job_accounts` SET `Accounts` = ? WHERE `Name` = ?;", function(id)
     JobSaveData = id
 end)
 
@@ -279,10 +273,10 @@ function c.sql.save.Jobs(cb)
             local Accounts = json.encode(data.GetAccounts(false))
             -- 
             local Name = data.GetName()
-            MySQL.Async.insert(JobSaveData, {
-                ["@Accounts"] = Accounts,
+            c.sql.ExecutePrepared(JobSaveData, {
+                Accounts,
                 -- Where Conditions
-                ["@Name"] = Name
+                Name
             }, function(r)
                 data.Saved()
             end)
@@ -293,10 +287,10 @@ function c.sql.save.Jobs(cb)
     end
 end
 
---[[ Jobs ]] --
+--[[ Objects ]] --
 
 local ObjectSaveData = -1
-MySQL.Async.store("UPDATE `objects` SET `Inventory` = @Inventory, `Coords` = @Coords WHERE `UUID` = @UUID;",
+c.sql.PrepareQuery("UPDATE `objects` SET `Inventory` = ?, `Coords` = ? WHERE `UUID` = ?;",
     function(id)
         ObjectSaveData = id
     end)
@@ -315,11 +309,11 @@ function c.sql.save.Objects(cb)
                     --
                     local UUID = data.UUID
                     -- 
-                    MySQL.Async.insert(ObjectSaveData, {
-                        ["@Inventory"] = Inventory,
-                        ["@Coords"] = Coords,
+                    c.sql.ExecutePrepared(ObjectSaveData, {
+                        Inventory,
+                        Coords,
                         -- Where Conditions
-                        ["@UUID"] = UUID
+                        UUID
                     }, function(r)
                         data.Saved()
                     end)
