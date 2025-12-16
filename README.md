@@ -46,7 +46,32 @@ Some natives are only client sided, so leverage the callbacks to request data wh
 
 <br>
 
-> ^3: Using the mysql-async resource's store functions, pre determined queries only send the data per transaction rather than full statements, cutting down the time needed to perform.
+> ^3: Using an integrated MySQL2 connection pool with prepared statements, the system optimizes query execution and provides comprehensive performance monitoring.
+
+<br>
+
+-----
+
+<br>
+
+## 📚 Documentation
+
+**Complete documentation is now available in the [`Documentation/`](./Documentation/) folder.**
+
+### Quick Links
+
+- **[Documentation Index](./Documentation/README.md)** - Start here
+- **[SQL Architecture](./Documentation/SQL_Architecture.md)** - Database system overview
+- **[SQL API Reference](./Documentation/SQL_API_Reference.md)** - Complete API documentation
+- **[SQL Migration Guide](./Documentation/SQL_Migration_Guide.md)** - Migrating from mysql-async
+- **[Contributing Guide](./CONTRIBUTING.md)** - How to contribute
+
+### Key Documentation
+
+- **SQL & Database**: Architecture, API reference, migration guide, performance optimization
+- **Security**: Best practices and implementation guidelines
+- **Testing**: Testing frameworks and procedures
+- **Validation**: Centralized validation system
 
 <br>
 
@@ -80,21 +105,44 @@ Just try and have fun.
 
 <br>
 
-Please make sure you have had a read of how to setup a server from the [FiveM Docs](https://docs.fivem.net/docs/), use this as a referance point for both native function useage as well as finding out how things work within their runtime.
+**📖 For detailed setup instructions, see the [Documentation](./Documentation/README.md)**
 
-But the basics are:
-- [Reading the FiveM Docs on how to Setup a Server,](https://docs.fivem.net/docs/server-manual/setting-up-a-server/)
-- [Installing and using a SQL Server (MariaDB, MySQL),](https://mariadb.org/)
-- import the db.sql to your sql server,
-- Check your server.cfg is setup and like the example,
-- Have Fun!
-
-
-A general getting started guide will be on the wiki as mentioned below.
+Basic requirements:
+- [FiveM Server Setup Guide](https://docs.fivem.net/docs/server-manual/setting-up-a-server/)
+- [MySQL 5.7+ or MariaDB 10.3+](https://mariadb.org/)
+- Import `db.sql` to your database
+- Configure `server.cfg` (see [SQL Architecture](./Documentation/SQL_Architecture.md) for configuration)
 
 <br>
 
->##### Note: *Please only use a linux build server if you are comfortable in development. It does not have features that assist with debugging and troubleshooting for the [CFX.re](https://cfx.re/) team.*
+>##### Note: *Please only use a linux build server if you are comfortable in development.*
+
+<br>
+
+-----
+
+<br>
+
+## Configuration
+
+### MySQL Connection
+
+Add to your `server.cfg`:
+
+```bash
+# Option 1: Connection string (recommended)
+set mysql_connection_string "mysql://user:password@host:port/database"
+
+# Option 2: Individual parameters
+set mysql_host "localhost"
+set mysql_port "3306"
+set mysql_user "root"
+set mysql_password "yourpassword"
+set mysql_database "fivem"
+set mysql_connection_limit "10"
+```
+
+For detailed configuration options, see [SQL Architecture Documentation](./Documentation/SQL_Architecture.md).
 
 <br>
 
@@ -154,33 +202,35 @@ end
 <br>
 <br>
 
-### For SQL (mysql-async)
+### For SQL
 
 <br>
+
+**The core now uses an integrated MySQL2 system. See [SQL Documentation](./Documentation/) for complete details.**
 
 - Database tables are lowercase, columns are capitalised.
 ```sql
 INSERT INTO `job_accounts` (`Name`, `Description`, `Boss`, `Members`, `Accounts`) etc.. 
 ```
-- Use Parameters within the mysql-async resource.
+- Use positional parameters (?) or named parameters (@param):
 ```lua
+-- Recommended: Positional parameters
 local data = "xyz"
-MySQL.Async.execute("INSERT `table` .... `Column1` = @data WHERE X=X;", {
-["@data"] = data
-},function(r) 
-    -- do
-end)
+c.sql.Update("UPDATE `table` SET `Column1` = ? WHERE X = ?", {data, id})
+
+-- Legacy: Named parameters (still supported via compatibility layer)
+MySQL.Async.execute("UPDATE `table` SET `Column1` = @data WHERE X = @id", {
+    ["@data"] = data,
+    ["@id"] = id
+})
 ```
 - __*Do not do this!*__
 ```lua
 local data = "Cool Story Bro"
-MySQL.Async.execute("INSERT `table` .... `Column1` = "..data..";",{
-},function(r) 
-    -- do
-end)
+c.sql.Update("UPDATE `table` SET `Column1` = "..data, {}) -- SQL INJECTION RISK!
 ```
 
->##### Note: *If you see anyone doing the above, it can probably be exploited in a way to ruin your database.* __*Always pass parameters correctly*__
+>##### Note: *Always use parameterized queries to prevent SQL injection attacks. See [Security Guide](./Documentation/Security_Guide.md)*
 
 <br>
 <br>
@@ -233,35 +283,53 @@ function SameSameB(var) {
 
 <br>
 
-### Recommended MySQL Configuration
+**For detailed performance optimization, see [SQL Performance Documentation](./Documentation/SQL_Performance.md)**
 
-Add to your `server.cfg`:
+### MySQL Configuration
 
-```cfg
-set mysql_connection_string "mysql://user:pass@localhost:3307/db?charset=utf8mb4_general_ci&supportBigNumbers=true&multipleStatements=true&connectionLimit=10"
-set mysql_slow_query_warning "150"  # Log queries taking >150ms
-set mysql_debug "0"  # Disable in production, enable for debugging
+The core uses an integrated MySQL2 connection pool with automatic performance monitoring.
+
+Configuration in `server.cfg`:
+
+```bash
+set mysql_connection_string "mysql://user:pass@localhost:3306/db"
+set mysql_connection_limit "10"  # Adjust based on server load
 ```
 
 <br>
 
 ### Performance Monitoring
 
-The core now includes automatic query performance monitoring:
-- Saves completing in <100ms are logged in green
-- Saves taking >100ms trigger a warning in yellow
-- Only changed data is written (dirty flag system)
+The SQL system includes comprehensive monitoring:
+- Query execution time tracking
+- Slow query detection (>150ms)
+- Automatic performance logging
+- Statistics API (`c.sql.GetStats()`)
+
+Console command:
+```
+sqlstats  # Display performance statistics
+```
+
+For details, see:
+- [SQL Performance Guide](./Documentation/SQL_Performance.md)
+- [SQL Events & Exports](./Documentation/SQL_Events_Exports.md)
 
 <br>
 
-### Save Intervals
+### Save System
 
-- **Player data**: 30 seconds (health, position, stats) - saved at 1.5 minute intervals
-- **Vehicles**: 5 minutes (less critical, parked state)
-- **Jobs**: 10 minutes (rarely changes)
-- **Objects**: 5 minutes (world persistence)
+The dirty flag system ensures efficient database writes:
+- Only changed data is saved (60-80% reduction)
+- Optimized save intervals per data type
+- Prepared statements for high performance
+- Real-time performance monitoring
 
-The dirty flag system ensures that only modified data is written to the database, reducing unnecessary writes by 60-80% in typical scenarios.
+Save intervals:
+- Player data: 90 seconds
+- Vehicles: 5 minutes  
+- Jobs: 10 minutes
+- Objects: 5 minutes
 
 <br>
 
