@@ -117,6 +117,8 @@ Basic requirements:
 - Import `db.sql` to your database
 - Configure `server.cfg` (see [SQL Architecture](./Documentation/SQL_Architecture.md) for configuration)
 
+Pleas Please PLEASE, DO NOT USE ROOT when permitting your FiveM server to authenticate into your database. Please google best practises and create an account dedicated to fivem to only access what it needs...
+
 <br>
 
 >##### Note: *Please only use a linux build server if you are comfortable in development.*
