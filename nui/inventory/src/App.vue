@@ -29,7 +29,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import InventoryPanel from './components/InventoryPanel.vue'
 
 // Configuration constants
-const RESOURCE_NAME = 'ig.core'  // Can be changed if resource is renamed
+const RESOURCE_NAME = 'ingenium'  // Can be changed if resource is renamed
 
 export default {
   name: 'App',

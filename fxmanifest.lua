@@ -2,7 +2,7 @@
 fx_version "cerulean"
 game "gta5"
 author "Twiitchter"
-description "Ingenium Games - Core"
+description "Ingenium"
 version "0.9.0"
 ------------------------------------------------------------------------------
 lua54 "yes"
