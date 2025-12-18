@@ -126,7 +126,7 @@ The built files (`index.css` and `index.js`) are output to `nui/inventory/dist/a
 TriggerEvent("Client:Inventory:OpenSingle")
 
 -- Or via export
-exports['ig.core']:OpenSingleInventory()
+exports['ingenium']:OpenSingleInventory()
 ```
 
 #### Dual Inventory (Player + External)
@@ -137,7 +137,7 @@ local vehicleNetId = NetworkGetNetworkIdFromEntity(vehicle)
 TriggerEvent("Client:Inventory:OpenDual", vehicleNetId, "Vehicle Trunk")
 
 -- Or via export
-exports['ig.core']:OpenDualInventory(vehicleNetId, "Storage Container")
+exports['ingenium']:OpenDualInventory(vehicleNetId, "Storage Container")
 ```
 
 ### Keybind
@@ -148,11 +148,11 @@ By default, the inventory opens when pressing the **I** key (Control 170). This 
 
 ```lua
 -- Get player inventory
-local xPlayer = c.data.GetPlayer(source)
+local xPlayer = ig.data.GetPlayer(source)
 local inventory = xPlayer.GetInventory()
 
 -- Get external entity inventory
-local xVehicle = c.data.GetVehicle(netId)
+local xVehicle = ig.data.GetVehicle(netId)
 local vehicleInventory = xVehicle.GetInventory()
 
 -- The validation happens automatically in the callbacks
@@ -172,7 +172,7 @@ The system includes comprehensive validation to prevent:
 
 2. **Item Injection**
    - Validates that no new item types appear
-   - All items must exist in `c.items` database
+   - All items must exist in `ig.items` database
 
 3. **Invalid Data**
    - Quantity validation (must be positive number)
@@ -443,7 +443,7 @@ To test the validation system:
 
 ### Inventory doesn't open
 - Check console for errors
-- Verify `c.data.IsPlayerLoaded()` returns true
+- Verify `ig.data.IsPlayerLoaded()` returns true
 - Ensure NUI focus is not stuck (restart resource)
 
 ### Items not dragging

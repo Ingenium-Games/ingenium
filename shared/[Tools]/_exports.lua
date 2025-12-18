@@ -1,6 +1,6 @@
 -- Local server or Client sided.
 function GetLocale()
-    return c.locale
+    return ig.locale
 end
 exports("GetLocale", GetLocale)
 -- Phone Numbers Exports

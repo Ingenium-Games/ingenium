@@ -2,7 +2,7 @@
 local GetItems = RegisterServerCallback({
     eventName = "GetItems",
     eventCallback = function(source, ...)
-        local items = c.item.GetItems()
+        local items = ig.item.GetItems()
         return items
     end
 })
@@ -10,7 +10,7 @@ local GetItems = RegisterServerCallback({
 local GetJobs = RegisterServerCallback({
     eventName = "GetJobs",
     eventCallback = function(source, ...)
-        local jobs = c.job.GetJobs()
+        local jobs = ig.job.GetJobs()
         return jobs
     end
 })
@@ -18,7 +18,7 @@ local GetJobs = RegisterServerCallback({
 local GetDoors = RegisterServerCallback({
     eventName = "GetDoors",
     eventCallback = function(source, ...)
-        local doors = c.door.GetDoors()
+        local doors = ig.door.GetDoors()
         return doors
     end
 })
@@ -26,7 +26,7 @@ local GetDoors = RegisterServerCallback({
 local GetObjects = RegisterServerCallback({
     eventName = "GetObjects",
     eventCallback = function(source, ...)
-        local objs = c.door.GetObjects()
+        local objs = ig.door.GetObjects()
         return objs
     end
 })

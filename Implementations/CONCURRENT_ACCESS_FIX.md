@@ -14,7 +14,7 @@ Server Time: 0ms
 
 Player A opens drop
 ├─ Client receives snapshot: {bread: 5, water: 3}
-└─ Server: c.drop.Activate(netId)
+└─ Server: ig.drop.Activate(netId)
 
 Player B opens drop (50ms later)
 ├─ Client receives snapshot: {bread: 5, water: 3}
@@ -303,7 +303,7 @@ Validation:
 
 ### Concurrent Access Log
 ```lua
-c.func.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
+ig.funig.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
     itemName, submittedQty, currentQty, src
 ))
 ```
@@ -315,7 +315,7 @@ c.func.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d 
 
 ### Exploit Attempt Log
 ```lua
-c.validation.LogAndBanExploiter(src, 
+ig.validation.LogAndBanExploiter(src, 
     ("Item duplication attempt: %s quantity %d exceeds server total %d"):format(
         itemName, submittedQty, currentQty
     ))

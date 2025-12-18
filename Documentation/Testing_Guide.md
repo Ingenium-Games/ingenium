@@ -56,7 +56,7 @@ Verify that rapid transactions are rate-limited.
 
 1. **From server console**, get a player object:
    ```lua
-   local xPlayer = c.data.GetPlayer(1) -- Replace 1 with actual player ID
+   local xPlayer = ig.data.GetPlayer(1) -- Replace 1 with actual player ID
    ```
 
 2. **Spam AddCash** rapidly:
@@ -105,7 +105,7 @@ Verify that all financial transactions are logged.
 
 2. **Perform various transactions**:
    ```lua
-   local xPlayer = c.data.GetPlayer(1)
+   local xPlayer = ig.data.GetPlayer(1)
    xPlayer.AddCash(500)
    xPlayer.RemoveCash(100)
    xPlayer.SetBank(1000)
@@ -122,7 +122,7 @@ Verify that all financial transactions are logged.
   - timestamp
   - player_id
   - source
-  - type (add_cash, remove_cash, set_bank, etc.)
+  - type (add_cash, remove_cash, set_bank, etig.)
   - amount
   - reason
   - before_cash or before_bank values
@@ -145,7 +145,7 @@ Verify that suspicious transaction patterns are detected.
 
 2. **Trigger fraud detection** with >20 transactions in 60s:
    ```lua
-   local xPlayer = c.data.GetPlayer(1)
+   local xPlayer = ig.data.GetPlayer(1)
    for i = 1, 25 do
        xPlayer.AddCash(1)
        Wait(100) -- Small delay to avoid rate limit
@@ -172,7 +172,7 @@ Verify that numeric values are clamped to valid ranges.
 
 1. **Test Fuel clamping**:
    ```lua
-   local veh = c.data.GetVehicle(netId) -- Replace with actual vehicle net ID
+   local veh = ig.data.GetVehicle(netId) -- Replace with actual vehicle net ID
    veh.SetFuel(150) -- Should clamp to 100
    print("Fuel after 150:", veh.GetFuel()) -- Should print 100
    
@@ -182,7 +182,7 @@ Verify that numeric values are clamped to valid ranges.
 
 2. **Test Player stats clamping**:
    ```lua
-   local xPlayer = c.data.GetPlayer(1)
+   local xPlayer = ig.data.GetPlayer(1)
    xPlayer.SetHealth(9999) -- Should clamp to conf.defaulthealth
    xPlayer.SetArmour(9999) -- Should clamp to conf.defaultarmour
    xPlayer.SetHunger(150) -- Should clamp to 100
@@ -212,7 +212,7 @@ Verify that NaN values are handled properly.
 
 1. **Test NaN input**:
    ```lua
-   local xPlayer = c.data.GetPlayer(1)
+   local xPlayer = ig.data.GetPlayer(1)
    local nan = 0/0 -- Creates NaN
    print("NaN value:", nan, "equals itself?", nan == nan) -- Should print false
    
@@ -222,7 +222,7 @@ Verify that NaN values are handled properly.
 
 2. **Test with vehicle**:
    ```lua
-   local veh = c.data.GetVehicle(netId)
+   local veh = ig.data.GetVehicle(netId)
    veh.SetFuel(0/0) -- NaN
    print("Fuel after NaN:", veh.GetFuel()) -- Should be 0
    ```
@@ -248,7 +248,7 @@ Verify that authorization checks use server-side data, not client state.
    local coords = GetEntityCoords(GetPlayerPed(1))
    local veh = CreateVehicle(GetHashKey("adder"), coords.x, coords.y, coords.z, 0.0, true, true)
    local netId = NetworkGetNetworkIdFromEntity(veh)
-   local vehicle = c.data.AddVehicle(netId)
+   local vehicle = ig.data.AddVehicle(netId)
    -- Don't add keys for player
    ```
 
@@ -256,7 +256,7 @@ Verify that authorization checks use server-side data, not client state.
    ```lua
    -- Even if client could modify Keys in state, server checks self.Keys
    -- Server-side verification:
-   local xPlayer = c.data.GetPlayer(1)
+   local xPlayer = ig.data.GetPlayer(1)
    local hasKeys = vehicle.CheckKeys(xPlayer.GetCharacter_ID())
    print("Has keys (should be false):", hasKeys)
    ```
@@ -287,13 +287,13 @@ Verify that security events can be captured by external systems.
    ```lua
    -- In your logging resource
    AddEventHandler("txaLogger:SecurityAlert", function(alert)
-       -- Send to Discord webhook, database, etc.
+       -- Send to Discord webhook, database, etig.
        print(json.encode(alert, {indent = true}))
    end)
    
    AddEventHandler("txaLogger:LogTransaction", function(log)
        -- Store to database
-       MySQL.Async.execute("INSERT INTO transaction_log (...) VALUES (...)", log)
+       MySQL.Asynig.execute("INSERT INTO transaction_log (...) VALUES (...)", log)
    end)
    
    AddEventHandler("txaLogger:FraudAlert", function(alert)

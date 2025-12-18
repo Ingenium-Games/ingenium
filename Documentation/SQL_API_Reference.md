@@ -4,13 +4,13 @@ Complete reference for all SQL functions in ig.core.
 
 ## Core Query Functions
 
-### c.sql.Query
+### ig.sql.Query
 
 Execute a SELECT query that returns multiple rows.
 
 **Syntax:**
 ```lua
-c.sql.Query(query, parameters, callback)
+ig.sql.Query(query, parameters, callback)
 ```
 
 **Parameters:**
@@ -24,13 +24,13 @@ c.sql.Query(query, parameters, callback)
 **Examples:**
 ```lua
 -- Positional parameters
-local players = c.sql.Query("SELECT * FROM characters WHERE primary_id = ?", {licenseId})
+local players = ig.sql.Query("SELECT * FROM characters WHERE primary_id = ?", {licenseId})
 
 -- Named parameters (compatibility)
-local players = c.sql.Query("SELECT * FROM characters WHERE primary_id = @id", {["@id"] = licenseId})
+local players = ig.sql.Query("SELECT * FROM characters WHERE primary_id = @id", {["@id"] = licenseId})
 
 -- With callback
-c.sql.Query("SELECT * FROM characters", {}, function(results)
+ig.sql.Query("SELECT * FROM characters", {}, function(results)
     for i, char in ipairs(results) do
         print(char.First_Name)
     end
@@ -39,13 +39,13 @@ end)
 
 ---
 
-### c.sql.FetchScalar
+### ig.sql.FetchScalar
 
 Execute a SELECT query that returns a single value.
 
 **Syntax:**
 ```lua
-c.sql.FetchScalar(query, parameters, callback)
+ig.sql.FetchScalar(query, parameters, callback)
 ```
 
 **Parameters:**
@@ -54,18 +54,18 @@ c.sql.FetchScalar(query, parameters, callback)
 - `callback` (function, optional) - Callback function called with value
 
 **Returns:**
-- `any` - Single scalar value (string, number, boolean, etc.) or `nil`
+- `any` - Single scalar value (string, number, boolean, etig.) or `nil`
 
 **Examples:**
 ```lua
 -- Get bank balance
-local balance = c.sql.FetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {characterId})
+local balance = ig.sql.FetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {characterId})
 
 -- Get count
-local count = c.sql.FetchScalar("SELECT COUNT(*) FROM characters WHERE Primary_ID = ?", {primaryId})
+local count = ig.sql.FetchScalar("SELECT COUNT(*) FROM characters WHERE Primary_ID = ?", {primaryId})
 
 -- Check existence
-local exists = c.sql.FetchScalar("SELECT License_ID FROM users WHERE License_ID = ? LIMIT 1", {licenseId})
+local exists = ig.sql.FetchScalar("SELECT License_ID FROM users WHERE License_ID = ? LIMIT 1", {licenseId})
 if exists then
     print("User exists")
 end
@@ -73,13 +73,13 @@ end
 
 ---
 
-### c.sql.FetchSingle
+### ig.sql.FetchSingle
 
 Execute a SELECT query that returns a single row.
 
 **Syntax:**
 ```lua
-c.sql.FetchSingle(query, parameters, callback)
+ig.sql.FetchSingle(query, parameters, callback)
 ```
 
 **Parameters:**
@@ -93,24 +93,24 @@ c.sql.FetchSingle(query, parameters, callback)
 **Examples:**
 ```lua
 -- Get single user
-local user = c.sql.FetchSingle("SELECT * FROM users WHERE License_ID = ? LIMIT 1", {licenseId})
+local user = ig.sql.FetchSingle("SELECT * FROM users WHERE License_ID = ? LIMIT 1", {licenseId})
 if user then
     print(user.Username)
 end
 
 -- Get character details
-local character = c.sql.FetchSingle("SELECT * FROM characters WHERE Character_ID = ?", {characterId})
+local character = ig.sql.FetchSingle("SELECT * FROM characters WHERE Character_ID = ?", {characterId})
 ```
 
 ---
 
-### c.sql.Insert
+### ig.sql.Insert
 
 Execute an INSERT query.
 
 **Syntax:**
 ```lua
-c.sql.Insert(query, parameters, callback)
+ig.sql.Insert(query, parameters, callback)
 ```
 
 **Parameters:**
@@ -124,13 +124,13 @@ c.sql.Insert(query, parameters, callback)
 **Examples:**
 ```lua
 -- Insert character
-local insertId = c.sql.Insert(
+local insertId = ig.sql.Insert(
     "INSERT INTO characters (Created, Primary_ID, Character_ID, First_Name, Last_Name) VALUES (?, ?, ?, ?, ?)",
     {timestamp, primaryId, characterId, firstName, lastName}
 )
 
 -- With callback
-c.sql.Insert(
+ig.sql.Insert(
     "INSERT INTO character_accounts (Character_ID, Account_Number, Bank) VALUES (?, ?, ?)",
     {characterId, accountNumber, startingBalance},
     function(insertId)
@@ -141,13 +141,13 @@ c.sql.Insert(
 
 ---
 
-### c.sql.Update
+### ig.sql.Update
 
 Execute an UPDATE or DELETE query.
 
 **Syntax:**
 ```lua
-c.sql.Update(query, parameters, callback)
+ig.sql.Update(query, parameters, callback)
 ```
 
 **Parameters:**
@@ -161,26 +161,26 @@ c.sql.Update(query, parameters, callback)
 **Examples:**
 ```lua
 -- Update bank balance
-local affected = c.sql.Update("UPDATE character_accounts SET Bank = ? WHERE Character_ID = ?", {newBalance, characterId})
+local affected = ig.sql.Update("UPDATE character_accounts SET Bank = ? WHERE Character_ID = ?", {newBalance, characterId})
 
 -- Delete character
-c.sql.Update("DELETE FROM characters WHERE Character_ID = ? LIMIT 1", {characterId}, function(affected)
+ig.sql.Update("DELETE FROM characters WHERE Character_ID = ? LIMIT 1", {characterId}, function(affected)
     print("Deleted " .. affected .. " characters")
 end)
 
 -- Batch update
-local count = c.sql.Update("UPDATE vehicles SET Parked = TRUE", {})
+local count = ig.sql.Update("UPDATE vehicles SET Parked = TRUE", {})
 ```
 
 ---
 
-### c.sql.Transaction
+### ig.sql.Transaction
 
 Execute multiple queries in an atomic transaction.
 
 **Syntax:**
 ```lua
-c.sql.Transaction(queries, callback)
+ig.sql.Transaction(queries, callback)
 ```
 
 **Parameters:**
@@ -193,7 +193,7 @@ c.sql.Transaction(queries, callback)
 **Examples:**
 ```lua
 -- Transfer money between accounts
-c.sql.Transaction({
+ig.sql.Transaction({
     {query = "UPDATE character_accounts SET Bank = Bank - ? WHERE Character_ID = ?", parameters = {amount, fromId}},
     {query = "UPDATE character_accounts SET Bank = Bank + ? WHERE Character_ID = ?", parameters = {amount, toId}},
     {query = "INSERT INTO transactions (From_ID, To_ID, Amount, Timestamp) VALUES (?, ?, ?, ?)", parameters = {fromId, toId, amount, timestamp}}
@@ -208,13 +208,13 @@ end)
 
 ---
 
-### c.sql.Batch
+### ig.sql.Batch
 
 Execute multiple queries without transaction (fire and forget).
 
 **Syntax:**
 ```lua
-c.sql.Batch(queries, callback)
+ig.sql.Batch(queries, callback)
 ```
 
 **Parameters:**
@@ -227,7 +227,7 @@ c.sql.Batch(queries, callback)
 **Examples:**
 ```lua
 -- Batch update multiple records
-c.sql.Batch({
+ig.sql.Batch({
     {query = "UPDATE characters SET Active = FALSE WHERE Character_ID = ?", parameters = {char1}},
     {query = "UPDATE characters SET Active = FALSE WHERE Character_ID = ?", parameters = {char2}},
     {query = "UPDATE characters SET Active = FALSE WHERE Character_ID = ?", parameters = {char3}}
@@ -246,13 +246,13 @@ end)
 
 ## Prepared Statements
 
-### c.sql.PrepareQuery
+### ig.sql.PrepareQuery
 
 Prepare a query for repeated execution (optimization).
 
 **Syntax:**
 ```lua
-c.sql.PrepareQuery(query, callback)
+ig.sql.PrepareQuery(query, callback)
 ```
 
 **Parameters:**
@@ -266,7 +266,7 @@ c.sql.PrepareQuery(query, callback)
 ```lua
 -- Prepare at resource start
 local PlayerSaveQuery = -1
-c.sql.PrepareQuery(
+ig.sql.PrepareQuery(
     "UPDATE characters SET Health = ?, Coords = ?, Inventory = ? WHERE Character_ID = ?",
     function(queryId)
         PlayerSaveQuery = queryId
@@ -276,13 +276,13 @@ c.sql.PrepareQuery(
 
 ---
 
-### c.sql.ExecutePrepared
+### ig.sql.ExecutePrepared
 
 Execute a prepared query.
 
 **Syntax:**
 ```lua
-c.sql.ExecutePrepared(queryId, parameters, callback)
+ig.sql.ExecutePrepared(queryId, parameters, callback)
 ```
 
 **Parameters:**
@@ -296,7 +296,7 @@ c.sql.ExecutePrepared(queryId, parameters, callback)
 **Examples:**
 ```lua
 -- Execute in save loop
-c.sql.ExecutePrepared(PlayerSaveQuery, {health, coords, inventory, characterId}, function(affected)
+ig.sql.ExecutePrepared(PlayerSaveQuery, {health, coords, inventory, characterId}, function(affected)
     print("Saved character")
 end)
 ```
@@ -305,13 +305,13 @@ end)
 
 ## Utility Functions
 
-### c.sql.IsReady
+### ig.sql.IsReady
 
 Check if SQL connection is established.
 
 **Syntax:**
 ```lua
-c.sql.IsReady()
+ig.sql.IsReady()
 ```
 
 **Returns:**
@@ -319,7 +319,7 @@ c.sql.IsReady()
 
 **Examples:**
 ```lua
-if c.sql.IsReady() then
+if ig.sql.IsReady() then
     print("Database connected")
 else
     print("Waiting for database...")
@@ -328,13 +328,13 @@ end
 
 ---
 
-### c.sql.AwaitReady
+### ig.sql.AwaitReady
 
 Wait for SQL connection to be ready (blocking).
 
 **Syntax:**
 ```lua
-c.sql.AwaitReady(timeout)
+ig.sql.AwaitReady(timeout)
 ```
 
 **Parameters:**
@@ -346,7 +346,7 @@ c.sql.AwaitReady(timeout)
 **Examples:**
 ```lua
 -- Wait up to 30 seconds
-if c.sql.AwaitReady() then
+if ig.sql.AwaitReady() then
     print("Database ready!")
     -- Proceed with queries
 else
@@ -354,20 +354,20 @@ else
 end
 
 -- Custom timeout
-if c.sql.AwaitReady(10000) then -- 10 seconds
+if ig.sql.AwaitReady(10000) then -- 10 seconds
     print("Connected")
 end
 ```
 
 ---
 
-### c.sql.GetStats
+### ig.sql.GetStats
 
 Get SQL performance statistics.
 
 **Syntax:**
 ```lua
-c.sql.GetStats()
+ig.sql.GetStats()
 ```
 
 **Returns:**
@@ -393,7 +393,7 @@ c.sql.GetStats()
 
 **Examples:**
 ```lua
-local stats = c.sql.GetStats()
+local stats = ig.sql.GetStats()
 print(string.format("Executed %d queries, avg %.2fms", stats.totalQueries, stats.averageTime))
 if stats.slowQueries > 0 then
     print("Warning: " .. stats.slowQueries .. " slow queries detected")
@@ -409,7 +409,7 @@ end
 Use `?` placeholders and pass parameters as an array:
 
 ```lua
-c.sql.Query("SELECT * FROM users WHERE license = ? AND active = ?", {license, true})
+ig.sql.Query("SELECT * FROM users WHERE license = ? AND active = ?", {license, true})
 ```
 
 ### Named Parameters (Compatibility)
@@ -417,7 +417,7 @@ c.sql.Query("SELECT * FROM users WHERE license = ? AND active = ?", {license, tr
 Use `@paramName` placeholders and pass parameters as a table:
 
 ```lua
-c.sql.Query("SELECT * FROM users WHERE license = @license", {["@license"] = license})
+ig.sql.Query("SELECT * FROM users WHERE license = @license", {["@license"] = license})
 ```
 
 Both formats are automatically converted to MySQL2 positional parameters.
@@ -429,14 +429,14 @@ Both formats are automatically converted to MySQL2 positional parameters.
 ### Synchronous (Blocking)
 
 ```lua
-local result = c.sql.Query("SELECT * FROM characters", {})
+local result = ig.sql.Query("SELECT * FROM characters", {})
 -- result is immediately available
 ```
 
 ### Asynchronous (Non-blocking)
 
 ```lua
-c.sql.Query("SELECT * FROM characters", {}, function(result)
+ig.sql.Query("SELECT * FROM characters", {}, function(result)
     -- result available in callback
 end)
 ```
@@ -445,7 +445,7 @@ end)
 
 ```lua
 Citizen.CreateThread(function()
-    local result = c.sql.Query("SELECT * FROM characters", {})
+    local result = ig.sql.Query("SELECT * FROM characters", {})
     -- Safe to use blocking calls in threads
 end)
 ```
@@ -458,13 +458,13 @@ All query functions handle errors gracefully:
 
 ```lua
 -- Failed queries return safe defaults
-local result = c.sql.Query("INVALID SQL", {})
+local result = ig.sql.Query("INVALID SQL", {})
 -- result = {}
 
-local scalar = c.sql.FetchScalar("INVALID SQL", {})
+local scalar = ig.sql.FetchScalar("INVALID SQL", {})
 -- scalar = nil
 
-local insertId = c.sql.Insert("INVALID SQL", {})
+local insertId = ig.sql.Insert("INVALID SQL", {})
 -- insertId = 0
 ```
 
@@ -475,9 +475,9 @@ Errors are automatically logged to console with query context.
 ## Performance Tips
 
 1. **Use Prepared Statements** for repeated queries
-2. **Batch Operations** with `c.sql.Batch()` for non-critical updates
+2. **Batch Operations** with `ig.sql.Batch()` for non-critical updates
 3. **Limit Result Sets** with WHERE clauses and LIMIT
-4. **Monitor Performance** with `c.sql.GetStats()` and slow query events
+4. **Monitor Performance** with `ig.sql.GetStats()` and slow query events
 5. **Use Transactions** for related updates to ensure atomicity
 
 ---

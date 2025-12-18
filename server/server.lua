@@ -13,34 +13,34 @@ AddEventHandler("onResourceStart", function(resourceName)
         return
     end
     --
-    c.version.Check(conf.url.version, resourceName)
-    -- Run setup / startup by loading data from files the database etc.
-    c.data.Initilize()
+    ig.version.Check(conf.url.version, resourceName)
+    -- Run setup / startup by loading data from files the database etig.
+    ig.data.Initilize()
     --
-    while c._loading do
+    while ig._loading do
         Wait(25)
     end
     -- Time now updates
-    c.time.ServerSync()
+    ig.time.ServerSync()
     -- Players save to the DB.
-    c.data.ServerSync()
+    ig.data.ServerSync()
     -- Start allowing dead characters to be revived - called every minute
-    c.data.ReviveSync()
+    ig.data.ReviveSync()
     -- Get character values every x seconds.
-    c.data.CharacterValues()
+    ig.data.CharacterValues()
     -- Start Paying players based on conf.
-    c.job.PayCycle()
+    ig.job.PayCycle()
     -- Cleanup Cycles on files.
-    c.gsr.CleanUp()
-    c.drop.CleanUp()
-    c.pick.CleanUp()
-    c.note.CleanUp()
+    ig.gsr.CleanUp()
+    ig.drop.CleanUp()
+    ig.pick.CleanUp()
+    ig.note.CleanUp()
     --
     Queue.OnReady()
     --
 
     -- TESTING
-    c.persistance.ObjectThread()
+    -- ig.persistance.ObjectThread()
     
 end)
 
@@ -49,8 +49,8 @@ RegisterNetEvent("Server:PlayerConnecting")
 AddEventHandler("Server:PlayerConnecting", function()
     local src = tonumber(source)
     local Username = GetPlayerName(src)
-    local Primary_ID = c.func.identifier(src)
-    local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = c.func.identifiers(src)
+    local Primary_ID = ig.funig.identifier(src)
+    local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = ig.funig.identifiers(src)
     --
     local function Startup()
         TriggerClientEvent("Client:Character:OpeningMenu", src)
@@ -58,15 +58,15 @@ AddEventHandler("Server:PlayerConnecting", function()
     end
     --
     if License_ID then
-        c.data.AddPlayer(src)
+        ig.data.AddPlayer(src)
         -- Lets see if the player exists.
-        local exists = c.sql.user.Find(License_ID)
+        local exists = ig.sql.user.Find(License_ID)
         if (exists == nil) then
             -- If no user present.    
-            c.sql.user.Add(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+            ig.sql.user.Add(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
         else
             -- If user exists, update based on connection info.
-            c.sql.user.Update(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+            ig.sql.user.Update(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
         end
     else
         DropPlayer(src, "No License Identifier, No Entry.")
@@ -75,31 +75,31 @@ end)
 -- ====================================================================================--
 AddEventHandler("playerDropped", function()
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     -- if the data not false?
     if xPlayer then
         -- Remove Job Permissions
         ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
         -- Save Data
-        c.sql.save.User(xPlayer, function()
-            c.sql.char.SetActive(xPlayer.GetIdentifier(), false, function()
-                c.func.Debug_1("[E] 'playerDropped' : Player Disconnection.")
-                c.data.RemovePlayer(src)
+        ig.sql.save.User(xPlayer, function()
+            ig.sql.char.SetActive(xPlayer.GetIdentifier(), false, function()
+                ig.funig.Debug_1("[E] 'playerDropped' : Player Disconnection.")
+                ig.data.RemovePlayer(src)
             end)
         end)
     end
     -- last player, force save data.
-    if not c.data.ArePlayersActive() then
+    if not ig.data.ArePlayersActive() then
         --
-        c.sql.save.Vehicles()
+        ig.sql.save.Vehicles()
         print("   ^7[^5SQL^7]: Vehicles")
         Citizen.Wait(conf.sec)
         --
-        c.sql.save.Jobs()
+        ig.sql.save.Jobs()
         print("   ^7[^5SQL^7]: Jobs")
         Citizen.Wait(conf.sec)
         --
-        c.sql.save.Objects()
+        ig.sql.save.Objects()
         print("   ^7[^5SQL^7]: Objects")
         Citizen.Wait(conf.sec)
         --

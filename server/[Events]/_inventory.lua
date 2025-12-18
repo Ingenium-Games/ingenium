@@ -1,15 +1,15 @@
 -- ====================================================================================--
 --- [Internal] Server Side Only, used in combination with callbacks
-for k,v in pairs (c.items) do
+for k,v in pairs (ig.items) do
     AddEventHandler(("Inventory:Consume:%s"):format(k), function(source, position, quantity) 
         local src = source
         local position = position
         local quantity = quantity or 1
-        local xPlayer = c.data.GetPlayer(src)
+        local xPlayer = ig.data.GetPlayer(src)
         --
-        if c.item.IsWeapon(k) then
+        if ig.item.IsWeapon(k) then
             --
-            local item = c.item.GetItem(k)
+            local item = ig.item.GetItem(k)
             local ammotype = item.Meta.Ammo     
             local hash = item.Weapon
 
@@ -27,7 +27,7 @@ for k,v in pairs (c.items) do
             return
         end
         --
-        if c.item.IsConsumeable(k) then
+        if ig.item.IsConsumeable(k) then
             --
             xPlayer.RemoveItem(k, position)
             --
@@ -46,24 +46,24 @@ for k,v in pairs (c.items) do
             local name = k
             local Meta
             -- If Weapon add meta
-            if c.item.IsWeapon(content) then
+            if ig.item.IsWeapon(content) then
                 Meta = {
-                    Ammo = c.item.GetWeaponAmmoType(content),
+                    Ammo = ig.item.GetWeaponAmmoType(content),
                     Components = {},
-                    SerialNumber = c.rng.chars(6),
-                    BatchNumber = c.rng.nums(10),
+                    SerialNumber = ig.rng.chars(6),
+                    BatchNumber = ig.rng.nums(10),
                     Crafted = false,
                     Registered = true,
-                    About = c.item.GetAbout(content)
+                    About = ig.item.GetAbout(content)
                 }
             end
             -- if consumeable get meta
-            if c.item.IsConsumeable(content) then
-                Meta = c.item.GetMeta()
+            if ig.item.IsConsumeable(content) then
+                Meta = ig.item.GetMeta()
             end
             --
             xPlayer.RemoveItem(k, position)
-            xPlayer.AddItem({content,1,100,c.item.IsWeapon(content),(Meta or false)})
+            xPlayer.AddItem({content,1,100,ig.item.IsWeapon(content),(Meta or false)})
             return
         end
         --

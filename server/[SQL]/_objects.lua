@@ -1,6 +1,6 @@
 -- ====================================================================================--
-if not c.sql then c.sql = {} end
-c.sql.obj = {}
+if not ig.sql then ig.sql = {} end
+ig.sql.obj = {}
 -- ====================================================================================--
 
 --[[
@@ -28,11 +28,11 @@ ROW_FORMAT=DYNAMIC
 
 --- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
-function c.sql.obj.GetObjects(cb)
-    local result = c.sql.Query("SELECT * FROM `objects`", {})
+function ig.sql.obj.GetObjects(cb)
+    local result = ig.sql.Query("SELECT * FROM `objects`", {})
     for i=1, #result, 1 do
         local j = result[i]
-        c.objects[i] = j
+        ig.objects[i] = j
     end
     if cb then
         cb()
@@ -40,11 +40,11 @@ function c.sql.obj.GetObjects(cb)
 end
 --
 
-function c.sql.obj.Add(data, cb)
+function ig.sql.obj.Add(data, cb)
     local Data = data
-    c.sql.Insert(
+    ig.sql.Insert(
         "INSERT INTO `objects` (`UUID`, `Model`, `Coords`, `Meta`, `States`, `Inventory`, `Created`, `Updated`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
-        {Data.UUID, Data.Model, Data.Coords, Data.Meta, Data.States, Data.Inventory, c.func.Timestamp(), c.func.Timestamp()},
+        {Data.UUID, Data.Model, Data.Coords, Data.Meta, Data.States, Data.Inventory, ig.funig.Timestamp(), ig.funig.Timestamp()},
         function(insertId)
             if cb then
                 cb(insertId)

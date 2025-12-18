@@ -1,154 +1,154 @@
 -- ====================================================================================--
-c.stats = conf.default.stats
-c.status = {}
+ig.stats = conf.default.stats
+ig.status = {}
 -- ====================================================================================--
 
 local _min = 0.00
 local _max = 100.00
-local _hunger = c.sec * 3.25
-local _thirst = c.sec * 2
-local _stress = c.sec * 4.25
+local _hunger = ig.sec * 3.25
+local _thirst = ig.sec * 2
+local _stress = ig.sec * 4.25
 
 -- ====================================================================================--
 
-function c.status.GetHealth()
+function ig.status.GetHealth()
     return GetEntityHealth(PlayerPedId())
 end
 
-function c.status.SetHealth(health)
+function ig.status.SetHealth(health)
     SetEntityHealth(PlayerPedId(), health)
 end
 
-function c.status.GetMaxHealth()
+function ig.status.GetMaxHealth()
     return GetEntityMaxHealth(PlayerPedId())
 end
 
-function c.status.SelfDamageHealth()
-    local health = c.status.GetHealth()
-    c.status.SetHealth((health - conf.default.selfdamage))
+function ig.status.SelfDamageHealth()
+    local health = ig.status.GetHealth()
+    ig.status.SetHealth((health - conf.default.selfdamage))
 end
 
 -- ====================================================================================--
 
-function c.status.GetArmour()
+function ig.status.GetArmour()
     return GetPedArmour(PlayerPedId())
 end
 
-function c.status.SetArmour(armour)
+function ig.status.SetArmour(armour)
     SetPedArmour(PlayerPedId(), armour)
 end
 
-function c.status.AddArmour(armour)
+function ig.status.AddArmour(armour)
     AddArmourToPed(PlayerPedId(), armour)
 end
 
-function c.status.AddArmourToAmount(amount)
-    local current = c.status.GetArmour()
+function ig.status.AddArmourToAmount(amount)
+    local current = ig.status.GetArmour()
     if current < amount then
-        c.status.SetArmour(amount)
+        ig.status.SetArmour(amount)
     end
 end
 
 -- ====================================================================================--
 
-function c.status.GetHunger()
-    return c.stats.Hunger
+function ig.status.GetHunger()
+    return ig.stats.Hunger
 end
 
-function c.status.SetHunger(v)
-    c.stats.Hunger = v
+function ig.status.SetHunger(v)
+    ig.stats.Hunger = v
 end
 
-function c.status.AddHunger(v)
-    local val = c.check.Number(v, _min, _max)
-    local calc = c.stats.Hunger + val
+function ig.status.AddHunger(v)
+    local val = ig.check.Number(v, _min, _max)
+    local calc = ig.stats.Hunger + val
     if calc >= 100 then
-        c.stats.Hunger = _max
+        ig.stats.Hunger = _max
     else
-        c.stats.Hunger = c.math.Decimals(c.stats.Hunger + val, 2)
+        ig.stats.Hunger = ig.math.Decimals(ig.stats.Hunger + val, 2)
     end
 end
 
-function c.status.RemoveHunger(v)
-    local val = c.check.Number(v, _min, _max)
-    local calc = c.stats.Hunger - val
+function ig.status.RemoveHunger(v)
+    local val = ig.check.Number(v, _min, _max)
+    local calc = ig.stats.Hunger - val
     if calc <= 0 then
-        c.stats.Hunger = _min
-        c.status.SelfDamageHealth()
+        ig.stats.Hunger = _min
+        ig.status.SelfDamageHealth()
     else
-        c.stats.Hunger = c.math.Decimals(c.stats.Hunger - val, 2)
+        ig.stats.Hunger = ig.math.Decimals(ig.stats.Hunger - val, 2)
     end
 end
 
 -- ====================================================================================--
 
-function c.status.GetThirst()
-    return c.stats.Thirst
+function ig.status.GetThirst()
+    return ig.stats.Thirst
 end
 
-function c.status.SetThirst(v)
-    c.stats.Thirst = v
+function ig.status.SetThirst(v)
+    ig.stats.Thirst = v
 end
 
-function c.status.AddThirst(v)
-    local val = c.check.Number(v, _min, _max)
-    local calc = c.stats.Thirst + val
+function ig.status.AddThirst(v)
+    local val = ig.check.Number(v, _min, _max)
+    local calc = ig.stats.Thirst + val
     if calc >= 100 then
-        c.stats.Thirst = _max
+        ig.stats.Thirst = _max
     else
-        c.stats.Thirst = c.math.Decimals(c.stats.Thirst + val, 2)
+        ig.stats.Thirst = ig.math.Decimals(ig.stats.Thirst + val, 2)
     end
 end
 
-function c.status.RemoveThirst(v)
-    local val = c.check.Number(v, _min, _max)
-    local calc = c.stats.Thirst - val
+function ig.status.RemoveThirst(v)
+    local val = ig.check.Number(v, _min, _max)
+    local calc = ig.stats.Thirst - val
     if calc <= 0 then
-        c.stats.Thirst = _min
-        c.status.SelfDamageHealth()
+        ig.stats.Thirst = _min
+        ig.status.SelfDamageHealth()
     else
-        c.stats.Thirst = c.math.Decimals(c.stats.Thirst - val, 2)
+        ig.stats.Thirst = ig.math.Decimals(ig.stats.Thirst - val, 2)
     end
 end
 
 -- ====================================================================================--
 
-function c.status.GetStress()
-    return c.stats.Stress
+function ig.status.GetStress()
+    return ig.stats.Stress
 end
 
-function c.status.SetStress(v)
-    c.stats.Stress = v
+function ig.status.SetStress(v)
+    ig.stats.Stress = v
 end
 
-function c.status.AddStress(v)
-    local val = c.check.Number(v, _min, _max)
-    local calc = c.stats.Stress + val
+function ig.status.AddStress(v)
+    local val = ig.check.Number(v, _min, _max)
+    local calc = ig.stats.Stress + val
     if calc >= 100 then
-        c.stats.Stress = _max
-        c.status.SelfDamageHealth()
+        ig.stats.Stress = _max
+        ig.status.SelfDamageHealth()
     else
-        c.stats.Stress = c.math.Decimals(c.stats.Stress + val, 2)
+        ig.stats.Stress = ig.math.Decimals(ig.stats.Stress + val, 2)
     end
 end
 
-function c.status.RemoveStress(v)
-    local val = c.check.Number(v, _min, _max)
-    local calc = c.stats.Stress - val
+function ig.status.RemoveStress(v)
+    local val = ig.check.Number(v, _min, _max)
+    local calc = ig.stats.Stress - val
     if calc <= 0 then
-        c.stats.Stress = _min
+        ig.stats.Stress = _min
     else
-        c.stats.Stress = c.math.Decimals(c.stats.Stress - val, 2)
+        ig.stats.Stress = ig.math.Decimals(ig.stats.Stress - val, 2)
     end
 end
 
 -- ====================================================================================--
 
-function c.status.StartHungerDecrease()
+function ig.status.StartHungerDecrease()
     local function Do()
-        if c.data.GetLoadedStatus() then
-            local default = (1 * c.modifier.GetHungerModifier()) / 100
-            c.status.RemoveHunger(default)
+        if ig.data.GetLoadedStatus() then
+            local default = (1 * ig.modifier.GetHungerModifier()) / 100
+            ig.status.RemoveHunger(default)
             SetTimeout(_hunger, Do)
         else
             -- this is to break the loop if switching between characters.
@@ -159,11 +159,11 @@ function c.status.StartHungerDecrease()
     SetTimeout(_hunger, Do)
 end
 
-function c.status.StartThirstDecrease()
+function ig.status.StartThirstDecrease()
     local function Do()
-        if c.data.GetLoadedStatus() then
-            local default = (1 * c.modifier.GetThirstModifier()) / 100
-            c.status.RemoveThirst(default)
+        if ig.data.GetLoadedStatus() then
+            local default = (1 * ig.modifier.GetThirstModifier()) / 100
+            ig.status.RemoveThirst(default)
             SetTimeout(_thirst, Do)
         else
             -- this is to break the loop if switching between characters.
@@ -174,20 +174,20 @@ function c.status.StartThirstDecrease()
     SetTimeout(_thirst, Do)
 end
 
-function c.status.StartStressIncrease()
+function ig.status.StartStressIncrease()
     local function Do()
-        if c.data.GetLoadedStatus() then
+        if ig.data.GetLoadedStatus() then
             local sitting = exports["sit"]:IsSitting()
             local laying = exports["sit"]:IsLaying()
             if (not sitting) and (not laying) then
-                local default = (1 * c.modifier.GetStressModifier()) / 100
-                c.status.AddStress(default)
+                local default = (1 * ig.modifier.GetStressModifier()) / 100
+                ig.status.AddStress(default)
             elseif sitting then
                 local default = 0.95
-                c.status.RemoveStress(default)
+                ig.status.RemoveStress(default)
             elseif laying then
                 local default = 3.45
-                c.status.RemoveStress(default)
+                ig.status.RemoveStress(default)
             end
             SetTimeout(_stress, Do)
         else
@@ -201,7 +201,7 @@ end
 
 -- ====================================================================================--
 
-function c.status.SetPlayer()
+function ig.status.SetPlayer()
     local ply = PlayerId()
     local ped = PlayerPedId()
     --
@@ -218,15 +218,15 @@ function c.status.SetPlayer()
     SetPlayerInvincible(ply, false)
     --
     -- time to gain our data from the server.
-    c.status.SetHealth(LocalPlayer.state.Health)
-    c.status.SetArmour(LocalPlayer.state.Armour)
-    c.status.SetHunger(LocalPlayer.state.Hunger)
-    c.status.SetThirst(LocalPlayer.state.Thirst)
-    c.status.SetStress(LocalPlayer.state.Stress)
+    ig.status.SetHealth(LocalPlayer.state.Health)
+    ig.status.SetArmour(LocalPlayer.state.Armour)
+    ig.status.SetHunger(LocalPlayer.state.Hunger)
+    ig.status.SetThirst(LocalPlayer.state.Thirst)
+    ig.status.SetStress(LocalPlayer.state.Stress)
     -- Begin Routines / Timeouts
-    c.status.StartHungerDecrease()
-    c.status.StartThirstDecrease()
-    c.status.StartStressIncrease()
+    ig.status.StartHungerDecrease()
+    ig.status.StartThirstDecrease()
+    ig.status.StartStressIncrease()
 end
 
 --[[
@@ -265,13 +265,13 @@ timer to recieve end to be elivered from server.
 ]] --
 
 -- Quicker
-function c.status.SetHaste(bool, dec)
+function ig.status.SetHaste(bool, dec)
     local ped = PlayerPedId()
     if bool then
         if not dec then
             dec = 2.0
         end
-        local dec = c.math.Decimals(dec, 1)
+        local dec = ig.math.Decimals(dec, 1)
         if dec >= 1.0 then
             SetPedMoveRateOverride(ped, dec)
         end
@@ -281,13 +281,13 @@ function c.status.SetHaste(bool, dec)
 end
 
 -- Slower
-function c.status.SetSlow(bool, dec)
+function ig.status.SetSlow(bool, dec)
     local ped = PlayerPedId()
     if bool then
         if not dec then
             dec = 0.5
         end
-        local dec = c.math.Decimals(dec, 1)
+        local dec = ig.math.Decimals(dec, 1)
         if dec <= 1.0 then
             SetPedMoveRateOverride(ped, dec)
         end
@@ -297,50 +297,50 @@ function c.status.SetSlow(bool, dec)
 end
 
 -- set ingmae vision styles
-function c.status.SetVision(style)
+function ig.status.SetVision(style)
 
 end
 
 -- tick damage
-function c.status.SetBleed(bool, dec)
+function ig.status.SetBleed(bool, dec)
 
 end
 
 -- tick damage
-function c.status.SetPoison(bool, dec)
+function ig.status.SetPoison(bool, dec)
 
 end
 
 -- tick damage
-function c.status.SetBurn(bool, dec)
+function ig.status.SetBurn(bool, dec)
 
 end
 
 -- tick damage
-function c.status.SetWithdrawls(bool, dec)
+function ig.status.SetWithdrawls(bool, dec)
 
 end
 
-function c.status.SetInjury(bool, dec)
+function ig.status.SetInjury(bool, dec)
 
 end
 
 -- One of three, first person only, third person only, out of body experiance. FP, TP, OB
-function c.status.Camera(type)
+function ig.status.Camera(type)
 
 end
 
 -- Notmal, Static, Micky Mouse.
-function c.status.Sound(type)
+function ig.status.Sound(type)
 
 end
 
 -- Really fuck your camera up.
-function c.status.Bobble(bool)
+function ig.status.Bobble(bool)
 
 end
 
-function c.status.WalkType(type)
+function ig.status.WalkType(type)
 
 end
 

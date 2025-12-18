@@ -5,14 +5,14 @@
 RegisterNetEvent("Server:Character:List", function(req, Primary_ID)
     local src = tonumber(req) or source
     local p = promise.new()
-    local Slots = c.sql.user.GetSlots(Primary_ID)
-    local Characters = c.sql.char.GetAllPermited(Primary_ID, Slots)
+    local Slots = ig.sql.user.GetSlots(Primary_ID)
+    local Characters = ig.sql.char.GetAllPermited(Primary_ID, Slots)
     p:resolve()
     Citizen.Await(p)
     -- Send the data table to the client that requested it...
     TriggerClientEvent("Client:Nui:Message", src, "connected", {["Characters"] = Characters, ["Slots"] = Slots})
     -- Place the user in their own instance until the user has joined and loaded.
-    c.inst.SetPlayer(src)
+    ig.inst.SetPlayer(src)
 end)
 
 -- [C]
@@ -22,8 +22,8 @@ RegisterNetEvent("Server:Character:Join", function(Character_ID)
     if (Character_ID == "New") then
         TriggerClientEvent("Client:Character:Create", src)
     elseif Character_ID ~= nil then
-        local Coords = c.sql.char.GetCoords(Character_ID)
-        c.data.LoadPlayer(src, Character_ID)
+        local Coords = ig.sql.char.GetCoords(Character_ID)
+        ig.data.LoadPlayer(src, Character_ID)
         TriggerClientEvent("Client:Character:ReSpawn", src, Coords)
     elseif Character_ID == nil then
         DropPlayer(src, "You dont have a character selected, this is impossible, bye.")
@@ -33,8 +33,8 @@ end)
 -- [C]
 RegisterNetEvent("Server:Character:Delete", function(Character_ID)
     local src = tonumber(source)
-    local primary_id = c.func.identifier(src)
-    c.sql.char.Delete(Character_ID, function()
+    local primary_id = ig.funig.identifier(src)
+    ig.sql.char.Delete(Character_ID, function()
         DropPlayer(src, "Character with id: "..Character_ID.." was Deleted Successfully, please rejoin.")
     end)
 end)
@@ -50,16 +50,16 @@ end)
 RegisterNetEvent("Server:Character:Register", function(first_name, last_name, appearance)
     local src = tonumber(source)
     -- Run a check to see if it being exploited.
-    if c.data.GetPlayer(src) ~= false then
-        c.func.Eventban(src, "Server:Character:Register")
+    if ig.data.GetPlayer(src) ~= false then
+        ig.funig.Eventban(src, "Server:Character:Register")
     end
     local p = promise.new()
-    local character_id = c.sql.gen.CharacterID()
-    local city_id = c.sql.gen.CityID()
-    local phone_number = c.sql.gen.PhoneNumber()
-    local iban = c.sql.gen.Iban()
-    local bank_number = c.sql.gen.AccountNumber()
-    local primary_id = c.func.identifier(src)
+    local character_id = ig.sql.gen.CharacterID()
+    local city_id = ig.sql.gen.CityID()
+    local phone_number = ig.sql.gen.PhoneNumber()
+    local iban = ig.sql.gen.Iban()
+    local bank_number = ig.sql.gen.AccountNumber()
+    local primary_id = ig.funig.identifier(src)
     local data = {}
     
     data.Primary_ID = primary_id -- Owner
@@ -76,14 +76,14 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, ap
     data.Skills = json.encode(conf.default.skills)
     data.Appearance = json.encode(appearance)
     
-    c.sql.char.Add(data, function()
-        -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etc.
-        c.sql.bank.AddAccount(character_id, bank_number)
+    ig.sql.char.Add(data, function()
+        -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etig.
+        ig.sql.bank.AddAccount(character_id, bank_number)
         --
         p:resolve()
     end)
     --
-    c.data.LoadPlayer(src, character_id)
+    ig.data.LoadPlayer(src, character_id)
     --
     Citizen.Await(p)    
     --[[
@@ -93,32 +93,32 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, ap
     --[[
             ADD YOUR CHARACTER CREATION EVENT ABOVE
     ]]--
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     xPlayer.AddItem({"Phone",1,100})
 end)
 
 RegisterNetEvent("Server:Character:Spawn", function(req)
     local src = tonumber(req)
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     TriggerClientEvent("Client:Character:ReSpawn", src, xPlayer.GetCoords())
 end)
 
 RegisterNetEvent("Server:Character:SaveSkin", function(appearance, bool)
 	local src = source
-	local xPlayer = c.data.GetPlayer(src)
+	local xPlayer = ig.data.GetPlayer(src)
 	local identifier = xPlayer.GetIdentifier()
-    c.sql.char.SetAppearance(identifier, appearance, function()
+    ig.sql.char.SetAppearance(identifier, appearance, function()
         xPlayer.SetAppearance(appearance)
     end)
     if type(bool) == "boolean" and bool == true then
-        c.inst.SetPlayerDefault(src)
+        ig.inst.SetPlayerDefault(src)
     end
 end)
 
 -- Save appearance with validation (new system)
 RegisterNetEvent("Server:Character:SaveAppearance", function(appearance)
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     
     if not xPlayer then
         print('^1[Appearance] No xPlayer found for source: ' .. src .. '^0')
@@ -126,7 +126,7 @@ RegisterNetEvent("Server:Character:SaveAppearance", function(appearance)
     end
     
     -- Validate appearance data
-    local isValid, errorMsg = c.appearance.ValidateAppearance(appearance)
+    local isValid, errorMsg = ig.appearance.ValidateAppearance(appearance)
     if not isValid then
         print('^1[Appearance] Invalid appearance data for ' .. xPlayer.GetIdentifier() .. ': ' .. errorMsg .. '^0')
         TriggerClientEvent('Client:Nui:Message', src, 'notification', {
@@ -139,7 +139,7 @@ RegisterNetEvent("Server:Character:SaveAppearance", function(appearance)
     
     -- Save to database
     local identifier = xPlayer.GetIdentifier()
-    c.sql.char.SetAppearance(identifier, appearance, function()
+    ig.sql.char.SetAppearance(identifier, appearance, function()
         xPlayer.SetAppearance(appearance)
         print('^2[Appearance] Saved appearance for ' .. identifier .. '^0')
     end)
@@ -147,7 +147,7 @@ end)
 
 RegisterNetEvent("Server:Character:LoadSkin", function()
 	local src = source
-	local xPlayer = c.data.GetPlayer(src)
+	local xPlayer = ig.data.GetPlayer(src)
 	local appearance = xPlayer.GetAppearance()
 	TriggerClientEvent("Client:Character:LoadSkin", src, appearance)
 end)
@@ -157,7 +157,7 @@ end)
 RegisterNetEvent("Server:Character:Loaded", function()
     local src = source
     local ped = GetPlayerPed(src)
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
 
     -- CPED_CONFIG_FLAG_DontInfluenceWantedLevel = 42,
     -- CPED_CONFIG_FLAG_CanPerformArrest = 155, CPED_CONFIG_FLAG_CanPerformUncuff = 156, CPED_CONFIG_FLAG_CanBeArrested = 157
@@ -174,9 +174,9 @@ end)
 -- [C] 
 RegisterNetEvent("Server:Character:Ready", function()
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     -- update what instance they are in.
-    c.inst.SetPlayer(src, xPlayer.GetInstance())
+    ig.inst.SetPlayer(src, xPlayer.GetInstance())
     -- Remove from current ACL Job Group
     ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetIdentifier(), xPlayer.GetJob().Name))
     -- to trigger state updates for clients
@@ -186,11 +186,11 @@ RegisterNetEvent("Server:Character:Ready", function()
     xPlayer.GetBank() -- this triggers state changes    
 end)
 
--- Use this to remove any things connected to Characters like police blips etc.
+-- Use this to remove any things connected to Characters like police blips etig.
 -- [C+S]
 RegisterNetEvent("Server:Character:Switch", function(req)
     local src = req or source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     -- Remove Player Identifier from job as entity if no longer existing.
     ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetIdentifier(), xPlayer.GetJob().Name))
     --
@@ -201,10 +201,10 @@ end)
 -- [C]
 RegisterNetEvent("Server:Character:Death", function(data)
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     -- Death SQL added the state bag change handler
     -- Mark as dead within DB
-    c.sql.char.SetDead(xPlayer.GetCharacter_ID(), true, data)
+    ig.sql.char.SetDead(xPlayer.GetCharacter_ID(), true, data)
     --
     if data.Log then
         -- agro = source id or -1 for server.
@@ -226,7 +226,7 @@ end)
 -- [C+S]
 RegisterNetEvent("Server:Character:SetJob", function(req, data)
     local src = req or source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     -- Force set to false incase already employeed
     xPlayer.SetDuty(false)
     -- Add New Job command permissions for ACL system
@@ -242,9 +242,9 @@ RegisterNetEvent("Server:Character:Duty", function(boolean)
         -- Add Functions or Hooks here!
         local bool = boolean
         local src = source
-        local xPlayer = c.data.GetPlayer(src)
+        local xPlayer = ig.data.GetPlayer(src)
         xPlayer.SetDuty(bool)
     else
-        c.func.Debug_3("Ability to go on/off duty has ben disabled.")
+        ig.funig.Debug_3("Ability to go on/off duty has ben disabled.")
     end
 end)

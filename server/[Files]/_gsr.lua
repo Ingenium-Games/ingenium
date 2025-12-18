@@ -1,6 +1,6 @@
 -- ====================================================================================--
-c.gsr = {} -- function level
-c.gsrs = {} -- dropped items table
+ig.gsr = {} -- function level
+ig.gsrs = {} -- dropped items table
 -- ====================================================================================--
  
 --[[    
@@ -18,21 +18,21 @@ c.gsrs = {} -- dropped items table
     
 --- func desc
 ---@param . any
-function c.gsr.Load()
-    if c.json.Exists(conf.file.gsr) then
-        c.gsrs = c.json.Read(conf.file.gsr)
+function ig.gsr.Load()
+    if ig.json.Exists(conf.file.gsr) then
+        ig.gsrs = ig.json.Read(conf.file.gsr)
     else
-        c.gsrs = {}
-        c.json.Write(conf.file.gsr, c.gsrs)
+        ig.gsrs = {}
+        ig.json.Write(conf.file.gsr, ig.gsrs)
     end
-    c.gsr.Update()
+    ig.gsr.Update()
 end
 
 
 --- func desc
-function c.gsr.Update()
+function ig.gsr.Update()
     local function Do()
-        c.json.Write(conf.file.gsr, c.gsrs)
+        ig.json.Write(conf.file.gsr, ig.gsrs)
         SetTimeout(conf.file.save, Do)
     end
     SetTimeout(conf.file.save, Do)
@@ -40,30 +40,30 @@ end
 
 --- func desc
 ---@param data any
-function c.gsr.Add(data)
+function ig.gsr.Add(data)
     if type(data) == "table" then
-        table.insert(c.gsrs, data)
+        table.insert(ig.gsrs, data)
     else
-        c.func.Debug_1("Drop to be added, please check data sent.")
+        ig.funig.Debug_1("Drop to be added, please check data sent.")
     end
 end
 
 --- func desc
 ---@param id any
-function c.gsr.Exist(id)
-    if c.gsrs[id] then
+function ig.gsr.Exist(id)
+    if ig.gsrs[id] then
         return true
     end
     return false
 end
 
 --- func desc
-function c.gsr.Clean()
-    if type(c.gsrs) == "table" then
-        for k,v in pairs(c.gsrs) do
+function ig.gsr.Clean()
+    if type(ig.gsrs) == "table" then
+        for k,v in pairs(ig.gsrs) do
             if v then
                 if (os.time() - v.Time) >= conf.file.cleanup then
-                    table.remove(c.gsrs, k)            
+                    table.remove(ig.gsrs, k)            
                 end
             end
         end
@@ -71,9 +71,9 @@ function c.gsr.Clean()
 end
 
 --- func desc
-function c.gsr.CleanUp()
+function ig.gsr.CleanUp()
     local function Do()
-        c.gsr.Clean()
+        ig.gsr.Clean()
         SetTimeout(conf.file.cleanup, Do)
     end
     SetTimeout(conf.file.cleanup, Do)

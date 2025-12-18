@@ -30,11 +30,11 @@ This document describes the infrastructure added to `ig.core` to support the mig
 **Optimized Vehicle Tracking System**
 - Replaces 50ms polling with event-driven approach
 - Uses `gameEventTriggered` for `CEventNetworkPlayerEnteredVehicle` and `CEventNetworkPlayerLeftVehicle`
-- Lightweight 1-second fallback thread for edge cases (teleportation, etc.)
+- Lightweight 1-second fallback thread for edge cases (teleportation, etig.)
 - Provides helper functions:
-  - `c.GetCurrentVehicle()` - Returns current vehicle entity
-  - `c.GetCurrentSeat()` - Returns current seat index
-  - `c.IsInVehicle()` - Returns boolean
+  - `ig.GetCurrentVehicle()` - Returns current vehicle entity
+  - `ig.GetCurrentSeat()` - Returns current seat index
+  - `ig.IsInVehicle()` - Returns boolean
 
 **Performance Improvement**: 20x reduction in vehicle state checks (1000ms vs 50ms)
 
@@ -91,7 +91,7 @@ All config files use the existing pattern:
 
 ### Function Patterns
 Follows existing ig.core conventions:
-- Uses `c.func.Debug_1/2/3()` for logging
+- Uses `ig.funig.Debug_1/2/3()` for logging
 - Uses `Citizen.CreateThread()` for threads
 - Uses `LocalPlayer.state` for client state
 - Uses `Player(source).state` for server state
@@ -123,9 +123,9 @@ Follows existing ig.core conventions:
 ### Checking if Player is in Vehicle
 ```lua
 -- Using helper function
-if c.IsInVehicle() then
-    local vehicle = c.GetCurrentVehicle()
-    local seat = c.GetCurrentSeat()
+if ig.IsInVehicle() then
+    local vehicle = ig.GetCurrentVehicle()
+    local seat = ig.GetCurrentSeat()
     print("In vehicle, seat: " .. seat)
 end
 ```
@@ -151,7 +151,7 @@ if IsGameModeFeatureEnabled("hideHud") then
 end
 
 -- Get current mode
-local mode = GetGameMode() -- Returns "RP", "DM", etc.
+local mode = GetGameMode() -- Returns "RP", "DM", etig.
 ```
 
 ## Next Steps

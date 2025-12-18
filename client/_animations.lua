@@ -1,5 +1,5 @@
 -- ====================================================================================--
-c.animation = {}
+ig.animation = {}
 -- ====================================================================================--
 RegisterNetEvent("Animation:General:ArmsCrossed")
 AddEventHandler("Animation:General:ArmsCrossed", function(bool, ped)
@@ -15,13 +15,13 @@ AddEventHandler("Animation:General:ArmsCrossed", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "CrossedArms", true) 
+            ig.data.SetLocalPlayerState("Animation", "CrossedArms", true) 
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -41,13 +41,13 @@ AddEventHandler("Animation:General:HandsUp", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "HandsUp", true)
+            ig.data.SetLocalPlayerState("Animation", "HandsUp", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true) 
+            ig.data.SetLocalPlayerState("Animation", false, true) 
         end
         RemoveAnimDict(dict)
     end
@@ -67,13 +67,13 @@ AddEventHandler("Animation:General:HoldArm", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "ArmHold", true)
+            ig.data.SetLocalPlayerState("Animation", "ArmHold", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -93,13 +93,13 @@ AddEventHandler("Animation:General:Mugging", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "Mugging", true)
+            ig.data.SetLocalPlayerState("Animation", "Mugging", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -119,13 +119,13 @@ AddEventHandler("Animation:General:PickUp", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "PickUp", true)
+            ig.data.SetLocalPlayerState("Animation", "PickUp", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -145,13 +145,13 @@ AddEventHandler("Animation:General:Escorting", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "Escorting", true)
+            ig.data.SetLocalPlayerState("Animation", "Escorting", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -171,13 +171,13 @@ AddEventHandler("Animation:General:Escorted", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "Escorted", true)
+            ig.data.SetLocalPlayerState("Animation", "Escorted", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -197,13 +197,13 @@ AddEventHandler("Animation:General:Nod", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "Nod", true)
+            ig.data.SetLocalPlayerState("Animation", "Nod", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -223,13 +223,13 @@ AddEventHandler("Animation:General:Lockpick", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "Lockpick", true)
+            ig.data.SetLocalPlayerState("Animation", "Lockpick", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -249,13 +249,13 @@ AddEventHandler("Animation:General:Repair", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "Repair", true)
+            ig.data.SetLocalPlayerState("Animation", "Repair", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -275,13 +275,13 @@ AddEventHandler("Animation:General:PhoneCall", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "PhoneCall", true)
+            ig.data.SetLocalPlayerState("Animation", "PhoneCall", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end
@@ -301,13 +301,13 @@ AddEventHandler("Animation:General:FacePalm", function(bool, ped)
     if bool and not IsEntityPlayingAnim(ped, dict, anim, 3) then
         TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", "FacePalm", true)
+            ig.data.SetLocalPlayerState("Animation", "FacePalm", true)
         end
         RemoveAnimDict(dict)
     else
         ClearPedTasks(ped)
         if IsPedAPlayer(ped) then
-            c.data.SetLocalPlayerState("Animation", false, true)
+            ig.data.SetLocalPlayerState("Animation", false, true)
         end
         RemoveAnimDict(dict)
     end

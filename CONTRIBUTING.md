@@ -82,7 +82,7 @@ local function localHelper() end
 
 -- Tables/Objects: camelCase
 local playerData = {}
-c.sql.char = {}
+ig.sql.char = {}
 
 -- Boolean variables: prefix with Is/Has/Should
 local isAlive = true
@@ -169,7 +169,7 @@ Brief description of what the function does.
 
 **Syntax:**
 ```lua
-c.sql.FunctionName(param1, param2, callback)
+ig.sql.FunctionName(param1, param2, callback)
 ```
 
 **Parameters:**
@@ -183,10 +183,10 @@ c.sql.FunctionName(param1, param2, callback)
 **Examples:**
 ```lua
 -- Example 1: Basic usage
-local result = c.sql.FunctionName(value1, value2)
+local result = ig.sql.FunctionName(value1, value2)
 
 -- Example 2: With callback
-c.sql.FunctionName(value1, value2, function(result)
+ig.sql.FunctionName(value1, value2, function(result)
     print("Done")
 end)
 ```
@@ -227,15 +227,15 @@ end)
 -- Test basic functionality
 RegisterCommand('testsql', function()
     -- Test query
-    local result = c.sql.Query("SELECT * FROM users LIMIT 1", {})
+    local result = ig.sql.Query("SELECT * FROM users LIMIT 1", {})
     assert(#result >= 0, "Query failed")
     
     -- Test insert
-    local id = c.sql.Insert("INSERT INTO test VALUES (?)", {"data"})
+    local id = ig.sql.Insert("INSERT INTO test VALUES (?)", {"data"})
     assert(id > 0, "Insert failed")
     
     -- Cleanup
-    c.sql.Update("DELETE FROM test WHERE id = ?", {id})
+    ig.sql.Update("DELETE FROM test WHERE id = ?", {id})
     
     print("Tests passed!")
 end, true)
@@ -243,7 +243,7 @@ end, true)
 
 ### Performance Testing
 
-- Benchmark queries with `c.sql.GetStats()`
+- Benchmark queries with `ig.sql.GetStats()`
 - Monitor slow queries with `ig:sql:slowQuery` event
 - Test with realistic player counts
 - Profile save operations
@@ -312,20 +312,20 @@ Fill out ALL sections of the PR template:
 
 ```lua
 -- Good: Use prepared statements
-local query = c.sql.PrepareQuery("UPDATE chars SET data = ? WHERE id = ?")
-c.sql.ExecutePrepared(query, {data, id})
+local query = ig.sql.PrepareQuery("UPDATE chars SET data = ? WHERE id = ?")
+ig.sql.ExecutePrepared(query, {data, id})
 
 -- Good: Use positional parameters
-c.sql.Query("SELECT * FROM users WHERE id = ?", {userId})
+ig.sql.Query("SELECT * FROM users WHERE id = ?", {userId})
 
 -- Good: Limit result sets
-c.sql.Query("SELECT * FROM chars WHERE active = TRUE LIMIT 100", {})
+ig.sql.Query("SELECT * FROM chars WHERE active = TRUE LIMIT 100", {})
 
 -- Bad: String concatenation
 local query = "SELECT * FROM users WHERE id = " .. userId -- SQL INJECTION RISK!
 
 -- Bad: Selecting everything
-c.sql.Query("SELECT * FROM chars", {}) -- Returns too much data
+ig.sql.Query("SELECT * FROM chars", {}) -- Returns too much data
 ```
 
 ### Security Requirements
@@ -341,7 +341,7 @@ c.sql.Query("SELECT * FROM chars", {}) -- Returns too much data
 1. Use indexes on frequently queried columns
 2. Use prepared statements for high-frequency operations
 3. Batch operations when possible
-4. Monitor with `c.sql.GetStats()`
+4. Monitor with `ig.sql.GetStats()`
 5. Optimize slow queries (>150ms)
 
 ## Versioning

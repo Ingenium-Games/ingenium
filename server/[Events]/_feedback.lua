@@ -3,10 +3,10 @@ local nospam = {}
 
 RegisterNetEvent("Feedback", function(message, url)
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if not nospam[src] then
         nospam[src] = true
-        c.func.Discord(conf.url.feedback, 11216719, xPlayer.GetName(), message, c.table.Dump(xPlayer.GetCoords()))
+        ig.funig.Discord(conf.url.feedback, 11216719, xPlayer.GetName(), message, ig.table.Dump(xPlayer.GetCoords()))
     else
         xPlayer.Notify("Please wait a while before trying to submit more feedback.")
     end

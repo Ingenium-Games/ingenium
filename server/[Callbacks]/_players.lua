@@ -2,14 +2,14 @@
 local GetActiveWorkers = RegisterServerCallback({
     eventName = "GetActiveWorkers",
     eventCallback = function(source, ...)
-        return c.job.ActiveMembers()
+        return ig.job.ActiveMembers()
     end
 })
 
 local GetModifiers = RegisterServerCallback({
     eventName = "GetModifiers",
     eventCallback = function(source, ...)
-        local xPlayer = c.data.GetPlayer(source)
+        local xPlayer = ig.data.GetPlayer(source)
         local Modifiers = xPlayer.GetModifiers()
         return Modifiers
     end
@@ -18,7 +18,7 @@ local GetModifiers = RegisterServerCallback({
 local GetSkills = RegisterServerCallback({
     eventName = "GetSkills",
     eventCallback = function(source, ...)
-        local xPlayer = c.data.GetPlayer(source)
+        local xPlayer = ig.data.GetPlayer(source)
         local Skills = xPlayer.GetSkills()
         return Skills
     end
@@ -27,7 +27,7 @@ local GetSkills = RegisterServerCallback({
 local GetPlayerJob = RegisterServerCallback({
     eventName = "GetPlayerJob",
     eventCallback = function(source)
-        local xPlayer = c.data.GetPlayer(source)
+        local xPlayer = ig.data.GetPlayer(source)
         local Job = xPlayer.GetJob()
         return Job
     end

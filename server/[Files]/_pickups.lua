@@ -1,6 +1,6 @@
 -- ====================================================================================--
-c.pick = {} -- function level
-c.picks = false -- dropped items table
+ig.pick = {} -- function level
+ig.picks = false -- dropped items table
 -- ====================================================================================--
     
 --[[    
@@ -17,21 +17,21 @@ c.picks = false -- dropped items table
     
 --- func desc
 ---@param . any
-function c.pick.Load()
-    if c.json.Exists(conf.file.pickups) then
-        local file = c.json.Read(conf.file.pickups)
-        c.picks = file
+function ig.pick.Load()
+    if ig.json.Exists(conf.file.pickups) then
+        local file = ig.json.Read(conf.file.pickups)
+        ig.picks = file
     else
-        c.picks = {}
-        c.json.Write(conf.file.pickups, c.picks)
+        ig.picks = {}
+        ig.json.Write(conf.file.pickups, ig.picks)
     end
-    c.pick.Update()
+    ig.pick.Update()
 end
 
 --- func desc
-function c.pick.Update()
+function ig.pick.Update()
     local function Do()
-        c.json.Write(conf.file.pickups, c.picks)
+        ig.json.Write(conf.file.pickups, ig.picks)
         SetTimeout(conf.file.save, Do)
     end
     SetTimeout(conf.file.save, Do)
@@ -39,30 +39,30 @@ end
 
 --- func desc
 ---@param data any
-function c.pick.Add(data)
+function ig.pick.Add(data)
     if type(data) == "table" then
-        table.insert(c.picks, data)
+        table.insert(ig.picks, data)
     else
-        c.func.Debug_1("Drop to be added, please check data sent.")
+        ig.funig.Debug_1("Drop to be added, please check data sent.")
     end
 end
 
 --- func desc
 ---@param id any
-function c.pick.Exist(id)
-    if c.picks[id] then
+function ig.pick.Exist(id)
+    if ig.picks[id] then
         return true
     end
     return false
 end
 
 --- func desc
-function c.pick.Clean()
-    if type(c.picks) == "table" then
-        for k,v in pairs(c.picks) do
+function ig.pick.Clean()
+    if type(ig.picks) == "table" then
+        for k,v in pairs(ig.picks) do
             if v then        
                 if (os.time() - v.Time) >= conf.file.cleanup then
-                    table.remove(c.picks, k)            
+                    table.remove(ig.picks, k)            
                 end
             end
         end
@@ -70,9 +70,9 @@ function c.pick.Clean()
 end
 
 --- func desc
-function c.pick.CleanUp()
+function ig.pick.CleanUp()
     local function Do()
-        c.pick.Clean()
+        ig.pick.Clean()
         SetTimeout(conf.file.cleanup, Do)
     end
     SetTimeout(conf.file.cleanup, Do)

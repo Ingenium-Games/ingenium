@@ -1,23 +1,23 @@
 -- ====================================================================================--
-c.item = {} -- function level
-c.items = false
+ig.item = {} -- function level
+ig.items = false
 -- ====================================================================================--
 
-function c.item.SetItems(items)
-    if not c.items then
-        c.items = items
+function ig.item.SetItems(items)
+    if not ig.items then
+        ig.items = items
     end
 end
 
-function c.item.GetItems()
-    return c.items
+function ig.item.GetItems()
+    return ig.items
 end
 
-function c.item.Exists(name)
-    if c.items[name] then
+function ig.item.Exists(name)
+    if ig.items[name] then
         return true, name
     else
-        for k,v in pairs (c.items) do
+        for k,v in pairs (ig.items) do
             if v.Item == name then
                 return true, k
             end
@@ -26,57 +26,57 @@ function c.item.Exists(name)
     end
 end
 
-function c.item.GetItem(name)
-    if c.item.Exists(name) then
-        return c.items[name]
+function ig.item.GetItem(name)
+    if ig.item.Exists(name) then
+        return ig.items[name]
     end 
 end
 
-function c.item.IsCraftable(name)
-    return c.items[name].Craftable
+function ig.item.IsCraftable(name)
+    return ig.items[name].Craftable
 end
 
-function c.item.IsWeapon(name)
-    return c.items[name].Weapon
+function ig.item.IsWeapon(name)
+    return ig.items[name].Weapon
 end
 
-function c.item.GetWeaponAmmoType(name)
-    return c.items[name].Meta.Ammo
+function ig.item.GetWeaponAmmoType(name)
+    return ig.items[name].Meta.Ammo
 end
 
-function c.item.GetAbout(name)
-    return c.items[name].Meta.About
+function ig.item.GetAbout(name)
+    return ig.items[name].Meta.About
 end
 
-function c.item.CanDegrade(name)
-    return c.items[name].Degrade
+function ig.item.CanDegrade(name)
+    return ig.items[name].Degrade
 end
 
-function c.item.CanStack(name)
-    return c.items[name].Stackable
+function ig.item.CanStack(name)
+    return ig.items[name].Stackable
 end
 
-function c.item.CanHotkey(name)
-    return c.items[name].Hotkey
+function ig.item.CanHotkey(name)
+    return ig.items[name].Hotkey
 end
 
-function c.item.GetMeta(name)
-    return c.items[name].Meta
+function ig.item.GetMeta(name)
+    return ig.items[name].Meta
 end
 
-function c.item.GetData(name)
-    return c.items[name].Data
+function ig.item.GetData(name)
+    return ig.items[name].Data
 end
 
 --- func desc
 ---@param name any
-function c.item.GetValue(name)
-    return c.items[name].Value
+function ig.item.GetValue(name)
+    return ig.items[name].Value
 end
 
 
-function c.item.ReturnPosition(name)
-    for k,v in ipairs(c.items) do
+function ig.item.ReturnPosition(name)
+    for k,v in ipairs(ig.items) do
         if v == name then
             return k
         end

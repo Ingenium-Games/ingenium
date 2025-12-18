@@ -1,26 +1,26 @@
 -- ====================================================================================--
 -- Globals and Require/Replace
 math.randomseed(GetGameTimer())
-c = c or exports["ig.core"]:c()
+c = c or {}
 -- ====================================================================================--
-c.imagehost = conf.imagehost
-c.sec = conf.sec
-c.min = conf.min
-c.hour = conf.hour
-c.day = conf.day
-c.locale = conf.locale
+ig.imagehost = conf.imagehost
+ig.sec = conf.sec
+ig.min = conf.min
+ig.hour = conf.hour
+ig.day = conf.day
+ig.locale = conf.locale
 --
 function GetLocale()
-    return c.locale
+    return ig.locale
 end
 exports("GetLocale", GetLocale)
 --
 -- _data.lua
-c._running = false
-c._loading = true
+ig._running = false
+ig._loading = true
 --
 local ok, glm = pcall(require, "glm")
 if ok and glm then
     c = c or {}
-    c.glm = glm
+    ig.glm = glm
 end

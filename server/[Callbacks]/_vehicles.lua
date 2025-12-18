@@ -9,7 +9,7 @@ local EnsureVehicle = RegisterServerCallback({
         --
         if type == 2 then
             if DoesEntityExist(ent) then
-                c.data.AddVehicle(net, c.class.Vehicle, net)
+                ig.data.AddVehicle(net, ig.class.Vehicle, net)
             end
         end
         --
@@ -20,7 +20,7 @@ local EnsureVehicle = RegisterServerCallback({
 local SetVehicleConMods = RegisterServerCallback({
     eventName = "SetVehicleConMods",
     eventCallback = function(source, net, con, mods)
-        local xVehicle = c.data.GetVehicle(net)
+        local xVehicle = ig.data.GetVehicle(net)
         xVehicle.SetCondition(con)
         xVehicle.SetModifications(mods)
         return true

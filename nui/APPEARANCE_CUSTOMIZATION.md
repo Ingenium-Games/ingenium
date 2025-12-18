@@ -13,7 +13,7 @@ nui/src/components/appearance/
 ├── HeritageEditor.vue             # Parent blending (freemode only)
 ├── FaceFeaturesEditor.vue         # 20 facial feature sliders
 ├── HairEditor.vue                 # Hair styles, colors, and eye color
-├── OverlayEditor.vue              # Overlays (makeup, facial hair, etc.)
+├── OverlayEditor.vue              # Overlays (makeup, facial hair, etig.)
 ├── ClothingEditor.vue             # Clothing components
 ├── AccessoriesEditor.vue          # Props/accessories
 ├── TattooEditor.vue               # Tattoo management
@@ -54,14 +54,14 @@ The system uses the Pinia store at `nui/src/stores/appearance.js` which provides
 - **Active Indicators**: Clear visual feedback for selections
 
 ### 5. Overlays (Appearance)
-- **13 Categories**: Blemishes, facial hair, eyebrows, aging, makeup, etc.
+- **13 Categories**: Blemishes, facial hair, eyebrows, aging, makeup, etig.
 - **Style Selection**: Dropdown for available styles per overlay
 - **Opacity Slider**: Fine-tune visibility of each overlay
 - **Color Picker**: For overlays that support coloring
 - **Compact Cards**: Each overlay in its own card with all controls
 
 ### 6. Clothing
-- **12 Component Slots**: Face, mask, hair, torso, legs, bag, shoes, etc.
+- **12 Component Slots**: Face, mask, hair, torso, legs, bag, shoes, etig.
 - **Drawable/Texture Controls**: +/- buttons and number inputs
 - **Range Validation**: Prevents invalid values (0-255)
 - **Organized Layout**: Each component in a dedicated section
@@ -111,7 +111,7 @@ local config = {
 From Lua client code:
 ```lua
 -- Open appearance customization
-exports['ig.core']:OpenAppearanceCustomization({
+exports['ingenium']:OpenAppearanceCustomization({
     appearance = currentAppearanceData,
     constants = appearanceConstants,
     peds = pedsData,
@@ -171,7 +171,7 @@ The system uses:
 ### Required Data Files
 1. **data/peds.json**: All ped models with metadata
 2. **data/tattoos.json**: Tattoos organized by body zone
-3. **data/appearance-constants.json**: Eye colors, face features, overlays, etc.
+3. **data/appearance-constants.json**: Eye colors, face features, overlays, etig.
 
 ### Data Structure Examples
 

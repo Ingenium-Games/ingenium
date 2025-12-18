@@ -1,15 +1,15 @@
-# c.validation Module - Unified Validation Architecture
+# ig.validation Module - Unified Validation Architecture
 
 ## Overview
 
-Per user request, all inventory validation has been merged into a single `c.validation` global table structure with a unified validation function as the single point of failure for easier debugging.
+Per user request, all inventory validation has been merged into a single `ig.validation` global table structure with a unified validation function as the single point of failure for easier debugging.
 
 ## Architecture
 
 ### Module Structure
 
 ```lua
-c.validation = {
+ig.validation = {
     -- Core Functions
     GetItemQuantities(inventory)              -- Calculate item totals
     IsValidItem(itemName)                     -- Check item exists in database
@@ -28,7 +28,7 @@ c.validation = {
 
 ## Single Point of Failure
 
-**Function**: `c.validation.ValidateAndUnpack(source, inventory)`
+**Function**: `ig.validation.ValidateAndUnpack(source, inventory)`
 
 All class `UnpackInventory` functions now call this single function, providing:
 
@@ -57,10 +57,10 @@ end
 After (unified validation):
 ```lua
 self.UnpackInventory = function(inv)
-    local processed, valid, error = c.validation.ValidateAndUnpack(self.ID, inv)
+    local processed, valid, error = ig.validation.ValidateAndUnpack(self.ID, inv)
     
     if not valid then
-        c.func.Debug_1("Error unpacking inventory: " .. (error or "unknown"))
+        ig.funig.Debug_1("Error unpacking inventory: " .. (error or "unknown"))
         self.Inventory = {}
         self.State.Inventory = self.Inventory
         return
@@ -77,14 +77,14 @@ end
 - `server/[Validation]/_inventory_validator.lua` - Centralized validation module
 
 ### Classes Updated
-All now use `c.validation.ValidateAndUnpack()`:
+All now use `ig.validation.ValidateAndUnpack()`:
 - `server/[Classes]/_player.lua` (2 functions)
 - `server/[Classes]/_vehicle.lua` (2 functions)
-- `server/[Classes]/_npc.lua` (1 function)
+- `server/[Classes]/_npig.lua` (1 function)
 - `server/[Classes]/_job.lua` (1 function)
 
 ### Callbacks Updated
-Use `c.validation.ValidateInventoryIntegrity()`:
+Use `ig.validation.ValidateInventoryIntegrity()`:
 - `server/[Callbacks]/_inventory.lua` - OrganizeInventory, OrganizeInventories
 
 ## Validation Flow
@@ -94,19 +94,19 @@ Client sends inventory
     ↓
 Callback receives data
     ↓
-c.validation.ValidateInventoryIntegrity()
+ig.validation.ValidateInventoryIntegrity()
     ├─ Check item duplication
     ├─ Check item injection  
     └─ Track quantity changes
     ↓ If exploit detected
-    c.validation.LogAndBanExploiter()
+    ig.validation.LogAndBanExploiter()
     ↓ If valid
 Class.UnpackInventory(inv)
     ↓
-c.validation.ValidateAndUnpack(source, inv)
-    ├─ c.validation.ValidateInventory()
-    │   └─ c.validation.ValidateSlot() for each slot
-    │       ├─ c.validation.IsValidItem()
+ig.validation.ValidateAndUnpack(source, inv)
+    ├─ ig.validation.ValidateInventory()
+    │   └─ ig.validation.ValidateSlot() for each slot
+    │       ├─ ig.validation.IsValidItem()
     │       ├─ Type checks
     │       ├─ Quantity limits
     │       ├─ Quality range
@@ -124,7 +124,7 @@ Inventory saved to entity
 ```lua
 -- In server/[Validation]/_inventory_validator.lua
 
-function c.validation.ValidateAndUnpack(source, inventory)
+function ig.validation.ValidateAndUnpack(source, inventory)
     local inv = inventory or {}
     local processed = {}
     
@@ -132,11 +132,11 @@ function c.validation.ValidateAndUnpack(source, inventory)
     print("^3[VALIDATION] Validating inventory for source:", source, "items:", #inv)
     
     -- Validate entire inventory first
-    local valid, error = c.validation.ValidateInventory(inv)
+    local valid, error = ig.validation.ValidateInventory(inv)
     if not valid then
         print("^1[VALIDATION] FAILED:", error)
         if source then
-            c.validation.LogAndBanExploiter(source, error)
+            ig.validation.LogAndBanExploiter(source, error)
         end
         return nil, false, error
     end
@@ -149,19 +149,19 @@ end
 
 ```lua
 -- Item existence
-function c.validation.IsValidItem(itemName)
+function ig.validation.IsValidItem(itemName)
     print("^3[VALIDATION] Checking item:", itemName)
     -- ...
 end
 
 -- Slot validation
-function c.validation.ValidateSlot(slot, index)
+function ig.validation.ValidateSlot(slot, index)
     print("^3[VALIDATION] Validating slot", index, ":", slot.Item)
     -- ...
 end
 
 -- Integrity (duplication/injection)
-function c.validation.ValidateInventoryIntegrity(...)
+function ig.validation.ValidateInventoryIntegrity(...)
     print("^3[VALIDATION] Checking inventory integrity")
     -- ...
 end
@@ -175,7 +175,7 @@ end
    - Simple breakpoint placement
 
 2. **Global Access**
-   - Available anywhere via `c.validation`
+   - Available anywhere via `ig.validation`
    - Consistent API across codebase
    - Can be called from any server script
 
@@ -213,14 +213,14 @@ All integrated into single validation flow:
 To add a new validation rule that applies to all inventories:
 
 ```lua
--- In c.validation.ValidateSlot()
+-- In ig.validation.ValidateSlot()
 
-function c.validation.ValidateSlot(slot, index)
+function ig.validation.ValidateSlot(slot, index)
     -- ... existing validation ...
     
     -- NEW VALIDATION: Example - check custom item flag
     if slot.CustomFlag then
-        if not c.items[slot.Item].AllowsCustomFlag then
+        if not ig.items[slot.Item].AllowsCustomFlag then
             return false, ("Slot %d: Custom flag not allowed for %s"):format(idx, slot.Item)
         end
     end
@@ -242,9 +242,9 @@ Old system had validation in two places:
 2. Callbacks (array length check)
 
 New system has validation in one place:
-1. `c.validation` module (all validation)
-2. Classes call `c.validation.ValidateAndUnpack()`
-3. Callbacks call `c.validation.ValidateInventoryIntegrity()`
+1. `ig.validation` module (all validation)
+2. Classes call `ig.validation.ValidateAndUnpack()`
+3. Callbacks call `ig.validation.ValidateInventoryIntegrity()`
 
 **Result**: Single point of failure for maximum debuggability.
 

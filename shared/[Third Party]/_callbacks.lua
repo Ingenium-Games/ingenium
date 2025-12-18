@@ -80,11 +80,11 @@ if IS_SERVER then
 	local function generateSecureTicket()
 		-- Use existing RNG from the framework
 		-- Generate a 20+ character random string for better security
-		-- NOTE: c.rng.chars uses Lua's math.random() which is not cryptographically secure
+		-- NOTE: ig.rng.chars uses Lua's math.random() which is not cryptographically secure
 		-- For production use, consider using a more secure entropy source
 		-- However, combined with short expiration (30s) and source validation,
 		-- this provides reasonable security against brute force attacks
-		return c.rng.chars(TICKET_LENGTH)
+		return ig.rng.chars(TICKET_LENGTH)
 	end
 	
 	-- Clean up expired tickets

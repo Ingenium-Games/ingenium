@@ -48,7 +48,7 @@ function PlayerKilled()
     }
     TriggerEvent("Client:Character:Death", data)
     TriggerServerEvent("Server:Character:Death", data)
-    c.data.SetLocalPlayerState("IsDead", true, true)
+    ig.data.SetLocalPlayerState("IsDead", true, true)
     Wait(5850)
     local pos = GetEntityCoords(ped)
     local found, groundz = GetGroundZFor_3dCoord(pos.x, pos.y, pos.z, false)
@@ -62,11 +62,11 @@ end
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if c.data.GetLoadedStatus() then
+        if ig.data.GetLoadedStatus() then
             local ply = PlayerId()
             local ped = PlayerPedId()
             if IsEntityDead(ped) then
-                if not c.data.GetLocalPlayerState("IsDead") then
+                if not ig.data.GetLocalPlayerState("IsDead") then
                     PlayerKilled()
                 end
             else

@@ -2,7 +2,7 @@
 local UseItem = RegisterServerCallback({
     eventName = "UseItem",
     eventCallback = function(source, number)
-        local xPlayer = c.data.GetPlayer(source)
+        local xPlayer = ig.data.GetPlayer(source)
         local itemtbl = xPlayer.GetItemFromPosition(number)
         local has, position = xPlayer.HasItem(itemtbl.Item)
         if has then
@@ -19,7 +19,7 @@ local UseItem = RegisterServerCallback({
 local UpdateAmmo = RegisterServerCallback({
     eventName = "UpdateAmmo",
     eventCallback = function(source, ammotype, amount)
-        local xPlayer = c.data.GetPlayer(source)
+        local xPlayer = ig.data.GetPlayer(source)
         xPlayer.SetAmmo(tostring(ammotype), tonumber(amount))
     end
 })
@@ -28,7 +28,7 @@ local UpdateAmmo = RegisterServerCallback({
 local GiveItem = RegisterServerCallback({
     eventName = "GiveItem",
     eventCallback = function(source, number, target)
-        local xPlayer = c.data.GetPlayer(source)
+        local xPlayer = ig.data.GetPlayer(source)
         local itemtbl = xPlayer.GetItemFromPosition(number)
 
     end
@@ -38,7 +38,7 @@ local GiveItem = RegisterServerCallback({
 local DropItem = RegisterServerCallback({
     eventName = "DropItem",
     eventCallback = function(source, number, position)
-        local xPlayer = c.data.GetPlayer(source)
+        local xPlayer = ig.data.GetPlayer(source)
         local itemtbl = xPlayer.GetItemFromPosition(number)
 
     end
@@ -48,10 +48,10 @@ local DropItem = RegisterServerCallback({
 local UseItemQuick = RegisterServerCallback({
     eventName = "UseItemQuick",
     eventCallback = function(source, number)
-        local xPlayer = c.data.GetPlayer(source)
+        local xPlayer = ig.data.GetPlayer(source)
         local itemtbl = xPlayer.GetItemFromPosition(number)
         if itemtbl then
-            local useable = c.item.CanHotkey(itemtbl.Item)
+            local useable = ig.item.CanHotkey(itemtbl.Item)
             if useable then
                 xPlayer.ConsumeItem(number)
                 return true
@@ -70,7 +70,7 @@ local GetItemQuantity = RegisterServerCallback({
     eventName = "GetItemQuantity",
     eventCallback = function(source, item)
         local src = source
-        local xPlayer = c.data.GetPlayer(src)
+        local xPlayer = ig.data.GetPlayer(src)
         local quantity, postiion = xPlayer.GetItemQuantity(item)
         return quantity
     end
@@ -87,28 +87,28 @@ local GetInventory = RegisterServerCallback({
             --
             -- Object
             if type == 3 then
-                local xObject = c.data.GetObject(net)
+                local xObject = ig.data.GetObject(net)
                 return xObject.GetInventory()
                 --
                 -- Vehicle
             elseif type == 2 then
-                local xVehicle = c.data.GetVehicle(net)
+                local xVehicle = ig.data.GetVehicle(net)
                 return xVehicle.GetInventory()
                 --
                 -- Ped
             elseif type == 1 then
                 if IsPedAPlayer(entity) then
                     if GetPlayerPed(src) == entity then
-                        local xPlayer = c.data.GetPlayer(src)
+                        local xPlayer = ig.data.GetPlayer(src)
                         return xPlayer.GetInventory()
                     else
-                        local xPlayer = c.data.GetPlayer(net)
+                        local xPlayer = ig.data.GetPlayer(net)
                         return xPlayer.GetInventory()
                     end
                 else
                     -- is an NPC
-                    local xNpc = c.data.GetNpc(net)
-                    return xNpc.GetInventory()
+                    local xNpc = ig.data.GetNpc(net)
+                    return xNpig.GetInventory()
                 end
             end
         end
@@ -129,17 +129,17 @@ local OrganizeInventory = RegisterServerCallback({
             
             -- Object
             if type == 3 then
-                local xObject = c.data.GetObject(net)
+                local xObject = ig.data.GetObject(net)
                 beforeInventory = xObject.GetInventory()
                 
                 -- Enhanced validation: Check inventory integrity (duplication/injection)
                 -- Skip individual slot validation since UnpackInventory handles that
-                local valid, error = c.validation.ValidateInventoryIntegrity(
+                local valid, error = ig.validation.ValidateInventoryIntegrity(
                     beforeInventory, nil, inv1, nil
                 )
                 
                 if not valid then
-                    c.validation.LogAndBanExploiter(src, error)
+                    ig.validation.LogAndBanExploiter(src, error)
                     return false
                 end
                 
@@ -149,16 +149,16 @@ local OrganizeInventory = RegisterServerCallback({
                 --
                 -- Vehicle
             elseif type == 2 then
-                local xVehicle = c.data.GetVehicle(net)
+                local xVehicle = ig.data.GetVehicle(net)
                 beforeInventory = xVehicle.GetInventory()
                 
                 -- Enhanced validation: Check inventory integrity (duplication/injection)
-                local valid, error = c.validation.ValidateInventoryIntegrity(
+                local valid, error = ig.validation.ValidateInventoryIntegrity(
                     beforeInventory, nil, inv1, nil
                 )
                 
                 if not valid then
-                    c.validation.LogAndBanExploiter(src, error)
+                    ig.validation.LogAndBanExploiter(src, error)
                     return false
                 end
                 
@@ -169,16 +169,16 @@ local OrganizeInventory = RegisterServerCallback({
                 -- Ped
             elseif type == 1 then
                 if IsPedAPlayer(entity) then
-                    local xPlayer = c.data.GetPlayer(net)
+                    local xPlayer = ig.data.GetPlayer(net)
                     beforeInventory = xPlayer.GetInventory()
                     
                     -- Enhanced validation: Check inventory integrity (duplication/injection)
-                    local valid, error = c.validation.ValidateInventoryIntegrity(
+                    local valid, error = ig.validation.ValidateInventoryIntegrity(
                         beforeInventory, nil, inv1, nil
                     )
                     
                     if not valid then
-                        c.validation.LogAndBanExploiter(src, error)
+                        ig.validation.LogAndBanExploiter(src, error)
                         return false
                     end
                     
@@ -187,21 +187,21 @@ local OrganizeInventory = RegisterServerCallback({
                     return true
                 else
                     -- is an NPC
-                    local xNpc = c.data.GetNpc(net)
-                    beforeInventory = xNpc.GetInventory()
+                    local xNpc = ig.data.GetNpc(net)
+                    beforeInventory = xNpig.GetInventory()
                     
                     -- Enhanced validation: Check inventory integrity (duplication/injection)
-                    local valid, error = c.validation.ValidateInventoryIntegrity(
+                    local valid, error = ig.validation.ValidateInventoryIntegrity(
                         beforeInventory, nil, inv1, nil
                     )
                     
                     if not valid then
-                        c.validation.LogAndBanExploiter(src, error)
+                        ig.validation.LogAndBanExploiter(src, error)
                         return false
                     end
                     
                     -- UnpackInventory will handle detailed slot validation
-                    xNpc.UnpackInventory(inv1)
+                    xNpig.UnpackInventory(inv1)
                     return true
                 end
             end
@@ -220,27 +220,27 @@ local OrganizeInventories = RegisterServerCallback({
         
         -- CRITICAL: Get CURRENT server state, not cached client state
         -- This prevents race conditions when multiple players access the same inventory
-        local xPlayer = c.data.GetPlayer(src)
+        local xPlayer = ig.data.GetPlayer(src)
         local currentPlayer = xPlayer.GetInventory()  -- Current server state for player
         local currentExternal  -- Current server state for external entity
         
         -- Get external inventory based on entity type
         if type == 3 then
             -- Object
-            local xObject = c.data.GetObject(net)
+            local xObject = ig.data.GetObject(net)
             currentExternal = xObject.GetInventory()
         elseif type == 2 then
             -- Vehicle
-            local xVehicle = c.data.GetVehicle(net)
+            local xVehicle = ig.data.GetVehicle(net)
             currentExternal = xVehicle.GetInventory()
         elseif type == 1 then
             -- Ped
             if IsPedAPlayer(entity) then
-                local xTarget = c.data.GetPlayer(net)
+                local xTarget = ig.data.GetPlayer(net)
                 currentExternal = xTarget.GetInventory()
             else
-                local xNpc = c.data.GetNpc(net)
-                currentExternal = xNpc.GetInventory()
+                local xNpc = ig.data.GetNpc(net)
+                currentExternal = xNpig.GetInventory()
             end
         end
         
@@ -285,7 +285,7 @@ local OrganizeInventories = RegisterServerCallback({
                 -- If difference is small, it's likely concurrent access
                 -- Adjust client inventory to match server state
                 if difference <= 10 then
-                    c.func.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
+                    ig.funig.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
                         itemName, submittedQty, currentQty, src
                     ))
                     
@@ -338,7 +338,7 @@ local OrganizeInventories = RegisterServerCallback({
                     end
                 else
                     -- Large difference = likely exploit attempt
-                    c.validation.LogAndBanExploiter(src, 
+                    ig.validation.LogAndBanExploiter(src, 
                         ("Item duplication attempt: %s quantity %d exceeds server total %d"):format(
                             itemName, submittedQty, currentQty
                         ))
@@ -350,7 +350,7 @@ local OrganizeInventories = RegisterServerCallback({
         -- Additional check: No new items should appear
         for itemName, _ in pairs(submittedTotal) do
             if not currentTotal[itemName] then
-                c.validation.LogAndBanExploiter(src,
+                ig.validation.LogAndBanExploiter(src,
                     ("Item injection detected: %s not present in current server state"):format(itemName))
                 return false
             end
@@ -361,7 +361,7 @@ local OrganizeInventories = RegisterServerCallback({
         
         if type == 3 then
             -- Object
-            local xObject = c.data.GetObject(net)
+            local xObject = ig.data.GetObject(net)
             xObject.UnpackInventory(inv2)
             
             -- Check if this is a drop (model hash comparison - backtick notation auto-hashes)
@@ -370,28 +370,28 @@ local OrganizeInventories = RegisterServerCallback({
                 local inventory = xObject.GetInventory()
                 if not inventory or #inventory == 0 then
                     -- Drop is empty, remove it
-                    if c.drop and c.drop.Remove then
-                        c.drop.Remove(net)
+                    if ig.drop and ig.drop.Remove then
+                        ig.drop.Remove(net)
                     end
                 else
                     -- Drop still has items, deactivate it
-                    if c.drop and c.drop.Deactivate then
-                        c.drop.Deactivate(net)
+                    if ig.drop and ig.drop.Deactivate then
+                        ig.drop.Deactivate(net)
                     end
                 end
             end
         elseif type == 2 then
             -- Vehicle
-            local xVehicle = c.data.GetVehicle(net)
+            local xVehicle = ig.data.GetVehicle(net)
             xVehicle.UnpackInventory(inv2)
         elseif type == 1 then
             -- Ped
             if IsPedAPlayer(entity) then
-                local xTarget = c.data.GetPlayer(net)
+                local xTarget = ig.data.GetPlayer(net)
                 xTarget.UnpackInventory(inv2)
             else
-                local xNpc = c.data.GetNpc(net)
-                xNpc.UnpackInventory(inv2)
+                local xNpc = ig.data.GetNpc(net)
+                xNpig.UnpackInventory(inv2)
             end
         end
         
@@ -410,9 +410,9 @@ local TransferInventoryItem = RegisterServerCallback({
         local src = source
         
         -- Validate source player
-        local xPlayer = c.data.GetPlayer(src)
+        local xPlayer = ig.data.GetPlayer(src)
         if not xPlayer then
-            c.func.Debug_1("Player not found for item transfer")
+            ig.funig.Debug_1("Player not found for item transfer")
             return false
         end
         
@@ -428,17 +428,17 @@ local TransferInventoryItem = RegisterServerCallback({
             fromEntity = NetworkGetEntityFromNetworkId(fromNetId)
             local entityType = GetEntityType(fromEntity)
             if entityType == 3 then
-                fromInventory = c.data.GetObject(fromNetId)
+                fromInventory = ig.data.GetObject(fromNetId)
                 fromType = "object"
             elseif entityType == 2 then
-                fromInventory = c.data.GetVehicle(fromNetId)
+                fromInventory = ig.data.GetVehicle(fromNetId)
                 fromType = "vehicle"
             elseif entityType == 1 then
                 if IsPedAPlayer(fromEntity) then
-                    fromInventory = c.data.GetPlayer(fromNetId)
+                    fromInventory = ig.data.GetPlayer(fromNetId)
                     fromType = "player"
                 else
-                    fromInventory = c.data.GetNpc(fromNetId)
+                    fromInventory = ig.data.GetNpc(fromNetId)
                     fromType = "npc"
                 end
             end
@@ -452,37 +452,37 @@ local TransferInventoryItem = RegisterServerCallback({
             toEntity = NetworkGetEntityFromNetworkId(toNetId)
             local entityType = GetEntityType(toEntity)
             if entityType == 3 then
-                toInventory = c.data.GetObject(toNetId)
+                toInventory = ig.data.GetObject(toNetId)
                 toType = "object"
             elseif entityType == 2 then
-                toInventory = c.data.GetVehicle(toNetId)
+                toInventory = ig.data.GetVehicle(toNetId)
                 toType = "vehicle"
             elseif entityType == 1 then
                 if IsPedAPlayer(toEntity) then
-                    toInventory = c.data.GetPlayer(toNetId)
+                    toInventory = ig.data.GetPlayer(toNetId)
                     toType = "player"
                 else
-                    toInventory = c.data.GetNpc(toNetId)
+                    toInventory = ig.data.GetNpc(toNetId)
                     toType = "npc"
                 end
             end
         end
         
         if not fromInventory or not toInventory then
-            c.func.Debug_1("Invalid inventory in transfer")
+            ig.funig.Debug_1("Invalid inventory in transfer")
             return false
         end
         
         -- Validate item exists in source inventory
         local sourceItem = fromInventory.GetItemFromPosition(fromSlot)
         if not sourceItem or sourceItem.Item ~= itemData.Item then
-            c.func.Debug_1("Item mismatch or not found in source inventory")
+            ig.funig.Debug_1("Item mismatch or not found in source inventory")
             return false
         end
         
         -- Validate quantity
         if sourceItem.Quantity < itemData.Quantity then
-            c.func.Debug_1("Insufficient quantity in source inventory")
+            ig.funig.Debug_1("Insufficient quantity in source inventory")
             return false
         end
         
@@ -525,7 +525,7 @@ local TransferInventoryItem = RegisterServerCallback({
             end
         end
         
-        c.func.Debug_3("Item transferred: " .. itemData.Item .. " x" .. itemData.Quantity)
+        ig.funig.Debug_3("Item transferred: " .. itemData.Item .. " x" .. itemData.Quantity)
         
         return true
     end

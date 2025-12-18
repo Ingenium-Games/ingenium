@@ -11,7 +11,7 @@ ui_page "nui/dist/index.html"
 -- Old NUI system (uncomment to use old system)
 -- ui_page "nui/index.html"
 ------------------------------------------------------------------------------
-shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_c.lua", "shared/_locale.lua"}
+shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_ig.lua",    "shared/[Tools]/*.lua",    "shared/[Third Party]/*.lua", "shared/_locale.lua"}
 ------------------------------------------------------------------------------
 client_scripts {"client/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "client/_functions.lua",
                 "client/[Data]/_game_data_helpers.lua", "client/**/*.lua", "nui/lua/*.lua"}
@@ -19,15 +19,13 @@ client_scripts {"client/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua", "shar
 -- SQL Handler (must load before other server scripts)
 server_scripts {
     "@restfx/build/import.lua",
+    "server/_var.lua",
+    "locale/*.lua",
     "server/[SQL]/_pool.js",
     "server/[SQL]/_query.js", 
     "server/[SQL]/_transaction.js",
     "server/[SQL]/_handler.lua",
     "server/[SQL]/_compatibility.lua",
-    "server/_var.lua",
-    "locale/*.lua",
-    "shared/[Tools]/*.lua",
-    "shared/[Third Party]/*.lua",
     "server/_functions.lua",
     "server/_cron.lua",
     "server/[Doors]/_doors.lua",

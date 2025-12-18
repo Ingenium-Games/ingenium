@@ -15,7 +15,7 @@ function ig.GetTattooData(hash)
 end
 
 ---Get all tattoos for a specific zone
----@param zone string @"ZONE_HEAD", "ZONE_TORSO", "ZONE_LEFT_ARM", etc.
+---@param zone string @"ZONE_HEAD", "ZONE_TORSO", "ZONE_LEFT_ARM", etig.
 ---@return table<number, TattooData>
 function ig.GetTattoosByZone(zone)
     local result = {}
@@ -28,7 +28,7 @@ function ig.GetTattoosByZone(zone)
 end
 
 ---Get all tattoos from a specific collection
----@param collection string @"mpbeach_overlays", "mpbusiness_overlays", etc.
+---@param collection string @"mpbeach_overlays", "mpbusiness_overlays", etig.
 ---@return table<number, TattooData>
 function ig.GetTattoosByCollection(collection)
     local result = {}
@@ -88,7 +88,7 @@ function ig.GetWeaponData(hash)
 end
 
 ---Get all weapons of a specific type
----@param weaponType string @"Pistol", "Rifle", "SMG", "Shotgun", "Sniper", "Melee", etc.
+---@param weaponType string @"Pistol", "Rifle", "SMG", "Shotgun", "Sniper", "Melee", etig.
 ---@return table<number, WeaponData>
 function ig.GetWeaponsByType(weaponType)
     local result = {}
@@ -153,7 +153,7 @@ function ig.GetVehicleDataByModel(model)
 end
 
 ---Get all vehicles of a specific class
----@param class string @"Sports", "Super", "SUV", "Sedan", etc.
+---@param class string @"Sports", "Super", "SUV", "Sedan", etig.
 ---@return table<number, VehicleData>
 function ig.GetVehiclesByClass(class)
     local result = {}
@@ -166,7 +166,7 @@ function ig.GetVehiclesByClass(class)
 end
 
 ---Get all vehicles by manufacturer
----@param manufacturer string @"Benefactor", "Vapid", "Dewbauchee", etc.
+---@param manufacturer string @"Benefactor", "Vapid", "Dewbauchee", etig.
 ---@return table<number, VehicleData>
 function ig.GetVehiclesByManufacturer(manufacturer)
     local result = {}
@@ -179,7 +179,7 @@ function ig.GetVehiclesByManufacturer(manufacturer)
 end
 
 ---Get all vehicles by type
----@param vehType string @"automobile", "bike", "boat", "helicopter", etc.
+---@param vehType string @"automobile", "bike", "boat", "helicopter", etig.
 ---@return table<number, VehicleData>
 function ig.GetVehiclesByType(vehType)
     local result = {}
@@ -260,7 +260,7 @@ function ig.GetItemData(itemName)
 end
 
 ---Get all items of a specific type
----@param itemType string @"food", "drink", "weapon", "tool", etc.
+---@param itemType string @"food", "drink", "weapon", "tool", etig.
 ---@return table<string, ItemData>
 function ig.GetItemsByType(itemType)
     local result = {}

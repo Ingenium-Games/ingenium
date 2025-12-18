@@ -1,12 +1,12 @@
 -- ====================================================================================--
-c.data = {}
+ig.data = {}
 -- ====================================================================================--
 
 --- Upon joining, these are core functions to run internally prior to sending the join request to the server
 ---@param cb function "Callback function to run if any provided."
-function c.data.Initilize(cb)
+function ig.data.Initilize(cb)
     -- Get time and update every minute.
-    c.time.UpdateTime()
+    ig.time.UpdateTime()
     --
     TriggerServerEvent("Server:PlayerConnecting")
     if cb then
@@ -15,50 +15,50 @@ function c.data.Initilize(cb)
 end
 
 --- Returns the local from the local variable. String
-function c.data.GetLocale()
-    return c.locale
+function ig.data.GetLocale()
+    return ig.locale
 end
 
 --- Takes local information from the `user` SQL table and sets it for the client.
-function c.data.SetLocale()
-    c.locale = LocalPlayer.state.Locale
+function ig.data.SetLocale()
+    ig.locale = LocalPlayer.state.Locale
 end
 
 --- Sets the client as receieved the character data. Boolean
 ---@param bool boolean "Set loaded status to true or false."
-function c.data.SetLoadedStatus(bool)
+function ig.data.SetLoadedStatus(bool)
     if type(bool) == "boolean" then
-        c._loaded = bool
+        ig._loaded = bool
     end
 end
 
 --- Returns if the client has finished loading. Boolean
-function c.data.GetLoadedStatus()
-    return c._loaded
+function ig.data.GetLoadedStatus()
+    return ig._loaded
 end
 
 --- Returns if the client has finished loading. Boolean
-function c.data.IsPlayerLoaded()
-    return c._loaded
+function ig.data.IsPlayerLoaded()
+    return ig._loaded
 end
 
 --- Returns the Player state
-function c.data.GetLocalPlayer()
+function ig.data.GetLocalPlayer()
     return LocalPlayer.state
 end
 
 --- Returns the Player state
-function c.GetLocalPlayer()
-    return c.data.GetLocalPlayer()
+function ig.GetLocalPlayer()
+    return ig.data.GetLocalPlayer()
 end
 
 --- Returns the Player state
-function c.data.GetLocalPlayerState(key)
+function ig.data.GetLocalPlayerState(key)
     return LocalPlayer.state[key]
 end
 
 --- Returns the Player state
-function c.GetLocalPlayerState(key)
+function ig.GetLocalPlayerState(key)
     return LocalPlayer.state[key]
 end
 
@@ -67,7 +67,7 @@ end
 ---@param key string "The key"
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
-function c.data.SetLocalPlayerState(key, value, sync)
+function ig.data.SetLocalPlayerState(key, value, sync)
     if sync == nil then sync = false end
     LocalPlayer.state:set(key, value, sync)
 end
@@ -77,32 +77,32 @@ end
 ---@param key string "The key"
 ---@param value any "Just not a table"
 ---@param sync boolean "Sync to Server, default is false"
-function c.SetLocalPlayerState(key, value, sync)
-    c.data.SetLocalPlayerState(key, value, sync)
+function ig.SetLocalPlayerState(key, value, sync)
+    ig.data.SetLocalPlayerState(key, value, sync)
 end
 
 --- Return the Players"s state bag.
 ---@param id any "Player's Server Id"
-function c.data.GetPlayer(id)
+function ig.data.GetPlayer(id)
     local id = id or -1
     return Player(id).state
 end
 
 --- Return the Players"s state bag.
 ---@param id any "Player"s Server Id"
-function c.data.GetPlayerState(id, key)
+function ig.data.GetPlayerState(id, key)
     return Player(id).state[key]
 end
 
 --- Return the Players"s state bag.
 ---@param id any "Player's Server Id"
-function c.GetPlayerState(id, key)   
-    return c.data.GetPlayerState(id, key)
+function ig.GetPlayerState(id, key)   
+    return ig.data.GetPlayerState(id, key)
 end
 
 --- Return the Players"s state bag.
 ---@param ped any "Player's Ped Entity"
-function c.data.GetPlayerPedState(ped, key)
+function ig.data.GetPlayerPedState(ped, key)
     local player = NetworkGetPlayerIndexFromPed(ped)
     local id = GetPlayerServerId(player)
     return Player(id).state[key]
@@ -110,60 +110,60 @@ end
 
 --- Return the Players"s state bag.
 ---@param ped any "Player's Ped Entity"
-function c.GetPlayerPedState(ped, key)    
-    return c.data.GetPlayerPedState(ped, key)
+function ig.GetPlayerPedState(ped, key)    
+    return ig.data.GetPlayerPedState(ped, key)
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function c.data.GetEntityState(net, key)
+function ig.data.GetEntityState(net, key)
     local entity = NetworkGetEntityFromNetworkId(net)
     return Entity(entity).state[key]
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function c.GetEntityState(net, key)    
-    return c.data.GetEntityState(net, key)
+function ig.GetEntityState(net, key)    
+    return ig.data.GetEntityState(net, key)
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function c.data.SetEntityState(net, key, value)   
+function ig.data.SetEntityState(net, key, value)   
     local entity = NetworkGetEntityFromNetworkId(net) 
     Entity(entity).state:set(tostring(key), value, true)
 end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function c.SetEntityState(net, key, value)    
-    c.data.SetEntityState(net, key, value)   
+function ig.SetEntityState(net, key, value)    
+    ig.data.SetEntityState(net, key, value)   
 end
 
 --- func desc
 ---@param net any "The passed client entity"
 ---@param key any "The state bag key you want to get the data from."
-function c.data.GetEntityStateCheck(net, key)
+function ig.data.GetEntityStateCheck(net, key)
     local entity = NetworkGetEntityFromNetworkId(net)
     local type = GetEntityType(entity)
     --
     if type == 1 then
         if IsPedAPlayer(entity) then
-            return c.data.GetPlayerPedState(entity, key)
+            return ig.data.GetPlayerPedState(entity, key)
         end
     end
     --
-    return c.data.GetEntityState(net, key)
+    return ig.data.GetEntityState(net, key)
 end
 
-function c.data.Packet()
+function ig.data.Packet()
     return {
-        Health = c.status.GetHealth(),
-        Armour = c.status.GetArmour(),
-        Hunger = c.status.GetHunger(),
-        Thirst = c.status.GetThirst(),
-        Stress = c.status.GetStress(),
-        Modifiers = c.modifier.GetModifiers(),
+        Health = ig.status.GetHealth(),
+        Armour = ig.status.GetArmour(),
+        Hunger = ig.status.GetHunger(),
+        Thirst = ig.status.GetThirst(),
+        Stress = ig.status.GetStress(),
+        Modifiers = ig.modifier.GetModifiers(),
     }
 end
 

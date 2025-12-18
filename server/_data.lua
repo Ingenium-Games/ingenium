@@ -1,11 +1,11 @@
 -- ====================================================================================--
-c.data = {} -- data table for funcitons.
-c.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
+ig.data = {} -- data table for funcitons.
+ig.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
 -- ====================================================================================--
 
 --- Used on startup prior to the server really running.
-function c.data.Initilize()
-    c.func.Debug_1("Loading Sequence Begin.")
+function ig.data.Initilize()
+    ig.funig.Debug_1("Loading Sequence Begin.")
     local num, loaded = 0, false
     local t = {
         [1] = "DB: Characters marked as In-Active;",
@@ -25,47 +25,47 @@ function c.data.Initilize()
     --
     local function cb()
         num = num + 1
-        c.func.Debug_1(t[num])
+        ig.funig.Debug_1(t[num])
     end
     --
     MySQL.ready(function()
         -- Add other SQL commands required on start up.
-        -- such as cleaning tables, requesting data, etc..
+        -- such as cleaning tables, requesting data, etig..
         -- [1]
-        c.sql.ResetActiveCharacters(cb)
+        ig.sql.ResetActiveCharacters(cb)
         -- [2]
-        c.sql.jobs.Generate(cb)
+        ig.sql.jobs.Generate(cb)
         -- [3]
-        c.sql.jobs.Setup(cb)
+        ig.sql.jobs.Setup(cb)
         -- [4]
-        c.sql.jobs.Accounts(cb)
+        ig.sql.jobs.Accounts(cb)
         -- [5] -- Not so much a SQL function, but dependant on it being conducted in order.
-        c.data.CreateJobObjects()
+        ig.data.CreateJobObjects()
         cb()
         -- [5.5] -- Load JSON data files synchronously before individual loaders
-        c.data.LoadJSONData(cb)
+        ig.data.LoadJSONData(cb)
         -- [6] gunshot residue data table
-        c.gsr.Load()
+        ig.gsr.Load()
         cb()
         -- [7] dropped items data table
-        c.drop.Load()
+        ig.drop.Load()
         cb()
         -- [7.5] Restore physical drops from persistence
-        c.data.RestoreDrops()
+        ig.data.RestoreDrops()
         -- [8] pickups data table (not items script)
-        c.pick.Load()
+        ig.pick.Load()
         cb()
         -- [9] notes data table (notepad script)
-        c.note.Load()
+        ig.note.Load()
         cb()
         -- [10] Load names for random names selection.
-        c.name.Load()
+        ig.name.Load()
         cb()
 
         -- [12]
-        c.sql.veh.Reset(cb)
+        ig.sql.veh.Reset(cb)
         --
-        c.sql.obj.GetObjects()
+        ig.sql.obj.GetObjects()
         --
         loaded = true
     end)
@@ -74,25 +74,25 @@ function c.data.Initilize()
         Wait(250)
     end
 
-    c._loading = false
-    c.func.Debug_1("Loading Sequence Complete.")
-    c._running = true
+    ig._loading = false
+    ig.funig.Debug_1("Loading Sequence Complete.")
+    ig._running = true
 end
 
 -- ====================================================================================--
 
 --- Adds player to the player index.
 ---@param source number "source [server_id]"
-function c.data.AddPlayer(source)
+function ig.data.AddPlayer(source)
     local num = tonumber(source)
-    c.pdex[num] = false
+    ig.pdex[num] = false
 end
 
 --- Gets player from the player table.
 ---@param source number
-function c.data.GetPlayer(source)
-    if type(c.pdex[tonumber(source)]) == "table" then
-        return c.pdex[tonumber(source)]
+function ig.data.GetPlayer(source)
+    if type(ig.pdex[tonumber(source)]) == "table" then
+        return ig.pdex[tonumber(source)]
     else
         return false
     end
@@ -100,46 +100,46 @@ end
 
 --- Same as above.
 ---@param source number
-function c.GetPlayer(source)
-    return c.data.GetPlayer(tonumber(source))
+function ig.GetPlayer(source)
+    return ig.data.GetPlayer(tonumber(source))
 end
 
 --- Same as above.
 ---@param source number
-function c.GetPlayerFromId(source)
-    return c.data.GetPlayer(tonumber(source))
+function ig.GetPlayerFromId(source)
+    return ig.data.GetPlayer(tonumber(source))
 end
 
 --- Set the player id to the table.
 ---@param source number
 ---@param data table
-function c.data.SetPlayer(source, data)
-    c.pdex[tonumber(source)] = data
+function ig.data.SetPlayer(source, data)
+    ig.pdex[tonumber(source)] = data
 end
 
 --- Set to nil for garbage collection.
 ---@param source number
-function c.data.RemovePlayer(source)
-    c.pdex[tonumber(source)] = nil
+function ig.data.RemovePlayer(source)
+    ig.pdex[tonumber(source)] = nil
 end
 
 --- Get the player table
-function c.data.GetPlayers()
-    return c.pdex
+function ig.data.GetPlayers()
+    return ig.pdex
 end
 
 --- Wrapper for the above.
-function c.GetPlayers()
-    return c.data.GetPlayers()
+function ig.GetPlayers()
+    return ig.data.GetPlayers()
 end
 
 --- func desc
 ---@param character_id any
-function c.data.GetOfflinePlayer(character_id)
+function ig.data.GetOfflinePlayer(character_id)
     if character_id then
-        local data = c.sql.char.Get(character_id)
+        local data = ig.sql.char.Get(character_id)
         if data then
-            local temp = c.class.OfflinePlayer(data)
+            local temp = ig.class.OfflinePlayer(data)
             return temp
         end
     end
@@ -148,11 +148,11 @@ end
 
 --- Return corresponding player data from character_id
 ---@param id string "Character_ID"
-function c.data.GetPlayerByIdentifier(id)
-    for k, v in pairs(c.pdex) do
+function ig.data.GetPlayerByIdentifier(id)
+    for k, v in pairs(ig.pdex) do
         if v then
             if v.GetCharacter_ID() == tostring(id) then
-                return c.data.GetPlayer(k)
+                return ig.data.GetPlayer(k)
             end
         end
     end
@@ -160,14 +160,14 @@ function c.data.GetPlayerByIdentifier(id)
 end
 
 --- Wrapper for the above.
-function c.GetPlayerFromIdentifier(id)
-    return c.data.GetPlayerByIdentifier(id)
+function ig.GetPlayerFromIdentifier(id)
+    return ig.data.GetPlayerByIdentifier(id)
 end
 
 --- Return corresponding player data from character_id
 ---@param id string "Character_ID"
-function c.data.GetPlayerIDByIdentifier(id)
-    for k, v in pairs(c.pdex) do
+function ig.data.GetPlayerIDByIdentifier(id)
+    for k, v in pairs(ig.pdex) do
         if v then
             if v.GetCharacter_ID() == id then
                 return k
@@ -178,7 +178,7 @@ function c.data.GetPlayerIDByIdentifier(id)
 end
 
 --- func desc
-function c.data.ArePlayersActive()
+function ig.data.ArePlayersActive()
     local ptbl = GetPlayers()
     if type(ptbl) == "table" and #ptbl >= 1 then
         return true
@@ -187,11 +187,11 @@ function c.data.ArePlayersActive()
 end
 
 -- ====================================================================================--
--- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
+-- Vehicles - ig.vdex = Object Table with xVehicle as referance obj, ig.vehicle = function table
 
 ---@param net integer "Network ID 16 bit integer"
-function c.data.FindVehicle(net)
-    for k, v in pairs(c.vdex) do
+function ig.data.FindVehicle(net)
+    for k, v in pairs(ig.vdex) do
         if v then
             if v.Net == net then
                 return true, v, k
@@ -202,8 +202,8 @@ function c.data.FindVehicle(net)
 end
 
 ---@param plate string "Plate of vehicle."
-function c.data.FindVehicleFromPlate(plate)
-    for k, v in pairs(c.vdex) do
+function ig.data.FindVehicleFromPlate(plate)
+    for k, v in pairs(ig.vdex) do
         if (v and v.Plate == plate) then
             return true
         end
@@ -212,8 +212,8 @@ function c.data.FindVehicleFromPlate(plate)
 end
 
 ---@param plate string "Plate of vehicle."
-function c.data.GetVehicleByPlate(plate)
-    for k, v in pairs(c.vdex) do
+function ig.data.GetVehicleByPlate(plate)
+    for k, v in pairs(ig.vdex) do
         if v then
             if v.Plate == plate then
                 return v
@@ -226,68 +226,68 @@ end
 --- func desc
 ---@param net any
 ---@param cb any
-function c.data.AddVehicle(net, cb, ...)
-    -- local aa, bb, cc = c.data.FindVehicle(net)
+function ig.data.AddVehicle(net, cb, ...)
+    -- local aa, bb, cc = ig.data.FindVehicle(net)
     -- if (not aa) then
-        c.vdex[tonumber(net)] = cb(...)
+        ig.vdex[tonumber(net)] = cb(...)
     -- end
 end
 
 --- func desc
 ---@param net any
 ---@param cb any
-function c.data.SetVehicle(net, cb, ...)
-    c.vdex[tonumber(net)] = cb(...)
-    return c.vdex[tonumber(net)]
+function ig.data.SetVehicle(net, cb, ...)
+    ig.vdex[tonumber(net)] = cb(...)
+    return ig.vdex[tonumber(net)]
 end
 
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
-function c.data.GetVehicle(arg)
-    if c.vdex[tonumber(arg)] ~= false then
-        return c.vdex[tonumber(arg)]
+function ig.data.GetVehicle(arg)
+    if ig.vdex[tonumber(arg)] ~= false then
+        return ig.vdex[tonumber(arg)]
     else
-        c.func.Debug_1("No Vehicle Found.")
+        ig.funig.Debug_1("No Vehicle Found.")
         return false
     end
 end
 
 --- Same as above.
 ---@param net integer "Network ID 16 bit integer or Plate (8 char string)"
-function c.GetVehicle(net)
-    return c.data.GetVehicle(net)
+function ig.GetVehicle(net)
+    return ig.data.GetVehicle(net)
 end
 
 --- Get all xVehicles
-function c.data.GetVehicles()
-    return c.vdex
+function ig.data.GetVehicles()
+    return ig.vdex
 end
 
 --- Get all xVehicles
-function c.GetVehicles()
-    return c.data.GetVehicles()
+function ig.GetVehicles()
+    return ig.data.GetVehicles()
 end
 
 -- Set to nil for garbage collection
 --- func desc
 ---@param arg any
-function c.data.RemoveVehicle(arg)
-    if c.vdex[tonumber(arg)] then
-        c.vdex[tonumber(arg)] = nil
+function ig.data.RemoveVehicle(arg)
+    if ig.vdex[tonumber(arg)] then
+        ig.vdex[tonumber(arg)] = nil
     end
 end
 
 ---@param plate string "Plate of vehicle."
-function c.GetVehicleByPlate(plate)
-    return c.data.GetVehicleByPlate(plate)
+function ig.GetVehicleByPlate(plate)
+    return ig.data.GetVehicleByPlate(plate)
 end
 
 -- ====================================================================================--
 -- NPC"s 
 
 ---@param net integer "Network ID 16 bit integer"
-function c.data.FindNpc(arg)
-    for k, v in pairs(c.ndex) do
+function ig.data.FindNpc(arg)
+    for k, v in pairs(ig.ndex) do
         if v then
             if k == arg and type(v) == "table" then
                 return true, v, k
@@ -300,47 +300,47 @@ end
 --- func desc
 ---@param net any
 ---@param cb any
-function c.data.AddNpc(net, cb, ...)
-    if not c.data.FindNpc(net) then
-        c.ndex[tonumber(net)] = cb(...)
+function ig.data.AddNpc(net, cb, ...)
+    if not ig.data.FindNpc(net) then
+        ig.ndex[tonumber(net)] = cb(...)
     end
 end
 
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
-function c.data.GetNpc(net)
-    return c.ndex[tonumber(net)] or false
+function ig.data.GetNpc(net)
+    return ig.ndex[tonumber(net)] or false
 end
 
 --- Same as above.
 ---@param net integer "Network ID 16 bit integer"
-function c.GetNpc(net)
-    return c.data.GetNpc(net)
+function ig.GetNpc(net)
+    return ig.data.GetNpc(net)
 end
 
 --- Get all xVehicles
-function c.data.GetNpcs()
-    return c.ndex
+function ig.data.GetNpcs()
+    return ig.ndex
 end
 
 --- Get all xVehicles
-function c.GetNpcs()
-    return c.data.GetNpcs()
+function ig.GetNpcs()
+    return ig.data.GetNpcs()
 end
 
 -- Set to nil for garbage collection
 --- func desc
 ---@param net any
-function c.data.RemoveNpc(net)
-    c.ndex[tonumber(net)] = nil
+function ig.data.RemoveNpc(net)
+    ig.ndex[tonumber(net)] = nil
 end
 
 -- ====================================================================================--
 -- 
 
 ---@param net integer "Network ID 16 bit integer"
-function c.data.FindObject(net)
-    for k, v in pairs(c.odex) do
+function ig.data.FindObject(net)
+    for k, v in pairs(ig.odex) do
         if v then
             if k == net and type(v) == "table" then
                 return true, v, k
@@ -351,8 +351,8 @@ function c.data.FindObject(net)
 end
 
 ---@param net integer "Network ID 16 bit integer"
-function c.data.FindObjectFromUUID(uuid)
-    for k, v in pairs(c.odex) do
+function ig.data.FindObjectFromUUID(uuid)
+    for k, v in pairs(ig.odex) do
         if v and (v.UUID == uuid) then
             return true, v, k
         end
@@ -361,8 +361,8 @@ function c.data.FindObjectFromUUID(uuid)
 end
 
 ---@param net integer "Network ID 16 bit integer"
-function c.data.GetObjectFromUUID(uuid)
-    for k, v in pairs(c.odex) do
+function ig.data.GetObjectFromUUID(uuid)
+    for k, v in pairs(ig.odex) do
         if v and (v.UUID == uuid) then
             return v
         end
@@ -373,83 +373,83 @@ end
 --- func desc
 ---@param net any
 ---@param cb any
-function c.data.AddObject(net, cb, ...)
-    if not c.data.FindObject(net) then
-        c.odex[tostring(net)] = cb(...)
+function ig.data.AddObject(net, cb, ...)
+    if not ig.data.FindObject(net) then
+        ig.odex[tostring(net)] = cb(...)
     end
 end
 
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
-function c.data.GetObject(net)
-    return c.odex[tostring(net)] or false
+function ig.data.GetObject(net)
+    return ig.odex[tostring(net)] or false
 end
 
 --- Same as above.
 ---@param net integer "Network ID 16 bit integer"
-function c.GetObject(net)
-    return c.data.GetObject(net)
+function ig.GetObject(net)
+    return ig.data.GetObject(net)
 end
 
 --- Get all xVehicles
-function c.data.GetObjects()
-    return c.odex
+function ig.data.GetObjects()
+    return ig.odex
 end
 
 --- Get all xVehicles
-function c.GetObjects()
-    return c.data.GetObjects()
+function ig.GetObjects()
+    return ig.data.GetObjects()
 end
 
 -- Set to nil for garbage collection
 --- func desc
 ---@param uuid any
-function c.data.RemoveObject(uuid)
-    c.odex[tostring(uuid)] = nil
+function ig.data.RemoveObject(uuid)
+    ig.odex[tostring(uuid)] = nil
 end
 
 -- ====================================================================================--
--- Jobs - c.jdex = Object table, c.jobs = table built from the DB, c.job = functions.
+-- Jobs - ig.jdex = Object table, ig.jobs = table built from the DB, ig.job = functions.
 
 --- func desc
-function c.data.CreateJobObjects()
-    local jobs = c.job.GetJobs()
+function ig.data.CreateJobObjects()
+    local jobs = ig.job.GetJobs()
     for k, v in pairs(jobs) do
-        if not c.jdex[k] then
-            c.jdex[k] = c.class.Job(v)
+        if not ig.jdex[k] then
+            ig.jdex[k] = ig.class.Job(v)
         end
     end
-    c.json.Write(conf.file.jobs, c.jobs)
+    ig.json.Write(conf.file.jobs, ig.jobs)
 end
 
 --- func desc
-function c.data.GetJobs()
-    return c.jdex
-end
-
---- func desc
----@param str any
-function c.data.GetJob(str)
-    return c.jdex[str]
+function ig.data.GetJobs()
+    return ig.jdex
 end
 
 --- func desc
 ---@param str any
-function c.GetJob(str)
-    return c.data.GetJob(str)
+function ig.data.GetJob(str)
+    return ig.jdex[str]
+end
+
+--- func desc
+---@param str any
+function ig.GetJob(str)
+    return ig.data.GetJob(str)
 end
 
 -- ====================================================================================--
 
 --- func desc
 ---@param str any
-function c.data.Save(str)
+function ig.data.Save(str)
 
 end
 
 -- Server to Datatable routine.
-function c.data.RetrievePackets()
-    local plys = c.data.GetPlayers()
+function ig.data.RetrievePackets()
+    local plys = ig.data.GetPlayers()
     for k, v in pairs(plys) do
         if v then
             local data = TriggerClientCallback({
@@ -458,7 +458,7 @@ function c.data.RetrievePackets()
                 args = {}
             })
             if data then
-                local xPlayer = c.data.GetPlayer(k)
+                local xPlayer = ig.data.GetPlayer(k)
                 xPlayer.SetHealth(data.Health)
                 xPlayer.SetArmour(data.Armour)
                 xPlayer.SetHunger(data.Hunger)
@@ -471,22 +471,22 @@ function c.data.RetrievePackets()
 end
 
 --- func desc
-function c.data.CharacterValues()
+function ig.data.CharacterValues()
     local function Do()
-        c.data.RetrievePackets()
+        ig.data.RetrievePackets()
         SetTimeout(conf.charactersync, Do)
     end
     SetTimeout(conf.charactersync, Do)
 end
 
 -- Server to DB routine.
-function c.data.ServerSync()
+function ig.data.ServerSync()
     -- Separate sync threads for different data types with different intervals
     
     -- User sync - most frequent (1.5 min)
     local function UserSync()
-        if c.data.ArePlayersActive() then
-            c.sql.save.Users()
+        if ig.data.ArePlayersActive() then
+            ig.sql.save.Users()
         end
         SetTimeout(conf.serversync, UserSync)
     end
@@ -494,8 +494,8 @@ function c.data.ServerSync()
     
     -- Vehicle sync - less frequent (5 min)
     local function VehicleSync()
-        if c.data.ArePlayersActive() then
-            c.sql.save.Vehicles()
+        if ig.data.ArePlayersActive() then
+            ig.sql.save.Vehicles()
         end
         SetTimeout(conf.vehiclesync, VehicleSync)
     end
@@ -503,8 +503,8 @@ function c.data.ServerSync()
     
     -- Job sync - least frequent (10 min)
     local function JobSync()
-        if c.data.ArePlayersActive() then
-            c.sql.save.Jobs()
+        if ig.data.ArePlayersActive() then
+            ig.sql.save.Jobs()
         end
         SetTimeout(conf.jobsync, JobSync)
     end
@@ -512,8 +512,8 @@ function c.data.ServerSync()
     
     -- Object sync - moderate frequency (5 min)
     local function ObjectSync()
-        if c.data.ArePlayersActive() then
-            c.sql.save.Objects()
+        if ig.data.ArePlayersActive() then
+            ig.sql.save.Objects()
         end
         SetTimeout(conf.objectsync, ObjectSync)
     end
@@ -521,11 +521,11 @@ function c.data.ServerSync()
 end
 
 -- Server to DB routine.
-function c.data.ReviveSync()
+function ig.data.ReviveSync()
     local function Do()
-        local result = c.sql.char.ReviveDeadCharacters()
+        local result = ig.sql.char.ReviveDeadCharacters()
         if result then
-            c.func.Debug_2("Revived Characters")
+            ig.funig.Debug_2("Revived Characters")
         end
         SetTimeout(conf.revivesync, Do)
     end
@@ -537,13 +537,13 @@ end
 --- Create xPlayer table and pass to client.
 ---@param source number
 ---@param Character_ID string
-function c.data.LoadPlayer(source, Character_ID)
+function ig.data.LoadPlayer(source, Character_ID)
     local src = tonumber(source)
     local p = promise.new()
-    local xPlayer = c.class.Player(src, Character_ID)
+    local xPlayer = ig.class.Player(src, Character_ID)
     -- No need to pass data to the client anymore.
-    c.sql.char.SetActive(Character_ID, true, function()
-        c.data.SetPlayer(src, xPlayer)
+    ig.sql.char.SetActive(Character_ID, true, function()
+        ig.data.SetPlayer(src, xPlayer)
         p:resolve()
     end)
     -- Wait for the player to be loaded prior to sending the "ok" to load to the client.

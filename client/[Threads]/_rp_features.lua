@@ -22,7 +22,7 @@ Citizen.CreateThread(function()
         SwitchTrainTrack(0, false)
         SwitchTrainTrack(3, false)
         SetRandomTrains(false)
-        c.func.Debug_1("RP: Trains disabled")
+        ig.funig.Debug_1("RP: Trains disabled")
     end
     
     -- Disable police dispatch if configured
@@ -30,14 +30,14 @@ Citizen.CreateThread(function()
         for i = 1, 15 do
             EnableDispatchService(i, false)
         end
-        c.func.Debug_1("RP: Dispatch services disabled")
+        ig.funig.Debug_1("RP: Dispatch services disabled")
     end
     
     -- Set audio flags for RP experience
     SetAudioFlag("PoliceScannerDisabled", true)
     SetAudioFlag("DisableFlightMusic", true)
     
-    c.func.Debug_1("RP: One-time setup complete")
+    ig.funig.Debug_1("RP: One-time setup complete")
 end)
 
 -- ====================================================================================--
@@ -161,18 +161,18 @@ end)
 -- ====================================================================================--
 
 --- Disable idle camera manually
-function c.DisableIdleCamera()
+function ig.DisableIdleCamera()
     InvalidateIdleCam()
     InvalidateVehicleIdleCam()
 end
 
 --- Enable/disable HUD visibility
 ---@param visible boolean
-function c.SetHudVisible(visible)
+function ig.SetHudVisible(visible)
     DisplayHud(visible)
     DisplayRadar(visible)
 end
 
 -- Export helper functions
-exports("DisableIdleCamera", c.DisableIdleCamera)
-exports("SetHudVisible", c.SetHudVisible)
+exports("DisableIdleCamera", ig.DisableIdleCamera)
+exports("SetHudVisible", ig.SetHudVisible)

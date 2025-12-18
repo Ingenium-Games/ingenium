@@ -1,6 +1,6 @@
 -- ====================================================================================--
-c.note = {} -- function level
-c.notes = false -- dropped items table
+ig.note = {} -- function level
+ig.notes = false -- dropped items table
 -- ====================================================================================--
     
 --[[    
@@ -16,21 +16,21 @@ c.notes = false -- dropped items table
 ]]--
 
 --- func desc
-function c.note.Load()
-    if c.json.Exists(conf.file.notes) then
-        local file = c.json.Read(conf.file.notes)
-        c.notes = file
+function ig.note.Load()
+    if ig.json.Exists(conf.file.notes) then
+        local file = ig.json.Read(conf.file.notes)
+        ig.notes = file
     else
-        c.notes = {}
-        c.json.Write(conf.file.notes, c.notes)
+        ig.notes = {}
+        ig.json.Write(conf.file.notes, ig.notes)
     end
-    c.note.Update()
+    ig.note.Update()
 end
 
 --- func desc
-function c.note.Update()
+function ig.note.Update()
     local function Do()
-        c.json.Write(conf.file.notes, c.notes)
+        ig.json.Write(conf.file.notes, ig.notes)
         SetTimeout(conf.file.save, Do)
     end
     SetTimeout(conf.file.save, Do)
@@ -38,30 +38,30 @@ end
 
 --- func desc
 ---@param data any
-function c.note.Add(data)
+function ig.note.Add(data)
     if type(data) == "table" then
-        table.insert(c.notes, data)
+        table.insert(ig.notes, data)
     else
-        c.func.Debug_1("Drop to be added, please check data sent.")
+        ig.funig.Debug_1("Drop to be added, please check data sent.")
     end
 end
 
 --- func desc
 ---@param id any
-function c.note.Exist(id)
-    if c.notes[id] then
+function ig.note.Exist(id)
+    if ig.notes[id] then
         return true
     end
     return false
 end
 
 --- func desc
-function c.note.Clean()
-    if type(c.notes) == "table" then
-        for k,v in pairs(c.notes) do
+function ig.note.Clean()
+    if type(ig.notes) == "table" then
+        for k,v in pairs(ig.notes) do
             if v then
                 if (os.time() - v.Time) >= conf.file.cleanup then
-                    table.remove(c.notes, k)            
+                    table.remove(ig.notes, k)            
                 end
             end
         end
@@ -69,9 +69,9 @@ function c.note.Clean()
 end
 
 --- func desc
-function c.note.CleanUp()
+function ig.note.CleanUp()
     local function Do()
-        c.note.Clean()
+        ig.note.Clean()
         SetTimeout(conf.file.cleanup, Do)
     end
     SetTimeout(conf.file.cleanup, Do)

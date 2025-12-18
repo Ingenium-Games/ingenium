@@ -1,11 +1,11 @@
 -- ====================================================================================--
-c.json = c.json or {}
+ig.json = ig.json or {}
 -- ====================================================================================--
 
 --- Load JSON file from data directory
 ---@param filename string "File name in data/ directory"
 ---@return table|nil
-function c.json.Load(filename)
+function ig.json.Load(filename)
     local resourceName = GetCurrentResourceName()
     local path = ('data/%s.json'):format(filename)
     local file = LoadResourceFile(resourceName, path)
@@ -28,7 +28,7 @@ end
 --- Write JSON file to data directory
 ---@param filename string
 ---@param data table
-function c.json.Write(filename, data)
+function ig.json.Write(filename, data)
     local resourceName = GetCurrentResourceName()
     local path = ('data/%s.json'):format(filename)
     local encoded = json.encode(data, {indent = true})
@@ -40,7 +40,7 @@ end
 --- Load data from JSON or fallback to defaults
 --- This function is called during initialization and runs synchronously
 ---@param callback function Optional callback to execute after loading
-function c.data.LoadJSONData(callback)
+function ig.data.LoadJSONData(callback)
     print('^3[Data] Loading dynamic JSON files into memory...^7')
     
     -- Note: Static data (Items, Doors) are defined in their respective Lua files
@@ -48,20 +48,20 @@ function c.data.LoadJSONData(callback)
     
     -- Dynamic runtime data (loaded and saved periodically)
     -- If JSON doesn't exist, initialize with empty tables
-    c.drops = c.json.Load('Drops') or {}
-    c.active_drops = {} -- Always start with no active drops
-    c.picks = c.json.Load('Pickups') or {}
-    c.scenes = c.json.Load('Scenes') or {}
-    c.notes = c.json.Load('Notes') or {}
-    c.gsrs = c.json.Load('GSR') or {}
+    ig.drops = ig.json.Load('Drops') or {}
+    ig.active_drops = {} -- Always start with no active drops
+    ig.picks = ig.json.Load('Pickups') or {}
+    ig.scenes = ig.json.Load('Scenes') or {}
+    ig.notes = ig.json.Load('Notes') or {}
+    ig.gsrs = ig.json.Load('GSR') or {}
     
     -- Game data (static reference data from ig.dump)
-    c.tattoos = c.json.Load('tattoos') or {}
-    c.weapons = c.json.Load('weapons') or {}
-    c.vehicles = c.json.Load('vehicles') or {}
-    c.modkits = c.json.Load('modkits') or {}
-    c.peds = c.json.Load('peds') or {}
-    c.appearance_constants = c.json.Load('appearance-constants') or {}
+    ig.tattoos = ig.json.Load('tattoos') or {}
+    ig.weapons = ig.json.Load('weapons') or {}
+    ig.vehicles = ig.json.Load('vehicles') or {}
+    ig.modkits = ig.json.Load('modkits') or {}
+    ig.peds = ig.json.Load('peds') or {}
+    ig.appearance_constants = ig.json.Load('appearance-constants') or {}
     
     -- Count loaded items
     local counts = {
@@ -71,11 +71,11 @@ function c.data.LoadJSONData(callback)
         modkits = 0,
         peds = 0
     }
-    for _ in pairs(c.tattoos) do counts.tattoos = counts.tattoos + 1 end
-    for _ in pairs(c.weapons) do counts.weapons = counts.weapons + 1 end
-    for _ in pairs(c.vehicles) do counts.vehicles = counts.vehicles + 1 end
-    for _ in pairs(c.modkits) do counts.modkits = counts.modkits + 1 end
-    for _ in pairs(c.peds) do counts.peds = counts.peds + 1 end
+    for _ in pairs(ig.tattoos) do counts.tattoos = counts.tattoos + 1 end
+    for _ in pairs(ig.weapons) do counts.weapons = counts.weapons + 1 end
+    for _ in pairs(ig.vehicles) do counts.vehicles = counts.vehicles + 1 end
+    for _ in pairs(ig.modkits) do counts.modkits = counts.modkits + 1 end
+    for _ in pairs(ig.peds) do counts.peds = counts.peds + 1 end
     
     if counts.tattoos > 0 or counts.weapons > 0 or counts.vehicles > 0 or counts.modkits > 0 or counts.peds > 0 then
         print('^2[Data] Game data loaded:^7')
@@ -84,7 +84,7 @@ function c.data.LoadJSONData(callback)
         if counts.vehicles > 0 then print(('  ^3- Vehicles: %d^7'):format(counts.vehicles)) end
         if counts.modkits > 0 then print(('  ^3- Mod Kits: %d^7'):format(counts.modkits)) end
         if counts.peds > 0 then print(('  ^3- Peds: %d^7'):format(counts.peds)) end
-        if c.appearance_constants and c.appearance_constants.eyeColors then 
+        if ig.appearance_constants and ig.appearance_constants.eyeColors then 
             print(('  ^3- Appearance Constants: Loaded^7')) 
         end
     end
@@ -95,19 +95,19 @@ function c.data.LoadJSONData(callback)
 end
 
 --- Restore drops from JSON after server restart
-function c.data.RestoreDrops()
-    if not c.drops or type(c.drops) ~= "table" then
-        c.func.Debug_1("No drops to restore")
+function ig.data.RestoreDrops()
+    if not ig.drops or type(ig.drops) ~= "table" then
+        ig.funig.Debug_1("No drops to restore")
         return
     end
     
     local restoredCount = 0
     local failedCount = 0
     
-    for uuid, drop in pairs(c.drops) do
+    for uuid, drop in pairs(ig.drops) do
         if drop.Coords and drop.Model and drop.Inventory then
             -- Create the physical object
-            local entity, netId = c.func.CreateObject(
+            local entity, netId = ig.funig.CreateObject(
                 drop.Model,
                 drop.Coords.x,
                 drop.Coords.y,
@@ -117,7 +117,7 @@ function c.data.RestoreDrops()
             
             if entity and netId then
                 -- Get the object
-                local xObject = c.data.GetObject(netId)
+                local xObject = ig.data.GetObject(netId)
                 if xObject then
                     -- Set coordinates
                     xObject.SetCoords({
@@ -139,10 +139,10 @@ function c.data.RestoreDrops()
                         for _, item in ipairs(drop.Inventory) do
                             -- Validate item exists in the database before adding
                             local itemName = item[1] or item.Item
-                            if itemName and c.item.Exists(itemName) then
+                            if itemName and ig.item.Exists(itemName) then
                                 xObject.AddItem(item)
                             else
-                                c.func.Debug_1("Skipping invalid item in drop restore: " .. tostring(itemName))
+                                ig.funig.Debug_1("Skipping invalid item in drop restore: " .. tostring(itemName))
                             end
                         end
                     end
@@ -152,19 +152,19 @@ function c.data.RestoreDrops()
                     
                     -- Update drop entry with new NetID
                     drop.NetID = netId
-                    c.drops[uuid] = drop
+                    ig.drops[uuid] = drop
                     
                     restoredCount = restoredCount + 1
                 else
-                    c.func.Debug_1("Failed to get xObject for restored drop: " .. uuid)
+                    ig.funig.Debug_1("Failed to get xObject for restored drop: " .. uuid)
                     failedCount = failedCount + 1
                 end
             else
-                c.func.Debug_1("Failed to create entity for drop: " .. uuid)
+                ig.funig.Debug_1("Failed to create entity for drop: " .. uuid)
                 failedCount = failedCount + 1
             end
         else
-            c.func.Debug_1("Invalid drop data for UUID: " .. uuid)
+            ig.funig.Debug_1("Invalid drop data for UUID: " .. uuid)
             failedCount = failedCount + 1
         end
     end

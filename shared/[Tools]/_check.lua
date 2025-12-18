@@ -1,8 +1,8 @@
 -- ====================================================================================--
-c.check = {}
+ig.check = {}
 -- ====================================================================================--
 --- func desc
-function c.check.Number(num, min, max)
+function ig.check.Number(num, min, max)
     local v = 0
     if min and max then
         if type(num) ~= "number" then
@@ -30,7 +30,7 @@ end
 
 --- func desc
 ---@param bool any
-function c.check.Boolean(bool)
+function ig.check.Boolean(bool)
     local v = false
     assert(type(bool) == "boolean", "Invalid variable type at argument #1, expected boolean, got "..type(bool))
     if type(bool) ~= "boolean" then
@@ -42,7 +42,7 @@ end
 
 --- func desc
 ---@param t any
-function c.check.Table(t)
+function ig.check.Table(t)
     local v = {}
     assert(type(t) == "table", "Invalid variable type at argument #1, expected table, got "..type(t))
     if type(t) ~= "table" then
@@ -54,7 +54,7 @@ end
 
 --- func desc
 ---@param str any
-function c.check.String(str)
+function ig.check.String(str)
     local v = ""
     assert(type(str) == "string", "Invalid variable type at argument #1, expected string, got "..type(str))
     if type(str) ~= "string" then

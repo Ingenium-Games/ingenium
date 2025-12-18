@@ -70,7 +70,7 @@ Financial transactions (cash/bank operations) are protected with:
 Each transaction type has a 1-second cooldown per player:
 
 ```lua
-if c.security.CheckRateLimit(self.ID, "add_cash") then
+if ig.security.CheckRateLimit(self.ID, "add_cash") then
     self.Notify("Transaction too fast. Please wait.")
     return
 end
@@ -112,7 +112,7 @@ Add event handlers to process security events:
 -- In your logging resource
 AddEventHandler("txaLogger:LogTransaction", function(log)
     -- Store log to database
-    MySQL.Async.execute("INSERT INTO transaction_logs (...) VALUES (...)", {
+    MySQL.Asynig.execute("INSERT INTO transaction_logs (...) VALUES (...)", {
         timestamp = log.timestamp,
         player_id = log.player_id,
         type = log.type,
@@ -180,14 +180,14 @@ end
 ## Input Validation
 
 ### Range Clamping
-All bounded numeric properties are automatically clamped to their valid ranges using `c.check.Number(value, min, max)`.
+All bounded numeric properties are automatically clamped to their valid ranges using `ig.check.Number(value, min, max)`.
 
 **File**: `shared/[Tools]/_check.lua`
 
 The function now uses explicit clamping instead of returning 0 for out-of-range values:
 
 ```lua
-function c.check.Number(num, min, max)
+function ig.check.Number(num, min, max)
     if min and max then
         -- Explicit clamping: ensure value is within min-max range
         return math.max(min, math.min(max, num))
@@ -210,11 +210,11 @@ The following properties are automatically clamped:
 - `Fuel`: 0 to 100
 
 ### Adding New Bounded Properties
-Use `c.check.Number` with min/max parameters:
+Use `ig.check.Number` with min/max parameters:
 
 ```lua
 self.SetCustomStat = function(v)
-    local num = c.check.Number(v, 0, 100)  -- Automatically clamped to 0-100
+    local num = ig.check.Number(v, 0, 100)  -- Automatically clamped to 0-100
     self.CustomStat = num
     self.State.CustomStat = num
 end
@@ -266,7 +266,7 @@ xPlayer.SetHealth(9999) -- Should clamp to conf.defaulthealth
 ### Version Updates
 When updating ig.core:
 1. Check if new state bag keys are added
-2. Verify new numeric properties use `c.check.Number` with appropriate bounds
+2. Verify new numeric properties use `ig.check.Number` with appropriate bounds
 3. Add transaction logging to any new financial operations
 4. Update this documentation
 

@@ -6,7 +6,7 @@ local TeleportOnMarker = RegisterClientCallback({
     eventCallback = function()
         local wp = GetFirstBlipInfoId(8)
         if DoesBlipExist(wp) then
-            c.func.FadeOut(1000)
+            ig.funig.FadeOut(1000)
             local ords = GetBlipInfoIdCoord(wp)
             for height = 0.1, 1000.0, 1.0 do
                 SetPedCoordsKeepVehicle(PlayerPedId(), ords["x"], ords["y"], height + 0.0)
@@ -17,7 +17,7 @@ local TeleportOnMarker = RegisterClientCallback({
                 end
                 Citizen.Wait(0)
             end
-            c.func.FadeIn(1000)
+            ig.funig.FadeIn(1000)
         end
     end
 })
@@ -25,21 +25,21 @@ local TeleportOnMarker = RegisterClientCallback({
 local Teleport = RegisterClientCallback({
     eventName = "Teleport",
     eventCallback = function(ords)
-        c.func.FadeOut(1000)
+        ig.funig.FadeOut(1000)
         SetEntityCoords(PlayerPedId(), ords["x"], ords["y"], ords["z"])
         SetEntityHeading(PlayerPedId(), ords["h"])
-        c.func.FadeIn(1000)
+        ig.funig.FadeIn(1000)
     end
 })
 
 local Revive = RegisterClientCallback({
     eventName = "Revive",
     eventCallback = function(ords)
-        c.func.FadeOut(1000)
+        ig.funig.FadeOut(1000)
         NetworkResurrectLocalPlayer(ords.x, ords.y, ords.z, ords.h, true, false)
-        c.status.SetHealth(150)
-        c.data.SetLocalPlayerState("IsDead", false, true)
-        c.func.FadeIn(1000)
+        ig.status.SetHealth(150)
+        ig.data.SetLocalPlayerState("IsDead", false, true)
+        ig.funig.FadeIn(1000)
     end
 })
 
@@ -47,7 +47,7 @@ local Heal = RegisterClientCallback({
     eventName = "Heal",
     eventCallback = function()
         ClearPedBloodDamage(PlayerPedId())
-        c.status.SetHealth(c.status.GetMaxHealth())
+        ig.status.SetHealth(ig.status.GetMaxHealth())
     end
 })
 

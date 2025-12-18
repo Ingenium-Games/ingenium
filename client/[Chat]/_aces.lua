@@ -1,19 +1,19 @@
 -- ====================================================================================--
 -- Chat Suggestions get added based on user ACE permissions / grade.
-c.ace = {}
-c.aces = {}
+ig.ace = {}
+ig.aces = {}
 -- ====================================================================================--
 
-c.ace.public = function()
+ig.ace.public = function()
     -- public
     --
     TriggerEvent("chat:addSuggestion", "/switch", _L("switch"))
     --
 end
 
-c.ace.mod = function()
+ig.ace.mod = function()
     -- public
-    c.ace.public()
+    ig.ace.public()
     -- mod
     --
     TriggerEvent("chat:addSuggestion", "/setjob", _L("setjob"), {{
@@ -39,9 +39,9 @@ c.ace.mod = function()
 
 end
 
-c.ace.admin = function()
+ig.ace.admin = function()
     -- mod
-    c.ace.mod()
+    ig.ace.mod()
     -- admin
     --
     TriggerEvent("chat:addSuggestion", "/car", _L("car"), {{
@@ -76,17 +76,17 @@ c.ace.admin = function()
 
 end
 
-c.ace.superadmin = function()
+ig.ace.superadmin = function()
     -- admin
-    c.ace.admin()
+    ig.ace.admin()
     -- superadmin
     --
 
 end
 
-c.ace.developer = function()
+ig.ace.developer = function()
     -- superadmin
-    c.ace.superadmin()
+    ig.ace.superadmin()
     -- developer
     --       
     TriggerEvent("chat:addSuggestion", "/fx", _L("fx"), {{
@@ -125,14 +125,14 @@ c.ace.developer = function()
     }})
 end
 
-c.ace.owner = function()
+ig.ace.owner = function()
     -- developer
     --    
-    c.ace.developer()
+    ig.ace.developer()
 
 end
 
-for k, v in pairs(c.ace) do
-    table.insert(c.aces, k)
+for k, v in pairs(ig.ace) do
+    table.insert(ig.aces, k)
 end
 

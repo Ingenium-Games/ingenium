@@ -18,11 +18,11 @@ This implementation provides a scalable, job-based appearance customization pric
 - Only dirty files are written during periodic saves, minimizing I/O
 
 #### Key Functions
-- `c.appearance.LoadJobPricing(jobName)` - Load job-specific pricing
-- `c.appearance.GetPricing(jobName)` - Get pricing with fallback to default
-- `c.appearance.UpdatePrice(jobName, category, itemId, price)` - Update individual prices
-- `c.appearance.SaveAllDirtyPricing()` - Save modified pricing files
-- `c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)` - Calculate total cost
+- `ig.appearance.LoadJobPricing(jobName)` - Load job-specific pricing
+- `ig.appearance.GetPricing(jobName)` - Get pricing with fallback to default
+- `ig.appearance.UpdatePrice(jobName, category, itemId, price)` - Update individual prices
+- `ig.appearance.SaveAllDirtyPricing()` - Save modified pricing files
+- `ig.appearance.CalculateCost(jobName, oldAppearance, newAppearance)` - Calculate total cost
 
 ### Server Callbacks (`/server/[Callbacks]/_appearance.lua`)
 
@@ -134,7 +134,7 @@ This implementation provides a scalable, job-based appearance customization pric
    - Store saves initial appearance and initializes cost tracking
 
 2. **Making Changes**
-   - User modifies appearance (hair, clothing, etc.)
+   - User modifies appearance (hair, clothing, etig.)
    - Watcher detects change and triggers `calculateTotalCost()`
    - Cost is calculated by comparing initial vs. current appearance
    - UI updates immediately with new cost estimate

@@ -29,7 +29,7 @@ SendNUIMessage({
 #### New Way ✓ Recommended
 ```lua
 -- Using exports
-exports['ig.core']:Notify("Hello!", "green", 5000)
+exports['ingenium']:Notify("Hello!", "green", 5000)
 ```
 
 **Benefits of new way:**
@@ -58,7 +58,7 @@ end)
 #### New Way ✓ Built-in
 ```lua
 -- Show menu
-exports['ig.core']:ShowMenu({
+exports['ingenium']:ShowMenu({
     title = "My Menu",
     items = {
         { label = "Option 1", action = "opt1", data = {} },
@@ -96,7 +96,7 @@ end)
 #### New Way ✓ Built-in
 ```lua
 -- Show input
-exports['ig.core']:ShowInput({
+exports['ingenium']:ShowInput({
     title = "Enter your name",
     placeholder = "John Doe",
     maxLength = 50
@@ -121,10 +121,10 @@ end)
 #### New Way ✓ Centralized
 ```lua
 -- Show HUD
-exports['ig.core']:ShowHUD()
+exports['ingenium']:ShowHUD()
 
 -- Update data
-exports['ig.core']:UpdateHUD({
+exports['ingenium']:UpdateHUD({
     health = 100,
     armor = 50,
     hunger = 75,
@@ -136,7 +136,7 @@ exports['ig.core']:UpdateHUD({
 })
 
 -- Hide HUD
-exports['ig.core']:HideHUD()
+exports['ingenium']:HideHUD()
 ```
 
 ## Migration Checklist
@@ -187,7 +187,7 @@ Add to your test resource:
 ```lua
 RegisterCommand("test-new-ui", function()
     -- Test menu
-    exports['ig.core']:ShowMenu({
+    exports['ingenium']:ShowMenu({
         title = "Test Menu",
         items = {
             { label = "Option 1", action = "test1" },
@@ -208,11 +208,11 @@ TriggerEvent("Client:Notify", "Message", "green", 5000)
 **After (optional, but recommended):**
 ```lua
 -- Use exports for new code
-exports['ig.core']:Notify("Message", "green", 5000)
+exports['ingenium']:Notify("Message", "green", 5000)
 
 -- OR create a helper function
 function Notify(msg, color, fade)
-    exports['ig.core']:Notify(msg, color or "black", fade or 5000)
+    exports['ingenium']:Notify(msg, color or "black", fade or 5000)
 end
 
 -- Then use
@@ -231,7 +231,7 @@ Notify("Message", "green")
 ```lua
 -- Unified menu system
 local function ShowJobMenu()
-    exports['ig.core']:ShowMenu({
+    exports['ingenium']:ShowMenu({
         title = "Job Actions",
         items = {
             { label = "Clock In", action = "clockin" },
@@ -265,7 +265,7 @@ end)
 ```lua
 -- Show input
 local function AskForName()
-    exports['ig.core']:ShowInput({
+    exports['ingenium']:ShowInput({
         title = "Enter Player Name",
         placeholder = "John Doe",
         maxLength = 50
@@ -291,12 +291,12 @@ end)
 **After:**
 ```lua
 -- Show HUD
-exports['ig.core']:ShowHUD()
+exports['ingenium']:ShowHUD()
 
 -- Update on player data change
 RegisterNetEvent("playerDataUpdated")
 AddEventHandler("playerDataUpdated", function(data)
-    exports['ig.core']:UpdateHUD({
+    exports['ingenium']:UpdateHUD({
         health = data.health,
         armor = data.armor,
         hunger = data.hunger,
@@ -315,7 +315,7 @@ end)
 
 ```lua
 local function ShowMainMenu()
-    exports['ig.core']:ShowMenu({
+    exports['ingenium']:ShowMenu({
         title = "Main Menu",
         items = {
             { label = "Inventory", action = "inventory" },
@@ -326,7 +326,7 @@ local function ShowMainMenu()
 end
 
 local function ShowSettingsMenu()
-    exports['ig.core']:ShowMenu({
+    exports['ingenium']:ShowMenu({
         title = "Settings",
         items = {
             { label = "Toggle HUD", action = "toggle_hud" },
@@ -344,7 +344,7 @@ AddEventHandler("Client:Menu:Select", function(action, data)
         ShowMainMenu()
     elseif action == "toggle_hud" then
         -- Toggle HUD logic
-        exports['ig.core']:HideMenu()
+        exports['ingenium']:HideMenu()
     end
     -- ... handle other actions
 end)
@@ -354,7 +354,7 @@ end)
 
 ```lua
 local function AskForAmount()
-    exports['ig.core']:ShowInput({
+    exports['ingenium']:ShowInput({
         title = "Enter Amount",
         placeholder = "100",
         maxLength = 10
@@ -366,18 +366,18 @@ AddEventHandler("Client:Input:Submit", function(value)
     local amount = tonumber(value)
     
     if not amount or amount <= 0 then
-        exports['ig.core']:Notify("Invalid amount!", "red", 3000)
+        exports['ingenium']:Notify("Invalid amount!", "red", 3000)
         return
     end
     
     if amount > 1000000 then
-        exports['ig.core']:Notify("Amount too large!", "red", 3000)
+        exports['ingenium']:Notify("Amount too large!", "red", 3000)
         return
     end
     
     -- Process valid amount
     TriggerServerEvent("server:processAmount", amount)
-    exports['ig.core']:Notify("Processing $" .. amount, "green", 3000)
+    exports['ingenium']:Notify("Processing $" .. amount, "green", 3000)
 end)
 ```
 
@@ -388,7 +388,7 @@ end)
 local function ShowVehicleMenu(vehicle)
     local coords = GetEntityCoords(PlayerPedId())
     
-    exports['ig.core']:ShowContextMenu({
+    exports['ingenium']:ShowContextMenu({
         title = "Vehicle",
         items = {
             { label = "Enter Vehicle", icon = "🚗", action = "enter" },
@@ -432,7 +432,7 @@ ui_page "nui/index.html"
 
 **Solution:**
 1. Verify ig.core is started before your resource
-2. Check resource name is correct: `exports['ig.core']:...`
+2. Check resource name is correct: `exports['ingenium']:...`
 3. Restart your resource after updating
 
 ### Issue: UI appears but doesn't respond

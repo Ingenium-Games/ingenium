@@ -87,13 +87,13 @@ Execute a SELECT query from another resource.
 
 **Syntax:**
 ```lua
-exports['ig.core']:query(query, params, callback)
+exports['ingenium']:query(query, params, callback)
 ```
 
 **Example:**
 ```lua
 -- From another resource
-local characters = exports['ig.core']:query("SELECT * FROM characters WHERE Primary_ID = ?", {licenseId})
+local characters = exports['ingenium']:query("SELECT * FROM characters WHERE Primary_ID = ?", {licenseId})
 ```
 
 ---
@@ -104,12 +104,12 @@ Fetch a single value from another resource.
 
 **Syntax:**
 ```lua
-exports['ig.core']:fetchScalar(query, params, callback)
+exports['ingenium']:fetchScalar(query, params, callback)
 ```
 
 **Example:**
 ```lua
-local balance = exports['ig.core']:fetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {charId})
+local balance = exports['ingenium']:fetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {charId})
 ```
 
 ---
@@ -120,12 +120,12 @@ Fetch a single row from another resource.
 
 **Syntax:**
 ```lua
-exports['ig.core']:fetchSingle(query, params, callback)
+exports['ingenium']:fetchSingle(query, params, callback)
 ```
 
 **Example:**
 ```lua
-local user = exports['ig.core']:fetchSingle("SELECT * FROM users WHERE License_ID = ?", {licenseId})
+local user = exports['ingenium']:fetchSingle("SELECT * FROM users WHERE License_ID = ?", {licenseId})
 ```
 
 ---
@@ -136,12 +136,12 @@ Execute INSERT from another resource.
 
 **Syntax:**
 ```lua
-exports['ig.core']:insert(query, params, callback)
+exports['ingenium']:insert(query, params, callback)
 ```
 
 **Example:**
 ```lua
-local insertId = exports['ig.core']:insert("INSERT INTO logs (message, timestamp) VALUES (?, ?)", {message, timestamp})
+local insertId = exports['ingenium']:insert("INSERT INTO logs (message, timestamp) VALUES (?, ?)", {message, timestamp})
 ```
 
 ---
@@ -152,12 +152,12 @@ Execute UPDATE/DELETE from another resource.
 
 **Syntax:**
 ```lua
-exports['ig.core']:update(query, params, callback)
+exports['ingenium']:update(query, params, callback)
 ```
 
 **Example:**
 ```lua
-local affected = exports['ig.core']:update("UPDATE characters SET Active = FALSE", {})
+local affected = exports['ingenium']:update("UPDATE characters SET Active = FALSE", {})
 ```
 
 ---
@@ -168,12 +168,12 @@ Execute transaction from another resource.
 
 **Syntax:**
 ```lua
-exports['ig.core']:transaction(queries, callback)
+exports['ingenium']:transaction(queries, callback)
 ```
 
 **Example:**
 ```lua
-exports['ig.core']:transaction({
+exports['ingenium']:transaction({
     {query = "UPDATE accounts SET balance = balance - ?", parameters = {100}},
     {query = "INSERT INTO transactions VALUES (?)", parameters = {data}}
 }, function(success, results)
@@ -189,7 +189,7 @@ Check if database is ready from another resource.
 
 **Syntax:**
 ```lua
-exports['ig.core']:isReady()
+exports['ingenium']:isReady()
 ```
 
 **Returns:**
@@ -197,7 +197,7 @@ exports['ig.core']:isReady()
 
 **Example:**
 ```lua
-if exports['ig.core']:isReady() then
+if exports['ingenium']:isReady() then
     print("Database is ready")
 end
 ```
@@ -210,7 +210,7 @@ Get performance statistics from another resource.
 
 **Syntax:**
 ```lua
-exports['ig.core']:getStats()
+exports['ingenium']:getStats()
 ```
 
 **Returns:**
@@ -218,7 +218,7 @@ exports['ig.core']:getStats()
 
 **Example:**
 ```lua
-local stats = exports['ig.core']:getStats()
+local stats = exports['ingenium']:getStats()
 print("Total queries: " .. stats.totalQueries)
 print("Average time: " .. string.format("%.2fms", stats.averageTime))
 ```
@@ -291,10 +291,10 @@ end)
 Citizen.CreateThread(function()
     print("Waiting for database...")
     
-    if c.sql.AwaitReady(30000) then
+    if ig.sql.AwaitReady(30000) then
         print("Database ready - loading data")
         -- Load your resource data
-        local data = c.sql.Query("SELECT * FROM my_table", {})
+        local data = ig.sql.Query("SELECT * FROM my_table", {})
     else
         print("ERROR: Database connection timeout!")
     end
@@ -309,7 +309,7 @@ RegisterCommand('checkplayer', function(source, args)
     local license = args[1]
     
     -- Use export to query ig.core database
-    local user = exports['ig.core']:fetchSingle(
+    local user = exports['ingenium']:fetchSingle(
         "SELECT * FROM users WHERE License_ID = ?",
         {license}
     )
@@ -330,7 +330,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(300000) -- 5 minutes
         
-        local stats = c.sql.GetStats()
+        local stats = ig.sql.GetStats()
         
         if stats.averageTime > 50 then
             print(string.format("^3[WARNING] High average query time: %.2fms^7", stats.averageTime))

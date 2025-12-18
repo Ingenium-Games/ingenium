@@ -19,7 +19,7 @@ Citizen.CreateThread(function()
         local ped = PlayerPedId()
         local ply = PlayerId()
         
-        if c.data.IsPlayerLoaded() then
+        if ig.data.IsPlayerLoaded() then
             Wait(0) -- Per-frame check when player is loaded
             
             -- Get current player states
@@ -142,21 +142,21 @@ local deathFxActive = false
 
 Citizen.CreateThread(function()
     while true do
-        if c.data.IsPlayerLoaded() then
+        if ig.data.IsPlayerLoaded() then
             Wait(500) -- Check every 500ms
             
             local isDead = LocalPlayer.state.IsDead
             
             if isDead and not deathFxActive then
                 -- Player just died, start death effects
-                c.fx.StartDeath()
+                ig.fx.StartDeath()
                 deathFxActive = true
-                c.func.Debug_2("Death FX started")
+                ig.funig.Debug_2("Death FX started")
             elseif not isDead and deathFxActive then
                 -- Player revived, stop death effects
-                c.fx.StopDeath()
+                ig.fx.StopDeath()
                 deathFxActive = false
-                c.func.Debug_2("Death FX stopped")
+                ig.funig.Debug_2("Death FX stopped")
             end
         else
             -- Player not loaded

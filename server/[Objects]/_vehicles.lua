@@ -1,7 +1,7 @@
 -- ====================================================================================--
-c.vehicle = {} -- function level
-c.vehicles = {}
-c.vdex = {} -- vehicles...
+ig.vehicle = {} -- function level
+ig.vehicles = {}
+ig.vdex = {} -- vehicles...
 -- ====================================================================================--
 
 --[[
@@ -28,31 +28,31 @@ c.vdex = {} -- vehicles...
 }
 
 
-function c.vehicle.GetVehicles()
-    return c.vehicles
+function ig.vehicle.GetVehicles()
+    return ig.vehicles
 end
 
-function c.vehicle.SetVehicles(veh)
-    c.vehicles = veh
+function ig.vehicle.SetVehicles(veh)
+    ig.vehicles = veh
 end
 
-function c.vehicle.Generate(distance)
-    for id, data in pairs(c.vehicle.GetVehicles()) do
+function ig.vehicle.Generate(distance)
+    for id, data in pairs(ig.vehicle.GetVehicles()) do
         if (not data.Spawned) then
             local Model = data.Model
             local Coords = json.decode(data.Coords)
             local Condition = json.decode(data.Condition)
             local Modificaitons = json.decode(data.Modificaitons)
-            local db = c.sql.veh.GetByPlate(data.Plate)
-            local ply = c.func.GetClosestPlayer(vec3(Coords.x, Coords.y, Coords.z), distance)
+            local db = ig.sql.veh.GetByPlate(data.Plate)
+            local ply = ig.funig.GetClosestPlayer(vec3(Coords.x, Coords.y, Coords.z), distance)
             if (ply) then
                 Citizen.CreateThread(function()
                     --
-                    local entity, net = c.func.CreateVehicle(data.Model, Coords.x, Coords.y, Coords.z, Coords.h, db)
+                    local entity, net = ig.funig.CreateVehicle(data.Model, Coords.x, Coords.y, Coords.z, Coords.h, db)
                     --
                     if not entity then
                         local _, net = TriggerClientCallback({source = ply, eventName = "EnsurePersistantVehicle", args = {Model, Coords}})
-                        c.data.AddVehicle(net, c.class.OwnedVehicle, net, db)
+                        ig.data.AddVehicle(net, ig.class.OwnedVehicle, net, db)
                     end
                 end)
             end
@@ -67,10 +67,10 @@ AddStateBagChangeHandler("Spawned", nil, function(bagName, key, value, _unused, 
         local net = tonumber(string)
         local vehicle = NetworkGetEntityFromNetworkId(net)
         local id = Entity(vehicle).state.ID
-        if (id and c.vehicles[id]) then
-            c.vehicles[id].Spawned = true
+        if (id and ig.vehicles[id]) then
+            ig.vehicles[id].Spawned = true
             if (not DoesEntityExist(vehicle)) then
-                c.vehicles[id].Spawned = false
+                ig.vehicles[id].Spawned = false
             end
         end
     end
@@ -93,15 +93,15 @@ RegisterNetEvent("Vehicle:Update", function(net, model, modifications, condition
     end
 
     local id = Entity(vehicle).state.ID
-    if (id and c.vehicles[id]) then
+    if (id and ig.vehicles[id]) then
         if not recent[id] then
-            local xVehicle = c.data.GetVehicle(net)
-            c.sql.save.Vehicle(xVehicle, function()
+            local xVehicle = ig.data.GetVehicle(net)
+            ig.sql.save.Vehicle(xVehicle, function()
                 recent[id] = true
             end)
         end
     else
-        local xVehicle = c.data.GetVehicle(net)
+        local xVehicle = ig.data.GetVehicle(net)
         local data = {
             Character_ID = xVehicle.GetOwner(),
             Model = xVehicle.GetModel(),
@@ -111,13 +111,13 @@ RegisterNetEvent("Vehicle:Update", function(net, model, modifications, condition
             Modifications = json.encode(modifications)
         }
         --
-        c.sql.veh.Add(data, function()
-            local data = c.sql.veh.GetByPlate(xVehicle.Plate)
+        ig.sql.veh.Add(data, function()
+            local data = ig.sql.veh.GetByPlate(xVehicle.Plate)
             xVehicle.SetID(data.ID)
             xVehicle.SetCondition(json.decode(data.Condition))
             xVehicle.SetModifications(json.decode(data.Modifications))
-            c.vehicles[data.ID] = data
-            c.vehicles[data.ID].Spawned = true
+            ig.vehicles[data.ID] = data
+            ig.vehicles[data.ID].Spawned = true
         end)
     end
 end)

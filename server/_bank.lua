@@ -1,50 +1,50 @@
 -- ====================================================================================--
-c.bank = {}
+ig.bank = {}
 -- ====================================================================================--
 
 local payments = false
 
 -- Pulls all characters with loans and deducts money to pay the loan, can go negitive.
 --- func desc
-function c.bank.CalculatePayments()
-    local xJob = c.data.GetJob("bank")
+function ig.bank.CalculatePayments()
+    local xJob = ig.data.GetJob("bank")
 
     -- To run independant of active players and debit accounts via sql.
-    c.func.Debug_1("Pulls all characters with loans and deducts money to pay the loan, can go negitive.")
+    ig.funig.Debug_1("Pulls all characters with loans and deducts money to pay the loan, can go negitive.")
 end
 
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
     if not payments then
-        c.cron.RunAt(conf.loanpayment.h, conf.loanpayment.m, c.bank.CalculatePayments)
+        ig.cron.RunAt(conf.loanpayment.h, conf.loanpayment.m, ig.bank.CalculatePayments)
         payments = true
-    end -- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculatePayments()")
+    end -- ig.funig.Debug_1("[E] Added Cron Job [F] ig.bank.CalculatePayments()")
 end)
 --
 
 -- Updates the characters loan to add the interest on the outstanding amount each day.
 --- func desc
-function c.bank.CalculateInterest()
-    local xJob = c.data.GetJob("bank")
+function ig.bank.CalculateInterest()
+    local xJob = ig.data.GetJob("bank")
 
     -- To run independant of active players and debit accounts via sql.
-    c.func.Debug_1("Updates the characters loan to add the interest on the outstanding amount each day.")
+    ig.funig.Debug_1("Updates the characters loan to add the interest on the outstanding amount each day.")
 end
 
 local interest = false
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
     if not interest then
-        c.cron.RunAt(conf.loaninterest.h, conf.loaninterest.m, c.bank.CalculateInterest)
+        ig.cron.RunAt(conf.loaninterest.h, conf.loaninterest.m, ig.bank.CalculateInterest)
         interest = true
-    end -- c.func.Debug_1("[E] Added Cron Job [F] c.bank.CalculateInterest()")
+    end -- ig.funig.Debug_1("[E] Added Cron Job [F] ig.bank.CalculateInterest()")
 end)
 --
 
 --- func desc
-function c.bank.CheckNegativeBalances()
-    local xJob = c.data.GetJob("bank")
-    local xPlayers = c.data.GetPlayers()
+function ig.bank.CheckNegativeBalances()
+    local xJob = ig.data.GetJob("bank")
+    local xPlayers = ig.data.GetPlayers()
     for k, v in pairs(xPlayers) do
         if v then
             local xPlayer = v
@@ -59,7 +59,7 @@ function c.bank.CheckNegativeBalances()
             end
         end
     end
-    -- c.func.Debug_1("Active clients notified of negative bank balances and Fees charged at $"..conf.bankoverdraw)
+    -- ig.funig.Debug_1("Active clients notified of negative bank balances and Fees charged at $"..conf.bankoverdraw)
 end
 
 local negative = false
@@ -68,9 +68,9 @@ local negative = false
 AddEventHandler("onServerResourceStart", function()
     if not negative then
         for i = 0, 23, 1 do
-            c.cron.RunAt(i, 0, c.bank.CheckNegativeBalances)
+            ig.cron.RunAt(i, 0, ig.bank.CheckNegativeBalances)
         end
         negative = true
     end
-    -- c.func.Debug_1("[E] Added Cron Job: [F] c.bank.CheckNegativeBalances()")
+    -- ig.funig.Debug_1("[E] Added Cron Job: [F] ig.bank.CheckNegativeBalances()")
 end)

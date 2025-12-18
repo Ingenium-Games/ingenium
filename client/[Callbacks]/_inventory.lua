@@ -7,33 +7,33 @@ local Weapon = RegisterClientCallback({
         local Ped = PlayerPedId()
         -- _Weaponnameame
         local Name = k
-        c._weaponname = Name
+        ig._weaponname = Name
         -- _Type
         local AmmoType = ammotype
-        c._ammotype = AmmoType
+        ig._ammotype = AmmoType
         -- _Ammo
         local Ammo = ammo
-        if c._ammo[AmmoType] > Ammo then
-            Ammo = c._ammo[AmmoType]
+        if ig._ammo[AmmoType] > Ammo then
+            Ammo = ig._ammo[AmmoType]
         else
-            c._ammo[AmmoType] = Ammo
+            ig._ammo[AmmoType] = Ammo
         end
         -- _Weapon
         local Hash = tonumber(hash)
         -- _Componenets
         local Components = components
-        c._components = Components
+        ig._components = Components
         --
-        if c._weapon == Hash then
+        if ig._weapon == Hash then
             -- If putting the gun away, update the ammo
             TriggerServerCallback({
                 eventName = "UpdateAmmo",
-                args = {c._ammotype, c._ammo[c._ammotype]}
+                args = {ig._ammotype, ig._ammo[ig._ammotype]}
             })
             --
             SetCurrentPedWeapon(Ped, `WEAPON_UNARMED`, true)
             RemoveAllPedWeapons(Ped, true)
-            c._weapon = nil
+            ig._weapon = nil
         else
             if Hash == `WEAPON_PETROLCAN` or Hash == `WEAPON_FIREEXTINGUISHER` then
                 Ammo = 4000
@@ -49,7 +49,7 @@ local Weapon = RegisterClientCallback({
                 end
             end
             --
-            c._weapon = Hash
+            ig._weapon = Hash
         end
         --
     end
@@ -59,46 +59,46 @@ local Consumeable = RegisterClientCallback({
     eventName = "Client:Item:Consumeable",
     eventCallback = function(k)
         local Name = k
-        local Data = c.item.GetData(Name)
+        local Data = ig.item.GetData(Name)
         --
         if Data.Modifiers then
             if Data.Modifiers.Hunger then
-                c.modifier.SetHungerModifier(Data.Modifiers.Hunger)
+                ig.modifier.SetHungerModifier(Data.Modifiers.Hunger)
             end
             if Data.Modifiers.Thirst then
-                c.modifier.SetThirstModifier(Data.Modifiers.Thirst)
+                ig.modifier.SetThirstModifier(Data.Modifiers.Thirst)
             end
             if Data.Modifiers.Stress then
-                c.modifier.SetStressModifier(Data.Modifiers.Stress)
+                ig.modifier.SetStressModifier(Data.Modifiers.Stress)
             end
         end
         --
         if Data.Status then
             if Data.Status.Health then
-                c.status.SetHealth(c.check.Number((c.status.GetHealth() + Data.Status.Health), 0, 400))
+                ig.status.SetHealth(ig.check.Number((ig.status.GetHealth() + Data.Status.Health), 0, 400))
             end
             if Data.Status.Armour then
-                c.status.AddArmourToAmount(c.check.Number(Data.Status.Armour, 1, 100))
+                ig.status.AddArmourToAmount(ig.check.Number(Data.Status.Armour, 1, 100))
             end
             if Data.Status.Hunger then
                 if Data.Status.Hunger > 0 then
-                    c.status.AddHunger(Data.Status.Hunger)
+                    ig.status.AddHunger(Data.Status.Hunger)
                 else
-                    c.status.RemoveHunger(Data.Status.Hunger)
+                    ig.status.RemoveHunger(Data.Status.Hunger)
                 end
             end
             if Data.Status.Thirst then
                 if Data.Status.Thirst > 0 then
-                    c.status.AddThirst(Data.Status.Thirst)
+                    ig.status.AddThirst(Data.Status.Thirst)
                 else
-                    c.status.RemoveThirst(Data.Status.Thirst)
+                    ig.status.RemoveThirst(Data.Status.Thirst)
                 end
             end
             if Data.Status.Stress then
                 if Data.Status.Stress > 0 then
-                    c.status.AddStress(Data.Status.Stress)
+                    ig.status.AddStress(Data.Status.Stress)
                 else
-                    c.status.RemoveStress(Data.Status.Stress)
+                    ig.status.RemoveStress(Data.Status.Stress)
                 end
             end
         end
@@ -106,10 +106,10 @@ local Consumeable = RegisterClientCallback({
         if Data.Ammo then
             local type = Data.Ammo.Type
             local amount = Data.Ammo.Amount
-            c._ammo[type] = c._ammo[type] + amount
+            ig._ammo[type] = ig._ammo[type] + amount
             TriggerServerCallback({
                 eventName = "UpdateAmmo",
-                args = {type, c._ammo[type]}
+                args = {type, ig._ammo[type]}
             })
         end
     end

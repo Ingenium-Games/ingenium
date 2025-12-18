@@ -1,6 +1,6 @@
 -- ====================================================================================--
-c.blip = {} -- functions
-c.blips = {} -- stored made blips.
+ig.blip = {} -- functions
+ig.blips = {} -- stored made blips.
 SetThisScriptCanRemoveBlipsCreatedByAnyScript(true)
 -- ====================================================================================--
 
@@ -29,7 +29,7 @@ SetThisScriptCanRemoveBlipsCreatedByAnyScript(true)
 ---@param display number
 ---@param category number
 ---@param legend boolean
-function c.blip.Blip(coords, sprite, colour, text, scale, flash, fade, short, high, display, category, legend)
+function ig.blip.Blip(coords, sprite, colour, text, scale, flash, fade, short, high, display, category, legend)
     local blip = AddBlipForCoord(coords)
     SetBlipSprite(blip, (sprite or 1))
     SetBlipDisplay(blip, (display or 6))
@@ -85,7 +85,7 @@ end
 ---@param display number
 ---@param category number
 ---@param legend boolean
-function c.blip.EntityBlip(entity, sprite, colour, text, scale, flash, fade, short, high, display, category, legend)
+function ig.blip.EntityBlip(entity, sprite, colour, text, scale, flash, fade, short, high, display, category, legend)
     local blip = AddBlipForEntity(entity)
     SetBlipSprite(blip, (sprite or 1))
     SetBlipDisplay(blip, (display or 6))
@@ -134,7 +134,7 @@ end
 ---@param color any
 ---@param alpha any
 ---@param high any
-function c.blip.RadiusBlip(coords, range, color, alpha, high)
+function ig.blip.RadiusBlip(coords, range, color, alpha, high)
     local blip = AddBlipForRadius(coords(range or 100.0))
     SetBlipColour(blip, (color or 1))
     SetBlipAlpha(blip, (alpha or 80))
@@ -160,7 +160,7 @@ end
 ---@param high any
 ---@param display any
 ---@param short any
-function c.blip.AreaBlip(coords, width, height, heading, color, alpha, high, display, short)
+function ig.blip.AreaBlip(coords, width, height, heading, color, alpha, high, display, short)
     local blip = AddBlipForArea(coords, (width or 100.0), (height or 100.0))
     SetBlipColour(blip, (color or 1))
     SetBlipAlpha(blip, (alpha or 80))
@@ -184,39 +184,39 @@ function c.blip.AreaBlip(coords, width, height, heading, color, alpha, high, dis
 end
 
 --- func desc
-function c.blip.CreateBlip(...)
-    local handle = #c.blips + 1
-    local blip = c.blip.Blip(...)
-    c.blips[handle] = blip
+function ig.blip.CreateBlip(...)
+    local handle = #ig.blips + 1
+    local blip = ig.blip.Blip(...)
+    ig.blips[handle] = blip
     return handle
 end
 
 --- func desc
-function c.blip.CreateRadius(...)
-    local handle = #c.blips + 1
-    local blip = c.blip.RadiusBlip(...)
-    c.blips[handle] = blip
+function ig.blip.CreateRadius(...)
+    local handle = #ig.blips + 1
+    local blip = ig.blip.RadiusBlip(...)
+    ig.blips[handle] = blip
     return handle
 end
 
 --- func desc
-function c.blip.CreateArea(...)
-    local handle = #c.blips + 1
-    local blip = c.blip.AreaBlip(...)
-    c.blips[handle] = blip
+function ig.blip.CreateArea(...)
+    local handle = #ig.blips + 1
+    local blip = ig.blip.AreaBlip(...)
+    ig.blips[handle] = blip
     return handle
 end
 
 --- func desc
 ---@param handle any
-function c.blip.GetBlip(handle)
-    return c.blips[handle]
+function ig.blip.GetBlip(handle)
+    return ig.blips[handle]
 end
 
 --- func desc
 ---@param handle any
-function c.blip.Remove(handle)
-    local blip = c.blips[handle]
+function ig.blip.Remove(handle)
+    local blip = ig.blips[handle]
     if blip then
         RemoveBlip(blip["handle"])
     end
@@ -233,14 +233,14 @@ local Blips = {
 
 function activateblips()
     for i=1, #Blips do
-        local handle = c.blip.CreateBlip(Blips[i].coords, Blips[i].sprite, Blips[i].colour, Blips[i].title, Blips[i].size)
+        local handle = ig.blip.CreateBlip(Blips[i].coords, Blips[i].sprite, Blips[i].colour, Blips[i].title, Blips[i].size)
         store_blips[Blips[i].title] = handle
     end
 end
 
 function deactiveateblips()
     for k,v in pairs(store_blips) do
-        c.blip.Remove(v)
+        ig.blip.Remove(v)
     end
 end
 

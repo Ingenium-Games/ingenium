@@ -4,7 +4,7 @@
 
 --- Memory monitoring command
 RegisterCommand('memory', function(source, args)
-    if source == 0 or (c.func and c.func.IsAce and c.func.IsAce(source)) then
+    if source == 0 or (ig.func and ig.funig.IsAce and ig.funig.IsAce(source)) then
         local memBefore = collectgarbage('count')
         collectgarbage('collect')
         local memAfter = collectgarbage('count')
@@ -23,22 +23,22 @@ RegisterCommand('memory', function(source, args)
         }
         
         -- Count players
-        for k,v in pairs(c.pdex or {}) do 
+        for k,v in pairs(ig.pdex or {}) do 
             if v then counts.players = counts.players + 1 end 
         end
         
         -- Count vehicles
-        for k,v in pairs(c.vdex or {}) do 
+        for k,v in pairs(ig.vdex or {}) do 
             if v then counts.vehicles = counts.vehicles + 1 end 
         end
         
         -- Count NPCs
-        for k,v in pairs(c.ndex or {}) do 
+        for k,v in pairs(ig.ndex or {}) do 
             if v then counts.npcs = counts.npcs + 1 end 
         end
         
         -- Count objects
-        for k,v in pairs(c.odex or {}) do 
+        for k,v in pairs(ig.odex or {}) do 
             if v then counts.objects = counts.objects + 1 end 
         end
         
@@ -62,25 +62,25 @@ local function CleanupOrphanedEntities()
     local cleaned = {vehicles = 0, npcs = 0, objects = 0}
     
     -- Clean vehicles
-    for net, veh in pairs(c.vdex or {}) do
+    for net, veh in pairs(ig.vdex or {}) do
         if veh and veh.Entity and not DoesEntityExist(veh.Entity) then
-            c.vdex[net] = nil
+            ig.vdex[net] = nil
             cleaned.vehicles = cleaned.vehicles + 1
         end
     end
     
     -- Clean NPCs
-    for net, npc in pairs(c.ndex or {}) do
-        if npc and npc.Entity and not DoesEntityExist(npc.Entity) then
-            c.ndex[net] = nil
+    for net, npc in pairs(ig.ndex or {}) do
+        if npc and npig.Entity and not DoesEntityExist(npig.Entity) then
+            ig.ndex[net] = nil
             cleaned.npcs = cleaned.npcs + 1
         end
     end
     
     -- Clean objects
-    for uuid, obj in pairs(c.odex or {}) do
+    for uuid, obj in pairs(ig.odex or {}) do
         if obj and obj.Entity and not DoesEntityExist(obj.Entity) then
-            c.odex[uuid] = nil
+            ig.odex[uuid] = nil
             cleaned.objects = cleaned.objects + 1
         end
     end

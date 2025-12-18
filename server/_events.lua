@@ -1,12 +1,12 @@
 -- ====================================================================================--
-c.event = {}
+ig.event = {}
 -- ====================================================================================--
 
 --- func desc
 ---@param job string "Jobname used fro role permissions"
 ---@param name string "The final argument f the event"
 ---@param cb function "The function to call post event being triggered and once confirmed user is able to action event."
-function c.event.AddInteractJobEvent(job, name, cb)
+function ig.event.AddInteractJobEvent(job, name, cb)
     local eventname = ("Server:Interact:%s"):format(name)
     ExecuteCommand(("add_ace job.%s Server:Interact:%s allow"):format(job, name))
     RegisterNetEvent(eventname, function(options)
@@ -17,7 +17,7 @@ function c.event.AddInteractJobEvent(job, name, cb)
             -- Do Actions...
             cb(src, o)
         else
-            c.func.Eventban(src, eventname)
+            ig.funig.Eventban(src, eventname)
         end
     end)
     return eventname

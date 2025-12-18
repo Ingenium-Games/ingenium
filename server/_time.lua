@@ -1,21 +1,21 @@
 -- ====================================================================================--
-c.time = {} -- functions
+ig.time = {} -- functions
 -- ====================================================================================--
 
 --- func desc
-function c.time.Update()
+function ig.time.Update()
     local time = os.date("*t")
     SetConvarReplicated("Time", os.date("%H:%M", os.time() + conf.altertime * 60 * 60))
     SetConvarServerInfo("Server Time", os.date("%H:%M"))
-    c.cron.OnTime(time.hour, time.min)
+    ig.cron.OnTime(time.hour, time.min)
 end
 
 --- func desc
-function c.time.ServerSync()
-    c.time.Update()
+function ig.time.ServerSync()
+    ig.time.Update()
     local function Do()
-        c.time.Update()
-        SetTimeout(c.min, Do)
+        ig.time.Update()
+        SetTimeout(ig.min, Do)
     end
-    SetTimeout(c.min, Do)
+    SetTimeout(ig.min, Do)
 end

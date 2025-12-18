@@ -10,7 +10,7 @@ RegisterNUICallback("_character-select__join", function(data, cb)
         return
     end
     -- Check if player is loaded as a character, otherwise dont disable nui, itll be in the character seleciton screen.
-    if not c.data.IsPlayerLoaded() then
+    if not ig.data.IsPlayerLoaded() then
         SetNuiFocus(false, false)
         TriggerServerEvent("Server:Character:Join", data.ID)
         SetFollowPedCamViewMode(0)
@@ -36,7 +36,7 @@ RegisterNUICallback("_character-select__delete", function(data, cb)
         return
     end
     -- Check if player is loaded as a character, otherwise dont disable nui, itll be in the character seleciton screen.
-    if not c.data.IsPlayerLoaded() then
+    if not ig.data.IsPlayerLoaded() then
         -- Remove Focus
         SetNuiFocus(false, false)
         TriggerServerEvent("Server:Character:Delete", data.ID)
@@ -56,14 +56,14 @@ end)
 
 RegisterNUICallback("_character-select__register", function(data, cb)
     -- Check if player is loaded as a character, otherwise dont disable nui, itll be in the character seleciton screen.
-    if not c.data.IsPlayerLoaded() then
+    if not ig.data.IsPlayerLoaded() then
         -- Remove Focus
         SetNuiFocus(false, false)
         SetFollowPedCamViewMode(0)
         
         -- Get appearance from our native system
-        local appearance = c.appearance.PendingAppearance or c.appearance.GetAppearance()
-        c.appearance.PendingAppearance = nil -- Clear pending appearance
+        local appearance = ig.appearance.PendingAppearance or ig.appearance.GetAppearance()
+        ig.appearance.PendingAppearance = nil -- Clear pending appearance
         
         TriggerServerEvent("Server:Character:Register", data.First_Name, data.Last_Name, appearance)
         cb({

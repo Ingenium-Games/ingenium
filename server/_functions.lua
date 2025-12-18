@@ -1,29 +1,29 @@
 -- ====================================================================================--
-c.func = {}
+ig.func = {}
 -- ====================================================================================--
 
 --- func desc
 ---@param any any
-function c.func.Func(...)
+function ig.funig.Func(...)
     local arg = {...}
-    local status, val = c.func.Err(unpack(arg))
+    local status, val = ig.funig.Err(unpack(arg))
     return val
 end
 
 --- func desc
 ---@param func any
-function c.func.Err(func, ...)
+function ig.funig.Err(func, ...)
     local arg = {...}
     return xpcall(function()
-        return c.func.Func(unpack(arg))
+        return ig.funig.Func(unpack(arg))
     end, function(err)
-        return c.func.Error(err)
+        return ig.funig.Error(err)
     end)
 end
 
 --- func desc
 ---@param err any
-function c.func.Error(err)
+function ig.funig.Error(err)
     if conf.error then
         if type(err) == "string" then
             print("   ^7[^3Error^7]:  ==    ", err)
@@ -37,7 +37,7 @@ end
 
 --- func desc
 ---@param str any
-function c.func.Debug_1(str)
+function ig.funig.Debug_1(str)
     if conf.debug_1 then
         print("   ^7[^6Debug L1^7]:  ==    ", str)
     end
@@ -45,7 +45,7 @@ end
 
 --- func desc
 ---@param str any
-function c.func.Debug_2(str)
+function ig.funig.Debug_2(str)
     if conf.debug_2 then
         print("   ^7[^6Debug L2^7]:  ==    ", str)
     end
@@ -53,7 +53,7 @@ end
 
 --- func desc
 ---@param str any
-function c.func.Debug_3(str)
+function ig.funig.Debug_3(str)
     if conf.debug_3 then
         print("   ^7[^6Debug L3^7]:  ==    ", str)
     end
@@ -61,19 +61,19 @@ end
 
 --- func desc
 ---@param str any
-function c.func.Alert(str)
+function ig.funig.Alert(str)
     print("   ^7[^3Alert^7]:  ==    ", str)
 end
 
 --- func desc
-function c.func.Timestamp()
+function ig.funig.Timestamp()
     return os.time(os.date("*t"))
 end
 
 --- func desc
 ---@param time any
-function c.func.Timestring(time)
-    local time = time or c.func.Timestamp()
+function ig.funig.Timestring(time)
+    local time = time or ig.funig.Timestamp()
     return os.date("%c", time)
 end
 
@@ -85,7 +85,7 @@ local intervals = {}
 ---@param callback function | number
 ---@param interval? number
 ---@param ... any
-function c.func.SetInterval(callback, interval, ...)
+function ig.funig.SetInterval(callback, interval, ...)
 	interval = interval or 0
 
     if type(interval) ~= 'number' then
@@ -120,7 +120,7 @@ function c.func.SetInterval(callback, interval, ...)
 end
 
 ---@param id number
-function c.func.ClearInterval(id)
+function ig.funig.ClearInterval(id)
     if type(id) ~= 'number' then
         return error(('Interval id must be a number. Received %s'):format(json.encode(id --[[@as unknown]])))
 	end
@@ -135,8 +135,8 @@ end
 -- ====================================================================================--
 
 --- Returns Primary_ID as set by conf.lua. String
----@param source number "license: etc..."
-function c.func.identifier(source)
+---@param source number "license: etig..."
+function ig.funig.identifier(source)
     local src = tonumber(source)
     for k, v in ipairs(GetPlayerIdentifiers(src)) do
         if string.match(v, conf.identifier) then
@@ -146,8 +146,8 @@ function c.func.identifier(source)
 end
 
 --- Returns Steam, FiveM, License, Discord and IP identifiers in that order. Strings
----@param source number "license: etc..."
-function c.func.identifiers(source)
+---@param source number "license: etig..."
+function ig.funig.identifiers(source)
     local src = tonumber(source)
     local steam, fivem, license, discord, ip = nil, nil, nil, nil, nil
     for k, v in ipairs(GetPlayerIdentifiers(src)) do
@@ -172,7 +172,7 @@ end
 ---@param name any
 ---@param message any
 ---@param footer any
-function c.func.Discord(url, color, name, message, footer)
+function ig.funig.Discord(url, color, name, message, footer)
     local embed = {{
         ["color"] = color,
         ["title"] = "**" .. name .. "**",
@@ -198,18 +198,18 @@ end
 ---@param name any
 ---@param message any
 ---@param footer any
-function c.func.Discorse(message, url, name, coords)
+function ig.funig.Discorse(message, url, name, coords)
     --[[local post = json.encode({
         raw = message,
         title = "Feedback",
         displayusername = "system",
-        topic_id = tonumber(c.func.Timestamp()),
+        topic_id = tonumber(ig.funig.Timestamp()),
         category = 26
     })]]--
     PerformHttpRequest(conf.url.discorse_posts, function(err, text, headers)
         print(err)
         print(text)
-        print(c.table.Dump(headers))
+        print(ig.table.Dump(headers))
     end, "POST", [[{
         "title": "string",
         "raw": "string",
@@ -225,16 +225,16 @@ end
 --- func desc
 ---@param source any
 ---@param event any
-function c.func.Eventban(source, event)
+function ig.funig.Eventban(source, event)
     local src = source
-    local time = c.func.Timestamp()
+    local time = ig.funig.Timestamp()
     local reason = {
         ["Event"] = event,
         ["Timestamp"] = time,
         ["By"] = "Server"
     }
-    c.sql.user.SetBan(c.func.identifier(src), true, reason, function()
-        DropPlayer(src, "[AC] c.func.Eventban : Abuse of [E] " .. event .. ", at [T] " .. time ..
+    ig.sql.user.SetBan(ig.funig.identifier(src), true, reason, function()
+        DropPlayer(src, "[AC] ig.funig.Eventban : Abuse of [E] " .. event .. ", at [T] " .. time ..
             ". Please screenshot this for records sake")
         TriggerEvent("txaLogger:CommandExecuted", "[AC] Eventban : Abuse of [E] " .. event .. ", at [T] " .. time .. ".")
     end)
@@ -245,8 +245,8 @@ end
 
 --- func desc
 ---@param vehicle any
-function c.func.IsAnyPlayerInsideVehicle(vehicle)
-    local playerPeds = c.func.GetAllPlayerPeds()
+function ig.funig.IsAnyPlayerInsideVehicle(vehicle)
+    local playerPeds = ig.funig.GetAllPlayerPeds()
     for i, playerPed in ipairs(playerPeds) do
         local veh = GetVehiclePedIsIn(playerPed, false)
 
@@ -261,7 +261,7 @@ end
 --- func desc
 ---@param position any
 ---@param maxRadius any
-function c.func.GetClosestPlayer(position, maxRadius)
+function ig.funig.GetClosestPlayer(position, maxRadius)
     local closestDistance = maxRadius and (maxRadius * maxRadius) or 1000000.0
     local closestPlayer = nil
     local closestPos = nil
@@ -290,7 +290,7 @@ function c.func.GetClosestPlayer(position, maxRadius)
 end
 
 --- func desc
-function c.func.GetAllPlayerPeds()
+function ig.funig.GetAllPlayerPeds()
     local playerPeds = {}
 
     local peds = GetAllPeds()
@@ -306,12 +306,12 @@ end
 --- func desc
 ---@param position any
 ---@param maxRadius any
-function c.func.GetClosestPlayerPed(position, maxRadius)
+function ig.funig.GetClosestPlayerPed(position, maxRadius)
     local closestDistance = maxRadius and (maxRadius * maxRadius) or 1000000.0
     local closestPlayerPed = nil
     local closestPos = nil
 
-    for i, playerPed in ipairs(c.func.GetAllPlayerPeds()) do
+    for i, playerPed in ipairs(ig.funig.GetAllPlayerPeds()) do
         local pos = GetEntityCoords(playerPed)
         local distanceSquared = #(position - pos)
 
@@ -335,7 +335,7 @@ end
 ---@param y any
 ---@param z any
 ---@param h any
-function c.func.CreateVehicle(name, x, y, z, h, data)
+function ig.funig.CreateVehicle(name, x, y, z, h, data)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -347,15 +347,15 @@ function c.func.CreateVehicle(name, x, y, z, h, data)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            c.func.Debug_2("Timout Reached on creating vehicle")
+            ig.funig.Debug_2("Timout Reached on creating vehicle")
             return false, false
         end
     end
     local net = NetworkGetNetworkIdFromEntity(entity)
     if data then
-        c.data.AddVehicle(net, c.class.OwnedVehicle, net, data)
+        ig.data.AddVehicle(net, ig.class.OwnedVehicle, net, data)
     else
-        c.data.AddVehicle(net, c.class.Vehicle, net)
+        ig.data.AddVehicle(net, ig.class.Vehicle, net)
     end
     return entity, net
 end
@@ -366,7 +366,7 @@ end
 ---@param y any
 ---@param z any
 ---@param h any
-function c.func.CreatePed(name, x, y, z, h)
+function ig.funig.CreatePed(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -378,12 +378,12 @@ function c.func.CreatePed(name, x, y, z, h)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            c.func.Debug_2("Timout Reached on creating ped")
+            ig.funig.Debug_2("Timout Reached on creating ped")
             return false, false
         end
     end
     local net = NetworkGetNetworkIdFromEntity(entity)
-    c.data.AddPed(net, c.class.Npc, net)
+    ig.data.AddPed(net, ig.class.Npc, net)
     return entity, net
 end
 
@@ -393,7 +393,7 @@ end
 ---@param y any
 ---@param z any
 ---@param isdoor any
-function c.func.CreateObject(model, x, y, z, isdoor, data)
+function ig.funig.CreateObject(model, x, y, z, isdoor, data)
     local hash = nil
     if type(model) == "number" then
         hash = model
@@ -408,15 +408,15 @@ function c.func.CreateObject(model, x, y, z, isdoor, data)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            c.func.Debug_2("Timout Reached on creating object")
+            ig.funig.Debug_2("Timout Reached on creating object")
             return false, false
         end
     end
     local net = NetworkGetNetworkIdFromEntity(entity)
     if data then
-        c.data.AddObject(net, c.class.ExistingObject, net, data)
+        ig.data.AddObject(net, ig.class.ExistingObject, net, data)
     else
-        c.data.AddObject(net, c.class.BlankObject, net)
+        ig.data.AddObject(net, ig.class.BlankObject, net)
     end
     return entity, net
 end
@@ -424,7 +424,7 @@ end
 -- My own version of the native for the server to use.
 --- func desc
 ---@param hash any
-function c.func.IsPedMale(hash)
+function ig.funig.IsPedMale(hash)
     if conf.peds.male[hash] then
         return true, "Male"
     end
@@ -436,7 +436,7 @@ end
 -- My own version of the native for the server to use.
 --- func desc
 ---@param hash any
-function c.func.IsPedHuman(hash)
+function ig.funig.IsPedHuman(hash)
     if conf.peds.animals[hash] then
         return false, "Animal"
     else
@@ -445,7 +445,7 @@ function c.func.IsPedHuman(hash)
 end
 
 --- func desc
-function c.func.HasPlayers()
+function ig.funig.HasPlayers()
     if (#GetPlayers() > 0) then
         return true
     else
@@ -460,15 +460,15 @@ end
 --- Get item data from loaded JSON
 ---@param itemName string
 ---@return table|nil
-function c.item.Get(itemName)
-    return c.items and c.items[itemName] or nil
+function ig.item.Get(itemName)
+    return ig.items and ig.items[itemName] or nil
 end
-exports('GetItem', c.item.Get)
+exports('GetItem', ig.item.Get)
 
 --- Get door data from loaded JSON
 ---@param doorId any
 ---@return table|nil
-function c.door.Get(doorId)
-    return c.doors and c.doors[doorId] or nil
+function ig.door.Get(doorId)
+    return ig.doors and ig.doors[doorId] or nil
 end
-exports('GetDoor', c.door.Get)
+exports('GetDoor', ig.door.Get)

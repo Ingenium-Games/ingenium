@@ -5,12 +5,12 @@ local DataPacket = RegisterClientCallback({
     eventName = "DataPacket",
     eventCallback = function()
         local data = false
-        if c.data.GetLoadedStatus() then
-            c.func.IsBusy()
+        if ig.data.GetLoadedStatus() then
+            ig.funig.IsBusy()
             Citizen.Wait(500)
-            data = c.data.Packet()
+            data = ig.data.Packet()
             Citizen.Wait(500)
-            c.func.NotBusy()
+            ig.funig.NotBusy()
         end
         return data
     end

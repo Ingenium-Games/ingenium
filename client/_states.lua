@@ -1,6 +1,6 @@
 -- ====================================================================================--
-c.state = {} -- functions
-c.states = {} -- table of potential states to become etc.
+ig.state = {} -- functions
+ig.states = {} -- table of potential states to become etig.
 -- ====================================================================================--
 
 ---- Add States to the Table prior to being locked on server boot.
@@ -9,16 +9,16 @@ c.states = {} -- table of potential states to become etc.
 ---@param value number "You feel your stomach ache a little."
 ---@param effect function "Any change to the screen on the users end"
 ---@param action function "Any change to the screen on the users end"
-function c.state.AddState(name, value, description, effects, actions)
-    if not c.states[name] then
-        c.states[name] = {}
-        c.states[name][value] = {
+function ig.state.AddState(name, value, description, effects, actions)
+    if not ig.states[name] then
+        ig.states[name] = {}
+        ig.states[name][value] = {
             ["description"] = description,
             ["effect"] = effects,
             ["action"] = actions
         }
     else
-        c.states[name][value] = {
+        ig.states[name][value] = {
             ["description"] = description,
             ["effect"] = effects,
             ["action"] = actions
@@ -26,47 +26,47 @@ function c.state.AddState(name, value, description, effects, actions)
     end
 end
 
-function c.state.ChangeAction(name, value, cb)
+function ig.state.ChangeAction(name, value, cb)
     if not cb then
         cb = function()
         end
     end
-    if c.states[name][value] then
-        c.states[name][value]["action"] = cb()
+    if ig.states[name][value] then
+        ig.states[name][value]["action"] = cb()
     else
-        c.func.Debug_1("The states action: " .. name .. " does not exist, please add state prior to action.")
+        ig.funig.Debug_1("The states action: " .. name .. " does not exist, please add state prior to action.")
     end
 end
 
-function c.state.ChangeEffect(name, value, cb)
+function ig.state.ChangeEffect(name, value, cb)
     if not cb then
         cb = function()
         end
     end
-    if c.states[name][value] then
-        c.states[name][value]["effect"] = cb()
+    if ig.states[name][value] then
+        ig.states[name][value]["effect"] = cb()
     else
-        c.func.Debug_1("The states effect: " .. name .. " does not exist, please add state prior to effect.")
+        ig.funig.Debug_1("The states effect: " .. name .. " does not exist, please add state prior to effect.")
     end
 end
 
 ---- To action based on the key and value of various modifiers or other tasks.
 ---@param name string "The name of the State"
 ---@param value number "The number of the State containing values"
-function c.state.TriggerState(name, value)
-    c.state.TriggerEffect(name, value)
-    c.state.TriggerAction(name, value)
+function ig.state.TriggerState(name, value)
+    ig.state.TriggerEffect(name, value)
+    ig.state.TriggerAction(name, value)
 end
 
-function c.state.TriggerEffect(name, value)
-    if type(c.states[name][value].effect) == "function" then
-        c.states[name][value].effect()
+function ig.state.TriggerEffect(name, value)
+    if type(ig.states[name][value].effect) == "function" then
+        ig.states[name][value].effect()
     end
 end
 
-function c.state.TriggerAction(name, value)
-    if type(c.states[name][value].action) == "function" then
-        c.states[name][value].action()
+function ig.state.TriggerAction(name, value)
+    if type(ig.states[name][value].action) == "function" then
+        ig.states[name][value].action()
     end
 end
 
@@ -236,15 +236,15 @@ local S = {
 }
 
 for k, v in pairs(H) do
-    c.state.AddState("Hunger", k, v[1] or nil, v[2] or nil, v[3] or nil)
+    ig.state.AddState("Hunger", k, v[1] or nil, v[2] or nil, v[3] or nil)
 end
 
 for k, v in pairs(T) do
-    c.state.AddState("Thirst", k, v[1] or nil, v[2] or nil, v[3] or nil)
+    ig.state.AddState("Thirst", k, v[1] or nil, v[2] or nil, v[3] or nil)
 end
 
 for k, v in pairs(S) do
-    c.state.AddState("Stress", k, v[1] or nil, v[2] or nil, v[3] or nil)
+    ig.state.AddState("Stress", k, v[1] or nil, v[2] or nil, v[3] or nil)
 end
 
--- c.func.Debug_1(c.table.Dump(c.states.Hunger))
+-- ig.funig.Debug_1(ig.table.Dump(ig.states.Hunger))

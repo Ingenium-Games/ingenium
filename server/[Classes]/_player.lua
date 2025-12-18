@@ -1,17 +1,17 @@
 -- ====================================================================================--
-if not c.class then
-    c.class = {}
+if not ig.class then
+    ig.class = {}
 end
 -- ====================================================================================--
 --- func desc
 ---@param source any
 ---@param character_id any
-function c.class.Player(source, character_id)
+function ig.class.Player(source, character_id)
     local src = tonumber(source)
     local Character_ID = character_id
-    local Steam_ID, FiveM_ID, License_ID, Discord_ID = c.func.identifiers(src)
-    local user = c.sql.user.Get(License_ID)
-    local char = c.sql.char.Get(Character_ID)
+    local Steam_ID, FiveM_ID, License_ID, Discord_ID = ig.funig.identifiers(src)
+    local user = ig.sql.user.Get(License_ID)
+    local char = ig.sql.char.Get(Character_ID)
     local self = {}
     --
     self.ID = src
@@ -69,12 +69,12 @@ function c.class.Player(source, character_id)
     self.State.Phone = self.Phone
     --
     -- Gender ("Male"/"Female")
-    self.Gender, self.GenderString = c.func.IsPedMale(self.Model)
+    self.Gender, self.GenderString = ig.funig.IsPedMale(self.Model)
     self.State.Gender = self.Gender
     self.State.GenderString = self.GenderString
     --
     -- Humaniod Model (true/false)
-    self.IsHuman = c.func.IsPedHuman(self.Model)
+    self.IsHuman = ig.funig.IsPedHuman(self.Model)
     self.State.IsHuman = self.IsHuman
     --
     -- Integers
@@ -222,7 +222,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.GetIdentifier = function()
-        return c.func.identifier(self.ID)
+        return ig.funig.identifier(self.ID)
     end
     --
     self.GetCharacter_ID = function()
@@ -254,7 +254,7 @@ function c.class.Player(source, character_id)
     end
     --    
     self.SetSupporter = function(bool)
-        local bool = c.check.Boolean(bool)
+        local bool = ig.check.Boolean(bool)
         self.IsSupporter = bool
         self.State.IsSupporter = self.IsSupporter
     end
@@ -271,7 +271,7 @@ function c.class.Player(source, character_id)
         local id = id or self.InstanceID
         SetPlayerRoutingBucket(self.ID, id)
         SetEntityRoutingBucket(self.Entity, id)
-        c.sql.char.SetInstance(self.GetIdentifier(), id)
+        ig.sql.char.SetInstance(self.GetIdentifier(), id)
     end
     -- 
     self.GetHealth = function()
@@ -279,7 +279,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetHealth = function(v)
-        local n = c.check.Number(v, 0, conf.defaulthealth)
+        local n = ig.check.Number(v, 0, conf.defaulthealth)
         if self.Health ~= n then
             self.Health = n
             self.State.Health = self.Health
@@ -293,7 +293,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetArmour = function(v)
-        local n = c.check.Number(v, 0, conf.defaultarmour)
+        local n = ig.check.Number(v, 0, conf.defaultarmour)
         if self.Armour ~= n then
             self.Armour = n
             self.State.Armour = self.Armour
@@ -307,7 +307,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetHunger = function(v)
-        local n = c.check.Number(v, 0, 100)
+        local n = ig.check.Number(v, 0, 100)
         if self.Hunger ~= n then
             self.Hunger = n
             self.State.Hunger = self.Hunger
@@ -321,7 +321,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetThirst = function(v)
-        local n = c.check.Number(v, 0, 100)
+        local n = ig.check.Number(v, 0, 100)
         if self.Thirst ~= n then
             self.Thirst = n
             self.State.Thirst = self.Thirst
@@ -335,7 +335,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetStress = function(v)
-        local n = c.check.Number(v, 0, 100)
+        local n = ig.check.Number(v, 0, 100)
         if self.Stress ~= n then
             self.Stress = n
             self.State.Stress = self.Stress
@@ -353,7 +353,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetModifiers = function(t)
-        local tab = c.check.Table(t)
+        local tab = ig.check.Table(t)
         self.OldModifiers = self.Modifiers
         self.Modifiers = tab
         self.State.Modifiers = self.Modifiers
@@ -379,7 +379,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetDead = function(b)
-        local bool = c.check.Boolean(b)
+        local bool = ig.check.Boolean(b)
         self.Dead = bool
         self.State.IsDead = self.Dead
     end
@@ -389,7 +389,7 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetDuty = function(b)
-        local bool = c.check.Boolean(b)
+        local bool = ig.check.Boolean(b)
         self.Duty = bool
         self.State.Duty = self.Duty
     end
@@ -407,8 +407,8 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetSkill = function(skill, v)
-        local num = c.check.Number(v, 0, 255)
-        num = c.math.Decimals(num, 0)
+        local num = ig.check.Number(v, 0, 255)
+        num = ig.math.Decimals(num, 0)
         if self.Skills[skill] then
             if self.Skills[skill] ~= num then
                 self.Skills[skill] = num
@@ -423,13 +423,13 @@ function c.class.Player(source, character_id)
             self.IsDirty = true
             self.DirtyFields.Skills = true
             self.EncodedSkills = nil
-            c.func.Debug_1("Skill did not exist, adding in now.")
+            ig.funig.Debug_1("Skill did not exist, adding in now.")
         end
     end
     --
     self.AddSkill = function(skill, v)
-        local num = c.check.Number(v, 0, 255)
-        num = c.math.Decimals(num, 0)
+        local num = ig.check.Number(v, 0, 255)
+        num = ig.math.Decimals(num, 0)
         if self.Skills[skill] then
             self.Skills[skill] = self.Skills[skill] + num
             self.State.Skills = self.Skills
@@ -442,7 +442,7 @@ function c.class.Player(source, character_id)
             self.IsDirty = true
             self.DirtyFields.Skills = true
             self.EncodedSkills = nil
-            c.func.Debug_1("Skill did not exist on character, adding in now.")
+            ig.funig.Debug_1("Skill did not exist on character, adding in now.")
         end
     end
     --
@@ -468,8 +468,8 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetAccount = function(acc, v)
-        local num = c.check.Number(v)
-        num = c.math.Decimals(num, 2)
+        local num = ig.check.Number(v)
+        num = ig.math.Decimals(num, 2)
         if self.Accounts[acc] then
             if self.Accounts[acc] ~= num then
                 self.Accounts[acc] = num
@@ -478,7 +478,7 @@ function c.class.Player(source, character_id)
                 self.EncodedAccounts = nil
             end
         else
-            c.func.Debug_1("Account entered does not exist")
+            ig.funig.Debug_1("Account entered does not exist")
         end
     end
     --
@@ -500,9 +500,9 @@ function c.class.Player(source, character_id)
         local a, p = self.GetItemQuantity("Change")
         if amount then
             if a > 0 then
-                return c.math.Decimals((amount + (a / 100)), 2)
+                return ig.math.Decimals((amount + (a / 100)), 2)
             else
-                return c.math.Decimals(amount, 2)
+                return ig.math.Decimals(amount, 2)
             end
         else
             return 0
@@ -511,14 +511,14 @@ function c.class.Player(source, character_id)
     --
     self.SetCash = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckTransactionRateLimit and c.security.CheckTransactionRateLimit(self, "set_cash") then
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "set_cash") then
             return
         end
         
         -- negative check first
         if v < 0.00 then
             self.Notify("Nope")
-            c.func.Debug_1(
+            ig.funig.Debug_1(
                 "self.SetCash: for " ..
                     self.ID)
             CancelEvent()
@@ -529,11 +529,11 @@ function c.class.Player(source, character_id)
         local amount, position = self.GetItemQuantity("Cash")
         local a, p = self.GetItemQuantity("Change")
 
-        local num = c.check.Number(v)
-        local mod = c.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+        local num = ig.check.Number(v)
+        local mod = ig.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
 
         if amount > 0 then
-            self.Inventory[position].Quantity = c.math.Decimals(num, 0)
+            self.Inventory[position].Quantity = ig.math.Decimals(num, 0)
         else
             self.AddItem({"Cash", num, 100, false, false})
         end
@@ -551,19 +551,19 @@ function c.class.Player(source, character_id)
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         
         -- Transaction logging
-        if c.security and c.security.LogPlayerTransaction then
-            c.security.LogPlayerTransaction(self, "set_cash", num, "SetCash API call")
+        if ig.security and ig.security.LogPlayerTransaction then
+            ig.security.LogPlayerTransaction(self, "set_cash", num, "SetCash API call")
         end
         --[[
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
-            acc = c.math.Decimals(num, 2)
+            acc = ig.math.Decimals(num, 2)
             if acc < 0 then
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                c.func.Debug_1(
+                ig.funig.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                 CancelEvent()
@@ -577,14 +577,14 @@ function c.class.Player(source, character_id)
     --
     self.AddCash = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckTransactionRateLimit and c.security.CheckTransactionRateLimit(self, "add_cash") then
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "add_cash") then
             return
         end
         
         -- negative check first
         if v < 0 then
             self.Notify("Nope")
-            c.func.Debug_1(
+            ig.funig.Debug_1(
                 "self.AddCash: for " ..
                     self.ID)
             CancelEvent()
@@ -595,14 +595,14 @@ function c.class.Player(source, character_id)
         local amount, position = self.GetItemQuantity("Cash")
         local a, p = self.GetItemQuantity("Change")
 
-        local num = c.check.Number(v)
-        local mod = c.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+        local num = ig.check.Number(v)
+        local mod = ig.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
 
         -- Dallar Billz
         if amount > 0 then
-            self.Inventory[position].Quantity = amount + c.math.Decimals(num, 0)
+            self.Inventory[position].Quantity = amount + ig.math.Decimals(num, 0)
         else
-            self.AddItem({"Cash", c.math.Decimals(num, 0), 100, false, false})
+            self.AddItem({"Cash", ig.math.Decimals(num, 0), 100, false, false})
         end
 
         -- Coins
@@ -618,19 +618,19 @@ function c.class.Player(source, character_id)
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         
         -- Transaction logging
-        if c.security and c.security.LogPlayerTransaction then
-            c.security.LogPlayerTransaction(self, "add_cash", num, "AddCash API call")
+        if ig.security and ig.security.LogPlayerTransaction then
+            ig.security.LogPlayerTransaction(self, "add_cash", num, "AddCash API call")
         end
         --[[
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
-            acc = acc + c.math.Decimals(num, 2)
+            acc = acc + ig.math.Decimals(num, 2)
             if acc < 0 then
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                c.func.Debug_1(
+                ig.funig.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                 CancelEvent()
@@ -644,14 +644,14 @@ function c.class.Player(source, character_id)
     --
     self.RemoveCash = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckTransactionRateLimit and c.security.CheckTransactionRateLimit(self, "remove_cash") then
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "remove_cash") then
             return
         end
         
         -- negative check first
-        if self.GetCash() < c.math.Decimals(v, 2) then
+        if self.GetCash() < ig.math.Decimals(v, 2) then
             self.Notify("Nope")
-            c.func.Debug_1(
+            ig.funig.Debug_1(
                 "self.RemoveCash: for " ..
                     self.ID)
             CancelEvent()
@@ -661,9 +661,9 @@ function c.class.Player(source, character_id)
         local amount, position = self.GetItemQuantity("Cash")
         local a, p = self.GetItemQuantity("Change")
 
-        local num = c.check.Number(v)
-        local mod = c.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
-        local billz = c.math.Decimals(num, 0)
+        local num = ig.check.Number(v)
+        local mod = ig.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+        local billz = ig.math.Decimals(num, 0)
 
         -- Dollarr Billz
         if amount >= 1 then
@@ -701,19 +701,19 @@ function c.class.Player(source, character_id)
         TriggerClientEvent("Client:Inventory:Update", self.ID)
         
         -- Transaction logging
-        if c.security and c.security.LogPlayerTransaction then
-            c.security.LogPlayerTransaction(self, "remove_cash", num, "RemoveCash API call")
+        if ig.security and ig.security.LogPlayerTransaction then
+            ig.security.LogPlayerTransaction(self, "remove_cash", num, "RemoveCash API call")
         end
         --[[
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         local acc = self.GetAccount("Cash")
         if acc then
-            acc = acc - c.math.Decimals(num, 2)
+            acc = acc - ig.math.Decimals(num, 2)
             if acc < 0 then
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                c.func.Debug_1(
+                ig.funig.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                 CancelEvent()
@@ -728,18 +728,18 @@ function c.class.Player(source, character_id)
     self.GetBank = function()
         local acc = self.GetAccount("Bank")
         if acc then
-            return c.math.Decimals(acc, 2)
+            return ig.math.Decimals(acc, 2)
         end
     end
     --
     self.SetBank = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckTransactionRateLimit and c.security.CheckTransactionRateLimit(self, "set_bank") then
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "set_bank") then
             return
         end
         
-        local num = c.check.Number(v)
-        local acc = c.math.Decimals(num, 2)
+        local num = ig.check.Number(v)
+        local acc = ig.math.Decimals(num, 2)
         if acc then
             self.SetAccount("Bank", acc)
             self.State.Bank = self.GetBank()
@@ -747,58 +747,58 @@ function c.class.Player(source, character_id)
                 "[]")
             
             -- Transaction logging
-            if c.security and c.security.LogPlayerTransaction then
-                c.security.LogPlayerTransaction(self, "set_bank", num, "SetBank API call")
+            if ig.security and ig.security.LogPlayerTransaction then
+                ig.security.LogPlayerTransaction(self, "set_bank", num, "SetBank API call")
             end
         end
     end
     --
     self.AddBank = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckTransactionRateLimit and c.security.CheckTransactionRateLimit(self, "add_bank") then
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "add_bank") then
             return
         end
         
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         local acc = self.GetAccount("Bank")
         if acc then
-            acc = acc + c.math.Decimals(num, 2)
+            acc = acc + ig.math.Decimals(num, 2)
             self.SetAccount("Bank", acc)
             self.State.Bank = self.GetBank()
             TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Credited $" .. num,
                 "[]")
             
             -- Transaction logging
-            if c.security and c.security.LogPlayerTransaction then
-                c.security.LogPlayerTransaction(self, "add_bank", num, "AddBank API call")
+            if ig.security and ig.security.LogPlayerTransaction then
+                ig.security.LogPlayerTransaction(self, "add_bank", num, "AddBank API call")
             end
         end
     end
     --
     self.RemoveBank = function(v)
         -- Rate limiting check
-        if c.security and c.security.CheckTransactionRateLimit and c.security.CheckTransactionRateLimit(self, "remove_bank") then
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "remove_bank") then
             return
         end
         
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         local acc = self.GetAccount("Bank")
         if acc then
-            acc = acc - c.math.Decimals(num, 2)
+            acc = acc - ig.math.Decimals(num, 2)
             self.SetAccount("Bank", acc)
             self.State.Bank = self.GetBank()
             TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Debited $" .. num,
                 "[]")
             
             -- Transaction logging
-            if c.security and c.security.LogPlayerTransaction then
-                c.security.LogPlayerTransaction(self, "remove_bank", num, "RemoveBank API call")
+            if ig.security and ig.security.LogPlayerTransaction then
+                ig.security.LogPlayerTransaction(self, "remove_bank", num, "RemoveBank API call")
             end
         end
     end
     --
     self.PayBalance = function(v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         if self.GetCash() >= num then
             self.RemoveCash(num)
         else
@@ -820,13 +820,13 @@ function c.class.Player(source, character_id)
     end
     --
     self.SetAmmo = function(type, v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         local ammo = self.GetAmmo(type)
         if num < 0 then
             self.Ammo[type] = 0
             self.Kick(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            c.func.Debug_1(
+            ig.funig.Debug_1(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for " ..
                     self.ID)
             CancelEvent()
@@ -841,14 +841,14 @@ function c.class.Player(source, character_id)
     end
     --
     self.AddAmmo = function(type, v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         local ammo = self.GetAmmo(type)
         self.Ammo[type] = ammo + num
         if self.Ammo[type] < 0 then
             self.Ammo[type] = 0
             self.Kick(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            c.func.Debug_1(
+            ig.funig.Debug_1(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for " ..
                     self.ID)
             CancelEvent()
@@ -860,14 +860,14 @@ function c.class.Player(source, character_id)
     end
     --
     self.RemoveAmmo = function(type, v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         local ammo = self.GetAmmo(type)
         self.Ammo[type] = ammo - num
         if self.Ammo[type] < 0 then
             self.Ammo[type] = 0
             self.Kick(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            c.func.Debug_1(
+            ig.funig.Debug_1(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for " ..
                     self.ID)
             CancelEvent()
@@ -885,13 +885,13 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param t any
     self.SetJob = function(Name, Grade)
-        if c.job.Exist(Name, Grade) then
+        if ig.job.Exist(Name, Grade) then
             if self.Job.Name ~= Name or self.Job.Grade ~= Grade then
                 self.Job.Name = Name
                 self.Job.Grade = Grade
                 self.State.Job = self.Job.Name
                 self.State.Grade = self.Job.Grade
-                self.State.Boss = c.job.IsBoss(self.Job.Name, self.Job.Grade)
+                self.State.Boss = ig.job.IsBoss(self.Job.Name, self.Job.Grade)
                 self.IsDirty = true
                 self.DirtyFields.Job = true
                 self.EncodedJob = nil
@@ -900,8 +900,8 @@ function c.class.Player(source, character_id)
                 TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job.Name, self.Job.Grade)
             end
         else
-            c.func.Debug_1("Ignoring invalid .SetJob() :" .. Name .. ", " .. Grade .. " for " .. self.ID)
-            print(c.table.Dump(c.jobs))
+            ig.funig.Debug_1("Ignoring invalid .SetJob() :" .. Name .. ", " .. Grade .. " for " .. self.ID)
+            print(ig.table.Dump(ig.jobs))
         end
     end
     --- func desc
@@ -911,7 +911,7 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param s any
     self.SetPhone = function(s)
-        local s = c.check.String(s)
+        local s = ig.check.String(s)
         self.Phone = s
         self.State.Phone = self.Phone
     end
@@ -937,10 +937,10 @@ function c.class.Player(source, character_id)
         local x, y, z = table.unpack(GetEntityCoords(self.Entity))
         local h = GetEntityHeading(self.Entity)
         return {
-            ["x"] = c.math.Decimals(x, 2),
-            ["y"] = c.math.Decimals(y, 2),
-            ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2)
+            ["x"] = ig.math.Decimals(x, 2),
+            ["y"] = ig.math.Decimals(y, 2),
+            ["z"] = ig.math.Decimals(z, 2),
+            ["h"] = ig.math.Decimals(h, 2)
         }
     end
     --- func desc
@@ -948,10 +948,10 @@ function c.class.Player(source, character_id)
     self.SetCoords = function(t)
         self.OldCoords = self.GetCoords()
         local newCoords = {
-            x = c.math.Decimals(t.x, 2),
-            y = c.math.Decimals(t.y, 2),
-            z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2)
+            x = ig.math.Decimals(t.x, 2),
+            y = ig.math.Decimals(t.y, 2),
+            z = ig.math.Decimals(t.z, 2),
+            h = ig.math.Decimals(t.h, 2)
         }
         -- Check if coords actually changed
         if self.Coords.x ~= newCoords.x or self.Coords.y ~= newCoords.y or 
@@ -970,7 +970,7 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param t any
     self.SetHotbar = function(t)
-        local t = c.check.Table(t)
+        local t = ig.check.Table(t)
         self.Hotbar = t
     end
     --- func desc
@@ -980,7 +980,7 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param b any
     self.SetWanted = function(b)
-        local b = c.check.Boolean(b)
+        local b = ig.check.Boolean(b)
         self.IsWanted = b
         self.State.IsWanted = self.IsWanted
     end
@@ -991,7 +991,7 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param b any
     self.SetCuffed = function(b)
-        local b = c.check.Boolean(b)
+        local b = ig.check.Boolean(b)
         self.IsCuffed = b
         self.State.IsCuffed = self.IsCuffed
     end
@@ -1002,7 +1002,7 @@ function c.class.Player(source, character_id)
     --- func desc
     ---@param b any
     self.SetFrozen = function(b)
-        local b = c.check.Boolean(b)
+        local b = ig.check.Boolean(b)
         self.IsFrozen = b
         self.State.IsFrozen = self.IsFrozen
     end
@@ -1031,11 +1031,11 @@ function c.class.Player(source, character_id)
     self.GetWeight = function()
         self.Weight = 0
         for _, v in pairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
+            if ig.item.Exists(v.Item) then
+                local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -1044,7 +1044,7 @@ function c.class.Player(source, character_id)
     ---@param inv any
     self.UnpackInventory = function(inv)
         -- Use unified validation function
-        local processed, valid, error = c.validation.ValidateAndUnpack(self.ID, inv)
+        local processed, valid, error = ig.validation.ValidateAndUnpack(self.ID, inv)
         
         if not valid then
             -- Error already logged and player kicked by ValidateAndUnpack
@@ -1075,16 +1075,16 @@ function c.class.Player(source, character_id)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
+            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
             return
         end
         local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta),
-            ["Name"] = (v[6] or c.items[v[1]].Name)
+            ["Item"] = ig.check.String(v[1]), -- string
+            ["Quantity"] = ig.check.Number((v[2] or ig.items[v[1]].Quantity)), -- number/int >= 1
+            ["Quality"] = ig.check.Number((v[3] or ig.items[v[1]].Quality)), -- number/int >= 1 <= 100
+            ["Weapon"] = (v[4] or ig.items[v[1]].Weapon),
+            ["Meta"] = (v[5] or ig.items[v[1]].Meta),
+            ["Name"] = (v[6] or ig.items[v[1]].Name)
         }
         return info
     end
@@ -1093,9 +1093,9 @@ function c.class.Player(source, character_id)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), ('String' or false), ({} or false)}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
+        if ig.item.Exists(item.Item) then
+            local weapon = ig.item.IsWeapon(item.Item)
+            local stackable = ig.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
@@ -1109,7 +1109,7 @@ function c.class.Player(source, character_id)
             self.EncodedInventory = nil
             TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+            ig.funig.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
         end
     end
     --
@@ -1298,7 +1298,7 @@ end
 
 --- func desc
 ---@param data any
-function c.class.OfflinePlayer(data)
+function ig.class.OfflinePlayer(data)
     local Character_ID = data.Character_ID
     local License_ID = data.License_ID
     local self = {}
@@ -1464,11 +1464,11 @@ function c.class.OfflinePlayer(data)
     self.GetWeight = function()
         self.Weight = 0
         for _, v in pairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
+            if ig.item.Exists(v.Item) then
+                local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -1477,11 +1477,11 @@ function c.class.OfflinePlayer(data)
     ---@param inv any
     self.UnpackInventory = function(inv)
         -- Use unified validation function (no source since this is for offline player)
-        local processed, valid, error = c.validation.ValidateAndUnpack(nil, inv)
+        local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
             -- Log error but don't kick since player is offline
-            c.func.Debug_1("Error unpacking offline player inventory: " .. (error or "unknown"))
+            ig.funig.Debug_1("Error unpacking offline player inventory: " .. (error or "unknown"))
             self.Inventory = {}
             return
         end
@@ -1507,18 +1507,18 @@ function c.class.OfflinePlayer(data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1(
+            ig.funig.Debug_1(
                 "Ignoring invalid .SteralizeItem() while .AddItem() was called, for Offline Player License: " ..
                     self.License_ID)
             return
         end
         local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta),
-            ["Name"] = (v[6] or c.items[v[1]].Name)
+            ["Item"] = ig.check.String(v[1]), -- string
+            ["Quantity"] = ig.check.Number((v[2] or ig.items[v[1]].Quantity)), -- number/int >= 1
+            ["Quality"] = ig.check.Number((v[3] or ig.items[v[1]].Quality)), -- number/int >= 1 <= 100
+            ["Weapon"] = (v[4] or ig.items[v[1]].Weapon),
+            ["Meta"] = (v[5] or ig.items[v[1]].Meta),
+            ["Name"] = (v[6] or ig.items[v[1]].Name)
         }
         return info
     end
@@ -1527,9 +1527,9 @@ function c.class.OfflinePlayer(data)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
+        if ig.item.Exists(item.Item) then
+            local weapon = ig.item.IsWeapon(item.Item)
+            local stackable = ig.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
@@ -1539,7 +1539,7 @@ function c.class.OfflinePlayer(data)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for Offline Player License: " .. self.License_ID)
+            ig.funig.Debug_1("Ignoring invalid .AddItem() for Offline Player License: " .. self.License_ID)
         end
     end
     --

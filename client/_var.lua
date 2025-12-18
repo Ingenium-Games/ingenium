@@ -3,24 +3,24 @@
 math.randomseed(GetNetworkTime())
 c = c or exports["ig.core"]:c()
 -- ====================================================================================--
-c.imagehost = conf.imagehost
-c.sec = conf.sec
-c.min = conf.min
-c.hour = conf.hour
-c.day = conf.day
-c.locale = conf.locale
+ig.imagehost = conf.imagehost
+ig.sec = conf.sec
+ig.min = conf.min
+ig.hour = conf.hour
+ig.day = conf.day
+ig.locale = conf.locale
 --
 function GetLocale()
-    return c.locale
+    return ig.locale
 end
 exports("GetLocale", GetLocale)
 --
 -- _data.lua
-c._loaded = false
-c._character = nil
+ig._loaded = false
+ig._character = nil
 --
 local ok, glm = pcall(require, "glm")
 if ok and glm then
     c = c or {}
-    c.glm = glm
+    ig.glm = glm
 end

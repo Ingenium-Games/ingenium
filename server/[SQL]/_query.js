@@ -182,7 +182,7 @@ class QueryExecutor {
     }
 
     /**
-     * Prepare a stored query (for use with MySQL.Async.store compatibility)
+     * Prepare a stored query (for use with MySQL.Asynig.store compatibility)
      */
     static prepareQuery(queryString) {
         // Generate a unique ID for this prepared query

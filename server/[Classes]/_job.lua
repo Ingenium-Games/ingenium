@@ -1,11 +1,11 @@
 -- ====================================================================================--
-if not c.class then
-    c.class = {}
+if not ig.class then
+    ig.class = {}
 end
 -- ====================================================================================--
 --- func desc
 ---@param tab any
-function c.class.Job(tab)
+function ig.class.Job(tab)
     local self = {}
     self.Name = tab.Name
     self.Label = tab.Label
@@ -23,7 +23,7 @@ function c.class.Job(tab)
     self.Save = false
     --- func desc
     self.SetUpdated = function()
-        self.Updated = c.func.Timestamp()
+        self.Updated = ig.funig.Timestamp()
         self.Save = true
     end
     --- func desc
@@ -58,13 +58,13 @@ function c.class.Job(tab)
             self.Description = str
             self.SetUpdated()
         else
-            c.func.Debug_1("Unable to set description as length is too long. Must be less than 1500 characters.")
+            ig.funig.Debug_1("Unable to set description as length is too long. Must be less than 1500 characters.")
         end
     end
     --- func desc
     ---@param b any
     self.GetAccounts = function(b)
-        local bool = c.check.Boolean(b)
+        local bool = ig.check.Boolean(b)
         if bool then
             local Accounts = {}
             for k, v in pairs(self.Accounts) do
@@ -88,12 +88,12 @@ function c.class.Job(tab)
     ---@param acc any
     ---@param v any
     self.SetAccount = function(acc, v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         if self.Accounts[acc] then
-            self.Accounts[acc] = c.math.Decimals(num, 2)
+            self.Accounts[acc] = ig.math.Decimals(num, 2)
             self.SetUpdated()
         else
-            c.func.Debug_1("Account entered does not exist")
+            ig.funig.Debug_1("Account entered does not exist")
         end
     end
     --- func desc
@@ -106,24 +106,24 @@ function c.class.Job(tab)
     --- func desc
     ---@param v any
     self.SetSafe = function(v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         if num >= 0 then
-            local acc = c.math.Decimals(num, 2)
+            local acc = ig.math.Decimals(num, 2)
             self.SetAccount("Safe", acc)
         end
     end
     --- func desc
     ---@param v any
     self.AddSafe = function(v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         if num > 0 then
             local acc = self.GetAccount("Safe")
             if acc then
                 local bkp = acc
-                acc = acc + c.math.Decimals(num, 2)
+                acc = acc + ig.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    c.func.Debug_1("Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
+                    ig.funig.Debug_1("Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
                     self.SetAccount("Safe", acc)
@@ -134,15 +134,15 @@ function c.class.Job(tab)
     --- func desc
     ---@param v any
     self.RemoveSafe = function(v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         if num > 0 then
             local acc = self.GetAccount("Safe")
             if acc then
                 local bkp = acc
-                acc = acc - c.math.Decimals(num, 2)
+                acc = acc - ig.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    c.func.Debug_1("Job " .. self.Name ..
+                    ig.funig.Debug_1("Job " .. self.Name ..
                                        " has RemoveSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
@@ -161,18 +161,18 @@ function c.class.Job(tab)
     --- func desc
     ---@param v any
     self.SetBank = function(v)
-        local num = c.check.Number(v)
-        local acc = c.math.Decimals(num, 0)
+        local num = ig.check.Number(v)
+        local acc = ig.math.Decimals(num, 0)
         self.SetAccount("Bank", acc)
     end
     --- func desc
     ---@param v any
     self.AddBank = function(v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         if num > 0 then
             local acc = self.GetAccount("Bank")
             if acc then
-                acc = acc + c.math.Decimals(num, 2)
+                acc = acc + ig.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Bank", acc)
                 else
@@ -184,11 +184,11 @@ function c.class.Job(tab)
     --- func desc
     ---@param v any
     self.RemoveBank = function(v)
-        local num = c.check.Number(v)
+        local num = ig.check.Number(v)
         if num > 0 then
             local acc = self.GetAccount("Bank")
             if acc then
-                acc = acc - c.math.Decimals(num, 2)
+                acc = acc - ig.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Bank", acc)
                 else
@@ -240,8 +240,8 @@ function c.class.Job(tab)
     --- func desc
     ---@param num "number"
     self.SetSupplyLevel = function(num)
-        local num = c.check.Number(num)
-        local v = c.math.Decimals(num, 0)
+        local num = ig.check.Number(num)
+        local v = ig.math.Decimals(num, 0)
         self.Supplies = v
         self.SetUpdated()
     end
@@ -249,8 +249,8 @@ function c.class.Job(tab)
     --- func desc
     ---@param num "number"
     self.AddSupplies = function(num)
-        local num = c.check.Number(num)
-        local v = c.math.Decimals(num, 0)
+        local num = ig.check.Number(num)
+        local v = ig.math.Decimals(num, 0)
         self.Supplies = self.Supplies + v
         self.SetUpdated()
     end
@@ -258,8 +258,8 @@ function c.class.Job(tab)
     --- func desc
     ---@param num "number"
     self.RemoveSupplies = function(num)
-        local num = c.check.Number(num)
-        local v = c.math.Decimals(num, 0)
+        local num = ig.check.Number(num)
+        local v = ig.math.Decimals(num, 0)
         self.Supplies = self.Supplies - v
         self.SetUpdated()
     end
@@ -268,11 +268,11 @@ function c.class.Job(tab)
     self.GetWeight = function()
         self.Weight = 0
         for _, v in pairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
+            if ig.item.Exists(v.Item) then
+                local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -281,10 +281,10 @@ function c.class.Job(tab)
     ---@param inv any
     self.UnpackInventory = function(inv)
         -- Use unified validation function (no source for jobs)
-        local processed, valid, error = c.validation.ValidateAndUnpack(nil, inv)
+        local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            c.func.Debug_1("Error unpacking job inventory: " .. (error or "unknown"))
+            ig.funig.Debug_1("Error unpacking job inventory: " .. (error or "unknown"))
             self.Inventory = {}
             return
         end
@@ -310,16 +310,16 @@ function c.class.Job(tab)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Job ID: " .. self.Name)
+            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Job ID: " .. self.Name)
             return
         end
         local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta),
-            ["Name"] = (v[6] or c.items[v[1]].Name)
+            ["Item"] = ig.check.String(v[1]), -- string
+            ["Quantity"] = ig.check.Number((v[2] or ig.items[v[1]].Quantity)), -- number/int >= 1
+            ["Quality"] = ig.check.Number((v[3] or ig.items[v[1]].Quality)), -- number/int >= 1 <= 100
+            ["Weapon"] = (v[4] or ig.items[v[1]].Weapon),
+            ["Meta"] = (v[5] or ig.items[v[1]].Meta),
+            ["Name"] = (v[6] or ig.items[v[1]].Name)
         }
         return info
     end
@@ -328,9 +328,9 @@ function c.class.Job(tab)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
+        if ig.item.Exists(item.Item) then
+            local weapon = ig.item.IsWeapon(item.Item)
+            local stackable = ig.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
@@ -341,7 +341,7 @@ function c.class.Job(tab)
             end
             self.SetUpdated()
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for Job ID:  " .. self.Name)
+            ig.funig.Debug_1("Ignoring invalid .AddItem() for Job ID:  " .. self.Name)
         end
     end
     --

@@ -1,29 +1,29 @@
 -- ====================================================================================--
-c.func = {}
+ig.func = {}
 -- ====================================================================================--
 
 --- func desc
 ---@param . any
-function c.func.Func(...)
+function ig.funig.Func(...)
     local arg = {...}
-    local status, val = c.func.Err(unpack(arg))
+    local status, val = ig.funig.Err(unpack(arg))
     return val
 end
 
 --- func desc
 ---@param func any
-function c.func.Err(func, ...)
+function ig.funig.Err(func, ...)
     local arg = {...}
     return xpcall(function()
-        return c.func.Func(unpack(arg))
+        return ig.funig.Func(unpack(arg))
     end, function(err)
-        return c.func.Error(err)
+        return ig.funig.Error(err)
     end)
 end
 
 --- func desc
 ---@param err any
-function c.func.Error(err)
+function ig.funig.Error(err)
     if conf.error then
         if type(err) == "string" then
             print("   ^7[^3Error^7]:  ==    ", err)
@@ -37,7 +37,7 @@ end
 
 --- func desc
 ---@param str any
-function c.func.Debug_1(str)
+function ig.funig.Debug_1(str)
     if conf.debug_1 then
         print("   ^7[^6Debug L1^7]:  ==    ", str)
     end
@@ -45,7 +45,7 @@ end
 
 --- func desc
 ---@param str any
-function c.func.Debug_2(str)
+function ig.funig.Debug_2(str)
     if conf.debug_2 then
         print("   ^7[^6Debug L2^7]:  ==    ", str)
     end
@@ -53,7 +53,7 @@ end
 
 --- func desc
 ---@param str any
-function c.func.Debug_3(str)
+function ig.funig.Debug_3(str)
     if conf.debug_3 then
         print("   ^7[^6Debug L3^7]:  ==    ", str)
     end
@@ -61,7 +61,7 @@ end
 
 --- func desc
 ---@param str any
-function c.func.Alert(str)
+function ig.funig.Alert(str)
     print("   ^7[^3Alert^7]:  ==    ", str)
 end
 
@@ -73,7 +73,7 @@ local intervals = {}
 ---@param callback function | number
 ---@param interval? number
 ---@param ... any
-function c.func.SetInterval(callback, interval, ...)
+function ig.funig.SetInterval(callback, interval, ...)
 	interval = interval or 0
 
     if type(interval) ~= 'number' then
@@ -108,7 +108,7 @@ function c.func.SetInterval(callback, interval, ...)
 end
 
 ---@param id number
-function c.func.ClearInterval(id)
+function ig.funig.ClearInterval(id)
     if type(id) ~= 'number' then
         return error(('Interval id must be a number. Received %s'):format(json.encode(id --[[@as unknown]])))
 	end
@@ -124,38 +124,38 @@ end
 
 --- Preduce a Busy Spinner
 --- func desc
-function c.func.IsBusy()
+function ig.funig.IsBusy()
     BeginTextCommandBusyspinnerOn("FM_COR_AUTOD")
     EndTextCommandBusyspinnerOn(5)
 end
 
 --- Remvoe a Busy Spinner
 --- func desc
-function c.func.NotBusy()
+function ig.funig.NotBusy()
     BusyspinnerOff()
     PreloadBusyspinner()
 end
 
 --- Produce a Busy Spinner with a "Please Wait"
 --- func desc
-function c.func.PleaseWait()
+function ig.funig.PleaseWait()
     BeginTextCommandBusyspinnerOn("PM_WAIT")
     EndTextCommandBusyspinnerOn(5)
 end
 
 --- Informs the client to Please Wait with a Busy Spinner over a timeframe.
 ---@param ms number "Milisecons to wait."
-function c.func.IsBusyPleaseWait(ms)
-    c.func.PleaseWait()
+function ig.funig.IsBusyPleaseWait(ms)
+    ig.funig.PleaseWait()
     --
     Citizen.Wait(ms)
     --
-    c.func.NotBusy()
+    ig.funig.NotBusy()
 end
 
 --- func desc
 ---@param ms any
-function c.func.FadeOut(ms)
+function ig.funig.FadeOut(ms)
     if not IsScreenFadedOut() then
         DoScreenFadeOut(ms)
         Citizen.Wait(0)
@@ -170,7 +170,7 @@ end
 
 --- func desc
 ---@param ms any
-function c.func.FadeIn(ms)
+function ig.funig.FadeIn(ms)
     if not IsScreenFadedIn() then
         DoScreenFadeIn(ms)
         Citizen.Wait(0)
@@ -187,8 +187,8 @@ end
 
 -- @entity - the object
 -- @arrays - locations in a table format
--- @style - c.SelectMarker() - Pick Marker type.
-function c.func.CompareCoords(coords, arrays, style, range)
+-- @style - ig.SelectMarker() - Pick Marker type.
+function ig.funig.CompareCoords(coords, arrays, style, range)
     if not range then
         range = 10
     end
@@ -203,7 +203,7 @@ function c.func.CompareCoords(coords, arrays, style, range)
             end
             if comparedst < range then
                 if style then
-                    c.marker.Place(ords, style)
+                    ig.marker.Place(ords, style)
                 end
             end
         end
@@ -215,7 +215,7 @@ function c.func.CompareCoords(coords, arrays, style, range)
         end
         if comparedst < range then
             if style then
-                c.marker.Place(arrays, style)
+                ig.marker.Place(arrays, style)
             end
         end
         return dstchecked
@@ -226,7 +226,7 @@ end
 ---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
-function c.func.GetPlayersInArea(ords, radius, minimal)
+function ig.funig.GetPlayersInArea(ords, radius, minimal)
     local coords = vec3(ords)
     local objs = GetGamePool("CPed")
     local obj = {}
@@ -262,7 +262,7 @@ end
 ---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
-function c.func.GetPedsInArea(ords, radius, minimal)
+function ig.funig.GetPedsInArea(ords, radius, minimal)
     local coords = vec3(ords)
     local objs = GetGamePool("CPed")
     local obj = {}
@@ -294,7 +294,7 @@ end
 ---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
-function c.func.GetObjectsInArea(ords, radius, minimal)
+function ig.funig.GetObjectsInArea(ords, radius, minimal)
     local coords = vec3(ords)
     local objs = GetGamePool("CObject")
     local obj = {}
@@ -326,7 +326,7 @@ end
 ---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
-function c.func.GetVehiclesInArea(ords, radius, minimal)
+function ig.funig.GetVehiclesInArea(ords, radius, minimal)
     local coords = vec3(ords)
     local objs = GetGamePool("CVehicle")
     local obj = {}
@@ -358,7 +358,7 @@ end
 ---@param ords table "Generally a {x,y,z} or vec3"
 ---@param radius number "Radius to return objects within"
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
-function c.func.GetPickupsInArea(coords, radius, minimal)
+function ig.funig.GetPickupsInArea(coords, radius, minimal)
     local coords = vec3(ords)
     local objs = GetGamePool("CPickup")
     local obj = {}
@@ -386,18 +386,18 @@ function c.func.GetPickupsInArea(coords, radius, minimal)
     return obj
 end
 
-function c.func.GetPlayers()
+function ig.funig.GetPlayers()
     return GetActivePlayers()
 end
 
 -- returns closest, closestdist
 --- func desc
-function c.func.GetClosestPed()
+function ig.funig.GetClosestPed()
     local closest = -1
     local closestdist = -1
     local ply = PlayerPedId()
     local coords = vec3(GetEntityCoords(ply))
-    local peds = c.func.GetPedsInArea(coords, 20, true)
+    local peds = ig.funig.GetPedsInArea(coords, 20, true)
     for _, value in pairs(peds) do
         local targetcoords = vec3(GetEntityCoords(value))
         local distance = #(targetcoords - coords)
@@ -411,7 +411,7 @@ end
 
 -- returns closest, closestdist
 --- func desc
-function c.func.GetClosestPlayer()
+function ig.funig.GetClosestPlayer()
     local players = GetActivePlayers()
     local closest = -1
     local closestdist = -1
@@ -433,12 +433,12 @@ end
 
 -- returns closestVeh, closestdist
 --- func desc
-function c.func.GetClosestVehicle()
+function ig.funig.GetClosestVehicle()
     local closest = -1
     local closestdist = -1
     local ply = PlayerPedId()
     local coords = vec3(GetEntityCoords(ply))
-    local vehicles = c.func.GetVehiclesInArea(coords, 20, true)
+    local vehicles = ig.funig.GetVehiclesInArea(coords, 20, true)
     for _, value in pairs(vehicles) do
         local targetcoords = vec3(GetEntityCoords(value))
         local distance = #(targetcoords - coords)
@@ -453,7 +453,7 @@ end
 -- returns closestVeh, closestdist
 --- func desc
 ---@param positions any
-function c.func.GetClosestPosition(positions)
+function ig.funig.GetClosestPosition(positions)
     local closest = -1
     local closestdist = -1
     local count = 0
@@ -475,7 +475,7 @@ end
 -- base events.
 --- func desc
 ---@param ped any
-function c.func.GetVehicleSeatOfPed(ped)
+function ig.funig.GetVehicleSeatOfPed(ped)
     local vehicle = GetVehiclePedIsIn(ped, false)
     for i = -2, GetVehicleMaxNumberOfPassengers(vehicle) do
         if (GetPedInVehicleSeat(vehicle, i) == ped) then
@@ -486,7 +486,7 @@ function c.func.GetVehicleSeatOfPed(ped)
 end
 
 --- func desc
-function c.func.GetEntityFromRay(flag)
+function ig.funig.GetEntityFromRay(flag)
 	local cam = GetGameplayCamCoord()
 	local direction = GetGameplayCamRot()
 	direction = vec2(math.rad(direction.x), math.rad(direction.z))
@@ -506,7 +506,7 @@ end
 --- func desc
 ---@param networkId any
 ---@param timeout any
-function c.func.WaitUntilNetIdExists(networkId, timeout)
+function ig.funig.WaitUntilNetIdExists(networkId, timeout)
 	local threshold = GetGameTimer() + (timeout or 5000)
 
 	while (not NetworkDoesEntityExistWithNetworkId(networkId) and GetGameTimer() < threshold) do
@@ -519,7 +519,7 @@ end
 --- func desc
 ---@param entityHandle any
 ---@param timeout any
-function c.func.WaitUntilPlayerIsOwner(entityHandle, timeout)
+function ig.funig.WaitUntilPlayerIsOwner(entityHandle, timeout)
 	local threshold = GetGameTimer() + (timeout or 5000)
 
 	while (DoesEntityExist(entityHandle) and NetworkGetEntityOwner(entityHandle) ~= PlayerId() and GetGameTimer() < threshold) do
@@ -535,7 +535,7 @@ end
 ---@param y any
 ---@param z any
 ---@param h any
-function c.func.CreatePed(name, x, y, z, h)
+function ig.funig.CreatePed(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -553,7 +553,7 @@ function c.func.CreatePed(name, x, y, z, h)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                c.func.Debug_2("Timout Reached on creating object")
+                ig.funig.Debug_2("Timout Reached on creating object")
                 return false, false
             end
         end
@@ -572,7 +572,7 @@ end
 ---@param y any
 ---@param z any
 ---@param isdoor any
-function c.func.CreateObject(name, x, y, z, isdoor)
+function ig.funig.CreateObject(name, x, y, z, isdoor)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -593,7 +593,7 @@ function c.func.CreateObject(name, x, y, z, isdoor)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                c.func.Debug_2("Timout Reached on creating object")
+                ig.funig.Debug_2("Timout Reached on creating object")
                 return false, false
             end
         end
@@ -612,7 +612,7 @@ end
 ---@param y any
 ---@param z any
 ---@param h any
-function c.func.CreateVehicle(name, x, y, z, h)
+function ig.funig.CreateVehicle(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -630,7 +630,7 @@ function c.func.CreateVehicle(name, x, y, z, h)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                c.func.Debug_2("Timout Reached on creating object")
+                ig.funig.Debug_2("Timout Reached on creating object")
                 return false, false
             end
         end
@@ -650,7 +650,7 @@ end
 --- func desc
 ---@param coords any
 ---@param radius any
-function c.func.IsVehicleSpawnClear(coords, radius)
+function ig.funig.IsVehicleSpawnClear(coords, radius)
     if coords then
         coords = type(coords) == 'table' and vec3(coords.x, coords.y, coords.z) or coords
     else
@@ -675,7 +675,7 @@ end
 -- returns all Modifications of a vehicle
 --- func desc
 ---@param vehicle any
-function c.func.GetVehicleModifications(vehicle)
+function ig.funig.GetVehicleModifications(vehicle)
     -- main colors
     local primaryColor, secondaryColor = GetVehicleColours(vehicle)
     local pearlescentColor, wheelColor = GetVehicleExtraColours(vehicle)
@@ -699,7 +699,7 @@ function c.func.GetVehicleModifications(vehicle)
                                IsVehicleNeonLightEnabled(vehicle, 2), IsVehicleNeonLightEnabled(vehicle, 3)}
     return { -- 1
     string.upper(GetVehicleNumberPlateText(vehicle)), -- 2
-    c.func.GetVehicleMods(vehicle), -- 3
+    ig.funig.GetVehicleMods(vehicle), -- 3
     primaryColor, -- 4
     secondaryColor, -- 5
     pearlescentColor, -- 6
@@ -712,7 +712,7 @@ function c.func.GetVehicleModifications(vehicle)
     GetVehicleXenonLightsColour(vehicle), -- 13
     neonLightsColor, -- 14
     enabledNeonLights, -- 15
-    c.func.GetVehicleExtras(vehicle), -- 16
+    ig.funig.GetVehicleExtras(vehicle), -- 16
     GetVehicleWheelType(vehicle), -- 17
     GetVehicleModVariation(vehicle, 23), -- 18
     GetVehicleModVariation(vehicle, 24), -- 19
@@ -728,12 +728,12 @@ end
 --- func desc
 ---@param vehicle any
 ---@param Modifications any
-function c.func.SetVehicleModifications(vehicle, Modifications)
+function ig.funig.SetVehicleModifications(vehicle, Modifications)
     SetVehicleModKit(vehicle, 0)
     -- 16 wheelType
     SetVehicleWheelType(vehicle, Modifications[16])
     -- 2 mods
-    c.func.SetVehicleMods(vehicle, Modifications[2], Modifications[17], Modifications[18])
+    ig.funig.SetVehicleMods(vehicle, Modifications[2], Modifications[17], Modifications[18])
     -- 3-4 primary/secondaryColor
     SetVehicleColours(vehicle, Modifications[3], Modifications[4])
     -- 5-6 pearlescent/wheelColor
@@ -761,7 +761,7 @@ function c.func.SetVehicleModifications(vehicle, Modifications)
         SetVehicleNeonLightEnabled(vehicle, i, Modifications[14][i + 1])
     end
     -- 15 extras
-    c.func.SetVehicleExtras(vehicle, Modifications[15])
+    ig.funig.SetVehicleExtras(vehicle, Modifications[15])
     -- 19 bulletproofTires
     SetVehicleTyresCanBurst(vehicle, not Modifications[19])
     -- 20 driftTires
@@ -783,7 +783,7 @@ end
 -- returns the status values of a vehicle
 --- func desc
 ---@param vehicle any
-function c.func.GetVehicleCondition(vehicle)
+function ig.funig.GetVehicleCondition(vehicle)
     local fuelLevel = 65.0
     fuelLevel = GetVehicleFuelLevel(vehicle)
     fuelLevel = math.floor(fuelLevel * 10.0) / 10.0
@@ -795,16 +795,16 @@ function c.func.GetVehicleCondition(vehicle)
     math.floor(GetVehicleDirtLevel(vehicle) * 10.0) / 10.0, -- 6 fuel level
     fuelLevel, -- 7 lock status
     GetVehicleDoorLockStatus(vehicle), -- 8 tire states
-    c.func.GetVehicleTireStates(vehicle), -- 9 door states
-    c.func.GetVehicleDoorStates(vehicle), -- 10 window states
-    c.func.GetVehicleWindowStates(vehicle)}
+    ig.funig.GetVehicleTireStates(vehicle), -- 9 door states
+    ig.funig.GetVehicleDoorStates(vehicle), -- 10 window states
+    ig.funig.GetVehicleWindowStates(vehicle)}
 end
 
 -- apply all vehicle status values
 --- func desc
 ---@param vehicle any
 ---@param Condition any
-function c.func.SetVehicleCondition(vehicle, Condition)
+function ig.funig.SetVehicleCondition(vehicle, Condition)
     -- 1 entity health
     SetEntityHealth(vehicle, Condition[1])
     -- 2 body health
@@ -823,17 +823,17 @@ function c.func.SetVehicleCondition(vehicle, Condition)
     -- 7 lock status
     SetVehicleDoorsLocked(vehicle, Condition[7])
     -- 8 tire states
-    c.func.SetVehicleTireStates(vehicle, Condition[8])
+    ig.funig.SetVehicleTireStates(vehicle, Condition[8])
     -- 9 door states
-    c.func.SetVehicleDoorStates(vehicle, Condition[9])
+    ig.funig.SetVehicleDoorStates(vehicle, Condition[9])
     -- 10 window states
-    c.func.SetVehicleWindowStates(vehicle, Condition[10])
+    ig.funig.SetVehicleWindowStates(vehicle, Condition[10])
 end
 
 -- returns all non-stock vehicle mods
 --- func desc
 ---@param vehicle any
-function c.func.GetVehicleMods(vehicle)
+function ig.funig.GetVehicleMods(vehicle)
     local mods = {}
     for i = 0, 49, 1 do
         -- TODO check for 17, 19, 21 -- toggle or normal mods? -- currently not possible
@@ -861,7 +861,7 @@ end
 ---@param mods any
 ---@param customFrontWheels any
 ---@param customRearWheels any
-function c.func.SetVehicleMods(vehicle, mods, customFrontWheels, customRearWheels)
+function ig.funig.SetVehicleMods(vehicle, mods, customFrontWheels, customRearWheels)
     for i, mod in ipairs(mods) do
         local id = mod[1]
         local value = mod[2]
@@ -878,7 +878,7 @@ end
 -- returns all vehicle extras
 --- func desc
 ---@param vehicle any
-function c.func.GetVehicleExtras(vehicle)
+function ig.funig.GetVehicleExtras(vehicle)
     local extras = {}
     for i = 0, 20, 1 do
         if (DoesExtraExist(vehicle, i)) then
@@ -900,13 +900,13 @@ end
 --- func desc
 ---@param vehicle any
 ---@param extras any
-function c.func.SetVehicleExtras(vehicle, extras)
+function ig.funig.SetVehicleExtras(vehicle, extras)
     for i, extra in ipairs(extras) do
         SetVehicleExtra(vehicle, extra[1], extra[2])
     end
 end
 
-function c.func.SetVehicleExtrasFalse(vehicle, extras)
+function ig.funig.SetVehicleExtrasFalse(vehicle, extras)
     for i, extra in ipairs(extras) do
         SetVehicleExtra(vehicle, extra[1], 1)
     end
@@ -915,7 +915,7 @@ end
 -- returns all tire states
 --- func desc
 ---@param vehicle any
-function c.func.GetVehicleTireStates(vehicle)
+function ig.funig.GetVehicleTireStates(vehicle)
     local burstTires = {}
     for i = 0, 5, 1 do
         if (IsVehicleTyreBurst(vehicle, i, true)) then
@@ -935,7 +935,7 @@ end
 --- func desc
 ---@param vehicle any
 ---@param tireStates any
-function c.func.SetVehicleTireStates(vehicle, tireStates)
+function ig.funig.SetVehicleTireStates(vehicle, tireStates)
     for i, tireState in ipairs(tireStates) do
         SetVehicleTyreBurst(vehicle, tireState[1], tireState[2], 1000.0)
     end
@@ -944,7 +944,7 @@ end
 -- returns all door states
 --- func desc
 ---@param vehicle any
-function c.func.GetVehicleDoorStates(vehicle)
+function ig.funig.GetVehicleDoorStates(vehicle)
     local doorStates = {}
     for i = 0, 7, 1 do
         if (GetIsDoorValid(vehicle, i)) then
@@ -962,7 +962,7 @@ end
 --- func desc
 ---@param vehicle any
 ---@param doorStates any
-function c.func.SetVehicleDoorStates(vehicle, doorStates)
+function ig.funig.SetVehicleDoorStates(vehicle, doorStates)
     for i, doorState in ipairs(doorStates) do
         if (doorState[2]) then
             SetVehicleDoorBroken(vehicle, doorState[1], true)
@@ -975,7 +975,7 @@ end
 -- returns all window states
 --- func desc
 ---@param vehicle any
-function c.func.GetVehicleWindowStates(vehicle)
+function ig.funig.GetVehicleWindowStates(vehicle)
     if (AreAllVehicleWindowsIntact(vehicle)) then
         return {}
     end
@@ -992,7 +992,7 @@ end
 --- func desc
 ---@param vehicle any
 ---@param windowStates any
-function c.func.SetVehicleWindowStates(vehicle, windowStates)
+function ig.funig.SetVehicleWindowStates(vehicle, windowStates)
     for i, windowState in ipairs(windowStates) do
         SmashVehicleWindow(vehicle, windowState)
     end
@@ -1000,7 +1000,7 @@ end
 
 --- func desc
 ---@param vehicle any
-function c.func.DeleteVehicle(vehicle)
+function ig.funig.DeleteVehicle(vehicle)
     if (not DoesEntityExist(vehicle)) then return end
     if (GetResourceState("AdvancedParking") == "started") then
         exports["AdvancedParking"]:DeleteVehicle(vehicle)

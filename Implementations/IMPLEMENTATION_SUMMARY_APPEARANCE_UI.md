@@ -40,7 +40,7 @@ AppearanceCustomization.vue (Main Container)
 const availableTabs = computed(() => {
   // Dynamically generates tabs based on config
   // Hides heritage for non-freemode
-  // Respects config.allowModelChange, allowHeritage, etc.
+  // Respects config.allowModelChange, allowHeritage, etig.
 })
 ```
 
@@ -128,7 +128,7 @@ debounceTimers.value[featureId] = setTimeout(() => {
 3. Eye Color - Visual color grid with hex colors
 
 #### OverlayEditor.vue (226 lines)
-**Purpose**: Manage 13 head overlays (makeup, facial hair, etc.)
+**Purpose**: Manage 13 head overlays (makeup, facial hair, etig.)
 **Features**:
 - Individual cards for each overlay
 - Style dropdown (varies per overlay)

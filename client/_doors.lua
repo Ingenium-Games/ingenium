@@ -1,6 +1,6 @@
 -- ====================================================================================--
-c.door = {} -- functions
-c.doors = {} -- from server
+ig.door = {} -- functions
+ig.doors = {} -- from server
 -- ====================================================================================--
 
 --[[
@@ -16,11 +16,11 @@ c.doors = {} -- from server
 [       script:ig.dev] }
 ]]--
 
-function c.door.SetDoors(doors)
-    c.doors = doors
+function ig.door.SetDoors(doors)
+    ig.doors = doors
 end
 
-function c.door.ToggleLock(hash)
+function ig.door.ToggleLock(hash)
     --
     --while DoorSystemSetOpenRatio(hash) ~= 0.0 do
     --    Citizen.Wait(1000)
@@ -38,7 +38,7 @@ end
 
 local door_hashes = {}
 
-function c.door.Add(d)
+function ig.door.Add(d)
     local hash, model, coords, jobs, locked, item, time = d[1], d[2], d[3], d[4], d[5], d[6], d[7]
     AddDoorToSystem(hash, model, coords.x, coords.y, coords.z, false, false, false)
     DoorSystemSetDoorState(hash, locked, 0)
@@ -46,7 +46,7 @@ function c.door.Add(d)
     table.insert(door_hashes, hash)
 end
 
-function c.door.Find(d)
+function ig.door.Find(d)
     local hash = d[1]
     if IsDoorRegisteredWithSystem(hash) then
         return true
@@ -55,11 +55,11 @@ function c.door.Find(d)
     end
 end
 
-function c.door.GetModels()
+function ig.door.GetModels()
     local models = {}
-    for k,v in pairs(c.doors) do
+    for k,v in pairs(ig.doors) do
         local model = v[2]
-        if not c.table.MatchValue(models, model) then
+        if not ig.table.MatchValue(models, model) then
             table.insert(models, model)
         end
     end    
@@ -68,8 +68,8 @@ end
 
 --- func desc
 ---@param coords any
-function c.door.FindHash(hash)
-    for k,v in pairs(c.doors) do
+function ig.door.FindHash(hash)
+    for k,v in pairs(ig.doors) do
         -- is the door in the table?
         if (v[1] == hash) then
             return true, k, v
@@ -81,14 +81,14 @@ end
 local start_scan = false
 local target_cache = {}
 
-function c.door.AddDoorsToSystem(doors)
+function ig.door.AddDoorsToSystem(doors)
     for k,v in pairs(doors) do
-        if not c.door.Find(v) then
-            c.door.Add(v)
+        if not ig.door.Find(v) then
+            ig.door.Add(v)
         end
     end
-    if c.doors ~= doors then
-        c.door.SetDoors(doors)
+    if ig.doors ~= doors then
+        ig.door.SetDoors(doors)
     end
     start_scan = true
 end
@@ -96,17 +96,17 @@ end
 local models_cache = false
 local zones = {}
 
-function c.door.GenerateDoorsInRadius()
-    if not models_cache then models_cache = c.door.GetModels() end
+function ig.door.GenerateDoorsInRadius()
+    if not models_cache then models_cache = ig.door.GetModels() end
     -- print("Checking Models")
-    -- print(c.table.Dump(models_cache))
+    -- print(ig.table.Dump(models_cache))
     local entities = {}
     local ords = GetEntityCoords(PlayerPedId())
-    local objs = c.func.GetObjectsInArea(ords, 16, false)
+    local objs = ig.funig.GetObjectsInArea(ords, 16, false)
     -- print("Checking Objects")
-    -- print(c.table.Dump(objs))
+    -- print(ig.table.Dump(objs))
     for k, v in pairs(objs) do
-        if c.table.MatchValue(models_cache, v.Model) then
+        if ig.table.MatchValue(models_cache, v.Model) then
             local bool, hash = DoorSystemFindExistingDoor(v.Coords.x, v.Coords.y, v.Coords.z, v.Model)
             if bool then
                 entities[k] = hash
@@ -114,16 +114,16 @@ function c.door.GenerateDoorsInRadius()
         end
     end
     -- print("Checking Entities")
-    -- print(c.table.Dump(entities))
+    -- print(ig.table.Dump(entities))
     for k, v in pairs(entities) do
-        if DoesEntityExist(k) and not c.table.MatchValue(target_cache, k) then
+        if DoesEntityExist(k) and not ig.table.MatchValue(target_cache, k) then
             --
             --print("Adding to cache: "..k)
             table.insert(target_cache, k)
             --
-            local bool, key, values = c.door.FindHash(v)
-            --print("Checking c.door.FindHash(hash) ")
-            --print(bool, key, c.table.Dump(values))
+            local bool, key, values = ig.door.FindHash(v)
+            --print("Checking ig.door.FindHash(hash) ")
+            --print(bool, key, ig.table.Dump(values))
             --
             exports['ig.target']:AddEntityZone("DOOR_"..key, k, {
                 name = "DOOR_"..key,
@@ -142,7 +142,7 @@ function c.door.GenerateDoorsInRadius()
                         end
                     end,
                     action = function()
-                        c.door.ToggleLock(v)
+                        ig.door.ToggleLock(v)
                     end
                 },
                 {
@@ -156,7 +156,7 @@ function c.door.GenerateDoorsInRadius()
                         end
                     end,
                     action = function()
-                        c.door.ToggleLock(v)
+                        ig.door.ToggleLock(v)
                     end
                 },
             },
@@ -165,13 +165,13 @@ function c.door.GenerateDoorsInRadius()
         end
     end
     -- print("Checking target_cache")
-    -- print(c.table.Dump(target_cache))
+    -- print(ig.table.Dump(target_cache))
 end
 
 --- func desc
 ---@param coords any
-function c.door.SetState(hash, state)
-    for k,v in pairs(c.doors) do
+function ig.door.SetState(hash, state)
+    for k,v in pairs(ig.doors) do
         -- is the door in the table?
         if v[1] == hash then
             v[5] = state
@@ -181,7 +181,7 @@ end
 
 RegisterNetEvent("Client:Doors:Sync", function(hash, state)
     if IsDoorRegisteredWithSystem(hash) then
-        c.door.SetState(hash, state)
+        ig.door.SetState(hash, state)
         DoorSystemSetDoorState(hash, state, 0)
     end
 end)
@@ -189,7 +189,7 @@ end)
 Citizen.CreateThread(function()
     while true do
         if start_scan then
-            c.door.GenerateDoorsInRadius()
+            ig.door.GenerateDoorsInRadius()
             Citizen.Wait(2200)
         else
             Citizen.Wait(500)

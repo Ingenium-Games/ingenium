@@ -3,9 +3,9 @@
 -- Handles job-specific pricing for appearance customization
 -- ====================================================================================--
 
-c.appearance = c.appearance or {}
-c.appearance_pricing = c.appearance_pricing or {}
-c.appearance_pricing_dirty = c.appearance_pricing_dirty or {}
+ig.appearance = ig.appearance or {}
+ig.appearance_pricing = ig.appearance_pricing or {}
+ig.appearance_pricing_dirty = ig.appearance_pricing_dirty or {}
 
 -- Constants
 local DEFAULT_PRICING_PATH = "appearance/pricing_default"
@@ -18,20 +18,20 @@ local JOB_PRICING_PATH_TEMPLATE = "[Jobs]/%s/data/appearance/pricing"
 ---Load pricing data for a specific job
 ---@param jobName string The name of the job
 ---@return table|nil Pricing data or nil if not found
-function c.appearance.LoadJobPricing(jobName)
+function ig.appearance.LoadJobPricing(jobName)
     -- Return if already loaded
-    if c.appearance_pricing[jobName] then 
-        return c.appearance_pricing[jobName] 
+    if ig.appearance_pricing[jobName] then 
+        return ig.appearance_pricing[jobName] 
     end
     
     -- Construct path to job-specific pricing file
     local path = JOB_PRICING_PATH_TEMPLATE:format(jobName)
     
     -- Check if file exists and load it
-    if c.json.Exists(path) then
-        c.appearance_pricing[jobName] = c.json.Read(path)
+    if ig.json.Exists(path) then
+        ig.appearance_pricing[jobName] = ig.json.Read(path)
         print(string.format("^2[Appearance Pricing] Loaded pricing for job: %s^0", jobName))
-        return c.appearance_pricing[jobName]
+        return ig.appearance_pricing[jobName]
     end
     
     return nil
@@ -40,19 +40,19 @@ end
 ---Get pricing data for a job, with fallback to default
 ---@param jobName string|nil The name of the job (nil for default)
 ---@return table Pricing data
-function c.appearance.GetPricing(jobName)
+function ig.appearance.GetPricing(jobName)
     -- If no job specified, return default
     if not jobName or jobName == "" then
-        return c.appearance.GetDefaultPricing()
+        return ig.appearance.GetDefaultPricing()
     end
     
     -- Try to load job-specific pricing
-    local pricing = c.appearance.LoadJobPricing(jobName)
+    local pricing = ig.appearance.LoadJobPricing(jobName)
     
     -- Fallback to default if job pricing not found
     if not pricing then
         print(string.format("^3[Appearance Pricing] No pricing found for job: %s, using default^0", jobName))
-        return c.appearance.GetDefaultPricing()
+        return ig.appearance.GetDefaultPricing()
     end
     
     return pricing
@@ -60,15 +60,15 @@ end
 
 ---Get default pricing data
 ---@return table Default pricing data
-function c.appearance.GetDefaultPricing()
+function ig.appearance.GetDefaultPricing()
     -- Load default pricing if not already loaded
-    if not c.appearance_pricing["_default"] then
-        if c.json.Exists(DEFAULT_PRICING_PATH) then
-            c.appearance_pricing["_default"] = c.json.Read(DEFAULT_PRICING_PATH)
+    if not ig.appearance_pricing["_default"] then
+        if ig.json.Exists(DEFAULT_PRICING_PATH) then
+            ig.appearance_pricing["_default"] = ig.json.Read(DEFAULT_PRICING_PATH)
             print("^2[Appearance Pricing] Loaded default pricing^0")
         else
             -- Create minimal default if file doesn't exist
-            c.appearance_pricing["_default"] = {
+            ig.appearance_pricing["_default"] = {
                 shopInfo = {
                     name = "Default Shop",
                     jobName = "_default"
@@ -87,7 +87,7 @@ function c.appearance.GetDefaultPricing()
         end
     end
     
-    return c.appearance_pricing["_default"]
+    return ig.appearance_pricing["_default"]
 end
 
 -- ====================================================================================--
@@ -100,14 +100,14 @@ end
 ---@param itemId string|number The item identifier
 ---@param price number The new price
 ---@return boolean Success status
-function c.appearance.UpdatePrice(jobName, category, itemId, price)
+function ig.appearance.UpdatePrice(jobName, category, itemId, price)
     if not jobName or jobName == "" or jobName == "_default" then
         print("^1[Appearance Pricing] Cannot update default pricing^0")
         return false
     end
     
     -- Load pricing if not already loaded
-    local pricing = c.appearance.LoadJobPricing(jobName)
+    local pricing = ig.appearance.LoadJobPricing(jobName)
     if not pricing then
         print(string.format("^1[Appearance Pricing] Failed to load pricing for job: %s^0", jobName))
         return false
@@ -125,7 +125,7 @@ function c.appearance.UpdatePrice(jobName, category, itemId, price)
     pricing.pricing[category].items[tostring(itemId)] = price
     
     -- Mark as dirty for periodic save
-    c.appearance_pricing_dirty[jobName] = true
+    ig.appearance_pricing_dirty[jobName] = true
     
     print(string.format("^2[Appearance Pricing] Updated %s price for job %s: item %s = $%d^0", 
         category, jobName, tostring(itemId), price))
@@ -134,13 +134,13 @@ function c.appearance.UpdatePrice(jobName, category, itemId, price)
 end
 
 ---Save all dirty pricing data
-function c.appearance.SaveAllDirtyPricing()
+function ig.appearance.SaveAllDirtyPricing()
     local saved = 0
-    for jobName, _ in pairs(c.appearance_pricing_dirty) do
-        if c.appearance_pricing[jobName] and jobName ~= "_default" then
+    for jobName, _ in pairs(ig.appearance_pricing_dirty) do
+        if ig.appearance_pricing[jobName] and jobName ~= "_default" then
             local path = JOB_PRICING_PATH_TEMPLATE:format(jobName)
-            c.json.Write(path, c.appearance_pricing[jobName])
-            c.appearance_pricing_dirty[jobName] = nil
+            ig.json.Write(path, ig.appearance_pricing[jobName])
+            ig.appearance_pricing_dirty[jobName] = nil
             saved = saved + 1
         end
     end
@@ -151,12 +151,12 @@ function c.appearance.SaveAllDirtyPricing()
 end
 
 ---Save all loaded pricing data (called on resource stop)
-function c.appearance.SaveAllPricing()
+function ig.appearance.SaveAllPricing()
     local saved = 0
-    for jobName, pricingData in pairs(c.appearance_pricing) do
+    for jobName, pricingData in pairs(ig.appearance_pricing) do
         if jobName ~= "_default" then
             local path = JOB_PRICING_PATH_TEMPLATE:format(jobName)
-            c.json.Write(path, pricingData)
+            ig.json.Write(path, pricingData)
             saved = saved + 1
         end
     end
@@ -169,12 +169,12 @@ end
 -- ====================================================================================--
 
 -- Save dirty pricing every 5 minutes
-if not c.appearance.PricingSaveThread then
-    c.appearance.PricingSaveThread = true
+if not ig.appearance.PricingSaveThread then
+    ig.appearance.PricingSaveThread = true
     Citizen.CreateThread(function()
         while true do
             Citizen.Wait(300000) -- 5 minutes
-            c.appearance.SaveAllDirtyPricing()
+            ig.appearance.SaveAllDirtyPricing()
         end
     end)
 end
@@ -186,7 +186,7 @@ end
 AddEventHandler("onResourceStop", function(resource)
     if GetCurrentResourceName() ~= resource then return end
     print("^3[Appearance Pricing] Saving all pricing data on resource stop...^0")
-    c.appearance.SaveAllPricing()
+    ig.appearance.SaveAllPricing()
 end)
 
 -- ====================================================================================--
@@ -209,8 +209,8 @@ end
 ---@param oldAppearance table The original appearance
 ---@param newAppearance table The new appearance
 ---@return number, table Total cost and itemized breakdown
-function c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
-    local pricing = c.appearance.GetPricing(jobName)
+function ig.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
+    local pricing = ig.appearance.GetPricing(jobName)
     local totalCost = 0
     local itemizedCosts = {}
     
@@ -352,7 +352,7 @@ function c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
         end
     end
     
-    -- Apply modifiers (employee discount, etc.)
+    -- Apply modifiers (employee discount, etig.)
     if pricing.modifiers and pricing.modifiers.employee_discount then
         totalCost = totalCost * pricing.modifiers.employee_discount
     end

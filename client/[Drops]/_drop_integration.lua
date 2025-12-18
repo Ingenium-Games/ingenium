@@ -2,7 +2,7 @@
 -- Drop Integration: Client-side drop system integration
 -- ====================================================================================--
 
--- Table to store blip handles for targeted drops (using existing c.blips system)
+-- Table to store blip handles for targeted drops (using existing ig.blips system)
 local dropBlipHandles = {}
 
 --- Handle drop notification for targeted drops
@@ -25,7 +25,7 @@ RegisterNetEvent('Client:Drop:Notify', function(data)
     
     -- Create blip if not a dead drop using the existing blip system
     if not isDeadDrop then
-        local blipHandle = c.blip.CreateBlip(
+        local blipHandle = ig.blip.CreateBlip(
             vector3(coords.x, coords.y, coords.z),
             478,  -- Package icon sprite
             2,    -- Green color
@@ -43,10 +43,10 @@ RegisterNetEvent('Client:Drop:Notify', function(data)
         -- Store blip handle for cleanup
         dropBlipHandles[uuid] = blipHandle
         
-        c.func.Debug_3("Created blip for drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
+        ig.funig.Debug_3("Created blip for drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
     end
     
-    -- Trigger hook for custom scripts (phone notifications, etc.)
+    -- Trigger hook for custom scripts (phone notifications, etig.)
     TriggerEvent('Client:Drop:Received', {
         coords = coords,
         isDeadDrop = isDeadDrop,
@@ -54,7 +54,7 @@ RegisterNetEvent('Client:Drop:Notify', function(data)
         uuid = uuid
     })
     
-    c.func.Debug_1("Received drop notification" .. (isDeadDrop and " (dead drop)" or " (with blip)"))
+    ig.funig.Debug_1("Received drop notification" .. (isDeadDrop and " (dead drop)" or " (with blip)"))
 end)
 
 --- Handle access denied
@@ -69,15 +69,15 @@ RegisterNetEvent('Client:Drop:AccessDenied', function(data)
         }
     })
     
-    c.func.Debug_1("Access denied to restricted drop")
+    ig.funig.Debug_1("Access denied to restricted drop")
 end)
 
 --- Clean up blip when drop is removed
 RegisterNetEvent('Client:Drop:Removed', function(uuid)
     if dropBlipHandles[uuid] then
-        c.blip.Remove(dropBlipHandles[uuid])
+        ig.blip.Remove(dropBlipHandles[uuid])
         dropBlipHandles[uuid] = nil
-        c.func.Debug_3("Removed blip for drop " .. uuid)
+        ig.funig.Debug_3("Removed blip for drop " .. uuid)
     end
 end)
 
@@ -103,7 +103,7 @@ CreateThread(function()
             -- Update the UI if inventory is currently open
             TriggerEvent("Client:Drop:InventoryUpdated", netId, value)
             
-            c.func.Debug_3("Drop inventory updated via State Bag for NetID: " .. tostring(netId))
+            ig.funig.Debug_3("Drop inventory updated via State Bag for NetID: " .. tostring(netId))
         end
     end)
 end)
@@ -113,7 +113,7 @@ end)
 RegisterNetEvent('Client:Inventory:UpdateLive', function(fromNetId, toNetId)
     -- Check if we currently have an inventory UI open for either of these entities
     -- Use the export from inventory.lua
-    local currentExternal = exports['ig.core']:GetCurrentExternalInventory()
+    local currentExternal = exports['ingenium']:GetCurrentExternalInventory()
     
     if currentExternal == fromNetId or currentExternal == toNetId then
         -- Fetch updated inventories from State Bags
@@ -143,7 +143,7 @@ RegisterNetEvent('Client:Inventory:UpdateLive', function(fromNetId, toNetId)
                 }
             })
             
-            c.func.Debug_3("Live inventory update sent to NUI")
+            ig.funig.Debug_3("Live inventory update sent to NUI")
         end
     end
 end)

@@ -28,7 +28,7 @@ end)
 
 AddEventHandler("explosionEvent", function()
     --CancelEvent()
-    --c.func.Debug_1("Explosion has been Cancelled.")
+    --ig.funig.Debug_1("Explosion has been Cancelled.")
 end)
 
 AddEventHandler("entityCreated", function(ent)
@@ -40,19 +40,19 @@ AddEventHandler("entityCreated", function(ent)
         -- Object
         if type == 3 then
             if not conf.disable.objects[model] then
-                c.data.AddObject(net, c.class.BlankObject, net)                      
+                ig.data.AddObject(net, ig.class.BlankObject, net)                      
             else
                 DeleteEntity(ent)
-                c.func.Debug_1("Object has been Deleted.")
+                ig.funig.Debug_1("Object has been Deleted.")
             end
         --
         -- Vehicle
         elseif type == 2 then
             if not conf.disable.vehicles[model] then                        
-                c.data.AddVehicle(net, c.class.Vehicle, net, false)
+                ig.data.AddVehicle(net, ig.class.Vehicle, net, false)
             else
                 DeleteEntity(ent)
-                c.func.Debug_1("Vehicle has been Deleted.")
+                ig.funig.Debug_1("Vehicle has been Deleted.")
             end
         --
         -- Ped
@@ -60,14 +60,14 @@ AddEventHandler("entityCreated", function(ent)
             if not conf.disable.peds[model] then                        
                 -- not a human player
                 if not IsPedAPlayer(ent) then
-                    c.data.AddNpc(net, c.class.Npc, net)
+                    ig.data.AddNpc(net, ig.class.Npc, net)
                 else
                 -- is a player
 
                 end
             else
                 DeleteEntity(ent)
-                c.func.Debug_1("Ped has been Deleted.")
+                ig.funig.Debug_1("Ped has been Deleted.")
             end
         -- no other types // fin
         end
@@ -82,14 +82,14 @@ AddEventHandler("entityCreating", function(ent)
     -- Object
     if type == 3 then
         if conf.disable.objects[model] then
-            c.func.Debug_1("Object prevented from Spawning.")
+            ig.funig.Debug_1("Object prevented from Spawning.")
             CancelEvent()
         end
     --
     -- Vehicle
     elseif type == 2 then            
         if conf.disable.vehicles[model] then
-            c.func.Debug_1("Vehicle prevented from Spawning.")
+            ig.funig.Debug_1("Vehicle prevented from Spawning.")
             CancelEvent()
         end
     --
@@ -98,7 +98,7 @@ AddEventHandler("entityCreating", function(ent)
         -- not a human player
         if not IsPedAPlayer(ent) then
             if conf.disable.peds[model] then
-                c.func.Debug_1("Ped prevented from Spawning.")
+                ig.funig.Debug_1("Ped prevented from Spawning.")
                 CancelEvent()
             end
         else
@@ -115,15 +115,15 @@ AddEventHandler("entityRemoved", function(ent)
     
     -- Object
     if type == 3 then
-        c.data.RemoveObject(net)
+        ig.data.RemoveObject(net)
     -- Vehicle
     elseif type == 2 then            
-        c.data.RemoveVehicle(net)
+        ig.data.RemoveVehicle(net)
    -- Ped
     elseif type == 1 then
         -- not a human player
         if not IsPedAPlayer(ent) then
-            c.data.RemoveNpc(net)
+            ig.data.RemoveNpc(net)
         else
         -- is a player
             

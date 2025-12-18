@@ -1,6 +1,6 @@
 -- ====================================================================================--
-c.door = {} -- functions
-c.doors = {} -- cached doors
+ig.door = {} -- functions
+ig.doors = {} -- cached doors
 -- ====================================================================================--
 
 --[[    
@@ -25,8 +25,8 @@ c.doors = {} -- cached doors
 
 --- func desc
 ---@param coords any
-function c.door.Find(coords)
-    for k, v in pairs(c.doors) do
+function ig.door.Find(coords)
+    for k, v in pairs(ig.doors) do
         -- is the door in the table?
         if (v[3] == coords) then
             return true, k
@@ -37,8 +37,8 @@ end
 
 --- func desc
 ---@param coords any
-function c.door.FindHash(hash)
-    for k, v in pairs(c.doors) do
+function ig.door.FindHash(hash)
+    for k, v in pairs(ig.doors) do
         -- is the door in the table?
         if (v[1] == hash) then
             return true, k
@@ -49,24 +49,24 @@ end
 
 --- func desc
 ---@param coords any
-function c.door.SetState(hash, state)
-    for k, v in pairs(c.doors) do
+function ig.door.SetState(hash, state)
+    for k, v in pairs(ig.doors) do
         -- is the door in the table?
         if (v[1] == hash) then
             v[5] = state
-            c.json.Write("Doors", c.doors)
+            ig.json.Write("Doors", ig.doors)
         end
     end
 end
 
 --- func desc
 ---@param coords any
-function c.door.ChangeState(hash)
-    for k, v in pairs(c.doors) do
+function ig.door.ChangeState(hash)
+    for k, v in pairs(ig.doors) do
         -- is the door in the table?
         if (v[1] == hash) then
             v[5] = not v[5]
-            c.json.Write("Doors", c.doors)
+            ig.json.Write("Doors", ig.doors)
         end
     end
 end
@@ -75,31 +75,31 @@ end
 ---@param model any
 ---@param coords any
 ---@param locked any
-function c.door.Add(Doors)
+function ig.door.Add(Doors)
     for k, v in pairs(Doors) do
-        if not c.door.Find(v.Ords) then
-            local n = #c.doors + 1
+        if not ig.door.Find(v.Ords) then
+            local n = #ig.doors + 1
             local hash, model, coords, jobs, locked, item, time = joaat("DOOR_" .. n), v.Model, v.Ords, v.Job,
                 (v.State or 1), (v.Item or false), (v.Time or false)
-            c.doors[n] = {hash, model, coords, jobs, locked, item, time}
+            ig.doors[n] = {hash, model, coords, jobs, locked, item, time}
             if v.Time then
                 if v.Time.h and v.Time.m and v.Time.s then
-                    c.cron.RunAt(v.Time.h, v.Time.m, c.door.SetState, hash, v.Time.s)
+                    ig.cron.RunAt(v.Time.h, v.Time.m, ig.door.SetState, hash, v.Time.s)
                 end
             end
         else
-            print("Ignoring duplicate door : " .. c.table.Dump(v))
+            print("Ignoring duplicate door : " .. ig.table.Dump(v))
         end
     end
-    c.json.Write("Doors", c.doors)
+    ig.json.Write("Doors", ig.doors)
 end
 
 --- func desc
-function c.door.GetDoors()
-    return c.table.Clone(c.doors)
+function ig.door.GetDoors()
+    return ig.table.Clone(ig.doors)
 end
 
 RegisterNetEvent("Server:Doors:SetState", function(hash, state)
-    c.door.SetState(hash, state)
+    ig.door.SetState(hash, state)
     TriggerClientEvent("Client:Doors:Sync", -1, hash, state)
 end)

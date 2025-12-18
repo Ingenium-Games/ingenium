@@ -173,7 +173,7 @@ export const useAppearanceStore = defineStore('appearance', () => {
       if (!currentAppearance.value.components) {
         currentAppearance.value.components = []
       }
-      const index = currentAppearance.value.components.findIndex(c => c.component_id === componentId)
+      const index = currentAppearance.value.components.findIndex(c => ig.component_id === componentId)
       if (index >= 0) {
         currentAppearance.value.components[index] = { component_id: componentId, drawable, texture }
       } else {
@@ -327,13 +327,13 @@ export const useAppearanceStore = defineStore('appearance', () => {
         
         if (changed) {
           const price = getItemPrice('clothing', newComp.component_id)
-          const compName = constants.value?.components?.find(c => c.id === newComp.component_id)?.name || `Component ${newComp.component_id}`
+          const compName = constants.value?.components?.find(c => ig.id === newComp.component_id)?.name || `Component ${newComp.component_id}`
           addCost('clothing', newComp.component_id, price, compName)
         }
       }
     }
     
-    // Apply modifiers (employee discount, etc.)
+    // Apply modifiers (employee discount, etig.)
     if (pricing.value.modifiers && pricing.value.modifiers.employee_discount) {
       total = Math.floor(total * pricing.value.modifiers.employee_discount)
     }

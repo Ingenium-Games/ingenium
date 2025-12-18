@@ -118,7 +118,7 @@ The new system provides clean export functions for other resources to use.
 
 ```lua
 -- Show a notification (backwards compatible)
-exports['ig.core']:Notify("Hello World!", "green", 5000)
+exports['ingenium']:Notify("Hello World!", "green", 5000)
 
 -- Or use the event (also backwards compatible)
 TriggerEvent("Client:Notify", "Hello World!", "green", 5000)
@@ -130,7 +130,7 @@ Colors: `black`, `blue`, `orange`, `red`, `green`, `pink`, `purple`, `yellow`
 
 ```lua
 -- Show a menu
-exports['ig.core']:ShowMenu({
+exports['ingenium']:ShowMenu({
     title = "Example Menu",
     items = {
         { 
@@ -154,14 +154,14 @@ AddEventHandler("Client:Menu:Select", function(action, data)
 end)
 
 -- Hide menu
-exports['ig.core']:HideMenu()
+exports['ingenium']:HideMenu()
 ```
 
 ### Input Dialogs
 
 ```lua
 -- Show an input dialog
-exports['ig.core']:ShowInput({
+exports['ingenium']:ShowInput({
     title = "Enter your name",
     placeholder = "John Doe",
     maxLength = 50
@@ -174,14 +174,14 @@ AddEventHandler("Client:Input:Submit", function(value)
 end)
 
 -- Hide input dialog
-exports['ig.core']:HideInput()
+exports['ingenium']:HideInput()
 ```
 
 ### Context Menus
 
 ```lua
 -- Show a context menu
-exports['ig.core']:ShowContextMenu({
+exports['ingenium']:ShowContextMenu({
     title = "Actions",
     items = {
         { label = "Repair", icon = "🔧", action = "repair" },
@@ -197,17 +197,17 @@ AddEventHandler("Client:Context:Select", function(action, data)
 end)
 
 -- Hide context menu
-exports['ig.core']:HideContextMenu()
+exports['ingenium']:HideContextMenu()
 ```
 
 ### HUD
 
 ```lua
 -- Show HUD
-exports['ig.core']:ShowHUD()
+exports['ingenium']:ShowHUD()
 
 -- Update HUD data
-exports['ig.core']:UpdateHUD({
+exports['ingenium']:UpdateHUD({
     health = 100,
     armor = 50,
     hunger = 75,
@@ -219,7 +219,7 @@ exports['ig.core']:UpdateHUD({
 })
 
 -- Hide HUD
-exports['ig.core']:HideHUD()
+exports['ingenium']:HideHUD()
 ```
 
 ## NUI Messages
@@ -272,7 +272,7 @@ For new features, use the export API:
 -- Manual SendNUIMessage calls with custom handling
 
 -- New way (clean API)
-exports['ig.core']:ShowMenu({ title = "Menu", items = {...} })
+exports['ingenium']:ShowMenu({ title = "Menu", items = {...} })
 ```
 
 ### Migrating UI Components

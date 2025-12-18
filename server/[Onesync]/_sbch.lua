@@ -1,23 +1,19 @@
 -- ====================================================================================--
 -- player is the state used for _user.lua and _character.lua as they are merged into one.
-if not c.sbch then
-    c.sbch = {}
-end
--- c.sbch.
+ig.sbch = {}
 -- ====================================================================================--
-c.sbch.player = {}
+ig.sbch.player = {}
 --
-
--- Typically these are invoked via the xplayer table to modify states as its the server, and people are acustomed to xplayer tables etc.
+-- Typically these are invoked via the xplayer table to modify states as its the server, and people are acustomed to xplayer tables etig.
 -- however the clients can also invoke state changes, like the dead version, so when they do this,
 -- we run a check to see if its the same as the prior value before getting the server to update the data table.
 -- the only one we dont is the isdead, as technically clients can say when they are alive or dead....
 
 -- When a player loads in, all these are invoked as they are a nil state, therefore the change should trigger the refresh
 
-c.sbch.player.IsWanted = AddStateBagChangeHandler("IsWanted", nil, function(bagName, key, value, _, _)
+ig.sbch.player.IsWanted = AddStateBagChangeHandler("IsWanted", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         if value ~= xPlayer.GetWanted() then
             xPlayer.SetWanted(true)
@@ -29,9 +25,9 @@ c.sbch.player.IsWanted = AddStateBagChangeHandler("IsWanted", nil, function(bagN
 end)
 --
 
-c.sbch.player.IsSupporter = AddStateBagChangeHandler("IsSupporter", nil, function(bagName, key, value, _, _)
+ig.sbch.player.IsSupporter = AddStateBagChangeHandler("IsSupporter", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         if value ~= xPlayer.GetSupporter() then
             xPlayer.SetSupporter(value)
@@ -43,16 +39,16 @@ c.sbch.player.IsSupporter = AddStateBagChangeHandler("IsSupporter", nil, functio
 end)
 --
 
-c.sbch.player.IsDead = AddStateBagChangeHandler("IsDead", nil, function(bagName, key, value, _, _)
+ig.sbch.player.IsDead = AddStateBagChangeHandler("IsDead", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         if value == false then
             -- We want to know when they were revived.
-            c.sql.char.SetDead(xPlayer.GetCharacter_ID(), value, {
-                RevivedAt = c.func.Timestamp()
+            ig.sql.char.SetDead(xPlayer.GetCharacter_ID(), value, {
+                RevivedAt = ig.funig.Timestamp()
             })
-            c.sql.char.SetHealth(xPlayer.GetCharacter_ID(), 150)
+            ig.sql.char.SetHealth(xPlayer.GetCharacter_ID(), 150)
             --
         else
             --
@@ -65,9 +61,9 @@ c.sbch.player.IsDead = AddStateBagChangeHandler("IsDead", nil, function(bagName,
 end)
 --
 
-c.sbch.player.IsCuffed = AddStateBagChangeHandler("IsCuffed", nil, function(bagName, key, value, _, _)
+ig.sbch.player.IsCuffed = AddStateBagChangeHandler("IsCuffed", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         if value ~= xPlayer.GetCuffed() then
             xPlayer.SetCuffed(value)
@@ -79,9 +75,9 @@ c.sbch.player.IsCuffed = AddStateBagChangeHandler("IsCuffed", nil, function(bagN
 end)
 -- 
 
-c.sbch.player.IsEscorted = AddStateBagChangeHandler("IsEscorted", nil, function(bagName, key, value, _, _)
+ig.sbch.player.IsEscorted = AddStateBagChangeHandler("IsEscorted", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         if value ~= xPlayer.GetEscorted() then
             xPlayer.SetEscorted(value)
@@ -93,9 +89,9 @@ c.sbch.player.IsEscorted = AddStateBagChangeHandler("IsEscorted", nil, function(
 end)
 --    
 
-c.sbch.player.IsEscorting = AddStateBagChangeHandler("IsEscorting", nil, function(bagName, key, value, _, _)
+ig.sbch.player.IsEscorting = AddStateBagChangeHandler("IsEscorting", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         if value ~= xPlayer.GetEscorting() then
             xPlayer.SetEscorting(value)
@@ -107,9 +103,9 @@ c.sbch.player.IsEscorting = AddStateBagChangeHandler("IsEscorting", nil, functio
 end)
 --
 
-c.sbch.player.IsSwimming = AddStateBagChangeHandler("IsSwimming", nil, function(bagName, key, value, _, _)
+ig.sbch.player.IsSwimming = AddStateBagChangeHandler("IsSwimming", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         if value ~= xPlayer.GetSwimming() then
             xPlayer.SetSwimming(value)
@@ -124,9 +120,9 @@ end)
 -- ====================================================================================--
 --
 -- BANKING
-c.sbch.player.Bank = AddStateBagChangeHandler("Bank", nil, function(bagName, key, value, _, _)
+ig.sbch.player.Bank = AddStateBagChangeHandler("Bank", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         --
         TriggerClientEvent("Client:RunChecks:Bank", src)
@@ -135,9 +131,9 @@ c.sbch.player.Bank = AddStateBagChangeHandler("Bank", nil, function(bagName, key
 end)
 --
 -- BANKING
-c.sbch.player.Cash = AddStateBagChangeHandler("Cash", nil, function(bagName, key, value, _, _)
+ig.sbch.player.Cash = AddStateBagChangeHandler("Cash", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         --
         TriggerClientEvent("Client:RunChecks:Cash", src)
@@ -146,9 +142,9 @@ c.sbch.player.Cash = AddStateBagChangeHandler("Cash", nil, function(bagName, key
 end)
 --
 -- Phone
-c.sbch.player.Phone = AddStateBagChangeHandler("Phone", nil, function(bagName, key, value, _, _)
+ig.sbch.player.Phone = AddStateBagChangeHandler("Phone", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if xPlayer then
         if value ~= xPlayer.GetPhone() then
             xPlayer.SetPhone(value)

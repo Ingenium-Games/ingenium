@@ -1,16 +1,16 @@
 -- ====================================================================================--
-c.json = {}
+ig.json = {}
 -- ====================================================================================--
-function c.json.Exists(file)
-    return c.file.Exists(file..".json")
+function ig.json.Exists(file)
+    return ig.file.Exists(file..".json")
 end
 
-function c.json.Read(file)
-    local content = c.file.Read(file..".json")
+function ig.json.Read(file)
+    local content = ig.file.Read(file..".json")
     return json.decode(content)
 end
   
-function c.json.Write(file, content)
+function ig.json.Write(file, content)
     local data = json.encode(content)
-    c.file.Write(file..".json", data)
+    ig.file.Write(file..".json", data)
 end

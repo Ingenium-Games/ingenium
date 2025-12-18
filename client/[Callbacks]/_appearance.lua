@@ -15,33 +15,33 @@ RegisterServerCallback({
         config = config or {}
         
         -- Store if this is character creation
-        c.appearance.IsCharacterCreation = config.isCharacterCreation or false
+        ig.appearance.IsCharacterCreation = config.isCharacterCreation or false
         
         -- Activate customization mode
-        c.appearance.SetCustomizationActive(true)
+        ig.appearance.SetCustomizationActive(true)
         
         -- Get current appearance
-        local currentAppearance = c.appearance.GetAppearance()
+        local currentAppearance = ig.appearance.GetAppearance()
         
         -- Get appearance constants
-        local constants = c.appearance.GetConstants()
+        local constants = ig.appearance.GetConstants()
         
         -- Get ped data from server if needed
         local peds = nil
         if config.allowModelChange ~= false then
-            peds = c.callback.Await('ig:GameData:GetPeds')
+            peds = ig.callback.Await('ig:GameData:GetPeds')
         end
         
         -- Get tattoo data from server if tattoos enabled
         local tattoos = nil
         if config.allowTattoos ~= false then
-            tattoos = c.callback.Await('ig:GameData:GetTattoos')
+            tattoos = ig.callback.Await('ig:GameData:GetTattoos')
         end
         
         -- Get pricing data from server if pricing enabled
         local pricing = nil
         if config.jobName then
-            pricing = c.callback.Await('Server:Appearance:GetPricing', config.jobName)
+            pricing = ig.callback.Await('Server:Appearance:GetPricing', config.jobName)
         end
         
         -- Send data to NUI
@@ -61,7 +61,7 @@ RegisterServerCallback({
     eventName = "Client:Appearance:Close",
     eventCallback = function()
         -- Deactivate customization mode
-        c.appearance.SetCustomizationActive(false)
+        ig.appearance.SetCustomizationActive(false)
         
         -- Close NUI
         TriggerEvent("Client:Nui:Message", "appearance:close", {})
@@ -72,7 +72,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateModel",
     eventCallback = function(model)
-        c.appearance.SetModel(model)
+        ig.appearance.SetModel(model)
         return true
     end
 })
@@ -81,7 +81,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateHeadBlend",
     eventCallback = function(headBlend)
-        c.appearance.SetHeadBlend(headBlend)
+        ig.appearance.SetHeadBlend(headBlend)
         return true
     end
 })
@@ -90,7 +90,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateFaceFeature",
     eventCallback = function(index, value)
-        c.appearance.SetFaceFeature(index, value)
+        ig.appearance.SetFaceFeature(index, value)
         return true
     end
 })
@@ -99,7 +99,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateFaceFeatures",
     eventCallback = function(features)
-        c.appearance.SetFaceFeatures(features)
+        ig.appearance.SetFaceFeatures(features)
         return true
     end
 })
@@ -108,7 +108,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateHeadOverlay",
     eventCallback = function(overlayId, data)
-        c.appearance.SetHeadOverlay(overlayId, data.style, data.opacity, data.color, data.secondColor)
+        ig.appearance.SetHeadOverlay(overlayId, data.style, data.opacity, data.color, data.secondColor)
         return true
     end
 })
@@ -117,7 +117,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateHeadOverlays",
     eventCallback = function(overlays)
-        c.appearance.SetHeadOverlays(overlays)
+        ig.appearance.SetHeadOverlays(overlays)
         return true
     end
 })
@@ -126,7 +126,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateHair",
     eventCallback = function(hair)
-        c.appearance.SetHair(hair.style, hair.color, hair.highlight)
+        ig.appearance.SetHair(hair.style, hair.color, hair.highlight)
         return true
     end
 })
@@ -135,7 +135,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateEyeColor",
     eventCallback = function(color)
-        c.appearance.SetEyeColor(color)
+        ig.appearance.SetEyeColor(color)
         return true
     end
 })
@@ -144,7 +144,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateComponent",
     eventCallback = function(componentId, drawable, texture)
-        c.appearance.SetComponent(componentId, drawable, texture)
+        ig.appearance.SetComponent(componentId, drawable, texture)
         return true
     end
 })
@@ -153,7 +153,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateComponents",
     eventCallback = function(components)
-        c.appearance.SetComponents(components)
+        ig.appearance.SetComponents(components)
         return true
     end
 })
@@ -162,7 +162,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateProp",
     eventCallback = function(propId, drawable, texture)
-        c.appearance.SetProp(propId, drawable, texture)
+        ig.appearance.SetProp(propId, drawable, texture)
         return true
     end
 })
@@ -171,7 +171,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:UpdateProps",
     eventCallback = function(props)
-        c.appearance.SetProps(props)
+        ig.appearance.SetProps(props)
         return true
     end
 })
@@ -180,7 +180,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:ApplyTattoo",
     eventCallback = function(collection, hash)
-        c.appearance.ApplyTattoo(collection, hash)
+        ig.appearance.ApplyTattoo(collection, hash)
         return true
     end
 })
@@ -189,7 +189,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:ClearTattoos",
     eventCallback = function()
-        c.appearance.ClearTattoos()
+        ig.appearance.ClearTattoos()
         return true
     end
 })
@@ -198,7 +198,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:ApplyTattoos",
     eventCallback = function(tattoos)
-        c.appearance.ApplyTattoos(tattoos)
+        ig.appearance.ApplyTattoos(tattoos)
         return true
     end
 })
@@ -211,7 +211,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:SetCameraView",
     eventCallback = function(mode)
-        c.appearance.SetCameraView(mode)
+        ig.appearance.SetCameraView(mode)
         return true
     end
 })
@@ -220,7 +220,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:RotateCamera",
     eventCallback = function(degrees)
-        c.appearance.RotateCamera(degrees)
+        ig.appearance.RotateCamera(degrees)
         return true
     end
 })
@@ -229,7 +229,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:TurnAround",
     eventCallback = function(duration)
-        c.appearance.TurnAround(duration)
+        ig.appearance.TurnAround(duration)
         return true
     end
 })
@@ -242,17 +242,17 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Client:Appearance:Save",
     eventCallback = function()
-        local appearance = c.appearance.GetAppearance()
+        local appearance = ig.appearance.GetAppearance()
         
         -- Check if this is character creation
-        local isCharacterCreation = c.appearance.IsCharacterCreation or false
+        local isCharacterCreation = ig.appearance.IsCharacterCreation or false
         
         if isCharacterCreation then
             -- Store appearance temporarily for character registration
-            c.appearance.PendingAppearance = appearance
+            ig.appearance.PendingAppearance = appearance
             
             -- Close customization
-            c.appearance.SetCustomizationActive(false)
+            ig.appearance.SetCustomizationActive(false)
             TriggerEvent("Client:Nui:Message", "appearance:close", {})
             
             -- Trigger character registration NUI
@@ -263,7 +263,7 @@ RegisterServerCallback({
             TriggerServerEvent("Server:Character:SaveAppearance", appearance)
             
             -- Close customization
-            c.appearance.SetCustomizationActive(false)
+            ig.appearance.SetCustomizationActive(false)
             TriggerEvent("Client:Nui:Message", "appearance:close", {})
         end
         
@@ -277,7 +277,7 @@ RegisterServerCallback({
     eventCallback = function()
         -- Restore previous appearance if stored
         -- For now, just close
-        c.appearance.SetCustomizationActive(false)
+        ig.appearance.SetCustomizationActive(false)
         TriggerEvent("Client:Nui:Message", "appearance:close", {})
         
         return true

@@ -38,8 +38,8 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         }})
     )
     --
-    local id = c.func.identifier(src)
-    local data = c.sql.user.Get(id)
+    local id = ig.funig.identifier(src)
+    local data = ig.sql.user.Get(id)
     if data ~= nil then
         if data.Priority ~= nil then
             Queue.AddPriority(data.Steam_ID)

@@ -1,30 +1,30 @@
 -- ====================================================================================--
-c.skill = {} -- functions
-c._skills = {} -- Server sent to client
+ig.skill = {} -- functions
+ig._skills = {} -- Server sent to client
 -- ====================================================================================--
 
 --- Sets the table of active modifiers.
 ---@param t table "Typically passed from the server as an internal table."
-function c.skill.SetSkills()
+function ig.skill.SetSkills()
     if LocalPlayer.state.Skills ~= nil then
-        c._skills = LocalPlayer.state.Skills
-        c.func.Debug_2("[F] c.skill.SetSkills() LocalState Used")
-        -- print(c._skills)
-        -- print(c.table.Dump(c._skills))
+        ig._skills = LocalPlayer.state.Skills
+        ig.funig.Debug_2("[F] ig.skill.SetSkills() LocalState Used")
+        -- print(ig._skills)
+        -- print(ig.table.Dump(ig._skills))
     else
-        c._skills = TriggerServerCallback({eventName = "GetSkills"})
-        c.func.Debug_2("[F] c.skill.SetSkills() Event Used")
+        ig._skills = TriggerServerCallback({eventName = "GetSkills"})
+        ig.funig.Debug_2("[F] ig.skill.SetSkills() Event Used")
     end
 end
 
 -- ====================================================================================--
 
 --
-function c.skill.GetSkills()
+function ig.skill.GetSkills()
     return self.Skills
 end
 --
-function c.skill.GetSkill(skill)
+function ig.skill.GetSkill(skill)
     for k, v in pairs(self.Skills) do
         if k == skill then
             return v
@@ -32,8 +32,8 @@ function c.skill.GetSkill(skill)
     end
 end
 --
-function c.skill.CompareSkill(sk, level)
-    local skill = c.skill.GetSkill(sk)
+function ig.skill.CompareSkill(sk, level)
+    local skill = ig.skill.GetSkill(sk)
     if skill < level then
         return false
     else

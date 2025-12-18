@@ -216,7 +216,7 @@ restart ig.core  # FiveM server console
 
 **Resource Name** (App.vue):
 ```javascript
-const RESOURCE_NAME = 'ig.core'
+const RESOURCE_NAME = 'ingenium'
 ```
 
 **Image Paths** (InventoryItem.vue):

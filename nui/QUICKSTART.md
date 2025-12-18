@@ -58,10 +58,10 @@ TriggerEvent("Client:Notify", "Hello World!", "green", 5000)
 
 ```lua
 -- Show a notification
-exports['ig.core']:Notify("Success!", "green", 3000)
+exports['ingenium']:Notify("Success!", "green", 3000)
 
 -- Show a menu
-exports['ig.core']:ShowMenu({
+exports['ingenium']:ShowMenu({
     title = "My Menu",
     items = {
         { label = "Option 1", action = "opt1" },
@@ -150,7 +150,7 @@ nui/
 ## Next Steps
 
 1. Read the [README.md](README.md) for full documentation
-2. Try the examples: `/test-notify`, `/test-menu`, etc.
+2. Try the examples: `/test-notify`, `/test-menu`, etig.
 3. Explore the source code in `src/`
 4. Build your own components!
 

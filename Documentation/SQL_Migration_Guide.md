@@ -21,7 +21,7 @@ The new SQL system maintains **full backward compatibility** with mysql-async th
 
 ### Path 1: Zero-Change Deployment (Recommended First Step)
 
-Simply deploy ig.core with the new SQL system. The compatibility layer automatically handles all `MySQL.Async.*` and `MySQL.Sync.*` calls.
+Simply deploy ig.core with the new SQL system. The compatibility layer automatically handles all `MySQL.Asynig.*` and `MySQL.Synig.*` calls.
 
 **No code changes required!**
 
@@ -38,7 +38,7 @@ Migrate high-frequency operations first for maximum performance gain:
 
 ### Path 3: Full Migration
 
-Migrate all SQL calls to new `c.sql.*` API in one deployment.
+Migrate all SQL calls to new `ig.sql.*` API in one deployment.
 
 ## Step-by-Step Migration
 
@@ -46,7 +46,7 @@ Migrate all SQL calls to new `c.sql.*` API in one deployment.
 
 #### Before (mysql-async):
 ```lua
-MySQL.Async.fetchAll("SELECT * FROM characters WHERE Primary_ID = @Primary_ID", {
+MySQL.Asynig.fetchAll("SELECT * FROM characters WHERE Primary_ID = @Primary_ID", {
     ["@Primary_ID"] = primaryId
 }, function(data)
     -- Handle results
@@ -59,13 +59,13 @@ end)
 #### After (new system):
 ```lua
 -- Option 1: Synchronous (blocking)
-local data = c.sql.Query("SELECT * FROM characters WHERE Primary_ID = ?", {primaryId})
+local data = ig.sql.Query("SELECT * FROM characters WHERE Primary_ID = ?", {primaryId})
 for i, char in ipairs(data) do
     print(char.First_Name)
 end
 
 -- Option 2: With callback (asynchronous)
-c.sql.Query("SELECT * FROM characters WHERE Primary_ID = ?", {primaryId}, function(data)
+ig.sql.Query("SELECT * FROM characters WHERE Primary_ID = ?", {primaryId}, function(data)
     for i, char in ipairs(data) do
         print(char.First_Name)
     end
@@ -78,7 +78,7 @@ end)
 ```lua
 local IsBusy = true
 local result = nil
-MySQL.Async.fetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = @Character_ID", {
+MySQL.Asynig.fetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = @Character_ID", {
     ["@Character_ID"] = characterId
 }, function(data)
     result = data
@@ -92,7 +92,7 @@ return result
 
 #### After:
 ```lua
-local result = c.sql.FetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {characterId})
+local result = ig.sql.FetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {characterId})
 return result
 ```
 
@@ -100,7 +100,7 @@ return result
 
 #### Before (execute):
 ```lua
-MySQL.Async.execute("UPDATE character_accounts SET Bank = @Bank WHERE Character_ID = @Character_ID", {
+MySQL.Asynig.execute("UPDATE character_accounts SET Bank = @Bank WHERE Character_ID = @Character_ID", {
     ["@Bank"] = newBalance,
     ["@Character_ID"] = characterId
 }, function(affectedRows)
@@ -110,14 +110,14 @@ end)
 
 #### After:
 ```lua
-c.sql.Update("UPDATE character_accounts SET Bank = ? WHERE Character_ID = ?", {newBalance, characterId}, function(affectedRows)
+ig.sql.Update("UPDATE character_accounts SET Bank = ? WHERE Character_ID = ?", {newBalance, characterId}, function(affectedRows)
     print("Updated " .. affectedRows .. " rows")
 end)
 ```
 
 #### Before (insert):
 ```lua
-MySQL.Async.insert("INSERT INTO characters (...) VALUES (@val1, @val2)", {
+MySQL.Asynig.insert("INSERT INTO characters (...) VALUES (@val1, @val2)", {
     ["@val1"] = value1,
     ["@val2"] = value2
 }, function(insertId)
@@ -127,22 +127,22 @@ end)
 
 #### After:
 ```lua
-c.sql.Insert("INSERT INTO characters (...) VALUES (?, ?)", {value1, value2}, function(insertId)
+ig.sql.Insert("INSERT INTO characters (...) VALUES (?, ?)", {value1, value2}, function(insertId)
     print("Inserted with ID: " .. insertId)
 end)
 ```
 
 ### Step 4: Update Prepared Statements
 
-#### Before (MySQL.Async.store):
+#### Before (MySQL.Asynig.store):
 ```lua
 local SaveData = -1
-MySQL.Async.store("UPDATE characters SET Health = @Health WHERE Character_ID = @Character_ID", function(id)
+MySQL.Asynig.store("UPDATE characters SET Health = @Health WHERE Character_ID = @Character_ID", function(id)
     SaveData = id
 end)
 
 -- Later, execute:
-MySQL.Async.insert(SaveData, {
+MySQL.Asynig.insert(SaveData, {
     ["@Health"] = health,
     ["@Character_ID"] = characterId
 }, function(r)
@@ -153,12 +153,12 @@ end)
 #### After:
 ```lua
 local SaveData = -1
-c.sql.PrepareQuery("UPDATE characters SET Health = ? WHERE Character_ID = ?", function(id)
+ig.sql.PrepareQuery("UPDATE characters SET Health = ? WHERE Character_ID = ?", function(id)
     SaveData = id
 end)
 
 -- Later, execute with positional parameters:
-c.sql.ExecutePrepared(SaveData, {health, characterId}, function(r)
+ig.sql.ExecutePrepared(SaveData, {health, characterId}, function(r)
     print("Saved")
 end)
 ```
@@ -167,7 +167,7 @@ end)
 
 #### Before:
 ```lua
-MySQL.Async.transaction({
+MySQL.Asynig.transaction({
     {query = "UPDATE accounts SET balance = balance - @amount", parameters = {["@amount"] = 100}},
     {query = "INSERT INTO transactions VALUES (@data)", parameters = {["@data"] = data}}
 }, function(success)
@@ -177,7 +177,7 @@ end)
 
 #### After:
 ```lua
-c.sql.Transaction({
+ig.sql.Transaction({
     {query = "UPDATE accounts SET balance = balance - ?", parameters = {100}},
     {query = "INSERT INTO transactions VALUES (?)", parameters = {data}}
 }, function(success, results)
@@ -201,7 +201,7 @@ The most common change is converting named parameters to positional:
 
 #### Before:
 ```lua
-MySQL.Async.execute("UPDATE users SET ban = @ban, reason = @reason WHERE id = @id", {
+MySQL.Asynig.execute("UPDATE users SET ban = @ban, reason = @reason WHERE id = @id", {
     ["@ban"] = true,
     ["@reason"] = "Cheating",
     ["@id"] = userId
@@ -210,7 +210,7 @@ MySQL.Async.execute("UPDATE users SET ban = @ban, reason = @reason WHERE id = @i
 
 #### After:
 ```lua
-c.sql.Update("UPDATE users SET ban = ?, reason = ? WHERE id = ?", {true, "Cheating", userId})
+ig.sql.Update("UPDATE users SET ban = ?, reason = ? WHERE id = ?", {true, "Cheating", userId})
 ```
 
 ## Common Patterns
@@ -221,7 +221,7 @@ c.sql.Update("UPDATE users SET ban = ?, reason = ? WHERE id = ?", {true, "Cheati
 ```lua
 local IsBusy = true
 local result = nil
-MySQL.Async.fetchScalar("SELECT ...", params, function(data)
+MySQL.Asynig.fetchScalar("SELECT ...", params, function(data)
     result = data
     IsBusy = false
 end)
@@ -233,7 +233,7 @@ return result
 
 #### After:
 ```lua
-local result = c.sql.FetchScalar("SELECT ...", params)
+local result = ig.sql.FetchScalar("SELECT ...", params)
 return result
 ```
 
@@ -241,9 +241,9 @@ return result
 
 #### Before:
 ```lua
-MySQL.Async.fetchScalar("SELECT id FROM users WHERE license = @license", {["@license"] = license}, function(userId)
+MySQL.Asynig.fetchScalar("SELECT id FROM users WHERE license = @license", {["@license"] = license}, function(userId)
     if userId then
-        MySQL.Async.fetchAll("SELECT * FROM characters WHERE user_id = @userId", {["@userId"] = userId}, function(characters)
+        MySQL.Asynig.fetchAll("SELECT * FROM characters WHERE user_id = @userId", {["@userId"] = userId}, function(characters)
             -- Process characters
         end)
     end
@@ -252,9 +252,9 @@ end)
 
 #### After:
 ```lua
-local userId = c.sql.FetchScalar("SELECT id FROM users WHERE license = ?", {license})
+local userId = ig.sql.FetchScalar("SELECT id FROM users WHERE license = ?", {license})
 if userId then
-    local characters = c.sql.Query("SELECT * FROM characters WHERE user_id = ?", {userId})
+    local characters = ig.sql.Query("SELECT * FROM characters WHERE user_id = ?", {userId})
     -- Process characters
 end
 ```
@@ -264,7 +264,7 @@ end
 #### Before:
 ```lua
 for i = 1, 100 do
-    MySQL.Async.execute("UPDATE characters SET data = @data WHERE id = @id", {
+    MySQL.Asynig.execute("UPDATE characters SET data = @data WHERE id = @id", {
         ["@data"] = GetData(i),
         ["@id"] = i
     })
@@ -274,12 +274,12 @@ end
 #### After:
 ```lua
 local UpdateQuery = -1
-c.sql.PrepareQuery("UPDATE characters SET data = ? WHERE id = ?", function(id)
+ig.sql.PrepareQuery("UPDATE characters SET data = ? WHERE id = ?", function(id)
     UpdateQuery = id
 end)
 
 for i = 1, 100 do
-    c.sql.ExecutePrepared(UpdateQuery, {GetData(i), i})
+    ig.sql.ExecutePrepared(UpdateQuery, {GetData(i), i})
 end
 ```
 
@@ -292,19 +292,19 @@ Test individual function migrations:
 ```lua
 RegisterCommand('testmigration', function()
     -- Test Query
-    local chars = c.sql.Query("SELECT * FROM characters LIMIT 1", {})
+    local chars = ig.sql.Query("SELECT * FROM characters LIMIT 1", {})
     assert(#chars >= 0, "Query failed")
     
     -- Test FetchScalar
-    local count = c.sql.FetchScalar("SELECT COUNT(*) FROM users", {})
+    local count = ig.sql.FetchScalar("SELECT COUNT(*) FROM users", {})
     assert(type(count) == "number", "FetchScalar failed")
     
     -- Test Insert
-    local insertId = c.sql.Insert("INSERT INTO test_table (data) VALUES (?)", {"test"})
+    local insertId = ig.sql.Insert("INSERT INTO test_table (data) VALUES (?)", {"test"})
     assert(insertId > 0, "Insert failed")
     
     -- Clean up
-    c.sql.Update("DELETE FROM test_table WHERE id = ?", {insertId})
+    ig.sql.Update("DELETE FROM test_table WHERE id = ?", {insertId})
     
     print("Migration tests passed!")
 end, true)
@@ -317,7 +317,7 @@ Compare performance before and after:
 ```lua
 local startTime = os.clock()
 for i = 1, 1000 do
-    c.sql.FetchScalar("SELECT id FROM users WHERE license = ?", {"test"})
+    ig.sql.FetchScalar("SELECT id FROM users WHERE license = ?", {"test"})
 end
 local elapsed = (os.clock() - startTime) * 1000
 print(string.format("1000 queries: %.2fms (avg: %.2fms)", elapsed, elapsed / 1000))
@@ -342,7 +342,7 @@ If issues occur:
 
 **Solution**: Wait for database ready:
 ```lua
-if c.sql.AwaitReady() then
+if ig.sql.AwaitReady() then
     -- Proceed with queries
 end
 ```
@@ -352,10 +352,10 @@ end
 **Solution**: Match parameter order to `?` placeholders:
 ```lua
 -- WRONG
-c.sql.Query("SELECT * FROM chars WHERE id = ? AND active = ?", {true, characterId})
+ig.sql.Query("SELECT * FROM chars WHERE id = ? AND active = ?", {true, characterId})
 
 -- CORRECT
-c.sql.Query("SELECT * FROM chars WHERE id = ? AND active = ?", {characterId, true})
+ig.sql.Query("SELECT * FROM chars WHERE id = ? AND active = ?", {characterId, true})
 ```
 
 ### Issue: Callback not being called
@@ -363,9 +363,9 @@ c.sql.Query("SELECT * FROM chars WHERE id = ? AND active = ?", {characterId, tru
 **Solution**: Ensure you're not mixing sync/async patterns:
 ```lua
 -- Use callback OR return value, not both
-local result = c.sql.Query("SELECT ...", {}) -- Sync
+local result = ig.sql.Query("SELECT ...", {}) -- Sync
 -- OR
-c.sql.Query("SELECT ...", {}, function(result) end) -- Async
+ig.sql.Query("SELECT ...", {}, function(result) end) -- Async
 ```
 
 ## Performance Gains

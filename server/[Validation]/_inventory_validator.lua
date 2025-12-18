@@ -2,17 +2,14 @@
 -- Enhanced Inventory Validation System
 -- Server-Side Security Module
 -- 
--- @module c.validation
+-- @module ig.validation
 -- @author ig.core Development Team
 -- @version 1.0.0
 -- @description Provides comprehensive validation to prevent inventory exploits
 --              including item duplication, quantity manipulation, and item injection
 -- ====================================================================================--
 
--- Initialize validation module on global c table
-if not c.validation then
-    c.validation = {}
-end
+ig.validation = {}
 
 -- ====================================================================================--
 -- Core Validation Functions
@@ -22,7 +19,7 @@ end
 -- Calculate total quantities of all item types in an inventory
 -- @param inventory table - Inventory array to analyze
 -- @return table - Map of item names to total quantities
-function c.validation.GetItemQuantities(inventory)
+function ig.validation.GetItemQuantities(inventory)
     local quantities = {}
     
     for _, slot in ipairs(inventory) do
@@ -45,13 +42,13 @@ end
 -- Validate that an item exists in the game's item database
 -- @param itemName string - Name of the item to check
 -- @return boolean - True if item exists, false otherwise
-function c.validation.IsValidItem(itemName)
+function ig.validation.IsValidItem(itemName)
     -- Type check to prevent nil or non-string values
     if type(itemName) ~= "string" or itemName == "" then
         return false
     end
     
-    return c.items[itemName] ~= nil
+    return ig.items[itemName] ~= nil
 end
 
 ---
@@ -61,7 +58,7 @@ end
 -- @param index number - Slot index for error reporting
 -- @return boolean - True if valid, false otherwise
 -- @return string - Error message if invalid
-function c.validation.ValidateSlot(slot, index)
+function ig.validation.ValidateSlot(slot, index)
     -- Empty slot is valid
     if not slot or not slot.Item then
         return true, nil
@@ -70,7 +67,7 @@ function c.validation.ValidateSlot(slot, index)
     local idx = index or 0
     
     -- Check if item exists in database (exploit prevention)
-    if not c.validation.IsValidItem(slot.Item) then
+    if not ig.validation.IsValidItem(slot.Item) then
         return false, ("Slot %d: Invalid item: %s"):format(idx, tostring(slot.Item))
     end
     
@@ -98,7 +95,7 @@ function c.validation.ValidateSlot(slot, index)
     
     -- Validate weapon flag consistency
     if slot.Weapon == true then
-        local weaponHash = c.item.IsWeapon(slot.Item)
+        local weaponHash = ig.item.IsWeapon(slot.Item)
         if type(weaponHash) ~= "string" then
             return false, ("Slot %d: Weapon flag mismatch for %s"):format(idx, slot.Item)
         end
@@ -117,13 +114,13 @@ end
 -- @param inventory table - Inventory to validate
 -- @return boolean - True if all slots valid, false otherwise
 -- @return string - Error message if invalid
-function c.validation.ValidateInventory(inventory)
+function ig.validation.ValidateInventory(inventory)
     if type(inventory) ~= "table" then
         return false, "Inventory must be a table"
     end
     
     for index, slot in ipairs(inventory) do
-        local valid, error = c.validation.ValidateSlot(slot, index)
+        local valid, error = ig.validation.ValidateSlot(slot, index)
         if not valid then
             return false, error
         end
@@ -140,10 +137,10 @@ end
 -- @param afterExternal table - External inventory after operation (can be nil)
 -- @return boolean - True if valid, false if exploit detected
 -- @return string - Detailed error message if invalid
-function c.validation.ValidateInventoryIntegrity(beforePlayer, beforeExternal, afterPlayer, afterExternal)
+function ig.validation.ValidateInventoryIntegrity(beforePlayer, beforeExternal, afterPlayer, afterExternal)
     -- Get quantities before operation
-    local beforePlayerQty = c.validation.GetItemQuantities(beforePlayer or {})
-    local beforeExternalQty = c.validation.GetItemQuantities(beforeExternal or {})
+    local beforePlayerQty = ig.validation.GetItemQuantities(beforePlayer or {})
+    local beforeExternalQty = ig.validation.GetItemQuantities(beforeExternal or {})
     
     -- Combine before quantities
     local beforeTotal = {}
@@ -155,8 +152,8 @@ function c.validation.ValidateInventoryIntegrity(beforePlayer, beforeExternal, a
     end
     
     -- Get quantities after operation
-    local afterPlayerQty = c.validation.GetItemQuantities(afterPlayer or {})
-    local afterExternalQty = c.validation.GetItemQuantities(afterExternal or {})
+    local afterPlayerQty = ig.validation.GetItemQuantities(afterPlayer or {})
+    local afterExternalQty = ig.validation.GetItemQuantities(afterExternal or {})
     
     -- Combine after quantities
     local afterTotal = {}
@@ -190,7 +187,7 @@ function c.validation.ValidateInventoryIntegrity(beforePlayer, beforeExternal, a
     for item, beforeQty in pairs(beforeTotal) do
         local afterQty = afterTotal[item] or 0
         if afterQty < beforeQty then
-            c.func.Debug_1(("Item quantity decreased: %s from %d to %d"):format(
+            ig.funig.Debug_1(("Item quantity decreased: %s from %d to %d"):format(
                 item, beforeQty, afterQty
             ))
         end
@@ -203,11 +200,11 @@ end
 -- Security action: Log and ban player for exploit attempt
 -- @param source number - Player source ID
 -- @param reason string - Detailed reason for ban
-function c.validation.LogAndBanExploiter(source, reason)
+function ig.validation.LogAndBanExploiter(source, reason)
     -- Sanitize reason to prevent log injection
     local sanitizedReason = tostring(reason):gsub("[\r\n]", " "):sub(1, 500)
     
-    local xPlayer = c.data.GetPlayer(source)
+    local xPlayer = ig.data.GetPlayer(source)
     if xPlayer then
         local logMessage = ("[INVENTORY EXPLOIT] Player: %s (%s) | Reason: %s"):format(
             xPlayer.Name,
@@ -222,7 +219,7 @@ function c.validation.LogAndBanExploiter(source, reason)
         TriggerEvent("txaLogger:CommandExecuted", logMessage)
         
         -- Use existing ban function
-        c.func.Eventban(source, "Inventory manipulation detected: " .. sanitizedReason)
+        ig.funig.Eventban(source, "Inventory manipulation detected: " .. sanitizedReason)
     else
         DropPlayer(source, "Inventory manipulation detected: " .. sanitizedReason)
     end
@@ -236,15 +233,15 @@ end
 -- @return table - Processed inventory (with quality cleanup)
 -- @return boolean - True if valid, false if exploit detected
 -- @return string - Error message if invalid
-function c.validation.ValidateAndUnpack(source, inventory)
+function ig.validation.ValidateAndUnpack(source, inventory)
     local inv = inventory or {}
     local processed = {}
     
     -- Validate entire inventory first
-    local valid, error = c.validation.ValidateInventory(inv)
+    local valid, error = ig.validation.ValidateInventory(inv)
     if not valid then
         if source then
-            c.validation.LogAndBanExploiter(source, error)
+            ig.validation.LogAndBanExploiter(source, error)
         end
         return nil, false, error
     end
@@ -274,4 +271,4 @@ end
 -- ====================================================================================--
 
 -- Maintain backward compatibility with old HandleExploit name
-c.validation.HandleExploit = c.validation.LogAndBanExploiter
+ig.validation.HandleExploit = ig.validation.LogAndBanExploiter

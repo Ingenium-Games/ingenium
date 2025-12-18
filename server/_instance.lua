@@ -1,14 +1,14 @@
 -- ====================================================================================--
-c.inst = {}
+ig.inst = {}
 -- ====================================================================================--
 
 --- Sets the player and their ped entity to a routing bucket.
 ---@param source number ""
 ---@param num number "The number of the istance/routing bucket"
-function c.inst.SetPlayer(source, num)
+function ig.inst.SetPlayer(source, num)
     if not num then num = source end
     local src = tonumber(source)
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     local current = GetPlayerRoutingBucket(src)
     if not xPlayer then
         SetPlayerRoutingBucket(src, num)
@@ -19,7 +19,7 @@ function c.inst.SetPlayer(source, num)
             SetPlayerRoutingBucket(src, num)
             SetEntityRoutingBucket(GetPlayerPed(src), num)
             xPlayer.SetInstance(num)
-            c.func.Debug_1(xPlayer.GetName().." added to Instance: "..num)
+            ig.funig.Debug_1(xPlayer.GetName().." added to Instance: "..num)
             if num ~= conf.instancedefault then
                 SetRoutingBucketPopulationEnabled(num, false)
             elseif num == conf.instancedefault then
@@ -32,7 +32,7 @@ end
 --- Sets the entity to the 
 ---@param entity any ""
 ---@param num number "The number of the istance/routing bucket"
-function c.inst.SetEntity(entity, num)
+function ig.inst.SetEntity(entity, num)
     local current = GetEntityRoutingBucket(entity)
     if current ~= num then
         SetEntityRoutingBucket(entity, num)
@@ -41,30 +41,30 @@ end
 
 --- Get player routing bucket
 ---@param source number
-function c.inst.GetPlayerInstance(source)
+function ig.inst.GetPlayerInstance(source)
     return GetPlayerRoutingBucket(source)
 end
 
 --- Get entity routing bucket
 ---@param entity any
-function c.inst.GetEntityInstance(entity)
+function ig.inst.GetEntityInstance(entity)
     return GetEntityRoutingBucket(entity)
 end
 
 --- Set the player and their ped to the default global instance/routing bucket.
 ---@param source number
-function c.inst.SetPlayerDefault(source)
+function ig.inst.SetPlayerDefault(source)
     local src = tonumber(source)
-    local xPlayer = c.data.GetPlayer(source)
+    local xPlayer = ig.data.GetPlayer(source)
     SetPlayerRoutingBucket(source, conf.instancedefault)
     SetEntityRoutingBucket(GetPlayerPed(source), conf.instancedefault)
     xPlayer.SetInstance(conf.instancedefault)
     SetRoutingBucketPopulationEnabled(conf.instancedefault, true)
-    c.func.Debug_1(xPlayer.GetName().." added to Global Instance.")
+    ig.funig.Debug_1(xPlayer.GetName().." added to Global Instance.")
 end
 
 --- Set entity routing bucket
 ---@param entity any
-function c.inst.SetEntityDefault(entity)
+function ig.inst.SetEntityDefault(entity)
     SetEntityRoutingBucket(entity, conf.instancedefault)
 end

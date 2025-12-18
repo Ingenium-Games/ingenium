@@ -1,25 +1,25 @@
 -- ====================================================================================--
-c.job = {} -- Function Table
-c.jobs = {} -- DB Pull
-c.jdex = {} -- Job Index for xJobs functions.
+ig.job = {} -- Function Table
+ig.jobs = {} -- DB Pull
+ig.jdex = {} -- Job Index for xJobs functions.
 -- ====================================================================================--
 
 --- func desc
 ---@param str any
-function c.job.GetJob(str)
-    return c.jobs[str]
+function ig.job.GetJob(str)
+    return ig.jobs[str]
 end
 
 --- func desc
-function c.job.GetJobs()
-    return c.jobs
+function ig.job.GetJobs()
+    return ig.jobs
 end
 
 --- func desc
 ---@param name any
 ---@param grade any
-function c.job.IsBoss(name, grade)
-    if (#c.jobs[name].Grades == grade) then
+function ig.job.IsBoss(name, grade)
+    if (#ig.jobs[name].Grades == grade) then
         return true
     else
         return false
@@ -30,7 +30,7 @@ local CurrentlyActive = {}
 
 --- Return 
 --- func desc
-function c.job.ActiveMembers()
+function ig.job.ActiveMembers()
     local tab = {}
     for k, v in ipairs(CurrentlyActive) do
         if v then
@@ -46,14 +46,14 @@ function c.job.ActiveMembers()
 end
 
 -- Testing purposes Only
-exports("JobsOnline", c.job.ActiveMembers())
+exports("JobsOnline", ig.job.ActiveMembers())
 
 --- 
 ---@param job string
 ---@param grade any
-function c.job.Exist(name, grade)
+function ig.job.Exist(name, grade)
     if name and grade then
-        if c.jobs[tostring(name)].Grades[tonumber(grade)] then
+        if ig.jobs[tostring(name)].Grades[tonumber(grade)] then
             return true
         end
     end
@@ -63,33 +63,33 @@ end
 --- Same as above.
 ---@param job string
 ---@param grade any
-function c.DoesJobExist(name, grade)
-    return c.job.Exist(name, grade)
+function ig.DoesJobExist(name, grade)
+    return ig.job.Exist(name, grade)
 end
 
 RegisterNetEvent("Server:Character:OffDuty", function(req)
     local src = req or source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if conf.enableduty then
         CurrentlyActive[src] = "OffDuty"
         xPlayer.SetDuty(false)
         xPlayer.Notify("Off Duty")
         TriggerClientEvent("Client:Character:OffDuty", src)
     else
-        c.func.Debug_1("Ability to go off duty has ben disabled.")
+        ig.funig.Debug_1("Ability to go off duty has ben disabled.")
     end
 end)
 
 RegisterNetEvent("Server:Character:OnDuty", function(req)
     local src = req or source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     if conf.enableduty then
         CurrentlyActive[src] = xPlayer.GetJob()
         xPlayer.SetDuty(true)
         xPlayer.Notify("On Duty")
         TriggerClientEvent("Client:Character:OnDuty", src, CurrentlyActive[src])
     else
-        c.func.Debug_1("Ability to go on duty has ben disabled.")
+        ig.funig.Debug_1("Ability to go on duty has ben disabled.")
     end
 end)
 
@@ -98,7 +98,7 @@ end)
 AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
     CurrentlyActive[src] = "OffDuty"
-    -- print(c.table.Dump(CurrentlyActive))
+    -- print(ig.table.Dump(CurrentlyActive))
 end)
 
 -- cleanup the table to reduce crap.
@@ -109,16 +109,16 @@ end)
 
 --- func desc
 ---@param bool boolean "Use the Job funds to pay all employees?" 
-function c.job.Payroll(bool)
-    if c.data.ArePlayersActive() then
-        local xCity = c.data.GetJob("city")
+function ig.job.Payroll(bool)
+    if ig.data.ArePlayersActive() then
+        local xCity = ig.data.GetJob("city")
         for k, v in ipairs(CurrentlyActive) do
             if type(v) == "table" then
                 -- CurrentlyActive[1] = [Name="popo",Grade=2,etc,etc]
-                local xPlayer = c.data.GetPlayer(k)
+                local xPlayer = ig.data.GetPlayer(k)
                 if xPlayer then
                     if xPlayer.OnDuty() then
-                        local xJob = c.data.GetJob(CurrentlyActive[k].Name)
+                        local xJob = ig.data.GetJob(CurrentlyActive[k].Name)
                         local pay = xJob.GetGradeSalery(v.Grade)
                         local tax = (pay / conf.default.tax) + 0.00
                         local net = pay - tax
@@ -132,22 +132,22 @@ function c.job.Payroll(bool)
                 end
             end
         end
-        c.func.Debug_1("Jobs Payed.")
+        ig.funig.Debug_1("Jobs Payed.")
     end
 end
 
 --- func desc
 ---@param Job any
 ---@param Amount any
-function c.job.PayJob(Job, Amount)
-    local xJob = c.data.GetJob(Job)
+function ig.job.PayJob(Job, Amount)
+    local xJob = ig.data.GetJob(Job)
     xJob.AddBank(Amount)
 end
 
 --- func desc
-function c.job.PayCycle()
+function ig.job.PayCycle()
     local function Do()
-        c.job.Payroll(conf.enablejobpayroll)
+        ig.job.Payroll(conf.enablejobpayroll)
         -- Adding cleanup of empty or false records.
         for k, v in ipairs(CurrentlyActive) do
             -- Really make sure its a false record.

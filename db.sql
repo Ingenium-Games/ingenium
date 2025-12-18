@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `bnl_housing` (
 CREATE TABLE IF NOT EXISTS `characters` (
   `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Default ID - Auto Inc on new insert.',
   `Primary_ID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'The Character Owner\\',
-  `Character_ID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'The Character ID to be called as reference, C00:Unique_ID/C01:Unique_ID/C02:Unique_ID etc...',
+  `Character_ID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'The Character ID to be called as reference, C00:Unique_ID/C01:Unique_ID/C02:Unique_ID etig...',
   `Created` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Last_Seen` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `City_ID` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'City ID / License to be used for Government Actions',

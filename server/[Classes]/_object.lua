@@ -1,12 +1,12 @@
 -- ====================================================================================--
-if not c.class then
-    c.class = {}
+if not ig.class then
+    ig.class = {}
 end
 -- ====================================================================================--
 
 --- func desc
 ---@param net any
-function c.class.BlankObject(net)
+function ig.class.BlankObject(net)
     local self = {}
     --
     self.Net = net
@@ -16,19 +16,19 @@ function c.class.BlankObject(net)
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
     -- Data Sent
-    self.UUID = c.rng.UUID()
+    self.UUID = ig.rng.UUID()
     self.State.UUID = self.UUID
     --
-    self.Created = c.func.Timestamp()
+    self.Created = ig.funig.Timestamp()
     self.State.Created = self.Created
     --
-    self.Updated = c.func.Timestamp()
+    self.Updated = ig.funig.Timestamp()
     self.State.Updated = self.Updated
     --
     self.Save = false
     --- func desc
     self.SetUpdated = function()
-        self.Updated = c.func.Timestamp()
+        self.Updated = ig.funig.Timestamp()
         self.Save = true
     end
     --- func desc
@@ -53,26 +53,26 @@ function c.class.BlankObject(net)
         local h = GetEntityHeading(self.Entity)
         local rx, ry, rz = table.unpack(GetEntityRotation((self.Entity)))
         return {
-            ["x"] = c.math.Decimals(x, 2),
-            ["y"] = c.math.Decimals(y, 2),
-            ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2),
-            ["rx"] = c.math.Decimals(rx, 2),
-            ["ry"] = c.math.Decimals(ry, 2),
-            ["rz"] = c.math.Decimals(rz, 2)
+            ["x"] = ig.math.Decimals(x, 2),
+            ["y"] = ig.math.Decimals(y, 2),
+            ["z"] = ig.math.Decimals(z, 2),
+            ["h"] = ig.math.Decimals(h, 2),
+            ["rx"] = ig.math.Decimals(rx, 2),
+            ["ry"] = ig.math.Decimals(ry, 2),
+            ["rz"] = ig.math.Decimals(rz, 2)
         }
     end
     --- func desc
     ---@param t any
     self.SetCoords = function(t)
         self.Coords = {
-            x = c.math.Decimals(t.x, 2),
-            y = c.math.Decimals(t.y, 2),
-            z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2),
-            rx = c.math.Decimals(t.rx, 2),
-            ry = c.math.Decimals(t.ry, 2),
-            rz = c.math.Decimals(t.rz, 2),
+            x = ig.math.Decimals(t.x, 2),
+            y = ig.math.Decimals(t.y, 2),
+            z = ig.math.Decimals(t.z, 2),
+            h = ig.math.Decimals(t.h, 2),
+            rx = ig.math.Decimals(t.rx, 2),
+            ry = ig.math.Decimals(t.ry, 2),
+            rz = ig.math.Decimals(t.rz, 2),
         }
         --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
@@ -86,11 +86,11 @@ function c.class.BlankObject(net)
     self.GetWeight = function()
         self.Weight = 0
         for _, v in pairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
+            if ig.item.Exists(v.Item) then
+                local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -99,7 +99,7 @@ function c.class.BlankObject(net)
     ---@param inv any
     self.UnpackInventory = function(inv)
         local inv = inv or {}
-        -- print(c.table.Dump(inv))
+        -- print(ig.table.Dump(inv))
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
@@ -112,14 +112,14 @@ function c.class.BlankObject(net)
             }
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
-                if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                if type(ig.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
+                    ig.funig.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Quuality and Quantity are numbers.
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                ig.funig.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- If the Quality is below 0, then destroy the item.
@@ -148,16 +148,16 @@ function c.class.BlankObject(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
+            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
             return
         end
         local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta),
-            ["Name"] = (v[6] or c.items[v[1]].Name)
+            ["Item"] = ig.check.String(v[1]), -- string
+            ["Quantity"] = ig.check.Number((v[2] or ig.items[v[1]].Quantity)), -- number/int >= 1
+            ["Quality"] = ig.check.Number((v[3] or ig.items[v[1]].Quality)), -- number/int >= 1 <= 100
+            ["Weapon"] = (v[4] or ig.items[v[1]].Weapon),
+            ["Meta"] = (v[5] or ig.items[v[1]].Meta),
+            ["Name"] = (v[6] or ig.items[v[1]].Name)
         }
         return info
     end
@@ -166,9 +166,9 @@ function c.class.BlankObject(net)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
+        if ig.item.Exists(item.Item) then
+            local weapon = ig.item.IsWeapon(item.Item)
+            local stackable = ig.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
@@ -178,7 +178,7 @@ function c.class.BlankObject(net)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
+            ig.funig.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
         self.SetUpdated()
     end
@@ -289,7 +289,7 @@ ROW_FORMAT=DYNAMIC
 
 --- func desc
 ---@param net any
-function c.class.ExistingObject(net, data)
+function ig.class.ExistingObject(net, data)
     local self = {}
     --
     self.Net = net
@@ -311,13 +311,13 @@ function c.class.ExistingObject(net, data)
     self.Created = data.Created
     self.State.Created = self.Created
     --
-    self.Updated = c.func.Timestamp()
+    self.Updated = ig.funig.Timestamp()
     self.State.Updated = self.Updated
     --
     self.Save = false
     --- func desc
     self.SetUpdated = function()
-        self.Updated = c.func.Timestamp()
+        self.Updated = ig.funig.Timestamp()
         self.Save = true
     end
     --- func desc
@@ -348,26 +348,26 @@ function c.class.ExistingObject(net, data)
         local h = GetEntityHeading(self.Entity)
         local rx, ry, rz = table.unpack(GetEntityRotation((self.Entity)))
         return {
-            ["x"] = c.math.Decimals(x, 2),
-            ["y"] = c.math.Decimals(y, 2),
-            ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2),
-            ["rx"] = c.math.Decimals(rx, 2),
-            ["ry"] = c.math.Decimals(ry, 2),
-            ["rz"] = c.math.Decimals(rz, 2)
+            ["x"] = ig.math.Decimals(x, 2),
+            ["y"] = ig.math.Decimals(y, 2),
+            ["z"] = ig.math.Decimals(z, 2),
+            ["h"] = ig.math.Decimals(h, 2),
+            ["rx"] = ig.math.Decimals(rx, 2),
+            ["ry"] = ig.math.Decimals(ry, 2),
+            ["rz"] = ig.math.Decimals(rz, 2)
         }
     end
     --- func desc
     ---@param t any
     self.SetCoords = function(t)
         self.Coords = {
-            x = c.math.Decimals(t.x, 2),
-            y = c.math.Decimals(t.y, 2),
-            z = c.math.Decimals(t.z, 2),
-            h = c.math.Decimals(t.h, 2),
-            rx = c.math.Decimals(t.rx, 2),
-            ry = c.math.Decimals(t.ry, 2),
-            rz = c.math.Decimals(t.rz, 2),
+            x = ig.math.Decimals(t.x, 2),
+            y = ig.math.Decimals(t.y, 2),
+            z = ig.math.Decimals(t.z, 2),
+            h = ig.math.Decimals(t.h, 2),
+            rx = ig.math.Decimals(t.rx, 2),
+            ry = ig.math.Decimals(t.ry, 2),
+            rz = ig.math.Decimals(t.rz, 2),
         }
         --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
@@ -382,11 +382,11 @@ function c.class.ExistingObject(net, data)
     self.GetWeight = function()
         self.Weight = 0
         for _, v in pairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
+            if ig.item.Exists(v.Item) then
+                local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -395,7 +395,7 @@ function c.class.ExistingObject(net, data)
     ---@param inv any
     self.UnpackInventory = function(inv)
         local inv = inv or {}
-        -- print(c.table.Dump(inv))
+        -- print(ig.table.Dump(inv))
         self.Inventory = {}
         for i = 1, #inv do
             self.Inventory[i] = {
@@ -408,14 +408,14 @@ function c.class.ExistingObject(net, data)
             }
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
-                if type(c.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    c.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                if type(ig.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
+                    ig.funig.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Quuality and Quantity are numbers.
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                c.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                ig.funig.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- If the Quality is below 0, then destroy the item.
@@ -443,16 +443,16 @@ function c.class.ExistingObject(net, data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
+            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
             return
         end
         local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta),
-            ["Name"] = (v[6] or c.items[v[1]].Name)
+            ["Item"] = ig.check.String(v[1]), -- string
+            ["Quantity"] = ig.check.Number((v[2] or ig.items[v[1]].Quantity)), -- number/int >= 1
+            ["Quality"] = ig.check.Number((v[3] or ig.items[v[1]].Quality)), -- number/int >= 1 <= 100
+            ["Weapon"] = (v[4] or ig.items[v[1]].Weapon),
+            ["Meta"] = (v[5] or ig.items[v[1]].Meta),
+            ["Name"] = (v[6] or ig.items[v[1]].Name)
         }
         return info
     end
@@ -461,9 +461,9 @@ function c.class.ExistingObject(net, data)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
+        if ig.item.Exists(item.Item) then
+            local weapon = ig.item.IsWeapon(item.Item)
+            local stackable = ig.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
@@ -473,7 +473,7 @@ function c.class.ExistingObject(net, data)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
+            ig.funig.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
         self.SetUpdated()
     end

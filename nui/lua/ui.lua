@@ -5,7 +5,7 @@
 --- Show a menu with custom items
 --- @param data table Menu configuration with title and items
 --- Example:
---- exports['ig.core']:ShowMenu({
+--- exports['ingenium']:ShowMenu({
 ---   title = "Example Menu",
 ---   items = {
 ---     { label = "Option 1", action = "action1", data = {} },
@@ -23,7 +23,7 @@ end)
 --- Show an input dialog
 --- @param data table Input configuration with title, placeholder, and maxLength
 --- Example:
---- exports['ig.core']:ShowInput({
+--- exports['ingenium']:ShowInput({
 ---   title = "Enter your name",
 ---   placeholder = "John Doe",
 ---   maxLength = 50
@@ -39,7 +39,7 @@ end)
 --- Show a context menu at a specific position
 --- @param data table Context menu configuration with title, items, and position
 --- Example:
---- exports['ig.core']:ShowContextMenu({
+--- exports['ingenium']:ShowContextMenu({
 ---   title = "Actions",
 ---   items = {
 ---     { label = "Action 1", icon = "🔧", action = "repair" },

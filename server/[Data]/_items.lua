@@ -1,34 +1,8 @@
 -- ====================================================================================--
-local weapon_dump = exports["ig.dump"]:GetWeapons()
+ig.items = { -- table of items
 -- ====================================================================================--
-
---[[
-    [""] = {
-        Name = "",
-        Degrade = false,
-        DegradeRate = 0.0,
-        Quality = 100,
-        Quantity = 1,
-        Cost = 1,
-        Value = 1,
-        Weight = 0,
-        Weapon = false,
-        Meta = false,
-        Data = false,
-        Craftable = false,
-        Recipe = false,
-        Materials = false,
-        Stackable = true,
-        Consumeable = false,
-        Hotkey = false,
-        Image = ".png"
-    },
-]] --
-
-c.items = { -- table of items
-    -- ====================================================================================--
-    -- Interactive Items
-    -- ====================================================================================--
+-- Interactive Items
+-- ====================================================================================--
 
     ["Anchovy"] = {
         Name = "Anchovy",
@@ -1159,7 +1133,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = false,
         Hotkey = false,
-        Image = "Ceramic.png"
+        Image = "Ceramiig.png"
     },
 
     ["Can"] = {
@@ -1222,7 +1196,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = false,
         Hotkey = false,
-        Image = "Plastic.png"
+        Image = "Plastiig.png"
     },
 
     ["Electronics"] = {
@@ -1264,7 +1238,7 @@ c.items = { -- table of items
         Stackable = true,
         Consumeable = false,
         Hotkey = false,
-        Image = "Fabric.png"
+        Image = "Fabriig.png"
     },
 
     ["Lockpick"] = {
@@ -8263,7 +8237,7 @@ c.items = { -- table of items
         Weight = 0,
         Weapon = false,
         Meta = {
-            About = "Nomrally 59c."
+            About = "Nomrally 59ig."
         },
         Data = {
             -- Modifiers change the rate of degridation
@@ -8332,4 +8306,4 @@ c.items = { -- table of items
 
 }
 
-c.json.Write(conf.file.items, c.items)
+ig.json.Write(conf.file.items, ig.items)

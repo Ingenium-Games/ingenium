@@ -39,7 +39,7 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
                     TriggerServerEvent("Server:PlayerEnteredVehicle", netId, seat, vehicleName)
                 end
                 
-                c.func.Debug_3("Player entered vehicle: " .. vehicleName .. " in seat " .. seat)
+                ig.funig.Debug_3("Player entered vehicle: " .. vehicleName .. " in seat " .. seat)
             end
         end
     
@@ -63,7 +63,7 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
                     TriggerServerEvent("Server:PlayerLeftVehicle", netId, seat, vehicleName)
                 end
                 
-                c.func.Debug_3("Player left vehicle: " .. vehicleName)
+                ig.funig.Debug_3("Player left vehicle: " .. vehicleName)
             end
             
             -- Reset tracking
@@ -75,7 +75,7 @@ end)
 
 -- ====================================================================================--
 -- Lightweight Fallback Thread (1 second check for edge cases)
--- Handles cases where game events might not trigger (teleportation, etc.)
+-- Handles cases where game events might not trigger (teleportation, etig.)
 -- ====================================================================================--
 
 Citizen.CreateThread(function()
@@ -107,7 +107,7 @@ Citizen.CreateThread(function()
                 TriggerServerEvent("Server:PlayerEnteredVehicle", netId, seat, vehicleName)
             end
             
-            c.func.Debug_1("Vehicle entry detected via fallback thread")
+            ig.funig.Debug_1("Vehicle entry detected via fallback thread")
         
         -- Player left vehicle but event didn't trigger
         elseif vehicle == 0 and currentVehicle ~= 0 then
@@ -128,7 +128,7 @@ Citizen.CreateThread(function()
             currentVehicle = 0
             currentSeat = -1
             
-            c.func.Debug_1("Vehicle exit detected via fallback thread")
+            ig.funig.Debug_1("Vehicle exit detected via fallback thread")
         end
     end
 end)
@@ -139,23 +139,23 @@ end)
 
 --- Get current vehicle player is in
 ---@return number vehicle entity
-function c.GetCurrentVehicle()
+function ig.GetCurrentVehicle()
     return currentVehicle
 end
 
 --- Get current seat player is in
 ---@return number seat index (-1 = driver)
-function c.GetCurrentSeat()
+function ig.GetCurrentSeat()
     return currentSeat
 end
 
 --- Check if player is in a vehicle
 ---@return boolean
-function c.IsInVehicle()
+function ig.IsInVehicle()
     return currentVehicle ~= 0
 end
 
 -- Export helper functions
-exports("GetCurrentVehicle", c.GetCurrentVehicle)
-exports("GetCurrentSeat", c.GetCurrentSeat)
-exports("IsInVehicle", c.IsInVehicle)
+exports("GetCurrentVehicle", ig.GetCurrentVehicle)
+exports("GetCurrentSeat", ig.GetCurrentSeat)
+exports("IsInVehicle", ig.IsInVehicle)

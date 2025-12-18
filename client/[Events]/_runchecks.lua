@@ -14,13 +14,13 @@ RegisterNetEvent("Client:RunChecks:IsWanted")
 AddEventHandler("Client:RunChecks:IsWanted", function()
     local wanted = LocalPlayer.state.IsWanted
     -- Handle wanted status changes
-    -- Example: Update UI, trigger wanted effects, etc.
+    -- Example: Update UI, trigger wanted effects, etig.
     if wanted then
         -- Player is now wanted
-        c.func.Debug_3("Player is now wanted")
+        ig.funig.Debug_3("Player is now wanted")
     else
         -- Player is no longer wanted
-        c.func.Debug_3("Player wanted status cleared")
+        ig.funig.Debug_3("Player wanted status cleared")
     end
 end)
 
@@ -30,11 +30,11 @@ RegisterNetEvent("Client:RunChecks:IsSupporter")
 AddEventHandler("Client:RunChecks:IsSupporter", function()
     local isSupporter = LocalPlayer.state.IsSupporter
     -- Handle supporter status changes
-    -- Example: Enable supporter features, update UI, etc.
+    -- Example: Enable supporter features, update UI, etig.
     if isSupporter then
-        c.func.Debug_3("Player is now a supporter")
+        ig.funig.Debug_3("Player is now a supporter")
     else
-        c.func.Debug_3("Player supporter status removed")
+        ig.funig.Debug_3("Player supporter status removed")
     end
 end)
 
@@ -44,12 +44,12 @@ RegisterNetEvent("Client:RunChecks:IsDead")
 AddEventHandler("Client:RunChecks:IsDead", function()
     local isDead = LocalPlayer.state.IsDead
     -- Handle death status changes
-    -- Example: Show death screen, respawn options, etc.
+    -- Example: Show death screen, respawn options, etig.
     if isDead then
-        c.func.Debug_2("Player died")
+        ig.funig.Debug_2("Player died")
         -- Death handling is already in client/_death.lua
     else
-        c.func.Debug_2("Player revived")
+        ig.funig.Debug_2("Player revived")
         -- Revive handling
     end
 end)
@@ -60,15 +60,15 @@ RegisterNetEvent("Client:RunChecks:IsCuffed")
 AddEventHandler("Client:RunChecks:IsCuffed", function()
     local isCuffed = LocalPlayer.state.IsCuffed
     -- Handle cuffed status changes
-    -- Example: Restrict movement, play animations, etc.
+    -- Example: Restrict movement, play animations, etig.
     if isCuffed then
-        c.func.Debug_3("Player cuffed")
+        ig.funig.Debug_3("Player cuffed")
         -- Apply cuffed effects
         local ped = PlayerPedId()
         SetEnableHandcuffs(ped, true)
         SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
     else
-        c.func.Debug_3("Player uncuffed")
+        ig.funig.Debug_3("Player uncuffed")
         -- Remove cuffed effects
         local ped = PlayerPedId()
         SetEnableHandcuffs(ped, false)
@@ -81,12 +81,12 @@ RegisterNetEvent("Client:RunChecks:IsEscorted")
 AddEventHandler("Client:RunChecks:IsEscorted", function()
     local isEscorted = LocalPlayer.state.IsEscorted
     -- Handle escorted status changes
-    -- Example: Attach to escorting player, restrict actions, etc.
+    -- Example: Attach to escorting player, restrict actions, etig.
     if isEscorted then
-        c.func.Debug_3("Player is being escorted")
+        ig.funig.Debug_3("Player is being escorted")
         -- Handle escort attachment
     else
-        c.func.Debug_3("Player is no longer being escorted")
+        ig.funig.Debug_3("Player is no longer being escorted")
         -- Detach from escort
     end
 end)
@@ -97,12 +97,12 @@ RegisterNetEvent("Client:RunChecks:IsEscorting")
 AddEventHandler("Client:RunChecks:IsEscorting", function()
     local isEscorting = LocalPlayer.state.IsEscorting
     -- Handle escorting status changes
-    -- Example: Attach escorted player, restrict actions, etc.
+    -- Example: Attach escorted player, restrict actions, etig.
     if isEscorting then
-        c.func.Debug_3("Player is escorting someone")
+        ig.funig.Debug_3("Player is escorting someone")
         -- Handle escort attachment
     else
-        c.func.Debug_3("Player stopped escorting")
+        ig.funig.Debug_3("Player stopped escorting")
         -- Detach escorted player
     end
 end)
@@ -113,11 +113,11 @@ RegisterNetEvent("Client:RunChecks:IsSwimming")
 AddEventHandler("Client:RunChecks:IsSwimming", function()
     local isSwimming = LocalPlayer.state.IsSwimming
     -- Handle swimming status changes
-    -- Example: Apply swimming effects, update UI, etc.
+    -- Example: Apply swimming effects, update UI, etig.
     if isSwimming then
-        c.func.Debug_3("Player is swimming")
+        ig.funig.Debug_3("Player is swimming")
     else
-        c.func.Debug_3("Player stopped swimming")
+        ig.funig.Debug_3("Player stopped swimming")
     end
 end)
 
@@ -131,8 +131,8 @@ RegisterNetEvent("Client:RunChecks:Bank")
 AddEventHandler("Client:RunChecks:Bank", function()
     local bank = LocalPlayer.state.Bank
     -- Handle bank balance changes
-    -- Example: Update UI, show notifications, etc.
-    c.func.Debug_3("Bank balance updated: $" .. tostring(bank or 0))
+    -- Example: Update UI, show notifications, etig.
+    ig.funig.Debug_3("Bank balance updated: $" .. tostring(bank or 0))
     -- Trigger UI update event
     TriggerEvent("Client:HUD:UpdateBank", bank)
 end)
@@ -143,8 +143,8 @@ RegisterNetEvent("Client:RunChecks:Cash")
 AddEventHandler("Client:RunChecks:Cash", function()
     local cash = LocalPlayer.state.Cash
     -- Handle cash changes
-    -- Example: Update UI, show notifications, etc.
-    c.func.Debug_3("Cash updated: $" .. tostring(cash or 0))
+    -- Example: Update UI, show notifications, etig.
+    ig.funig.Debug_3("Cash updated: $" .. tostring(cash or 0))
     -- Trigger UI update event
     TriggerEvent("Client:HUD:UpdateCash", cash)
 end)
@@ -155,9 +155,9 @@ RegisterNetEvent("Client:RunChecks:Phone")
 AddEventHandler("Client:RunChecks:Phone", function()
     local phone = LocalPlayer.state.Phone
     -- Handle phone changes
-    -- Example: Update phone app, sync contacts, etc.
+    -- Example: Update phone app, sync contacts, etig.
     if phone then
-        c.func.Debug_3("Phone number updated: " .. tostring(phone))
+        ig.funig.Debug_3("Phone number updated: " .. tostring(phone))
         -- Trigger phone system update
         TriggerEvent("Client:Phone:UpdateNumber", phone)
     end

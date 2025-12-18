@@ -10,7 +10,7 @@ AddEventHandler("Client:Character:OpeningMenu", function()
     ShutdownLoadingScreenNui()
     -- Set false for switch command
     local ped = GetPlayerPed(-1)
-    c.data.SetLoadedStatus(false)
+    ig.data.SetLoadedStatus(false)
     FreezeEntityPosition(ped, true)
     SetFollowPedCamViewMode(4)
     SetEntityCoords(ped, -43.143894195557, 822.04595947266, 231.33236694336)
@@ -46,8 +46,8 @@ AddEventHandler("Client:Character:Create", function()
     local plyped = PlayerPedId()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
-    c.func.FadeOut(1000)
-    c.func.IsBusyPleaseWait(1000)
+    ig.funig.FadeOut(1000)
+    ig.funig.IsBusyPleaseWait(1000)
     
     -- Use native appearance system
     local config = {
@@ -58,42 +58,42 @@ AddEventHandler("Client:Character:Create", function()
     }
     
     -- Open appearance customization via callback
-    c.callback.TriggerCallback('Client:Appearance:Open', config)
+    ig.callback.TriggerCallback('Client:Appearance:Open', config)
     
-    c.func.FadeIn(1000)
-    c.func.IsBusyPleaseWait(1000)
+    ig.funig.FadeIn(1000)
+    ig.funig.IsBusyPleaseWait(1000)
 end)
 
 -- Respawn in on last saved coords.
 -- [S]
 RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
-    c.func.FadeOut(1000)
+    ig.funig.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
     SetEntityHeading(GetPlayerPed(-1), Coords.h)
     TriggerServerEvent("Server:Character:LoadSkin")
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     FreezeEntityPosition(GetPlayerPed(-1), false)
-    c.func.FadeIn(2000)
+    ig.funig.FadeIn(2000)
 end)
 
 RegisterNetEvent("Client:Character:NewSpawn")
 AddEventHandler("Client:Character:NewSpawn", function()
-    c.func.FadeOut(1000)
+    ig.funig.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), conf.spawn.x, conf.spawn.y, conf.spawn.z)
     SetEntityHeading(GetPlayerPed(-1), conf.spawn.h)
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     FreezeEntityPosition(GetPlayerPed(-1), false)
-    c.func.FadeIn(2000)
+    ig.funig.FadeIn(2000)
 end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
 AddEventHandler("Client:Character:LoadSkin", function(appearance)
     -- Use native appearance system
     if appearance then
-        c.appearance.SetAppearance(appearance)
+        ig.appearance.SetAppearance(appearance)
     end
 end)
 
@@ -107,16 +107,16 @@ end)
 RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
     -- Wait for state to be synced to local character
-    c.func.IsBusyPleaseWait(5000)
+    ig.funig.IsBusyPleaseWait(5000)
     --
     -- 
-    c.data.SetLoadedStatus(true)
-    c.chat.AddSuggestions()
-    c.data.SetLocale()
+    ig.data.SetLoadedStatus(true)
+    ig.chat.AddSuggestions()
+    ig.data.SetLocale()
     --
-    c.skill.SetSkills()
-    c.status.SetPlayer()
-    c.modifier.SetModifiers()
+    ig.skill.SetSkills()
+    ig.status.SetPlayer()
+    ig.modifier.SetModifiers()
     -- 
     TriggerEvent("Client:Character:Ready")
 end)
@@ -143,7 +143,7 @@ AddEventHandler("Client:Character:Ready", function()
         SetWeaponsNoAutoreload(true)
         RemoveMultiplayerHudCash()
         
-        c.func.Debug_1("RP Mode character initialization complete")
+        ig.funig.Debug_1("RP Mode character initialization complete")
     end
     --
 end)
@@ -151,17 +151,17 @@ end)
 RegisterNetEvent("Client:Character:Pre-Switch")
 AddEventHandler("Client:Character:Pre-Switch", function()
     --
-    c.func.FadeOut(1000)
+    ig.funig.FadeOut(1000)
     --
-    c.func.FadeIn(2000)
+    ig.funig.FadeIn(2000)
     --
 end)
 
--- Use this to remove any things connected to Characters like police blips etc.
+-- Use this to remove any things connected to Characters like police blips etig.
 RegisterNetEvent("Client:Character:Switch")
 AddEventHandler("Client:Character:Switch", function()
     --
-    c.data.SetLoadedStatus(false)
+    ig.data.SetLoadedStatus(false)
     --
 end)
 
@@ -171,7 +171,7 @@ AddEventHandler("Client:Character:OffDuty", function()
         -- Add Functions or Hooks here!
         
     else
-        c.func.Debug_3("Ability to go off duty has ben disabled.")
+        ig.funig.Debug_3("Ability to go off duty has ben disabled.")
     end
 end)
 
@@ -181,7 +181,7 @@ AddEventHandler("Client:Character:OnDuty", function(job)
         -- Add Functions or Hooks here!
        
     else
-        c.func.Debug_3("Ability to go on duty has ben disabled.")
+        ig.funig.Debug_3("Ability to go on duty has ben disabled.")
     end
 end)
 

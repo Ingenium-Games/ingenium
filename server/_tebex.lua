@@ -1,5 +1,5 @@
 -- ====================================================================================--
-c.tebex = {}
+ig.tebex = {}
 -- ====================================================================================--
 --[[
 {id} - fivem:var id
@@ -24,15 +24,15 @@ c.tebex = {}
 
 RegisterCommand("AddPriority", function(source, args, rawCommand)
     local id = args[1]
-    c.sql.user.SetPriority(id, true)
+    ig.sql.user.SetPriority(id, true)
 end, true)
 
 RegisterCommand("RemovePriority", function(source, args, rawCommand)
     local id = args[1]
-    c.sql.user.SetPriority(id, false)
+    ig.sql.user.SetPriority(id, false)
 end, true)
 
 RegisterCommand("AddCharacterSlot", function(source, args, rawCommand)
     local id = args[1]
-    c.sql.user.AddCharacterSlot(id, false)
+    ig.sql.user.AddCharacterSlot(id, false)
 end, true)

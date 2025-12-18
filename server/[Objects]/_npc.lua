@@ -1,5 +1,5 @@
 -- ====================================================================================--
-c.npc = {} -- function level
-c.npcs = {} -- database pull - If ever used?	
-c.ndex = {} -- the index/store for currently used vehciles prior to writing to db.
+ig.npc = {} -- function level
+ig.npcs = {} -- database pull - If ever used?	
+ig.ndex = {} -- the index/store for currently used vehciles prior to writing to db.
 -- ====================================================================================--

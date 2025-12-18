@@ -25,7 +25,7 @@ conf.drops.active_timeout = 5 * conf.min        -- 5 minutes before deactivating
    - Player approaches drop (within 2.0 meters)
    - Uses `ig.target` to see "Open Drop" option
    - Clicks to open dual-panel inventory UI
-   - Server activates drop (moves to `c.active_drops`)
+   - Server activates drop (moves to `ig.active_drops`)
 
 2. **Transferring Items**
    - Player sees their inventory on left panel
@@ -38,7 +38,7 @@ conf.drops.active_timeout = 5 * conf.min        -- 5 minutes before deactivating
    - Player closes inventory UI
    - NUI sends final inventories to server
    - Server validates and saves via `OrganizeInventories`
-   - Drop deactivates (moves back to `c.drops`)
+   - Drop deactivates (moves back to `ig.drops`)
    - If empty, drop is automatically removed
 
 ## Server-Side Usage
@@ -53,13 +53,13 @@ local items = {
 }
 local model = `v_ret_gc_box1`  -- Optional, uses default if nil
 
-local netId = c.drop.Create(coords, items, model)
+local netId = ig.drop.Create(coords, items, model)
 ```
 
 ### Removing a Drop
 
 ```lua
-c.drop.Remove(netId)
+ig.drop.Remove(netId)
 ```
 
 ### Activating/Deactivating Drops
@@ -70,8 +70,8 @@ Drops are automatically managed:
 - **Removed** automatically if inventory becomes empty
 
 ```lua
-c.drop.Activate(netId)   -- Manual activation (rare)
-c.drop.Deactivate(netId) -- Manual deactivation (rare)
+ig.drop.Activate(netId)   -- Manual activation (rare)
+ig.drop.Deactivate(netId) -- Manual deactivation (rare)
 ```
 
 ## Client-Side Usage
@@ -173,7 +173,7 @@ Drops are saved to `data/Drops.json`:
 ### Automatic Restoration
 
 On server restart:
-1. Drops loaded from JSON via `c.data.LoadJSONData()`
+1. Drops loaded from JSON via `ig.data.LoadJSONData()`
 2. Physical props recreated at saved positions
 3. Inventory items validated and restored
 4. State Bags initialized
@@ -189,7 +189,7 @@ conf.drops.cleanup_enabled = true
 conf.drops.cleanup_time = 30 * conf.min  -- 30 minutes
 
 -- Manual cleanup
-c.drop.CleanupOld()
+ig.drop.CleanupOld()
 ```
 
 - Runs every 5 minutes (if enabled)
@@ -198,28 +198,28 @@ c.drop.CleanupOld()
 
 ## State Management
 
-### c.drops
+### ig.drops
 Persistent drops stored in memory and JSON
 
-### c.active_drops
+### ig.active_drops
 Drops currently being accessed by players
 
 ### Flow
 ```
 Player opens drop:
-  c.drops → c.active_drops
+  ig.drops → ig.active_drops
 
 Player closes drop (not empty):
-  c.active_drops → c.drops
+  ig.active_drops → ig.drops
 
 Player closes drop (empty):
-  c.active_drops → removed
+  ig.active_drops → removed
 
 Periodic save:
-  c.drops + c.active_drops → JSON
+  ig.drops + ig.active_drops → JSON
 
 Server restart:
-  JSON → c.drops → world entities
+  JSON → ig.drops → world entities
 ```
 
 ## Integration with Existing Systems
@@ -231,7 +231,7 @@ Server restart:
 - No changes needed to core inventory logic
 
 ### Validation System
-- `c.validation.ValidateInventoryIntegrity()` prevents duplication
+- `ig.validation.ValidateInventoryIntegrity()` prevents duplication
 - Item existence checked during restoration
 - Quantity validation on drops
 - Exploit detection and logging
@@ -266,14 +266,14 @@ Server restart:
 ## Troubleshooting
 
 ### Drops not appearing
-- Check `c.drops` table in server console
+- Check `ig.drops` table in server console
 - Verify model hash is valid: `conf.drops.default_model`
 - Check entity creation in server logs
 
 ### Items not persisting
 - Verify JSON write permissions on `data/Drops.json`
 - Check save routine logs for errors
-- Ensure `c.drop.Deactivate()` is called on close
+- Ensure `ig.drop.Deactivate()` is called on close
 
 ### UI not opening
 - Verify `ig.target` is installed and running
@@ -287,7 +287,7 @@ Server restart:
 
 ### Empty drops not removing
 - Check `OrganizeInventories` callback in logs
-- Verify `c.drop.Remove()` is being called
+- Verify `ig.drop.Remove()` is being called
 - Check entity existence after removal
 
 ## Examples
@@ -296,7 +296,7 @@ Server restart:
 ```lua
 -- Client-side
 local itemName = "bread"
-local quantity = c.inventory.GetItemQuantity(itemName)
+local quantity = ig.inventory.GetItemQuantity(itemName)
 if quantity > 0 then
     TriggerServerEvent('Server:Item:Drop', itemName, quantity, 100, false, {})
 end
@@ -311,7 +311,7 @@ local items = {
     {"water", 3, 100, false, {}},
     {"bandage", 2, 100, false, {}}
 }
-c.drop.Create(coords, items)
+ig.drop.Create(coords, items)
 ```
 
 ### Open drop programmatically
@@ -328,7 +328,7 @@ end
 ### Manual cleanup
 ```lua
 -- Server console or command
-c.drop.CleanupOld()
+ig.drop.CleanupOld()
 ```
 
 ## Technical Notes

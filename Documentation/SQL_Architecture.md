@@ -72,7 +72,7 @@ Provides ACID-compliant transaction support:
 **Transaction Patterns:**
 ```lua
 -- Atomic transaction
-c.sql.Transaction({
+ig.sql.Transaction({
     {query = "UPDATE accounts SET balance = balance - ?", parameters = {100, accountId}},
     {query = "INSERT INTO transactions VALUES (?, ?, ?)", parameters = {accountId, 100, timestamp}}
 }, function(success, results)
@@ -89,35 +89,35 @@ end)
 Provides clean Lua interface to JavaScript query engine:
 
 **Key Functions:**
-- `c.sql.Query(query, params, callback)` - SELECT all
-- `c.sql.FetchScalar(query, params, callback)` - Single value
-- `c.sql.FetchSingle(query, params, callback)` - Single row
-- `c.sql.Insert(query, params, callback)` - INSERT
-- `c.sql.Update(query, params, callback)` - UPDATE/DELETE
-- `c.sql.Transaction(queries, callback)` - Transactions
-- `c.sql.PrepareQuery(query)` - Prepare statement
-- `c.sql.ExecutePrepared(id, params, callback)` - Execute prepared
-- `c.sql.IsReady()` - Connection status
-- `c.sql.AwaitReady(timeout)` - Wait for connection
-- `c.sql.GetStats()` - Performance metrics
+- `ig.sql.Query(query, params, callback)` - SELECT all
+- `ig.sql.FetchScalar(query, params, callback)` - Single value
+- `ig.sql.FetchSingle(query, params, callback)` - Single row
+- `ig.sql.Insert(query, params, callback)` - INSERT
+- `ig.sql.Update(query, params, callback)` - UPDATE/DELETE
+- `ig.sql.Transaction(queries, callback)` - Transactions
+- `ig.sql.PrepareQuery(query)` - Prepare statement
+- `ig.sql.ExecutePrepared(id, params, callback)` - Execute prepared
+- `ig.sql.IsReady()` - Connection status
+- `ig.sql.AwaitReady(timeout)` - Wait for connection
+- `ig.sql.GetStats()` - Performance metrics
 
 ### 5. Compatibility Layer (`server/[SQL]/_compatibility.lua`)
 
 Maintains backward compatibility with mysql-async:
 
 **Supported Legacy APIs:**
-- `MySQL.Async.fetchAll()`
-- `MySQL.Async.fetchScalar()`
-- `MySQL.Async.execute()`
-- `MySQL.Async.insert()`
-- `MySQL.Async.store()`
-- `MySQL.Async.transaction()`
-- `MySQL.Sync.*` equivalents
+- `MySQL.Asynig.fetchAll()`
+- `MySQL.Asynig.fetchScalar()`
+- `MySQL.Asynig.execute()`
+- `MySQL.Asynig.insert()`
+- `MySQL.Asynig.store()`
+- `MySQL.Asynig.transaction()`
+- `MySQL.Synig.*` equivalents
 
 **Migration Strategy:**
 The compatibility layer allows gradual migration:
 1. Existing code continues working unchanged
-2. New code uses `c.sql.*` API
+2. New code uses `ig.sql.*` API
 3. Deprecated calls can be tracked with warnings
 4. Full removal in future major version
 
@@ -153,7 +153,7 @@ end)
 ### Statistics
 
 ```lua
-local stats = c.sql.GetStats()
+local stats = ig.sql.GetStats()
 --[[
 {
     totalQueries = 1523,
@@ -185,14 +185,14 @@ Optimized for high-frequency operations like save systems:
 ```lua
 -- One-time preparation (at resource start)
 local SaveQuery = -1
-c.sql.PrepareQuery(
+ig.sql.PrepareQuery(
     "UPDATE characters SET health = ?, coords = ? WHERE id = ?",
     function(queryId)
         SaveQuery = queryId
     end)
 
 -- Repeated execution (in save loop)
-c.sql.ExecutePrepared(SaveQuery, {health, coords, characterId}, function(affected)
+ig.sql.ExecutePrepared(SaveQuery, {health, coords, characterId}, function(affected)
     print("Saved character")
 end)
 ```
@@ -229,11 +229,11 @@ end)
 
 | mysql-async | ig.core SQL |
 |-------------|-------------|
-| `MySQL.Async.fetchAll()` | `c.sql.Query()` |
-| `MySQL.Async.fetchScalar()` | `c.sql.FetchScalar()` |
-| `MySQL.Async.execute()` | `c.sql.Update()` or `c.sql.Insert()` |
-| `MySQL.Async.insert()` | `c.sql.Insert()` |
-| `MySQL.Async.store()` | `c.sql.PrepareQuery()` |
+| `MySQL.Asynig.fetchAll()` | `ig.sql.Query()` |
+| `MySQL.Asynig.fetchScalar()` | `ig.sql.FetchScalar()` |
+| `MySQL.Asynig.execute()` | `ig.sql.Update()` or `ig.sql.Insert()` |
+| `MySQL.Asynig.insert()` | `ig.sql.Insert()` |
+| `MySQL.Asynig.store()` | `ig.sql.PrepareQuery()` |
 | `@paramName` | `?` (or use compatibility) |
 
 ### Gradual Migration
@@ -260,14 +260,14 @@ end)
 
 ### Error Handling
 1. Always provide callbacks for critical operations
-2. Check `c.sql.IsReady()` before critical queries
+2. Check `ig.sql.IsReady()` before critical queries
 3. Use transactions for related updates
 4. Log errors appropriately
 
 ### Performance
-1. Use `c.sql.Batch()` for non-critical bulk updates
+1. Use `ig.sql.Batch()` for non-critical bulk updates
 2. Leverage prepared statements for saves
-3. Monitor `c.sql.GetStats()` regularly
+3. Monitor `ig.sql.GetStats()` regularly
 4. Optimize queries based on slow query logs
 
 ## Troubleshooting
@@ -275,7 +275,7 @@ end)
 ### Connection Issues
 
 **Problem**: "Connection pool is not initialized"
-- **Solution**: Wait for `ig:sql:ready` event or use `c.sql.AwaitReady()`
+- **Solution**: Wait for `ig:sql:ready` event or use `ig.sql.AwaitReady()`
 
 **Problem**: Too many connections
 - **Solution**: Increase `mysql_connection_limit` or optimize query patterns

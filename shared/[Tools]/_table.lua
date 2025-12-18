@@ -1,10 +1,10 @@
 -- ====================================================================================--
-c.table = {}
+ig.table = {}
 -- ====================================================================================--
 
 --- func desc
 ---@param . any
-function c.table.MatchValue(t, v)
+function ig.table.MatchValue(t, v)
     for _, i in ipairs(t) do
         if (i == v) then
             return true
@@ -16,7 +16,7 @@ end
 --- func desc
 ---@param t any
 ---@param k any
-function c.table.MatchKey(t, k)
+function ig.table.MatchKey(t, k)
     for i, _ in ipairs(t) do
         if (i == k) then
             return true
@@ -27,7 +27,7 @@ end
 
 --- func desc
 ---@param t any
-function c.table.Clone(t)
+function ig.table.Clone(t)
     local u = setmetatable({}, getmetatable(t))
     for i, v in pairs(t) do
         u[i] = v
@@ -39,9 +39,9 @@ end
 ---@param t table "The original table"
 ---@param u table "The table to bring into the original"
 ---@param bool boolean "keep or replace?""
-function c.table.Merge(t, u, bool)
+function ig.table.Merge(t, u, bool)
     if not bool then bool = true end
-    local r = c.table.Clone(t)
+    local r = ig.table.Clone(t)
     if bool then
         for i, v in pairs(u) do
             if not r[i] then
@@ -59,8 +59,8 @@ end
 --- func desc
 ---@param p any
 ---@param t any
-function c.table.ReArrange(p, t)
-    local r = c.table.Clone(t)
+function ig.table.ReArrange(p, t)
+    local r = ig.table.Clone(t)
     for i, v in pairs(p) do
         r[v] = t[i]
         r[i] = nil
@@ -70,14 +70,14 @@ end
 
 --- func desc
 ---@param t any
-function c.table.Size(t)
+function ig.table.Size(t)
     local r = #t
     return r
 end
 
 --- func desc
 ---@param t any
-function c.table.SizeOf(t)
+function ig.table.SizeOf(t)
 	local count = 0
 
 	for _,_ in pairs(t) do
@@ -90,7 +90,7 @@ end
 --- func desc
 ---@param table any
 ---@param nb any
-function c.table.Dump(table, nb)
+function ig.table.Dump(table, nb)
     if nb == nil then
         nb = 0
     end
@@ -109,7 +109,7 @@ function c.table.Dump(table, nb)
             for i = 1, nb, 1 do
                 s = s .. "    "
             end
-            s = s .. "[" .. k .. "] = " .. c.table.Dump(v, nb + 1) .. ",\n"
+            s = s .. "[" .. k .. "] = " .. ig.table.Dump(v, nb + 1) .. ",\n"
         end
 
         for i = 1, nb, 1 do

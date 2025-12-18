@@ -22,7 +22,7 @@ RegisterNetEvent("Client:Inventory:OpenDual")
 AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTitle)
     if inventoryOpen then return end
     
-    local playerInventory = c.inventory.GetInventory()
+    local playerInventory = ig.inventory.GetInventory()
     
     -- Get external inventory via callback
     TriggerServerCallback({
@@ -58,7 +58,7 @@ RegisterNetEvent("Client:Inventory:OpenSingle")
 AddEventHandler("Client:Inventory:OpenSingle", function()
     if inventoryOpen then return end
     
-    local playerInventory = c.inventory.GetInventory()
+    local playerInventory = ig.inventory.GetInventory()
     
     inventoryOpen = true
     currentExternalNetId = nil
@@ -128,9 +128,9 @@ RegisterNUICallback("inventory_close", function(data, cb)
             args = {externalNetId, playerInventory, externalInventory},
             callback = function(success)
                 if success then
-                    c.func.Debug_1("Inventory saved successfully")
+                    ig.funig.Debug_1("Inventory saved successfully")
                 else
-                    c.func.Debug_1("Inventory save failed")
+                    ig.funig.Debug_1("Inventory save failed")
                 end
             end
         })
@@ -141,9 +141,9 @@ RegisterNUICallback("inventory_close", function(data, cb)
             args = {GetPlayerPed(-1), playerInventory},
             callback = function(success)
                 if success then
-                    c.func.Debug_1("Inventory saved successfully")
+                    ig.funig.Debug_1("Inventory saved successfully")
                 else
-                    c.func.Debug_1("Inventory save failed")
+                    ig.funig.Debug_1("Inventory save failed")
                 end
             end
         })
@@ -173,7 +173,7 @@ RegisterNUICallback("inventory_action", function(data, cb)
             callback = function(success)
                 if success then
                     -- Item was consumed, update UI
-                    TriggerEvent("Client:Inventory:Update", c.inventory.GetInventory(), nil)
+                    TriggerEvent("Client:Inventory:Update", ig.inventory.GetInventory(), nil)
                 end
             end
         })
@@ -190,7 +190,7 @@ RegisterNUICallback("inventory_action", function(data, cb)
             callback = function(success)
                 if success then
                     -- Item was dropped, update UI
-                    TriggerEvent("Client:Inventory:Update", c.inventory.GetInventory(), nil)
+                    TriggerEvent("Client:Inventory:Update", ig.inventory.GetInventory(), nil)
                 end
             end
         })
@@ -211,7 +211,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         
         if IsControlJustReleased(0, 170) then -- I key (170 = INPUT_CELLPHONE_LEFT)
-            if not inventoryOpen and c.data.IsPlayerLoaded() then
+            if not inventoryOpen and ig.data.IsPlayerLoaded() then
                 TriggerEvent("Client:Inventory:OpenSingle")
             end
         end

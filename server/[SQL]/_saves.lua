@@ -1,6 +1,6 @@
 -- ====================================================================================--
-if not c.sql then c.sql = {} end
-c.sql.save = {}
+if not ig.sql then ig.sql = {} end
+ig.sql.save = {}
 -- ====================================================================================--
 
 --[[ Performance Monitoring Wrapper ]] --
@@ -27,7 +27,7 @@ end
 --[[ Players ]] --
 
 local PlayerSaveData = -1
-c.sql.PrepareQuery(
+ig.sql.PrepareQuery(
     "UPDATE `characters` SET `Health` = ?, `Armour` = ?, `Hunger` = ?, `Thirst` = ?, `Stress` = ?, `Coords` = ?, `Skills` = ?, `Accounts` = ?, `Modifiers` = ?, `Inventory` = ?, `Ammo` = ?, `Job` = ? WHERE `Character_ID` = ?;",
     function(id)
         PlayerSaveData = id
@@ -36,7 +36,7 @@ c.sql.PrepareQuery(
 --- Save Single User/Character
 ---@param data table "xPlayer table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
-function c.sql.save.User(data, cb)
+function ig.sql.save.User(data, cb)
     if not data or not data.GetIsDirty() then 
         if cb then cb() end
         return 
@@ -58,7 +58,7 @@ function c.sql.save.User(data, cb)
     local Job = data.GetEncodedJob()
     -- 
     local Character_ID = data.GetCharacter_ID()
-    c.sql.ExecutePrepared(PlayerSaveData, {
+    ig.sql.ExecutePrepared(PlayerSaveData, {
         -- Other Variables.
         Health,
         Armour,
@@ -85,12 +85,12 @@ end
 
 --- Save All Characters from the xPLayer Table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.save.Users(cb)
+function ig.sql.save.Users(cb)
     local startTime = os.clock()
     local saveCount = 0
-    local xPlayers = c.data.GetPlayers()
+    local xPlayers = ig.data.GetPlayers()
     for k, v in pairs(xPlayers) do
-        local data = c.data.GetPlayer(k)
+        local data = ig.data.GetPlayer(k)
         if data and data.GetIsDirty() then
             saveCount = saveCount + 1
             -- Other Variables.
@@ -109,7 +109,7 @@ function c.sql.save.Users(cb)
             local Job = data.GetEncodedJob()
             -- 
             local Character_ID = data.GetCharacter_ID()
-            c.sql.ExecutePrepared(PlayerSaveData, {
+            ig.sql.ExecutePrepared(PlayerSaveData, {
                 -- Other Variables.
                 Health,
                 Armour,
@@ -141,7 +141,7 @@ end
 --[[ Vehicles ]] --
 
 local VehicleSaveData = -1
-c.sql.PrepareQuery(
+ig.sql.PrepareQuery(
     "UPDATE `vehicles` SET `Fuel` = ?, `Coords` = ?, `Keys` = ?, `Condition` = ?, `Modifications` = ?, `Inventory` = ?, `Parked` = ?, `Impound` = ?, `Wanted` = ?  WHERE `Plate` = ?", -- AND `Parked` = TRUE;
     function(id)
         VehicleSaveData = id
@@ -150,7 +150,7 @@ c.sql.PrepareQuery(
 --- Save Single User/Character
 ---@param data table "xCar table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
-function c.sql.save.Vehicle(data, cb)
+function ig.sql.save.Vehicle(data, cb)
     if not data or data.Owner == false or not data.Save or not data.GetIsDirty() then
         if cb then cb() end
         return
@@ -169,11 +169,11 @@ function c.sql.save.Vehicle(data, cb)
     local Condition = data.GetEncodedCondition()
     local Modifications = data.GetEncodedModifications()
     --
-    local Updated = c.func.Timestamp()
+    local Updated = ig.funig.Timestamp()
     -- The Key
     local Plate = data.GetPlate()
     --
-    c.sql.ExecutePrepared(VehicleSaveData, {
+    ig.sql.ExecutePrepared(VehicleSaveData, {
         -- Other Variables.
         Fuel,
         -- Tables
@@ -199,10 +199,10 @@ end
 
 --- Save All Characters from the xPLayer Table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.save.Vehicles(cb)
+function ig.sql.save.Vehicles(cb)
     local startTime = os.clock()
     local saveCount = 0
-    local xVehicles = c.data.GetVehicles()
+    local xVehicles = ig.data.GetVehicles()
     for k, data in pairs(xVehicles) do
         if data and data.Owner ~= false and data.Save == true and data.GetIsDirty() then
             if DoesEntityExist(data.Entity) then
@@ -221,11 +221,11 @@ function c.sql.save.Vehicles(cb)
                 local Condition = data.GetEncodedCondition()
                 local Modifications = data.GetEncodedModifications()
                 --
-                local Updated = c.func.Timestamp()
+                local Updated = ig.funig.Timestamp()
                 -- The Key
                 local Plate = data.GetPlate()
                 --
-                c.sql.ExecutePrepared(VehicleSaveData, {
+                ig.sql.ExecutePrepared(VehicleSaveData, {
                     -- Other Variables.
                     Fuel,
                     -- Tables
@@ -245,7 +245,7 @@ function c.sql.save.Vehicles(cb)
                     data.ClearDirty()
                 end)
             else
-                c.data.RemoveVehicle(k)
+                ig.data.RemoveVehicle(k)
             end
         end
     end
@@ -259,21 +259,21 @@ end
 --[[ Jobs ]] --
 
 local JobSaveData = -1
-c.sql.PrepareQuery("UPDATE `job_accounts` SET `Accounts` = ? WHERE `Name` = ?;", function(id)
+ig.sql.PrepareQuery("UPDATE `job_accounts` SET `Accounts` = ? WHERE `Name` = ?;", function(id)
     JobSaveData = id
 end)
 
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.save.Jobs(cb)
-    local xJobs = c.data.GetJobs()
+function ig.sql.save.Jobs(cb)
+    local xJobs = ig.data.GetJobs()
     for k, data in pairs(xJobs) do
         if (data.ShouldSave() == true) then
             -- Tables require JSON Encoding.
             local Accounts = json.encode(data.GetAccounts(false))
             -- 
             local Name = data.GetName()
-            c.sql.ExecutePrepared(JobSaveData, {
+            ig.sql.ExecutePrepared(JobSaveData, {
                 Accounts,
                 -- Where Conditions
                 Name
@@ -290,18 +290,18 @@ end
 --[[ Objects ]] --
 
 local ObjectSaveData = -1
-c.sql.PrepareQuery("UPDATE `objects` SET `Inventory` = ?, `Coords` = ? WHERE `UUID` = ?;",
+ig.sql.PrepareQuery("UPDATE `objects` SET `Inventory` = ?, `Coords` = ? WHERE `UUID` = ?;",
     function(id)
         ObjectSaveData = id
     end)
 
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.save.Objects(cb)
-    local xObjs = c.data.GetObjects()
+function ig.sql.save.Objects(cb)
+    local xObjs = ig.data.GetObjects()
     for k, data in pairs(xObjs) do
         if data then
-            if (tonumber(c.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
+            if (tonumber(ig.funig.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
                 if DoesEntityExist(data.Entity) then
                     -- Tables require JSON Encoding.
                     local Inventory = json.encode(data.CompressInventory())
@@ -309,7 +309,7 @@ function c.sql.save.Objects(cb)
                     --
                     local UUID = data.UUID
                     -- 
-                    c.sql.ExecutePrepared(ObjectSaveData, {
+                    ig.sql.ExecutePrepared(ObjectSaveData, {
                         Inventory,
                         Coords,
                         -- Where Conditions

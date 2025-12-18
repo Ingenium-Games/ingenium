@@ -354,7 +354,7 @@ Record and document:
 3. Verify callback responses
 
 ### Common Issues
-- **Inventory won't open**: Check `c.data.IsPlayerLoaded()` returns true
+- **Inventory won't open**: Check `ig.data.IsPlayerLoaded()` returns true
 - **Items not showing**: Verify inventory data structure matches expected format
 - **Drag not working**: Check browser console for Vue/JavaScript errors
 - **Kicked unexpectedly**: Check server logs for specific validation failure

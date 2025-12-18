@@ -7,12 +7,12 @@ Complete item drop system for ig.core FiveM framework with real-time multi-playe
 
 ### State Flow
 ```
-Player drops item → c.drop.Create() → Physical prop spawned
-                                    → c.drops (persistent state)
+Player drops item → ig.drop.Create() → Physical prop spawned
+                                    → ig.drops (persistent state)
 
 Player opens drop → ig.target interaction → NUI dual-panel UI
-                                          → c.drop.Activate()
-                                          → c.drops → c.active_drops
+                                          → ig.drop.Activate()
+                                          → ig.drops → ig.active_drops
 
 Player transfers items → TransferInventoryItem callback → Validation
                                                         → xObject.AddItem/RemoveItem
@@ -22,23 +22,23 @@ Player transfers items → TransferInventoryItem callback → Validation
 Player closes UI → OrganizeInventories callback → Final validation
                                                  → xObject.UnpackInventory
                                                  → State Bag updated
-                                                 → c.drop.Deactivate()
-                                                 → c.active_drops → c.drops (if not empty)
-                                                 → OR c.drop.Remove() (if empty)
+                                                 → ig.drop.Deactivate()
+                                                 → ig.active_drops → ig.drops (if not empty)
+                                                 → OR ig.drop.Remove() (if empty)
 
-Periodic save → MergeDropsForSave() → c.drops + c.active_drops → JSON
-Server restart → JSON → c.drops → Restore physical props
+Periodic save → MergeDropsForSave() → ig.drops + ig.active_drops → JSON
+Server restart → JSON → ig.drops → Restore physical props
 ```
 
 ### Key Components
 
 #### Server-Side
 1. **`server/[Drops]/_drop_system.lua`**
-   - `c.drop.Create()` - Spawn drop with items
-   - `c.drop.Remove()` - Delete drop
-   - `c.drop.Activate()` - Move to active state
-   - `c.drop.Deactivate()` - Move to persistent state
-   - `c.drop.CleanupOld()` - Remove old drops (optional)
+   - `ig.drop.Create()` - Spawn drop with items
+   - `ig.drop.Remove()` - Delete drop
+   - `ig.drop.Activate()` - Move to active state
+   - `ig.drop.Deactivate()` - Move to persistent state
+   - `ig.drop.CleanupOld()` - Remove old drops (optional)
    - Event handlers for drop/access
 
 2. **`server/[Callbacks]/_inventory.lua`**
@@ -48,8 +48,8 @@ Server restart → JSON → c.drops → Restore physical props
    - Auto-cleanup of empty drops
 
 3. **`server/[Data]/_loader.lua`**
-   - `c.data.LoadJSONData()` - Load drops from JSON
-   - `c.data.RestoreDrops()` - Recreate physical props
+   - `ig.data.LoadJSONData()` - Load drops from JSON
+   - `ig.data.RestoreDrops()` - Recreate physical props
    - Item validation during restoration
 
 4. **`server/[Data]/_save_routine.lua`**
@@ -60,7 +60,7 @@ Server restart → JSON → c.drops → Restore physical props
 
 5. **`server/[Files]/_drops.lua`**
    - Compatibility layer
-   - `c.drop.Load()` - Initialize system
+   - `ig.drop.Load()` - Initialize system
    - Legacy function stubs
 
 #### Client-Side
@@ -154,8 +154,8 @@ conf.drops.active_timeout = 5 * conf.min
 ```
 
 ### State Management
-- **`c.drops`** - Persistent drops (saved to JSON)
-- **`c.active_drops`** - Currently accessed drops
+- **`ig.drops`** - Persistent drops (saved to JSON)
+- **`ig.active_drops`** - Currently accessed drops
 - **`Entity.state.Inventory`** - Real-time sync via State Bags
 
 ## Events
@@ -190,7 +190,7 @@ local items = {
     {"bread", 5, 100, false, {}},
     {"water", 3, 100, false, {}}
 }
-c.drop.Create(coords, items)
+ig.drop.Create(coords, items)
 ```
 
 ### Open Drop
@@ -207,7 +207,7 @@ TriggerServerEvent('Server:Drop:Access', netId)
 **Example: Two Players Interacting**
 
 1. Player A approaches drop, clicks "Open Drop"
-2. Server: `c.drop.Activate(netId)` moves to active state
+2. Server: `ig.drop.Activate(netId)` moves to active state
 3. Player A sees dual-panel UI with drop items
 4. Player B approaches, clicks "Open Drop" on same entity
 5. Player B sees dual-panel UI with same items
@@ -281,11 +281,11 @@ conf.drops.models = {
 ### Debugging
 ```lua
 -- Server console
-print(json.encode(c.drops, {indent = true}))
-print(json.encode(c.active_drops, {indent = true}))
+print(json.encode(ig.drops, {indent = true}))
+print(json.encode(ig.active_drops, {indent = true}))
 
 -- Manual cleanup
-c.drop.CleanupOld()
+ig.drop.CleanupOld()
 
 -- Manual save
 ExecuteCommand('savedata')
@@ -295,7 +295,7 @@ ExecuteCommand('savedata')
 
 **Drops not appearing after restart**
 - Check `data/Drops.json` exists and is valid
-- Verify `c.data.RestoreDrops()` is called
+- Verify `ig.data.RestoreDrops()` is called
 - Check server logs for restoration errors
 
 **Items not syncing between players**
@@ -305,7 +305,7 @@ ExecuteCommand('savedata')
 
 **Empty drops not removing**
 - Check `OrganizeInventories` callback logs
-- Verify `c.drop.Remove()` is being called
+- Verify `ig.drop.Remove()` is being called
 - Check model hash comparison
 
 ## Credits

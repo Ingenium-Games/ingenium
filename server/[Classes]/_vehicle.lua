@@ -1,16 +1,16 @@
 -- ====================================================================================--
-if not c.class then
-    c.class = {}
+if not ig.class then
+    ig.class = {}
 end
 -- ====================================================================================--
 
 --- func desc
 ---@param net any
 ---@param bool any
-function c.class.Vehicle(net)
+function ig.class.Vehicle(net)
     local data = {
         Fuel = math.random(25, 89),
-        Plate = string.upper(c.rng.chars(8)),
+        Plate = string.upper(ig.rng.chars(8)),
         Instance = false,
         Garage = false,
         Parked = false,
@@ -22,7 +22,7 @@ function c.class.Vehicle(net)
         Inventory = {},
         Condition = {},
         Keys = {},
-        Updated = c.func.Timestamp()
+        Updated = ig.funig.Timestamp()
     }
     local self = {}
     self.Net = net
@@ -107,7 +107,7 @@ function c.class.Vehicle(net)
     self.Save = false
     --- func desc
     self.SetUpdated = function()
-        self.Updated = c.func.Timestamp()
+        self.Updated = ig.funig.Timestamp()
         self.Save = true
         self.IsDirty = true
     end
@@ -129,7 +129,7 @@ function c.class.Vehicle(net)
     end
     --
     self.SetParked = function(b)
-        local bool = c.check.Boolean(b)
+        local bool = ig.check.Boolean(b)
         self.Parked = bool
         self.SetUpdated()
     end
@@ -139,26 +139,26 @@ function c.class.Vehicle(net)
         local h = GetEntityHeading(self.Entity)
         local rx, ry, rz = table.unpack(GetEntityRotation((self.Entity)))
         return {
-            ["x"] = c.math.Decimals(x, 2),
-            ["y"] = c.math.Decimals(y, 2),
-            ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2),
-            ["rx"] = c.math.Decimals(rx, 2),
-            ["ry"] = c.math.Decimals(ry, 2),
-            ["rz"] = c.math.Decimals(rz, 2)
+            ["x"] = ig.math.Decimals(x, 2),
+            ["y"] = ig.math.Decimals(y, 2),
+            ["z"] = ig.math.Decimals(z, 2),
+            ["h"] = ig.math.Decimals(h, 2),
+            ["rx"] = ig.math.Decimals(rx, 2),
+            ["ry"] = ig.math.Decimals(ry, 2),
+            ["rz"] = ig.math.Decimals(rz, 2)
         }
     end
     --- func desc
     ---@param coords any
     self.SetCoords = function(coords)
         self.Coords = {
-            x = c.math.Decimals(coords.x, 2),
-            y = c.math.Decimals(coords.y, 2),
-            z = c.math.Decimals(coords.z, 2),
-            h = c.math.Decimals(coords.h, 2),
-            rx = c.math.Decimals(coords.rx, 2),
-            ry = c.math.Decimals(coords.ry, 2),
-            rz = c.math.Decimals(coords.rz, 2),
+            x = ig.math.Decimals(coords.x, 2),
+            y = ig.math.Decimals(coords.y, 2),
+            z = ig.math.Decimals(coords.z, 2),
+            h = ig.math.Decimals(coords.h, 2),
+            rx = ig.math.Decimals(coords.rx, 2),
+            ry = ig.math.Decimals(coords.ry, 2),
+            rz = ig.math.Decimals(coords.rz, 2),
         }
         --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
@@ -191,7 +191,7 @@ function c.class.Vehicle(net)
             self.DirtyFields.Keys = true
             self.EncodedKeys = nil
         else
-            c.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
+            ig.funig.Debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
         self.SetUpdated()
     end
@@ -205,7 +205,7 @@ function c.class.Vehicle(net)
             self.DirtyFields.Keys = true
             self.EncodedKeys = nil
         else
-            c.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
+            ig.funig.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end        
         self.SetUpdated()
     end
@@ -291,7 +291,7 @@ function c.class.Vehicle(net)
     --- func desc
     ---@param v any
     self.SetFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
+        local num = ig.check.Number(v, 0, 100)
         if self.Fuel ~= num then
             self.Fuel = num
             self.State.Fuel = num
@@ -302,7 +302,7 @@ function c.class.Vehicle(net)
     --- func desc
     ---@param v any
     self.AddFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
+        local num = ig.check.Number(v, 0, 100)
         self.SetFuel((self.GetFuel() + num))
         self.Fuel = self.GetFuel()
         self.State.Fuel = self.Fuel
@@ -316,7 +316,7 @@ function c.class.Vehicle(net)
     --- func desc
     ---@param v any
     self.RemoveFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
+        local num = ig.check.Number(v, 0, 100)
         self.SetFuel((self.GetFuel() - num))
         self.Fuel = self.GetFuel()
         self.State.Fuel = self.Fuel
@@ -333,7 +333,7 @@ function c.class.Vehicle(net)
     end
     --- func desc
     self.SetGarage = function(v)
-        local str = c.check.String(v)
+        local str = ig.check.String(v)
         self.Garage = str
         self.SetUpdated()
     end
@@ -355,11 +355,11 @@ function c.class.Vehicle(net)
     self.GetWeight = function()
         self.Weight = 0
         for _, v in pairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
+            if ig.item.Exists(v.Item) then
+                local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -368,10 +368,10 @@ function c.class.Vehicle(net)
     ---@param inv any
     self.UnpackInventory = function(inv)
         -- Use unified validation function (no source for vehicles)
-        local processed, valid, error = c.validation.ValidateAndUnpack(nil, inv)
+        local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            c.func.Debug_1("Error unpacking vehicle inventory: " .. (error or "unknown"))
+            ig.funig.Debug_1("Error unpacking vehicle inventory: " .. (error or "unknown"))
             self.Inventory = {}
             return
         end
@@ -397,17 +397,17 @@ function c.class.Vehicle(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func
+            ig.func
                 .Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
             return
         end
         local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta),
-            ["Name"] = (v[6] or c.items[v[1]].Name)
+            ["Item"] = ig.check.String(v[1]), -- string
+            ["Quantity"] = ig.check.Number((v[2] or ig.items[v[1]].Quantity)), -- number/int >= 1
+            ["Quality"] = ig.check.Number((v[3] or ig.items[v[1]].Quality)), -- number/int >= 1 <= 100
+            ["Weapon"] = (v[4] or ig.items[v[1]].Weapon),
+            ["Meta"] = (v[5] or ig.items[v[1]].Meta),
+            ["Name"] = (v[6] or ig.items[v[1]].Name)
         }
         return info
     end
@@ -416,9 +416,9 @@ function c.class.Vehicle(net)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
+        if ig.item.Exists(item.Item) then
+            local weapon = ig.item.IsWeapon(item.Item)
+            local stackable = ig.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
@@ -428,7 +428,7 @@ function c.class.Vehicle(net)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
+            ig.funig.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
         end
     end
     --
@@ -573,7 +573,7 @@ end
 --- func desc
 ---@param net any
 ---@param bool any
-function c.class.OwnedVehicle(net, data)
+function ig.class.OwnedVehicle(net, data)
     local self = {}
     --
     self.Net = net
@@ -647,7 +647,7 @@ function c.class.OwnedVehicle(net, data)
     --
     --- func desc
     self.SetUpdated = function()
-        self.Updated = c.func.Timestamp()
+        self.Updated = ig.funig.Timestamp()
         self.Save = true
         self.IsDirty = true
     end
@@ -685,7 +685,7 @@ function c.class.OwnedVehicle(net, data)
     end
     --
     self.SetParked = function(b)
-        local bool = c.check.Boolean(b)
+        local bool = ig.check.Boolean(b)
         self.Parked = bool
         self.SetUpdated()
     end
@@ -699,26 +699,26 @@ function c.class.OwnedVehicle(net, data)
         local h = GetEntityHeading(self.Entity)
         local rx, ry, rz = table.unpack(GetEntityRotation((self.Entity)))
         return {
-            ["x"] = c.math.Decimals(x, 2),
-            ["y"] = c.math.Decimals(y, 2),
-            ["z"] = c.math.Decimals(z, 2),
-            ["h"] = c.math.Decimals(h, 2),
-            ["rx"] = c.math.Decimals(rx, 2),
-            ["ry"] = c.math.Decimals(ry, 2),
-            ["rz"] = c.math.Decimals(rz, 2)
+            ["x"] = ig.math.Decimals(x, 2),
+            ["y"] = ig.math.Decimals(y, 2),
+            ["z"] = ig.math.Decimals(z, 2),
+            ["h"] = ig.math.Decimals(h, 2),
+            ["rx"] = ig.math.Decimals(rx, 2),
+            ["ry"] = ig.math.Decimals(ry, 2),
+            ["rz"] = ig.math.Decimals(rz, 2)
         }
     end
     --- func desc
     ---@param coords any
     self.SetCoords = function(coords)
         self.Coords = {
-            x = c.math.Decimals(coords.x, 2),
-            y = c.math.Decimals(coords.y, 2),
-            z = c.math.Decimals(coords.z, 2),
-            h = c.math.Decimals(coords.h, 2),
-            rx = c.math.Decimals(coords.rx, 2),
-            ry = c.math.Decimals(coords.ry, 2),
-            rz = c.math.Decimals(coords.rz, 2),
+            x = ig.math.Decimals(coords.x, 2),
+            y = ig.math.Decimals(coords.y, 2),
+            z = ig.math.Decimals(coords.z, 2),
+            h = ig.math.Decimals(coords.h, 2),
+            rx = ig.math.Decimals(coords.rx, 2),
+            ry = ig.math.Decimals(coords.ry, 2),
+            rz = ig.math.Decimals(coords.rz, 2),
         }
         --
         SetEntityCoords(self.Entity, vec3(self.Coords.x, self.Coords.y, self.Coords.z))
@@ -751,7 +751,7 @@ function c.class.OwnedVehicle(net, data)
             self.EncodedKeys = nil
             self.SetUpdated()
         else
-            c.func.Debug_2("User: " .. id .. " Already has key to this vehicle.")
+            ig.funig.Debug_2("User: " .. id .. " Already has key to this vehicle.")
         end
     end
     --- func desc
@@ -765,7 +765,7 @@ function c.class.OwnedVehicle(net, data)
             self.EncodedKeys = nil
             self.SetUpdated()
         else
-            c.func.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
+            ig.funig.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
         end
     end
     --- func desc
@@ -852,7 +852,7 @@ function c.class.OwnedVehicle(net, data)
     --- func desc
     ---@param v any
     self.SetFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
+        local num = ig.check.Number(v, 0, 100)
         if self.Fuel ~= num then
             self.Fuel = num
             self.State.Fuel = num
@@ -863,7 +863,7 @@ function c.class.OwnedVehicle(net, data)
     --- func desc
     ---@param v any
     self.AddFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
+        local num = ig.check.Number(v, 0, 100)
         self.SetFuel((self.GetFuel() + num))
         self.Fuel = self.GetFuel()
         self.State.Fuel = self.Fuel
@@ -877,7 +877,7 @@ function c.class.OwnedVehicle(net, data)
     --- func desc
     ---@param v any
     self.RemoveFuel = function(v)
-        local num = c.check.Number(v, 0, 100)
+        local num = ig.check.Number(v, 0, 100)
         self.SetFuel((self.GetFuel() - num))
         self.Fuel = self.GetFuel()
         self.State.Fuel = self.Fuel
@@ -894,7 +894,7 @@ function c.class.OwnedVehicle(net, data)
     end
     --- func desc
     self.SetGarage = function(v)
-        local str = c.check.String(v)
+        local str = ig.check.String(v)
         self.Garage = str
         self.SetUpdated()
     end
@@ -916,11 +916,11 @@ function c.class.OwnedVehicle(net, data)
     self.GetWeight = function()
         self.Weight = 0
         for _, v in pairs(self.Inventory) do
-            if c.item.Exists(v.Item) then
-                local item = c.items[v.Item]
+            if ig.item.Exists(v.Item) then
+                local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                c.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -929,10 +929,10 @@ function c.class.OwnedVehicle(net, data)
     ---@param inv any
     self.UnpackInventory = function(inv)
         -- Use unified validation function (no source for owned vehicles)
-        local processed, valid, error = c.validation.ValidateAndUnpack(nil, inv)
+        local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            c.func.Debug_1("Error unpacking owned vehicle inventory: " .. (error or "unknown"))
+            ig.funig.Debug_1("Error unpacking owned vehicle inventory: " .. (error or "unknown"))
             self.Inventory = {}
             self.State.Inventory = self.Inventory
             return
@@ -940,7 +940,7 @@ function c.class.OwnedVehicle(net, data)
         
         self.Inventory = processed
         self.State.Inventory = self.Inventory
-        -- print(c.table.Dump(self.Inventory))
+        -- print(ig.table.Dump(self.Inventory))
     end
     --- func desc
     self.GetInventory = function()
@@ -961,17 +961,17 @@ function c.class.OwnedVehicle(net, data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            c.func
+            ig.func
                 .Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
             return
         end
         local info = {
-            ["Item"] = c.check.String(v[1]), -- string
-            ["Quantity"] = c.check.Number((v[2] or c.items[v[1]].Quantity)), -- number/int >= 1
-            ["Quality"] = c.check.Number((v[3] or c.items[v[1]].Quality)), -- number/int >= 1 <= 100
-            ["Weapon"] = (v[4] or c.items[v[1]].Weapon),
-            ["Meta"] = (v[5] or c.items[v[1]].Meta),
-            ["Name"] = (v[6] or c.items[v[1]].Name)
+            ["Item"] = ig.check.String(v[1]), -- string
+            ["Quantity"] = ig.check.Number((v[2] or ig.items[v[1]].Quantity)), -- number/int >= 1
+            ["Quality"] = ig.check.Number((v[3] or ig.items[v[1]].Quality)), -- number/int >= 1 <= 100
+            ["Weapon"] = (v[4] or ig.items[v[1]].Weapon),
+            ["Meta"] = (v[5] or ig.items[v[1]].Meta),
+            ["Name"] = (v[6] or ig.items[v[1]].Name)
         }
         return info
     end
@@ -980,9 +980,9 @@ function c.class.OwnedVehicle(net, data)
     ---@param add table "Array Format {\"Name\", 1, math.random(65,100), (String or false), {}}"
     self.AddItem = function(tbl)
         local item = self.SteralizeItem(tbl)
-        if c.item.Exists(item.Item) then
-            local weapon = c.item.IsWeapon(item.Item)
-            local stackable = c.item.CanStack(item.Item)
+        if ig.item.Exists(item.Item) then
+            local weapon = ig.item.IsWeapon(item.Item)
+            local stackable = ig.item.CanStack(item.Item)
             local has, key = self.HasItem(item.Item)
             if (weapon and type(item.Weapon) == "string") or (not stackable) then
                 self.Inventory[#self.Inventory + 1] = item
@@ -995,7 +995,7 @@ function c.class.OwnedVehicle(net, data)
             self.EncodedInventory = nil
             self.SetUpdated()
         else
-            c.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
+            ig.funig.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
         end
     end
     --

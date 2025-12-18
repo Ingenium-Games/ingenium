@@ -9,12 +9,12 @@ RegisterCommand("test-notify", function()
     TriggerEvent("Client:Notify", "This is a test notification!", "green", 5000)
     
     -- New way (using exports)
-    exports['ig.core']:Notify("This is another notification!", "blue", 5000)
+    exports['ingenium']:Notify("This is another notification!", "blue", 5000)
 end, false)
 
 -- Example 2: Using menus
 RegisterCommand("test-menu", function()
-    exports['ig.core']:ShowMenu({
+    exports['ingenium']:ShowMenu({
         title = "Test Menu",
         items = {
             {
@@ -53,7 +53,7 @@ end)
 
 -- Example 3: Using input dialogs
 RegisterCommand("test-input", function()
-    exports['ig.core']:ShowInput({
+    exports['ingenium']:ShowInput({
         title = "Enter Your Name",
         placeholder = "John Doe",
         maxLength = 50
@@ -69,7 +69,7 @@ end)
 
 -- Example 4: Using context menus
 RegisterCommand("test-context", function()
-    exports['ig.core']:ShowContextMenu({
+    exports['ingenium']:ShowContextMenu({
         title = "Actions",
         items = {
             { label = "Repair Vehicle", icon = "🔧", action = "repair" },
@@ -89,10 +89,10 @@ end)
 
 -- Example 5: Using HUD
 RegisterCommand("test-hud-show", function()
-    exports['ig.core']:ShowHUD()
+    exports['ingenium']:ShowHUD()
     
     -- Update HUD with sample data
-    exports['ig.core']:UpdateHUD({
+    exports['ingenium']:UpdateHUD({
         health = 100,
         armor = 50,
         hunger = 75,
@@ -106,7 +106,7 @@ RegisterCommand("test-hud-show", function()
 end, false)
 
 RegisterCommand("test-hud-hide", function()
-    exports['ig.core']:HideHUD()
+    exports['ingenium']:HideHUD()
 end, false)
 
 -- Example 6: Simulating HUD updates (like in a game loop)
@@ -114,7 +114,7 @@ RegisterCommand("test-hud-update", function()
     local health = GetEntityHealth(PlayerPedId())
     local armor = GetPedArmour(PlayerPedId())
     
-    exports['ig.core']:UpdateHUD({
+    exports['ingenium']:UpdateHUD({
         health = math.floor((health - 100) / 100 * 100),
         armor = armor
     })

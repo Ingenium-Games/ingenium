@@ -22,7 +22,7 @@ RegisterNetEvent("Server:PlayerEnteredVehicle", function(netId, seat, vehicleNam
         player.state:set("VehicleSeat", seat, true)
         player.state:set("Vehicle", netId, true)
         
-        c.func.Debug_3("Player " .. source .. " entered vehicle: " .. vehicleName .. " (seat " .. seat .. ")")
+        ig.funig.Debug_3("Player " .. source .. " entered vehicle: " .. vehicleName .. " (seat " .. seat .. ")")
         
         -- Trigger any server-side vehicle entry logic
         TriggerEvent("Server:OnPlayerEnteredVehicle", source, vehicle, seat, netId)
@@ -44,7 +44,7 @@ RegisterNetEvent("Server:PlayerLeftVehicle", function(netId, seat, vehicleName)
     player.state:set("VehicleSeat", -1, true)
     player.state:set("Vehicle", 0, true)
     
-    c.func.Debug_3("Player " .. source .. " left vehicle: " .. vehicleName)
+    ig.funig.Debug_3("Player " .. source .. " left vehicle: " .. vehicleName)
     
     -- Trigger any server-side vehicle exit logic
     TriggerEvent("Server:OnPlayerLeftVehicle", source, netId, seat)

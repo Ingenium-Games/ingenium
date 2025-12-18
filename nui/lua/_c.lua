@@ -12,7 +12,7 @@ end)
 --
 RegisterNUICallback("_c__close", function(data, cb)
     -- Check if player is loaded as a character, otherwise dont disable nui, itll be in the character seleciton screen.
-    if c.data.IsPlayerLoaded() then
+    if ig.data.IsPlayerLoaded() then
         -- Remove Focus
         SetNuiFocus(false, false)
         cb({

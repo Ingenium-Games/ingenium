@@ -11,7 +11,7 @@ DEBUG :
     -- Up to you if you want to see whats going on or not.
     -- _1 is most common ways of tracking at top level functions
     -- _2 is for state and class generation, to prevent console spam
-    -- _3 is alterations of state, event triggers etc.
+    -- _3 is alterations of state, event triggers etig.
 ]]--
 conf.debug_1 = true
 conf.debug_2 = false
@@ -111,7 +111,7 @@ conf.altertime = 0
 JOBS AND DEFAULTS
     -- DEFAULT STARTING BALANCES FOR ALL JOBS IPON INITIAL CREATION
     -- Take money from Job account to pay staff?
-    -- Use the job center rather than have all jobs whitelisted. (Not really intended outside of private servers, private might do seasonal things, and offer different ways of setting up bosses etc.)
+    -- Use the job center rather than have all jobs whitelisted. (Not really intended outside of private servers, private might do seasonal things, and offer different ways of setting up bosses etig.)
     -- Permit jobs to be able to go off duty to not get paid for service while online.
     -- The time taken serverside to do pay runs.
 ]]--
@@ -145,7 +145,7 @@ conf.drops = {}
 conf.drops.cleanup_enabled = false              -- Do not auto-delete old drops by default
 conf.drops.cleanup_time = 30 * conf.min         -- Time before cleanup if enabled (30 minutes)
 conf.drops.default_model = `v_ret_gc_box1`      -- Default prop model (backticks auto-hash)
-conf.drops.active_timeout = 5 * conf.min        -- Time before moving back to c.drops if no players nearby
+conf.drops.active_timeout = 5 * conf.min        -- Time before moving back to ig.drops if no players nearby
 -- ====================================================================================--
 conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
 conf.lock = nil

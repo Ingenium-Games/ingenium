@@ -9,16 +9,16 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         if IsPedArmed(ped, 4 | 2) then
             if IsPedShooting(ped) then
-                if c._weapon ~= nil and c._ammotype ~= nil then
-                    c._ammo[c._ammotype] = c._ammo[c._ammotype] - 1
+                if ig._weapon ~= nil and ig._ammotype ~= nil then
+                    ig._ammo[ig._ammotype] = ig._ammo[ig._ammotype] - 1
                 end
                 Citizen.Wait(115)
             end
             if IsPedReloading(ped) then
-                if c._weapon ~= nil then
+                if ig._weapon ~= nil then
                     TriggerServerCallback({
                         eventName = "UpdateAmmo",
-                        args = {c._ammotype, c._ammo[c._ammotype]}
+                        args = {ig._ammotype, ig._ammo[ig._ammotype]}
                     })
                     Citizen.Wait(1250)
                 end
@@ -45,10 +45,10 @@ Citizen.CreateThread(function()
         local ped = PlayerPedId()
         Citizen.Wait(0)
         if IsPedArmed(ped, 4 | 2) then
-            if c._weapon ~= nil then
+            if ig._weapon ~= nil then
                 TriggerServerCallback({
                     eventName = "UpdateAmmo",
-                    args = {c._ammotype, c._ammo[c._ammotype]}
+                    args = {ig._ammotype, ig._ammo[ig._ammotype]}
                 })
                 Citizen.Wait(2500)
             end

@@ -1,7 +1,7 @@
 -- ====================================================================================--
-c.object = {} -- function level
-c.objects = {} -- database pull 
-c.odex = {} -- the odex/store for currently used objects prior to storage
+ig.object = {} -- function level
+ig.objects = {} -- database pull 
+ig.odex = {} -- the odex/store for currently used objects prior to storage
 -- ====================================================================================--
 
 --[[
@@ -19,15 +19,15 @@ c.odex = {} -- the odex/store for currently used objects prior to storage
 [       script:ig.dev] }
 ]]--
 
-function c.object.Generate(distance)
-	for uuid, data in pairs(c.objects) do
-        local found = c.data.FindObjectFromUUID(data.UUID)
+function ig.object.Generate(distance)
+	for uuid, data in pairs(ig.objects) do
+        local found = ig.data.FindObjectFromUUID(data.UUID)
         if (not found) then
             local Coords = json.decode(data.Coords)
-            if (c.func.GetClosestPlayer(vec3(Coords.x,Coords.y,Coords.z), distance)) then
+            if (ig.funig.GetClosestPlayer(vec3(Coords.x,Coords.y,Coords.z), distance)) then
                 -- vehicle not found, spawn it when player is close
                 Citizen.CreateThread(function()
-                    local entity, net = c.func.CreateObject(data.Model, Coords.x, Coords.y, Coords.z, false, data)
+                    local entity, net = ig.funig.CreateObject(data.Model, Coords.x, Coords.y, Coords.z, false, data)
                     SetEntityRotation(Coords.rx, Coords.ry, Coords.rz)
                     FreezeEntityPosition(entity, true)
                 end)
@@ -36,6 +36,6 @@ function c.object.Generate(distance)
 	end
 end
 
-function c.object.AddObject(data)
-    local id = c.objects
+function ig.object.AddObject(data)
+    local id = ig.objects
 end

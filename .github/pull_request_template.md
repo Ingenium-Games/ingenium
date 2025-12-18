@@ -65,7 +65,7 @@ Related to #
 - [ ] I have commented my code where necessary
 - [ ] I have removed any debug/console logs
 - [ ] My changes generate no new warnings or errors
-- [ ] No sensitive data (passwords, tokens, etc.) committed
+- [ ] No sensitive data (passwords, tokens, etig.) committed
 
 ## SQL Changes (if applicable)
 <!-- Only fill out if this PR includes SQL/database changes -->

@@ -1,7 +1,7 @@
 -- ====================================================================================--
 -- Drop System: Physical item drops in the world
 -- ====================================================================================--
-c.active_drops = {} -- Drops currently being accessed by players
+ig.active_drops = {} -- Drops currently being accessed by players
 -- ====================================================================================--
 
 --- Create a drop in the world with items
@@ -11,14 +11,14 @@ c.active_drops = {} -- Drops currently being accessed by players
 ---@param targetPlayer number|nil Optional target player source to notify
 ---@param isDeadDrop boolean|nil If true, notifies player without blip (for secret drops)
 ---@return number|boolean netId Network ID of created drop or false on failure
-function c.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
+function ig.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
     if type(coords) ~= "table" or not coords.x or not coords.y or not coords.z then
-        c.func.Debug_1("Invalid coords provided to c.drop.Create")
+        ig.funig.Debug_1("Invalid coords provided to ig.drop.Create")
         return false
     end
     
     if type(items) ~= "table" or #items == 0 then
-        c.func.Debug_1("Invalid or empty items provided to c.drop.Create")
+        ig.funig.Debug_1("Invalid or empty items provided to ig.drop.Create")
         return false
     end
     
@@ -26,17 +26,17 @@ function c.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
     local heading = coords.h or 0.0
     
     -- Create the physical object in the world
-    local entity, netId = c.func.CreateObject(dropModel, coords.x, coords.y, coords.z, false)
+    local entity, netId = ig.funig.CreateObject(dropModel, coords.x, coords.y, coords.z, false)
     
     if not entity or not netId then
-        c.func.Debug_1("Failed to create drop object")
+        ig.funig.Debug_1("Failed to create drop object")
         return false
     end
     
     -- Get the object from the object index
-    local xObject = c.data.GetObject(netId)
+    local xObject = ig.data.GetObject(netId)
     if not xObject then
-        c.func.Debug_1("Failed to get xObject for drop")
+        ig.funig.Debug_1("Failed to get xObject for drop")
         return false
     end
     
@@ -64,10 +64,10 @@ function c.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
     xObject.State.Inventory = xObject.GetInventory()
     
     -- Create drop entry
-    local uuid = c.rng.UUID()
-    local timestamp = c.func.Timestamp()
+    local uuid = ig.rng.UUID()
+    local timestamp = ig.funig.Timestamp()
     
-    c.drops[uuid] = {
+    ig.drops[uuid] = {
         UUID = uuid,
         NetID = netId,
         Coords = {
@@ -86,7 +86,7 @@ function c.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
     
     -- Notify target player if specified
     if targetPlayer and type(targetPlayer) == "number" then
-        local xPlayer = c.data.GetPlayer(targetPlayer)
+        local xPlayer = ig.data.GetPlayer(targetPlayer)
         if xPlayer then
             -- Send notification to target player
             TriggerClientEvent('Client:Drop:Notify', targetPlayer, {
@@ -96,9 +96,9 @@ function c.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
                 uuid = uuid
             })
             
-            c.func.Debug_3("Notified player " .. targetPlayer .. " of drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
+            ig.funig.Debug_3("Notified player " .. targetPlayer .. " of drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
             
-            -- Trigger hook event for custom scripts (phone systems, etc.)
+            -- Trigger hook event for custom scripts (phone systems, etig.)
             TriggerEvent('Server:Drop:Created:Targeted', {
                 targetPlayer = targetPlayer,
                 coords = coords,
@@ -110,7 +110,7 @@ function c.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
         end
     end
     
-    c.func.Debug_1("Created drop with UUID: " .. uuid .. " NetID: " .. netId)
+    ig.funig.Debug_1("Created drop with UUID: " .. uuid .. " NetID: " .. netId)
     
     return netId
 end
@@ -118,16 +118,16 @@ end
 --- Remove a drop from the world
 ---@param netId number Network ID of the drop
 ---@return boolean success
-function c.drop.Remove(netId)
+function ig.drop.Remove(netId)
     if not netId then
-        c.func.Debug_1("Invalid netId provided to c.drop.Remove")
+        ig.funig.Debug_1("Invalid netId provided to ig.drop.Remove")
         return false
     end
     
     -- Find the drop by NetID
     local dropUUID = nil
     local dropData = nil
-    for uuid, drop in pairs(c.drops) do
+    for uuid, drop in pairs(ig.drops) do
         if drop.NetID == netId then
             dropUUID = uuid
             dropData = drop
@@ -137,7 +137,7 @@ function c.drop.Remove(netId)
     
     -- Also check active drops
     if not dropUUID then
-        for uuid, drop in pairs(c.active_drops) do
+        for uuid, drop in pairs(ig.active_drops) do
             if drop.NetID == netId then
                 dropUUID = uuid
                 dropData = drop
@@ -147,7 +147,7 @@ function c.drop.Remove(netId)
     end
     
     if not dropUUID then
-        c.func.Debug_1("Drop not found for NetID: " .. netId)
+        ig.funig.Debug_1("Drop not found for NetID: " .. netId)
         return false
     end
     
@@ -157,8 +157,8 @@ function c.drop.Remove(netId)
     end
     
     -- Remove from both tables
-    c.drops[dropUUID] = nil
-    c.active_drops[dropUUID] = nil
+    ig.drops[dropUUID] = nil
+    ig.active_drops[dropUUID] = nil
     
     -- Delete the entity
     local entity = NetworkGetEntityFromNetworkId(netId)
@@ -167,19 +167,19 @@ function c.drop.Remove(netId)
     end
     
     -- Remove from object index
-    c.data.RemoveObject(tostring(netId))
+    ig.data.RemoveObject(tostring(netId))
     
-    c.func.Debug_1("Removed drop with UUID: " .. dropUUID)
+    ig.funig.Debug_1("Removed drop with UUID: " .. dropUUID)
     
     return true
 end
 
---- Move drop from c.drops to c.active_drops when opened
+--- Move drop from ig.drops to ig.active_drops when opened
 ---@param netId number Network ID of the drop
 ---@return boolean success
-function c.drop.Activate(netId)
+function ig.drop.Activate(netId)
     if not netId then
-        c.func.Debug_1("Invalid netId provided to c.drop.Activate")
+        ig.funig.Debug_1("Invalid netId provided to ig.drop.Activate")
         return false
     end
     
@@ -187,7 +187,7 @@ function c.drop.Activate(netId)
     local dropUUID = nil
     local dropData = nil
     
-    for uuid, drop in pairs(c.drops) do
+    for uuid, drop in pairs(ig.drops) do
         if drop.NetID == netId then
             dropUUID = uuid
             dropData = drop
@@ -197,31 +197,31 @@ function c.drop.Activate(netId)
     
     -- Already active?
     if not dropUUID then
-        for uuid, drop in pairs(c.active_drops) do
+        for uuid, drop in pairs(ig.active_drops) do
             if drop.NetID == netId then
-                c.func.Debug_3("Drop already active: " .. uuid)
+                ig.funig.Debug_3("Drop already active: " .. uuid)
                 return true
             end
         end
-        c.func.Debug_1("Drop not found for activation: " .. netId)
+        ig.funig.Debug_1("Drop not found for activation: " .. netId)
         return false
     end
     
     -- Move to active
-    c.active_drops[dropUUID] = dropData
-    c.drops[dropUUID] = nil
+    ig.active_drops[dropUUID] = dropData
+    ig.drops[dropUUID] = nil
     
-    c.func.Debug_3("Activated drop: " .. dropUUID)
+    ig.funig.Debug_3("Activated drop: " .. dropUUID)
     
     return true
 end
 
---- Move drop from c.active_drops back to c.drops when closed
+--- Move drop from ig.active_drops back to ig.drops when closed
 ---@param netId number Network ID of the drop
 ---@return boolean success
-function c.drop.Deactivate(netId)
+function ig.drop.Deactivate(netId)
     if not netId then
-        c.func.Debug_1("Invalid netId provided to c.drop.Deactivate")
+        ig.funig.Debug_1("Invalid netId provided to ig.drop.Deactivate")
         return false
     end
     
@@ -229,7 +229,7 @@ function c.drop.Deactivate(netId)
     local dropUUID = nil
     local dropData = nil
     
-    for uuid, drop in pairs(c.active_drops) do
+    for uuid, drop in pairs(ig.active_drops) do
         if drop.NetID == netId then
             dropUUID = uuid
             dropData = drop
@@ -238,70 +238,70 @@ function c.drop.Deactivate(netId)
     end
     
     if not dropUUID then
-        c.func.Debug_3("Drop not found in active drops: " .. netId)
+        ig.funig.Debug_3("Drop not found in active drops: " .. netId)
         return false
     end
     
     -- Get current inventory from xObject
-    local xObject = c.data.GetObject(netId)
+    local xObject = ig.data.GetObject(netId)
     if xObject then
         dropData.Inventory = xObject.CompressInventory()
-        dropData.Updated = c.func.Timestamp()
+        dropData.Updated = ig.funig.Timestamp()
     end
     
     -- If inventory is empty, remove the drop entirely
     if not dropData.Inventory or #dropData.Inventory == 0 then
-        c.func.Debug_3("Drop inventory empty, removing: " .. dropUUID)
-        c.active_drops[dropUUID] = nil
-        c.drop.Remove(netId)
+        ig.funig.Debug_3("Drop inventory empty, removing: " .. dropUUID)
+        ig.active_drops[dropUUID] = nil
+        ig.drop.Remove(netId)
         return true
     end
     
     -- Move back to persistent drops
-    c.drops[dropUUID] = dropData
-    c.active_drops[dropUUID] = nil
+    ig.drops[dropUUID] = dropData
+    ig.active_drops[dropUUID] = nil
     
-    c.func.Debug_3("Deactivated drop: " .. dropUUID)
+    ig.funig.Debug_3("Deactivated drop: " .. dropUUID)
     
     return true
 end
 
 --- Clean up old drops if cleanup is enabled
-function c.drop.CleanupOld()
+function ig.drop.CleanupOld()
     if not conf.drops.cleanup_enabled then
         return
     end
     
-    local currentTime = c.func.Timestamp()
+    local currentTime = ig.funig.Timestamp()
     local removedCount = 0
     
-    for uuid, drop in pairs(c.drops) do
+    for uuid, drop in pairs(ig.drops) do
         if drop.Created and (currentTime - drop.Created) >= conf.drops.cleanup_time then
-            c.drop.Remove(drop.NetID)
+            ig.drop.Remove(drop.NetID)
             removedCount = removedCount + 1
         end
     end
     
     if removedCount > 0 then
-        c.func.Debug_1("Cleaned up " .. removedCount .. " old drops")
+        ig.funig.Debug_1("Cleaned up " .. removedCount .. " old drops")
     end
 end
 
 --- Start periodic cleanup routine
-function c.drop.StartCleanupRoutine()
+function ig.drop.StartCleanupRoutine()
     if not conf.drops.cleanup_enabled then
-        c.func.Debug_1("Drop cleanup is disabled")
+        ig.funig.Debug_1("Drop cleanup is disabled")
         return
     end
     
     local function DoCleanup()
-        c.drop.CleanupOld()
+        ig.drop.CleanupOld()
         -- Run cleanup every 5 minutes, but respect cleanup_time for age comparison
         SetTimeout(5 * conf.min, DoCleanup)
     end
     
     SetTimeout(5 * conf.min, DoCleanup)
-    c.func.Debug_1("Drop cleanup routine started (runs every 5 minutes)")
+    ig.funig.Debug_1("Drop cleanup routine started (runs every 5 minutes)")
 end
 
 -- ====================================================================================--
@@ -311,10 +311,10 @@ end
 --- Handle player accessing a drop (opening inventory UI)
 RegisterNetEvent("Server:Drop:Access", function(netId)
     local source = source
-    local xPlayer = c.GetPlayer(source)
+    local xPlayer = ig.GetPlayer(source)
     
     if not xPlayer then
-        c.func.Debug_1("Player not found for drop access event")
+        ig.funig.Debug_1("Player not found for drop access event")
         return
     end
     
@@ -323,7 +323,7 @@ RegisterNetEvent("Server:Drop:Access", function(netId)
     local dropData = nil
     
     -- Find drop in both active and inactive states
-    for uuid, drop in pairs(c.drops) do
+    for uuid, drop in pairs(ig.drops) do
         if drop.NetID == netId then
             dropUUID = uuid
             dropData = drop
@@ -332,7 +332,7 @@ RegisterNetEvent("Server:Drop:Access", function(netId)
     end
     
     if not dropUUID then
-        for uuid, drop in pairs(c.active_drops) do
+        for uuid, drop in pairs(ig.active_drops) do
             if drop.NetID == netId then
                 dropUUID = uuid
                 dropData = drop
@@ -348,15 +348,15 @@ RegisterNetEvent("Server:Drop:Access", function(netId)
             TriggerClientEvent('Client:Drop:AccessDenied', source, {
                 message = "This drop is not for you"
             })
-            c.func.Debug_1("Player " .. source .. " denied access to restricted drop (target: " .. dropData.TargetPlayer .. ")")
+            ig.funig.Debug_1("Player " .. source .. " denied access to restricted drop (target: " .. dropData.TargetPlayer .. ")")
             return
         end
     end
     
     -- Activate the drop (move to active state)
-    c.drop.Activate(netId)
+    ig.drop.Activate(netId)
     
-    c.func.Debug_3("Player " .. source .. " accessed drop NetID: " .. netId)
+    ig.funig.Debug_3("Player " .. source .. " accessed drop NetID: " .. netId)
 end)
 
 --- Handle when inventory UI is closed for a drop
@@ -365,9 +365,9 @@ RegisterNetEvent("Server:Drop:Close", function(netId)
     local source = source
     
     -- Get the drop object
-    local xObject = c.data.GetObject(netId)
+    local xObject = ig.data.GetObject(netId)
     if not xObject then
-        c.func.Debug_1("Drop object not found for NetID: " .. tostring(netId))
+        ig.funig.Debug_1("Drop object not found for NetID: " .. tostring(netId))
         return
     end
     
@@ -377,12 +377,12 @@ RegisterNetEvent("Server:Drop:Close", function(netId)
     -- Check if inventory is empty, if so remove the drop
     local inventory = xObject.GetInventory()
     if not inventory or #inventory == 0 then
-        c.drop.Remove(netId)
-        c.func.Debug_3("Drop removed (empty) after close by player " .. source)
+        ig.drop.Remove(netId)
+        ig.funig.Debug_3("Drop removed (empty) after close by player " .. source)
     else
         -- Move back to inactive state
-        c.drop.Deactivate(netId)
-        c.func.Debug_3("Drop deactivated after close by player " .. source)
+        ig.drop.Deactivate(netId)
+        ig.funig.Debug_3("Drop deactivated after close by player " .. source)
     end
 end)
 
@@ -390,16 +390,16 @@ end)
 --- This is called when items are dragged out of inventory in the UI
 RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, meta)
     local source = source
-    local xPlayer = c.GetPlayer(source)
+    local xPlayer = ig.GetPlayer(source)
     
     if not xPlayer then
-        c.func.Debug_1("Player not found for drop event")
+        ig.funig.Debug_1("Player not found for drop event")
         return
     end
     
     -- Validate item exists
-    if not c.item.Exists(item) then
-        c.func.Debug_1("Invalid item in drop event: " .. tostring(item))
+    if not ig.item.Exists(item) then
+        ig.funig.Debug_1("Invalid item in drop event: " .. tostring(item))
         return
     end
     
@@ -412,13 +412,13 @@ RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, m
     -- Check if player has the item with sufficient quantity
     local hasItem, slot = xPlayer.HasItem(item)
     if not hasItem then
-        c.func.Debug_1("Player does not have item: " .. item)
+        ig.funig.Debug_1("Player does not have item: " .. item)
         return
     end
     
     local playerQuantity = xPlayer.GetItemQuantity(item)
     if playerQuantity < quantity then
-        c.func.Debug_1("Player does not have enough quantity: " .. item .. " (has " .. playerQuantity .. ", needs " .. quantity .. ")")
+        ig.funig.Debug_1("Player does not have enough quantity: " .. item .. " (has " .. playerQuantity .. ", needs " .. quantity .. ")")
         return
     end
     
@@ -432,7 +432,7 @@ RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, m
     local forwardY = coords.y + math.sin(math.rad(heading)) * 1.0
     
     -- Create the drop
-    local netId = c.drop.Create(
+    local netId = ig.drop.Create(
         {x = forwardX, y = forwardY, z = coords.z - 0.9, h = heading},
         {{item, quantity, quality, weapon, meta}}
     )
@@ -445,7 +445,7 @@ RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, m
                 xPlayer.RemoveItem(item, currentSlot)
             end
         end
-        c.func.Debug_3("Player " .. source .. " dropped " .. quantity .. "x " .. item)
+        ig.funig.Debug_3("Player " .. source .. " dropped " .. quantity .. "x " .. item)
     end
 end)
 
@@ -455,8 +455,8 @@ end)
 
 -- Start cleanup routine when resource is ready
 CreateThread(function()
-    while c._loading do
+    while ig._loading do
         Wait(1000)
     end
-    c.drop.StartCleanupRoutine()
+    ig.drop.StartCleanupRoutine()
 end)

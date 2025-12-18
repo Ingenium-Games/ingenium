@@ -11,7 +11,7 @@
 │  │                   │         │                      │   │
 │  │  • ui.lua         │         │  ┌────────────────┐ │   │
 │  │  • examples.lua   │         │  │   Vue 3 App    │ │   │
-│  │  • _c.lua         │         │  │                │ │   │
+│  │  • _ig.lua         │         │  │                │ │   │
 │  │                   │         │  │  • App.vue     │ │   │
 │  │  Exports:         │         │  │  • Components  │ │   │
 │  │  - ShowMenu()     │         │  │  • Stores      │ │   │
@@ -31,7 +31,7 @@ Lua Resource
     │
     ├─▶ TriggerEvent("Client:Notify", ...)
     │   OR
-    └─▶ exports['ig.core']:Notify(...)
+    └─▶ exports['ingenium']:Notify(...)
             │
             ▼
         SendNUIMessage
@@ -53,7 +53,7 @@ Lua Resource
 ```
 Lua Resource
     │
-    └─▶ exports['ig.core']:ShowMenu({...})
+    └─▶ exports['ingenium']:ShowMenu({...})
             │
             ▼
         SendNUIMessage("menu:show")
@@ -184,7 +184,7 @@ nui/
 ├── 📁 lua/                    # Lua integration
 │   ├── ui.lua                 # Export API
 │   ├── examples.lua           # Test commands
-│   ├── _c.lua                 # Core NUI handler
+│   ├── _ig.lua                 # Core NUI handler
 │   ├── notification.lua       # Old notification
 │   └── character-select.lua   # Old char select
 │
@@ -236,24 +236,24 @@ nui/
 ### Lua Exports
 ```lua
 -- Notifications
-exports['ig.core']:Notify(text, color, fade)
+exports['ingenium']:Notify(text, color, fade)
 
 -- Menus
-exports['ig.core']:ShowMenu({title, items})
-exports['ig.core']:HideMenu()
+exports['ingenium']:ShowMenu({title, items})
+exports['ingenium']:HideMenu()
 
 -- Input
-exports['ig.core']:ShowInput({title, placeholder, maxLength})
-exports['ig.core']:HideInput()
+exports['ingenium']:ShowInput({title, placeholder, maxLength})
+exports['ingenium']:HideInput()
 
 -- Context Menu
-exports['ig.core']:ShowContextMenu({title, items, position})
-exports['ig.core']:HideContextMenu()
+exports['ingenium']:ShowContextMenu({title, items, position})
+exports['ingenium']:HideContextMenu()
 
 -- HUD
-exports['ig.core']:ShowHUD()
-exports['ig.core']:HideHUD()
-exports['ig.core']:UpdateHUD(data)
+exports['ingenium']:ShowHUD()
+exports['ingenium']:HideHUD()
+exports['ingenium']:UpdateHUD(data)
 ```
 
 ### Events

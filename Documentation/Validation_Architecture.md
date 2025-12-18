@@ -30,7 +30,7 @@ The inventory validation system uses a **two-layer approach** to avoid duplicati
 - Example: Player didn't have "Diamond" before, now has it → KICK
 
 ✅ **Item Existence Validation**
-- Validates item names exist in `c.items` database
+- Validates item names exist in `ig.items` database
 - Prevents undefined/invalid items
 - Example: Item name "FakeItem123" not in database → KICK
 
@@ -55,7 +55,7 @@ The inventory validation system uses a **two-layer approach** to avoid duplicati
 
 ## Layer 2: UnpackInventory (Low-Level)
 
-**Location**: `/server/[Classes]/_player.lua`, `_vehicle.lua`, `_npc.lua`, `_objects.lua`
+**Location**: `/server/[Classes]/_player.lua`, `_vehicle.lua`, `_npig.lua`, `_objects.lua`
 
 **When**: After InventoryValidator passes
 

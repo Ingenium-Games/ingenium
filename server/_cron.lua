@@ -1,12 +1,12 @@
 -- ====================================================================================--
-c.cron = {} -- functions
-c.crons = {} -- table of jobs to action @ times.
+ig.cron = {} -- functions
+ig.crons = {} -- table of jobs to action @ times.
 -- ====================================================================================--
 
 -- https://github.com/esx-framework/esx-legacy/blob/main/%5Besx%5D/cron/server/main.lua
 
-function c.cron.RunAt(h, m, cb, ...)
-	table.insert(c.crons, {
+function ig.cron.RunAt(h, m, cb, ...)
+	table.insert(ig.crons, {
 		h  = h,
 		m  = m,
 		cb = cb,
@@ -14,10 +14,10 @@ function c.cron.RunAt(h, m, cb, ...)
 	})
 end
 
-function c.cron.OnTime(h, m)
-	for i=1, #c.crons, 1 do
-		if c.crons[i].h == h and c.crons[i].m == m then
-			c.crons[i].cb(table.unpack(c.crons[i].args))
+function ig.cron.OnTime(h, m)
+	for i=1, #ig.crons, 1 do
+		if ig.crons[i].h == h and ig.crons[i].m == m then
+			ig.crons[i].cb(table.unpack(ig.crons[i].args))
 		end
 	end
 end
@@ -26,7 +26,7 @@ end
 local added = false
 AddEventHandler("onServerResourceStart", function()
     if not added then
-        c.door.Add(Doors)
+        ig.door.Add(Doors)
     end
     added = true
 end)

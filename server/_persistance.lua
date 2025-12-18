@@ -1,6 +1,6 @@
 -- ====================================================================================--
-c.persistance = {}
-c.persistant = {}
+ig.persistance = {}
+ig.persistant = {}
 -- ====================================================================================--
 --
 local SPAWN_TIMEOUT = 10000
@@ -8,12 +8,12 @@ local SPAWN_DISTANCE = 200
 --
 local persistance_objects = false
 --
-function c.persistance.ObjectThread()
+function ig.persistance.ObjectThread()
 	Citizen.CreateThread(function()
 		while (true) do
             Citizen.Wait(SPAWN_TIMEOUT)
-			if c.func.HasPlayers() then
-				c.object.Generate(SPAWN_DISTANCE)
+			if ig.funig.HasPlayers() then
+				ig.object.Generate(SPAWN_DISTANCE)
 			end
 		end
 	end)
@@ -24,12 +24,12 @@ end
 	
 local persistance_vehicles = false
 --
-function c.persistance.VehicleThread()
+function ig.persistance.VehicleThread()
 	Citizen.CreateThread(function()
 		while (true) do
             Citizen.Wait(10000)
-			if c.func.HasPlayers() then
-				c.vehicle.Generate(SPAWN_DISTANCE)
+			if ig.funig.HasPlayers() then
+				ig.vehicle.Generate(SPAWN_DISTANCE)
 			end
 		end
 	end)

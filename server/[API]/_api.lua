@@ -9,7 +9,7 @@ local callback = function(req, res)
     req.path.registered = '/items'
     req.path.full       = '/items'
     -- change the response body if you want to
-    res.body = c.file.Read("Items.json")
+    res.body = ig.file.Read("Items.json")
     -- the request body is only recieved with
     -- few diffrent type of requests
 	-- the recieved body is already decoding
@@ -30,7 +30,7 @@ local callback2 = function(req, res)
     req.path.registered = '/jobs'
     req.path.full       = '/jobs'
     -- change the response body if you want to
-    res.body = c.file.Read("Jobs.json")
+    res.body = ig.file.Read("Jobs.json")
     -- the request body is only recieved with
     -- few diffrent type of requests
 	-- the recieved body is already decoding

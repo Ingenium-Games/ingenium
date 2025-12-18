@@ -3,7 +3,6 @@
  * Manages database transactions with rollback support
  */
 
-const getPool = () => global.exports.ig.core.getPool();
 
 class TransactionManager {
     /**

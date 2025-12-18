@@ -3,7 +3,7 @@
 -- Handles all character appearance customization
 -- ====================================================================================--
 
-c.appearance = c.appearance or {}
+ig.appearance = ig.appearance or {}
 
 -- Local cache for appearance data
 local currentAppearance = nil
@@ -16,9 +16,9 @@ local customizationActive = false
 
 ---Initialize appearance system
 ---Loads appearance constants from server
-function c.appearance.Initialize()
+function ig.appearance.Initialize()
     if not appearanceConstants then
-        appearanceConstants = c.callback.Await('ig:GameData:GetAppearanceConstants')
+        appearanceConstants = ig.callback.Await('ig:GameData:GetAppearanceConstants')
         if appearanceConstants then
             print('^2[Appearance] Constants loaded successfully^0')
         else
@@ -29,9 +29,9 @@ end
 
 ---Get appearance constants
 ---@return table|nil Appearance constants or nil
-function c.appearance.GetConstants()
+function ig.appearance.GetConstants()
     if not appearanceConstants then
-        c.appearance.Initialize()
+        ig.appearance.Initialize()
     end
     return appearanceConstants
 end
@@ -43,7 +43,7 @@ end
 ---Change ped model
 ---@param model string|number Ped model name or hash
 ---@param callback function|nil Optional callback when model is loaded
-function c.appearance.SetModel(model, callback)
+function ig.appearance.SetModel(model, callback)
     local modelHash = type(model) == "string" and GetHashKey(model) or model
     
     RequestModel(modelHash)
@@ -63,7 +63,7 @@ end
 
 ---Get current ped model
 ---@return string Ped model name
-function c.appearance.GetModel()
+function ig.appearance.GetModel()
     local ped = PlayerPedId()
     local hash = GetEntityModel(ped)
     return GetHashKey(hash)
@@ -71,7 +71,7 @@ end
 
 ---Check if ped is freemode model
 ---@return boolean True if freemode model
-function c.appearance.IsFreemode()
+function ig.appearance.IsFreemode()
     local ped = PlayerPedId()
     local hash = GetEntityModel(ped)
     return hash == GetHashKey('mp_m_freemode_01') or hash == GetHashKey('mp_f_freemode_01')
@@ -83,8 +83,8 @@ end
 
 ---Set head blend data (parents/heritage)
 ---@param headBlend table Head blend data {shapeFirst, shapeSecond, skinFirst, skinSecond, shapeMix, skinMix, thirdMix}
-function c.appearance.SetHeadBlend(headBlend)
-    if not c.appearance.IsFreemode() then return end
+function ig.appearance.SetHeadBlend(headBlend)
+    if not ig.appearance.IsFreemode() then return end
     
     local ped = PlayerPedId()
     SetPedHeadBlendData(
@@ -104,8 +104,8 @@ end
 
 ---Get current head blend data
 ---@return table Head blend data
-function c.appearance.GetHeadBlend()
-    if not c.appearance.IsFreemode() then return nil end
+function ig.appearance.GetHeadBlend()
+    if not ig.appearance.IsFreemode() then return nil end
     
     local ped = PlayerPedId()
     local shapeFirst = GetPedHeadBlendFirstIndex(ped)
@@ -130,8 +130,8 @@ end
 ---Set face feature
 ---@param index number Feature index (0-19)
 ---@param value number Feature value (-1.0 to 1.0)
-function c.appearance.SetFaceFeature(index, value)
-    if not c.appearance.IsFreemode() then return end
+function ig.appearance.SetFaceFeature(index, value)
+    if not ig.appearance.IsFreemode() then return end
     
     local ped = PlayerPedId()
     SetPedFaceFeature(ped, index, value)
@@ -139,28 +139,28 @@ end
 
 ---Set all face features
 ---@param features table Table of features {[0]=value, [1]=value, ...}
-function c.appearance.SetFaceFeatures(features)
-    if not c.appearance.IsFreemode() then return end
+function ig.appearance.SetFaceFeatures(features)
+    if not ig.appearance.IsFreemode() then return end
     if type(features) ~= "table" then return end
     
     for i = 0, 19 do
         if features[tostring(i)] ~= nil then
-            c.appearance.SetFaceFeature(i, features[tostring(i)])
+            ig.appearance.SetFaceFeature(i, features[tostring(i)])
         elseif features[i] ~= nil then
-            c.appearance.SetFaceFeature(i, features[i])
+            ig.appearance.SetFaceFeature(i, features[i])
         end
     end
 end
 
 ---Get current face features
 ---@return table Face features
-function c.appearance.GetFaceFeatures()
+function ig.appearance.GetFaceFeatures()
     -- Note: Face features cannot be read from the game, must be tracked
     return currentAppearance and currentAppearance.faceFeatures or {}
 end
 
 -- ====================================================================================--
--- HEAD OVERLAYS (Makeup, Beards, etc.)
+-- HEAD OVERLAYS (Makeup, Beards, etig.)
 -- ====================================================================================--
 
 ---Set head overlay
@@ -169,8 +169,8 @@ end
 ---@param opacity number Opacity (0.0-1.0)
 ---@param color number Color index
 ---@param secondColor number|nil Secondary color index (for certain overlays)
-function c.appearance.SetHeadOverlay(overlayId, style, opacity, color, secondColor)
-    if not c.appearance.IsFreemode() then return end
+function ig.appearance.SetHeadOverlay(overlayId, style, opacity, color, secondColor)
+    if not ig.appearance.IsFreemode() then return end
     
     local ped = PlayerPedId()
     SetPedHeadOverlay(ped, overlayId, style or 0, opacity or 1.0)
@@ -187,14 +187,14 @@ end
 
 ---Set all head overlays
 ---@param overlays table Table of overlays {[0]={style, opacity, color}, ...}
-function c.appearance.SetHeadOverlays(overlays)
-    if not c.appearance.IsFreemode() then return end
+function ig.appearance.SetHeadOverlays(overlays)
+    if not ig.appearance.IsFreemode() then return end
     if type(overlays) ~= "table" then return end
     
     for i = 0, 12 do
         local overlay = overlays[tostring(i)] or overlays[i]
         if overlay then
-            c.appearance.SetHeadOverlay(
+            ig.appearance.SetHeadOverlay(
                 i,
                 overlay.style,
                 overlay.opacity,
@@ -213,8 +213,8 @@ end
 ---@param style number Hair style index
 ---@param color number Primary color
 ---@param highlight number Highlight color
-function c.appearance.SetHair(style, color, highlight)
-    if not c.appearance.IsFreemode() then return end
+function ig.appearance.SetHair(style, color, highlight)
+    if not ig.appearance.IsFreemode() then return end
     
     local ped = PlayerPedId()
     SetPedComponentVariation(ped, 2, style or 0, 0, 0) -- Component 2 is hair
@@ -223,7 +223,7 @@ end
 
 ---Get current hair data
 ---@return table Hair data {style, color, highlight}
-function c.appearance.GetHair()
+function ig.appearance.GetHair()
     local ped = PlayerPedId()
     return {
         style = GetPedDrawableVariation(ped, 2),
@@ -238,8 +238,8 @@ end
 
 ---Set eye color
 ---@param color number Eye color index (0-31)
-function c.appearance.SetEyeColor(color)
-    if not c.appearance.IsFreemode() then return end
+function ig.appearance.SetEyeColor(color)
+    if not ig.appearance.IsFreemode() then return end
     
     local ped = PlayerPedId()
     SetPedEyeColor(ped, color or 0)
@@ -247,7 +247,7 @@ end
 
 ---Get current eye color
 ---@return number Eye color index
-function c.appearance.GetEyeColor()
+function ig.appearance.GetEyeColor()
     local ped = PlayerPedId()
     return GetPedEyeColor(ped)
 end
@@ -261,19 +261,19 @@ end
 ---@param drawable number Drawable index
 ---@param texture number Texture index
 ---@param palette number Palette index (default 0)
-function c.appearance.SetComponent(componentId, drawable, texture, palette)
+function ig.appearance.SetComponent(componentId, drawable, texture, palette)
     local ped = PlayerPedId()
     SetPedComponentVariation(ped, componentId, drawable or 0, texture or 0, palette or 0)
 end
 
 ---Set all components
 ---@param components table Array of components {{component_id, drawable, texture}, ...}
-function c.appearance.SetComponents(components)
+function ig.appearance.SetComponents(components)
     if type(components) ~= "table" then return end
     
     for _, comp in ipairs(components) do
         if comp.component_id or comp[1] then
-            c.appearance.SetComponent(
+            ig.appearance.SetComponent(
                 comp.component_id or comp[1],
                 comp.drawable or comp[2],
                 comp.texture or comp[3],
@@ -286,7 +286,7 @@ end
 ---Get current component variation
 ---@param componentId number Component ID
 ---@return table Component data {drawable, texture, palette}
-function c.appearance.GetComponent(componentId)
+function ig.appearance.GetComponent(componentId)
     local ped = PlayerPedId()
     return {
         drawable = GetPedDrawableVariation(ped, componentId),
@@ -297,10 +297,10 @@ end
 
 ---Get all components
 ---@return table Array of all components
-function c.appearance.GetComponents()
+function ig.appearance.GetComponents()
     local components = {}
     for i = 0, 11 do
-        local comp = c.appearance.GetComponent(i)
+        local comp = ig.appearance.GetComponent(i)
         table.insert(components, {
             component_id = i,
             drawable = comp.drawable,
@@ -319,7 +319,7 @@ end
 ---@param propId number Prop ID (0, 1, 2, 6, 7)
 ---@param drawable number Drawable index (-1 to remove)
 ---@param texture number Texture index
-function c.appearance.SetProp(propId, drawable, texture)
+function ig.appearance.SetProp(propId, drawable, texture)
     local ped = PlayerPedId()
     if drawable == -1 then
         ClearPedProp(ped, propId)
@@ -330,12 +330,12 @@ end
 
 ---Set all props
 ---@param props table Array of props {{prop_id, drawable, texture}, ...}
-function c.appearance.SetProps(props)
+function ig.appearance.SetProps(props)
     if type(props) ~= "table" then return end
     
     for _, prop in ipairs(props) do
         if prop.prop_id or prop[1] then
-            c.appearance.SetProp(
+            ig.appearance.SetProp(
                 prop.prop_id or prop[1],
                 prop.drawable or prop[2],
                 prop.texture or prop[3]
@@ -347,7 +347,7 @@ end
 ---Get current prop variation
 ---@param propId number Prop ID
 ---@return table Prop data {drawable, texture}
-function c.appearance.GetProp(propId)
+function ig.appearance.GetProp(propId)
     local ped = PlayerPedId()
     return {
         drawable = GetPedPropIndex(ped, propId),
@@ -357,11 +357,11 @@ end
 
 ---Get all props
 ---@return table Array of all props
-function c.appearance.GetProps()
+function ig.appearance.GetProps()
     local props = {}
     local propIds = {0, 1, 2, 6, 7} -- Valid prop IDs
     for _, propId in ipairs(propIds) do
-        local prop = c.appearance.GetProp(propId)
+        local prop = ig.appearance.GetProp(propId)
         table.insert(props, {
             prop_id = propId,
             drawable = prop.drawable,
@@ -378,28 +378,28 @@ end
 ---Apply tattoo
 ---@param collection string Collection hash
 ---@param hash string Tattoo hash
-function c.appearance.ApplyTattoo(collection, hash)
+function ig.appearance.ApplyTattoo(collection, hash)
     local ped = PlayerPedId()
     AddPedDecorationFromHashes(ped, GetHashKey(collection), GetHashKey(hash))
 end
 
 ---Remove all tattoos
-function c.appearance.ClearTattoos()
+function ig.appearance.ClearTattoos()
     local ped = PlayerPedId()
     ClearPedDecorations(ped)
 end
 
 ---Apply multiple tattoos
 ---@param tattoos table Array of tattoos {{collection, hash}, ...}
-function c.appearance.ApplyTattoos(tattoos)
+function ig.appearance.ApplyTattoos(tattoos)
     if type(tattoos) ~= "table" then return end
     
-    c.appearance.ClearTattoos()
+    ig.appearance.ClearTattoos()
     for _, tattoo in ipairs(tattoos) do
         if tattoo.collection and tattoo.hash then
-            c.appearance.ApplyTattoo(tattoo.collection, tattoo.hash)
+            ig.appearance.ApplyTattoo(tattoo.collection, tattoo.hash)
         elseif tattoo[1] and tattoo[2] then
-            c.appearance.ApplyTattoo(tattoo[1], tattoo[2])
+            ig.appearance.ApplyTattoo(tattoo[1], tattoo[2])
         end
     end
 end
@@ -410,7 +410,7 @@ end
 
 ---Set complete appearance
 ---@param appearance table Complete appearance data
-function c.appearance.SetAppearance(appearance)
+function ig.appearance.SetAppearance(appearance)
     if type(appearance) ~= "table" then return end
     
     -- Store current appearance
@@ -421,39 +421,39 @@ function c.appearance.SetAppearance(appearance)
         local currentModel = GetEntityModel(PlayerPedId())
         local newModel = GetHashKey(appearance.model)
         if currentModel ~= newModel then
-            c.appearance.SetModel(appearance.model, function()
+            ig.appearance.SetModel(appearance.model, function()
                 -- Apply rest of appearance after model change
-                c.appearance.ApplyAppearanceData(appearance)
+                ig.appearance.ApplyAppearanceData(appearance)
             end)
             return
         end
     end
     
     -- Apply appearance data
-    c.appearance.ApplyAppearanceData(appearance)
+    ig.appearance.ApplyAppearanceData(appearance)
 end
 
 ---Apply appearance data (internal use)
 ---@param appearance table Appearance data
-function c.appearance.ApplyAppearanceData(appearance)
+function ig.appearance.ApplyAppearanceData(appearance)
     -- Head blend (heritage)
     if appearance.headBlend then
-        c.appearance.SetHeadBlend(appearance.headBlend)
+        ig.appearance.SetHeadBlend(appearance.headBlend)
     end
     
     -- Face features
     if appearance.faceFeatures then
-        c.appearance.SetFaceFeatures(appearance.faceFeatures)
+        ig.appearance.SetFaceFeatures(appearance.faceFeatures)
     end
     
     -- Head overlays
     if appearance.headOverlays then
-        c.appearance.SetHeadOverlays(appearance.headOverlays)
+        ig.appearance.SetHeadOverlays(appearance.headOverlays)
     end
     
     -- Hair
     if appearance.hair then
-        c.appearance.SetHair(
+        ig.appearance.SetHair(
             appearance.hair.style,
             appearance.hair.color,
             appearance.hair.highlight
@@ -462,42 +462,42 @@ function c.appearance.ApplyAppearanceData(appearance)
     
     -- Eye color
     if appearance.eyeColor ~= nil then
-        c.appearance.SetEyeColor(appearance.eyeColor)
+        ig.appearance.SetEyeColor(appearance.eyeColor)
     end
     
     -- Components (clothing)
     if appearance.components then
-        c.appearance.SetComponents(appearance.components)
+        ig.appearance.SetComponents(appearance.components)
     end
     
     -- Props (accessories)
     if appearance.props then
-        c.appearance.SetProps(appearance.props)
+        ig.appearance.SetProps(appearance.props)
     end
     
     -- Tattoos
     if appearance.tattoos then
-        c.appearance.ApplyTattoos(appearance.tattoos)
+        ig.appearance.ApplyTattoos(appearance.tattoos)
     end
 end
 
 ---Get complete current appearance
 ---@return table Complete appearance data
-function c.appearance.GetAppearance()
+function ig.appearance.GetAppearance()
     local ped = PlayerPedId()
     local model = GetEntityModel(ped)
     
     local appearance = {
         model = GetHashKey(model),
-        components = c.appearance.GetComponents(),
-        props = c.appearance.GetProps(),
-        hair = c.appearance.GetHair(),
-        eyeColor = c.appearance.GetEyeColor()
+        components = ig.appearance.GetComponents(),
+        props = ig.appearance.GetProps(),
+        hair = ig.appearance.GetHair(),
+        eyeColor = ig.appearance.GetEyeColor()
     }
     
     -- Only include freemode-specific data if applicable
-    if c.appearance.IsFreemode() then
-        appearance.headBlend = c.appearance.GetHeadBlend()
+    if ig.appearance.IsFreemode() then
+        appearance.headBlend = ig.appearance.GetHeadBlend()
         appearance.faceFeatures = currentAppearance and currentAppearance.faceFeatures or {}
         appearance.headOverlays = currentAppearance and currentAppearance.headOverlays or {}
     end
@@ -527,26 +527,26 @@ local CameraViews = {
 }
 
 ---Create customization camera
-function c.appearance.CreateCamera()
+function ig.appearance.CreateCamera()
     local ped = PlayerPedId()
     local coords = GetEntityCoords(ped)
     local heading = GetEntityHeading(ped)
     
     -- Destroy existing camera if any
-    c.appearance.DestroyCamera()
+    ig.appearance.DestroyCamera()
     
     -- Create new camera
     customizationCamera = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
     
     -- Set initial view to face
-    c.appearance.SetCameraView("face")
+    ig.appearance.SetCameraView("face")
     
     -- Render camera
     RenderScriptCams(true, true, 1000, true, true)
 end
 
 ---Destroy customization camera
-function c.appearance.DestroyCamera()
+function ig.appearance.DestroyCamera()
     if customizationCamera then
         RenderScriptCams(false, true, 1000, true, true)
         DestroyCam(customizationCamera, false)
@@ -557,7 +557,7 @@ end
 
 ---Set camera view mode
 ---@param mode string Camera mode: "face", "body", "legs", "full"
-function c.appearance.SetCameraView(mode)
+function ig.appearance.SetCameraView(mode)
     if not customizationCamera then return end
     if not CameraViews[mode] then return end
     
@@ -584,7 +584,7 @@ end
 
 ---Rotate camera around ped
 ---@param degrees number Degrees to rotate (positive = right, negative = left)
-function c.appearance.RotateCamera(degrees)
+function ig.appearance.RotateCamera(degrees)
     if not customizationCamera then return end
     
     cameraRotation = cameraRotation + degrees
@@ -592,12 +592,12 @@ function c.appearance.RotateCamera(degrees)
     if cameraRotation < 0 then cameraRotation = cameraRotation + 360 end
     
     -- Update camera position
-    c.appearance.SetCameraView(customizationCameraMode)
+    ig.appearance.SetCameraView(customizationCameraMode)
 end
 
 ---Make ped turn around (full 360 rotation)
 ---@param duration number Duration in milliseconds (default 2000)
-function c.appearance.TurnAround(duration)
+function ig.appearance.TurnAround(duration)
     local ped = PlayerPedId()
     local startHeading = GetEntityHeading(ped)
     local targetHeading = startHeading + 360.0
@@ -619,7 +619,7 @@ end
 
 ---Get current camera mode
 ---@return string Current camera mode
-function c.appearance.GetCameraMode()
+function ig.appearance.GetCameraMode()
     return customizationCameraMode
 end
 
@@ -629,7 +629,7 @@ end
 
 ---Set customization active state
 ---@param active boolean True if customization is active
-function c.appearance.SetCustomizationActive(active)
+function ig.appearance.SetCustomizationActive(active)
     customizationActive = active
     
     if active then
@@ -638,27 +638,27 @@ function c.appearance.SetCustomizationActive(active)
         FreezeEntityPosition(ped, true)
         
         -- Create camera
-        c.appearance.CreateCamera()
+        ig.appearance.CreateCamera()
     else
         -- Unfreeze player
         local ped = PlayerPedId()
         FreezeEntityPosition(ped, false)
         
         -- Destroy camera
-        c.appearance.DestroyCamera()
+        ig.appearance.DestroyCamera()
     end
 end
 
 ---Check if customization is active
 ---@return boolean True if customization is active
-function c.appearance.IsCustomizationActive()
+function ig.appearance.IsCustomizationActive()
     return customizationActive
 end
 
 -- Initialize on resource start
 Citizen.CreateThread(function()
     Citizen.Wait(1000)
-    c.appearance.Initialize()
+    ig.appearance.Initialize()
 end)
 
 print('^2[Client] Appearance module loaded^0')

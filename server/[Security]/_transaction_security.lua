@@ -2,10 +2,7 @@
 -- Transaction Logging and Rate Limiting System
 -- Provides audit trail and anti-spam protection for financial transactions
 -- ====================================================================================--
-
-if not c.security then
-    c.security = {}
-end
+ig.security = {}
 
 -- Transaction log storage (in production, this should write to database)
 local transactionLog = {}
@@ -25,7 +22,7 @@ local playerTransactionHistory = {}
 ---@param transactionType string Type of transaction (e.g., "add_cash", "remove_cash", "set_bank")
 ---@param amount number Transaction amount
 ---@param reason string Reason for transaction
-function c.security.LogTransaction(player, transactionType, amount, reason)
+function ig.security.LogTransaction(player, transactionType, amount, reason)
     if not player then
         print("^3[SECURITY WARNING] LogTransaction called with nil player^7")
         return
@@ -56,7 +53,7 @@ function c.security.LogTransaction(player, transactionType, amount, reason)
     TriggerEvent("txaLogger:LogTransaction", log)
     
     -- Detect suspicious activity
-    c.security.DetectSuspiciousActivity(player, transactionType, amount)
+    ig.security.DetectSuspiciousActivity(player, transactionType, amount)
 end
 
 -- ====================================================================================--
@@ -67,7 +64,7 @@ end
 ---@param playerId number Player source ID
 ---@param transactionType string Type of transaction
 ---@return boolean isLimited True if rate limit is active
-function c.security.CheckRateLimit(playerId, transactionType)
+function ig.security.CheckRateLimit(playerId, transactionType)
     local cooldownKey = playerId .. "_" .. transactionType
     local currentTime = os.time()
     
@@ -75,7 +72,7 @@ function c.security.CheckRateLimit(playerId, transactionType)
     if transactionCooldowns[cooldownKey] then
         local timeSinceLastTransaction = currentTime - transactionCooldowns[cooldownKey]
         if timeSinceLastTransaction < 1 then
-            c.func.Debug_1(("Transaction rate limit hit for player %d on %s"):format(playerId, transactionType))
+            ig.funig.Debug_1(("Transaction rate limit hit for player %d on %s"):format(playerId, transactionType))
             return true
         end
     end
@@ -89,12 +86,12 @@ end
 ---@param player table Player object
 ---@param transactionType string Type of transaction
 ---@return boolean isLimited True if rate limit is active
-function c.security.CheckTransactionRateLimit(player, transactionType)
+function ig.security.CheckTransactionRateLimit(player, transactionType)
     if not player or not player.ID then
         return false
     end
     
-    if c.security.CheckRateLimit(player.ID, transactionType) then
+    if ig.security.CheckRateLimit(player.ID, transactionType) then
         if player.Notify then
             player.Notify("Transaction too fast. Please wait.")
         end
@@ -108,9 +105,9 @@ end
 ---@param transactionType string Type of transaction
 ---@param amount number Transaction amount
 ---@param reason string Reason for transaction
-function c.security.LogPlayerTransaction(player, transactionType, amount, reason)
+function ig.security.LogPlayerTransaction(player, transactionType, amount, reason)
     if player then
-        c.security.LogTransaction(player, transactionType, amount, reason)
+        ig.security.LogTransaction(player, transactionType, amount, reason)
     end
 end
 
@@ -123,7 +120,7 @@ end
 ---@param actionType string Type of action
 ---@param amount number Transaction amount
 ---@return boolean isSuspicious True if pattern is suspicious
-function c.security.DetectSuspiciousActivity(player, actionType, amount)
+function ig.security.DetectSuspiciousActivity(player, actionType, amount)
     if not player or not player.GetCharacter_ID then
         return false
     end

@@ -216,16 +216,16 @@ end
 
 - Database tables are lowercase, columns are capitalised.
 ```sql
-INSERT INTO `job_accounts` (`Name`, `Description`, `Boss`, `Members`, `Accounts`) etc.. 
+INSERT INTO `job_accounts` (`Name`, `Description`, `Boss`, `Members`, `Accounts`) etig.. 
 ```
 - Use positional parameters (?) or named parameters (@param):
 ```lua
 -- Recommended: Positional parameters
 local data = "xyz"
-c.sql.Update("UPDATE `table` SET `Column1` = ? WHERE X = ?", {data, id})
+ig.sql.Update("UPDATE `table` SET `Column1` = ? WHERE X = ?", {data, id})
 
 -- Legacy: Named parameters (still supported via compatibility layer)
-MySQL.Async.execute("UPDATE `table` SET `Column1` = @data WHERE X = @id", {
+MySQL.Asynig.execute("UPDATE `table` SET `Column1` = @data WHERE X = @id", {
     ["@data"] = data,
     ["@id"] = id
 })
@@ -233,7 +233,7 @@ MySQL.Async.execute("UPDATE `table` SET `Column1` = @data WHERE X = @id", {
 - __*Do not do this!*__
 ```lua
 local data = "Cool Story Bro"
-c.sql.Update("UPDATE `table` SET `Column1` = "..data, {}) -- SQL INJECTION RISK!
+ig.sql.Update("UPDATE `table` SET `Column1` = "..data, {}) -- SQL INJECTION RISK!
 ```
 
 >##### Note: *Always use parameterized queries to prevent SQL injection attacks. See [Security Guide](./Documentation/Security_Guide.md)*
@@ -310,7 +310,7 @@ The SQL system includes comprehensive monitoring:
 - Query execution time tracking
 - Slow query detection (>150ms)
 - Automatic performance logging
-- Statistics API (`c.sql.GetStats()`)
+- Statistics API (`ig.sql.GetStats()`)
 
 Console command:
 ```

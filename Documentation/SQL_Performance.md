@@ -22,7 +22,7 @@ set mysql_connection_limit "15"
 set mysql_connection_limit "20"
 ```
 
-**Note**: More connections aren't always better. Monitor with `c.sql.GetStats()`.
+**Note**: More connections aren't always better. Monitor with `ig.sql.GetStats()`.
 
 ## Query Optimization
 
@@ -33,13 +33,13 @@ For repeated queries (saves, updates):
 ```lua
 -- BAD: Repeated parsing
 for i = 1, 100 do
-    c.sql.Update("UPDATE chars SET data = ? WHERE id = ?", {data, i})
+    ig.sql.Update("UPDATE chars SET data = ? WHERE id = ?", {data, i})
 end
 
 -- GOOD: Parse once, execute many
-local query = c.sql.PrepareQuery("UPDATE chars SET data = ? WHERE id = ?")
+local query = ig.sql.PrepareQuery("UPDATE chars SET data = ? WHERE id = ?")
 for i = 1, 100 do
-    c.sql.ExecutePrepared(query, {data, i})
+    ig.sql.ExecutePrepared(query, {data, i})
 end
 ```
 
@@ -49,20 +49,20 @@ end
 
 ```lua
 -- BAD: Return all rows
-local chars = c.sql.Query("SELECT * FROM characters", {})
+local chars = ig.sql.Query("SELECT * FROM characters", {})
 
 -- GOOD: Limit what you need
-local chars = c.sql.Query("SELECT * FROM characters WHERE active = TRUE LIMIT 100", {})
+local chars = ig.sql.Query("SELECT * FROM characters WHERE active = TRUE LIMIT 100", {})
 ```
 
 ### 3. Use Specific Columns
 
 ```lua
 -- BAD: Select everything
-local names = c.sql.Query("SELECT * FROM characters", {})
+local names = ig.sql.Query("SELECT * FROM characters", {})
 
 -- GOOD: Select only needed columns
-local names = c.sql.Query("SELECT first_name, last_name FROM characters", {})
+local names = ig.sql.Query("SELECT first_name, last_name FROM characters", {})
 ```
 
 **Performance**: Reduces data transfer and memory usage
@@ -85,7 +85,7 @@ CREATE INDEX idx_char_active ON characters(Primary_ID, Active);
 
 ```lua
 -- BAD: Filter in Lua
-local allChars = c.sql.Query("SELECT * FROM characters", {})
+local allChars = ig.sql.Query("SELECT * FROM characters", {})
 local filtered = {}
 for _, char in ipairs(allChars) do
     if char.Active then
@@ -94,7 +94,7 @@ for _, char in ipairs(allChars) do
 end
 
 -- GOOD: Filter in SQL
-local filtered = c.sql.Query("SELECT * FROM characters WHERE Active = TRUE", {})
+local filtered = ig.sql.Query("SELECT * FROM characters WHERE Active = TRUE", {})
 ```
 
 ## Transaction Optimization
@@ -115,13 +115,13 @@ Don't use transactions for:
 
 ```lua
 -- Use Transaction for atomic operations
-c.sql.Transaction({
+ig.sql.Transaction({
     {query = "UPDATE accounts SET balance = balance - ?", parameters = {100}},
     {query = "UPDATE accounts SET balance = balance + ?", parameters = {100}}
 }) -- Both succeed or both fail
 
 -- Use Batch for independent operations
-c.sql.Batch({
+ig.sql.Batch({
     {query = "UPDATE chars SET last_seen = ? WHERE id = ?", parameters = {time, id1}},
     {query = "UPDATE chars SET last_seen = ? WHERE id = ?", parameters = {time, id2}}
 }) -- Each can fail independently
@@ -139,8 +139,8 @@ xPlayer.SetHealth(100)  -- Marks as dirty
 xPlayer.SetArmour(50)   -- Still dirty
 
 -- Save only saves if dirty
-c.sql.save.User(xPlayer) -- Saves and clears dirty flag
-c.sql.save.User(xPlayer) -- Skipped - not dirty
+ig.sql.save.User(xPlayer) -- Saves and clears dirty flag
+ig.sql.save.User(xPlayer) -- Skipped - not dirty
 ```
 
 **Performance**: 60-80% reduction in save operations
@@ -154,7 +154,7 @@ Configure save intervals based on your needs:
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(30000)
-        c.sql.save.Users()
+        ig.sql.save.Users()
     end
 end)
 
@@ -162,7 +162,7 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(300000)
-        c.sql.save.Objects()
+        ig.sql.save.Objects()
     end
 end)
 ```
@@ -172,12 +172,12 @@ end)
 ```lua
 -- BAD: Save one at a time
 for _, player in pairs(GetPlayers()) do
-    local xPlayer = c.data.GetPlayer(player)
-    c.sql.save.User(xPlayer)
+    local xPlayer = ig.data.GetPlayer(player)
+    ig.sql.save.User(xPlayer)
 end
 
 -- GOOD: Use bulk save function
-c.sql.save.Users() -- Batches all dirty players
+ig.sql.save.Users() -- Batches all dirty players
 ```
 
 ## Query Profiling
@@ -215,7 +215,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(300000) -- 5 minutes
         
-        local stats = c.sql.GetStats()
+        local stats = ig.sql.GetStats()
         
         -- Warning thresholds
         if stats.averageTime > 50 then
@@ -267,17 +267,17 @@ end
 
 ```lua
 -- BAD: N+1 query pattern
-local users = c.sql.Query("SELECT * FROM users", {})
+local users = ig.sql.Query("SELECT * FROM users", {})
 for _, user in ipairs(users) do
-    local chars = c.sql.Query("SELECT * FROM characters WHERE user_id = ?", {user.id})
+    local chars = ig.sql.Query("SELECT * FROM characters WHERE user_id = ?", {user.id})
     -- Process chars
 end
 
 -- GOOD: Single JOIN query
-local data = c.sql.Query([[
-    SELECT u.*, c.* 
+local data = ig.sql.Query([[
+    SELECT u.*, ig.* 
     FROM users u 
-    LEFT JOIN characters c ON u.id = c.user_id
+    LEFT JOIN characters c ON u.id = ig.user_id
 ]], {})
 ```
 
@@ -287,8 +287,8 @@ local data = c.sql.Query([[
 -- Cache static data at resource start
 local ItemList = {}
 Citizen.CreateThread(function()
-    if c.sql.AwaitReady() then
-        ItemList = c.sql.Query("SELECT * FROM items", {})
+    if ig.sql.AwaitReady() then
+        ItemList = ig.sql.Query("SELECT * FROM items", {})
     end
 end)
 
@@ -307,38 +307,38 @@ end
 
 ```lua
 -- Use indexed columns in WHERE
-c.sql.Query("SELECT * FROM characters WHERE Primary_ID = ?", {primaryId}) -- INDEXED
+ig.sql.Query("SELECT * FROM characters WHERE Primary_ID = ?", {primaryId}) -- INDEXED
 
 -- Avoid functions in WHERE (prevents index use)
 -- BAD
-c.sql.Query("SELECT * FROM characters WHERE LOWER(First_Name) = ?", {name:lower()})
+ig.sql.Query("SELECT * FROM characters WHERE LOWER(First_Name) = ?", {name:lower()})
 -- GOOD
-c.sql.Query("SELECT * FROM characters WHERE First_Name = ?", {name})
+ig.sql.Query("SELECT * FROM characters WHERE First_Name = ?", {name})
 ```
 
 ### 4. Use LIMIT
 
 ```lua
 -- Always use LIMIT for single-row queries
-c.sql.FetchSingle("SELECT * FROM users WHERE license = ? LIMIT 1", {license})
+ig.sql.FetchSingle("SELECT * FROM users WHERE license = ? LIMIT 1", {license})
 
 -- Paginate large result sets
 local page = 1
 local perPage = 50
 local offset = (page - 1) * perPage
-c.sql.Query("SELECT * FROM characters LIMIT ? OFFSET ?", {perPage, offset})
+ig.sql.Query("SELECT * FROM characters LIMIT ? OFFSET ?", {perPage, offset})
 ```
 
 ### 5. Async for UI, Sync for Logic
 
 ```lua
 -- UI operations: Use callbacks (async)
-c.sql.Query("SELECT * FROM characters", {}, function(characters)
+ig.sql.Query("SELECT * FROM characters", {}, function(characters)
     TriggerClientEvent('showCharacterMenu', source, characters)
 end)
 
 -- Game logic: Use sync (simpler code)
-local balance = c.sql.FetchScalar("SELECT bank FROM accounts WHERE id = ?", {accountId})
+local balance = ig.sql.FetchScalar("SELECT bank FROM accounts WHERE id = ?", {accountId})
 if balance >= price then
     -- Proceed with purchase
 end
@@ -350,7 +350,7 @@ Create a performance monitoring command:
 
 ```lua
 RegisterCommand('sqlperf', function(source)
-    local stats = c.sql.GetStats()
+    local stats = ig.sql.GetStats()
     
     local report = string.format([[
 === SQL Performance Report ===

@@ -73,7 +73,7 @@ function getComponentPrice(componentId) {
 
 function getCurrentComponent(componentId) {
   const comps = appearanceStore.currentAppearance?.components || []
-  const found = comps.find(c => c.component_id === componentId)
+  const found = comps.find(c => ig.component_id === componentId)
   return found || { drawable: 0, texture: 0 }
 }
 

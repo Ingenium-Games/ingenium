@@ -55,7 +55,7 @@ export async function callClientCallback(callback, ...args) {
 function GetParentResourceName() {
   // In development, return a dummy name
   if (import.meta.env.DEV) {
-    return Promise.resolve('ig.core')
+    return Promise.resolve('ingenium')
   }
   
   return new Promise((resolve) => {
@@ -73,7 +73,7 @@ function GetParentResourceName() {
       // Timeout after 5 seconds
       setTimeout(() => {
         clearInterval(checkInterval)
-        resolve('ig.core') // Fallback
+        resolve('ingenium') // Fallback
       }, 5000)
     }
   })

@@ -7,11 +7,11 @@
 -- ====================================================================================--
 -- Game Data Tables
 -- ====================================================================================--
-c.tattoos = {}
-c.weapons = {}
-c.vehicles = {}
-c.modkits = {}
-c.itemdata = {}
+ig.tattoos = {}
+ig.weapons = {}
+ig.vehicles = {}
+ig.modkits = {}
+ig.itemdata = {}
 
 ---@class TattooData
 ---@field hash number
@@ -77,11 +77,11 @@ Citizen.CreateThread(function()
     local startTime = GetGameTimer()
     
     -- Load all data files
-    c.tattoos = LoadDataFile('tattoos.json')
-    c.weapons = LoadDataFile('weapons.json')
-    c.vehicles = LoadDataFile('vehicles.json')
-    c.modkits = LoadDataFile('modkits.json')
-    c.itemdata = LoadDataFile('items.json')
+    ig.tattoos = LoadDataFile('tattoos.json')
+    ig.weapons = LoadDataFile('weapons.json')
+    ig.vehicles = LoadDataFile('vehicles.json')
+    ig.modkits = LoadDataFile('modkits.json')
+    ig.itemdata = LoadDataFile('items.json')
     
     -- Count loaded items
     local counts = {
@@ -92,11 +92,11 @@ Citizen.CreateThread(function()
         items = 0
     }
     
-    for _ in pairs(c.tattoos) do counts.tattoos = counts.tattoos + 1 end
-    for _ in pairs(c.weapons) do counts.weapons = counts.weapons + 1 end
-    for _ in pairs(c.vehicles) do counts.vehicles = counts.vehicles + 1 end
-    for _ in pairs(c.modkits) do counts.modkits = counts.modkits + 1 end
-    for _ in pairs(c.itemdata) do counts.items = counts.items + 1 end
+    for _ in pairs(ig.tattoos) do counts.tattoos = counts.tattoos + 1 end
+    for _ in pairs(ig.weapons) do counts.weapons = counts.weapons + 1 end
+    for _ in pairs(ig.vehicles) do counts.vehicles = counts.vehicles + 1 end
+    for _ in pairs(ig.modkits) do counts.modkits = counts.modkits + 1 end
+    for _ in pairs(ig.itemdata) do counts.items = counts.items + 1 end
     
     local loadTime = GetGameTimer() - startTime
     

@@ -11,7 +11,7 @@
 RegisterServerCallback({
     eventName = "Server:Appearance:GetPricing",
     eventCallback = function(source, jobName)
-        local pricing = c.appearance.GetPricing(jobName)
+        local pricing = ig.appearance.GetPricing(jobName)
         return pricing
     end
 })
@@ -25,7 +25,7 @@ RegisterServerCallback({
     eventName = "Server:Appearance:ValidatePurchase",
     eventCallback = function(source, jobName, oldAppearance, newAppearance)
         -- Calculate cost
-        local totalCost, itemizedCosts = c.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
+        local totalCost, itemizedCosts = ig.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
         
         -- If no cost, allow free change
         if totalCost <= 0 then
@@ -39,7 +39,7 @@ RegisterServerCallback({
         -- Check if player has enough money
         -- TODO: Integrate with your economy system
         -- The following is a placeholder implementation
-        local player = c.func.GetPlayer(source)
+        local player = ig.funig.GetPlayer(source)
         if not player then
             return {
                 success = false,
@@ -52,7 +52,7 @@ RegisterServerCallback({
         -- Example: local playerCash = player.cash or 0
         -- Example: if playerCash < totalCost then return error end
         -- Example: player.cash = player.cash - totalCost
-        -- Example: c.func.SavePlayer(source, player)
+        -- Example: ig.funig.SavePlayer(source, player)
         
         -- For now, allow all purchases (implement economy integration above)
         return {
