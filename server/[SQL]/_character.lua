@@ -7,8 +7,8 @@ function ig.sql.char.Add(t, cb)
     ig.sql.Insert(
         "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Iban`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`, `Skills`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         {
-            ig.funig.Timestamp(),
-            ig.funig.Timestamp(),
+            ig.func.Timestamp(),
+            ig.func.Timestamp(),
             t.Primary_ID,
             t.Character_ID,
             t.City_ID,
@@ -65,8 +65,8 @@ function ig.sql.char.ReviveDeadCharacters(cb)
         "UPDATE `characters` SET `Health` = 150, `Is_Dead` = FALSE, `Coords` = ?, `Dead_Time` = NULL, `Dead_Data` = ? WHERE `Dead_Time` <= (? - '604800')",
         {
             json.encode({["z"]=43.28,["h"]=337.32,["x"]=327.52,["y"]=-603.03}), -- Pillbox Elevators
-            json.encode({["RevivedAt"]= ig.funig.Timestamp(), ["By"]="Server"}),
-            ig.funig.Timestamp()
+            json.encode({["RevivedAt"]= ig.func.Timestamp(), ["By"]="Server"}),
+            ig.func.Timestamp()
         },
         function(affectedRows)
             if cb then
@@ -82,7 +82,7 @@ function ig.sql.char.Get(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchAll("SELECT * FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
+    MySQL.Async.fetchAll("SELECT * FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         result = data[1]
@@ -103,7 +103,7 @@ function ig.sql.char.GetCount(primary_id, cb)
     local Primary_ID = primary_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT COUNT(`Primary_ID`) AS 'Count' FROM `characters` WHERE `Primary_ID` = @Primary_ID;",
+    MySQL.Async.fetchScalar("SELECT COUNT(`Primary_ID`) AS 'Count' FROM `characters` WHERE `Primary_ID` = @Primary_ID;",
         {
             ["@Primary_ID"] = Primary_ID
         }, function(data)
@@ -126,7 +126,7 @@ end
 
 function ig.sql.char.Delete(character_id, cb)
     local Character_ID = character_id
-    MySQL.Asynig.execute("DELETE FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
+    MySQL.Async.execute("DELETE FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -144,7 +144,7 @@ function ig.sql.char.Current(primary_id, cb)
     local Primary_ID = primary_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar(
+    MySQL.Async.fetchScalar(
         "SELECT `Character_ID` FROM `characters` WHERE `Active` IS TRUE AND `Primary_ID` = @Primary_ID", {
             ["@Primary_ID"] = Primary_ID
         }, function(data)
@@ -163,10 +163,10 @@ end
 --- SET - The `Active` = BOOLEAN `Character_ID` from the Primary_ID identifier
 -- @`Character_ID`
 function ig.sql.char.SetActive(character_id, bool, cb)
-    if type(bool) ~= "boolean" then ig.funig.Debug_1("ig.sql.char.SetActive, boolean was not passed") return end
+    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.char.SetActive, boolean was not passed") return end
     local Character_ID = character_id
     local Bool = bool
-    MySQL.Asynig.execute("UPDATE `characters` SET `Active` = @Bool WHERE `Character_ID` = @Character_ID", {
+    MySQL.Async.execute("UPDATE `characters` SET `Active` = @Bool WHERE `Character_ID` = @Character_ID", {
         ["@Bool"] = Bool,
         ["@Character_ID"] = Character_ID
     }, function(data)
@@ -182,13 +182,13 @@ end
 --- SET - The `Active` = BOOLEAN `Character_ID` from the Primary_ID identifier
 -- @`Character_ID`
 function ig.sql.char.SetDead(character_id, bool, data, cb)
-    if type(bool) ~= "boolean" then ig.funig.Debug_1("ig.sql.char.SetDead, boolean was not passed") return end
+    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.char.SetDead, boolean was not passed") return end
     local Character_ID = character_id
     local Bool = bool
     local Data = json.encode(data)
-    MySQL.Asynig.execute("UPDATE `characters` SET `Is_Dead` = @Bool, `Dead_Time` = @Time, `Dead_Data` = @Data WHERE `Character_ID` = @Character_ID", {
+    MySQL.Async.execute("UPDATE `characters` SET `Is_Dead` = @Bool, `Dead_Time` = @Time, `Dead_Data` = @Data WHERE `Character_ID` = @Character_ID", {
         ["@Bool"] = Bool,
-        ["@Time"] = ig.funig.Timestamp(),
+        ["@Time"] = ig.func.Timestamp(),
         ["@Data"] = Data,
         ["@Character_ID"] = Character_ID
     }, function(data)
@@ -206,7 +206,7 @@ end
 function ig.sql.char.SetInstance(character_id, instance_id, cb)
     local Character_ID = character_id
     local Instance = instance_id
-    MySQL.Asynig.execute("UPDATE `characters` SET `Instance` = @Instance WHERE `Character_ID` = @Character_ID", {
+    MySQL.Async.execute("UPDATE `characters` SET `Instance` = @Instance WHERE `Character_ID` = @Character_ID", {
         ["@Instance"] = Instance,
         ["@Character_ID"] = Character_ID,
     }, function(data)
@@ -221,7 +221,7 @@ end
 
 -- Should the Server crash, this one is to reset all Active Characters Just incasethe Active Column is used to data identify users/characters in data pulls.
 function ig.sql.ResetActiveCharacters(cb)
-    MySQL.Asynig.execute("UPDATE `characters` SET `Active` = FALSE;", {}, function(data)
+    MySQL.Async.execute("UPDATE `characters` SET `Active` = FALSE;", {}, function(data)
         if data then
             --
         end
@@ -235,7 +235,7 @@ end
 function ig.sql.char.GetAllWanted(cb)
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchAll("SELECT `Character_ID` FROM `characters` WHERE `Wanted` IS TRUE;", {}, function(data)
+    MySQL.Async.fetchAll("SELECT `Character_ID` FROM `characters` WHERE `Wanted` IS TRUE;", {}, function(data)
         result = data
         IsBusy = false
     end)
@@ -251,9 +251,9 @@ end
 --- Set - The `Wanted` Boolean TRUE from the `Character_ID`
 -- @`Character_ID`
 function ig.sql.char.SetWanted(character_id, bool, cb)
-    if type(bool) ~= "boolean" then ig.funig.Debug_1("ig.sql.char.SetActive, boolean was not passed") return end
+    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.char.SetActive, boolean was not passed") return end
     local Character_ID = character_id
-    MySQL.Asynig.execute("UPDATE `characters` SET `Wanted` IS TRUE WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.execute("UPDATE `characters` SET `Wanted` IS TRUE WHERE `Character_ID` = @Character_ID;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -271,7 +271,7 @@ function ig.sql.char.GetFromPhone(phone, cb)
     local Phone = phone
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Character_ID` FROM `characters` WHERE `Phone` = @Phone LIMIT 1;", {
+    MySQL.Async.fetchScalar("SELECT `Character_ID` FROM `characters` WHERE `Phone` = @Phone LIMIT 1;", {
         ["@Phone"] = Phone
     }, function(data)
         result = data
@@ -292,7 +292,7 @@ function ig.sql.char.GetPhone(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Phone` FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
+    MySQL.Async.fetchScalar("SELECT `Phone` FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         result = data
@@ -313,7 +313,7 @@ function ig.sql.char.GetCityId(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `City_ID` FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
+    MySQL.Async.fetchScalar("SELECT `City_ID` FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         result = data
@@ -334,7 +334,7 @@ function ig.sql.char.GetFromCityId(city_id, cb)
     local City_ID = city_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Character_ID` FROM `characters` WHERE `City_ID` = @City_ID LIMIT 1;", {
+    MySQL.Async.fetchScalar("SELECT `Character_ID` FROM `characters` WHERE `City_ID` = @City_ID LIMIT 1;", {
         ["@City_ID"] = City_ID
     }, function(data)
         result = data
@@ -355,7 +355,7 @@ function ig.sql.char.GetCoords(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Coords` FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
+    MySQL.Async.fetchScalar("SELECT `Coords` FROM `characters` WHERE `Character_ID` = @Character_ID LIMIT 1;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -379,7 +379,7 @@ end
 function ig.sql.char.SetCoords(character_id, vector3, cb)
     local Character_ID = character_id
     local Coords = json.encode(vector3)
-    MySQL.Asynig.execute("UPDATE `characters` SET `Coords` = @Coords WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.execute("UPDATE `characters` SET `Coords` = @Coords WHERE `Character_ID` = @Character_ID;", {
         ["@Coords"] = Coords,
         ["@Character_ID"] = Character_ID
     }, function(data)
@@ -399,7 +399,7 @@ function ig.sql.char.GetAppearance(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Appearance` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.fetchScalar("SELECT `Appearance` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -423,7 +423,7 @@ end
 function ig.sql.char.SetAppearance(character_id, style, cb)
     local Character_ID = character_id
     local Appearance = json.encode(style)
-    MySQL.Asynig.execute("UPDATE `characters` SET `Appearance` = @Appearance WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.execute("UPDATE `characters` SET `Appearance` = @Appearance WHERE `Character_ID` = @Character_ID;", {
         ["@Appearance"] = Appearance,
         ["@Character_ID"] = Character_ID
     }, function(data)
@@ -442,7 +442,7 @@ end
 -- cb if any.
 function ig.sql.char.AddOutfit(Character_ID, Number, style, cb)
     local Appearance = json.encode(style)
-    MySQL.Asynig.execute("INSERT INTO character_outfits (`Character_ID`, `Number`, `Appearance`) VALUES (@Character_ID, @Number, @Appearance);", {
+    MySQL.Async.execute("INSERT INTO character_outfits (`Character_ID`, `Number`, `Appearance`) VALUES (@Character_ID, @Number, @Appearance);", {
         ["@Character_ID"] = Character_ID,
         ["@Number"] = Number,
         ["@Appearance"] = Appearance,
@@ -460,7 +460,7 @@ end
 function ig.sql.char.GetOutfitsAsCount(Character_ID, cb)
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchAll("SELECT COUNT(`Character_ID`) AS 'Count' FROM `character_outfits` WHERE Character_ID = @Character_ID;", {
+    MySQL.Async.fetchAll("SELECT COUNT(`Character_ID`) AS 'Count' FROM `character_outfits` WHERE Character_ID = @Character_ID;", {
         ["@Character_ID"] = Character_ID,
     }
     , function(data)
@@ -485,7 +485,7 @@ end
 function ig.sql.char.GetOutfitByNumber(Character_ID, Number, cb)
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Appearance` FROM `character_outfits` WHERE `Character_ID` = @Character_ID AND `Number` = @Number;", {
+    MySQL.Async.fetchScalar("SELECT `Appearance` FROM `character_outfits` WHERE `Character_ID` = @Character_ID AND `Number` = @Number;", {
         ["@Character_ID"] = Character_ID,
         ["@Number"] = Number,
     }
@@ -514,7 +514,7 @@ function ig.sql.char.GetHealth(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Health` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.fetchScalar("SELECT `Health` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -538,7 +538,7 @@ end
 function ig.sql.char.SetHealth(character_id, health, cb)
     local Health = health
     local Character_ID = character_id
-    MySQL.Asynig.execute("UPDATE `characters` SET `Health` = @Health WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.execute("UPDATE `characters` SET `Health` = @Health WHERE `Character_ID` = @Character_ID;", {
         ["@Health"] = Health,
         ["@Character_ID"] = Character_ID
     }, function(data)
@@ -558,7 +558,7 @@ function ig.sql.char.GetArmour(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Armour` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.fetchScalar("SELECT `Armour` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -582,7 +582,7 @@ end
 function ig.sql.char.SetArmour(character_id, armour, cb)
     local Character_ID = character_id
     local Armour = armour
-    MySQL.Asynig.execute("UPDATE `characters` SET `Armour` = @Armour WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.execute("UPDATE `characters` SET `Armour` = @Armour WHERE `Character_ID` = @Character_ID;", {
         ["@Armour"] = Armour,
         ["@Character_ID"] = Character_ID
     }, function(data)
@@ -602,7 +602,7 @@ function ig.sql.char.GetHunger(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Hunger` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.fetchScalar("SELECT `Hunger` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -626,7 +626,7 @@ end
 function ig.sql.char.SetHunger(character_id, hunger, cb)
     local Character_ID = character_id
     local Hunger = hunger
-    MySQL.Asynig.execute("UPDATE `characters` SET `Hunger` = @Hunger WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.execute("UPDATE `characters` SET `Hunger` = @Hunger WHERE `Character_ID` = @Character_ID;", {
         ["@Hunger"] = Hunger,
         ["@Character_ID"] = Character_ID
     }, function(data)
@@ -646,7 +646,7 @@ function ig.sql.char.GetThirst(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Thirst` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.fetchScalar("SELECT `Thirst` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -670,7 +670,7 @@ end
 function ig.sql.char.SetThirst(character_id, thirst, cb)
     local Character_ID = character_id
     local Thirst = thirst
-    MySQL.Asynig.execute("UPDATE `characters` SET `Thirst` = @Thirst WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.execute("UPDATE `characters` SET `Thirst` = @Thirst WHERE `Character_ID` = @Character_ID;", {
         ["@Thirst"] = Thirst,
         ["@Character_ID"] = Character_ID
     }, function(data)
@@ -690,7 +690,7 @@ function ig.sql.char.GetStress(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
-    MySQL.Asynig.fetchScalar("SELECT `Stress` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.fetchScalar("SELECT `Stress` FROM `characters` WHERE `Character_ID` = @Character_ID;", {
         ["@Character_ID"] = Character_ID
     }, function(data)
         if data then
@@ -714,7 +714,7 @@ end
 function ig.sql.char.SetStress(character_ID, stress, cb)
     local Character_ID = character_id
     local Stress = stress
-    MySQL.Asynig.execute("UPDATE `characters` SET `Stress` = @Stress WHERE `Character_ID` = @Character_ID;", {
+    MySQL.Async.execute("UPDATE `characters` SET `Stress` = @Stress WHERE `Character_ID` = @Character_ID;", {
         ["@Stress"] = Stress,
         ["@Character_ID"] = Character_ID
     }, function(data)

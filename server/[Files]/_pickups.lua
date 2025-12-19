@@ -43,7 +43,7 @@ function ig.pick.Add(data)
     if type(data) == "table" then
         table.insert(ig.picks, data)
     else
-        ig.funig.Debug_1("Drop to be added, please check data sent.")
+        ig.func.Debug_1("Drop to be added, please check data sent.")
     end
 end
 

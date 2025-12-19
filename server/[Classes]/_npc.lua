@@ -13,12 +13,12 @@ function ig.class.Npc(net)
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
     -- Gender ("Male"/"Female")
-    self.Gender, self.GenderString = ig.funig.IsPedMale(self.Model)
+    self.Gender, self.GenderString = ig.func.IsPedMale(self.Model)
     self.State.Gender = self.Gender
     self.State.GenderString = self.GenderString
     --
     -- Humaniod Model (true/false)
-    self.IsHuman = ig.funig.IsPedHuman(self.Model)
+    self.IsHuman = ig.func.IsPedHuman(self.Model)
     self.State.IsHuman = self.IsHuman
     --
     -- Animation?
@@ -104,7 +104,7 @@ function ig.class.Npc(net)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -149,7 +149,7 @@ function ig.class.Npc(net)
         local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            ig.funig.Debug_1("Error unpacking NPC inventory: " .. (error or "unknown"))
+            ig.func.Debug_1("Error unpacking NPC inventory: " .. (error or "unknown"))
             self.Inventory = {}
             self.State.Inventory = self.Inventory
             return
@@ -176,7 +176,7 @@ function ig.class.Npc(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC: " .. self.Net)
+            ig.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC: " .. self.Net)
             return
         end
         local info = {
@@ -206,7 +206,7 @@ function ig.class.Npc(net)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            ig.funig.Debug_1("Ignoring invalid .AddItem() for NPC: " .. self.Net)
+            ig.func.Debug_1("Ignoring invalid .AddItem() for NPC: " .. self.Net)
         end
     end
     --

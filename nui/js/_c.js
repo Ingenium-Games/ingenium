@@ -48,7 +48,7 @@ $(document).ready(function () {
 // Close Function
 function _c__close() {
   $.post(
-    "https://ig.core/_c__close",
+    "https://ingenium/_c__close",
     JSON.stringify({message: "_c__close", data: {} })
   );
 }

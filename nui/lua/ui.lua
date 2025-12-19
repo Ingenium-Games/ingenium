@@ -1,5 +1,5 @@
 -- ====================================================================================--
--- UI Export API for ig.core Vue 3 NUI System
+-- UI Export API for ingenium Vue 3 NUI System
 -- ====================================================================================--
 
 --- Show a menu with custom items

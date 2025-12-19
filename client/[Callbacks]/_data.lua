@@ -6,11 +6,11 @@ local DataPacket = RegisterClientCallback({
     eventCallback = function()
         local data = false
         if ig.data.GetLoadedStatus() then
-            ig.funig.IsBusy()
+            ig.func.IsBusy()
             Citizen.Wait(500)
             data = ig.data.Packet()
             Citizen.Wait(500)
-            ig.funig.NotBusy()
+            ig.func.NotBusy()
         end
         return data
     end

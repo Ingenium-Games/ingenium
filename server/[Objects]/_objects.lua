@@ -24,10 +24,10 @@ function ig.object.Generate(distance)
         local found = ig.data.FindObjectFromUUID(data.UUID)
         if (not found) then
             local Coords = json.decode(data.Coords)
-            if (ig.funig.GetClosestPlayer(vec3(Coords.x,Coords.y,Coords.z), distance)) then
+            if (ig.func.GetClosestPlayer(vec3(Coords.x,Coords.y,Coords.z), distance)) then
                 -- vehicle not found, spawn it when player is close
                 Citizen.CreateThread(function()
-                    local entity, net = ig.funig.CreateObject(data.Model, Coords.x, Coords.y, Coords.z, false, data)
+                    local entity, net = ig.func.CreateObject(data.Model, Coords.x, Coords.y, Coords.z, false, data)
                     SetEntityRotation(Coords.rx, Coords.ry, Coords.rz)
                     FreezeEntityPosition(entity, true)
                 end)

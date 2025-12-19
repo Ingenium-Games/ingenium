@@ -169,7 +169,7 @@ function ig.sql.save.Vehicle(data, cb)
     local Condition = data.GetEncodedCondition()
     local Modifications = data.GetEncodedModifications()
     --
-    local Updated = ig.funig.Timestamp()
+    local Updated = ig.func.Timestamp()
     -- The Key
     local Plate = data.GetPlate()
     --
@@ -221,7 +221,7 @@ function ig.sql.save.Vehicles(cb)
                 local Condition = data.GetEncodedCondition()
                 local Modifications = data.GetEncodedModifications()
                 --
-                local Updated = ig.funig.Timestamp()
+                local Updated = ig.func.Timestamp()
                 -- The Key
                 local Plate = data.GetPlate()
                 --
@@ -301,7 +301,7 @@ function ig.sql.save.Objects(cb)
     local xObjs = ig.data.GetObjects()
     for k, data in pairs(xObjs) do
         if data then
-            if (tonumber(ig.funig.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
+            if (tonumber(ig.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
                 if DoesEntityExist(data.Entity) then
                     -- Tables require JSON Encoding.
                     local Inventory = json.encode(data.CompressInventory())

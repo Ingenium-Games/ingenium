@@ -18,11 +18,11 @@ local function MergeDropsForSave()
         local xObject = ig.data.GetObject(drop.NetID)
         if xObject then
             drop.Inventory = xObject.CompressInventory()
-            drop.Updated = ig.funig.Timestamp()
+            drop.Updated = ig.func.Timestamp()
             dropsToSave[uuid] = drop
         else
             -- If xObject doesn't exist, skip this drop (will be cleaned up)
-            ig.funig.Debug_1("Skipping save for drop " .. uuid .. " - xObject not found")
+            ig.func.Debug_1("Skipping save for drop " .. uuid .. " - xObject not found")
         end
     end
     
@@ -79,7 +79,7 @@ end)
 
 -- Manual save command for admins
 RegisterCommand('savedata', function(source, args)
-    if source == 0 or (ig.func and ig.funig.IsAce and ig.funig.IsAce(source)) then
+    if source == 0 or (ig.func and ig.func.IsAce and ig.func.IsAce(source)) then
         print('^3[Manual Save] Saving dynamic data...^7')
         
         -- Use helper function to merge drops

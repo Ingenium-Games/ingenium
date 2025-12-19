@@ -28,7 +28,7 @@ end)
 
 AddEventHandler("explosionEvent", function()
     --CancelEvent()
-    --ig.funig.Debug_1("Explosion has been Cancelled.")
+    --ig.func.Debug_1("Explosion has been Cancelled.")
 end)
 
 AddEventHandler("entityCreated", function(ent)
@@ -43,7 +43,7 @@ AddEventHandler("entityCreated", function(ent)
                 ig.data.AddObject(net, ig.class.BlankObject, net)                      
             else
                 DeleteEntity(ent)
-                ig.funig.Debug_1("Object has been Deleted.")
+                ig.func.Debug_1("Object has been Deleted.")
             end
         --
         -- Vehicle
@@ -52,7 +52,7 @@ AddEventHandler("entityCreated", function(ent)
                 ig.data.AddVehicle(net, ig.class.Vehicle, net, false)
             else
                 DeleteEntity(ent)
-                ig.funig.Debug_1("Vehicle has been Deleted.")
+                ig.func.Debug_1("Vehicle has been Deleted.")
             end
         --
         -- Ped
@@ -67,7 +67,7 @@ AddEventHandler("entityCreated", function(ent)
                 end
             else
                 DeleteEntity(ent)
-                ig.funig.Debug_1("Ped has been Deleted.")
+                ig.func.Debug_1("Ped has been Deleted.")
             end
         -- no other types // fin
         end
@@ -82,14 +82,14 @@ AddEventHandler("entityCreating", function(ent)
     -- Object
     if type == 3 then
         if conf.disable.objects[model] then
-            ig.funig.Debug_1("Object prevented from Spawning.")
+            ig.func.Debug_1("Object prevented from Spawning.")
             CancelEvent()
         end
     --
     -- Vehicle
     elseif type == 2 then            
         if conf.disable.vehicles[model] then
-            ig.funig.Debug_1("Vehicle prevented from Spawning.")
+            ig.func.Debug_1("Vehicle prevented from Spawning.")
             CancelEvent()
         end
     --
@@ -98,7 +98,7 @@ AddEventHandler("entityCreating", function(ent)
         -- not a human player
         if not IsPedAPlayer(ent) then
             if conf.disable.peds[model] then
-                ig.funig.Debug_1("Ped prevented from Spawning.")
+                ig.func.Debug_1("Ped prevented from Spawning.")
                 CancelEvent()
             end
         else

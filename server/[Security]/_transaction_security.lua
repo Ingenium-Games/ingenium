@@ -72,7 +72,7 @@ function ig.security.CheckRateLimit(playerId, transactionType)
     if transactionCooldowns[cooldownKey] then
         local timeSinceLastTransaction = currentTime - transactionCooldowns[cooldownKey]
         if timeSinceLastTransaction < 1 then
-            ig.funig.Debug_1(("Transaction rate limit hit for player %d on %s"):format(playerId, transactionType))
+            ig.func.Debug_1(("Transaction rate limit hit for player %d on %s"):format(playerId, transactionType))
             return true
         end
     end

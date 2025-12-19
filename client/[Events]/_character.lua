@@ -46,8 +46,8 @@ AddEventHandler("Client:Character:Create", function()
     local plyped = PlayerPedId()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
-    ig.funig.FadeOut(1000)
-    ig.funig.IsBusyPleaseWait(1000)
+    ig.func.FadeOut(1000)
+    ig.func.IsBusyPleaseWait(1000)
     
     -- Use native appearance system
     local config = {
@@ -60,33 +60,33 @@ AddEventHandler("Client:Character:Create", function()
     -- Open appearance customization via callback
     ig.callback.TriggerCallback('Client:Appearance:Open', config)
     
-    ig.funig.FadeIn(1000)
-    ig.funig.IsBusyPleaseWait(1000)
+    ig.func.FadeIn(1000)
+    ig.func.IsBusyPleaseWait(1000)
 end)
 
 -- Respawn in on last saved coords.
 -- [S]
 RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
-    ig.funig.FadeOut(1000)
+    ig.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
     SetEntityHeading(GetPlayerPed(-1), Coords.h)
     TriggerServerEvent("Server:Character:LoadSkin")
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     FreezeEntityPosition(GetPlayerPed(-1), false)
-    ig.funig.FadeIn(2000)
+    ig.func.FadeIn(2000)
 end)
 
 RegisterNetEvent("Client:Character:NewSpawn")
 AddEventHandler("Client:Character:NewSpawn", function()
-    ig.funig.FadeOut(1000)
+    ig.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), conf.spawn.x, conf.spawn.y, conf.spawn.z)
     SetEntityHeading(GetPlayerPed(-1), conf.spawn.h)
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     FreezeEntityPosition(GetPlayerPed(-1), false)
-    ig.funig.FadeIn(2000)
+    ig.func.FadeIn(2000)
 end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
@@ -107,7 +107,7 @@ end)
 RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
     -- Wait for state to be synced to local character
-    ig.funig.IsBusyPleaseWait(5000)
+    ig.func.IsBusyPleaseWait(5000)
     --
     -- 
     ig.data.SetLoadedStatus(true)
@@ -143,7 +143,7 @@ AddEventHandler("Client:Character:Ready", function()
         SetWeaponsNoAutoreload(true)
         RemoveMultiplayerHudCash()
         
-        ig.funig.Debug_1("RP Mode character initialization complete")
+        ig.func.Debug_1("RP Mode character initialization complete")
     end
     --
 end)
@@ -151,9 +151,9 @@ end)
 RegisterNetEvent("Client:Character:Pre-Switch")
 AddEventHandler("Client:Character:Pre-Switch", function()
     --
-    ig.funig.FadeOut(1000)
+    ig.func.FadeOut(1000)
     --
-    ig.funig.FadeIn(2000)
+    ig.func.FadeIn(2000)
     --
 end)
 
@@ -171,7 +171,7 @@ AddEventHandler("Client:Character:OffDuty", function()
         -- Add Functions or Hooks here!
         
     else
-        ig.funig.Debug_3("Ability to go off duty has ben disabled.")
+        ig.func.Debug_3("Ability to go off duty has ben disabled.")
     end
 end)
 
@@ -181,7 +181,7 @@ AddEventHandler("Client:Character:OnDuty", function(job)
         -- Add Functions or Hooks here!
        
     else
-        ig.funig.Debug_3("Ability to go on duty has ben disabled.")
+        ig.func.Debug_3("Ability to go on duty has ben disabled.")
     end
 end)
 

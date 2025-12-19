@@ -19,7 +19,7 @@ function ig.inst.SetPlayer(source, num)
             SetPlayerRoutingBucket(src, num)
             SetEntityRoutingBucket(GetPlayerPed(src), num)
             xPlayer.SetInstance(num)
-            ig.funig.Debug_1(xPlayer.GetName().." added to Instance: "..num)
+            ig.func.Debug_1(xPlayer.GetName().." added to Instance: "..num)
             if num ~= conf.instancedefault then
                 SetRoutingBucketPopulationEnabled(num, false)
             elseif num == conf.instancedefault then
@@ -60,7 +60,7 @@ function ig.inst.SetPlayerDefault(source)
     SetEntityRoutingBucket(GetPlayerPed(source), conf.instancedefault)
     xPlayer.SetInstance(conf.instancedefault)
     SetRoutingBucketPopulationEnabled(conf.instancedefault, true)
-    ig.funig.Debug_1(xPlayer.GetName().." added to Global Instance.")
+    ig.func.Debug_1(xPlayer.GetName().." added to Global Instance.")
 end
 
 --- Set entity routing bucket

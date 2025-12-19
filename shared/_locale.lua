@@ -4,7 +4,7 @@
 Locales = {}
 
 function _(key) -- Translate string
-    local locale = exports["ig.core"]:GetLocale()
+    local locale = exports["ingenium"]:GetLocale()
     if Locales[locale] ~= nil then
         if Locales[locale][key] ~= nil then
             return string.format(Locales[locale][key])

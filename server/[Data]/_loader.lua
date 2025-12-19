@@ -97,7 +97,7 @@ end
 --- Restore drops from JSON after server restart
 function ig.data.RestoreDrops()
     if not ig.drops or type(ig.drops) ~= "table" then
-        ig.funig.Debug_1("No drops to restore")
+        ig.func.Debug_1("No drops to restore")
         return
     end
     
@@ -107,7 +107,7 @@ function ig.data.RestoreDrops()
     for uuid, drop in pairs(ig.drops) do
         if drop.Coords and drop.Model and drop.Inventory then
             -- Create the physical object
-            local entity, netId = ig.funig.CreateObject(
+            local entity, netId = ig.func.CreateObject(
                 drop.Model,
                 drop.Coords.x,
                 drop.Coords.y,
@@ -142,7 +142,7 @@ function ig.data.RestoreDrops()
                             if itemName and ig.item.Exists(itemName) then
                                 xObject.AddItem(item)
                             else
-                                ig.funig.Debug_1("Skipping invalid item in drop restore: " .. tostring(itemName))
+                                ig.func.Debug_1("Skipping invalid item in drop restore: " .. tostring(itemName))
                             end
                         end
                     end
@@ -156,15 +156,15 @@ function ig.data.RestoreDrops()
                     
                     restoredCount = restoredCount + 1
                 else
-                    ig.funig.Debug_1("Failed to get xObject for restored drop: " .. uuid)
+                    ig.func.Debug_1("Failed to get xObject for restored drop: " .. uuid)
                     failedCount = failedCount + 1
                 end
             else
-                ig.funig.Debug_1("Failed to create entity for drop: " .. uuid)
+                ig.func.Debug_1("Failed to create entity for drop: " .. uuid)
                 failedCount = failedCount + 1
             end
         else
-            ig.funig.Debug_1("Invalid drop data for UUID: " .. uuid)
+            ig.func.Debug_1("Invalid drop data for UUID: " .. uuid)
             failedCount = failedCount + 1
         end
     end

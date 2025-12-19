@@ -1,6 +1,6 @@
 # SQL Events & Exports
 
-Complete reference for SQL-related events, exports, and commands in ig.core.
+Complete reference for SQL-related events, exports, and commands in ingenium.
 
 ## Server Events
 
@@ -304,11 +304,11 @@ end)
 ### Cross-Resource Query
 
 ```lua
--- In another resource that depends on ig.core
+-- In another resource that depends on ingenium
 RegisterCommand('checkplayer', function(source, args)
     local license = args[1]
     
-    -- Use export to query ig.core database
+    -- Use export to query ingenium database
     local user = exports['ingenium']:fetchSingle(
         "SELECT * FROM users WHERE License_ID = ?",
         {license}

@@ -20,7 +20,7 @@ end
 function ig.sql.user.Add(usermame, license_id, fivem_id, steam_id, discord_id, ip, cb)
     ig.sql.Insert(
         "INSERT INTO `users` (`Join_Date`, `Last_Login`, `Username`, `Steam_ID`, `License_ID`, `FiveM_ID`, `Discord_ID`, `Ace`, `Locale`, `IP_Address`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-        {ig.funig.Timestamp(), ig.funig.Timestamp(), usermame, steam_id, license_id, fivem_id, discord_id, conf.ace, conf.locale, ip},
+        {ig.func.Timestamp(), ig.func.Timestamp(), usermame, steam_id, license_id, fivem_id, discord_id, conf.ace, conf.locale, ip},
         function(insertId)
             TriggerEvent("txaLogger:CommandExecuted", "Adding new User "..usermame)
             if cb then
@@ -32,7 +32,7 @@ end
 function ig.sql.user.Update(usermame, license_id, fivem_id, steam_id, discord_id, ip, cb)
     ig.sql.Update(
         "UPDATE `users` SET `Last_Login` = ?, `Username` = ?, `Steam_ID` = IFNULL(`Steam_ID`,?), `FiveM_ID` = IFNULL(`FiveM_ID`,?), `Discord_ID` = IFNULL(`Discord_ID`,?), `IP_Address` = ? WHERE `License_ID` = ?;",
-        {ig.funig.Timestamp(), usermame, steam_id, fivem_id, discord_id, ip, license_id},
+        {ig.func.Timestamp(), usermame, steam_id, fivem_id, discord_id, ip, license_id},
         function(affectedRows)
             if cb then
                 cb(affectedRows)
@@ -127,7 +127,7 @@ end
 --- Get/Set - `Ban` = bool from the users License_ID identifier
 -- @License_ID
 function ig.sql.user.SetBan(license_id, bool, reason, cb)
-    if type(bool) ~= "boolean" then ig.funig.Debug_1("ig.sql.user.SetBan, boolean was not passed") return end
+    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.user.SetBan, boolean was not passed") return end
     ig.sql.Update("UPDATE `users` SET `Ban` = ?, `Ban_Reason` = ? WHERE `License_ID` = ? LIMIT 1;", {bool, json.encode(reason), license_id}, function(affectedRows)
         TriggerEvent("txaLogger:CommandExecuted", "Ban set to "..tostring(bool).." on Primary ID :"..license_id)
         if cb then
@@ -149,7 +149,7 @@ end
 --- Get/Set - `Priority`
 -- @FiveM_ID
 function ig.sql.user.SetPriority(fivem_id, bool, cb)
-    if type(bool) ~= "boolean" then ig.funig.Debug_1("ig.sql.user.SetPriority, boolean was not passed") return end
+    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.user.SetPriority, boolean was not passed") return end
     local FiveM_ID = ("fivem:%s"):format(fivem_id)
     ig.sql.Update("UPDATE `users` SET `Priority` = ? WHERE `FiveM_ID` = ? LIMIT 1;", {bool, FiveM_ID}, function(affectedRows)
         TriggerEvent("txaLogger:CommandExecuted", "Priority set to "..tostring(bool).." on FiveM_ID : "..FiveM_ID)

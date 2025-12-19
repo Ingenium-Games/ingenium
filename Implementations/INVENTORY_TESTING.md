@@ -4,7 +4,7 @@
 This guide provides test cases for validating the Vue-based inventory system with enhanced security validation.
 
 ## Prerequisites
-- FiveM server with ig.core resource installed
+- FiveM server with ingenium resource installed
 - At least one test player account
 - Access to server console for logs
 - Items in player inventory for testing

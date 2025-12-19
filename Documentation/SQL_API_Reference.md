@@ -1,6 +1,6 @@
 # SQL API Reference
 
-Complete reference for all SQL functions in ig.core.
+Complete reference for all SQL functions in ingenium.
 
 ## Core Query Functions
 

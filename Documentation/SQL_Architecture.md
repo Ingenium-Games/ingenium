@@ -2,7 +2,7 @@
 
 ## Overview
 
-The ig.core SQL system is a fully integrated MySQL2-based database layer that replaces the external `mysql-async` dependency. It provides high-performance query execution, connection pooling, transaction support, and comprehensive performance monitoring.
+The ingenium SQL system is a fully integrated MySQL2-based database layer that replaces the external `mysql-async` dependency. It provides high-performance query execution, connection pooling, transaction support, and comprehensive performance monitoring.
 
 ## Architecture Components
 
@@ -106,13 +106,13 @@ Provides clean Lua interface to JavaScript query engine:
 Maintains backward compatibility with mysql-async:
 
 **Supported Legacy APIs:**
-- `MySQL.Asynig.fetchAll()`
-- `MySQL.Asynig.fetchScalar()`
-- `MySQL.Asynig.execute()`
-- `MySQL.Asynig.insert()`
-- `MySQL.Asynig.store()`
-- `MySQL.Asynig.transaction()`
-- `MySQL.Synig.*` equivalents
+- `MySQL.Async.fetchAll()`
+- `MySQL.Async.fetchScalar()`
+- `MySQL.Async.execute()`
+- `MySQL.Async.insert()`
+- `MySQL.Async.store()`
+- `MySQL.Async.transaction()`
+- `MySQL.Sync.*` equivalents
 
 **Migration Strategy:**
 The compatibility layer allows gradual migration:
@@ -227,13 +227,13 @@ end)
 
 ### Key Differences
 
-| mysql-async | ig.core SQL |
+| mysql-async | ingenium SQL |
 |-------------|-------------|
-| `MySQL.Asynig.fetchAll()` | `ig.sql.Query()` |
-| `MySQL.Asynig.fetchScalar()` | `ig.sql.FetchScalar()` |
-| `MySQL.Asynig.execute()` | `ig.sql.Update()` or `ig.sql.Insert()` |
-| `MySQL.Asynig.insert()` | `ig.sql.Insert()` |
-| `MySQL.Asynig.store()` | `ig.sql.PrepareQuery()` |
+| `MySQL.Async.fetchAll()` | `ig.sql.Query()` |
+| `MySQL.Async.fetchScalar()` | `ig.sql.FetchScalar()` |
+| `MySQL.Async.execute()` | `ig.sql.Update()` or `ig.sql.Insert()` |
+| `MySQL.Async.insert()` | `ig.sql.Insert()` |
+| `MySQL.Async.store()` | `ig.sql.PrepareQuery()` |
 | `@paramName` | `?` (or use compatibility) |
 
 ### Gradual Migration

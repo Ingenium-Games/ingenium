@@ -57,13 +57,13 @@ ig.itemdata = {}
 local function LoadDataFile(filename)
     local file = LoadResourceFile(GetCurrentResourceName(), 'shared/data/' .. filename)
     if not file then
-        print('^1[ig.core] Failed to load data file: ' .. filename .. '^0')
+        print('^1[ingenium] Failed to load data file: ' .. filename .. '^0')
         return {}
     end
     
     local success, data = pcall(json.decode, file)
     if not success then
-        print('^1[ig.core] Failed to parse JSON in file: ' .. filename .. '^0')
+        print('^1[ingenium] Failed to parse JSON in file: ' .. filename .. '^0')
         return {}
     end
     
@@ -72,7 +72,7 @@ end
 
 -- Initialize data on resource start
 Citizen.CreateThread(function()
-    print('^2[ig.core] Loading game data...^0')
+    print('^2[ingenium] Loading game data...^0')
     
     local startTime = GetGameTimer()
     
@@ -100,7 +100,7 @@ Citizen.CreateThread(function()
     
     local loadTime = GetGameTimer() - startTime
     
-    print('^2[ig.core] Data loaded in ' .. loadTime .. 'ms:^0')
+    print('^2[ingenium] Data loaded in ' .. loadTime .. 'ms:^0')
     print('^3  - Tattoos: ' .. counts.tattoos .. '^0')
     print('^3  - Weapons: ' .. counts.weapons .. '^0')
     print('^3  - Vehicles: ' .. counts.vehicles .. '^0')

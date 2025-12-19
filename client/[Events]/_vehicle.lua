@@ -39,7 +39,7 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
                     TriggerServerEvent("Server:PlayerEnteredVehicle", netId, seat, vehicleName)
                 end
                 
-                ig.funig.Debug_3("Player entered vehicle: " .. vehicleName .. " in seat " .. seat)
+                ig.func.Debug_3("Player entered vehicle: " .. vehicleName .. " in seat " .. seat)
             end
         end
     
@@ -63,7 +63,7 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
                     TriggerServerEvent("Server:PlayerLeftVehicle", netId, seat, vehicleName)
                 end
                 
-                ig.funig.Debug_3("Player left vehicle: " .. vehicleName)
+                ig.func.Debug_3("Player left vehicle: " .. vehicleName)
             end
             
             -- Reset tracking
@@ -107,7 +107,7 @@ Citizen.CreateThread(function()
                 TriggerServerEvent("Server:PlayerEnteredVehicle", netId, seat, vehicleName)
             end
             
-            ig.funig.Debug_1("Vehicle entry detected via fallback thread")
+            ig.func.Debug_1("Vehicle entry detected via fallback thread")
         
         -- Player left vehicle but event didn't trigger
         elseif vehicle == 0 and currentVehicle ~= 0 then
@@ -128,7 +128,7 @@ Citizen.CreateThread(function()
             currentVehicle = 0
             currentSeat = -1
             
-            ig.funig.Debug_1("Vehicle exit detected via fallback thread")
+            ig.func.Debug_1("Vehicle exit detected via fallback thread")
         end
     end
 end)

@@ -10,10 +10,10 @@ AddStateBagChangeHandler("Condition", nil, function(bagName, key, value, _unused
 	local string = bagName:gsub("entity:", "")
 	local net = tonumber(string)
 	--
-    if (ig.funig.WaitUntilNetIdExists(net, 5000)) then
+    if (ig.func.WaitUntilNetIdExists(net, 5000)) then
 		local vehicle = NetToVeh(net)
-		if (ig.funig.WaitUntilPlayerIsOwner(vehicle, 5000)) then
-			ig.funig.SetVehicleCondition(vehicle, value)
+		if (ig.func.WaitUntilPlayerIsOwner(vehicle, 5000)) then
+			ig.func.SetVehicleCondition(vehicle, value)
 			if not Entity(vehicle).state.Spawned then
 				Entity(vehicle).state:set("Spawned", true)
 			end
@@ -29,10 +29,10 @@ AddStateBagChangeHandler("Modifications", nil, function(bagName, key, value, _un
 	local string = bagName:gsub("entity:", "")
 	local net = tonumber(string)
 	--
-    if (ig.funig.WaitUntilNetIdExists(net, 5000)) then
+    if (ig.func.WaitUntilNetIdExists(net, 5000)) then
 		local vehicle = NetToVeh(net)
-		if (ig.funig.WaitUntilPlayerIsOwner(vehicle, 5000)) then
-            ig.funig.SetVehicleModifications(vehicle, value)
+		if (ig.func.WaitUntilPlayerIsOwner(vehicle, 5000)) then
+            ig.func.SetVehicleModifications(vehicle, value)
 			if not Entity(vehicle).state.Spawned then
 				Entity(vehicle).state:set("Spawned", true)
 			end
@@ -48,8 +48,8 @@ function ig.persistance.UpdateVehicle(vehicle)
 
 	local net = NetworkGetNetworkIdFromEntity(vehicle)
 	local model	= GetEntityModel(vehicle)
-	local modifications	= ig.funig.GetVehicleModifications(vehicle)
-	local condition	= ig.funig.GetVehicleCondition(vehicle)
+	local modifications	= ig.func.GetVehicleModifications(vehicle)
+	local condition	= ig.func.GetVehicleCondition(vehicle)
 
 	TriggerServerEvent("Vehicle:Update", net, model, modifications, condition)
 end

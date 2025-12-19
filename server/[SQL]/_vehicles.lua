@@ -58,7 +58,7 @@ function ig.sql.veh.Add(data, cb)
     local Data = data
     ig.sql.Insert(
         "INSERT INTO `vehicles` (`Character_ID`, `Model`, `Plate`, `Condition`, `Modifications`, `Updated`) VALUES (?, ?, ?, ?, ?, ?);",
-        {Data.Character_ID, Data.Model, Data.Plate, json.encode(Data.Condition), json.encode(Data.Modifications), ig.funig.Timestamp()},
+        {Data.Character_ID, Data.Model, Data.Plate, json.encode(Data.Condition), json.encode(Data.Modifications), ig.func.Timestamp()},
         function(insertId)
             TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Adding Vehicle: "..Data.Plate.." | Owner "..Data.Character_ID)
             if cb then
@@ -71,7 +71,7 @@ function ig.sql.veh.ChangeOwner(data, cb)
     local Data = data
     ig.sql.Update(
         "UPDATE `vehicles` SET `Character_ID` = ?, `Updated` = ? WHERE `Plate` = ?;",
-        {Data.Character_ID, ig.funig.Timestamp(), Data.Plate},
+        {Data.Character_ID, ig.func.Timestamp(), Data.Plate},
         function(affectedRows)
             TriggerEvent("txaLogger:CommandExecuted", " [DB] -- Changing Vehicle : "..Data.Plate.." | Owner "..Data.Character_ID)
             if cb then

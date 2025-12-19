@@ -156,7 +156,7 @@ window.postMessage({
 The system uses:
 - **Tailwind CSS**: For utility classes
 - **Custom CSS**: Scoped component styles
-- **CSS Variables**: From ig.core theme
+- **CSS Variables**: From ingenium theme
 - **Consistent Design**: Matches existing NUI components
 - **Responsive Layout**: Adapts to different screen sizes
 

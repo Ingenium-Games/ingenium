@@ -1,6 +1,6 @@
 # SQL Performance Optimization
 
-Guide to optimizing SQL performance in ig.core.
+Guide to optimizing SQL performance in ingenium.
 
 ## Connection Pooling
 

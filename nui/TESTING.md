@@ -25,7 +25,7 @@ client_scripts {
 }
 ```
 
-Then restart the resource: `/restart ig.core`
+Then restart the resource: `/restart ingenium`
 
 ## Feature Tests
 
@@ -351,7 +351,7 @@ TriggerEvent("Client:Notify", string.rep("This is a very long notification messa
 **Solutions:**
 - Check F8 console for errors
 - Verify build completed: `ls nui/dist/`
-- Restart resource: `/restart ig.core`
+- Restart resource: `/restart ingenium`
 
 ### Issue: Menu not appearing
 **Solutions:**

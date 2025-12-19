@@ -34,7 +34,7 @@ function ig.state.ChangeAction(name, value, cb)
     if ig.states[name][value] then
         ig.states[name][value]["action"] = cb()
     else
-        ig.funig.Debug_1("The states action: " .. name .. " does not exist, please add state prior to action.")
+        ig.func.Debug_1("The states action: " .. name .. " does not exist, please add state prior to action.")
     end
 end
 
@@ -46,7 +46,7 @@ function ig.state.ChangeEffect(name, value, cb)
     if ig.states[name][value] then
         ig.states[name][value]["effect"] = cb()
     else
-        ig.funig.Debug_1("The states effect: " .. name .. " does not exist, please add state prior to effect.")
+        ig.func.Debug_1("The states effect: " .. name .. " does not exist, please add state prior to effect.")
     end
 end
 
@@ -247,4 +247,4 @@ for k, v in pairs(S) do
     ig.state.AddState("Stress", k, v[1] or nil, v[2] or nil, v[3] or nil)
 end
 
--- ig.funig.Debug_1(ig.table.Dump(ig.states.Hunger))
+-- ig.func.Debug_1(ig.table.Dump(ig.states.Hunger))

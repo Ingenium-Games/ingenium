@@ -60,7 +60,7 @@ self.UnpackInventory = function(inv)
     local processed, valid, error = ig.validation.ValidateAndUnpack(self.ID, inv)
     
     if not valid then
-        ig.funig.Debug_1("Error unpacking inventory: " .. (error or "unknown"))
+        ig.func.Debug_1("Error unpacking inventory: " .. (error or "unknown"))
         self.Inventory = {}
         self.State.Inventory = self.Inventory
         return

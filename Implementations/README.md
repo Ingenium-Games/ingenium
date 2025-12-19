@@ -1,6 +1,6 @@
 # Implementation Documentation
 
-This folder contains detailed implementation summaries and technical documentation for features built into ig.core. These documents serve as historical reference and technical guides for contributors.
+This folder contains detailed implementation summaries and technical documentation for features built into ingenium. These documents serve as historical reference and technical guides for contributors.
 
 ## Purpose
 
@@ -44,5 +44,5 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for more details.
 
 ## Related Documentation
 
-- [User Documentation](../Documentation/README.md) - How to use ig.core
-- [Contributing Guidelines](../CONTRIBUTING.md) - How to contribute to ig.core
+- [User Documentation](../Documentation/README.md) - How to use ingenium
+- [Contributing Guidelines](../CONTRIBUTING.md) - How to contribute to ingenium

@@ -54,7 +54,7 @@ function ig.sql.jobs.Accounts(cb)
     for i=1, #data, 1 do
         local i = data[i]
         if not ig.jobs[i.Name] then
-            ig.funig.Debug_1("Please run GetAll(), followed by Setup() before this...")
+            ig.func.Debug_1("Please run GetAll(), followed by Setup() before this...")
         end
         ig.jobs[i.Name].Accounts = json.decode(i.Accounts)
         ig.jobs[i.Name].Members = json.decode(i.Members)

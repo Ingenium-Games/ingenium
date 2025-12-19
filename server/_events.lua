@@ -17,7 +17,7 @@ function ig.event.AddInteractJobEvent(job, name, cb)
             -- Do Actions...
             cb(src, o)
         else
-            ig.funig.Eventban(src, eventname)
+            ig.func.Eventban(src, eventname)
         end
     end)
     return eventname

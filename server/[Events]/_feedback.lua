@@ -6,7 +6,7 @@ RegisterNetEvent("Feedback", function(message, url)
     local xPlayer = ig.data.GetPlayer(src)
     if not nospam[src] then
         nospam[src] = true
-        ig.funig.Discord(conf.url.feedback, 11216719, xPlayer.GetName(), message, ig.table.Dump(xPlayer.GetCoords()))
+        ig.func.Discord(conf.url.feedback, 11216719, xPlayer.GetName(), message, ig.table.Dump(xPlayer.GetCoords()))
     else
         xPlayer.Notify("Please wait a while before trying to submit more feedback.")
     end

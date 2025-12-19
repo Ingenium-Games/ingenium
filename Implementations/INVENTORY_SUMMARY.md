@@ -148,7 +148,7 @@ server/[Callbacks]/_inventory.lua
 1. Client drags items
 2. Client saves positions to localStorage
 3. Client sends inventories on close
-   └─> fetch('https://ig.core/inventory_close')
+   └─> fetch('https://ingenium/inventory_close')
 4. Server receives data
 5. Server gets "before" state from memory
 6. InventoryValidator.ValidateInventoryIntegrity()
@@ -207,7 +207,7 @@ npm run build  # Outputs to dist/assets/
 
 ### Server
 ```bash
-restart ig.core  # FiveM server console
+restart ingenium  # FiveM server console
 ```
 
 ---
@@ -263,7 +263,7 @@ Runtime testing on FiveM server required for:
 1. Drag-and-drop functionality
 2. Server validation in real scenarios
 3. Performance with multiple players
-4. Integration with other ig.core systems
+4. Integration with other ingenium systems
 
 See `INVENTORY_TESTING.md` for complete test plan.
 
@@ -312,7 +312,7 @@ See `INVENTORY_TESTING.md` for complete test plan.
 
 - Implementation: GitHub Copilot
 - Code Review: Automated review system
-- Architecture: Based on ig.core patterns by Twiitchter
+- Architecture: Based on ingenium patterns by Twiitchter
 
 ---
 

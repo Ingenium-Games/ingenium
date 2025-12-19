@@ -44,11 +44,11 @@ function ig.vehicle.Generate(distance)
             local Condition = json.decode(data.Condition)
             local Modificaitons = json.decode(data.Modificaitons)
             local db = ig.sql.veh.GetByPlate(data.Plate)
-            local ply = ig.funig.GetClosestPlayer(vec3(Coords.x, Coords.y, Coords.z), distance)
+            local ply = ig.func.GetClosestPlayer(vec3(Coords.x, Coords.y, Coords.z), distance)
             if (ply) then
                 Citizen.CreateThread(function()
                     --
-                    local entity, net = ig.funig.CreateVehicle(data.Model, Coords.x, Coords.y, Coords.z, Coords.h, db)
+                    local entity, net = ig.func.CreateVehicle(data.Model, Coords.x, Coords.y, Coords.z, Coords.h, db)
                     --
                     if not entity then
                         local _, net = TriggerClientCallback({source = ply, eventName = "EnsurePersistantVehicle", args = {Model, Coords}})

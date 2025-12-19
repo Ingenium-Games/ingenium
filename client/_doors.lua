@@ -102,7 +102,7 @@ function ig.door.GenerateDoorsInRadius()
     -- print(ig.table.Dump(models_cache))
     local entities = {}
     local ords = GetEntityCoords(PlayerPedId())
-    local objs = ig.funig.GetObjectsInArea(ords, 16, false)
+    local objs = ig.func.GetObjectsInArea(ords, 16, false)
     -- print("Checking Objects")
     -- print(ig.table.Dump(objs))
     for k, v in pairs(objs) do

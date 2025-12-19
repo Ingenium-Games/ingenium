@@ -4,7 +4,7 @@ This document provides step-by-step instructions for testing the security harden
 
 ## Prerequisites
 
-1. Server running ig.core with this PR applied
+1. Server running ingenium with this PR applied
 2. Client connected to the server
 3. Admin/console access
 4. F8 console access on client
@@ -293,7 +293,7 @@ Verify that security events can be captured by external systems.
    
    AddEventHandler("txaLogger:LogTransaction", function(log)
        -- Store to database
-       MySQL.Asynig.execute("INSERT INTO transaction_log (...) VALUES (...)", log)
+       MySQL.Async.execute("INSERT INTO transaction_log (...) VALUES (...)", log)
    end)
    
    AddEventHandler("txaLogger:FraudAlert", function(alert)

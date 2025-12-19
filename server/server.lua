@@ -41,7 +41,7 @@ AddEventHandler("onResourceStart", function(resourceName)
 
     -- TESTING
     -- ig.persistance.ObjectThread()
-    
+    ig._loaded = true
 end)
 
 -- ====================================================================================--
@@ -49,8 +49,8 @@ RegisterNetEvent("Server:PlayerConnecting")
 AddEventHandler("Server:PlayerConnecting", function()
     local src = tonumber(source)
     local Username = GetPlayerName(src)
-    local Primary_ID = ig.funig.identifier(src)
-    local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = ig.funig.identifiers(src)
+    local Primary_ID = ig.func.identifier(src)
+    local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = ig.func.identifiers(src)
     --
     local function Startup()
         TriggerClientEvent("Client:Character:OpeningMenu", src)
@@ -83,7 +83,7 @@ AddEventHandler("playerDropped", function()
         -- Save Data
         ig.sql.save.User(xPlayer, function()
             ig.sql.char.SetActive(xPlayer.GetIdentifier(), false, function()
-                ig.funig.Debug_1("[E] 'playerDropped' : Player Disconnection.")
+                ig.func.Debug_1("[E] 'playerDropped' : Player Disconnection.")
                 ig.data.RemovePlayer(src)
             end)
         end)

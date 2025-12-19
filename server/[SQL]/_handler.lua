@@ -112,7 +112,7 @@ function ig.sql.Batch(queries, callback)
 end
 
 -- ====================================================================================--
--- Prepared Statements (for compatibility with MySQL.Asynig.store pattern)
+-- Prepared Statements (for compatibility with MySQL.Async.store pattern)
 -- ====================================================================================--
 
 --- Prepare a query for later execution (returns query ID)
@@ -144,7 +144,7 @@ end
 --- Wait for SQL connection to be ready
 ---@param timeout number|nil Timeout in milliseconds (default 30000)
 ---@return boolean True if ready, false if timeout
-function ig.sql.AwaitReady(timeout)
+function ig.sql.AwaitReady(timeout, cb)
     local maxWait = timeout or 30000
     local waited = 0
     local interval = 100
@@ -154,7 +154,9 @@ function ig.sql.AwaitReady(timeout)
         waited = waited + interval
     end
     
-    return ig.sql.IsReady()
+    if ig.sql.IsReady() then
+        cb()
+    end
 end
 
 --- Get SQL performance statistics

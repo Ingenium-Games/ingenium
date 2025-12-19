@@ -3,7 +3,7 @@
 -- Server-Side Security Module
 -- 
 -- @module ig.validation
--- @author ig.core Development Team
+-- @author ingenium Development Team
 -- @version 1.0.0
 -- @description Provides comprehensive validation to prevent inventory exploits
 --              including item duplication, quantity manipulation, and item injection
@@ -187,7 +187,7 @@ function ig.validation.ValidateInventoryIntegrity(beforePlayer, beforeExternal, 
     for item, beforeQty in pairs(beforeTotal) do
         local afterQty = afterTotal[item] or 0
         if afterQty < beforeQty then
-            ig.funig.Debug_1(("Item quantity decreased: %s from %d to %d"):format(
+            ig.func.Debug_1(("Item quantity decreased: %s from %d to %d"):format(
                 item, beforeQty, afterQty
             ))
         end
@@ -219,7 +219,7 @@ function ig.validation.LogAndBanExploiter(source, reason)
         TriggerEvent("txaLogger:CommandExecuted", logMessage)
         
         -- Use existing ban function
-        ig.funig.Eventban(source, "Inventory manipulation detected: " .. sanitizedReason)
+        ig.func.Eventban(source, "Inventory manipulation detected: " .. sanitizedReason)
     else
         DropPlayer(source, "Inventory manipulation detected: " .. sanitizedReason)
     end

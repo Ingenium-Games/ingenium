@@ -18,12 +18,12 @@ end
 function ig.modifier.SetModifiers()
     if LocalPlayer.state.Modifiers ~= nil then
         ig.modifiers = LocalPlayer.state.Modifiers
-        ig.funig.Debug_2("[F] ig.modifier.SetModifiers() LocalState Used")
+        ig.func.Debug_2("[F] ig.modifier.SetModifiers() LocalState Used")
         -- print(ig.modifiers)
         -- print(ig.table.Dump(ig.modifiers))
     else
         ig.modifiers = TriggerServerCallback({eventName = "GetModifiers"})
-        ig.funig.Debug_2("[F] ig.modifier.SetModifiers() Event Used")
+        ig.func.Debug_2("[F] ig.modifier.SetModifiers() Event Used")
     end
     ig.oldmodifiers = ig.modifiers
 end

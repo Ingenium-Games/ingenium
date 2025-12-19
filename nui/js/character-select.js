@@ -127,7 +127,7 @@ function character_select_delete() {
   $(".character-select-kill").click(function () {
     if (Character_ID !== null) {
       $.post(
-        "https://ig.core/_character-select__delete",
+        "https://ingenium/_character-select__delete",
         JSON.stringify({
           ID: Character_ID,
         })
@@ -140,7 +140,7 @@ function character_select_join() {
   $(".character-select-play").click(function () {
     if (Character_ID !== null) {
       $.post(
-        "https://ig.core/_character-select__join",
+        "https://ingenium/_character-select__join",
         JSON.stringify({
           ID: Character_ID,
         })
@@ -157,7 +157,7 @@ function character_select_make() {
   var fn = document.getElementById("FirstName").value;
   var ln = document.getElementById("LastName").value;
   $.post(
-    "https://ig.core/_character-select__register",
+    "https://ingenium/_character-select__register",
     JSON.stringify({
       First_Name: fn,
       Last_Name: ln,

@@ -252,7 +252,7 @@ appearanceStore.updateHair()
 - **Tailwind CSS**: Utility classes for layout
 - **Scoped CSS**: Component-specific styles
 - **Design Tokens**: Consistent colors and spacing
-- **Dark Theme**: Matches ig.core design
+- **Dark Theme**: Matches ingenium design
 - **Responsive**: Mobile-friendly with media queries
 
 ### Accessibility Features
@@ -447,7 +447,7 @@ dist/assets/index-vue.js   113.51 kB
 This implementation delivers a complete, production-ready appearance customization system that:
 - Meets all requirements from the issue specification
 - Integrates seamlessly with existing backend
-- Follows Vue 3 and ig.core best practices
+- Follows Vue 3 and ingenium best practices
 - Is accessible, performant, and maintainable
 - Is fully documented and ready for QA testing
 

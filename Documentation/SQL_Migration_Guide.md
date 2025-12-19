@@ -1,6 +1,6 @@
 # SQL Migration Guide
 
-Step-by-step guide for migrating from mysql-async to the new ig.core SQL system.
+Step-by-step guide for migrating from mysql-async to the new ingenium SQL system.
 
 ## Overview
 
@@ -21,7 +21,7 @@ The new SQL system maintains **full backward compatibility** with mysql-async th
 
 ### Path 1: Zero-Change Deployment (Recommended First Step)
 
-Simply deploy ig.core with the new SQL system. The compatibility layer automatically handles all `MySQL.Asynig.*` and `MySQL.Synig.*` calls.
+Simply deploy ingenium with the new SQL system. The compatibility layer automatically handles all `MySQL.Async.*` and `MySQL.Sync.*` calls.
 
 **No code changes required!**
 
@@ -46,7 +46,7 @@ Migrate all SQL calls to new `ig.sql.*` API in one deployment.
 
 #### Before (mysql-async):
 ```lua
-MySQL.Asynig.fetchAll("SELECT * FROM characters WHERE Primary_ID = @Primary_ID", {
+MySQL.Async.fetchAll("SELECT * FROM characters WHERE Primary_ID = @Primary_ID", {
     ["@Primary_ID"] = primaryId
 }, function(data)
     -- Handle results
@@ -78,7 +78,7 @@ end)
 ```lua
 local IsBusy = true
 local result = nil
-MySQL.Asynig.fetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = @Character_ID", {
+MySQL.Async.fetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = @Character_ID", {
     ["@Character_ID"] = characterId
 }, function(data)
     result = data
@@ -100,7 +100,7 @@ return result
 
 #### Before (execute):
 ```lua
-MySQL.Asynig.execute("UPDATE character_accounts SET Bank = @Bank WHERE Character_ID = @Character_ID", {
+MySQL.Async.execute("UPDATE character_accounts SET Bank = @Bank WHERE Character_ID = @Character_ID", {
     ["@Bank"] = newBalance,
     ["@Character_ID"] = characterId
 }, function(affectedRows)
@@ -117,7 +117,7 @@ end)
 
 #### Before (insert):
 ```lua
-MySQL.Asynig.insert("INSERT INTO characters (...) VALUES (@val1, @val2)", {
+MySQL.Async.insert("INSERT INTO characters (...) VALUES (@val1, @val2)", {
     ["@val1"] = value1,
     ["@val2"] = value2
 }, function(insertId)
@@ -134,15 +134,15 @@ end)
 
 ### Step 4: Update Prepared Statements
 
-#### Before (MySQL.Asynig.store):
+#### Before (MySQL.Async.store):
 ```lua
 local SaveData = -1
-MySQL.Asynig.store("UPDATE characters SET Health = @Health WHERE Character_ID = @Character_ID", function(id)
+MySQL.Async.store("UPDATE characters SET Health = @Health WHERE Character_ID = @Character_ID", function(id)
     SaveData = id
 end)
 
 -- Later, execute:
-MySQL.Asynig.insert(SaveData, {
+MySQL.Async.insert(SaveData, {
     ["@Health"] = health,
     ["@Character_ID"] = characterId
 }, function(r)
@@ -167,7 +167,7 @@ end)
 
 #### Before:
 ```lua
-MySQL.Asynig.transaction({
+MySQL.Async.transaction({
     {query = "UPDATE accounts SET balance = balance - @amount", parameters = {["@amount"] = 100}},
     {query = "INSERT INTO transactions VALUES (@data)", parameters = {["@data"] = data}}
 }, function(success)
@@ -201,7 +201,7 @@ The most common change is converting named parameters to positional:
 
 #### Before:
 ```lua
-MySQL.Asynig.execute("UPDATE users SET ban = @ban, reason = @reason WHERE id = @id", {
+MySQL.Async.execute("UPDATE users SET ban = @ban, reason = @reason WHERE id = @id", {
     ["@ban"] = true,
     ["@reason"] = "Cheating",
     ["@id"] = userId
@@ -221,7 +221,7 @@ ig.sql.Update("UPDATE users SET ban = ?, reason = ? WHERE id = ?", {true, "Cheat
 ```lua
 local IsBusy = true
 local result = nil
-MySQL.Asynig.fetchScalar("SELECT ...", params, function(data)
+MySQL.Async.fetchScalar("SELECT ...", params, function(data)
     result = data
     IsBusy = false
 end)
@@ -241,9 +241,9 @@ return result
 
 #### Before:
 ```lua
-MySQL.Asynig.fetchScalar("SELECT id FROM users WHERE license = @license", {["@license"] = license}, function(userId)
+MySQL.Async.fetchScalar("SELECT id FROM users WHERE license = @license", {["@license"] = license}, function(userId)
     if userId then
-        MySQL.Asynig.fetchAll("SELECT * FROM characters WHERE user_id = @userId", {["@userId"] = userId}, function(characters)
+        MySQL.Async.fetchAll("SELECT * FROM characters WHERE user_id = @userId", {["@userId"] = userId}, function(characters)
             -- Process characters
         end)
     end
@@ -264,7 +264,7 @@ end
 #### Before:
 ```lua
 for i = 1, 100 do
-    MySQL.Asynig.execute("UPDATE characters SET data = @data WHERE id = @id", {
+    MySQL.Async.execute("UPDATE characters SET data = @data WHERE id = @id", {
         ["@data"] = GetData(i),
         ["@id"] = i
     })
@@ -332,7 +332,7 @@ Test under realistic server load with actual player counts.
 If issues occur:
 
 1. **Immediate**: Restore database backup
-2. **Code**: Revert to previous ig.core version
+2. **Code**: Revert to previous ingenium version
 3. **Config**: Ensure `mysql-async` dependency is restored
 4. **Restart**: Restart FiveM server
 

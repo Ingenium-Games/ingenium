@@ -2,7 +2,7 @@
 
 ## Completed Work
 
-This PR successfully implements the infrastructure needed to merge ig.base and ig.interact resources into ig.core, focusing on performance optimization and proper architecture.
+This PR successfully implements the infrastructure needed to merge ig.base and ig.interact resources into ingenium, focusing on performance optimization and proper architecture.
 
 ### Files Created (13 total)
 
@@ -93,7 +93,7 @@ end)
 ```
 
 #### Uses Existing Patterns
-- `ig.funig.Debug_*()` for logging
+- `ig.func.Debug_*()` for logging
 - `Citizen.CreateThread()` for threads
 - `LocalPlayer.state` for client state
 - `Player(source).state` for server state
@@ -181,7 +181,7 @@ If issues arise:
 
 ## Conclusion
 
-This PR successfully creates the foundation for merging ig.base and ig.interact into ig.core. The optimizations implemented will provide significant performance improvements, and the infrastructure is ready for the next phase of migration.
+This PR successfully creates the foundation for merging ig.base and ig.interact into ingenium. The optimizations implemented will provide significant performance improvements, and the infrastructure is ready for the next phase of migration.
 
 **Total Implementation Time:** ~45 minutes
 **Files Created:** 13

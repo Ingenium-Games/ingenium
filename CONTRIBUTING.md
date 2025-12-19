@@ -1,6 +1,6 @@
-# Contributing to ig.core
+# Contributing to ingenium
 
-Thank you for your interest in contributing to ig.core! This document provides guidelines and standards for contributing to the project.
+Thank you for your interest in contributing to ingenium! This document provides guidelines and standards for contributing to the project.
 
 ## Table of Contents
 
@@ -34,9 +34,9 @@ Thank you for your interest in contributing to ig.core! This document provides g
 ### Setup Development Environment
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/ig.core.git`
+2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/ingenium.git`
 3. Create a feature branch: `git checkout -b feature/your-feature-name`
-4. Configure your test server with ig.core
+4. Configure your test server with ingenium
 5. Set up your database connection in `server.cfg`
 
 ## Development Workflow
@@ -384,7 +384,7 @@ When implementing new features, you must provide two types of documentation:
 
 ### Documentation Structure
 
-- **`/Documentation/`** - User-facing guides and API references for those using ig.core
+- **`/Documentation/`** - User-facing guides and API references for those using ingenium
 - **`/Implementations/`** - Technical implementation details for contributors and maintainers
 
 ### Implementation Document Template
@@ -452,4 +452,4 @@ Good documentation helps future contributors understand not just *what* the code
 
 ### Thank You!
 
-Your contributions make ig.core better for everyone. Thank you for taking the time to contribute!
+Your contributions make ingenium better for everyone. Thank you for taking the time to contribute!

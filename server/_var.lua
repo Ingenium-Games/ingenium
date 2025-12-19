@@ -1,7 +1,7 @@
 -- ====================================================================================--
 -- Globals and Require/Replace
 math.randomseed(GetGameTimer())
-c = c or {}
+ig = ig or {}
 -- ====================================================================================--
 ig.imagehost = conf.imagehost
 ig.sec = conf.sec
@@ -18,9 +18,10 @@ exports("GetLocale", GetLocale)
 -- _data.lua
 ig._running = false
 ig._loading = true
+ig._dataloaded = false
 --
 local ok, glm = pcall(require, "glm")
 if ok and glm then
-    c = c or {}
+    ig = ig or {}
     ig.glm = glm
 end

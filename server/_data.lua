@@ -5,7 +5,7 @@ ig.pdex = {} -- player index = pdex (source numbers assigned by the server upon 
 
 --- Used on startup prior to the server really running.
 function ig.data.Initilize()
-    ig.funig.Debug_1("Loading Sequence Begin.")
+    ig.func.Debug_1("Loading Sequence Begin.")
     local num, loaded = 0, false
     local t = {
         [1] = "DB: Characters marked as In-Active;",
@@ -25,10 +25,10 @@ function ig.data.Initilize()
     --
     local function cb()
         num = num + 1
-        ig.funig.Debug_1(t[num])
+        ig.func.Debug_1(t[num])
     end
     --
-    MySQL.ready(function()
+    ig.sql.AwaitReady(40000,function()
         -- Add other SQL commands required on start up.
         -- such as cleaning tables, requesting data, etig..
         -- [1]
@@ -41,26 +41,10 @@ function ig.data.Initilize()
         ig.sql.jobs.Accounts(cb)
         -- [5] -- Not so much a SQL function, but dependant on it being conducted in order.
         ig.data.CreateJobObjects()
-        cb()
-        -- [5.5] -- Load JSON data files synchronously before individual loaders
+
         ig.data.LoadJSONData(cb)
-        -- [6] gunshot residue data table
-        ig.gsr.Load()
-        cb()
-        -- [7] dropped items data table
-        ig.drop.Load()
-        cb()
-        -- [7.5] Restore physical drops from persistence
+
         ig.data.RestoreDrops()
-        -- [8] pickups data table (not items script)
-        ig.pick.Load()
-        cb()
-        -- [9] notes data table (notepad script)
-        ig.note.Load()
-        cb()
-        -- [10] Load names for random names selection.
-        ig.name.Load()
-        cb()
 
         -- [12]
         ig.sql.veh.Reset(cb)
@@ -75,8 +59,8 @@ function ig.data.Initilize()
     end
 
     ig._loading = false
-    ig.funig.Debug_1("Loading Sequence Complete.")
-    ig._running = true
+    ig.func.Debug_1("Loading Sequence Complete.")
+    ig._dataloaded = true
 end
 
 -- ====================================================================================--
@@ -247,7 +231,7 @@ function ig.data.GetVehicle(arg)
     if ig.vdex[tonumber(arg)] ~= false then
         return ig.vdex[tonumber(arg)]
     else
-        ig.funig.Debug_1("No Vehicle Found.")
+        ig.func.Debug_1("No Vehicle Found.")
         return false
     end
 end
@@ -525,7 +509,7 @@ function ig.data.ReviveSync()
     local function Do()
         local result = ig.sql.char.ReviveDeadCharacters()
         if result then
-            ig.funig.Debug_2("Revived Characters")
+            ig.func.Debug_2("Revived Characters")
         end
         SetTimeout(conf.revivesync, Do)
     end

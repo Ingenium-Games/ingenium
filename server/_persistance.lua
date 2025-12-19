@@ -12,7 +12,7 @@ function ig.persistance.ObjectThread()
 	Citizen.CreateThread(function()
 		while (true) do
             Citizen.Wait(SPAWN_TIMEOUT)
-			if ig.funig.HasPlayers() then
+			if ig.func.HasPlayers() then
 				ig.object.Generate(SPAWN_DISTANCE)
 			end
 		end
@@ -28,7 +28,7 @@ function ig.persistance.VehicleThread()
 	Citizen.CreateThread(function()
 		while (true) do
             Citizen.Wait(10000)
-			if ig.funig.HasPlayers() then
+			if ig.func.HasPlayers() then
 				ig.vehicle.Generate(SPAWN_DISTANCE)
 			end
 		end

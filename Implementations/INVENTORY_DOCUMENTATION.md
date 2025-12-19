@@ -18,7 +18,7 @@ This document provides comprehensive information about the Vue-based inventory s
 
 ## Architecture
 
-The inventory system is integrated into ig.core's single NUI page approach and consists of three main layers:
+The inventory system is integrated into ingenium's single NUI page approach and consists of three main layers:
 
 ### 1. Client-Side (Vue.js)
 - **Location**: `/nui/inventory/`
@@ -30,7 +30,7 @@ The inventory system is integrated into ig.core's single NUI page approach and c
   - `InventoryPanel.vue` - Reusable panel component for both player and external inventories
   - `InventoryItem.vue` - Individual item display with context menu
 
-**Note**: The Vue inventory follows ig.core's "one NUI" pattern where all UI elements are loaded in a single `index.html` file. The inventory Vue app is compiled to `/nui/inventory/dist/assets/` and loaded as a module script.
+**Note**: The Vue inventory follows ingenium's "one NUI" pattern where all UI elements are loaded in a single `index.html` file. The inventory Vue app is compiled to `/nui/inventory/dist/assets/` and loaded as a module script.
 
 ### 2. Client-Side (Lua)
 - **Location**: `/nui/lua/inventory.lua`
@@ -87,7 +87,7 @@ The inventory system is integrated into ig.core's single NUI page approach and c
 
 ### Prerequisites
 - Node.js 16+ (for building Vue app)
-- FiveM server with ig.core resource
+- FiveM server with ingenium resource
 
 ### Building the Vue Application
 
@@ -105,12 +105,12 @@ The built files (`index.css` and `index.js`) are output to `nui/inventory/dist/a
 
 1. Ensure the resource is properly loaded in `server.cfg`:
    ```
-   ensure ig.core
+   ensure ingenium
    ```
 
 2. Restart the server or refresh the resource:
    ```
-   restart ig.core
+   restart ingenium
    ```
 
 ---

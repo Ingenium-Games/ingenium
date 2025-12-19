@@ -4,7 +4,7 @@
 
 --- Memory monitoring command
 RegisterCommand('memory', function(source, args)
-    if source == 0 or (ig.func and ig.funig.IsAce and ig.funig.IsAce(source)) then
+    if source == 0 or (ig.func and ig.func.IsAce and ig.func.IsAce(source)) then
         local memBefore = collectgarbage('count')
         collectgarbage('collect')
         local memAfter = collectgarbage('count')
@@ -102,3 +102,46 @@ CreateThread(function()
     print('^3[Cleanup] Starting orphaned entity cleanup routine (60s intervals)^7')
     CleanupOrphanedEntities()
 end)
+
+RegisterCommand('sqlperf', function(source)
+    local stats = ig.sql.GetStats()
+    
+    local report = string.format([[
+=== SQL Performance Report ===
+Total Queries: %d
+Slow Queries: %d (%.2f%%)
+Failed Queries: %d (%.2f%%)
+Average Query Time: %.2fms
+Total Execution Time: %.2fs
+
+Connection Status: %s
+Database: %s:%d/%s
+Pool Size: %d connections
+
+Thresholds:
+  Good: < 50ms
+  Warning: 50-100ms
+  Critical: > 100ms
+============================
+    ]],
+        stats.totalQueries,
+        stats.slowQueries,
+        (stats.slowQueries / stats.totalQueries) * 100,
+        stats.failedQueries,
+        (stats.failedQueries / stats.totalQueries) * 100,
+        stats.averageTime,
+        stats.totalTime / 1000,
+        stats.isReady and "Ready" or "Not Ready",
+        stats.config.host,
+        stats.config.port,
+        stats.config.database,
+        stats.config.connectionLimit
+    )
+    
+    print(report)
+    if source ~= 0 then
+        TriggerClientEvent('chat:addMessage', source, {
+            args = {"[SQL]", "Check server console for performance report"}
+        })
+    end
+end, true)

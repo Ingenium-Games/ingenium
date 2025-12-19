@@ -1,7 +1,7 @@
 /**
  * MySQL2 Connection Pool Manager
  * Integrated in-resource MySQL connection pool using mysql2
- * Based on oxmysql architecture adapted for ig.core
+ * Based on oxmysql architecture adapted for ingenium
  */
 
 const mysql = require('mysql2/promise');

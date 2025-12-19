@@ -38,7 +38,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         }})
     )
     --
-    local id = ig.funig.identifier(src)
+    local id = ig.func.identifier(src)
     local data = ig.sql.user.Get(id)
     if data ~= nil then
         if data.Priority ~= nil then

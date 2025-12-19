@@ -1,4 +1,4 @@
--- Luacheck configuration for ig.core
+-- Luacheck configuration for ingenium
 std = "lua53"
 
 globals = {

@@ -303,7 +303,7 @@ Validation:
 
 ### Concurrent Access Log
 ```lua
-ig.funig.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
+ig.func.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
     itemName, submittedQty, currentQty, src
 ))
 ```

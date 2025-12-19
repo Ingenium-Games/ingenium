@@ -1,6 +1,6 @@
-# ig.core Documentation
+# ingenium Documentation
 
-Welcome to the ig.core documentation hub. This centralized resource provides comprehensive information about the ig.core FiveM framework.
+Welcome to the ingenium documentation hub. This centralized resource provides comprehensive information about the ingenium FiveM framework.
 
 ## 📚 Core Systems
 

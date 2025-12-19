@@ -22,7 +22,7 @@ function ig.class.Vehicle(net)
         Inventory = {},
         Condition = {},
         Keys = {},
-        Updated = ig.funig.Timestamp()
+        Updated = ig.func.Timestamp()
     }
     local self = {}
     self.Net = net
@@ -107,7 +107,7 @@ function ig.class.Vehicle(net)
     self.Save = false
     --- func desc
     self.SetUpdated = function()
-        self.Updated = ig.funig.Timestamp()
+        self.Updated = ig.func.Timestamp()
         self.Save = true
         self.IsDirty = true
     end
@@ -191,7 +191,7 @@ function ig.class.Vehicle(net)
             self.DirtyFields.Keys = true
             self.EncodedKeys = nil
         else
-            ig.funig.Debug_1("User: " .. id .. " Already has key to this vehicle.")
+            ig.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
         end
         self.SetUpdated()
     end
@@ -205,7 +205,7 @@ function ig.class.Vehicle(net)
             self.DirtyFields.Keys = true
             self.EncodedKeys = nil
         else
-            ig.funig.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
+            ig.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
         end        
         self.SetUpdated()
     end
@@ -359,7 +359,7 @@ function ig.class.Vehicle(net)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -371,7 +371,7 @@ function ig.class.Vehicle(net)
         local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            ig.funig.Debug_1("Error unpacking vehicle inventory: " .. (error or "unknown"))
+            ig.func.Debug_1("Error unpacking vehicle inventory: " .. (error or "unknown"))
             self.Inventory = {}
             return
         end
@@ -428,7 +428,7 @@ function ig.class.Vehicle(net)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            ig.funig.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
+            ig.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
         end
     end
     --
@@ -647,7 +647,7 @@ function ig.class.OwnedVehicle(net, data)
     --
     --- func desc
     self.SetUpdated = function()
-        self.Updated = ig.funig.Timestamp()
+        self.Updated = ig.func.Timestamp()
         self.Save = true
         self.IsDirty = true
     end
@@ -751,7 +751,7 @@ function ig.class.OwnedVehicle(net, data)
             self.EncodedKeys = nil
             self.SetUpdated()
         else
-            ig.funig.Debug_2("User: " .. id .. " Already has key to this vehicle.")
+            ig.func.Debug_2("User: " .. id .. " Already has key to this vehicle.")
         end
     end
     --- func desc
@@ -765,7 +765,7 @@ function ig.class.OwnedVehicle(net, data)
             self.EncodedKeys = nil
             self.SetUpdated()
         else
-            ig.funig.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
+            ig.func.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
         end
     end
     --- func desc
@@ -920,7 +920,7 @@ function ig.class.OwnedVehicle(net, data)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -932,7 +932,7 @@ function ig.class.OwnedVehicle(net, data)
         local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            ig.funig.Debug_1("Error unpacking owned vehicle inventory: " .. (error or "unknown"))
+            ig.func.Debug_1("Error unpacking owned vehicle inventory: " .. (error or "unknown"))
             self.Inventory = {}
             self.State.Inventory = self.Inventory
             return
@@ -995,7 +995,7 @@ function ig.class.OwnedVehicle(net, data)
             self.EncodedInventory = nil
             self.SetUpdated()
         else
-            ig.funig.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
+            ig.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
         end
     end
     --

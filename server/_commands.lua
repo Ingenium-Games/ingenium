@@ -27,7 +27,7 @@ RegisterCommand("switch", function(source, args, rawCommand)
     local src = source
     local p = promise.new()
     local xPlayer = ig.data.GetPlayer(src)
-    local Primary_ID = ig.funig.identifier(src)
+    local Primary_ID = ig.func.identifier(src)
     local Character_ID = xPlayer.GetCharacter_ID()
     -- Send the client/sever the events once the character has changed to inactive on the db. 
     TriggerClientEvent("Client:Character:Pre-Switch")
@@ -127,9 +127,9 @@ ExecuteCommand("add_ace group.admin command.ban allow")
 RegisterCommand("ban", function(source, args, rawCommand)
     local src = source
     local xInvoke = ig.data.GetPlayer(src)
-    local Primary_ID = ig.funig.identifier(args[1])
+    local Primary_ID = ig.func.identifier(args[1])
     local xPlayer = ig.data.GetPlayer(args[1])
-    local reason = { Reason = tostring(args[2]), Time = tostring(ig.funig.Timestamp()), By = xInvoke.GetName(), }
+    local reason = { Reason = tostring(args[2]), Time = tostring(ig.func.Timestamp()), By = xInvoke.GetName(), }
     if (args[1] == src) then
         TriggerClientEvent("Client:Notify", src, "You cannot /ban yourself.")
     else

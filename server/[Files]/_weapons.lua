@@ -1,6 +1,6 @@
 -- ====================================================================================--
-ig.drop = {} -- function level
-ig.drops = false -- dropped items table
+ig.weapon = {} -- function level
+ig.weapons = false -- dropped items table
 -- ====================================================================================--
 
 --[[    
@@ -20,20 +20,20 @@ ig.drops = false -- dropped items table
 
 --- Load drops from JSON (now handled by ig.data.LoadJSONData)
 ---@param . any
-function ig.drop.Load()
+function ig.weapon.Load()
     -- Data is already loaded by ig.data.LoadJSONData
     -- This function kept for compatibility
-    if not ig.drops then
-        ig.drops = {}
+    if not ig.weapons then
+        ig.weapons = {}
     end
     ig.func.Debug_1("Drop system initialized")
 end
 
 --- func desc
 ---@param data any
-function ig.drop.Add(data)
+function ig.weapon.Add(data)
     if type(data) == "table" then
-        table.insert(ig.drops, data)
+        table.insert(ig.weapons, data)
     else
         ig.func.Debug_1("Drop to be added, please check data sent.")
     end
@@ -41,15 +41,15 @@ end
 
 --- func desc
 ---@param id any
-function ig.drop.Exist(id)
-    if ig.drops[id] then
+function ig.weapon.Exist(id)
+    if ig.weapons[id] then
         return true
     end
     return false
 end
 
 --- func desc
-function ig.drop.Resync()
-    local drops = ig.drops
-    TriggerClientEvent("Client:Drops:Update", -1, drops)
+function ig.weapon.Resync()
+    local weapons = ig.weapons
+    TriggerClientEvent("Client:Weapons:Update", -1, weapons)
 end

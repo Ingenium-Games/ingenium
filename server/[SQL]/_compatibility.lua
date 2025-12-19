@@ -16,7 +16,7 @@ MySQL.Sync = {}
 ---@param query string SQL query
 ---@param parameters table|nil Query parameters
 ---@param callback function Callback(results)
-function MySQL.Asynig.fetchAll(query, parameters, callback)
+function MySQL.Async.fetchAll(query, parameters, callback)
     local params = parameters or {}
     
     Citizen.CreateThread(function()
@@ -32,7 +32,7 @@ end
 ---@param query string SQL query
 ---@param parameters table|nil Query parameters
 ---@param callback function Callback(value)
-function MySQL.Asynig.fetchScalar(query, parameters, callback)
+function MySQL.Async.fetchScalar(query, parameters, callback)
     local params = parameters or {}
     
     Citizen.CreateThread(function()
@@ -48,7 +48,7 @@ end
 ---@param query string SQL query
 ---@param parameters table|nil Query parameters
 ---@param callback function|nil Optional callback(affectedRows)
-function MySQL.Asynig.execute(query, parameters, callback)
+function MySQL.Async.execute(query, parameters, callback)
     local params = parameters or {}
     
     Citizen.CreateThread(function()
@@ -72,7 +72,7 @@ end
 ---@param query string|number SQL query or prepared query ID
 ---@param parameters table Query parameters
 ---@param callback function|nil Optional callback(insertId)
-function MySQL.Asynig.insert(query, parameters, callback)
+function MySQL.Async.insert(query, parameters, callback)
     local params = parameters or {}
     
     Citizen.CreateThread(function()
@@ -96,7 +96,7 @@ end
 --- Async store - Prepare a query for later execution
 ---@param query string SQL query to prepare
 ---@param callback function Callback(queryId)
-function MySQL.Asynig.store(query, callback)
+function MySQL.Async.store(query, callback)
     Citizen.CreateThread(function()
         local queryId = ig.sql.PrepareQuery(query)
         
@@ -109,7 +109,7 @@ end
 --- Async transaction - Execute multiple queries in a transaction
 ---@param queries table Array of {query, parameters} objects
 ---@param callback function|nil Optional callback(success)
-function MySQL.Asynig.transaction(queries, callback)
+function MySQL.Async.transaction(queries, callback)
     Citizen.CreateThread(function()
         local result = ig.sql.Transaction(queries)
         
@@ -127,7 +127,7 @@ end
 ---@param query string SQL query
 ---@param parameters table|nil Query parameters
 ---@return table Results array
-function MySQL.Synig.fetchAll(query, parameters)
+function MySQL.Sync.fetchAll(query, parameters)
     local params = parameters or {}
     return ig.sql.Query(query, params)
 end
@@ -136,7 +136,7 @@ end
 ---@param query string SQL query
 ---@param parameters table|nil Query parameters
 ---@return any Single value
-function MySQL.Synig.fetchScalar(query, parameters)
+function MySQL.Sync.fetchScalar(query, parameters)
     local params = parameters or {}
     return ig.sql.FetchScalar(query, params)
 end
@@ -145,7 +145,7 @@ end
 ---@param query string SQL query
 ---@param parameters table|nil Query parameters
 ---@return number Affected rows or insert ID
-function MySQL.Synig.execute(query, parameters)
+function MySQL.Sync.execute(query, parameters)
     local params = parameters or {}
     local upperQuery = string.upper(query)
     
@@ -160,7 +160,7 @@ end
 ---@param query string SQL query
 ---@param parameters table|nil Query parameters
 ---@return number Insert ID
-function MySQL.Synig.insert(query, parameters)
+function MySQL.Sync.insert(query, parameters)
     local params = parameters or {}
     return ig.sql.Insert(query, params)
 end
@@ -168,7 +168,7 @@ end
 --- Sync transaction - Execute multiple queries in a transaction (blocking)
 ---@param queries table Array of {query, parameters} objects
 ---@return boolean Success
-function MySQL.Synig.transaction(queries)
+function MySQL.Sync.transaction(queries)
     local result = ig.sql.Transaction(queries)
     return result.success
 end
@@ -205,10 +205,10 @@ if SHOW_DEPRECATION_WARNINGS then
     
     -- Wrap all functions with deprecation warnings
     for name, func in pairs(MySQL.Async) do
-        MySQL.Async[name] = wrapWithWarning("MySQL.Asynig." .. name, func)
+        MySQL.Async[name] = wrapWithWarning("MySQL.Async." .. name, func)
     end
     
     for name, func in pairs(MySQL.Sync) do
-        MySQL.Sync[name] = wrapWithWarning("MySQL.Synig." .. name, func)
+        MySQL.Sync[name] = wrapWithWarning("MySQL.Sync." .. name, func)
     end
 end

@@ -10,7 +10,7 @@ function ig.bank.CalculatePayments()
     local xJob = ig.data.GetJob("bank")
 
     -- To run independant of active players and debit accounts via sql.
-    ig.funig.Debug_1("Pulls all characters with loans and deducts money to pay the loan, can go negitive.")
+    ig.func.Debug_1("Pulls all characters with loans and deducts money to pay the loan, can go negitive.")
 end
 
 -- queued to add
@@ -18,7 +18,7 @@ AddEventHandler("onServerResourceStart", function()
     if not payments then
         ig.cron.RunAt(conf.loanpayment.h, conf.loanpayment.m, ig.bank.CalculatePayments)
         payments = true
-    end -- ig.funig.Debug_1("[E] Added Cron Job [F] ig.bank.CalculatePayments()")
+    end -- ig.func.Debug_1("[E] Added Cron Job [F] ig.bank.CalculatePayments()")
 end)
 --
 
@@ -28,7 +28,7 @@ function ig.bank.CalculateInterest()
     local xJob = ig.data.GetJob("bank")
 
     -- To run independant of active players and debit accounts via sql.
-    ig.funig.Debug_1("Updates the characters loan to add the interest on the outstanding amount each day.")
+    ig.func.Debug_1("Updates the characters loan to add the interest on the outstanding amount each day.")
 end
 
 local interest = false
@@ -37,7 +37,7 @@ AddEventHandler("onServerResourceStart", function()
     if not interest then
         ig.cron.RunAt(conf.loaninterest.h, conf.loaninterest.m, ig.bank.CalculateInterest)
         interest = true
-    end -- ig.funig.Debug_1("[E] Added Cron Job [F] ig.bank.CalculateInterest()")
+    end -- ig.func.Debug_1("[E] Added Cron Job [F] ig.bank.CalculateInterest()")
 end)
 --
 
@@ -59,7 +59,7 @@ function ig.bank.CheckNegativeBalances()
             end
         end
     end
-    -- ig.funig.Debug_1("Active clients notified of negative bank balances and Fees charged at $"..conf.bankoverdraw)
+    -- ig.func.Debug_1("Active clients notified of negative bank balances and Fees charged at $"..conf.bankoverdraw)
 end
 
 local negative = false
@@ -72,5 +72,5 @@ AddEventHandler("onServerResourceStart", function()
         end
         negative = true
     end
-    -- ig.funig.Debug_1("[E] Added Cron Job: [F] ig.bank.CheckNegativeBalances()")
+    -- ig.func.Debug_1("[E] Added Cron Job: [F] ig.bank.CheckNegativeBalances()")
 end)

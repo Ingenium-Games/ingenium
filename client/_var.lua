@@ -1,7 +1,7 @@
 -- ====================================================================================--
 -- Globals and Require/Replace
 math.randomseed(GetNetworkTime())
-c = c or exports["ig.core"]:c()
+c = c or exports["ingenium"]:c()
 -- ====================================================================================--
 ig.imagehost = conf.imagehost
 ig.sec = conf.sec
@@ -21,6 +21,6 @@ ig._character = nil
 --
 local ok, glm = pcall(require, "glm")
 if ok and glm then
-    c = c or {}
+    ig = ig or {}
     ig.glm = glm
 end

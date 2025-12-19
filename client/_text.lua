@@ -13,7 +13,7 @@ function ig.text.AddEntry(s1, s2)
         ig.texts[str1] = str2
         AddTextEntry(str1, str2)
     else
-        ig.funig.Debug_1("Text Entry: "..str1.." has already been used. Ignoring this input.")
+        ig.func.Debug_1("Text Entry: "..str1.." has already been used. Ignoring this input.")
     end    
 end
 

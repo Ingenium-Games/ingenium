@@ -1,6 +1,6 @@
 # Quick Start Guide - Vue 3 NUI System
 
-Get started with the new ig.core Vue 3 NUI system in 5 minutes.
+Get started with the new ingenium Vue 3 NUI system in 5 minutes.
 
 ## For Developers (Building the NUI)
 
@@ -20,7 +20,7 @@ This creates the `dist/` folder with optimized assets.
 ### 3. Start FiveM
 The resource is now ready to use! Just start your FiveM server:
 ```bash
-/restart ig.core
+/restart ingenium
 ```
 
 ### 4. Optional: Development Mode
@@ -84,7 +84,7 @@ end)
 | `npm run dev` | Start dev server with HMR |
 | `npm run build` | Build for production |
 | `npm run watch` | Auto-rebuild on changes |
-| `/restart ig.core` | Restart resource in FiveM |
+| `/restart ingenium` | Restart resource in FiveM |
 
 ## Directory Structure
 
@@ -129,7 +129,7 @@ nui/
 
 **NUI not loading?**
 - Verify `dist/index.html` exists
-- Restart ig.core: `/restart ig.core`
+- Restart ingenium: `/restart ingenium`
 
 **Changes not showing?**
 - Run `npm run build`

@@ -19,16 +19,16 @@ function ig.class.BlankObject(net)
     self.UUID = ig.rng.UUID()
     self.State.UUID = self.UUID
     --
-    self.Created = ig.funig.Timestamp()
+    self.Created = ig.func.Timestamp()
     self.State.Created = self.Created
     --
-    self.Updated = ig.funig.Timestamp()
+    self.Updated = ig.func.Timestamp()
     self.State.Updated = self.Updated
     --
     self.Save = false
     --- func desc
     self.SetUpdated = function()
-        self.Updated = ig.funig.Timestamp()
+        self.Updated = ig.func.Timestamp()
         self.Save = true
     end
     --- func desc
@@ -90,7 +90,7 @@ function ig.class.BlankObject(net)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -113,13 +113,13 @@ function ig.class.BlankObject(net)
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
                 if type(ig.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    ig.funig.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                    ig.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Quuality and Quantity are numbers.
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                ig.funig.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                ig.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- If the Quality is below 0, then destroy the item.
@@ -148,7 +148,7 @@ function ig.class.BlankObject(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
+            ig.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
             return
         end
         local info = {
@@ -178,7 +178,7 @@ function ig.class.BlankObject(net)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            ig.funig.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
+            ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
         self.SetUpdated()
     end
@@ -311,13 +311,13 @@ function ig.class.ExistingObject(net, data)
     self.Created = data.Created
     self.State.Created = self.Created
     --
-    self.Updated = ig.funig.Timestamp()
+    self.Updated = ig.func.Timestamp()
     self.State.Updated = self.Updated
     --
     self.Save = false
     --- func desc
     self.SetUpdated = function()
-        self.Updated = ig.funig.Timestamp()
+        self.Updated = ig.func.Timestamp()
         self.Save = true
     end
     --- func desc
@@ -386,7 +386,7 @@ function ig.class.ExistingObject(net, data)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -409,13 +409,13 @@ function ig.class.ExistingObject(net, data)
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
                 if type(ig.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    ig.funig.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                    ig.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
                     break
                 end
             end
             -- Validate Quuality and Quantity are numbers.
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                ig.funig.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                ig.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
                 break
             end
             -- If the Quality is below 0, then destroy the item.
@@ -443,7 +443,7 @@ function ig.class.ExistingObject(net, data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
+            ig.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
             return
         end
         local info = {
@@ -473,7 +473,7 @@ function ig.class.ExistingObject(net, data)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            ig.funig.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
+            ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
         self.SetUpdated()
     end

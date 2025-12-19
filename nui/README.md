@@ -1,10 +1,10 @@
 # IG Core NUI - Vue 3 System
 
-Modern Vue 3 NUI system for ig.core with Pinia state management and TailwindCSS.
+Modern Vue 3 NUI system for ingenium with Pinia state management and TailwindCSS.
 
 ## Overview
 
-This is a complete rewrite of the ig.core NUI system using modern frontend technologies:
+This is a complete rewrite of the ingenium NUI system using modern frontend technologies:
 
 - **Vue 3**: Modern reactive UI framework with Composition API
 - **Pinia**: Lightweight state management
@@ -107,7 +107,7 @@ This watches for file changes and rebuilds automatically. You'll need to refresh
 ### Testing In-Game
 
 1. Build the project: `npm run build` or use watch mode
-2. Restart the ig.core resource in FiveM
+2. Restart the ingenium resource in FiveM
 3. The new Vue-based NUI should load
 
 ## Lua Export API
@@ -297,7 +297,7 @@ To migrate existing UI to Vue components:
 ### Changes Not Showing
 
 1. Run `npm run build` after making changes
-2. Restart the ig.core resource: `/restart ig.core`
+2. Restart the ingenium resource: `/restart ingenium`
 3. Or use watch mode: `npm run watch`
 
 ### Dev Server Not Working

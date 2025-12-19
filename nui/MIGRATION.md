@@ -141,7 +141,7 @@ exports['ingenium']:HideHUD()
 
 ## Migration Checklist
 
-### For ig.core Developers
+### For ingenium Developers
 
 - [ ] Keep old NUI files during transition period
 - [ ] Test all notification calls work with new system
@@ -149,7 +149,7 @@ exports['ingenium']:HideHUD()
 - [ ] Migrate any custom UI components to Vue
 - [ ] Update documentation
 
-### For Resource Developers (using ig.core)
+### For Resource Developers (using ingenium)
 
 - [ ] Update notification calls to use exports (optional, old way still works)
 - [ ] Replace custom menu systems with `ShowMenu()`
@@ -169,9 +169,9 @@ npm install
 npm run build
 ```
 
-2. Restart ig.core:
+2. Restart ingenium:
 ```
-/restart ig.core
+/restart ingenium
 ```
 
 3. Test notifications:
@@ -431,7 +431,7 @@ ui_page "nui/index.html"
 ### Issue: Exports not working
 
 **Solution:**
-1. Verify ig.core is started before your resource
+1. Verify ingenium is started before your resource
 2. Check resource name is correct: `exports['ingenium']:...`
 3. Restart your resource after updating
 

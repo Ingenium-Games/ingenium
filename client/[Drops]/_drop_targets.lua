@@ -29,5 +29,5 @@ CreateThread(function()
         distance = 2.0,
     })
     
-    ig.funig.Debug_1("Drop targets registered with ig.target")
+    ig.func.Debug_1("Drop targets registered with ig.target")
 end)

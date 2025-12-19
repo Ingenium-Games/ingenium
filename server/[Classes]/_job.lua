@@ -23,7 +23,7 @@ function ig.class.Job(tab)
     self.Save = false
     --- func desc
     self.SetUpdated = function()
-        self.Updated = ig.funig.Timestamp()
+        self.Updated = ig.func.Timestamp()
         self.Save = true
     end
     --- func desc
@@ -58,7 +58,7 @@ function ig.class.Job(tab)
             self.Description = str
             self.SetUpdated()
         else
-            ig.funig.Debug_1("Unable to set description as length is too long. Must be less than 1500 characters.")
+            ig.func.Debug_1("Unable to set description as length is too long. Must be less than 1500 characters.")
         end
     end
     --- func desc
@@ -93,7 +93,7 @@ function ig.class.Job(tab)
             self.Accounts[acc] = ig.math.Decimals(num, 2)
             self.SetUpdated()
         else
-            ig.funig.Debug_1("Account entered does not exist")
+            ig.func.Debug_1("Account entered does not exist")
         end
     end
     --- func desc
@@ -123,7 +123,7 @@ function ig.class.Job(tab)
                 acc = acc + ig.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    ig.funig.Debug_1("Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
+                    ig.func.Debug_1("Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
                     self.SetAccount("Safe", acc)
@@ -142,7 +142,7 @@ function ig.class.Job(tab)
                 acc = acc - ig.math.Decimals(num, 2)
                 if acc < 0 then
                     self.SetAccount("Safe", bkp)
-                    ig.funig.Debug_1("Job " .. self.Name ..
+                    ig.func.Debug_1("Job " .. self.Name ..
                                        " has RemoveSafe() Cancelled due to Negative balance remaining.")
                     CancelEvent()
                 else
@@ -272,7 +272,7 @@ function ig.class.Job(tab)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -284,7 +284,7 @@ function ig.class.Job(tab)
         local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            ig.funig.Debug_1("Error unpacking job inventory: " .. (error or "unknown"))
+            ig.func.Debug_1("Error unpacking job inventory: " .. (error or "unknown"))
             self.Inventory = {}
             return
         end
@@ -310,7 +310,7 @@ function ig.class.Job(tab)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Job ID: " .. self.Name)
+            ig.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Job ID: " .. self.Name)
             return
         end
         local info = {
@@ -341,7 +341,7 @@ function ig.class.Job(tab)
             end
             self.SetUpdated()
         else
-            ig.funig.Debug_1("Ignoring invalid .AddItem() for Job ID:  " .. self.Name)
+            ig.func.Debug_1("Ignoring invalid .AddItem() for Job ID:  " .. self.Name)
         end
     end
     --

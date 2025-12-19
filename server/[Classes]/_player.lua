@@ -9,7 +9,7 @@ end
 function ig.class.Player(source, character_id)
     local src = tonumber(source)
     local Character_ID = character_id
-    local Steam_ID, FiveM_ID, License_ID, Discord_ID = ig.funig.identifiers(src)
+    local Steam_ID, FiveM_ID, License_ID, Discord_ID = ig.func.identifiers(src)
     local user = ig.sql.user.Get(License_ID)
     local char = ig.sql.char.Get(Character_ID)
     local self = {}
@@ -69,12 +69,12 @@ function ig.class.Player(source, character_id)
     self.State.Phone = self.Phone
     --
     -- Gender ("Male"/"Female")
-    self.Gender, self.GenderString = ig.funig.IsPedMale(self.Model)
+    self.Gender, self.GenderString = ig.func.IsPedMale(self.Model)
     self.State.Gender = self.Gender
     self.State.GenderString = self.GenderString
     --
     -- Humaniod Model (true/false)
-    self.IsHuman = ig.funig.IsPedHuman(self.Model)
+    self.IsHuman = ig.func.IsPedHuman(self.Model)
     self.State.IsHuman = self.IsHuman
     --
     -- Integers
@@ -222,7 +222,7 @@ function ig.class.Player(source, character_id)
     end
     --
     self.GetIdentifier = function()
-        return ig.funig.identifier(self.ID)
+        return ig.func.identifier(self.ID)
     end
     --
     self.GetCharacter_ID = function()
@@ -423,7 +423,7 @@ function ig.class.Player(source, character_id)
             self.IsDirty = true
             self.DirtyFields.Skills = true
             self.EncodedSkills = nil
-            ig.funig.Debug_1("Skill did not exist, adding in now.")
+            ig.func.Debug_1("Skill did not exist, adding in now.")
         end
     end
     --
@@ -442,7 +442,7 @@ function ig.class.Player(source, character_id)
             self.IsDirty = true
             self.DirtyFields.Skills = true
             self.EncodedSkills = nil
-            ig.funig.Debug_1("Skill did not exist on character, adding in now.")
+            ig.func.Debug_1("Skill did not exist on character, adding in now.")
         end
     end
     --
@@ -478,7 +478,7 @@ function ig.class.Player(source, character_id)
                 self.EncodedAccounts = nil
             end
         else
-            ig.funig.Debug_1("Account entered does not exist")
+            ig.func.Debug_1("Account entered does not exist")
         end
     end
     --
@@ -518,7 +518,7 @@ function ig.class.Player(source, character_id)
         -- negative check first
         if v < 0.00 then
             self.Notify("Nope")
-            ig.funig.Debug_1(
+            ig.func.Debug_1(
                 "self.SetCash: for " ..
                     self.ID)
             CancelEvent()
@@ -563,7 +563,7 @@ function ig.class.Player(source, character_id)
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                ig.funig.Debug_1(
+                ig.func.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                 CancelEvent()
@@ -584,7 +584,7 @@ function ig.class.Player(source, character_id)
         -- negative check first
         if v < 0 then
             self.Notify("Nope")
-            ig.funig.Debug_1(
+            ig.func.Debug_1(
                 "self.AddCash: for " ..
                     self.ID)
             CancelEvent()
@@ -630,7 +630,7 @@ function ig.class.Player(source, character_id)
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                ig.funig.Debug_1(
+                ig.func.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                 CancelEvent()
@@ -651,7 +651,7 @@ function ig.class.Player(source, character_id)
         -- negative check first
         if self.GetCash() < ig.math.Decimals(v, 2) then
             self.Notify("Nope")
-            ig.funig.Debug_1(
+            ig.func.Debug_1(
                 "self.RemoveCash: for " ..
                     self.ID)
             CancelEvent()
@@ -713,7 +713,7 @@ function ig.class.Player(source, character_id)
                 acc = 0
                 self.Kick(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                ig.funig.Debug_1(
+                ig.func.Debug_1(
                     "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
                         self.ID)
                 CancelEvent()
@@ -826,7 +826,7 @@ function ig.class.Player(source, character_id)
             self.Ammo[type] = 0
             self.Kick(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            ig.funig.Debug_1(
+            ig.func.Debug_1(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for " ..
                     self.ID)
             CancelEvent()
@@ -848,7 +848,7 @@ function ig.class.Player(source, character_id)
             self.Ammo[type] = 0
             self.Kick(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            ig.funig.Debug_1(
+            ig.func.Debug_1(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for " ..
                     self.ID)
             CancelEvent()
@@ -867,7 +867,7 @@ function ig.class.Player(source, character_id)
             self.Ammo[type] = 0
             self.Kick(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin")
-            ig.funig.Debug_1(
+            ig.func.Debug_1(
                 "A bug has occoured to make your ammo a negative amount, as you cannot have negative ammo in hand, please report this to the Server Admin: for " ..
                     self.ID)
             CancelEvent()
@@ -900,7 +900,7 @@ function ig.class.Player(source, character_id)
                 TriggerClientEvent("Client:Character:SetJob", self.ID, self.Job.Name, self.Job.Grade)
             end
         else
-            ig.funig.Debug_1("Ignoring invalid .SetJob() :" .. Name .. ", " .. Grade .. " for " .. self.ID)
+            ig.func.Debug_1("Ignoring invalid .SetJob() :" .. Name .. ", " .. Grade .. " for " .. self.ID)
             print(ig.table.Dump(ig.jobs))
         end
     end
@@ -1035,7 +1035,7 @@ function ig.class.Player(source, character_id)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -1075,7 +1075,7 @@ function ig.class.Player(source, character_id)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.funig.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
+            ig.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Player ID: " .. self.ID)
             return
         end
         local info = {
@@ -1109,7 +1109,7 @@ function ig.class.Player(source, character_id)
             self.EncodedInventory = nil
             TriggerClientEvent("Client:Inventory:Update", self.ID)
         else
-            ig.funig.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
+            ig.func.Debug_1("Ignoring invalid .AddItem() for " .. self.ID)
         end
     end
     --
@@ -1468,7 +1468,7 @@ function ig.class.OfflinePlayer(data)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
             end
         end
         return self.Weight
@@ -1481,7 +1481,7 @@ function ig.class.OfflinePlayer(data)
         
         if not valid then
             -- Log error but don't kick since player is offline
-            ig.funig.Debug_1("Error unpacking offline player inventory: " .. (error or "unknown"))
+            ig.func.Debug_1("Error unpacking offline player inventory: " .. (error or "unknown"))
             self.Inventory = {}
             return
         end
@@ -1507,7 +1507,7 @@ function ig.class.OfflinePlayer(data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.funig.Debug_1(
+            ig.func.Debug_1(
                 "Ignoring invalid .SteralizeItem() while .AddItem() was called, for Offline Player License: " ..
                     self.License_ID)
             return
@@ -1539,7 +1539,7 @@ function ig.class.OfflinePlayer(data)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            ig.funig.Debug_1("Ignoring invalid .AddItem() for Offline Player License: " .. self.License_ID)
+            ig.func.Debug_1("Ignoring invalid .AddItem() for Offline Player License: " .. self.License_ID)
         end
     end
     --

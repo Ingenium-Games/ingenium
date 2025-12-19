@@ -8,12 +8,12 @@ ig._skills = {} -- Server sent to client
 function ig.skill.SetSkills()
     if LocalPlayer.state.Skills ~= nil then
         ig._skills = LocalPlayer.state.Skills
-        ig.funig.Debug_2("[F] ig.skill.SetSkills() LocalState Used")
+        ig.func.Debug_2("[F] ig.skill.SetSkills() LocalState Used")
         -- print(ig._skills)
         -- print(ig.table.Dump(ig._skills))
     else
         ig._skills = TriggerServerCallback({eventName = "GetSkills"})
-        ig.funig.Debug_2("[F] ig.skill.SetSkills() Event Used")
+        ig.func.Debug_2("[F] ig.skill.SetSkills() Event Used")
     end
 end
 

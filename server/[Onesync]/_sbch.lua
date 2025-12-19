@@ -46,7 +46,7 @@ ig.sbch.player.IsDead = AddStateBagChangeHandler("IsDead", nil, function(bagName
         if value == false then
             -- We want to know when they were revived.
             ig.sql.char.SetDead(xPlayer.GetCharacter_ID(), value, {
-                RevivedAt = ig.funig.Timestamp()
+                RevivedAt = ig.func.Timestamp()
             })
             ig.sql.char.SetHealth(xPlayer.GetCharacter_ID(), 150)
             --

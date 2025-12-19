@@ -1,7 +1,7 @@
 {
   "name": "ig-core-nui",
   "version": "1.0.0",
-  "description": "Modern Vue 3 NUI for ig.core",
+  "description": "Modern Vue 3 NUI for ingenium",
   "type": "module",
   "scripts": {
     "dev": "vite",

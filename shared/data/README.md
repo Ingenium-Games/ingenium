@@ -1,4 +1,4 @@
-# ig.core Data Directory
+# ingenium Data Directory
 
 This directory contains game data loaded at resource startup.
 
@@ -97,7 +97,7 @@ Copy these files from `ig.dump/data/` directory.
 To update data after making changes to JSON files:
 
 ```
-restart ig.core
+restart ingenium
 ```
 
 The loader will automatically reload all data files.

@@ -42,7 +42,7 @@ function ig.note.Add(data)
     if type(data) == "table" then
         table.insert(ig.notes, data)
     else
-        ig.funig.Debug_1("Drop to be added, please check data sent.")
+        ig.func.Debug_1("Drop to be added, please check data sent.")
     end
 end
 

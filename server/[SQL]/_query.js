@@ -3,7 +3,7 @@
  * Handles query execution with parameter conversion and result formatting
  */
 
-const getPool = () => global.exports.ig.core.getPool();
+const getPool = () => global.exports.ingenium.getPool();
 
 class QueryExecutor {
     /**
@@ -36,7 +36,7 @@ class QueryExecutor {
      */
     static async query(queryString, parameters = [], callback = null) {
         try {
-            const pool = getPool();
+            const pool = new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -65,7 +65,7 @@ class QueryExecutor {
      */
     static async fetchSingle(queryString, parameters = [], callback = null) {
         try {
-            const pool = getPool();
+            const pool =new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -94,7 +94,7 @@ class QueryExecutor {
      */
     static async fetchScalar(queryString, parameters = [], callback = null) {
         try {
-            const pool = getPool();
+            const pool =new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -128,7 +128,7 @@ class QueryExecutor {
      */
     static async insert(queryString, parameters = [], callback = null) {
         try {
-            const pool = getPool();
+            const pool =new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -157,7 +157,7 @@ class QueryExecutor {
      */
     static async update(queryString, parameters = [], callback = null) {
         try {
-            const pool = getPool();
+            const pool =new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -182,7 +182,7 @@ class QueryExecutor {
     }
 
     /**
-     * Prepare a stored query (for use with MySQL.Asynig.store compatibility)
+     * Prepare a stored query (for use with MySQL.Async.store compatibility)
      */
     static prepareQuery(queryString) {
         // Generate a unique ID for this prepared query
@@ -205,7 +205,7 @@ class QueryExecutor {
             }
             
             const queryString = global.preparedQueries[queryId];
-            const pool = getPool();
+            const pool =new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);

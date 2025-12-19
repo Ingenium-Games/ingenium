@@ -10,19 +10,19 @@ function ig.version.Check(url, resourceName)
         local version = GetResourceMetadata(resourceName, "version")
         PerformHttpRequest(url, function(err, text, headers)
             --
-            ig.funig.Debug_1("^0[ ^3Performing Update Check ^0: "..resourceName.." ] ")
+            ig.func.Debug_1("^0[ ^3Performing Update Check ^0: "..resourceName.." ] ")
             if (text ~= nil) then
                 if version == text then
-                    ig.funig.Debug_1("^0[ ^4Ok! ^0] ")
+                    ig.func.Debug_1("^0[ ^4Ok! ^0] ")
                 else
                     print("\n")
-                    ig.funig.Alert("Newer version of "..resourceName.." found")
-                    ig.funig.Alert("[ Old : "..version.." ] ")
-                    ig.funig.Alert("[ New : "..text.." ] ")        
+                    ig.func.Alert("Newer version of "..resourceName.." found")
+                    ig.func.Alert("[ Old : "..version.." ] ")
+                    ig.func.Alert("[ New : "..text.." ] ")        
                     print("\n")
                 end
             else
-                ig.funig.Debug_1("Unable to find version.txt on "..url)
+                ig.func.Debug_1("Unable to find version.txt on "..url)
             end
         end, "GET", "", "")
     end

@@ -3,8 +3,8 @@
 -- ====================================================================================--
 -- [C]
 AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, net)
-    local condition = ig.funig.GetVehicleCondition(vehicle)
-    local modifictions = ig.funig.GetVehicleModifications(vehicle)
+    local condition = ig.func.GetVehicleCondition(vehicle)
+    local modifictions = ig.func.GetVehicleModifications(vehicle)
     TriggerServerCallback({
         eventName = "SetVehicleConMods",
         args = {net, condition, modifictions}
@@ -12,8 +12,8 @@ AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, net)
 end)
 -- [C]
 AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, net)
-    local condition = ig.funig.GetVehicleCondition(vehicle)
-    local modifictions = ig.funig.GetVehicleModifications(vehicle)
+    local condition = ig.func.GetVehicleCondition(vehicle)
+    local modifictions = ig.func.GetVehicleModifications(vehicle)
     TriggerServerCallback({
         eventName = "SetVehicleConMods",
         args = {net, condition, modifictions}

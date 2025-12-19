@@ -1,7 +1,7 @@
 # Item Drop System - Implementation Summary
 
 ## Overview
-Complete item drop system for ig.core FiveM framework with real-time multi-player synchronization via State Bags and NUI drag-and-drop interface.
+Complete item drop system for ingenium FiveM framework with real-time multi-player synchronization via State Bags and NUI drag-and-drop interface.
 
 ## Architecture
 
@@ -310,7 +310,7 @@ ExecuteCommand('savedata')
 
 ## Credits
 
-- Framework: ig.core by Ingenium Games
+- Framework: ingenium by Ingenium Games
 - State Bags: FiveM/OneSync
 - Target System: ig.target
 - Inventory UI: Vue 3 NUI system

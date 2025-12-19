@@ -17,7 +17,7 @@ if conf.gamemode == "RP" then
     
     AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, netId)
         -- RP-specific logic when entering vehicle
-        ig.funig.Debug_3("RP Mode: Entered vehicle " .. name)
+        ig.func.Debug_3("RP Mode: Entered vehicle " .. name)
         
         -- Example: Set player state for RP features
         if seat == -1 then
@@ -31,7 +31,7 @@ if conf.gamemode == "RP" then
     
     AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, netId)
         -- RP-specific logic when leaving vehicle
-        ig.funig.Debug_3("RP Mode: Left vehicle " .. name)
+        ig.func.Debug_3("RP Mode: Left vehicle " .. name)
         
         -- Clear vehicle-related states
         LocalPlayer.state:set("IsDriving", false, false)
@@ -46,7 +46,7 @@ end
 if conf.gamemode == "DM" or conf.gamemode == "TDM" then
     -- Simplified vehicle handling for combat modes
     AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, netId)
-        ig.funig.Debug_3(conf.gamemode .. " Mode: Entered vehicle " .. name)
+        ig.func.Debug_3(conf.gamemode .. " Mode: Entered vehicle " .. name)
         
         -- Combat mode specific logic
         -- Example: Restore armor when entering vehicle
@@ -56,7 +56,7 @@ if conf.gamemode == "DM" or conf.gamemode == "TDM" then
     end)
     
     AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, netId)
-        ig.funig.Debug_3(conf.gamemode .. " Mode: Left vehicle " .. name)
+        ig.func.Debug_3(conf.gamemode .. " Mode: Left vehicle " .. name)
     end)
 end
 
@@ -66,13 +66,13 @@ end
 
 if conf.gamemode == "KOTH" then
     AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, netId)
-        ig.funig.Debug_3("KOTH Mode: Entered vehicle " .. name)
+        ig.func.Debug_3("KOTH Mode: Entered vehicle " .. name)
         
         -- KOTH specific vehicle logic
     end)
     
     AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, netId)
-        ig.funig.Debug_3("KOTH Mode: Left vehicle " .. name)
+        ig.func.Debug_3("KOTH Mode: Left vehicle " .. name)
     end)
 end
 
@@ -82,13 +82,13 @@ end
 
 if conf.gamemode == "FR" then
     AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, netId)
-        ig.funig.Debug_3("FR Mode: Entered vehicle " .. name)
+        ig.func.Debug_3("FR Mode: Entered vehicle " .. name)
         
         -- Free roam vehicle logic (similar to RP but less restrictive)
     end)
     
     AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, netId)
-        ig.funig.Debug_3("FR Mode: Left vehicle " .. name)
+        ig.func.Debug_3("FR Mode: Left vehicle " .. name)
     end)
 end
 
@@ -98,12 +98,12 @@ end
 
 if conf.gamemode == "GG" then
     AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, netId)
-        ig.funig.Debug_3("GG Mode: Entered vehicle " .. name)
+        ig.func.Debug_3("GG Mode: Entered vehicle " .. name)
         
         -- Gun game typically disables vehicles or has special rules
     end)
     
     AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, netId)
-        ig.funig.Debug_3("GG Mode: Left vehicle " .. name)
+        ig.func.Debug_3("GG Mode: Left vehicle " .. name)
     end)
 end

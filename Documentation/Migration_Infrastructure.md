@@ -1,7 +1,7 @@
 # Migration Infrastructure Documentation
 
 ## Overview
-This document describes the infrastructure added to `ig.core` to support the migration of `ig.base` and `ig.interact` resources.
+This document describes the infrastructure added to `ingenium` to support the migration of `ig.base` and `ig.interact` resources.
 
 ## Files Added
 
@@ -90,8 +90,8 @@ All config files use the existing pattern:
 - Loaded before client/server scripts execute
 
 ### Function Patterns
-Follows existing ig.core conventions:
-- Uses `ig.funig.Debug_1/2/3()` for logging
+Follows existing ingenium conventions:
+- Uses `ig.func.Debug_1/2/3()` for logging
 - Uses `Citizen.CreateThread()` for threads
 - Uses `LocalPlayer.state` for client state
 - Uses `Player(source).state` for server state
@@ -99,14 +99,14 @@ Follows existing ig.core conventions:
 ## Performance Benefits
 
 ### Before (Separate Resources)
-- 3 resources loading (ig.core, ig.base, ig.interact)
+- 3 resources loading (ingenium, ig.base, ig.interact)
 - Redundant state tables duplicating LocalPlayer.state
 - Cross-resource events for every state change
 - ~8-12 separate threads
 - Vehicle polling every 50ms (20 checks per second)
 
 ### After (Merged)
-- 1 resource (ig.core only)
+- 1 resource (ingenium only)
 - Single state source (LocalPlayer.state)
 - Direct function calls (no cross-resource overhead)
 - ~4-6 optimized threads
@@ -162,7 +162,7 @@ local mode = GetGameMode() -- Returns "RP", "DM", etig.
 3. Copy entity interaction files to `client/[Interactions]/entities/`
 4. Copy job interaction files to `client/[Interactions]/jobs/`
 5. Populate config files with actual data from ig.interact
-6. Update all `exports["ig.core"]:c()` calls to direct `c` access
+6. Update all `exports["ingenium"]:c()` calls to direct `c` access
 7. Test all interaction features
 
 ### Phase 3: Cleanup
@@ -188,7 +188,7 @@ If issues arise:
 4. Fix and test again
 
 ## Notes
-- All new code follows ig.core coding standards
+- All new code follows ingenium coding standards
 - Uses FiveM native state management (LocalPlayer.state, Player().state)
 - Maintains security protections (StateBag validation)
-- Compatible with existing ig.core state synchronization
+- Compatible with existing ingenium state synchronization

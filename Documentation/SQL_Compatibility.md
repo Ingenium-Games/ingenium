@@ -1,6 +1,6 @@
 # SQL Compatibility Layer
 
-Documentation for the MySQL.Async compatibility layer in ig.core.
+Documentation for the MySQL.Async compatibility layer in ingenium.
 
 ## Overview
 
@@ -10,11 +10,11 @@ The compatibility layer provides **full backward compatibility** with the mysql-
 
 ### MySQL.Async
 
-All `MySQL.Asynig.*` functions are fully supported:
+All `MySQL.Async.*` functions are fully supported:
 
 #### fetchAll
 ```lua
-MySQL.Asynig.fetchAll(query, parameters, callback)
+MySQL.Async.fetchAll(query, parameters, callback)
 ```
 - Executes SELECT query returning multiple rows
 - Callback receives array of result rows
@@ -22,7 +22,7 @@ MySQL.Asynig.fetchAll(query, parameters, callback)
 
 #### fetchScalar
 ```lua
-MySQL.Asynig.fetchScalar(query, parameters, callback)
+MySQL.Async.fetchScalar(query, parameters, callback)
 ```
 - Executes SELECT query returning single value
 - Callback receives scalar value or `nil`
@@ -30,7 +30,7 @@ MySQL.Asynig.fetchScalar(query, parameters, callback)
 
 #### execute
 ```lua
-MySQL.Asynig.execute(query, parameters, callback)
+MySQL.Async.execute(query, parameters, callback)
 ```
 - Executes INSERT, UPDATE, or DELETE query
 - Callback receives affected rows (UPDATE/DELETE) or insertId (INSERT)
@@ -38,7 +38,7 @@ MySQL.Asynig.execute(query, parameters, callback)
 
 #### insert
 ```lua
-MySQL.Asynig.insert(query_or_id, parameters, callback)
+MySQL.Async.insert(query_or_id, parameters, callback)
 ```
 - Executes INSERT query or prepared statement
 - Supports both raw queries (string) and prepared query IDs (number)
@@ -46,15 +46,15 @@ MySQL.Asynig.insert(query_or_id, parameters, callback)
 
 #### store
 ```lua
-MySQL.Asynig.store(query, callback)
+MySQL.Async.store(query, callback)
 ```
 - Prepares a query for later execution
-- Callback receives query ID for use with `MySQL.Asynig.insert()`
+- Callback receives query ID for use with `MySQL.Async.insert()`
 - Maps to `ig.sql.PrepareQuery()`
 
 #### transaction
 ```lua
-MySQL.Asynig.transaction(queries, callback)
+MySQL.Async.transaction(queries, callback)
 ```
 - Executes multiple queries in atomic transaction
 - Callback receives success boolean
@@ -62,41 +62,41 @@ MySQL.Asynig.transaction(queries, callback)
 
 ### MySQL.Sync
 
-All `MySQL.Synig.*` functions are fully supported as blocking equivalents:
+All `MySQL.Sync.*` functions are fully supported as blocking equivalents:
 
 #### fetchAll
 ```lua
-local results = MySQL.Synig.fetchAll(query, parameters)
+local results = MySQL.Sync.fetchAll(query, parameters)
 ```
-- Synchronous version of `MySQL.Asynig.fetchAll`
+- Synchronous version of `MySQL.Async.fetchAll`
 - Returns results directly (no callback)
 
 #### fetchScalar
 ```lua
-local value = MySQL.Synig.fetchScalar(query, parameters)
+local value = MySQL.Sync.fetchScalar(query, parameters)
 ```
-- Synchronous version of `MySQL.Asynig.fetchScalar`
+- Synchronous version of `MySQL.Async.fetchScalar`
 - Returns scalar value directly
 
 #### execute
 ```lua
-local affected = MySQL.Synig.execute(query, parameters)
+local affected = MySQL.Sync.execute(query, parameters)
 ```
-- Synchronous version of `MySQL.Asynig.execute`
+- Synchronous version of `MySQL.Async.execute`
 - Returns affected rows or insertId
 
 #### insert
 ```lua
-local insertId = MySQL.Synig.insert(query, parameters)
+local insertId = MySQL.Sync.insert(query, parameters)
 ```
-- Synchronous version of `MySQL.Asynig.insert`
+- Synchronous version of `MySQL.Async.insert`
 - Returns insertId directly
 
 #### transaction
 ```lua
-local success = MySQL.Synig.transaction(queries)
+local success = MySQL.Sync.transaction(queries)
 ```
-- Synchronous version of `MySQL.Asynig.transaction`
+- Synchronous version of `MySQL.Async.transaction`
 - Returns success boolean
 
 ## Parameter Handling
@@ -105,7 +105,7 @@ The compatibility layer automatically converts named parameters to positional:
 
 ```lua
 -- Your old code with named parameters
-MySQL.Asynig.fetchAll("SELECT * FROM users WHERE license = @license AND active = @active", {
+MySQL.Async.fetchAll("SELECT * FROM users WHERE license = @license AND active = @active", {
     ["@license"] = license,
     ["@active"] = true
 }, callback)
@@ -120,10 +120,10 @@ ig.sql.Query("SELECT * FROM users WHERE license = ? AND active = ?", {license, t
 
 ### Async Execution
 
-All `MySQL.Asynig.*` functions execute in a new thread:
+All `MySQL.Async.*` functions execute in a new thread:
 
 ```lua
-function MySQL.Asynig.fetchAll(query, parameters, callback)
+function MySQL.Async.fetchAll(query, parameters, callback)
     Citizen.CreateThread(function()
         local results = ig.sql.Query(query, parameters or {})
         if callback and type(callback) == 'function' then
@@ -137,10 +137,10 @@ This ensures backward compatibility with code expecting asynchronous behavior.
 
 ### Sync Execution
 
-All `MySQL.Synig.*` functions execute synchronously:
+All `MySQL.Sync.*` functions execute synchronously:
 
 ```lua
-function MySQL.Synig.fetchAll(query, parameters)
+function MySQL.Sync.fetchAll(query, parameters)
     return ig.sql.Query(query, parameters or {})
 end
 ```
@@ -168,7 +168,7 @@ Migrate code file-by-file to new `ig.sql.*` API:
 
 ```lua
 -- Old code (still works)
-MySQL.Asynig.fetchAll("SELECT * FROM characters WHERE id = @id", {
+MySQL.Async.fetchAll("SELECT * FROM characters WHERE id = @id", {
     ["@id"] = characterId
 }, function(results)
     -- Handle results
@@ -203,8 +203,8 @@ local SHOW_DEPRECATION_WARNINGS = true
 
 When enabled, each legacy call logs:
 ```
-[SQL DEPRECATION] MySQL.Asynig.fetchAll is deprecated - migrate to ig.sql.* API
-[SQL DEPRECATION] Called from: @ig.core/server/[SQL]/_bank.lua:29
+[SQL DEPRECATION] MySQL.Async.fetchAll is deprecated - migrate to ig.sql.* API
+[SQL DEPRECATION] Called from: @ingenium/server/[SQL]/_bank.lua:29
 ```
 
 This helps identify which code still needs migration.
@@ -226,7 +226,7 @@ This helps identify which code still needs migration.
 
 ```lua
 -- Your existing resource using mysql-async
-MySQL.Asynig.fetchAll("SELECT * FROM my_table", {}, function(results)
+MySQL.Async.fetchAll("SELECT * FROM my_table", {}, function(results)
     for _, row in ipairs(results) do
         print(row.name)
     end
@@ -239,7 +239,7 @@ end)
 
 ```lua
 -- Old code with @named parameters
-MySQL.Asynig.execute("UPDATE characters SET active = @active WHERE id = @id", {
+MySQL.Async.execute("UPDATE characters SET active = @active WHERE id = @id", {
     ["@active"] = false,
     ["@id"] = characterId
 })
@@ -252,12 +252,12 @@ MySQL.Asynig.execute("UPDATE characters SET active = @active WHERE id = @id", {
 ```lua
 -- Old store/insert pattern
 local SaveQuery = -1
-MySQL.Asynig.store("UPDATE characters SET data = @data WHERE id = @id", function(id)
+MySQL.Async.store("UPDATE characters SET data = @data WHERE id = @id", function(id)
     SaveQuery = id
 end)
 
 -- Later...
-MySQL.Asynig.insert(SaveQuery, {
+MySQL.Async.insert(SaveQuery, {
     ["@data"] = json.encode(data),
     ["@id"] = characterId
 })
@@ -269,7 +269,7 @@ MySQL.Asynig.insert(SaveQuery, {
 
 ```lua
 -- Old transaction format
-MySQL.Asynig.transaction({
+MySQL.Async.transaction({
     {query = "UPDATE accounts SET balance = balance - @amount WHERE id = @from", parameters = {["@amount"] = 100, ["@from"] = 1}},
     {query = "UPDATE accounts SET balance = balance + @amount WHERE id = @to", parameters = {["@amount"] = 100, ["@to"] = 2}}
 }, function(success)
@@ -304,7 +304,7 @@ Error handling differs slightly:
 
 ```lua
 -- mysql-async: Errors passed to callback
-MySQL.Asynig.fetchAll("INVALID SQL", {}, function(results)
+MySQL.Async.fetchAll("INVALID SQL", {}, function(results)
     -- results = nil on error
 end)
 
@@ -322,13 +322,13 @@ local results = ig.sql.Query("INVALID SQL", {})
 ```lua
 RegisterCommand('testcompat', function()
     -- Test Async functions
-    MySQL.Asynig.fetchAll("SELECT * FROM users LIMIT 1", {}, function(r1)
+    MySQL.Async.fetchAll("SELECT * FROM users LIMIT 1", {}, function(r1)
         assert(type(r1) == "table", "fetchAll failed")
         
-        MySQL.Asynig.fetchScalar("SELECT COUNT(*) FROM users", {}, function(r2)
+        MySQL.Async.fetchScalar("SELECT COUNT(*) FROM users", {}, function(r2)
             assert(type(r2) == "number", "fetchScalar failed")
             
-            MySQL.Asynig.execute("UPDATE users SET last_check = ? WHERE id = 1", {os.time()}, function(r3)
+            MySQL.Async.execute("UPDATE users SET last_check = ? WHERE id = 1", {os.time()}, function(r3)
                 assert(r3 >= 0, "execute failed")
                 
                 print("All compatibility tests passed!")
@@ -337,11 +337,11 @@ RegisterCommand('testcompat', function()
     end)
     
     -- Test Sync functions
-    local syncResults = MySQL.Synig.fetchAll("SELECT * FROM users LIMIT 1", {})
-    assert(#syncResults >= 0, "Synig.fetchAll failed")
+    local syncResults = MySQL.Sync.fetchAll("SELECT * FROM users LIMIT 1", {})
+    assert(#syncResults >= 0, "Sync.fetchAll failed")
     
-    local syncScalar = MySQL.Synig.fetchScalar("SELECT COUNT(*) FROM users", {})
-    assert(type(syncScalar) == "number", "Synig.fetchScalar failed")
+    local syncScalar = MySQL.Sync.fetchScalar("SELECT COUNT(*) FROM users", {})
+    assert(type(syncScalar) == "number", "Sync.fetchScalar failed")
     
     print("Sync compatibility tests passed!")
 end, true)

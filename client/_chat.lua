@@ -9,9 +9,9 @@ function ig.chat.AddSuggestions()
     local ace = LocalPlayer.state.Ace
     if ig.ace[ace] then
         ig.ace[ace]()
-        ig.funig.Debug_1("Added chat suggestions for group: "..ace.." and below.")
+        ig.func.Debug_1("Added chat suggestions for group: "..ace.." and below.")
     else
-        ig.funig.Debug_1("Unable to find chat suggestions for group: "..ace)
+        ig.func.Debug_1("Unable to find chat suggestions for group: "..ace)
     end
 end
 

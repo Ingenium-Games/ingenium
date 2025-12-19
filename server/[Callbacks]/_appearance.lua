@@ -39,7 +39,7 @@ RegisterServerCallback({
         -- Check if player has enough money
         -- TODO: Integrate with your economy system
         -- The following is a placeholder implementation
-        local player = ig.funig.GetPlayer(source)
+        local player = ig.func.GetPlayer(source)
         if not player then
             return {
                 success = false,
@@ -52,7 +52,7 @@ RegisterServerCallback({
         -- Example: local playerCash = player.cash or 0
         -- Example: if playerCash < totalCost then return error end
         -- Example: player.cash = player.cash - totalCost
-        -- Example: ig.funig.SavePlayer(source, player)
+        -- Example: ig.func.SavePlayer(source, player)
         
         -- For now, allow all purchases (implement economy integration above)
         return {

@@ -1,6 +1,6 @@
 For any and all data related things, please review the https://github.com/DurtyFree/gta-v-data-dumps repo as the source of truth.
 
-# ig.core
+# ingenium
 
 Please only use the releases, cloneing may result in errors.
 
@@ -58,7 +58,7 @@ Some natives are only client sided, so leverage the callbacks to request data wh
 
 **Complete documentation is now available in the [`Documentation/`](./Documentation/) folder.**
 
-- **[User Documentation](./Documentation/README.md)** - Guides and API references for using ig.core
+- **[User Documentation](./Documentation/README.md)** - Guides and API references for using ingenium
 - **[Implementation Documentation](./Implementations/README.md)** - Technical details for contributors
 - **[Contributing Guidelines](./CONTRIBUTING.md)** - How to contribute to this project
 
@@ -225,7 +225,7 @@ local data = "xyz"
 ig.sql.Update("UPDATE `table` SET `Column1` = ? WHERE X = ?", {data, id})
 
 -- Legacy: Named parameters (still supported via compatibility layer)
-MySQL.Asynig.execute("UPDATE `table` SET `Column1` = @data WHERE X = @id", {
+MySQL.Async.execute("UPDATE `table` SET `Column1` = @data WHERE X = @id", {
     ["@data"] = data,
     ["@id"] = id
 })

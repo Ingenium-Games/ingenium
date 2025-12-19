@@ -1,6 +1,6 @@
-# Security Best Practices - ig.core
+# Security Best Practices - ingenium
 
-This document outlines the security measures implemented in ig.core to protect against common FiveM exploits.
+This document outlines the security measures implemented in ingenium to protect against common FiveM exploits.
 
 ## Table of Contents
 1. [StateBag Protection](#statebag-protection)
@@ -112,7 +112,7 @@ Add event handlers to process security events:
 -- In your logging resource
 AddEventHandler("txaLogger:LogTransaction", function(log)
     -- Store log to database
-    MySQL.Asynig.execute("INSERT INTO transaction_logs (...) VALUES (...)", {
+    MySQL.Async.execute("INSERT INTO transaction_logs (...) VALUES (...)", {
         timestamp = log.timestamp,
         player_id = log.player_id,
         type = log.type,
@@ -264,7 +264,7 @@ xPlayer.SetHealth(9999) -- Should clamp to conf.defaulthealth
 4. Review and adjust rate limit thresholds based on legitimate usage patterns
 
 ### Version Updates
-When updating ig.core:
+When updating ingenium:
 1. Check if new state bag keys are added
 2. Verify new numeric properties use `ig.check.Number` with appropriate bounds
 3. Add transaction logging to any new financial operations
@@ -296,4 +296,4 @@ For security concerns or questions:
 
 **Last Updated**: 2025-12-14  
 **Version**: 0.9.0  
-**Author**: ig.core Security Team
+**Author**: ingenium Security Team

@@ -33,7 +33,7 @@ end)
 -- [C]
 RegisterNetEvent("Server:Character:Delete", function(Character_ID)
     local src = tonumber(source)
-    local primary_id = ig.funig.identifier(src)
+    local primary_id = ig.func.identifier(src)
     ig.sql.char.Delete(Character_ID, function()
         DropPlayer(src, "Character with id: "..Character_ID.." was Deleted Successfully, please rejoin.")
     end)
@@ -51,7 +51,7 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, ap
     local src = tonumber(source)
     -- Run a check to see if it being exploited.
     if ig.data.GetPlayer(src) ~= false then
-        ig.funig.Eventban(src, "Server:Character:Register")
+        ig.func.Eventban(src, "Server:Character:Register")
     end
     local p = promise.new()
     local character_id = ig.sql.gen.CharacterID()
@@ -59,7 +59,7 @@ RegisterNetEvent("Server:Character:Register", function(first_name, last_name, ap
     local phone_number = ig.sql.gen.PhoneNumber()
     local iban = ig.sql.gen.Iban()
     local bank_number = ig.sql.gen.AccountNumber()
-    local primary_id = ig.funig.identifier(src)
+    local primary_id = ig.func.identifier(src)
     local data = {}
     
     data.Primary_ID = primary_id -- Owner
@@ -245,6 +245,6 @@ RegisterNetEvent("Server:Character:Duty", function(boolean)
         local xPlayer = ig.data.GetPlayer(src)
         xPlayer.SetDuty(bool)
     else
-        ig.funig.Debug_3("Ability to go on/off duty has ben disabled.")
+        ig.func.Debug_3("Ability to go on/off duty has ben disabled.")
     end
 end)

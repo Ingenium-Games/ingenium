@@ -44,7 +44,7 @@ function ig.sql.obj.Add(data, cb)
     local Data = data
     ig.sql.Insert(
         "INSERT INTO `objects` (`UUID`, `Model`, `Coords`, `Meta`, `States`, `Inventory`, `Created`, `Updated`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
-        {Data.UUID, Data.Model, Data.Coords, Data.Meta, Data.States, Data.Inventory, ig.funig.Timestamp(), ig.funig.Timestamp()},
+        {Data.UUID, Data.Model, Data.Coords, Data.Meta, Data.States, Data.Inventory, ig.func.Timestamp(), ig.func.Timestamp()},
         function(insertId)
             if cb then
                 cb(insertId)

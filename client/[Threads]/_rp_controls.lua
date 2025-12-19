@@ -151,12 +151,12 @@ Citizen.CreateThread(function()
                 -- Player just died, start death effects
                 ig.fx.StartDeath()
                 deathFxActive = true
-                ig.funig.Debug_2("Death FX started")
+                ig.func.Debug_2("Death FX started")
             elseif not isDead and deathFxActive then
                 -- Player revived, stop death effects
                 ig.fx.StopDeath()
                 deathFxActive = false
-                ig.funig.Debug_2("Death FX stopped")
+                ig.func.Debug_2("Death FX stopped")
             end
         else
             -- Player not loaded

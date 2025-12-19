@@ -21,7 +21,7 @@ function ig.inventory.GetWeight()
             local item = ig.items[v.Item]
             ig.inventory.Weight = ig.inventory.Weight + item.Weight
         else
-            ig.funig.Debug_1("Ignoring invalid item within .GetWeight()")
+            ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
         end
     end
     return ig.inventory.Weight

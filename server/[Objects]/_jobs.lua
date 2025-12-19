@@ -76,7 +76,7 @@ RegisterNetEvent("Server:Character:OffDuty", function(req)
         xPlayer.Notify("Off Duty")
         TriggerClientEvent("Client:Character:OffDuty", src)
     else
-        ig.funig.Debug_1("Ability to go off duty has ben disabled.")
+        ig.func.Debug_1("Ability to go off duty has ben disabled.")
     end
 end)
 
@@ -89,7 +89,7 @@ RegisterNetEvent("Server:Character:OnDuty", function(req)
         xPlayer.Notify("On Duty")
         TriggerClientEvent("Client:Character:OnDuty", src, CurrentlyActive[src])
     else
-        ig.funig.Debug_1("Ability to go on duty has ben disabled.")
+        ig.func.Debug_1("Ability to go on duty has ben disabled.")
     end
 end)
 
@@ -132,7 +132,7 @@ function ig.job.Payroll(bool)
                 end
             end
         end
-        ig.funig.Debug_1("Jobs Payed.")
+        ig.func.Debug_1("Jobs Payed.")
     end
 end
 
