@@ -155,7 +155,9 @@ function ig.sql.AwaitReady(timeout, cb)
     end
     
     if ig.sql.IsReady() then
-        cb()
+        if cb then
+            return cb() 
+        end
     end
 end
 

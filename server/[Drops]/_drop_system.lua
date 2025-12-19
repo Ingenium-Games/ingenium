@@ -1,6 +1,8 @@
 -- ====================================================================================--
 -- Drop System: Physical item drops in the world
 -- ====================================================================================--
+ig.drop = ig.drop or {} -- function level
+ig.drops = ig.drops or {} -- dropped items table
 ig.active_drops = {} -- Drops currently being accessed by players
 -- ====================================================================================--
 

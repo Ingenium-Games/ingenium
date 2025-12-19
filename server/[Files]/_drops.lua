@@ -1,6 +1,6 @@
 -- ====================================================================================--
-ig.drop = {} -- function level
-ig.drops = false -- dropped items table
+ig.drop = ig.drop or {} -- function level
+ig.drops = ig.drops or {} -- dropped items table
 -- ====================================================================================--
 
 --[[    

@@ -453,22 +453,3 @@ function ig.func.HasPlayers()
     end
 end
 
--- ====================================================================================--
--- Item and Door Helper Functions
--- ====================================================================================--
-
---- Get item data from loaded JSON
----@param itemName string
----@return table|nil
-function ig.item.Get(itemName)
-    return ig.items and ig.items[itemName] or nil
-end
-exports('GetItem', ig.item.Get)
-
---- Get door data from loaded JSON
----@param doorId any
----@return table|nil
-function ig.door.Get(doorId)
-    return ig.doors and ig.doors[doorId] or nil
-end
-exports('GetDoor', ig.door.Get)

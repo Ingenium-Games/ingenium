@@ -30,3 +30,52 @@ local GetObjects = RegisterServerCallback({
         return objs
     end
 })
+
+local GetTattoos = RegisterServerCallback({
+    eventName = "ig:GameData:GetTattoos",
+    eventCallback = function(source)
+        return ig.tattoos
+    end
+})
+
+local GetTattoosByZone = RegisterServerCallback({
+    eventName = "ig:GameData:GetTattoosByZone",
+    eventCallback = function(source, zone)
+        return ig.tattoo.GetByZone(zone)
+    end
+})
+
+local GetWeapons = RegisterServerCallback({
+    eventName = "ig:GameData:GetWeapons",
+    eventCallback = function(source)
+        return ig.weapons
+    end
+})
+
+local GetVehicles = RegisterServerCallback({
+    eventName = "ig:GameData:GetVehicles",
+    eventCallback = function(source)
+        return ig.vehicles
+    end
+})
+
+local GetVehicleByHash = RegisterServerCallback({
+    eventName = "ig:GameData:GetVehicleByHash",
+    eventCallback = function(source, hash)
+        return ig.vehicle.GetByHash(hash)
+    end
+})
+
+local GetModkits = RegisterServerCallback({
+    eventName = "ig:GameData:GetModkits",
+    eventCallback = function(source)
+        return ig.modkits
+    end
+})
+
+local GetModkitForVehicle = RegisterServerCallback({
+    eventName = "ig:GameData:GetModkitForVehicle",
+    eventCallback = function(source, vehicleHash)
+        return ig.modkit.GetForVehicle(vehicleHash)
+    end
+})

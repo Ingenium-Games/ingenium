@@ -64,4 +64,51 @@ RegisterServerCallback({
     end
 })
 
-print('^2[Server] Appearance callbacks loaded^0')
+local GetPeds = RegisterServerCallback({
+    eventName = "ig:GameData:GetPeds",
+    eventCallback = function(source)
+        return ig.peds
+    end
+})
+
+local GetPedsByGender = RegisterServerCallback({
+    eventName = "ig:GameData:GetPedsByGender",
+    eventCallback = function(source, gender)
+        return ig.ped.GetByGender(gender)
+    end
+})
+
+local GetPedsByType = RegisterServerCallback({
+    eventName = "ig:GameData:GetPedsByType",
+    eventCallback = function(source, pedType)
+        return ig.ped.GetByType(pedType)
+    end
+})
+
+local GetPedByHash = RegisterServerCallback({
+    eventName = "ig:GameData:GetPedByHash",
+    eventCallback = function(source, hash)
+        return ig.ped.GetByHash(hash)
+    end
+})
+
+local GetPedByName = RegisterServerCallback({
+    eventName = "ig:GameData:GetPedByName",
+    eventCallback = function(source, name)
+        return ig.ped.GetByName(name)
+    end
+})
+
+local GetAppearanceConstants = RegisterServerCallback({
+    eventName = "ig:GameData:GetAppearanceConstants",
+    eventCallback = function(source)
+        return ig.appearance_constants
+    end
+})
+
+local ValidateAppearance = RegisterServerCallback({
+    eventName = "ig:Appearance:ValidateAppearance",
+    eventCallback = function(source, appearance)
+        return ig.appearance.ValidateAppearance(appearance)
+    end
+})
