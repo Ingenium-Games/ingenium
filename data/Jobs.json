@@ -1,1 +1,287 @@
-[]
+{
+  "none": {
+    "Unemployed": {
+      "org": "Unemployed",
+      "rank": 1,
+      "pay": 8
+    }
+  },
+  "police": {
+    "Cadet": {
+      "org": "Police Department",
+      "rank": 1,
+      "pay": 17
+    },
+    "Junior Officer": {
+      "org": "Police Department",
+      "rank": 2,
+      "pay": 22
+    },
+    "Officer": {
+      "org": "Police Department",
+      "rank": 3,
+      "pay": 26
+    },
+    "Senior Officer": {
+      "org": "Police Department",
+      "rank": 4,
+      "pay": 29
+    },
+    "Cheif of Police": {
+      "org": "Police Department",
+      "rank": 5,
+      "pay": 33
+    }
+  },
+  "medic": {
+    "Trainee": {
+      "org": "Emergancy Medical Services",
+      "rank": 1,
+      "pay": 19
+    },
+    "Paramedic": {
+      "org": "Emergancy Medical Services",
+      "rank": 2,
+      "pay": 24
+    },
+    "Doctor": {
+      "org": "Emergancy Medical Services",
+      "rank": 3,
+      "pay": 29
+    },
+    "Cheif Medical Officer": {
+      "org": "Emergancy Medical Services",
+      "rank": 4,
+      "pay": 33
+    }
+  },
+  "pdm": {
+    "Pre-Delivery": {
+      "org": "Premium Motor Sport",
+      "rank": 1,
+      "pay": 13
+    },
+    "Floor Sales": {
+      "org": "Premium Motor Sport",
+      "rank": 2,
+      "pay": 18
+    },
+    "Sales Expert": {
+      "org": "Premium Motor Sport",
+      "rank": 3,
+      "pay": 23
+    },
+    "Operations Director": {
+      "org": "Premium Motor Sport",
+      "rank": 4,
+      "pay": 27
+    }
+  },
+  "mechanic": {
+    "Apprentice": {
+      "org": "Benny's Original Motorworks",
+      "rank": 1,
+      "pay": 12
+    },
+    "Mechanic": {
+      "org": "Benny's Original Motorworks",
+      "rank": 2,
+      "pay": 22
+    },
+    "Import Logistics": {
+      "org": "Benny's Original Motorworks",
+      "rank": 3,
+      "pay": 26
+    },
+    "Boss Man": {
+      "org": "Benny's Original Motorworks",
+      "rank": 4,
+      "pay": 30
+    }
+  },
+  "news": {
+    "Intern": {
+      "org": "Wezeal News",
+      "rank": 1,
+      "pay": 10
+    },
+    "Camera Crew": {
+      "org": "Wezeal News",
+      "rank": 2,
+      "pay": 16
+    },
+    "Reporter": {
+      "org": "Wezeal News",
+      "rank": 3,
+      "pay": 21
+    },
+    "DJ Mixer": {
+      "org": "Wezeal News",
+      "rank": 4,
+      "pay": 25
+    },
+    "News Anchor": {
+      "org": "Wezeal News",
+      "rank": 5,
+      "pay": 29
+    }
+  },
+  "garbage": {
+    "Waste Colector": {
+      "org": "Desperado's Waste Services",
+      "rank": 1,
+      "pay": 15
+    },
+    "Heavy Colections": {
+      "org": "Desperado's Waste Services",
+      "rank": 2,
+      "pay": 22
+    },
+    "Renew Technition": {
+      "org": "Desperado's Waste Services",
+      "rank": 3,
+      "pay": 25
+    },
+    "Service Logistic Manager": {
+      "org": "Desperado's Waste Services",
+      "rank": 4,
+      "pay": 28
+    }
+  },
+  "vargos": {
+    "Repin Yellow": {
+      "org": "Vargos",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "ballers": {
+    "Repin Purple": {
+      "org": "Ballers",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "famillies": {
+    "Repin Green": {
+      "org": "Famillies",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "aztecas": {
+    "Repin Red": {
+      "org": "Aztecas",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "pepe": {
+    "Delivery Driver": {
+      "org": "Pepe's Pizzaria",
+      "rank": 1,
+      "pay": 10
+    },
+    "Pizza Chef": {
+      "org": "Pepe's Pizzaria",
+      "rank": 2,
+      "pay": 18
+    },
+    "Franchisee": {
+      "org": "Pepe's Pizzaria",
+      "rank": 3,
+      "pay": 24
+    }
+  },
+  "postal": {
+    "Delivery Driver": {
+      "org": "Go Postal",
+      "rank": 1,
+      "pay": 13
+    }
+  },
+  "mining": {
+    "Miner": {
+      "org": "Caveat Cutters Union",
+      "rank": 1,
+      "pay": 13
+    }
+  },
+  "lumber": {
+    "Wood Cutter": {
+      "org": "Chippy Chop'ns Wood Shop'n",
+      "rank": 1,
+      "pay": 13
+    }
+  },
+  "chicken": {
+    "Chicken Packer": {
+      "org": "Cluckin' Bell",
+      "rank": 1,
+      "pay": 13
+    }
+  },
+  "bank": {
+    "Associate": {
+      "org": "Fleeca",
+      "rank": 1,
+      "pay": 21
+    }
+  },
+  "city": {
+    "Major": {
+      "org": "State Department",
+      "rank": 1,
+      "pay": 37
+    }
+  },
+  "logistics": {
+    "Driver": {
+      "org": "OP Logistics",
+      "rank": 1,
+      "pay": 9
+    }
+  },
+  "altruists": {
+    "Repin Nude": {
+      "org": "Altruists",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "lostsc": {
+    "Repin Bikes": {
+      "org": "Lost SC",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "marabunta": {
+    "Repin Things": {
+      "org": "Marabuntas",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "triads": {
+    "Repin Golden Dragons": {
+      "org": "Triads",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "lostmc": {
+    "Repin Bikes": {
+      "org": "Lost MC",
+      "rank": 1,
+      "pay": 5
+    }
+  },
+  "taxi": {
+    "Driver": {
+      "org": "Taxi Service",
+      "rank": 1,
+      "pay": 6
+    }
+  }
+}

@@ -5,40 +5,27 @@ ig.pdex = {} -- player index = pdex (source numbers assigned by the server upon 
 
 --- Used on startup prior to the server really running.
 function ig.data.Initilize()
+    --
     ig._loading = true
     --
-    ig.data.LoadJSONData(function()
-        ig.item.GenerateConsumptionEvents()
-        print(('  ^3- Consumption Events: Registered^7')) 
-    end)
-    --
     ig.sql.AwaitReady(40000, function()
-        -- Add other SQL commands required on start up.
-        -- such as cleaning tables, requesting data, etig..
-        -- [1]
-        ig.sql.ResetActiveCharacters()
-        -- [2]
-        ig.sql.jobs.Generate()
-        -- [3]
-        ig.sql.jobs.Setup()
-        -- [4]
-        ig.sql.jobs.Accounts()
-        -- [5] -- Not so much a SQL function, but dependant on it being conducted in order.
-        ig.data.CreateJobObjects()
-
-        ig.data.RestoreDrops()
-
-        -- [12]
-        ig.sql.veh.Reset()
-        --
-        ig.sql.obj.GetObjects()
         --
         ig._loading = false
+        --
     end)
 
     while ig._loading do
         Wait(250)
     end
+    --
+    ig.data.LoadJSONData(function()
+        ig.item.GenerateConsumptionEvents()
+        print(('  ^3- Consumption Events: Registered^7')) 
+        --
+        ig.data.RestoreDrops()
+        print(('  ^3- Restoring: Drops^7')) 
+    end)
+    --
     ig._dataloaded = true
 end
 

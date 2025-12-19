@@ -1,9 +1,6 @@
 /**
- * MySQL2 Connection Pool Manager
- * Integrated in-resource MySQL connection pool using mysql2
- * Based on oxmysql architecture adapted for ingenium
+ * MySQL2 Connection Pool Manager for FiveM (Ingenium)
  */
-
 const mysql = require('mysql2/promise');
 
 class ConnectionPool {
@@ -28,7 +25,7 @@ class ConnectionPool {
             bigNumberStrings: false,
             dateStrings: true
         };
-        
+
         this.stats = {
             totalQueries: 0,
             slowQueries: 0,
@@ -37,12 +34,8 @@ class ConnectionPool {
         };
     }
 
-    /**
-     * Initialize the connection pool
-     */
     async initialize() {
         try {
-            // Parse connection string if provided (mysql://user:pass@host:port/database)
             const connectionString = GetConvar('mysql_connection_string', '');
             if (connectionString && connectionString.startsWith('mysql://')) {
                 const url = new URL(connectionString);
@@ -54,17 +47,14 @@ class ConnectionPool {
             }
 
             this.pool = mysql.createPool(this.config);
-            
+
             // Test connection
             const connection = await this.pool.getConnection();
             console.log(`^2[SQL] Connected to MySQL database: ${this.config.database}@${this.config.host}:${this.config.port}^7`);
             connection.release();
-            
+
             this.isReady = true;
-            
-            // Emit ready event
             emit('ig:sql:ready');
-            
             return true;
         } catch (error) {
             console.error(`^1[SQL ERROR] Failed to initialize connection pool: ${error.message}^7`);
@@ -74,9 +64,6 @@ class ConnectionPool {
         }
     }
 
-    /**
-     * Get a connection from the pool
-     */
     async getConnection() {
         if (!this.isReady) {
             throw new Error('Connection pool is not initialized');
@@ -84,48 +71,33 @@ class ConnectionPool {
         return await this.pool.getConnection();
     }
 
-    /**
-     * Execute a raw query
-     */
     async execute(query, parameters = []) {
         const startTime = process.hrtime.bigint();
-        
         try {
             const [results] = await this.pool.execute(query, parameters);
-            
             const endTime = process.hrtime.bigint();
-            const duration = Number(endTime - startTime) / 1000000; // Convert to milliseconds
-            
+            const duration = Number(endTime - startTime) / 1000000;
             this.stats.totalQueries++;
             this.stats.totalTime += duration;
-            
             if (duration > 150) {
                 this.stats.slowQueries++;
                 console.log(`^3[SQL WARNING] Slow query (${duration.toFixed(2)}ms): ${query.substring(0, 100)}...^7`);
                 emit('ig:sql:slowQuery', { query, duration, parameters });
             }
-            
             emit('ig:sql:queryExecuted', { query, duration, success: true });
-            
             return results;
         } catch (error) {
             this.stats.failedQueries++;
             console.error(`^1[SQL ERROR] Query failed: ${error.message}^7`);
             console.error(`^1[SQL ERROR] Query: ${query}^7`);
             console.error(`^1[SQL ERROR] Parameters: ${JSON.stringify(parameters)}^7`);
-            
             emit('ig:sql:queryExecuted', { query, duration: 0, success: false, error: error.message });
-            
             throw error;
         }
     }
 
-    /**
-     * Get pool statistics
-     */
     getStats() {
         const avgTime = this.stats.totalQueries > 0 ? this.stats.totalTime / this.stats.totalQueries : 0;
-        
         return {
             ...this.stats,
             averageTime: avgTime,
@@ -139,9 +111,6 @@ class ConnectionPool {
         };
     }
 
-    /**
-     * Close the connection pool
-     */
     async close() {
         if (this.pool) {
             await this.pool.end();
@@ -150,30 +119,23 @@ class ConnectionPool {
         }
     }
 
-    /**
-     * Check if pool is ready
-     */
     ready() {
         return this.isReady;
     }
 }
 
-// Create singleton instance
-const pool = new ConnectionPool();
+// Singleton!
+const poolSingleton = new ConnectionPool();
 
-// Export for use in other modules
-global.exports('getPool', () => pool);
-global.exports('isReady', () => pool.ready());
-global.exports('getStats', () => pool.getStats());
+// Export for use in other modules/resources
+global.exports('getPool', () => poolSingleton);
+global.exports('isReady', () => poolSingleton.ready());
+global.exports('getStats', () => poolSingleton.getStats());
 
-// Initialize on resource start
 setImmediate(async () => {
-    await pool.initialize();
+    await poolSingleton.initialize();
 });
 
-// Cleanup on resource stop
 on('onResourceStop', (resourceName) => {
-    if (resourceName === GetCurrentResourceName()) {
-        pool.close();
-    }
+    if (resourceName === GetCurrentResourceName()) poolSingleton.close();
 });

@@ -40,8 +40,7 @@ server_scripts {
     "server/[SQL]/_saves.lua",
     "server/[SQL]/_users.lua",
     "server/[SQL]/_vehicles.lua",
-    "server/**/*.lua",
-    "server/**/*.js"
+    "server/**/*.lua"
 }
 ------------------------------------------------------------------------------
 dependencies {"/onesync", "discordroles", "restfx"}

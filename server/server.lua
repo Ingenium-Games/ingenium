@@ -14,7 +14,10 @@ AddEventHandler("onResourceStart", function(resourceName)
     end
     --
     ig.version.Check(conf.url.version, resourceName)
-    -- Run setup / startup by loading data from files the database etig.
+end)
+
+AddEventHandler('ig:sql:ready', function()
+    --
     ig.data.Initilize()
     --
     while ig._loading do
@@ -37,12 +40,8 @@ AddEventHandler("onResourceStart", function(resourceName)
     ig.note.CleanUp()
     --
     Queue.OnReady()
-    --
-
-    -- TESTING
-    -- ig.persistance.ObjectThread()
-    ig._loaded = true
 end)
+
 
 -- ====================================================================================--
 RegisterNetEvent("Server:PlayerConnecting")
@@ -95,13 +94,8 @@ AddEventHandler("playerDropped", function()
         print("   ^7[^5SQL^7]: Vehicles")
         Citizen.Wait(conf.sec)
         --
-        ig.sql.save.Jobs()
-        print("   ^7[^5SQL^7]: Jobs")
-        Citizen.Wait(conf.sec)
-        --
-        ig.sql.save.Objects()
-        print("   ^7[^5SQL^7]: Objects")
-        Citizen.Wait(conf.sec)
+        ig.sql.veh.Reset()
+        ig.sql.ResetActiveCharacters()
         --
     end
 end)
