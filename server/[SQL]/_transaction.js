@@ -14,7 +14,7 @@ class TransactionManager {
         let connection = null;
         
         try {
-            const pool =new ConnectionPool();
+            const pool = pool;
             connection = await pool.getConnection();
             
             // Start transaction
@@ -86,7 +86,7 @@ class TransactionManager {
      */
     static async batch(queries, callback = null) {
         try {
-            const pool =new ConnectionPool();
+            const pool = pool;
             const results = [];
             
             for (const item of queries) {

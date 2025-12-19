@@ -36,7 +36,7 @@ class QueryExecutor {
      */
     static async query(queryString, parameters = [], callback = null) {
         try {
-            const pool = new ConnectionPool();
+            const pool = ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -65,7 +65,7 @@ class QueryExecutor {
      */
     static async fetchSingle(queryString, parameters = [], callback = null) {
         try {
-            const pool =new ConnectionPool();
+            const pool = ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -94,7 +94,7 @@ class QueryExecutor {
      */
     static async fetchScalar(queryString, parameters = [], callback = null) {
         try {
-            const pool =new ConnectionPool();
+            const pool = ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -128,7 +128,7 @@ class QueryExecutor {
      */
     static async insert(queryString, parameters = [], callback = null) {
         try {
-            const pool =new ConnectionPool();
+            const pool = new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -157,7 +157,7 @@ class QueryExecutor {
      */
     static async update(queryString, parameters = [], callback = null) {
         try {
-            const pool =new ConnectionPool();
+            const pool = new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);
@@ -205,7 +205,7 @@ class QueryExecutor {
             }
             
             const queryString = global.preparedQueries[queryId];
-            const pool =new ConnectionPool();
+            const pool = new ConnectionPool();
             const { query, parameters: params } = this.convertNamedParameters(queryString, parameters);
             
             const results = await pool.execute(query, params);

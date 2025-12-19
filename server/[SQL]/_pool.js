@@ -13,7 +13,7 @@ class ConnectionPool {
         this.config = {
             host: GetConvar('mysql_connection_string', '').match(/mysql:\/\/([^:]+)/)?.[1] || 
                   GetConvar('mysql_host', 'localhost'),
-            port: parseInt(GetConvar('mysql_port', '3306')),
+            port: parseInt(GetConvar('mysql_port', '5001')),
             user: GetConvar('mysql_user', 'root'),
             password: GetConvar('mysql_password', ''),
             database: GetConvar('mysql_database', 'fivem'),
@@ -47,7 +47,7 @@ class ConnectionPool {
             if (connectionString && connectionString.startsWith('mysql://')) {
                 const url = new URL(connectionString);
                 this.config.host = url.hostname;
-                this.config.port = parseInt(url.port) || 3306;
+                this.config.port = parseInt(url.port) || 5001;
                 this.config.user = url.username;
                 this.config.password = url.password;
                 this.config.database = url.pathname.substring(1);
