@@ -41,7 +41,8 @@ local function SaveDynamicData()
         ig.json.Write('Scenes', ig.scenes)
         ig.json.Write('Notes', ig.notes)
         ig.json.Write('GSR', ig.gsrs)
-        
+        ig.json.Write('Objects') or {}
+
         local elapsed = (os.clock() - startTime) * 1000
         print(('^2[Autosave] Dynamic data saved to JSON (%.2fms)^7'):format(elapsed))
     end

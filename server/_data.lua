@@ -1,35 +1,8 @@
 -- ====================================================================================--
 ig.data = {} -- data table for funcitons.
+-- ====================================================================================--
+
 ig.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
--- ====================================================================================--
-
---- Used on startup prior to the server really running.
-function ig.data.Initilize()
-    --
-    ig._loading = true
-    --
-    ig.sql.AwaitReady(40000, function()
-        --
-        ig._loading = false
-        --
-    end)
-
-    while ig._loading do
-        Wait(250)
-    end
-    --
-    ig.data.LoadJSONData(function()
-        ig.item.GenerateConsumptionEvents()
-        print(('  ^3- Consumption Events: Registered^7')) 
-        --
-        ig.data.RestoreDrops()
-        print(('  ^3- Restoring: Drops^7')) 
-    end)
-    --
-    ig._dataloaded = true
-end
-
--- ====================================================================================--
 
 --- Adds player to the player index.
 ---@param source number "source [server_id]"
@@ -139,6 +112,8 @@ end
 -- ====================================================================================--
 -- Vehicles - ig.vdex = Object Table with xVehicle as referance obj, ig.vehicle = function table
 
+ig.vdex = {} -- the index/store for currently generated vehicles
+
 ---@param net integer "Network ID 16 bit integer"
 function ig.data.FindVehicle(net)
     for k, v in pairs(ig.vdex) do
@@ -235,6 +210,8 @@ end
 -- ====================================================================================--
 -- NPC"s 
 
+ig.ndex = {} -- the index/store for currently generated npcs
+
 ---@param net integer "Network ID 16 bit integer"
 function ig.data.FindNpc(arg)
     for k, v in pairs(ig.ndex) do
@@ -287,6 +264,9 @@ end
 
 -- ====================================================================================--
 -- 
+
+ig.odex = {} -- the odex/store for currently generated objects
+
 
 ---@param net integer "Network ID 16 bit integer"
 function ig.data.FindObject(net)
@@ -390,6 +370,33 @@ function ig.GetJob(str)
 end
 
 -- ====================================================================================--
+
+--- Used on startup prior to the server really running.
+function ig.data.Initilize()
+    --
+    ig._loading = true
+    --
+    ig.sql.AwaitReady(40000, function()
+        --
+        ig._loading = false
+        --
+    end)
+
+    while ig._loading do
+        Wait(250)
+    end
+    --
+    ig.data.LoadJSONData(function()
+        ig.item.GenerateConsumptionEvents()
+        print(('  ^3- Consumption Events: Registered^7')) 
+        --
+        ig.data.RestoreDrops()
+        print(('  ^3- Restoring: Drops^7')) 
+    end)
+    --
+    ig._dataloaded = true
+end
+
 
 --- func desc
 ---@param str any
@@ -598,48 +605,18 @@ function ig.data.RestoreDrops()
                 drop.Coords.x,
                 drop.Coords.y,
                 drop.Coords.z,
-                false
+                false,
+                drop
             )
             
             if entity and netId then
                 -- Get the object
                 local xObject = ig.data.GetObject(netId)
                 if xObject then
-                    -- Set coordinates
-                    xObject.SetCoords({
-                        x = drop.Coords.x,
-                        y = drop.Coords.y,
-                        z = drop.Coords.z,
-                        h = drop.Coords.h or 0.0,
-                        rx = 0.0,
-                        ry = 0.0,
-                        rz = 0.0
-                    })
-                    
                     -- Freeze and enable collision
                     FreezeEntityPosition(xObject.Entity, true)
                     SetEntityCollision(xObject.Entity, true, true)
-                    
-                    -- Add inventory items with validation
-                    if type(drop.Inventory) == "table" then
-                        for _, item in ipairs(drop.Inventory) do
-                            -- Validate item exists in the database before adding
-                            local itemName = item[1] or item.Item
-                            if itemName and ig.item.Exists(itemName) then
-                                xObject.AddItem(item)
-                            else
-                                ig.func.Debug_1("Skipping invalid item in drop restore: " .. tostring(itemName))
-                            end
-                        end
-                    end
-                    
-                    -- Update state bag
-                    xObject.State.Inventory = xObject.GetInventory()
-                    
-                    -- Update drop entry with new NetID
-                    drop.NetID = netId
-                    ig.drops[uuid] = drop
-                    
+                    --
                     restoredCount = restoredCount + 1
                 else
                     ig.func.Debug_1("Failed to get xObject for restored drop: " .. uuid)

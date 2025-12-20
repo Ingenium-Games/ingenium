@@ -23,6 +23,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]--
+ig.queue = {}
 local Queue = {}
 -- EDIT THESE IN SERVER.CFG + OTHER OPTIONS IN QConfig.LUA
 Queue.MaxPlayers = GetConvarInt("sv_maxclients", 48)
@@ -453,7 +454,7 @@ function Queue:OnJoin(cb, resource)
 end
 
 
-function joiningqueue(source, name, setKickReason, deferrals)
+function ig.queue.Join(source, name, setKickReason, deferrals)
     local src = source
     local ids = Queue:GetIds(src)
     local name = GetPlayerName(src)

@@ -127,7 +127,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 CancelEvent()
             else
                 Citizen.Wait(0)
-                joiningqueue(src, name, reject, d)
+                ig.queue.Join(src, name, reject, d)
             end
         end 
     end)

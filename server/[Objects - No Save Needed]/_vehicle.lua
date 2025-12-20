@@ -1,9 +1,8 @@
 -- ====================================================================================--
 ig.vehicle = {} -- function level
-ig.vehicles = {} -- names table to be imported from Names.json
--- ====================================================================================--
+ig.vehicles = {} -- names table to be imported from Vehicles.json
 
-local gender = {["m"] = {},["f"] = {},["u"] = {}}
+-- ====================================================================================--
 
 --- func desc
 ---@param . any
