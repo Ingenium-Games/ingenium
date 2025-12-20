@@ -450,15 +450,3 @@ RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, m
         ig.func.Debug_3("Player " .. source .. " dropped " .. quantity .. "x " .. item)
     end
 end)
-
--- ====================================================================================--
--- Initialization
--- ====================================================================================--
-
--- Start cleanup routine when resource is ready
-CreateThread(function()
-    while ig._loading do
-        Wait(1000)
-    end
-    ig.drop.StartCleanupRoutine()
-end)

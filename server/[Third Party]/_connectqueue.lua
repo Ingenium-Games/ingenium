@@ -127,7 +127,6 @@ end
 AddEventHandler("onResourceStart", function(resource)
     if resource == Queue.CurResource then
         while GetResourceState(resource) ~= "started" do Citizen.Wait(0) end
-        Citizen.Wait(1)
         Queue.LoadExports()
     end
 end)
@@ -138,5 +137,3 @@ AddEventHandler("onResourceStop", function(resource)
         Queue.Exports = nil
     end
 end)
-
-SetTimeout(1, function() Queue.LoadExports() end)

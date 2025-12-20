@@ -52,7 +52,7 @@ function ig.sql.char.GetAllPermited(primary_id, slots, cb)
     return result
 end
 
-function ig.sql.char.ReviveDeadCharacters(cb)
+function ig.sql.char.ReviveDeadCharacters()
     ig.sql.Update(
         "UPDATE `characters` SET `Health` = 150, `Is_Dead` = FALSE, `Coords` = ?, `Dead_Time` = NULL, `Dead_Data` = ? WHERE `Dead_Time` <= (? - '604800')",
         {
@@ -61,7 +61,6 @@ function ig.sql.char.ReviveDeadCharacters(cb)
             ig.func.Timestamp()
         },
         function(affectedRows)
-            if cb then cb(affectedRows) end
         end
     )
 end

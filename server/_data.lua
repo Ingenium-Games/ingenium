@@ -521,9 +521,6 @@ function ig.data.LoadJSONData(callback)
     ig.doors        = ig.json.Load('Doors') or {}
     ig.objects      = ig.json.Load('Objects') or {}
     ig.names        = ig.json.Load('Names') or {}
-    ig.job_accounts = ig.json.Load('job_accounts') or {}
-    ig.job_objects  = ig.json.Load('job_objects') or {}
-    ig.vehicles_rt  = ig.json.Load('VehiclesRT') or {}  -- if used for runtime vehicles
 
     -- ==== STATIC ("Reference") DATA TABLES ("ig.dump"/config) ====
     ig.tattoos             = ig.json.Load('tattoos') or {}

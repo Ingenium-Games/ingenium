@@ -35,8 +35,6 @@ server_scripts {
     "server/[SQL]/_bank.lua",
     "server/[SQL]/_character.lua",
     "server/[SQL]/_gen.lua",
-    "server/[SQL]/_jobs.lua",
-    "server/[SQL]/_objects.lua",
     "server/[SQL]/_saves.lua",
     "server/[SQL]/_users.lua",
     "server/[SQL]/_vehicles.lua",

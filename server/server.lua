@@ -33,11 +33,6 @@ AddEventHandler('ig:sql:ready', function()
     ig.data.CharacterValues()
     -- Start Paying players based on conf.
     ig.job.PayCycle()
-    -- Cleanup Cycles on files.
-    ig.gsr.CleanUp()
-    ig.drop.CleanUp()
-    ig.pick.CleanUp()
-    ig.note.CleanUp()
     --
     Queue.OnReady()
 end)
