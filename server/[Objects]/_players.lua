@@ -1,0 +1,97 @@
+--
+ig.player = {} -- function level
+ig.players = {} -- loaded past / present players
+--
+ig.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
+
+--- Adds player to the player index.
+---@param source number "source [server_id]"
+function ig.player.AddPlayer(source)
+    local num = tonumber(source)
+    ig.pdex[num] = false
+end
+
+--- Gets player from the player table.
+---@param source number
+function ig.player.GetPlayer(source)
+    if type(ig.pdex[tonumber(source)]) == "table" then
+        return ig.pdex[tonumber(source)]
+    else
+        return false
+    end
+end
+
+--- Same as above.
+---@param source number
+function ig.GetPlayer(source)
+    return ig.player.GetPlayer(tonumber(source))
+end
+
+--- Same as above.
+---@param source number
+function ig.GetPlayerFromId(source)
+    return ig.player.GetPlayer(tonumber(source))
+end
+
+--- Set the player id to the table.
+---@param source number
+---@param data table
+function ig.player.SetPlayer(source, data)
+    ig.pdex[tonumber(source)] = data
+end
+
+--- Set to nil for garbage collection.
+---@param source number
+function ig.player.RemovePlayer(source)
+    ig.pdex[tonumber(source)] = nil
+end
+
+--- Get the player table
+function ig.player.GetPlayers()
+    return ig.pdex
+end
+
+--- Wrapper for the above.
+function ig.GetPlayers()
+    return ig.player.GetPlayers()
+end
+
+--- func desc
+---@param character_id any
+function ig.player.GetOfflinePlayer(character_id)
+    if character_id then
+        local data = ig.sql.char.Get(character_id)
+        if data then
+            local temp = ig.class.OfflinePlayer(data)
+            return temp
+        end
+    end
+    return nil
+end
+
+--- Return corresponding player data from character_id
+---@param id string "Character_ID"
+function ig.player.GetPlayerByCharacterID(id)
+    for k, v in pairs(ig.pdex) do
+        if v then
+            if v.GetCharacter_ID() == tostring(id) then
+                return ig.player.GetPlayer(k)
+            end
+        end
+    end
+    return nil
+end
+
+--- Wrapper for the above.
+function ig.GetPlayerByCharacterID(id)
+    return ig.player.GetPlayerByCharacterID(id)
+end
+
+--- func desc
+function ig.player.ArePlayersActive()
+    local ptbl = GetPlayers()
+    if type(ptbl) == "table" and #ptbl >= 1 then
+        return true
+    end
+    return false
+end

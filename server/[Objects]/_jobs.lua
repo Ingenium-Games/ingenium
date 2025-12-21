@@ -1,6 +1,6 @@
 -- ====================================================================================--
-ig.job = ig.job or {} -- function level
-ig.jobs = ig.jobs or {} -- dropped items table
+ig.job = {} -- function level
+ig.jobs = {}
 ig.jdex = {} -- Job Index for xJobs functions.
 -- ====================================================================================--
 

@@ -1,3 +1,5 @@
+--  To create json creator on web tool to enable users to create items.
+
 -- ====================================================================================--
 ig.item = {} -- function level
 ig.items = {}

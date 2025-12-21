@@ -119,8 +119,8 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     end
     --
     Citizen.Wait(2000)
-    d.presentCard(json.encode(connecting), function(dete, raw)
-        if dete.Submit then
+    d.presentCard(json.encode(connecting), function(data, raw)
+        if data.Submit then
             if drop then
                 Citizen.Wait(0)
                 d.done("You saw the reasons a moment ago, on an adaptive card. It renders all the reasons why you cannot join.")

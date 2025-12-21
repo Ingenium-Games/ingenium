@@ -1,0 +1,3 @@
+-- Placeholder file, should be loaded into server as a file to reduce DB pulling upon launch, however data pertaining to jobs would be considered critical and therefore saved to DB.
+--  To create json creator on web tool to enable users to create roles or jobs to match database.
+--  To create sql standard schema to import database informaiton upon generation of the new jobs.
