@@ -135,13 +135,20 @@ function ig.table.MakeReadOnly(t, name)
     -- Create a proxy table
     local proxy = {}
     
+    -- Cache for protected nested tables to avoid repeated metatable creation
+    local nestedProxies = {}
+    
     -- Create metatable for read-only access
     local mt = {
         __index = function(_, key)
             local value = t[key]
             -- Recursively protect nested tables
             if type(value) == "table" then
-                return ig.table.MakeReadOnly(value, name and (name .. "." .. tostring(key)) or tostring(key))
+                -- Cache the protected nested table
+                if not nestedProxies[key] then
+                    nestedProxies[key] = ig.table.MakeReadOnly(value, name and (name .. "." .. tostring(key)) or tostring(key))
+                end
+                return nestedProxies[key]
             end
             return value
         end,
