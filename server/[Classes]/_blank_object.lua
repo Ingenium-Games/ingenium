@@ -274,7 +274,9 @@ function ig.class.BlankObject(net)
         return inv
     end
     -- ====================================================================================--
-    self.UnpackInventory(self.Inventory)
+    -- Initialize with empty inventory
+    self.Inventory = {}
+    self.UnpackInventory({})
     -- ====================================================================================--
     return self
 end

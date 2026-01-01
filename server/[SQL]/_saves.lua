@@ -190,7 +190,6 @@ function ig.sql.save.Vehicle(data, cb)
         Plate
     }, function(r)
         data.ClearDirty()
-        data.ClearDirty()
     end)
     if cb then
         cb()
@@ -241,7 +240,6 @@ function ig.sql.save.Vehicles(cb)
                     -- Where Conditions
                     Plate
                 }, function(r)
-                    data.ClearDirty()
                     data.ClearDirty()
                 end)
             else

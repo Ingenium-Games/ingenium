@@ -88,12 +88,16 @@ function ig.class.Vehicle(net)
         self.State.Spawned = self.Spawned
     end
     --- func desc
-    self.Saved = function()
+    self.ClearDirty = function()
         self.IsDirty = false
     end
     --- func desc
     self.GetIsDirty = function()
         return self.IsDirty
+    end
+    --
+    self.MarkDirty = function()
+        self.IsDirty = true
     end
     --- func desc
     self.GetSource = function()

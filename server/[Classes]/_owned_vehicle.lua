@@ -69,8 +69,6 @@ function ig.class.OwnedVehicle(net, data)
     self.Updated = data.Updated
     self.State.Updated = self.Updated
     --
-    self.IsDirty = false
-    --
     -- Dirty Flag System for Database Optimization
     self.IsDirty = false
     self.DirtyFields = {}
@@ -87,12 +85,16 @@ function ig.class.OwnedVehicle(net, data)
         self.IsDirty = true
     end
     --- func desc
-    self.Saved = function()
+    self.ClearDirty = function()
         self.IsDirty = false
     end
     --- func desc
     self.GetIsDirty = function()
         return self.IsDirty
+    end
+    --
+    self.MarkDirty = function()
+        self.IsDirty = true
     end
     --- func desc
     self.GetSource = function()
@@ -499,6 +501,10 @@ function ig.class.OwnedVehicle(net, data)
     ---@param old any
     self.RearrangeItems = function(new, old)
         table.insert(self.Inventory, new, table.remove(self.Inventory, old))
+        self.State.Inventory = self.Inventory
+        self.DirtyFields.Inventory = true
+        self.EncodedInventory = nil
+        self.SetUpdated()
     end
     --- func desc
     self.CompressInventory = function()
