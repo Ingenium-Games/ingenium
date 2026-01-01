@@ -124,9 +124,9 @@ end
 
 --- Makes a table read-only by preventing modifications
 --- Recursively protects nested tables as well
----@param t table "The table to make read-only"
----@param name string|nil "Optional name for error messages"
----@return table "The read-only proxy table"
+---@param t table The table to make read-only
+---@param name string|nil Optional name for error messages
+---@return table The read-only proxy table
 function ig.table.MakeReadOnly(t, name)
     if type(t) ~= "table" then
         return t
@@ -152,7 +152,7 @@ function ig.table.MakeReadOnly(t, name)
             end
             return value
         end,
-        __newindex = function(_, key, value)
+        __newindex = function(_, key, _)
             local tableName = name or "table"
             error(string.format("Attempt to modify read-only %s[%s]. This data is protected from modification.", tableName, tostring(key)), 2)
         end,
