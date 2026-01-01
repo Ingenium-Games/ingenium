@@ -91,7 +91,6 @@ To verify protection is working:
 
 1. Check console output on startup for:
    - `[ingenium] Configuration tables protected from modification`
-   - `[ingenium] Game data tables protected from modification`
    - `[Data] Static reference data protected from modification`
 
 2. Test in console:
