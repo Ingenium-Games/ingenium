@@ -90,14 +90,18 @@ function ig.class.Vehicle(net)
     --- func desc
     self.ClearDirty = function()
         self.IsDirty = false
+        self.DirtyFields = {}
     end
     --- func desc
     self.GetIsDirty = function()
         return self.IsDirty
     end
     --
-    self.MarkDirty = function()
+    self.MarkDirty = function(fieldName)
         self.IsDirty = true
+        if fieldName then
+            self.DirtyFields[fieldName] = true
+        end
     end
     --- func desc
     self.GetSource = function()
@@ -108,7 +112,6 @@ function ig.class.Vehicle(net)
         return self.Net
     end
     --
-    self.IsDirty = false
     --- func desc
     self.SetUpdated = function()
         self.Updated = ig.func.Timestamp()

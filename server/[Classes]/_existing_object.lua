@@ -57,6 +57,7 @@ function ig.class.ExistingObject(net, data)
     self.State.Updated = self.Updated
     --
     self.IsDirty = false
+    self.DirtyFields = {}
     --- func desc
     self.SetUpdated = function()
         self.Updated = ig.func.Timestamp()
@@ -65,14 +66,18 @@ function ig.class.ExistingObject(net, data)
     --- func desc
     self.ClearDirty = function()
         self.IsDirty = false
+        self.DirtyFields = {}
     end
     --- func desc
     self.GetIsDirty = function()
         return self.IsDirty
     end
     --
-    self.MarkDirty = function()
+    self.MarkDirty = function(fieldName)
         self.IsDirty = true
+        if fieldName then
+            self.DirtyFields[fieldName] = true
+        end
     end
     --- func desc
     ---@param return any
