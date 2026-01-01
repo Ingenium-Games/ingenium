@@ -151,7 +151,7 @@ ig.sql.PrepareQuery(
 ---@param data table "xCar table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
 function ig.sql.save.Vehicle(data, cb)
-    if not data or data.Owner == false or not data.Save or not data.GetIsDirty() then
+    if not data or data.Owner == false or not data.GetIsDirty() then
         if cb then cb() end
         return
     end
@@ -189,7 +189,6 @@ function ig.sql.save.Vehicle(data, cb)
         -- Where conditions
         Plate
     }, function(r)
-        data.Saved()
         data.ClearDirty()
     end)
     if cb then
@@ -204,7 +203,7 @@ function ig.sql.save.Vehicles(cb)
     local saveCount = 0
     local xVehicles = ig.data.GetVehicles()
     for k, data in pairs(xVehicles) do
-        if data and data.Owner ~= false and data.Save == true and data.GetIsDirty() then
+        if data and data.Owner ~= false and data.GetIsDirty() then
             if DoesEntityExist(data.Entity) then
                 saveCount = saveCount + 1
                 -- Other Variables.
@@ -241,7 +240,6 @@ function ig.sql.save.Vehicles(cb)
                     -- Where Conditions
                     Plate
                 }, function(r)
-                    data.Saved()
                     data.ClearDirty()
                 end)
             else
@@ -268,7 +266,7 @@ end)
 function ig.sql.save.Jobs(cb)
     local xJobs = ig.data.GetJobs()
     for k, data in pairs(xJobs) do
-        if (data.ShouldSave() == true) then
+        if (data.GetIsDirty() == true) then
             -- Tables require JSON Encoding.
             local Accounts = json.encode(data.GetAccounts(false))
             -- 
@@ -278,7 +276,7 @@ function ig.sql.save.Jobs(cb)
                 -- Where Conditions
                 Name
             }, function(r)
-                data.Saved()
+                data.ClearDirty()
             end)
         end
     end
@@ -301,11 +299,11 @@ function ig.sql.save.Objects(cb)
     local xObjs = ig.data.GetObjects()
     for k, data in pairs(xObjs) do
         if data then
-            if (tonumber(ig.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.ShouldSave() == true then
+            if (tonumber(ig.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.GetIsDirty() == true then
                 if DoesEntityExist(data.Entity) then
-                    -- Tables require JSON Encoding.
-                    local Inventory = json.encode(data.CompressInventory())
-                    local Coords = json.encode(data.GetCoords())
+                    -- Tables require JSON Encoding - Use cached versions
+                    local Inventory = data.GetEncodedInventory()
+                    local Coords = data.GetEncodedCoords()
                     --
                     local UUID = data.UUID
                     -- 
@@ -315,7 +313,7 @@ function ig.sql.save.Objects(cb)
                         -- Where Conditions
                         UUID
                     }, function(r)
-                        data.Saved()
+                        data.ClearDirty()
                     end)
                 end
             end

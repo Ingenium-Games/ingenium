@@ -501,14 +501,7 @@ local TransferInventoryItem = RegisterServerCallback({
             itemData.Meta or {}
         })
         
-        -- CRITICAL: Update State Bags immediately for real-time sync
-        if fromType ~= "player" and fromInventory.State then
-            fromInventory.State.Inventory = fromInventory.GetInventory()
-        end
-        
-        if toType ~= "player" and toInventory.State then
-            toInventory.State.Inventory = toInventory.GetInventory()
-        end
+        -- State bags are automatically synced by RemoveItem and AddItem methods
         
         -- Notify all nearby players of the update (for UI refresh)
         if fromType == "object" or toType == "object" then
