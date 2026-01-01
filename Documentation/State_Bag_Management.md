@@ -204,12 +204,17 @@ xObject.UnpackInventory(saved_inventory)
 ```
 
 **`SyncInventory()`**
-- Manual sync method for batch operations
-- Use when you need explicit control
+- Manual sync method for explicit control
+- **Rarely needed** - use only if modifying `self.Inventory` directly (not recommended)
+- Prefer using `AddItem`, `RemoveItem`, `RearrangeItems` which auto-sync
 ```lua
--- If you modify self.Inventory directly (not recommended)
+-- Only use if you must modify inventory directly (not recommended)
 xObject.Inventory[1].Quantity = 5
-xObject.SyncInventory()  -- Explicit sync
+xObject.SyncInventory()  // Explicit sync
+
+// Better approach - use class methods that auto-sync:
+xObject.RemoveItem(item_name, 1)
+xObject.AddItem({item_name, 5, quality, weapon, meta})
 ```
 
 #### Coordinate Methods

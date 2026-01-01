@@ -134,7 +134,9 @@ function ig.class.BlankObject(net)
         return self.Inventory
     end
     --- Sync inventory to state bag
-    --- Call this after batch inventory operations to update clients
+    --- NOTE: This method is rarely needed as AddItem, RemoveItem, and RearrangeItems
+    --- automatically sync state bags. Use this only if you directly modify self.Inventory
+    --- (which is not recommended) or need explicit control over sync timing.
     self.SyncInventory = function()
         self.State.Inventory = self.Inventory
         self.SetUpdated()
@@ -438,7 +440,9 @@ function ig.class.ExistingObject(net, data)
         return self.Inventory
     end
     --- Sync inventory to state bag
-    --- Call this after batch inventory operations to update clients
+    --- NOTE: This method is rarely needed as AddItem, RemoveItem, and RearrangeItems
+    --- automatically sync state bags. Use this only if you directly modify self.Inventory
+    --- (which is not recommended) or need explicit control over sync timing.
     self.SyncInventory = function()
         self.State.Inventory = self.Inventory
         self.SetUpdated()
