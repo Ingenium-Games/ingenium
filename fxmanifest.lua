@@ -11,7 +11,7 @@ ui_page "nui/dist/index.html"
 -- Old NUI system (uncomment to use old system)
 -- ui_page "nui/index.html"
 ------------------------------------------------------------------------------
-shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_ig.lua",    "shared/[Tools]/*.lua",    "shared/[Third Party]/*.lua", "shared/_locale.lua"}
+shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_ig.lua",    "shared/[Tools]/*.lua",    "shared/[Third Party]/*.lua", "shared/_locale.lua", "shared/_protect.lua"}
 ------------------------------------------------------------------------------
 client_scripts {"client/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "client/_functions.lua",
                 "client/[Data]/_game_data_helpers.lua", "client/**/*.lua", "nui/lua/*.lua"}
