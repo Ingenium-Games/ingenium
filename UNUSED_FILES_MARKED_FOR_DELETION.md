@@ -168,9 +168,15 @@ Clients request data from server via callbacks in `server/[Callbacks]/_data.lua`
 ### 3. OPTIONAL DELETION - Development Tools
 - `[Stubs]/natives_*.lua` (unless developers need IDE support)
 
-### 4. VERIFY - Data File Check
-- Confirm if `data/modkits.json` exists or is needed
-- If doesn't exist, may cause errors during data loading
+### 4. VERIFY - Data File Check ✅ INVESTIGATED
+
+- **`data/modkits.json`** - Status: Missing but handled gracefully
+  - Referenced in `server/_data.lua` line 205
+  - File does not exist in `data/` directory
+  - Code handles gracefully: `ig.modkits = ig.json.Load('modkits') or {}`
+  - If missing, an error is logged but an empty table is used
+  - **Result:** System continues to function, modkits just won't be available
+  - **Recommendation:** If vehicle modkits feature is needed, the file should be created from game data dumps (see main README reference to gta-v-data-dumps repo)
 
 ---
 
