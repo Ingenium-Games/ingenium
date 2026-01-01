@@ -4,27 +4,14 @@ if not ig.class then
 end
 -- ====================================================================================--
 
+-- ====================================================================================--
+
 --- func desc
 ---@param net any
 ---@param bool any
-function ig.class.Vehicle(net)
-    local data = {
-        Fuel = math.random(25, 89),
-        Plate = string.upper(ig.rng.chars(8)),
-        Instance = false,
-        Garage = false,
-        Parked = false,
-        Impound = false,
-        Owner = false,
-        Wanted = true,
-        -- Json
-        Modifications = {},
-        Inventory = {},
-        Condition = {},
-        Keys = {},
-        Updated = ig.func.Timestamp()
-    }
+function ig.class.OwnedVehicle(net, data)
     local self = {}
+    --
     self.Net = net
     self.Entity = NetworkGetEntityFromNetworkId(net)
     self.State = Entity(self.Entity).state
@@ -32,12 +19,13 @@ function ig.class.Vehicle(net)
     self.Model = GetEntityModel(self.Entity)
     self.State.Model = self.Model
     -- Plate
-    self.Plate = data.Plate
+    self.Plate = string.upper(data.Plate)
     self.State.Plate = self.Plate
     --
     self.Weight = 0
+    self.State.Weight = 0
     -- Owner
-    self.Owner = data.Owner
+    self.Owner = data.Character_ID
     self.State.Owner = self.Owner
     -- Wanted
     self.Wanted = data.Wanted
@@ -55,23 +43,33 @@ function ig.class.Vehicle(net)
     self.Parked = data.Parked
     self.State.Parked = self.Parked
     --
+    self.Spawned = false
+    --
+    self.HasSpawned = function()
+        self.Spawned = true
+        self.State.Spawned = self.Spawned
+    end
+    --
     self.Impound = data.Impound
     self.State.Impound = self.Impound
     --
     -- Inventory
-    self.Inventory = data.Inventory
+    self.Inventory = json.decode(data.Inventory)
+    self.State.Inventory = self.Inventory
     -- Condition
-    self.Condition = data.Condition
+    self.Condition = json.decode(data.Condition)
+    self.State.Condition = self.Condition
     -- Modifications
-    self.Modifications = data.Modifications
-    -- Key
-    self.Keys = data.Keys
+    self.Modifications = json.decode(data.Modifications)
+    self.State.Modifications = self.Modifications
+    -- Keys
+    self.Keys = json.decode(data.Keys)
     self.State.Keys = self.Keys
     --
     self.Updated = data.Updated
     self.State.Updated = self.Updated
     --
-    self.Spawned = false
+    self.IsDirty = false
     --
     -- Dirty Flag System for Database Optimization
     self.IsDirty = false
@@ -83,9 +81,10 @@ function ig.class.Vehicle(net)
     self.EncodedModifications = nil
     self.EncodedKeys = nil
     --
-    self.HasSpawned = function()
-        self.Spawned = true
-        self.State.Spawned = self.Spawned
+    --- func desc
+    self.SetUpdated = function()
+        self.Updated = ig.func.Timestamp()
+        self.IsDirty = true
     end
     --- func desc
     self.Saved = function()
@@ -102,13 +101,6 @@ function ig.class.Vehicle(net)
     --- func desc
     self.GetNet = function()
         return self.Net
-    end
-    --
-    self.IsDirty = false
-    --- func desc
-    self.SetUpdated = function()
-        self.Updated = ig.func.Timestamp()
-        self.IsDirty = true
     end
     --- func desc
     self.GetModel = function()
@@ -131,6 +123,10 @@ function ig.class.Vehicle(net)
         local bool = ig.check.Boolean(b)
         self.Parked = bool
         self.SetUpdated()
+    end
+    --
+    self.GetImpound = function()
+        return self.Impound
     end
     --- func desc
     self.GetCoords = function()
@@ -166,7 +162,6 @@ function ig.class.Vehicle(net)
         ---
         self.SetUpdated()
     end
-
     --- func desc
     self.GetKeys = function()
         return self.Keys
@@ -189,10 +184,10 @@ function ig.class.Vehicle(net)
             self.State.Keys = self.Keys
             self.DirtyFields.Keys = true
             self.EncodedKeys = nil
+            self.SetUpdated()
         else
-            ig.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
+            ig.func.Debug_2("User: " .. id .. " Already has key to this vehicle.")
         end
-        self.SetUpdated()
     end
     --- func desc
     ---@param id any
@@ -203,10 +198,10 @@ function ig.class.Vehicle(net)
             self.State.Keys = self.Keys
             self.DirtyFields.Keys = true
             self.EncodedKeys = nil
+            self.SetUpdated()
         else
-            ig.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
-        end        
-        self.SetUpdated()
+            ig.func.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
+        end
     end
     --- func desc
     ---@param id any
@@ -226,6 +221,7 @@ function ig.class.Vehicle(net)
     --- func desc
     ---@param conditions any
     self.SetCondition = function(conditions)
+        -- Set Condition
         self.Condition = conditions
         self.State.Condition = self.Condition
         self.DirtyFields.Condition = true
@@ -258,6 +254,7 @@ function ig.class.Vehicle(net)
     --- func desc
     ---@param modifications any
     self.SetModifications = function(modifications)
+        -- Get Modifications
         self.Modifications = modifications
         self.State.Modifications = self.Modifications
         self.DirtyFields.Modifications = true
@@ -366,16 +363,19 @@ function ig.class.Vehicle(net)
     --- func desc
     ---@param inv any
     self.UnpackInventory = function(inv)
-        -- Use unified validation function (no source for vehicles)
+        -- Use unified validation function (no source for owned vehicles)
         local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            ig.func.Debug_1("Error unpacking vehicle inventory: " .. (error or "unknown"))
+            ig.func.Debug_1("Error unpacking owned vehicle inventory: " .. (error or "unknown"))
             self.Inventory = {}
+            self.State.Inventory = self.Inventory
             return
         end
         
         self.Inventory = processed
+        self.State.Inventory = self.Inventory
+        -- print(ig.table.Dump(self.Inventory))
     end
     --- func desc
     self.GetInventory = function()
@@ -426,6 +426,9 @@ function ig.class.Vehicle(net)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
+            self.DirtyFields.Inventory = true
+            self.EncodedInventory = nil
+            self.SetUpdated()
         else
             ig.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
         end
@@ -487,6 +490,9 @@ function ig.class.Vehicle(net)
         else
             table.remove(self.Inventory, position)
         end
+        self.DirtyFields.Inventory = true
+        self.EncodedInventory = nil
+        self.SetUpdated()
     end
     --- func desc
     ---@param new any
@@ -563,7 +569,11 @@ function ig.class.Vehicle(net)
     -- ====================================================================================--
     SetVehicleNumberPlateText(self.Entity, self.Plate) 
     self.UnpackInventory(self.Inventory)
+    self.AddKey(self.Owner)
+    self.SetParked(false)
+    self.SetUpdated()
     self.HasSpawned()
     -- ====================================================================================--
     return self
 end
+-- ====================================================================================--
