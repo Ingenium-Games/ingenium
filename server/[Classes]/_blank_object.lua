@@ -32,7 +32,7 @@ function ig.class.BlankObject(net)
         self.IsDirty = true
     end
     --- func desc
-    self.Saved = function()
+    self.ClearDirty = function()
         self.IsDirty = false
     end
     --- func desc

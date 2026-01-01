@@ -63,7 +63,7 @@ function ig.class.ExistingObject(net, data)
         self.IsDirty = true
     end
     --- func desc
-    self.Saved = function()
+    self.ClearDirty = function()
         self.IsDirty = false
     end
     --- func desc

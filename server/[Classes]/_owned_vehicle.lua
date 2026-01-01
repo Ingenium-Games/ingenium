@@ -87,14 +87,18 @@ function ig.class.OwnedVehicle(net, data)
     --- func desc
     self.ClearDirty = function()
         self.IsDirty = false
+        self.DirtyFields = {}
     end
     --- func desc
     self.GetIsDirty = function()
         return self.IsDirty
     end
     --
-    self.MarkDirty = function()
+    self.MarkDirty = function(fieldName)
         self.IsDirty = true
+        if fieldName then
+            self.DirtyFields[fieldName] = true
+        end
     end
     --- func desc
     self.GetSource = function()
@@ -515,23 +519,6 @@ function ig.class.OwnedVehicle(net, data)
         end
         return inv
     end
-    -- ====================================================================================--
-    -- Dirty Flag Helper Methods
-    -- ====================================================================================--
-    self.GetIsDirty = function()
-        return self.IsDirty
-    end
-    --
-    self.ClearDirty = function()
-        self.IsDirty = false
-        self.DirtyFields = {}
-    end
-    --
-    self.MarkDirty = function(fieldName)
-        self.IsDirty = true
-        self.DirtyFields[fieldName] = true
-    end
-    --
     -- ====================================================================================--
     -- Cached JSON Encoding Methods
     -- ====================================================================================--
