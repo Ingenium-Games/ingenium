@@ -122,4 +122,44 @@ function ig.table.Dump(table, nb)
     end
 end
 
+--- Makes a table read-only by preventing modifications
+--- Recursively protects nested tables as well
+---@param t table "The table to make read-only"
+---@param name string|nil "Optional name for error messages"
+---@return table "The read-only proxy table"
+function ig.table.MakeReadOnly(t, name)
+    if type(t) ~= "table" then
+        return t
+    end
+    
+    -- Create a proxy table
+    local proxy = {}
+    
+    -- Create metatable for read-only access
+    local mt = {
+        __index = function(_, key)
+            local value = t[key]
+            -- Recursively protect nested tables
+            if type(value) == "table" then
+                return ig.table.MakeReadOnly(value, name and (name .. "." .. tostring(key)) or tostring(key))
+            end
+            return value
+        end,
+        __newindex = function(_, key, value)
+            local tableName = name or "table"
+            error(string.format("Attempt to modify read-only %s[%s]. This data is protected from modification.", tableName, tostring(key)), 2)
+        end,
+        __metatable = "protected",
+        __pairs = function()
+            return pairs(t)
+        end,
+        __ipairs = function()
+            return ipairs(t)
+        end
+    }
+    
+    setmetatable(proxy, mt)
+    return proxy
+end
+
 -- ====================================================================================--
