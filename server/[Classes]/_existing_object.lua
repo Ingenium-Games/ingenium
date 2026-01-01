@@ -58,19 +58,20 @@ function ig.class.ExistingObject(net, data)
     --
     self.IsDirty = false
     self.DirtyFields = {}
-    --- func desc
-    self.SetUpdated = function()
-        self.Updated = ig.func.Timestamp()
-        self.IsDirty = true
+    --
+    -- Cached JSON Encoding for Performance
+    self.EncodedInventory = nil
+    --
+    -- ====================================================================================--
+    -- Dirty Flag Helper Methods
+    -- ====================================================================================--
+    self.GetIsDirty = function()
+        return self.IsDirty
     end
-    --- func desc
+    --
     self.ClearDirty = function()
         self.IsDirty = false
         self.DirtyFields = {}
-    end
-    --- func desc
-    self.GetIsDirty = function()
-        return self.IsDirty
     end
     --
     self.MarkDirty = function(fieldName)
@@ -78,6 +79,11 @@ function ig.class.ExistingObject(net, data)
         if fieldName then
             self.DirtyFields[fieldName] = true
         end
+    end
+    --
+    self.SetUpdated = function()
+        self.Updated = ig.func.Timestamp()
+        self.IsDirty = true
     end
     --- func desc
     ---@param return any
@@ -296,6 +302,8 @@ function ig.class.ExistingObject(net, data)
             table.remove(self.Inventory, position)
         end
         self.State.Inventory = self.Inventory
+        self.DirtyFields.Inventory = true
+        self.EncodedInventory = nil
         self.SetUpdated()
     end
     --- func desc
@@ -304,6 +312,8 @@ function ig.class.ExistingObject(net, data)
     self.RearrangeItems = function(new, old)
         table.insert(self.Inventory, new, table.remove(self.Inventory, old))
         self.State.Inventory = self.Inventory
+        self.DirtyFields.Inventory = true
+        self.EncodedInventory = nil
         self.SetUpdated()
     end
     --- func desc
@@ -315,6 +325,22 @@ function ig.class.ExistingObject(net, data)
         end
         return inv
     end
+    -- ====================================================================================--
+    -- Cached JSON Encoding Methods
+    -- ====================================================================================--
+    self.GetEncodedInventory = function()
+        if not self.EncodedInventory or self.DirtyFields.Inventory then
+            self.EncodedInventory = json.encode(self.CompressInventory())
+            self.DirtyFields.Inventory = false
+        end
+        return self.EncodedInventory
+    end
+    --
+    self.GetEncodedCoords = function()
+        -- Coords don't have a dedicated cache field, encode fresh each time
+        return json.encode(self.GetCoords())
+    end
+    --
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
     -- ====================================================================================--

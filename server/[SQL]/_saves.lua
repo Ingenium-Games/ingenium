@@ -301,9 +301,9 @@ function ig.sql.save.Objects(cb)
         if data then
             if (tonumber(ig.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.GetIsDirty() == true then
                 if DoesEntityExist(data.Entity) then
-                    -- Tables require JSON Encoding.
-                    local Inventory = json.encode(data.CompressInventory())
-                    local Coords = json.encode(data.GetCoords())
+                    -- Tables require JSON Encoding - Use cached versions
+                    local Inventory = data.GetEncodedInventory()
+                    local Coords = data.GetEncodedCoords()
                     --
                     local UUID = data.UUID
                     -- 
