@@ -186,7 +186,7 @@ function ig.class.BlankObject(net)
         else
             ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
-            self.State.Inventory = self.Inventory
+        self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --
@@ -490,7 +490,7 @@ function ig.class.ExistingObject(net, data)
         else
             ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
-            self.State.Inventory = self.Inventory
+        self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --
