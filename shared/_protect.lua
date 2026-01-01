@@ -4,11 +4,14 @@
 -- Prevents client-side modification of loaded data structures
 -- ====================================================================================--
 
+-- Configuration
+local INIT_DELAY_MS = 100  -- Delay in milliseconds to ensure all dependencies are loaded
+
 Citizen.CreateThread(function()
     -- Wait for all tools and config to be fully loaded
     -- The config loads first, then tools (including ig.table), then this protection
     -- By this point in the load order, everything we need is available
-    Wait(100)  -- Small delay to ensure all initialization is complete
+    Wait(INIT_DELAY_MS)
     
     -- Verify dependencies are available
     if not ig or not ig.table or not ig.table.MakeReadOnly then
