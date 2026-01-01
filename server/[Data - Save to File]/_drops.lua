@@ -62,9 +62,6 @@ function ig.drop.Create(coords, items, model, targetPlayer, isDeadDrop)
         xObject.AddItem(item)
     end
     
-    -- Update state bag for synchronization
-    xObject.State.Inventory = xObject.GetInventory()
-    
     -- Create drop entry
     local uuid = ig.rng.UUID()
     local timestamp = ig.func.Timestamp()
@@ -372,9 +369,6 @@ RegisterNetEvent("Server:Drop:Close", function(netId)
         ig.func.Debug_1("Drop object not found for NetID: " .. tostring(netId))
         return
     end
-    
-    -- Update state bag with current inventory
-    xObject.State.Inventory = xObject.GetInventory()
     
     -- Check if inventory is empty, if so remove the drop
     local inventory = xObject.GetInventory()

@@ -133,6 +133,12 @@ function ig.class.BlankObject(net)
     self.GetInventory = function()
         return self.Inventory
     end
+    --- Sync inventory to state bag
+    --- Call this after batch inventory operations to update clients
+    self.SyncInventory = function()
+        self.State.Inventory = self.Inventory
+        self.SetUpdated()
+    end
     --- func desc
     ---@param name any
     self.HasItem = function(name)
@@ -180,6 +186,7 @@ function ig.class.BlankObject(net)
         else
             ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
+            self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --
@@ -240,6 +247,7 @@ function ig.class.BlankObject(net)
         else
             table.remove(self.Inventory, position)
         end
+        self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --- func desc
@@ -247,6 +255,7 @@ function ig.class.BlankObject(net)
     ---@param old any
     self.RearrangeItems = function(new, old)
         table.insert(self.Inventory, new, table.remove(self.Inventory, old))
+        self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --- func desc
@@ -428,6 +437,12 @@ function ig.class.ExistingObject(net, data)
     self.GetInventory = function()
         return self.Inventory
     end
+    --- Sync inventory to state bag
+    --- Call this after batch inventory operations to update clients
+    self.SyncInventory = function()
+        self.State.Inventory = self.Inventory
+        self.SetUpdated()
+    end
     --- func desc
     ---@param name any
     self.HasItem = function(name)
@@ -475,6 +490,7 @@ function ig.class.ExistingObject(net, data)
         else
             ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
+            self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --
@@ -535,6 +551,7 @@ function ig.class.ExistingObject(net, data)
         else
             table.remove(self.Inventory, position)
         end
+        self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --- func desc
@@ -542,6 +559,7 @@ function ig.class.ExistingObject(net, data)
     ---@param old any
     self.RearrangeItems = function(new, old)
         table.insert(self.Inventory, new, table.remove(self.Inventory, old))
+        self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --- func desc
