@@ -66,15 +66,16 @@ Attempt to modify read-only conf.spawn[x]. This data is protected from modificat
 3. **Asset Escrow** - Combined with FiveM's asset escrow encryption, this provides multiple layers of protection
 4. **Best Practices** - This is part of a defense-in-depth strategy
 
-## Implementation Details
+### Implementation Details
 
 ### Files Modified
 
-1. `shared/[Tools]/_table.lua` - Added `MakeReadOnly()` function
-2. `shared/_protect.lua` - Protects `conf` configuration table
-3. `shared/data/_loader.lua` - Protects client-side game data tables  
-4. `server/_data.lua` - Protects server-side static reference data tables
-5. `fxmanifest.lua` - Updated to include protection script
+1. `shared/[Tools]/_table.lua` - Added `MakeReadOnly()` function with nested table caching
+2. `shared/_protect.lua` - Protects `conf` configuration table  
+3. `server/_data.lua` - Protects server-side static reference data tables
+4. `fxmanifest.lua` - Updated to include protection script
+
+Note: The `shared/data/` directory contains unused data loaders that are not integrated into the manifest. All actual data loading and protection happens in `server/_data.lua`.
 
 ### Load Order
 

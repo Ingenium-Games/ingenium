@@ -106,13 +106,4 @@ Citizen.CreateThread(function()
     print('^3  - Vehicles: ' .. counts.vehicles .. '^0')
     print('^3  - Mod Kits: ' .. counts.modkits .. '^0')
     print('^3  - Items: ' .. counts.items .. '^0')
-    
-    -- Protect data tables from modification
-    ig.tattoos = ig.table.MakeReadOnly(ig.tattoos, "ig.tattoos")
-    ig.weapons = ig.table.MakeReadOnly(ig.weapons, "ig.weapons")
-    ig.vehicles = ig.table.MakeReadOnly(ig.vehicles, "ig.vehicles")
-    ig.modkits = ig.table.MakeReadOnly(ig.modkits, "ig.modkits")
-    ig.itemdata = ig.table.MakeReadOnly(ig.itemdata, "ig.itemdata")
-    
-    print('^2[ingenium] Game data tables protected from modification^0')
 end)
