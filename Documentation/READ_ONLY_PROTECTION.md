@@ -83,14 +83,14 @@ Attempt to modify read-only conf.spawn[x]. This data is protected from modificat
 3. `server/_data.lua` - Protects server-side static reference data tables
 4. `fxmanifest.lua` - Updated to include protection script
 
-Note: The `shared/data/` directory contains unused data loaders that are not integrated into the manifest. All actual data loading and protection happens in `server/_data.lua`.
+Note: The `shared/data/` directory has been removed as it contained unused data loaders that were not integrated into the manifest. All actual data loading and protection happens in `server/_data.lua`.
 
 ### Load Order
 
 Protection is applied after all configuration and data files are loaded:
 1. Config files load (`_config/*.lua`)
 2. Tools load (`shared/[Tools]/*.lua`) 
-3. Data loads (`shared/data/_loader.lua` and `server/_data.lua`)
+3. Data loads (`server/_data.lua`)
 4. Protection applies (`shared/_protect.lua` and within data loaders)
 
 ## Testing
