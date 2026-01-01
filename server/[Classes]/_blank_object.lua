@@ -200,10 +200,12 @@ function ig.class.BlankObject(net)
             else
                 self.Inventory[#self.Inventory + 1] = item
             end
+            self.State.Inventory = self.Inventory
+            self.DirtyFields.Inventory = true
+            self.EncodedInventory = nil
         else
             ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
-        self.State.Inventory = self.Inventory
         self.SetUpdated()
     end
     --

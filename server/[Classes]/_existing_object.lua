@@ -241,6 +241,8 @@ function ig.class.ExistingObject(net, data)
             ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
         self.State.Inventory = self.Inventory
+            self.DirtyFields.Inventory = true
+            self.EncodedInventory = nil
         self.SetUpdated()
     end
     --
