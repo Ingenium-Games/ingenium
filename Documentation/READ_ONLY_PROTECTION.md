@@ -9,18 +9,26 @@ The Ingenium framework now includes built-in protection for configuration and st
 ### Configuration Tables
 - `conf` - Main configuration table and all nested tables (shared)
 
-### Static Game Data Tables (Client & Shared)
+### Static Game Data Tables (Server-Side)
+These tables contain reference data that should **never** change during gameplay:
 - `ig.tattoos` - Tattoo data
 - `ig.weapons` - Weapon data  
 - `ig.vehicles` - Vehicle data
 - `ig.modkits` - Vehicle modification kits
-- `ig.itemdata` - Item data
-
-### Static Game Data Tables (Server Only)
 - `ig.peds` - Ped/character model data
 - `ig.appearance_constants` - Appearance customization constants
 
-Note: Some tables are only protected on the server side because they're not loaded on the client side.
+### Dynamic Data Tables (Intentionally Unprotected)
+These tables contain runtime data that **must** change during gameplay:
+- `ig.items` - Inventory items (can be created/modified)
+- `ig.drops` - World drops
+- `ig.jobs` - Job data
+- `ig.doors` - Door states
+- `ig.objects` - World objects
+- `ig.notes` - Player notes
+- And other runtime data structures
+
+Note: Only static reference data is protected. Dynamic data that needs to be modified during gameplay is intentionally left unprotected.
 
 ## How It Works
 

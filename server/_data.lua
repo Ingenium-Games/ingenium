@@ -254,7 +254,9 @@ function ig.data.LoadJSONData(callback)
     print('^2[Data] JSON data loading complete^7')
 
     -- Protect static reference data from modification
-    -- These tables should never be modified at runtime
+    -- These tables should NEVER be modified at runtime
+    -- Dynamic tables (items, drops, jobs, doors, objects, etc.) are intentionally left
+    -- unprotected as they need to be modified during gameplay
     ig.tattoos = ig.table.MakeReadOnly(ig.tattoos, "ig.tattoos")
     ig.weapons = ig.table.MakeReadOnly(ig.weapons, "ig.weapons")
     ig.vehicles = ig.table.MakeReadOnly(ig.vehicles, "ig.vehicles")
