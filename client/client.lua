@@ -23,7 +23,7 @@ Citizen.CreateThread(function()
                 ig.objects.AddToEnviroment(objects)
                 --        
 
-
+                ig.ipls.LoadConfigurations()
             end)
             --
             return
