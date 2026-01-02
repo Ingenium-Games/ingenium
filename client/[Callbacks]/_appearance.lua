@@ -259,8 +259,23 @@ RegisterServerCallback({
             TriggerEvent("Client:Character:NewSpawn")
             TriggerEvent("Client:Nui:Message", "register")
         else
-            -- Send to server for validation and saving
-            TriggerServerEvent("Server:Character:SaveAppearance", appearance)
+            -- Send to server for validation and saving using callback
+            TriggerServerCallback({
+                eventName = "Server:Character:SaveAppearance",
+                args = {appearance},
+                callback = function(result)
+                    if result and result.success then
+                        print("^2Appearance saved successfully^0")
+                    else
+                        print("^1Failed to save appearance: " .. (result and result.error or "Unknown error") .. "^0")
+                        TriggerEvent("Client:Nui:Message", "notification", {
+                            text = "Failed to save appearance: " .. (result and result.error or "Unknown error"),
+                            color = "red",
+                            fade = 5000
+                        })
+                    end
+                end
+            })
             
             -- Close customization
             ig.appearance.SetCustomizationActive(false)

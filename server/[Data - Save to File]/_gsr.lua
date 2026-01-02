@@ -347,31 +347,41 @@ if conf.file.cleanup then
 end
 
 -- Register shot fired event
-RegisterNetEvent("Server:GSR:Shot", function(weaponHash, ammoType)
-    local source = source
-    
-    -- Try to increment existing GSR first
-    local xPlayer = ig.data.GetPlayer(source)
-    if xPlayer then
-        local incremented = ig.gsr.IncrementShots(xPlayer.GetCharacter_ID(), 60)
-        
-        if not incremented then
-            -- Create new GSR record
-            ig.gsr.Create(source, weaponHash, ammoType)
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:GSR:Shot",
+    eventCallback = function(source, weaponHash, ammoType)
+        -- Try to increment existing GSR first
+        local xPlayer = ig.data.GetPlayer(source)
+        if xPlayer then
+            local incremented = ig.gsr.IncrementShots(xPlayer.GetCharacter_ID(), 60)
+            
+            if not incremented then
+                -- Create new GSR record
+                ig.gsr.Create(source, weaponHash, ammoType)
+            end
+            return { success = true }
+        else
+            return { success = false, error = "Player not found" }
         end
     end
-end)
+})
 
 -- Police command to test for GSR
-RegisterNetEvent("Server:GSR:Test", function(targetSource)
-    local source = source
-    local xOfficer = ig.data.GetPlayer(source)
-    
-    if not xOfficer or xOfficer.GetJob().Name ~= "police" then
-        return
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:GSR:Test",
+    eventCallback = function(source, targetSource)
+        local xOfficer = ig.data.GetPlayer(source)
+        
+        if not xOfficer or xOfficer.GetJob().Name ~= "police" then
+            return { success = false, error = "Unauthorized" }
+        end
+        
+        local positive, data = ig.gsr.Test(source, targetSource)
+        
+        TriggerClientEvent("Client:GSR:TestResult", source, positive, data)
+        
+        return { success = true, positive = positive, data = data }
     end
-    
-    local positive, data = ig.gsr.Test(source, targetSource)
-    
-    TriggerClientEvent("Client:GSR:TestResult", source, positive, data)
-end)
+})

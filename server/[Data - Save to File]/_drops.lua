@@ -308,139 +308,153 @@ end
 -- ====================================================================================--
 
 --- Handle player accessing a drop (opening inventory UI)
-RegisterNetEvent("Server:Drop:Access", function(netId)
-    local source = source
-    local xPlayer = ig.GetPlayer(source)
-    
-    if not xPlayer then
-        ig.func.Debug_1("Player not found for drop access event")
-        return
-    end
-    
-    -- Check if drop has restricted access
-    local dropUUID = nil
-    local dropData = nil
-    
-    -- Find drop in both active and inactive states
-    for uuid, drop in pairs(ig.drops) do
-        if drop.NetID == netId then
-            dropUUID = uuid
-            dropData = drop
-            break
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:Drop:Access",
+    eventCallback = function(source, netId)
+        local xPlayer = ig.GetPlayer(source)
+        
+        if not xPlayer then
+            ig.func.Debug_1("Player not found for drop access event")
+            return { success = false, error = "Player not found" }
         end
-    end
-    
-    if not dropUUID then
-        for uuid, drop in pairs(ig.active_drops) do
+        
+        -- Check if drop has restricted access
+        local dropUUID = nil
+        local dropData = nil
+        
+        -- Find drop in both active and inactive states
+        for uuid, drop in pairs(ig.drops) do
             if drop.NetID == netId then
                 dropUUID = uuid
                 dropData = drop
                 break
             end
         end
-    end
-    
-    -- Validate access permissions
-    if dropData and dropData.TargetPlayer then
-        if dropData.TargetPlayer ~= source then
-            -- Not authorized to access this drop
-            TriggerClientEvent('Client:Drop:AccessDenied', source, {
-                message = "This drop is not for you"
-            })
-            ig.func.Debug_1("Player " .. source .. " denied access to restricted drop (target: " .. dropData.TargetPlayer .. ")")
-            return
+        
+        if not dropUUID then
+            for uuid, drop in pairs(ig.active_drops) do
+                if drop.NetID == netId then
+                    dropUUID = uuid
+                    dropData = drop
+                    break
+                end
+            end
         end
+        
+        -- Validate access permissions
+        if dropData and dropData.TargetPlayer then
+            if dropData.TargetPlayer ~= source then
+                -- Not authorized to access this drop
+                TriggerClientEvent('Client:Drop:AccessDenied', source, {
+                    message = "This drop is not for you"
+                })
+                ig.func.Debug_1("Player " .. source .. " denied access to restricted drop (target: " .. dropData.TargetPlayer .. ")")
+                return { success = false, error = "Access denied" }
+            end
+        end
+        
+        -- Activate the drop (move to active state)
+        ig.drop.Activate(netId)
+        
+        ig.func.Debug_3("Player " .. source .. " accessed drop NetID: " .. netId)
+        return { success = true }
     end
-    
-    -- Activate the drop (move to active state)
-    ig.drop.Activate(netId)
-    
-    ig.func.Debug_3("Player " .. source .. " accessed drop NetID: " .. netId)
-end)
+})
 
 --- Handle when inventory UI is closed for a drop
 --- The OrganizeInventories callback already handles saving, this is for cleanup
-RegisterNetEvent("Server:Drop:Close", function(netId)
-    local source = source
-    
-    -- Get the drop object
-    local xObject = ig.data.GetObject(netId)
-    if not xObject then
-        ig.func.Debug_1("Drop object not found for NetID: " .. tostring(netId))
-        return
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:Drop:Close",
+    eventCallback = function(source, netId)
+        -- Get the drop object
+        local xObject = ig.data.GetObject(netId)
+        if not xObject then
+            ig.func.Debug_1("Drop object not found for NetID: " .. tostring(netId))
+            return { success = false, error = "Drop not found" }
+        end
+        
+        -- Check if inventory is empty, if so remove the drop
+        local inventory = xObject.GetInventory()
+        if not inventory or #inventory == 0 then
+            ig.drop.Remove(netId)
+            ig.func.Debug_3("Drop removed (empty) after close by player " .. source)
+        else
+            -- Move back to inactive state
+            ig.drop.Deactivate(netId)
+            ig.func.Debug_3("Drop deactivated after close by player " .. source)
+        end
+        
+        return { success = true }
     end
-    
-    -- Check if inventory is empty, if so remove the drop
-    local inventory = xObject.GetInventory()
-    if not inventory or #inventory == 0 then
-        ig.drop.Remove(netId)
-        ig.func.Debug_3("Drop removed (empty) after close by player " .. source)
-    else
-        -- Move back to inactive state
-        ig.drop.Deactivate(netId)
-        ig.func.Debug_3("Drop deactivated after close by player " .. source)
-    end
-end)
+})
 
 --- Handle player dropping items from inventory UI
 --- This is called when items are dragged out of inventory in the UI
-RegisterNetEvent("Server:Item:Drop", function(item, quantity, quality, weapon, meta)
-    local source = source
-    local xPlayer = ig.GetPlayer(source)
-    
-    if not xPlayer then
-        ig.func.Debug_1("Player not found for drop event")
-        return
-    end
-    
-    -- Validate item exists
-    if not ig.item.Exists(item) then
-        ig.func.Debug_1("Invalid item in drop event: " .. tostring(item))
-        return
-    end
-    
-    -- Default values
-    quantity = quantity or 1
-    quality = quality or 100
-    weapon = weapon or false
-    meta = meta or {}
-    
-    -- Check if player has the item with sufficient quantity
-    local hasItem, slot = xPlayer.HasItem(item)
-    if not hasItem then
-        ig.func.Debug_1("Player does not have item: " .. item)
-        return
-    end
-    
-    local playerQuantity = xPlayer.GetItemQuantity(item)
-    if playerQuantity < quantity then
-        ig.func.Debug_1("Player does not have enough quantity: " .. item .. " (has " .. playerQuantity .. ", needs " .. quantity .. ")")
-        return
-    end
-    
-    -- Get player coords
-    local ped = GetPlayerPed(source)
-    local coords = GetEntityCoords(ped)
-    local heading = GetEntityHeading(ped)
-    
-    -- Offset coords slightly in front of player
-    local forwardX = coords.x + math.cos(math.rad(heading)) * 1.0
-    local forwardY = coords.y + math.sin(math.rad(heading)) * 1.0
-    
-    -- Create the drop
-    local netId = ig.drop.Create(
-        {x = forwardX, y = forwardY, z = coords.z - 0.9, h = heading},
-        {{item, quantity, quality, weapon, meta}}
-    )
-    
-    if netId then
-        -- Remove the specified quantity from player (recalculate slot each time)
-        for i = 1, quantity do
-            local _, currentSlot = xPlayer.HasItem(item)
-            if currentSlot then
-                xPlayer.RemoveItem(item, currentSlot)
-            end
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:Item:Drop",
+    eventCallback = function(source, item, quantity, quality, weapon, meta)
+        local xPlayer = ig.GetPlayer(source)
+        
+        if not xPlayer then
+            ig.func.Debug_1("Player not found for drop event")
+            return { success = false, error = "Player not found" }
         end
-        ig.func.Debug_3("Player " .. source .. " dropped " .. quantity .. "x " .. item)
+        
+        -- Validate item exists
+        if not ig.item.Exists(item) then
+            ig.func.Debug_1("Invalid item in drop event: " .. tostring(item))
+            return { success = false, error = "Invalid item" }
+        end
+        
+        -- Default values
+        quantity = quantity or 1
+        quality = quality or 100
+        weapon = weapon or false
+        meta = meta or {}
+        
+        -- Check if player has the item with sufficient quantity
+        local hasItem, slot = xPlayer.HasItem(item)
+        if not hasItem then
+            ig.func.Debug_1("Player does not have item: " .. item)
+            return { success = false, error = "Item not found" }
+        end
+        
+        local playerQuantity = xPlayer.GetItemQuantity(item)
+        if playerQuantity < quantity then
+            ig.func.Debug_1("Player does not have enough quantity: " .. item .. " (has " .. playerQuantity .. ", needs " .. quantity .. ")")
+            return { success = false, error = "Insufficient quantity" }
+        end
+        
+        -- Get player coords
+        local ped = GetPlayerPed(source)
+        local coords = GetEntityCoords(ped)
+        local heading = GetEntityHeading(ped)
+        
+        -- Offset coords slightly in front of player
+        local forwardX = coords.x + math.cos(math.rad(heading)) * 1.0
+        local forwardY = coords.y + math.sin(math.rad(heading)) * 1.0
+        
+        -- Create the drop
+        local netId = ig.drop.Create(
+            {x = forwardX, y = forwardY, z = coords.z - 0.9, h = heading},
+            {{item, quantity, quality, weapon, meta}}
+        )
+        
+        if netId then
+            -- Remove the specified quantity from player (recalculate slot each time)
+            for i = 1, quantity do
+                local _, currentSlot = xPlayer.HasItem(item)
+                if currentSlot then
+                    xPlayer.RemoveItem(item, currentSlot)
+                end
+            end
+            ig.func.Debug_3("Player " .. source .. " dropped " .. quantity .. "x " .. item)
+            return { success = true, netId = netId }
+        else
+            return { success = false, error = "Failed to create drop" }
+        end
     end
-end)
+})

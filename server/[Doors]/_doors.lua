@@ -99,7 +99,15 @@ function ig.door.GetDoors()
     return ig.table.Clone(ig.doors)
 end
 
-RegisterNetEvent("Server:Doors:SetState", function(hash, state)
-    ig.door.SetState(hash, state)
-    TriggerClientEvent("Client:Doors:Sync", -1, hash, state)
-end)
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:Doors:SetState",
+    eventCallback = function(source, hash, state)
+        local src = source
+        -- TODO: Add ACL/permission checks here if needed
+        -- For now, allow all door changes
+        ig.door.SetState(hash, state)
+        TriggerClientEvent("Client:Doors:Sync", -1, hash, state)
+        return { success = true }
+    end
+})

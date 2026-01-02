@@ -27,11 +27,19 @@ function ig.door.ToggleLock(hash)
     --end
     --
     local state = DoorSystemGetDoorState(hash)
-    if DoorSystemGetDoorPendingState(hash) ~- state then
+    if DoorSystemGetDoorPendingState(hash) ~= state then
         if state == 0 then
-            TriggerServerEvent("Server:Doors:SetState", hash, 1)
+            -- Use secure callback for door state change
+            TriggerServerCallback({
+                eventName = "Server:Doors:SetState",
+                args = {hash, 1}
+            })
         elseif state == 1 then 
-            TriggerServerEvent("Server:Doors:SetState", hash, 0)
+            -- Use secure callback for door state change
+            TriggerServerCallback({
+                eventName = "Server:Doors:SetState",
+                args = {hash, 0}
+            })
         end
     end
 end

@@ -47,7 +47,16 @@ function PlayerKilled()
         Coords = vector3(GetEntityCoords(ped)),
     }
     TriggerEvent("Client:Character:Death", data)
-    TriggerServerEvent("Server:Character:Death", data)
+    -- Use callback for secure death reporting
+    TriggerServerCallback({
+        eventName = "Server:Character:Death",
+        args = {data},
+        callback = function(result)
+            if result and not result.success then
+                print("^1Failed to report death: " .. (result.error or "Unknown error") .. "^0")
+            end
+        end
+    })
     ig.data.SetLocalPlayerState("IsDead", true, true)
     Wait(5850)
     local pos = GetEntityCoords(ped)
