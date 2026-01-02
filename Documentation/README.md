@@ -4,6 +4,10 @@ Welcome to the ingenium documentation hub. This centralized resource provides co
 
 ## 📚 Core Systems
 
+### Zone Management
+- **[Zone Management (ig.zone)](./Zone_Management.md)** - Integrated PolyZone system for zone definition and checking
+- **[IPL Management (ig.ipl/ig.ipls)](./Zone_IPL_Management.md)** - Interior prop list loading with zone triggers
+
 ### SQL & Database
 - **[SQL Architecture](./SQL_Architecture.md)** - Overview of the integrated MySQL2 SQL system
 - **[SQL API Reference](./SQL_API_Reference.md)** - Complete API documentation for SQL operations
