@@ -7,6 +7,7 @@
 -- Integrated into Ingenium by Twiitchter
 -- Copyright (c) 2019-2021 Michael Afrin
 -- ====================================================================================--
+-- Note: eventPrefix is intentionally global as it's used by ComboZone.lua
 eventPrefix = '__PolyZone__:'
 PolyZone = {}
 
@@ -519,9 +520,9 @@ function PolyZone.getPlayerPosition()
   return GetEntityCoords(PlayerPedId())
 end
 
-HeadBone = 0x796e;
+local HeadBone = 0x796e
 function PolyZone.getPlayerHeadPosition()
-  return GetPedBoneCoords(PlayerPedId(), HeadBone);
+  return GetPedBoneCoords(PlayerPedId(), HeadBone)
 end
 
 function PolyZone.ensureMetatable(zone)
