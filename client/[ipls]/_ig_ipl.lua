@@ -14,6 +14,30 @@ local iplRegistry = {}
 local activeIPLs = {}
 
 -- ====================================================================================--
+-- Configuration Loader
+-- ====================================================================================--
+
+--- Load IPL configurations from conf.ipls
+function ig.ipls.LoadConfigurations()
+	if not conf or not conf.ipls then
+		print("[ig.ipls] Warning: No IPL configurations found in conf.ipls")
+		return
+	end
+	
+	local count = 0
+	for key, config in pairs(conf.ipls) do
+		if type(config) == "table" and config.name then
+			ig.ipls.Register(config)
+			count = count + 1
+		end
+	end
+	
+	if count > 0 then
+		print("[ig.ipls] Loaded " .. count .. " IPL configurations from conf.ipls")
+	end
+end
+
+-- ====================================================================================--
 -- Core IPL Functions
 -- ====================================================================================--
 
@@ -247,5 +271,14 @@ end
 function ig.ipls.Get(name)
 	return iplRegistry[name]
 end
+
+-- ====================================================================================--
+-- Auto-load IPL configurations from conf.ipls on resource start
+-- ====================================================================================--
+CreateThread(function()
+	-- Wait a moment to ensure conf is fully loaded
+	Wait(100)
+	ig.ipls.LoadConfigurations()
+end)
 
 -- ====================================================================================--

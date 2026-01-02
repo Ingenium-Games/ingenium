@@ -23,11 +23,6 @@ ig.zone.GetPlayerHeadPosition = PolyZone.getPlayerHeadPosition
 ig.zone.EnsureMetatable = PolyZone.ensureMetatable
 
 -- ====================================================================================--
--- Export the zone namespace for external resource compatibility (future use)
--- This will allow other resources to use Ingenium's PolyZone implementation
--- ====================================================================================--
-exports("GetZone", function()
-	return ig.zone
-end)
-
+-- Note: Zone functionality is exported via the top-level ig table export
+-- External resources can access zones via exports.ingenium:GetIngenium().zone
 -- ====================================================================================--
