@@ -346,7 +346,11 @@ function ig.pick.ResyncAll()
 end
 
 -- Register collection event
-RegisterNetEvent("Server:Pickup:Collect", function(uuid)
-    local source = source
-    ig.pick.Collect(source, uuid)
-end)
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:Pickup:Collect",
+    eventCallback = function(source, uuid)
+        ig.pick.Collect(source, uuid)
+        return { success = true }
+    end
+})

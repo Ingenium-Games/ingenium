@@ -12,8 +12,18 @@ RegisterNUICallback("_character-select__join", function(data, cb)
     -- Check if player is loaded as a character, otherwise dont disable nui, itll be in the character seleciton screen.
     if not ig.data.IsPlayerLoaded() then
         SetNuiFocus(false, false)
-        TriggerServerEvent("Server:Character:Join", data.ID)
-        SetFollowPedCamViewMode(0)
+        -- Use secure callback instead of direct event
+        TriggerServerCallback({
+            eventName = "Server:Character:Join",
+            args = {data.ID},
+            callback = function(result)
+                if result and result.success then
+                    SetFollowPedCamViewMode(0)
+                else
+                    print("^1Failed to join character: " .. (result and result.error or "Unknown error") .. "^0")
+                end
+            end
+        })
         cb({
             message = "ok",
             data = nil
@@ -39,7 +49,16 @@ RegisterNUICallback("_character-select__delete", function(data, cb)
     if not ig.data.IsPlayerLoaded() then
         -- Remove Focus
         SetNuiFocus(false, false)
-        TriggerServerEvent("Server:Character:Delete", data.ID)
+        -- Use secure callback instead of direct event
+        TriggerServerCallback({
+            eventName = "Server:Character:Delete",
+            args = {data.ID},
+            callback = function(result)
+                if result and not result.success then
+                    print("^1Failed to delete character: " .. (result.error or "Unknown error") .. "^0")
+                end
+            end
+        })
         cb({
             message = "ok",
             data = nil
@@ -65,7 +84,18 @@ RegisterNUICallback("_character-select__register", function(data, cb)
         local appearance = ig.appearance.PendingAppearance or ig.appearance.GetAppearance()
         ig.appearance.PendingAppearance = nil -- Clear pending appearance
         
-        TriggerServerEvent("Server:Character:Register", data.First_Name, data.Last_Name, appearance)
+        -- Use secure callback instead of direct event
+        TriggerServerCallback({
+            eventName = "Server:Character:Register",
+            args = {data.First_Name, data.Last_Name, appearance},
+            callback = function(result)
+                if result and result.success then
+                    print("^2Character registered successfully with ID: " .. (result.character_id or "unknown") .. "^0")
+                else
+                    print("^1Failed to register character: " .. (result and result.error or "Unknown error") .. "^0")
+                end
+            end
+        })
         cb({
             message = "ok",
             data = nil

@@ -8,7 +8,16 @@ function ig.data.Initilize(cb)
     -- Get time and update every minute.
     ig.time.UpdateTime()
     --
-    TriggerServerEvent("Server:PlayerConnecting")
+    -- Use secure callback for player connecting
+    TriggerServerCallback({
+        eventName = "Server:PlayerConnecting",
+        args = {},
+        callback = function(result)
+            if result and not result.success then
+                print("^1Failed to connect: " .. (result.error or "Unknown error") .. "^0")
+            end
+        end
+    })
     if cb then
         cb()
     end

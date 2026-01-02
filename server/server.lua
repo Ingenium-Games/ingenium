@@ -39,33 +39,38 @@ end)
 
 
 -- ====================================================================================--
-RegisterNetEvent("Server:PlayerConnecting")
-AddEventHandler("Server:PlayerConnecting", function()
-    local src = tonumber(source)
-    local Username = GetPlayerName(src)
-    local Primary_ID = ig.func.identifier(src)
-    local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = ig.func.identifiers(src)
-    --
-    local function Startup()
-        TriggerClientEvent("Client:Character:OpeningMenu", src)
-        TriggerEvent("Server:Character:List", src, Primary_ID)
-    end
-    --
-    if License_ID then
-        ig.data.AddPlayer(src)
-        -- Lets see if the player exists.
-        local exists = ig.sql.user.Find(License_ID)
-        if (exists == nil) then
-            -- If no user present.    
-            ig.sql.user.Add(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
-        else
-            -- If user exists, update based on connection info.
-            ig.sql.user.Update(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:PlayerConnecting",
+    eventCallback = function(source)
+        local src = tonumber(source)
+        local Username = GetPlayerName(src)
+        local Primary_ID = ig.func.identifier(src)
+        local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = ig.func.identifiers(src)
+        --
+        local function Startup()
+            TriggerClientEvent("Client:Character:OpeningMenu", src)
+            TriggerEvent("Server:Character:List", src, Primary_ID)
         end
-    else
-        DropPlayer(src, "No License Identifier, No Entry.")
+        --
+        if License_ID then
+            ig.data.AddPlayer(src)
+            -- Lets see if the player exists.
+            local exists = ig.sql.user.Find(License_ID)
+            if (exists == nil) then
+                -- If no user present.    
+                ig.sql.user.Add(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+            else
+                -- If user exists, update based on connection info.
+                ig.sql.user.Update(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+            end
+            return { success = true }
+        else
+            DropPlayer(src, "No License Identifier, No Entry.")
+            return { success = false, error = "No license identifier" }
+        end
     end
-end)
+})
 -- ====================================================================================--
 AddEventHandler("playerDropped", function()
     local src = source

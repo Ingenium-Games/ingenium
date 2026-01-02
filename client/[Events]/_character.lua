@@ -72,7 +72,16 @@ AddEventHandler("Client:Character:ReSpawn", function(Coords)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
     SetEntityHeading(GetPlayerPed(-1), Coords.h)
-    TriggerServerEvent("Server:Character:LoadSkin")
+    -- Use callback to load skin securely
+    TriggerServerCallback({
+        eventName = "Server:Character:LoadSkin",
+        args = {},
+        callback = function(result)
+            if result and result.success and result.appearance then
+                TriggerEvent("Client:Character:LoadSkin", result.appearance)
+            end
+        end
+    })
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     FreezeEntityPosition(GetPlayerPed(-1), false)
     ig.func.FadeIn(2000)
@@ -100,7 +109,16 @@ end)
 RegisterNetEvent("Client:Character:SaveSkin")
 AddEventHandler("Client:Character:SaveSkin", function(bool)
     local appearance = exports["fivem-appearance"]:getPedAppearance(GetPlayerPed(-1))
-    TriggerServerEvent("Server:Character:SaveSkin", appearance, bool)
+    -- Use callback for secure save
+    TriggerServerCallback({
+        eventName = "Server:Character:SaveSkin",
+        args = {appearance, bool},
+        callback = function(result)
+            if result and not result.success then
+                print("^1Failed to save skin: " .. (result.error or "Unknown error") .. "^0")
+            end
+        end
+    })
 end)
 
 -- Event to receive the data of the chosen character for the client.
