@@ -286,14 +286,3 @@ end
 function ig.ipls.Get(name)
 	return iplRegistry[name]
 end
-
--- ====================================================================================--
--- Auto-load IPL configurations from conf.ipls on resource start
--- ====================================================================================--
-CreateThread(function()
-	-- Wait a moment to ensure conf is fully loaded
-	Wait(100)
-	ig.ipls.LoadConfigurations()
-end)
-
--- ====================================================================================--
