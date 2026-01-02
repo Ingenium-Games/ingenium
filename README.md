@@ -351,6 +351,7 @@ Save intervals:
 Special thanks too; 
 
 - @[pietermcfiber](https://github.com/pitermcflebor) for [pmc-callbacks](https://github.com/pitermcflebor/pmc-callbacks)
+- @[mkafrin](https://github.com/mkafrin) for [PolyZone](https://github.com/mkafrin/PolyZone) - Integrated into Ingenium as `ig.zone`
 
 <br>
 

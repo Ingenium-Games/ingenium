@@ -6,6 +6,8 @@ description "Ingenium"
 version "0.9.0"
 ------------------------------------------------------------------------------
 lua54 "yes"
+-- Provide PolyZone functionality to replace external PolyZone resource
+provide "polyzone"
 -- New Vue 3 NUI system (comment out to use old system)
 ui_page "nui/dist/index.html"
 -- Old NUI system (uncomment to use old system)
@@ -13,8 +15,26 @@ ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
 shared_scripts {"_config/config.lua", "_config/**/*.lua", "shared/_ig.lua",    "shared/[Tools]/*.lua",    "shared/[Third Party]/*.lua", "shared/_locale.lua", "shared/_protect.lua"}
 ------------------------------------------------------------------------------
-client_scripts {"client/_var.lua", "locale/*.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "client/_functions.lua",
-                "client/[Data]/_game_data_helpers.lua", "client/**/*.lua", "nui/lua/*.lua"}
+client_scripts {
+    "client/_var.lua",
+    "locale/*.lua",
+    "shared/[Tools]/*.lua",
+    "shared/[Third Party]/*.lua",
+    "client/_functions.lua",
+    "client/[Data]/_game_data_helpers.lua",
+    -- PolyZone integration (must load before ig.zone wrapper)
+    "client/[Zones]/PolyZone.lua",
+    "client/[Zones]/BoxZone.lua",
+    "client/[Zones]/CircleZone.lua",
+    "client/[Zones]/EntityZone.lua",
+    "client/[Zones]/ComboZone.lua",
+    "client/[Zones]/_ig_zone.lua",
+    -- IPL management (must load after zones)
+    "client/[ipls]/_ig_ipl.lua",
+    -- Other client scripts
+    "client/**/*.lua",
+    "nui/lua/*.lua"
+}
 ------------------------------------------------------------------------------
 -- SQL Handler (must load before other server scripts)
 server_scripts {
