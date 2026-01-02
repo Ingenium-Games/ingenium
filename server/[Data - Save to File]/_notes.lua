@@ -456,11 +456,17 @@ function ig.note.ResyncAll()
 end
 
 -- Register read event
-RegisterNetEvent("Server:Note:Read", function(id)
-    local source = source
-    local xPlayer = ig.data.GetPlayer(source)
-    
-    if xPlayer then
-        ig.note.MarkRead(id, xPlayer.GetCharacter_ID())
+-- Migrated to callback for security
+RegisterServerCallback({
+    eventName = "Server:Note:Read",
+    eventCallback = function(source, id)
+        local xPlayer = ig.data.GetPlayer(source)
+        
+        if xPlayer then
+            ig.note.MarkRead(id, xPlayer.GetCharacter_ID())
+            return { success = true }
+        else
+            return { success = false, error = "Player not found" }
+        end
     end
-end)
+})

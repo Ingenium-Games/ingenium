@@ -22,6 +22,17 @@ RegisterServerCallback({
     end
 })
 
+-- Legacy server-side event wrapper for backwards compatibility
+-- This allows TriggerEvent("Server:Character:List", src, Primary_ID) to still work
+AddEventHandler("Server:Character:List", function(src, Primary_ID)
+    local Slots = ig.sql.user.GetSlots(Primary_ID)
+    local Characters = ig.sql.char.GetAllPermited(Primary_ID, Slots)
+    -- Send the data table to the client that requested it...
+    TriggerClientEvent("Client:Nui:Message", src, "connected", {["Characters"] = Characters, ["Slots"] = Slots})
+    -- Place the user in their own instance until the user has joined and loaded.
+    ig.inst.SetPlayer(src)
+end)
+
 -- [C] - Migrated to callback for security
 RegisterServerCallback({
     eventName = "Server:Character:Join",
