@@ -83,10 +83,9 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Server:Character:Register",
     eventCallback = function(source, first_name, last_name, appearance)
-        local src = tonumber(source)
         -- Run a check to see if it being exploited.
-        if ig.data.GetPlayer(src) ~= false then
-            ig.func.Eventban(src, "Server:Character:Register")
+        if ig.data.GetPlayer(source) ~= false then
+            ig.func.Eventban(source, "Server:Character:Register")
             return { success = false, error = "Already has character loaded" }
         end
         local p = promise.new()
@@ -95,7 +94,7 @@ RegisterServerCallback({
         local phone_number = ig.sql.gen.PhoneNumber()
         local iban = ig.sql.gen.Iban()
         local bank_number = ig.sql.gen.AccountNumber()
-        local primary_id = ig.func.identifier(src)
+        local primary_id = ig.func.identifier(source)
         local data = {}
         
         data.Primary_ID = primary_id -- Owner
@@ -119,17 +118,18 @@ RegisterServerCallback({
             p:resolve()
         end)
         --
-        ig.data.LoadPlayer(src, character_id)
-        --
-        Citizen.Await(p)    
+        -- Wait for database operations to complete before loading player
+        Citizen.Await(p)
+        
+        ig.data.LoadPlayer(source, character_id)
         --[[
                 ADD YOUR CHARACTER CREATION EVENT BELOW
         ]]--
-        TriggerEvent("Server:Character:Spawn", src)
+        TriggerEvent("Server:Character:Spawn", source)
         --[[
                 ADD YOUR CHARACTER CREATION EVENT ABOVE
         ]]--
-        local xPlayer = ig.data.GetPlayer(src)
+        local xPlayer = ig.data.GetPlayer(source)
         xPlayer.AddItem({"Phone",1,100})
         
         return { success = true, character_id = character_id }
@@ -290,8 +290,7 @@ RegisterServerCallback({
 RegisterServerCallback({
     eventName = "Server:Character:SetJob",
     eventCallback = function(source, data)
-        local src = source
-        local xPlayer = ig.data.GetPlayer(src)
+        local xPlayer = ig.data.GetPlayer(source)
         if not xPlayer then
             return { success = false, error = "Player not found" }
         end
@@ -314,8 +313,7 @@ RegisterServerCallback({
         if conf.enableduty then
             -- Add Functions or Hooks here!
             local bool = boolean
-            local src = source
-            local xPlayer = ig.data.GetPlayer(src)
+            local xPlayer = ig.data.GetPlayer(source)
             if not xPlayer then
                 return { success = false, error = "Player not found" }
             end
