@@ -153,8 +153,8 @@ function ig.ipls.LoadByName(name)
 	
 	config.loaded = true
 	
-	-- Set up zone handler if zone configuration exists
-	if config.zone and ig.zone then
+	-- Set up zone handler if zone configuration exists and not already set up
+	if config.zone and ig.zone and not config.zoneHandler then
 		ig.ipls.SetupZoneHandler(name, config.zone)
 	end
 	
@@ -196,6 +196,12 @@ function ig.ipls.SetupZoneHandler(name, zoneConfig)
 	local config = iplRegistry[name]
 	if not config then
 		print("[ig.ipls] Error: IPL configuration '" .. name .. "' not found")
+		return false
+	end
+	
+	-- Prevent duplicate zone handler setup
+	if config.zoneHandler then
+		print("[ig.ipls] Warning: Zone handler already exists for '" .. name .. "'")
 		return false
 	end
 	
@@ -245,12 +251,21 @@ function ig.ipls.SetupZoneHandler(name, zoneConfig)
 	end
 	
 	-- Set up zone in/out callbacks for IPL loading/unloading
+	-- Only set up dynamic loading callbacks if enabled
 	if zone and zoneConfig.dynamicLoad then
 		zone:onPlayerInOut(function(isInside)
 			if isInside then
-				ig.ipls.LoadByName(name)
+				-- Only load IPLs, don't trigger zone setup again
+				if config.ipls and #config.ipls > 0 then
+					ig.ipl.LoadMultiple(config.ipls)
+				end
+				config.loaded = true
 			else
-				ig.ipls.UnloadByName(name)
+				-- Unload IPLs when leaving zone
+				if config.ipls and #config.ipls > 0 then
+					ig.ipl.UnloadMultiple(config.ipls)
+				end
+				config.loaded = false
 			end
 		end)
 	end
