@@ -18,6 +18,7 @@ client_scripts {
     "locale/*.lua",
     "shared/[Tools]/*.lua",
     "shared/[Third Party]/*.lua",
+    "client/_callback.lua",
     "client/_functions.lua",
     "client/[Data]/_game_data_helpers.lua",
     -- PolyZone integration (must load before ig.zone wrapper)

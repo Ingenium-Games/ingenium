@@ -20,7 +20,7 @@ function ig.tattoo.GetAll(callback)
     if tattooCache then
         callback(tattooCache)
     else
-        ig.callback.Await('ig:GameData:GetTattoos', function(data)
+        ig.callback.Async('ig:GameData:GetTattoos', function(data)
             tattooCache = data
             callback(data)
         end)
@@ -31,7 +31,7 @@ end
 ---@param zone string Zone name
 ---@param callback function Callback function(tattoos)
 function ig.tattoo.GetByZone(zone, callback)
-    ig.callback.Await('ig:GameData:GetTattoosByZone', function(data)
+    ig.callback.Async('ig:GameData:GetTattoosByZone', function(data)
         callback(data)
     end, zone)
 end
@@ -52,7 +52,7 @@ function ig.weapon.GetAll(callback)
     if weaponCache then
         callback(weaponCache)
     else
-        ig.callback.Await('ig:GameData:GetWeapons', function(data)
+        ig.callback.Async('ig:GameData:GetWeapons', function(data)
             weaponCache = data
             callback(data)
         end)
@@ -92,7 +92,7 @@ function ig.vehicle.GetAll(callback)
     if vehicleCache then
         callback(vehicleCache)
     else
-        ig.callback.Await('ig:GameData:GetVehicles', function(data)
+        ig.callback.Async('ig:GameData:GetVehicles', function(data)
             vehicleCache = data
             callback(data)
         end)
@@ -106,7 +106,7 @@ function ig.vehicle.GetByHash(hash, callback)
     if vehicleCache and vehicleCache[tostring(hash)] then
         callback(vehicleCache[tostring(hash)])
     else
-        ig.callback.Await('ig:GameData:GetVehicleByHash', function(data)
+        ig.callback.Async('ig:GameData:GetVehicleByHash', function(data)
             callback(data)
         end, hash)
     end
@@ -137,7 +137,7 @@ function ig.modkit.GetAll(callback)
     if modkitCache then
         callback(modkitCache)
     else
-        ig.callback.Await('ig:GameData:GetModkits', function(data)
+        ig.callback.Async('ig:GameData:GetModkits', function(data)
             modkitCache = data
             callback(data)
         end)
@@ -148,7 +148,7 @@ end
 ---@param vehicleHash number Vehicle hash
 ---@param callback function Callback function(modkit)
 function ig.modkit.GetForVehicle(vehicleHash, callback)
-    ig.callback.Await('ig:GameData:GetModkitForVehicle', function(data)
+    ig.callback.Async('ig:GameData:GetModkitForVehicle', function(data)
         callback(data)
     end, vehicleHash)
 end

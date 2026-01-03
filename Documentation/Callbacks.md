@@ -2,6 +2,8 @@
 
 This documentation covers the callback system implemented in the Ingenium framework, with a focus on the primary implementation in [`ingenium/shared/[Third Party]/_callbacks.lua`](https://github.com/Ingenium-Games/ingenium/blob/main/shared/%5BThird%20Party%5D/_callbacks.lua).
 
+> **💡 Quick Start:** For client-side development, use the convenient `ig.callback` wrapper. See [Callback_Wrapper_Guide.md](Callback_Wrapper_Guide.md) for usage examples.
+
 ---
 
 ## Overview
@@ -14,6 +16,7 @@ The system includes:
 - Support for promises, timeouts, async/sync usage
 - Security: event tickets & rate limiting
 - Optional ACL (permission) checks
+- **Client-side wrapper:** `ig.callback` namespace for convenient access
 
 ---
 
@@ -148,11 +151,17 @@ RegisterServerCallback({
     end
 })
 
--- To invoke from client:
-ig.callback.Await('GetInventory', function(items)
-  print("Received inventory:", items)
+-- To invoke from client (using wrapper):
+local items = ig.callback.Await('GetInventory', "somePlayerId")
+print("Received inventory:", json.encode(items))
+
+-- Or with async pattern:
+ig.callback.Async('GetInventory', function(items)
+    print("Received inventory:", json.encode(items))
 end, "somePlayerId")
 ```
+
+> **Note:** For more examples and patterns, see [Callback_Wrapper_Guide.md](Callback_Wrapper_Guide.md)
 
 ---
 
@@ -180,9 +189,10 @@ export async function callClientCallback(callback, ...args) {
 2. **Server receives and validates ticket**  
    → Executes registered `eventCallback`.
 3. **Response sent back to client**  
-   → Promise resolved, result returned or passed to async callback.
-
----
+  **Client Wrapper Guide:** [Callback_Wrapper_Guide.md](Callback_Wrapper_Guide.md) - Convenient `ig.callback` API
+- **Core Implementation:** [`shared/[Third Party]/_callbacks.lua`](https://github.com/Ingenium-Games/ingenium/blob/main/shared/%5BThird%20Party%5D/_callbacks.lua)
+- **Server Examples:** [`server/[Callbacks]/_dump.lua`](https://github.com/Ingenium-Games/ingenium/blob/main/server/%5BCallbacks%5D/_dump.lua)
+- **NUI Integration:** [nui/src/utils/nui.js](https://github.com/Ingenium-Games/ingenium/blob/main/nui/src/utils/nui.js)
 
 ## Further Reading
 
