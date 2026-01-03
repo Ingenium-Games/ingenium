@@ -9,7 +9,7 @@ if conf.gamemode ~= "RP" then
     return
 end
 
-local modeSettings = GetGameModeSettings("RP")
+local modeSettings = ig.game.GetGameModeSettings("RP")
 
 -- ====================================================================================--
 -- One-Time Setup Thread
@@ -155,24 +155,3 @@ Citizen.CreateThread(function()
         -- Additional RP state checks can be added here
     end
 end)
-
--- ====================================================================================--
--- Helper Functions
--- ====================================================================================--
-
---- Disable idle camera manually
-function ig.DisableIdleCamera()
-    InvalidateIdleCam()
-    InvalidateVehicleIdleCam()
-end
-
---- Enable/disable HUD visibility
----@param visible boolean
-function ig.SetHudVisible(visible)
-    DisplayHud(visible)
-    DisplayRadar(visible)
-end
-
--- Export helper functions
-exports("DisableIdleCamera", ig.DisableIdleCamera)
-exports("SetHudVisible", ig.SetHudVisible)

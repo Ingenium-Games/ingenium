@@ -1,7 +1,7 @@
 -- ====================================================================================--
 -- Globals and Require/Replace
 math.randomseed(GetNetworkTime())
-c = c or exports["ingenium"]:c()
+ig = ig or {}
 -- ====================================================================================--
 ig.imagehost = conf.imagehost
 ig.sec = conf.sec
@@ -9,12 +9,6 @@ ig.min = conf.min
 ig.hour = conf.hour
 ig.day = conf.day
 ig.locale = conf.locale
---
-function GetLocale()
-    return ig.locale
-end
-exports("GetLocale", GetLocale)
---
 -- _data.lua
 ig._loaded = false
 ig._character = nil

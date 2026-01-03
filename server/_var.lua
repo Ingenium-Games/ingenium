@@ -9,12 +9,6 @@ ig.min = conf.min
 ig.hour = conf.hour
 ig.day = conf.day
 ig.locale = conf.locale
---
-function GetLocale()
-    return ig.locale
-end
-exports("GetLocale", GetLocale)
---
 -- _data.lua
 ig._running = false
 ig._loading = true

@@ -20,7 +20,7 @@ local function SaveDynamicData()
         print(('^2[Autosave] Dynamic data saved to JSON (%.2fms)^7'):format(elapsed))
     end
     
-    SetTimeout(300000, SaveDynamicData) -- 5 minutes
+    SetTimeout(conf.objectsync, SaveDynamicData) -- 5 minutes
 end
 
 -- Start routine after resource is fully loaded

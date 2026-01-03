@@ -7,10 +7,6 @@ ig._inventory = {} -- from server
 AddEventHandler("Client:Character:SetInventory", function(inv)
     ig._inventory = inv
 end)
-
-exports("GetInventory", function()
-    return ig._inventory
-end)
 -- ====================================================================================--
 
 --- func desc

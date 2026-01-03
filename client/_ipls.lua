@@ -4,21 +4,18 @@
 -- ====================================================================================--
 
 -- Initialize the ig.ipl namespace
-ig.ipl = {}
-ig.ipls = {}
 
--- ====================================================================================--
--- IPL Registry - Stores all registered IPL configurations
--- ====================================================================================--
-local iplRegistry = {}
-local activeIPLs = {}
+ig.ipl = {} -- Function level
+ig.ipls = {} -- Data tables of loaded vs unloaded (Active vs inactive)
+ig.ipls.active = {}
+ig.ipls.inactive = {}
 
 -- ====================================================================================--
 -- Configuration Loader
 -- ====================================================================================--
 
 --- Load IPL configurations from conf.ipls
-function ig.ipls.LoadConfigurations()
+function ig.ipl.LoadConfigurations()
 	if not conf or not conf.ipls then
 		print("[ig.ipls] Warning: No IPL configurations found in conf.ipls")
 		return
@@ -27,7 +24,7 @@ function ig.ipls.LoadConfigurations()
 	local count = 0
 	for key, config in pairs(conf.ipls) do
 		if type(config) == "table" and config.name then
-			ig.ipls.Register(config)
+			ig.ipl.Register(config)
 			count = count + 1
 		end
 	end
@@ -50,7 +47,7 @@ function ig.ipl.Load(iplName)
 	end
 	
 	RequestIpl(iplName)
-	activeIPLs[iplName] = true
+	ig.ipls.active[iplName] = true
 	return true
 end
 
@@ -63,7 +60,7 @@ function ig.ipl.Unload(iplName)
 	end
 	
 	RemoveIpl(iplName)
-	activeIPLs[iplName] = nil
+	ig.ipls.active[iplName] = nil
 	return true
 end
 
@@ -71,7 +68,7 @@ end
 --@param iplName string "The IPL identifier to check"
 --@return boolean
 function ig.ipl.IsLoaded(iplName)
-	return activeIPLs[iplName] == true
+	return ig.ipls.active[iplName] == true
 end
 
 --- Load multiple IPLs at once
@@ -108,7 +105,7 @@ end
 
 --- Register an IPL configuration with optional zone triggers
 --@param config table "IPL configuration: {name, ipls, zone, autoload}"
-function ig.ipls.Register(config)
+function ig.ipl.Register(config)
 	if not config or not config.name then
 		print("[ig.ipls] Error: IPL config must have a name")
 		return false
@@ -123,11 +120,11 @@ function ig.ipls.Register(config)
 		zoneHandler = nil
 	}
 	
-	iplRegistry[config.name] = iplConfig
+	ig.ipls.inactive[config.name] = iplConfig
 	
 	-- Auto-load if specified
 	if iplConfig.autoload then
-		ig.ipls.LoadByName(config.name)
+		ig.ipl.LoadByName(config.name)
 	end
 	
 	return true
@@ -135,8 +132,8 @@ end
 
 --- Load a registered IPL configuration by name
 --@param name string "The registered IPL configuration name"
-function ig.ipls.LoadByName(name)
-	local config = iplRegistry[name]
+function ig.ipl.LoadByName(name)
+	local config = ig.ipls.inactive[name]
 	if not config then
 		print("[ig.ipls] Error: IPL configuration '" .. name .. "' not found")
 		return false
@@ -155,7 +152,7 @@ function ig.ipls.LoadByName(name)
 	
 	-- Set up zone handler if zone configuration exists and not already set up
 	if config.zone and ig.zone and not config.zoneHandler then
-		ig.ipls.SetupZoneHandler(name, config.zone)
+		ig.ipl.SetupZoneHandler(name, config.zone)
 	end
 	
 	return true
@@ -163,8 +160,8 @@ end
 
 --- Unload a registered IPL configuration by name
 --@param name string "The registered IPL configuration name"
-function ig.ipls.UnloadByName(name)
-	local config = iplRegistry[name]
+function ig.ipl.UnloadByName(name)
+	local config = ig.ipls.inactive[name]
 	if not config then
 		print("[ig.ipls] Error: IPL configuration '" .. name .. "' not found")
 		return false
@@ -192,8 +189,8 @@ end
 --- Set up a zone handler for proximity-based IPL loading
 --@param name string "The registered IPL configuration name"
 --@param zoneConfig table "Zone configuration: {type, coords, radius/size, etc.}"
-function ig.ipls.SetupZoneHandler(name, zoneConfig)
-	local config = iplRegistry[name]
+function ig.ipl.SetupZoneHandler(name, zoneConfig)
+	local config = ig.ipls.inactive[name]
 	if not config then
 		print("[ig.ipls] Error: IPL configuration '" .. name .. "' not found")
 		return false
@@ -276,13 +273,13 @@ end
 
 --- Get all registered IPL configurations
 --@return table
-function ig.ipls.GetAll()
-	return iplRegistry
+function ig.ipl.GetAll()
+	return ig.ipls.inactive
 end
 
 --- Get a specific IPL configuration
 --@param name string "The registered IPL configuration name"
 --@return table
-function ig.ipls.Get(name)
-	return iplRegistry[name]
+function ig.ipl.Get(name)
+	return ig.ipls.inactive[name]
 end
