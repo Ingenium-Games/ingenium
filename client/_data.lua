@@ -167,12 +167,16 @@ end
 
 function ig.data.Packet()
     return {
+        -- Data to send to server for server to update
         Health = ig.status.GetHealth(),
         Armour = ig.status.GetArmour(),
         Hunger = ig.status.GetHunger(),
         Thirst = ig.status.GetThirst(),
         Stress = ig.status.GetStress(),
         Modifiers = ig.modifier.GetModifiers(),
+        -- 
+        
+
     }
 end
 

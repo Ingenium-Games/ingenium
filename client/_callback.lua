@@ -194,7 +194,3 @@ function ig.callback.UnregisterClient(eventData)
         UnregisterClientCallback(eventData)
     end
 end
-
--- ====================================================================================--
-
-print('^2[Client] Callback wrapper initialized^0')

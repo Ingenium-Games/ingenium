@@ -226,7 +226,11 @@ function ig.status.SetPlayer()
     -- Begin Routines / Timeouts
     ig.status.StartHungerDecrease()
     ig.status.StartThirstDecrease()
-    ig.status.StartStressIncrease()
+    if GetResourceState("sit") ~= "started" then
+        ig.func.Debug_1("[WARNING] Sit resource is not running. Stress decrease while sitting/laying will not function.")
+    elseif GetResourceState("sit") == "started" then
+        ig.status.StartStressIncrease()
+    end
 end
 
 --[[
@@ -242,16 +246,16 @@ SetRunSprintMultiplierForPlayer(player,multiplier)
 SetSwimMultiplierForPlayer(player,multiplier)
 
 ShakeGameplayCam(shakeName, intensity)
-DEATH_FAIL_IN_EFFECT_SHAKE  
-DRUNK_SHAKE  
-FAMILY5_DRUG_TRIP_SHAKE  
-HAND_SHAKE  
-JOLT_SHAKE  
-LARGE_EXPLOSION_SHAKE  
-MEDIUM_EXPLOSION_SHAKE  
-SMALL_EXPLOSION_SHAKE  
-ROAD_VIBRATION_SHAKE  
-SKY_DIVING_SHAKE  
+DEATH_FAIL_IN_EFFECT_SHAKE
+DRUNK_SHAKE
+FAMILY5_DRUG_TRIP_SHAKE
+HAND_SHAKE
+JOLT_SHAKE
+LARGE_EXPLOSION_SHAKE
+MEDIUM_EXPLOSION_SHAKE
+SMALL_EXPLOSION_SHAKE
+ROAD_VIBRATION_SHAKE
+SKY_DIVING_SHAKE
 VIBRATE_SHAKE
 
 ]] --
@@ -343,4 +347,3 @@ end
 function ig.status.WalkType(type)
 
 end
-

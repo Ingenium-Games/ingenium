@@ -13,6 +13,24 @@ local ALLOWED_CLIENT_KEYS = {
     ["IsClimbing"] = true,
     ["IsRagdoll"] = true,
     -- Add other benign animation/state keys here
+    ["IsSitting"] = true,
+    ["IsCuffed"] = true,
+    ["IsEscorted"] = true,
+    ["Emote"] = true,
+    ["FacialAnim"] = true,
+    ["WalkStyle"] = true,
+    ["IsInVehicle"] = true,
+    ["VehicleSeat"] = true,
+    ["IsTalking"] = true,
+    ["VoiceRange"] = true,
+    ["RadioChannel"] = true,
+    ["RadioVolume"] = true,
+    ["IsDead"] = true,
+    ["IsUnconscious"] = true,
+    ["IsInCombat"] = true,
+    ["IsAiming"] = true,
+    ["IsShooting"] = true,
+    ["CurrentWeapon"] = true,
 }
 
 -- Blacklist of critical keys that must NEVER be modified by clients

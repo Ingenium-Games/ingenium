@@ -9,14 +9,14 @@ provide "polyzone"
 --
 ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
-shared_scripts { 
-    "_config/config.lua", 
-    "_config/**/*.lua", 
-    "shared/_ig.lua", 
-    "shared/[Tools]/*.lua", 
-    "shared/[Third Party]/*.lua", 
-    "shared/_locale.lua", 
-    "shared/_protect.lua" 
+shared_scripts {
+    "_config/config.lua",
+    "_config/**/*.lua",
+    "shared/_ig.lua",
+    "shared/[Tools]/*.lua",
+    "shared/[Third Party]/*.lua",
+    "shared/_locale.lua",
+    "shared/_protect.lua"
 }
 ------------------------------------------------------------------------------
 client_scripts {
@@ -60,25 +60,26 @@ server_scripts {
     "server/**/*.lua"
 }
 ------------------------------------------------------------------------------
-dependencies { 
-    "/onesync", 
-    "discordroles", 
-    "restfx", 
-    "freecam", 
-    "screenshotbasic" 
+dependencies {
+    "/onesync",
+    "discordroles",
+    "restfx",
+    "freecam",
+    "sit",
+    "screenshotbasic"
 }
 ------------------------------------------------------------------------------
-files { 
-    "data/*.json", 
-    "nui/index.html", 
-    "nui/css/*.css", 
-    "nui/js/*.js", 
-    "nui/img/*.png", 
+files {
+    "data/*.json",
+    "nui/index.html",
+    "nui/css/*.css",
+    "nui/js/*.js",
+    "nui/img/*.png",
     "nui/libs/*.js",
-    "nui/inventory/dist/assets/*.css", 
-    "nui/inventory/dist/assets/*.js", 
-    "nui/dist/*.html", 
-    "nui/dist/assets/*.css", 
-    "nui/dist/assets/*.js" 
+    "nui/inventory/dist/assets/*.css",
+    "nui/inventory/dist/assets/*.js",
+    "nui/dist/*.html",
+    "nui/dist/assets/*.css",
+    "nui/dist/assets/*.js"
 }
 ------------------------------------------------------------------------------
