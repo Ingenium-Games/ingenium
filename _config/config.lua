@@ -30,7 +30,8 @@ LOCALISATION/INTERNATIONALISATION also known as.. i18n :
 conf.locale = "en"
 --[[
 ACE PERMISSIONS :
-    -- The permissions are done inside the DB, so every time the User joins the ace gets set at the user level, the default level to assign to the DB on a new user joining is...
+    -- The permissions are done inside the DB, so every time the User joins the ace gets set at the user level, 
+    -- the default level to assign to the DB on a new user joining is...
 ]]--
 conf.ace = "public" 
 --[[
@@ -50,8 +51,8 @@ UPDATE TIMES :
     [5] Job account saves (rarely change)
     [6] Object saves (world persistence)
 ]]--
-conf.clientsync = 15 * conf.sec
-conf.charactersync = 30 * conf.sec
+conf.clientsync = 35 * conf.sec
+conf.charactersync = 55 * conf.sec
 conf.serversync = 1.5 * conf.min
 conf.playersync = 2 * conf.min
 conf.revivesync = conf.min

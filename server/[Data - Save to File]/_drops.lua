@@ -303,6 +303,34 @@ function ig.drop.StartCleanupRoutine()
     ig.func.Debug_1("Drop cleanup routine started (runs every 5 minutes)")
 end
 
+--- Helper function to merge active drops back into drops for saving
+---@return table dropsToSave Combined drops table
+function ig.drop.MergeDropsForSave()
+    local dropsToSave = {}
+    
+    -- Copy ig.drops
+    for uuid, drop in pairs(ig.drops) do
+        dropsToSave[uuid] = drop
+    end
+    
+    -- Merge ig.active_drops with updated inventory
+    for uuid, drop in pairs(ig.active_drops) do
+        -- Update inventory from xObject before saving
+        local xObject = ig.data.GetObject(drop.NetID)
+        if xObject then
+            drop.Inventory = xObject.CompressInventory()
+            drop.Updated = ig.func.Timestamp()
+            dropsToSave[uuid] = drop
+        else
+            -- If xObject doesn't exist, skip this drop (will be cleaned up)
+            ig.func.Debug_1("Skipping save for drop " .. uuid .. " - xObject not found")
+        end
+    end
+    
+    return dropsToSave
+end
+
+
 -- ====================================================================================--
 -- Events
 -- ====================================================================================--

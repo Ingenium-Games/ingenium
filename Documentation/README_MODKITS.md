@@ -1,7 +1,7 @@
 # Missing modkits.json File
 
 ## Status
-The `modkits.json` file is referenced in the code but does not exist in this directory.
+The `modkits.json` file is referenced in the code but does not exist in the //data/ directory.
 
 ## Impact
 - The system handles this gracefully by using an empty table: `ig.modkits = {}`

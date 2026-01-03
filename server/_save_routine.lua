@@ -2,46 +2,19 @@
 -- Save dynamic JSON data periodically
 -- ====================================================================================--
 
---- Helper function to merge active drops back into drops for saving
----@return table dropsToSave Combined drops table
-local function MergeDropsForSave()
-    local dropsToSave = {}
-    
-    -- Copy ig.drops
-    for uuid, drop in pairs(ig.drops) do
-        dropsToSave[uuid] = drop
-    end
-    
-    -- Merge ig.active_drops with updated inventory
-    for uuid, drop in pairs(ig.active_drops) do
-        -- Update inventory from xObject before saving
-        local xObject = ig.data.GetObject(drop.NetID)
-        if xObject then
-            drop.Inventory = xObject.CompressInventory()
-            drop.Updated = ig.func.Timestamp()
-            dropsToSave[uuid] = drop
-        else
-            -- If xObject doesn't exist, skip this drop (will be cleaned up)
-            ig.func.Debug_1("Skipping save for drop " .. uuid .. " - xObject not found")
-        end
-    end
-    
-    return dropsToSave
-end
-
 local function SaveDynamicData()
     if not ig._loading then  -- Don't save during startup
         local startTime = os.clock()
         
         -- Merge drops for persistence
-        local dropsToSave = MergeDropsForSave()
+        local dropsToSave = ig.drop.MergeDropsForSave()
         
         ig.json.Write('Drops', dropsToSave)
-        ig.json.Write('Pickups', ig.picks)
-        ig.json.Write('Scenes', ig.scenes)
-        ig.json.Write('Notes', ig.notes)
-        ig.json.Write('GSR', ig.gsrs)
-        ig.json.Write('Objects') or {}
+        ig.json.Write('Pickups', ig.picks or {})
+        ig.json.Write('Scenes', ig.scenes or {})
+        ig.json.Write('Notes', ig.notes or {})
+        ig.json.Write('GSR', ig.gsrs or {})
+        ig.json.Write('Objects', ig.objects or {}) 
 
         local elapsed = (os.clock() - startTime) * 1000
         print(('^2[Autosave] Dynamic data saved to JSON (%.2fms)^7'):format(elapsed))
@@ -67,7 +40,7 @@ AddEventHandler('onResourceStop', function(resource)
         print('^3[Shutdown] Saving all dynamic data...^7')
         
         -- Use helper function to merge drops
-        local dropsToSave = MergeDropsForSave()
+        local dropsToSave = ig.drop.MergeDropsForSave()
         
         ig.json.Write('Drops', dropsToSave)
         ig.json.Write('Pickups', ig.picks)
@@ -84,7 +57,7 @@ RegisterCommand('savedata', function(source, args)
         print('^3[Manual Save] Saving dynamic data...^7')
         
         -- Use helper function to merge drops
-        local dropsToSave = MergeDropsForSave()
+        local dropsToSave = ig.drop.MergeDropsForSave()
         
         ig.json.Write('Drops', dropsToSave)
         ig.json.Write('Pickups', ig.picks)

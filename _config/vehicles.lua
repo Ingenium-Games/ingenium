@@ -1,8 +1,7 @@
 -- ====================================================================================--
 conf.vehicles = {}
 -- ====================================================================================--
-conf.vehicles.classes = [[
-[
+conf.vehicles.classes = {
   "Compact",
   "Sedan",
   "SUV",
@@ -25,5 +24,4 @@ conf.vehicles.classes = [[
   "Military",
   "Commercial",
   "Train"
-]
-]]
+}

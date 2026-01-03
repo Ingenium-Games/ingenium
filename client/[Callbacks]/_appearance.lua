@@ -364,5 +364,3 @@ RegisterServerCallback({
         return variations
     end
 })
-
-print('^2[Client] Appearance NUI callbacks loaded^0')

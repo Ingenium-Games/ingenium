@@ -4,7 +4,6 @@
 -- ====================================================================================--
 
 conf = conf or {}
-conf.gamemode = conf.gamemode or "RP"
 
 -- ====================================================================================--
 -- Game Mode Specific Settings
@@ -96,17 +95,4 @@ end
 function IsGameModeFeatureEnabled(feature)
     local settings = GetGameModeSettings()
     return settings[feature] or false
-end
-
--- Export functions
-if IsDuplicityVersion() then
-    -- Server-side exports
-    exports("GetGameMode", GetGameMode)
-    exports("GetGameModeSettings", GetGameModeSettings)
-    exports("IsGameModeFeatureEnabled", IsGameModeFeatureEnabled)
-else
-    -- Client-side exports
-    exports("GetGameMode", GetGameMode)
-    exports("GetGameModeSettings", GetGameModeSettings)
-    exports("IsGameModeFeatureEnabled", IsGameModeFeatureEnabled)
 end

@@ -9,10 +9,10 @@ function _(key) -- Translate string
         if Locales[locale][key] ~= nil then
             return string.format(Locales[locale][key])
         else
-            return 'Translation [' .. locale .. '][' .. key .. '] does not exists'
+            return 'Translation [' .. locale .. '][' .. key .. '] does not exists.'
         end
     else
-        return 'Locale [' .. locale .. '] does not exists'
+        return 'Locale [' .. locale .. '] does not exists.'
     end
 end
 
