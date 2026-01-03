@@ -3,15 +3,21 @@ fx_version "cerulean"
 game "gta5"
 author "Twiitchter"
 description "Ingenium"
-version "0.9.0"
+version "1.0.0"
 ------------------------------------------------------------------------------
-lua54 "yes"
--- Provide PolyZone functionality to replace external PolyZone resource
 provide "polyzone"
--- New Vue 3 NUI system (comment out to use old system)
+--
 ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
-shared_scripts { "_config/config.lua", "_config/**/*.lua", "shared/_ig.lua", "shared/[Tools]/*.lua", "shared/[Third Party]/*.lua", "shared/_locale.lua", "shared/_protect.lua" }
+shared_scripts { 
+    "_config/config.lua", 
+    "_config/**/*.lua", 
+    "shared/_ig.lua", 
+    "shared/[Tools]/*.lua", 
+    "shared/[Third Party]/*.lua", 
+    "shared/_locale.lua", 
+    "shared/_protect.lua" 
+}
 ------------------------------------------------------------------------------
 client_scripts {
     "client/_var.lua",
@@ -35,16 +41,10 @@ client_scripts {
     "nui/lua/*.lua"
 }
 ------------------------------------------------------------------------------
--- SQL Handler (must load before other server scripts)
 server_scripts {
     "@restfx/build/import.lua",
     "server/_var.lua",
     "locale/*.lua",
-    "server/[SQL]/_pool.js",
-    "server/[SQL]/_query.js",
-    "server/[SQL]/_transaction.js",
-    "server/[SQL]/_handler.lua",
-    "server/[SQL]/_compatibility.lua",
     "server/_functions.lua",
     "server/_cron.lua",
     "server/[Doors]/_doors.lua",
@@ -60,8 +60,25 @@ server_scripts {
     "server/**/*.lua"
 }
 ------------------------------------------------------------------------------
-dependencies { "/onesync", "discordroles", "restfx" }
+dependencies { 
+    "/onesync", 
+    "discordroles", 
+    "restfx", 
+    "freecam", 
+    "screenshotbasic" 
+}
 ------------------------------------------------------------------------------
-files { "data/*.json", "nui/index.html", "nui/css/*.css", "nui/js/*.js", "nui/img/*.png", "nui/libs/*.js",
-    "nui/inventory/dist/assets/*.css", "nui/inventory/dist/assets/*.js", "nui/dist/*.html", "nui/dist/assets/*.css", "nui/dist/assets/*.js" }
+files { 
+    "data/*.json", 
+    "nui/index.html", 
+    "nui/css/*.css", 
+    "nui/js/*.js", 
+    "nui/img/*.png", 
+    "nui/libs/*.js",
+    "nui/inventory/dist/assets/*.css", 
+    "nui/inventory/dist/assets/*.js", 
+    "nui/dist/*.html", 
+    "nui/dist/assets/*.css", 
+    "nui/dist/assets/*.js" 
+}
 ------------------------------------------------------------------------------
