@@ -4,13 +4,13 @@ Complete reference for SQL-related events, exports, and commands in ingenium.
 
 ## Server Events
 
-### ig:sql:ready
+### ingenium.sql:Ready
 
 Emitted when the database connection is established and ready for queries.
 
 **Usage:**
 ```lua
-AddEventHandler('ig:sql:ready', function()
+AddEventHandler('ingenium.sql:Ready', function()
     print("Database connection established")
     -- Safe to execute queries now
 end)
@@ -51,7 +51,7 @@ end)
 
 ---
 
-### ig:sql:slowQuery
+### ingenium.sql:SlowQuery
 
 Emitted when a query takes longer than 150ms to execute.
 
@@ -69,7 +69,7 @@ Emitted when a query takes longer than 150ms to execute.
 
 **Usage:**
 ```lua
-AddEventHandler('ig:sql:slowQuery', function(data)
+AddEventHandler('ingenium.sql:SlowQuery', function(data)
     print(string.format("^3[SLOW QUERY] %.2fms: %s^7", data.duration, data.query))
     
     -- Log to file or external service
@@ -274,7 +274,7 @@ end)
 
 ```lua
 -- Send Discord webhook for slow queries
-AddEventHandler('ig:sql:slowQuery', function(data)
+AddEventHandler('ingenium.sql:SlowQuery', function(data)
     PerformHttpRequest('https://discord.com/api/webhooks/...', function(err, text, headers)
     end, 'POST', json.encode({
         content = string.format("**Slow Query Alert**\nDuration: %.2fms\nQuery: `%s`", 

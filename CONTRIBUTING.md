@@ -244,7 +244,7 @@ end, true)
 ### Performance Testing
 
 - Benchmark queries with `ig.sql.GetStats()`
-- Monitor slow queries with `ig:sql:slowQuery` event
+- Monitor slow queries with `ingenium.sql:SlowQuery` event
 - Test with realistic player counts
 - Profile save operations
 

@@ -14,9 +14,11 @@ AddEventHandler("onResourceStart", function(resourceName)
     end
     --
     ig.version.Check(conf.url.version, resourceName)
+
+
 end)
 
-AddEventHandler('ig:sql:ready', function()
+AddEventHandler('ingenium.sql:Ready', function()
     --
     ig.data.Initilize()
     --

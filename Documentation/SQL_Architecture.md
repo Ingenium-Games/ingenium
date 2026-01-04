@@ -37,7 +37,7 @@ set mysql_charset "utf8mb4"
 - Initialize and maintain connection pool
 - Provide connections for query execution
 - Track performance statistics
-- Emit lifecycle events (`ig:sql:ready`)
+- Emit lifecycle events (`ingenium.sql:Ready`)
 
 ### 2. Query Executor (`server/[SQL]/_query.js`)
 
@@ -140,12 +140,12 @@ AddEventHandler('ig:sql:queryExecuted', function(data)
 end)
 
 -- Emitted for slow queries
-AddEventHandler('ig:sql:slowQuery', function(data)
+AddEventHandler('ingenium.sql:SlowQuery', function(data)
     -- data = {query, duration, parameters}
 end)
 
 -- Connection ready
-AddEventHandler('ig:sql:ready', function()
+AddEventHandler('ingenium.sql:Ready', function()
     -- Database connection established
 end)
 ```
@@ -275,7 +275,7 @@ end)
 ### Connection Issues
 
 **Problem**: "Connection pool is not initialized"
-- **Solution**: Wait for `ig:sql:ready` event or use `ig.sql.AwaitReady()`
+- **Solution**: Wait for `ingenium.sql:Ready` event or use `ig.sql.AwaitReady()`
 
 **Problem**: Too many connections
 - **Solution**: Increase `mysql_connection_limit` or optimize query patterns
@@ -283,7 +283,7 @@ end)
 ### Performance Issues
 
 **Problem**: Slow queries
-- **Solution**: Check `ig:sql:slowQuery` events, add indexes, optimize WHERE clauses
+- **Solution**: Check `ingenium.sql:SlowQuery` events, add indexes, optimize WHERE clauses
 
 **Problem**: High total queries
 - **Solution**: Use prepared statements for repeated operations

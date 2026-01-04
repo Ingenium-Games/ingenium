@@ -185,7 +185,7 @@ ig.sql.save.Users() -- Batches all dirty players
 ### Monitor Slow Queries
 
 ```lua
-AddEventHandler('ig:sql:slowQuery', function(data)
+AddEventHandler('ingenium.sql:SlowQuery', function(data)
     -- Log to file
     local file = io.open("slow_queries.log", "a")
     file:write(string.format("[%s] %.2fms - %s\n", 
@@ -404,7 +404,7 @@ end, true)
 
 ### High Slow Query Count
 
-1. Identify problematic queries with `ig:sql:slowQuery` event
+1. Identify problematic queries with `ingenium.sql:SlowQuery` event
 2. Add missing indexes
 3. Reduce result set sizes with LIMIT
 4. Split complex JOINs into simpler queries

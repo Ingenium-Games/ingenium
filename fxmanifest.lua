@@ -51,6 +51,7 @@ server_scripts {
     "server/[Security]/*.lua",
     "server/[Validation]/*.lua",
     "server/[Tools]/_memory.lua",
+    "server/[SQL]/_handler.lua",    
     "server/[SQL]/_bank.lua",
     "server/[SQL]/_character.lua",
     "server/[SQL]/_gen.lua",
