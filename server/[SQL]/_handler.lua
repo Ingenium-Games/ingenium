@@ -3,6 +3,7 @@
 -- Provides Lua access to JavaScript MySQL2 query execution engine
 -- ====================================================================================--
 
+if not ig then ig = {} end
 if not ig.sql then ig.sql = {} end
 
 -- ====================================================================================--
@@ -24,7 +25,7 @@ function ig.sql.Query(query, parameters, callback)
         params = {}
     end
     
-    return exports['ingenium']:query(query, params, cb)
+    return exports['ingenium.sql']:query(query, params, cb)
 end
 
 --- Execute a SELECT query that returns a single row
@@ -41,7 +42,7 @@ function ig.sql.FetchSingle(query, parameters, callback)
         params = {}
     end
     
-    return exports['ingenium']:fetchSingle(query, params, cb)
+    return exports['ingenium.sql']:fetchSingle(query, params, cb)
 end
 
 --- Execute a SELECT query that returns a single value
@@ -58,7 +59,7 @@ function ig.sql.FetchScalar(query, parameters, callback)
         params = {}
     end
     
-    return exports['ingenium']:fetchScalar(query, params, cb)
+    return exports['ingenium.sql']:fetchScalar(query, params, cb)
 end
 
 --- Execute an INSERT query
@@ -75,7 +76,7 @@ function ig.sql.Insert(query, parameters, callback)
         params = {}
     end
     
-    return exports['ingenium']:insert(query, params, cb)
+    return exports['ingenium.sql']:insert(query, params, cb)
 end
 
 --- Execute an UPDATE or DELETE query
@@ -92,7 +93,7 @@ function ig.sql.Update(query, parameters, callback)
         params = {}
     end
     
-    return exports['ingenium']:update(query, params, cb)
+    return exports['ingenium.sql']:update(query, params, cb)
 end
 
 --- Execute multiple queries in a transaction
@@ -100,7 +101,7 @@ end
 ---@param callback function|nil Optional callback(success, results)
 ---@return table {success, results}
 function ig.sql.Transaction(queries, callback)
-    return exports['ingenium']:transaction(queries, callback)
+    return exports['ingenium.sql']:transaction(queries, callback)
 end
 
 --- Execute multiple queries as a batch (without transaction)
@@ -108,7 +109,7 @@ end
 ---@param callback function|nil Optional callback(results)
 ---@return table Results array
 function ig.sql.Batch(queries, callback)
-    return exports['ingenium']:batch(queries, callback)
+    return exports['ingenium.sql']:batch(queries, callback)
 end
 
 -- ====================================================================================--
@@ -119,7 +120,7 @@ end
 ---@param query string SQL query to prepare
 ---@return string Query ID
 function ig.sql.PrepareQuery(query)
-    return exports['ingenium']:prepareQuery(query)
+    return exports['ingenium.sql']:prepareQuery(query)
 end
 
 --- Execute a prepared query
@@ -128,7 +129,7 @@ end
 ---@param callback function|nil Optional callback(affectedRows)
 ---@return number Affected rows
 function ig.sql.ExecutePrepared(queryId, parameters, callback)
-    return exports['ingenium']:executePrepared(queryId, parameters, callback)
+    return exports['ingenium.sql']:executePrepared(queryId, parameters, callback)
 end
 
 -- ====================================================================================--
@@ -138,13 +139,13 @@ end
 --- Check if SQL connection is ready
 ---@return boolean True if ready
 function ig.sql.IsReady()
-    return exports['ingenium']:isReady()
+    return exports['ingenium.sql']:isReady()
 end
 
 --- Wait for SQL connection to be ready
 ---@param timeout number|nil Timeout in milliseconds (default 30000)
 ---@return boolean True if ready, false if timeout
-function ig.sql.AwaitReady(timeout, cb)
+function ig.sql.AwaitReady(timeout)
     local maxWait = timeout or 30000
     local waited = 0
     local interval = 100
@@ -154,17 +155,13 @@ function ig.sql.AwaitReady(timeout, cb)
         waited = waited + interval
     end
     
-    if ig.sql.IsReady() then
-        if cb then
-            return cb() 
-        end
-    end
+    return ig.sql.IsReady()
 end
 
 --- Get SQL performance statistics
 ---@return table Statistics object
 function ig.sql.GetStats()
-    return exports['ingenium']:getStats()
+    return exports['ingenium.sql']:getStats()
 end
 
 -- ====================================================================================--
@@ -173,7 +170,6 @@ end
 
 Citizen.CreateThread(function()
     print("^2[SQL Handler] Lua wrapper interface loaded^7")
-    
     -- Wait for SQL to be ready
     if ig.sql.AwaitReady() then
         print("^2[SQL Handler] Connection ready^7")

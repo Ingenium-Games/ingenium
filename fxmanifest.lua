@@ -35,7 +35,7 @@ client_scripts {
     "client/[Zones]/ComboZone.lua",
     "client/[Zones]/_ig_zone.lua",
     -- IPL management (must load after zones)
-    "client/[ipls]/_ig_ipl.lua",
+    "client/_ipls.lua",
     -- Other client scripts
     "client/**/*.lua",
     "nui/lua/*.lua"
@@ -66,7 +66,7 @@ dependencies {
     "restfx",
     "freecam",
     "sit",
-    "screenshotbasic"
+    "screenshot-basic"
 }
 ------------------------------------------------------------------------------
 files {
