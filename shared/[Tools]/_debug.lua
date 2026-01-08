@@ -33,9 +33,13 @@ function ig.debug.GetLevel()
     return 0 -- No debug output
 end
 
+-- Stack level constants for context extraction
+local STACK_LEVEL_DEFAULT = 3  -- Default level for most debug calls
+local STACK_LEVEL_WRAPPED = 4  -- Additional level when called from wrapper
+
 -- Get resource and line information from debug stack
 function ig.debug.GetContext(stackLevel)
-    stackLevel = stackLevel or 3
+    stackLevel = stackLevel or STACK_LEVEL_DEFAULT
     local info = debug.getinfo(stackLevel, "Sln")
     
     if info then
@@ -109,6 +113,7 @@ function ig.debug.Log(level, message, stackLevel)
     print(consoleMsg)
     
     -- Server-side file logging for errors and warnings
+    -- Note: Uses event instead of direct call for server/client separation
     if IsDuplicityVersion() and (level == "ERROR" or level == "WARN") then
         TriggerEvent("ig:debug:logToFile", fileMsg, level)
     end
@@ -163,7 +168,7 @@ function ig.debug.Wrap(func, funcName)
         local success, result = xpcall(func, ig.debug.ErrorHandler, ...)
         
         if not success then
-            ig.debug.Error(string.format("Function '%s' failed: %s", funcName, tostring(result)))
+            -- Error already logged by ErrorHandler, just return nil
             return nil
         end
         

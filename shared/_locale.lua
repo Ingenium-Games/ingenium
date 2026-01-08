@@ -4,6 +4,7 @@
 Locales = {}
 
 function _(key, ...) -- Translate string with optional formatting
+    -- Usage: _("key", arg1, arg2, ...) where args replace %s, %d, etc. in the translation
     local locale = exports["ingenium"]:GetLocale()
     
     -- Try requested locale

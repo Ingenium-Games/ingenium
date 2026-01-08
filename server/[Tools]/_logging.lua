@@ -5,7 +5,6 @@
 if not IsDuplicityVersion() then return end
 
 local logDirectory = "logs"
-local maxLogSize = 10 * 1024 * 1024 -- 10MB
 local logQueue = {}
 local isWriting = false
 
@@ -26,13 +25,13 @@ end
 local function WriteLogEntry(message, level)
     local filePath = GetLogFilePath(level)
     
-    -- Open file in append mode
-    local file = io.open(filePath, "a")
+    -- Open file in append mode with error handling
+    local file, err = io.open(filePath, "a")
     if file then
         file:write(message .. "\n")
         file:close()
     else
-        print("^1[ERROR] Failed to write to log file: " .. filePath .. "^7")
+        print("^1[ERROR] Failed to write to log file: " .. filePath .. " - " .. tostring(err) .. "^7")
     end
 end
 
@@ -78,8 +77,12 @@ exports("LogToFile", function(message, level)
 end)
 
 -- Periodic queue flush (every 5 seconds)
-if ig and ig.func and ig.func.SetInterval then
-    ig.func.SetInterval(ProcessLogQueue, 5000)
-end
+-- Use standard Citizen thread for reliability
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(5000)
+        ProcessLogQueue()
+    end
+end)
 
 -- ====================================================================================--
