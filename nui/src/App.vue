@@ -20,6 +20,9 @@
     
     <!-- Appearance Customization -->
     <AppearanceCustomization />
+    
+    <!-- Target Menu (ig.target integration) -->
+    <TargetMenu />
   </div>
 </template>
 
@@ -34,6 +37,7 @@ import InputDialog from './components/InputDialog.vue'
 import Menu from './components/Menu.vue'
 import ContextMenu from './components/ContextMenu.vue'
 import AppearanceCustomization from './components/appearance/AppearanceCustomization.vue'
+import TargetMenu from './components/target/TargetMenu.vue'
 
 const uiStore = useUIStore()
 
