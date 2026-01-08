@@ -46,6 +46,12 @@ client_scripts {
     "client/[Target]/_api.lua",
     "client/[Target]/_defaults.lua",
     "client/[Target]/_main.lua",
+    -- Development tools (requires target system)
+    "client/[Dev]/_var.lua",
+    "client/[Dev]/_debug.lua",
+    "client/[Dev]/_ammunation.lua",
+    "client/[Dev]/_doorcreator.lua",
+    "client/[Dev]/_vehicleseats.lua",
     -- IPL management (must load after zones)
     "client/_ipls.lua",
     -- VOIP system (loads before other client scripts for early initialization)
@@ -74,6 +80,9 @@ server_scripts {
     "server/[SQL]/_saves.lua",
     "server/[SQL]/_users.lua",
     "server/[SQL]/_vehicles.lua",
+    -- Development tools (server-side commands)
+    "server/[Dev]/_var.lua",
+    "server/[Dev]/_commands.lua",
     -- VOIP system (loads before other server scripts)
     "server/[Voice]/_voip.lua",
     -- PMA-Voice compatibility wrapper (loads last for exports)
