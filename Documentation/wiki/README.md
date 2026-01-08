@@ -1,10 +1,63 @@
 # Ingenium Function Reference
 
-Complete reference documentation for all Ingenium functions.
+Complete wiki-style reference documentation for all Ingenium framework functions.
+
+## Overview
+
+This wiki contains comprehensive documentation for **781 functions** across the Ingenium framework. Each function has its own dedicated markdown file with:
+
+- ✅ Function signature and parameters
+- ✅ Detailed description
+- ✅ Usage examples and code snippets
+- ✅ Security notes and warnings (where applicable)
+- ✅ Related functions and alternatives
+- ✅ Source file location
+
+## How to Use This Documentation
+
+1. **Browse by Namespace**: Find functions organized by their namespace (e.g., `ig.func`, `ig.callback`, `ig.appearance`)
+2. **Click on a Function**: Each function name links to its dedicated documentation page
+3. **Read Examples**: All functions include practical usage examples
+4. **Check Security Notes**: Functions with security implications include clear warnings
+
+## Quick Links
+
+### Most Common Namespaces
+
+- **[func](#func)** - Core utility functions (76 functions)
+- **[sql](#sql)** - Database operations (92 functions)
+- **[appearance](#appearance)** - Character customization (54 functions)
+- **[voip](#voip)** - Voice communication (43 functions)
+- **[callback](#callback)** - Async callback system (10 functions)
+- **[target](#target)** - Targeting/interaction system (19 functions)
+- **[vehicle](#vehicle)** - Vehicle management (24 functions)
+- **[job](#job)** - Job/employment system (27 functions)
+- **[item](#item)** - Item management (50 functions)
+- **[status](#status)** - Player status effects (36 functions)
+
+## Security Best Practices
+
+⚠️ Functions with security implications include warnings about:
+- SQL injection vulnerabilities
+- Network request safety
+- Player identifier handling
+- Admin permission requirements
+- Dynamic code execution risks
+
+Always review security notes before using sensitive functions in production.
+
+## Contributing
+
+Found an issue or want to improve the documentation? 
+- Check the source file location in each function's page
+- Submit improvements via pull request
+- Report issues on GitHub
+
+---
 
 Total Functions: **781**
 
-## Namespaces
+## All Namespaces
 
 - [GetEntityState](#GetEntityState) (1 functions)
 - [GetJob](#GetJob) (1 functions)
