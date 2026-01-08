@@ -45,7 +45,7 @@ function ig.voip.server.InitializePlayer(playerId)
         return
     end
     
-    -- Initialize player voice data
+    -- Initialize player voice data (internal tracking)
     playerVoiceData[playerId] = {
         voiceMode = conf.voip.defaultMode or 2,
         radioChannel = 0,
@@ -61,15 +61,9 @@ function ig.voip.server.InitializePlayer(playerId)
         gridY = 0
     }
     
-    -- Set initial statebags
-    player.state:set("InVoice", false, true)
-    player.state:set("InCall", false, true)
-    player.state:set("InConnection", false, true)
-    player.state:set("InAdminCall", false, true)
-    player.state:set("VoiceMode", conf.voip.defaultMode or 2, true)
-    player.state:set("VoiceDistance", 0.0, true)
-    player.state:set("RadioFrequency", 0, true)
-    player.state:set("RadioTransmitting", false, true)
+    -- Note: Player class now handles statebag initialization during character creation
+    -- The statebags are already set via xPlayer methods when character is loaded
+    -- We only need to ensure they have defaults if not already set
     
     ig.voip.Debug(("Initialized voice for player %d"):format(playerId))
 end
@@ -127,14 +121,21 @@ function ig.voip.server.SetVoiceMode(playerId, modeIndex)
         return
     end
     
-    local player = Player(playerId)
-    if not player then
-        return
+    -- Try to get xPlayer first (if character is loaded)
+    local xPlayer = ig.data.GetPlayer(playerId)
+    if xPlayer then
+        -- Use player class method
+        xPlayer.SetVoiceMode(modeIndex)
+    else
+        -- Fallback to direct state setting if xPlayer not available
+        local player = Player(playerId)
+        if player then
+            player.state:set("VoiceMode", modeIndex, true)
+            player.state:set("VoiceDistance", mode.distance, true)
+        end
     end
     
     playerVoiceData[playerId].voiceMode = modeIndex
-    player.state:set("VoiceMode", modeIndex, true)
-    player.state:set("VoiceDistance", mode.distance, true)
     
     ig.voip.Debug(("Player %d set voice mode to %d (%s)"):format(playerId, modeIndex, mode.name))
 end
@@ -181,9 +182,15 @@ function ig.voip.server.JoinRadioChannel(playerId, channel)
     radioChannels[channel][playerId] = true
     playerVoiceData[playerId].radioChannel = channel
     
-    local player = Player(playerId)
-    if player then
-        player.state:set("RadioFrequency", channel, true)
+    -- Use xPlayer method if available
+    local xPlayer = ig.data.GetPlayer(playerId)
+    if xPlayer then
+        xPlayer.SetRadioFrequency(channel)
+    else
+        local player = Player(playerId)
+        if player then
+            player.state:set("RadioFrequency", channel, true)
+        end
     end
     
     ig.voip.Debug(("Player %d joined radio channel %d"):format(playerId, channel))
@@ -210,10 +217,17 @@ function ig.voip.server.LeaveRadioChannel(playerId, channel)
     playerVoiceData[playerId].radioChannel = 0
     playerVoiceData[playerId].radioTransmitting = false
     
-    local player = Player(playerId)
-    if player then
-        player.state:set("RadioFrequency", 0, true)
-        player.state:set("RadioTransmitting", false, true)
+    -- Use xPlayer methods if available
+    local xPlayer = ig.data.GetPlayer(playerId)
+    if xPlayer then
+        xPlayer.SetRadioFrequency(0)
+        xPlayer.SetRadioTransmitting(false)
+    else
+        local player = Player(playerId)
+        if player then
+            player.state:set("RadioFrequency", 0, true)
+            player.state:set("RadioTransmitting", false, true)
+        end
     end
     
     ig.voip.Debug(("Player %d left radio channel %d"):format(playerId, channel))
@@ -229,9 +243,15 @@ function ig.voip.server.SetRadioTransmitting(playerId, transmitting)
     
     playerVoiceData[playerId].radioTransmitting = transmitting
     
-    local player = Player(playerId)
-    if player then
-        player.state:set("RadioTransmitting", transmitting, true)
+    -- Use xPlayer method if available
+    local xPlayer = ig.data.GetPlayer(playerId)
+    if xPlayer then
+        xPlayer.SetRadioTransmitting(transmitting)
+    else
+        local player = Player(playerId)
+        if player then
+            player.state:set("RadioTransmitting", transmitting, true)
+        end
     end
 end
 
@@ -266,18 +286,30 @@ function ig.voip.server.StartCall(callerId, targetId)
     playerVoiceData[targetId].inCall = true
     playerVoiceData[targetId].callTarget = callerId
     
-    -- Update statebags
-    local caller = Player(callerId)
-    local target = Player(targetId)
+    -- Update statebags using xPlayer methods if available
+    local xCaller = ig.data.GetPlayer(callerId)
+    local xTarget = ig.data.GetPlayer(targetId)
     
-    if caller then
-        caller.state:set("InCall", true, true)
-        caller.state:set("CallActive", true, true)
+    if xCaller then
+        xCaller.SetInCall(true)
+        xCaller.SetCallActive(true)
+    else
+        local caller = Player(callerId)
+        if caller then
+            caller.state:set("InCall", true, true)
+            caller.state:set("CallActive", true, true)
+        end
     end
     
-    if target then
-        target.state:set("InCall", true, true)
-        target.state:set("CallActive", true, true)
+    if xTarget then
+        xTarget.SetInCall(true)
+        xTarget.SetCallActive(true)
+    else
+        local target = Player(targetId)
+        if target then
+            target.state:set("InCall", true, true)
+            target.state:set("CallActive", true, true)
+        end
     end
     
     ig.voip.Debug(("Call started between player %d and %d"):format(callerId, targetId))
@@ -298,10 +330,16 @@ function ig.voip.server.EndCall(playerId)
     playerVoiceData[playerId].inCall = false
     playerVoiceData[playerId].callTarget = nil
     
-    local player = Player(playerId)
-    if player then
-        player.state:set("InCall", false, true)
-        player.state:set("CallActive", false, true)
+    local xPlayer = ig.data.GetPlayer(playerId)
+    if xPlayer then
+        xPlayer.SetInCall(false)
+        xPlayer.SetCallActive(false)
+    else
+        local player = Player(playerId)
+        if player then
+            player.state:set("InCall", false, true)
+            player.state:set("CallActive", false, true)
+        end
     end
     
     -- Clear target's call state if exists
@@ -310,10 +348,16 @@ function ig.voip.server.EndCall(playerId)
         playerVoiceData[targetId].inCall = false
         playerVoiceData[targetId].callTarget = nil
         
-        local target = Player(targetId)
-        if target then
-            target.state:set("InCall", false, true)
-            target.state:set("CallActive", false, true)
+        local xTarget = ig.data.GetPlayer(targetId)
+        if xTarget then
+            xTarget.SetInCall(false)
+            xTarget.SetCallActive(false)
+        else
+            local target = Player(targetId)
+            if target then
+                target.state:set("InCall", false, true)
+                target.state:set("CallActive", false, true)
+            end
         end
     end
     
@@ -345,10 +389,16 @@ function ig.voip.server.StartConnection(playerId, connectionId)
     playerVoiceData[playerId].inConnection = true
     playerVoiceData[playerId].connectionId = connectionId
     
-    local player = Player(playerId)
-    if player then
-        player.state:set("InConnection", true, true)
-        player.state:set("ConnectionActive", true, true)
+    local xPlayer = ig.data.GetPlayer(playerId)
+    if xPlayer then
+        xPlayer.SetInConnection(true)
+        xPlayer.SetConnectionActive(true)
+    else
+        local player = Player(playerId)
+        if player then
+            player.state:set("InConnection", true, true)
+            player.state:set("ConnectionActive", true, true)
+        end
     end
     
     ig.voip.Debug(("Connection started for player %d (ID: %s)"):format(playerId, connectionId))
@@ -366,10 +416,16 @@ function ig.voip.server.EndConnection(playerId)
     playerVoiceData[playerId].inConnection = false
     playerVoiceData[playerId].connectionId = nil
     
-    local player = Player(playerId)
-    if player then
-        player.state:set("InConnection", false, true)
-        player.state:set("ConnectionActive", false, true)
+    local xPlayer = ig.data.GetPlayer(playerId)
+    if xPlayer then
+        xPlayer.SetInConnection(false)
+        xPlayer.SetConnectionActive(false)
+    else
+        local player = Player(playerId)
+        if player then
+            player.state:set("InConnection", false, true)
+            player.state:set("ConnectionActive", false, true)
+        end
     end
     
     ig.voip.Debug(("Connection ended for player %d"):format(playerId))
@@ -410,10 +466,15 @@ function ig.voip.server.StartAdminCall(adminId, targetId)
     playerVoiceData[targetId].inAdminCall = true
     playerVoiceData[targetId].adminCallSource = adminId
     
-    -- Update target's statebag (server-side only)
-    local target = Player(targetId)
-    if target then
-        target.state:set("InAdminCall", true, true)
+    -- Update target's statebag using xPlayer method (server-only, permission checked)
+    local xTarget = ig.data.GetPlayer(targetId)
+    if xTarget then
+        xTarget.SetInAdminCall(true, adminId)
+    else
+        local target = Player(targetId)
+        if target then
+            target.state:set("InAdminCall", true, true)
+        end
     end
     
     ig.voip.Debug(("Admin call started from %d to %d"):format(adminId, targetId))
@@ -441,9 +502,14 @@ function ig.voip.server.EndAdminCall(adminId, targetId)
                 playerVoiceData[targetId].inAdminCall = false
                 playerVoiceData[targetId].adminCallSource = nil
                 
-                local target = Player(targetId)
-                if target then
-                    target.state:set("InAdminCall", false, true)
+                local xTarget = ig.data.GetPlayer(targetId)
+                if xTarget then
+                    xTarget.SetInAdminCall(false, adminId)
+                else
+                    local target = Player(targetId)
+                    if target then
+                        target.state:set("InAdminCall", false, true)
+                    end
                 end
             end
         end
@@ -454,9 +520,14 @@ function ig.voip.server.EndAdminCall(adminId, targetId)
                 playerVoiceData[tgtId].inAdminCall = false
                 playerVoiceData[tgtId].adminCallSource = nil
                 
-                local target = Player(tgtId)
-                if target then
-                    target.state:set("InAdminCall", false, true)
+                local xTarget = ig.data.GetPlayer(tgtId)
+                if xTarget then
+                    xTarget.SetInAdminCall(false, adminId)
+                else
+                    local target = Player(tgtId)
+                    if target then
+                        target.state:set("InAdminCall", false, true)
+                    end
                 end
             end
         end
@@ -590,15 +661,32 @@ end
 -- Event Handlers
 -- ====================================================================================--
 
---- Handle player connecting
-AddEventHandler("playerConnecting", function()
+--- Handle character ready (after character is fully loaded)
+---@description Initialize VOIP only after character is ready, not on initial connection
+AddEventHandler("Server:Character:Ready", function()
     local playerId = source
+    -- Initialize VOIP for this player now that character is ready
     ig.voip.server.InitializePlayer(playerId)
+    
+    -- Get xPlayer and set initial voice mode
+    local xPlayer = ig.data.GetPlayer(playerId)
+    if xPlayer then
+        -- Set default voice mode using player class method
+        xPlayer.SetVoiceMode(conf.voip.defaultMode or 2)
+    end
+end)
+
+--- Handle player character switch (cleanup old VOIP state)
+AddEventHandler("Server:Character:Switch", function(playerId)
+    local src = playerId or source
+    -- Clean up VOIP state when switching characters
+    ig.voip.server.CleanupPlayer(src)
 end)
 
 --- Handle player dropping
 AddEventHandler("playerDropped", function()
     local playerId = source
+    -- Clean up all VOIP state on disconnect
     ig.voip.server.CleanupPlayer(playerId)
 end)
 
