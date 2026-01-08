@@ -22,6 +22,13 @@ conf.dev.debug = {
 conf.dev.door_creator = {
     enabled = true,
     raycast_distance = 10.0,
+    -- Output options for door configurations
+    output = {
+        console = true,        -- Print to console
+        file = true,           -- Save to file
+        location = "local",    -- "local" or "server" - where to save files
+        file_path = "door_configs/",  -- Relative path for saved configurations
+    },
 }
 
 -- Vehicle seats interaction settings
@@ -32,6 +39,51 @@ conf.dev.vehicle_seats = {
 -- Ammunation locations (for development reference)
 conf.dev.ammunation_locations = {
     -- Will be populated from _ammunation.lua
+}
+
+-- Global development output settings
+-- These apply to all dev commands and tools
+conf.dev.output = {
+    -- Console output settings
+    console = {
+        enabled = true,
+        use_colors = true,  -- Use colored output
+        verbose = false,    -- Show detailed debug information
+    },
+    
+    -- File output settings
+    file = {
+        enabled = true,
+        location = "local",  -- "local" = client-side files, "server" = server-side files
+        base_path = "dev_output/",  -- Base directory for all dev output files
+        timestamp = true,   -- Include timestamp in filenames
+        format = "lua",     -- "lua", "json", or "txt"
+    },
+    
+    -- Collaboration settings
+    collaboration = {
+        share_output = false,  -- Allow output to be shared with other developers
+        export_format = "json",  -- Format for shared exports: "json" or "lua"
+        include_metadata = true,  -- Include creator, timestamp, etc.
+    },
+}
+
+-- Command-specific output overrides
+-- Individual commands can override global settings
+conf.dev.commands = {
+    door_creator = {
+        output = {
+            console = true,
+            file = true,
+            location = "local",
+        },
+    },
+    debug_draw = {
+        output = {
+            console = true,
+            file = false,
+        },
+    },
 }
 
 -- ====================================================================================--

@@ -52,6 +52,11 @@ client_scripts {
     "client/[Dev]/_ammunation.lua",
     "client/[Dev]/_doorcreator.lua",
     "client/[Dev]/_vehicleseats.lua",
+    -- Garage system (requires target system and SQL)
+    "client/[Garage]/_var.lua",
+    "client/[Garage]/_client.lua",
+    "client/[Garage]/_blips.lua",
+    "client/[Garage]/_machine.lua",
     -- IPL management (must load after zones)
     "client/_ipls.lua",
     -- VOIP system (loads before other client scripts for early initialization)
@@ -83,6 +88,10 @@ server_scripts {
     -- Development tools (server-side commands)
     "server/[Dev]/_var.lua",
     "server/[Dev]/_commands.lua",
+    -- Garage system (server-side logic and callbacks)
+    "server/[Garage]/_var.lua",
+    "server/[Garage]/_callbacks.lua",
+    "server/[Garage]/_server.lua",
     -- VOIP system (loads before other server scripts)
     "server/[Voice]/_voip.lua",
     -- PMA-Voice compatibility wrapper (loads last for exports)
