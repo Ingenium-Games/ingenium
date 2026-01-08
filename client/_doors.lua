@@ -134,7 +134,7 @@ function ig.door.GenerateDoorsInRadius()
             --print("Checking ig.door.FindHash(hash) ")
             --print(bool, key, ig.table.Dump(values))
             --
-            exports['ig.target']:AddEntityZone("DOOR_"..key, k, {
+            exports['ingenium']:AddEntityZone("DOOR_"..key, k, {
                 name = "DOOR_"..key,
                 heading = GetEntityHeading(k),
                 debugPoly = false,

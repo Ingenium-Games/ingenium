@@ -1,12 +1,14 @@
 ------------------------------------------------------------------------------
 fx_version "cerulean"
 game "gta5"
+lua54 "yes"
 author "Twiitchter"
 description "Ingenium"
 version "1.0.0"
 ------------------------------------------------------------------------------
 provide "polyzone"
 provide "pma-voice"
+provide "ig.target"
 --
 ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
@@ -22,6 +24,7 @@ shared_scripts {
 }
 ------------------------------------------------------------------------------
 client_scripts {
+    "@glm/init.lua",
     "client/_var.lua",
     "locale/*.lua",
     "shared/[Tools]/*.lua",
@@ -36,6 +39,24 @@ client_scripts {
     "client/[Zones]/EntityZone.lua",
     "client/[Zones]/ComboZone.lua",
     "client/[Zones]/_ig_zone.lua",
+    -- Target system (must load after zones, requires glm)
+    "client/[Target]/_var.lua",
+    "client/[Target]/_lib.lua",
+    "client/[Target]/_utils.lua",
+    "client/[Target]/_api.lua",
+    "client/[Target]/_defaults.lua",
+    "client/[Target]/_main.lua",
+    -- Development tools (requires target system)
+    "client/[Dev]/_var.lua",
+    "client/[Dev]/_debug.lua",
+    "client/[Dev]/_ammunation.lua",
+    "client/[Dev]/_doorcreator.lua",
+    "client/[Dev]/_vehicleseats.lua",
+    -- Garage system (requires target system and SQL)
+    "client/[Garage]/_var.lua",
+    "client/[Garage]/_client.lua",
+    "client/[Garage]/_blips.lua",
+    "client/[Garage]/_machine.lua",
     -- IPL management (must load after zones)
     "client/_ipls.lua",
     -- VOIP system (loads before other client scripts for early initialization)
@@ -64,6 +85,13 @@ server_scripts {
     "server/[SQL]/_saves.lua",
     "server/[SQL]/_users.lua",
     "server/[SQL]/_vehicles.lua",
+    -- Development tools (server-side commands)
+    "server/[Dev]/_var.lua",
+    "server/[Dev]/_commands.lua",
+    -- Garage system (server-side logic and callbacks)
+    "server/[Garage]/_var.lua",
+    "server/[Garage]/_callbacks.lua",
+    "server/[Garage]/_server.lua",
     -- VOIP system (loads before other server scripts)
     "server/[Voice]/_voip.lua",
     -- PMA-Voice compatibility wrapper (loads last for exports)
@@ -77,7 +105,8 @@ dependencies {
     "restfx",
     "freecam",
     "sit",
-    "screenshot-basic"
+    "screenshot-basic",
+    "glm"
 }
 ------------------------------------------------------------------------------
 files {
