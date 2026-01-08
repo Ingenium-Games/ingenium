@@ -50,20 +50,9 @@ function ig.objects.GetObject(net)
     return ig.odex[tostring(net)] or false
 end
 
---- Same as above.
----@param net integer "Network ID 16 bit integer"
-function ig.GetObject(net)
-    return ig.objects.GetObject(net)
-end
-
 --- Get all xVehicles
 function ig.objects.GetObjects()
     return ig.odex
-end
-
---- Get all xVehicles
-function ig.GetObjects()
-    return ig.objects.GetObjects()
 end
 
 -- Set to nil for garbage collection

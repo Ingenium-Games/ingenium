@@ -33,20 +33,9 @@ function ig.npc.GetNpc(net)
     return ig.ndex[tonumber(net)] or false
 end
 
---- Same as above.
----@param net integer "Network ID 16 bit integer"
-function ig.GetNpc(net)
-    return ig.npc.GetNpc(net)
-end
-
 --- Get all xVehicles
 function ig.npc.GetNpcs()
     return ig.ndex
-end
-
---- Get all xVehicles
-function ig.GetNpcs()
-    return ig.npc.GetNpcs()
 end
 
 -- Set to nil for garbage collection

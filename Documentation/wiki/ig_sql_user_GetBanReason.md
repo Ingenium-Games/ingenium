@@ -1,0 +1,36 @@
+# ig.sql.user.GetBanReason
+
+## Description
+
+Set - `Ace` for the users License_ID
+
+## Signature
+
+```lua
+function ig.sql.user.GetBanReason(license_id, cb)
+```
+
+## Example
+
+```lua
+-- Example usage of ig.sql.user.GetBanReason
+local result = ig.sql.user.GetBanReason()
+```
+
+## Important Notes
+
+> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
+
+> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
+
+## Related Functions
+
+- [ig.sql.user.Add](ig_sql_user_Add.md)
+- [ig.sql.user.AddCharacterSlot](ig_sql_user_AddCharacterSlot.md)
+- [ig.sql.user.Find](ig_sql_user_Find.md)
+- [ig.sql.user.Get](ig_sql_user_Get.md)
+- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
+
+## Source
+
+Defined in: `server/[SQL]/_users.lua`

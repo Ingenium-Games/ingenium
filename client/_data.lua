@@ -57,17 +57,7 @@ function ig.data.GetLocalPlayer()
 end
 
 --- Returns the Player state
-function ig.GetLocalPlayer()
-    return ig.data.GetLocalPlayer()
-end
-
---- Returns the Player state
 function ig.data.GetLocalPlayerState(key)
-    return LocalPlayer.state[key]
-end
-
---- Returns the Player state
-function ig.GetLocalPlayerState(key)
     return LocalPlayer.state[key]
 end
 
@@ -79,15 +69,6 @@ end
 function ig.data.SetLocalPlayerState(key, value, sync)
     if sync == nil then sync = false end
     LocalPlayer.state:set(key, value, sync)
-end
-
--- Please do not use this other than for animations or such...
---- Set the Players"s state bag.
----@param key string "The key"
----@param value any "Just not a table"
----@param sync boolean "Sync to Server, default is false"
-function ig.SetLocalPlayerState(key, value, sync)
-    ig.data.SetLocalPlayerState(key, value, sync)
 end
 
 --- Return the Players"s state bag.
@@ -104,23 +85,11 @@ function ig.data.GetPlayerState(id, key)
 end
 
 --- Return the Players"s state bag.
----@param id any "Player's Server Id"
-function ig.GetPlayerState(id, key)   
-    return ig.data.GetPlayerState(id, key)
-end
-
---- Return the Players"s state bag.
 ---@param ped any "Player's Ped Entity"
 function ig.data.GetPlayerPedState(ped, key)
     local player = NetworkGetPlayerIndexFromPed(ped)
     local id = GetPlayerServerId(player)
     return Player(id).state[key]
-end
-
---- Return the Players"s state bag.
----@param ped any "Player's Ped Entity"
-function ig.GetPlayerPedState(ped, key)    
-    return ig.data.GetPlayerPedState(ped, key)
 end
 
 --- Return the Entity"s state bag.
@@ -132,21 +101,9 @@ end
 
 --- Return the Entity"s state bag.
 ---@param net any "NetworkId"
-function ig.GetEntityState(net, key)    
-    return ig.data.GetEntityState(net, key)
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
 function ig.data.SetEntityState(net, key, value)   
     local entity = NetworkGetEntityFromNetworkId(net) 
     Entity(entity).state:set(tostring(key), value, true)
-end
-
---- Return the Entity"s state bag.
----@param net any "NetworkId"
-function ig.SetEntityState(net, key, value)    
-    ig.data.SetEntityState(net, key, value)   
 end
 
 --- func desc
