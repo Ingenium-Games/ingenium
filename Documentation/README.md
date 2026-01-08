@@ -4,6 +4,10 @@ Welcome to the ingenium documentation hub. This centralized resource provides co
 
 ## 📚 Core Systems
 
+### Internationalization & Debugging
+- **[i18n and Debugging Guide](./I18N_AND_DEBUGGING.md)** - Multi-language support and enhanced error tracking
+- **[i18n & Debug Examples](./EXAMPLES_I18N_DEBUG.lua)** - Code examples for locale and debugging features
+
 ### Zone Management
 - **[Zone Management (ig.zone)](./Zone_Management.md)** - Integrated PolyZone system for zone definition and checking
 - **[IPL Management (ig.ipl/ig.ipls)](./Zone_IPL_Management.md)** - Interior prop list loading with zone triggers
@@ -36,6 +40,21 @@ Welcome to the ingenium documentation hub. This centralized resource provides co
 
 ### Configuration
 
+#### Locale Configuration
+Set your preferred language in `_config/config.lua`:
+```lua
+conf.locale = "en"  -- Options: "en", "fr", "es", "de", "pt"
+```
+
+#### Debug Configuration
+Configure debug levels in `_config/config.lua`:
+```lua
+conf.error = true    -- Critical errors
+conf.debug_1 = true  -- Info level
+conf.debug_2 = false -- Debug level  
+conf.debug_3 = true  -- Trace level
+```
+
 #### MySQL Connection
 Set one of the following in your `server.cfg`:
 
@@ -53,9 +72,10 @@ set mysql_connection_limit "10"
 ```
 
 ### First Steps
-1. Review the [SQL Architecture](./SQL_Architecture.md) to understand the database layer
-2. Check [Security Guide](./Security_Guide.md) for security best practices
-3. Explore [SQL API Reference](./SQL_API_Reference.md) for available functions
+1. Review the [i18n and Debugging Guide](./I18N_AND_DEBUGGING.md) to understand localization and error tracking
+2. Review the [SQL Architecture](./SQL_Architecture.md) to understand the database layer
+3. Check [Security Guide](./Security_Guide.md) for security best practices
+4. Explore [SQL API Reference](./SQL_API_Reference.md) for available functions
 
 ## 📖 Feature Documentation
 
@@ -87,6 +107,14 @@ All architecture and implementation documents are organized in this `Documentati
 - Follow contribution guidelines for pull requests
 
 ## 🔄 Recent Updates
+
+### Internationalization & Debugging (v1.1.0+)
+- Multi-language support (English, French, Spanish, German, Portuguese)
+- Enhanced error tracking with resource name, file path, and line numbers
+- Structured debug levels (ERROR, WARN, INFO, DEBUG, TRACE)
+- Server-side error logging to files
+- Function wrapping for automatic error handling
+- Backward compatible with existing debug functions
 
 ### SQL System Overhaul (v0.9.0+)
 - Integrated MySQL2 in-resource implementation
