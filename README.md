@@ -100,6 +100,14 @@ Just try and have fun.
 
 <br>
 
+### 🔧 Extensibility Philosophy
+
+**ingenium is built to be modified and extended.** Every security feature, configuration, and system within ingenium is designed with external developers in mind. If something exists within ingenium, it should be accessible and customizable to fit your specific needs. We provide APIs and functions to dynamically control features rather than requiring you to edit core files directly.
+
+Example: Rather than manually editing StateBag protection tables, use the provided `ig.security` API functions to add or remove protected keys at runtime from your own resources.
+
+<br>
+
 -----
 
 <br>

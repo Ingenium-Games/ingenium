@@ -3,6 +3,11 @@
 -- Prevents clients from modifying sensitive entity state data
 -- ====================================================================================--
 
+-- Initialize ig.security namespace if not already present
+if not ig.security then
+    ig.security = {}
+end
+
 -- Whitelist of keys that clients are allowed to modify
 local ALLOWED_CLIENT_KEYS = {
     ["Animation"] = true,
@@ -149,6 +154,106 @@ local function handleStateBagChange(bagName, key, value, reserved, replicated)
             -- Optionally: DropPlayer(playerId, "StateBag exploit attempt detected")
         end
     end
+end
+
+-- ====================================================================================--
+-- Public API for external developers
+-- ====================================================================================--
+
+--- Add a key to the allowed client keys whitelist
+---@param key string The state bag key to allow clients to modify
+---@return boolean success True if the key was added successfully
+function ig.security.AddAllowedStateBagKey(key)
+    if type(key) ~= "string" or key == "" then
+        print("^3[SECURITY WARNING] AddAllowedStateBagKey: Invalid key provided^7")
+        return false
+    end
+    
+    if ALLOWED_CLIENT_KEYS[key] then
+        print(("^3[SECURITY] Key '%s' is already in the allowed list^7"):format(key))
+        return false
+    end
+    
+    ALLOWED_CLIENT_KEYS[key] = true
+    print(("^2[SECURITY] Added '%s' to allowed StateBag keys^7"):format(key))
+    return true
+end
+
+--- Remove a key from the allowed client keys whitelist
+---@param key string The state bag key to remove from allowed list
+---@return boolean success True if the key was removed successfully
+function ig.security.RemoveAllowedStateBagKey(key)
+    if type(key) ~= "string" or key == "" then
+        print("^3[SECURITY WARNING] RemoveAllowedStateBagKey: Invalid key provided^7")
+        return false
+    end
+    
+    if not ALLOWED_CLIENT_KEYS[key] then
+        print(("^3[SECURITY] Key '%s' is not in the allowed list^7"):format(key))
+        return false
+    end
+    
+    ALLOWED_CLIENT_KEYS[key] = nil
+    print(("^2[SECURITY] Removed '%s' from allowed StateBag keys^7"):format(key))
+    return true
+end
+
+--- Add a key to the blocked client keys blacklist
+---@param key string The state bag key to block clients from modifying
+---@return boolean success True if the key was added successfully
+function ig.security.AddBlockedStateBagKey(key)
+    if type(key) ~= "string" or key == "" then
+        print("^3[SECURITY WARNING] AddBlockedStateBagKey: Invalid key provided^7")
+        return false
+    end
+    
+    if BLOCKED_CLIENT_KEYS[key] then
+        print(("^3[SECURITY] Key '%s' is already in the blocked list^7"):format(key))
+        return false
+    end
+    
+    BLOCKED_CLIENT_KEYS[key] = true
+    print(("^2[SECURITY] Added '%s' to blocked StateBag keys^7"):format(key))
+    return true
+end
+
+--- Remove a key from the blocked client keys blacklist
+---@param key string The state bag key to remove from blocked list
+---@return boolean success True if the key was removed successfully
+function ig.security.RemoveBlockedStateBagKey(key)
+    if type(key) ~= "string" or key == "" then
+        print("^3[SECURITY WARNING] RemoveBlockedStateBagKey: Invalid key provided^7")
+        return false
+    end
+    
+    if not BLOCKED_CLIENT_KEYS[key] then
+        print(("^3[SECURITY] Key '%s' is not in the blocked list^7"):format(key))
+        return false
+    end
+    
+    BLOCKED_CLIENT_KEYS[key] = nil
+    print(("^2[SECURITY] Removed '%s' from blocked StateBag keys^7"):format(key))
+    return true
+end
+
+--- Get all allowed StateBag keys
+---@return table allowedKeys Table of allowed keys (key = true format)
+function ig.security.GetAllowedStateBagKeys()
+    local keys = {}
+    for key, _ in pairs(ALLOWED_CLIENT_KEYS) do
+        keys[key] = true
+    end
+    return keys
+end
+
+--- Get all blocked StateBag keys
+---@return table blockedKeys Table of blocked keys (key = true format)
+function ig.security.GetBlockedStateBagKeys()
+    local keys = {}
+    for key, _ in pairs(BLOCKED_CLIENT_KEYS) do
+        keys[key] = true
+    end
+    return keys
 end
 
 -- Register handlers for specific state bag patterns to improve performance
