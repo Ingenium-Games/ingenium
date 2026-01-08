@@ -18,3 +18,7 @@ nui/inventory/package-lock.json
 nui/node_modules/
 nui/package-lock.json
 nui/dist/
+
+# Logs directory
+logs/
+*.log

@@ -9,10 +9,12 @@ conf.day = 24 * conf.hour
 --[[
 DEBUG :
     -- Up to you if you want to see whats going on or not.
-    -- _1 is most common ways of tracking at top level functions
-    -- _2 is for state and class generation, to prevent console spam
-    -- _3 is alterations of state, event triggers etig.
+    -- error is for critical errors that should always be logged
+    -- _1 is most common ways of tracking at top level functions (INFO)
+    -- _2 is for state and class generation, to prevent console spam (DEBUG)
+    -- _3 is alterations of state, event triggers etc (TRACE)
 ]]--
+conf.error = true
 conf.debug_1 = true
 conf.debug_2 = false
 conf.debug_3 = true

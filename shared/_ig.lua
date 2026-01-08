@@ -6,3 +6,8 @@ exports("GetIngenium", function()
 	return ig
 end)
 -- ====================================================================================--
+-- Locale Export
+exports("GetLocale", function()
+	return conf.locale
+end)
+-- ====================================================================================--
