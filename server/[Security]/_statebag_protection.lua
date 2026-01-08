@@ -31,6 +31,16 @@ local ALLOWED_CLIENT_KEYS = {
     ["IsAiming"] = true,
     ["IsShooting"] = true,
     ["CurrentWeapon"] = true,
+    -- VOIP statebag keys
+    ["InVoice"] = true,
+    ["InCall"] = true,
+    ["InConnection"] = true,
+    ["VoiceMode"] = true,
+    ["VoiceDistance"] = true,
+    ["RadioFrequency"] = true,
+    ["RadioTransmitting"] = true,
+    ["CallActive"] = true,
+    ["ConnectionActive"] = true,
 }
 
 -- Blacklist of critical keys that must NEVER be modified by clients
@@ -51,6 +61,7 @@ local BLOCKED_CLIENT_KEYS = {
     ["Character_ID"] = true,
     ["License_ID"] = true,
     ["Ace"] = true,
+    ["InAdminCall"] = true, -- Only server can set admin call state
     -- Add other sensitive keys here
 }
 
