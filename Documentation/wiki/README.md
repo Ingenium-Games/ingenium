@@ -680,11 +680,17 @@ Total Functions: **715**
 
 ## security
 
+- [ig.security.AddAllowedStateBagKey](ig_security_AddAllowedStateBagKey.md)
+- [ig.security.AddBlockedStateBagKey](ig_security_AddBlockedStateBagKey.md)
 - [ig.security.CheckRateLimit](ig_security_CheckRateLimit.md)
 - [ig.security.CheckTransactionRateLimit](ig_security_CheckTransactionRateLimit.md)
 - [ig.security.DetectSuspiciousActivity](ig_security_DetectSuspiciousActivity.md)
+- [ig.security.GetAllowedStateBagKeys](ig_security_GetAllowedStateBagKeys.md)
+- [ig.security.GetBlockedStateBagKeys](ig_security_GetBlockedStateBagKeys.md)
 - [ig.security.LogPlayerTransaction](ig_security_LogPlayerTransaction.md)
 - [ig.security.LogTransaction](ig_security_LogTransaction.md)
+- [ig.security.RemoveAllowedStateBagKey](ig_security_RemoveAllowedStateBagKey.md)
+- [ig.security.RemoveBlockedStateBagKey](ig_security_RemoveBlockedStateBagKey.md)
 
 ## skill
 

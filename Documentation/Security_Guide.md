@@ -42,7 +42,30 @@ Only benign animation and state keys are allowed to be modified by clients:
 - `IsRagdoll`
 
 ### Adding New Whitelisted Keys
-Edit the `ALLOWED_CLIENT_KEYS` table in `_statebag_protection.lua`:
+
+#### Method 1: Dynamic API (Recommended for External Resources)
+
+Use the `ig.security` API functions to dynamically manage StateBag protection at runtime:
+
+```lua
+-- Add a key to the allowed list
+ig.security.AddAllowedStateBagKey("MyCustomKey")
+
+-- Add a key to the blocked list
+ig.security.AddBlockedStateBagKey("MySensitiveData")
+
+-- Remove keys from lists
+ig.security.RemoveAllowedStateBagKey("MyCustomKey")
+ig.security.RemoveBlockedStateBagKey("MySensitiveData")
+
+-- Get current lists
+local allowed = ig.security.GetAllowedStateBagKeys()
+local blocked = ig.security.GetBlockedStateBagKeys()
+```
+
+#### Method 2: Static Configuration (For Core Changes)
+
+Edit the `ALLOWED_CLIENT_KEYS` or `BLOCKED_CLIENT_KEYS` tables in `_statebag_protection.lua`:
 
 ```lua
 local ALLOWED_CLIENT_KEYS = {
@@ -52,6 +75,15 @@ local ALLOWED_CLIENT_KEYS = {
 ```
 
 ⚠️ **Warning**: Only whitelist keys that are purely cosmetic or non-sensitive. Never whitelist financial, inventory, or authorization keys.
+
+### Available Functions
+
+- `ig.security.AddAllowedStateBagKey(key)` - Add a key to the allowed whitelist
+- `ig.security.RemoveAllowedStateBagKey(key)` - Remove a key from the allowed whitelist
+- `ig.security.AddBlockedStateBagKey(key)` - Add a key to the blocked blacklist
+- `ig.security.RemoveBlockedStateBagKey(key)` - Remove a key from the blocked blacklist
+- `ig.security.GetAllowedStateBagKeys()` - Get all allowed keys
+- `ig.security.GetBlockedStateBagKeys()` - Get all blocked keys
 
 ---
 
