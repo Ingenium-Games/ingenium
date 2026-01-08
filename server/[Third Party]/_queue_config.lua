@@ -69,15 +69,15 @@ QConfig.ShowTemp = false
 
 -- simple localization
 QConfig.Language = {
-    joining = "Joining",
-    connecting = "Connecting",
-    idrr = "Error couldn't retrieve any of your id's, try restarting.",
-    err = "There was an error",
-    pos = "You are %d/%d in queue :%s",
-    connectingerr = "Error adding you to connecting list",
-    timedout = "Error Timed out?",
-    wlonly = "You must be whitelisted to join this server",
-    steam = "Error steam must be running"
+    joining = _("queue_joining"),
+    connecting = _("queue_connecting"),
+    idrr = _("queue_idrr"),
+    err = _("queue_err"),
+    pos = _("queue_pos"),
+    connectingerr = _("queue_connectingerr"),
+    timedout = _("queue_timedout"),
+    wlonly = _("queue_wlonly"),
+    steam = _("queue_steam")
 }
 
 Queue = {}

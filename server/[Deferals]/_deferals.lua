@@ -6,7 +6,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     d.defer()    
     --
     Citizen.Wait(0)
-    d.update("Checking User Account: Please Wait...")
+    d.update(_("defer_checking_account"))
     --
     local drop = false
     local name = GetPlayerName(src)
@@ -18,14 +18,14 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             DeferralCards.CardElement:TextBlock({
                 size = "Medium",
                 weight = "Bolder",
-                text = "Welcome "..name,
+                text = string.format(_("defer_welcome"), name),
             }),
             DeferralCards.CardElement:TextBlock({
-                text = "\n...",
+                text = _("defer_loading"),
                 wrap = true
             }),
             DeferralCards.CardElement:TextBlock({
-                text = "By joining, you have agreed to our rules as found on our website. \n",
+                text = _("defer_rules_agreement"),
                 wrap = true
             }),
             DeferralCards.Container:Create({
@@ -56,23 +56,23 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     if namecheck then
         drop = true
         table.insert(facts.facts, DeferralCards.Container:Fact({
-            title = "Issue ⁉️",
-            value = "Your name contains forbidden characters."
+            title = _("defer_issue"),
+            value = _("defer_forbidden_characters")
         }))
     end
     if data ~= nil then
         if data.Ban then
             drop = true
             table.insert(facts.facts, DeferralCards.Container:Fact({
-                title = "Issue ⁉️",
-                value = "You have been banned by command or automatic event."
+                title = _("defer_issue"),
+                value = _("defer_banned")
             }))
         end
     end
     ]]--
     --
     Citizen.Wait(0)
-    d.update("If you get stuck here, please open Discord and try again...")
+    d.update(_("defer_stuck_message"))
     --
     local discord = false
     if conf.discord.permissions then
@@ -83,15 +83,15 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 discord = false
                 drop = true
                 table.insert(facts.facts, DeferralCards.Container:Fact({
-                    title = "Issue ⁉️",
-                    value = "You have not joined our discord."
+                    title = _("defer_issue"),
+                    value = _("defer_no_discord")
                 }))
             end
         end)
     end
     --
     Citizen.Wait(0)
-    d.update("Loading Awesome Server: Please Wait...")
+    d.update(_("defer_loading_server"))
     --
     table.insert(connecting.body, facts)
     if not drop then
@@ -100,7 +100,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             actions = {
                 DeferralCards.Action:Submit({
                     id = "Submit",
-                    title = " 👋 - Click to Join",
+                    title = _("defer_click_to_join"),
                     data = {Submit = true}
                 })
             }
@@ -111,7 +111,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             actions = {
                 DeferralCards.Action:Submit({
                     id = "Submit",
-                    title = " ✋ - Click to Leave",
+                    title = _("defer_click_to_leave"),
                     data = {Submit = true}
                 })
             }
@@ -123,7 +123,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         if data.Submit then
             if drop then
                 Citizen.Wait(0)
-                d.done("You saw the reasons a moment ago, on an adaptive card. It renders all the reasons why you cannot join.")
+                d.done(_("defer_rejection_message"))
                 CancelEvent()
             else
                 Citizen.Wait(0)

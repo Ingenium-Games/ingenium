@@ -25,12 +25,17 @@ end
 ---@param err any
 function ig.func.Error(err)
     if conf.error then
-        if type(err) == "string" then
-            print("   ^7[^3Error^7]:  ==    ", err)
-            print(debug.traceback(_, 2))
+        -- Use new debug system if available, otherwise fallback
+        if ig.debug and ig.debug.Error then
+            ig.debug.Error(err)
         else
-            print("   ^7[^3Error^7]:  ==    ", "Unable to type(err) == string. [err] = ", err)
-            print(debug.traceback(_, 2))
+            if type(err) == "string" then
+                print("   ^7[^3Error^7]:  ==    ", err)
+                print(debug.traceback(_, 2))
+            else
+                print("   ^7[^3Error^7]:  ==    ", "Unable to type(err) == string. [err] = ", err)
+                print(debug.traceback(_, 2))
+            end
         end
     end
 end
@@ -39,7 +44,12 @@ end
 ---@param str any
 function ig.func.Debug_1(str)
     if conf.debug_1 then
-        print("   ^7[^6Debug L1^7]:  ==    ", str)
+        -- Use new debug system if available, otherwise fallback
+        if ig.debug and ig.debug.Info then
+            ig.debug.Info(str)
+        else
+            print("   ^7[^6Debug L1^7]:  ==    ", str)
+        end
     end
 end
 
@@ -47,7 +57,12 @@ end
 ---@param str any
 function ig.func.Debug_2(str)
     if conf.debug_2 then
-        print("   ^7[^6Debug L2^7]:  ==    ", str)
+        -- Use new debug system if available, otherwise fallback
+        if ig.debug and ig.debug.Debug then
+            ig.debug.Debug(str)
+        else
+            print("   ^7[^6Debug L2^7]:  ==    ", str)
+        end
     end
 end
 
@@ -55,14 +70,24 @@ end
 ---@param str any
 function ig.func.Debug_3(str)
     if conf.debug_3 then
-        print("   ^7[^6Debug L3^7]:  ==    ", str)
+        -- Use new debug system if available, otherwise fallback
+        if ig.debug and ig.debug.Trace then
+            ig.debug.Trace(str)
+        else
+            print("   ^7[^6Debug L3^7]:  ==    ", str)
+        end
     end
 end
 
 --- func desc
 ---@param str any
 function ig.func.Alert(str)
-    print("   ^7[^3Alert^7]:  ==    ", str)
+    -- Use new debug system if available, otherwise fallback
+    if ig.debug and ig.debug.Warn then
+        ig.debug.Warn(str)
+    else
+        print("   ^7[^3Alert^7]:  ==    ", str)
+    end
 end
 
 --- func desc
