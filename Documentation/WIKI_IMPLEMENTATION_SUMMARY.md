@@ -1,17 +1,17 @@
 # Ingenium Wiki Documentation - Implementation Summary
 
 ## Overview
-Successfully implemented comprehensive wiki-style documentation for all 781 Ingenium framework functions as requested.
+Successfully implemented comprehensive wiki-style documentation for all Ingenium framework functions, and removed redundant wrapper functions.
 
 ## What Was Delivered
 
 ### 1. Wiki Directory Structure
 - Location: `Documentation/wiki/`
-- Contains 735 markdown files (734 function docs + 1 README index)
-- Total size: 3.0 MB
+- Contains 716 markdown files (715 function docs + 1 README index)
+- Total size: ~2.8 MB
 
 ### 2. Individual Function Documentation
-Each of the 734 function pages includes:
+Each of the 715 function pages includes:
 
 #### Standard Sections
 - **Title**: Function name (e.g., `ig.func.CreateVehicle`)
@@ -44,26 +44,39 @@ The main wiki README includes:
 - Usage guide
 - Quick links to major namespaces
 - Security best practices
-- Complete index of all 781 functions organized by namespace
+- Complete index of all 715 functions organized by namespace
 
 ### 4. Namespace Organization
-Functions organized into 47 namespaces including:
+Functions organized into 55 namespaces including:
 
 **Top Namespaces by Function Count:**
 1. `ig.sql` - 92 functions (Database operations)
-2. `ig.func` - 76 functions (Core utilities)
-3. `ig.appearance` - 54 functions (Character customization)
-4. `ig.item` - 50 functions (Item management)
-5. `ig.voip` - 43 functions (Voice communication)
+2. `ig.func` - 63 functions (Core utilities)
+3. `ig.appearance` - 50 functions (Character customization)
+4. `ig.voip` - 43 functions (Voice communication)
+5. `ig.item` - 36 functions (Item management)
 6. `ig.status` - 36 functions (Player status effects)
-7. `ig.job` - 27 functions (Job/employment system)
-8. `ig.note` - 27 functions (Notes system)
-9. `ig.data` - 28 functions (Data management)
-10. `ig.vehicle` - 24 functions (Vehicle management)
+7. `ig.data` - 27 functions (Data management)
+8. `ig.job` - 27 functions (Job/employment system)
+9. `ig.note` - 26 functions (Notes system)
+10. `ig.vehicle` - 21 functions (Vehicle management)
 
-And 37 more namespaces covering all aspects of the framework.
+And 45 more namespaces covering all aspects of the framework.
 
-### 5. Enhanced Examples
+### 5. Removed Redundant Wrapper Functions
+Identified and removed 19 wrapper functions at the `ig.` level that were simply calling namespace functions:
+- Removed: `ig.GetPlayer()`, `ig.GetVehicle()`, `ig.GetNpc()`, `ig.GetObject()`, etc.
+- These were wrappers for: `ig.player.GetPlayer()`, `ig.vehicle.GetVehicle()`, etc.
+- Reason: No proper use case - they added unnecessary API surface area
+- Files modified:
+  - `client/_data.lua` - Removed 7 wrappers
+  - `server/[Objects]/_players.lua` - Removed 3 wrappers
+  - `server/[Objects]/_vehicles.lua` - Removed 3 wrappers
+  - `server/[Objects]/_npcs.lua` - Removed 2 wrappers
+  - `server/[Objects]/_objects.lua` - Removed 2 wrappers
+  - `server/_data.lua` - Removed 1 wrapper
+
+### 6. Enhanced Examples
 Special attention given to commonly-used functions with comprehensive multi-example documentation:
 
 - `ig.func.CreateVehicle` - Vehicle spawning with examples

@@ -21,18 +21,6 @@ function ig.player.GetPlayer(source)
     end
 end
 
---- Same as above.
----@param source number
-function ig.GetPlayer(source)
-    return ig.player.GetPlayer(tonumber(source))
-end
-
---- Same as above.
----@param source number
-function ig.GetPlayerFromId(source)
-    return ig.player.GetPlayer(tonumber(source))
-end
-
 --- Set the player id to the table.
 ---@param source number
 ---@param data table
@@ -49,11 +37,6 @@ end
 --- Get the player table
 function ig.player.GetPlayers()
     return ig.pdex
-end
-
---- Wrapper for the above.
-function ig.GetPlayers()
-    return ig.player.GetPlayers()
 end
 
 --- func desc
@@ -80,11 +63,6 @@ function ig.player.GetPlayerByCharacterID(id)
         end
     end
     return nil
-end
-
---- Wrapper for the above.
-function ig.GetPlayerByCharacterID(id)
-    return ig.player.GetPlayerByCharacterID(id)
 end
 
 --- func desc

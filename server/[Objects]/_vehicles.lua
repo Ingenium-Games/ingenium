@@ -70,20 +70,9 @@ function ig.vehicle.GetVehicle(arg)
     end
 end
 
---- Same as above.
----@param net integer "Network ID 16 bit integer or Plate (8 char string)"
-function ig.GetVehicle(net)
-    return ig.vehicle.GetVehicle(net)
-end
-
 --- Get all xVehicles
 function ig.vehicle.GetVehicles()
     return ig.vdex
-end
-
---- Get all xVehicles
-function ig.GetVehicles()
-    return ig.vehicle.GetVehicles()
 end
 
 -- Set to nil for garbage collection
@@ -93,9 +82,4 @@ function ig.vehicle.RemoveVehicle(arg)
     if ig.vdex[tonumber(arg)] then
         ig.vdex[tonumber(arg)] = nil
     end
-end
-
----@param plate string "Plate of vehicle."
-function ig.GetVehicleByPlate(plate)
-    return ig.vehicle.GetVehicleByPlate(plate)
 end

@@ -32,12 +32,6 @@ function ig.data.GetJob(str)
     return ig.jdex[str]
 end
 
---- func desc
----@param str any
-function ig.GetJob(str)
-    return ig.data.GetJob(str)
-end
-
 -- ====================================================================================--
 
 --- Used on startup prior to the server really running.

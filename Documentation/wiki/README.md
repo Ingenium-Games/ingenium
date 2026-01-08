@@ -4,7 +4,7 @@ Complete wiki-style reference documentation for all Ingenium framework functions
 
 ## Overview
 
-This wiki contains comprehensive documentation for **781 functions** across the Ingenium framework. Each function has its own dedicated markdown file with:
+This wiki contains comprehensive documentation for **715 functions** across the Ingenium framework. Each function has its own dedicated markdown file with:
 
 - ✅ Function signature and parameters
 - ✅ Detailed description
@@ -24,16 +24,16 @@ This wiki contains comprehensive documentation for **781 functions** across the 
 
 ### Most Common Namespaces
 
-- **[func](#func)** - Core utility functions (76 functions)
-- **[sql](#sql)** - Database operations (92 functions)
-- **[appearance](#appearance)** - Character customization (54 functions)
-- **[voip](#voip)** - Voice communication (43 functions)
-- **[callback](#callback)** - Async callback system (10 functions)
-- **[target](#target)** - Targeting/interaction system (19 functions)
-- **[vehicle](#vehicle)** - Vehicle management (24 functions)
-- **[job](#job)** - Job/employment system (27 functions)
-- **[item](#item)** - Item management (50 functions)
-- **[status](#status)** - Player status effects (36 functions)
+- **[sql](#sql)** - 92 functions
+- **[func](#func)** - 63 functions
+- **[appearance](#appearance)** - 50 functions
+- **[voip](#voip)** - 43 functions
+- **[item](#item)** - 36 functions
+- **[status](#status)** - 36 functions
+- **[data](#data)** - 27 functions
+- **[job](#job)** - 27 functions
+- **[note](#note)** - 26 functions
+- **[vehicle](#vehicle)** - 21 functions
 
 ## Security Best Practices
 
@@ -48,39 +48,20 @@ Always review security notes before using sensitive functions in production.
 
 ## Contributing
 
-Found an issue or want to improve the documentation? 
+Found an issue or want to improve the documentation?
 - Check the source file location in each function's page
 - Submit improvements via pull request
 - Report issues on GitHub
 
 ---
 
-Total Functions: **781**
+Total Functions: **715**
 
 ## All Namespaces
 
-- [GetEntityState](#GetEntityState) (1 functions)
-- [GetJob](#GetJob) (1 functions)
-- [GetLocalPlayer](#GetLocalPlayer) (1 functions)
-- [GetLocalPlayerState](#GetLocalPlayerState) (1 functions)
-- [GetNpc](#GetNpc) (1 functions)
-- [GetNpcs](#GetNpcs) (1 functions)
-- [GetObject](#GetObject) (1 functions)
-- [GetObjects](#GetObjects) (1 functions)
-- [GetPlayer](#GetPlayer) (1 functions)
-- [GetPlayerByCharacterID](#GetPlayerByCharacterID) (1 functions)
-- [GetPlayerFromId](#GetPlayerFromId) (1 functions)
-- [GetPlayerPedState](#GetPlayerPedState) (1 functions)
-- [GetPlayerState](#GetPlayerState) (1 functions)
-- [GetPlayers](#GetPlayers) (1 functions)
-- [GetVehicle](#GetVehicle) (1 functions)
-- [GetVehicleByPlate](#GetVehicleByPlate) (1 functions)
-- [GetVehicles](#GetVehicles) (1 functions)
-- [SetEntityState](#SetEntityState) (1 functions)
-- [SetLocalPlayerState](#SetLocalPlayerState) (1 functions)
 - [affiliation](#affiliation) (3 functions)
 - [ammo](#ammo) (2 functions)
-- [appearance](#appearance) (54 functions)
+- [appearance](#appearance) (50 functions)
 - [bank](#bank) (3 functions)
 - [blip](#blip) (9 functions)
 - [callback](#callback) (10 functions)
@@ -89,27 +70,27 @@ Total Functions: **781**
 - [check](#check) (4 functions)
 - [class](#class) (8 functions)
 - [cron](#cron) (2 functions)
-- [data](#data) (28 functions)
-- [door](#door) (15 functions)
+- [data](#data) (27 functions)
+- [door](#door) (11 functions)
 - [drop](#drop) (7 functions)
 - [event](#event) (1 functions)
 - [file](#file) (4 functions)
-- [func](#func) (76 functions)
+- [func](#func) (63 functions)
 - [fx](#fx) (2 functions)
 - [game](#game) (3 functions)
 - [gsr](#gsr) (19 functions)
 - [inst](#inst) (6 functions)
 - [inventory](#inventory) (8 functions)
 - [ipl](#ipl) (12 functions)
-- [item](#item) (50 functions)
+- [item](#item) (36 functions)
 - [job](#job) (27 functions)
 - [json](#json) (2 functions)
 - [marker](#marker) (1 functions)
 - [math](#math) (4 functions)
 - [modifier](#modifier) (14 functions)
-- [modkit](#modkit) (8 functions)
+- [modkit](#modkit) (6 functions)
 - [name](#name) (4 functions)
-- [note](#note) (27 functions)
+- [note](#note) (26 functions)
 - [npc](#npc) (5 functions)
 - [objects](#objects) (7 functions)
 - [ped](#ped) (13 functions)
@@ -125,90 +106,14 @@ Total Functions: **781**
 - [status](#status) (36 functions)
 - [table](#table) (9 functions)
 - [target](#target) (19 functions)
-- [tattoo](#tattoo) (9 functions)
+- [tattoo](#tattoo) (7 functions)
 - [text](#text) (2 functions)
 - [time](#time) (6 functions)
 - [validation](#validation) (7 functions)
-- [vehicle](#vehicle) (24 functions)
+- [vehicle](#vehicle) (21 functions)
 - [version](#version) (3 functions)
 - [voip](#voip) (43 functions)
-- [weapon](#weapon) (15 functions)
-
-## GetEntityState
-
-- [ig.GetEntityState](ig_GetEntityState.md)
-
-## GetJob
-
-- [ig.GetJob](ig_GetJob.md)
-
-## GetLocalPlayer
-
-- [ig.GetLocalPlayer](ig_GetLocalPlayer.md)
-
-## GetLocalPlayerState
-
-- [ig.GetLocalPlayerState](ig_GetLocalPlayerState.md)
-
-## GetNpc
-
-- [ig.GetNpc](ig_GetNpc.md)
-
-## GetNpcs
-
-- [ig.GetNpcs](ig_GetNpcs.md)
-
-## GetObject
-
-- [ig.GetObject](ig_GetObject.md)
-
-## GetObjects
-
-- [ig.GetObjects](ig_GetObjects.md)
-
-## GetPlayer
-
-- [ig.GetPlayer](ig_GetPlayer.md)
-
-## GetPlayerByCharacterID
-
-- [ig.GetPlayerByCharacterID](ig_GetPlayerByCharacterID.md)
-
-## GetPlayerFromId
-
-- [ig.GetPlayerFromId](ig_GetPlayerFromId.md)
-
-## GetPlayerPedState
-
-- [ig.GetPlayerPedState](ig_GetPlayerPedState.md)
-
-## GetPlayerState
-
-- [ig.GetPlayerState](ig_GetPlayerState.md)
-
-## GetPlayers
-
-- [ig.GetPlayers](ig_GetPlayers.md)
-
-## GetVehicle
-
-- [ig.GetVehicle](ig_GetVehicle.md)
-
-## GetVehicleByPlate
-
-- [ig.GetVehicleByPlate](ig_GetVehicleByPlate.md)
-
-## GetVehicles
-
-- [ig.GetVehicles](ig_GetVehicles.md)
-
-## SetEntityState
-
-- [ig.SetEntityState](ig_SetEntityState.md)
-
-## SetLocalPlayerState
-
-- [ig.SetLocalPlayerState](ig_SetLocalPlayerState.md)
+- [weapon](#weapon) (12 functions)
 
 ## affiliation
 
@@ -234,14 +139,11 @@ Total Functions: **781**
 - [ig.appearance.GetCameraMode](ig_appearance_GetCameraMode.md)
 - [ig.appearance.GetComponent](ig_appearance_GetComponent.md)
 - [ig.appearance.GetComponents](ig_appearance_GetComponents.md)
-- [ig.appearance.GetComponents](ig_appearance_GetComponents.md)
-- [ig.appearance.GetConstants](ig_appearance_GetConstants.md)
 - [ig.appearance.GetConstants](ig_appearance_GetConstants.md)
 - [ig.appearance.GetDefaultAppearance](ig_appearance_GetDefaultAppearance.md)
 - [ig.appearance.GetDefaultPricing](ig_appearance_GetDefaultPricing.md)
 - [ig.appearance.GetEyeColor](ig_appearance_GetEyeColor.md)
 - [ig.appearance.GetEyeColors](ig_appearance_GetEyeColors.md)
-- [ig.appearance.GetFaceFeatures](ig_appearance_GetFaceFeatures.md)
 - [ig.appearance.GetFaceFeatures](ig_appearance_GetFaceFeatures.md)
 - [ig.appearance.GetHair](ig_appearance_GetHair.md)
 - [ig.appearance.GetHairDecorations](ig_appearance_GetHairDecorations.md)
@@ -250,7 +152,6 @@ Total Functions: **781**
 - [ig.appearance.GetModel](ig_appearance_GetModel.md)
 - [ig.appearance.GetPricing](ig_appearance_GetPricing.md)
 - [ig.appearance.GetProp](ig_appearance_GetProp.md)
-- [ig.appearance.GetProps](ig_appearance_GetProps.md)
 - [ig.appearance.GetProps](ig_appearance_GetProps.md)
 - [ig.appearance.Initialize](ig_appearance_Initialize.md)
 - [ig.appearance.IsCustomizationActive](ig_appearance_IsCustomizationActive.md)
@@ -360,7 +261,6 @@ Total Functions: **781**
 - [ig.data.GetPlayerPedState](ig_data_GetPlayerPedState.md)
 - [ig.data.GetPlayerState](ig_data_GetPlayerState.md)
 - [ig.data.Initilize](ig_data_Initilize.md)
-- [ig.data.Initilize](ig_data_Initilize.md)
 - [ig.data.IsPlayerLoaded](ig_data_IsPlayerLoaded.md)
 - [ig.data.LoadJSONData](ig_data_LoadJSONData.md)
 - [ig.data.LoadPlayer](ig_data_LoadPlayer.md)
@@ -378,18 +278,14 @@ Total Functions: **781**
 ## door
 
 - [ig.door.Add](ig_door_Add.md)
-- [ig.door.Add](ig_door_Add.md)
 - [ig.door.AddDoorsToSystem](ig_door_AddDoorsToSystem.md)
 - [ig.door.ChangeState](ig_door_ChangeState.md)
 - [ig.door.Find](ig_door_Find.md)
-- [ig.door.Find](ig_door_Find.md)
-- [ig.door.FindHash](ig_door_FindHash.md)
 - [ig.door.FindHash](ig_door_FindHash.md)
 - [ig.door.GenerateDoorsInRadius](ig_door_GenerateDoorsInRadius.md)
 - [ig.door.GetDoors](ig_door_GetDoors.md)
 - [ig.door.GetModels](ig_door_GetModels.md)
 - [ig.door.SetDoors](ig_door_SetDoors.md)
-- [ig.door.SetState](ig_door_SetState.md)
 - [ig.door.SetState](ig_door_SetState.md)
 - [ig.door.ToggleLock](ig_door_ToggleLock.md)
 
@@ -417,37 +313,25 @@ Total Functions: **781**
 ## func
 
 - [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
 - [ig.func.ClearInterval](ig_func_ClearInterval.md)
 - [ig.func.CompareCoords](ig_func_CompareCoords.md)
 - [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 - [ig.func.CreatePed](ig_func_CreatePed.md)
 - [ig.func.CreateVehicle](ig_func_CreateVehicle.md)
-- [ig.func.CreateVehicle](ig_func_CreateVehicle.md)
-- [ig.func.Debug_1](ig_func_Debug_1.md)
-- [ig.func.Debug_1](ig_func_Debug_1.md)
-- [ig.func.Debug_2](ig_func_Debug_2.md)
-- [ig.func.Debug_2](ig_func_Debug_2.md)
-- [ig.func.Debug_3](ig_func_Debug_3.md)
-- [ig.func.Debug_3](ig_func_Debug_3.md)
+- [ig.func.Debug.1](ig_func_Debug_1.md)
+- [ig.func.Debug.2](ig_func_Debug_2.md)
+- [ig.func.Debug.3](ig_func_Debug_3.md)
 - [ig.func.DeleteVehicle](ig_func_DeleteVehicle.md)
 - [ig.func.Discord](ig_func_Discord.md)
 - [ig.func.Discorse](ig_func_Discorse.md)
 - [ig.func.Err](ig_func_Err.md)
-- [ig.func.Err](ig_func_Err.md)
-- [ig.func.Error](ig_func_Error.md)
 - [ig.func.Error](ig_func_Error.md)
 - [ig.func.Eventban](ig_func_Eventban.md)
 - [ig.func.FadeIn](ig_func_FadeIn.md)
 - [ig.func.FadeOut](ig_func_FadeOut.md)
 - [ig.func.Func](ig_func_Func.md)
-- [ig.func.Func](ig_func_Func.md)
 - [ig.func.GetAllPlayerPeds](ig_func_GetAllPlayerPeds.md)
 - [ig.func.GetClosestPed](ig_func_GetClosestPed.md)
-- [ig.func.GetClosestPlayer](ig_func_GetClosestPlayer.md)
 - [ig.func.GetClosestPlayer](ig_func_GetClosestPlayer.md)
 - [ig.func.GetClosestPlayerPed](ig_func_GetClosestPlayerPed.md)
 - [ig.func.GetClosestPosition](ig_func_GetClosestPosition.md)
@@ -476,7 +360,6 @@ Total Functions: **781**
 - [ig.func.IsVehicleSpawnClear](ig_func_IsVehicleSpawnClear.md)
 - [ig.func.NotBusy](ig_func_NotBusy.md)
 - [ig.func.PleaseWait](ig_func_PleaseWait.md)
-- [ig.func.SetInterval](ig_func_SetInterval.md)
 - [ig.func.SetInterval](ig_func_SetInterval.md)
 - [ig.func.SetVehicleCondition](ig_func_SetVehicleCondition.md)
 - [ig.func.SetVehicleDoorStates](ig_func_SetVehicleDoorStates.md)
@@ -565,15 +448,10 @@ Total Functions: **781**
 
 - [ig.item.CanCraft](ig_item_CanCraft.md)
 - [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
 - [ig.item.CanHotkey](ig_item_CanHotkey.md)
 - [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
 - [ig.item.Exists](ig_item_Exists.md)
 - [ig.item.GenerateConsumptionEvents](ig_item_GenerateConsumptionEvents.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 - [ig.item.GetAbout](ig_item_GetAbout.md)
 - [ig.item.GetAll](ig_item_GetAll.md)
 - [ig.item.GetByCategory](ig_item_GetByCategory.md)
@@ -583,32 +461,23 @@ Total Functions: **781**
 - [ig.item.GetConsumables](ig_item_GetConsumables.md)
 - [ig.item.GetCraftable](ig_item_GetCraftable.md)
 - [ig.item.GetData](ig_item_GetData.md)
-- [ig.item.GetData](ig_item_GetData.md)
 - [ig.item.GetDegradable](ig_item_GetDegradable.md)
 - [ig.item.GetDescription](ig_item_GetDescription.md)
 - [ig.item.GetItem](ig_item_GetItem.md)
-- [ig.item.GetItem](ig_item_GetItem.md)
-- [ig.item.GetItems](ig_item_GetItems.md)
 - [ig.item.GetItems](ig_item_GetItems.md)
 - [ig.item.GetLabel](ig_item_GetLabel.md)
-- [ig.item.GetMeta](ig_item_GetMeta.md)
 - [ig.item.GetMeta](ig_item_GetMeta.md)
 - [ig.item.GetRecipe](ig_item_GetRecipe.md)
 - [ig.item.GetStackSize](ig_item_GetStackSize.md)
 - [ig.item.GetTotalInEconomy](ig_item_GetTotalInEconomy.md)
 - [ig.item.GetValue](ig_item_GetValue.md)
-- [ig.item.GetValue](ig_item_GetValue.md)
-- [ig.item.GetWeaponAmmoType](ig_item_GetWeaponAmmoType.md)
 - [ig.item.GetWeaponAmmoType](ig_item_GetWeaponAmmoType.md)
 - [ig.item.GetWeapons](ig_item_GetWeapons.md)
 - [ig.item.GetWeight](ig_item_GetWeight.md)
 - [ig.item.IsConsumeable](ig_item_IsConsumeable.md)
 - [ig.item.IsCraftable](ig_item_IsCraftable.md)
-- [ig.item.IsCraftable](ig_item_IsCraftable.md)
-- [ig.item.IsWeapon](ig_item_IsWeapon.md)
 - [ig.item.IsWeapon](ig_item_IsWeapon.md)
 - [ig.item.RequiresLicense](ig_item_RequiresLicense.md)
-- [ig.item.ReturnPosition](ig_item_ReturnPosition.md)
 - [ig.item.ReturnPosition](ig_item_ReturnPosition.md)
 - [ig.item.Search](ig_item_Search.md)
 - [ig.item.SetItems](ig_item_SetItems.md)
@@ -681,9 +550,7 @@ Total Functions: **781**
 
 - [ig.modkit.ClearCache](ig_modkit_ClearCache.md)
 - [ig.modkit.GetAll](ig_modkit_GetAll.md)
-- [ig.modkit.GetAll](ig_modkit_GetAll.md)
 - [ig.modkit.GetByID](ig_modkit_GetByID.md)
-- [ig.modkit.GetForVehicle](ig_modkit_GetForVehicle.md)
 - [ig.modkit.GetForVehicle](ig_modkit_GetForVehicle.md)
 - [ig.modkit.HasModkit](ig_modkit_HasModkit.md)
 - [ig.modkit.Load](ig_modkit_Load.md)
@@ -721,7 +588,6 @@ Total Functions: **781**
 - [ig.note.ResyncAll](ig_note_ResyncAll.md)
 - [ig.note.Search](ig_note_Search.md)
 - [ig.note.Show](ig_note_Show.md)
-- [ig.note.Update](ig_note_Update.md)
 - [ig.note.Update](ig_note_Update.md)
 - [ig.note.ValidateData](ig_note_ValidateData.md)
 
@@ -1008,10 +874,8 @@ Total Functions: **781**
 
 - [ig.tattoo.ClearCache](ig_tattoo_ClearCache.md)
 - [ig.tattoo.GetAll](ig_tattoo_GetAll.md)
-- [ig.tattoo.GetAll](ig_tattoo_GetAll.md)
 - [ig.tattoo.GetByCollection](ig_tattoo_GetByCollection.md)
 - [ig.tattoo.GetByHash](ig_tattoo_GetByHash.md)
-- [ig.tattoo.GetByZone](ig_tattoo_GetByZone.md)
 - [ig.tattoo.GetByZone](ig_tattoo_GetByZone.md)
 - [ig.tattoo.IsFemale](ig_tattoo_IsFemale.md)
 - [ig.tattoo.IsMale](ig_tattoo_IsMale.md)
@@ -1047,15 +911,12 @@ Total Functions: **781**
 - [ig.vehicle.FindVehicle](ig_vehicle_FindVehicle.md)
 - [ig.vehicle.FindVehicleFromPlate](ig_vehicle_FindVehicleFromPlate.md)
 - [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
 - [ig.vehicle.GetByClass](ig_vehicle_GetByClass.md)
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
 - [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
 - [ig.vehicle.GetByManufacturer](ig_vehicle_GetByManufacturer.md)
 - [ig.vehicle.GetByName](ig_vehicle_GetByName.md)
 - [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
 - [ig.vehicle.GetCurrentVehicle](ig_vehicle_GetCurrentVehicle.md)
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
 - [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
 - [ig.vehicle.GetVehicle](ig_vehicle_GetVehicle.md)
 - [ig.vehicle.GetVehicleByPlate](ig_vehicle_GetVehicleByPlate.md)
@@ -1125,13 +986,10 @@ Total Functions: **781**
 - [ig.weapon.Exist](ig_weapon_Exist.md)
 - [ig.weapon.Get](ig_weapon_Get.md)
 - [ig.weapon.GetAll](ig_weapon_GetAll.md)
-- [ig.weapon.GetAll](ig_weapon_GetAll.md)
 - [ig.weapon.GetByCategory](ig_weapon_GetByCategory.md)
-- [ig.weapon.GetByHash](ig_weapon_GetByHash.md)
 - [ig.weapon.GetByHash](ig_weapon_GetByHash.md)
 - [ig.weapon.GetByName](ig_weapon_GetByName.md)
 - [ig.weapon.GetComponents](ig_weapon_GetComponents.md)
-- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md)
 - [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md)
 - [ig.weapon.GetName](ig_weapon_GetName.md)
 - [ig.weapon.IsMelee](ig_weapon_IsMelee.md)
