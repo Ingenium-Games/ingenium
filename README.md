@@ -1,405 +1,509 @@
-For any and all data related things, please review the https://github.com/DurtyFree/gta-v-data-dumps repo as the source of truth.
-Test Push
-# ingenium
+# Ingenium
 
-Please only use the releases, cloneing may result in errors.
+**Proprietary Game Framework**
 
-This is the core resource used on the Ingenium Games FiveM Server.
+© 2021-2026 Ingenium Games. All rights reserved.
 
-<br>
+**This is closed-source proprietary software. ** Unauthorized copying, distribution, modification, or use is strictly prohibited.
 
-It utilizes state bags and will __ONLY__ work as intended with OneSync Infinity, so use or tick the box from your txAdmin web panel. or set `+onesync on`
+---
 
-<br>
+## ⚠️ Legal Notice
 
------
+This software is the exclusive property of Ingenium Games and is protected by copyright law. 
 
-<br>
+**All Rights Reserved. ** This codebase is **NOT** licensed under open-source terms. Use is restricted to authorized personnel only.
 
-> Note: As with all source code on the internet, please review prior to blindly using...
+### Third-Party Dependencies
 
-<br>
-<br>
+This project integrates the following open-source libraries, which retain their original licenses:
 
-## __How it works__
+- **[pmc-callbacks](https://github.com/pitermcflebor/pmc-callbacks)** by [@pitermcflebor](https://github.com/pitermcflebor) - MIT License
+- **[PolyZone](https://github.com/mkafrin/PolyZone)** by [@mkafrin](https://github.com/mkafrin) - Integrated as `ig.zone` - MIT License
+- **[Vue. js 3](https://github.com/vuejs/core)** - MIT License
+- **[Pinia](https://github.com/vuejs/pinia)** - MIT License
+- **[Vite](https://github.com/vitejs/vite)** - MIT License
+- **[TailwindCSS](https://github.com/tailwindlabs/tailwindcss)** - MIT License
+- **[vuedraggable](https://github.com/SortableJS/vue.draggable. next)** - MIT License
 
-<br>
+For full license texts of third-party dependencies, please refer to their respective repositories.
 
-Data tables (xPlayer, xVehicle, xPed, xObject) are stored server side for each entity, with its entity as its key and data being the table value. ^1
-
-<br>
-
-Any update of an entities data table on the server will trigger the entity state to also updated and repliated. As statebags can be accessed by the client, there is no need to pass the data to the client for any entity. ^2
-
-<br>
-
-From the data tables, the server will asyncriously save data stored to the SQL database at scheduled intervals. ^3
-
-<br>
-
-> ^1: I kept it in the ESX style format for ease of reading/switching over for other servers to not break your brain. Databases are different and will not work from ES / ESX / OX / VRP / Any Other.
-
-<br>
-
-> ^2: Do not trust the clients, for the most part.
-Some natives are only client sided, so leverage the callbacks to request data when applicable.
-
-<br>
-
-> ^3: Using an integrated MySQL2 connection pool with prepared statements, the system optimizes query execution and provides comprehensive performance monitoring.
-
-<br>
-
------
-
-<br>
-
-## 📚 Documentation
-
-**Complete documentation is now available in the [`Documentation/`](./Documentation/) folder.**
-
-- **[User Documentation](./Documentation/README.md)** - Guides and API references for using ingenium
-- **[Implementation Documentation](./Implementations/README.md)** - Technical details for contributors
-- **[Contributing Guidelines](./CONTRIBUTING.md)** - How to contribute to this project
-
-### Quick Links
-
-- **[Documentation Index](./Documentation/README.md)** - Start here
-- **[SQL Architecture](./Documentation/SQL_Architecture.md)** - Database system overview
-- **[SQL API Reference](./Documentation/SQL_API_Reference.md)** - Complete API documentation
-- **[SQL Migration Guide](./Documentation/SQL_Migration_Guide.md)** - Migrating from mysql-async
-- **[Contributing Guide](./CONTRIBUTING.md)** - How to contribute
-
-### Key Documentation
-
-- **SQL & Database**: Architecture, API reference, migration guide, performance optimization
-- **Security**: Best practices and implementation guidelines
-- **Testing**: Testing frameworks and procedures
-- **Validation**: Centralized validation system
-
-<br>
-
------
-
-<br>
-
+---
 
 ## Overview
 
-<br>
+**Ingenium** is the core framework powering the Ingenium Games FiveM server, built with a modern **single-Vue application architecture**. All UI components are developed using **Vue 3** and managed through **Pinia** state management, ensuring a cohesive, performant, and maintainable frontend experience.
 
->#### This is a work of constant development and change, some functions may break or change on the way to release.
+### Core Philosophy
 
-<br>
+Ingenium follows a **Vue-first approach**:
+- All new UI features **must** be implemented as Vue 3 components
+- State management **must** use Pinia stores
+- No standalone HTML/jQuery implementations should be added
+- All NUI interfaces render through the centralized Vue application
 
-This is intended to be used by people getting started within FiveM and to be somewhat user friendly, but also for the more advanced users or developers too.
+---
 
-It is a learning experiance getting started with native functions, runtime issues, differances with NUI/DUI, but if you perservere, you will end up making something enjoyable for yourself and __hopefully__ others.
+## Architecture
 
-Just try and have fun.
+### How It Works
 
-<br>
+Data tables (`xPlayer`, `xVehicle`, `xPed`, `xObject`) are stored server-side for each entity, with the entity as the key and data as the table value. 
 
-### 🔧 Extensibility Philosophy
+Any update to an entity's data table on the server triggers the entity state to be updated and replicated via **StateBags**. Since StateBags are accessible by the client, there's no need to manually pass data to the client for any entity. 
 
-**ingenium is built to be modified and extended.** Every security feature, configuration, and system within ingenium is designed with external developers in mind. If something exists within ingenium, it should be accessible and customizable to fit your specific needs. We provide APIs and functions to dynamically control features rather than requiring you to edit core files directly.
+From the data tables, the server asynchronously saves data to the SQL database at scheduled intervals using an integrated **MySQL2 connection pool** with prepared statements for optimal performance and security.
 
-Example: Rather than manually editing StateBag protection tables, use the provided `ig.security` API functions to add or remove protected keys at runtime from your own resources.
+### Requirements
 
-<br>
+- **FiveM Server** with [OneSync Infinity](https://docs.fivem.net/docs/scripting-reference/onesync/) enabled (required)
+- **MySQL 5.7+** or **MariaDB 10.3+**
+- **Node.js 18+** (for NUI development)
 
------
+> ⚠️ **Important:** OneSync Infinity is **mandatory**. Enable it in txAdmin or set `+onesync on` in your server configuration.
 
-<br>
+---
 
+## 📚 Documentation
 
-## Getting Started
+Comprehensive documentation is organized within the repository:
 
-<br>
+- **[User Documentation](./Documentation/README.md)** - API references, guides, and usage examples
+- **[Implementation Documentation](./Implementations/README.md)** - Technical implementation details for contributors
+- **[Contributing Guidelines](./CONTRIBUTING.md)** - Standards and procedures for development
+- **[Wiki](https://github.com/Ingenium-Games/ore/wiki)** - Function references and event documentation
 
-**📖 For detailed setup instructions, see the [Documentation](./Documentation/README.md)**
+### Quick Links
 
-Basic requirements:
-- [FiveM Server Setup Guide](https://docs.fivem.net/docs/server-manual/setting-up-a-server/)
-- [MySQL 5.7+ or MariaDB 10.3+](https://mariadb.org/)
-- Import `db.sql` to your database
-- Configure `server.cfg` (see [SQL Architecture](./Documentation/SQL_Architecture.md) for configuration)
+| Topic | Location |
+|-------|----------|
+| **SQL Architecture** | [`Documentation/SQL_Architecture.md`](./Documentation/SQL_Architecture.md) |
+| **SQL API Reference** | [`Documentation/SQL_API_Reference.md`](./Documentation/SQL_API_Reference.md) |
+| **Security Guide** | [`Documentation/Security_Guide.md`](./Documentation/Security_Guide.md) |
+| **Validation System** | [`Documentation/Validation_Architecture.md`](./Documentation/Validation_Architecture.md) |
+| **Zone Management (ig.zone)** | [`Documentation/Zone_Management.md`](./Documentation/Zone_Management.md) |
+| **i18n & Debugging** | [`Documentation/I18N_AND_DEBUGGING.md`](./Documentation/I18N_AND_DEBUGGING.md) |
+| **NUI/Vue System** | [`nui/README.md`](./nui/README.md) |
+| **NUI Architecture** | [`nui/ARCHITECTURE.md`](./nui/ARCHITECTURE.md) |
 
-Pleas Please PLEASE, DO NOT USE ROOT when permitting your FiveM server to authenticate into your database. Please google best practises and create an account dedicated to fivem to only access what it needs...
+---
 
-<br>
+## 🎨 Vue 3 Single-App Architecture
 
->##### Note: *Please only use a linux build server if you are comfortable in development.*
+### Overview
 
-<br>
+Ingenium uses a **unified Vue 3 application** for all NUI components.  This architecture provides:
 
------
+- **Single Page Application (SPA)**: All UI lives in one NUI resource
+- **Pinia State Management**:  Centralized reactive state across all components
+- **Component-Based Design**: Modular, reusable Vue components
+- **Hot Module Replacement (HMR)**: Rapid development iteration
+- **TypeScript Ready**: Full type safety support
 
-<br>
+### Technology Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **Vue 3** | Reactive UI framework with Composition API |
+| **Pinia** | Lightweight, intuitive state management |
+| **Vite** | Fast build tool with HMR |
+| **TailwindCSS** | Utility-first styling framework |
+| **vuedraggable** | Drag-and-drop inventory system |
+
+### NUI Structure
+
+```
+nui/
+├── src/
+│   ├── components/          # Vue 3 components (notifications, menus, HUD, etc.)
+│   ├── stores/              # Pinia stores (ui, character, notifications, appearance, etc.)
+│   ├── utils/               # Helper functions and NUI message handlers
+│   ├── App.vue              # Root application component
+│   ├── main.js              # Application entry point
+│   └── style.css            # Global styles (TailwindCSS)
+├── inventory/               # Standalone inventory Vue app
+├── dist/                    # Compiled production build
+├── lua/                     # Lua export API for client-side integration
+├── package.json             # Node dependencies
+└── vite.config. js           # Vite build configuration
+```
+
+### Development Workflow
+
+1. **Navigate to NUI directory**: 
+   ```bash
+   cd nui
+   npm install
+   ```
+
+2. **Development with HMR**:
+   ```bash
+   npm run dev
+   ```
+   Starts dev server at `http://localhost:3000` with hot reload.
+
+3. **Build for production**:
+   ```bash
+   npm run build
+   ```
+   Compiles optimized bundle to `dist/` directory.
+
+4. **Watch mode** (auto-rebuild):
+   ```bash
+   npm run watch
+   ```
+
+For detailed NUI documentation, see [`nui/README.md`](./nui/README.md) and [`nui/ARCHITECTURE.md`](./nui/ARCHITECTURE. md).
+
+---
+
+## Code Formatting Standards
+
+Consistency is critical for maintainability. All code **must** follow these standards:
+
+### Lua Standards
+
+- **Variables**: `lowercase`
+  ```lua
+  local myVariable = {}
+  ```
+
+- **Functions**: `UpperCamelCase`
+  ```lua
+  --- Retrieves player data by ID
+  -- @param playerId number The player's server ID
+  -- @return table Player data object
+  function GetPlayerData(playerId)
+      return playerDataTable[playerId]
+  end
+  ```
+
+- **Documentation**: All functions **must** include: 
+  - Description of purpose
+  - `@param` annotations with type and description
+  - `@return` annotations (if applicable)
+  - Example usage in wiki pages
+
+  **Example**:
+  ```lua
+  --- Applies damage to a vehicle
+  -- @param vehicle number Entity ID of the vehicle
+  -- @param damage number Damage amount (0-1000)
+  -- @return boolean Success status
+  function ApplyVehicleDamage(vehicle, damage)
+      if not DoesEntityExist(vehicle) then
+          return false
+      end
+      SetVehicleEngineHealth(vehicle, damage)
+      return true
+  end
+  ```
+
+### SQL Standards
+
+- **Tables**: `lowercase`
+- **Columns**: `Capitalized`
+
+  ```sql
+  INSERT INTO `job_accounts` (`Name`, `Description`, `Boss`, `Members`, `Accounts`) VALUES (?, ?, ?, ?, ?)
+  ```
+
+- **Always use parameterized queries** (positional `?` or named `@param`):
+
+  ✅ **Correct**:
+  ```lua
+  local data = "xyz"
+  ig.sql.Update("UPDATE `table` SET `Column1` = ? WHERE X = ?", {data, id})
+  ```
+
+  ❌ **Incorrect** (SQL injection risk):
+  ```lua
+  local data = "Cool Story Bro"
+  ig. sql.Update("UPDATE `table` SET `Column1` = ".. data, {})
+  ```
+
+### JavaScript/Vue Standards
+
+- **Variables**: `camelCase`
+  ```javascript
+  let myVariable = 42
+  ```
+
+- **Functions**: `UpperCamelCase`
+  ```javascript
+  /// Formats currency value
+  /// @param value number The numeric value
+  /// @return string Formatted currency string
+  function FormatCurrency(value) {
+      return `$${value.toLocaleString()}`
+  }
+  ```
+
+- **Documentation**: Use JSDoc-style comments
+
+  ```javascript
+  /**
+   * Sends a message to the NUI backend
+   * @param {string} message - The message type
+   * @param {object} data - Data payload
+   */
+  function SendNuiMessage(message, data) {
+      // implementation
+  }
+  ```
+
+### Vue Component Standards
+
+- **Single File Components (SFC)** required for all new UI
+- **Composition API** preferred over Options API
+- **Pinia stores** for all stateful logic
+- **`<script setup>`** syntax for cleaner code
+
+**Example**:
+```vue
+<template>
+  <div class="my-component">
+    <h1>{{ title }}</h1>
+    <button @click="HandleClick">Click Me</button>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { useMyStore } from '../stores/myStore'
+
+const myStore = useMyStore()
+const title = ref('Hello World')
+
+/**
+ * Handles button click event
+ */
+function HandleClick() {
+  myStore.incrementCounter()
+}
+</script>
+
+<style scoped>
+.my-component {
+  padding: 20px;
+}
+</style>
+```
+
+---
+
+## Wiki Guidelines
+
+The [Wiki](https://github.com/Ingenium-Games/ore/wiki) provides function references and usage examples. 
+
+### Requirements for Wiki Entries
+
+1. **Function Naming**: All functions **must** follow `UpperCamelCase` convention
+   - ❌ `get_player_data()`
+   - ✅ `GetPlayerData()`
+
+2. **Parameter Documentation**: Every function must document:
+   - Parameter name
+   - Type
+   - Description
+
+3. **Working Examples**:  Each wiki page **must** include a complete, functional code example
+
+   **Example Wiki Entry**: 
+
+   ```markdown
+   ## GetPlayerMoney
+
+   Retrieves the current cash amount for a player.
+
+   ### Parameters
+   - `playerId` (number): The server ID of the player
+
+   ### Returns
+   - `number`: The player's cash amount
+
+   ### Example
+   ```lua
+   local playerId = source
+   local cash = GetPlayerMoney(playerId)
+   print("Player " .. playerId .. " has $" .. cash)
+   ```
+   ```
+
+4. **Missing Information**: Some wiki pages currently lack complete examples or proper function naming.  These **must** be updated.
+
+---
 
 ## Configuration
 
-### MySQL Connection
+### Database Connection
 
-Add to your `server.cfg`:
+Add **one** of the following to your `server.cfg`:
 
+**Option 1: Connection String (Recommended)**
 ```bash
-# Option 1: Connection string (recommended)
 set mysql_connection_string "mysql://user:password@host:port/database"
-
-# Option 2: Individual parameters
-set mysql_host "localhost"
-set mysql_port "3306"
-set mysql_user "root"
-set mysql_password "yourpassword"
-set mysql_database "fivem"
 set mysql_connection_limit "10"
 ```
 
-For detailed configuration options, see [SQL Architecture Documentation](./Documentation/SQL_Architecture.md).
+**Option 2: Individual Parameters**
+```bash
+set mysql_host "localhost"
+set mysql_port "3306"
+set mysql_user "your_user"
+set mysql_password "your_password"
+set mysql_database "your_database"
+set mysql_connection_limit "10"
+```
 
-<br>
+> ⚠️ **Security Warning:** **NEVER** use the `root` database user. Create a dedicated user with minimal required privileges.
 
------
+For detailed configuration, see [`Documentation/SQL_Architecture.md`](./Documentation/SQL_Architecture.md).
 
-<br>
+### Locale Configuration
 
-## [Wiki](https://github.com/Ingenium-Games/ore/wiki)
+Set your preferred language in `_config/config.lua`:
 
-<br>
-
-The [Wiki](https://github.com/Ingenium-Games/ore/wiki) contains a breif overview of functions and events that operate within the core to assist in leveraging for your own works.
-
-It will also contain a guide on how to get started and eventually a way to import a pre-made server as apart of the txAdmin web panel as a recipe.
-
-This is still, very much, a work in progress
-
-
-<br>
-
------
-
-<br>
-
-## Code Formatting
-
-<br>
-
-An attempt to be as consistant as possible has been made following the below as a set of rough indicators to assist with reading over code blocks,
-
-<br>
-
-### For Lua
-
-<br>
-
-- Variables = lowercase
 ```lua
-local this = {}
+conf.locale = "en"  -- Options: "en", "fr", "es", "de", "pt"
 ```
-- Functions = UpperCamelCase
+
+### Debug Configuration
+
+Configure debug output levels in `_config/config.lua`:
+
 ```lua
-function TestingFunction() end
-```
-- Add notes where possible and define paramaters
-```lua
---- Function Description
---@param var string "Context around it"
-function TestingFunction(var) 
-    if type(var) == "string" then
-      -- the type of var is string
-      print("IS STRING")
-    end
-end
+conf.error = true    -- Critical errors
+conf.debug_1 = true  -- Info level
+conf.debug_2 = false -- Debug level
+conf.debug_3 = true  -- Trace level
 ```
 
-<br>
-<br>
-
-### For SQL
-
-<br>
-
-**The core now uses an integrated MySQL2 system. See [SQL Documentation](./Documentation/) for complete details.**
-
-- Database tables are lowercase, columns are capitalised.
-```sql
-INSERT INTO `job_accounts` (`Name`, `Description`, `Boss`, `Members`, `Accounts`) etig.. 
-```
-- Use positional parameters (?) or named parameters (@param):
-```lua
--- Recommended: Positional parameters
-local data = "xyz"
-ig.sql.Update("UPDATE `table` SET `Column1` = ? WHERE X = ?", {data, id})
-
--- Legacy: Named parameters (still supported via compatibility layer)
-MySQL.Async.execute("UPDATE `table` SET `Column1` = @data WHERE X = @id", {
-    ["@data"] = data,
-    ["@id"] = id
-})
-```
-- __*Do not do this!*__
-```lua
-local data = "Cool Story Bro"
-ig.sql.Update("UPDATE `table` SET `Column1` = "..data, {}) -- SQL INJECTION RISK!
-```
-
->##### Note: *Always use parameterized queries to prevent SQL injection attacks. See [Security Guide](./Documentation/Security_Guide.md)*
-
-<br>
-<br>
-
-### For JS
-
-<br>
-
-- Variables = lowercase
-```js
-let variable = 42
-```
-
-- Functions = UpperCamelCase
-```js
-function SameSameA() {};
-```
-
-- Add notes where possible and define paramaters
-```js
-// function descriptions
-// @param var type "Context"
-function SameSameB(var) {
-  if (var != "xyz") {
-    // The passed var variable is not equal to xyz
-    console.log("var is not xyz")
-  };
-};
-```
-
-<br>
-<br>
-
-### For Front End (HTML,CSS,etc)
-
-<br>
-
-- ??? You guys do you, just make it understandable.
-
->I need to figure out my style..
-
-<br>
-<br>
-
------
-
-<br>
+---
 
 ## Database Optimization
 
-<br>
+### MySQL Performance
 
-**For detailed performance optimization, see [SQL Performance Documentation](./Documentation/SQL_Performance.md)**
-
-### MySQL Configuration
-
-The core uses an integrated MySQL2 connection pool with automatic performance monitoring.
-
-Configuration in `server.cfg`:
-
-```bash
-set mysql_connection_string "mysql://user:pass@localhost:3306/db"
-set mysql_connection_limit "10"  # Adjust based on server load
-```
-
-<br>
-
-### Performance Monitoring
-
-The SQL system includes comprehensive monitoring:
-- Query execution time tracking
+The integrated MySQL2 system includes: 
+- Connection pooling with configurable limits
+- Automatic query profiling
 - Slow query detection (>150ms)
-- Automatic performance logging
-- Statistics API (`ig.sql.GetStats()`)
+- Prepared statement caching
+- Real-time performance statistics
 
-Console command:
+**Console Command**:
 ```
-sqlstats  # Display performance statistics
+sqlstats
 ```
 
-For details, see:
-- [SQL Performance Guide](./Documentation/SQL_Performance.md)
-- [SQL Events & Exports](./Documentation/SQL_Events_Exports.md)
-
-<br>
+Displays query execution metrics and performance statistics.
 
 ### Save System
 
-The dirty flag system ensures efficient database writes:
-- Only changed data is saved (60-80% reduction)
-- Optimized save intervals per data type
-- Prepared statements for high performance
-- Real-time performance monitoring
+The **dirty flag system** ensures efficient database writes:
 
-Save intervals:
-- Player data: 90 seconds
-- Vehicles: 5 minutes  
-- Jobs: 10 minutes
-- Objects: 5 minutes
+- **Dirty Tracking**: Only changed data is saved (60-80% reduction in writes)
+- **Optimized Intervals**:
+  - Player data: **90 seconds**
+  - Vehicles: **5 minutes**
+  - Jobs: **10 minutes**
+  - Objects: **5 minutes**
+- **Prepared Statements**: Pre-compiled queries for maximum performance
 
-<br>
+For details, see [`Documentation/SQL_Performance.md`](./Documentation/SQL_Performance.md).
 
------
+---
 
-<br>
+## Directory Structure
 
+```
+ingenium/
+├── Documentation/          # User and API documentation
+├── Implementations/        # Technical implementation details
+├── [Example Doors]/        # Example door system implementation
+├── [Example Items]/        # Example item definitions
+├── [Stubs]/                # Development stubs and templates
+├── _config/                # Configuration files
+├── client/                 # Client-side Lua scripts
+├── server/                 # Server-side Lua scripts
+├── shared/                 # Shared Lua utilities
+├── data/                   # Game data (peds, vehicles, items, etc.)
+├── locale/                 # Localization files (en, fr, es, de, pt)
+├── nui/                    # Vue 3 NUI system
+│   ├── src/                # Vue source code
+│   ├── inventory/          # Inventory Vue app
+│   ├── dist/               # Compiled production build
+│   └── lua/                # Lua API exports
+├── db. sql                  # Database schema
+├── fxmanifest.lua          # FiveM resource manifest
+├── server.cfg              # Example server configuration
+├── CONTRIBUTING.md         # Contribution guidelines
+└── README.md               # This file
+```
 
-## Credits and Indirect Contributors
-
-<br>
-
-Special thanks too; 
-
-- @[pietermcfiber](https://github.com/pitermcflebor) for [pmc-callbacks](https://github.com/pitermcflebor/pmc-callbacks)
-- @[mkafrin](https://github.com/mkafrin) for [PolyZone](https://github.com/mkafrin/PolyZone) - Integrated into Ingenium as `ig.zone`
-
-<br>
-
-
-
------
-
-<br>
+---
 
 ## Testing
 
-<br>
+Tested and verified on: 
 
->Note: *It has currently been tested and working on the following server operating systems with no issues present. __As you would hopefully expect!__*
->- Windows Server (64bit)
->- CentOS 8 Stream (64bit) - RHEL Distro
+- ✅ **Windows Server** (64-bit)
+- ✅ **CentOS 8 Stream** (64-bit, RHEL distribution)
 
-<br>
+For NUI testing procedures, see [`nui/TESTING.md`](./nui/TESTING.md).
 
------
+---
 
-<br>
+## Security
 
+Security is a top priority.  Key features include:
 
-> __If you seek to profit, sell, include or use secitons of code, please include the full license as shown.__
-> If you do profit, please consider sending some my way.
+- **Parameterized SQL Queries**: All database operations use prepared statements
+- **StateBag Protection**: Server-side validation and access control
+- **Input Validation**: Centralized validation system ([`Documentation/Validation_Architecture.md`](./Documentation/Validation_Architecture.md))
+- **Rate Limiting**:  Built-in protection against abuse
+- **Extensible Security API**: `ig.security` functions for custom protection
 
-<br>
+For complete security guidelines, see [`Documentation/Security_Guide.md`](./Documentation/Security_Guide.md).
 
------
+---
 
-<br>
+## Development Status
 
+Ingenium is under **active development**.  Some functions may change or break during updates. Always review release notes before updating.
 
-## MIT License (MIT)
+> **Note**: Only use **official releases**. Cloning the `main` branch may result in unstable or incomplete features.
 
-**Copyright (c) 2021 : Twiitchter - https://github.com/Ingenium-Games**
+---
 
-*Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:*
+## Credits
 
-*The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.*
+Special thanks to:
 
-*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*
+- **[@pitermcflebor](https://github.com/pitermcflebor)** - [pmc-callbacks](https://github.com/pitermcflebor/pmc-callbacks) (MIT License)
+- **[@mkafrin](https://github.com/mkafrin)** - [PolyZone](https://github.com/mkafrin/PolyZone) (MIT License), integrated as `ig.zone`
+
+---
+
+## Support
+
+For authorized users: 
+
+- **Bug Reports**: Contact internal development team
+- **Documentation Issues**: Submit via internal channels
+- **Feature Requests**:  Discuss with project maintainers
+
+---
+
+## Copyright
+
+**© 2021-2026 Ingenium Games.  All rights reserved.**
+
+**Twiitchter** - [https://github.com/Ingenium-Games](https://github.com/Ingenium-Games)
+
+This software is proprietary and confidential.  Unauthorized use, reproduction, or distribution is strictly prohibited and may result in legal action.
+
+---
+
+*For reference to GTA V data structures, see [gta-v-data-dumps](https://github.com/DurtyFree/gta-v-data-dumps) as the authoritative source.*
