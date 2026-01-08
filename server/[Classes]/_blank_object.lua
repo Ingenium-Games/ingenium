@@ -302,8 +302,11 @@ function ig.class.BlankObject(net)
     end
     --
     self.GetEncodedCoords = function()
-        -- Coords don't have a dedicated cache field, encode fresh each time
-        return json.encode(self.GetCoords())
+        if not self.EncodedCoords or self.DirtyFields.Coords then
+            self.EncodedCoords = json.encode(self.GetCoords())
+            self.DirtyFields.Coords = false
+        end
+        return self.EncodedCoords
     end
     --
     -- ====================================================================================--

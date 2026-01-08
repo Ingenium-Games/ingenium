@@ -95,11 +95,12 @@ Citizen.CreateThread(function()
         
         -- NPC weapon drop disable check (every 2.5 seconds)
         if modeSettings.disableNPCWeaponDrops and (currentTime - lastNPCWeaponCheck) >= NPC_WEAPON_INTERVAL then
+            local ped = PlayerPedId()
             -- Disable weapon drops from NPCs
-            SetPedDropsWeaponsWhenDead(PlayerPedId(), false)
+            SetPedDropsWeaponsWhenDead(ped, false)
             
             -- Remove nearby dropped weapons (within 50 units)
-            local playerCoords = GetEntityCoords(PlayerPedId())
+            local playerCoords = GetEntityCoords(ped)
             local pickups = {
                 `PICKUP_WEAPON_PISTOL`,
                 `PICKUP_WEAPON_COMBATPISTOL`,
