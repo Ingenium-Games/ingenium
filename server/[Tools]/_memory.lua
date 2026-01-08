@@ -71,7 +71,7 @@ local function CleanupOrphanedEntities()
     
     -- Clean NPCs
     for net, npc in pairs(ig.ndex or {}) do
-        if npc and npig.Entity and not DoesEntityExist(npig.Entity) then
+        if npc and npc.Entity and not DoesEntityExist(npc.Entity) then
             ig.ndex[net] = nil
             cleaned.npcs = cleaned.npcs + 1
         end

@@ -113,11 +113,25 @@ end
 
 --- Loop over the modifers and decrease them.
 function ig.modifier.DegradeModifiers()
+    local modified = false
     for k,v in pairs(ig.modifiers) do    
-        if v < _min then v = 1 end
-        if v > _max then v = 10 end
+        if v < _min then 
+            ig.modifiers[k] = 1
+            modified = true
+        end
+        if v > _max then 
+            ig.modifiers[k] = 10
+            modified = true
+        end
         if v <= 10 and v > 1 then
-            v = math.min(v - (1 * ig.modifier.GetDegradeBoost()), 1)
+            ig.modifiers[k] = math.max(v - (1 * ig.modifier.GetDegradeBoost()), 1)
+            modified = true
+        end
+    end
+    -- Trigger state update if any modifier was changed
+    if modified then
+        for k,v in pairs(ig.modifiers) do
+            ig.state.TriggerState(k, v)
         end
     end
 end
