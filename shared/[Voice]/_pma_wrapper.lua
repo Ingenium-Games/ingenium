@@ -40,13 +40,14 @@ if IsDuplicityVersion() == 0 then
     ---@return any The property value
     exports("getVoiceProperty", function(property)
         if property == "radioEnabled" then
-            return localVoiceState.radioChannel > 0
+            -- Check if in any radio channel
+            return LocalPlayer.state.RadioFrequency and LocalPlayer.state.RadioFrequency > 0
         elseif property == "radioChannel" then
-            return localVoiceState.radioChannel
+            return LocalPlayer.state.RadioFrequency or 0
         elseif property == "voiceMode" then
-            return localVoiceState.voiceMode
+            return LocalPlayer.state.VoiceMode or conf.voip.defaultMode
         elseif property == "isTalking" then
-            return localVoiceState.isTalking
+            return LocalPlayer.state.IsTalking or false
         end
         return nil
     end)

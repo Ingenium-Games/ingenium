@@ -167,10 +167,18 @@ function ig.voip.server.JoinRadioChannel(playerId, channel)
         return false
     end
     
-    -- Leave current channel if in one
+    -- Leave current channel if in one (handle directly to avoid recursion)
     local currentChannel = playerVoiceData[playerId].radioChannel
     if currentChannel > 0 then
-        ig.voip.server.LeaveRadioChannel(playerId, currentChannel)
+        -- Remove from current channel
+        if radioChannels[currentChannel] then
+            radioChannels[currentChannel][playerId] = nil
+            
+            -- Remove empty channels
+            if next(radioChannels[currentChannel]) == nil then
+                radioChannels[currentChannel] = nil
+            end
+        end
     end
     
     -- Initialize channel if doesn't exist
