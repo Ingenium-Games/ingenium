@@ -6,6 +6,7 @@ description "Ingenium"
 version "1.0.0"
 ------------------------------------------------------------------------------
 provide "polyzone"
+provide "pma-voice"
 --
 ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
@@ -15,6 +16,7 @@ shared_scripts {
     "shared/_ig.lua",
     "shared/[Tools]/*.lua",
     "shared/[Third Party]/*.lua",
+    "shared/[Voice]/_voip.lua",
     "shared/_locale.lua",
     "shared/_protect.lua"
 }
@@ -36,6 +38,10 @@ client_scripts {
     "client/[Zones]/_ig_zone.lua",
     -- IPL management (must load after zones)
     "client/_ipls.lua",
+    -- VOIP system (loads before other client scripts for early initialization)
+    "client/[Voice]/_voip.lua",
+    -- PMA-Voice compatibility wrapper (loads last for exports)
+    "shared/[Voice]/_pma_wrapper.lua",
     -- Other client scripts
     "client/**/*.lua",
     "nui/lua/*.lua"
@@ -58,6 +64,10 @@ server_scripts {
     "server/[SQL]/_saves.lua",
     "server/[SQL]/_users.lua",
     "server/[SQL]/_vehicles.lua",
+    -- VOIP system (loads before other server scripts)
+    "server/[Voice]/_voip.lua",
+    -- PMA-Voice compatibility wrapper (loads last for exports)
+    "shared/[Voice]/_pma_wrapper.lua",
     "server/**/*.lua"
 }
 ------------------------------------------------------------------------------

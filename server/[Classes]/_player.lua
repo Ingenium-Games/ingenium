@@ -1289,6 +1289,179 @@ function ig.class.Player(source, character_id)
     end
     --
     -- ====================================================================================--
+    -- VOIP Methods
+    -- ====================================================================================--
+    -- Initialize VOIP state variables (set defaults on character creation)
+    self.VoiceMode = conf.voip.defaultMode or 2
+    self.State.VoiceMode = self.VoiceMode
+    --
+    self.VoiceDistance = 0.0
+    self.State.VoiceDistance = self.VoiceDistance
+    --
+    self.RadioFrequency = 0
+    self.State.RadioFrequency = self.RadioFrequency
+    --
+    self.RadioTransmitting = false
+    self.State.RadioTransmitting = self.RadioTransmitting
+    --
+    self.InVoice = false
+    self.State.InVoice = self.InVoice
+    --
+    self.InCall = false
+    self.State.InCall = self.InCall
+    --
+    self.InConnection = false
+    self.State.InConnection = self.InConnection
+    --
+    self.InAdminCall = false
+    self.State.InAdminCall = self.InAdminCall
+    --
+    self.CallActive = false
+    self.State.CallActive = self.CallActive
+    --
+    self.ConnectionActive = false
+    self.State.ConnectionActive = self.ConnectionActive
+    --
+    --- Get player's voice mode
+    ---@return number The voice mode index (1-3)
+    self.GetVoiceMode = function()
+        return self.VoiceMode
+    end
+    --
+    --- Set player's voice mode
+    ---@param modeIndex number The voice mode index (1-3)
+    self.SetVoiceMode = function(modeIndex)
+        local mode = ig.voip.GetVoiceMode(modeIndex)
+        if not mode then
+            return
+        end
+        if self.VoiceMode ~= modeIndex then
+            self.VoiceMode = modeIndex
+            self.VoiceDistance = mode.distance
+            self.State.VoiceMode = self.VoiceMode
+            self.State.VoiceDistance = self.VoiceDistance
+        end
+    end
+    --
+    --- Get player's radio frequency
+    ---@return number The radio frequency (0 = none)
+    self.GetRadioFrequency = function()
+        return self.RadioFrequency
+    end
+    --
+    --- Set player's radio frequency
+    ---@param frequency number The radio frequency (0 to leave radio)
+    self.SetRadioFrequency = function(frequency)
+        local freq = ig.check.Number(frequency, 0, conf.voip.radioChannelMax)
+        if self.RadioFrequency ~= freq then
+            self.RadioFrequency = freq
+            self.State.RadioFrequency = self.RadioFrequency
+        end
+    end
+    --
+    --- Get player's radio transmitting state
+    ---@return boolean True if transmitting
+    self.GetRadioTransmitting = function()
+        return self.RadioTransmitting
+    end
+    --
+    --- Set player's radio transmitting state
+    ---@param transmitting boolean Whether transmitting
+    self.SetRadioTransmitting = function(transmitting)
+        local tx = ig.check.Boolean(transmitting)
+        if self.RadioTransmitting ~= tx then
+            self.RadioTransmitting = tx
+            self.State.RadioTransmitting = self.RadioTransmitting
+        end
+    end
+    --
+    --- Get player's InCall state
+    ---@return boolean True if in call
+    self.GetInCall = function()
+        return self.InCall
+    end
+    --
+    --- Set player's InCall state
+    ---@param inCall boolean Whether in call
+    self.SetInCall = function(inCall)
+        local ic = ig.check.Boolean(inCall)
+        if self.InCall ~= ic then
+            self.InCall = ic
+            self.State.InCall = self.InCall
+        end
+    end
+    --
+    --- Get player's CallActive state
+    ---@return boolean True if call is active
+    self.GetCallActive = function()
+        return self.CallActive
+    end
+    --
+    --- Set player's CallActive state
+    ---@param active boolean Whether call is active
+    self.SetCallActive = function(active)
+        local ca = ig.check.Boolean(active)
+        if self.CallActive ~= ca then
+            self.CallActive = ca
+            self.State.CallActive = self.CallActive
+        end
+    end
+    --
+    --- Get player's InConnection state
+    ---@return boolean True if in connection
+    self.GetInConnection = function()
+        return self.InConnection
+    end
+    --
+    --- Set player's InConnection state
+    ---@param inConnection boolean Whether in connection
+    self.SetInConnection = function(inConnection)
+        local ic = ig.check.Boolean(inConnection)
+        if self.InConnection ~= ic then
+            self.InConnection = ic
+            self.State.InConnection = self.InConnection
+        end
+    end
+    --
+    --- Get player's ConnectionActive state
+    ---@return boolean True if connection is active
+    self.GetConnectionActive = function()
+        return self.ConnectionActive
+    end
+    --
+    --- Set player's ConnectionActive state
+    ---@param active boolean Whether connection is active
+    self.SetConnectionActive = function(active)
+        local ca = ig.check.Boolean(active)
+        if self.ConnectionActive ~= ca then
+            self.ConnectionActive = ca
+            self.State.ConnectionActive = self.ConnectionActive
+        end
+    end
+    --
+    --- Get player's InAdminCall state (read-only for non-admins)
+    ---@return boolean True if in admin call
+    self.GetInAdminCall = function()
+        return self.InAdminCall
+    end
+    --
+    --- Set player's InAdminCall state (server-only, requires admin permission)
+    ---@param inAdminCall boolean Whether in admin call
+    ---@param adminSource number|nil The admin's server ID (for verification)
+    self.SetInAdminCall = function(inAdminCall, adminSource)
+        -- Only allow setting if adminSource has permission
+        if adminSource and not IsPlayerAceAllowed(adminSource, conf.voip.adminCallAce) then
+            ig.func.Debug_1(("Player %d attempted to set InAdminCall without permission"):format(adminSource))
+            return
+        end
+        local iac = ig.check.Boolean(inAdminCall)
+        if self.InAdminCall ~= iac then
+            self.InAdminCall = iac
+            self.State.InAdminCall = self.InAdminCall
+        end
+    end
+    --
+    -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
     -- ====================================================================================--
     return self
