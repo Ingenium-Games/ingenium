@@ -38,6 +38,8 @@ RegisterCommand("switch", function(source, args, rawCommand)
     --
     Citizen.Await(p)
     Citizen.Wait((ig.sec * 4500))
+    -- Place player in their own routing bucket for character selection
+    ig.inst.SetPlayer(src)
     TriggerClientEvent("Client:Character:OpeningMenu", src)
     TriggerEvent("Server:Character:List", src, Primary_ID)
     -- Events to handle character removeal.
