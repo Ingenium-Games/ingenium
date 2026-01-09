@@ -42,7 +42,7 @@ exports('removeZone', ig.target.removeZone)
 local function AddTarget(target, add, resource)
     local num = #target
     for i = 1, #add do
-        num += 1
+        num = num + 1
         add[i].resource = resource or 'ig.target'
         target[num] = add[i]
     end

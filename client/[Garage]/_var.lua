@@ -1,8 +1,3 @@
--- ====================================================================================--
--- Globals and Require/Replace
-math = require('glm')
-math.randomseed(GetNetworkTime())
-c = exports["ig.core"]:c()
 --
 TicketMachine = `prop_parkingpay`
 MachinePosition = nil

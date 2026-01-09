@@ -113,7 +113,7 @@ local function enableTargeting()
             options = newOptions or options or {}
 
             if currentZone then
-                if (not newOptions and currentZone.id ~= currentTarget?.zone) or (lastEntity ~= entityHit) then
+                if (not newOptions and currentZone.id ~= currentTarget.zone) or (lastEntity ~= entityHit) then
                     newOptions = options
                 end
 
@@ -133,7 +133,7 @@ local function enableTargeting()
 
             for _, v in pairs(options) do
                 local optionCount = #v
-                totalOptions += optionCount
+                totalOptions = totalOptions + optionCount
 
                 for i = 1, optionCount do
                     local option = v[i]
@@ -198,7 +198,7 @@ local function enableTargeting()
 
                     v[i].hide = hide
 
-                    if hide then hidden += 1 end
+                    if hide then hidden = hidden + 1 end
                 end
             end
 
@@ -248,7 +248,9 @@ local function enableTargeting()
             if options then table.wipe(options) end
             SendNuiMessage('{"event": "leftTarget"}')
             lastEntity = nil
-        else Wait(50) end
+        else
+            Wait(50)
+        end
 
         if not options or not next(options) then
             flag = flag == 26 and 1 or 26
@@ -315,7 +317,7 @@ RegisterNUICallback('select', function(data, cb)
     cb(1)
     setNuiFocus(false)
 
-    local option = options?[data[1]][data[2]]
+    local option = options and options[data[1]] and options[data[1]][data[2]]
 
     if option then
         if option.action then

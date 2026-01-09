@@ -60,7 +60,7 @@ if sprite then
 
                     if zone.drawSprite ~= false and (contains or (zone.distance or 7) < 7) then
                         zone.colour = contains and hover or colour
-                        n += 1
+                        n = n + 1
                         inRange[n] = zone
                     end
 

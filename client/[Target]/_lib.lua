@@ -212,18 +212,18 @@ local function getTriangles(polygon)
                         triangles[nTriangles + 1], triangles[nTriangles + 2] = makeTriangles(t)
                         if c and d then
                             for i = 1, #t do
-                                points[t[i]].uses += 1
+                                points[t[i]].uses = points[t[i]].uses + 1
                             end
                         else
                             for k, v in pairs(t) do
-                                points[v].uses += 2
+                                points[v].uses = points[v].uses + 2
                             end
                         end
                     end
                 end
             else
-                aData.uses += 1
-                bData.uses += 1
+                aData.uses = aData.uses + 1
+                bData.uses = bData.uses + 1
             end
         end
     end
@@ -270,7 +270,7 @@ CreateThread(function()
                 end
 
                 if zone.inside or zone.debug then
-                    insideCount += 1
+                    insideCount = insideCount + 1
                     inside[insideCount] = zone
                 end
             else
@@ -283,7 +283,7 @@ CreateThread(function()
                 end
 
                 if zone.debug then
-                    insideCount += 1
+                    insideCount = insideCount + 1
                     inside[insideCount] = zone
                 end
             end
