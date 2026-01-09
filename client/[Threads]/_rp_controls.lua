@@ -9,19 +9,30 @@ if conf.gamemode ~= "RP" then
     return
 end
 
+-- Timing constants
+local IDLE_CHECK_INTERVAL = 100 -- Check every 100ms when no special states active
+
 -- ====================================================================================--
 -- Per-Frame Control Restriction Thread
 -- Disables controls based on player state
 -- ====================================================================================--
 
 Citizen.CreateThread(function()
+    -- Cache previous states to avoid unnecessary operations
+    local prevStates = {
+        isDead = false,
+        isFrozen = false,
+        isCuffed = false,
+        isEscorted = false,
+        isEscorting = false,
+        isSwimming = false
+    }
+    
     while true do
         local ped = PlayerPedId()
         local ply = PlayerId()
         
         if ig.data.IsPlayerLoaded() then
-            Wait(0) -- Per-frame check when player is loaded
-            
             -- Get current player states
             local isDead = LocalPlayer.state.IsDead
             local isFrozen = LocalPlayer.state.IsFrozen
@@ -29,6 +40,15 @@ Citizen.CreateThread(function()
             local isEscorted = LocalPlayer.state.IsEscorted
             local isEscorting = LocalPlayer.state.IsEscorting
             local isSwimming = LocalPlayer.state.IsSwimming
+            
+            -- Only do per-frame updates when states require it
+            local needsPerFrame = isDead or isCuffed or isEscorted or isFrozen or isSwimming or isEscorting
+            
+            if needsPerFrame then
+                Wait(0) -- Per-frame when states require control management
+            else
+                Wait(IDLE_CHECK_INTERVAL)
+            end
             
             -- ====================================================================================--
             -- Death State Controls

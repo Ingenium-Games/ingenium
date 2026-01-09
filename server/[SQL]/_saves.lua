@@ -89,8 +89,10 @@ function ig.sql.save.Users(cb)
     local startTime = os.clock()
     local saveCount = 0
     local xPlayers = ig.data.GetPlayers()
-    for k, v in pairs(xPlayers) do
-        local data = ig.data.GetPlayer(k)
+    
+    -- Pre-allocate to avoid table resizing during iteration
+    for k, data in pairs(xPlayers) do
+        -- Use data directly from pairs iteration instead of redundant GetPlayer call
         if data and data.GetIsDirty() then
             saveCount = saveCount + 1
             -- Other Variables.
@@ -131,8 +133,11 @@ function ig.sql.save.Users(cb)
             end)
         end
     end
+    
     local elapsed = (os.clock() - startTime) * 1000
-    print(string.format("^2[SQL] Saved %d players in %.2fms^7", saveCount, elapsed))
+    if saveCount > 0 then
+        print(string.format("^2[SQL] Saved %d players in %.2fms^7", saveCount, elapsed))
+    end
     if cb then
         cb()
     end
@@ -196,59 +201,55 @@ function ig.sql.save.Vehicle(data, cb)
     end
 end
 
---- Save All Characters from the xPLayer Table.
+--- Save all vehicles from the xVehicle table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function ig.sql.save.Vehicles(cb)
     local startTime = os.clock()
     local saveCount = 0
     local xVehicles = ig.data.GetVehicles()
+    
     for k, data in pairs(xVehicles) do
         if data and data.Owner ~= false and data.GetIsDirty() then
+            -- Check entity existence once before gathering data
             if DoesEntityExist(data.Entity) then
                 saveCount = saveCount + 1
-                -- Other Variables.
+                -- Gather all data for the save operation
                 local Fuel = data.GetFuel()
-                -- Booleans
                 local Parked = data.GetParked()
                 local Impound = data.GetImpound()
                 local Wanted = data.GetWanted()
-                -- Tables require JSON Encoding - Use cached versions
                 local Keys = data.GetEncodedKeys()
                 local Coords = data.GetEncodedCoords()
                 local Inventory = data.GetEncodedInventory()
-                --
                 local Condition = data.GetEncodedCondition()
                 local Modifications = data.GetEncodedModifications()
-                --
-                local Updated = ig.func.Timestamp()
-                -- The Key
                 local Plate = data.GetPlate()
-                --
+                
                 ig.sql.ExecutePrepared(VehicleSaveData, {
-                    -- Other Variables.
                     Fuel,
-                    -- Tables
                     Coords,
                     Keys,
                     Condition,
                     Modifications,
                     Inventory,
-                    -- Booleans
                     Parked,
                     Impound,
                     Wanted,
-                    -- Where Conditions
                     Plate
                 }, function(r)
                     data.ClearDirty()
                 end)
             else
+                -- Clean up non-existent vehicles
                 ig.data.RemoveVehicle(k)
             end
         end
     end
+    
     local elapsed = (os.clock() - startTime) * 1000
-    print(string.format("^2[SQL] Saved %d vehicles in %.2fms^7", saveCount, elapsed))
+    if saveCount > 0 then
+        print(string.format("^2[SQL] Saved %d vehicles in %.2fms^7", saveCount, elapsed))
+    end
     if cb then
         cb()
     end

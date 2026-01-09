@@ -2,23 +2,34 @@
 ig.table = {}
 -- ====================================================================================--
 
---- func desc
----@param . any
+--- Check if a value exists in a sequential array table
+--- Optimized for sequential arrays with numeric indices (1, 2, 3...)
+--- For sparse arrays or dictionaries, manually iterate with pairs()
+---@param t table The array table to search
+---@param v any The value to find
+---@return boolean True if value exists in the table
 function ig.table.MatchValue(t, v)
+    -- Use ipairs for array iteration - faster than pairs for sequential arrays
     for _, i in ipairs(t) do
-        if (i == v) then
+        if i == v then
             return true
         end
     end
     return false
 end
 
---- func desc
----@param t any
----@param k any
+--- Check if a key exists in a table
+--- Works with both sequential arrays and associative tables (dictionaries)
+--- Performance note: For simple key checks, t[k] ~= nil is faster
+--- Use this function when you need consistent behavior across table types
+--- For optimal array bounds checking, use: k >= 1 and k <= #t and t[k] ~= nil
+---@param t table The table to check
+---@param k any The key to find
+---@return boolean True if key exists in the table
 function ig.table.MatchKey(t, k)
-    for i, _ in ipairs(t) do
-        if (i == k) then
+    -- Use pairs for general key lookup (works for both arrays and dictionaries)
+    for key, _ in pairs(t) do
+        if key == k then
             return true
         end
     end
@@ -132,10 +143,8 @@ function ig.table.MakeReadOnly(t, name)
         return t
     end
     
-    -- Create a proxy table
-    local proxy = {}
-    
     -- Cache for protected nested tables to avoid repeated metatable creation
+    -- MUST be declared before the metatable to be captured in the closure
     local nestedProxies = {}
     
     -- Create metatable for read-only access
@@ -165,8 +174,8 @@ function ig.table.MakeReadOnly(t, name)
         end
     }
     
-    setmetatable(proxy, mt)
-    return proxy
+    -- Create and return the proxy table with the metatable
+    return setmetatable({}, mt)
 end
 
 -- ====================================================================================--
