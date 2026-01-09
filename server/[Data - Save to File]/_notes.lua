@@ -15,7 +15,7 @@ ig.notes = false -- dropped items table
         }
 ]]--
 
---- func desc
+--- Load notes from file
 function ig.note.Load()
     if ig.json.Exists(conf.file.notes) then
         local file = ig.json.Read(conf.file.notes)
@@ -24,16 +24,8 @@ function ig.note.Load()
         ig.notes = {}
         ig.json.Write(conf.file.notes, ig.notes)
     end
-    ig.note.Update()
-end
-
---- func desc
-function ig.note.Update()
-    local function Do()
-        ig.json.Write(conf.file.notes, ig.notes)
-        SetTimeout(conf.file.save, Do)
-    end
-    SetTimeout(conf.file.save, Do)
+    -- Note: Periodic saving is handled by server/_save_routine.lua
+    -- No need for a separate update routine here
 end
 
 --- func desc
@@ -55,27 +47,30 @@ function ig.note.Exist(id)
     return false
 end
 
---- func desc
-function ig.note.Clean()
-    if type(ig.notes) == "table" then
-        for k,v in pairs(ig.notes) do
-            if v then
-                if (os.time() - v.Time) >= conf.file.cleanup then
-                    table.remove(ig.notes, k)            
-                end
-            end
+---Clean old notes
+---@param maxAge number|nil Max age in seconds (uses config if nil)
+---@return number Number of notes removed
+function ig.note.CleanOld(maxAge)
+    local maxAge = maxAge or conf.file.cleanup
+    local now = os.time()
+    local removed = 0
+    
+    for id, note in pairs(ig.notes) do
+        if note.Time and (now - note.Time) >= maxAge then
+            ig.note.Remove(id)
+            removed = removed + 1
         end
-    end    
+    end
+    
+    if removed > 0 then
+        ig.func.Debug_2("Cleaned up " .. removed .. " old notes")
+    end
+    
+    return removed
 end
 
---- func desc
-function ig.note.CleanUp()
-    local function Do()
-        ig.note.Clean()
-        SetTimeout(conf.file.cleanup, Do)
-    end
-    SetTimeout(conf.file.cleanup, Do)
-end
+-- Note: Periodic cleanup is managed by server/[Data - Save to File]/_gsr.lua
+-- Consolidated Cleanup Manager to reduce thread overhead
 
 -- ====================================================================================--
 -- Enhanced Notes System Helpers
@@ -245,28 +240,6 @@ function ig.note.Update(id, newContent, editor)
     ig.func.Debug_3("Note " .. id .. " updated by " .. (editor or "unknown"))
     
     return true
-end
-
----Clean old notes
----@param maxAge number|nil Max age in seconds (uses config if nil)
----@return number Number of notes removed
-function ig.note.CleanOld(maxAge)
-    local maxAge = maxAge or conf.file.cleanup
-    local now = os.time()
-    local removed = 0
-    
-    for id, note in pairs(ig.notes) do
-        if note.Time and (now - note.Time) >= maxAge then
-            ig.note.Remove(id)
-            removed = removed + 1
-        end
-    end
-    
-    if removed > 0 then
-        ig.func.Debug_2("Cleaned up " .. removed .. " old notes")
-    end
-    
-    return removed
 end
 
 ---Hide note (don't remove, just make invisible)

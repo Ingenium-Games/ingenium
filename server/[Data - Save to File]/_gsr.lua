@@ -336,15 +336,80 @@ function ig.gsr.GetCount()
     return count
 end
 
--- Auto-cleanup thread
-if conf.file.cleanup then
-    CreateThread(function()
-        while true do
-            Wait(300000) -- Every 5 minutes
+-- ====================================================================================--
+-- Consolidated Cleanup Manager
+-- Single thread to manage all periodic cleanup operations
+-- Reduces thread overhead by consolidating multiple cleanup routines
+-- ====================================================================================--
+
+local cleanupSchedule = {
+    -- Track last run time for each cleanup type (in seconds)
+    notes = 0,
+    gsr = 0,
+    drops = 0,
+    pickups = 0
+}
+
+-- Cleanup intervals (converted from conf values to seconds)
+local CLEANUP_INTERVALS = {
+    notes = (conf.file.cleanup or (60 * 60 * 1000)) / 1000,  -- Default 1 hour in milliseconds, converted to seconds
+    gsr = 300,                                                  -- 5 minutes
+    drops = 300,                                                -- 5 minutes (from drop cleanup)
+    pickups = 3600,                                             -- 1 hour
+}
+
+-- Main consolidated cleanup loop
+local function ConsolidatedCleanupLoop()
+    local currentTime = os.time()
+    
+    -- Notes cleanup
+    if (currentTime - cleanupSchedule.notes) >= CLEANUP_INTERVALS.notes then
+        if ig.note and ig.note.CleanOld then
+            ig.note.CleanOld()
+        end
+        cleanupSchedule.notes = currentTime
+    end
+    
+    -- GSR cleanup
+    if (currentTime - cleanupSchedule.gsr) >= CLEANUP_INTERVALS.gsr then
+        if ig.gsr and ig.gsr.CleanOld then
             ig.gsr.CleanOld()
         end
-    end)
+        cleanupSchedule.gsr = currentTime
+    end
+    
+    -- Drops cleanup (if enabled)
+    if conf.drops and conf.drops.cleanup_enabled then
+        if (currentTime - cleanupSchedule.drops) >= CLEANUP_INTERVALS.drops then
+            if ig.drop and ig.drop.CleanupOld then
+                ig.drop.CleanupOld()
+            end
+            cleanupSchedule.drops = currentTime
+        end
+    end
+    
+    -- Pickups cleanup
+    if (currentTime - cleanupSchedule.pickups) >= CLEANUP_INTERVALS.pickups then
+        if ig.pick and ig.pick.CleanupOld then
+            ig.pick.CleanupOld()
+        end
+        cleanupSchedule.pickups = currentTime
+    end
+    
+    -- Check at the shortest interval (5 minutes for most operations)
+    SetTimeout(300000, ConsolidatedCleanupLoop)
 end
+
+-- Start the consolidated cleanup manager after server is loaded
+CreateThread(function()
+    while ig._loading do
+        Wait(1000)
+    end
+    
+    Wait(10000) -- Initial 10 second delay
+    print('^3[Cleanup Manager] Starting consolidated cleanup routines^7')
+    ConsolidatedCleanupLoop()
+end)
 
 -- Register shot fired event
 -- Migrated to callback for security

@@ -39,6 +39,7 @@ client_scripts {
     "client/[Zones]/EntityZone.lua",
     "client/[Zones]/ComboZone.lua",
     "client/[Zones]/_ig_zone.lua",
+    "client/[Zones]/_zone_manager.lua",  -- Consolidated zone manager (must load after zones)
     -- Target system (must load after zones, requires glm)
     "client/[Target]/_var.lua",
     "client/[Target]/_lib.lua",
