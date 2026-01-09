@@ -51,6 +51,9 @@ RegisterServerCallback({
         local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = ig.func.identifiers(src)
         --
         local function Startup()
+            -- Place player in their own routing bucket BEFORE showing character menu
+            -- This prevents them from seeing/hearing other players during character selection
+            ig.inst.SetPlayer(src)
             TriggerClientEvent("Client:Character:OpeningMenu", src)
             TriggerEvent("Server:Character:List", src, Primary_ID)
         end

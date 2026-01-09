@@ -1,10 +1,18 @@
 -- ====================================================================================--
 ig.inst = {}
 -- ====================================================================================--
+-- ROUTING BUCKET NOTES:
+-- Routing buckets are used to isolate players from each other. Players in different
+-- routing buckets cannot see, hear (via VOIP), or interact with each other.
+-- - Character selection: Players are placed in their own bucket (source ID)
+-- - Character creation: Players remain in their isolated bucket during appearance customization
+-- - Active gameplay: Players are moved to the default bucket (conf.instancedefault, usually 0)
+-- - VOIP system respects routing buckets and enforces voice isolation
+-- ====================================================================================--
 
 --- Sets the player and their ped entity to a routing bucket.
----@param source number ""
----@param num number "The number of the istance/routing bucket"
+---@param source number The source player ID
+---@param num number The number of the instance/routing bucket
 function ig.inst.SetPlayer(source, num)
     if not num then num = source end
     local src = tonumber(source)
@@ -29,9 +37,9 @@ function ig.inst.SetPlayer(source, num)
     end
 end
 
---- Sets the entity to the 
----@param entity any ""
----@param num number "The number of the istance/routing bucket"
+--- Sets the entity to the specified routing bucket
+---@param entity any The entity handle
+---@param num number The number of the instance/routing bucket
 function ig.inst.SetEntity(entity, num)
     local current = GetEntityRoutingBucket(entity)
     if current ~= num then

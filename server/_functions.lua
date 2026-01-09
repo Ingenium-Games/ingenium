@@ -354,13 +354,17 @@ function ig.func.GetClosestPlayerPed(position, maxRadius)
     return closestPlayerPed, closestDistance
 end
 
---- func desc
----@param name any
----@param x any
----@param y any
----@param z any
----@param h any
-function ig.func.CreateVehicle(name, x, y, z, h, data)
+--- Create a vehicle entity
+---@param name any Vehicle model name or hash
+---@param x any X coordinate
+---@param y any Y coordinate
+---@param z any Z coordinate
+---@param h any Heading
+---@param data any Optional vehicle data
+---@param routingBucket number|nil Optional routing bucket (inherits from calling context if not specified)
+---@return number|boolean entity The vehicle entity or false on failure
+---@return number|boolean net The network ID or false on failure
+function ig.func.CreateVehicle(name, x, y, z, h, data, routingBucket)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -376,6 +380,12 @@ function ig.func.CreateVehicle(name, x, y, z, h, data)
             return false, false
         end
     end
+    
+    -- Set routing bucket if specified
+    if routingBucket then
+        ig.inst.SetEntity(entity, routingBucket)
+    end
+    
     local net = NetworkGetNetworkIdFromEntity(entity)
     if data then
         ig.data.AddVehicle(net, ig.class.OwnedVehicle, net, data)
@@ -385,13 +395,16 @@ function ig.func.CreateVehicle(name, x, y, z, h, data)
     return entity, net
 end
 
---- func desc
----@param name any
----@param x any
----@param y any
----@param z any
----@param h any
-function ig.func.CreatePed(name, x, y, z, h)
+--- Create a ped entity (NPC)
+---@param name any Ped model name or hash
+---@param x any X coordinate
+---@param y any Y coordinate
+---@param z any Z coordinate
+---@param h any Heading
+---@param routingBucket number|nil Optional routing bucket (inherits from calling context if not specified)
+---@return number|boolean entity The ped entity or false on failure
+---@return number|boolean net The network ID or false on failure
+function ig.func.CreatePed(name, x, y, z, h, routingBucket)
     local hash = nil
     if type(name) == "number" then
         hash = name
@@ -407,6 +420,12 @@ function ig.func.CreatePed(name, x, y, z, h)
             return false, false
         end
     end
+    
+    -- Set routing bucket if specified
+    if routingBucket then
+        ig.inst.SetEntity(entity, routingBucket)
+    end
+    
     local net = NetworkGetNetworkIdFromEntity(entity)
     ig.data.AddPed(net, ig.class.Npc, net)
     return entity, net
