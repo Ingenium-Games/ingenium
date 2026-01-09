@@ -108,14 +108,16 @@ Review threads for consolidation to minimize resource impact on end users' machi
 **After:**
 - Created consolidated `ZoneManager` that manages all zones in a single thread
 - Single thread checks all registered zones based on their configured intervals
+- **Direct replacement:** Original `onPlayerInOut()` and `onPointInOut()` functions now use the manager automatically
 - Timer-based scheduling allows per-zone intervals while using one thread
-- Backward compatible API: use `:onPlayerInOutManaged()` instead of `:onPlayerInOut()`
+- No code changes needed - existing zone callbacks work transparently
 
 **Impact:** 
 - Reduces from N threads (one per zone) to 1 thread for all zones
 - Example: 10 zones would reduce from 10 threads to 1 thread (90% reduction)
 - Maintains all functionality including per-zone check intervals
-- IPLs already updated to use managed zones
+- Completely transparent - existing code works without modification
+- No legacy/backward compatibility concerns - direct replacement approach
 
 ## Summary of Thread Reductions
 
@@ -191,9 +193,9 @@ All cleanup, save, and zone check intervals are configurable:
    - **Before:** PolyZone created one thread per zone using `onPlayerInOut()`
    - **After:** Consolidated zone manager (`client/[Zones]/_zone_manager.lua`)
    - Single thread checks all registered zones on their configured intervals
-   - Backward compatible: Use `:onPlayerInOutManaged()` instead of `:onPlayerInOut()`
+   - **Direct replacement:** Original functions automatically use the manager
    - Can handle unlimited zones with minimal overhead
-   - **Usage:** `zone:onPlayerInOutManaged(callback, interval)`
+   - No code changes needed - fully transparent to existing code
 
 2. **Target System:**
    - Runs checking logic frequently
@@ -216,15 +218,19 @@ All cleanup, save, and zone check intervals are configurable:
 - Save intervals can be adjusted in config without code changes
 - Zone check intervals can be passed per-zone or use the default (250ms)
 
-### Using the Zone Manager
+### Zone Manager
 
-**For new zones:**
+**Direct Replacement Approach:**
+- The zone manager directly replaces the original `onPlayerInOut()` and `onPointInOut()` functions
+- No legacy code or backward compatibility concerns
+- All existing zone code works transparently without modification
+- External resources using the zone system automatically benefit from consolidation
+
+**Usage (unchanged from original):**
 ```lua
--- Instead of:
+-- Standard PolyZone API - automatically uses consolidated manager
 zone:onPlayerInOut(function(isInside) ... end, 500)
-
--- Use:
-zone:onPlayerInOutManaged(function(isInside) ... end, 500)
+zone:onPointInOut(getPointFunc, function(isInside) ... end, 500)
 ```
 
 **Check zone statistics:**

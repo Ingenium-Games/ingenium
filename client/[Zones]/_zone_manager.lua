@@ -164,22 +164,35 @@ function ZoneManager.SetCheckInterval(interval)
 end
 
 -- ====================================================================================--
--- Wrapper functions to maintain backward compatibility with PolyZone API
--- These can be added to the zone classes to use the manager instead of individual threads
+-- Replace legacy PolyZone functions to use consolidated manager
+-- This replaces the old per-zone thread approach with the consolidated manager
 -- ====================================================================================--
 
--- Add managed callback to PolyZone
-function PolyZone:onPlayerInOutManaged(callback, waitInMS)
-    local getPoint = PolyZone.getPlayerPosition
-    self._managedZoneId = ZoneManager.RegisterZone(self, callback, getPoint, waitInMS)
+-- Replace PolyZone:onPointInOut with managed version
+function PolyZone:onPointInOut(getPointCb, onPointInOutCb, waitInMS)
+    self._managedZoneId = ZoneManager.RegisterZone(self, onPointInOutCb, getPointCb, waitInMS)
 end
 
--- Add managed callback to ComboZone
+-- Replace PolyZone:onPlayerInOut with managed version
+function PolyZone:onPlayerInOut(onPointInOutCb, waitInMS)
+    local getPoint = PolyZone.getPlayerPosition
+    self._managedZoneId = ZoneManager.RegisterZone(self, onPointInOutCb, getPoint, waitInMS)
+end
+
+-- Replace ComboZone functions if available
 if ComboZone then
-    function ComboZone:onPlayerInOutManaged(callback, waitInMS)
-        local getPoint = PolyZone.getPlayerPosition
-        self._managedZoneId = ZoneManager.RegisterZone(self, callback, getPoint, waitInMS)
+    function ComboZone:onPointInOut(getPointCb, onPointInOutCb, waitInMS)
+        self._managedZoneId = ZoneManager.RegisterZone(self, onPointInOutCb, getPointCb, waitInMS)
     end
+    
+    function ComboZone:onPlayerInOut(onPointInOutCb, waitInMS)
+        local getPoint = PolyZone.getPlayerPosition
+        self._managedZoneId = ZoneManager.RegisterZone(self, onPointInOutCb, getPoint, waitInMS)
+    end
+    
+    -- Note: onPlayerInOutExhaustive and onPointInOutExhaustive are not replaced
+    -- as they have different callback signatures with multiple zones
+    -- These can be added if needed in the future
 end
 
 -- Destroy override to unregister from manager
@@ -211,5 +224,6 @@ end, false)
 
 -- Debug info
 print("^2[ZoneManager] Consolidated zone manager loaded^7")
-print("^3[ZoneManager] Use :onPlayerInOutManaged() instead of :onPlayerInOut() to use consolidated manager^7")
+print("^3[ZoneManager] Replaced onPlayerInOut() and onPointInOut() to use consolidated manager^7")
+print("^3[ZoneManager] All zones now automatically use single-thread management^7")
 print("^3[ZoneManager] Type /zonestats to see zone manager statistics^7")
