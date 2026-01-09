@@ -29,7 +29,7 @@ Citizen.CreateThread(function()
             
             -- Handle reloading - immediate sync
             elseif IsPedReloading(ped) then
-                if ig._weapon ~= nil and ig._ammotype ~= nil then
+                if ig._weapon ~= nil and ig._ammotype ~= nil and ig._ammo[ig._ammotype] ~= nil then
                     TriggerServerCallback({
                         eventName = "UpdateAmmo",
                         args = {ig._ammotype, ig._ammo[ig._ammotype]}
@@ -43,7 +43,7 @@ Citizen.CreateThread(function()
             end
             
             -- Periodic ammo sync (every 2.5 seconds) when not reloading/shooting
-            if ig._weapon ~= nil and (currentTime - lastAmmoSync) >= AMMO_SYNC_INTERVAL then
+            if ig._weapon ~= nil and ig._ammotype ~= nil and ig._ammo[ig._ammotype] ~= nil and (currentTime - lastAmmoSync) >= AMMO_SYNC_INTERVAL then
                 TriggerServerCallback({
                     eventName = "UpdateAmmo",
                     args = {ig._ammotype, ig._ammo[ig._ammotype]}
