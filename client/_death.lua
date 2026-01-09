@@ -68,21 +68,26 @@ function PlayerKilled()
     end
 end
 
+-- ====================================================================================--
+-- Optimized death detection thread
+-- Checks death state periodically rather than per-frame
+-- ====================================================================================--
+
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
         if ig.data.GetLoadedStatus() then
+            Wait(500) -- Check every 500ms instead of per-frame
+            
             local ply = PlayerId()
             local ped = PlayerPedId()
+            
             if IsEntityDead(ped) then
                 if not ig.data.GetLocalPlayerState("IsDead") then
                     PlayerKilled()
                 end
-            else
-                Citizen.Wait(250)
             end
         else
-            Citizen.Wait(1250)
+            Wait(1250)
         end
     end
 end)
