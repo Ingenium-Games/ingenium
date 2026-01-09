@@ -81,6 +81,7 @@ server_scripts {
     "server/[Tools]/_memory.lua",
     "server/[SQL]/_handler.lua",    
     "server/[SQL]/_bank.lua",
+    "server/[SQL]/_banking.lua",
     "server/[SQL]/_character.lua",
     "server/[SQL]/_gen.lua",
     "server/[SQL]/_saves.lua",
