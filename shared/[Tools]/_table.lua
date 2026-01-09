@@ -3,6 +3,8 @@ ig.table = {}
 -- ====================================================================================--
 
 --- Check if a value exists in an array table
+--- Optimized for sequential array tables (1, 2, 3...)
+--- For dictionaries or sparse arrays, consider using pairs() with value comparison
 ---@param t table The array table to search
 ---@param v any The value to find
 ---@return boolean True if value exists in the table
@@ -18,7 +20,8 @@ end
 
 --- Check if a key exists in a table
 --- Works with both array indices and associative table keys
---- Note: For pure array bounds checking, consider using: k >= 1 and k <= #t and t[k] ~= nil
+--- Note: Changed from ipairs() to pairs() for general table support
+--- Note: For pure array bounds checking, use: k >= 1 and k <= #t and t[k] ~= nil
 ---@param t table The table to check
 ---@param k any The key to find
 ---@return boolean True if key exists in the table
