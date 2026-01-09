@@ -15,13 +15,21 @@ end
 -- ====================================================================================--
 
 Citizen.CreateThread(function()
+    -- Cache previous states to avoid unnecessary operations
+    local prevStates = {
+        isDead = false,
+        isFrozen = false,
+        isCuffed = false,
+        isEscorted = false,
+        isEscorting = false,
+        isSwimming = false
+    }
+    
     while true do
         local ped = PlayerPedId()
         local ply = PlayerId()
         
         if ig.data.IsPlayerLoaded() then
-            Wait(0) -- Per-frame check when player is loaded
-            
             -- Get current player states
             local isDead = LocalPlayer.state.IsDead
             local isFrozen = LocalPlayer.state.IsFrozen
@@ -29,6 +37,25 @@ Citizen.CreateThread(function()
             local isEscorted = LocalPlayer.state.IsEscorted
             local isEscorting = LocalPlayer.state.IsEscorting
             local isSwimming = LocalPlayer.state.IsSwimming
+            
+            -- Check if any state changed to determine wait time
+            local stateChanged = (
+                prevStates.isDead ~= isDead or
+                prevStates.isFrozen ~= isFrozen or
+                prevStates.isCuffed ~= isCuffed or
+                prevStates.isEscorted ~= isEscorted or
+                prevStates.isEscorting ~= isEscorting or
+                prevStates.isSwimming ~= isSwimming
+            )
+            
+            -- Only do per-frame updates when states require it
+            local needsPerFrame = isDead or isCuffed or isEscorted or isFrozen or isSwimming or isEscorting
+            
+            if needsPerFrame then
+                Wait(0) -- Per-frame when states require control management
+            else
+                Wait(100) -- Check every 100ms when no special states active
+            end
             
             -- ====================================================================================--
             -- Death State Controls
@@ -125,6 +152,14 @@ Citizen.CreateThread(function()
                 DisableControlAction(0, 20, true)   -- Z (Crouch)
                 DisableControlAction(0, 22, true)   -- X (Prone)
             end
+            
+            -- Update previous states
+            prevStates.isDead = isDead
+            prevStates.isFrozen = isFrozen
+            prevStates.isCuffed = isCuffed
+            prevStates.isEscorted = isEscorted
+            prevStates.isEscorting = isEscorting
+            prevStates.isSwimming = isSwimming
             
         else
             -- Player not loaded, wait longer

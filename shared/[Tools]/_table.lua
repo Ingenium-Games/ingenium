@@ -2,23 +2,28 @@
 ig.table = {}
 -- ====================================================================================--
 
---- func desc
----@param . any
+--- Check if a value exists in an array table
+---@param t table The array table to search
+---@param v any The value to find
+---@return boolean True if value exists in the table
 function ig.table.MatchValue(t, v)
+    -- Use ipairs for array iteration - faster than pairs
     for _, i in ipairs(t) do
-        if (i == v) then
+        if i == v then
             return true
         end
     end
     return false
 end
 
---- func desc
----@param t any
----@param k any
+--- Check if a key exists in an array table
+---@param t table The array table to check
+---@param k any The key to find
+---@return boolean True if key exists in the table
 function ig.table.MatchKey(t, k)
+    -- Use ipairs for array iteration - faster than pairs
     for i, _ in ipairs(t) do
-        if (i == k) then
+        if i == k then
             return true
         end
     end
@@ -132,10 +137,8 @@ function ig.table.MakeReadOnly(t, name)
         return t
     end
     
-    -- Create a proxy table
-    local proxy = {}
-    
     -- Cache for protected nested tables to avoid repeated metatable creation
+    -- MUST be declared before the metatable to be captured in the closure
     local nestedProxies = {}
     
     -- Create metatable for read-only access
@@ -165,8 +168,8 @@ function ig.table.MakeReadOnly(t, name)
         end
     }
     
-    setmetatable(proxy, mt)
-    return proxy
+    -- Create and return the proxy table with the metatable
+    return setmetatable({}, mt)
 end
 
 -- ====================================================================================--
