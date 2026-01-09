@@ -352,10 +352,10 @@ local cleanupSchedule = {
 
 -- Cleanup intervals (converted from conf values to seconds)
 local CLEANUP_INTERVALS = {
-    notes = (conf.file.cleanup or 3600000) / 1000,    -- Default 1 hour
-    gsr = 300,                                          -- 5 minutes
-    drops = 300,                                        -- 5 minutes (from drop cleanup)
-    pickups = 3600,                                     -- 1 hour
+    notes = (conf.file.cleanup or (60 * 60 * 1000)) / 1000,  -- Default 1 hour in milliseconds, converted to seconds
+    gsr = 300,                                                  -- 5 minutes
+    drops = 300,                                                -- 5 minutes (from drop cleanup)
+    pickups = 3600,                                             -- 1 hour
 }
 
 -- Main consolidated cleanup loop
