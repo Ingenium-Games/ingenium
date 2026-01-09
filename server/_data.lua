@@ -38,16 +38,18 @@ end
 function ig.data.Initilize()
     --
     ig._loading = true
+    print('^3[Initialization] Waiting for SQL connection...^7')
     --
-    ig.sql.AwaitReady(40000, function()
-        --
-        ig._loading = false
-        --
-    end)
-
-    while ig._loading do
-        Wait(250)
+    -- Wait for SQL to be ready with proper timeout
+    local sqlReady = ig.sql.AwaitReady(40000)
+    
+    if not sqlReady then
+        print('^1[CRITICAL] SQL connection failed to initialize within 40 seconds!^7')
+        print('^1[CRITICAL] Server initialization aborted. Please check MySQL configuration.^7')
+        return
     end
+    
+    print('^2[Initialization] SQL connection ready^7')
     --
     ig.data.LoadJSONData(function()
         ig.item.GenerateConsumptionEvents()
@@ -57,7 +59,9 @@ function ig.data.Initilize()
         print(('  ^3- Restoring: Drops^7')) 
     end)
     --
+    ig._loading = false
     ig._dataloaded = true
+    print('^2[Initialization] Server data initialization complete^7')
 end
 
 
@@ -99,45 +103,54 @@ function ig.data.CharacterValues()
     SetTimeout(conf.charactersync, Do)
 end
 
--- Server to DB routine.
+-- Server to DB routine - Consolidated save manager
+-- Uses a single timeout chain with timer-based scheduling to reduce thread overhead
 function ig.data.ServerSync()
-    -- Separate sync threads for different data types with different intervals
+    -- Track last run time for each save type
+    local lastRun = {
+        users = 0,
+        vehicles = 0,
+        jobs = 0,
+        objects = 0
+    }
     
-    -- User sync - most frequent (1.5 min)
-    local function UserSync()
+    -- Consolidated save loop - runs at the smallest interval and checks what needs saving
+    local function ConsolidatedSaveLoop()
         if ig.data.ArePlayersActive() then
-            ig.sql.save.Users()
+            local currentTime = os.clock()
+            
+            -- User sync - most frequent (1.5 min)
+            if (currentTime - lastRun.users) >= (conf.serversync / 1000) then
+                ig.sql.save.Users()
+                lastRun.users = currentTime
+            end
+            
+            -- Vehicle sync - less frequent (5 min)
+            if (currentTime - lastRun.vehicles) >= (conf.vehiclesync / 1000) then
+                ig.sql.save.Vehicles()
+                lastRun.vehicles = currentTime
+            end
+            
+            -- Job sync - least frequent (10 min)
+            if (currentTime - lastRun.jobs) >= (conf.jobsync / 1000) then
+                ig.sql.save.Jobs()
+                lastRun.jobs = currentTime
+            end
+            
+            -- Object sync - moderate frequency (5 min)
+            if (currentTime - lastRun.objects) >= (conf.objectsync / 1000) then
+                ig.sql.save.Objects()
+                lastRun.objects = currentTime
+            end
         end
-        SetTimeout(conf.serversync, UserSync)
+        
+        -- Use the smallest interval as our check frequency (serversync is typically the smallest)
+        SetTimeout(conf.serversync, ConsolidatedSaveLoop)
     end
-    SetTimeout(conf.serversync, UserSync)
     
-    -- Vehicle sync - less frequent (5 min)
-    local function VehicleSync()
-        if ig.data.ArePlayersActive() then
-            ig.sql.save.Vehicles()
-        end
-        SetTimeout(conf.vehiclesync, VehicleSync)
-    end
-    SetTimeout(conf.vehiclesync, VehicleSync)
-    
-    -- Job sync - least frequent (10 min)
-    local function JobSync()
-        if ig.data.ArePlayersActive() then
-            ig.sql.save.Jobs()
-        end
-        SetTimeout(conf.jobsync, JobSync)
-    end
-    SetTimeout(conf.jobsync, JobSync)
-    
-    -- Object sync - moderate frequency (5 min)
-    local function ObjectSync()
-        if ig.data.ArePlayersActive() then
-            ig.sql.save.Objects()
-        end
-        SetTimeout(conf.objectsync, ObjectSync)
-    end
-    SetTimeout(conf.objectsync, ObjectSync)
+    -- Start the consolidated save loop
+    SetTimeout(conf.serversync, ConsolidatedSaveLoop)
+    ig.func.Debug_1("Consolidated save manager started")
 end
 
 -- Server to DB routine.

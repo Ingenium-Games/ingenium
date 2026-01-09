@@ -286,22 +286,8 @@ function ig.drop.CleanupOld()
     end
 end
 
---- Start periodic cleanup routine
-function ig.drop.StartCleanupRoutine()
-    if not conf.drops.cleanup_enabled then
-        ig.func.Debug_1("Drop cleanup is disabled")
-        return
-    end
-    
-    local function DoCleanup()
-        ig.drop.CleanupOld()
-        -- Run cleanup every 5 minutes, but respect cleanup_time for age comparison
-        SetTimeout(5 * conf.min, DoCleanup)
-    end
-    
-    SetTimeout(5 * conf.min, DoCleanup)
-    ig.func.Debug_1("Drop cleanup routine started (runs every 5 minutes)")
-end
+-- Note: Periodic cleanup is managed by server/[Data - Save to File]/_gsr.lua
+-- Consolidated Cleanup Manager to reduce thread overhead
 
 --- Helper function to merge active drops back into drops for saving
 ---@return table dropsToSave Combined drops table

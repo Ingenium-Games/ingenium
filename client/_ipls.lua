@@ -250,6 +250,7 @@ function ig.ipl.SetupZoneHandler(name, zoneConfig)
 	-- Set up zone in/out callbacks for IPL loading/unloading
 	-- Only set up dynamic loading callbacks if enabled
 	if zone and zoneConfig.dynamicLoad then
+		-- Uses consolidated zone manager automatically
 		zone:onPlayerInOut(function(isInside)
 			if isInside then
 				-- Only load IPLs, don't trigger zone setup again
