@@ -7,7 +7,7 @@ ig.table = {}
 ---@param v any The value to find
 ---@return boolean True if value exists in the table
 function ig.table.MatchValue(t, v)
-    -- Use ipairs for array iteration - faster than pairs
+    -- Use ipairs for array iteration - faster than pairs for sequential arrays
     for _, i in ipairs(t) do
         if i == v then
             return true
@@ -18,6 +18,7 @@ end
 
 --- Check if a key exists in a table
 --- Works with both array indices and associative table keys
+--- Note: For pure array bounds checking, consider using: k >= 1 and k <= #t and t[k] ~= nil
 ---@param t table The table to check
 ---@param k any The key to find
 ---@return boolean True if key exists in the table

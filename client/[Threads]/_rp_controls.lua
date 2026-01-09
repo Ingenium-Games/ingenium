@@ -9,6 +9,9 @@ if conf.gamemode ~= "RP" then
     return
 end
 
+-- Timing constants
+local IDLE_CHECK_INTERVAL = 100 -- Check every 100ms when no special states active
+
 -- ====================================================================================--
 -- Per-Frame Control Restriction Thread
 -- Disables controls based on player state
@@ -44,7 +47,7 @@ Citizen.CreateThread(function()
             if needsPerFrame then
                 Wait(0) -- Per-frame when states require control management
             else
-                Wait(100) -- Check every 100ms when no special states active
+                Wait(IDLE_CHECK_INTERVAL)
             end
             
             -- ====================================================================================--
