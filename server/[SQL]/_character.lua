@@ -73,6 +73,14 @@ function ig.sql.char.Get(character_id, cb)
     return row
 end
 
+--- Get - Character via IBAN
+function ig.sql.char.GetByIban(iban, cb)
+    local result = ig.sql.Query("SELECT * FROM `characters` WHERE `Iban` = ? LIMIT 1;", {iban})
+    local row = (result and result[1]) or nil
+    if cb then cb(row) end
+    return row
+end
+
 --- Get - # of characters owned for Primary_ID
 function ig.sql.char.GetCount(primary_id, cb)
     local result = ig.sql.FetchScalar("SELECT COUNT(`Primary_ID`) FROM `characters` WHERE `Primary_ID` = ?;", {primary_id})

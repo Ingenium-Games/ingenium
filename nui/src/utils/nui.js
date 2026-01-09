@@ -87,8 +87,9 @@ export function setupNuiHandlers() {
   const notificationStore = useNotificationStore()
   const characterStore = useCharacterStore()
   
-  // Import appearance store dynamically to avoid circular dependencies
+  // Import appearance and banking stores dynamically to avoid circular dependencies
   let appearanceStore = null
+  let bankingStore = null
   
   window.addEventListener('message', (event) => {
     const { message, data } = event.data
@@ -172,6 +173,49 @@ export function setupNuiHandlers() {
         }
         break
       
+      // Banking system
+      case 'banking:open':
+        if (!bankingStore) {
+          // Lazy load banking store
+          import('../stores/banking.js').then(module => {
+            bankingStore = module.useBankingStore()
+            bankingStore.open(data)
+          })
+        } else {
+          bankingStore.open(data)
+        }
+        break
+      
+      case 'banking:close':
+        if (bankingStore) {
+          bankingStore.close()
+        }
+        break
+      
+      case 'banking:updateBalance':
+        if (bankingStore) {
+          bankingStore.updateBalance(data.balance)
+        }
+        break
+      
+      case 'banking:updateCash':
+        if (bankingStore) {
+          bankingStore.updateCash(data.cash)
+        }
+        break
+      
+      case 'banking:addTransaction':
+        if (bankingStore) {
+          bankingStore.addTransaction(data)
+        }
+        break
+      
+      case 'banking:updateFavorites':
+        if (bankingStore && data.favorites) {
+          bankingStore.favorites = data.favorites
+        }
+        break
+      
       default:
         console.log('Unhandled NUI message:', message, data)
         break
@@ -182,7 +226,10 @@ export function setupNuiHandlers() {
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       // Close active UI elements
-      if (uiStore.showMenu) {
+      if (bankingStore && bankingStore.isVisible) {
+        bankingStore.close()
+        sendNuiMessage('banking:close')
+      } else if (uiStore.showMenu) {
         uiStore.showMenu = false
         sendNuiMessage('menu:close')
       } else if (uiStore.showInput) {
