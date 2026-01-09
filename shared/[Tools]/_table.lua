@@ -20,6 +20,8 @@ end
 
 --- Check if a key exists in a table
 --- Works with both sequential arrays and associative tables (dictionaries)
+--- Performance note: For simple key checks, t[k] ~= nil is faster
+--- Use this function when you need consistent behavior across table types
 --- For optimal array bounds checking, use: k >= 1 and k <= #t and t[k] ~= nil
 ---@param t table The table to check
 ---@param k any The key to find
