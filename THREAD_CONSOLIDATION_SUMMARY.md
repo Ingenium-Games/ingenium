@@ -98,6 +98,25 @@ Review threads for consolidation to minimize resource impact on end users' machi
 
 **Impact:** Eliminated 1 redundant timeout chain, cleaner code architecture.
 
+### 7. Zone System Consolidation (`client/[Zones]/_zone_manager.lua`) - NEW
+
+**Before:**
+- Each zone using `onPlayerInOut()` created its own thread polling every 500ms
+- N zones = N threads (could be 10+ threads for a typical server)
+- Each zone independently checked player position
+
+**After:**
+- Created consolidated `ZoneManager` that manages all zones in a single thread
+- Single thread checks all registered zones based on their configured intervals
+- Timer-based scheduling allows per-zone intervals while using one thread
+- Backward compatible API: use `:onPlayerInOutManaged()` instead of `:onPlayerInOut()`
+
+**Impact:** 
+- Reduces from N threads (one per zone) to 1 thread for all zones
+- Example: 10 zones would reduce from 10 threads to 1 thread (90% reduction)
+- Maintains all functionality including per-zone check intervals
+- IPLs already updated to use managed zones
+
 ## Summary of Thread Reductions
 
 | Area | Before | After | Reduction |
@@ -106,7 +125,10 @@ Review threads for consolidation to minimize resource impact on end users' machi
 | Cleanup Routines | 4+ threads | 1 thread | -3+ |
 | Client Weapon | 3 per-frame threads | 1 optimized thread | -2 |
 | Client Death | 1 per-frame thread | 1 periodic thread | ~500x less overhead |
-| **Total** | **12+ threads** | **3 threads** | **-9+ threads** |
+| Zone System | N threads (1 per zone) | 1 thread for all zones | -N+1 (e.g., 10 zones: -9) |
+| **Total** | **12+ N threads** | **3 threads** | **-9+ N threads** |
+
+**Example with 10 zones:** 22+ threads reduced to 3 threads = **86% reduction**
 
 ## Performance Impact
 
@@ -153,7 +175,7 @@ Review threads for consolidation to minimize resource impact on end users' machi
 
 ## Configuration
 
-All cleanup and save intervals are configurable through the `conf` table:
+All cleanup, save, and zone check intervals are configurable:
 - `conf.serversync` - User save interval (default: 90000ms / 1.5 min)
 - `conf.vehiclesync` - Vehicle save interval (default: 300000ms / 5 min)
 - `conf.jobsync` - Job save interval (default: 600000ms / 10 min)
@@ -161,13 +183,17 @@ All cleanup and save intervals are configurable through the `conf` table:
 - `conf.file.cleanup` - Cleanup age threshold (default: 3600000ms / 1 hour)
 - `conf.drops.cleanup_enabled` - Enable/disable drop cleanup
 - `conf.drops.cleanup_time` - Drop age threshold
+- Zone check intervals - Passed as parameter to `:onPlayerInOutManaged(callback, interval)`
 
 ## Future Optimization Opportunities
 
-1. **Zone System:**
-   - PolyZone creates multiple threads per zone
-   - Consider zone pooling or lazy activation
-   - Third-party library, may require wrapper optimization
+1. **Zone System:** ✅ **IMPLEMENTED**
+   - **Before:** PolyZone created one thread per zone using `onPlayerInOut()`
+   - **After:** Consolidated zone manager (`client/[Zones]/_zone_manager.lua`)
+   - Single thread checks all registered zones on their configured intervals
+   - Backward compatible: Use `:onPlayerInOutManaged()` instead of `:onPlayerInOut()`
+   - Can handle unlimited zones with minimal overhead
+   - **Usage:** `zone:onPlayerInOutManaged(callback, interval)`
 
 2. **Target System:**
    - Runs checking logic frequently
@@ -185,8 +211,31 @@ All cleanup and save intervals are configurable through the `conf` table:
 
 - The consolidated cleanup manager is in `server/[Data - Save to File]/_gsr.lua`
 - The consolidated save manager is in `server/_data.lua`
+- The consolidated zone manager is in `client/[Zones]/_zone_manager.lua`
 - All cleanup functions (`CleanOld()`) are preserved and called by the manager
 - Save intervals can be adjusted in config without code changes
+- Zone check intervals can be passed per-zone or use the default (250ms)
+
+### Using the Zone Manager
+
+**For new zones:**
+```lua
+-- Instead of:
+zone:onPlayerInOut(function(isInside) ... end, 500)
+
+-- Use:
+zone:onPlayerInOutManaged(function(isInside) ... end, 500)
+```
+
+**Check zone statistics:**
+```lua
+-- In-game command
+/zonestats
+
+-- In code
+local stats = ig.zoneManager.GetStats()
+print(stats.totalZones, stats.isRunning)
+```
 
 ## Conclusion
 
