@@ -315,3 +315,43 @@ function ig.data.RestoreDrops()
         print(('^1[Drops] Failed to restore %d drops^7'):format(failedCount))
     end
 end
+
+-- ====================================================================================--
+-- Player Data Functions (Wrappers for ig.player)
+-- ====================================================================================--
+
+--- Get all players
+function ig.data.GetPlayers()
+    return ig.player.GetPlayers()
+end
+
+--- Get a player by source
+---@param src number
+function ig.data.GetPlayer(src)
+    return ig.player.GetPlayer(src)
+end
+
+--- Set player data
+---@param src number
+---@param data table
+function ig.data.SetPlayer(src, data)
+    ig.player.SetPlayer(src, data)
+end
+
+--- Add a player
+---@param src number
+function ig.data.AddPlayer(src)
+    ig.player.AddPlayer(src)
+end
+
+--- Remove a player
+---@param src number
+function ig.data.RemovePlayer(src)
+    ig.player.RemovePlayer(src)
+end
+
+--- Get player by Character_ID
+---@param characterId string
+function ig.data.GetPlayerByCharacterId(characterId)
+    return ig.player.GetPlayerByCharacterId(characterId)
+end

@@ -56,6 +56,9 @@ function ig.class.Player(source, character_id)
     self.City_ID = char.City_ID -- X-00000
     self.State.City_ID = self.City_ID
     --
+    self.Iban = char.Iban
+    self.State.Iban = self.Iban
+    --
     self.First_Name = char.First_Name
     self.State.First_Name = self.First_Name
     --
@@ -231,6 +234,10 @@ function ig.class.Player(source, character_id)
     --
     self.GetCity_ID = function()
         return self.City_ID
+    end
+    --
+    self.GetIban = function()
+        return self.Iban
     end
     --
     self.GetBirth_Date = function()

@@ -26,6 +26,9 @@
     
     <!-- Garage Menu (integrated garage system) -->
     <GarageMenu />
+    
+    <!-- Banking Menu -->
+    <BankingMenu />
   </div>
 </template>
 
@@ -42,6 +45,7 @@ import ContextMenu from './components/ContextMenu.vue'
 import AppearanceCustomization from './components/appearance/AppearanceCustomization.vue'
 import TargetMenu from './components/target/TargetMenu.vue'
 import GarageMenu from './components/GarageMenu.vue'
+import BankingMenu from './components/BankingMenu.vue'
 
 const uiStore = useUIStore()
 

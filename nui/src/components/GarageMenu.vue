@@ -39,7 +39,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { sendNuiMessage } from '../../utils/nui'
+import { sendNuiMessage } from '../utils/nui'
 
 const isVisible = ref(false)
 const vehicles = ref([])

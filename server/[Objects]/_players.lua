@@ -39,6 +39,17 @@ function ig.player.GetPlayers()
     return ig.pdex
 end
 
+--- Get player by Character_ID
+---@param characterId string
+function ig.player.GetPlayerByCharacterId(characterId)
+    for k, v in pairs(ig.pdex) do
+        if v and type(v) == "table" and v.GetCharacter_ID and v.GetCharacter_ID() == characterId then
+            return v
+        end
+    end
+    return nil
+end
+
 --- func desc
 ---@param character_id any
 function ig.player.GetOfflinePlayer(character_id)
