@@ -222,8 +222,82 @@ RegisterCommand('zonestats', function()
     print("^3==============================^7")
 end, false)
 
+-- Command to list all client zones with details
+RegisterCommand('listzones', function()
+    local zoneCount = 0
+    print("^3=== Client Zone List ===^7")
+    
+    for zoneId, zoneData in pairs(ZoneManager.zones) do
+        zoneCount = zoneCount + 1
+        local zone = zoneData.zone
+        
+        -- Determine zone type
+        local zoneType = "Unknown"
+        if zone.isPolyZone then
+            zoneType = "PolyZone"
+        elseif zone.isBoxZone then
+            zoneType = "BoxZone"
+        elseif zone.isCircleZone then
+            zoneType = "CircleZone"
+        elseif zone.isEntityZone then
+            zoneType = "EntityZone"
+        elseif zone.isComboZone then
+            zoneType = "ComboZone"
+        end
+        
+        -- Get zone name
+        local zoneName = zone.name or "Unnamed"
+        
+        -- Get current state
+        local isInside = ZoneManager.lastStates[zoneId] or false
+        local stateStr = isInside and "^2INSIDE^7" or "^1OUTSIDE^7"
+        
+        -- Get check interval
+        local interval = zoneData.checkInterval or "N/A"
+        
+        -- Get zone status
+        local isPaused = zone.paused and "^3PAUSED^7" or "^2ACTIVE^7"
+        local isDestroyed = zone.destroyed and "^1DESTROYED^7" or "^2VALID^7"
+        
+        print(("^3Zone #%d:^7"):format(zoneCount))
+        print(("  Name: ^2%s^7"):format(zoneName))
+        print(("  Type: ^2%s^7"):format(zoneType))
+        print(("  State: %s"):format(stateStr))
+        print(("  Interval: ^2%dms^7"):format(interval))
+        print(("  Status: %s / %s"):format(isPaused, isDestroyed))
+        
+        -- Additional info for specific zone types
+        if zone.center then
+            print(("  Center: ^2%.2f, %.2f, %.2f^7"):format(zone.center.x or 0, zone.center.y or 0, zone.center.z or 0))
+        end
+        
+        if zone.radius then
+            print(("  Radius: ^2%.2f^7"):format(zone.radius))
+        end
+        
+        if zone.length and zone.width then
+            print(("  Dimensions: ^2%.2f x %.2f^7"):format(zone.length, zone.width))
+        end
+        
+        if zone.heading then
+            print(("  Heading: ^2%.2f^7"):format(zone.heading))
+        end
+        
+        print("  ---")
+    end
+    
+    if zoneCount == 0 then
+        print("^3No zones registered for this client^7")
+    else
+        print(("^2Total: %d zones^7"):format(zoneCount))
+    end
+    
+    print("^3========================^7")
+end, false)
+
 -- Debug info
 print("^2[ZoneManager] Consolidated zone manager loaded^7")
 print("^3[ZoneManager] Replaced onPlayerInOut() and onPointInOut() to use consolidated manager^7")
 print("^3[ZoneManager] All zones now automatically use single-thread management^7")
 print("^3[ZoneManager] Type /zonestats to see zone manager statistics^7")
+print("^3[ZoneManager] Type /listzones to list all active zones^7")

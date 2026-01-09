@@ -115,6 +115,8 @@ end
 
 ### Player In/Out Callbacks
 
+**⚠️ Performance Note:** All zone callbacks use a consolidated single-thread manager for optimal performance. Multiple zones share one checking thread instead of creating individual threads per zone.
+
 ```lua
 zone:onPlayerInOut(function(isInside, point)
     if isInside then
@@ -122,8 +124,14 @@ zone:onPlayerInOut(function(isInside, point)
     else
         print("Player left the zone")
     end
-end, 500)  -- Check every 500ms
+end, 500)  -- Check every 500ms (default: 250ms)
 ```
+
+**How it works:**
+- All zones using `onPlayerInOut()` or `onPointInOut()` are managed by a single thread
+- Each zone can have its own check interval
+- The manager efficiently schedules checks based on each zone's configured interval
+- This approach dramatically reduces resource usage compared to per-zone threads
 
 ### Custom Point Callbacks
 
@@ -347,6 +355,45 @@ Ingenium provides PolyZone compatibility through the `provide "polyzone"` direct
 3. **Destroy Unused Zones**: Always call `zone:destroy()` when done
 4. **ComboZone for Multiple Zones**: Use ComboZone instead of separate zones when checking the same point against many zones
 5. **Pause When Not Needed**: Use `zone:setPaused(true)` when temporarily not needed
+6. **Consolidated Manager**: All zones automatically use a single-thread manager - no need for manual optimization
+
+### Zone Manager Statistics
+
+Monitor zone performance and active zones:
+
+```lua
+-- In-game command (client-side)
+/zonestats
+
+-- Programmatically
+local stats = ig.zoneManager.GetStats()
+print("Total Zones:", stats.totalZones)
+print("Manager Running:", stats.isRunning)
+print("Check Interval:", stats.checkInterval, "ms")
+
+-- Inspect zones by type
+for zoneType, count in pairs(stats.byType) do
+    print(zoneType .. ":", count)
+end
+```
+
+### Developer Commands
+
+**View Active Zones** (client-side):
+```
+/zonestats
+```
+Shows:
+- Total number of registered zones
+- Manager running status
+- Default check interval
+- Breakdown by zone type (PolyZone, BoxZone, CircleZone, etc.)
+
+**List Client Zones** (client-side):
+```
+/listzones
+```
+Shows all zones registered for the current client with details about each zone.
 
 ## See Also
 
