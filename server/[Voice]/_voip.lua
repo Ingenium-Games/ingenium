@@ -612,6 +612,21 @@ function ig.voip.server.RemoveFromGrid(playerId)
     end
 end
 
+--- Check if two players are in the same routing bucket
+---@param playerId number The first player's server ID
+---@param otherPlayerId number The second player's server ID
+---@return boolean True if players are in the same bucket or routing bucket isolation is disabled
+local function IsInSameRoutingBucket(playerId, otherPlayerId)
+    if not conf.voip.routingBucketIsolation then
+        return true
+    end
+    
+    local playerBucket = GetPlayerRoutingBucket(playerId)
+    local otherBucket = GetPlayerRoutingBucket(otherPlayerId)
+    
+    return playerBucket == otherBucket
+end
+
 --- Get players in proximity
 ---@param playerId number The server ID of the player
 ---@param distance number The maximum distance
@@ -629,9 +644,6 @@ function ig.voip.server.GetPlayersInProximity(playerId, distance)
     local coords = GetEntityCoords(ped)
     local playersInProximity = {}
     
-    -- Get player's routing bucket for isolation check
-    local playerBucket = conf.voip.routingBucketIsolation and GetPlayerRoutingBucket(playerId) or nil
-    
     if conf.voip.useGrid then
         -- Use grid-based search
         local gridX = playerVoiceData[playerId].gridX
@@ -644,11 +656,8 @@ function ig.voip.server.GetPlayersInProximity(playerId, distance)
                 for otherPlayerId, _ in pairs(voiceGrid[key]) do
                     if otherPlayerId ~= playerId then
                         -- Check routing bucket isolation on server-side
-                        if playerBucket then
-                            local otherBucket = GetPlayerRoutingBucket(otherPlayerId)
-                            if playerBucket ~= otherBucket then
-                                goto continue_grid
-                            end
+                        if not IsInSameRoutingBucket(playerId, otherPlayerId) then
+                            goto continue_grid
                         end
                         
                         local otherPed = GetPlayerPed(otherPlayerId)
@@ -672,11 +681,8 @@ function ig.voip.server.GetPlayersInProximity(playerId, distance)
             local otherId = tonumber(otherPlayerId)
             if otherId and otherId ~= playerId then
                 -- Check routing bucket isolation on server-side
-                if playerBucket then
-                    local otherBucket = GetPlayerRoutingBucket(otherId)
-                    if playerBucket ~= otherBucket then
-                        goto continue_brute
-                    end
+                if not IsInSameRoutingBucket(playerId, otherId) then
+                    goto continue_brute
                 end
                 
                 local otherPed = GetPlayerPed(otherId)
