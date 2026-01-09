@@ -22,7 +22,7 @@ Citizen.CreateThread(function()
             
             -- Handle shooting
             if IsPedShooting(ped) then
-                if ig._weapon ~= nil and ig._ammotype ~= nil and ig._ammo[ig._ammotype] then
+                if ig._weapon ~= nil and ig._ammotype ~= nil and ig._ammo[ig._ammotype] ~= nil then
                     ig._ammo[ig._ammotype] = ig._ammo[ig._ammotype] - 1
                 end
                 Wait(115) -- Brief wait after shot to avoid double-counting

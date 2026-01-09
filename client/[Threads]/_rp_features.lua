@@ -83,6 +83,16 @@ Citizen.CreateThread(function()
     local IDLE_CAMERA_INTERVAL = 5000  -- 5 seconds
     local NPC_WEAPON_INTERVAL = 2500   -- 2.5 seconds
     
+    -- Cache pickup hashes outside loop to avoid table recreation
+    local weaponPickupHashes = {
+        `PICKUP_WEAPON_PISTOL`,
+        `PICKUP_WEAPON_COMBATPISTOL`,
+        `PICKUP_WEAPON_PUMPSHOTGUN`,
+        `PICKUP_WEAPON_CARBINERIFLE`,
+        `PICKUP_WEAPON_ASSAULTRIFLE`,
+        `PICKUP_WEAPON_SMG`,
+    }
+    
     while true do
         local currentTime = GetGameTimer()
         
@@ -101,16 +111,8 @@ Citizen.CreateThread(function()
             
             -- Remove nearby dropped weapons (within 50 units)
             local playerCoords = GetEntityCoords(ped)
-            local pickups = {
-                `PICKUP_WEAPON_PISTOL`,
-                `PICKUP_WEAPON_COMBATPISTOL`,
-                `PICKUP_WEAPON_PUMPSHOTGUN`,
-                `PICKUP_WEAPON_CARBINERIFLE`,
-                `PICKUP_WEAPON_ASSAULTRIFLE`,
-                `PICKUP_WEAPON_SMG`,
-            }
             
-            for _, pickupHash in ipairs(pickups) do
+            for _, pickupHash in ipairs(weaponPickupHashes) do
                 local pickup = GetClosestPickupOfType(pickupHash, playerCoords.x, playerCoords.y, playerCoords.z, 50.0)
                 if pickup and DoesPickupExist(pickup) then
                     RemovePickup(pickup)

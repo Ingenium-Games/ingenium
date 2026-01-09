@@ -16,14 +16,14 @@ function ig.table.MatchValue(t, v)
     return false
 end
 
---- Check if a key exists in an array table
----@param t table The array table to check
+--- Check if a key exists in a table
+---@param t table The table to check
 ---@param k any The key to find
 ---@return boolean True if key exists in the table
 function ig.table.MatchKey(t, k)
-    -- Use ipairs for array iteration - faster than pairs
-    for i, _ in ipairs(t) do
-        if i == k then
+    -- Use pairs for general key lookup (not just array indices)
+    for key, _ in pairs(t) do
+        if key == k then
             return true
         end
     end

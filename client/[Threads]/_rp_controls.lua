@@ -38,16 +38,6 @@ Citizen.CreateThread(function()
             local isEscorting = LocalPlayer.state.IsEscorting
             local isSwimming = LocalPlayer.state.IsSwimming
             
-            -- Check if any state changed to determine wait time
-            local stateChanged = (
-                prevStates.isDead ~= isDead or
-                prevStates.isFrozen ~= isFrozen or
-                prevStates.isCuffed ~= isCuffed or
-                prevStates.isEscorted ~= isEscorted or
-                prevStates.isEscorting ~= isEscorting or
-                prevStates.isSwimming ~= isSwimming
-            )
-            
             -- Only do per-frame updates when states require it
             local needsPerFrame = isDead or isCuffed or isEscorted or isFrozen or isSwimming or isEscorting
             
@@ -152,14 +142,6 @@ Citizen.CreateThread(function()
                 DisableControlAction(0, 20, true)   -- Z (Crouch)
                 DisableControlAction(0, 22, true)   -- X (Prone)
             end
-            
-            -- Update previous states
-            prevStates.isDead = isDead
-            prevStates.isFrozen = isFrozen
-            prevStates.isCuffed = isCuffed
-            prevStates.isEscorted = isEscorted
-            prevStates.isEscorting = isEscorting
-            prevStates.isSwimming = isSwimming
             
         else
             -- Player not loaded, wait longer
