@@ -66,8 +66,9 @@ function ig.sql.banking.GetFavorites(characterId)
         return {}
     end
     
-    local favorites = json.decode(char.Banking_Favorites)
-    if type(favorites) ~= "table" then
+    -- Safely decode JSON with error handling
+    local success, favorites = pcall(json.decode, char.Banking_Favorites)
+    if not success or type(favorites) ~= "table" then
         return {}
     end
     
@@ -138,8 +139,11 @@ end
 function ig.sql.banking.AddBankOffline(characterId, amount)
     local query = [[
         UPDATE `characters` 
-        SET `Accounts` = JSON_SET(`Accounts`, '$.Bank', 
-            CAST(JSON_EXTRACT(`Accounts`, '$.Bank') AS DECIMAL(10,2)) + ?)
+        SET `Accounts` = JSON_SET(
+            `Accounts`, 
+            '$.Bank', 
+            COALESCE(CAST(JSON_EXTRACT(`Accounts`, '$.Bank') AS DECIMAL(10,2)), 0) + ?
+        )
         WHERE `Character_ID` = ?
     ]]
     

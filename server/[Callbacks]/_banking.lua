@@ -85,12 +85,12 @@ RegisterServerCallback({
             targetPlayer.AddBank(amount)
             
             -- Notify target
-            targetPlayer.Notify("You received $" .. amount .. " from " .. xPlayer.GetFull_Name(), "green", 5000)
+            targetPlayer.Notify(string.format("You received $%s from %s", amount, xPlayer.GetFull_Name()), "green", 5000)
             
             -- Send transaction to target NUI
             TriggerClientEvent("banking:addTransaction", targetPlayer.GetID(), {
                 type = "Transfer In",
-                description = "From " .. xPlayer.GetFull_Name() .. ": " .. description,
+                description = string.format("From %s: %s", xPlayer.GetFull_Name(), description),
                 amount = amount,
                 date = os.date("%Y-%m-%d %H:%M:%S")
             })
@@ -102,30 +102,28 @@ RegisterServerCallback({
         -- Log transaction for sender
         ig.sql.banking.AddTransaction(xPlayer.GetCharacter_ID(), {
             type = "Transfer Out",
-            description = "To " .. targetCharacter.First_Name .. " " .. targetCharacter.Last_Name .. ": " .. description,
-            amount = -amount,
-            targetIban = targetIban
+            description = string.format("To %s %s: %s", targetCharacter.First_Name, targetCharacter.Last_Name, description),
+            amount = -amount
         })
         
         -- Log transaction for receiver
         ig.sql.banking.AddTransaction(targetCharacter.Character_ID, {
             type = "Transfer In",
-            description = "From " .. xPlayer.GetFull_Name() .. ": " .. description,
-            amount = amount,
-            sourceIban = xPlayer.GetIban()
+            description = string.format("From %s: %s", xPlayer.GetFull_Name(), description),
+            amount = amount
         })
         
         -- Update sender's NUI
         TriggerClientEvent("banking:updateBalance", source, { balance = xPlayer.GetBank() })
         TriggerClientEvent("banking:addTransaction", source, {
             type = "Transfer Out",
-            description = "To " .. targetCharacter.First_Name .. " " .. targetCharacter.Last_Name .. ": " .. description,
+            description = string.format("To %s %s: %s", targetCharacter.First_Name, targetCharacter.Last_Name, description),
             amount = -amount,
             date = os.date("%Y-%m-%d %H:%M:%S")
         })
         
         -- Notify sender
-        xPlayer.Notify("Transfer successful: $" .. amount .. " to " .. targetCharacter.First_Name .. " " .. targetCharacter.Last_Name, "green", 5000)
+        xPlayer.Notify(string.format("Transfer successful: $%s to %s %s", amount, targetCharacter.First_Name, targetCharacter.Last_Name), "green", 5000)
         
         -- Security logging
         if ig.security and ig.security.LogPlayerTransaction then
@@ -185,7 +183,7 @@ RegisterServerCallback({
         })
         
         -- Notify player
-        xPlayer.Notify("Withdrawal successful: $" .. amount, "green", 3000)
+        xPlayer.Notify(string.format("Withdrawal successful: $%s", amount), "green", 3000)
         
         -- Security logging
         if ig.security and ig.security.LogPlayerTransaction then
@@ -245,7 +243,7 @@ RegisterServerCallback({
         })
         
         -- Notify player
-        xPlayer.Notify("Deposit successful: $" .. amount, "green", 3000)
+        xPlayer.Notify(string.format("Deposit successful: $%s", amount), "green", 3000)
         
         -- Security logging
         if ig.security and ig.security.LogPlayerTransaction then

@@ -119,8 +119,8 @@ end
 -- Add ATM targets globally
 CreateThread(function()
     -- Wait for player to be loaded
-    while not ig or not ig.target then
-        Wait(100)
+    while not ig or not ig.target do
+        Wait(500) -- Increased wait interval to reduce performance impact
     end
     
     Wait(2000) -- Additional wait to ensure system is fully loaded
@@ -147,8 +147,8 @@ end)
 -- Add bank location zones
 CreateThread(function()
     -- Wait for player to be loaded
-    while not ig or not ig.target then
-        Wait(100)
+    while not ig or not ig.target do
+        Wait(500) -- Increased wait interval to reduce performance impact
     end
     
     Wait(2000)
