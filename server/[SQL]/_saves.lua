@@ -201,7 +201,7 @@ function ig.sql.save.Vehicle(data, cb)
     end
 end
 
---- Save All Vehicles from the xVehicle Table.
+--- Save all vehicles from the xVehicle table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function ig.sql.save.Vehicles(cb)
     local startTime = os.clock()
