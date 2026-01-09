@@ -1,6 +1,14 @@
 -- ====================================================================================--
 ig.inst = {}
 -- ====================================================================================--
+-- ROUTING BUCKET NOTES:
+-- Routing buckets are used to isolate players from each other. Players in different
+-- routing buckets cannot see, hear (via VOIP), or interact with each other.
+-- - Character selection: Players are placed in their own bucket (source ID)
+-- - Character creation: Players remain in their isolated bucket during appearance customization
+-- - Active gameplay: Players are moved to the default bucket (conf.instancedefault, usually 0)
+-- - VOIP system respects routing buckets and enforces voice isolation
+-- ====================================================================================--
 
 --- Sets the player and their ped entity to a routing bucket.
 ---@param source number ""

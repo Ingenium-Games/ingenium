@@ -152,6 +152,10 @@ end
 
 -- ====================================================================================--
 -- Radio System
+-- Note: Radio channels work ACROSS routing buckets by design. This allows dispatch,
+-- emergency services, and other systems to communicate regardless of instance.
+-- If routing bucket isolation for radio is desired, implement filtering at the 
+-- client-side voice target level.
 -- ====================================================================================--
 
 --- Join a radio channel
@@ -265,6 +269,8 @@ end
 
 -- ====================================================================================--
 -- Call System
+-- Note: Phone calls work ACROSS routing buckets by design. This allows players to
+-- communicate via phone regardless of their physical location or instance.
 -- ====================================================================================--
 
 --- Start a call between two players
@@ -441,6 +447,8 @@ end
 
 -- ====================================================================================--
 -- Admin Call System (Permission-gated)
+-- Note: Admin calls work ACROSS routing buckets by design. This allows administrators
+-- to communicate with players regardless of their instance for support purposes.
 -- ====================================================================================--
 
 --- Start an admin call to a target player
@@ -621,6 +629,9 @@ function ig.voip.server.GetPlayersInProximity(playerId, distance)
     local coords = GetEntityCoords(ped)
     local playersInProximity = {}
     
+    -- Get player's routing bucket for isolation check
+    local playerBucket = conf.voip.routingBucketIsolation and GetPlayerRoutingBucket(playerId) or nil
+    
     if conf.voip.useGrid then
         -- Use grid-based search
         local gridX = playerVoiceData[playerId].gridX
@@ -632,6 +643,14 @@ function ig.voip.server.GetPlayersInProximity(playerId, distance)
             if voiceGrid[key] then
                 for otherPlayerId, _ in pairs(voiceGrid[key]) do
                     if otherPlayerId ~= playerId then
+                        -- Check routing bucket isolation on server-side
+                        if playerBucket then
+                            local otherBucket = GetPlayerRoutingBucket(otherPlayerId)
+                            if playerBucket ~= otherBucket then
+                                goto continue_grid
+                            end
+                        end
+                        
                         local otherPed = GetPlayerPed(otherPlayerId)
                         if otherPed and otherPed ~= 0 then
                             local otherCoords = GetEntityCoords(otherPed)
@@ -640,6 +659,8 @@ function ig.voip.server.GetPlayersInProximity(playerId, distance)
                                 table.insert(playersInProximity, otherPlayerId)
                             end
                         end
+                        
+                        ::continue_grid::
                     end
                 end
             end
@@ -650,6 +671,14 @@ function ig.voip.server.GetPlayersInProximity(playerId, distance)
         for _, otherPlayerId in ipairs(allPlayers) do
             local otherId = tonumber(otherPlayerId)
             if otherId and otherId ~= playerId then
+                -- Check routing bucket isolation on server-side
+                if playerBucket then
+                    local otherBucket = GetPlayerRoutingBucket(otherId)
+                    if playerBucket ~= otherBucket then
+                        goto continue_brute
+                    end
+                end
+                
                 local otherPed = GetPlayerPed(otherId)
                 if otherPed and otherPed ~= 0 then
                     local otherCoords = GetEntityCoords(otherPed)
@@ -658,6 +687,8 @@ function ig.voip.server.GetPlayersInProximity(playerId, distance)
                         table.insert(playersInProximity, otherId)
                     end
                 end
+                
+                ::continue_brute::
             end
         end
     end

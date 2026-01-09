@@ -136,6 +136,9 @@ conf.voip.gridSize = 50.0
 --[[
 ROUTING BUCKET ISOLATION :
     Isolate voice by routing bucket (players in different buckets can't hear each other).
+    When enabled, proximity voice will only work between players in the same routing bucket.
+    Note: Radio, phone calls, and admin calls work ACROSS routing buckets by design.
+    This is enforced on both client and server side for maximum security.
 ]]--
 conf.voip.routingBucketIsolation = true
 
