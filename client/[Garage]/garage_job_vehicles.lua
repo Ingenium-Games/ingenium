@@ -11,6 +11,9 @@
 -- This file is automatically loaded via the client_scripts wildcard in fxmanifest.lua
 -- ====================================================================================--
 
+-- Configuration
+local SPAWN_CLEAR_RADIUS = 1.2  -- Radius to check if a parking spot is clear
+
 -- Listen for server-authorized spawn requests
 RegisterNetEvent('ingenium:clientSpawnVehicle', function(data)
     if type(data) ~= 'table' or not data.model then
@@ -39,7 +42,7 @@ RegisterNetEvent('ingenium:clientSpawnVehicle', function(data)
                 -- Check if spot is clear (using existing function if available)
                 local isClear = true
                 if c and c.func and c.func.IsVehicleSpawnClear then
-                    isClear = c.func.IsVehicleSpawnClear(spot, 1.2)
+                    isClear = c.func.IsVehicleSpawnClear(spot, SPAWN_CLEAR_RADIUS)
                 else
                     -- Fallback: simple check for nearby vehicles
                     local nearbyVeh = GetClosestVehicle(spot.x, spot.y, spot.z, 2.0, 0, 70)

@@ -205,6 +205,30 @@ RegisterNetEvent('ingenium:spawnJobVehicle', function(data)
 
   local model = data.model
   local spawnCoords = data.spawnCoords
+  
+  -- Validate spawnCoords if provided
+  if spawnCoords then
+    if type(spawnCoords) ~= 'table' then
+      log('spawnJobVehicle: Invalid spawnCoords type from player %s', tostring(src))
+      return
+    end
+    
+    -- Validate coordinate values are within reasonable bounds
+    if spawnCoords.x and (type(spawnCoords.x) ~= 'number' or math.abs(spawnCoords.x) > 20000) then
+      log('spawnJobVehicle: Invalid X coordinate from player %s', tostring(src))
+      return
+    end
+    
+    if spawnCoords.y and (type(spawnCoords.y) ~= 'number' or math.abs(spawnCoords.y) > 20000) then
+      log('spawnJobVehicle: Invalid Y coordinate from player %s', tostring(src))
+      return
+    end
+    
+    if spawnCoords.z and (type(spawnCoords.z) ~= 'number' or math.abs(spawnCoords.z) > 2000) then
+      log('spawnJobVehicle: Invalid Z coordinate from player %s', tostring(src))
+      return
+    end
+  end
 
   -- Check if player is allowed to spawn this vehicle
   local allowed = false
