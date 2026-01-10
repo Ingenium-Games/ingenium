@@ -193,17 +193,17 @@ function ig.data.LoadJSONData(callback)
     print('^3[Data] Loading dynamic and static JSON files into memory...^7')
 
     -- ==== DYNAMIC ("Runtime") DATA TABLES ====
-    ig.items        = ig.json.Load('Items') or {}
-    ig.drops        = ig.json.Load('Drops') or {}
+    ig.items        = ig.json.Load('items') or {}
+    ig.drops        = ig.json.Load('drops') or {}
     ig.active_drops = {}  -- always reset
-    ig.picks        = ig.json.Load('Pickups') or {}
-    ig.scenes       = ig.json.Load('Scenes') or {}
-    ig.notes        = ig.json.Load('Notes') or {}
-    ig.gsrs         = ig.json.Load('GSR') or {}
-    ig.jobs         = ig.json.Load('Jobs') or {}
-    ig.doors        = ig.json.Load('Doors') or {}
-    ig.objects      = ig.json.Load('Objects') or {}
-    ig.names        = ig.json.Load('Names') or {}
+    ig.picks        = ig.json.Load('pickups') or {}
+    ig.scenes       = ig.json.Load('scenes') or {}
+    ig.notes        = ig.json.Load('notes') or {}
+    ig.gsrs         = ig.json.Load('gsr') or {}
+    ig.jobs         = ig.json.Load('jobs') or {}
+    ig.doors        = ig.json.Load('doors') or {}
+    ig.objects      = ig.json.Load('objects') or {}
+    ig.names        = ig.json.Load('names') or {}
 
     -- ==== STATIC ("Reference") DATA TABLES ("ig.dump"/config) ====
     ig.tattoos             = ig.json.Load('tattoos') or {}
