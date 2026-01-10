@@ -9,8 +9,8 @@ if conf.gamemode ~= "RP" then
     return
 end
 
--- Timing constants
-local IDLE_CHECK_INTERVAL = 100 -- Check every 100ms when no special states active
+-- Timing constants from config
+local IDLE_CHECK_INTERVAL = conf.rp.controlIdleInterval -- Check when no special states active
 
 -- ====================================================================================--
 -- Per-Frame Control Restriction Thread
