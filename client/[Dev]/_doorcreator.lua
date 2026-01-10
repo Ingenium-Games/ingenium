@@ -63,14 +63,14 @@ local function Target()
     end
 end
 
-local DoorDev = exports["ig.core"]:RegisterClientCallback({
+local DoorDev = RegisterClientCallback({
     eventName = "Developer:DoorDev",
     eventCallback = function()
         Target()
     end
 })
 
-local GetDoor = exports["ig.core"]:RegisterClientCallback({
+local GetDoor = RegisterClientCallback({
     eventName = "Developer:GetDoor",
     eventCallback = function(name, state, job, item, time, timestate)
         if job then

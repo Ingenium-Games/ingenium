@@ -33,8 +33,7 @@ AddEventHandler('ingenium.sql:Ready', function()
     ig.data.ReviveSync()
     -- Get character values every x seconds.
     ig.data.CharacterValues()
-    -- Start Paying players based on conf.
-    ig.job.PayCycle()
+
     --
     Queue.OnReady()
 end)

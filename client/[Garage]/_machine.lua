@@ -69,7 +69,7 @@ end
 
 -- Open Gui and Focus NUI
 function OGui()
-    VehicleData = exports["ig.core"]:TriggerServerCallback({
+    VehicleData = TriggerServerCallback({
         eventName = "GetCars",
         args = {}
     })
@@ -125,7 +125,7 @@ RegisterNUICallback("GUI:SelectVehicle", function(data, cb)
         end
     end
     
-    local billed = exports["ig.core"]:TriggerServerCallback({eventName = "ParkingBill", args = {}})
+    local billed = TriggerServerCallback({eventName = "ParkingBill", args = {}})
     if not billed then
         TriggerEvent("Client:Notify","You dont have the cash to return your vehicle.")
         CGui()
@@ -154,7 +154,7 @@ RegisterNUICallback("GUI:SelectVehicle", function(data, cb)
     end
     
     if bestSpot then
-        local net = exports["ig.core"]:TriggerServerCallback({eventName = "EnsurePlayerVehicle", args = {Data, bestSpot}})
+        local net = TriggerServerCallback({eventName = "EnsurePlayerVehicle", args = {Data, bestSpot}})
     else
         TriggerEvent("Client:Notify", "No available parking spots nearby.", 2)
     end

@@ -3,9 +3,9 @@
 
 Locales = {}
 
-function _(key, ...) -- Translate string with optional formatting
+local function _(key, ...) -- Translate string with optional formatting
     -- Usage: _("key", arg1, arg2, ...) where args replace %s, %d, etc. in the translation
-    local locale = exports["ingenium"]:GetLocale()
+    local locale = conf.locale
     
     -- Try requested locale
     if Locales[locale] ~= nil and Locales[locale][key] ~= nil then

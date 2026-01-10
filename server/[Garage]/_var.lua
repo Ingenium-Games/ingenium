@@ -1,10 +1,3 @@
--- ====================================================================================--
--- Globals and Require/Replace
-math = require('glm')
-math.randomseed(GetGameTimer())
-c = exports["ig.core"]:c()
---
-
 ParkingSpots = {
     {x=-61.02,y=-1118.52,z=25.99,h=342.99},
     {x=140.43,y=-725.22,z=32.82,h=158.74},

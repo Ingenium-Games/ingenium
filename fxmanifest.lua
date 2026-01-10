@@ -107,9 +107,9 @@ dependencies {
     "discordroles",
     "restfx",
     "freecam",
-    "sit",
-    "screenshot-basic",
-    "glm"
+    --"sit",
+    --"screenshot-basic",
+    --"glm"
 }
 ------------------------------------------------------------------------------
 files {

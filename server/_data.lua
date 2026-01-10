@@ -116,7 +116,7 @@ function ig.data.ServerSync()
     
     -- Consolidated save loop - runs at the smallest interval and checks what needs saving
     local function ConsolidatedSaveLoop()
-        if ig.data.ArePlayersActive() then
+        if ig.data.ArePlayersActive() ~= nil then
             local currentTime = os.clock()
             
             -- User sync - most frequent (1.5 min)

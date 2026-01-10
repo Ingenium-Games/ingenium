@@ -1,4 +1,4 @@
-local GetCar = exports["ig.core"]:RegisterServerCallback({
+local GetCar = RegisterServerCallback({
     eventName = "GetCar",
     eventCallback = function(source, plate)
         local data = c.sql.veh.GetByPlate(plate)[1]
@@ -6,7 +6,7 @@ local GetCar = exports["ig.core"]:RegisterServerCallback({
     end
 })
 
-local GetCars = exports["ig.core"]:RegisterServerCallback({
+local GetCars = RegisterServerCallback({
     eventName = "GetCars",
     eventCallback = function(source, character_id)
         local xPlayer = c.data.GetPlayer(source)
@@ -15,7 +15,7 @@ local GetCars = exports["ig.core"]:RegisterServerCallback({
     end
 })
 
-local EnsurePlayerVehicle = exports["ig.core"]:RegisterServerCallback({
+local EnsurePlayerVehicle = RegisterServerCallback({
     eventName = "EnsurePlayerVehicle",
     eventCallback = function(source, data, spot)
         local entity = CreateVehicle(data.Model, spot.x, spot.y, spot.z, spot.h, true, false)
@@ -40,7 +40,7 @@ local EnsurePlayerVehicle = exports["ig.core"]:RegisterServerCallback({
     end
 })
 
-local ParkingBill = exports["ig.core"]:RegisterServerCallback({
+local ParkingBill = RegisterServerCallback({
     eventName = "ParkingBill",
     eventCallback = function(source)
         local amount = 5
