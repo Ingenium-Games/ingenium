@@ -50,7 +50,7 @@ const props = defineProps({
 // State
 const vehicles = ref([])
 const loading = ref(true)
-let messageListener = null
+let messageListenerHandle = null
 
 // Methods
 function requestVehicles() {
@@ -82,7 +82,7 @@ function handleJobVehiclesReceived(receivedVehicles) {
 onMounted(() => {
   // Listen for server response using FiveM's native function
   if (typeof onNet !== 'undefined') {
-    messageListener = onNet('ingenium:receiveJobVehicles', handleJobVehiclesReceived)
+    messageListenerHandle = onNet('ingenium:receiveJobVehicles', handleJobVehiclesReceived)
   }
   
   // Request vehicles from server
@@ -90,8 +90,16 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  // Clean up listener if needed
-  // Note: FiveM's onNet doesn't require explicit cleanup in most cases
+  // Clean up listener
+  // Note: FiveM's onNet returns a handle that can be used for cleanup
+  // In practice, component lifecycle usually handles this, but explicit cleanup is good practice
+  if (messageListenerHandle && typeof offNet !== 'undefined') {
+    try {
+      offNet('ingenium:receiveJobVehicles', handleJobVehiclesReceived)
+    } catch (e) {
+      // Silently fail if offNet is not available
+    }
+  }
 })
 </script>
 

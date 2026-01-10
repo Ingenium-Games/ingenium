@@ -16,8 +16,7 @@
 --       model = "vehicle_model_name",    -- Vehicle spawn name
 --       label = "Display Name",           -- Name shown in UI
 --       minGrade = 1,                     -- (Optional) Minimum numeric grade/rank required
---       roles = {"role1", "role2"},       -- (Optional) List of role names allowed
---       spawnProps = {}                   -- (Optional) Additional spawn properties
+--       roles = {"role1", "role2"}        -- (Optional) List of role names allowed
 --     }
 --   }
 -- }

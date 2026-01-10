@@ -109,8 +109,9 @@ local function getPlayerJobInfo(source)
     
   else
     -- No framework detected - stub implementation
-    -- You MUST implement this for your custom framework
-    log('WARNING: Stub getPlayerJobInfo called. No job data available.')
+    -- WARNING: You MUST implement this function for your custom framework
+    -- This stub will prevent job vehicles from working until implemented
+    log('ERROR: Stub getPlayerJobInfo called for player %s. Job vehicle system will not work until you implement getPlayerJobInfo for your framework!', tostring(source))
     return { job = nil, grade = 0, roles = {} }
   end
 end
