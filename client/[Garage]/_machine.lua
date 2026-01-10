@@ -1,7 +1,7 @@
 
 -- Check if player is near an machine
 function IsNearMachine()
-        local objFound = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 1.5, TicketMachine, 0, 0, 0)
+        local objFound = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 1.5, ig.garage._TicketMachine, 0, 0, 0)
         if DoesEntityExist(objFound) then
             TaskTurnPedToFaceEntity(PlayerPedId(), objFound, 3.0)
             return true
@@ -25,14 +25,14 @@ function MachineAnimation()
             loadAnimDict("amb@prop_human_atm@male@exit")
             loadAnimDict("amb@prop_human_atm@male@idle_a")
 
-            if (UseMachine) then
+            if (ig.garage._UseMachine) then
                 ClearPedTasks(PlayerPedId())
                 TaskPlayAnim(player, "amb@prop_human_atm@male@exit", "exit", 1.0, 1.0, -1, 49, 0, 0, 0, 0)
-                UseMachine = false
+                ig.garage._UseMachine = false
                 local finished = exports["ig.taskbar"]:Start(3000, "Retrieving Card")
                 ClearPedTasks(PlayerPedId())
             else
-                UseMachine = true
+                ig.garage._UseMachine = true
                 TaskPlayAnim(player, "amb@prop_human_atm@male@idle_a", "idle_b", 1.0, 1.0, -1, 49, 0, 0, 0, 0)
                 local finished = exports["ig.taskbar"]:Start(1000, "Accessing Parking Machine")
                 if finished == 100 then
@@ -48,14 +48,14 @@ function MachineAnimation()
 
             loadAnimDict("mp_common")
 
-            if (UseMachine) then
+            if (ig.garage._UseMachine) then
                 ClearPedTasks(PlayerPedId())
                 TaskPlayAnim(player, "mp_common", "givetake1_a", 1.0, 1.0, -1, 49, 0, 0, 0, 0)
-                UseMachine = false
+                ig.garage._UseMachine = false
                 local finished = exports["ig.taskbar"]:Start(1000, "Retrieving Card")
                 ClearPedTasks(PlayerPedId())
             else
-                UseMachine = true
+                ig.garage._UseMachine = true
                 TaskPlayAnim(player, "mp_common", "givetake1_a", 1.0, 1.0, -1, 49, 0, 0, 0, 0)
                 local finished = exports["ig.taskbar"]:Start(1000, "Accessing Parking Machine")
                 if finished == 100 then
@@ -69,7 +69,7 @@ end
 
 -- Open Gui and Focus NUI
 function OGui()
-    VehicleData = TriggerServerCallback({
+    ig.garage._VehicleData = TriggerServerCallback({
         eventName = "GetCars",
         args = {}
     })
@@ -78,7 +78,7 @@ function OGui()
     SetNuiFocus(true, true)
     SendNUIMessage({
         message = "Open",
-        data = VehicleData,
+        data = ig.garage._VehicleData,
     })
 end
 
@@ -89,22 +89,22 @@ function CGui()
         message = "Close",
         data = {},
     })
-    VehicleData = {}
-    OpenMachine = false
+    ig.garage._VehicleData = {}
+    ig.garage._OpenMachine = false
     Machine = nil
-    MachinePosition = nil
+    ig.garage._MachinePosition = nil
     MachineAnimation()
 end
 
 AddEventHandler("Client:Interact:ParkingMachine", function(data)
     Machine = data.entity
-    MachinePosition = GetEntityCoords(Machine)
+    ig.garage._MachinePosition = GetEntityCoords(Machine)
     if IsNearMachine() then
-        OpenMachine = true
+        ig.garage._OpenMachine = true
         OGui()
     else
         TriggerEvent("Client:Notify", "No Parking Machine", 2)
-        OpenMachine = false
+        ig.garage._OpenMachine = false
         CGui()
     end
 end)
@@ -118,7 +118,7 @@ RegisterNUICallback("GUI:SelectVehicle", function(data, cb)
     local Plate = data.Plate
     -- Optimized: Added early exit to avoid unnecessary iterations
     local Data = nil
-    for k,v in pairs(VehicleData) do
+    for k,v in pairs(ig.garage._VehicleData) do
         if v.Plate == Plate then
             Data = v
             break  -- Exit early once found
@@ -139,11 +139,11 @@ RegisterNUICallback("GUI:SelectVehicle", function(data, cb)
     end
     
     -- Optimized: More efficient parking spot selection
-    local Position = MachinePosition
+    local Position = ig.garage._MachinePosition
     local bestSpot = nil
     local bestDistance = math.huge
     
-    for _, spot in ipairs(ParkingSpots) do
+    for _, spot in ipairs(conf.garage.parkingspots) do
         if c.func.IsVehicleSpawnClear(spot, 1.2) then
             local distance = #(vector3(spot.x, spot.y, spot.z) - Position)
             if distance < bestDistance then
