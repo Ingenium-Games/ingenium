@@ -41,6 +41,7 @@ The configuration file defines which vehicles are available to each job:
 - **name** (required): Display name shown in the UI
 - **minGrade** (optional): Minimum grade/rank required (default: 1)
 - **allowedRoles** (optional): Array of specific role names that can access this vehicle (overrides minGrade)
+  - **Note:** Role names must exactly match those in `data/jobs.json` (case-sensitive, including any typos)
 - **description** (optional): Description shown in the UI
 
 ### Job Grades
@@ -93,6 +94,8 @@ The system reads job grades from `data/jobs.json`. Each job role has a `rank` fi
   ]
 }
 ```
+
+**Note:** Role names like "Cheif of Police" must exactly match the spelling in `data/jobs.json`, even if misspelled.
 
 ### EMS Vehicles
 

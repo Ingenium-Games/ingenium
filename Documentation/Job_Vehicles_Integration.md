@@ -100,7 +100,7 @@ To restrict a vehicle to specific roles instead of grade:
 }
 ```
 
-**Note:** Role names must exactly match those in `data/jobs.json`
+**Note:** Role names must exactly match those in `data/jobs.json` (including spelling, case-sensitivity)
 
 ## File Manifest
 
