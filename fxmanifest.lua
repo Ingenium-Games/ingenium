@@ -96,6 +96,7 @@ server_scripts {
     "server/[Garage]/_var.lua",
     "server/[Garage]/_callbacks.lua",
     "server/[Garage]/_job_vehicles.lua",
+    -- "server/[Garage]/_job_vehicles_validation.lua",  -- Uncomment to enable config validation
     -- VOIP system (loads before other server scripts)
     "server/[Voice]/_voip.lua",
     "server/[Third Party]/_queue_config.lua",
