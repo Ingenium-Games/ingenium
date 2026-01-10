@@ -35,26 +35,25 @@ Integrated vehicle garage and parking system for ingenium framework. Formerly `i
 ### Main Files
 
 #### _var.lua
-Contains parking spot locations and global variables.
+Contains internal runtime variables in the `ig.garage` namespace.
 
-**Parking Spots Structure:**
-```lua
-ParkingSpots = {
-    {x=-61.02, y=-1118.52, z=25.99, h=342.99},
-    {x=140.43, y=-725.22, z=32.82, h=158.74},
-    -- 900+ more locations
-}
-```
+**Note:** Parking spots have been moved to `conf.garage.parkingspots` in `_config/garage.lua` for easy editing by server owners.
 
-**Global Variables:**
+**Internal Runtime Variables:**
 ```lua
-TicketMachine = `prop_parkingpay`  -- Machine prop model
-MachinePosition = nil              -- Current machine location
-AtMachine = false                  -- Within interaction distance
-OpenMachine = false                -- UI is open
-UseMachine = false                 -- Animation playing
-VehicleData = {}                   -- Player's vehicles
-VehicleBlip = nil                  -- Vehicle location blip
+-- Initialize namespace
+if not ig then ig = {} end
+if not ig.garage then ig.garage = {} end
+
+-- Internal variables (underscore-prefixed)
+ig.garage._TicketMachine = `prop_parkingpay`  -- Machine prop model
+ig.garage._MachinePosition = nil              -- Current machine location
+ig.garage._AtMachine = false                  -- Within interaction distance
+ig.garage._OpenMachine = false                -- UI is open
+ig.garage._UseMachine = false                 -- Animation playing
+ig.garage._VehicleData = {}                   -- Player's vehicles
+ig.garage._VehicleBlip = nil                  -- Vehicle location blip
+ig.garage._CreatedEntities = {}               -- Tracking spawned props
 ```
 
 ---
@@ -135,7 +134,23 @@ TriggerServerEvent('garage:spawnVehicle', plate)
 ### Main Files
 
 #### _var.lua
-Contains server-side vehicle data (42KB file with extensive vehicle information).
+Contains server-side props configuration in the `ig.garage` namespace.
+
+**Internal Runtime Variables:**
+```lua
+-- Initialize namespace
+if not ig then ig = {} end
+if not ig.garage then ig.garage = {} end
+
+-- Internal server-side props (underscore-prefixed)
+ig.garage._Props = {
+    {x=-934.63, y=-2076.8, z=9.3, h=127.56},
+    -- Coordinates for parking machine props
+    -- 50+ locations across the map
+}
+```
+
+**Note:** Parking spots have been moved to `conf.garage.parkingspots` in `_config/garage.lua`.
 
 ---
 
@@ -301,6 +316,13 @@ conf.garage.machine_prop = `prop_parkingpay`
 -- Distance settings
 conf.garage.interaction_distance = 2.5  -- Interaction range
 conf.garage.parking_spot_radius = 2.0   -- Spot detection radius
+
+-- Parking spots (900+ locations across the map)
+conf.garage.parkingspots = {
+    {x=-61.02, y=-1118.52, z=25.99, h=342.99},
+    {x=140.43, y=-725.22, z=32.82, h=158.74},
+    -- 900+ more locations
+}
 ```
 
 ---
@@ -365,10 +387,10 @@ conf.garage.integration = {
 
 ### Location Data
 
-900+ parking spots are defined in `client/[Garage]/_var.lua`:
+900+ parking spots are now defined in `_config/garage.lua` as public configuration:
 
 ```lua
-ParkingSpots = {
+conf.garage.parkingspots = {
     -- Legion Square
     {x=-61.02, y=-1118.52, z=25.99, h=342.99},
     {x=-57.39, y=-1117.86, z=25.99, h=340.16},
@@ -384,8 +406,8 @@ ParkingSpots = {
 ### Adding New Spots
 
 ```lua
--- Add to ParkingSpots table in client/[Garage]/_var.lua
-table.insert(ParkingSpots, {
+-- Add to conf.garage.parkingspots table in _config/garage.lua
+table.insert(conf.garage.parkingspots, {
     x = 100.0,    -- X coordinate
     y = -200.0,   -- Y coordinate
     z = 30.0,     -- Z coordinate
@@ -396,8 +418,8 @@ table.insert(ParkingSpots, {
 ### Parking Machine Props
 
 ```lua
--- Add to Props table in client/[Garage]/_var.lua
-Props = {
+-- Add to ig.garage._Props table in server/[Garage]/_var.lua
+ig.garage._Props = {
     {x=-934.63, y=-2076.8, z=9.3, h=127.56},
     -- Coordinates for parking machine prop
 }
@@ -480,8 +502,8 @@ exports['ingenium']:AddModel(`prop_parkingpay`, {
 
 ```lua
 -- Add new garage location
--- 1. Add parking spots in _var.lua
-ParkingSpots = {
+-- 1. Add parking spots in _config/garage.lua
+conf.garage.parkingspots = {
     -- Existing spots...
     -- New custom location
     {x=1200.0, y=-3000.0, z=5.0, h=0.0},
@@ -489,8 +511,8 @@ ParkingSpots = {
     {x=1210.0, y=-3000.0, z=5.0, h=0.0},
 }
 
--- 2. Add parking machine prop
-Props = {
+-- 2. Add parking machine prop in server/[Garage]/_var.lua
+ig.garage._Props = {
     -- Existing props...
     {x=1207.5, y=-2995.0, z=5.5, h=180.0},
 }

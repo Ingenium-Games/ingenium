@@ -7,18 +7,18 @@ end
 -- Optimized: Create entities only once, avoiding duplication
 local function CreateGarageEntities()
     -- Clean up existing entities first
-    for k,v in pairs(CreatedEntities) do
+    for k,v in pairs(ig.garage._CreatedEntities) do
         if DoesEntityExist(v) then
             DeleteEntity(v)
         end
     end
-    CreatedEntities = {}
+    ig.garage._CreatedEntities = {}
     
     -- Create new entities
-    for k,v in pairs(Props) do
+    for k,v in pairs(ig.garage._Props) do
         local H = factorH(v.h)
-        CreatedEntities[k] = CreateObject(TicketMachine, v.x, v.y, v.z - 1, false, false, false)
-        SetEntityHeading(CreatedEntities[k], H)
+        ig.garage._CreatedEntities[k] = CreateObject(ig.garage._TicketMachine, v.x, v.y, v.z - 1, false, false, false)
+        SetEntityHeading(ig.garage._CreatedEntities[k], H)
     end
 end
 
@@ -31,11 +31,11 @@ AddEventHandler("onResourceStop", function(resourceName)
         return
     end
     -- Optimized: Properly clean up entities
-    for k,v in pairs(CreatedEntities) do
+    for k,v in pairs(ig.garage._CreatedEntities) do
         if DoesEntityExist(v) then
             DeleteEntity(v)
         end
     end
-    CreatedEntities = {}
-    VehicleBlip = nil
+    ig.garage._CreatedEntities = {}
+    ig.garage._VehicleBlip = nil
 end)
