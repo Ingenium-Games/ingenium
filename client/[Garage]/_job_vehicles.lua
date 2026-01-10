@@ -10,27 +10,6 @@ ig.garage.jobVehicles = {}
 -- NUI Callback Handlers
 -- ====================================================================================--
 
--- Handle request for job vehicles list
-RegisterNUICallback("jobVehicles:request", function(data, cb)
-    -- Request job vehicles from server
-    local jobVehicles = ig.callback.Await("ingenium:GetJobVehicles")
-    
-    -- Get current player job info for display
-    local playerJob = ig.callback.Await("GetPlayerJob")
-    local jobName = playerJob and playerJob.job or ""
-    
-    -- Send data back to NUI
-    SendNUIMessage({
-        message = "jobVehicles:update",
-        data = {
-            vehicles = jobVehicles or {},
-            job = jobName
-        }
-    })
-    
-    cb("ok")
-end)
-
 -- Handle spawn request from NUI
 RegisterNUICallback("jobVehicles:spawn", function(data, cb)
     local vehicleModel = data.model

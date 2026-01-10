@@ -34,6 +34,30 @@ end)
 -- Helper Functions
 -- ====================================================================================--
 
+--- Spawn a vehicle at specified location with timeout
+---@param vehicleModel string The vehicle model name or hash
+---@param spawnLocation table Location {x, y, z, h}
+---@param timeout number Timeout in milliseconds (default: 3000)
+---@return boolean success, any result Entity or error message
+local function SpawnVehicleWithTimeout(vehicleModel, spawnLocation, timeout)
+    timeout = timeout or 3000
+    
+    local entity = CreateVehicle(GetHashKey(vehicleModel), spawnLocation.x, spawnLocation.y, spawnLocation.z, spawnLocation.h or 0.0, true, false)
+    
+    local startTime = GetGameTimer()
+    
+    while not DoesEntityExist(entity) do
+        local elapsed = GetGameTimer() - startTime
+        if elapsed >= timeout then
+            return false, "Spawn timeout"
+        end
+        Citizen.Wait(10)
+    end
+    
+    local net = NetworkGetNetworkIdFromEntity(entity)
+    return true, entity, net
+end
+
 --- Get the rank/grade for a specific job role
 ---@param jobId string The job identifier
 ---@param roleName string The role/grade name
@@ -185,7 +209,7 @@ RegisterServerCallback({
         end
         
         if not vehicleConfig then
-            ig.func.Alert("[Job Vehicles] Player " .. playerId .. " requested invalid vehicle: " .. tostring(vehicleModel))
+            ig.func.Alert("[Job Vehicles] Player " .. playerId .. " requested unauthorized vehicle")
             TriggerClientEvent("Client:Notify", playerId, "Invalid vehicle requested", 2)
             return false, "Invalid vehicle"
         end
@@ -206,23 +230,13 @@ RegisterServerCallback({
         -- Spawn the vehicle server-side
         ig.func.Debug_1("[Job Vehicles] Spawning " .. vehicleModel .. " for player " .. playerId .. " at job: " .. jobId)
         
-        local entity = CreateVehicle(GetHashKey(vehicleModel), spawnLocation.x, spawnLocation.y, spawnLocation.z, spawnLocation.h or 0.0, true, false)
+        local success, entity, net = SpawnVehicleWithTimeout(vehicleModel, spawnLocation, 3000)
         
-        -- Wait for entity to exist (with timeout)
-        local startTime = GetGameTimer()
-        local timeout = 3000
-        
-        while not DoesEntityExist(entity) do
-            local elapsed = GetGameTimer() - startTime
-            if elapsed >= timeout then
-                ig.func.Alert("[Job Vehicles] Timeout creating vehicle for player " .. playerId)
-                TriggerClientEvent("Client:Notify", playerId, "Failed to spawn vehicle (timeout)", 2)
-                return false, "Spawn timeout"
-            end
-            Citizen.Wait(10)
+        if not success then
+            ig.func.Alert("[Job Vehicles] Failed to spawn vehicle for player " .. playerId .. ": " .. tostring(entity))
+            TriggerClientEvent("Client:Notify", playerId, "Failed to spawn vehicle (timeout)", 2)
+            return false, entity
         end
-        
-        local net = NetworkGetNetworkIdFromEntity(entity)
         
         -- Add vehicle to game data as a non-owned (job) vehicle
         -- Using ig.class.Vehicle (not OwnedVehicle) since this is a job vehicle
@@ -255,20 +269,12 @@ exports("SpawnVehicleForPlayer", function(playerId, vehicleModel, spawnLocation)
         return false, "Invalid parameters"
     end
     
-    local entity = CreateVehicle(GetHashKey(vehicleModel), spawnLocation.x, spawnLocation.y, spawnLocation.z, spawnLocation.h or 0.0, true, false)
+    local success, entity, net = SpawnVehicleWithTimeout(vehicleModel, spawnLocation, 3000)
     
-    local startTime = GetGameTimer()
-    local timeout = 3000
-    
-    while not DoesEntityExist(entity) do
-        local elapsed = GetGameTimer() - startTime
-        if elapsed >= timeout then
-            return false, "Spawn timeout"
-        end
-        Citizen.Wait(10)
+    if not success then
+        return false, entity  -- entity contains error message
     end
     
-    local net = NetworkGetNetworkIdFromEntity(entity)
     ig.data.AddVehicle(net, ig.class.Vehicle, net)
     
     return true, net

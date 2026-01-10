@@ -46,15 +46,6 @@ const vehicles = ref([])
 const currentJob = ref('')
 const isSpawning = ref(false)
 
-async function loadJobVehicles() {
-  try {
-    // Request job vehicles from server via client callback
-    sendNuiMessage('jobVehicles:request')
-  } catch (error) {
-    console.error('Failed to load job vehicles:', error)
-  }
-}
-
 function spawnVehicle(model, name) {
   if (isSpawning.value) return
   
@@ -95,6 +86,7 @@ if (typeof window !== 'undefined') {
 
 onMounted(() => {
   // Component is mounted and ready
+  // Job vehicles will be loaded when garage opens via jobVehicles:show message
 })
 </script>
 
