@@ -1,7 +1,7 @@
 local GetCar = RegisterServerCallback({
     eventName = "GetCar",
     eventCallback = function(source, plate)
-        local data = c.sql.veh.GetByPlate(plate)[1]
+        local data = ig.sql.veh.GetByPlate(plate)[1]
         return data
     end
 })
@@ -9,8 +9,8 @@ local GetCar = RegisterServerCallback({
 local GetCars = RegisterServerCallback({
     eventName = "GetCars",
     eventCallback = function(source, character_id)
-        local xPlayer = c.data.GetPlayer(source)
-        local data = c.sql.veh.GetAll(xPlayer.GetCharacter_ID())
+        local xPlayer = ig.data.GetPlayer(source)
+        local data = ig.sql.veh.GetAll(xPlayer.GetCharacter_ID())
         return data
     end
 })
@@ -27,7 +27,7 @@ local EnsurePlayerVehicle = RegisterServerCallback({
         while not DoesEntityExist(entity) do
             local elapsed = GetGameTimer() - startTime
             if elapsed >= timeout then
-                c.func.Debug_1("Timeout reached on creating vehicle")
+                ig.funig.Debug_1("Timeout reached on creating vehicle")
                 return false, false
             end
             -- Wait 10ms to balance CPU usage with responsiveness
@@ -35,7 +35,7 @@ local EnsurePlayerVehicle = RegisterServerCallback({
         end
         
         local net = NetworkGetNetworkIdFromEntity(entity)
-        c.data.AddVehicle(net, c.class.OwnedVehicle, net, data)
+        ig.data.AddVehicle(net, ig.class.OwnedVehicle, net, data)
         return net
     end
 })
@@ -44,8 +44,8 @@ local ParkingBill = RegisterServerCallback({
     eventName = "ParkingBill",
     eventCallback = function(source)
         local amount = 5
-        local xPlayer = c.data.GetPlayer(source)
-        local xJob = c.data.GetJob("city")
+        local xPlayer = ig.data.GetPlayer(source)
+        local xJob = ig.data.GetJob("city")
         if xPlayer.GetBank() < amount then
             return false
         else

@@ -69,15 +69,15 @@ QConfig.ShowTemp = false
 
 -- simple localization
 QConfig.Language = {
-    joining = _("queue_joining"),
-    connecting = _("queue_connecting"),
-    idrr = _("queue_idrr"),
-    err = _("queue_err"),
-    pos = _("queue_pos"),
-    connectingerr = _("queue_connectingerr"),
-    timedout = _("queue_timedout"),
-    wlonly = _("queue_wlonly"),
-    steam = _("queue_steam")
+    joining = _L("queue_joining"),
+    connecting = _L("queue_connecting"),
+    idrr = _L("queue_idrr"),
+    err = _L("queue_err"),
+    pos = _L("queue_pos"),
+    connectingerr = _L("queue_connectingerr"),
+    timedout = _L("queue_timedout"),
+    wlonly = _L("queue_wlonly"),
+    steam = _L("queue_steam")
 }
 
 Queue = {}

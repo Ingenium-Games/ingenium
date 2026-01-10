@@ -38,7 +38,7 @@ client_scripts {
     "client/[Zones]/CircleZone.lua",
     "client/[Zones]/EntityZone.lua",
     "client/[Zones]/ComboZone.lua",
-    "client/[Zones]/_ig_zone.lua",
+    "client/[Zones]/_zone.lua",
     "client/[Zones]/_zone_manager.lua",  -- Consolidated zone manager (must load after zones)
     -- Target system (must load after zones, requires glm)
     "client/[Target]/_var.lua",
@@ -94,11 +94,13 @@ server_scripts {
     -- Garage system (server-side logic and callbacks)
     "server/[Garage]/_var.lua",
     "server/[Garage]/_callbacks.lua",
-    "server/[Garage]/_server.lua",
     -- VOIP system (loads before other server scripts)
     "server/[Voice]/_voip.lua",
+    "server/[Third Party]/_queue_config.lua",
+    "server/[Third Party]/*.lua",
     -- PMA-Voice compatibility wrapper (loads last for exports)
     "shared/[Voice]/_pma_wrapper.lua",
+
     "server/**/*.lua"
 }
 ------------------------------------------------------------------------------

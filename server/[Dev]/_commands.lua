@@ -2,43 +2,43 @@
 ExecuteCommand("add_ace group.developer command.vdex allow")
 RegisterCommand("vdex", function(source, args, rawCommand)
     local src = source
-    local dex = c.data.GetVehicles()
-    print(c.table.Dump(dex))
+    local dex = ig.data.GetVehicles()
+    print(ig.table.Dump(dex))
 end, true)
 
 ExecuteCommand("add_ace group.developer command.pdex allow")
 RegisterCommand("pdex", function(source, args, rawCommand)
     local src = source
-    local dex = c.data.GetPlayers()
-    print(c.table.Dump(dex))
+    local dex = ig.data.GetPlayers()
+    print(ig.table.Dump(dex))
 end, true)
 
 ExecuteCommand("add_ace group.developer command.odex allow")
 RegisterCommand("odex", function(source, args, rawCommand)
     local src = source
-    local dex = c.odex
-    print(c.table.Dump(dex))
+    local dex = ig.odex
+    print(ig.table.Dump(dex))
 end, true)
 
 ExecuteCommand("add_ace group.developer command.jdex allow")
 RegisterCommand("jdex", function(source, args, rawCommand)
     local src = source
-    local dex = c.data.GetJobs()
-    print(c.table.Dump(dex))
+    local dex = ig.data.GetJobs()
+    print(ig.table.Dump(dex))
 end, true)
 
 ExecuteCommand("add_ace group.developer command.ndex allow")
 RegisterCommand("ndex", function(source, args, rawCommand)
     local src = source
-    local dex = c.data.GetNpcs()
-    print(c.table.Dump(dex))
+    local dex = ig.data.GetNpcs()
+    print(ig.table.Dump(dex))
 end, true)
 
 ExecuteCommand("add_ace group.developer command.ddex allow")
 RegisterCommand("ddex", function(source, args, rawCommand)
     local src = source
-    local dex = c.door.GetDoors()
-    print(c.table.Dump(dex))
+    local dex = ig.door.GetDoors()
+    print(ig.table.Dump(dex))
 end, true)
 
 --
@@ -77,7 +77,7 @@ ExecuteCommand("add_ace group.developer command.additem allow")
 RegisterCommand("additem", function(source, args, rawCommand)
     local src = source
     local string = args[1]
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     xPlayer.AddItem({string,1,100})
 end, true)
 
@@ -85,7 +85,7 @@ ExecuteCommand("add_ace group.developer command.addbank allow")
 RegisterCommand("addbank", function(source, args, rawCommand)
     local src = source
     local number = tonumber(args[1])
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     xPlayer.AddBank(number)
 end, true)
 
@@ -93,14 +93,14 @@ ExecuteCommand("add_ace group.developer command.addcash allow")
 RegisterCommand("addcash", function(source, args, rawCommand)
     local src = source
     local number = tonumber(args[1])
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     xPlayer.AddCash(number)
 end, true)
 
 ExecuteCommand("add_ace group.developer command.pos allow")
 RegisterCommand("pos", function(source, args, rawCommand)
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     local Coords = xPlayer.GetCoords()
     local name = args[1] or "NoName"
     local file = io.open('pos.lua', "a")
@@ -136,7 +136,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.cam allow")
 RegisterCommand("cam", function(source, args, rawCommand)
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     local name = args[1] or "NoName"
     local table = exports["ig.core"]:TriggerClientCallback({
         source = src,
@@ -158,7 +158,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.spot allow")
 RegisterCommand("spot", function(source, args, rawCommand)
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     local ords = xPlayer.GetCoords()
     local file = io.open('parkingspots.lua', "a")
     io.output(file)
@@ -172,7 +172,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.prop allow")
 RegisterCommand("prop", function(source, args, rawCommand)
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     local ords = xPlayer.GetCoords()
     local file = io.open('props.lua', "a")
     io.output(file)
@@ -186,7 +186,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.vehiclelist allow")
 RegisterCommand("vehiclelist", function(source, args, rawCommand)
     local src = source
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     local table = Dump:GetVehicles()
     local file = io.open('vehicle_list.lua', "a")
     io.output(file)
@@ -218,7 +218,7 @@ RegisterCommand("addoor", function(source, args, rawCommand)
     local item = args[4] or false
     local time = args[5] or false
     local timestate = tonumber(args[6]) or nil
-    local xPlayer = c.data.GetPlayer(src)
+    local xPlayer = ig.data.GetPlayer(src)
     local tbl = exports["ig.core"]:TriggerClientCallback({
         source = src,
         eventName = "Developer:GetDoor",
@@ -226,7 +226,7 @@ RegisterCommand("addoor", function(source, args, rawCommand)
     })
     local file = io.open('doors.lua', "a")
     io.output(file)
-    local output = c.table.Dump(tbl)..",\n"
+    local output = ig.table.Dump(tbl)..",\n"
     io.write(output)
     io.close(file)
     print("Added door to doors.lua")
@@ -236,29 +236,29 @@ end, true)
 
 ExecuteCommand("add_ace group.developer command.uuid allow")
 RegisterCommand("uuid", function(source, args, rawCommand)
-    print(c.rng.UUID())
-    print(c.func.Timestamp())
+    print(ig.rng.UUID())
+    print(ig.funig.Timestamp())
 end, true)
 
 ExecuteCommand("add_ace group.developer command.objects allow")
 RegisterCommand("objects", function(source, args, rawCommand)
-    print(c.table.Dump(c.objects))
+    print(ig.table.Dump(ig.objects))
 end, true)
 
 ExecuteCommand("add_ace group.developer command.vdata allow")
 RegisterCommand("vdata", function(source, args, rawCommand)
     local vehicle = GetVehiclePedIsIn(GetPlayerPed(source), false)
     local net = NetworkGetNetworkIdFromEntity(vehicle)
-    local xVehicle = c.data.GetVehicle(net)
-    print(c.table.Dump(xVehicle))
+    local xVehicle = ig.data.GetVehicle(net)
+    print(ig.table.Dump(xVehicle))
 end, true)
 
 ExecuteCommand("add_ace group.developer command.vsave allow")
 RegisterCommand("vsave", function(source, args, rawCommand)
     local vehicle = GetVehiclePedIsIn(GetPlayerPed(source), false)
     local net = NetworkGetNetworkIdFromEntity(vehicle)
-    local xVehicle = c.data.GetVehicle(net)
-    c.sql.save.Vehicle(xVehicle)
+    local xVehicle = ig.data.GetVehicle(net)
+    ig.sql.save.Vehicle(xVehicle)
 end, true)
 
 ExecuteCommand("add_ace group.developer bnl_housing:admin allow")

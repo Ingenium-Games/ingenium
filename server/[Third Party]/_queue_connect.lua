@@ -24,7 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]--
 ig.queue = {}
-local Queue = {}
 -- EDIT THESE IN SERVER.CFG + OTHER OPTIONS IN QConfig.LUA
 Queue.MaxPlayers = GetConvarInt("sv_maxclients", 48)
 Queue.Debug = GetConvar("sv_debugqueue", "true") == "true" and true or false

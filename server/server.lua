@@ -15,10 +15,6 @@ AddEventHandler("onResourceStart", function(resourceName)
     --
     ig.version.Check(conf.url.version, resourceName)
 
-
-end)
-
-AddEventHandler('ingenium.sql:Ready', function()
     --
     ig.data.Initilize()
     --
@@ -36,6 +32,11 @@ AddEventHandler('ingenium.sql:Ready', function()
 
     --
     Queue.OnReady()
+    
+end)
+
+AddEventHandler('ingenium.sql:Ready', function()
+
 end)
 
 
