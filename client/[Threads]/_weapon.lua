@@ -3,10 +3,10 @@
 -- Optimized to reduce multiple per-frame threads into one efficient thread
 -- ====================================================================================--
 
--- Timing constants
-local AMMO_SYNC_INTERVAL = 2500 -- 2.5 seconds between periodic ammo syncs
-local SHOT_COOLDOWN_MS = 115    -- Brief wait after shot to avoid double-counting
-local RELOAD_DURATION_MS = 1250 -- Wait during reload animation
+-- Timing constants from config
+local AMMO_SYNC_INTERVAL = conf.weapon.ammoSyncInterval  -- Between periodic ammo syncs
+local SHOT_COOLDOWN_MS = conf.weapon.shotCooldown        -- Brief wait after shot to avoid double-counting
+local RELOAD_DURATION_MS = conf.weapon.reloadDuration    -- Wait during reload animation
 
 -- Consolidated weapon management thread
 -- Handles ammo tracking, control disabling, and periodic updates in a single loop

@@ -149,6 +149,28 @@ conf.drops.cleanup_enabled = false              -- Do not auto-delete old drops 
 conf.drops.cleanup_time = 30 * conf.min         -- Time before cleanup if enabled (30 minutes)
 conf.drops.default_model = `v_ret_gc_box1`      -- Default prop model (backticks auto-hash)
 conf.drops.active_timeout = 5 * conf.min        -- Time before moving back to ig.drops if no players nearby
+--[[
+WEAPON THREAD CONFIGURATION:
+    -- Timing intervals for weapon system threads
+    -- [1] Ammo sync interval - how often to sync ammo counts to server (milliseconds)
+    -- [2] Shot cooldown - wait time after shot to avoid double-counting (milliseconds)
+    -- [3] Reload duration - wait during reload animation (milliseconds)
+]]--
+conf.weapon = {}
+conf.weapon.ammoSyncInterval = 2.5 * conf.sec   -- 2.5 seconds between periodic ammo syncs
+conf.weapon.shotCooldown = 115                  -- 115ms wait after shot
+conf.weapon.reloadDuration = 1.25 * conf.sec    -- 1.25 seconds reload wait
+--[[
+RP THREAD CONFIGURATION:
+    -- Timing intervals for RP mode feature threads
+    -- [1] Idle camera check interval (milliseconds)
+    -- [2] NPC weapon drop check interval (milliseconds)
+    -- [3] Control state idle check interval (milliseconds)
+]]--
+conf.rp = {}
+conf.rp.idleCameraInterval = 5 * conf.sec       -- 5 seconds between idle camera checks
+conf.rp.npcWeaponInterval = 2.5 * conf.sec      -- 2.5 seconds between NPC weapon checks
+conf.rp.controlIdleInterval = 100               -- 100ms when no special states active
 -- ====================================================================================--
 conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
 conf.lock = nil

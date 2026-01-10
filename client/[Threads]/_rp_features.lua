@@ -79,9 +79,9 @@ Citizen.CreateThread(function()
     local lastIdleCameraCheck = 0
     local lastNPCWeaponCheck = 0
     
-    -- Timer intervals (in milliseconds)
-    local IDLE_CAMERA_INTERVAL = 5000  -- 5 seconds
-    local NPC_WEAPON_INTERVAL = 2500   -- 2.5 seconds
+    -- Timer intervals from config (in milliseconds)
+    local IDLE_CAMERA_INTERVAL = conf.rp.idleCameraInterval
+    local NPC_WEAPON_INTERVAL = conf.rp.npcWeaponInterval
     
     -- Cache pickup hashes outside loop to avoid table recreation
     local weaponPickupHashes = {
