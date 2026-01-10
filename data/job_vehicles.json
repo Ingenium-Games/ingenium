@@ -1,0 +1,66 @@
+{
+  "police": [
+    {
+      "model": "police",
+      "name": "Police Cruiser",
+      "minGrade": 1,
+      "description": "Standard patrol vehicle"
+    },
+    {
+      "model": "police2",
+      "name": "Police Interceptor",
+      "minGrade": 3,
+      "description": "High-speed pursuit vehicle"
+    },
+    {
+      "model": "policeb",
+      "name": "Police Motorcycle",
+      "minGrade": 2,
+      "description": "Patrol motorcycle for quick response"
+    },
+    {
+      "model": "riot",
+      "name": "SWAT Riot Van",
+      "minGrade": 4,
+      "allowedRoles": ["Senior Officer", "Cheif of Police"],
+      "description": "Armored vehicle for special operations"
+    }
+  ],
+  "medic": [
+    {
+      "model": "ambulance",
+      "name": "Ambulance",
+      "minGrade": 1,
+      "description": "Emergency medical response vehicle"
+    },
+    {
+      "model": "firetruk",
+      "name": "Fire Truck",
+      "minGrade": 3,
+      "allowedRoles": ["Doctor", "Cheif Medical Officer"],
+      "description": "Fire and rescue vehicle"
+    }
+  ],
+  "pdm": [
+    {
+      "model": "premier",
+      "name": "Showroom Vehicle",
+      "minGrade": 2,
+      "description": "Vehicle for test drives"
+    }
+  ],
+  "mechanic": [
+    {
+      "model": "towtruck",
+      "name": "Tow Truck",
+      "minGrade": 1,
+      "description": "Vehicle recovery truck"
+    },
+    {
+      "model": "flatbed",
+      "name": "Flatbed Truck",
+      "minGrade": 2,
+      "description": "Heavy duty vehicle transport"
+    }
+  ]
+}

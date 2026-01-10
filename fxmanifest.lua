@@ -58,6 +58,7 @@ client_scripts {
     "client/[Garage]/_client.lua",
     "client/[Garage]/_blips.lua",
     "client/[Garage]/_machine.lua",
+    "client/[Garage]/_job_vehicles.lua",
     -- IPL management (must load after zones)
     "client/_ipls.lua",
     -- VOIP system (loads before other client scripts for early initialization)
@@ -94,6 +95,7 @@ server_scripts {
     -- Garage system (server-side logic and callbacks)
     "server/[Garage]/_var.lua",
     "server/[Garage]/_callbacks.lua",
+    "server/[Garage]/_job_vehicles.lua",
     -- VOIP system (loads before other server scripts)
     "server/[Voice]/_voip.lua",
     "server/[Third Party]/_queue_config.lua",

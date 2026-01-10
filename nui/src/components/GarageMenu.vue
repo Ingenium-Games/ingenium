@@ -7,31 +7,38 @@
       </div>
       
       <div class="garage-content">
-        <table class="garage-table">
-          <thead>
-            <tr>
-              <th>Plate</th>
-              <th>Name</th>
-              <th>Retrieve</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(vehicle, index) in vehicles" :key="index">
-              <td>{{ vehicle.Plate }}</td>
-              <td>{{ vehicle.Model }}</td>
-              <td>
-                <button 
-                  v-if="vehicle.Parked" 
-                  class="return-btn"
-                  @click="retrieveVehicle(vehicle.Plate)"
-                >
-                  Return Vehicle
-                </button>
-                <span v-else class="out-status">OUT</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- Personal Vehicles Section -->
+        <div class="vehicles-section">
+          <h3 class="section-title">Personal Vehicles</h3>
+          <table class="garage-table">
+            <thead>
+              <tr>
+                <th>Plate</th>
+                <th>Name</th>
+                <th>Retrieve</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(vehicle, index) in vehicles" :key="index">
+                <td>{{ vehicle.Plate }}</td>
+                <td>{{ vehicle.Model }}</td>
+                <td>
+                  <button 
+                    v-if="vehicle.Parked" 
+                    class="return-btn"
+                    @click="retrieveVehicle(vehicle.Plate)"
+                  >
+                    Return Vehicle
+                  </button>
+                  <span v-else class="out-status">OUT</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Job Vehicles Section -->
+        <GarageJobVehicles />
       </div>
     </div>
   </div>
@@ -40,6 +47,7 @@
 <script setup>
 import { ref } from 'vue'
 import { sendNuiMessage } from '../utils/nui'
+import GarageJobVehicles from './GarageJobVehicles.vue'
 
 const isVisible = ref(false)
 const vehicles = ref([])
@@ -150,6 +158,19 @@ if (typeof window !== 'undefined') {
   padding: 20px;
   overflow-y: auto;
   flex: 1;
+}
+
+.vehicles-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  margin: 0 0 15px 0;
+  color: #ecf0f1;
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
 }
 
 .garage-table {
