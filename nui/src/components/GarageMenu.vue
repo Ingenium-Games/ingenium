@@ -32,6 +32,9 @@
             </tr>
           </tbody>
         </table>
+        
+        <!-- Job Vehicles Section -->
+        <GarageJobVehicles />
       </div>
     </div>
   </div>
@@ -40,6 +43,7 @@
 <script setup>
 import { ref } from 'vue'
 import { sendNuiMessage } from '../utils/nui'
+import GarageJobVehicles from './GarageJobVehicles.vue'
 
 const isVisible = ref(false)
 const vehicles = ref([])

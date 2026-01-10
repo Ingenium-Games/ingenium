@@ -94,6 +94,7 @@ server_scripts {
     -- Garage system (server-side logic and callbacks)
     "server/[Garage]/_var.lua",
     "server/[Garage]/_callbacks.lua",
+    "server/[Garage]/garage_job_vehicles.lua",
     -- VOIP system (loads before other server scripts)
     "server/[Voice]/_voip.lua",
     "server/[Third Party]/_queue_config.lua",
