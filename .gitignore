@@ -19,6 +19,10 @@ nui/node_modules/
 nui/package-lock.json
 nui/dist/
 
+# Storybook
+storybook-static/
+nui/**/*.stories.js
+
 # Logs directory
 logs/
 *.log
