@@ -81,6 +81,7 @@ Comprehensive documentation is organized within the repository:
 | **SQL API Reference** | [`Documentation/SQL_API_Reference.md`](./Documentation/SQL_API_Reference.md) |
 | **Security Guide** | [`Documentation/Security_Guide.md`](./Documentation/Security_Guide.md) |
 | **Validation System** | [`Documentation/Validation_Architecture.md`](./Documentation/Validation_Architecture.md) |
+| **Discord Integration** | [`Documentation/Discord_Integration_QuickStart.md`](./Documentation/Discord_Integration_QuickStart.md) |
 | **Zone Management (ig.zone)** | [`Documentation/Zone_Management.md`](./Documentation/Zone_Management.md) |
 | **i18n & Debugging** | [`Documentation/I18N_AND_DEBUGGING.md`](./Documentation/I18N_AND_DEBUGGING.md) |
 | **NUI/Vue System** | [`nui/README.md`](./nui/README.md) |
