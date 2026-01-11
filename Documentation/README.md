@@ -23,6 +23,7 @@ Welcome to the ingenium documentation hub. This centralized resource provides co
 ### Validation & Security
 - **[Validation Architecture](./Validation_Architecture.md)** - Centralized validation system
 - **[Security Guide](./Security_Guide.md)** - Security best practices and implementation
+- **[Discord Integration](./Discord_Integration.md)** - Internal Discord role-based authentication and queue priority
 
 ### Data & Migration
 - **[Migration Infrastructure](./Migration_Infrastructure.md)** - Data migration system and tools
