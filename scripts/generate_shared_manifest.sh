@@ -153,8 +153,15 @@ docs_json_file = sys.argv[2]
 
 try:
     # Read docs JSON from file
-    with open(docs_json_file, 'r') as jf:
-        docs_json_str = jf.read()
+    try:
+        with open(docs_json_file, 'r') as jf:
+            docs_json_str = jf.read()
+    except FileNotFoundError:
+        print(f"Error: Docs JSON file not found at {docs_json_file}", file=sys.stderr)
+        sys.exit(1)
+    except IOError as e:
+        print(f"Error: Failed to read docs JSON file: {e}", file=sys.stderr)
+        sys.exit(1)
     
     # Parse JSON
     try:
@@ -189,7 +196,10 @@ try:
     print("Wrote", manpath)
 
 except Exception as e:
+    # This should rarely be hit as most errors are handled specifically above
+    import traceback
     print(f"Error: Unexpected error occurred: {e}", file=sys.stderr)
+    traceback.print_exc(file=sys.stderr)
     sys.exit(1)
 PY
 
