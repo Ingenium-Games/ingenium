@@ -2,7 +2,7 @@
 
 ## Description
 
-Performs groupdigits operation
+Formats a number with thousands separators (commas). Converts numeric values into human-readable format by inserting commas every three digits.
 
 ## Signature
 
@@ -17,8 +17,12 @@ function ig.math.GroupDigits(val)
 ## Example
 
 ```lua
--- Example usage
-local result = ig.math.GroupDigits(value)
+-- Format numbers with commas
+local formatted = ig.math.GroupDigits("1000000")
+print(formatted)  -- Output: "1,000,000"
+
+local price = ig.math.GroupDigits("99999")
+print(price)  -- Output: "99,999"
 ```
 
 ## Source

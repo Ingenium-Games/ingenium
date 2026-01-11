@@ -2,7 +2,7 @@
 
 ## Description
 
-Performs findhash operation
+Finds doors in the system by their model hash. Returns all door instances that match the specified hash value.
 
 ## Signature
 
@@ -17,8 +17,12 @@ function ig.door.FindHash(hash)
 ## Example
 
 ```lua
--- Example usage
-local result = ig.door.FindHash(value)
+-- Find doors by model hash
+local doorHash = GetHashKey("prop_door_01")
+local doors = ig.door.FindHash(doorHash)
+for _, door in ipairs(doors) do
+    print("Found door at:", door.coords)
+end
 ```
 
 ## Source

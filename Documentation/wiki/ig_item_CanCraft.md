@@ -2,7 +2,7 @@
 
 ## Description
 
-Performs cancraft operation
+Checks if an item can be crafted by verifying if a crafting recipe exists for the specified item.
 
 ## Signature
 
@@ -18,8 +18,11 @@ function ig.item.CanCraft(xPlayer, itemName)
 ## Example
 
 ```lua
--- Example usage
-local result = ig.item.CanCraft(value, value)
+-- Check if item is craftable
+local craftable = ig.item.CanCraft("lockpick")
+if craftable then
+    print("Lockpick can be crafted")
+end
 ```
 
 ## Source

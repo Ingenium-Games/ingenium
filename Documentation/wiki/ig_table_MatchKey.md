@@ -2,7 +2,7 @@
 
 ## Description
 
-Performs matchkey operation
+Searches a table for entries matching a specific key and returns matching elements. Useful for filtering table data by key name.
 
 ## Signature
 
@@ -18,8 +18,14 @@ function ig.table.MatchKey(t, k)
 ## Example
 
 ```lua
--- Example usage
-local result = ig.table.MatchKey({}, value)
+-- Find all entries with specific key
+local data = {
+    {name = "John", age = 30},
+    {name = "Jane", age = 25},
+    {title = "Admin"}
+}
+local withAge = ig.table.MatchKey(data, "age")
+-- Returns entries that have "age" key
 ```
 
 ## Source

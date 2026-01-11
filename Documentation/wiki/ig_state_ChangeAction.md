@@ -2,7 +2,7 @@
 
 ## Description
 
-Performs changeaction operation
+Changes the action handler for a registered state. Allows dynamic modification of what happens when a state is triggered.
 
 ## Signature
 
@@ -19,8 +19,11 @@ function ig.state.ChangeAction(name, value, cb)
 ## Example
 
 ```lua
--- Example usage
-local result = ig.state.ChangeAction("name_example", value, function() end)
+-- Change action for an existing state
+ig.state.ChangeAction("wounded", function(player)
+    print("Player is wounded:", player)
+    -- New handling logic
+end)
 ```
 
 ## Source

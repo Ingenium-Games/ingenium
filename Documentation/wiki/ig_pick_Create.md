@@ -2,7 +2,7 @@
 
 ## Description
 
-Creates a new  instance
+Creates a new pickup object in the world at specified coordinates. Pickups are collectible items that players can interact with. Returns the pickup instance.
 
 ## Signature
 
@@ -20,11 +20,14 @@ function ig.pick.Create(coords, model, event, data)
 ## Example
 
 ```lua
--- Create new 
-local created = ig.pick.Create(value, value, value, {})
-if created then
-    print("Created successfully")
-end
+-- Create pickup at location
+local coords = vector3(100.0, 200.0, 30.0)
+local pickup = ig.pick.Create({
+    coords = coords,
+    model = "prop_cs_box_01",
+    item = "lockpick",
+    amount = 1
+})
 ```
 
 ## Source

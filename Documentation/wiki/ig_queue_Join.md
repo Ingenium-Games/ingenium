@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Handles player connection to the queue system. This is the main entry point for players joining the server queue. Manages queue position, priority calculation, and connection flow.
 
 ## Signature
 
@@ -13,8 +13,9 @@ function ig.queue.Join(source, name, setKickReason, deferrals)
 ## Example
 
 ```lua
--- Example usage of ig.queue.Join
-local result = ig.queue.Join(source, name, setKickReason, deferrals)
+-- This function is called internally by the queue system
+-- when a player attempts to join the server
+-- It handles priority calculation and queue management automatically
 ```
 
 ## Source

@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+This function name appears to be an alias or unused. Use ig.note.CleanOld() instead to remove old notes based on age.
 
 ## Signature
 
@@ -18,8 +18,12 @@ function ig.note.Clean()
 ## Example
 
 ```lua
--- Example usage of ig.note.Clean
-ig.note.Clean()
+-- Note: Use ig.note.CleanOld() instead
+-- Clean notes older than default configured time
+local removed = ig.note.CleanOld()
+
+-- Clean notes older than 1 hour (3600 seconds)
+local removed = ig.note.CleanOld(3600)
 ```
 
 ## Related Functions
