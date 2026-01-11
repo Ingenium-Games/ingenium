@@ -45,6 +45,49 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             Queue.AddPriority(data.Steam_ID)
         end
     end
+    
+    -- Add Discord-based priority to queue
+    if conf.discord.priority_enabled then
+        local discordPrioritySet = false
+        ig.discord.HasAnyRole(src, 
+            (function()
+                local roleIds = {}
+                if conf.discord.priority_roles then
+                    for _, role in ipairs(conf.discord.priority_roles) do
+                        table.insert(roleIds, role.id)
+                    end
+                end
+                return roleIds
+            end)(),
+            function(hasAnyRole, matchedRoles)
+                if hasAnyRole and #matchedRoles > 0 then
+                    -- Find highest priority from matched roles
+                    local highestPower = 0
+                    for _, matchedRoleId in ipairs(matchedRoles) do
+                        for _, priorityRole in ipairs(conf.discord.priority_roles) do
+                            if priorityRole.id == matchedRoleId and priorityRole.power > highestPower then
+                                highestPower = priorityRole.power
+                            end
+                        end
+                    end
+                    
+                    if highestPower > 0 then
+                        -- Get player identifiers for queue priority
+                        local ids = Queue:GetIds(src)
+                        if ids and ids[1] then
+                            Queue.AddPriority(ids[1], highestPower)
+                        end
+                    end
+                end
+                discordPrioritySet = true
+            end
+        )
+        
+        -- Wait for Discord priority check to complete
+        while not discordPrioritySet do
+            Citizen.Wait(100)
+        end
+    end
     --[[ 
 
         This section detects any non alphanumeric characters in usernames. 
@@ -75,12 +118,15 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     d.update(_("defer_stuck_message"))
     --
     local discord = false
+    local discordCheckComplete = false
+    
     if conf.discord.permissions then
-        exports["discordroles"]:isRolePresent(src, conf.discord.role, function(hasRole, roles)
-            if hasRole then
-                discord = true
-            else
-                discord = false
+        -- Use internal Discord module
+        ig.discord.HasMemberRole(src, function(hasMemberRole)
+            discord = hasMemberRole
+            discordCheckComplete = true
+            
+            if not hasMemberRole then
                 drop = true
                 table.insert(facts.facts, DeferralCards.Container:Fact({
                     title = _("defer_issue"),
@@ -88,6 +134,13 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 }))
             end
         end)
+        
+        -- Wait for Discord check to complete
+        while not discordCheckComplete do
+            Citizen.Wait(100)
+        end
+    else
+        discordCheckComplete = true
     end
     --
     Citizen.Wait(0)
