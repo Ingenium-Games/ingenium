@@ -2,9 +2,7 @@
 -- Chat System Configuration
 -- ====================================================================================--
 
-ig.chat = ig.chat or {}
-
-ig.chat.config = {
+conf.chat = {
     -- Enable/disable chat logging
     logging = {
         enabled = true,
@@ -36,51 +34,18 @@ ig.chat.config = {
     }
 }
 
--- Function to format chat log entry
-function ig.chat.FormatLogEntry(source, playerName, message, isCommand)
-    local timestamp = os.date("%Y-%m-%d %H:%M:%S")
-    local identifiers = ""
-    local coords = ""
-    
-    if ig.chat.config.logging.includeIdentifiers and source > 0 then
-        local ids = ig.func.GetPlayerIdentifiers(source)
-        if ids then
-            identifiers = string.format(" [%s]", ids.steam or ids.license or "unknown")
-        end
-    end
-    
-    if ig.chat.config.logging.includeCoordinates and source > 0 then
-        local ped = GetPlayerPed(source)
-        if ped and ped > 0 then
-            local playerCoords = GetEntityCoords(ped)
-            coords = string.format(" @(%.1f, %.1f, %.1f)", playerCoords.x, playerCoords.y, playerCoords.z)
-        end
-    end
-    
-    local messageType = isCommand and "COMMAND" or "MESSAGE"
-    return string.format("[%s] [%s] %s (ID: %d)%s%s: %s", 
-        timestamp, 
-        messageType,
-        playerName, 
-        source,
-        identifiers,
-        coords,
-        message
-    )
-end
-
 -- Example configuration - copy this to your server's config
 --[[
 -- Enable chat logging with all options
-ig.chat.config.logging.enabled = true
-ig.chat.config.logging.logToFile = true
-ig.chat.config.logging.logToTxAdmin = true
-ig.chat.config.logging.logMessages = true
-ig.chat.config.logging.logCommands = true
+conf.chat.logging.enabled = true
+conf.chat.logging.logToFile = true
+conf.chat.logging.logToTxAdmin = true
+conf.chat.logging.logMessages = true
+conf.chat.logging.logCommands = true
 
 -- Or use convars
 local chatLogging = GetConvar('ig_chat_logging', 'true')
 if chatLogging == 'true' then
-    ig.chat.config.logging.enabled = true
+    conf.chat.logging.enabled = true
 end
 ]]--

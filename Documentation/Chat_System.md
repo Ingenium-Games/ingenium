@@ -42,7 +42,7 @@ The chat system includes comprehensive logging capabilities that can log to both
 Configure chat logging in `_config/chat.lua`:
 
 ```lua
-ig.chat.config = {
+conf.chat = {
     logging = {
         enabled = true,
         
@@ -101,8 +101,8 @@ exports['ingenium']:LogChatMessage(
 )
 
 -- Enable/disable logging dynamically
-ig.chat.config.logging.enabled = false  -- Disable logging
-ig.chat.config.logging.enabled = true   -- Re-enable logging
+conf.chat.logging.enabled = false  -- Disable logging
+conf.chat.logging.enabled = true   -- Re-enable logging
 
 -- Configure via convars (in server.cfg)
 set ig_chat_logging "true"

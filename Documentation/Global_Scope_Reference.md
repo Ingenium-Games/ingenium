@@ -81,6 +81,36 @@ conf = {
         controlIdleInterval   -- Control state idle check interval
     }
     
+    -- Chat system configuration
+    chat = {
+        logging = {
+            enabled, logToFile, logDirectory, logToTxAdmin,
+            logMessages, logCommands,
+            includeCoordinates, includeIdentifiers,
+            maxLogDays
+        },
+        messageSettings = {
+            maxLength, allowEmptyMessages, filterProfanity
+        }
+    }
+    
+    -- Screenshot system configuration
+    screenshot = {
+        enabled, quality, encoding,
+        outputs = {
+            discord = {enabled, webhook, username, avatar_url},
+            imageHost = {enabled, url, headers},
+            discourse = {enabled, url, apiKey, apiUsername, categoryId}
+        },
+        autoScreenshot = {
+            onReport, onError, onDeath, onBan
+        },
+        includeMetadata = {
+            playerName, playerIdentifiers, coordinates,
+            gameTime, vehicleInfo, nearbyPlayers
+        }
+    }
+    
     -- System
     consolechannel, lock
 }
