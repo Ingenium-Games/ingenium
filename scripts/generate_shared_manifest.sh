@@ -117,8 +117,7 @@ for repo_entry in "${repos_arr[@]}"; do
       --arg ref "commit:${commit_sha}" \
       --arg permalink "${permalink}" \
       '{id:$id,repo:$repo,path:$path,ref:$ref,permalink:$permalink}')"
-    docs_json="$(cat "${docs_json_tmpfile}" | jq ". + [${entry}]")"
-    printf '%s' "${docs_json}" > "${docs_json_tmpfile}"
+    jq ". + [${entry}]" "${docs_json_tmpfile}" > "${docs_json_tmpfile}.tmp" && mv "${docs_json_tmpfile}.tmp" "${docs_json_tmpfile}"
   done
 done
 
@@ -134,7 +133,7 @@ if ! jq empty < "${docs_json_tmpfile}" 2>/dev/null; then
   exit 1
 fi
 
-if [ ! -s "${docs_json_tmpfile}" ] || jq -e '. == []' < "${docs_json_tmpfile}" >/dev/null 2>&1; then
+if jq -e '. == []' < "${docs_json_tmpfile}" >/dev/null 2>&1; then
   echo "Warning: No markdown files found in configured repositories"
 fi
 
