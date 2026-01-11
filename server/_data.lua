@@ -2,6 +2,9 @@
 ig.data = {} -- data table for funcitons.
 -- ====================================================================================--
 
+-- Flags to prevent duplicate cron registrations
+local syncRegistered = false
+local reviveRegistered = false
 
 -- ====================================================================================--
 -- 
@@ -106,7 +109,6 @@ end
 -- Server to DB routine - Uses cron for time-based saves
 -- Registers different save operations at appropriate intervals via cron
 function ig.data.ServerSync()
-    local syncRegistered = false
     if not syncRegistered then
         -- User sync - every 2 minutes (90 seconds rounds to 2 min for cron)
         for hour = 0, 23 do
@@ -149,7 +151,6 @@ end
 
 -- Server to DB routine - Revive dead characters every minute via cron
 function ig.data.ReviveSync()
-    local reviveRegistered = false
     if not reviveRegistered then
         -- Register for every minute of every hour
         for hour = 0, 23 do
