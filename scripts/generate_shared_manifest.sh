@@ -130,12 +130,15 @@ if [ "${docs_json}" = "[]" ]; then
 fi
 
 # Use python3 to merge and write manifest (preserves other fields)
-export DOCS_JSON="${docs_json}"
-python3 - "${MANIFEST_PATH}" <<'PY'
-import sys, yaml, json, os
+# Write docs_json to a temporary file to avoid "Argument list too long" error
+docs_json_tmpfile=$(mktemp)
+echo "${docs_json}" > "$docs_json_tmpfile"
+python3 - "${MANIFEST_PATH}" "$docs_json_tmpfile" <<'PY'
+import sys, yaml, json
 manpath = sys.argv[1]
-# Get JSON string from environment (default to empty array as JSON string)
-docs_json_str = os.environ.get('DOCS_JSON', '[]')
+docs_json_file = sys.argv[2]
+with open(docs_json_file, 'r') as jf:
+    docs_json_str = jf.read()
 with open(manpath, 'r') as f:
     m = yaml.safe_load(f)
 docs = json.loads(docs_json_str)
@@ -145,5 +148,8 @@ with open(manpath, 'w') as f:
     f.write(yaml.safe_dump(m, sort_keys=False))
 print("Wrote", manpath)
 PY
+
+# Clean up temporary file
+rm -f "$docs_json_tmpfile"
 
 echo "Manifest regenerated at ${MANIFEST_PATH}"
