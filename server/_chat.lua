@@ -211,11 +211,14 @@ CreateThread(function()
     end
 end)
 
--- Periodic cleanup check (once per day)
-CreateThread(function()
-    while true do
-        Wait(86400000) -- 24 hours
-        CleanupOldLogs()
+-- Periodic cleanup check (once per day) - registered with cron system
+local cleanupRegistered = false
+AddEventHandler("onServerResourceStart", function()
+    if not cleanupRegistered then
+        -- Run cleanup at 3:00 AM daily (common maintenance time)
+        ig.cron.RunAt(3, 0, CleanupOldLogs)
+        cleanupRegistered = true
+        print('[IG Chat] Registered daily log cleanup with cron (3:00 AM)')
     end
 end)
 
