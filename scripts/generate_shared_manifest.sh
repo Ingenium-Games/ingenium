@@ -108,6 +108,7 @@ export DOCS_JSON="${docs_json}"
 python3 - "${MANIFEST_PATH}" <<'PY'
 import sys, yaml, json, os
 manpath = sys.argv[1]
+# Get JSON string from environment (default to empty array as JSON string)
 docs_json_str = os.environ.get('DOCS_JSON', '[]')
 with open(manpath, 'r') as f:
     m = yaml.safe_load(f)
