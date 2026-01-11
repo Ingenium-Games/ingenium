@@ -21,25 +21,19 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          # Use package.json for cache key so an out-of-sync package-lock.json won't
-          # cause the setup-node cache action to fail. This prevents CI failures
-          # when package-lock.json is out of sync with package.json.
           cache-dependency-path: 'nui/package.json'
 
       - name: Install dependencies
         working-directory: ./nui
-        run: |
-          # Remove any existing lockfile to avoid failures when it's out of sync
-          rm -f package-lock.json
-          npm install
+        run: npm ci || npm install
 
       - name: Build Storybook
         working-directory: ./nui
-        run: npm run build-storybook
+        run: npm run build-storybook -- --debug-webpack
 
       - name: Deploy Storybook to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: nui/storybook-static
+          folder: storybook-static
           token: ${{ secrets.GITHUB_TOKEN }}
