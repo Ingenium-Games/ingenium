@@ -387,6 +387,44 @@ For issues or questions:
 3. Review this documentation
 4. Contact server developers
 
+## Refactoring and Framework Integration
+
+The queue system has been refactored to leverage existing framework functions:
+
+### Framework Functions Used
+
+1. **`ig.func.identifiers(source)`** - Retrieves all player identifiers (steam, fivem, license, discord, ip)
+2. **`ig.func.identifier(source)`** - Retrieves primary identifier (license)
+3. **`ig.func.Debug_1(msg)`** - Debug logging with framework's debug system
+4. **`ig.sql.FetchScalar(query, params)`** - Database scalar queries
+
+### Identifier Handling
+
+Instead of separate functions for each identifier type, the system uses a unified table-based approach:
+
+```lua
+local identifiers = GetPlayerIdentifiers(src)
+-- Returns:
+-- {
+--   steam = "steam:...",
+--   fivem = "fivem:...",
+--   license = "license:...",
+--   discord = "discord:...",
+--   ip = "ip:...",
+--   array = function() -- Returns array format for compatibility
+-- }
+
+-- Access identifiers
+if identifiers.steam then
+    -- Player has Steam
+end
+
+-- Get all identifiers as array
+local idArray = identifiers.array()
+```
+
+This eliminates code duplication and provides a consistent interface for identifier access throughout the queue system.
+
 ## Credits
 
 - **ConnectQueue** by Nick78111 - Original queue system
