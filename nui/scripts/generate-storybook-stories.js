@@ -10,10 +10,13 @@ const SEARCH_DIR = join(ROOT, 'src');
 
 function toTitleCase(str) {
   return str
-    .replace(/[-_.]/g, ' ')
-    .replace(/\b(.)/g, (m) => m.toUpperCase())
-    .replace(/\s+/g, ' ')
-    .trim();
+    .replace(/\.vue$/, '')
+    .split('/')
+    .map(segment => segment
+      .replace(/[-_]/g, ' ')
+      .replace(/\b(.)/g, (m) => m.toUpperCase())
+    )
+    .join('/');
 }
 
 function findVueFiles(dir, fileList = []) {
@@ -54,7 +57,7 @@ files.forEach((file) => {
   const relPath = relative(SEARCH_DIR, file);
   const title = `NUI/${toTitleCase(relPath)}`;
 
-  const content = `import Component from '${relImportPath}';\n\nexport default { title: '${title}', component: Component };\n\nexport const Default = () => ({\n  components: { Component },\n  template: '<component :is="Component" />'\n});\n`;
+  const content = `import Component from '${relImportPath}';\n\nexport default { title: '${title}', component: Component };\n\nexport const Default = {\n  render: () => ({\n    components: { Component },\n    template: '<component :is="Component" />'\n  })\n};\n`;
 
   writeFileSync(storyFile, content, 'utf8');
   console.log(`Generated ${relative(ROOT, storyFile)}`);
