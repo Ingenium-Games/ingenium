@@ -81,7 +81,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         
         -- Wait for Discord priority check to complete with timeout
         local waitCount = 0
-        while not discordPrioritySet and waitCount < 100 do -- Max 5 seconds
+        while not discordPrioritySet and waitCount < 40 do -- Max 2 seconds
             Citizen.Wait(50)
             waitCount = waitCount + 1
         end
@@ -135,7 +135,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
         
         -- Wait for Discord check to complete with timeout
         local waitCount = 0
-        while not discordCheckComplete and waitCount < 100 do -- Max 5 seconds
+        while not discordCheckComplete and waitCount < 40 do -- Max 2 seconds
             Citizen.Wait(50)
             waitCount = waitCount + 1
         end

@@ -9,6 +9,7 @@ ig.discord = {}
 local roleCache = {}
 local cacheTimeout = 300 -- 5 minutes in seconds
 local maxCacheSize = 500 -- Maximum number of cached users
+local cacheCount = 0 -- Track cache size efficiently
 
 ---@param discordId string The Discord ID (e.g., "discord:123456789")
 ---@return string|nil The Discord ID without prefix, or nil if invalid
@@ -85,9 +86,6 @@ function ig.discord.HasRole(src, roleId, callback)
             local data = json.decode(response)
             if data and data.roles then
                 -- Check cache size and remove oldest entry if needed
-                local cacheCount = 0
-                for _ in pairs(roleCache) do cacheCount = cacheCount + 1 end
-                
                 if cacheCount >= maxCacheSize then
                     -- Find and remove oldest entry
                     local oldestId = nil
@@ -100,10 +98,14 @@ function ig.discord.HasRole(src, roleId, callback)
                     end
                     if oldestId then
                         roleCache[oldestId] = nil
+                        cacheCount = cacheCount - 1
                     end
                 end
                 
                 -- Cache the roles
+                if not roleCache[cleanDiscordId] then
+                    cacheCount = cacheCount + 1
+                end
                 roleCache[cleanDiscordId] = {
                     roles = data.roles,
                     timestamp = os.time()
@@ -217,10 +219,15 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(60000) -- Every minute
         local currentTime = os.time()
+        local removed = 0
         for discordId, data in pairs(roleCache) do
             if currentTime - data.timestamp >= cacheTimeout then
                 roleCache[discordId] = nil
+                removed = removed + 1
             end
+        end
+        if removed > 0 then
+            cacheCount = cacheCount - removed
         end
     end
 end)
