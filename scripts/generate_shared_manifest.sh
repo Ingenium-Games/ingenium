@@ -28,7 +28,7 @@ echo "Regenerating ${MANIFEST_PATH} for repos: ${REPOS_ENV}"
 get_commit_sha() {
   local repo="$1" ref="$2"
   # Try heads ref
-  sha="$(curl -sS -H "Authorization: token ${GITHUB_TOKEN}" \
+  sha="$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
     "${GITHUB_API}/repos/${repo}/git/refs/heads/${ref}" \
     | jq -r '.object.sha' 2>/dev/null || true)"
   if [ -n "${sha}" ] && [ "${sha}" != "null" ]; then
@@ -36,7 +36,7 @@ get_commit_sha() {
     return
   fi
   # Try tags ref
-  sha="$(curl -sS -H "Authorization: token ${GITHUB_TOKEN}" \
+  sha="$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
     "${GITHUB_API}/repos/${repo}/git/refs/tags/${ref}" \
     | jq -r '.object.sha' 2>/dev/null || true)"
   if [ -n "${sha}" ] && [ "${sha}" != "null" ]; then
@@ -62,7 +62,7 @@ for repo_entry in "${repos_arr[@]}"; do
   echo "Resolved ${repo_ref} -> ${commit_sha}"
 
   # Get tree (recursive)
-  tree_json="$(curl -sS -H "Authorization: token ${GITHUB_TOKEN}" \
+  tree_json="$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
     "${GITHUB_API}/repos/${repo_name}/git/trees/${commit_sha}?recursive=1")"
 
   # For each markdown file, create an entry
