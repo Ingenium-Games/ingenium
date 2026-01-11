@@ -93,13 +93,26 @@ if [ ! -f "${MANIFEST_PATH}" ]; then
   exit 1
 fi
 
+# Validate docs_json before processing
+if ! echo "${docs_json}" | jq empty 2>/dev/null; then
+  echo "Error: docs_json is not valid JSON"
+  exit 1
+fi
+
+if [ "${docs_json}" = "[]" ]; then
+  echo "Warning: No markdown files found in configured repositories"
+fi
+
 # Use python3 to merge and write manifest (preserves other fields)
-echo "${docs_json}" | python3 - "${MANIFEST_PATH}" <<'PY'
-import sys, yaml, json
+export DOCS_JSON="${docs_json}"
+python3 - "${MANIFEST_PATH}" <<'PY'
+import sys, yaml, json, os
 manpath = sys.argv[1]
+# Get JSON string from environment (default to empty array as JSON string)
+docs_json_str = os.environ.get('DOCS_JSON', '[]')
 with open(manpath, 'r') as f:
     m = yaml.safe_load(f)
-docs = json.load(sys.stdin)
+docs = json.loads(docs_json_str)
 m.setdefault('references', {})
 m['references']['docs'] = docs
 with open(manpath, 'w') as f:
