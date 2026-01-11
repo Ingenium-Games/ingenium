@@ -1,0 +1,51 @@
+version: 1
+environment: shared-ingenium
+metadata:
+  title: "Shared MCP manifest for Ingenium + Ingenium.sql"
+  description: "Authoritative manifest mapping stable permalinks and references across Ingenium-Games/ingenium and Ingenium-Games/ingenium.sql. Auto-regenerated on documentation/implementation/wiki changes."
+  maintainer: "ops-team@example.com"
+  created_at: "2026-01-11T00:00:00Z"
+repositories:
+  - name: "Ingenium-Games/ingenium"
+    repo_id: 315585060
+    default_ref: "main"
+    note: "Primary framework. Contains Lua core, Vue UI, and docs."
+    docs_discovery:
+      include_globs:
+        - "**/*.md"
+        - "**/*.markdown"
+        - "docs/**"
+        - "wiki/**"
+      exclude_globs:
+        - "node_modules/**"
+        - ".venv/**"
+  - name: "Ingenium-Games/ingenium.sql"
+    repo_id: 1127453727
+    default_ref: "main"
+    note: "SQL handler for Ingenium. References and docs must be kept in sync with the framework repo."
+    docs_discovery:
+      include_globs:
+        - "**/*.md"
+        - "**/*.markdown"
+        - "docs/**"
+        - "wiki/**"
+      exclude_globs:
+        - "node_modules/**"
+update_policy:
+  auto_regenerate_on_docs_change: true
+  regenerate_on:
+    - "docs/**"
+    - "**/*.md"
+    - "**/*.markdown"
+    - "wiki/**"
+  method: "script"
+  script_path: "scripts/generate_shared_manifest.sh"
+  commit_changes: true
+  commit_message: "chore(mcp): regenerate .mcp/manifest.yaml (docs changed)"
+references:
+  docs: []
+rules:
+  - id: "strict_permalinks"
+    description: "Agents MUST prefer the manifest permalink/ref when resolving references. Do not substitute branches unless explicitly requested."
+  - id: "no_secrets"
+    description: "This manifest MUST NOT contain plaintext secrets. Use secret references and secrets manager integrations."
