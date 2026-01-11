@@ -109,8 +109,8 @@ dependencies {
     "/onesync",
     "restfx",
     "freecam",
+    "screenshot-basic",
     --"sit",
-    --"screenshot-basic",
     --"glm"
 }
 ------------------------------------------------------------------------------

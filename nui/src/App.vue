@@ -1,5 +1,8 @@
 <template>
   <div class="nui-container">
+    <!-- Chat (always rendered for message display) -->
+    <Chat />
+    
     <!-- Character Select -->
     <CharacterSelect v-if="uiStore.showCharacterSelect" />
     
@@ -36,6 +39,7 @@
 import { onMounted, onUnmounted } from 'vue'
 import { useUIStore } from './stores/ui'
 import { setupNuiHandlers } from './utils/nui'
+import Chat from './components/Chat.vue'
 import CharacterSelect from './components/CharacterSelect.vue'
 import HUD from './components/HUD.vue'
 import NotificationContainer from './components/NotificationContainer.vue'
