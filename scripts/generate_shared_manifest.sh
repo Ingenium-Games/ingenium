@@ -97,11 +97,13 @@ fi
 python3 - <<PY
 import sys, yaml, json
 manpath = "${MANIFEST_PATH}"
-m = yaml.safe_load(open(manpath))
+with open(manpath, 'r') as f:
+    m = yaml.safe_load(f)
 docs = json.loads('''${docs_json}''')
 m.setdefault('references', {})
 m['references']['docs'] = docs
-open(manpath, 'w').write(yaml.safe_dump(m, sort_keys=False))
+with open(manpath, 'w') as f:
+    f.write(yaml.safe_dump(m, sort_keys=False))
 print("Wrote", manpath)
 PY
 

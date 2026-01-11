@@ -27,7 +27,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq python3 python3-pip
-          pip3 install --user yq 2>/dev/null || echo "yq installation skipped (optional)"
+          pip3 install yq 2>/dev/null || echo "yq installation skipped (optional)"
 
       - name: Regenerate manifest
         env:
