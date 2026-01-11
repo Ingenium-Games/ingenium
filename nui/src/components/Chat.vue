@@ -46,10 +46,17 @@
 <script setup>
 import { ref, computed, watch, nextTick } from 'vue'
 import { useChatStore } from '../stores/chat'
+import { sendNuiMessage } from '../utils/nui'
 
 const chatStore = useChatStore()
 const messagesContainer = ref(null)
 const chatInput = ref(null)
+
+// Get resource name for NUI callbacks
+let resourceName = 'ingenium' // Fallback
+if (window.GetParentResourceName) {
+  resourceName = window.GetParentResourceName()
+}
 
 // Show messages from the last 10 seconds, or all messages if chat is visible
 const visibleMessages = computed(() => {
@@ -111,7 +118,7 @@ function sendMessage() {
   }
   
   // Send message to Lua
-  fetch(`https://ingenium/chatSubmit`, {
+  fetch(`https://${resourceName}/chatSubmit`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -126,7 +133,7 @@ function sendMessage() {
 }
 
 function closeChat() {
-  fetch(`https://ingenium/chatClose`, {
+  fetch(`https://${resourceName}/chatClose`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

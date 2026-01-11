@@ -53,7 +53,9 @@ function ig.screenshot.SendToDiscord(imageUrl, metadata)
         return
     end
     
-    if not ig.screenshot.ValidateWebhook(webhook) then
+    -- Validate Discord webhook URL format
+    if not string.match(webhook, "^https://discord%.com/api/webhooks/%d+/[%w_-]+$") and
+       not string.match(webhook, "^https://discordapp%.com/api/webhooks/%d+/[%w_-]+$") then
         print('[IG Screenshot] Invalid Discord webhook URL')
         return
     end
@@ -212,10 +214,11 @@ function ig.screenshot.SendToDiscourse(imageUrl, metadata)
         json.encode(metadata, {indent = true})
     )
     
+    local categoryId = ig.screenshot.config.outputs.discourse.categoryId or 4
     local payload = {
         title = title,
         raw = body,
-        category = 4, -- Adjust category ID as needed
+        category = categoryId,
     }
     
     PerformHttpRequest(discourseUrl .. '/posts.json', function(err, text, headers)
@@ -259,8 +262,9 @@ RegisterCommand('takescreenshot', function(source, args, rawCommand)
         return
     end
     
-    local targetPlayer = GetPlayerPed(playerId)
-    if not targetPlayer or targetPlayer == 0 then
+    -- Check if player exists
+    local targetPlayerName = GetPlayerName(playerId)
+    if not targetPlayerName then
         TriggerClientEvent('Client:Notify', source, 'Player not found', 'red', 5000)
         return
     end

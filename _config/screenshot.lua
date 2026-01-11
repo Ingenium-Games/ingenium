@@ -34,7 +34,8 @@ ig.screenshot.config = {
             enabled = false,
             url = "", -- Your Discourse instance URL
             apiKey = "", -- Discourse API key
-            apiUsername = "" -- Discourse API username
+            apiUsername = "", -- Discourse API username
+            categoryId = 4 -- Category ID for screenshot posts (default: 4)
         }
     },
     
