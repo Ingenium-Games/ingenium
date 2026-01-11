@@ -68,9 +68,13 @@ for repo_entry in "${repos_arr[@]}"; do
   # For each markdown file, create an entry
   mapfile -t md_paths < <(echo "${tree_json}" \
     | jq -r '.tree[] | select(.type=="blob") | .path' \
-    | grep -E '\\.(md|markdown)$' || true)
+    | grep -E '\.(md|markdown)$' || true)
 
   for mdpath in "${md_paths[@]}"; do
+    # Skip empty paths
+    if [ -z "${mdpath}" ]; then
+      continue
+    fi
     permalink="https://github.com/${repo_name}/blob/${commit_sha}/${mdpath}"
     entry="$(jq -n \
       --arg id "$(basename "${repo_name}")/${mdpath}" \
