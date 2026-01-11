@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Adds  to the system
 
 ## Signature
 
@@ -10,24 +10,17 @@
 function ig.sql.char.Add(t, cb)
 ```
 
+## Parameters
+
+- **`t`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.char.Add
-ig.sql.char.Add(item)
+-- Example usage
+local result = ig.sql.char.Add(value, function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.char.AddOutfit](ig_sql_char_AddOutfit.md)
-- [ig.sql.char.Current](ig_sql_char_Current.md)
-- [ig.sql.char.Delete](ig_sql_char_Delete.md)
-- [ig.sql.char.Get](ig_sql_char_Get.md)
-- [ig.sql.char.GetAll](ig_sql_char_GetAll.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs randommale operation
 
 ## Signature
 
@@ -12,20 +12,14 @@ function ig.name.RandomMale()
 
 ## Parameters
 
-- **`.`**: any
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.name.RandomMale
-ig.name.RandomMale()
+-- Example usage
+local result = ig.name.RandomMale()
 ```
-
-## Related Functions
-
-- [ig.name.Load](ig_name_Load.md)
-- [ig.name.RandomFemale](ig_name_RandomFemale.md)
-- [ig.name.RandomUnisex](ig_name_RandomUnisex.md)
 
 ## Source
 

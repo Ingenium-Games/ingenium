@@ -2,7 +2,7 @@
 
 ## Description
 
-end
+Retrieves and returns vehicles data
 
 ## Signature
 
@@ -12,25 +12,17 @@ function ig.vehicle.GetVehicles()
 
 ## Parameters
 
-- **`net`**: any
-- **`cb`**: any
-- **`net`**: integer "Network ID 16 bit integer or Plate (8 char string)
-- **`net`**: integer "Network ID 16 bit integer or Plate (8 char string)
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.vehicle.GetVehicles
+-- Get vehicles data
 local result = ig.vehicle.GetVehicles()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md)
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
-- [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
 
 ## Source
 

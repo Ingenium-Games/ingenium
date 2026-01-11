@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Updates  data
 
 ## Signature
 
@@ -10,20 +10,18 @@
 function ig.note.Update(id, newContent, editor)
 ```
 
+## Parameters
+
+- **`id`**: string
+- **`newContent`**: any
+- **`editor`**: number
+
 ## Example
 
 ```lua
--- Example usage of ig.note.Update
-local result = ig.note.Update(id, newContent, editor)
+-- Example usage
+local result = ig.note.Update("id_12345", value, 100)
 ```
-
-## Related Functions
-
-- [ig.note.Add](ig_note_Add.md)
-- [ig.note.Clean](ig_note_Clean.md)
-- [ig.note.CleanOld](ig_note_CleanOld.md)
-- [ig.note.CleanUp](ig_note_CleanUp.md)
-- [ig.note.Create](ig_note_Create.md)
 
 ## Source
 

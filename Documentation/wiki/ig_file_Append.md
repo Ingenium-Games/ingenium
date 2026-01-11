@@ -2,7 +2,7 @@
 
 ## Description
 
-Write a string to a file.
+Performs append operation
 
 ## Signature
 
@@ -13,27 +13,14 @@ function ig.file.Append(file, data)
 ## Parameters
 
 - **`file`**: any
-- **`file`**: any
-- **`data`**: any
-- **`file`**: any
-- **`data`**: any
+- **`data`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.file.Append
-local result = ig.file.Append(file, data)
+-- Example usage
+local result = ig.file.Append(value, 100)
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.file.Exists](ig_file_Exists.md)
-- [ig.file.Read](ig_file_Read.md)
-- [ig.file.Write](ig_file_Write.md)
 
 ## Source
 

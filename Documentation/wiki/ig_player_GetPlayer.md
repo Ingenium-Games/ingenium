@@ -2,7 +2,7 @@
 
 ## Description
 
-Adds player to the player index.
+Retrieves and returns player data
 
 ## Signature
 
@@ -12,23 +12,17 @@ function ig.player.GetPlayer(source)
 
 ## Parameters
 
-- **`source`**: number "source [server_id]
 - **`source`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.player.GetPlayer
-local result = ig.player.GetPlayer()
+-- Get player data
+local result = ig.player.GetPlayer(100)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.player.AddPlayer](ig_player_AddPlayer.md)
-- [ig.player.ArePlayersActive](ig_player_ArePlayersActive.md)
-- [ig.player.GetOfflinePlayer](ig_player_GetOfflinePlayer.md)
-- [ig.player.GetPlayerByCharacterID](ig_player_GetPlayerByCharacterID.md)
-- [ig.player.GetPlayers](ig_player_GetPlayers.md)
 
 ## Source
 

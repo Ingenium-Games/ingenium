@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs logtransaction operation
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.security.LogTransaction(player, transactionType, amount, reason)
 
 ## Parameters
 
-- **`player`**: table Player object
-- **`transactionType`**: string Type of transaction (e.g., "add_cash", "remove_cash", "set_bank")
-- **`amount`**: number Transaction amount
-- **`reason`**: string Reason for transaction
+- **`player`**: any
+- **`transactionType`**: any
+- **`amount`**: number
+- **`reason`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.security.LogTransaction
-local result = ig.security.LogTransaction(player, transactionType, amount, reason)
+-- Example usage
+local result = ig.security.LogTransaction(value, value, 100, value)
 ```
-
-## Related Functions
-
-- [ig.security.CheckRateLimit](ig_security_CheckRateLimit.md)
-- [ig.security.CheckTransactionRateLimit](ig_security_CheckTransactionRateLimit.md)
-- [ig.security.DetectSuspiciousActivity](ig_security_DetectSuspiciousActivity.md)
-- [ig.security.LogPlayerTransaction](ig_security_LogPlayerTransaction.md)
 
 ## Source
 

@@ -12,24 +12,15 @@ function ig.validation.ValidateSlot(slot, index)
 
 ## Parameters
 
-- **`itemName`**: string - Name of the item to check
-- **`slot`**: table - Inventory slot to validate
-- **`index`**: number - Slot index for error reporting
+- **`slot`**: number
+- **`index`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.validation.ValidateSlot
-local result = ig.validation.ValidateSlot(slot, index)
+-- Example usage
+local result = ig.validation.ValidateSlot(100, 100)
 ```
-
-## Related Functions
-
-- [ig.validation.GetItemQuantities](ig_validation_GetItemQuantities.md)
-- [ig.validation.IsValidItem](ig_validation_IsValidItem.md)
-- [ig.validation.LogAndBanExploiter](ig_validation_LogAndBanExploiter.md)
-- [ig.validation.ValidateAndUnpack](ig_validation_ValidateAndUnpack.md)
-- [ig.validation.ValidateInventory](ig_validation_ValidateInventory.md)
 
 ## Source
 

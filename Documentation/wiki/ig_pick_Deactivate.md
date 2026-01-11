@@ -2,7 +2,7 @@
 
 ## Description
 
-Sort by distance
+Performs deactivate operation
 
 ## Signature
 
@@ -12,24 +12,15 @@ function ig.pick.Deactivate(uuid, duration)
 
 ## Parameters
 
-- **`model`**: number Model hash
-- **`uuid`**: string Pickup UUID
-- **`duration`**: number|nil Duration in ms (permanent if nil)
+- **`uuid`**: string
+- **`duration`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.pick.Deactivate
-local result = ig.pick.Deactivate(uuid, duration)
+-- Example usage
+local result = ig.pick.Deactivate("id_12345", "duration")
 ```
-
-## Related Functions
-
-- [ig.pick.Activate](ig_pick_Activate.md)
-- [ig.pick.CleanupOld](ig_pick_CleanupOld.md)
-- [ig.pick.Collect](ig_pick_Collect.md)
-- [ig.pick.Create](ig_pick_Create.md)
-- [ig.pick.CreateLoot](ig_pick_CreateLoot.md)
 
 ## Source
 

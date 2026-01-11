@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Legacy function name. Use ig.note.CleanOld() to remove old notes from the system based on age threshold.
 
 ## Signature
 
@@ -17,8 +17,9 @@ function ig.note.CleanUp()
 ## Example
 
 ```lua
--- Example usage of ig.note.CleanUp
-ig.note.CleanUp()
+-- Clean old notes from system
+local removed = ig.note.CleanOld()
+print("Removed " .. removed .. " old notes")
 ```
 
 ## Related Functions

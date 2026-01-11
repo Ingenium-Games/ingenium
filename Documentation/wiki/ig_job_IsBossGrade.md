@@ -2,7 +2,7 @@
 
 ## Description
 
-Get grade name
+Checks and returns whether isbossgrade condition is met
 
 ## Signature
 
@@ -12,27 +12,15 @@ function ig.job.IsBossGrade(jobName, grade)
 
 ## Parameters
 
-- **`jobName`**: string Job name
-- **`grade`**: number Grade level
-- **`jobName`**: string Job name
-- **`grade`**: number Grade level
-- **`jobName`**: string Job name
-- **`grade`**: number Grade level
+- **`jobName`**: any
+- **`grade`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.job.IsBossGrade
-local result = ig.job.IsBossGrade(jobName, grade)
+-- Example usage
+local result = ig.job.IsBossGrade(value, 100)
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

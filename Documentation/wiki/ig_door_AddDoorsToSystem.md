@@ -2,7 +2,7 @@
 
 ## Description
 
-is the door in the table?
+Adds doorstosystem to the system
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.door.AddDoorsToSystem(doors)
 
 ## Parameters
 
-- **`coords`**: any
+- **`doors`**: table
 
 ## Example
 
 ```lua
--- Example usage of ig.door.AddDoorsToSystem
-ig.door.AddDoorsToSystem(item)
+-- Example usage
+local result = ig.door.AddDoorsToSystem({})
 ```
-
-## Related Functions
-
-- [ig.door.Add](ig_door_Add.md)
-- [ig.door.Find](ig_door_Find.md)
-- [ig.door.FindHash](ig_door_FindHash.md)
-- [ig.door.GenerateDoorsInRadius](ig_door_GenerateDoorsInRadius.md)
-- [ig.door.GetModels](ig_door_GetModels.md)
 
 ## Source
 

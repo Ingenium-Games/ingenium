@@ -10,20 +10,19 @@ Include tattoos if any were applied
 function ig.appearance.CreateCamera()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.appearance.CreateCamera
-local entity = ig.appearance.CreateCamera(params)
+-- Create new camera
+local created = ig.appearance.CreateCamera()
+if created then
+    print("Created successfully")
+end
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.DestroyCamera](ig_appearance_DestroyCamera.md)
 
 ## Source
 

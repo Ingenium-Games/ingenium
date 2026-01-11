@@ -10,24 +10,18 @@ Get/Set - `Ban` = bool from the users License_ID identifier
 function ig.sql.user.SetPriority(fivem_id, bool, cb)
 ```
 
+## Parameters
+
+- **`fivem_id`**: any
+- **`bool`**: string
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.user.SetPriority
-ig.sql.user.SetPriority(value)
+-- Set priority
+ig.sql.user.SetPriority(value, "bool", function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.user.Add](ig_sql_user_Add.md)
-- [ig.sql.user.AddCharacterSlot](ig_sql_user_AddCharacterSlot.md)
-- [ig.sql.user.Find](ig_sql_user_Find.md)
-- [ig.sql.user.Get](ig_sql_user_Get.md)
-- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
 
 ## Source
 

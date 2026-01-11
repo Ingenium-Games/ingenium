@@ -2,7 +2,7 @@
 
 ## Description
 
-queued to add
+Performs checknegativebalances operation
 
 ## Signature
 
@@ -10,21 +10,16 @@ queued to add
 function ig.bank.CheckNegativeBalances()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.bank.CheckNegativeBalances
-ig.bank.CheckNegativeBalances()
+-- Example usage
+local result = ig.bank.CheckNegativeBalances()
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.bank.CalculateInterest](ig_bank_CalculateInterest.md)
-- [ig.bank.CalculatePayments](ig_bank_CalculatePayments.md)
 
 ## Source
 

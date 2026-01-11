@@ -2,7 +2,7 @@
 
 ## Description
 
-Get job statistics
+Retrieves and returns allstats data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.job.GetAllStats()
 
 ## Parameters
 
-- **`jobName`**: string Job name
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.job.GetAllStats
+-- Get allstats data
 local result = ig.job.GetAllStats()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
-- [ig.job.GetByBoss](ig_job_GetByBoss.md)
 
 ## Source
 

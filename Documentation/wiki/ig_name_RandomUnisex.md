@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Checks and returns whether randomunisex condition is met
 
 ## Signature
 
@@ -12,20 +12,14 @@ function ig.name.RandomUnisex()
 
 ## Parameters
 
-- **`.`**: any
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.name.RandomUnisex
-ig.name.RandomUnisex()
+-- Example usage
+local result = ig.name.RandomUnisex()
 ```
-
-## Related Functions
-
-- [ig.name.Load](ig_name_Load.md)
-- [ig.name.RandomFemale](ig_name_RandomFemale.md)
-- [ig.name.RandomMale](ig_name_RandomMale.md)
 
 ## Source
 

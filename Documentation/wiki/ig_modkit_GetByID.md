@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns byid data
 
 ## Signature
 
@@ -12,23 +12,17 @@ function ig.modkit.GetByID(id)
 
 ## Parameters
 
-- **`.`**: any
-- **`id`**: number Modkit ID
+- **`id`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.modkit.GetByID
-local result = ig.modkit.GetByID()
+-- Get byid data
+local result = ig.modkit.GetByID("id_12345")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.modkit.ClearCache](ig_modkit_ClearCache.md)
-- [ig.modkit.GetAll](ig_modkit_GetAll.md)
-- [ig.modkit.GetForVehicle](ig_modkit_GetForVehicle.md)
-- [ig.modkit.GetAll](ig_modkit_GetAll.md)
-- [ig.modkit.GetForVehicle](ig_modkit_GetForVehicle.md)
 
 ## Source
 

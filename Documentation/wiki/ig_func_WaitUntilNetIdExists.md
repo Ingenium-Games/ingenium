@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Checks and returns whether waituntilnetidexists condition is met
 
 ## Signature
 
@@ -18,21 +18,9 @@ function ig.func.WaitUntilNetIdExists(networkId, timeout)
 ## Example
 
 ```lua
--- Example usage of ig.func.WaitUntilNetIdExists
-local result = ig.func.WaitUntilNetIdExists(networkId, timeout)
+-- Example usage
+local result = ig.func.WaitUntilNetIdExists(value, value)
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `timeout` - Sets maximum wait time for operation
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

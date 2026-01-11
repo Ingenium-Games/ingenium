@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Retrieves and returns players data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.func.GetPlayers()
 
 ## Parameters
 
-- **`minimal`**: boolean "Return just the found objects or their model and coords as well?
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.func.GetPlayers
+-- Get players data
 local result = ig.func.GetPlayers()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

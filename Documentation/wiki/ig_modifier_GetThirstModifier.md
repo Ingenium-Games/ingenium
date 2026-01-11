@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns thirstmodifier data
 
 ## Signature
 
@@ -12,23 +12,17 @@ function ig.modifier.GetThirstModifier()
 
 ## Parameters
 
-- **`v`**: number "Can only be a number.
-- **`v`**: number "Can only be a number.
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.modifier.GetThirstModifier
+-- Get thirstmodifier data
 local result = ig.modifier.GetThirstModifier()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.modifier.AddHungerModifier](ig_modifier_AddHungerModifier.md)
-- [ig.modifier.AddStressModifier](ig_modifier_AddStressModifier.md)
-- [ig.modifier.AddThirstModifier](ig_modifier_AddThirstModifier.md)
-- [ig.modifier.DegradeModifiers](ig_modifier_DegradeModifiers.md)
-- [ig.modifier.GetDegradeBoost](ig_modifier_GetDegradeBoost.md)
 
 ## Source
 

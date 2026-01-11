@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns byname data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.job.GetByName(name)
 
 ## Parameters
 
-- **`name`**: string Job name
+- **`name`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.job.GetByName
-local result = ig.job.GetByName()
+-- Get byname data
+local result = ig.job.GetByName(100)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

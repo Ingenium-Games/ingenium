@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs decimals operation
 
 ## Signature
 
@@ -12,20 +12,15 @@ function ig.math.Decimals(num, dec)
 
 ## Parameters
 
-- **`.`**: any
+- **`num`**: number
+- **`dec`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.math.Decimals
-local result = ig.math.Decimals(num, dec)
+-- Example usage
+local result = ig.math.Decimals(100, value)
 ```
-
-## Related Functions
-
-- [ig.math.GroupDigits](ig_math_GroupDigits.md)
-- [ig.math.Round](ig_math_Round.md)
-- [ig.math.Trim](ig_math_Trim.md)
 
 ## Source
 

@@ -10,24 +10,20 @@ Get - The entire ROW of data from Characters table where the Character_ID is the
 function ig.sql.user.Get(license_id, cb)
 ```
 
+## Parameters
+
+- **`license_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.user.Get
-local result = ig.sql.user.Get()
+-- Get  data
+local result = ig.sql.user.Get(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.user.Add](ig_sql_user_Add.md)
-- [ig.sql.user.AddCharacterSlot](ig_sql_user_AddCharacterSlot.md)
-- [ig.sql.user.Find](ig_sql_user_Find.md)
-- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
-- [ig.sql.user.GetBan](ig_sql_user_GetBan.md)
 
 ## Source
 

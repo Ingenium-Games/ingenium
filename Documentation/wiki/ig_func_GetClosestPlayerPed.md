@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Retrieves and returns closestplayerped data
 
 ## Signature
 
@@ -12,23 +12,18 @@ function ig.func.GetClosestPlayerPed(position, maxRadius)
 
 ## Parameters
 
-- **`position`**: any
-- **`maxRadius`**: any
+- **`position`**: number
+- **`maxRadius`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.func.GetClosestPlayerPed
-local result = ig.func.GetClosestPlayerPed()
+-- Get closestplayerped data
+local result = ig.func.GetClosestPlayerPed(100, 100)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

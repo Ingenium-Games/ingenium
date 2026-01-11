@@ -12,7 +12,7 @@ function ig.func.CreateVehicle(name, x, y, z, h, data)
 
 ## Parameters
 
-- **`name`**: any
+- **`name`**: string
 - **`x`**: any
 - **`y`**: any
 - **`z`**: any
@@ -36,18 +36,6 @@ local customData = { color = "red", tuning = true }
 local vehicle3, netId3 = ig.func.CreateVehicle("zentorno", 200.0, 300.0, 30.0, 0.0, customData)
 ```
 
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
-
 ## Source
 
-Defined in: `server/_functions.lua`
+Defined in: `client/_functions.lua`

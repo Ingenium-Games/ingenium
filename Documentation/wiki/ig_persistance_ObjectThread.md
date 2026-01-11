@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs objectthread operation
 
 ## Signature
 
@@ -10,17 +10,16 @@
 function ig.persistance.ObjectThread()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.persistance.ObjectThread
-ig.persistance.ObjectThread()
+-- Example usage
+local result = ig.persistance.ObjectThread()
 ```
-
-## Related Functions
-
-- [ig.persistance.UpdateVehicle](ig_persistance_UpdateVehicle.md)
-- [ig.persistance.VehicleThread](ig_persistance_VehicleThread.md)
 
 ## Source
 

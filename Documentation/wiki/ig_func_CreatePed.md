@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Creates a new ped instance
 
 ## Signature
 
@@ -12,7 +12,7 @@ function ig.func.CreatePed(name, x, y, z, h)
 
 ## Parameters
 
-- **`name`**: any
+- **`name`**: string
 - **`x`**: any
 - **`y`**: any
 - **`z`**: any
@@ -21,18 +21,13 @@ function ig.func.CreatePed(name, x, y, z, h)
 ## Example
 
 ```lua
--- Example usage of ig.func.CreatePed
-local entity = ig.func.CreatePed(params)
+-- Create new ped
+local created = ig.func.CreatePed("name_example", value, value, value, value)
+if created then
+    print("Created successfully")
+end
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreateVehicle](ig_func_CreateVehicle.md)
 
 ## Source
 
-Defined in: `server/_functions.lua`
+Defined in: `client/_functions.lua`

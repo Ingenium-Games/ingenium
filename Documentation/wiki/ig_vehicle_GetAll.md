@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs getall operation
 
 ## Signature
 
@@ -12,23 +12,18 @@ function ig.vehicle.GetAll()
 
 ## Parameters
 
-- **`.`**: any
+- **`callback`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.vehicle.GetAll
-local result = ig.vehicle.GetAll()
+-- Get all data
+local result = ig.vehicle.GetAll(function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md)
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
-- [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
-- [ig.vehicle.GetCurrentVehicle](ig_vehicle_GetCurrentVehicle.md)
 
 ## Source
 
-Defined in: `server/[Data - No Save Needed]/_vehicle.lua`
+Defined in: `client/[Data]/_game_data_helpers.lua`

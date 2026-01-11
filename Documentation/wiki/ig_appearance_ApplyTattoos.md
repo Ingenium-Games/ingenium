@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs applytattoos operation
 
 ## Signature
 
@@ -12,24 +12,14 @@ function ig.appearance.ApplyTattoos(tattoos)
 
 ## Parameters
 
-- **`collection`**: string Collection hash
-- **`hash`**: string Tattoo hash
-- **`tattoos`**: table Array of tattoos {{collection, hash}, ...}
+- **`tattoos`**: table
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.ApplyTattoos
-local result = ig.appearance.ApplyTattoos(tattoos)
+-- Example usage
+local result = ig.appearance.ApplyTattoos({})
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
-- [ig.appearance.DestroyCamera](ig_appearance_DestroyCamera.md)
 
 ## Source
 

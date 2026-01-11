@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Cleans up and destroys a camera instance, freeing its resources.
 
 ## Signature
 
@@ -12,29 +12,16 @@ function ig.camera.CleanUp(camera)
 
 ## Parameters
 
-- **`px`**: any
-- **`py`**: any
-- **`pz`**: any
-- **`rx`**: any
-- **`ry`**: any
-- **`rz`**: any
-- **`fov`**: any
-- **`l1`**: any
-- **`l2`**: any
-- **`camera`**: any
+- **`camera`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.camera.CleanUp
-local result = ig.camera.CleanUp(camera)
+-- Clean up camera
+local camera = ig.camera.Basic(100.0, 200.0, 30.0, 0.0, 0.0, 90.0, 50.0)
+-- ... use camera ...
+ig.camera.CleanUp(camera)
 ```
-
-## Related Functions
-
-- [ig.camera.Advanced](ig_camera_Advanced.md)
-- [ig.camera.Basic](ig_camera_Basic.md)
-- [ig.camera.NewName](ig_camera_NewName.md)
 
 ## Source
 

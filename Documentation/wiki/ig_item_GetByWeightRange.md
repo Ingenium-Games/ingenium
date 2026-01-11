@@ -2,7 +2,7 @@
 
 ## Description
 
-Get all consumables
+Retrieves and returns byweightrange data
 
 ## Signature
 
@@ -12,23 +12,18 @@ function ig.item.GetByWeightRange(minWeight, maxWeight)
 
 ## Parameters
 
-- **`minWeight`**: number Minimum weight
-- **`maxWeight`**: number Maximum weight
+- **`minWeight`**: any
+- **`maxWeight`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.item.GetByWeightRange
-local result = ig.item.GetByWeightRange()
+-- Get byweightrange data
+local result = ig.item.GetByWeightRange(value, value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Creates a new radius instance
 
 ## Signature
 
@@ -10,20 +10,19 @@ No description available
 function ig.blip.CreateRadius(...)
 ```
 
+## Parameters
+
+- **`...`**: any
+
 ## Example
 
 ```lua
--- Example usage of ig.blip.CreateRadius
-local entity = ig.blip.CreateRadius(params)
+-- Create new radius
+local created = ig.blip.CreateRadius(value)
+if created then
+    print("Created successfully")
+end
 ```
-
-## Related Functions
-
-- [ig.blip.AreaBlip](ig_blip_AreaBlip.md)
-- [ig.blip.Blip](ig_blip_Blip.md)
-- [ig.blip.CreateArea](ig_blip_CreateArea.md)
-- [ig.blip.CreateBlip](ig_blip_CreateBlip.md)
-- [ig.blip.EntityBlip](ig_blip_EntityBlip.md)
 
 ## Source
 

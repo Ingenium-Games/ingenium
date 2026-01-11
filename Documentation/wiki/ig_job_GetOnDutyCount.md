@@ -2,7 +2,7 @@
 
 ## Description
 
-Get job count
+Retrieves and returns ondutycount data
 
 ## Signature
 
@@ -12,23 +12,17 @@ function ig.job.GetOnDutyCount(jobName)
 
 ## Parameters
 
-- **`category`**: string Category (e.g., "public", "private", "gang")
-- **`jobName`**: string Job name
+- **`jobName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.job.GetOnDutyCount
-local result = ig.job.GetOnDutyCount()
+-- Get ondutycount data
+local result = ig.job.GetOnDutyCount(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Adds  to the system
 
 ## Signature
 
@@ -12,27 +12,14 @@ function ig.gsr.Add(data)
 
 ## Parameters
 
-- **`.`**: any
-- **`data`**: any
+- **`data`**: table
 
 ## Example
 
 ```lua
--- Example usage of ig.gsr.Add
-ig.gsr.Add(item)
+-- Example usage
+local result = ig.gsr.Add({})
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.gsr.Clean](ig_gsr_Clean.md)
-- [ig.gsr.CleanOld](ig_gsr_CleanOld.md)
-- [ig.gsr.Clear](ig_gsr_Clear.md)
-- [ig.gsr.Create](ig_gsr_Create.md)
-- [ig.gsr.Exist](ig_gsr_Exist.md)
 
 ## Source
 

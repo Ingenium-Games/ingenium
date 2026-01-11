@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Retrieves and returns doors data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.door.GetDoors()
 
 ## Parameters
 
-- **`model`**: any
-- **`coords`**: any
-- **`locked`**: any
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.door.GetDoors
+-- Get doors data
 local result = ig.door.GetDoors()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.door.Add](ig_door_Add.md)
-- [ig.door.AddDoorsToSystem](ig_door_AddDoorsToSystem.md)
-- [ig.door.Find](ig_door_Find.md)
-- [ig.door.FindHash](ig_door_FindHash.md)
-- [ig.door.GenerateDoorsInRadius](ig_door_GenerateDoorsInRadius.md)
 
 ## Source
 

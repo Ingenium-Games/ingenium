@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs blankobject operation
 
 ## Signature
 
@@ -17,17 +17,9 @@ function ig.class.BlankObject(net)
 ## Example
 
 ```lua
--- Example usage of ig.class.BlankObject
-local result = ig.class.BlankObject(net)
+-- Example usage
+local result = ig.class.BlankObject(value)
 ```
-
-## Related Functions
-
-- [ig.class.ExistingObject](ig_class_ExistingObject.md)
-- [ig.class.Job](ig_class_Job.md)
-- [ig.class.Npc](ig_class_Npc.md)
-- [ig.class.OfflinePlayer](ig_class_OfflinePlayer.md)
-- [ig.class.OwnedVehicle](ig_class_OwnedVehicle.md)
 
 ## Source
 

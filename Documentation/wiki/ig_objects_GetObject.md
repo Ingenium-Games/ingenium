@@ -2,7 +2,7 @@
 
 ## Description
 
-Get the xVehicle Data/Table
+Retrieves and returns object data
 
 ## Signature
 
@@ -12,25 +12,17 @@ function ig.objects.GetObject(net)
 
 ## Parameters
 
-- **`net`**: integer "Network ID 16 bit integer
-- **`net`**: any
-- **`cb`**: any
-- **`net`**: integer "Network ID 16 bit integer
+- **`net`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.objects.GetObject
-local result = ig.objects.GetObject()
+-- Get object data
+local result = ig.objects.GetObject("net")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.objects.AddObject](ig_objects_AddObject.md)
-- [ig.objects.FindObject](ig_objects_FindObject.md)
-- [ig.objects.FindObjectFromUUID](ig_objects_FindObjectFromUUID.md)
-- [ig.objects.GetObjectFromUUID](ig_objects_GetObjectFromUUID.md)
-- [ig.objects.GetObjects](ig_objects_GetObjects.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Validate pickup data
+Performs resyncall operation
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.pick.ResyncAll()
 
 ## Parameters
 
-- **`pickup`**: table Pickup data to validate
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.pick.ResyncAll
-ig.pick.ResyncAll()
+-- Example usage
+local result = ig.pick.ResyncAll()
 ```
-
-## Related Functions
-
-- [ig.pick.Activate](ig_pick_Activate.md)
-- [ig.pick.CleanupOld](ig_pick_CleanupOld.md)
-- [ig.pick.Collect](ig_pick_Collect.md)
-- [ig.pick.Create](ig_pick_Create.md)
-- [ig.pick.CreateLoot](ig_pick_CreateLoot.md)
 
 ## Source
 

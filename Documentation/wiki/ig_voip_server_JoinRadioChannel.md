@@ -2,7 +2,7 @@
 
 ## Description
 
-Get player's current voice mode
+Performs joinradiochannel operation
 
 ## Signature
 
@@ -12,24 +12,15 @@ function ig.voip.server.JoinRadioChannel(playerId, channel)
 
 ## Parameters
 
-- **`playerId`**: number The server ID of the player
-- **`playerId`**: number The server ID of the player
-- **`channel`**: number The radio channel number
+- **`playerId`**: any
+- **`channel`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.voip.server.JoinRadioChannel
-local result = ig.voip.server.JoinRadioChannel(playerId, channel)
+-- Example usage
+local result = ig.voip.server.JoinRadioChannel(value, 100)
 ```
-
-## Related Functions
-
-- [ig.voip.server.CleanupPlayer](ig_voip_server_CleanupPlayer.md)
-- [ig.voip.server.EndAdminCall](ig_voip_server_EndAdminCall.md)
-- [ig.voip.server.EndCall](ig_voip_server_EndCall.md)
-- [ig.voip.server.EndConnection](ig_voip_server_EndConnection.md)
-- [ig.voip.server.GetPlayersInProximity](ig_voip_server_GetPlayersInProximity.md)
 
 ## Source
 

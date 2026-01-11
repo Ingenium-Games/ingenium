@@ -12,26 +12,14 @@ function ig.drop.Activate(netId)
 
 ## Parameters
 
-- **`netId`**: number Network ID of the drop
+- **`netId`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.drop.Activate
-local result = ig.drop.Activate(netId)
+-- Example usage
+local result = ig.drop.Activate(value)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.drop.CleanupOld](ig_drop_CleanupOld.md)
-- [ig.drop.Create](ig_drop_Create.md)
-- [ig.drop.Deactivate](ig_drop_Deactivate.md)
-- [ig.drop.MergeDropsForSave](ig_drop_MergeDropsForSave.md)
-- [ig.drop.Remove](ig_drop_Remove.md)
 
 ## Source
 

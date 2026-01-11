@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns gamemode data
 
 ## Signature
 
@@ -10,17 +10,19 @@
 function ig.game.GetGameMode()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.game.GetGameMode
+-- Get gamemode data
 local result = ig.game.GetGameMode()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.game.GetGameModeSettings](ig_game_GetGameModeSettings.md)
-- [ig.game.IsGameModeFeatureEnabled](ig_game_IsGameModeFeatureEnabled.md)
 
 ## Source
 

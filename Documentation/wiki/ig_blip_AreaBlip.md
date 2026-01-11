@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs areablip operation
 
 ## Signature
 
@@ -12,9 +12,6 @@ function ig.blip.AreaBlip(coords, width, height, heading, color, alpha, high, di
 
 ## Parameters
 
-- **`color`**: any
-- **`alpha`**: any
-- **`high`**: any
 - **`coords`**: any
 - **`width`**: any
 - **`height`**: any
@@ -28,17 +25,9 @@ function ig.blip.AreaBlip(coords, width, height, heading, color, alpha, high, di
 ## Example
 
 ```lua
--- Example usage of ig.blip.AreaBlip
-local result = ig.blip.AreaBlip(coords, width, height, heading, color, alpha, high, display, short)
+-- Example usage
+local result = ig.blip.AreaBlip(value, value, value, value, value, value, value, value, value)
 ```
-
-## Related Functions
-
-- [ig.blip.Blip](ig_blip_Blip.md)
-- [ig.blip.CreateArea](ig_blip_CreateArea.md)
-- [ig.blip.CreateBlip](ig_blip_CreateBlip.md)
-- [ig.blip.CreateRadius](ig_blip_CreateRadius.md)
-- [ig.blip.EntityBlip](ig_blip_EntityBlip.md)
 
 ## Source
 

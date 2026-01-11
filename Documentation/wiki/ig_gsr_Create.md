@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Creates a new  instance
 
 ## Signature
 
@@ -12,24 +12,19 @@ function ig.gsr.Create(source, weaponHash, ammoType)
 
 ## Parameters
 
-- **`source`**: number Player source
-- **`weaponHash`**: number Weapon used
-- **`ammoType`**: string Ammo type
+- **`source`**: any
+- **`weaponHash`**: any
+- **`ammoType`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.gsr.Create
-local entity = ig.gsr.Create(params)
+-- Create new 
+local created = ig.gsr.Create(value, value, value)
+if created then
+    print("Created successfully")
+end
 ```
-
-## Related Functions
-
-- [ig.gsr.Add](ig_gsr_Add.md)
-- [ig.gsr.Clean](ig_gsr_Clean.md)
-- [ig.gsr.CleanOld](ig_gsr_CleanOld.md)
-- [ig.gsr.Clear](ig_gsr_Clear.md)
-- [ig.gsr.Exist](ig_gsr_Exist.md)
 
 ## Source
 

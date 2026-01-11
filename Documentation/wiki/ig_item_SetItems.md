@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Sets items to specified value
 
 ## Signature
 
@@ -10,20 +10,16 @@
 function ig.item.SetItems(items)
 ```
 
+## Parameters
+
+- **`items`**: any
+
 ## Example
 
 ```lua
--- Example usage of ig.item.SetItems
+-- Set items
 ig.item.SetItems(value)
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

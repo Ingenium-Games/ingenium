@@ -2,7 +2,7 @@
 
 ## Description
 
-Sync to clients
+Retrieves and returns count data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.note.GetCount()
 
 ## Parameters
 
-- **`id`**: string Note ID
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.note.GetCount
+-- Get count data
 local result = ig.note.GetCount()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.note.Add](ig_note_Add.md)
-- [ig.note.Clean](ig_note_Clean.md)
-- [ig.note.CleanOld](ig_note_CleanOld.md)
-- [ig.note.CleanUp](ig_note_CleanUp.md)
-- [ig.note.Create](ig_note_Create.md)
 
 ## Source
 

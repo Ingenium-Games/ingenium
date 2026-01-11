@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Checks and returns whether exists condition is met
 
 ## Signature
 
@@ -12,24 +12,15 @@ function ig.job.Exists(name, grade)
 
 ## Parameters
 
-- **`name`**: string Job name
-- **`name`**: string Job name
-- **`grade`**: number|nil Grade (if checking specific grade)
+- **`name`**: number
+- **`grade`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.job.Exists
-local result = ig.job.Exists(name, grade)
+-- Example usage
+local result = ig.job.Exists(100, 100)
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
-- [ig.job.GetByBoss](ig_job_GetByBoss.md)
 
 ## Source
 

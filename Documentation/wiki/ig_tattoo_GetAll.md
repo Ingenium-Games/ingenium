@@ -2,7 +2,7 @@
 
 ## Description
 
-[[
+Performs getall operation
 
 ## Signature
 
@@ -10,21 +10,20 @@
 function ig.tattoo.GetAll()
 ```
 
+## Parameters
+
+- **`callback`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.tattoo.GetAll
-local result = ig.tattoo.GetAll()
+-- Get all data
+local result = ig.tattoo.GetAll(function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.tattoo.ClearCache](ig_tattoo_ClearCache.md)
-- [ig.tattoo.GetByZone](ig_tattoo_GetByZone.md)
-- [ig.tattoo.GetByCollection](ig_tattoo_GetByCollection.md)
-- [ig.tattoo.GetByHash](ig_tattoo_GetByHash.md)
-- [ig.tattoo.GetByZone](ig_tattoo_GetByZone.md)
 
 ## Source
 
-Defined in: `server/[Data - No Save Needed]/_tattoo.lua`
+Defined in: `client/[Data]/_game_data_helpers.lua`

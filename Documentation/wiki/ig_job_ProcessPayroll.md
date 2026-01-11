@@ -2,7 +2,7 @@
 
 ## Description
 
-Calculate total payroll for job
+Processes payroll for all eligible employees in jobs. Calculates and distributes salaries based on job grades and online time. Typically run on a scheduled basis.
 
 ## Signature
 
@@ -12,24 +12,21 @@ function ig.job.ProcessPayroll(jobName, useJobFunds)
 
 ## Parameters
 
-- **`jobName`**: string Job name
-- **`jobName`**: string Job name
-- **`useJobFunds`**: boolean Use job bank account (true) or spawn money (false)
+- **`jobName`**: string
+- **`useJobFunds`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.job.ProcessPayroll
-local result = ig.job.ProcessPayroll(jobName, useJobFunds)
+-- Process payroll for all jobs
+ig.job.ProcessPayroll()
+
+-- This will:
+-- 1. Find all eligible employees
+-- 2. Calculate salaries based on grade
+-- 3. Deposit money into accounts
+-- 4. Log transactions
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

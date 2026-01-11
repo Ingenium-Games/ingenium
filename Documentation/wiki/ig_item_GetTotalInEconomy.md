@@ -2,7 +2,7 @@
 
 ## Description
 
-Get item stack size
+Retrieves and returns totalineconomy data
 
 ## Signature
 
@@ -12,23 +12,17 @@ function ig.item.GetTotalInEconomy(itemName)
 
 ## Parameters
 
-- **`name`**: string Item name
-- **`itemName`**: string Item name
+- **`itemName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.item.GetTotalInEconomy
-local result = ig.item.GetTotalInEconomy()
+-- Get totalineconomy data
+local result = ig.item.GetTotalInEconomy(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

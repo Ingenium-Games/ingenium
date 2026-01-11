@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Sets permissions to specified value
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.chat.SetPermissions()
 
 ## Parameters
 
-- **`group`**: any "Check permissions and import the chat suggestions.
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.chat.SetPermissions
-ig.chat.SetPermissions(value)
+-- Set permissions
+ig.chat.SetPermissions()
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function has administrative privileges. Restrict access to authorized users only.
-
-## Related Functions
-
-- [ig.chat.AddSuggestions](ig_chat_AddSuggestions.md)
 
 ## Source
 

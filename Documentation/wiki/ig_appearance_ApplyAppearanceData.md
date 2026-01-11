@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs applyappearancedata operation
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.appearance.ApplyAppearanceData(appearance)
 
 ## Parameters
 
-- **`appearance`**: table Complete appearance data
-- **`appearance`**: table Appearance data
+- **`appearance`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.ApplyAppearanceData
-local result = ig.appearance.ApplyAppearanceData(appearance)
+-- Example usage
+local result = ig.appearance.ApplyAppearanceData(100)
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
-- [ig.appearance.DestroyCamera](ig_appearance_DestroyCamera.md)
 
 ## Source
 

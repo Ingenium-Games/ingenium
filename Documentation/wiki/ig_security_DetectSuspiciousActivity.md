@@ -12,27 +12,16 @@ function ig.security.DetectSuspiciousActivity(player, actionType, amount)
 
 ## Parameters
 
-- **`player`**: table Player object
-- **`transactionType`**: string Type of transaction
-- **`amount`**: number Transaction amount
-- **`reason`**: string Reason for transaction
-- **`player`**: table Player object
-- **`actionType`**: string Type of action
-- **`amount`**: number Transaction amount
+- **`player`**: any
+- **`actionType`**: any
+- **`amount`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.security.DetectSuspiciousActivity
-local result = ig.security.DetectSuspiciousActivity(player, actionType, amount)
+-- Example usage
+local result = ig.security.DetectSuspiciousActivity(value, value, 100)
 ```
-
-## Related Functions
-
-- [ig.security.CheckRateLimit](ig_security_CheckRateLimit.md)
-- [ig.security.CheckTransactionRateLimit](ig_security_CheckTransactionRateLimit.md)
-- [ig.security.LogPlayerTransaction](ig_security_LogPlayerTransaction.md)
-- [ig.security.LogTransaction](ig_security_LogTransaction.md)
 
 ## Source
 

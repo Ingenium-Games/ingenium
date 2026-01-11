@@ -2,7 +2,7 @@
 
 ## Description
 
-Get weapon data by hash
+Retrieves and returns bycategory data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.weapon.GetByCategory(category)
 
 ## Parameters
 
-- **`hash`**: number Weapon hash
-- **`name`**: string Weapon name (e.g., "weapon_pistol")
-- **`category`**: string Category (e.g., "Pistol", "Rifle", "Melee")
+- **`category`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.weapon.GetByCategory
-local result = ig.weapon.GetByCategory()
+-- Get bycategory data
+local result = ig.weapon.GetByCategory(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.weapon.ClearCache](ig_weapon_ClearCache.md)
-- [ig.weapon.GetAll](ig_weapon_GetAll.md)
-- [ig.weapon.GetByHash](ig_weapon_GetByHash.md)
-- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md)
-- [ig.weapon.Get](ig_weapon_Get.md)
 
 ## Source
 

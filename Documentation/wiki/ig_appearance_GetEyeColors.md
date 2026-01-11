@@ -2,7 +2,7 @@
 
 ## Description
 
-============================================
+Retrieves and returns eyecolors data
 
 ## Signature
 
@@ -10,20 +10,19 @@
 function ig.appearance.GetEyeColors()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.appearance.GetEyeColors
+-- Get eyecolors data
 local result = ig.appearance.GetEyeColors()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

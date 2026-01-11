@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs find operation
 
 ## Signature
 
@@ -12,23 +12,15 @@ function ig.door.Find(coords)
 
 ## Parameters
 
-- **`coords`**: any
+- **`d`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.door.Find
-local result = ig.door.Find(coords)
+-- Example usage
+local result = ig.door.Find(value)
 ```
-
-## Related Functions
-
-- [ig.door.Add](ig_door_Add.md)
-- [ig.door.AddDoorsToSystem](ig_door_AddDoorsToSystem.md)
-- [ig.door.FindHash](ig_door_FindHash.md)
-- [ig.door.GenerateDoorsInRadius](ig_door_GenerateDoorsInRadius.md)
-- [ig.door.GetModels](ig_door_GetModels.md)
 
 ## Source
 
-Defined in: `server/[Doors]/_doors.lua`
+Defined in: `client/_doors.lua`

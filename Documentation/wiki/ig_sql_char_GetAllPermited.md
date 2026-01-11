@@ -10,24 +10,21 @@ Get - Info on the characters owned to prefill the multicharacter selection
 function ig.sql.char.GetAllPermited(primary_id, slots, cb)
 ```
 
+## Parameters
+
+- **`primary_id`**: any
+- **`slots`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.char.GetAllPermited
-local result = ig.sql.char.GetAllPermited()
+-- Get allpermited data
+local result = ig.sql.char.GetAllPermited(value, value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.char.Add](ig_sql_char_Add.md)
-- [ig.sql.char.AddOutfit](ig_sql_char_AddOutfit.md)
-- [ig.sql.char.Current](ig_sql_char_Current.md)
-- [ig.sql.char.Delete](ig_sql_char_Delete.md)
-- [ig.sql.char.Get](ig_sql_char_Get.md)
 
 ## Source
 

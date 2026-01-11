@@ -12,26 +12,14 @@ function ig.drop.Remove(netId)
 
 ## Parameters
 
-- **`netId`**: number Network ID of the drop
+- **`netId`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.drop.Remove
-ig.drop.Remove(item)
+-- Example usage
+local result = ig.drop.Remove("id_12345")
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.drop.Activate](ig_drop_Activate.md)
-- [ig.drop.CleanupOld](ig_drop_CleanupOld.md)
-- [ig.drop.Create](ig_drop_Create.md)
-- [ig.drop.Deactivate](ig_drop_Deactivate.md)
-- [ig.drop.MergeDropsForSave](ig_drop_MergeDropsForSave.md)
 
 ## Source
 

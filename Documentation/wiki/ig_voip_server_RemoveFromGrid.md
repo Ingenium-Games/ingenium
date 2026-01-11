@@ -2,7 +2,7 @@
 
 ## Description
 
-Only update if grid cell changed
+Removes fromgrid from the system
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.voip.server.RemoveFromGrid(playerId)
 
 ## Parameters
 
-- **`playerId`**: number The server ID of the player
+- **`playerId`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.voip.server.RemoveFromGrid
-ig.voip.server.RemoveFromGrid(item)
+-- Example usage
+local result = ig.voip.server.RemoveFromGrid(value)
 ```
-
-## Related Functions
-
-- [ig.voip.server.CleanupPlayer](ig_voip_server_CleanupPlayer.md)
-- [ig.voip.server.EndAdminCall](ig_voip_server_EndAdminCall.md)
-- [ig.voip.server.EndCall](ig_voip_server_EndCall.md)
-- [ig.voip.server.EndConnection](ig_voip_server_EndConnection.md)
-- [ig.voip.server.GetPlayersInProximity](ig_voip_server_GetPlayersInProximity.md)
 
 ## Source
 

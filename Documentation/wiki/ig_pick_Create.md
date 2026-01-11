@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Creates a new pickup object in the world at specified coordinates. Pickups are collectible items that players can interact with. Returns the pickup instance.
 
 ## Signature
 
@@ -12,29 +12,23 @@ function ig.pick.Create(coords, model, event, data)
 
 ## Parameters
 
-- **`coords`**: table Coordinates {x, y, z, h}
-- **`model`**: number Model hash
-- **`event`**: string|nil Event to trigger on pickup
-- **`data`**: table|nil Additional data
+- **`coords`**: any
+- **`model`**: any
+- **`event`**: any
+- **`data`**: table
 
 ## Example
 
 ```lua
--- Example usage of ig.pick.Create
-local entity = ig.pick.Create(params)
+-- Create pickup at location
+local coords = vector3(100.0, 200.0, 30.0)
+local pickup = ig.pick.Create({
+    coords = coords,
+    model = "prop_cs_box_01",
+    item = "lockpick",
+    amount = 1
+})
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.pick.Activate](ig_pick_Activate.md)
-- [ig.pick.CleanupOld](ig_pick_CleanupOld.md)
-- [ig.pick.Collect](ig_pick_Collect.md)
-- [ig.pick.CreateLoot](ig_pick_CreateLoot.md)
-- [ig.pick.CreateZone](ig_pick_CreateZone.md)
 
 ## Source
 

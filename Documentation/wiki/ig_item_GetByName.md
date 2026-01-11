@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns byname data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.item.GetByName(name)
 
 ## Parameters
 
-- **`name`**: any
-- **`name`**: any
-- **`name`**: string Item name
+- **`name`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.item.GetByName
-local result = ig.item.GetByName()
+-- Get byname data
+local result = ig.item.GetByName(function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

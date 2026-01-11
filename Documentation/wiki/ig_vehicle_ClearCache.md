@@ -2,7 +2,7 @@
 
 ## Description
 
-Get vehicle by hash
+Performs clearcache operation
 
 ## Signature
 
@@ -12,24 +12,14 @@ function ig.vehicle.ClearCache()
 
 ## Parameters
 
-- **`hash`**: number Vehicle hash
-- **`callback`**: function Callback function(vehicle)
-- **`hash`**: number Vehicle hash
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.vehicle.ClearCache
-ig.vehicle.ClearCache()
+-- Example usage
+local result = ig.vehicle.ClearCache()
 ```
-
-## Related Functions
-
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
-- [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
-- [ig.vehicle.GetCurrentVehicle](ig_vehicle_GetCurrentVehicle.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Updates grid data
 
 ## Signature
 
@@ -12,24 +12,16 @@ function ig.voip.server.UpdateGrid(playerId, x, y)
 
 ## Parameters
 
-- **`playerId`**: number The server ID of the player
-- **`x`**: number The X coordinate
-- **`y`**: number The Y coordinate
+- **`playerId`**: any
+- **`x`**: any
+- **`y`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.voip.server.UpdateGrid
-local result = ig.voip.server.UpdateGrid(playerId, x, y)
+-- Example usage
+local result = ig.voip.server.UpdateGrid(value, value, value)
 ```
-
-## Related Functions
-
-- [ig.voip.server.CleanupPlayer](ig_voip_server_CleanupPlayer.md)
-- [ig.voip.server.EndAdminCall](ig_voip_server_EndAdminCall.md)
-- [ig.voip.server.EndCall](ig_voip_server_EndCall.md)
-- [ig.voip.server.EndConnection](ig_voip_server_EndConnection.md)
-- [ig.voip.server.GetPlayersInProximity](ig_voip_server_GetPlayersInProximity.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Slower
+Sets bleed to specified value
 
 ## Signature
 
@@ -10,20 +10,17 @@ Slower
 function ig.status.SetBleed(bool, dec)
 ```
 
+## Parameters
+
+- **`bool`**: any
+- **`dec`**: any
+
 ## Example
 
 ```lua
--- Example usage of ig.status.SetBleed
-ig.status.SetBleed(value)
+-- Set bleed
+ig.status.SetBleed(value, value)
 ```
-
-## Related Functions
-
-- [ig.status.AddArmour](ig_status_AddArmour.md)
-- [ig.status.AddArmourToAmount](ig_status_AddArmourToAmount.md)
-- [ig.status.AddHunger](ig_status_AddHunger.md)
-- [ig.status.AddStress](ig_status_AddStress.md)
-- [ig.status.AddThirst](ig_status_AddThirst.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Where Conditions
+Performs jobs operation
 
 ## Signature
 
@@ -12,26 +12,14 @@ function ig.sql.save.Jobs(cb)
 
 ## Parameters
 
-- **`cb`**: function "To be called on SQL 'UPDATE' statements are completed.
+- **`cb`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.sql.save.Jobs
-local result = ig.sql.save.Jobs(cb)
+-- Example usage
+local result = ig.sql.save.Jobs(function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.save.Objects](ig_sql_save_Objects.md)
-- [ig.sql.save.User](ig_sql_save_User.md)
-- [ig.sql.save.Users](ig_sql_save_Users.md)
-- [ig.sql.save.Vehicle](ig_sql_save_Vehicle.md)
-- [ig.sql.save.Vehicles](ig_sql_save_Vehicles.md)
 
 ## Source
 

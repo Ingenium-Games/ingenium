@@ -2,7 +2,7 @@
 
 ## Description
 
-Get vehicle data by name
+Retrieves and returns bymanufacturer data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.vehicle.GetByManufacturer(manufacturer)
 
 ## Parameters
 
-- **`name`**: string Vehicle model name
-- **`class`**: string Vehicle class (e.g., "Sports", "Super", "SUV")
-- **`manufacturer`**: string Manufacturer name
+- **`manufacturer`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.vehicle.GetByManufacturer
-local result = ig.vehicle.GetByManufacturer()
+-- Get bymanufacturer data
+local result = ig.vehicle.GetByManufacturer(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md)
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
-- [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
 
 ## Source
 

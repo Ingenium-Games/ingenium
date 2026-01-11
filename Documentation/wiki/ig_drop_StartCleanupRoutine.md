@@ -2,7 +2,7 @@
 
 ## Description
 
-Clean up old drops if cleanup is enabled
+Initializes the automatic cleanup routine for dropped items. Periodically removes old drops from the world to prevent performance issues. Runs on a timer to check and cleanup drops based on configured age threshold.
 
 ## Signature
 
@@ -13,8 +13,11 @@ function ig.drop.StartCleanupRoutine()
 ## Example
 
 ```lua
--- Example usage of ig.drop.StartCleanupRoutine
+-- Start automatic cleanup of old drops
 ig.drop.StartCleanupRoutine()
+
+-- The routine will periodically clean up drops older than the configured timeout
+-- This helps maintain server performance by removing stale items
 ```
 
 ## Important Notes

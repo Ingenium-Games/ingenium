@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Retrieves and returns itemmeta data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.inventory.GetItemMeta(position)
 
 ## Parameters
 
-- **`name`**: any
+- **`position`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.inventory.GetItemMeta
-local result = ig.inventory.GetItemMeta()
+-- Get itemmeta data
+local result = ig.inventory.GetItemMeta(100)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.inventory.GetInventory](ig_inventory_GetInventory.md)
-- [ig.inventory.GetItemData](ig_inventory_GetItemData.md)
-- [ig.inventory.GetItemFromPosition](ig_inventory_GetItemFromPosition.md)
-- [ig.inventory.GetItemQuality](ig_inventory_GetItemQuality.md)
-- [ig.inventory.GetItemQuantity](ig_inventory_GetItemQuantity.md)
 
 ## Source
 

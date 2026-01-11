@@ -2,7 +2,7 @@
 
 ## Description
 
-Get the xVehicle Data/Table
+Retrieves and returns npcs data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.npc.GetNpcs()
 
 ## Parameters
 
-- **`net`**: any
-- **`cb`**: any
-- **`net`**: integer "Network ID 16 bit integer
-- **`net`**: integer "Network ID 16 bit integer
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.npc.GetNpcs
+-- Get npcs data
 local result = ig.npc.GetNpcs()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.npc.AddNpc](ig_npc_AddNpc.md)
-- [ig.npc.FindNpc](ig_npc_FindNpc.md)
-- [ig.npc.GetNpc](ig_npc_GetNpc.md)
-- [ig.npc.RemoveNpc](ig_npc_RemoveNpc.md)
 
 ## Source
 

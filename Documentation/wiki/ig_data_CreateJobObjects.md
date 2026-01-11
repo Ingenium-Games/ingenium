@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Creates a new jobobjects instance
 
 ## Signature
 
@@ -10,20 +10,19 @@
 function ig.data.CreateJobObjects()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.data.CreateJobObjects
-local entity = ig.data.CreateJobObjects(params)
+-- Create new jobobjects
+local created = ig.data.CreateJobObjects()
+if created then
+    print("Created successfully")
+end
 ```
-
-## Related Functions
-
-- [ig.data.GetEntityState](ig_data_GetEntityState.md)
-- [ig.data.GetEntityStateCheck](ig_data_GetEntityStateCheck.md)
-- [ig.data.GetLoadedStatus](ig_data_GetLoadedStatus.md)
-- [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md)
-- [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md)
 
 ## Source
 

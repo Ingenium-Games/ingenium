@@ -2,7 +2,7 @@
 
 ## Description
 
-Get item description
+Checks if an item can be crafted by verifying if a crafting recipe exists for the specified item.
 
 ## Signature
 
@@ -12,25 +12,18 @@ function ig.item.CanCraft(xPlayer, itemName)
 
 ## Parameters
 
-- **`name`**: string Item name
-- **`name`**: string Item name
-- **`xPlayer`**: table Player object
-- **`itemName`**: string Item to craft
+- **`xPlayer`**: any
+- **`itemName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.item.CanCraft
-local result = ig.item.CanCraft(xPlayer, itemName)
+-- Check if item is craftable
+local craftable = ig.item.CanCraft("lockpick")
+if craftable then
+    print("Lockpick can be crafted")
+end
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

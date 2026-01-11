@@ -12,28 +12,16 @@ function ig.callback.Async(eventName, callback, ...)
 
 ## Parameters
 
-- **`eventName`**: string The name of the server callback
-- **`callback`**: function Function to handle the response
-- **`...`**: any Additional arguments
+- **`eventName`**: any
+- **`callback`**: number
+- **`...`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.callback.Async
-local result = ig.callback.Async(eventName, callback, ...)
+-- Example usage
+local result = ig.callback.Async(value, 100, value)
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `callback` - Function to execute upon completion
-
-## Related Functions
-
-- [ig.callback.AsyncClient](ig_callback_AsyncClient.md)
-- [ig.callback.AsyncWithTimeout](ig_callback_AsyncWithTimeout.md)
-- [ig.callback.Await](ig_callback_Await.md)
-- [ig.callback.AwaitClient](ig_callback_AwaitClient.md)
-- [ig.callback.AwaitWithTimeout](ig_callback_AwaitWithTimeout.md)
 
 ## Source
 

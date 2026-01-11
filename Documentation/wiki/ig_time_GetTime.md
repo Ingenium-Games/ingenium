@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns time data
 
 ## Signature
 
@@ -10,20 +10,19 @@
 function ig.time.GetTime()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.time.GetTime
+-- Get time data
 local result = ig.time.GetTime()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.time.ClearOverride](ig_time_ClearOverride.md)
-- [ig.time.SetTimeOverride](ig_time_SetTimeOverride.md)
-- [ig.time.UpdateTime](ig_time_UpdateTime.md)
-- [ig.time.ServerSync](ig_time_ServerSync.md)
-- [ig.time.Update](ig_time_Update.md)
 
 ## Source
 

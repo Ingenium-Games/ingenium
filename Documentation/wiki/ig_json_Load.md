@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Loads  data into memory
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.json.Load(filename)
 
 ## Parameters
 
-- **`filename`**: string "File name in data/ directory
+- **`filename`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.json.Load
-local result = ig.json.Load(filename)
+-- Example usage
+local result = ig.json.Load(value)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function executes code dynamically. Never use with untrusted input.
-
-## Related Functions
-
-- [ig.json.Write](ig_json_Write.md)
 
 ## Source
 

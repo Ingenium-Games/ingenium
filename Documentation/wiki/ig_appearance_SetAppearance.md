@@ -2,7 +2,7 @@
 
 ## Description
 
-Remove all tattoos
+Sets appearance to specified value
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.appearance.SetAppearance(appearance)
 
 ## Parameters
 
-- **`tattoos`**: table Array of tattoos {{collection, hash}, ...}
-- **`appearance`**: table Complete appearance data
+- **`appearance`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.SetAppearance
-ig.appearance.SetAppearance(value)
+-- Set appearance
+ig.appearance.SetAppearance(100)
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

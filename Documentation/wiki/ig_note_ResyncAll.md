@@ -2,7 +2,7 @@
 
 ## Description
 
-Validate note data
+Performs resyncall operation
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.note.ResyncAll()
 
 ## Parameters
 
-- **`noteData`**: table Note data to validate
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.note.ResyncAll
-ig.note.ResyncAll()
+-- Example usage
+local result = ig.note.ResyncAll()
 ```
-
-## Related Functions
-
-- [ig.note.Add](ig_note_Add.md)
-- [ig.note.Clean](ig_note_Clean.md)
-- [ig.note.CleanOld](ig_note_CleanOld.md)
-- [ig.note.CleanUp](ig_note_CleanUp.md)
-- [ig.note.Create](ig_note_Create.md)
 
 ## Source
 

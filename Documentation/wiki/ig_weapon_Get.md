@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns the weapon data table containing all loaded weapon information
 
 ## Signature
 
@@ -10,20 +10,19 @@
 function ig.weapon.Get()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.weapon.Get
-local result = ig.weapon.Get()
+-- Get weapon data table
+local weapons = ig.weapon.Get()
+for weaponHash, weaponData in pairs(weapons) do
+    print("Weapon:", weaponHash, weaponData.name)
+end
 ```
-
-## Related Functions
-
-- [ig.weapon.ClearCache](ig_weapon_ClearCache.md)
-- [ig.weapon.GetAll](ig_weapon_GetAll.md)
-- [ig.weapon.GetByHash](ig_weapon_GetByHash.md)
-- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md)
-- [ig.weapon.GetComponents](ig_weapon_GetComponents.md)
 
 ## Source
 

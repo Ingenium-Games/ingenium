@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns job data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.data.GetJob(str)
 
 ## Parameters
 
-- **`str`**: any
+- **`str`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.data.GetJob
-local result = ig.data.GetJob()
+-- Get job data
+local result = ig.data.GetJob("str")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.data.GetEntityState](ig_data_GetEntityState.md)
-- [ig.data.GetEntityStateCheck](ig_data_GetEntityStateCheck.md)
-- [ig.data.GetLoadedStatus](ig_data_GetLoadedStatus.md)
-- [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md)
-- [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md)
 
 ## Source
 

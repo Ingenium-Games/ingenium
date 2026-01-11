@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs player operation
 
 ## Signature
 
@@ -12,23 +12,15 @@ function ig.class.Player(source, character_id)
 
 ## Parameters
 
-- **`source`**: any
+- **`source`**: number
 - **`character_id`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.class.Player
-local result = ig.class.Player(source, character_id)
+-- Example usage
+local result = ig.class.Player(100, value)
 ```
-
-## Related Functions
-
-- [ig.class.BlankObject](ig_class_BlankObject.md)
-- [ig.class.ExistingObject](ig_class_ExistingObject.md)
-- [ig.class.Job](ig_class_Job.md)
-- [ig.class.Npc](ig_class_Npc.md)
-- [ig.class.OfflinePlayer](ig_class_OfflinePlayer.md)
 
 ## Source
 

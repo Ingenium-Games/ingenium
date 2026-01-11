@@ -2,7 +2,7 @@
 
 ## Description
 
-Get the xVehicle Data/Table
+Removes npc from the system
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.npc.RemoveNpc(net)
 
 ## Parameters
 
-- **`net`**: integer "Network ID 16 bit integer
-- **`net`**: integer "Network ID 16 bit integer
-- **`net`**: any
+- **`net`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.npc.RemoveNpc
-ig.npc.RemoveNpc(item)
+-- Example usage
+local result = ig.npc.RemoveNpc(100)
 ```
-
-## Related Functions
-
-- [ig.npc.AddNpc](ig_npc_AddNpc.md)
-- [ig.npc.FindNpc](ig_npc_FindNpc.md)
-- [ig.npc.GetNpc](ig_npc_GetNpc.md)
-- [ig.npc.GetNpcs](ig_npc_GetNpcs.md)
 
 ## Source
 

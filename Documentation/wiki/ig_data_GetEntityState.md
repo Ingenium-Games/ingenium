@@ -2,7 +2,7 @@
 
 ## Description
 
-Return the Players"s state bag.
+Retrieves and returns entitystate data
 
 ## Signature
 
@@ -12,26 +12,18 @@ function ig.data.GetEntityState(net, key)
 
 ## Parameters
 
-- **`id`**: any "Player"s Server Id
-- **`id`**: any "Player's Server Id
-- **`ped`**: any "Player's Ped Entity
-- **`ped`**: any "Player's Ped Entity
-- **`net`**: any "NetworkId
+- **`net`**: any
+- **`key`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.data.GetEntityState
-local result = ig.data.GetEntityState()
+-- Get entitystate data
+local result = ig.data.GetEntityState(value, value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.data.GetEntityStateCheck](ig_data_GetEntityStateCheck.md)
-- [ig.data.GetLoadedStatus](ig_data_GetLoadedStatus.md)
-- [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md)
-- [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md)
-- [ig.data.GetLocale](ig_data_GetLocale.md)
 
 ## Source
 

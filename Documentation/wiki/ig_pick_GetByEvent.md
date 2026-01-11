@@ -2,7 +2,7 @@
 
 ## Description
 
-Update pickup data
+Retrieves and returns byevent data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.pick.GetByEvent(eventName)
 
 ## Parameters
 
-- **`uuid`**: string Pickup UUID
-- **`data`**: table New data to merge
-- **`eventName`**: string Event name to search for
+- **`eventName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.pick.GetByEvent
-local result = ig.pick.GetByEvent()
+-- Get byevent data
+local result = ig.pick.GetByEvent(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.pick.Activate](ig_pick_Activate.md)
-- [ig.pick.CleanupOld](ig_pick_CleanupOld.md)
-- [ig.pick.Collect](ig_pick_Collect.md)
-- [ig.pick.Create](ig_pick_Create.md)
-- [ig.pick.CreateLoot](ig_pick_CreateLoot.md)
 
 ## Source
 

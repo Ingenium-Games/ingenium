@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs displayhelp operation
 
 ## Signature
 
@@ -12,21 +12,15 @@ function ig.text.DisplayHelp(s, addon)
 
 ## Parameters
 
-- **`s1`**: any
-- **`s2`**: any
 - **`s`**: any
 - **`addon`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.text.DisplayHelp
-local result = ig.text.DisplayHelp(s, addon)
+-- Example usage
+local result = ig.text.DisplayHelp(value, value)
 ```
-
-## Related Functions
-
-- [ig.text.AddEntry](ig_text_AddEntry.md)
 
 ## Source
 

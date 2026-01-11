@@ -2,7 +2,7 @@
 
 ## Description
 
-Get all tattoo data
+Retrieves and returns bycollection data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.tattoo.GetByCollection(collection)
 
 ## Parameters
 
-- **`hash`**: number Tattoo hash
-- **`zone`**: string Zone name (e.g., "ZONE_HEAD", "ZONE_TORSO")
-- **`collection`**: string Collection hash
+- **`collection`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.tattoo.GetByCollection
-local result = ig.tattoo.GetByCollection()
+-- Get bycollection data
+local result = ig.tattoo.GetByCollection(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.tattoo.ClearCache](ig_tattoo_ClearCache.md)
-- [ig.tattoo.GetAll](ig_tattoo_GetAll.md)
-- [ig.tattoo.GetByZone](ig_tattoo_GetByZone.md)
-- [ig.tattoo.GetAll](ig_tattoo_GetAll.md)
-- [ig.tattoo.GetByHash](ig_tattoo_GetByHash.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves the current ammunition counts for all ammo types. Returns a table containing ammo counts indexed by ammo type (9mm, 5.56mm, 7.62mm, 20g, .223, .308).
 
 ## Signature
 
@@ -12,18 +12,16 @@ function ig.ammo.Get()
 
 ## Parameters
 
-- **`.`**: any
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.ammo.Get
-local result = ig.ammo.Get()
+-- Get all ammo counts
+local ammoData = ig.ammo.Get()
+print("9mm ammo:", ammoData["9mm"])
+print("5.56mm ammo:", ammoData["5.56mm"])
 ```
-
-## Related Functions
-
-- [ig.ammo.GetType](ig_ammo_GetType.md)
 
 ## Source
 

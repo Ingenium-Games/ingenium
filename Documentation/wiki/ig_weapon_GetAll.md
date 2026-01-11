@@ -2,29 +2,38 @@
 
 ## Description
 
-====================================================================================--
+Retrieves all weapon data from the cache or server. Calls the provided callback function with the weapon data. Uses cached data if available, otherwise fetches from server.
 
 ## Signature
 
 ```lua
-function ig.weapon.GetAll()
+function ig.weapon.GetAll(callback)
 ```
+
+## Parameters
+
+- **`callback`**: function - Callback function that receives the weapon data
 
 ## Example
 
 ```lua
--- Example usage of ig.weapon.GetAll
-local result = ig.weapon.GetAll()
+-- Get all weapons with callback
+ig.weapon.GetAll(function(weapons)
+    print("Loaded weapons:", #weapons)
+    for _, weapon in ipairs(weapons) do
+        print("Weapon:", weapon.name, weapon.hash)
+    end
+end)
+
+-- Use in async context
+ig.weapon.GetAll(function(data)
+    if data then
+        -- Process weapon data
+        print("Total weapons:", #data)
+    end
+end)
 ```
-
-## Related Functions
-
-- [ig.weapon.ClearCache](ig_weapon_ClearCache.md)
-- [ig.weapon.GetByHash](ig_weapon_GetByHash.md)
-- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md)
-- [ig.weapon.Get](ig_weapon_Get.md)
-- [ig.weapon.GetComponents](ig_weapon_GetComponents.md)
 
 ## Source
 
-Defined in: `server/[Data - No Save Needed]/_weapons.lua`
+Defined in: `client/[Data]/_game_data_helpers.lua`

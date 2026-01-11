@@ -2,7 +2,7 @@
 
 ## Description
 
-Already active?
+Performs deactivate operation
 
 ## Signature
 
@@ -12,26 +12,14 @@ function ig.drop.Deactivate(netId)
 
 ## Parameters
 
-- **`netId`**: number Network ID of the drop
+- **`netId`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.drop.Deactivate
-local result = ig.drop.Deactivate(netId)
+-- Example usage
+local result = ig.drop.Deactivate(value)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.drop.Activate](ig_drop_Activate.md)
-- [ig.drop.CleanupOld](ig_drop_CleanupOld.md)
-- [ig.drop.Create](ig_drop_Create.md)
-- [ig.drop.MergeDropsForSave](ig_drop_MergeDropsForSave.md)
-- [ig.drop.Remove](ig_drop_Remove.md)
 
 ## Source
 

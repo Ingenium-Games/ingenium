@@ -2,7 +2,7 @@
 
 ## Description
 
-Rate Limiting
+Checks and returns whether checktransactionratelimit condition is met
 
 ## Signature
 
@@ -12,24 +12,15 @@ function ig.security.CheckTransactionRateLimit(player, transactionType)
 
 ## Parameters
 
-- **`playerId`**: number Player source ID
-- **`transactionType`**: string Type of transaction
-- **`player`**: table Player object
-- **`transactionType`**: string Type of transaction
+- **`player`**: any
+- **`transactionType`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.security.CheckTransactionRateLimit
-local result = ig.security.CheckTransactionRateLimit(player, transactionType)
+-- Example usage
+local result = ig.security.CheckTransactionRateLimit(value, value)
 ```
-
-## Related Functions
-
-- [ig.security.CheckRateLimit](ig_security_CheckRateLimit.md)
-- [ig.security.DetectSuspiciousActivity](ig_security_DetectSuspiciousActivity.md)
-- [ig.security.LogPlayerTransaction](ig_security_LogPlayerTransaction.md)
-- [ig.security.LogTransaction](ig_security_LogTransaction.md)
 
 ## Source
 

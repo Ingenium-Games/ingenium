@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Updates  data
 
 ## Signature
 
@@ -10,20 +10,16 @@
 function ig.time.Update()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.time.Update
-ig.time.Update()
+-- Example usage
+local result = ig.time.Update()
 ```
-
-## Related Functions
-
-- [ig.time.ClearOverride](ig_time_ClearOverride.md)
-- [ig.time.GetTime](ig_time_GetTime.md)
-- [ig.time.SetTimeOverride](ig_time_SetTimeOverride.md)
-- [ig.time.UpdateTime](ig_time_UpdateTime.md)
-- [ig.time.ServerSync](ig_time_ServerSync.md)
 
 ## Source
 

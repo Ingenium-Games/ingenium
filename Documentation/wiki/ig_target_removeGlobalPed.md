@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Removes removeglobalped from the system
 
 ## Signature
 
@@ -12,26 +12,14 @@ function ig.target.removeGlobalPed(options)
 
 ## Parameters
 
-- **`target`**: table
-- **`remove`**: table
-- **`resource`**: string
-- **`options`**: table
 - **`options`**: table
 
 ## Example
 
 ```lua
--- Example usage of ig.target.removeGlobalPed
-local result = ig.target.removeGlobalPed(options)
+-- Example usage
+local result = ig.target.removeGlobalPed({})
 ```
-
-## Related Functions
-
-- [ig.target.AddBoxZone](ig_target_AddBoxZone.md)
-- [ig.target.AddEntity](ig_target_AddEntity.md)
-- [ig.target.AddEntityZone](ig_target_AddEntityZone.md)
-- [ig.target.AddGlobalObject](ig_target_AddGlobalObject.md)
-- [ig.target.AddGlobalPed](ig_target_AddGlobalPed.md)
 
 ## Source
 

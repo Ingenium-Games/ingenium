@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs changeeffect operation
 
 ## Signature
 
@@ -10,20 +10,18 @@ No description available
 function ig.state.ChangeEffect(name, value, cb)
 ```
 
+## Parameters
+
+- **`name`**: string
+- **`value`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.state.ChangeEffect
-local result = ig.state.ChangeEffect(name, value, cb)
+-- Example usage
+local result = ig.state.ChangeEffect("name_example", value, function() end)
 ```
-
-## Related Functions
-
-- [ig.state.AddState](ig_state_AddState.md)
-- [ig.state.ChangeAction](ig_state_ChangeAction.md)
-- [ig.state.TriggerAction](ig_state_TriggerAction.md)
-- [ig.state.TriggerEffect](ig_state_TriggerEffect.md)
-- [ig.state.TriggerState](ig_state_TriggerState.md)
 
 ## Source
 

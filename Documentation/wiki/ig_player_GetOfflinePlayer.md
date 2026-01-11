@@ -2,7 +2,7 @@
 
 ## Description
 
-Set the player id to the table.
+Retrieves and returns offlineplayer data
 
 ## Signature
 
@@ -12,25 +12,17 @@ function ig.player.GetOfflinePlayer(character_id)
 
 ## Parameters
 
-- **`source`**: number
-- **`data`**: table
-- **`source`**: number
-- **`character_id`**: any
+- **`character_id`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.player.GetOfflinePlayer
-local result = ig.player.GetOfflinePlayer()
+-- Get offlineplayer data
+local result = ig.player.GetOfflinePlayer(123)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.player.AddPlayer](ig_player_AddPlayer.md)
-- [ig.player.ArePlayersActive](ig_player_ArePlayersActive.md)
-- [ig.player.GetPlayer](ig_player_GetPlayer.md)
-- [ig.player.GetPlayerByCharacterID](ig_player_GetPlayerByCharacterID.md)
-- [ig.player.GetPlayers](ig_player_GetPlayers.md)
 
 ## Source
 

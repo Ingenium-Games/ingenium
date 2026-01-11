@@ -2,7 +2,7 @@
 
 ## Description
 
-Get all job members
+Retrieves and returns onlinemembers data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.job.GetOnlineMembers(jobName)
 
 ## Parameters
 
-- **`grade`**: number|nil Grade (if checking specific grade)
-- **`jobName`**: string Job name
-- **`jobName`**: string Job name
+- **`jobName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.job.GetOnlineMembers
-local result = ig.job.GetOnlineMembers()
+-- Get onlinemembers data
+local result = ig.job.GetOnlineMembers(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

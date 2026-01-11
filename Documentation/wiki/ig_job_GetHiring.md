@@ -2,7 +2,7 @@
 
 ## Description
 
-Get all job statistics
+Retrieves and returns hiring data
 
 ## Signature
 
@@ -10,20 +10,19 @@ Get all job statistics
 function ig.job.GetHiring()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.job.GetHiring
+-- Get hiring data
 local result = ig.job.GetHiring()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Get weapon display name
+Performs resync operation
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.weapon.Resync()
 
 ## Parameters
 
-- **`hash`**: number Weapon hash
-- **`hash`**: number Weapon hash
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.weapon.Resync
-ig.weapon.Resync()
+-- Example usage
+local result = ig.weapon.Resync()
 ```
-
-## Related Functions
-
-- [ig.weapon.ClearCache](ig_weapon_ClearCache.md)
-- [ig.weapon.GetAll](ig_weapon_GetAll.md)
-- [ig.weapon.GetByHash](ig_weapon_GetByHash.md)
-- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md)
-- [ig.weapon.Get](ig_weapon_Get.md)
 
 ## Source
 

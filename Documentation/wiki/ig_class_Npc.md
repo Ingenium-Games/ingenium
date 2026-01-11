@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs npc operation
 
 ## Signature
 
@@ -17,17 +17,9 @@ function ig.class.Npc(net)
 ## Example
 
 ```lua
--- Example usage of ig.class.Npc
-local result = ig.class.Npc(net)
+-- Example usage
+local result = ig.class.Npc(value)
 ```
-
-## Related Functions
-
-- [ig.class.BlankObject](ig_class_BlankObject.md)
-- [ig.class.ExistingObject](ig_class_ExistingObject.md)
-- [ig.class.Job](ig_class_Job.md)
-- [ig.class.OfflinePlayer](ig_class_OfflinePlayer.md)
-- [ig.class.OwnedVehicle](ig_class_OwnedVehicle.md)
 
 ## Source
 

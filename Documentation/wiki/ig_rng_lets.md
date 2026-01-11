@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs lets operation
 
 ## Signature
 
@@ -13,22 +13,13 @@ function ig.rng.lets(num)
 ## Parameters
 
 - **`num`**: any
-- **`num`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.rng.lets
-local result = ig.rng.lets(num)
+-- Example usage
+local result = ig.rng.lets(value)
 ```
-
-## Related Functions
-
-- [ig.rng.RandomValuesNoRepeats](ig_rng_RandomValuesNoRepeats.md)
-- [ig.rng.UUID](ig_rng_UUID.md)
-- [ig.rng.char](ig_rng_char.md)
-- [ig.rng.chars](ig_rng_chars.md)
-- [ig.rng.let](ig_rng_let.md)
 
 ## Source
 

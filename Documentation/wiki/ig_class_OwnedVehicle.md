@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs ownedvehicle operation
 
 ## Signature
 
@@ -13,26 +13,14 @@ function ig.class.OwnedVehicle(net, data)
 ## Parameters
 
 - **`net`**: any
-- **`bool`**: any
+- **`data`**: table
 
 ## Example
 
 ```lua
--- Example usage of ig.class.OwnedVehicle
-local result = ig.class.OwnedVehicle(net, data)
+-- Example usage
+local result = ig.class.OwnedVehicle(value, {})
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.class.BlankObject](ig_class_BlankObject.md)
-- [ig.class.ExistingObject](ig_class_ExistingObject.md)
-- [ig.class.Job](ig_class_Job.md)
-- [ig.class.Npc](ig_class_Npc.md)
-- [ig.class.OfflinePlayer](ig_class_OfflinePlayer.md)
 
 ## Source
 

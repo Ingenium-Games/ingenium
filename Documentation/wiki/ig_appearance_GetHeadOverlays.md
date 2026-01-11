@@ -2,7 +2,7 @@
 
 ## Description
 
-Get all appearance constants
+Retrieves and returns headoverlays data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.appearance.GetHeadOverlays()
 
 ## Parameters
 
-- **`gender`**: string "male" or "female
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.GetHeadOverlays
+-- Get headoverlays data
 local result = ig.appearance.GetHeadOverlays()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

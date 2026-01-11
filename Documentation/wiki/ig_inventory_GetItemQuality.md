@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Retrieves and returns itemquality data
 
 ## Signature
 
@@ -10,20 +10,19 @@ No description available
 function ig.inventory.GetItemQuality(name)
 ```
 
+## Parameters
+
+- **`name`**: string
+
 ## Example
 
 ```lua
--- Example usage of ig.inventory.GetItemQuality
-local result = ig.inventory.GetItemQuality()
+-- Get itemquality data
+local result = ig.inventory.GetItemQuality("name_example")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.inventory.GetInventory](ig_inventory_GetInventory.md)
-- [ig.inventory.GetItemData](ig_inventory_GetItemData.md)
-- [ig.inventory.GetItemFromPosition](ig_inventory_GetItemFromPosition.md)
-- [ig.inventory.GetItemMeta](ig_inventory_GetItemMeta.md)
-- [ig.inventory.GetItemQuantity](ig_inventory_GetItemQuantity.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Get current camera mode
+Sets customizationactive to specified value
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.appearance.SetCustomizationActive(active)
 
 ## Parameters
 
-- **`active`**: boolean True if customization is active
+- **`active`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.SetCustomizationActive
-ig.appearance.SetCustomizationActive(value)
+-- Set customizationactive
+ig.appearance.SetCustomizationActive(100)
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

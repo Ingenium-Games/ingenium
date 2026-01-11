@@ -10,24 +10,20 @@ Get - Info on the characters owned to prefill the multicharacter selection (not 
 function ig.sql.char.Get(character_id, cb)
 ```
 
+## Parameters
+
+- **`character_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.char.Get
-local result = ig.sql.char.Get()
+-- Get  data
+local result = ig.sql.char.Get(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.char.Add](ig_sql_char_Add.md)
-- [ig.sql.char.AddOutfit](ig_sql_char_AddOutfit.md)
-- [ig.sql.char.Current](ig_sql_char_Current.md)
-- [ig.sql.char.Delete](ig_sql_char_Delete.md)
-- [ig.sql.char.GetAll](ig_sql_char_GetAll.md)
 
 ## Source
 

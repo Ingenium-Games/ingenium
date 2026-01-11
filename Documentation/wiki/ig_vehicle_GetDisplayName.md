@@ -2,7 +2,7 @@
 
 ## Description
 
-Get vehicles by class
+Retrieves and returns displayname data
 
 ## Signature
 
@@ -12,25 +12,18 @@ function ig.vehicle.GetDisplayName(hash)
 
 ## Parameters
 
-- **`class`**: string Vehicle class (e.g., "Sports", "Super", "SUV")
-- **`manufacturer`**: string Manufacturer name
-- **`hash`**: number Vehicle hash
+- **`hash`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.vehicle.GetDisplayName
-local result = ig.vehicle.GetDisplayName()
+-- Get displayname data
+local result = ig.vehicle.GetDisplayName("hash")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md)
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
-- [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
-- [ig.vehicle.GetCurrentVehicle](ig_vehicle_GetCurrentVehicle.md)
 
 ## Source
 
-Defined in: `server/[Data - No Save Needed]/_vehicle.lua`
+Defined in: `client/[Data]/_game_data_helpers.lua`

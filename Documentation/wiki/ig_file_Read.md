@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs read operation
 
 ## Signature
 
@@ -12,21 +12,14 @@ function ig.file.Read(file)
 
 ## Parameters
 
-- **`.`**: any
 - **`file`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.file.Read
-local result = ig.file.Read(file)
+-- Example usage
+local result = ig.file.Read(value)
 ```
-
-## Related Functions
-
-- [ig.file.Append](ig_file_Append.md)
-- [ig.file.Exists](ig_file_Exists.md)
-- [ig.file.Write](ig_file_Write.md)
 
 ## Source
 

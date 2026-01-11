@@ -2,7 +2,7 @@
 
 ## Description
 
-Configuration Loader
+Loads  data into memory
 
 ## Signature
 
@@ -12,26 +12,14 @@ function ig.ipl.Load(iplName)
 
 ## Parameters
 
-- **`iplName`**: string "The IPL identifier to load
+- **`iplName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.ipl.Load
-local result = ig.ipl.Load(iplName)
+-- Example usage
+local result = ig.ipl.Load(value)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function executes code dynamically. Never use with untrusted input.
-
-## Related Functions
-
-- [ig.ipl.Get](ig_ipl_Get.md)
-- [ig.ipl.GetAll](ig_ipl_GetAll.md)
-- [ig.ipl.IsLoaded](ig_ipl_IsLoaded.md)
-- [ig.ipl.LoadByName](ig_ipl_LoadByName.md)
-- [ig.ipl.LoadConfigurations](ig_ipl_LoadConfigurations.md)
 
 ## Source
 

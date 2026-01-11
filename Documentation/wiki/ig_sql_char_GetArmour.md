@@ -2,7 +2,7 @@
 
 ## Description
 
-Get outfit Appearance by number
+Retrieves and returns armour data
 
 ## Signature
 
@@ -10,24 +10,20 @@ Get outfit Appearance by number
 function ig.sql.char.GetArmour(character_id, cb)
 ```
 
+## Parameters
+
+- **`character_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.char.GetArmour
-local result = ig.sql.char.GetArmour()
+-- Get armour data
+local result = ig.sql.char.GetArmour(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.char.Add](ig_sql_char_Add.md)
-- [ig.sql.char.AddOutfit](ig_sql_char_AddOutfit.md)
-- [ig.sql.char.Current](ig_sql_char_Current.md)
-- [ig.sql.char.Delete](ig_sql_char_Delete.md)
-- [ig.sql.char.Get](ig_sql_char_Get.md)
 
 ## Source
 

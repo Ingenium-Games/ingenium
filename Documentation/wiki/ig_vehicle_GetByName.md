@@ -2,7 +2,7 @@
 
 ## Description
 
-============================================
+Retrieves and returns byname data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.vehicle.GetByName(name)
 
 ## Parameters
 
-- **`.`**: any
-- **`hash`**: number Vehicle hash
-- **`name`**: string Vehicle model name
+- **`name`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.vehicle.GetByName
-local result = ig.vehicle.GetByName()
+-- Get byname data
+local result = ig.vehicle.GetByName("name_example")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md)
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
-- [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
 
 ## Source
 

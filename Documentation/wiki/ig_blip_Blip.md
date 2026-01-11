@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs blip operation
 
 ## Signature
 
@@ -12,33 +12,25 @@ function ig.blip.Blip(coords, sprite, colour, text, scale, flash, fade, short, h
 
 ## Parameters
 
-- **`coords`**: table 
-- **`sprite`**: number
-- **`colour`**: number
+- **`coords`**: any
+- **`sprite`**: any
+- **`colour`**: any
 - **`text`**: string
-- **`scale`**: number
-- **`flash`**: table
-- **`fade`**: table
-- **`short`**: boolean
-- **`high`**: boolean
-- **`display`**: number
-- **`category`**: number
-- **`legend`**: boolean
+- **`scale`**: any
+- **`flash`**: any
+- **`fade`**: any
+- **`short`**: any
+- **`high`**: any
+- **`display`**: any
+- **`category`**: any
+- **`legend`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.blip.Blip
-local result = ig.blip.Blip(coords, sprite, colour, text, scale, flash, fade, short, high, display, category, legend)
+-- Example usage
+local result = ig.blip.Blip(value, value, value, "text", value, value, value, value, value, value, value, value)
 ```
-
-## Related Functions
-
-- [ig.blip.AreaBlip](ig_blip_AreaBlip.md)
-- [ig.blip.CreateArea](ig_blip_CreateArea.md)
-- [ig.blip.CreateBlip](ig_blip_CreateBlip.md)
-- [ig.blip.CreateRadius](ig_blip_CreateRadius.md)
-- [ig.blip.EntityBlip](ig_blip_EntityBlip.md)
 
 ## Source
 

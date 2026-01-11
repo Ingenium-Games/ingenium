@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Adds suggestions to the system
 
 ## Signature
 
@@ -12,18 +12,14 @@ function ig.chat.AddSuggestions()
 
 ## Parameters
 
-- **`group`**: any "Check permissions and import the chat suggestions.
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.chat.AddSuggestions
-ig.chat.AddSuggestions(item)
+-- Example usage
+local result = ig.chat.AddSuggestions()
 ```
-
-## Related Functions
-
-- [ig.chat.SetPermissions](ig_chat_SetPermissions.md)
 
 ## Source
 

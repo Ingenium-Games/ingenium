@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Changes the action handler for a registered state. Allows dynamic modification of what happens when a state is triggered.
 
 ## Signature
 
@@ -12,26 +12,19 @@ function ig.state.ChangeAction(name, value, cb)
 
 ## Parameters
 
-- **`name`**: string "The name of the state like 'Hungry'
-- **`description`**: string "You feel your stomach ache a little.
-- **`value`**: number "You feel your stomach ache a little.
-- **`effect`**: function "Any change to the screen on the users end
-- **`action`**: function "Any change to the screen on the users end
+- **`name`**: string
+- **`value`**: any
+- **`cb`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.state.ChangeAction
-local result = ig.state.ChangeAction(name, value, cb)
+-- Change action for an existing state
+ig.state.ChangeAction("wounded", function(player)
+    print("Player is wounded:", player)
+    -- New handling logic
+end)
 ```
-
-## Related Functions
-
-- [ig.state.AddState](ig_state_AddState.md)
-- [ig.state.ChangeEffect](ig_state_ChangeEffect.md)
-- [ig.state.TriggerAction](ig_state_TriggerAction.md)
-- [ig.state.TriggerEffect](ig_state_TriggerEffect.md)
-- [ig.state.TriggerState](ig_state_TriggerState.md)
 
 ## Source
 

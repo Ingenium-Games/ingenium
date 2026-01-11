@@ -2,7 +2,7 @@
 
 ## Description
 
-is the door in the table?
+Finds doors in the system by their model hash. Returns all door instances that match the specified hash value.
 
 ## Signature
 
@@ -12,24 +12,19 @@ function ig.door.FindHash(hash)
 
 ## Parameters
 
-- **`coords`**: any
-- **`coords`**: any
+- **`hash`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.door.FindHash
-local result = ig.door.FindHash(hash)
+-- Find doors by model hash
+local doorHash = GetHashKey("prop_door_01")
+local doors = ig.door.FindHash(doorHash)
+for _, door in ipairs(doors) do
+    print("Found door at:", door.coords)
+end
 ```
-
-## Related Functions
-
-- [ig.door.Add](ig_door_Add.md)
-- [ig.door.AddDoorsToSystem](ig_door_AddDoorsToSystem.md)
-- [ig.door.Find](ig_door_Find.md)
-- [ig.door.GenerateDoorsInRadius](ig_door_GenerateDoorsInRadius.md)
-- [ig.door.GetModels](ig_door_GetModels.md)
 
 ## Source
 
-Defined in: `server/[Doors]/_doors.lua`
+Defined in: `client/_doors.lua`

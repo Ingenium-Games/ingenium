@@ -2,7 +2,7 @@
 
 ## Description
 
-Get job by name
+Retrieves and returns members data
 
 ## Signature
 
@@ -12,25 +12,17 @@ function ig.job.GetMembers(jobName)
 
 ## Parameters
 
-- **`name`**: string Job name
-- **`name`**: string Job name
-- **`grade`**: number|nil Grade (if checking specific grade)
-- **`jobName`**: string Job name
+- **`jobName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.job.GetMembers
-local result = ig.job.GetMembers()
+-- Get members data
+local result = ig.job.GetMembers(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

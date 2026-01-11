@@ -2,7 +2,7 @@
 
 ## Description
 
-Sync to clients
+Retrieves and returns nearby data
 
 ## Signature
 
@@ -12,24 +12,18 @@ function ig.pick.GetNearby(coords, radius)
 
 ## Parameters
 
-- **`uuid`**: string Pickup UUID
-- **`coords`**: vector3 Center coordinates
-- **`radius`**: number Search radius
+- **`coords`**: any
+- **`radius`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.pick.GetNearby
-local result = ig.pick.GetNearby()
+-- Get nearby data
+local result = ig.pick.GetNearby(value, value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.pick.Activate](ig_pick_Activate.md)
-- [ig.pick.CleanupOld](ig_pick_CleanupOld.md)
-- [ig.pick.Collect](ig_pick_Collect.md)
-- [ig.pick.Create](ig_pick_Create.md)
-- [ig.pick.CreateLoot](ig_pick_CreateLoot.md)
 
 ## Source
 

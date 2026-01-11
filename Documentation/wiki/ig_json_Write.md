@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs write operation
 
 ## Signature
 
@@ -12,24 +12,15 @@ function ig.json.Write(filename, data)
 
 ## Parameters
 
-- **`filename`**: string "File name in data/ directory
-- **`filename`**: string
-- **`data`**: table
+- **`filename`**: any
+- **`data`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.json.Write
-local result = ig.json.Write(filename, data)
+-- Example usage
+local result = ig.json.Write(value, 100)
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.json.Load](ig_json_Load.md)
 
 ## Source
 

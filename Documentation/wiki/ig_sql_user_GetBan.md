@@ -10,26 +10,20 @@ Get - `Ace` from the users License_ID identifier
 function ig.sql.user.GetBan(license_id, cb)
 ```
 
+## Parameters
+
+- **`license_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.user.GetBan
-local result = ig.sql.user.GetBan()
+-- Get ban data
+local result = ig.sql.user.GetBan(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.sql.user.Add](ig_sql_user_Add.md)
-- [ig.sql.user.AddCharacterSlot](ig_sql_user_AddCharacterSlot.md)
-- [ig.sql.user.Find](ig_sql_user_Find.md)
-- [ig.sql.user.Get](ig_sql_user_Get.md)
-- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
 
 ## Source
 

@@ -12,31 +12,18 @@ function ig.func.Discord(url, color, name, message, footer)
 
 ## Parameters
 
-- **`source`**: number "license: etig...
 - **`url`**: any
 - **`color`**: any
-- **`name`**: any
-- **`message`**: any
+- **`name`**: string
+- **`message`**: string
 - **`footer`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.func.Discord
-local result = ig.func.Discord(url, color, name, message, footer)
+-- Example usage
+local result = ig.func.Discord(value, value, "name_example", "message", value)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function makes network requests. Be cautious with sensitive data and validate URLs.
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns armour data
 
 ## Signature
 
@@ -10,20 +10,19 @@
 function ig.status.GetArmour()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.status.GetArmour
+-- Get armour data
 local result = ig.status.GetArmour()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.status.AddArmour](ig_status_AddArmour.md)
-- [ig.status.AddArmourToAmount](ig_status_AddArmourToAmount.md)
-- [ig.status.AddHunger](ig_status_AddHunger.md)
-- [ig.status.AddStress](ig_status_AddStress.md)
-- [ig.status.AddThirst](ig_status_AddThirst.md)
 
 ## Source
 

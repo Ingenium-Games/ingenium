@@ -2,7 +2,7 @@
 
 ## Description
 
-Get current head blend data
+Sets facefeature to specified value
 
 ## Signature
 
@@ -12,23 +12,15 @@ function ig.appearance.SetFaceFeature(index, value)
 
 ## Parameters
 
-- **`index`**: number Feature index (0-19)
-- **`value`**: number Feature value (-1.0 to 1.0)
+- **`index`**: number
+- **`value`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.SetFaceFeature
-ig.appearance.SetFaceFeature(value)
+-- Set facefeature
+ig.appearance.SetFaceFeature(100, value)
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 
