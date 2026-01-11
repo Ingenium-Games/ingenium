@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs startconnection operation
 
 ## Signature
 
@@ -12,23 +12,15 @@ function ig.voip.server.StartConnection(playerId, connectionId)
 
 ## Parameters
 
-- **`playerId`**: number The server ID of the player
-- **`connectionId`**: string The unique connection ID
+- **`playerId`**: any
+- **`connectionId`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.voip.server.StartConnection
-local result = ig.voip.server.StartConnection(playerId, connectionId)
+-- Example usage
+local result = ig.voip.server.StartConnection(value, value)
 ```
-
-## Related Functions
-
-- [ig.voip.server.CleanupPlayer](ig_voip_server_CleanupPlayer.md)
-- [ig.voip.server.EndAdminCall](ig_voip_server_EndAdminCall.md)
-- [ig.voip.server.EndCall](ig_voip_server_EndCall.md)
-- [ig.voip.server.EndConnection](ig_voip_server_EndConnection.md)
-- [ig.voip.server.GetPlayersInProximity](ig_voip_server_GetPlayersInProximity.md)
 
 ## Source
 

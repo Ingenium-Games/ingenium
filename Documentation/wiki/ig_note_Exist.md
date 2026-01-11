@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Checks and returns whether exist condition is met
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.note.Exist(id)
 
 ## Parameters
 
-- **`data`**: any
-- **`id`**: any
+- **`id`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.note.Exist
-local result = ig.note.Exist(id)
+-- Example usage
+local result = ig.note.Exist(123)
 ```
-
-## Related Functions
-
-- [ig.note.Add](ig_note_Add.md)
-- [ig.note.Clean](ig_note_Clean.md)
-- [ig.note.CleanOld](ig_note_CleanOld.md)
-- [ig.note.CleanUp](ig_note_CleanUp.md)
-- [ig.note.Create](ig_note_Create.md)
 
 ## Source
 

@@ -12,23 +12,15 @@ function ig.state.TriggerEffect(name, value)
 
 ## Parameters
 
-- **`name`**: string "The name of the State
-- **`value`**: number "The number of the State containing values
+- **`name`**: string
+- **`value`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.state.TriggerEffect
-local result = ig.state.TriggerEffect(name, value)
+-- Example usage
+local result = ig.state.TriggerEffect("name_example", value)
 ```
-
-## Related Functions
-
-- [ig.state.AddState](ig_state_AddState.md)
-- [ig.state.ChangeAction](ig_state_ChangeAction.md)
-- [ig.state.ChangeEffect](ig_state_ChangeEffect.md)
-- [ig.state.TriggerAction](ig_state_TriggerAction.md)
-- [ig.state.TriggerState](ig_state_TriggerState.md)
 
 ## Source
 

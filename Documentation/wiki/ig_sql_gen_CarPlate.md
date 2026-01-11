@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs carplate operation
 
 ## Signature
 
@@ -10,24 +10,16 @@ No description available
 function ig.sql.gen.CarPlate(cb)
 ```
 
+## Parameters
+
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.gen.CarPlate
-local result = ig.sql.gen.CarPlate(cb)
+-- Example usage
+local result = ig.sql.gen.CarPlate(function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.gen.AccountNumber](ig_sql_gen_AccountNumber.md)
-- [ig.sql.gen.CharacterID](ig_sql_gen_CharacterID.md)
-- [ig.sql.gen.CityID](ig_sql_gen_CityID.md)
-- [ig.sql.gen.Iban](ig_sql_gen_Iban.md)
-- [ig.sql.gen.PhoneNumber](ig_sql_gen_PhoneNumber.md)
 
 ## Source
 

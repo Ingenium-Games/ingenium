@@ -10,20 +10,19 @@ Use secure callback for door state change
 function ig.door.GetModels()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.door.GetModels
+-- Get models data
 local result = ig.door.GetModels()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.door.Add](ig_door_Add.md)
-- [ig.door.AddDoorsToSystem](ig_door_AddDoorsToSystem.md)
-- [ig.door.Find](ig_door_Find.md)
-- [ig.door.FindHash](ig_door_FindHash.md)
-- [ig.door.GenerateDoorsInRadius](ig_door_GenerateDoorsInRadius.md)
 
 ## Source
 

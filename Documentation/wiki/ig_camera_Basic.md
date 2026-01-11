@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Creates a basic scripted camera with specified position, rotation, and field of view.
 
 ## Signature
 
@@ -12,29 +12,24 @@ function ig.camera.Basic(px, py, pz, rx, ry, rz, fov, l1, l2)
 
 ## Parameters
 
-- **`t`**: any
-- **`px`**: any
-- **`py`**: any
-- **`pz`**: any
-- **`rx`**: any
-- **`ry`**: any
-- **`rz`**: any
-- **`fov`**: any
-- **`l1`**: any
-- **`l2`**: any
+- **`px`**: number
+- **`py`**: number
+- **`pz`**: number
+- **`rx`**: number
+- **`ry`**: number
+- **`rz`**: number
+- **`fov`**: number
+- **`l1`**: boolean
+- **`l2`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.camera.Basic
-local result = ig.camera.Basic(px, py, pz, rx, ry, rz, fov, l1, l2)
+-- Create a basic camera
+local camera = ig.camera.Basic(100.0, 200.0, 30.0, 0.0, 0.0, 90.0, 50.0)
+SetCamActive(camera, true)
+RenderScriptCams(true, false, 0, true, false)
 ```
-
-## Related Functions
-
-- [ig.camera.Advanced](ig_camera_Advanced.md)
-- [ig.camera.CleanUp](ig_camera_CleanUp.md)
-- [ig.camera.NewName](ig_camera_NewName.md)
 
 ## Source
 

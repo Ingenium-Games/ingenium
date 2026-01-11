@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs startdeath operation
 
 ## Signature
 
@@ -10,16 +10,16 @@ No description available
 function ig.fx.StartDeath()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.fx.StartDeath
-ig.fx.StartDeath()
+-- Example usage
+local result = ig.fx.StartDeath()
 ```
-
-## Related Functions
-
-- [ig.fx.StopDeath](ig_fx_StopDeath.md)
 
 ## Source
 

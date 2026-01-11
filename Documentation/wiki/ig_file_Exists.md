@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Checks and returns whether exists condition is met
 
 ## Signature
 
@@ -12,20 +12,14 @@ function ig.file.Exists(file)
 
 ## Parameters
 
-- **`.`**: any
+- **`file`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.file.Exists
-local result = ig.file.Exists(file)
+-- Example usage
+local result = ig.file.Exists(value)
 ```
-
-## Related Functions
-
-- [ig.file.Append](ig_file_Append.md)
-- [ig.file.Read](ig_file_Read.md)
-- [ig.file.Write](ig_file_Write.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-============================================
+Retrieves and returns byname data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.weapon.GetByName(name)
 
 ## Parameters
 
-- **`id`**: any
-- **`hash`**: number Weapon hash
-- **`name`**: string Weapon name (e.g., "weapon_pistol")
+- **`name`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.weapon.GetByName
-local result = ig.weapon.GetByName()
+-- Get byname data
+local result = ig.weapon.GetByName("name_example")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.weapon.ClearCache](ig_weapon_ClearCache.md)
-- [ig.weapon.GetAll](ig_weapon_GetAll.md)
-- [ig.weapon.GetByHash](ig_weapon_GetByHash.md)
-- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md)
-- [ig.weapon.Get](ig_weapon_Get.md)
 
 ## Source
 

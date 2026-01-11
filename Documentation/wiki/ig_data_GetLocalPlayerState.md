@@ -12,22 +12,17 @@ function ig.data.GetLocalPlayerState(key)
 
 ## Parameters
 
-- **`bool`**: boolean "Set loaded status to true or false.
+- **`key`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.data.GetLocalPlayerState
-local result = ig.data.GetLocalPlayerState()
+-- Get localplayerstate data
+local result = ig.data.GetLocalPlayerState(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.data.GetEntityState](ig_data_GetEntityState.md)
-- [ig.data.GetEntityStateCheck](ig_data_GetEntityStateCheck.md)
-- [ig.data.GetLoadedStatus](ig_data_GetLoadedStatus.md)
-- [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md)
-- [ig.data.GetLocale](ig_data_GetLocale.md)
 
 ## Source
 

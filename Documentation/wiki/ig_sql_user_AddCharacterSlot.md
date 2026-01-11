@@ -2,7 +2,7 @@
 
 ## Description
 
-Get/Set - `Priority`
+Adds characterslot to the system
 
 ## Signature
 
@@ -10,24 +10,17 @@ Get/Set - `Priority`
 function ig.sql.user.AddCharacterSlot(fivem_id, cb)
 ```
 
+## Parameters
+
+- **`fivem_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.user.AddCharacterSlot
-ig.sql.user.AddCharacterSlot(item)
+-- Example usage
+local result = ig.sql.user.AddCharacterSlot(value, function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.user.Add](ig_sql_user_Add.md)
-- [ig.sql.user.Find](ig_sql_user_Find.md)
-- [ig.sql.user.Get](ig_sql_user_Get.md)
-- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
-- [ig.sql.user.GetBan](ig_sql_user_GetBan.md)
 
 ## Source
 

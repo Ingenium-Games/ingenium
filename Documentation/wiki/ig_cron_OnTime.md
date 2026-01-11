@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs ontime operation
 
 ## Signature
 
@@ -10,16 +10,17 @@
 function ig.cron.OnTime(h, m)
 ```
 
+## Parameters
+
+- **`h`**: any
+- **`m`**: any
+
 ## Example
 
 ```lua
--- Example usage of ig.cron.OnTime
-local result = ig.cron.OnTime(h, m)
+-- Example usage
+local result = ig.cron.OnTime(value, value)
 ```
-
-## Related Functions
-
-- [ig.cron.RunAt](ig_cron_RunAt.md)
 
 ## Source
 

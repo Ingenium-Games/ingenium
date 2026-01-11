@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Loads jobpricing data into memory
 
 ## Signature
 
@@ -12,26 +12,14 @@ function ig.appearance.LoadJobPricing(jobName)
 
 ## Parameters
 
-- **`jobName`**: string The name of the job
+- **`jobName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.LoadJobPricing
-local result = ig.appearance.LoadJobPricing(jobName)
+-- Example usage
+local result = ig.appearance.LoadJobPricing(value)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function executes code dynamically. Never use with untrusted input.
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

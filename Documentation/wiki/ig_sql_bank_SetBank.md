@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Sets bank to specified value
 
 ## Signature
 
@@ -10,26 +10,18 @@
 function ig.sql.bank.SetBank(character_id, bank, cb)
 ```
 
+## Parameters
+
+- **`character_id`**: any
+- **`bank`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.bank.SetBank
-ig.sql.bank.SetBank(value)
+-- Set bank
+ig.sql.bank.SetBank(value, value, function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.sql.bank.AddAccount](ig_sql_bank_AddAccount.md)
-- [ig.sql.bank.GetBank](ig_sql_bank_GetBank.md)
-- [ig.sql.bank.GetLoan](ig_sql_bank_GetLoan.md)
-- [ig.sql.bank.SetLoan](ig_sql_bank_SetLoan.md)
-- [ig.sql.bank.TakeOutLoan](ig_sql_bank_TakeOutLoan.md)
 
 ## Source
 

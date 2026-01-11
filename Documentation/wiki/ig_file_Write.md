@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs write operation
 
 ## Signature
 
@@ -12,27 +12,15 @@ function ig.file.Write(file, data)
 
 ## Parameters
 
-- **`.`**: any
 - **`file`**: any
-- **`file`**: any
-- **`data`**: any
+- **`data`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.file.Write
-local result = ig.file.Write(file, data)
+-- Example usage
+local result = ig.file.Write(value, 100)
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.file.Append](ig_file_Append.md)
-- [ig.file.Exists](ig_file_Exists.md)
-- [ig.file.Read](ig_file_Read.md)
 
 ## Source
 

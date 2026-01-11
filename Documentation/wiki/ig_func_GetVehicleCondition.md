@@ -2,7 +2,7 @@
 
 ## Description
 
-13 neonLightsColor
+Retrieves and returns vehiclecondition data
 
 ## Signature
 
@@ -17,17 +17,12 @@ function ig.func.GetVehicleCondition(vehicle)
 ## Example
 
 ```lua
--- Example usage of ig.func.GetVehicleCondition
-local result = ig.func.GetVehicleCondition()
+-- Get vehiclecondition data
+local result = ig.func.GetVehicleCondition(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

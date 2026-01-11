@@ -2,7 +2,7 @@
 
 ## Description
 
-Get item weight
+Retrieves and returns recipe data
 
 ## Signature
 
@@ -12,25 +12,17 @@ function ig.item.GetRecipe(name)
 
 ## Parameters
 
-- **`name`**: string Item name
-- **`name`**: string Item name
-- **`name`**: string Item name
-- **`name`**: string Item name
+- **`name`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.item.GetRecipe
-local result = ig.item.GetRecipe()
+-- Get recipe data
+local result = ig.item.GetRecipe("name_example")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

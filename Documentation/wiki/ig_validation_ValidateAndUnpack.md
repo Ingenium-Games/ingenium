@@ -2,7 +2,7 @@
 
 ## Description
 
-Log to server console
+Performs validateandunpack operation
 
 ## Signature
 
@@ -12,23 +12,15 @@ function ig.validation.ValidateAndUnpack(source, inventory)
 
 ## Parameters
 
-- **`source`**: number - Player source for error reporting (can be nil for non-player entities)
-- **`inventory`**: table - Inventory array to validate and process
+- **`source`**: any
+- **`inventory`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.validation.ValidateAndUnpack
-local result = ig.validation.ValidateAndUnpack(source, inventory)
+-- Example usage
+local result = ig.validation.ValidateAndUnpack(value, value)
 ```
-
-## Related Functions
-
-- [ig.validation.GetItemQuantities](ig_validation_GetItemQuantities.md)
-- [ig.validation.IsValidItem](ig_validation_IsValidItem.md)
-- [ig.validation.LogAndBanExploiter](ig_validation_LogAndBanExploiter.md)
-- [ig.validation.ValidateInventory](ig_validation_ValidateInventory.md)
-- [ig.validation.ValidateInventoryIntegrity](ig_validation_ValidateInventoryIntegrity.md)
 
 ## Source
 

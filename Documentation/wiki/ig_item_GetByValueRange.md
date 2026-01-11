@@ -2,7 +2,7 @@
 
 ## Description
 
-Get items by weight range
+Retrieves and returns byvaluerange data
 
 ## Signature
 
@@ -12,25 +12,18 @@ function ig.item.GetByValueRange(minValue, maxValue)
 
 ## Parameters
 
-- **`minWeight`**: number Minimum weight
-- **`maxWeight`**: number Maximum weight
-- **`minValue`**: number Minimum value
-- **`maxValue`**: number Maximum value
+- **`minValue`**: any
+- **`maxValue`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.item.GetByValueRange
-local result = ig.item.GetByValueRange()
+-- Get byvaluerange data
+local result = ig.item.GetByValueRange(value, value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

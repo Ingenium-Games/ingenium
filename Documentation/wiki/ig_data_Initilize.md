@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs initilize operation
 
 ## Signature
 
@@ -12,24 +12,15 @@ function ig.data.Initilize()
 
 ## Parameters
 
-- **`str`**: any
-- **`str`**: any
+- **`cb`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.data.Initilize
-ig.data.Initilize()
+-- Example usage
+local result = ig.data.Initilize(function() end)
 ```
-
-## Related Functions
-
-- [ig.data.GetEntityState](ig_data_GetEntityState.md)
-- [ig.data.GetEntityStateCheck](ig_data_GetEntityStateCheck.md)
-- [ig.data.GetLoadedStatus](ig_data_GetLoadedStatus.md)
-- [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md)
-- [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md)
 
 ## Source
 
-Defined in: `server/_data.lua`
+Defined in: `client/_data.lua`

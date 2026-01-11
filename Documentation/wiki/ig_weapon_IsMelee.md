@@ -2,7 +2,7 @@
 
 ## Description
 
-Get weapons by category
+Checks and returns whether ismelee condition is met
 
 ## Signature
 
@@ -12,24 +12,14 @@ function ig.weapon.IsMelee(hash)
 
 ## Parameters
 
-- **`category`**: string Category (e.g., "Pistol", "Rifle", "Melee")
-- **`hash`**: number Weapon hash
-- **`hash`**: number Weapon hash
+- **`hash`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.weapon.IsMelee
-local result = ig.weapon.IsMelee(hash)
+-- Example usage
+local result = ig.weapon.IsMelee(value)
 ```
-
-## Related Functions
-
-- [ig.weapon.ClearCache](ig_weapon_ClearCache.md)
-- [ig.weapon.GetAll](ig_weapon_GetAll.md)
-- [ig.weapon.GetByHash](ig_weapon_GetByHash.md)
-- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md)
-- [ig.weapon.Get](ig_weapon_Get.md)
 
 ## Source
 

@@ -12,22 +12,16 @@ function ig.affiliation.AddGroupToTable(name, grouphash, relations)
 
 ## Parameters
 
-- **`.`**: any
-- **`name`**: string "Name of group : "NAME
-- **`grouphash`**: string "Hash number of the group, typically starts with: "0x
-- **`relations`**: table "Table of relations to iterate over : {['Companion'] = {}, ['Respect'] = {}, ['Like'] = {}, ['Nutral'] = {}, ['Dislike'] = {}, ['Hate'] = {}}
+- **`name`**: string
+- **`grouphash`**: any
+- **`relations`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.affiliation.AddGroupToTable
-ig.affiliation.AddGroupToTable(item)
+-- Example usage
+local result = ig.affiliation.AddGroupToTable("name_example", value, value)
 ```
-
-## Related Functions
-
-- [ig.affiliation.CreateGroup](ig_affiliation_CreateGroup.md)
-- [ig.affiliation.GetGroups](ig_affiliation_GetGroups.md)
 
 ## Source
 

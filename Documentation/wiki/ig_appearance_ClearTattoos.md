@@ -2,7 +2,7 @@
 
 ## Description
 
-Get all props
+Performs cleartattoos operation
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.appearance.ClearTattoos()
 
 ## Parameters
 
-- **`collection`**: string Collection hash
-- **`hash`**: string Tattoo hash
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.ClearTattoos
-ig.appearance.ClearTattoos()
+-- Example usage
+local result = ig.appearance.ClearTattoos()
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
-- [ig.appearance.DestroyCamera](ig_appearance_DestroyCamera.md)
 
 ## Source
 

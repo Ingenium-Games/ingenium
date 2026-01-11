@@ -2,7 +2,7 @@
 
 ## Description
 
-Get GSR by ID
+Retrieves and returns byid data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.gsr.GetByID(id)
 
 ## Parameters
 
-- **`id`**: string GSR ID
+- **`id`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.gsr.GetByID
-local result = ig.gsr.GetByID()
+-- Get byid data
+local result = ig.gsr.GetByID(123)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.gsr.Add](ig_gsr_Add.md)
-- [ig.gsr.Clean](ig_gsr_Clean.md)
-- [ig.gsr.CleanOld](ig_gsr_CleanOld.md)
-- [ig.gsr.Clear](ig_gsr_Clear.md)
-- [ig.gsr.Create](ig_gsr_Create.md)
 
 ## Source
 

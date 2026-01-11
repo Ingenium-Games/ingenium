@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs string operation
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.check.String(str)
 
 ## Parameters
 
-- **`bool`**: any
-- **`t`**: any
-- **`str`**: any
+- **`str`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.check.String
-local result = ig.check.String(str)
+-- Example usage
+local result = ig.check.String("str")
 ```
-
-## Related Functions
-
-- [ig.check.Boolean](ig_check_Boolean.md)
-- [ig.check.Number](ig_check_Number.md)
-- [ig.check.Table](ig_check_Table.md)
 
 ## Source
 

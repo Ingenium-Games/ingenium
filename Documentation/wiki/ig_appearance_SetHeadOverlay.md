@@ -2,7 +2,7 @@
 
 ## Description
 
-Get current face features
+Sets headoverlay to specified value
 
 ## Signature
 
@@ -12,26 +12,18 @@ function ig.appearance.SetHeadOverlay(overlayId, style, opacity, color, secondCo
 
 ## Parameters
 
-- **`overlayId`**: number Overlay ID (0-12)
-- **`style`**: number Style index
-- **`opacity`**: number Opacity (0.0-1.0)
-- **`color`**: number Color index
-- **`secondColor`**: number|nil Secondary color index (for certain overlays)
+- **`overlayId`**: any
+- **`style`**: any
+- **`opacity`**: any
+- **`color`**: any
+- **`secondColor`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.SetHeadOverlay
-ig.appearance.SetHeadOverlay(value)
+-- Set headoverlay
+ig.appearance.SetHeadOverlay(value, value, value, value, value)
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

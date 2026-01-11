@@ -2,7 +2,7 @@
 
 ## Description
 
-Sort by wealth (highest first)
+Checks and returns whether isbossofany condition is met
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.job.IsBossOfAny(characterId)
 
 ## Parameters
 
-- **`characterId`**: string Character ID
-- **`characterId`**: string Character ID
+- **`characterId`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.job.IsBossOfAny
-local result = ig.job.IsBossOfAny(characterId)
+-- Example usage
+local result = ig.job.IsBossOfAny(value)
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

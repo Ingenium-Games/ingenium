@@ -12,19 +12,17 @@ function ig.affiliation.GetGroups()
 
 ## Parameters
 
-- **`.`**: any
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.affiliation.GetGroups
+-- Get groups data
 local result = ig.affiliation.GetGroups()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.affiliation.AddGroupToTable](ig_affiliation_AddGroupToTable.md)
-- [ig.affiliation.CreateGroup](ig_affiliation_CreateGroup.md)
 
 ## Source
 

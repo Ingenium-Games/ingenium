@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs number operation
 
 ## Signature
 
@@ -10,18 +10,18 @@
 function ig.check.Number(num, min, max)
 ```
 
+## Parameters
+
+- **`num`**: any
+- **`min`**: number
+- **`max`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.check.Number
-local result = ig.check.Number(num, min, max)
+-- Example usage
+local result = ig.check.Number(value, 100, function() end)
 ```
-
-## Related Functions
-
-- [ig.check.Boolean](ig_check_Boolean.md)
-- [ig.check.String](ig_check_String.md)
-- [ig.check.Table](ig_check_Table.md)
 
 ## Source
 

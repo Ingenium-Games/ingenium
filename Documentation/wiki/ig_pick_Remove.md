@@ -2,7 +2,7 @@
 
 ## Description
 
-Sync to clients
+Removes  from the system
 
 ## Signature
 
@@ -12,24 +12,14 @@ function ig.pick.Remove(uuid)
 
 ## Parameters
 
-- **`event`**: string|nil Event to trigger on pickup
-- **`data`**: table|nil Additional data
-- **`uuid`**: string Pickup UUID
+- **`uuid`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.pick.Remove
-ig.pick.Remove(item)
+-- Example usage
+local result = ig.pick.Remove(value)
 ```
-
-## Related Functions
-
-- [ig.pick.Activate](ig_pick_Activate.md)
-- [ig.pick.CleanupOld](ig_pick_CleanupOld.md)
-- [ig.pick.Collect](ig_pick_Collect.md)
-- [ig.pick.Create](ig_pick_Create.md)
-- [ig.pick.CreateLoot](ig_pick_CreateLoot.md)
 
 ## Source
 

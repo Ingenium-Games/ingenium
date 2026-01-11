@@ -2,7 +2,7 @@
 
 ## Description
 
-Check if ped is freemode model
+Retrieves and returns displayname data
 
 ## Signature
 
@@ -12,25 +12,17 @@ function ig.ped.GetDisplayName(hash)
 
 ## Parameters
 
-- **`hash`**: number Ped hash
-- **`hash`**: number Ped hash
-- **`hash`**: number Ped hash
-- **`hash`**: number Ped hash
+- **`hash`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.ped.GetDisplayName
-local result = ig.ped.GetDisplayName()
+-- Get displayname data
+local result = ig.ped.GetDisplayName(100)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.ped.GetAll](ig_ped_GetAll.md)
-- [ig.ped.GetByGender](ig_ped_GetByGender.md)
-- [ig.ped.GetByHash](ig_ped_GetByHash.md)
-- [ig.ped.GetByName](ig_ped_GetByName.md)
-- [ig.ped.GetByType](ig_ped_GetByType.md)
 
 ## Source
 

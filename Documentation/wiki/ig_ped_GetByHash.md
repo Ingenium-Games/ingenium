@@ -2,7 +2,7 @@
 
 ## Description
 
-[[
+Retrieves and returns byhash data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.ped.GetByHash(hash)
 
 ## Parameters
 
-- **`hash`**: number Ped hash
+- **`hash`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.ped.GetByHash
-local result = ig.ped.GetByHash()
+-- Get byhash data
+local result = ig.ped.GetByHash("hash")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.ped.GetAll](ig_ped_GetAll.md)
-- [ig.ped.GetByGender](ig_ped_GetByGender.md)
-- [ig.ped.GetByName](ig_ped_GetByName.md)
-- [ig.ped.GetByType](ig_ped_GetByType.md)
-- [ig.ped.GetDisplayName](ig_ped_GetDisplayName.md)
 
 ## Source
 

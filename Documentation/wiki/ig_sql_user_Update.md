@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Updates  data
 
 ## Signature
 
@@ -10,24 +10,22 @@
 function ig.sql.user.Update(usermame, license_id, fivem_id, steam_id, discord_id, ip, cb)
 ```
 
+## Parameters
+
+- **`usermame`**: any
+- **`license_id`**: any
+- **`fivem_id`**: any
+- **`steam_id`**: any
+- **`discord_id`**: any
+- **`ip`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.user.Update
-local result = ig.sql.user.Update(usermame, license_id, fivem_id, steam_id, discord_id, ip, cb)
+-- Example usage
+local result = ig.sql.user.Update(value, value, value, value, value, value, function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.user.Add](ig_sql_user_Add.md)
-- [ig.sql.user.AddCharacterSlot](ig_sql_user_AddCharacterSlot.md)
-- [ig.sql.user.Find](ig_sql_user_Find.md)
-- [ig.sql.user.Get](ig_sql_user_Get.md)
-- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
 
 ## Source
 

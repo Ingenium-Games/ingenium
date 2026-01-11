@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs candegrade operation
 
 ## Signature
 
@@ -12,27 +12,15 @@ function ig.item.CanDegrade(name)
 
 ## Parameters
 
-- **`name`**: any
-- **`name`**: any
-- **`name`**: any
-- **`name`**: any
-- **`name`**: any
+- **`name`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.item.CanDegrade
-local result = ig.item.CanDegrade(name)
+-- Example usage
+local result = ig.item.CanDegrade("name_example")
 ```
-
-## Related Functions
-
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
-- [ig.item.GetData](ig_item_GetData.md)
 
 ## Source
 
-Defined in: `server/[Data - Save to File]/_items.lua`
+Defined in: `client/_items.lua`

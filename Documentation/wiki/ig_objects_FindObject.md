@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs findobject operation
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.objects.FindObject(net)
 
 ## Parameters
 
-- **`net`**: integer "Network ID 16 bit integer
+- **`net`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.objects.FindObject
-local result = ig.objects.FindObject(net)
+-- Example usage
+local result = ig.objects.FindObject(value)
 ```
-
-## Related Functions
-
-- [ig.objects.AddObject](ig_objects_AddObject.md)
-- [ig.objects.FindObjectFromUUID](ig_objects_FindObjectFromUUID.md)
-- [ig.objects.GetObject](ig_objects_GetObject.md)
-- [ig.objects.GetObjectFromUUID](ig_objects_GetObjectFromUUID.md)
-- [ig.objects.GetObjects](ig_objects_GetObjects.md)
 
 ## Source
 

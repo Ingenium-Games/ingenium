@@ -2,7 +2,7 @@
 
 ## Description
 
-Returns the local from the local variable. String
+Checks and returns whether isplayerloaded condition is met
 
 ## Signature
 
@@ -12,26 +12,14 @@ function ig.data.IsPlayerLoaded()
 
 ## Parameters
 
-- **`bool`**: boolean "Set loaded status to true or false.
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.data.IsPlayerLoaded
-ig.data.IsPlayerLoaded()
+-- Example usage
+local result = ig.data.IsPlayerLoaded()
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function executes code dynamically. Never use with untrusted input.
-
-## Related Functions
-
-- [ig.data.GetEntityState](ig_data_GetEntityState.md)
-- [ig.data.GetEntityStateCheck](ig_data_GetEntityStateCheck.md)
-- [ig.data.GetLoadedStatus](ig_data_GetLoadedStatus.md)
-- [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md)
-- [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md)
 
 ## Source
 

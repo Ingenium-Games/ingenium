@@ -2,7 +2,7 @@
 
 ## Description
 
-Sort by age (newest first)
+Creates a new graffiti instance
 
 ## Signature
 
@@ -12,28 +12,19 @@ function ig.note.CreateGraffiti(coords, message, author)
 
 ## Parameters
 
-- **`coords`**: table Coordinates
-- **`title`**: string Note title
-- **`content`**: string Note content
-- **`author`**: string Author name
-- **`coords`**: table Coordinates
-- **`message`**: string Graffiti message
-- **`author`**: string|nil Author (can be anonymous)
+- **`coords`**: any
+- **`message`**: string
+- **`author`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.note.CreateGraffiti
-local entity = ig.note.CreateGraffiti(params)
+-- Create new graffiti
+local created = ig.note.CreateGraffiti(value, "message", value)
+if created then
+    print("Created successfully")
+end
 ```
-
-## Related Functions
-
-- [ig.note.Add](ig_note_Add.md)
-- [ig.note.Clean](ig_note_Clean.md)
-- [ig.note.CleanOld](ig_note_CleanOld.md)
-- [ig.note.CleanUp](ig_note_CleanUp.md)
-- [ig.note.Create](ig_note_Create.md)
 
 ## Source
 

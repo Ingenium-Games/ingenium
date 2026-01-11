@@ -2,7 +2,7 @@
 
 ## Description
 
-Get notes near coordinates
+Retrieves and returns byauthor data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.note.GetByAuthor(author)
 
 ## Parameters
 
-- **`coords`**: vector3 Center coordinates
-- **`radius`**: number Search radius
-- **`author`**: string Author name/ID
+- **`author`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.note.GetByAuthor
-local result = ig.note.GetByAuthor()
+-- Get byauthor data
+local result = ig.note.GetByAuthor(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.note.Add](ig_note_Add.md)
-- [ig.note.Clean](ig_note_Clean.md)
-- [ig.note.CleanOld](ig_note_CleanOld.md)
-- [ig.note.CleanUp](ig_note_CleanUp.md)
-- [ig.note.Create](ig_note_Create.md)
 
 ## Source
 

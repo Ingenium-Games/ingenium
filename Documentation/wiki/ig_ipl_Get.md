@@ -12,22 +12,17 @@ function ig.ipl.Get(name)
 
 ## Parameters
 
-- **`name`**: string "The registered IPL configuration name
+- **`name`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.ipl.Get
-local result = ig.ipl.Get()
+-- Get  data
+local result = ig.ipl.Get("name_example")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.ipl.GetAll](ig_ipl_GetAll.md)
-- [ig.ipl.IsLoaded](ig_ipl_IsLoaded.md)
-- [ig.ipl.Load](ig_ipl_Load.md)
-- [ig.ipl.LoadByName](ig_ipl_LoadByName.md)
-- [ig.ipl.LoadConfigurations](ig_ipl_LoadConfigurations.md)
 
 ## Source
 

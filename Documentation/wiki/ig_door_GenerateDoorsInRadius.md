@@ -2,7 +2,7 @@
 
 ## Description
 
-is the door in the table?
+Performs generatedoorsinradius operation
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.door.GenerateDoorsInRadius()
 
 ## Parameters
 
-- **`coords`**: any
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.door.GenerateDoorsInRadius
-ig.door.GenerateDoorsInRadius()
+-- Example usage
+local result = ig.door.GenerateDoorsInRadius()
 ```
-
-## Related Functions
-
-- [ig.door.Add](ig_door_Add.md)
-- [ig.door.AddDoorsToSystem](ig_door_AddDoorsToSystem.md)
-- [ig.door.Find](ig_door_Find.md)
-- [ig.door.FindHash](ig_door_FindHash.md)
-- [ig.door.GetModels](ig_door_GetModels.md)
 
 ## Source
 

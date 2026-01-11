@@ -2,7 +2,7 @@
 
 ## Description
 
-Get boss players of a job
+Retrieves and returns gradeinfo data
 
 ## Signature
 
@@ -12,24 +12,18 @@ function ig.job.GetGradeInfo(jobName, grade)
 
 ## Parameters
 
-- **`jobName`**: string Job name
-- **`jobName`**: string Job name
-- **`grade`**: number Grade level
+- **`jobName`**: any
+- **`grade`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.job.GetGradeInfo
-local result = ig.job.GetGradeInfo()
+-- Get gradeinfo data
+local result = ig.job.GetGradeInfo(value, 100)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

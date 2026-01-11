@@ -2,7 +2,7 @@
 
 ## Description
 
-[[
+Retrieves and returns byhash data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.tattoo.GetByHash(hash)
 
 ## Parameters
 
-- **`hash`**: number Tattoo hash
+- **`hash`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.tattoo.GetByHash
-local result = ig.tattoo.GetByHash()
+-- Get byhash data
+local result = ig.tattoo.GetByHash("hash")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.tattoo.ClearCache](ig_tattoo_ClearCache.md)
-- [ig.tattoo.GetAll](ig_tattoo_GetAll.md)
-- [ig.tattoo.GetByZone](ig_tattoo_GetByZone.md)
-- [ig.tattoo.GetAll](ig_tattoo_GetAll.md)
-- [ig.tattoo.GetByCollection](ig_tattoo_GetByCollection.md)
 
 ## Source
 

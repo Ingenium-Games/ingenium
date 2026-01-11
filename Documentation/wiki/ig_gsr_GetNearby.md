@@ -2,7 +2,7 @@
 
 ## Description
 
-Sort by age (newest first)
+Retrieves and returns nearby data
 
 ## Signature
 
@@ -12,24 +12,18 @@ function ig.gsr.GetNearby(coords, radius)
 
 ## Parameters
 
-- **`weaponHash`**: number Weapon hash
-- **`coords`**: vector3 Center coordinates
-- **`radius`**: number Search radius
+- **`coords`**: any
+- **`radius`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.gsr.GetNearby
-local result = ig.gsr.GetNearby()
+-- Get nearby data
+local result = ig.gsr.GetNearby(value, value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.gsr.Add](ig_gsr_Add.md)
-- [ig.gsr.Clean](ig_gsr_Clean.md)
-- [ig.gsr.CleanOld](ig_gsr_CleanOld.md)
-- [ig.gsr.Clear](ig_gsr_Clear.md)
-- [ig.gsr.Create](ig_gsr_Create.md)
 
 ## Source
 

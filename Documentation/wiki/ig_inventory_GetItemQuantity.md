@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Retrieves and returns itemquantity data
 
 ## Signature
 
@@ -10,20 +10,19 @@ No description available
 function ig.inventory.GetItemQuantity(name)
 ```
 
+## Parameters
+
+- **`name`**: string
+
 ## Example
 
 ```lua
--- Example usage of ig.inventory.GetItemQuantity
-local result = ig.inventory.GetItemQuantity()
+-- Get itemquantity data
+local result = ig.inventory.GetItemQuantity("name_example")
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.inventory.GetInventory](ig_inventory_GetInventory.md)
-- [ig.inventory.GetItemData](ig_inventory_GetItemData.md)
-- [ig.inventory.GetItemFromPosition](ig_inventory_GetItemFromPosition.md)
-- [ig.inventory.GetItemMeta](ig_inventory_GetItemMeta.md)
-- [ig.inventory.GetItemQuality](ig_inventory_GetItemQuality.md)
 
 ## Source
 

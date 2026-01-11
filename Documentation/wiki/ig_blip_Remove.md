@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Removes  from the system
 
 ## Signature
 
@@ -13,22 +13,13 @@ function ig.blip.Remove(handle)
 ## Parameters
 
 - **`handle`**: any
-- **`handle`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.blip.Remove
-ig.blip.Remove(item)
+-- Example usage
+local result = ig.blip.Remove(value)
 ```
-
-## Related Functions
-
-- [ig.blip.AreaBlip](ig_blip_AreaBlip.md)
-- [ig.blip.Blip](ig_blip_Blip.md)
-- [ig.blip.CreateArea](ig_blip_CreateArea.md)
-- [ig.blip.CreateBlip](ig_blip_CreateBlip.md)
-- [ig.blip.CreateRadius](ig_blip_CreateRadius.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs calculateinterest operation
 
 ## Signature
 
@@ -10,21 +10,16 @@
 function ig.bank.CalculateInterest()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.bank.CalculateInterest
-ig.bank.CalculateInterest()
+-- Example usage
+local result = ig.bank.CalculateInterest()
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.bank.CalculatePayments](ig_bank_CalculatePayments.md)
-- [ig.bank.CheckNegativeBalances](ig_bank_CheckNegativeBalances.md)
 
 ## Source
 

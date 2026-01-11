@@ -2,7 +2,7 @@
 
 ## Description
 
-Resync job data to client
+Performs validatedata operation
 
 ## Signature
 
@@ -12,28 +12,14 @@ function ig.job.ValidateData(jobData)
 
 ## Parameters
 
-- **`source`**: number Player source
-- **`jobName`**: string|nil Specific job or nil for all
-- **`jobData`**: table Job data to validate
+- **`jobData`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.job.ValidateData
-local result = ig.job.ValidateData(jobData)
+-- Example usage
+local result = ig.job.ValidateData(value)
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

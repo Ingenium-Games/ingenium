@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves the ammunition count for a specific ammo type.
 
 ## Signature
 
@@ -12,18 +12,15 @@ function ig.ammo.GetType(type)
 
 ## Parameters
 
-- **`.`**: any
+- **`type`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.ammo.GetType
-local result = ig.ammo.GetType()
+-- Get ammo count for a specific type
+local count = ig.ammo.GetType("9mm")
+print("9mm ammo count:", count)
 ```
-
-## Related Functions
-
-- [ig.ammo.Get](ig_ammo_Get.md)
 
 ## Source
 

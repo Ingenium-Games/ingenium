@@ -2,7 +2,7 @@
 
 ## Description
 
-[[
+Performs getbyzone operation
 
 ## Signature
 
@@ -12,24 +12,19 @@ function ig.tattoo.GetByZone(zone)
 
 ## Parameters
 
-- **`hash`**: number Tattoo hash
-- **`zone`**: string Zone name (e.g., "ZONE_HEAD", "ZONE_TORSO")
+- **`zone`**: any
+- **`callback`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.tattoo.GetByZone
-local result = ig.tattoo.GetByZone()
+-- Get byzone data
+local result = ig.tattoo.GetByZone(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.tattoo.ClearCache](ig_tattoo_ClearCache.md)
-- [ig.tattoo.GetAll](ig_tattoo_GetAll.md)
-- [ig.tattoo.GetAll](ig_tattoo_GetAll.md)
-- [ig.tattoo.GetByCollection](ig_tattoo_GetByCollection.md)
-- [ig.tattoo.GetByHash](ig_tattoo_GetByHash.md)
 
 ## Source
 
-Defined in: `server/[Data - No Save Needed]/_tattoo.lua`
+Defined in: `client/[Data]/_game_data_helpers.lua`

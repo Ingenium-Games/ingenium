@@ -2,7 +2,7 @@
 
 ## Description
 
-Return the Entity"s state bag.
+Retrieves and returns entitystatecheck data
 
 ## Signature
 
@@ -12,27 +12,18 @@ function ig.data.GetEntityStateCheck(net, key)
 
 ## Parameters
 
-- **`net`**: any "NetworkId
-- **`net`**: any "NetworkId
-- **`net`**: any "NetworkId
-- **`net`**: any "NetworkId
-- **`net`**: any "The passed client entity
-- **`key`**: any "The state bag key you want to get the data from.
+- **`net`**: any
+- **`key`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.data.GetEntityStateCheck
-local result = ig.data.GetEntityStateCheck()
+-- Get entitystatecheck data
+local result = ig.data.GetEntityStateCheck(value, value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.data.GetEntityState](ig_data_GetEntityState.md)
-- [ig.data.GetLoadedStatus](ig_data_GetLoadedStatus.md)
-- [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md)
-- [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md)
-- [ig.data.GetLocale](ig_data_GetLocale.md)
 
 ## Source
 

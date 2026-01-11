@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Retrieves and returns itemfromposition data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.inventory.GetItemFromPosition(position)
 
 ## Parameters
 
-- **`name`**: any
+- **`position`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.inventory.GetItemFromPosition
-local result = ig.inventory.GetItemFromPosition()
+-- Get itemfromposition data
+local result = ig.inventory.GetItemFromPosition(100)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.inventory.GetInventory](ig_inventory_GetInventory.md)
-- [ig.inventory.GetItemData](ig_inventory_GetItemData.md)
-- [ig.inventory.GetItemMeta](ig_inventory_GetItemMeta.md)
-- [ig.inventory.GetItemQuality](ig_inventory_GetItemQuality.md)
-- [ig.inventory.GetItemQuantity](ig_inventory_GetItemQuantity.md)
 
 ## Source
 

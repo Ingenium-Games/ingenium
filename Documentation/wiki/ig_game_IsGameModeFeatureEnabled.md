@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Checks and returns whether isgamemodefeatureenabled condition is met
 
 ## Signature
 
@@ -12,20 +12,14 @@ function ig.game.IsGameModeFeatureEnabled(feature)
 
 ## Parameters
 
-- **`mode`**: string|nil Game mode (defaults to current)
-- **`feature`**: string Feature name
+- **`feature`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.game.IsGameModeFeatureEnabled
-local result = ig.game.IsGameModeFeatureEnabled(feature)
+-- Example usage
+local result = ig.game.IsGameModeFeatureEnabled(value)
 ```
-
-## Related Functions
-
-- [ig.game.GetGameMode](ig_game_GetGameMode.md)
-- [ig.game.GetGameModeSettings](ig_game_GetGameModeSettings.md)
 
 ## Source
 

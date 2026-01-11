@@ -2,7 +2,7 @@
 
 ## Description
 
-Check if pickup is active
+Performs cleanupold operation
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.pick.CleanupOld(maxAge)
 
 ## Parameters
 
-- **`uuid`**: string Pickup UUID
-- **`maxAge`**: number|nil Max age in seconds (uses config if nil)
+- **`maxAge`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.pick.CleanupOld
-local result = ig.pick.CleanupOld(maxAge)
+-- Example usage
+local result = ig.pick.CleanupOld(value)
 ```
-
-## Related Functions
-
-- [ig.pick.Activate](ig_pick_Activate.md)
-- [ig.pick.Collect](ig_pick_Collect.md)
-- [ig.pick.Create](ig_pick_Create.md)
-- [ig.pick.CreateLoot](ig_pick_CreateLoot.md)
-- [ig.pick.CreateZone](ig_pick_CreateZone.md)
 
 ## Source
 

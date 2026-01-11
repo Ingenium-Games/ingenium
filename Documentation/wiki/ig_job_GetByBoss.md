@@ -2,7 +2,7 @@
 
 ## Description
 
-Sort by wealth (highest first)
+Retrieves and returns byboss data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.job.GetByBoss(characterId)
 
 ## Parameters
 
-- **`characterId`**: string Character ID
+- **`characterId`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.job.GetByBoss
-local result = ig.job.GetByBoss()
+-- Get byboss data
+local result = ig.job.GetByBoss(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

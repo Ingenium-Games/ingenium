@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Sets timeoverride to specified value
 
 ## Signature
 
@@ -10,20 +10,17 @@
 function ig.time.SetTimeOverride(h, m)
 ```
 
+## Parameters
+
+- **`h`**: any
+- **`m`**: any
+
 ## Example
 
 ```lua
--- Example usage of ig.time.SetTimeOverride
-ig.time.SetTimeOverride(value)
+-- Set timeoverride
+ig.time.SetTimeOverride(value, value)
 ```
-
-## Related Functions
-
-- [ig.time.ClearOverride](ig_time_ClearOverride.md)
-- [ig.time.GetTime](ig_time_GetTime.md)
-- [ig.time.UpdateTime](ig_time_UpdateTime.md)
-- [ig.time.ServerSync](ig_time_ServerSync.md)
-- [ig.time.Update](ig_time_Update.md)
 
 ## Source
 

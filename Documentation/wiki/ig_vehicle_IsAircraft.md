@@ -2,7 +2,7 @@
 
 ## Description
 
-Get vehicles by manufacturer
+Checks and returns whether isaircraft condition is met
 
 ## Signature
 
@@ -12,24 +12,14 @@ function ig.vehicle.IsAircraft(hash)
 
 ## Parameters
 
-- **`manufacturer`**: string Manufacturer name
-- **`hash`**: number Vehicle hash
-- **`hash`**: number Vehicle hash
+- **`hash`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.vehicle.IsAircraft
-local result = ig.vehicle.IsAircraft(hash)
+-- Example usage
+local result = ig.vehicle.IsAircraft(100)
 ```
-
-## Related Functions
-
-- [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md)
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md)
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
-- [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns bank data
 
 ## Signature
 
@@ -10,26 +10,20 @@
 function ig.sql.bank.GetBank(character_id, cb)
 ```
 
+## Parameters
+
+- **`character_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.bank.GetBank
-local result = ig.sql.bank.GetBank()
+-- Get bank data
+local result = ig.sql.bank.GetBank(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.sql.bank.AddAccount](ig_sql_bank_AddAccount.md)
-- [ig.sql.bank.GetLoan](ig_sql_bank_GetLoan.md)
-- [ig.sql.bank.SetBank](ig_sql_bank_SetBank.md)
-- [ig.sql.bank.SetLoan](ig_sql_bank_SetLoan.md)
-- [ig.sql.bank.TakeOutLoan](ig_sql_bank_TakeOutLoan.md)
 
 ## Source
 

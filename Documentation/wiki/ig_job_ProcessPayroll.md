@@ -2,7 +2,7 @@
 
 ## Description
 
-Calculate total payroll for job
+Performs processpayroll operation
 
 ## Signature
 
@@ -12,24 +12,15 @@ function ig.job.ProcessPayroll(jobName, useJobFunds)
 
 ## Parameters
 
-- **`jobName`**: string Job name
-- **`jobName`**: string Job name
-- **`useJobFunds`**: boolean Use job bank account (true) or spawn money (false)
+- **`jobName`**: string
+- **`useJobFunds`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.job.ProcessPayroll
-local result = ig.job.ProcessPayroll(jobName, useJobFunds)
+-- Example usage
+local result = ig.job.ProcessPayroll("jobName_example", value)
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAll](ig_job_GetAll.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
 
 ## Source
 

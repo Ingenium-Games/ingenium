@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Adds entry to the system
 
 ## Signature
 
@@ -18,13 +18,9 @@ function ig.text.AddEntry(s1, s2)
 ## Example
 
 ```lua
--- Example usage of ig.text.AddEntry
-ig.text.AddEntry(item)
+-- Example usage
+local result = ig.text.AddEntry(value, value)
 ```
-
-## Related Functions
-
-- [ig.text.DisplayHelp](ig_text_DisplayHelp.md)
 
 ## Source
 

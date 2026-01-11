@@ -10,20 +10,16 @@ Voice channel IDs for MumbleSetVoiceChannel
 function ig.voip.client.InitializeMumble()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.voip.client.InitializeMumble
-ig.voip.client.InitializeMumble()
+-- Example usage
+local result = ig.voip.client.InitializeMumble()
 ```
-
-## Related Functions
-
-- [ig.voip.client.GetVoiceMode](ig_voip_client_GetVoiceMode.md)
-- [ig.voip.client.HandleAdminCallStateChange](ig_voip_client_HandleAdminCallStateChange.md)
-- [ig.voip.client.HandleCallStateChange](ig_voip_client_HandleCallStateChange.md)
-- [ig.voip.client.HandleConnectionStateChange](ig_voip_client_HandleConnectionStateChange.md)
-- [ig.voip.client.IsTalking](ig_voip_client_IsTalking.md)
 
 ## Source
 

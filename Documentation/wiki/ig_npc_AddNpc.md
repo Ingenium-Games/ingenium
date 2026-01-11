@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Adds npc to the system
 
 ## Signature
 
@@ -12,23 +12,16 @@ function ig.npc.AddNpc(net, cb, ...)
 
 ## Parameters
 
-- **`net`**: integer "Network ID 16 bit integer
-- **`net`**: any
-- **`cb`**: any
+- **`net`**: number
+- **`cb`**: function
+- **`...`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.npc.AddNpc
-ig.npc.AddNpc(item)
+-- Example usage
+local result = ig.npc.AddNpc(100, function() end, value)
 ```
-
-## Related Functions
-
-- [ig.npc.FindNpc](ig_npc_FindNpc.md)
-- [ig.npc.GetNpc](ig_npc_GetNpc.md)
-- [ig.npc.GetNpcs](ig_npc_GetNpcs.md)
-- [ig.npc.RemoveNpc](ig_npc_RemoveNpc.md)
 
 ## Source
 

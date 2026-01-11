@@ -12,20 +12,15 @@ function ig.skill.CompareSkill(sk, level)
 
 ## Parameters
 
-- **`t`**: table "Typically passed from the server as an internal table.
+- **`sk`**: any
+- **`level`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.skill.CompareSkill
-local result = ig.skill.CompareSkill(sk, level)
+-- Example usage
+local result = ig.skill.CompareSkill(value, 100)
 ```
-
-## Related Functions
-
-- [ig.skill.GetSkill](ig_skill_GetSkill.md)
-- [ig.skill.GetSkills](ig_skill_GetSkills.md)
-- [ig.skill.SetSkills](ig_skill_SetSkills.md)
 
 ## Source
 

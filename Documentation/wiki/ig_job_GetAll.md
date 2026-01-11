@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns all data
 
 ## Signature
 
@@ -10,20 +10,19 @@
 function ig.job.GetAll()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.job.GetAll
+-- Get all data
 local result = ig.job.GetAll()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.job.CalculatePayroll](ig_job_CalculatePayroll.md)
-- [ig.job.Exists](ig_job_Exists.md)
-- [ig.job.GetAllStats](ig_job_GetAllStats.md)
-- [ig.job.GetBosses](ig_job_GetBosses.md)
-- [ig.job.GetByBoss](ig_job_GetByBoss.md)
 
 ## Source
 

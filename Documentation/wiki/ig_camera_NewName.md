@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Generates a unique camera identifier name. Creates a random name in the format "CAM-XXXXX-XXXXX-XXXXX-XXXXX" and registers the camera in the cameras table.
 
 ## Signature
 
@@ -12,20 +12,16 @@ function ig.camera.NewName(t)
 
 ## Parameters
 
-- **`t`**: any
+- **`t`**: table
 
 ## Example
 
 ```lua
--- Example usage of ig.camera.NewName
-local result = ig.camera.NewName(t)
+-- Generate unique camera name
+local cameraData = { type = "DEFAULT_SCRIPTED_CAMERA" }
+local name = ig.camera.NewName(cameraData)
+print("Generated camera name:", name)
 ```
-
-## Related Functions
-
-- [ig.camera.Advanced](ig_camera_Advanced.md)
-- [ig.camera.Basic](ig_camera_Basic.md)
-- [ig.camera.CleanUp](ig_camera_CleanUp.md)
 
 ## Source
 

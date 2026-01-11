@@ -10,24 +10,20 @@ Get - The entire ROW of data from Characters table where the Character_ID is the
 function ig.sql.user.GetLastLogin(license_id, cb)
 ```
 
+## Parameters
+
+- **`license_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.user.GetLastLogin
-local result = ig.sql.user.GetLastLogin()
+-- Get lastlogin data
+local result = ig.sql.user.GetLastLogin(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.user.Add](ig_sql_user_Add.md)
-- [ig.sql.user.AddCharacterSlot](ig_sql_user_AddCharacterSlot.md)
-- [ig.sql.user.Find](ig_sql_user_Find.md)
-- [ig.sql.user.Get](ig_sql_user_Get.md)
-- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
 
 ## Source
 

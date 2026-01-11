@@ -2,7 +2,7 @@
 
 ## Description
 
-Get items by category
+Retrieves and returns weapons data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.item.GetWeapons()
 
 ## Parameters
 
-- **`category`**: string Category name (e.g., "weapon", "consumable", "tool")
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.item.GetWeapons
+-- Get weapons data
 local result = ig.item.GetWeapons()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

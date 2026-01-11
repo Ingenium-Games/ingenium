@@ -12,8 +12,8 @@ function ig.callback.Await(eventName, ...)
 
 ## Parameters
 
-- **`eventName`**: string The name of the server callback to trigger
-- **`...`**: any Additional arguments to pass to the callback
+- **`eventName`**: any
+- **`...`**: any
 
 ## Example
 
@@ -35,14 +35,6 @@ else
     print("Permission denied")
 end
 ```
-
-## Related Functions
-
-- [ig.callback.Async](ig_callback_Async.md)
-- [ig.callback.AsyncClient](ig_callback_AsyncClient.md)
-- [ig.callback.AsyncWithTimeout](ig_callback_AsyncWithTimeout.md)
-- [ig.callback.AwaitClient](ig_callback_AwaitClient.md)
-- [ig.callback.AwaitWithTimeout](ig_callback_AwaitWithTimeout.md)
 
 ## Source
 

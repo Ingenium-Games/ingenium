@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Adds object to the system
 
 ## Signature
 
@@ -12,25 +12,16 @@ function ig.objects.AddObject(net, cb, ...)
 
 ## Parameters
 
-- **`net`**: integer "Network ID 16 bit integer
-- **`net`**: integer "Network ID 16 bit integer
-- **`net`**: any
-- **`cb`**: any
+- **`net`**: string
+- **`cb`**: function
+- **`...`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.objects.AddObject
-ig.objects.AddObject(item)
+-- Example usage
+local result = ig.objects.AddObject("net", function() end, value)
 ```
-
-## Related Functions
-
-- [ig.objects.FindObject](ig_objects_FindObject.md)
-- [ig.objects.FindObjectFromUUID](ig_objects_FindObjectFromUUID.md)
-- [ig.objects.GetObject](ig_objects_GetObject.md)
-- [ig.objects.GetObjectFromUUID](ig_objects_GetObjectFromUUID.md)
-- [ig.objects.GetObjects](ig_objects_GetObjects.md)
 
 ## Source
 

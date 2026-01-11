@@ -2,7 +2,7 @@
 
 ## Description
 
-Update camera position
+Retrieves and returns cameramode data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.appearance.GetCameraMode()
 
 ## Parameters
 
-- **`duration`**: number Duration in milliseconds (default 2000)
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.GetCameraMode
+-- Get cameramode data
 local result = ig.appearance.GetCameraMode()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

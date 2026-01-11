@@ -2,7 +2,7 @@
 
 ## Description
 
-returns all window states
+Removes vehicle from the system
 
 ## Signature
 
@@ -13,24 +13,13 @@ function ig.func.DeleteVehicle(vehicle)
 ## Parameters
 
 - **`vehicle`**: any
-- **`vehicle`**: any
-- **`windowStates`**: any
-- **`vehicle`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.func.DeleteVehicle
-ig.func.DeleteVehicle(entity)
+-- Example usage
+local result = ig.func.DeleteVehicle(value)
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

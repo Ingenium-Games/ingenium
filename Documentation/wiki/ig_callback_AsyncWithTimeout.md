@@ -2,7 +2,7 @@
 
 ## Description
 
-if player then
+Performs asyncwithtimeout operation
 
 ## Signature
 
@@ -12,32 +12,18 @@ function ig.callback.AsyncWithTimeout(eventName, timeout, callback, timeoutCallb
 
 ## Parameters
 
-- **`eventName`**: string The name of the server callback
-- **`timeout`**: number Timeout in seconds
-- **`callback`**: function Function to handle the response
-- **`timeoutCallback`**: function Function to call on timeout
-- **`...`**: any Additional arguments
+- **`eventName`**: any
+- **`timeout`**: any
+- **`callback`**: function
+- **`timeoutCallback`**: any
+- **`...`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.callback.AsyncWithTimeout
-local result = ig.callback.AsyncWithTimeout(eventName, timeout, callback, timeoutCallback, ...)
+-- Example usage
+local result = ig.callback.AsyncWithTimeout(value, value, function() end, value, value)
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `timeout` - Sets maximum wait time for operation
-
-> 📋 **Parameter**: `callback` - Function to execute upon completion
-
-## Related Functions
-
-- [ig.callback.Async](ig_callback_Async.md)
-- [ig.callback.AsyncClient](ig_callback_AsyncClient.md)
-- [ig.callback.Await](ig_callback_Await.md)
-- [ig.callback.AwaitClient](ig_callback_AwaitClient.md)
-- [ig.callback.AwaitWithTimeout](ig_callback_AwaitWithTimeout.md)
 
 ## Source
 

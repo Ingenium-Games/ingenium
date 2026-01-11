@@ -2,7 +2,7 @@
 
 ## Description
 
-Same as above.
+Removes player from the system
 
 ## Signature
 
@@ -13,25 +13,13 @@ function ig.player.RemovePlayer(source)
 ## Parameters
 
 - **`source`**: number
-- **`source`**: number
-- **`source`**: number
-- **`data`**: table
-- **`source`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.player.RemovePlayer
-ig.player.RemovePlayer(item)
+-- Example usage
+local result = ig.player.RemovePlayer(100)
 ```
-
-## Related Functions
-
-- [ig.player.AddPlayer](ig_player_AddPlayer.md)
-- [ig.player.ArePlayersActive](ig_player_ArePlayersActive.md)
-- [ig.player.GetOfflinePlayer](ig_player_GetOfflinePlayer.md)
-- [ig.player.GetPlayer](ig_player_GetPlayer.md)
-- [ig.player.GetPlayerByCharacterID](ig_player_GetPlayerByCharacterID.md)
 
 ## Source
 

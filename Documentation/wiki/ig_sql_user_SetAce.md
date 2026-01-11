@@ -10,24 +10,18 @@ Set - Prefered locale or `Locale` for the users License_ID
 function ig.sql.user.SetAce(ace, license_id, cb)
 ```
 
+## Parameters
+
+- **`ace`**: string
+- **`license_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.user.SetAce
-ig.sql.user.SetAce(value)
+-- Set ace
+ig.sql.user.SetAce("ace", value, function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.user.Add](ig_sql_user_Add.md)
-- [ig.sql.user.AddCharacterSlot](ig_sql_user_AddCharacterSlot.md)
-- [ig.sql.user.Find](ig_sql_user_Find.md)
-- [ig.sql.user.Get](ig_sql_user_Get.md)
-- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
 
 ## Source
 

@@ -17,15 +17,9 @@ function ig.check.Boolean(bool)
 ## Example
 
 ```lua
--- Example usage of ig.check.Boolean
-local result = ig.check.Boolean(bool)
+-- Example usage
+local result = ig.check.Boolean(value)
 ```
-
-## Related Functions
-
-- [ig.check.Number](ig_check_Number.md)
-- [ig.check.String](ig_check_String.md)
-- [ig.check.Table](ig_check_Table.md)
 
 ## Source
 

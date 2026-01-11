@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs getall operation
 
 ## Signature
 
@@ -12,23 +12,18 @@ function ig.modkit.GetAll()
 
 ## Parameters
 
-- **`.`**: any
+- **`callback`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.modkit.GetAll
-local result = ig.modkit.GetAll()
+-- Get all data
+local result = ig.modkit.GetAll(function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.modkit.ClearCache](ig_modkit_ClearCache.md)
-- [ig.modkit.GetForVehicle](ig_modkit_GetForVehicle.md)
-- [ig.modkit.GetByID](ig_modkit_GetByID.md)
-- [ig.modkit.GetForVehicle](ig_modkit_GetForVehicle.md)
-- [ig.modkit.HasModkit](ig_modkit_HasModkit.md)
 
 ## Source
 
-Defined in: `server/[Data - No Save Needed]/_modkit.lua`
+Defined in: `client/[Data]/_game_data_helpers.lua`

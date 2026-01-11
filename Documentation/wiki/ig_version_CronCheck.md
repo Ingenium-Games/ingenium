@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs croncheck operation
 
 ## Signature
 
@@ -12,9 +12,6 @@ function ig.version.CronCheck(hour, min, url, resourceName)
 
 ## Parameters
 
-- **`time`**: any
-- **`url`**: any
-- **`resourceName`**: any
 - **`hour`**: any
 - **`min`**: any
 - **`url`**: any
@@ -23,14 +20,9 @@ function ig.version.CronCheck(hour, min, url, resourceName)
 ## Example
 
 ```lua
--- Example usage of ig.version.CronCheck
-local result = ig.version.CronCheck(hour, min, url, resourceName)
+-- Example usage
+local result = ig.version.CronCheck(value, value, value, value)
 ```
-
-## Related Functions
-
-- [ig.version.Check](ig_version_Check.md)
-- [ig.version.LoopCheck](ig_version_LoopCheck.md)
 
 ## Source
 

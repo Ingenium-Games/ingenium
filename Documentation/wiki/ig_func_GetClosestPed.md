@@ -2,7 +2,7 @@
 
 ## Description
 
-returns closest, closestdist
+Retrieves and returns closestped data
 
 ## Signature
 
@@ -10,20 +10,19 @@ returns closest, closestdist
 function ig.func.GetClosestPed()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.func.GetClosestPed
+-- Get closestped data
 local result = ig.func.GetClosestPed()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

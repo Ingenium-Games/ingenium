@@ -2,7 +2,7 @@
 
 ## Description
 
-Set all head overlays
+Sets hair to specified value
 
 ## Signature
 
@@ -12,25 +12,16 @@ function ig.appearance.SetHair(style, color, highlight)
 
 ## Parameters
 
-- **`overlays`**: table Table of overlays {[0]={style, opacity, color}, ...}
-- **`style`**: number Hair style index
-- **`color`**: number Primary color
-- **`highlight`**: number Highlight color
+- **`style`**: any
+- **`color`**: any
+- **`highlight`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.appearance.SetHair
-ig.appearance.SetHair(value)
+-- Set hair
+ig.appearance.SetHair(value, value, value)
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Checks and returns whether isvaliditem condition is met
 
 ## Signature
 
@@ -12,23 +12,14 @@ function ig.validation.IsValidItem(itemName)
 
 ## Parameters
 
-- **`inventory`**: table - Inventory array to analyze
-- **`itemName`**: string - Name of the item to check
+- **`itemName`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.validation.IsValidItem
-local result = ig.validation.IsValidItem(itemName)
+-- Example usage
+local result = ig.validation.IsValidItem(value)
 ```
-
-## Related Functions
-
-- [ig.validation.GetItemQuantities](ig_validation_GetItemQuantities.md)
-- [ig.validation.LogAndBanExploiter](ig_validation_LogAndBanExploiter.md)
-- [ig.validation.ValidateAndUnpack](ig_validation_ValidateAndUnpack.md)
-- [ig.validation.ValidateInventory](ig_validation_ValidateInventory.md)
-- [ig.validation.ValidateInventoryIntegrity](ig_validation_ValidateInventoryIntegrity.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns all data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.item.GetAll()
 
 ## Parameters
 
-- **`name`**: any
-- **`name`**: any
-- **`name`**: any
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.item.GetAll
+-- Get all data
 local result = ig.item.GetAll()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

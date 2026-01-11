@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Creates a new area instance
 
 ## Signature
 
@@ -10,20 +10,19 @@ No description available
 function ig.blip.CreateArea(...)
 ```
 
+## Parameters
+
+- **`...`**: any
+
 ## Example
 
 ```lua
--- Example usage of ig.blip.CreateArea
-local entity = ig.blip.CreateArea(params)
+-- Create new area
+local created = ig.blip.CreateArea(value)
+if created then
+    print("Created successfully")
+end
 ```
-
-## Related Functions
-
-- [ig.blip.AreaBlip](ig_blip_AreaBlip.md)
-- [ig.blip.Blip](ig_blip_Blip.md)
-- [ig.blip.CreateBlip](ig_blip_CreateBlip.md)
-- [ig.blip.CreateRadius](ig_blip_CreateRadius.md)
-- [ig.blip.EntityBlip](ig_blip_EntityBlip.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs debug_1 operation
 
 ## Signature
 
@@ -12,25 +12,15 @@ function ig.func.Debug_1(str)
 
 ## Parameters
 
-- **`func`**: any
-- **`err`**: any
-- **`str`**: any
+- **`str`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.func.Debug_1
-local result = ig.func.Debug_1(str)
+-- Example usage
+local result = ig.func.Debug_1("str")
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 
-Defined in: `server/_functions.lua`
+Defined in: `client/_functions.lua`

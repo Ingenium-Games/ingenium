@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns byhash data
 
 ## Signature
 
@@ -12,24 +12,19 @@ function ig.vehicle.GetByHash(hash)
 
 ## Parameters
 
-- **`.`**: any
-- **`hash`**: number Vehicle hash
+- **`hash`**: number
+- **`callback`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.vehicle.GetByHash
-local result = ig.vehicle.GetByHash()
+-- Get byhash data
+local result = ig.vehicle.GetByHash(100, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md)
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md)
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md)
-- [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md)
-- [ig.vehicle.GetCurrentVehicle](ig_vehicle_GetCurrentVehicle.md)
 
 ## Source
 
-Defined in: `server/[Data - No Save Needed]/_vehicle.lua`
+Defined in: `client/[Data]/_game_data_helpers.lua`

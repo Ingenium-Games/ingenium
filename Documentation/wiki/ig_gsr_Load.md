@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Loads  data into memory
 
 ## Signature
 
@@ -12,26 +12,14 @@ function ig.gsr.Load()
 
 ## Parameters
 
-- **`.`**: any
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.gsr.Load
-ig.gsr.Load()
+-- Example usage
+local result = ig.gsr.Load()
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function executes code dynamically. Never use with untrusted input.
-
-## Related Functions
-
-- [ig.gsr.Add](ig_gsr_Add.md)
-- [ig.gsr.Clean](ig_gsr_Clean.md)
-- [ig.gsr.CleanOld](ig_gsr_CleanOld.md)
-- [ig.gsr.Clear](ig_gsr_Clear.md)
-- [ig.gsr.Create](ig_gsr_Create.md)
 
 ## Source
 

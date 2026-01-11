@@ -2,7 +2,7 @@
 
 ## Description
 
-SHould remake htis one..
+Retrieves and returns all data
 
 ## Signature
 
@@ -10,24 +10,20 @@ SHould remake htis one..
 function ig.sql.char.GetAll(primary_id, cb)
 ```
 
+## Parameters
+
+- **`primary_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.char.GetAll
-local result = ig.sql.char.GetAll()
+-- Get all data
+local result = ig.sql.char.GetAll(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.char.Add](ig_sql_char_Add.md)
-- [ig.sql.char.AddOutfit](ig_sql_char_AddOutfit.md)
-- [ig.sql.char.Current](ig_sql_char_Current.md)
-- [ig.sql.char.Delete](ig_sql_char_Delete.md)
-- [ig.sql.char.Get](ig_sql_char_Get.md)
 
 ## Source
 

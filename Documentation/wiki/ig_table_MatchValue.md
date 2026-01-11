@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs matchvalue operation
 
 ## Signature
 
@@ -12,22 +12,15 @@ function ig.table.MatchValue(t, v)
 
 ## Parameters
 
-- **`.`**: any
+- **`t`**: table
+- **`v`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.table.MatchValue
-local result = ig.table.MatchValue(t, v)
+-- Example usage
+local result = ig.table.MatchValue({}, value)
 ```
-
-## Related Functions
-
-- [ig.table.Clone](ig_table_Clone.md)
-- [ig.table.Dump](ig_table_Dump.md)
-- [ig.table.MakeReadOnly](ig_table_MakeReadOnly.md)
-- [ig.table.MatchKey](ig_table_MatchKey.md)
-- [ig.table.Merge](ig_table_Merge.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs loopcheck operation
 
 ## Signature
 
@@ -12,7 +12,6 @@ function ig.version.LoopCheck(time, url, resourceName)
 
 ## Parameters
 
-- **`.`**: any
 - **`time`**: any
 - **`url`**: any
 - **`resourceName`**: any
@@ -20,14 +19,9 @@ function ig.version.LoopCheck(time, url, resourceName)
 ## Example
 
 ```lua
--- Example usage of ig.version.LoopCheck
-local result = ig.version.LoopCheck(time, url, resourceName)
+-- Example usage
+local result = ig.version.LoopCheck(value, value, value)
 ```
-
-## Related Functions
-
-- [ig.version.Check](ig_version_Check.md)
-- [ig.version.CronCheck](ig_version_CronCheck.md)
 
 ## Source
 

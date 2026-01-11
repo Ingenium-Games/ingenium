@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Adds interactjobevent to the system
 
 ## Signature
 
@@ -12,15 +12,15 @@ function ig.event.AddInteractJobEvent(job, name, cb)
 
 ## Parameters
 
-- **`job`**: string "Jobname used fro role permissions
-- **`name`**: string "The final argument f the event
-- **`cb`**: function "The function to call post event being triggered and once confirmed user is able to action event.
+- **`job`**: any
+- **`name`**: string
+- **`cb`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.event.AddInteractJobEvent
-ig.event.AddInteractJobEvent(item)
+-- Example usage
+local result = ig.event.AddInteractJobEvent(value, "name_example", function() end)
 ```
 
 ## Source

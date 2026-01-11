@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns skill data
 
 ## Signature
 
@@ -12,20 +12,17 @@ function ig.skill.GetSkill(skill)
 
 ## Parameters
 
-- **`t`**: table "Typically passed from the server as an internal table.
+- **`skill`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.skill.GetSkill
-local result = ig.skill.GetSkill()
+-- Get skill data
+local result = ig.skill.GetSkill(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.skill.CompareSkill](ig_skill_CompareSkill.md)
-- [ig.skill.GetSkills](ig_skill_GetSkills.md)
-- [ig.skill.SetSkills](ig_skill_SetSkills.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-============================================
+Performs getforvehicle operation
 
 ## Signature
 
@@ -12,25 +12,19 @@ function ig.modkit.GetForVehicle(vehicleHash)
 
 ## Parameters
 
-- **`.`**: any
-- **`id`**: number Modkit ID
-- **`vehicleHash`**: number Vehicle hash
+- **`vehicleHash`**: any
+- **`callback`**: function
 
 ## Example
 
 ```lua
--- Example usage of ig.modkit.GetForVehicle
-local result = ig.modkit.GetForVehicle()
+-- Get forvehicle data
+local result = ig.modkit.GetForVehicle(value, function() end)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.modkit.ClearCache](ig_modkit_ClearCache.md)
-- [ig.modkit.GetAll](ig_modkit_GetAll.md)
-- [ig.modkit.GetAll](ig_modkit_GetAll.md)
-- [ig.modkit.GetByID](ig_modkit_GetByID.md)
-- [ig.modkit.HasModkit](ig_modkit_HasModkit.md)
 
 ## Source
 
-Defined in: `server/[Data - No Save Needed]/_modkit.lua`
+Defined in: `client/[Data]/_game_data_helpers.lua`

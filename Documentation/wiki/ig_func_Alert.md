@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Displays an alert message to the player. Uses the debug warn system if available, otherwise prints to console with formatting.
 
 ## Signature
 
@@ -12,26 +12,15 @@ function ig.func.Alert(str)
 
 ## Parameters
 
-- **`str`**: any
-- **`str`**: any
-- **`str`**: any
-- **`str`**: any
+- **`str`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.func.Alert
-local result = ig.func.Alert(str)
+-- Display alert message
+ig.func.Alert("This is an important alert!")
 ```
-
-## Related Functions
-
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
-- [ig.func.CreateVehicle](ig_func_CreateVehicle.md)
 
 ## Source
 
-Defined in: `server/_functions.lua`
+Defined in: `client/_functions.lua`

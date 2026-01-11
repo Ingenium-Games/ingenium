@@ -12,21 +12,14 @@ function ig.check.Table(t)
 
 ## Parameters
 
-- **`bool`**: any
 - **`t`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.check.Table
-local result = ig.check.Table(t)
+-- Example usage
+local result = ig.check.Table(value)
 ```
-
-## Related Functions
-
-- [ig.check.Boolean](ig_check_Boolean.md)
-- [ig.check.Number](ig_check_Number.md)
-- [ig.check.String](ig_check_String.md)
 
 ## Source
 

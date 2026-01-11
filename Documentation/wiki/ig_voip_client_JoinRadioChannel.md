@@ -2,7 +2,7 @@
 
 ## Description
 
-Trigger event for UI updates
+Performs joinradiochannel operation
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.voip.client.JoinRadioChannel(channel)
 
 ## Parameters
 
-- **`channel`**: number The radio channel number
+- **`channel`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.voip.client.JoinRadioChannel
-local result = ig.voip.client.JoinRadioChannel(channel)
+-- Example usage
+local result = ig.voip.client.JoinRadioChannel(value)
 ```
-
-## Related Functions
-
-- [ig.voip.client.GetVoiceMode](ig_voip_client_GetVoiceMode.md)
-- [ig.voip.client.HandleAdminCallStateChange](ig_voip_client_HandleAdminCallStateChange.md)
-- [ig.voip.client.HandleCallStateChange](ig_voip_client_HandleCallStateChange.md)
-- [ig.voip.client.HandleConnectionStateChange](ig_voip_client_HandleConnectionStateChange.md)
-- [ig.voip.client.InitializeMumble](ig_voip_client_InitializeMumble.md)
 
 ## Source
 

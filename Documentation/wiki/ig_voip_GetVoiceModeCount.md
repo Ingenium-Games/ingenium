@@ -2,7 +2,7 @@
 
 ## Description
 
-Voice state types
+Retrieves and returns voicemodecount data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.voip.GetVoiceModeCount()
 
 ## Parameters
 
-- **`modeIndex`**: number The 1-based index of the voice mode
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.voip.GetVoiceModeCount
+-- Get voicemodecount data
 local result = ig.voip.GetVoiceModeCount()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.voip.client.GetVoiceMode](ig_voip_client_GetVoiceMode.md)
-- [ig.voip.client.HandleAdminCallStateChange](ig_voip_client_HandleAdminCallStateChange.md)
-- [ig.voip.client.HandleCallStateChange](ig_voip_client_HandleCallStateChange.md)
-- [ig.voip.client.HandleConnectionStateChange](ig_voip_client_HandleConnectionStateChange.md)
-- [ig.voip.client.InitializeMumble](ig_voip_client_InitializeMumble.md)
 
 ## Source
 

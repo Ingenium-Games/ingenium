@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs offlineplayer operation
 
 ## Signature
 
@@ -12,26 +12,14 @@ function ig.class.OfflinePlayer(data)
 
 ## Parameters
 
-- **`data`**: any
+- **`data`**: table
 
 ## Example
 
 ```lua
--- Example usage of ig.class.OfflinePlayer
-local result = ig.class.OfflinePlayer(data)
+-- Example usage
+local result = ig.class.OfflinePlayer({})
 ```
-
-## Important Notes
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.class.BlankObject](ig_class_BlankObject.md)
-- [ig.class.ExistingObject](ig_class_ExistingObject.md)
-- [ig.class.Job](ig_class_Job.md)
-- [ig.class.Npc](ig_class_Npc.md)
-- [ig.class.OwnedVehicle](ig_class_OwnedVehicle.md)
 
 ## Source
 

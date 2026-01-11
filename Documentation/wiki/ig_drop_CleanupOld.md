@@ -10,24 +10,16 @@ Get current inventory from xObject
 function ig.drop.CleanupOld()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.drop.CleanupOld
-ig.drop.CleanupOld()
+-- Example usage
+local result = ig.drop.CleanupOld()
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function accesses player identifiers or can ban/kick players. Ensure proper permission checks.
-
-## Related Functions
-
-- [ig.drop.Activate](ig_drop_Activate.md)
-- [ig.drop.Create](ig_drop_Create.md)
-- [ig.drop.Deactivate](ig_drop_Deactivate.md)
-- [ig.drop.MergeDropsForSave](ig_drop_MergeDropsForSave.md)
-- [ig.drop.Remove](ig_drop_Remove.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Get GSR by ID
+Retrieves and returns bycharacter data
 
 ## Signature
 
@@ -12,23 +12,17 @@ function ig.gsr.GetByCharacter(characterId)
 
 ## Parameters
 
-- **`id`**: string GSR ID
-- **`characterId`**: string Character ID
+- **`characterId`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.gsr.GetByCharacter
-local result = ig.gsr.GetByCharacter()
+-- Get bycharacter data
+local result = ig.gsr.GetByCharacter(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.gsr.Add](ig_gsr_Add.md)
-- [ig.gsr.Clean](ig_gsr_Clean.md)
-- [ig.gsr.CleanOld](ig_gsr_CleanOld.md)
-- [ig.gsr.Clear](ig_gsr_Clear.md)
-- [ig.gsr.Create](ig_gsr_Create.md)
 
 ## Source
 

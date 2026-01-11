@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Performs merge operation
 
 ## Signature
 
@@ -13,26 +13,15 @@ function ig.table.Merge(t, u, bool)
 ## Parameters
 
 - **`t`**: any
-- **`k`**: any
-- **`t`**: any
-- **`t`**: table "The original table
-- **`u`**: table "The table to bring into the original
-- **`bool`**: boolean "keep or replace?
+- **`u`**: table
+- **`bool`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.table.Merge
-local result = ig.table.Merge(t, u, bool)
+-- Example usage
+local result = ig.table.Merge(value, {}, value)
 ```
-
-## Related Functions
-
-- [ig.table.Clone](ig_table_Clone.md)
-- [ig.table.Dump](ig_table_Dump.md)
-- [ig.table.MakeReadOnly](ig_table_MakeReadOnly.md)
-- [ig.table.MatchKey](ig_table_MatchKey.md)
-- [ig.table.MatchValue](ig_table_MatchValue.md)
 
 ## Source
 

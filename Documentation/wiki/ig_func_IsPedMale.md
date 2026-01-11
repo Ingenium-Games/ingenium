@@ -2,7 +2,7 @@
 
 ## Description
 
-My own version of the native for the server to use.
+Checks and returns whether ispedmale condition is met
 
 ## Signature
 
@@ -17,17 +17,9 @@ function ig.func.IsPedMale(hash)
 ## Example
 
 ```lua
--- Example usage of ig.func.IsPedMale
-local result = ig.func.IsPedMale(hash)
+-- Example usage
+local result = ig.func.IsPedMale(value)
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

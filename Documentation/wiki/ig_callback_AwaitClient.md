@@ -2,7 +2,7 @@
 
 ## Description
 
-function(result)
+Performs awaitclient operation
 
 ## Signature
 
@@ -12,23 +12,15 @@ function ig.callback.AwaitClient(eventName, ...)
 
 ## Parameters
 
-- **`eventName`**: string The name of the client callback to trigger
-- **`...`**: any Additional arguments to pass to the callback
+- **`eventName`**: any
+- **`...`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.callback.AwaitClient
-local result = ig.callback.AwaitClient("eventName", arg1, arg2)
+-- Example usage
+local result = ig.callback.AwaitClient(value, value)
 ```
-
-## Related Functions
-
-- [ig.callback.Async](ig_callback_Async.md)
-- [ig.callback.AsyncClient](ig_callback_AsyncClient.md)
-- [ig.callback.AsyncWithTimeout](ig_callback_AsyncWithTimeout.md)
-- [ig.callback.Await](ig_callback_Await.md)
-- [ig.callback.AwaitWithTimeout](ig_callback_AwaitWithTimeout.md)
 
 ## Source
 

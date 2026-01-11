@@ -2,7 +2,7 @@
 
 ## Description
 
-Get call target from statebag
+Performs handleconnectionstatechange operation
 
 ## Signature
 
@@ -12,22 +12,14 @@ function ig.voip.client.HandleConnectionStateChange(inConnection)
 
 ## Parameters
 
-- **`inConnection`**: boolean Whether in connection
+- **`inConnection`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.voip.client.HandleConnectionStateChange
-local result = ig.voip.client.HandleConnectionStateChange(inConnection)
+-- Example usage
+local result = ig.voip.client.HandleConnectionStateChange(value)
 ```
-
-## Related Functions
-
-- [ig.voip.client.GetVoiceMode](ig_voip_client_GetVoiceMode.md)
-- [ig.voip.client.HandleAdminCallStateChange](ig_voip_client_HandleAdminCallStateChange.md)
-- [ig.voip.client.HandleCallStateChange](ig_voip_client_HandleCallStateChange.md)
-- [ig.voip.client.InitializeMumble](ig_voip_client_InitializeMumble.md)
-- [ig.voip.client.IsTalking](ig_voip_client_IsTalking.md)
 
 ## Source
 

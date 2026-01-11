@@ -10,26 +10,19 @@ Get - The `Active` = TRUE `Character_ID` from the Primary_ID identifier
 function ig.sql.char.SetDead(character_id, bool, data, cb)
 ```
 
+## Parameters
+
+- **`character_id`**: any
+- **`bool`**: any
+- **`data`**: table
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.char.SetDead
-ig.sql.char.SetDead(value)
+-- Set dead
+ig.sql.char.SetDead(value, value, {}, function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-> 📋 **Parameter**: `data` - Optional data payload for customization
-
-## Related Functions
-
-- [ig.sql.char.Add](ig_sql_char_Add.md)
-- [ig.sql.char.AddOutfit](ig_sql_char_AddOutfit.md)
-- [ig.sql.char.Current](ig_sql_char_Current.md)
-- [ig.sql.char.Delete](ig_sql_char_Delete.md)
-- [ig.sql.char.Get](ig_sql_char_Get.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-apply all tire states
+Retrieves and returns vehicledoorstates data
 
 ## Signature
 
@@ -13,23 +13,16 @@ function ig.func.GetVehicleDoorStates(vehicle)
 ## Parameters
 
 - **`vehicle`**: any
-- **`tireStates`**: any
-- **`vehicle`**: any
 
 ## Example
 
 ```lua
--- Example usage of ig.func.GetVehicleDoorStates
-local result = ig.func.GetVehicleDoorStates()
+-- Get vehicledoorstates data
+local result = ig.func.GetVehicleDoorStates(value)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs round operation
 
 ## Signature
 
@@ -12,21 +12,14 @@ function ig.math.Round(num)
 
 ## Parameters
 
-- **`.`**: any
-- **`num`**: any
+- **`num`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.math.Round
-local result = ig.math.Round(num)
+-- Example usage
+local result = ig.math.Round(100)
 ```
-
-## Related Functions
-
-- [ig.math.Decimals](ig_math_Decimals.md)
-- [ig.math.GroupDigits](ig_math_GroupDigits.md)
-- [ig.math.Trim](ig_math_Trim.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Sync to nearby clients
+Retrieves and returns byid data
 
 ## Signature
 
@@ -12,23 +12,17 @@ function ig.note.GetByID(id)
 
 ## Parameters
 
-- **`id`**: string Note ID
-- **`id`**: string Note ID
+- **`id`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.note.GetByID
-local result = ig.note.GetByID()
+-- Get byid data
+local result = ig.note.GetByID(123)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.note.Add](ig_note_Add.md)
-- [ig.note.Clean](ig_note_Clean.md)
-- [ig.note.CleanOld](ig_note_CleanOld.md)
-- [ig.note.CleanUp](ig_note_CleanUp.md)
-- [ig.note.Create](ig_note_Create.md)
 
 ## Source
 

@@ -10,20 +10,16 @@ Admin calls use a separate channel for priority
 function ig.voip.client.UpdateTalkingState()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.voip.client.UpdateTalkingState
-ig.voip.client.UpdateTalkingState()
+-- Example usage
+local result = ig.voip.client.UpdateTalkingState()
 ```
-
-## Related Functions
-
-- [ig.voip.client.GetVoiceMode](ig_voip_client_GetVoiceMode.md)
-- [ig.voip.client.HandleAdminCallStateChange](ig_voip_client_HandleAdminCallStateChange.md)
-- [ig.voip.client.HandleCallStateChange](ig_voip_client_HandleCallStateChange.md)
-- [ig.voip.client.HandleConnectionStateChange](ig_voip_client_HandleConnectionStateChange.md)
-- [ig.voip.client.InitializeMumble](ig_voip_client_InitializeMumble.md)
 
 ## Source
 

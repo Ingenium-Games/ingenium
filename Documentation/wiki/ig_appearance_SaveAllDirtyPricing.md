@@ -2,7 +2,7 @@
 
 ## Description
 
-Load pricing if not already loaded
+Saves alldirtypricing data to storage
 
 ## Signature
 
@@ -10,20 +10,16 @@ Load pricing if not already loaded
 function ig.appearance.SaveAllDirtyPricing()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.appearance.SaveAllDirtyPricing
-ig.appearance.SaveAllDirtyPricing()
+-- Example usage
+local result = ig.appearance.SaveAllDirtyPricing()
 ```
-
-## Related Functions
-
-- [ig.appearance.ApplyAppearanceData](ig_appearance_ApplyAppearanceData.md)
-- [ig.appearance.ApplyTattoo](ig_appearance_ApplyTattoo.md)
-- [ig.appearance.ApplyTattoos](ig_appearance_ApplyTattoos.md)
-- [ig.appearance.ClearTattoos](ig_appearance_ClearTattoos.md)
-- [ig.appearance.CreateCamera](ig_appearance_CreateCamera.md)
 
 ## Source
 

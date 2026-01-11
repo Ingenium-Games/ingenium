@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs runat operation
 
 ## Signature
 
@@ -10,16 +10,19 @@
 function ig.cron.RunAt(h, m, cb, ...)
 ```
 
+## Parameters
+
+- **`h`**: any
+- **`m`**: any
+- **`cb`**: any
+- **`...`**: any
+
 ## Example
 
 ```lua
--- Example usage of ig.cron.RunAt
-local result = ig.cron.RunAt(h, m, cb, ...)
+-- Example usage
+local result = ig.cron.RunAt(value, value, value, value)
 ```
-
-## Related Functions
-
-- [ig.cron.OnTime](ig_cron_OnTime.md)
 
 ## Source
 

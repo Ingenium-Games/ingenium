@@ -2,7 +2,7 @@
 
 ## Description
 
-Same as above.
+Retrieves and returns players data
 
 ## Signature
 
@@ -12,26 +12,17 @@ function ig.player.GetPlayers()
 
 ## Parameters
 
-- **`source`**: number
-- **`source`**: number
-- **`source`**: number
-- **`data`**: table
-- **`source`**: number
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.player.GetPlayers
+-- Get players data
 local result = ig.player.GetPlayers()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.player.AddPlayer](ig_player_AddPlayer.md)
-- [ig.player.ArePlayersActive](ig_player_ArePlayersActive.md)
-- [ig.player.GetOfflinePlayer](ig_player_GetOfflinePlayer.md)
-- [ig.player.GetPlayer](ig_player_GetPlayer.md)
-- [ig.player.GetPlayerByCharacterID](ig_player_GetPlayerByCharacterID.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs pleasewait operation
 
 ## Signature
 
@@ -10,20 +10,16 @@
 function ig.func.PleaseWait()
 ```
 
+## Parameters
+
+*No parameters*
+
 ## Example
 
 ```lua
--- Example usage of ig.func.PleaseWait
-ig.func.PleaseWait()
+-- Example usage
+local result = ig.func.PleaseWait()
 ```
-
-## Related Functions
-
-- [ig.func.Alert](ig_func_Alert.md)
-- [ig.func.ClearInterval](ig_func_ClearInterval.md)
-- [ig.func.CompareCoords](ig_func_CompareCoords.md)
-- [ig.func.CreateObject](ig_func_CreateObject.md)
-- [ig.func.CreatePed](ig_func_CreatePed.md)
 
 ## Source
 

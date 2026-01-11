@@ -2,7 +2,7 @@
 
 ## Description
 
-Get GSR by ID
+Retrieves and returns all data
 
 ## Signature
 
@@ -12,22 +12,17 @@ function ig.gsr.GetAll()
 
 ## Parameters
 
-- **`id`**: string GSR ID
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.gsr.GetAll
+-- Get all data
 local result = ig.gsr.GetAll()
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.gsr.Add](ig_gsr_Add.md)
-- [ig.gsr.Clean](ig_gsr_Clean.md)
-- [ig.gsr.CleanOld](ig_gsr_CleanOld.md)
-- [ig.gsr.Clear](ig_gsr_Clear.md)
-- [ig.gsr.Create](ig_gsr_Create.md)
 
 ## Source
 

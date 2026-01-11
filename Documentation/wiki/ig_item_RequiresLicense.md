@@ -2,7 +2,7 @@
 
 ## Description
 
-Get items by value range
+Performs requireslicense operation
 
 ## Signature
 
@@ -12,25 +12,14 @@ function ig.item.RequiresLicense(name)
 
 ## Parameters
 
-- **`maxWeight`**: number Maximum weight
-- **`minValue`**: number Minimum value
-- **`maxValue`**: number Maximum value
-- **`name`**: string Item name
+- **`name`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.item.RequiresLicense
-local result = ig.item.RequiresLicense(name)
+-- Example usage
+local result = ig.item.RequiresLicense(100)
 ```
-
-## Related Functions
-
-- [ig.item.CanDegrade](ig_item_CanDegrade.md)
-- [ig.item.CanHotkey](ig_item_CanHotkey.md)
-- [ig.item.CanStack](ig_item_CanStack.md)
-- [ig.item.Exists](ig_item_Exists.md)
-- [ig.item.GetAbout](ig_item_GetAbout.md)
 
 ## Source
 

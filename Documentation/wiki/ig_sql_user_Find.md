@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs find operation
 
 ## Signature
 
@@ -10,24 +10,17 @@
 function ig.sql.user.Find(license_id, cb)
 ```
 
+## Parameters
+
+- **`license_id`**: any
+- **`cb`**: function
+
 ## Example
 
 ```lua
--- Example usage of ig.sql.user.Find
-local result = ig.sql.user.Find(license_id, cb)
+-- Example usage
+local result = ig.sql.user.Find(value, function() end)
 ```
-
-## Important Notes
-
-> ⚠️ **Security**: This function interacts with the database. Always validate and sanitize inputs to prevent SQL injection.
-
-## Related Functions
-
-- [ig.sql.user.Add](ig_sql_user_Add.md)
-- [ig.sql.user.AddCharacterSlot](ig_sql_user_AddCharacterSlot.md)
-- [ig.sql.user.Get](ig_sql_user_Get.md)
-- [ig.sql.user.GetAce](ig_sql_user_GetAce.md)
-- [ig.sql.user.GetBan](ig_sql_user_GetBan.md)
 
 ## Source
 

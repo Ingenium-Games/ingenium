@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Performs check operation
 
 ## Signature
 
@@ -12,19 +12,15 @@ function ig.version.Check(url, resourceName)
 
 ## Parameters
 
-- **`.`**: any
+- **`url`**: any
+- **`resourceName`**: string
 
 ## Example
 
 ```lua
--- Example usage of ig.version.Check
-local result = ig.version.Check(url, resourceName)
+-- Example usage
+local result = ig.version.Check(value, "resourceName_example")
 ```
-
-## Related Functions
-
-- [ig.version.CronCheck](ig_version_CronCheck.md)
-- [ig.version.LoopCheck](ig_version_LoopCheck.md)
 
 ## Source
 

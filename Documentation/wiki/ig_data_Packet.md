@@ -12,25 +12,14 @@ function ig.data.Packet()
 
 ## Parameters
 
-- **`net`**: any "NetworkId
-- **`net`**: any "NetworkId
-- **`net`**: any "The passed client entity
-- **`key`**: any "The state bag key you want to get the data from.
+*No parameters*
 
 ## Example
 
 ```lua
--- Example usage of ig.data.Packet
-ig.data.Packet()
+-- Example usage
+local result = ig.data.Packet()
 ```
-
-## Related Functions
-
-- [ig.data.GetEntityState](ig_data_GetEntityState.md)
-- [ig.data.GetEntityStateCheck](ig_data_GetEntityStateCheck.md)
-- [ig.data.GetLoadedStatus](ig_data_GetLoadedStatus.md)
-- [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md)
-- [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md)
 
 ## Source
 

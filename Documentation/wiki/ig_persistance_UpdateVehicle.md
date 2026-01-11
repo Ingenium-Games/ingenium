@@ -10,17 +10,16 @@ update vehicle on server side
 function ig.persistance.UpdateVehicle(vehicle)
 ```
 
+## Parameters
+
+- **`vehicle`**: any
+
 ## Example
 
 ```lua
--- Example usage of ig.persistance.UpdateVehicle
-local result = ig.persistance.UpdateVehicle(vehicle)
+-- Example usage
+local result = ig.persistance.UpdateVehicle(value)
 ```
-
-## Related Functions
-
-- [ig.persistance.ObjectThread](ig_persistance_ObjectThread.md)
-- [ig.persistance.VehicleThread](ig_persistance_VehicleThread.md)
 
 ## Source
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-====================================================================================--
+Retrieves and returns npc data
 
 ## Signature
 
@@ -12,24 +12,17 @@ function ig.npc.GetNpc(net)
 
 ## Parameters
 
-- **`net`**: integer "Network ID 16 bit integer
-- **`net`**: any
-- **`cb`**: any
-- **`net`**: integer "Network ID 16 bit integer
+- **`net`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.npc.GetNpc
-local result = ig.npc.GetNpc()
+-- Get npc data
+local result = ig.npc.GetNpc(100)
+if result then
+    print("Retrieved:", result)
+end
 ```
-
-## Related Functions
-
-- [ig.npc.AddNpc](ig_npc_AddNpc.md)
-- [ig.npc.FindNpc](ig_npc_FindNpc.md)
-- [ig.npc.GetNpcs](ig_npc_GetNpcs.md)
-- [ig.npc.RemoveNpc](ig_npc_RemoveNpc.md)
 
 ## Source
 

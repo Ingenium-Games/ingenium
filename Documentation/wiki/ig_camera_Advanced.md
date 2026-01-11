@@ -2,7 +2,7 @@
 
 ## Description
 
-No description available
+Creates an advanced scripted camera with custom type, position, rotation, and field of view.
 
 ## Signature
 
@@ -12,29 +12,24 @@ function ig.camera.Advanced(type, px, py, pz, rx, ry, rz, fov, l1, l2)
 
 ## Parameters
 
-- **`type`**: any
-- **`px`**: any
-- **`py`**: any
-- **`pz`**: any
-- **`rx`**: any
-- **`ry`**: any
-- **`rz`**: any
-- **`fov`**: any
-- **`l1`**: any
-- **`l2`**: any
+- **`type`**: string
+- **`px`**: number
+- **`py`**: number
+- **`pz`**: number
+- **`rx`**: number
+- **`ry`**: number
+- **`rz`**: number
+- **`fov`**: number
+- **`l1`**: boolean
+- **`l2`**: number
 
 ## Example
 
 ```lua
--- Example usage of ig.camera.Advanced
-local result = ig.camera.Advanced(type, px, py, pz, rx, ry, rz, fov, l1, l2)
+-- Create an advanced camera
+local camera = ig.camera.Advanced("FIRST_PERSON_CAM", 100.0, 200.0, 30.0, 0.0, 0.0, 90.0, 50.0)
+SetCamActive(camera, true)
 ```
-
-## Related Functions
-
-- [ig.camera.Basic](ig_camera_Basic.md)
-- [ig.camera.CleanUp](ig_camera_CleanUp.md)
-- [ig.camera.NewName](ig_camera_NewName.md)
 
 ## Source
 

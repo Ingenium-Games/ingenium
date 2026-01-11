@@ -12,9 +12,8 @@ function ig.door.SetState(hash, state)
 
 ## Parameters
 
-- **`coords`**: any
-- **`coords`**: any
-- **`coords`**: any
+- **`hash`**: any
+- **`state`**: any
 
 ## Example
 
@@ -33,14 +32,6 @@ ig.door.ToggleLock(doorHash)
 ig.door.SetState(doorHash, 2)  -- 2 = open but not locked
 ```
 
-## Related Functions
-
-- [ig.door.Add](ig_door_Add.md)
-- [ig.door.AddDoorsToSystem](ig_door_AddDoorsToSystem.md)
-- [ig.door.Find](ig_door_Find.md)
-- [ig.door.FindHash](ig_door_FindHash.md)
-- [ig.door.GenerateDoorsInRadius](ig_door_GenerateDoorsInRadius.md)
-
 ## Source
 
-Defined in: `server/[Doors]/_doors.lua`
+Defined in: `client/_doors.lua`
