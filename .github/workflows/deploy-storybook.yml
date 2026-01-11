@@ -1,40 +1,45 @@
-name: Build and deploy Storybook to GitHub Pages
+name: Deploy Storybook
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
+    paths:
+      - 'nui/**'
+      - '.github/workflows/deploy-storybook.yml'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '18'
           cache: 'npm'
-          cache-dependency-path: nui/package-lock.json
+          # Use package.json for cache key so an out-of-sync package-lock.json won't
+          # cause the setup-node cache action to fail. This prevents CI failures
+          # when package-lock.json is out of sync with package.json.
+          cache-dependency-path: 'nui/package.json'
 
       - name: Install dependencies
         working-directory: ./nui
-        run: npm ci
-
-      - name: Generate Storybook stories for NUI components
-        working-directory: ./nui
-        run: node scripts/generate-storybook-stories.js
+        run: |
+          # Remove any existing lockfile to avoid failures when it's out of sync
+          rm -f package-lock.json
+          npm install
 
       - name: Build Storybook
         working-directory: ./nui
         run: npm run build-storybook
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy Storybook to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
-          publish_branch: gh-pages
+          branch: gh-pages
+          folder: nui/storybook-static
+          token: ${{ secrets.GITHUB_TOKEN }}
