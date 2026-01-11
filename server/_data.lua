@@ -1,7 +1,10 @@
 -- ====================================================================================--
-ig.data = {} -- data table for funcitons.
+ig.data = {} -- data table for functions.
 -- ====================================================================================--
 
+-- Flags to prevent duplicate sync registrations
+local syncRegistered = false
+local reviveRegistered = false
 
 -- ====================================================================================--
 -- 
@@ -106,63 +109,70 @@ end
 -- Server to DB routine - Consolidated save manager
 -- Uses a single timeout chain with timer-based scheduling to reduce thread overhead
 function ig.data.ServerSync()
-    -- Track last run time for each save type
-    local lastRun = {
-        users = 0,
-        vehicles = 0,
-        jobs = 0,
-        objects = 0
-    }
-    
-    -- Consolidated save loop - runs at the smallest interval and checks what needs saving
-    local function ConsolidatedSaveLoop()
-        if ig.data.ArePlayersActive() ~= nil then
-            local currentTime = os.clock()
-            
-            -- User sync - most frequent (1.5 min)
-            if (currentTime - lastRun.users) >= (conf.serversync / 1000) then
-                ig.sql.save.Users()
-                lastRun.users = currentTime
+    if not syncRegistered then
+        -- Track last run time for each save type
+        local lastRun = {
+            users = 0,
+            vehicles = 0,
+            jobs = 0,
+            objects = 0
+        }
+        
+        -- Consolidated save loop - runs at the smallest interval and checks what needs saving
+        local function ConsolidatedSaveLoop()
+            if ig.data.ArePlayersActive() ~= nil then
+                local currentTime = os.clock()
+                
+                -- User sync - most frequent (1.5 min)
+                if (currentTime - lastRun.users) >= (conf.serversync / 1000) then
+                    ig.sql.save.Users()
+                    lastRun.users = currentTime
+                end
+                
+                -- Vehicle sync - less frequent (5 min)
+                if (currentTime - lastRun.vehicles) >= (conf.vehiclesync / 1000) then
+                    ig.sql.save.Vehicles()
+                    lastRun.vehicles = currentTime
+                end
+                
+                -- Job sync - least frequent (10 min)
+                if (currentTime - lastRun.jobs) >= (conf.jobsync / 1000) then
+                    ig.sql.save.Jobs()
+                    lastRun.jobs = currentTime
+                end
+                
+                -- Object sync - moderate frequency (5 min)
+                if (currentTime - lastRun.objects) >= (conf.objectsync / 1000) then
+                    ig.sql.save.Objects()
+                    lastRun.objects = currentTime
+                end
             end
             
-            -- Vehicle sync - less frequent (5 min)
-            if (currentTime - lastRun.vehicles) >= (conf.vehiclesync / 1000) then
-                ig.sql.save.Vehicles()
-                lastRun.vehicles = currentTime
-            end
-            
-            -- Job sync - least frequent (10 min)
-            if (currentTime - lastRun.jobs) >= (conf.jobsync / 1000) then
-                ig.sql.save.Jobs()
-                lastRun.jobs = currentTime
-            end
-            
-            -- Object sync - moderate frequency (5 min)
-            if (currentTime - lastRun.objects) >= (conf.objectsync / 1000) then
-                ig.sql.save.Objects()
-                lastRun.objects = currentTime
-            end
+            -- Use the smallest interval as our check frequency (serversync is typically the smallest)
+            SetTimeout(conf.serversync, ConsolidatedSaveLoop)
         end
         
-        -- Use the smallest interval as our check frequency (serversync is typically the smallest)
+        -- Start the consolidated save loop
         SetTimeout(conf.serversync, ConsolidatedSaveLoop)
+        syncRegistered = true
+        ig.func.Debug_1("Consolidated save manager started")
     end
-    
-    -- Start the consolidated save loop
-    SetTimeout(conf.serversync, ConsolidatedSaveLoop)
-    ig.func.Debug_1("Consolidated save manager started")
 end
 
--- Server to DB routine.
+-- Server to DB routine - Revive dead characters every minute
 function ig.data.ReviveSync()
-    local function Do()
-        local result = ig.sql.char.ReviveDeadCharacters()
-        if result then
-            ig.func.Debug_2("Revived Characters")
+    if not reviveRegistered then
+        local function Do()
+            local result = ig.sql.char.ReviveDeadCharacters()
+            if result then
+                ig.func.Debug_2("Revived Characters")
+            end
+            SetTimeout(conf.revivesync, Do)
         end
         SetTimeout(conf.revivesync, Do)
+        reviveRegistered = true
+        ig.func.Debug_1("Revive sync started (every minute)")
     end
-    SetTimeout(conf.revivesync, Do)
 end
 
 -- ====================================================================================--
