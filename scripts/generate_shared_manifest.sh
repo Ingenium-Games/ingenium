@@ -94,12 +94,12 @@ if [ ! -f "${MANIFEST_PATH}" ]; then
 fi
 
 # Use python3 to merge and write manifest (preserves other fields)
-python3 - <<PY
+echo "${docs_json}" | python3 - "${MANIFEST_PATH}" <<'PY'
 import sys, yaml, json
-manpath = "${MANIFEST_PATH}"
+manpath = sys.argv[1]
 with open(manpath, 'r') as f:
     m = yaml.safe_load(f)
-docs = json.loads('''${docs_json}''')
+docs = json.load(sys.stdin)
 m.setdefault('references', {})
 m['references']['docs'] = docs
 with open(manpath, 'w') as f:
