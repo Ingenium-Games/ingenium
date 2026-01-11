@@ -1,0 +1,47 @@
+name: Regenerate MCP manifest (docs-driven)
+
+on:
+  push:
+    paths:
+      - "docs/**"
+      - "**/*.md"
+      - "**/*.markdown"
+      - "wiki/**"
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *' # daily at 02:00 UTC (optional)
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies (jq, python3, yq optional)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq python3 python3-pip
+          pip3 install yq 2>/dev/null || echo "yq installation skipped (optional)"
+
+      - name: Regenerate manifest
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          REPOS: "Ingenium-Games/ingenium:main;Ingenium-Games/ingenium.sql:main"
+        run: |
+          chmod +x scripts/generate_shared_manifest.sh
+          ./scripts/generate_shared_manifest.sh
+
+      - name: Commit generated manifest (if changes)
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore(mcp): regenerate .mcp/manifest.yaml (docs changed)"
+          file_pattern: ".mcp/manifest.yaml"
+          branch: ${{ github.ref_name }}
+          commit_user_name: "mcp-bot"
+          commit_user_email: "mcp-bot@example.com"
