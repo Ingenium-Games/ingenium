@@ -142,6 +142,7 @@ python3 - "${MANIFEST_PATH}" "${docs_json_tmpfile}" <<'PY'
 import sys
 import yaml
 import json
+import traceback
 
 # Validate argument count
 if len(sys.argv) != 3:
@@ -195,11 +196,14 @@ try:
     
     print("Wrote", manpath)
 
+except KeyboardInterrupt:
+    print("Error: Operation interrupted by user", file=sys.stderr)
+    sys.exit(1)
 except Exception as e:
     # This should rarely be hit as most errors are handled specifically above
-    import traceback
     print(f"Error: Unexpected error occurred: {e}", file=sys.stderr)
     traceback.print_exc(file=sys.stderr)
+    sys.exit(1)
     sys.exit(1)
 PY
 
