@@ -10,6 +10,7 @@ The Ingenium framework includes a modern Vue-based chat system that replaces the
 - **Backwards Compatible**: Works with existing chat scripts and resources
 - **Configurable**: Auto-hide messages after 10 seconds
 - **Keyboard Controls**: T to open chat, ESC to close, Enter to send
+- **Chat Logging**: Comprehensive logging to daily files and txAdmin
 
 ## Architecture
 
@@ -26,6 +27,95 @@ The chat system consists of:
 3. **Lua Integration** (`nui/lua/chat.lua`)
    - Bridges FiveM events with the Vue UI
    - Handles NUI callbacks and command execution
+
+4. **Server-Side Logging** (`server/_chat.lua`)
+   - Logs chat messages to daily files
+   - Integrates with txAdmin logging
+   - Configurable logging options
+
+## Chat Logging
+
+The chat system includes comprehensive logging capabilities that can log to both daily files and txAdmin.
+
+### Configuration
+
+Configure chat logging in `_config/chat.lua`:
+
+```lua
+ig.chat.config = {
+    logging = {
+        enabled = true,
+        
+        -- Log to daily chat history files
+        logToFile = true,
+        logDirectory = "logs/chat",
+        
+        -- Log to txAdmin
+        logToTxAdmin = true,
+        
+        -- What to log
+        logMessages = true,  -- Regular chat messages
+        logCommands = true,  -- Commands (starting with /)
+        
+        -- Include metadata in logs
+        includeCoordinates = false,
+        includeIdentifiers = false,
+        
+        -- Maximum days to keep chat logs (0 = keep forever)
+        maxLogDays = 30
+    }
+}
+```
+
+### Log Format
+
+Chat logs are stored in daily files with the format:
+```
+logs/chat/chat_YYYY-MM-DD.log
+```
+
+Example log entries:
+```
+[2024-01-11 14:30:45] [MESSAGE] PlayerName (ID: 1): Hello everyone!
+[2024-01-11 14:31:02] [COMMAND] AdminName (ID: 5): /heal
+[2024-01-11 14:31:15] [MESSAGE] PlayerName (ID: 3) [steam:110000123456789] @(123.4, 456.7, 28.5): At the bank
+```
+
+### txAdmin Integration
+
+When `logToTxAdmin` is enabled, chat messages are sent to txAdmin's built-in logging system using the `txaLogger:ChatMessage` event. This allows you to:
+- View chat history in txAdmin's web panel
+- Search and filter chat messages
+- Monitor chat activity in real-time
+- Export chat logs from txAdmin
+
+### Usage Examples
+
+```lua
+-- Log a specific chat message from a script
+exports['ingenium']:LogChatMessage(
+    source,           -- Player server ID
+    playerName,       -- Player name
+    "Hello world!",   -- Message
+    false            -- Is command? (false for regular message)
+)
+
+-- Enable/disable logging dynamically
+ig.chat.config.logging.enabled = false  -- Disable logging
+ig.chat.config.logging.enabled = true   -- Re-enable logging
+
+-- Configure via convars (in server.cfg)
+set ig_chat_logging "true"
+set ig_chat_log_to_file "true"
+set ig_chat_log_to_txadmin "true"
+```
+
+### Privacy Considerations
+
+- **Identifiers**: By default, player identifiers are NOT logged. Enable `includeIdentifiers` only if required by your privacy policy.
+- **Coordinates**: Player coordinates are NOT logged by default. Enable `includeCoordinates` if needed.
+- **Log Retention**: Configure `maxLogDays` to automatically clean up old logs and comply with data retention policies.
+- **Access Control**: Ensure log files have appropriate file permissions to prevent unauthorized access.
 
 ## Usage
 

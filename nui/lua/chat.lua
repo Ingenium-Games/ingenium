@@ -13,16 +13,16 @@ RegisterNUICallback('chatSubmit', function(data, cb)
     
     local message = data.message
     if message and #message > 0 then
+        -- Send message to server for logging
+        TriggerServerEvent('ig:chat:serverMessage', message)
+        
         -- Handle chat message or command
         if string.sub(message, 1, 1) == '/' then
-            -- This is a command - let FiveM's default chat handle it
+            -- This is a command - execute it locally
             ExecuteCommand(string.sub(message, 2))
         else
-            -- This is a regular message
-            TriggerServerEvent('chat:addMessage', {
-                author = GetPlayerName(PlayerId()),
-                message = message
-            })
+            -- Regular message is handled by server (it will broadcast)
+            -- No need to do anything else here
         end
     end
     

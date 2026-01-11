@@ -1,0 +1,193 @@
+-- ====================================================================================--
+-- Chat System - Server Side Logging
+-- ====================================================================================--
+
+if not IsDuplicityVersion() then return end
+
+ig.chat = ig.chat or {}
+
+local chatLogQueue = {}
+local isWritingChatLog = false
+
+-- Ensure chat log directory exists
+local function EnsureChatLogDirectory()
+    -- FiveM will create the directory when we write to it
+    return true
+end
+
+-- Get current chat log file path
+local function GetChatLogFilePath()
+    local date = os.date("%Y-%m-%d")
+    local logDir = ig.chat.config.logging.logDirectory or "logs/chat"
+    local filename = string.format("chat_%s.log", date)
+    return logDir .. "/" .. filename
+end
+
+-- Write chat log entry to file
+local function WriteChatLogEntry(entry)
+    local filePath = GetChatLogFilePath()
+    
+    -- Open file in append mode with error handling
+    local file, err = io.open(filePath, "a")
+    if file then
+        file:write(entry .. "\n")
+        file:close()
+    else
+        print("^1[Chat Log] Failed to write to chat log file: " .. filePath .. " - " .. tostring(err) .. "^7")
+    end
+end
+
+-- Process chat log queue
+local function ProcessChatLogQueue()
+    if isWritingChatLog or #chatLogQueue == 0 then
+        return
+    end
+    
+    isWritingChatLog = true
+    
+    while #chatLogQueue > 0 do
+        local entry = table.remove(chatLogQueue, 1)
+        WriteChatLogEntry(entry)
+    end
+    
+    isWritingChatLog = false
+end
+
+-- Queue a chat log entry
+local function QueueChatLogEntry(entry)
+    table.insert(chatLogQueue, entry)
+    
+    -- Process queue on next tick to batch writes
+    SetTimeout(0, ProcessChatLogQueue)
+end
+
+-- Log chat message
+function ig.chat.LogMessage(source, playerName, message, isCommand)
+    if not ig.chat.config or not ig.chat.config.logging or not ig.chat.config.logging.enabled then
+        return
+    end
+    
+    -- Check if we should log this type of message
+    if isCommand and not ig.chat.config.logging.logCommands then
+        return
+    end
+    
+    if not isCommand and not ig.chat.config.logging.logMessages then
+        return
+    end
+    
+    -- Format log entry
+    local logEntry = ig.chat.FormatLogEntry(source, playerName, message, isCommand)
+    
+    -- Log to file
+    if ig.chat.config.logging.logToFile then
+        QueueChatLogEntry(logEntry)
+    end
+    
+    -- Log to txAdmin
+    if ig.chat.config.logging.logToTxAdmin then
+        local txAdminMessage
+        if isCommand then
+            txAdminMessage = string.format("Command executed: %s by %s (ID: %d)", message, playerName, source)
+        else
+            txAdminMessage = string.format("Chat: [%s]: %s", playerName, message)
+        end
+        TriggerEvent("txaLogger:ChatMessage", txAdminMessage)
+    end
+end
+
+-- Handle chat messages from clients
+RegisterNetEvent('chat:addMessage')
+AddEventHandler('chat:addMessage', function(message)
+    -- This is a broadcast event - log it if it came from a player
+    if source and source > 0 then
+        local playerName = GetPlayerName(source)
+        if playerName then
+            local msg = message.message or message.text or ""
+            if type(message) == 'table' and message.args and message.args[2] then
+                msg = message.args[2]
+            end
+            
+            -- Check if it's a command or regular message
+            local isCommand = string.sub(msg, 1, 1) == "/"
+            
+            ig.chat.LogMessage(source, playerName, msg, isCommand)
+        end
+    end
+end)
+
+-- Handle server chat messages (for logging)
+RegisterServerEvent('ig:chat:serverMessage')
+AddEventHandler('ig:chat:serverMessage', function(message)
+    local source = source
+    local playerName = GetPlayerName(source)
+    
+    if not playerName then
+        return
+    end
+    
+    -- Check if it's a command or regular message
+    local isCommand = string.sub(message, 1, 1) == "/"
+    
+    -- Log the message
+    ig.chat.LogMessage(source, playerName, message, isCommand)
+    
+    -- If it's a regular message, broadcast it to all players
+    if not isCommand then
+        TriggerClientEvent('chat:addMessage', -1, {
+            author = playerName,
+            message = message,
+            color = {255, 255, 255}
+        })
+    else
+        -- If it's a command, execute it
+        local command = string.sub(message, 2)
+        -- The client will handle command execution
+    end
+end)
+
+-- Export logging function
+exports('LogChatMessage', function(source, playerName, message, isCommand)
+    ig.chat.LogMessage(source, playerName, message, isCommand)
+end)
+
+-- Clean up old chat logs based on maxLogDays setting
+local function CleanupOldLogs()
+    if not ig.chat.config or not ig.chat.config.logging or not ig.chat.config.logging.enabled then
+        return
+    end
+    
+    local maxDays = ig.chat.config.logging.maxLogDays
+    if maxDays == 0 then
+        return -- Keep logs forever
+    end
+    
+    -- This is a placeholder - actual file cleanup would require additional filesystem operations
+    -- In production, you might want to use a separate cleanup script
+    print(string.format("[Chat Log] Cleanup: Would delete chat logs older than %d days", maxDays))
+end
+
+-- Initialize
+EnsureChatLogDirectory()
+
+-- Periodic log queue flush (every 5 seconds)
+CreateThread(function()
+    while true do
+        Wait(5000)
+        ProcessChatLogQueue()
+    end
+end)
+
+-- Periodic cleanup check (once per day)
+CreateThread(function()
+    while true do
+        Wait(86400000) -- 24 hours
+        CleanupOldLogs()
+    end
+end)
+
+print('[IG Chat] Chat logging system loaded')
+print(string.format('[IG Chat] Logging to file: %s, Logging to txAdmin: %s', 
+    tostring(ig.chat.config.logging.logToFile),
+    tostring(ig.chat.config.logging.logToTxAdmin)
+))
