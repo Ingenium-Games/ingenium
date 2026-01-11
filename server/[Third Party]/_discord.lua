@@ -8,6 +8,7 @@ ig.discord = {}
 -- Cache for Discord role data to reduce API calls
 local roleCache = {}
 local cacheTimeout = 300 -- 5 minutes in seconds
+local maxCacheSize = 500 -- Maximum number of cached users
 
 ---@param discordId string The Discord ID (e.g., "discord:123456789")
 ---@return string|nil The Discord ID without prefix, or nil if invalid
@@ -83,6 +84,25 @@ function ig.discord.HasRole(src, roleId, callback)
         if statusCode == 200 then
             local data = json.decode(response)
             if data and data.roles then
+                -- Check cache size and remove oldest entry if needed
+                local cacheCount = 0
+                for _ in pairs(roleCache) do cacheCount = cacheCount + 1 end
+                
+                if cacheCount >= maxCacheSize then
+                    -- Find and remove oldest entry
+                    local oldestId = nil
+                    local oldestTime = os.time()
+                    for id, cached in pairs(roleCache) do
+                        if cached.timestamp < oldestTime then
+                            oldestTime = cached.timestamp
+                            oldestId = id
+                        end
+                    end
+                    if oldestId then
+                        roleCache[oldestId] = nil
+                    end
+                end
+                
                 -- Cache the roles
                 roleCache[cleanDiscordId] = {
                     roles = data.roles,

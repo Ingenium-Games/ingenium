@@ -47,45 +47,43 @@ AddEventHandler("playerConnecting", function(name, reject, d)
     end
     
     -- Add Discord-based priority to queue
-    if conf.discord.priority_enabled then
+    if conf.discord.priority_enabled and conf.discord.priority_roles and #conf.discord.priority_roles > 0 then
         local discordPrioritySet = false
-        ig.discord.HasAnyRole(src, 
-            (function()
-                local roleIds = {}
-                if conf.discord.priority_roles then
-                    for _, role in ipairs(conf.discord.priority_roles) do
-                        table.insert(roleIds, role.id)
-                    end
-                end
-                return roleIds
-            end)(),
-            function(hasAnyRole, matchedRoles)
-                if hasAnyRole and #matchedRoles > 0 then
-                    -- Find highest priority from matched roles
-                    local highestPower = 0
-                    for _, matchedRoleId in ipairs(matchedRoles) do
-                        for _, priorityRole in ipairs(conf.discord.priority_roles) do
-                            if priorityRole.id == matchedRoleId and priorityRole.power > highestPower then
-                                highestPower = priorityRole.power
-                            end
-                        end
-                    end
-                    
-                    if highestPower > 0 then
-                        -- Get player identifiers for queue priority
-                        local ids = Queue:GetIds(src)
-                        if ids and ids[1] then
-                            Queue.AddPriority(ids[1], highestPower)
-                        end
-                    end
-                end
-                discordPrioritySet = true
-            end
-        )
         
-        -- Wait for Discord priority check to complete
-        while not discordPrioritySet do
-            Citizen.Wait(100)
+        -- Extract role IDs from priority configuration
+        local roleIds = {}
+        for _, role in ipairs(conf.discord.priority_roles) do
+            table.insert(roleIds, role.id)
+        end
+        
+        ig.discord.HasAnyRole(src, roleIds, function(hasAnyRole, matchedRoles)
+            if hasAnyRole and #matchedRoles > 0 then
+                -- Find highest priority from matched roles
+                local highestPower = 0
+                for _, matchedRoleId in ipairs(matchedRoles) do
+                    for _, priorityRole in ipairs(conf.discord.priority_roles) do
+                        if priorityRole.id == matchedRoleId and priorityRole.power > highestPower then
+                            highestPower = priorityRole.power
+                        end
+                    end
+                end
+                
+                if highestPower > 0 then
+                    -- Get player identifiers for queue priority
+                    local ids = Queue:GetIds(src)
+                    if ids and ids[1] then
+                        Queue.AddPriority(ids[1], highestPower)
+                    end
+                end
+            end
+            discordPrioritySet = true
+        end)
+        
+        -- Wait for Discord priority check to complete with timeout
+        local waitCount = 0
+        while not discordPrioritySet and waitCount < 100 do -- Max 5 seconds
+            Citizen.Wait(50)
+            waitCount = waitCount + 1
         end
     end
     --[[ 
@@ -135,9 +133,11 @@ AddEventHandler("playerConnecting", function(name, reject, d)
             end
         end)
         
-        -- Wait for Discord check to complete
-        while not discordCheckComplete do
-            Citizen.Wait(100)
+        -- Wait for Discord check to complete with timeout
+        local waitCount = 0
+        while not discordCheckComplete and waitCount < 100 do -- Max 5 seconds
+            Citizen.Wait(50)
+            waitCount = waitCount + 1
         end
     else
         discordCheckComplete = true
