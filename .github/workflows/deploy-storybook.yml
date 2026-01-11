@@ -16,22 +16,39 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: 'nui/package.json'
+          cache-dependency-path: 'nui/package-lock.json'
+
+      - name: Print environment info
+        run: |
+          node --version
+          npm --version
 
       - name: Install dependencies
         working-directory: ./nui
         run: npm ci || npm install
 
+      - name: Generate Storybook stories
+        working-directory: ./nui
+        run: node scripts/generate-storybook-stories.js
+
       - name: Build Storybook
         working-directory: ./nui
-        run: npm run build-storybook -- --debug-webpack
+        run: npm run build-storybook -- --debug-webpack --loglevel verbose
 
-      - name: Deploy Storybook to gh-pages
+      - name: Verify build output
+        run: |
+          if [ ! -d "storybook-static" ]; then
+            echo "Error: storybook-static directory not found"
+            exit 1
+          fi
+          ls -la storybook-static/
+
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
