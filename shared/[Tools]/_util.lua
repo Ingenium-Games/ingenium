@@ -2,6 +2,7 @@
 -- Shared Utility Functions
 -- Common helper functions to reduce code duplication
 -- ====================================================================================--
+if not ig then ig = {} end
 ig.util = {}
 -- ====================================================================================--
 
