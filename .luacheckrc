@@ -7,6 +7,10 @@ globals = {
   "GetEntityCoords", "GetHashKey", "CreateThread", "Wait", "PerformHttpRequest", "json",
   "BeginTextCommandBusyspinnerOn", "EndTextCommandBusyspinnerOn", "BusyspinnerOff", "PreloadBusyspinner",
   "DoScreenFadeOut", "DoScreenFadeIn", "IsScreenFadedOut", "IsScreenFadedIn", "IsScreenFadingIn", "IsScreenFadingOut",
+  "ig", "cache", "lib", "Zones", "vec", "mat", "quat", "glm",
+  "SetVehicleDoorShut", "SetVehicleDoorOpen", "GetVehicleDoorAngleRatio", "GetVehicleDoorLockStatus",
+  "GetWorldPositionOfEntityBone", "DoesEntityExist", "NetworkDoesNetworkIdExist", "NetworkGetEntityIsNetworked",
+  "NetworkGetNetworkIdFromEntity", "IsPedAPlayer", "joaat", "SetTimeout", "SetInterval", "ClearInterval",
 }
 
 -- Ignore generated natives stubs and large generated files
@@ -17,5 +21,5 @@ exclude_files = {
   "server/fivem_natives_server.lua",
 }
 
-# allow long lines in generated or data files
+-- allow long lines in generated or data files
 max_line_length = 120

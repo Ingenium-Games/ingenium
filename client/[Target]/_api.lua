@@ -52,7 +52,7 @@ end
 ---@param remove table
 ---@param resource string
 local function removeTarget(target, remove, resource)
-    if type(remove) ~= 'table' then remove = { remove } end
+    remove = ig.util.EnsureTable(remove)
 
     for i = #target, 1, -1 do
         local option = target[i]
@@ -129,7 +129,7 @@ local Models = {}
 ---@param arr number | number[]
 ---@param options table
 function ig.target.AddModel(arr, options)
-    if type(arr) ~= 'table' then arr = { arr } end
+    arr = ig.util.EnsureTable(arr)
     local resource = GetInvokingResource()
 
     for i = 1, #arr do
@@ -148,7 +148,7 @@ exports('AddModel', ig.target.AddModel)
 ---@param arr number | number[]
 ---@param options table
 function ig.target.removeModel(arr, options)
-    if type(arr) ~= 'table' then arr = { arr } end
+    arr = ig.util.EnsureTable(arr)
     local resource = GetInvokingResource()
 
     for i = 1, #arr do
@@ -167,7 +167,7 @@ local Entities = {}
 ---@param arr number | number[]
 ---@param options table
 function ig.target.AddEntity(arr, options)
-    if type(arr) ~= 'table' then arr = { arr } end
+    arr = ig.util.EnsureTable(arr)
     local resource = GetInvokingResource()
 
     for i = 1, #arr do
@@ -187,7 +187,7 @@ exports('AddEntity', ig.target.AddEntity)
 ---@param arr number | number[]
 ---@param options table
 function ig.target.removeEntity(arr, options)
-    if type(arr) ~= 'table' then arr = { arr } end
+    arr = ig.util.EnsureTable(arr)
     local resource = GetInvokingResource()
 
     for i = 1, #arr do
@@ -205,7 +205,7 @@ local LocalEntities = {}
 ---@param arr number | number[]
 ---@param options table
 function ig.target.AddLocalEntity(arr, options)
-    if type(arr) ~= 'table' then arr = { arr } end
+    arr = ig.util.EnsureTable(arr)
     local resource = GetInvokingResource()
 
     for i = 1, #arr do
@@ -227,7 +227,7 @@ exports('AddLocalEntity', ig.target.AddLocalEntity)
 ---@param arr number | number[]
 ---@param options table
 function ig.target.removeLocalEntity(arr, options)
-    if type(arr) ~= 'table' then arr = { arr } end
+    arr = ig.util.EnsureTable(arr)
     local resource = GetInvokingResource()
 
     for i = 1, #arr do

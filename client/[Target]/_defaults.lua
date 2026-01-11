@@ -21,15 +21,10 @@ target:addGlobalVehicle({
         label = 'Toggle front driver door',
         bones = { 'door_dside_f', 'seat_dside_f' },
         interact = function(entity, distance, coords, name, bone)
-            if GetVehicleDoorLockStatus(entity) > 1 then return end
-
-            if bone and bone ~= -1 then
-                local boneCoords = GetWorldPositionOfEntityBone(entity, bone)
-                local dist = #(coords - boneCoords)
-                -- door bone has 0.5 threshold, seat bone has 0.72 threshold
-                -- since bone is already the closest, just check with a combined threshold
-                return dist < 0.72
-            end
+            if ig.util.IsVehicleLocked(entity) then return end
+            -- door bone has 0.5 threshold, seat bone has 0.72 threshold
+            -- since bone is already the closest, just check with a combined threshold
+            return ig.util.CheckBoneDistance(entity, bone, coords, 0.72)
         end,
         action = function(data)
             toggleDoor(data.entity, 0)
@@ -44,13 +39,8 @@ target:addGlobalVehicle({
         label = 'Toggle front passenger door',
         bones = { 'door_pside_f', 'seat_pside_f' },
         interact = function(entity, distance, coords, name, bone)
-            if GetVehicleDoorLockStatus(entity) > 1 then return end
-
-            if bone and bone ~= -1 then
-                local boneCoords = GetWorldPositionOfEntityBone(entity, bone)
-                local dist = #(coords - boneCoords)
-                return dist < 0.72
-            end
+            if ig.util.IsVehicleLocked(entity) then return end
+            return ig.util.CheckBoneDistance(entity, bone, coords, 0.72)
         end,
         action = function(data)
             toggleDoor(data.entity, 1)
@@ -65,13 +55,8 @@ target:addGlobalVehicle({
         label = 'Toggle rear driver door',
         bones = { 'door_dside_r', 'seat_dside_r' },
         interact = function(entity, distance, coords, name, bone)
-            if GetVehicleDoorLockStatus(entity) > 1 then return end
-
-            if bone and bone ~= -1 then
-                local boneCoords = GetWorldPositionOfEntityBone(entity, bone)
-                local dist = #(coords - boneCoords)
-                return dist < 0.72
-            end
+            if ig.util.IsVehicleLocked(entity) then return end
+            return ig.util.CheckBoneDistance(entity, bone, coords, 0.72)
         end,
         action = function(data)
             toggleDoor(data.entity, 2)
@@ -86,13 +71,8 @@ target:addGlobalVehicle({
         label = 'Toggle rear passenger door',
         bones = { 'door_pside_r', 'seat_pside_r' },
         interact = function(entity, distance, coords, name, bone)
-            if GetVehicleDoorLockStatus(entity) > 1 then return end
-
-            if bone and bone ~= -1 then
-                local boneCoords = GetWorldPositionOfEntityBone(entity, bone)
-                local dist = #(coords - boneCoords)
-                return dist < 0.72
-            end
+            if ig.util.IsVehicleLocked(entity) then return end
+            return ig.util.CheckBoneDistance(entity, bone, coords, 0.72)
         end,
         action = function(data)
             toggleDoor(data.entity, 3)
@@ -108,8 +88,8 @@ target:addGlobalVehicle({
         label = 'Toggle hood',
         bones = 'bonnet',
         interact = function(entity, distance, coords, name, boneId)
-            if GetVehicleDoorLockStatus(entity) > 1 then return end
-            return #(coords - GetWorldPositionOfEntityBone(entity, boneId)) < 0.9
+            if ig.util.IsVehicleLocked(entity) then return end
+            return ig.util.CheckBoneDistance(entity, boneId, coords, 0.9)
         end,
         action = function(data)
             toggleDoor(data.entity, 4)
@@ -124,8 +104,8 @@ target:addGlobalVehicle({
         label = 'Toggle trunk',
         bones = 'boot',
         interact = function(entity, distance, coords, name, boneId)
-            if GetVehicleDoorLockStatus(entity) > 1 then return end
-            return #(coords - GetWorldPositionOfEntityBone(entity, boneId)) < 0.9
+            if ig.util.IsVehicleLocked(entity) then return end
+            return ig.util.CheckBoneDistance(entity, boneId, coords, 0.9)
         end,
         action = function(data)
             toggleDoor(data.entity, 5)
