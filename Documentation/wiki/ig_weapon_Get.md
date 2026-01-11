@@ -2,7 +2,7 @@
 
 ## Description
 
-Retrieves and returns  data
+Retrieves and returns the weapon data table containing all loaded weapon information
 
 ## Signature
 
@@ -17,10 +17,10 @@ function ig.weapon.Get()
 ## Example
 
 ```lua
--- Get  data
-local result = ig.weapon.Get()
-if result then
-    print("Retrieved:", result)
+-- Get weapon data table
+local weapons = ig.weapon.Get()
+for weaponHash, weaponData in pairs(weapons) do
+    print("Weapon:", weaponHash, weaponData.name)
 end
 ```
 
