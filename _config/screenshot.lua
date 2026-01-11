@@ -32,10 +32,12 @@ ig.screenshot.config = {
         -- Discourse integration
         discourse = {
             enabled = false,
-            url = "", -- Your Discourse instance URL
+            url = "", -- Your Discourse instance URL (e.g., "https://forum.example.com")
             apiKey = "", -- Discourse API key
             apiUsername = "", -- Discourse API username
-            categoryId = 4 -- Category ID for screenshot posts (default: 4)
+            categoryId = nil -- Category ID for screenshot posts (required if Discourse is enabled)
+            -- To find your category ID: go to your category page and check the URL
+            -- Example: https://forum.example.com/c/screenshots/5 -> categoryId = 5
         }
     },
     

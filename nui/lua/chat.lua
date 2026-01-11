@@ -111,13 +111,7 @@ end, false)
 RegisterKeyMapping('+chat', 'Open Chat', 'keyboard', 'T')
 
 -- Listen for chat messages from server
-RegisterNetEvent('chat:addMessage')
-AddEventHandler('chat:addMessage', function(message)
-    AddChatMessage(message.author, message.text or message.message, message.color or message.args and message.args[1])
-end)
-
--- Override default chat resource commands
--- These allow the new Vue chat to integrate with existing resources
+-- Handles both new format (table) and legacy format (separate params)
 RegisterNetEvent('chat:addMessage')
 AddEventHandler('chat:addMessage', function(author, message, args)
     -- Handle both new format and legacy format
@@ -130,7 +124,7 @@ AddEventHandler('chat:addMessage', function(author, message, args)
         )
     else
         -- Legacy format: separate parameters
-        AddChatMessage(author, message, args)
+        AddChatMessage(author, message, args or {255, 255, 255})
     end
 end)
 

@@ -214,7 +214,12 @@ function ig.screenshot.SendToDiscourse(imageUrl, metadata)
         json.encode(metadata, {indent = true})
     )
     
-    local categoryId = ig.screenshot.config.outputs.discourse.categoryId or 4
+    local categoryId = ig.screenshot.config.outputs.discourse.categoryId
+    if not categoryId then
+        print('[IG Screenshot] Discourse categoryId not configured, using default category 1')
+        categoryId = 1 -- Use a safe default (usually "Uncategorized" in Discourse)
+    end
+    
     local payload = {
         title = title,
         raw = body,
@@ -264,7 +269,7 @@ RegisterCommand('takescreenshot', function(source, args, rawCommand)
     
     -- Check if player exists
     local targetPlayerName = GetPlayerName(playerId)
-    if not targetPlayerName then
+    if not targetPlayerName or targetPlayerName == '' then
         TriggerClientEvent('Client:Notify', source, 'Player not found', 'red', 5000)
         return
     end

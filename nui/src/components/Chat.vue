@@ -52,10 +52,14 @@ const chatStore = useChatStore()
 const messagesContainer = ref(null)
 const chatInput = ref(null)
 
-// Get resource name for NUI callbacks
-let resourceName = 'ingenium' // Fallback
+// Get resource name for NUI callbacks with validation
+let resourceName = 'ingenium' // Safe fallback
 if (window.GetParentResourceName) {
-  resourceName = window.GetParentResourceName()
+  const name = window.GetParentResourceName()
+  // Validate resource name (alphanumeric, dots, underscores, hyphens only)
+  if (name && /^[a-zA-Z0-9._-]+$/.test(name)) {
+    resourceName = name
+  }
 }
 
 // Show messages from the last 10 seconds, or all messages if chat is visible
