@@ -181,3 +181,25 @@ function ig.sql.user.AddCharacterSlot(fivem_id, cb)
     end)
 end
 
+--- Get - `Supporter` status from the users License_ID identifier
+-- @License_ID
+function ig.sql.user.GetSupporter(license_id, cb)
+    local result = ig.sql.FetchScalar("SELECT `Supporter` FROM `users` WHERE `License_ID` = ? LIMIT 1;", {license_id})
+    if cb then
+        cb()
+    end
+    return result
+end
+
+--- Set - `Supporter` status for the users License_ID
+-- @License_ID
+function ig.sql.user.SetSupporter(license_id, bool, cb)
+    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.user.SetSupporter, boolean was not passed") return end
+    ig.sql.Update("UPDATE `users` SET `Supporter` = ? WHERE `License_ID` = ? LIMIT 1;", {bool, license_id}, function(affectedRows)
+        TriggerEvent("txaLogger:CommandExecuted", "Supporter set to "..tostring(bool).." on License ID :"..license_id)
+        if cb then
+            cb(affectedRows)
+        end
+    end)
+end
+
