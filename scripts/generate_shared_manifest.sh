@@ -204,7 +204,6 @@ except Exception as e:
     print(f"Error: Unexpected error occurred: {e}", file=sys.stderr)
     traceback.print_exc(file=sys.stderr)
     sys.exit(1)
-    sys.exit(1)
 PY
 
 echo "Manifest regenerated at ${MANIFEST_PATH}"
