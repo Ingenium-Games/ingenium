@@ -19,19 +19,21 @@ local function SaveDynamicData()
         local elapsed = (os.clock() - startTime) * 1000
         print(('^2[Autosave] Dynamic data saved to JSON (%.2fms)^7'):format(elapsed))
     end
-    
-    SetTimeout(conf.objectsync, SaveDynamicData) -- 5 minutes
 end
 
--- Start routine after resource is fully loaded
-CreateThread(function()
-    while ig._loading do
-        Wait(1000)
+-- Register autosave with cron to run every 5 minutes
+local autosaveRegistered = false
+AddEventHandler("onServerResourceStart", function()
+    if not autosaveRegistered then
+        -- Register for every 5 minutes: :00, :05, :10, :15, :20, :25, :30, :35, :40, :45, :50, :55
+        for hour = 0, 23 do
+            for minute = 0, 59, 5 do
+                ig.cron.RunAt(hour, minute, SaveDynamicData)
+            end
+        end
+        autosaveRegistered = true
+        print('^3[Autosave] Registered dynamic data save with cron (5 min intervals)^7')
     end
-    
-    Wait(5000) -- Initial delay
-    print('^3[Autosave] Starting dynamic data save routine (5 min intervals)^7')
-    SaveDynamicData()
 end)
 
 -- Save on resource stop

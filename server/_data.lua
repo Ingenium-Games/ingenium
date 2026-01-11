@@ -103,66 +103,68 @@ function ig.data.CharacterValues()
     SetTimeout(conf.charactersync, Do)
 end
 
--- Server to DB routine - Consolidated save manager
--- Uses a single timeout chain with timer-based scheduling to reduce thread overhead
+-- Server to DB routine - Uses cron for time-based saves
+-- Registers different save operations at appropriate intervals via cron
 function ig.data.ServerSync()
-    -- Track last run time for each save type
-    local lastRun = {
-        users = 0,
-        vehicles = 0,
-        jobs = 0,
-        objects = 0
-    }
-    
-    -- Consolidated save loop - runs at the smallest interval and checks what needs saving
-    local function ConsolidatedSaveLoop()
-        if ig.data.ArePlayersActive() ~= nil then
-            local currentTime = os.clock()
-            
-            -- User sync - most frequent (1.5 min)
-            if (currentTime - lastRun.users) >= (conf.serversync / 1000) then
-                ig.sql.save.Users()
-                lastRun.users = currentTime
-            end
-            
-            -- Vehicle sync - less frequent (5 min)
-            if (currentTime - lastRun.vehicles) >= (conf.vehiclesync / 1000) then
-                ig.sql.save.Vehicles()
-                lastRun.vehicles = currentTime
-            end
-            
-            -- Job sync - least frequent (10 min)
-            if (currentTime - lastRun.jobs) >= (conf.jobsync / 1000) then
-                ig.sql.save.Jobs()
-                lastRun.jobs = currentTime
-            end
-            
-            -- Object sync - moderate frequency (5 min)
-            if (currentTime - lastRun.objects) >= (conf.objectsync / 1000) then
-                ig.sql.save.Objects()
-                lastRun.objects = currentTime
+    local syncRegistered = false
+    if not syncRegistered then
+        -- User sync - every 2 minutes (90 seconds rounds to 2 min for cron)
+        for hour = 0, 23 do
+            for minute = 0, 59, 2 do
+                ig.cron.RunAt(hour, minute, function()
+                    if ig.data.ArePlayersActive() ~= nil then
+                        ig.sql.save.Users()
+                    end
+                end)
             end
         end
         
-        -- Use the smallest interval as our check frequency (serversync is typically the smallest)
-        SetTimeout(conf.serversync, ConsolidatedSaveLoop)
+        -- Vehicle and Object sync - every 5 minutes
+        for hour = 0, 23 do
+            for minute = 0, 59, 5 do
+                ig.cron.RunAt(hour, minute, function()
+                    if ig.data.ArePlayersActive() ~= nil then
+                        ig.sql.save.Vehicles()
+                        ig.sql.save.Objects()
+                    end
+                end)
+            end
+        end
+        
+        -- Job sync - every 10 minutes
+        for hour = 0, 23 do
+            for minute = 0, 59, 10 do
+                ig.cron.RunAt(hour, minute, function()
+                    if ig.data.ArePlayersActive() ~= nil then
+                        ig.sql.save.Jobs()
+                    end
+                end)
+            end
+        end
+        
+        syncRegistered = true
+        ig.func.Debug_1("Consolidated save manager registered with cron")
     end
-    
-    -- Start the consolidated save loop
-    SetTimeout(conf.serversync, ConsolidatedSaveLoop)
-    ig.func.Debug_1("Consolidated save manager started")
 end
 
--- Server to DB routine.
+-- Server to DB routine - Revive dead characters every minute via cron
 function ig.data.ReviveSync()
-    local function Do()
-        local result = ig.sql.char.ReviveDeadCharacters()
-        if result then
-            ig.func.Debug_2("Revived Characters")
+    local reviveRegistered = false
+    if not reviveRegistered then
+        -- Register for every minute of every hour
+        for hour = 0, 23 do
+            for minute = 0, 59 do
+                ig.cron.RunAt(hour, minute, function()
+                    local result = ig.sql.char.ReviveDeadCharacters()
+                    if result then
+                        ig.func.Debug_2("Revived Characters")
+                    end
+                end)
+            end
         end
-        SetTimeout(conf.revivesync, Do)
+        reviveRegistered = true
+        ig.func.Debug_1("Revive sync registered with cron (every minute)")
     end
-    SetTimeout(conf.revivesync, Do)
 end
 
 -- ====================================================================================--
