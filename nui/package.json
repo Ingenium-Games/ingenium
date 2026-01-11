@@ -7,16 +7,22 @@
     "dev": "vite",
     "build": "vite build && node scripts/rename-html.js",
     "watch": "vite build --watch",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "node scripts/generate-storybook-stories.js",
+    "build-storybook": "storybook build -o ../storybook-static"
   },
   "dependencies": {
     "pinia": "^2.1.7",
     "vue": "^3.4.15"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.0",
+    "@storybook/vue3": "^7.0.0",
     "@vitejs/plugin-vue": "^5.0.3",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.33",
+    "storybook": "^7.0.0",
     "tailwindcss": "^3.4.1",
     "vite": "^5.0.12"
   }
