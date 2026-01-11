@@ -57,7 +57,17 @@ files.forEach((file) => {
   const relPath = relative(SEARCH_DIR, file);
   const title = `NUI/${toTitleCase(relPath)}`;
 
-  const content = `import Component from '${relImportPath}';\n\nexport default { title: '${title}', component: Component };\n\nexport const Default = {\n  render: () => ({\n    components: { Component },\n    template: '<component :is="Component" />'\n  })\n};\n`;
+  const content = `import Component from '${relImportPath}';
+
+export default { title: '${title}', component: Component };
+
+export const Default = {
+  render: () => ({
+    components: { Component },
+    template: '<component :is="Component" />'
+  })
+};
+`;
 
   writeFileSync(storyFile, content, 'utf8');
   console.log(`Generated ${relative(ROOT, storyFile)}`);
