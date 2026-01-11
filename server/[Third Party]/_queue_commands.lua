@@ -4,41 +4,48 @@
     Provides administrative commands for managing the queue system
 ]]--
 
+-- Helper function to check if player has admin or moderator permissions
+local function HasAdminPermission(src, requireAdmin)
+    if src == 0 then return true end  -- Console always has permission
+    
+    local licenseId = ig.func.identifier(src)
+    if not licenseId then return false end
+    
+    local ace = ig.sql.FetchScalar(
+        "SELECT `Ace` FROM `users` WHERE `License_ID` = ? LIMIT 1;",
+        {licenseId}
+    )
+    
+    if not ace then return false end
+    
+    if requireAdmin then
+        return ace == "admin"
+    else
+        return ace == "admin" or ace == "moderator"
+    end
+end
+
+-- Helper function to send message (console or player)
+local function SendMessage(src, message, isError)
+    if src == 0 then
+        local color = isError and "^1" or "^3"
+        print(color .. message .. "^7")
+    else
+        TriggerClientEvent("chat:addMessage", src, {
+            color = isError and {255, 0, 0} or {255, 165, 0},
+            args = {"[Queue]", message}
+        })
+    end
+end
+
 -- Command: View current queue
 RegisterCommand("queue:list", function(source, args, rawCommand)
     local src = source
     
     -- Check admin permission
-    if src > 0 then
-        local licenseId = nil
-        local ids = GetPlayerIdentifiers(src)
-        for _, id in ipairs(ids) do
-            if string.sub(id, 1, 8) == "license:" then
-                licenseId = id
-                break
-            end
-        end
-        
-        if not licenseId then
-            TriggerClientEvent("chat:addMessage", src, {
-                color = {255, 0, 0},
-                args = {"[Queue]", "Error: Could not verify permissions"}
-            })
-            return
-        end
-        
-        local ace = ig.sql.FetchScalar(
-            "SELECT `Ace` FROM `users` WHERE `License_ID` = ? LIMIT 1;",
-            {licenseId}
-        )
-        
-        if not ace or (ace ~= "admin" and ace ~= "moderator") then
-            TriggerClientEvent("chat:addMessage", src, {
-                color = {255, 0, 0},
-                args = {"[Queue]", "You don't have permission to use this command"}
-            })
-            return
-        end
+    if not HasAdminPermission(src, false) then
+        SendMessage(src, "You don't have permission to use this command", true)
+        return
     end
     
     -- Get queue list
@@ -93,36 +100,9 @@ RegisterCommand("queue:alert", function(source, args, rawCommand)
     local src = source
     
     -- Check admin permission
-    if src > 0 then
-        local licenseId = nil
-        local ids = GetPlayerIdentifiers(src)
-        for _, id in ipairs(ids) do
-            if string.sub(id, 1, 8) == "license:" then
-                licenseId = id
-                break
-            end
-        end
-        
-        if not licenseId then
-            TriggerClientEvent("chat:addMessage", src, {
-                color = {255, 0, 0},
-                args = {"[Queue]", "Error: Could not verify permissions"}
-            })
-            return
-        end
-        
-        local ace = ig.sql.FetchScalar(
-            "SELECT `Ace` FROM `users` WHERE `License_ID` = ? LIMIT 1;",
-            {licenseId}
-        )
-        
-        if not ace or (ace ~= "admin" and ace ~= "moderator") then
-            TriggerClientEvent("chat:addMessage", src, {
-                color = {255, 0, 0},
-                args = {"[Queue]", "You don't have permission to use this command"}
-            })
-            return
-        end
+    if not HasAdminPermission(src, false) then
+        SendMessage(src, "You don't have permission to use this command", true)
+        return
     end
     
     if #args < 1 then
@@ -181,36 +161,9 @@ RegisterCommand("queue:remove", function(source, args, rawCommand)
     local src = source
     
     -- Check admin permission
-    if src > 0 then
-        local licenseId = nil
-        local ids = GetPlayerIdentifiers(src)
-        for _, id in ipairs(ids) do
-            if string.sub(id, 1, 8) == "license:" then
-                licenseId = id
-                break
-            end
-        end
-        
-        if not licenseId then
-            TriggerClientEvent("chat:addMessage", src, {
-                color = {255, 0, 0},
-                args = {"[Queue]", "Error: Could not verify permissions"}
-            })
-            return
-        end
-        
-        local ace = ig.sql.FetchScalar(
-            "SELECT `Ace` FROM `users` WHERE `License_ID` = ? LIMIT 1;",
-            {licenseId}
-        )
-        
-        if not ace or (ace ~= "admin" and ace ~= "moderator") then
-            TriggerClientEvent("chat:addMessage", src, {
-                color = {255, 0, 0},
-                args = {"[Queue]", "You don't have permission to use this command"}
-            })
-            return
-        end
+    if not HasAdminPermission(src, false) then
+        SendMessage(src, "You don't have permission to use this command", true)
+        return
     end
     
     if #args < 1 then
@@ -269,9 +222,10 @@ RegisterCommand("queue:remove", function(source, args, rawCommand)
         -- Try to find by ID
         local found = false
         for _, player in ipairs(queueList) do
-            for _, id in ipairs(player.ids) do
+            local idArray = player.identifiers.array()
+            for _, id in ipairs(idArray) do
                 if string.find(id, identifier) then
-                    local removed = ig.queue.RemovePlayer(player.ids)
+                    local removed = ig.queue.RemovePlayer(player.identifiers)
                     if removed then
                         if src == 0 then
                             print(("^2[Queue] Removed %s from queue^7"):format(player.name))
@@ -306,37 +260,10 @@ end, false)
 RegisterCommand("queue:shutdown", function(source, args, rawCommand)
     local src = source
     
-    -- Check admin permission
-    if src > 0 then
-        local licenseId = nil
-        local ids = GetPlayerIdentifiers(src)
-        for _, id in ipairs(ids) do
-            if string.sub(id, 1, 8) == "license:" then
-                licenseId = id
-                break
-            end
-        end
-        
-        if not licenseId then
-            TriggerClientEvent("chat:addMessage", src, {
-                color = {255, 0, 0},
-                args = {"[Queue]", "Error: Could not verify permissions"}
-            })
-            return
-        end
-        
-        local ace = ig.sql.FetchScalar(
-            "SELECT `Ace` FROM `users` WHERE `License_ID` = ? LIMIT 1;",
-            {licenseId}
-        )
-        
-        if not ace or ace ~= "admin" then
-            TriggerClientEvent("chat:addMessage", src, {
-                color = {255, 0, 0},
-                args = {"[Queue]", "You don't have permission to use this command"}
-            })
-            return
-        end
+    -- Check admin permission (admin only for shutdown)
+    if not HasAdminPermission(src, true) then
+        SendMessage(src, "You don't have permission to use this command (admin only)", true)
+        return
     end
     
     local reason = "Server restart in progress"

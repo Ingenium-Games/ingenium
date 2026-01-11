@@ -56,43 +56,37 @@ local adminAlerts = {}
 
 local function DebugPrint(msg)
     if QueueConfig.debugMode then
-        print(("^3[QUEUE]: ^7%s^7"):format(tostring(msg)))
+        ig.func.Debug_1(("[QUEUE]: %s"):format(tostring(msg)))
     end
 end
 
-local function GetPlayerIds(src)
-    local ids = GetPlayerIdentifiers(src)
-    local endpoint = GetPlayerEndpoint(src)
+-- Get all player identifiers as a table
+-- Returns: {steam = "...", fivem = "...", license = "...", discord = "...", ip = "..."}
+local function GetPlayerIdentifiers(src)
+    local steam, fivem, license, discord, ip = ig.func.identifiers(src)
     
-    if not ids or #ids == 0 then
-        if endpoint then
-            ids = {"ip:" .. endpoint}
-        else
-            return nil
-        end
+    -- Return nil if no valid identifiers
+    if not license and not steam and not fivem then
+        return nil
     end
     
-    return ids
-end
-
-local function GetSteamId(src)
-    local ids = GetPlayerIdentifiers(src)
-    for _, id in ipairs(ids) do
-        if string.sub(id, 1, 6) == "steam:" then
-            return id
+    return {
+        steam = steam,
+        fivem = fivem,
+        license = license,
+        discord = discord,
+        ip = ip,
+        -- Also provide array format for compatibility with old queue system
+        array = function()
+            local ids = {}
+            if steam then table.insert(ids, steam) end
+            if fivem then table.insert(ids, fivem) end
+            if license then table.insert(ids, license) end
+            if discord then table.insert(ids, discord) end
+            if ip then table.insert(ids, ip) end
+            return ids
         end
-    end
-    return nil
-end
-
-local function GetLicenseId(src)
-    local ids = GetPlayerIdentifiers(src)
-    for _, id in ipairs(ids) do
-        if string.sub(id, 1, 8) == "license:" then
-            return id
-        end
-    end
-    return nil
+    }
 end
 
 --------------------------------------------------------------------------------
@@ -239,13 +233,13 @@ end
 --------------------------------------------------------------------------------
 
 local function GetDatabasePriority(src)
-    local licenseId = GetLicenseId(src)
-    if not licenseId then return 0 end
+    local identifiers = GetPlayerIdentifiers(src)
+    if not identifiers or not identifiers.license then return 0 end
     
     -- Check if player is a supporter from database
     local supporter = ig.sql.FetchScalar(
         "SELECT `Supporter` FROM `users` WHERE `License_ID` = ? LIMIT 1;",
-        {licenseId}
+        {identifiers.license}
     )
     
     if supporter and tonumber(supporter) == 1 then
@@ -261,8 +255,8 @@ local function GetDiscordPriority(src, callback)
         return
     end
     
-    local discordId = ig.discord.GetDiscordId(src)
-    if not discordId then
+    local identifiers = GetPlayerIdentifiers(src)
+    if not identifiers or not identifiers.discord then
         callback(0)
         return
     end
@@ -287,8 +281,12 @@ local function GetDiscordPriority(src, callback)
     end)
 end
 
-local function GetTempPriority(ids)
-    for _, id in ipairs(ids) do
+local function GetTempPriority(identifiers)
+    if not identifiers then return 0 end
+    
+    -- Check all identifier types for temp priority
+    local idArray = identifiers.array()
+    for _, id in ipairs(idArray) do
         local temp = tempPriority[id]
         if temp and os.time() < temp.endTime then
             return temp.power
@@ -297,23 +295,24 @@ local function GetTempPriority(ids)
     return 0
 end
 
-local function GetTotalPriority(src, ids, callback)
+local function GetTotalPriority(src, identifiers, callback)
     local dbPriority = GetDatabasePriority(src)
-    local tempPriority = GetTempPriority(ids)
+    local tempPrio = GetTempPriority(identifiers)
     
     GetDiscordPriority(src, function(discordPriority)
         -- Use the highest priority from all sources
-        local totalPriority = math.max(dbPriority, discordPriority, tempPriority)
+        local totalPriority = math.max(dbPriority, discordPriority, tempPrio)
         callback(totalPriority)
     end)
 end
 
-local function AddTempPriority(ids, power, duration)
-    if not ids or not power or not duration then return end
+local function AddTempPriority(identifiers, power, duration)
+    if not identifiers or not power or not duration then return end
     
     local endTime = os.time() + duration
+    local idArray = identifiers.array()
     
-    for _, id in ipairs(ids) do
+    for _, id in ipairs(idArray) do
         tempPriority[id] = {
             power = power,
             endTime = endTime
@@ -321,7 +320,7 @@ local function AddTempPriority(ids, power, duration)
     end
     
     DebugPrint(("Added temporary priority (power: %d, duration: %ds) for %s"):format(
-        power, duration, ids[1]
+        power, duration, idArray[1] or "unknown"
     ))
 end
 
@@ -329,10 +328,14 @@ end
 -- Queue Management
 --------------------------------------------------------------------------------
 
-local function FindPlayerInQueue(ids)
+local function FindPlayerInQueue(identifiers)
+    if not identifiers then return nil, nil end
+    
+    local searchIds = identifiers.array()
+    
     for index, player in ipairs(QueueState.playerQueue) do
-        for _, queueId in ipairs(player.ids) do
-            for _, searchId in ipairs(ids) do
+        for _, queueId in ipairs(player.identifiers.array()) do
+            for _, searchId in ipairs(searchIds) do
                 if queueId == searchId then
                     return index, player
                 end
@@ -342,8 +345,8 @@ local function FindPlayerInQueue(ids)
     return nil, nil
 end
 
-local function AddToQueue(src, ids, name, priority, deferrals)
-    local existingIndex = FindPlayerInQueue(ids)
+local function AddToQueue(src, identifiers, name, priority, deferrals)
+    local existingIndex = FindPlayerInQueue(identifiers)
     if existingIndex then
         -- Update existing entry
         QueueState.playerQueue[existingIndex].source = src
@@ -354,7 +357,7 @@ local function AddToQueue(src, ids, name, priority, deferrals)
     
     local player = {
         source = src,
-        ids = ids,
+        identifiers = identifiers,
         name = name,
         priority = priority,
         joinTime = os.time(),
@@ -376,13 +379,14 @@ local function AddToQueue(src, ids, name, priority, deferrals)
     
     table.insert(QueueState.playerQueue, insertPos, player)
     
+    local idArray = identifiers.array()
     DebugPrint(("Added %s [%s] to queue at position %d (priority: %d)"):format(
-        name, ids[1], insertPos, priority
+        name, idArray[1] or "unknown", insertPos, priority
     ))
 end
 
-local function RemoveFromQueue(ids)
-    local index = FindPlayerInQueue(ids)
+local function RemoveFromQueue(identifiers)
+    local index = FindPlayerInQueue(identifiers)
     if index then
         local player = QueueState.playerQueue[index]
         table.remove(QueueState.playerQueue, index)
@@ -392,8 +396,8 @@ local function RemoveFromQueue(ids)
     return false
 end
 
-local function GetQueuePosition(ids)
-    local index = FindPlayerInQueue(ids)
+local function GetQueuePosition(identifiers)
+    local index = FindPlayerInQueue(identifiers)
     return index
 end
 
@@ -401,9 +405,9 @@ end
 -- Connection Management
 --------------------------------------------------------------------------------
 
-local function AddToConnecting(ids, player)
+local function AddToConnecting(identifiers, player)
     table.insert(QueueState.connectingPlayers, {
-        ids = ids,
+        identifiers = identifiers,
         name = player.name,
         source = player.source,
         connectTime = os.time(),
@@ -411,10 +415,14 @@ local function AddToConnecting(ids, player)
     })
 end
 
-local function RemoveFromConnecting(ids)
+local function RemoveFromConnecting(identifiers)
+    if not identifiers then return false end
+    
+    local searchIds = identifiers.array()
+    
     for index, player in ipairs(QueueState.connectingPlayers) do
-        for _, connId in ipairs(player.ids) do
-            for _, searchId in ipairs(ids) do
+        for _, connId in ipairs(player.identifiers.array()) do
+            for _, searchId in ipairs(searchIds) do
                 if connId == searchId then
                     table.remove(QueueState.connectingPlayers, index)
                     return true
@@ -537,16 +545,16 @@ function ig.queue.GetQueueList()
             name = player.name,
             priority = player.priority,
             queueTime = os.time() - player.joinTime,
-            ids = player.ids
+            identifiers = player.identifiers  -- Changed from ids to identifiers
         })
     end
     return list
 end
 
-function ig.queue.RemovePlayer(ids)
-    local removed = RemoveFromQueue(ids)
+function ig.queue.RemovePlayer(identifiers)
+    local removed = RemoveFromQueue(identifiers)
     if removed then
-        RemoveFromConnecting(ids)
+        RemoveFromConnecting(identifiers)
         return true
     end
     return false
@@ -588,10 +596,10 @@ end
 
 function ig.queue.HandleConnection(name, setKickReason, deferrals)
     local src = source
-    local ids = GetPlayerIds(src)
+    local identifiers = GetPlayerIdentifiers(src)
     local connectTime = os.time()
     
-    if not ids then
+    if not identifiers then
         deferrals.done(_L("queue_idrr"))
         DebugPrint(("Rejected %s - Could not retrieve IDs"):format(name))
         return
@@ -604,16 +612,16 @@ function ig.queue.HandleConnection(name, setKickReason, deferrals)
     end
     
     -- Check for Steam requirement (if not already checked in deferrals)
-    if QueueConfig.requireSteam and not GetSteamId(src) then
+    if QueueConfig.requireSteam and not identifiers.steam then
         deferrals.done(_L("queue_steam"))
         return
     end
     -- Get player priority (combines DB supporter + Discord + temp priority)
-    GetTotalPriority(src, ids, function(priority)
+    GetTotalPriority(src, identifiers, function(priority)
         -- Add to queue
-        AddToQueue(src, ids, name, priority, deferrals)
+        AddToQueue(src, identifiers, name, priority, deferrals)
         
-        local position = GetQueuePosition(ids)
+        local position = GetQueuePosition(identifiers)
         
         -- If server has space and player is first in queue, connect immediately
         if CanPlayerConnect() and position == 1 then
@@ -621,16 +629,16 @@ function ig.queue.HandleConnection(name, setKickReason, deferrals)
             ProcessConnectionSteps(src, deferrals, function(success, errorMsg)
                 if not success then
                     deferrals.done(errorMsg or "Connection failed")
-                    RemoveFromQueue(ids)
+                    RemoveFromQueue(identifiers)
                     return
                 end
                 
-                AddToConnecting(ids, QueueState.playerQueue[position])
-                RemoveFromQueue(ids)
+                AddToConnecting(identifiers, QueueState.playerQueue[position])
+                RemoveFromQueue(identifiers)
                 
                 -- Add grace period priority for reconnection
                 if QueueConfig.graceEnabled then
-                    AddTempPriority(ids, QueueConfig.gracePower, QueueConfig.graceTime)
+                    AddTempPriority(identifiers, QueueConfig.gracePower, QueueConfig.graceTime)
                 end
                 
                 deferrals.done()
@@ -641,7 +649,7 @@ function ig.queue.HandleConnection(name, setKickReason, deferrals)
         
         -- Player must wait in queue
         local function updateQueueCard()
-            position = GetQueuePosition(ids)
+            position = GetQueuePosition(identifiers)
             
             if not position then
                 deferrals.done("Removed from queue")
@@ -680,15 +688,15 @@ function ig.queue.HandleConnection(name, setKickReason, deferrals)
                 ProcessConnectionSteps(src, deferrals, function(success, errorMsg)
                     if not success then
                         deferrals.done(errorMsg or "Connection failed")
-                        RemoveFromQueue(ids)
+                        RemoveFromQueue(identifiers)
                         return
                     end
                     
-                    AddToConnecting(ids, QueueState.playerQueue[position])
-                    RemoveFromQueue(ids)
+                    AddToConnecting(identifiers, QueueState.playerQueue[position])
+                    RemoveFromQueue(identifiers)
                     
                     if QueueConfig.graceEnabled then
-                        AddTempPriority(ids, QueueConfig.gracePower, QueueConfig.graceTime)
+                        AddTempPriority(identifiers, QueueConfig.gracePower, QueueConfig.graceTime)
                     end
                     
                     deferrals.done()
@@ -768,33 +776,35 @@ end)
 RegisterServerEvent("Server:Queue:ConfirmedPlayer")
 AddEventHandler("Server:Queue:ConfirmedPlayer", function()
     local src = source
-    local ids = GetPlayerIds(src)
+    local identifiers = GetPlayerIdentifiers(src)
     
     if not QueueState.connectedPlayers[src] then
         QueueState.connectedPlayers[src] = true
-        RemoveFromQueue(ids)
-        RemoveFromConnecting(ids)
+        RemoveFromQueue(identifiers)
+        RemoveFromConnecting(identifiers)
         DebugPrint(("Player %s confirmed connection"):format(GetPlayerName(src)))
     end
 end)
 
 AddEventHandler("playerDropped", function(reason)
     local src = source
-    local ids = GetPlayerIds(src)
+    local identifiers = GetPlayerIdentifiers(src)
     
     if QueueState.connectedPlayers[src] then
         QueueState.connectedPlayers[src] = nil
         
         -- Add grace period priority for reconnection
-        if QueueConfig.graceEnabled then
-            AddTempPriority(ids, QueueConfig.gracePower, QueueConfig.graceTime)
+        if QueueConfig.graceEnabled and identifiers then
+            AddTempPriority(identifiers, QueueConfig.gracePower, QueueConfig.graceTime)
         end
         
         DebugPrint(("Player %s disconnected: %s"):format(GetPlayerName(src), reason))
     end
     
-    RemoveFromQueue(ids)
-    RemoveFromConnecting(ids)
+    if identifiers then
+        RemoveFromQueue(identifiers)
+        RemoveFromConnecting(identifiers)
+    end
 end)
 
 --------------------------------------------------------------------------------
