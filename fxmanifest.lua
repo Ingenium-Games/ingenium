@@ -98,9 +98,10 @@ server_scripts {
     "server/[Voice]/_voip.lua",
     -- Discord integration (loads before queue system)
     "server/[Third Party]/_discord.lua",
-    "server/[Third Party]/_queue_config.lua",
-    "server/[Third Party]/_queue_connect.lua",
     "server/[Third Party]/_adaptivecards.lua",
+    "server/[Third Party]/_queue_config_new.lua",
+    "server/[Third Party]/_queue_system.lua",
+    "server/[Third Party]/_queue_commands.lua",
     -- PMA-Voice compatibility wrapper (loads last for exports)
     "shared/[Voice]/_pma_wrapper.lua",
 
