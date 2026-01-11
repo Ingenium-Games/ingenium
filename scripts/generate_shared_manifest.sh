@@ -28,21 +28,31 @@ echo "Regenerating ${MANIFEST_PATH} for repos: ${REPOS_ENV}"
 get_commit_sha() {
   local repo="$1" ref="$2"
   # Try heads ref
-  sha="$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-    "${GITHUB_API}/repos/${repo}/git/refs/heads/${ref}" \
-    | jq -r '.object.sha' 2>/dev/null || true)"
-  if [ -n "${sha}" ] && [ "${sha}" != "null" ]; then
-    echo "${sha}"
-    return
+  response="$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+    "${GITHUB_API}/repos/${repo}/git/refs/heads/${ref}" 2>&1)"
+  
+  # Check if response is valid JSON
+  if echo "${response}" | jq empty 2>/dev/null; then
+    sha="$(echo "${response}" | jq -r '.object.sha' 2>/dev/null || true)"
+    if [ -n "${sha}" ] && [ "${sha}" != "null" ]; then
+      echo "${sha}"
+      return
+    fi
   fi
+  
   # Try tags ref
-  sha="$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-    "${GITHUB_API}/repos/${repo}/git/refs/tags/${ref}" \
-    | jq -r '.object.sha' 2>/dev/null || true)"
-  if [ -n "${sha}" ] && [ "${sha}" != "null" ]; then
-    echo "${sha}"
-    return
+  response="$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+    "${GITHUB_API}/repos/${repo}/git/refs/tags/${ref}" 2>&1)"
+  
+  # Check if response is valid JSON
+  if echo "${response}" | jq empty 2>/dev/null; then
+    sha="$(echo "${response}" | jq -r '.object.sha' 2>/dev/null || true)"
+    if [ -n "${sha}" ] && [ "${sha}" != "null" ]; then
+      echo "${sha}"
+      return
+    fi
   fi
+  
   # Assume ref is already a sha
   echo "${ref}"
 }
@@ -65,10 +75,26 @@ for repo_entry in "${repos_arr[@]}"; do
   tree_json="$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
     "${GITHUB_API}/repos/${repo_name}/git/trees/${commit_sha}?recursive=1")"
 
+  # Validate tree_json is valid JSON
+  if ! echo "${tree_json}" | jq empty 2>/dev/null; then
+    echo "Error: Failed to fetch or parse tree for ${repo_name} @ ${commit_sha}"
+    echo "Response: ${tree_json}"
+    continue
+  fi
+
   # For each markdown file, create an entry
-  mapfile -t md_paths < <(echo "${tree_json}" \
-    | jq -r '.tree[] | select(.type=="blob") | .path' \
-    | grep -E '\.(md|markdown)$' || true)
+  # Use a more robust method than mapfile with process substitution
+  md_paths_raw="$(echo "${tree_json}" \
+    | jq -r '.tree[]? | select(.type=="blob") | .path' 2>/dev/null \
+    | grep -E '\.(md|markdown)$' || true)"
+  
+  # Read into array line by line
+  md_paths=()
+  while IFS= read -r line; do
+    if [ -n "${line}" ]; then
+      md_paths+=("${line}")
+    fi
+  done <<< "${md_paths_raw}"
 
   for mdpath in "${md_paths[@]}"; do
     # Skip empty paths
