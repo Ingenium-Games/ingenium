@@ -9,12 +9,12 @@ local function SaveDynamicData()
         -- Merge drops for persistence
         local dropsToSave = ig.drop.MergeDropsForSave()
         
-        ig.json.Write('Drops', dropsToSave)
-        ig.json.Write('Pickups', ig.picks or {})
-        ig.json.Write('Scenes', ig.scenes or {})
-        ig.json.Write('Notes', ig.notes or {})
-        ig.json.Write('GSR', ig.gsrs or {})
-        ig.json.Write('Objects', ig.objects or {}) 
+        ig.json.Write('drops', dropsToSave)
+        ig.json.Write('pickups', ig.picks or {})
+        ig.json.Write('scenes', ig.scenes or {})
+        ig.json.Write('notes', ig.notes or {})
+        ig.json.Write('gsr', ig.gsrs or {})
+        ig.json.Write('objects', ig.objects or {}) 
 
         local elapsed = (os.clock() - startTime) * 1000
         print(('^2[Autosave] Dynamic data saved to JSON (%.2fms)^7'):format(elapsed))
@@ -42,11 +42,11 @@ AddEventHandler('onResourceStop', function(resource)
         -- Use helper function to merge drops
         local dropsToSave = ig.drop.MergeDropsForSave()
         
-        ig.json.Write('Drops', dropsToSave)
-        ig.json.Write('Pickups', ig.picks)
-        ig.json.Write('Scenes', ig.scenes)
-        ig.json.Write('Notes', ig.notes)
-        ig.json.Write('GSR', ig.gsrs)
+        ig.json.Write('drops', dropsToSave)
+        ig.json.Write('pickups', ig.picks)
+        ig.json.Write('scenes', ig.scenes)
+        ig.json.Write('notes', ig.notes)
+        ig.json.Write('gsr', ig.gsrs)
         print('^2[Shutdown] All data saved successfully^7')
     end
 end)
@@ -59,11 +59,11 @@ RegisterCommand('savedata', function(source, args)
         -- Use helper function to merge drops
         local dropsToSave = ig.drop.MergeDropsForSave()
         
-        ig.json.Write('Drops', dropsToSave)
-        ig.json.Write('Pickups', ig.picks)
-        ig.json.Write('Scenes', ig.scenes)
-        ig.json.Write('Notes', ig.notes)
-        ig.json.Write('GSR', ig.gsrs)
+        ig.json.Write('drops', dropsToSave)
+        ig.json.Write('pickups', ig.picks)
+        ig.json.Write('scenes', ig.scenes)
+        ig.json.Write('notes', ig.notes)
+        ig.json.Write('gsr', ig.gsrs)
         print('^2[Manual Save] Complete^7')
         
         if source > 0 then
