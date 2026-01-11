@@ -96,10 +96,8 @@ server_scripts {
     "server/[Garage]/_callbacks.lua",
     -- VOIP system (loads before other server scripts)
     "server/[Voice]/_voip.lua",
-    -- Discord integration (loads before queue system)
+    -- Discord integration
     "server/[Third Party]/_discord.lua",
-    "server/[Third Party]/_queue_config.lua",
-    "server/[Third Party]/_queue_connect.lua",
     "server/[Third Party]/_adaptivecards.lua",
     -- PMA-Voice compatibility wrapper (loads last for exports)
     "shared/[Voice]/_pma_wrapper.lua",
@@ -118,11 +116,7 @@ dependencies {
 ------------------------------------------------------------------------------
 files {
     "data/*.json",
-    "nui/index.html",
-    "nui/css/*.css",
-    "nui/js/*.js",
     "nui/img/*.png",
-    "nui/libs/*.js",
     "nui/inventory/dist/assets/*.css",
     "nui/inventory/dist/assets/*.js",
     "nui/dist/*.html",

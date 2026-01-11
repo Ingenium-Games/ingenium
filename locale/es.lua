@@ -30,18 +30,6 @@ Locales["es"] = {
     ["defer_banned"] = "Has sido baneado por comando o evento automático.",
     ["defer_no_discord"] = "No te has unido a nuestro Discord.",
     
-    -- Queue System Messages
-    ["queue_joining"] = "Conectando",
-    ["queue_connecting"] = "Conectando",
-    ["queue_idrr"] = "Error: no se pudo recuperar ninguno de tus ID, intenta reiniciar.",
-    ["queue_err"] = "Hubo un error",
-    ["queue_pos"] = "Estás %d/%d en cola%s",
-    ["queue_connectingerr"] = "Error al agregarte a la lista de conexión",
-    ["queue_timedout"] = "Error: Se agotó el tiempo",
-    ["queue_wlonly"] = "Debes estar en la lista blanca para unirte a este servidor",
-    ["queue_steam"] = "Error: Steam debe estar ejecutándose",
-    ["queue_temp_priority"] = " :%d con prioridad temporal",
-    
     -- Inventory Messages
     ["inv_no_item_found"] = "No se encontró ningún objeto...",
     ["inv_not_useable_quickslot"] = "El objeto no es utilizable mediante ranura rápida: %s",
