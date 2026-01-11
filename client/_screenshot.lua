@@ -13,7 +13,7 @@ function ig.screenshot.Take(reason, additionalData, callback)
         return false
     end
     
-    if not ig.screenshot.config or not ig.screenshot.config.enabled then
+    if not conf.screenshot or not conf.screenshot.enabled then
         print("[IG Screenshot] Screenshot system is disabled")
         if callback then callback(false) end
         return false
@@ -34,15 +34,15 @@ function ig.screenshot.Take(reason, additionalData, callback)
         timestamp = os.time(),
     }
     
-    if ig.screenshot.config.includeMetadata then
+    if conf.screenshot.includeMetadata then
         local ped = PlayerPedId()
         local coords = GetEntityCoords(ped)
         
-        if ig.screenshot.config.includeMetadata.playerName then
+        if conf.screenshot.includeMetadata.playerName then
             metadata.playerName = GetPlayerName(PlayerId())
         end
         
-        if ig.screenshot.config.includeMetadata.coordinates then
+        if conf.screenshot.includeMetadata.coordinates then
             metadata.coordinates = {
                 x = coords.x,
                 y = coords.y,
@@ -50,14 +50,14 @@ function ig.screenshot.Take(reason, additionalData, callback)
             }
         end
         
-        if ig.screenshot.config.includeMetadata.gameTime then
+        if conf.screenshot.includeMetadata.gameTime then
             metadata.gameTime = {
                 hours = GetClockHours(),
                 minutes = GetClockMinutes()
             }
         end
         
-        if ig.screenshot.config.includeMetadata.vehicleInfo then
+        if conf.screenshot.includeMetadata.vehicleInfo then
             local vehicle = GetVehiclePedIsIn(ped, false)
             if vehicle ~= 0 then
                 metadata.vehicle = {
@@ -67,7 +67,7 @@ function ig.screenshot.Take(reason, additionalData, callback)
             end
         end
         
-        if ig.screenshot.config.includeMetadata.nearbyPlayers then
+        if conf.screenshot.includeMetadata.nearbyPlayers then
             local players = {}
             for _, player in ipairs(GetActivePlayers()) do
                 if player ~= PlayerId() then
@@ -95,7 +95,7 @@ function ig.screenshot.Take(reason, additionalData, callback)
     
     -- Take screenshot using screenshot-basic
     exports['screenshot-basic']:requestScreenshotUpload(
-        ig.screenshot.config.outputs.discord.webhook or "https://example.com/upload",
+        conf.screenshot.outputs.discord.webhook or "https://example.com/upload",
         'files[]',
         function(data)
             screenshotInProgress = false
@@ -123,7 +123,7 @@ end
 -- Automatically take screenshot on player report
 RegisterNetEvent('ig:screenshot:takeOnReport')
 AddEventHandler('ig:screenshot:takeOnReport', function(reportData)
-    if ig.screenshot.config.autoScreenshot.onReport then
+    if conf.screenshot.autoScreenshot.onReport then
         ig.screenshot.Take('player_report', reportData)
     end
 end)
@@ -131,13 +131,13 @@ end)
 -- Automatically take screenshot on error
 RegisterNetEvent('ig:screenshot:takeOnError')
 AddEventHandler('ig:screenshot:takeOnError', function(errorData)
-    if ig.screenshot.config.autoScreenshot.onError then
+    if conf.screenshot.autoScreenshot.onError then
         ig.screenshot.Take('client_error', errorData)
     end
 end)
 
 -- Automatically take screenshot on death
-if ig.screenshot.config and ig.screenshot.config.autoScreenshot.onDeath then
+if conf.screenshot and conf.screenshot.autoScreenshot.onDeath then
     CreateThread(function()
         while true do
             Wait(1000)

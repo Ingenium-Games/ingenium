@@ -9,6 +9,39 @@ ig.chat = ig.chat or {}
 local chatLogQueue = {}
 local isWritingChatLog = false
 
+-- Function to format chat log entry
+function ig.chat.FormatLogEntry(source, playerName, message, isCommand)
+    local timestamp = os.date("%Y-%m-%d %H:%M:%S")
+    local identifiers = ""
+    local coords = ""
+    
+    if conf.chat.logging.includeIdentifiers and source > 0 then
+        local ids = ig.func.GetPlayerIdentifiers(source)
+        if ids then
+            identifiers = string.format(" [%s]", ids.steam or ids.license or "unknown")
+        end
+    end
+    
+    if conf.chat.logging.includeCoordinates and source > 0 then
+        local ped = GetPlayerPed(source)
+        if ped and ped > 0 then
+            local playerCoords = GetEntityCoords(ped)
+            coords = string.format(" @(%.1f, %.1f, %.1f)", playerCoords.x, playerCoords.y, playerCoords.z)
+        end
+    end
+    
+    local messageType = isCommand and "COMMAND" or "MESSAGE"
+    return string.format("[%s] [%s] %s (ID: %d)%s%s: %s", 
+        timestamp, 
+        messageType,
+        playerName, 
+        source,
+        identifiers,
+        coords,
+        message
+    )
+end
+
 -- Ensure chat log directory exists
 local function EnsureChatLogDirectory()
     -- FiveM will create the directory when we write to it
@@ -18,7 +51,7 @@ end
 -- Get current chat log file path
 local function GetChatLogFilePath()
     local date = os.date("%Y-%m-%d")
-    local logDir = ig.chat.config.logging.logDirectory or "logs/chat"
+    local logDir = conf.chat.logging.logDirectory or "logs/chat"
     local filename = string.format("chat_%s.log", date)
     return logDir .. "/" .. filename
 end
@@ -63,16 +96,16 @@ end
 
 -- Log chat message
 function ig.chat.LogMessage(source, playerName, message, isCommand)
-    if not ig.chat.config or not ig.chat.config.logging or not ig.chat.config.logging.enabled then
+    if not conf.chat or not conf.chat.logging or not conf.chat.logging.enabled then
         return
     end
     
     -- Check if we should log this type of message
-    if isCommand and not ig.chat.config.logging.logCommands then
+    if isCommand and not conf.chat.logging.logCommands then
         return
     end
     
-    if not isCommand and not ig.chat.config.logging.logMessages then
+    if not isCommand and not conf.chat.logging.logMessages then
         return
     end
     
@@ -80,12 +113,12 @@ function ig.chat.LogMessage(source, playerName, message, isCommand)
     local logEntry = ig.chat.FormatLogEntry(source, playerName, message, isCommand)
     
     -- Log to file
-    if ig.chat.config.logging.logToFile then
+    if conf.chat.logging.logToFile then
         QueueChatLogEntry(logEntry)
     end
     
     -- Log to txAdmin
-    if ig.chat.config.logging.logToTxAdmin then
+    if conf.chat.logging.logToTxAdmin then
         local txAdminMessage
         if isCommand then
             txAdminMessage = string.format("Command executed: %s by %s (ID: %d)", message, playerName, source)
@@ -153,11 +186,11 @@ end)
 
 -- Clean up old chat logs based on maxLogDays setting
 local function CleanupOldLogs()
-    if not ig.chat.config or not ig.chat.config.logging or not ig.chat.config.logging.enabled then
+    if not conf.chat or not conf.chat.logging or not conf.chat.logging.enabled then
         return
     end
     
-    local maxDays = ig.chat.config.logging.maxLogDays
+    local maxDays = conf.chat.logging.maxLogDays
     if maxDays == 0 then
         return -- Keep logs forever
     end
@@ -188,6 +221,6 @@ end)
 
 print('[IG Chat] Chat logging system loaded')
 print(string.format('[IG Chat] Logging to file: %s, Logging to txAdmin: %s', 
-    tostring(ig.chat.config.logging.logToFile),
-    tostring(ig.chat.config.logging.logToTxAdmin)
+    tostring(conf.chat.logging.logToFile),
+    tostring(conf.chat.logging.logToTxAdmin)
 ))

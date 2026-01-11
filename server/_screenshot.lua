@@ -4,6 +4,21 @@
 
 ig.screenshot = ig.screenshot or {}
 
+-- Function to validate webhook URL
+function ig.screenshot.ValidateWebhook(webhook)
+    if not webhook or webhook == "" then
+        return false
+    end
+    
+    -- Basic Discord webhook validation
+    if string.match(webhook, "^https://discord%.com/api/webhooks/%d+/[%w_-]+$") or 
+       string.match(webhook, "^https://discordapp%.com/api/webhooks/%d+/[%w_-]+$") then
+        return true
+    end
+    
+    return false
+end
+
 -- Process screenshot data from client
 RegisterNetEvent('ig:screenshot:process')
 AddEventHandler('ig:screenshot:process', function(data)
@@ -26,27 +41,27 @@ AddEventHandler('ig:screenshot:process', function(data)
     ))
     
     -- Handle different output methods
-    if ig.screenshot.config.outputs.discord.enabled then
+    if conf.screenshot.outputs.discord.enabled then
         ig.screenshot.SendToDiscord(imageUrl, metadata)
     end
     
-    if ig.screenshot.config.outputs.imageHost.enabled then
+    if conf.screenshot.outputs.imageHost.enabled then
         ig.screenshot.SendToImageHost(imageUrl, metadata)
     end
     
-    if ig.screenshot.config.outputs.discourse.enabled then
+    if conf.screenshot.outputs.discourse.enabled then
         ig.screenshot.SendToDiscourse(imageUrl, metadata)
     end
     
     -- Log to database if logging is enabled
-    if ig.screenshot.config.logToDatabase then
+    if conf.screenshot.logToDatabase then
         ig.screenshot.LogToDatabase(imageUrl, metadata)
     end
 end)
 
 -- Send screenshot to Discord webhook
 function ig.screenshot.SendToDiscord(imageUrl, metadata)
-    local webhook = ig.screenshot.config.outputs.discord.webhook
+    local webhook = conf.screenshot.outputs.discord.webhook
     
     if not webhook or webhook == "" then
         print('[IG Screenshot] Discord webhook not configured')
@@ -163,8 +178,8 @@ function ig.screenshot.SendToDiscord(imageUrl, metadata)
             print(string.format('[IG Screenshot] Failed to send to Discord: %d', err))
         end
     end, 'POST', json.encode({
-        username = ig.screenshot.config.outputs.discord.username or "Ingenium Screenshot",
-        avatar_url = ig.screenshot.config.outputs.discord.avatar_url,
+        username = conf.screenshot.outputs.discord.username or "Ingenium Screenshot",
+        avatar_url = conf.screenshot.outputs.discord.avatar_url,
         embeds = embed
     }), {
         ['Content-Type'] = 'application/json'
@@ -173,7 +188,7 @@ end
 
 -- Send screenshot to custom image host
 function ig.screenshot.SendToImageHost(imageUrl, metadata)
-    local url = ig.screenshot.config.outputs.imageHost.url
+    local url = conf.screenshot.outputs.imageHost.url
     
     if not url or url == "" then
         print('[IG Screenshot] Image host URL not configured')
@@ -191,16 +206,16 @@ function ig.screenshot.SendToImageHost(imageUrl, metadata)
         else
             print(string.format('[IG Screenshot] Failed to send to image host: %d', err))
         end
-    end, 'POST', json.encode(payload), ig.screenshot.config.outputs.imageHost.headers or {
+    end, 'POST', json.encode(payload), conf.screenshot.outputs.imageHost.headers or {
         ['Content-Type'] = 'application/json'
     })
 end
 
 -- Send screenshot to Discourse
 function ig.screenshot.SendToDiscourse(imageUrl, metadata)
-    local discourseUrl = ig.screenshot.config.outputs.discourse.url
-    local apiKey = ig.screenshot.config.outputs.discourse.apiKey
-    local apiUsername = ig.screenshot.config.outputs.discourse.apiUsername
+    local discourseUrl = conf.screenshot.outputs.discourse.url
+    local apiKey = conf.screenshot.outputs.discourse.apiKey
+    local apiUsername = conf.screenshot.outputs.discourse.apiUsername
     
     if not discourseUrl or discourseUrl == "" or not apiKey or not apiUsername then
         print('[IG Screenshot] Discourse not configured properly')
@@ -214,7 +229,7 @@ function ig.screenshot.SendToDiscourse(imageUrl, metadata)
         json.encode(metadata, {indent = true})
     )
     
-    local categoryId = ig.screenshot.config.outputs.discourse.categoryId
+    local categoryId = conf.screenshot.outputs.discourse.categoryId
     if not categoryId then
         print('[IG Screenshot] Discourse categoryId not configured, using default category 1')
         categoryId = 1 -- Use a safe default (usually "Uncategorized" in Discourse)

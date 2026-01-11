@@ -2,10 +2,7 @@
 -- Screenshot Configuration
 -- ====================================================================================--
 
-ig.screenshot = {}
-
--- Configuration for screenshot outputs
-ig.screenshot.config = {
+conf.screenshot = {
     -- Enable/disable screenshot system
     enabled = true,
     
@@ -64,29 +61,14 @@ ig.screenshot.config = {
     }
 }
 
--- Function to validate webhook URL
-function ig.screenshot.ValidateWebhook(webhook)
-    if not webhook or webhook == "" then
-        return false
-    end
-    
-    -- Basic Discord webhook validation
-    if string.match(webhook, "^https://discord%.com/api/webhooks/%d+/[%w_-]+$") or 
-       string.match(webhook, "^https://discordapp%.com/api/webhooks/%d+/[%w_-]+$") then
-        return true
-    end
-    
-    return false
-end
-
 -- Example configuration - copy this to your server's config
 --[[
-ig.screenshot.config.outputs.discord.webhook = "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN"
+conf.screenshot.outputs.discord.webhook = "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN"
 
 -- Or use environment variable for security
 local discordWebhook = GetConvar('ig_screenshot_webhook', '')
 if discordWebhook ~= '' then
-    ig.screenshot.config.outputs.discord.webhook = discordWebhook
-    ig.screenshot.config.outputs.discord.enabled = true
+    conf.screenshot.outputs.discord.webhook = discordWebhook
+    conf.screenshot.outputs.discord.enabled = true
 end
 ]]--
