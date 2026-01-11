@@ -21,7 +21,7 @@ local function SaveDynamicData()
     end
 end
 
--- Register autosave with cron to run every 5 minutes
+-- Register autosave with cron to run every 5 minutes (12 jobs per hour, 288 total)
 local autosaveRegistered = false
 AddEventHandler("onServerResourceStart", function()
     if not autosaveRegistered then

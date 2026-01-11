@@ -106,11 +106,11 @@ function ig.data.CharacterValues()
     SetTimeout(conf.charactersync, Do)
 end
 
--- Server to DB routine - Uses cron for time-based saves
--- Registers different save operations at appropriate intervals via cron
+-- Server to DB routine - Uses cron for time-aligned saves, SetTimeout for sub-2-minute intervals
+-- Registers different save operations at appropriate intervals
 function ig.data.ServerSync()
     if not syncRegistered then
-        -- User sync - every 2 minutes (90 seconds rounds to 2 min for cron)
+        -- User sync - every 2 minutes using cron (30 per hour, 720 total)
         for hour = 0, 23 do
             for minute = 0, 59, 2 do
                 ig.cron.RunAt(hour, minute, function()
@@ -121,7 +121,7 @@ function ig.data.ServerSync()
             end
         end
         
-        -- Vehicle and Object sync - every 5 minutes
+        -- Vehicle and Object sync - every 5 minutes using cron (12 per hour, 288 total)
         for hour = 0, 23 do
             for minute = 0, 59, 5 do
                 ig.cron.RunAt(hour, minute, function()
@@ -133,7 +133,7 @@ function ig.data.ServerSync()
             end
         end
         
-        -- Job sync - every 10 minutes
+        -- Job sync - every 10 minutes using cron (6 per hour, 144 total)
         for hour = 0, 23 do
             for minute = 0, 59, 10 do
                 ig.cron.RunAt(hour, minute, function()
@@ -145,14 +145,14 @@ function ig.data.ServerSync()
         end
         
         syncRegistered = true
-        ig.func.Debug_1("Consolidated save manager registered with cron")
+        ig.func.Debug_1("Consolidated save manager registered with cron (2/5/10 min intervals)")
     end
 end
 
--- Server to DB routine - Revive dead characters every minute via cron
+-- Server to DB routine - Revive dead characters every minute
 function ig.data.ReviveSync()
     if not reviveRegistered then
-        -- Register for every minute of every hour
+        -- Every minute using cron (60 per hour, 1440 total)
         for hour = 0, 23 do
             for minute = 0, 59 do
                 ig.cron.RunAt(hour, minute, function()

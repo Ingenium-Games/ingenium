@@ -92,20 +92,15 @@ local function CleanupOrphanedEntities()
         ))
         collectgarbage('collect')
     end
+    
+    SetTimeout(60000, CleanupOrphanedEntities) -- Every minute
 end
 
--- Register cleanup routine with cron to run every minute
-local cleanupRegistered = false
-AddEventHandler("onServerResourceStart", function()
-    if not cleanupRegistered then
-        for hour = 0, 23 do
-            for minute = 0, 59 do
-                ig.cron.RunAt(hour, minute, CleanupOrphanedEntities)
-            end
-        end
-        cleanupRegistered = true
-        print('^3[Cleanup] Registered orphaned entity cleanup with cron (every minute)^7')
-    end
+-- Start cleanup routine
+CreateThread(function()
+    Wait(60000) -- Wait 1 minute after startup
+    print('^3[Cleanup] Starting orphaned entity cleanup routine (60s intervals)^7')
+    CleanupOrphanedEntities()
 end)
 
 RegisterCommand('sqlperf', function(source)
