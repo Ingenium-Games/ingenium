@@ -134,7 +134,7 @@ if ! jq empty < "${docs_json_tmpfile}" 2>/dev/null; then
   exit 1
 fi
 
-if [ ! -s "${docs_json_tmpfile}" ] || [ "$(cat "${docs_json_tmpfile}")" = "[]" ]; then
+if [ ! -s "${docs_json_tmpfile}" ] || jq -e '. == []' < "${docs_json_tmpfile}" >/dev/null 2>&1; then
   echo "Warning: No markdown files found in configured repositories"
 fi
 
@@ -151,11 +151,6 @@ if len(sys.argv) != 3:
 
 manpath = sys.argv[1]
 docs_json_file = sys.argv[2]
-
-# Validate docs_json_file is not empty
-if not docs_json_file or docs_json_file.strip() == "":
-    print("Error: docs_json_file argument is empty", file=sys.stderr)
-    sys.exit(1)
 
 try:
     # Read docs JSON from file
