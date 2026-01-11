@@ -152,19 +152,16 @@ end
 -- Server to DB routine - Revive dead characters every minute
 function ig.data.ReviveSync()
     if not reviveRegistered then
-        -- Every minute using cron (60 per hour, 1440 total)
-        for hour = 0, 23 do
-            for minute = 0, 59 do
-                ig.cron.RunAt(hour, minute, function()
-                    local result = ig.sql.char.ReviveDeadCharacters()
-                    if result then
-                        ig.func.Debug_2("Revived Characters")
-                    end
-                end)
+        local function Do()
+            local result = ig.sql.char.ReviveDeadCharacters()
+            if result then
+                ig.func.Debug_2("Revived Characters")
             end
+            SetTimeout(conf.revivesync, Do)
         end
+        SetTimeout(conf.revivesync, Do)
         reviveRegistered = true
-        ig.func.Debug_1("Revive sync registered with cron (every minute)")
+        ig.func.Debug_1("Revive sync started (every minute)")
     end
 end
 
