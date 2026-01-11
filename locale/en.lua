@@ -30,18 +30,6 @@ Locales["en"] = {
     ["defer_banned"] = "You have been banned by command or automatic event.",
     ["defer_no_discord"] = "You have not joined our discord.",
     
-    -- Queue System Messages
-    ["queue_joining"] = "Joining",
-    ["queue_connecting"] = "Connecting",
-    ["queue_idrr"] = "Error: couldn't retrieve any of your ID's, try restarting.",
-    ["queue_err"] = "There was an error",
-    ["queue_pos"] = "You are %d/%d in queue%s",
-    ["queue_connectingerr"] = "Error adding you to connecting list",
-    ["queue_timedout"] = "Error: Timed out",
-    ["queue_wlonly"] = "You must be whitelisted to join this server",
-    ["queue_steam"] = "Error: Steam must be running",
-    ["queue_temp_priority"] = " :%d with temporary priority",
-    
     -- Inventory Messages
     ["inv_no_item_found"] = "No Item Found...",
     ["inv_not_useable_quickslot"] = "Item is not useable via quickslot: %s",

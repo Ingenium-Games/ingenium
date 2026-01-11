@@ -1,6 +1,7 @@
 import { useUIStore } from '../stores/ui'
 import { useNotificationStore } from '../stores/notifications'
 import { useCharacterStore } from '../stores/character'
+import { useChatStore } from '../stores/chat'
 
 /**
  * Send a message back to the client Lua script
@@ -86,6 +87,7 @@ export function setupNuiHandlers() {
   const uiStore = useUIStore()
   const notificationStore = useNotificationStore()
   const characterStore = useCharacterStore()
+  const chatStore = useChatStore()
   
   // Import appearance and banking stores dynamically to avoid circular dependencies
   let appearanceStore = null
@@ -95,6 +97,27 @@ export function setupNuiHandlers() {
     const { message, data } = event.data
     
     switch (message) {
+      // Chat system
+      case 'chat:addMessage':
+        chatStore.addMessage(data)
+        break
+      
+      case 'chat:show':
+        chatStore.show()
+        break
+      
+      case 'chat:hide':
+        chatStore.hide()
+        break
+      
+      case 'chat:clear':
+        chatStore.clearMessages()
+        break
+      
+      case 'chat:setSuggestions':
+        chatStore.setSuggestions(data.suggestions || [])
+        break
+      
       // Notification system (backwards compatible)
       case 'notification':
         notificationStore.addNotification({
@@ -226,7 +249,10 @@ export function setupNuiHandlers() {
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       // Close active UI elements
-      if (bankingStore && bankingStore.isVisible) {
+      if (chatStore.isVisible) {
+        chatStore.hide()
+        sendNuiMessage('chatClose')
+      } else if (bankingStore && bankingStore.isVisible) {
         bankingStore.close()
         sendNuiMessage('banking:close')
       } else if (uiStore.showMenu) {

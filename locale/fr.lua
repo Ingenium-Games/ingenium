@@ -30,18 +30,6 @@ Locales["fr"] = {
     ["defer_banned"] = "Vous avez été banni par commande ou événement automatique.",
     ["defer_no_discord"] = "Vous n'avez pas rejoint notre Discord.",
     
-    -- Queue System Messages
-    ["queue_joining"] = "Connexion en cours",
-    ["queue_connecting"] = "Connexion",
-    ["queue_idrr"] = "Erreur : impossible de récupérer vos identifiants, essayez de redémarrer.",
-    ["queue_err"] = "Il y a eu une erreur",
-    ["queue_pos"] = "Vous êtes %d/%d dans la file d'attente %s",
-    ["queue_connectingerr"] = "Erreur lors de l'ajout à la liste de connexion",
-    ["queue_timedout"] = "Erreur : Délai d'attente dépassé",
-    ["queue_wlonly"] = "Vous devez être sur la liste blanche pour rejoindre ce serveur",
-    ["queue_steam"] = "Erreur : Steam doit être en cours d'exécution",
-    ["queue_temp_priority"] = " :%d avec priorité temporaire",
-    
     -- Inventory Messages
     ["inv_no_item_found"] = "Aucun objet trouvé...",
     ["inv_not_useable_quickslot"] = "L'objet n'est pas utilisable via l'emplacement rapide : %s",
