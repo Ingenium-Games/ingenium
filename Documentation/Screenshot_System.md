@@ -7,7 +7,7 @@ The screenshot system integrates with FiveM's `screenshot-basic` resource to aut
 Configure the screenshot system in `_config/screenshot.lua`:
 
 ```lua
-ig.screenshot.config = {
+conf.screenshot = {
     enabled = true,
     
     outputs = {
@@ -53,7 +53,7 @@ ig.screenshot.config = {
 
 2. Add the webhook URL to your configuration:
    ```lua
-   ig.screenshot.config.outputs.discord.webhook = "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_TOKEN"
+   conf.screenshot.outputs.discord.webhook = "https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_TOKEN"
    ```
 
 3. For security, you can use a convar instead:
@@ -66,7 +66,7 @@ ig.screenshot.config = {
    -- In _config/screenshot.lua
    local webhook = GetConvar('ig_screenshot_webhook', '')
    if webhook ~= '' then
-       ig.screenshot.config.outputs.discord.webhook = webhook
+       conf.screenshot.outputs.discord.webhook = webhook
    end
    ```
 
@@ -116,7 +116,7 @@ Screenshots include metadata such as:
 - Vehicle information (optional)
 - Nearby players (optional)
 
-Configure metadata in `ig.screenshot.config.includeMetadata`.
+Configure metadata in `conf.screenshot.includeMetadata`.
 
 ## Output Formats
 
