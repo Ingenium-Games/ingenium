@@ -57,8 +57,16 @@ get_commit_sha() {
   echo "${ref}"
 }
 
-# Build docs JSON array
-docs_json="[]"
+# Create temporary file for docs JSON and set up cleanup trap
+docs_json_tmpfile=$(mktemp)
+if [ ! -f "${docs_json_tmpfile}" ]; then
+  echo "Error: Failed to create temporary file"
+  exit 1
+fi
+trap 'rm -f "${docs_json_tmpfile}"' EXIT
+
+# Initialize temporary file with empty JSON array
+printf '[]' > "${docs_json_tmpfile}"
 
 IFS=';' read -r -a repos_arr <<< "${REPOS_ENV}"
 for repo_entry in "${repos_arr[@]}"; do
@@ -109,7 +117,8 @@ for repo_entry in "${repos_arr[@]}"; do
       --arg ref "commit:${commit_sha}" \
       --arg permalink "${permalink}" \
       '{id:$id,repo:$repo,path:$path,ref:$ref,permalink:$permalink}')"
-    docs_json="$(echo "${docs_json}" | jq ". + [${entry}]")"
+    docs_json="$(cat "${docs_json_tmpfile}" | jq ". + [${entry}]")"
+    printf '%s' "${docs_json}" > "${docs_json_tmpfile}"
   done
 done
 
@@ -120,36 +129,74 @@ if [ ! -f "${MANIFEST_PATH}" ]; then
 fi
 
 # Validate docs_json before processing
-if ! echo "${docs_json}" | jq empty 2>/dev/null; then
+if ! jq empty < "${docs_json_tmpfile}" 2>/dev/null; then
   echo "Error: docs_json is not valid JSON"
   exit 1
 fi
 
-if [ "${docs_json}" = "[]" ]; then
+if [ ! -s "${docs_json_tmpfile}" ] || [ "$(cat "${docs_json_tmpfile}")" = "[]" ]; then
   echo "Warning: No markdown files found in configured repositories"
 fi
 
 # Use python3 to merge and write manifest (preserves other fields)
-# Write docs_json to a temporary file to avoid "Argument list too long" error
-docs_json_tmpfile=$(mktemp)
-echo "${docs_json}" > "$docs_json_tmpfile"
-python3 - "${MANIFEST_PATH}" "$docs_json_tmpfile" <<'PY'
-import sys, yaml, json
+python3 - "${MANIFEST_PATH}" "${docs_json_tmpfile}" <<'PY'
+import sys
+import yaml
+import json
+
+# Validate argument count
+if len(sys.argv) != 3:
+    print("Error: Expected 2 arguments (manifest path and docs JSON file)", file=sys.stderr)
+    sys.exit(1)
+
 manpath = sys.argv[1]
 docs_json_file = sys.argv[2]
-with open(docs_json_file, 'r') as jf:
-    docs_json_str = jf.read()
-with open(manpath, 'r') as f:
-    m = yaml.safe_load(f)
-docs = json.loads(docs_json_str)
-m.setdefault('references', {})
-m['references']['docs'] = docs
-with open(manpath, 'w') as f:
-    f.write(yaml.safe_dump(m, sort_keys=False))
-print("Wrote", manpath)
-PY
 
-# Clean up temporary file
-rm -f "$docs_json_tmpfile"
+# Validate docs_json_file is not empty
+if not docs_json_file or docs_json_file.strip() == "":
+    print("Error: docs_json_file argument is empty", file=sys.stderr)
+    sys.exit(1)
+
+try:
+    # Read docs JSON from file
+    with open(docs_json_file, 'r') as jf:
+        docs_json_str = jf.read()
+    
+    # Parse JSON
+    try:
+        docs = json.loads(docs_json_str)
+    except json.JSONDecodeError as e:
+        print(f"Error: Failed to parse docs JSON: {e}", file=sys.stderr)
+        sys.exit(1)
+    
+    # Read YAML manifest
+    try:
+        with open(manpath, 'r') as f:
+            m = yaml.safe_load(f)
+    except FileNotFoundError:
+        print(f"Error: Manifest file not found at {manpath}", file=sys.stderr)
+        sys.exit(1)
+    except yaml.YAMLError as e:
+        print(f"Error: Failed to parse YAML manifest: {e}", file=sys.stderr)
+        sys.exit(1)
+    
+    # Update manifest
+    m.setdefault('references', {})
+    m['references']['docs'] = docs
+    
+    # Write updated manifest
+    try:
+        with open(manpath, 'w') as f:
+            f.write(yaml.safe_dump(m, sort_keys=False))
+    except IOError as e:
+        print(f"Error: Failed to write manifest: {e}", file=sys.stderr)
+        sys.exit(1)
+    
+    print("Wrote", manpath)
+
+except Exception as e:
+    print(f"Error: Unexpected error occurred: {e}", file=sys.stderr)
+    sys.exit(1)
+PY
 
 echo "Manifest regenerated at ${MANIFEST_PATH}"
