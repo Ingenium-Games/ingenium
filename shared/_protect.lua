@@ -15,7 +15,7 @@ Citizen.CreateThread(function()
     
     -- Verify dependencies are available
     if not ig or not ig.table or not ig.table.MakeReadOnly then
-        print('^1[ingenium] Error: Protection dependencies not loaded. Cannot protect configuration tables.^0')
+        ig.log.Error('ingenium', 'Protection dependencies not loaded. Cannot protect configuration tables.')
         return
     end
     
@@ -24,9 +24,9 @@ Citizen.CreateThread(function()
         local originalConf = conf
         conf = ig.table.MakeReadOnly(originalConf, "conf")
         
-        print('^2[ingenium] Configuration tables protected from modification^0')
+        ig.log.Info('ingenium', 'Configuration tables protected from modification')
     else
-        print('^1[ingenium] Warning: conf table not found. Configuration protection not applied.^0')
+        ig.log.Warn('ingenium', 'conf table not found. Configuration protection not applied.')
     end
 end)
 

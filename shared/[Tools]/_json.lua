@@ -11,17 +11,17 @@ function ig.json.Load(filename)
     local file = LoadResourceFile(resourceName, path)
     
     if not file then
-        print(('^1[ERROR] Failed to load %s^7'):format(path))
+        ig.log.Error('Data', 'Failed to load %s', path)
         return nil
     end
     
     local success, data = pcall(json.decode, file)
     if not success then
-        print(('^1[ERROR] Failed to decode %s: %s^7'):format(path, data))
+        ig.log.Error('Data', 'Failed to decode %s: %s', path, data)
         return nil
     end
-    
-    print(('^2[Data] Loaded %s (%d bytes)^7'):format(path, #file))
+
+    ig.log.Info('Data', 'Loaded %s (%d bytes)', path, #file)
     return data
 end
 
@@ -34,5 +34,5 @@ function ig.json.Write(filename, data)
     local encoded = json.encode(data, {indent = true})
     
     SaveResourceFile(resourceName, path, encoded, -1)
-    print(('^3[Data] Saved %s (%d bytes)^7'):format(path, #encoded))
+    ig.log.Info('Data', 'Saved %s (%d bytes)', path, #encoded)
 end

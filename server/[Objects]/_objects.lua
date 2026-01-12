@@ -4,7 +4,7 @@ ig.odex = {} -- the odex/store for currently generated objects
 
 
 ---@param net integer "Network ID 16 bit integer"
-function ig.objects.FindObject(net)
+function ig.object.FindObject(net)
     for k, v in pairs(ig.odex) do
         if v then
             if k == net and type(v) == "table" then
@@ -16,7 +16,7 @@ function ig.objects.FindObject(net)
 end
 
 ---@param net integer "Network ID 16 bit integer"
-function ig.objects.FindObjectFromUUID(uuid)
+function ig.object.FindObjectFromUUID(uuid)
     for k, v in pairs(ig.odex) do
         if v and (v.UUID == uuid) then
             return true, v, k
@@ -26,7 +26,7 @@ function ig.objects.FindObjectFromUUID(uuid)
 end
 
 ---@param net integer "Network ID 16 bit integer"
-function ig.objects.GetObjectFromUUID(uuid)
+function ig.object.GetObjectFromUUID(uuid)
     for k, v in pairs(ig.odex) do
         if v and (v.UUID == uuid) then
             return v
@@ -38,7 +38,7 @@ end
 --- func desc
 ---@param net any
 ---@param cb any
-function ig.objects.AddObject(net, cb, ...)
+function ig.object.AddObject(net, cb, ...)
     if not ig.objects.FindObject(net) then
         ig.odex[tostring(net)] = cb(...)
     end
@@ -46,18 +46,18 @@ end
 
 --- Get the xVehicle Data/Table
 ---@param net integer "Network ID 16 bit integer"
-function ig.objects.GetObject(net)
+function ig.object.GetObject(net)
     return ig.odex[tostring(net)] or false
 end
 
 --- Get all xVehicles
-function ig.objects.GetObjects()
+function ig.object.GetObjects()
     return ig.odex
 end
 
 -- Set to nil for garbage collection
 --- func desc
 ---@param uuid any
-function ig.objects.RemoveObject(uuid)
+function ig.object.RemoveObject(uuid)
     ig.odex[tostring(uuid)] = nil
 end

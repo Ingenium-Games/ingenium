@@ -99,21 +99,29 @@ end
 function ig.debug.Log(level, message, stackLevel)
     local currentLevel = ig.debug.GetLevel()
     local messageLevel = ig.debug.levels[level] or ig.debug.levels.INFO
-    
+
     -- Only log if the message level is at or below the current debug level
     if messageLevel > currentLevel then
         return
     end
-    
+
     stackLevel = (stackLevel or 2) + 1
     local context = ig.debug.GetContext(stackLevel)
     local consoleMsg, fileMsg = ig.debug.FormatMessage(level, message, context)
-    
-    -- Always print to console
+
+    -- If centralized logger exists, use it (preserves file logging behaviour)
+    if ig and ig.log and ig.log.Log then
+        -- ig.log expects level names like "error","warn","info","debug","trace"
+        local lvl = string.lower(level)
+        -- Tag with resource for clarity
+        ig.log.Log(lvl, context.resource, fileMsg)
+        return
+    end
+
+    -- Fallback: Always print to console
     print(consoleMsg)
-    
-    -- Server-side file logging for errors and warnings
-    -- Note: Uses event instead of direct call for server/client separation
+
+    -- Server-side file logging for errors and warnings (fallback)
     if IsDuplicityVersion() and (level == "ERROR" or level == "WARN") then
         TriggerEvent("ig:debug:logToFile", fileMsg, level)
     end

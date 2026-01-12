@@ -65,7 +65,11 @@ function ig.appearance.GetDefaultPricing()
     if not ig.appearance_pricing["_default"] then
         if ig.json.Exists(DEFAULT_PRICING_PATH) then
             ig.appearance_pricing["_default"] = ig.json.Read(DEFAULT_PRICING_PATH)
-            print("^2[Appearance Pricing] Loaded default pricing^0")
+            if ig and ig.log and ig.log.Info then
+                ig.log.Info("Appearance Pricing", "Loaded default pricing")
+            else
+                print("^2[Appearance Pricing] Loaded default pricing^0")
+            end
         else
             -- Create minimal default if file doesn't exist
             ig.appearance_pricing["_default"] = {

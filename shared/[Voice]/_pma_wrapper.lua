@@ -291,5 +291,5 @@ if IsDuplicityVersion() == 1 then
 end
 
 -- ====================================================================================--
-print("^2[Ingenium VOIP] PMA-Voice compatibility wrapper loaded^7")
+ig.log.Info("Ingenium VOIP", "PMA-Voice compatibility wrapper loaded")
 -- ====================================================================================--

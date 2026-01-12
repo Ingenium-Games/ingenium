@@ -106,7 +106,11 @@ function ZoneManager.Start()
             -- If no zones are registered, stop the manager
             if not anyZonesActive then
                 ZoneManager.isRunning = false
-                print("^3[ZoneManager] No active zones, stopping manager^7")
+                if ig and ig.log and ig.log.Debug then
+                    ig.log.Debug("ZoneManager", "No active zones, stopping manager")
+                else
+                    print("^3[ZoneManager] No active zones, stopping manager^7")
+                end
                 break
             end
             
@@ -116,7 +120,11 @@ function ZoneManager.Start()
         end
     end)
     
-    print("^2[ZoneManager] Started consolidated zone manager^7")
+    if ig and ig.log and ig.log.Debug then
+        ig.log.Debug("ZoneManager", "Started consolidated zone manager")
+    else
+        print("^2[ZoneManager] Started consolidated zone manager^7")
+    end
 end
 
 -- Stop the zone manager
@@ -296,8 +304,19 @@ RegisterCommand('listzones', function()
 end, false)
 
 -- Debug info
-print("^2[ZoneManager] Consolidated zone manager loaded^7")
-print("^3[ZoneManager] Replaced onPlayerInOut() and onPointInOut() to use consolidated manager^7")
-print("^3[ZoneManager] All zones now automatically use single-thread management^7")
-print("^3[ZoneManager] Type /zonestats to see zone manager statistics^7")
-print("^3[ZoneManager] Type /listzones to list all active zones^7")
+if ig and ig.log and ig.log.Debug then
+    ig.log.Debug("ZoneManager", "Consolidated zone manager loaded")
+else
+    print("^2[ZoneManager] Consolidated zone manager loaded^7")
+end
+if ig and ig.log and ig.log.Debug then
+    ig.log.Debug("ZoneManager", "Replaced onPlayerInOut() and onPointInOut() to use consolidated manager")
+    ig.log.Debug("ZoneManager", "All zones now automatically use single-thread management")
+    ig.log.Debug("ZoneManager", "Type /zonestats to see zone manager statistics")
+    ig.log.Debug("ZoneManager", "Type /listzones to list all active zones")
+else
+    print("^3[ZoneManager] Replaced onPlayerInOut() and onPointInOut() to use consolidated manager^7")
+    print("^3[ZoneManager] All zones now automatically use single-thread management^7")
+    print("^3[ZoneManager] Type /zonestats to see zone manager statistics^7")
+    print("^3[ZoneManager] Type /listzones to list all active zones^7")
+end

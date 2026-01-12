@@ -41,30 +41,30 @@ end
 function ig.data.Initilize()
     --
     ig._loading = true
-    print('^3[Initialization] Waiting for SQL connection...^7')
+    ig.log.Info('Initialization', 'Waiting for SQL connection...')
     --
     -- Wait for SQL to be ready with proper timeout
     local sqlReady = ig.sql.AwaitReady(40000)
     
     if not sqlReady then
-        print('^1[CRITICAL] SQL connection failed to initialize within 40 seconds!^7')
-        print('^1[CRITICAL] Server initialization aborted. Please check MySQL configuration.^7')
+        ig.log.Error('Initialization', 'CRITICAL: SQL connection failed to initialize within 40 seconds!')
+        ig.log.Error('Initialization', 'CRITICAL: Server initialization aborted. Please check MySQL configuration.')
         return
     end
-    
-    print('^2[Initialization] SQL connection ready^7')
+
+    ig.log.Info('Initialization', 'SQL connection ready')
     --
     ig.data.LoadJSONData(function()
         ig.item.GenerateConsumptionEvents()
-        print(('  ^3- Consumption Events: Registered^7')) 
+        ig.log.Info('Data', '- Consumption Events: Registered')
         --
         ig.data.RestoreDrops()
-        print(('  ^3- Restoring: Drops^7')) 
+        ig.log.Info('Data', '- Restoring: Drops')
     end)
     --
     ig._loading = false
     ig._dataloaded = true
-    print('^2[Initialization] Server data initialization complete^7')
+    ig.log.Info('Initialization', 'Server data initialization complete')
 end
 
 
@@ -200,7 +200,7 @@ end
 --- This function is called during initialization and runs synchronously
 ---@param callback function Optional callback to execute after loading
 function ig.data.LoadJSONData(callback)
-    print('^3[Data] Loading dynamic and static JSON files into memory...^7')
+    ig.log.Info('Data', 'Loading dynamic and static JSON files into memory...')
 
     -- ==== DYNAMIC ("Runtime") DATA TABLES ====
     ig.items        = ig.json.Load('items') or {}
@@ -246,29 +246,29 @@ function ig.data.LoadJSONData(callback)
     for _ in pairs(ig.modkits)   do counts.modkits = counts.modkits + 1 end
     for _ in pairs(ig.peds)      do counts.peds = counts.peds + 1 end
 
-    print('^2[Data] Dynamic runtime data loaded:^7')
-    print(('  ^3- Items: %d^7'):format(counts.items))
-    print(('  ^3- Drops: %d^7'):format(counts.drops))
-    print(('  ^3- Pickups: %d^7'):format(counts.picks))
-    print(('  ^3- Scenes: %d^7'):format(counts.scenes))
-    print(('  ^3- Notes: %d^7'):format(counts.notes))
-    print(('  ^3- GSR Entries: %d^7'):format(counts.gsrs))
-    print(('  ^3- Jobs: %d^7'):format(counts.jobs))
-    print(('  ^3- Doors: %d^7'):format(counts.doors))
-    print(('  ^3- Objects: %d^7'):format(counts.objects))
-    print(('  ^3- Names: %d^7'):format(counts.names))
+    ig.log.Info('Data', 'Dynamic runtime data loaded:')
+    ig.log.Info('Data', '  - Items: %d', counts.items)
+    ig.log.Info('Data', '  - Drops: %d', counts.drops)
+    ig.log.Info('Data', '  - Pickups: %d', counts.picks)
+    ig.log.Info('Data', '  - Scenes: %d', counts.scenes)
+    ig.log.Info('Data', '  - Notes: %d', counts.notes)
+    ig.log.Info('Data', '  - GSR Entries: %d', counts.gsrs)
+    ig.log.Info('Data', '  - Jobs: %d', counts.jobs)
+    ig.log.Info('Data', '  - Doors: %d', counts.doors)
+    ig.log.Info('Data', '  - Objects: %d', counts.objects)
+    ig.log.Info('Data', '  - Names: %d', counts.names)
 
-    print('^2[Data] Static reference data loaded:^7')
-    print(('  ^3- Tattoos: %d^7'):format(counts.tattoos))
-    print(('  ^3- Weapons: %d^7'):format(counts.weapons))
-    print(('  ^3- Vehicles: %d^7'):format(counts.vehicles))
-    print(('  ^3- Modkits: %d^7'):format(counts.modkits))
-    print(('  ^3- Peds: %d^7'):format(counts.peds))
+    ig.log.Info('Data', 'Static reference data loaded:')
+    ig.log.Info('Data', '  - Tattoos: %d', counts.tattoos)
+    ig.log.Info('Data', '  - Weapons: %d', counts.weapons)
+    ig.log.Info('Data', '  - Vehicles: %d', counts.vehicles)
+    ig.log.Info('Data', '  - Modkits: %d', counts.modkits)
+    ig.log.Info('Data', '  - Peds: %d', counts.peds)
     if ig.appearance_constants and next(ig.appearance_constants) then 
-        print('  ^3- Appearance Constants: Loaded^7') 
+        ig.log.Info('Data', '  - Appearance Constants: Loaded') 
     end
 
-    print('^2[Data] JSON data loading complete^7')
+    ig.log.Info('Data', 'JSON data loading complete')
 
     -- Protect static reference data from modification
     -- These tables should NEVER be modified at runtime
@@ -332,10 +332,10 @@ function ig.data.RestoreDrops()
     end
     
     if restoredCount > 0 then
-        print(('^2[Drops] Restored %d drops from persistence^7'):format(restoredCount))
+        ig.log.Info('Drops', 'Restored %d drops from persistence', restoredCount)
     end
     if failedCount > 0 then
-        print(('^1[Drops] Failed to restore %d drops^7'):format(failedCount))
+        ig.log.Error('Drops', 'Failed to restore %d drops', failedCount)
     end
 end
 

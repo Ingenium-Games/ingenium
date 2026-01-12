@@ -16,9 +16,9 @@ local function MonitoredSave(saveName, saveFunc, cb)
     saveFunc(function()
         local elapsed = (os.clock() - startTime) * 1000
         if elapsed > 100 then
-            print(string.format("^3[SQL WARNING] %s took %.2fms^7", saveName, elapsed))
+            ig.log.Warn("SQL", "%s took %.2fms", saveName, elapsed)
         else
-            print(string.format("^2[SQL] %s completed in %.2fms^7", saveName, elapsed))
+            ig.log.Info("SQL", "%s completed in %.2fms", saveName, elapsed)
         end
         if originalCb then originalCb() end
     end)
@@ -136,7 +136,7 @@ function ig.sql.save.Users(cb)
     
     local elapsed = (os.clock() - startTime) * 1000
     if saveCount > 0 then
-        print(string.format("^2[SQL] Saved %d players in %.2fms^7", saveCount, elapsed))
+        ig.log.Info("SQL", "Saved %d players in %.2fms", saveCount, elapsed)
     end
     if cb then
         cb()
@@ -206,7 +206,7 @@ end
 function ig.sql.save.Vehicles(cb)
     local startTime = os.clock()
     local saveCount = 0
-    local xVehicles = ig.data.GetVehicles()
+    local xVehicles = ig.vehicle.GetVehicles()
     
     for k, data in pairs(xVehicles) do
         if data and data.Owner ~= false and data.GetIsDirty() then
@@ -248,7 +248,7 @@ function ig.sql.save.Vehicles(cb)
     
     local elapsed = (os.clock() - startTime) * 1000
     if saveCount > 0 then
-        print(string.format("^2[SQL] Saved %d vehicles in %.2fms^7", saveCount, elapsed))
+        ig.log.Info("SQL", "Saved %d vehicles in %.2fms", saveCount, elapsed)
     end
     if cb then
         cb()
@@ -297,7 +297,7 @@ ig.sql.PrepareQuery("UPDATE `objects` SET `Inventory` = ?, `Coords` = ? WHERE `U
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function ig.sql.save.Objects(cb)
-    local xObjs = ig.data.GetObjects()
+    local xObjs = ig.object.GetObjects()
     for k, data in pairs(xObjs) do
         if data then
             if (tonumber(ig.func.Timestamp()) - tonumber(data.Updated)) >= 3000 or data.GetIsDirty() == true then

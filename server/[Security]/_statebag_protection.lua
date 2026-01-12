@@ -93,7 +93,7 @@ local function handleStateBagChange(bagName, key, value, reserved, replicated)
         end
         
         if playerId then
-            print(("^1[SECURITY CRITICAL] Player %d attempted to modify BLOCKED key: %s^7"):format(playerId, key))
+            ig.log.Error("SECURITY", "Player %d attempted to modify BLOCKED key: %s", playerId, key)
             TriggerEvent("txaLogger:SecurityAlert", {
                 type = "statebag_blacklist_violation",
                 severity = "critical",
@@ -121,7 +121,7 @@ local function handleStateBagChange(bagName, key, value, reserved, replicated)
             local entity = NetworkGetEntityFromNetworkId(netId)
             if DoesEntityExist(entity) then
                 local owner = NetworkGetEntityOwner(entity)
-                print(("^1[SECURITY] Player %d attempted to modify protected state bag key: %s^7"):format(owner, key))
+                ig.log.Warn("SECURITY", "Player %d attempted to modify protected state bag key: %s", owner, key)
                 
                 -- Log the exploit attempt
                 TriggerEvent("txaLogger:SecurityAlert", {
@@ -138,8 +138,8 @@ local function handleStateBagChange(bagName, key, value, reserved, replicated)
         end
     elseif bagName:match("^player:") then
         local playerId = tonumber(bagName:gsub('player:', ''), 10)
-        if playerId then
-            print(("^1[SECURITY] Player %d attempted to modify protected player state bag key: %s^7"):format(playerId, key))
+            if playerId then
+            ig.log.Warn("SECURITY", "Player %d attempted to modify protected player state bag key: %s", playerId, key)
             
             -- Log the exploit attempt
             TriggerEvent("txaLogger:SecurityAlert", {
@@ -165,17 +165,17 @@ end
 ---@return boolean success True if the key was added successfully
 function ig.security.AddAllowedStateBagKey(key)
     if type(key) ~= "string" or key == "" then
-        print("^3[SECURITY WARNING] AddAllowedStateBagKey: Invalid key provided^7")
+        ig.log.Warn("SECURITY", "AddAllowedStateBagKey: Invalid key provided")
         return false
     end
     
     if ALLOWED_CLIENT_KEYS[key] then
-        print(("^3[SECURITY] Key '%s' is already in the allowed list^7"):format(key))
+        ig.log.Warn("SECURITY", "Key '%s' is already in the allowed list", key)
         return false
     end
     
     ALLOWED_CLIENT_KEYS[key] = true
-    print(("^2[SECURITY] Added '%s' to allowed StateBag keys^7"):format(key))
+    ig.log.Info("SECURITY", "Added '%s' to allowed StateBag keys", key)
     return true
 end
 
@@ -184,17 +184,17 @@ end
 ---@return boolean success True if the key was removed successfully
 function ig.security.RemoveAllowedStateBagKey(key)
     if type(key) ~= "string" or key == "" then
-        print("^3[SECURITY WARNING] RemoveAllowedStateBagKey: Invalid key provided^7")
+        ig.log.Warn("SECURITY", "RemoveAllowedStateBagKey: Invalid key provided")
         return false
     end
     
     if not ALLOWED_CLIENT_KEYS[key] then
-        print(("^3[SECURITY] Key '%s' is not in the allowed list^7"):format(key))
+        ig.log.Warn("SECURITY", "Key '%s' is not in the allowed list", key)
         return false
     end
     
     ALLOWED_CLIENT_KEYS[key] = nil
-    print(("^2[SECURITY] Removed '%s' from allowed StateBag keys^7"):format(key))
+    ig.log.Info("SECURITY", "Removed '%s' from allowed StateBag keys", key)
     return true
 end
 
@@ -203,17 +203,17 @@ end
 ---@return boolean success True if the key was added successfully
 function ig.security.AddBlockedStateBagKey(key)
     if type(key) ~= "string" or key == "" then
-        print("^3[SECURITY WARNING] AddBlockedStateBagKey: Invalid key provided^7")
+        ig.log.Warn("SECURITY", "AddBlockedStateBagKey: Invalid key provided")
         return false
     end
     
     if BLOCKED_CLIENT_KEYS[key] then
-        print(("^3[SECURITY] Key '%s' is already in the blocked list^7"):format(key))
+        ig.log.Warn("SECURITY", "Key '%s' is already in the blocked list", key)
         return false
     end
     
     BLOCKED_CLIENT_KEYS[key] = true
-    print(("^2[SECURITY] Added '%s' to blocked StateBag keys^7"):format(key))
+    ig.log.Info("SECURITY", "Added '%s' to blocked StateBag keys", key)
     return true
 end
 
@@ -222,17 +222,17 @@ end
 ---@return boolean success True if the key was removed successfully
 function ig.security.RemoveBlockedStateBagKey(key)
     if type(key) ~= "string" or key == "" then
-        print("^3[SECURITY WARNING] RemoveBlockedStateBagKey: Invalid key provided^7")
+        ig.log.Warn("SECURITY", "RemoveBlockedStateBagKey: Invalid key provided")
         return false
     end
     
     if not BLOCKED_CLIENT_KEYS[key] then
-        print(("^3[SECURITY] Key '%s' is not in the blocked list^7"):format(key))
+        ig.log.Warn("SECURITY", "Key '%s' is not in the blocked list", key)
         return false
     end
     
     BLOCKED_CLIENT_KEYS[key] = nil
-    print(("^2[SECURITY] Removed '%s' from blocked StateBag keys^7"):format(key))
+    ig.log.Info("SECURITY", "Removed '%s' from blocked StateBag keys", key)
     return true
 end
 
@@ -260,4 +260,4 @@ end
 AddStateBagChangeHandler(nil, 'entity:', handleStateBagChange)
 AddStateBagChangeHandler(nil, 'player:', handleStateBagChange)
 
-print("^2[SECURITY] StateBag protection enabled^7")
+ig.log.Info("SECURITY", "StateBag protection enabled")

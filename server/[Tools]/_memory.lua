@@ -99,7 +99,7 @@ end
 -- Start cleanup routine
 CreateThread(function()
     Wait(60000) -- Wait 1 minute after startup
-    print('^3[Cleanup] Starting orphaned entity cleanup routine (60s intervals)^7')
+    ig.log.Info('Cleanup', 'Starting orphaned entity cleanup routine (60s intervals)')
     CleanupOrphanedEntities()
 end)
 

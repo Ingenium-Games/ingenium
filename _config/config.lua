@@ -15,9 +15,9 @@ DEBUG :
     -- _3 is alterations of state, event triggers etc (TRACE)
 ]]--
 conf.error = true
-conf.debug_1 = true
+conf.debug_1 = false
 conf.debug_2 = false
-conf.debug_3 = true
+conf.debug_3 = false
 --[[
 GENERIC :
     [1] Map name.
@@ -144,6 +144,13 @@ conf.callback.staleThreshold = 60 * conf.sec    -- 60 seconds of inactivity
 --[[
 DROP SYSTEM CONFIGURATION
 ]]--
+
+-- Logging configuration
+conf.log = conf.log or {}
+conf.log.enabled = false -- console logging default: OFF
+conf.log.level = "trace" -- default to the most verbose so file logging captures all levels
+conf.log.writeToFile = true -- file logging default: ON
+conf.log.levels = { error=true, warn=true, info=true, debug=true, trace=true } -- optional table: { error=true, warn=true, info=true, debug=true, trace=true }
 conf.drops = {}
 conf.drops.cleanup_enabled = false              -- Do not auto-delete old drops by default
 conf.drops.cleanup_time = 30 * conf.min         -- Time before cleanup if enabled (30 minutes)

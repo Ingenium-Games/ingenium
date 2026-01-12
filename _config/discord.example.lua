@@ -9,7 +9,7 @@
     EXAMPLE 1: Public Server with Priority for Supporters
     - No whitelist (anyone can join)
     - Supporters get priority in queue
-]]--
+
 conf.discord.guild_id = "YOUR_DISCORD_SERVER_ID"
 conf.discord.bot_token = "YOUR_BOT_TOKEN_HERE"
 
@@ -22,11 +22,11 @@ conf.discord.priority_roles = {
     {id = "YOUR_SUPPORTER_ROLE_ID", power = 50},
 }
 
---[[
+
     EXAMPLE 2: Private Server with Whitelist and Multiple Priority Tiers
     - Only members with specific role can join
     - Multiple priority tiers for different supporter levels
-]]--
+
 conf.discord.guild_id = "YOUR_DISCORD_SERVER_ID"
 conf.discord.bot_token = "YOUR_BOT_TOKEN_HERE"
 
@@ -43,20 +43,20 @@ conf.discord.priority_roles = {
     {id = "YOUR_MEMBER_PLUS_ROLE_ID", power = 25}, -- Member+ gets low priority
 }
 
---[[
+
     EXAMPLE 3: Completely Disabled
     - No Discord integration
     - Anyone can join
     - No priority queue
-]]--
+
 conf.discord.member_role_enabled = false
 conf.discord.priority_enabled = false
 
---[[
+
     EXAMPLE 4: Whitelist Only (No Priority)
     - Only members with specific role can join
     - No priority queue based on roles
-]]--
+
 conf.discord.guild_id = "YOUR_DISCORD_SERVER_ID"
 conf.discord.bot_token = "YOUR_BOT_TOKEN_HERE"
 
@@ -67,11 +67,11 @@ conf.discord.member_role = "YOUR_MEMBER_ROLE_ID"
 -- Disable priority queue
 conf.discord.priority_enabled = false
 
---[[
+
     EXAMPLE 5: Priority Only (No Whitelist)
     - Anyone can join (no whitelist)
     - VIP members get priority in queue
-]]--
+
 conf.discord.guild_id = "YOUR_DISCORD_SERVER_ID"
 conf.discord.bot_token = "YOUR_BOT_TOKEN_HERE"
 

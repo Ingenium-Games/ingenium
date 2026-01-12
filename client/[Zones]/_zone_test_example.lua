@@ -17,7 +17,11 @@
 CreateThread(function()
     Wait(5000)  -- Wait for game and Ingenium to fully load
     
-    print("^2[Zone Test] Starting zone system tests...^0")
+    if ig and ig.log and ig.log.Debug then
+        ig.log.Debug("Zone Test", "Starting zone system tests...")
+    else
+        print("^2[Zone Test] Starting zone system tests...^0")
+    end
     
     -- ====================================================================================--
     -- Test 1: Basic Zone Creation
@@ -94,7 +98,11 @@ CreateThread(function()
         end
     end, 1000)  -- Check every second
     
-    print("^2[Zone Test] ✓ Callbacks registered (visit Legion Square to test)^0")
+    if ig and ig.log and ig.log.Debug then
+        ig.log.Debug("Zone Test", "Callbacks registered (visit Legion Square to test)")
+    else
+        print("^2[Zone Test] ✓ Callbacks registered (visit Legion Square to test)^0")
+    end
     
     -- ====================================================================================--
     -- Test 4: IPL System
@@ -105,9 +113,17 @@ CreateThread(function()
     ig.ipl.Load("v_carshowroom")
     
     if ig.ipl.IsLoaded("v_carshowroom") then
-        print("^2[Zone Test] ✓ IPL loaded successfully^0")
+        if ig and ig.log and ig.log.Debug then
+            ig.log.Debug("Zone Test", "IPL loaded successfully")
+        else
+            print("^2[Zone Test] ✓ IPL loaded successfully^0")
+        end
     else
-        print("^1[Zone Test] ✗ Failed to load IPL^0")
+        if ig and ig.log and ig.log.Warn then
+            ig.log.Warn("Zone Test", "Failed to load IPL")
+        else
+            print("^1[Zone Test] ✗ Failed to load IPL^0")
+        end
     end
     
     -- Test IPL registry with zone
@@ -153,18 +169,34 @@ CreateThread(function()
     })
     
     if comboZone then
-        print("^2[Zone Test] ✓ ComboZone created with 3 zones^0")
+        if ig and ig.log and ig.log.Debug then
+            ig.log.Debug("Zone Test", "ComboZone created with 3 zones")
+        else
+            print("^2[Zone Test] ✓ ComboZone created with 3 zones^0")
+        end
         
         -- Test if point is in any zone
         local testPoint = vector3(200.0, -900.0, 28.0)
         local isInside, zone = comboZone:isPointInside(testPoint)
         if isInside and zone then
-            print("^2[Zone Test] ✓ Point found in combo zone: " .. zone.name .. "^0")
+            if ig and ig.log and ig.log.Debug then
+                ig.log.Debug("Zone Test", "Point found in combo zone: %s", zone.name)
+            else
+                print("^2[Zone Test] ✓ Point found in combo zone: " .. zone.name .. "^0")
+            end
         else
-            print("^1[Zone Test] ✗ Failed to detect point in combo zone^0")
+            if ig and ig.log and ig.log.Warn then
+                ig.log.Warn("Zone Test", "Failed to detect point in combo zone")
+            else
+                print("^1[Zone Test] ✗ Failed to detect point in combo zone^0")
+            end
         end
     else
-        print("^1[Zone Test] ✗ Failed to create ComboZone^0")
+        if ig and ig.log and ig.log.Error then
+            ig.log.Error("Zone Test", "Failed to create ComboZone")
+        else
+            print("^1[Zone Test] ✗ Failed to create ComboZone^0")
+        end
     end
     
     -- ====================================================================================--
@@ -198,11 +230,17 @@ CreateThread(function()
     -- ====================================================================================--
     -- Test Summary
     -- ====================================================================================--
-    print("^2[Zone Test] ======================^0")
-    print("^2[Zone Test] Test suite completed!^0")
-    print("^2[Zone Test] Visit Legion Square to test player callbacks^0")
-    print("^2[Zone Test] Visit Nightclub (-1569, -3017) to test dynamic IPL loading^0")
-    print("^2[Zone Test] ======================^0")
+    if ig and ig.log and ig.log.Debug then
+        ig.log.Debug("Zone Test", "Test suite completed!")
+        ig.log.Debug("Zone Test", "Visit Legion Square to test player callbacks")
+        ig.log.Debug("Zone Test", "Visit Nightclub (-1569, -3017) to test dynamic IPL loading")
+    else
+        print("^2[Zone Test] ======================^0")
+        print("^2[Zone Test] Test suite completed!^0")
+        print("^2[Zone Test] Visit Legion Square to test player callbacks^0")
+        print("^2[Zone Test] Visit Nightclub (-1569, -3017) to test dynamic IPL loading^0")
+        print("^2[Zone Test] ======================^0")
+    end
     
     -- Set up a command to show zone info
     RegisterCommand("zonetest", function()
@@ -226,7 +264,11 @@ CreateThread(function()
         end
     end, false)
     
-    print("^2[Zone Test] Command registered: /zonetest^0")
+    if ig and ig.log and ig.log.Debug then
+        ig.log.Debug("Zone Test", "Command registered: /zonetest")
+    else
+        print("^2[Zone Test] Command registered: /zonetest^0")
+    end
     
     -- Cleanup after 5 minutes (optional, for testing purposes)
     -- Uncomment to auto-cleanup

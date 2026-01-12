@@ -807,5 +807,5 @@ exports("VoiceEndAdminCall", function(adminId, targetId)
 end)
 
 -- ====================================================================================--
-print("^2[Ingenium VOIP] Server-side voice system initialized^7")
+ig.log.Info("Ingenium VOIP", "Server-side voice system initialized")
 -- ====================================================================================--

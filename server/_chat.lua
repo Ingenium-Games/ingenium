@@ -66,7 +66,7 @@ local function WriteChatLogEntry(entry)
         file:write(entry .. "\n")
         file:close()
     else
-        print("^1[Chat Log] Failed to write to chat log file: " .. filePath .. " - " .. tostring(err) .. "^7")
+            ig.log.Error("IG Chat", "Failed to write to chat log file: %s - %s", filePath, tostring(err))
     end
 end
 
@@ -197,7 +197,7 @@ local function CleanupOldLogs()
     
     -- This is a placeholder - actual file cleanup would require additional filesystem operations
     -- In production, you might want to use a separate cleanup script
-    print(string.format("[Chat Log] Cleanup: Would delete chat logs older than %d days", maxDays))
+    ig.log.Info("IG Chat", "Chat Log: Would delete chat logs older than %d days", maxDays)
 end
 
 -- Initialize
@@ -218,16 +218,17 @@ AddEventHandler("onServerResourceStart", function()
         -- Run cleanup at 3:00 AM daily (common maintenance time)
         ig.cron.RunAt(3, 0, CleanupOldLogs)
         chatLogCleanupRegistered = true
-        print('[IG Chat] Registered daily log cleanup with cron (3:00 AM)')
+        ig.log.Info('IG Chat', 'Registered daily log cleanup with cron (3:00 AM)')
     end
 end)
 
 AddEventHandler("onResourceStart", function(resource)
     if resource ~= GetCurrentResourceName() then return end
     -- Delay one tick to allow config loading order to settle
-        print('[IG Chat] Chat logging system loaded')
-        print(string.format('[IG Chat] Logging to file: %s, Logging to txAdmin: %s', 
-            tostring(conf.chat.logging.logToFile),
-            tostring(conf.chat.logging.logToTxAdmin)
-        ))
+    SetTimeout(0, function()
+        local logToFile = conf and conf.chat and conf.chat.logging and conf.chat.logging.logToFile or false
+        local logToTxAdmin = conf and conf.chat and conf.chat.logging and conf.chat.logging.logToTxAdmin or false
+        ig.log.Info('IG Chat', 'Chat logging system loaded')
+        ig.log.Info('IG Chat', 'Logging to file: %s, Logging to txAdmin: %s', tostring(logToFile), tostring(logToTxAdmin))
+    end)
 end)

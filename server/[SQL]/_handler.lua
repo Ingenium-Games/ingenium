@@ -142,17 +142,24 @@ function ig.sql.IsReady()
     return exports['ingenium.sql']:isReady()
 end
 
---- Wait for SQL connection to be ready
+--- Wait for SQL connection to be ready (OPTIMIZED with exponential backoff)
 ---@param timeout number|nil Timeout in milliseconds (default 30000)
 ---@return boolean True if ready, false if timeout
 function ig.sql.AwaitReady(timeout)
     local maxWait = timeout or 30000
     local waited = 0
-    local interval = 100
+    local interval = 50  -- Start with shorter interval
+    local maxInterval = 500  -- Cap the maximum wait interval
     
     while not ig.sql.IsReady() and waited < maxWait do
         Citizen.Wait(interval)
         waited = waited + interval
+        
+        -- Exponential backoff: double the interval up to maxInterval
+        -- This reduces CPU usage while still being responsive initially
+        if interval < maxInterval then
+            interval = math.min(interval * 2, maxInterval)
+        end
     end
     
     return ig.sql.IsReady()
@@ -169,12 +176,13 @@ end
 -- ====================================================================================--
 
 Citizen.CreateThread(function()
-    print("^2[SQL Handler] Lua wrapper interface loaded^7")
+    ig.log.Info("SQL Handler", "Lua wrapper interface loaded")
+    
     -- Wait for SQL to be ready
     if ig.sql.AwaitReady() then
-        print("^2[SQL Handler] Connection ready^7")
+        ig.log.Info("SQL Handler", "Connection ready")
     else
-        print("^1[SQL Handler] Connection timeout - check your MySQL configuration^7")
+        ig.log.Error("SQL Handler", "Connection timeout - check your MySQL configuration")
     end
 end)
 
@@ -184,13 +192,11 @@ end)
 
 -- SQL ready event
 AddEventHandler('ingenium.sql:Ready', function()
-    print("^2[SQL Handler] Database connection established^7")
+    ig.log.Info("SQL Handler", "Database connection established")
 end)
 
 -- Slow query logging
 AddEventHandler('ingenium.sql:SlowQuery', function(data)
-    print(string.format("^3[SQL WARNING] Slow query detected: %.2fms^7", data.duration))
-    if conf and conf.debug then
-        print(string.format("^3[SQL] Query: %s^7", data.query))
-    end
+    ig.log.Warn("SQL", "Slow query detected: %.2fms", data.duration)
+    ig.log.Debug("SQL", "Query: %s", data.query)
 end)

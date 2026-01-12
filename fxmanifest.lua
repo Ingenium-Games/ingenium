@@ -16,6 +16,7 @@ shared_scripts {
     "_config/config.lua",
     "_config/**/*.lua",
     "shared/_ig.lua",
+    "shared/_log.lua",
     "shared/[Tools]/*.lua",
     "shared/[Third Party]/*.lua",
     "shared/[Voice]/_voip.lua",

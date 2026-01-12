@@ -184,13 +184,13 @@ Citizen.CreateThread(function()
     -- Validate priority roles configuration
     if conf and conf.discord and conf.discord.priority_enabled then
         if not conf.discord.priority_roles or #conf.discord.priority_roles == 0 then
-            print("^3[Queue Warning] Discord priority is enabled but no priority roles are configured^7")
+            ig.log.Warn("Queue", "Discord priority is enabled but no priority roles are configured")
         end
     end
     
     -- Validate supporter priority
     if QueueConf.SupporterPriority > 0 then
-        print(("^2[Queue] Supporter priority enabled (power: %d)^7"):format(QueueConf.SupporterPriority))
+        ig.log.Info("Queue", "Supporter priority enabled (power: %d)", QueueConf.SupporterPriority)
     end
     
     -- Log configuration
@@ -210,4 +210,4 @@ Citizen.CreateThread(function()
     end
 end)
 
-print("^2[Queue] Configuration loaded^7")
+ig.log.Info("Queue", "Configuration loaded")

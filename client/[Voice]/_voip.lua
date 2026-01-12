@@ -520,5 +520,9 @@ exports("VoiceIsTalking", function()
 end)
 
 -- ====================================================================================--
-print("^2[Ingenium VOIP] Client-side voice system initialized^7")
+if ig and ig.log and ig.log.Info then
+    ig.log.Info("Ingenium VOIP", "Client-side voice system initialized")
+else
+    print("^2[Ingenium VOIP] Client-side voice system initialized^7")
+end
 -- ====================================================================================--

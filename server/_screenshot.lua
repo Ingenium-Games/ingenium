@@ -34,11 +34,11 @@ AddEventHandler('ig:screenshot:process', function(data)
     metadata.playerIdentifiers = identifiers
     metadata.serverTime = os.date('%Y-%m-%d %H:%M:%S')
     
-    print(string.format('[IG Screenshot] Processing screenshot from player %d (%s) - Reason: %s', 
+    ig.log.Info('Screenshot', 'Processing screenshot from player %d (%s) - Reason: %s', 
         source, 
         GetPlayerName(source), 
         metadata.reason or 'unknown'
-    ))
+    )
     
     -- Handle different output methods
     if conf.screenshot.outputs.discord.enabled then
@@ -64,14 +64,14 @@ function ig.screenshot.SendToDiscord(imageUrl, metadata)
     local webhook = conf.screenshot.outputs.discord.webhook
     
     if not webhook or webhook == "" then
-        print('[IG Screenshot] Discord webhook not configured')
+        ig.log.Warn('Screenshot', 'Discord webhook not configured')
         return
     end
     
     -- Validate Discord webhook URL format
     if not string.match(webhook, "^https://discord%.com/api/webhooks/%d+/[%w_-]+$") and
        not string.match(webhook, "^https://discordapp%.com/api/webhooks/%d+/[%w_-]+$") then
-        print('[IG Screenshot] Invalid Discord webhook URL')
+        ig.log.Error('Screenshot', 'Invalid Discord webhook URL')
         return
     end
     
@@ -173,9 +173,9 @@ function ig.screenshot.SendToDiscord(imageUrl, metadata)
     -- Send to Discord
     PerformHttpRequest(webhook, function(err, text, headers)
         if err == 200 or err == 204 then
-            print('[IG Screenshot] Successfully sent to Discord')
+            ig.log.Info('Screenshot', 'Successfully sent to Discord')
         else
-            print(string.format('[IG Screenshot] Failed to send to Discord: %d', err))
+            ig.log.Error('Screenshot', 'Failed to send to Discord: %d', err)
         end
     end, 'POST', json.encode({
         username = conf.screenshot.outputs.discord.username or "Ingenium Screenshot",
@@ -191,7 +191,7 @@ function ig.screenshot.SendToImageHost(imageUrl, metadata)
     local url = conf.screenshot.outputs.imageHost.url
     
     if not url or url == "" then
-        print('[IG Screenshot] Image host URL not configured')
+        ig.log.Warn('Screenshot', 'Image host URL not configured')
         return
     end
     
@@ -202,9 +202,9 @@ function ig.screenshot.SendToImageHost(imageUrl, metadata)
     
     PerformHttpRequest(url, function(err, text, headers)
         if err == 200 or err == 201 then
-            print('[IG Screenshot] Successfully sent to image host')
+            ig.log.Info('Screenshot', 'Successfully sent to image host')
         else
-            print(string.format('[IG Screenshot] Failed to send to image host: %d', err))
+            ig.log.Error('Screenshot', 'Failed to send to image host: %d', err)
         end
     end, 'POST', json.encode(payload), conf.screenshot.outputs.imageHost.headers or {
         ['Content-Type'] = 'application/json'
@@ -218,7 +218,7 @@ function ig.screenshot.SendToDiscourse(imageUrl, metadata)
     local apiUsername = conf.screenshot.outputs.discourse.apiUsername
     
     if not discourseUrl or discourseUrl == "" or not apiKey or not apiUsername then
-        print('[IG Screenshot] Discourse not configured properly')
+        ig.log.Warn('Screenshot', 'Discourse not configured properly')
         return
     end
     
@@ -231,7 +231,7 @@ function ig.screenshot.SendToDiscourse(imageUrl, metadata)
     
     local categoryId = conf.screenshot.outputs.discourse.categoryId
     if not categoryId then
-        print('[IG Screenshot] Discourse categoryId not configured, using default category 1')
+        ig.log.Warn('Screenshot', 'Discourse categoryId not configured, using default category 1')
         categoryId = 1 -- Use a safe default (usually "Uncategorized" in Discourse)
     end
     
@@ -243,9 +243,9 @@ function ig.screenshot.SendToDiscourse(imageUrl, metadata)
     
     PerformHttpRequest(discourseUrl .. '/posts.json', function(err, text, headers)
         if err == 200 or err == 201 then
-            print('[IG Screenshot] Successfully posted to Discourse')
+            ig.log.Info('Screenshot', 'Successfully posted to Discourse')
         else
-            print(string.format('[IG Screenshot] Failed to post to Discourse: %d - %s', err, text or ""))
+            ig.log.Error('Screenshot', 'Failed to post to Discourse: %d - %s', err, text or "")
         end
     end, 'POST', json.encode(payload), {
         ['Content-Type'] = 'application/json',
@@ -267,7 +267,7 @@ function ig.screenshot.LogToDatabase(imageUrl, metadata)
         json.encode(metadata)
     }, function(result)
         if result then
-            print('[IG Screenshot] Logged to database')
+            ig.log.Info('Screenshot', 'Logged to database')
         end
     end)
     ]]--
@@ -297,4 +297,4 @@ RegisterCommand('takescreenshot', function(source, args, rawCommand)
     TriggerClientEvent('Client:Notify', source, string.format('Screenshot requested from player %d', playerId), 'green', 5000)
 end, true) -- Restricted command
 
-print('[IG Screenshot] Screenshot system server loaded')
+ig.log.Info('Screenshot', 'Screenshot system server loaded')

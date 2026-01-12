@@ -17,7 +17,7 @@ local function SaveDynamicData()
         ig.json.Write('objects', ig.objects or {}) 
 
         local elapsed = (os.clock() - startTime) * 1000
-        print(('^2[Autosave] Dynamic data saved to JSON (%.2fms)^7'):format(elapsed))
+        ig.log.Info('Autosave', 'Dynamic data saved to JSON (%.2fms)', elapsed)
     end
     
     SetTimeout(conf.objectsync, SaveDynamicData) -- 5 minutes
@@ -30,14 +30,14 @@ CreateThread(function()
     end
     
     Wait(5000) -- Initial delay
-    print('^3[Autosave] Starting dynamic data save routine (5 min intervals)^7')
+    ig.log.Info('Autosave', 'Starting dynamic data save routine (5 min intervals)')
     SaveDynamicData()
 end)
 
 -- Save on resource stop
 AddEventHandler('onResourceStop', function(resource)
     if GetCurrentResourceName() == resource then
-        print('^3[Shutdown] Saving all dynamic data...^7')
+        ig.log.Info('Shutdown', 'Saving all dynamic data...')
         
         -- Use helper function to merge drops
         local dropsToSave = ig.drop.MergeDropsForSave()
@@ -47,14 +47,14 @@ AddEventHandler('onResourceStop', function(resource)
         ig.json.Write('scenes', ig.scenes)
         ig.json.Write('notes', ig.notes)
         ig.json.Write('gsr', ig.gsrs)
-        print('^2[Shutdown] All data saved successfully^7')
+        ig.log.Info('Shutdown', 'All data saved successfully')
     end
 end)
 
 -- Manual save command for admins
 RegisterCommand('savedata', function(source, args)
     if source == 0 or (ig.func and ig.func.IsAce and ig.func.IsAce(source)) then
-        print('^3[Manual Save] Saving dynamic data...^7')
+        ig.log.Info('Manual Save', 'Saving dynamic data...')
         
         -- Use helper function to merge drops
         local dropsToSave = ig.drop.MergeDropsForSave()
@@ -64,7 +64,7 @@ RegisterCommand('savedata', function(source, args)
         ig.json.Write('scenes', ig.scenes)
         ig.json.Write('notes', ig.notes)
         ig.json.Write('gsr', ig.gsrs)
-        print('^2[Manual Save] Complete^7')
+        ig.log.Info('Manual Save', 'Complete')
         
         if source > 0 then
             TriggerClientEvent('chat:addMessage', source, {

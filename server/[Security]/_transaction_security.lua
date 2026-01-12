@@ -24,7 +24,7 @@ local playerTransactionHistory = {}
 ---@param reason string Reason for transaction
 function ig.security.LogTransaction(player, transactionType, amount, reason)
     if not player then
-        print("^3[SECURITY WARNING] LogTransaction called with nil player^7")
+        ig.log.Warn("SECURITY", "LogTransaction called with nil player")
         return
     end
     
@@ -41,9 +41,7 @@ function ig.security.LogTransaction(player, transactionType, amount, reason)
     
     -- Validate critical fields
     if log.player_id == "no_character_id" or log.source == "no_source_id" then
-        print(("^3[SECURITY WARNING] Transaction logged with missing player info: %s from source %s^7"):format(
-            log.player_id, log.source
-        ))
+        ig.log.Warn("SECURITY", "Transaction logged with missing player info: %s from source %s", log.player_id, log.source)
     end
     
     -- Store in memory (in production, write to database)
@@ -161,9 +159,7 @@ function ig.security.DetectSuspiciousActivity(player, actionType, amount)
             timestamp = currentTime
         }
         
-        print(("^1[SECURITY] Suspicious transaction pattern detected for player %s (%d transactions in 60s)^7"):format(
-            playerId, #history.actions
-        ))
+        ig.log.Error("SECURITY", "Suspicious transaction pattern detected for player %s (%d transactions in 60s)", playerId, #history.actions)
         
         TriggerEvent("txaLogger:FraudAlert", alertData)
         
@@ -212,4 +208,4 @@ CreateThread(function()
     end
 end)
 
-print("^2[SECURITY] Transaction logging and fraud detection enabled^7")
+ig.log.Info("SECURITY", "Transaction logging and fraud detection enabled")

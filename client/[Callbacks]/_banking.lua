@@ -141,7 +141,11 @@ CreateThread(function()
         })
     end
     
-    print("^2[Banking] ATM targets registered^7")
+    if ig and ig.log and ig.log.Info then
+        ig.log.Info("Banking", "ATM targets registered")
+    else
+        print("^2[Banking] ATM targets registered^7")
+    end
 end)
 
 -- Add bank location zones
@@ -175,7 +179,11 @@ CreateThread(function()
         })
     end
     
-    print("^2[Banking] Bank location zones registered^7")
+    if ig and ig.log and ig.log.Info then
+        ig.log.Info("Banking", "Bank location zones registered")
+    else
+        print("^2[Banking] Bank location zones registered^7")
+    end
 end)
 
 -- Export for other resources
