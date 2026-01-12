@@ -1,7 +1,7 @@
 -- ====================================================================================--
 -- Chat System Configuration
 -- ====================================================================================--
-
+if not conf then conf = {} end
 conf.chat = {
     -- Enable/disable chat logging
     logging = {
@@ -28,7 +28,7 @@ conf.chat = {
     
     -- Chat message settings
     messageSettings = {
-        maxLength = 256, -- Maximum message length
+        maxLength = 2056, -- Maximum message length
         allowEmptyMessages = false,
         filterProfanity = false -- Future feature
     }

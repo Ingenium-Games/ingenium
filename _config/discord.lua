@@ -3,9 +3,9 @@ conf.discord = {}
 -- ====================================================================================--
 -- Discord Bot Configuration (for internal Discord API integration)
 -- Guild ID - Your Discord server ID
-conf.discord.guild_id = ""
+conf.discord.guild_id = "1147088071322509352"
 -- Bot Token - Your Discord bot token (keep this secure!)
-conf.discord.bot_token = ""
+conf.discord.bot_token = "NzcwNzkyNzI4OTc5MDQ2NDMx.GkXggc.6-cASlf92vwq_5oHSRMezn2OZSzgRal0q5MoQs"
 
 -- ====================================================================================--
 -- Member Role Configuration (Whitelist)

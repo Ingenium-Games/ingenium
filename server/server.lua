@@ -29,10 +29,6 @@ AddEventHandler("onResourceStart", function(resourceName)
     ig.data.ReviveSync()
     -- Get character values every x seconds.
     ig.data.CharacterValues()
-
-    --
-    Queue.OnReady()
-    
 end)
 
 AddEventHandler('ingenium.sql:Ready', function()
@@ -93,7 +89,7 @@ AddEventHandler("playerDropped", function()
         end)
     end
     -- last player, force save data.
-    if not ig.data.ArePlayersActive() then
+    if not ig.player.ArePlayersActive() then
         --
         ig.sql.save.Vehicles()
         print("   ^7[^5SQL^7]: Vehicles")

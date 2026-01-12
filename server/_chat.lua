@@ -222,8 +222,12 @@ AddEventHandler("onServerResourceStart", function()
     end
 end)
 
-print('[IG Chat] Chat logging system loaded')
-print(string.format('[IG Chat] Logging to file: %s, Logging to txAdmin: %s', 
-    tostring(conf.chat.logging.logToFile),
-    tostring(conf.chat.logging.logToTxAdmin)
-))
+AddEventHandler("onResourceStart", function(resource)
+    if resource ~= GetCurrentResourceName() then return end
+    -- Delay one tick to allow config loading order to settle
+        print('[IG Chat] Chat logging system loaded')
+        print(string.format('[IG Chat] Logging to file: %s, Logging to txAdmin: %s', 
+            tostring(conf.chat.logging.logToFile),
+            tostring(conf.chat.logging.logToTxAdmin)
+        ))
+end)
