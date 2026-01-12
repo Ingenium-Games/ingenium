@@ -1,5 +1,4 @@
 -- ====================================================================================--
-local weapon_dump = ig.weapons
 ig.items = { -- table of items
 -- ====================================================================================--
 -- Interactive Items
@@ -1994,7 +1993,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "A sharp tool used for skinning."
         },
-        Data = weapon_dump["2578778090"],
+        Data = ig.weapons["2578778090"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2029,7 +2028,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "A beat stick, for the typical beat cop."
         },
-        Data = weapon_dump["1737195953"],
+        Data = ig.weapons["1737195953"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2064,7 +2063,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Crafty and useful for many situations."
         },
-        Data = weapon_dump["1317494643"],
+        Data = ig.weapons["1317494643"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2099,7 +2098,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Home invader? Hit them like a home run!."
         },
-        Data = weapon_dump["2508868239"],
+        Data = ig.weapons["2508868239"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2134,7 +2133,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "PGA certified for an extra $50."
         },
-        Data = weapon_dump["1141786504"],
+        Data = ig.weapons["1141786504"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2172,7 +2171,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Tool of choice for many."
         },
-        Data = weapon_dump["2508868239"],
+        Data = ig.weapons["2508868239"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2207,7 +2206,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Kids play with these."
         },
-        Data = weapon_dump["3756226112"],
+        Data = ig.weapons["3756226112"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2245,7 +2244,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Rust, v2"
         },
-        Data = weapon_dump["940833800"],
+        Data = ig.weapons["940833800"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2283,7 +2282,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Drunks and Bums love to fight with these."
         },
-        Data = weapon_dump["4192643659"],
+        Data = ig.weapons["4192643659"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2321,7 +2320,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "There is roleplaying, then there is DnD"
         },
-        Data = weapon_dump["4192643659"],
+        Data = ig.weapons["4192643659"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2362,7 +2361,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "A friendly game until it's not."
         },
-        Data = weapon_dump["2484171525"],
+        Data = ig.weapons["2484171525"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2403,7 +2402,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["419712736"],
+        Data = ig.weapons["419712736"],
         Craftable = true,
         Recipe = true,
         Materials = {},
@@ -2432,7 +2431,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2460120199"],
+        Data = ig.weapons["2460120199"],
         Craftable = true,
         Recipe = true,
         Materials = {},
@@ -2461,7 +2460,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3713923289"],
+        Data = ig.weapons["3713923289"],
         Craftable = true,
         Recipe = true,
         Materials = {},
@@ -2490,7 +2489,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["4191993645"],
+        Data = ig.weapons["4191993645"],
         Craftable = true,
         Recipe = true,
         Materials = {},
@@ -2524,7 +2523,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 9mm rounds."
         },
-        Data = weapon_dump["453432689"],
+        Data = ig.weapons["453432689"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2571,7 +2570,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Commonly contained in a cigerrete packet."
         },
-        Data = weapon_dump["3218215474"],
+        Data = ig.weapons["3218215474"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2609,7 +2608,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 9mm rounds."
         },
-        Data = weapon_dump["1593441988"],
+        Data = ig.weapons["1593441988"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2656,7 +2655,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 9mm rounds."
         },
-        Data = weapon_dump["584646201"],
+        Data = ig.weapons["584646201"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2703,7 +2702,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 9mm rounds."
         },
-        Data = weapon_dump["2578377531"],
+        Data = ig.weapons["2578377531"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2751,7 +2750,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 9mm rounds."
         },
-        Data = weapon_dump["324215364"],
+        Data = ig.weapons["324215364"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2798,7 +2797,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 9mm rounds."
         },
-        Data = weapon_dump["736523883"],
+        Data = ig.weapons["736523883"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2845,7 +2844,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 9mm rounds."
         },
-        Data = weapon_dump["736523883"],
+        Data = ig.weapons["736523883"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2893,7 +2892,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 5.56mm rounds."
         },
-        Data = weapon_dump["3220176749"],
+        Data = ig.weapons["3220176749"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2940,7 +2939,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 5.56mm rounds."
         },
-        Data = weapon_dump["2210333304"],
+        Data = ig.weapons["2210333304"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -2987,7 +2986,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 5.56mm rounds."
         },
-        Data = weapon_dump["2937143193"],
+        Data = ig.weapons["2937143193"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3034,7 +3033,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 5.56mm rounds."
         },
-        Data = weapon_dump["2634544996"],
+        Data = ig.weapons["2634544996"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3081,7 +3080,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "Fires standard 5.56mm rounds."
         },
-        Data = weapon_dump["2144741730"],
+        Data = ig.weapons["2144741730"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3128,7 +3127,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["487013001"],
+        Data = ig.weapons["487013001"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3175,7 +3174,7 @@ ig.items = { -- table of items
             Registered = false,
             About = ""
         },
-        Data = weapon_dump["2017895192"],
+        Data = ig.weapons["2017895192"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3222,7 +3221,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3800352039"],
+        Data = ig.weapons["3800352039"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3269,7 +3268,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2640438543"],
+        Data = ig.weapons["2640438543"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3316,7 +3315,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["911657153"],
+        Data = ig.weapons["911657153"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3363,7 +3362,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["100416529"],
+        Data = ig.weapons["100416529"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3410,7 +3409,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["205991906"],
+        Data = ig.weapons["205991906"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3455,7 +3454,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2726580491"],
+        Data = ig.weapons["2726580491"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3501,7 +3500,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1305664598"],
+        Data = ig.weapons["1305664598"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3547,7 +3546,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2982836145"],
+        Data = ig.weapons["2982836145"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3592,7 +3591,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1119849093"],
+        Data = ig.weapons["1119849093"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3637,7 +3636,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2481070269"],
+        Data = ig.weapons["2481070269"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3682,7 +3681,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["741814745"],
+        Data = ig.weapons["741814745"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3727,7 +3726,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["4256991824"],
+        Data = ig.weapons["4256991824"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3772,7 +3771,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2694266206"],
+        Data = ig.weapons["2694266206"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3817,7 +3816,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["615608432"],
+        Data = ig.weapons["615608432"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3862,7 +3861,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["101631238"],
+        Data = ig.weapons["101631238"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3907,7 +3906,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["883325847"],
+        Data = ig.weapons["883325847"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3952,7 +3951,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["600439132"],
+        Data = ig.weapons["600439132"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -3999,7 +3998,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3249783761"],
+        Data = ig.weapons["3249783761"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4046,7 +4045,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["317205821"],
+        Data = ig.weapons["317205821"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4093,7 +4092,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["125959754"],
+        Data = ig.weapons["125959754"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4140,7 +4139,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3125143736"],
+        Data = ig.weapons["3125143736"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4187,7 +4186,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3523564046"],
+        Data = ig.weapons["3523564046"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4234,7 +4233,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3231910285"],
+        Data = ig.weapons["3231910285"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4281,7 +4280,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2132975508"],
+        Data = ig.weapons["2132975508"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4328,7 +4327,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1672152130"],
+        Data = ig.weapons["1672152130"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4375,7 +4374,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2874559379"],
+        Data = ig.weapons["2874559379"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4422,7 +4421,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["126349499"],
+        Data = ig.weapons["126349499"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4469,7 +4468,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2228681469"],
+        Data = ig.weapons["2228681469"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4516,7 +4515,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2548703416"],
+        Data = ig.weapons["2548703416"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4563,7 +4562,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1785463520"],
+        Data = ig.weapons["1785463520"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4610,7 +4609,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1432025498"],
+        Data = ig.weapons["1432025498"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4657,7 +4656,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3415619887"],
+        Data = ig.weapons["3415619887"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4704,7 +4703,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2285322324"],
+        Data = ig.weapons["2285322324"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4751,7 +4750,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2526821735"],
+        Data = ig.weapons["2526821735"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4798,7 +4797,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2939590305"],
+        Data = ig.weapons["2939590305"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4845,7 +4844,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1198256469"],
+        Data = ig.weapons["1198256469"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4892,7 +4891,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3056410471"],
+        Data = ig.weapons["3056410471"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4939,7 +4938,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["961495388"],
+        Data = ig.weapons["961495388"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -4986,7 +4985,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["4208062921"],
+        Data = ig.weapons["4208062921"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5033,7 +5032,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3686625920"],
+        Data = ig.weapons["3686625920"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5080,7 +5079,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["177293209"],
+        Data = ig.weapons["177293209"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5127,7 +5126,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3219281620"],
+        Data = ig.weapons["3219281620"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5174,7 +5173,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2024373456"],
+        Data = ig.weapons["2024373456"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5221,7 +5220,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2343591895"],
+        Data = ig.weapons["2343591895"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5262,7 +5261,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1198879012"],
+        Data = ig.weapons["1198879012"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5303,7 +5302,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["727643628"],
+        Data = ig.weapons["727643628"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5347,7 +5346,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3126027122"],
+        Data = ig.weapons["3126027122"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5379,7 +5378,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["94989220"],
+        Data = ig.weapons["94989220"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5426,7 +5425,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1470379660"],
+        Data = ig.weapons["1470379660"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5473,7 +5472,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2636060646"],
+        Data = ig.weapons["2636060646"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5520,7 +5519,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2138347493"],
+        Data = ig.weapons["2138347493"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5567,7 +5566,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["137902532"],
+        Data = ig.weapons["137902532"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5614,7 +5613,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["2828843422"],
+        Data = ig.weapons["2828843422"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5661,7 +5660,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3675956304"],
+        Data = ig.weapons["3675956304"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5708,7 +5707,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1649403952"],
+        Data = ig.weapons["1649403952"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5755,7 +5754,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["4019527611"],
+        Data = ig.weapons["4019527611"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5802,7 +5801,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["984333226"],
+        Data = ig.weapons["984333226"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5849,7 +5848,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3342088282"],
+        Data = ig.weapons["3342088282"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5896,7 +5895,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["171789620"],
+        Data = ig.weapons["171789620"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5943,7 +5942,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3638508604"],
+        Data = ig.weapons["3638508604"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -5990,7 +5989,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["3696079510"],
+        Data = ig.weapons["3696079510"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -6037,7 +6036,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1627465347"],
+        Data = ig.weapons["1627465347"],
         Craftable = true,
         Recipe = true,
         Materials = {{
@@ -6084,7 +6083,7 @@ ig.items = { -- table of items
             Registered = false,
             About = "."
         },
-        Data = weapon_dump["1834241177"],
+        Data = ig.weapons["1834241177"],
         Craftable = true,
         Recipe = true,
         Materials = {{
