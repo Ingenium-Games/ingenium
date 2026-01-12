@@ -21,18 +21,18 @@ function toTitleCase(str) {
 
 function findVueFiles(dir, fileList = []) {
   const files = readdirSync(dir);
-  
+
   files.forEach((file) => {
     const fullPath = join(dir, file);
     const stat = statSync(fullPath);
-    
+
     if (stat.isDirectory()) {
       findVueFiles(fullPath, fileList);
     } else if (file.endsWith('.vue')) {
       fileList.push(fullPath);
     }
   });
-  
+
   return fileList;
 }
 
@@ -57,16 +57,17 @@ files.forEach((file) => {
   const relPath = relative(SEARCH_DIR, file);
   const title = `NUI/${toTitleCase(relPath)}`;
 
+  // Story content uses CSF with args bound so Storybook Controls work.
   const content = `import Component from '${relImportPath}';
 
 export default { title: '${title}', component: Component };
 
-export const Default = {
-  render: () => ({
-    components: { Component },
-    template: '<component :is="Component" />'
-  })
-};
+export const Default = (args) => ({
+  components: { Component },
+  setup() { return { args }; },
+  template: '<Component v-bind="args" />'
+});
+Default.args = {};
 `;
 
   writeFileSync(storyFile, content, 'utf8');

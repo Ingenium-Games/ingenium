@@ -25,3 +25,4 @@ nui/**/*.stories.js
 # Logs directory
 logs/
 *.log
+node_modules
