@@ -22,13 +22,13 @@ local function GetLogFilePath(level)
 end
 
 -- Write log entry to file
-local function WriteLogEntry(message, level)
+-- Write a batch of messages for a single level to disk
+local function WriteBatchForLevel(level, messagesConcat)
     local filePath = GetLogFilePath(level)
     local resourceName = GetCurrentResourceName()
 
-    -- Read existing contents (if any) then append and save. Use SaveResourceFile so FiveM creates directories.
     local existing = LoadResourceFile(resourceName, filePath) or ""
-    local newContents = existing .. message .. "\n"
+    local newContents = existing .. messagesConcat .. "\n"
     local ok, err = pcall(function()
         SaveResourceFile(resourceName, filePath, newContents, -1)
     end)
@@ -48,19 +48,31 @@ local function ProcessLogQueue()
     isWriting = true
 
     -- Process a limited number of entries per invocation to avoid blocking the server
-    local BATCH_SIZE = 25
+    local BATCH_SIZE = 100
     local processed = 0
+
+    -- Group messages by level so we only read/write each file once per batch
+    local batches = {}
     while processed < BATCH_SIZE and #logQueue > 0 do
         local entry = table.remove(logQueue, 1)
-        WriteLogEntry(entry.message, entry.level)
+        if entry and entry.level and entry.message then
+            batches[entry.level] = batches[entry.level] or {}
+            batches[entry.level][#batches[entry.level] + 1] = entry.message
+        end
         processed = processed + 1
+    end
+
+    for level, msgs in pairs(batches) do
+        local concat = table.concat(msgs, "\n")
+        WriteBatchForLevel(level, concat)
     end
 
     isWriting = false
 
     -- If there are more entries, schedule the next batch on the next tick
     if #logQueue > 0 then
-        SetTimeout(0, ProcessLogQueue)
+        -- Add a short delay to allow more entries to accumulate and reduce thrash
+        SetTimeout(500, ProcessLogQueue)
     end
 end
 
@@ -72,8 +84,8 @@ local function QueueLogEntry(message, level)
         timestamp = os.time()
     })
     
-    -- Process queue on next tick to batch writes
-    SetTimeout(0, ProcessLogQueue)
+    -- Process queue shortly to batch writes (short delay reduces startup thrash)
+    SetTimeout(500, ProcessLogQueue)
 end
 
 -- Event handler for logging
