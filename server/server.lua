@@ -13,9 +13,6 @@ AddEventHandler("onResourceStart", function(resourceName)
         return
     end
     --
-    ig.version.Check(conf.url.version, resourceName)
-
-    --
     ig.data.Initilize()
     --
     while ig._loading do
@@ -30,11 +27,6 @@ AddEventHandler("onResourceStart", function(resourceName)
     -- Get character values every x seconds.
     ig.data.CharacterValues()
 end)
-
-AddEventHandler('ingenium.sql:Ready', function()
-
-end)
-
 
 -- ====================================================================================--
 -- Migrated to callback for security

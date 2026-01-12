@@ -183,10 +183,6 @@ Server-side development variables and state management.
 -- Enable/disable all development tools
 conf.dev.enabled = true
 
--- Version check URL
-conf.dev.version_check_url = "https://raw.githubusercontent.com/Ingenium-Games/ig.dev/main/version.txt"
-```
-
 ---
 
 ### Debug Settings

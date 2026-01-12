@@ -9,7 +9,7 @@ conf.default.accounts = {
     Bitcoin = 0.00,
 }
 
--- Default skills ever new character has.
+-- Default skills every new character has.
 conf.default.skills = {}
 
 -- Default Job and Accounts for new jobs found in the DB.

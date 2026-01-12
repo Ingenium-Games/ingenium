@@ -5,9 +5,6 @@
 if not conf then conf = {} end
 if not conf.dev then conf.dev = {} end
 
--- Version check URL for development tools
-conf.dev.version_check_url = "https://raw.githubusercontent.com/Ingenium-Games/ig.dev/main/version.txt"
-
 -- Enable/disable development tools (set to false in production)
 conf.dev.enabled = true
 

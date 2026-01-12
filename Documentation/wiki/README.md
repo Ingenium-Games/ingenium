@@ -934,12 +934,6 @@ Total Functions: **715**
 - [ig.vehicle.RemoveVehicle](ig_vehicle_RemoveVehicle.md)
 - [ig.vehicle.SetVehicle](ig_vehicle_SetVehicle.md)
 
-## version
-
-- [ig.version.Check](ig_version_Check.md)
-- [ig.version.CronCheck](ig_version_CronCheck.md)
-- [ig.version.LoopCheck](ig_version_LoopCheck.md)
-
 ## voip
 
 - [ig.voip.Debug](ig_voip_Debug.md)
