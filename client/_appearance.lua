@@ -3,7 +3,7 @@
 -- Handles all character appearance customization
 -- ====================================================================================--
 
-ig.appearance = ig.appearance or {}
+ig.appearance = {}
 
 -- Local cache for appearance data
 local currentAppearance = nil

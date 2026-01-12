@@ -11,8 +11,8 @@ conf.dev.enabled = true
 -- Debug visualization settings
 conf.dev.debug = {
     draw_text_3d = true,  -- Enable 3D text debug drawing
-    show_vehicles = false,  -- Show vehicle debug info
-    show_objects = false,   -- Show object debug info
+    show_vehicles = true,  -- Show vehicle debug info
+    show_objects = true,   -- Show object debug info
 }
 
 -- Door creator settings

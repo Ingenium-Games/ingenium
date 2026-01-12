@@ -3,7 +3,7 @@
 -- Provides convenient wrapper methods for the global callback system
 -- ====================================================================================--
 
-ig.callback = ig.callback or {}
+ig.callback = {}
 
 ---Await a server callback response synchronously
 ---This is a convenience wrapper around TriggerServerCallback

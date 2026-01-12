@@ -17,6 +17,7 @@ conf.default.job = {
     Name = "none",
     Grade = 1
 }
+
 conf.default.jobaccounts = {
     Bank = 5000.00,
     Safe = 0.00
@@ -28,11 +29,13 @@ conf.default.modifiers = {
     Thirst = 1,
     Stress = 1
 }
+
 conf.default.stats = {
     Hunger = 100, -- Min 0 Max 100
     Thirst = 100, -- Min 0 Max 100
     Stress = 0 -- Min 0 Max 100
 }
+
 conf.default.selfdamage = 3
 
 
@@ -42,3 +45,4 @@ conf.default.itemdegrade = false
 
 -- City job tax rate on all payments
 conf.default.tax = 10.00
+

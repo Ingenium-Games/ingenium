@@ -155,6 +155,7 @@ end)
 
 -- ====================================================================================--
 -- Death Visual Effects Thread
+-- Added Player Death checks into fx loop. as 
 -- Handles screen effects when player dies
 -- ====================================================================================--
 
@@ -164,15 +165,17 @@ Citizen.CreateThread(function()
     while true do
         if ig.data.IsPlayerLoaded() then
             Wait(500) -- Check every 500ms
+            --
+            local ped = PlayerPedId()
             
-            local isDead = LocalPlayer.state.IsDead
-            
-            if isDead and not deathFxActive then
+            if IsEntityDead(ped) and not ig.data.GetLocalPlayerState("IsDead") and not deathFxActive then
+                --
+                ig.death.PlayerKilled()
                 -- Player just died, start death effects
                 ig.fx.StartDeath()
                 deathFxActive = true
                 ig.func.Debug_2("Death FX started")
-            elseif not isDead and deathFxActive then
+            elseif not IsEntityDead(ped) not ig.data.GetLocalPlayerState("IsDead") and deathFxActive then
                 -- Player revived, stop death effects
                 ig.fx.StopDeath()
                 deathFxActive = false
