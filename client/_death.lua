@@ -1,8 +1,8 @@
 -- ====================================================================================--
-
+ig.death = {}
 -- ====================================================================================--
 
-function PlayerKilled()
+function ig.death.PlayerKilled()
     local ply = PlayerId()
     local ped = PlayerPedId()
     local log = false
@@ -67,27 +67,3 @@ function PlayerKilled()
         SetEntityCoords(ped, vector3(pos.x, pos.y, pos.z - 0.42))
     end
 end
-
--- ====================================================================================--
--- Optimized death detection thread
--- Checks death state periodically rather than per-frame
--- ====================================================================================--
-
-Citizen.CreateThread(function()
-    while true do
-        if ig.data.GetLoadedStatus() then
-            Wait(500) -- Check every 500ms instead of per-frame
-            
-            local ply = PlayerId()
-            local ped = PlayerPedId()
-            
-            if IsEntityDead(ped) then
-                if not ig.data.GetLocalPlayerState("IsDead") then
-                    PlayerKilled()
-                end
-            end
-        else
-            Wait(1250)
-        end
-    end
-end)

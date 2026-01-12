@@ -41,6 +41,7 @@ PRIMARY_ID :
     -- This will be what you choose to identify as the owner of the characters table within the DB.
     -- You can use any however I would leave it as the license as you need a legal copy of GTAV to
     -- play FiveM anyway, so everyone has a rockstar id, hence the license. But, up to you.
+    -- If you want to change it, please dont bother me with possible errors or issues. XD
     -- "fivem:" / "steam:" / "discord:" / "license:" / "ip:"
 ]]--
 conf.identifier = "license:"
@@ -83,10 +84,11 @@ conf.imagetoken = ""
 INSTANCE/ROUTINGBUCKET :
     -- Default world for all players.
 ]]--
-conf.instancedefault = 0 --
+conf.instancedefault = 0 -- Please do not change.
 --[[
-BANK START AMOUNT :
-    -- What do you want in your bank accounts?
+BANKLOANS START AMOUNT :
+    -- What do you want in your bank accounts in terms of a LOAN from the bank.
+    -- You can really ruin lives with debt.
 ]]--
 conf.startingloan = 0
 conf.bankoverdraw = 10
@@ -107,7 +109,9 @@ conf.nui = {}
 conf.nui.sync = 200
 --[[
 TIMEZONE ADJUSTMENT: 
-    -- Takes the server time, and change it based on 1 - 23 hours. 
+    -- Takes the server time, and change it based on 1 to 23 hours.
+    -- please only put positive numbers in... 
+    -- Eg you are in utc 00:00 but want it to run on Australian Eastern Standard time, so add 10 hours.
 ]]--
 conf.altertime = 0
 --[[
@@ -121,7 +125,7 @@ JOBS AND DEFAULTS
 conf.enablejobpayroll = true
 conf.enablejobcenter = false
 conf.enableduty = true
-conf.paycycle = conf.min * 15
+conf.paycycle = conf.min * 30
 --[[
 CALLBACK SECURITY:
     -- Ticket validation settings for secure callbacks

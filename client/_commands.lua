@@ -34,14 +34,3 @@ RegisterKeyMapping("armhold", "Arm Hold", "keyboard", "NumPad3")
 
 -- ====================================================================================--
 
-RegisterCommand("cash", function(source, args, rawCommand)
-    local cash = ig.data.GetLocalPlayerState("Cash")
-    TriggerEvent("Client:Notify", "Cash : $"..cash)
-end, false)
-
-RegisterCommand("bank", function(source, args, rawCommand)
-    local cash = ig.data.GetLocalPlayerState("Bank")
-    TriggerEvent("Client:Notify", "Bank : $"..cash)
-end, false)
-
--- ====================================================================================--
