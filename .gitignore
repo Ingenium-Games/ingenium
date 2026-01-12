@@ -18,6 +18,22 @@ nui/inventory/package-lock.json
 nui/node_modules/
 nui/dist/
 
+// ...existing code...
+# Node modules
+node_modules/
+**/node_modules/
+nui/node_modules/
+# Storybook / npm caches
+node_modules/.cache/
+```// filepath: c:\5M\repo\ingenium\.gitignore
+// ...existing code...
+# Node modules
+node_modules/
+**/node_modules/
+nui/node_modules/
+# Storybook / npm caches
+node_modules/.cache/
+
 # Storybook
 storybook-static/
 nui/**/*.stories.js
