@@ -3,14 +3,10 @@
 import { createPinia } from 'pinia';
 import '../src/styles/tailwind.css';
 
-// Add Pinia to all stories using decorators (Storybook v10+)
-export const decorators = [
-  (story, context) => {
-    const pinia = createPinia();
-    context.app.use(pinia);
-    return story();
-  },
-];
+// Use the new setup export for Storybook v10 Vue 3
+export const setup = (app) => {
+  app.use(createPinia());
+};
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
