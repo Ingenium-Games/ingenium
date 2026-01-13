@@ -90,7 +90,8 @@ BANKLOANS START AMOUNT :
     -- What do you want in your bank accounts in terms of a LOAN from the bank.
     -- You can really ruin lives with debt.
 ]]--
-conf.startingloan = 0
+conf.startingloan = false
+conf.startingloanamount = 0
 conf.bankoverdraw = 10
 --[[
 BANK LOANS TIMES TO PAY: 

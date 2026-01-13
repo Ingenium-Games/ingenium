@@ -106,14 +106,13 @@ RegisterServerCallback({
         data.Iban = iban
         data.Coords = json.encode(conf.spawn)
         data.Job = json.encode(conf.default.job)
-        data.Accounts = json.encode(conf.default.accounts)
         data.Modifiers = json.encode(conf.default.modifiers)
         data.Skills = json.encode(conf.default.skills)
         data.Appearance = json.encode(appearance)
         
         ig.sql.char.Add(data, function()
             -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etig.
-            ig.sql.bank.AddAccount(character_id, bank_number)
+            ig.sql.bank.AddAccount(character_id, bank_number, iban)
             --
             p:resolve()
         end)
