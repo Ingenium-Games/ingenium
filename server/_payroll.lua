@@ -77,14 +77,14 @@ end)
 -- ====================================================================================--
 
 function ig.payroll.ProcessPayroll()
-    if not conf.enablejobpayroll then
+    if not conf.enablepayroll then
         return
     end
     
     ig.log.Info("Payroll", "Starting payroll processing cycle...")
     
     -- Get all configured job payment amounts
-    local jobConfigs = conf.jobpayroll or {}
+    local jobConfigs = conf.jobs.payroll or {}
     local jobEmployees = {} -- Group employees by job
     
     -- Group on-duty players by job
@@ -303,14 +303,14 @@ if ig.cron and ig.cron.RunAt then
     for hour = 0, 23 do
         -- Run at :00 of each hour
         ig.cron.RunAt(hour, 0, function()
-            if conf.enablejobpayroll then
+            if conf.enablepayroll then
                 ig.payroll.ProcessPayroll()
             end
         end)
         
         -- Run at :30 of each hour
         ig.cron.RunAt(hour, 30, function()
-            if conf.enablejobpayroll then
+            if conf.enablepayroll then
                 ig.payroll.ProcessPayroll()
             end
         end)

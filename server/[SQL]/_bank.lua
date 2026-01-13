@@ -15,9 +15,9 @@ function ig.sql.bank.AddAccount(Character_ID, Account_Number, IBan, cb)
             end
         end)
     else
-    local Amount = ig.check.Number(conf.default.bank) + ig.check.Number(conf.startingloanamount)
-    local Loan = conf.startingloanamount
-    local Duration = conf.startingloanduration -- 30 days
+    local Amount = ig.check.Number(conf.default.bank) + ig.check.Number(conf.banking.startingloanamount)
+    local Loan = conf.banking.startingloanamount
+    local Duration = conf.banking.startingloanduration -- 30 days
     ig.sql.Insert(
         "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Bank`, `Iban`, `Loan`, `Duration`) VALUES (?, ?, ?, ?, ?, ?);",
         {Character_ID, Account_Number, Amount, IBan, Loan, Duration},
@@ -244,6 +244,42 @@ function ig.sql.bank.CheckAndFinalizeLoan(characterId, cb)
     ]]
     
     ig.sql.Update(query, {characterId}, function(affectedRows)
+        if cb then
+            cb(affectedRows)
+        end
+    end)
+end
+
+--- Get all accounts with negative balance
+-- Returns a table of accounts with negative bank balance (overdraft)
+-- @param cb callback function with results table
+function ig.sql.bank.GetNegativeBalanceAccounts(cb)
+    local query = [[
+        SELECT `Character_ID`, `Bank` 
+        FROM `banking_accounts` 
+        WHERE `Bank` < 0
+    ]]
+    
+    local result = ig.sql.Query(query, {})
+    if cb then
+        cb(result or {})
+    end
+    return result or {}
+end
+
+--- Apply overdraft fee to all negative accounts
+-- Deducts overdraft fee from all accounts with negative balance
+-- @param feeAmount Fee amount to charge
+-- @param cb callback function with affected rows count
+function ig.sql.bank.ApplyOverdraftFees(feeAmount, cb)
+    local fee = tonumber(feeAmount) or 0
+    local query = [[
+        UPDATE `banking_accounts` 
+        SET `Bank` = `Bank` - ? 
+        WHERE `Bank` < 0
+    ]]
+    
+    ig.sql.Update(query, {fee}, function(affectedRows)
         if cb then
             cb(affectedRows)
         end

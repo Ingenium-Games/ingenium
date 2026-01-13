@@ -151,7 +151,7 @@ end
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
     if not payments then
-        ig.cron.RunAt(conf.loanpayment.h, conf.loanpayment.m, ig.bank.CalculatePayments)
+        ig.cron.RunAt(conf.banking.loanpaymenttime.h, conf.banking.loanpaymenttime.m, ig.bank.CalculatePayments)
         payments = true
     end -- ig.func.Debug_1("[E] Added Cron Job [F] ig.bank.CalculatePayments()")
 end)
@@ -161,7 +161,7 @@ local interest = false
 -- queued to add
 AddEventHandler("onServerResourceStart", function()
     if not interest then
-        ig.cron.RunAt(conf.loaninterest.h, conf.loaninterest.m, ig.bank.CalculateInterest)
+        ig.cron.RunAt(conf.banking.loaninteresttime.h, conf.banking.loaninteresttime.m, ig.bank.CalculateInterest)
         interest = true
     end -- ig.func.Debug_1("[E] Added Cron Job [F] ig.bank.CalculateInterest()")
 end)
@@ -176,7 +176,7 @@ function ig.bank.CalculateInterest()
         return
     end
     
-    local interestRate = conf.interestrate or 5 -- Default 5% if not configured
+    local interestRate = conf.banking.interestrate or 5 -- Default 5% if not configured
     
     -- Get all active loans from database
     ig.sql.bank.GetAllLoansEnabled(function(loans)
@@ -266,36 +266,74 @@ function ig.bank.CalculateInterest()
 end
 
 
---- func desc
+--- Check and charge overdraft fees on negative balance accounts
+-- Applies overdraft fee to ALL accounts with negative balance (online or offline)
+-- Uses direct SQL queries to handle all accounts regardless of online status
 function ig.bank.CheckNegativeBalances()
     local xJob = ig.data.GetJob("bank")
-    local xPlayers = ig.data.GetPlayers()
-    for k, v in pairs(xPlayers) do
-        if v then
-            local xPlayer = v
-            local bank = xPlayer.GetBank()
-            if bank < 0 then
-                TriggerClientEvent("Client:Notify", xPlayer.GetID(),
-                    "Your Bank account is in negative. \nCurrent Balance is: $ " .. bank ..
-                        ". \nOver Draw Fee Charged at: $" .. conf.bankoverdraw ..
-                        ". \nThese fees apply every hour, on the hour, until balanced.", "error", 17500)
-                xPlayer.RemoveBank(conf.bankoverdraw)
-                xJob.AddBank(conf.bankoverdraw)
-            end
-        end
+    
+    if not xJob then
+        ig.func.Debug_1("Bank job not found for overdraft fee processing")
+        return
     end
-    -- ig.func.Debug_1("Active clients notified of negative bank balances and Fees charged at $"..conf.bankoverdraw)
+    
+    local overdraftFee = conf.banking.overdrawfee or 10
+    
+    -- Get all accounts with negative balance (online or offline)
+    ig.sql.bank.GetNegativeBalanceAccounts(function(negativeAccounts)
+        if not negativeAccounts or #negativeAccounts == 0 then
+            ig.func.Debug_1("No accounts with negative balance found")
+            return
+        end
+        
+        -- Apply overdraft fee to all negative accounts via single SQL query
+        ig.sql.bank.ApplyOverdraftFees(overdraftFee, function(affectedRows)
+            local totalFeesCollected = affectedRows * overdraftFee
+            
+            -- Add total fees to bank job account
+            if totalFeesCollected > 0 then
+                xJob.AddBank(totalFeesCollected)
+            end
+            
+            -- Log transactions and notify online players
+            for i = 1, #negativeAccounts do
+                local account = negativeAccounts[i]
+                local characterId = account.Character_ID
+                local previousBalance = tonumber(account.Bank) or 0
+                local newBalance = previousBalance - overdraftFee
+                
+                -- Log transaction for all accounts (online or offline)
+                ig.sql.banking.AddTransaction(characterId, {
+                    type = "Overdraft Fee",
+                    description = "Daily overdraft fee on negative balance account",
+                    amount = -overdraftFee
+                })
+                
+                -- Check if player is online and send notification
+                local xPlayer = ig.data.GetPlayer(characterId)
+                if xPlayer then
+                    TriggerClientEvent("Client:Notify", xPlayer.GetID(),
+                        "Overdraft Fee Applied\n" ..
+                        "Your Bank account is in negative.\n" ..
+                        "Current Balance: $" .. string.format("%.2f", newBalance) .. "\n" ..
+                        "Overdraft Fee Charged: $" .. string.format("%.2f", overdraftFee) .. "\n" ..
+                        "These fees apply daily at 9:00 AM until balanced.",
+                        "error", 5000)
+                end
+            end
+            
+            ig.func.Debug_1("Overdraft fee processing complete: " .. affectedRows .. 
+                           " accounts charged $" .. overdraftFee .. " each (total: $" .. totalFeesCollected .. ")")
+        end)
+    end)
 end
 
 local negative = false
--- queued to add
--- Set so the server will debit bank accounts on the hour every hour if in negative balance.
+-- Overdraft fee check: Configured time (default 9:00 AM daily)
 AddEventHandler("onServerResourceStart", function()
     if not negative then
-        for i = 0, 23, 1 do
-            ig.cron.RunAt(i, 0, ig.bank.CheckNegativeBalances)
-        end
+        ig.cron.RunAt(conf.banking.overdrafttime.h, conf.banking.overdrafttime.m, ig.bank.CheckNegativeBalances)
         negative = true
     end
-    -- ig.func.Debug_1("[E] Added Cron Job: [F] ig.bank.CheckNegativeBalances()")
+    -- ig.func.Debug_1("[E] Added Cron Job: [F] ig.bank.CheckNegativeBalances() at " .. conf.banking.overdrafttime.h .. ":" .. string.format("%02d", conf.banking.overdrafttime.m))
 end)
