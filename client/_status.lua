@@ -227,7 +227,7 @@ function ig.status.SetPlayer()
     ig.status.StartHungerDecrease()
     ig.status.StartThirstDecrease()
     if GetResourceState("sit") ~= "started" then
-        ig.func.Debug_1("[WARNING] Sit resource is not running. Stress decrease while sitting/laying will not function.")
+        ig.log.Warn("Status", "Sit resource is not running - stress decrease while sitting/laying will not function")
     elseif GetResourceState("sit") == "started" then
         ig.status.StartStressIncrease()
     end

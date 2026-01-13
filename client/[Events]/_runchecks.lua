@@ -17,10 +17,10 @@ AddEventHandler("Client:RunChecks:IsWanted", function()
     -- Example: Update UI, trigger wanted effects, etig.
     if wanted then
         -- Player is now wanted
-        ig.func.Debug_3("Player is now wanted")
+        ig.log.Trace("Status", "Player is now wanted")
     else
         -- Player is no longer wanted
-        ig.func.Debug_3("Player wanted status cleared")
+        ig.log.Trace("Status", "Player wanted status cleared")
     end
 end)
 
@@ -32,9 +32,9 @@ AddEventHandler("Client:RunChecks:IsSupporter", function()
     -- Handle supporter status changes
     -- Example: Enable supporter features, update UI, etig.
     if isSupporter then
-        ig.func.Debug_3("Player is now a supporter")
+        ig.log.Trace("Status", "Player is now a supporter")
     else
-        ig.func.Debug_3("Player supporter status removed")
+        ig.log.Trace("Status", "Player supporter status removed")
     end
 end)
 
@@ -46,10 +46,10 @@ AddEventHandler("Client:RunChecks:IsDead", function()
     -- Handle death status changes
     -- Example: Show death screen, respawn options, etig.
     if isDead then
-        ig.func.Debug_2("Player died")
+        ig.log.Debug("Status", "Player died")
         -- Death handling is already in client/_death.lua
     else
-        ig.func.Debug_2("Player revived")
+        ig.log.Debug("Status", "Player revived")
         -- Revive handling
     end
 end)
@@ -62,13 +62,13 @@ AddEventHandler("Client:RunChecks:IsCuffed", function()
     -- Handle cuffed status changes
     -- Example: Restrict movement, play animations, etig.
     if isCuffed then
-        ig.func.Debug_3("Player cuffed")
+        ig.log.Trace("Status", "Player cuffed")
         -- Apply cuffed effects
         local ped = PlayerPedId()
         SetEnableHandcuffs(ped, true)
         SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
     else
-        ig.func.Debug_3("Player uncuffed")
+        ig.log.Trace("Status", "Player uncuffed")
         -- Remove cuffed effects
         local ped = PlayerPedId()
         SetEnableHandcuffs(ped, false)
@@ -83,10 +83,10 @@ AddEventHandler("Client:RunChecks:IsEscorted", function()
     -- Handle escorted status changes
     -- Example: Attach to escorting player, restrict actions, etig.
     if isEscorted then
-        ig.func.Debug_3("Player is being escorted")
+        ig.log.Trace("Status", "Player is being escorted")
         -- Handle escort attachment
     else
-        ig.func.Debug_3("Player is no longer being escorted")
+        ig.log.Trace("Status", "Player is no longer being escorted")
         -- Detach from escort
     end
 end)
@@ -99,10 +99,10 @@ AddEventHandler("Client:RunChecks:IsEscorting", function()
     -- Handle escorting status changes
     -- Example: Attach escorted player, restrict actions, etig.
     if isEscorting then
-        ig.func.Debug_3("Player is escorting someone")
+        ig.log.Trace("Status", "Player is escorting someone")
         -- Handle escort attachment
     else
-        ig.func.Debug_3("Player stopped escorting")
+        ig.log.Trace("Status", "Player stopped escorting")
         -- Detach escorted player
     end
 end)
@@ -115,9 +115,9 @@ AddEventHandler("Client:RunChecks:IsSwimming", function()
     -- Handle swimming status changes
     -- Example: Apply swimming effects, update UI, etig.
     if isSwimming then
-        ig.func.Debug_3("Player is swimming")
+        ig.log.Trace("Status", "Player is swimming")
     else
-        ig.func.Debug_3("Player stopped swimming")
+        ig.log.Trace("Status", "Player stopped swimming")
     end
 end)
 
@@ -132,7 +132,7 @@ AddEventHandler("Client:RunChecks:Bank", function()
     local bank = LocalPlayer.state.Bank
     -- Handle bank balance changes
     -- Example: Update UI, show notifications, etig.
-    ig.func.Debug_3("Bank balance updated: $" .. tostring(bank or 0))
+    ig.log.Trace("Banking", "Bank balance updated: $" .. tostring(bank or 0))
     -- Trigger UI update event
     TriggerEvent("Client:HUD:UpdateBank", bank)
 end)
@@ -144,7 +144,7 @@ AddEventHandler("Client:RunChecks:Cash", function()
     local cash = LocalPlayer.state.Cash
     -- Handle cash changes
     -- Example: Update UI, show notifications, etig.
-    ig.func.Debug_3("Cash updated: $" .. tostring(cash or 0))
+    ig.log.Trace("Banking", "Cash updated: $" .. tostring(cash or 0))
     -- Trigger UI update event
     TriggerEvent("Client:HUD:UpdateCash", cash)
 end)
@@ -157,7 +157,7 @@ AddEventHandler("Client:RunChecks:Phone", function()
     -- Handle phone changes
     -- Example: Update phone app, sync contacts, etig.
     if phone then
-        ig.func.Debug_3("Phone number updated: " .. tostring(phone))
+        ig.log.Trace("Phone", "Phone number updated: " .. tostring(phone))
         -- Trigger phone system update
         TriggerEvent("Client:Phone:UpdateNumber", phone)
     end

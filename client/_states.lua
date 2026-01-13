@@ -34,7 +34,7 @@ function ig.state.ChangeAction(name, value, cb)
     if ig.states[name][value] then
         ig.states[name][value]["action"] = cb()
     else
-        ig.func.Debug_1("The states action: " .. name .. " does not exist, please add state prior to action.")
+        ig.log.Error("States", "State action " .. name .. " does not exist - please add state prior to action")
     end
 end
 
@@ -46,7 +46,7 @@ function ig.state.ChangeEffect(name, value, cb)
     if ig.states[name][value] then
         ig.states[name][value]["effect"] = cb()
     else
-        ig.func.Debug_1("The states effect: " .. name .. " does not exist, please add state prior to effect.")
+        ig.log.Error("States", "State effect " .. name .. " does not exist - please add state prior to effect")
     end
 end
 

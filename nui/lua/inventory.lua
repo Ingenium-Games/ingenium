@@ -128,9 +128,9 @@ RegisterNUICallback("inventory_close", function(data, cb)
             args = {externalNetId, playerInventory, externalInventory},
             callback = function(success)
                 if success then
-                    ig.func.Debug_1("Inventory saved successfully")
+                    ig.log.Info("Inventory", "Inventory saved successfully")
                 else
-                    ig.func.Debug_1("Inventory save failed")
+                    ig.log.Error("Inventory", "Inventory save failed")
                 end
             end
         })
@@ -141,9 +141,9 @@ RegisterNUICallback("inventory_close", function(data, cb)
             args = {GetPlayerPed(-1), playerInventory},
             callback = function(success)
                 if success then
-                    ig.func.Debug_1("Inventory saved successfully")
+                    ig.log.Info("Inventory", "Inventory saved successfully")
                 else
-                    ig.func.Debug_1("Inventory save failed")
+                    ig.log.Error("Inventory", "Inventory save failed")
                 end
             end
         })

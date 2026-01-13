@@ -10,14 +10,14 @@ function ig.bank.CalculatePayments()
     local xJob = ig.data.GetJob("bank")
     
     if not xJob then
-        ig.func.Debug_1("Bank job not found for loan payment processing")
+        ig.log.Error("Bank", "Bank job not found for loan payment processing")
         return
     end
     
     -- Get all active loans from database
     ig.sql.bank.GetAllLoansEnabled(function(loans)
         if not loans or #loans == 0 then
-            ig.func.Debug_1("No active loans to process for payment")
+            ig.log.Info("Bank", "No active loans to process for payment")
             return
         end
         
@@ -123,8 +123,7 @@ function ig.bank.CalculatePayments()
                         end
                         xJob.AddBank(totalPayments)
                         
-                        ig.func.Debug_1("Loan payment batch " .. batchNum .. "/" .. totalBatches .. 
-                                       " complete: " .. #transactionLog .. " processed")
+                        ig.log.Debug("Bank", "Loan payment batch " .. batchNum .. "/" .. totalBatches .. " complete: " .. #transactionLog .. " processed")
                     end)
                 end
                 
@@ -153,7 +152,7 @@ AddEventHandler("onServerResourceStart", function()
     if not payments then
         ig.cron.RunAt(conf.banking.loanpaymenttime.h, conf.banking.loanpaymenttime.m, ig.bank.CalculatePayments)
         payments = true
-    end -- ig.func.Debug_1("[E] Added Cron Job [F] ig.bank.CalculatePayments()")
+    end -- ig.log.Debug("Bank", "Added Cron Job: ig.bank.CalculatePayments()")
 end)
 --
 
@@ -163,7 +162,7 @@ AddEventHandler("onServerResourceStart", function()
     if not interest then
         ig.cron.RunAt(conf.banking.loaninteresttime.h, conf.banking.loaninteresttime.m, ig.bank.CalculateInterest)
         interest = true
-    end -- ig.func.Debug_1("[E] Added Cron Job [F] ig.bank.CalculateInterest()")
+    end -- ig.log.Debug("Bank", "Added Cron Job: ig.bank.CalculateInterest()")
 end)
 
 ---- Updates the characters loan to add the interest on the outstanding amount each day.
@@ -172,7 +171,7 @@ function ig.bank.CalculateInterest()
     local xJob = ig.data.GetJob("bank")
     
     if not xJob then
-        ig.func.Debug_1("Bank job not found for interest calculation")
+        ig.log.Error("Bank", "Bank job not found for interest calculation")
         return
     end
     
@@ -181,7 +180,7 @@ function ig.bank.CalculateInterest()
     -- Get all active loans from database
     ig.sql.bank.GetAllLoansEnabled(function(loans)
         if not loans or #loans == 0 then
-            ig.func.Debug_1("No active loans to process for interest")
+            ig.log.Info("Bank", "No active loans to process for interest")
             return
         end
         
@@ -240,8 +239,7 @@ function ig.bank.CalculateInterest()
                                 totalAccountsProcessed = totalAccountsProcessed + 1
                             end
                             
-                            ig.func.Debug_1("Interest calculation batch " .. batchNum .. "/" .. totalBatches .. 
-                                           " complete: " .. (endIdx - startIdx + 1) .. " accounts processed")
+                            ig.log.Debug("Bank", "Interest calculation batch " .. batchNum .. "/" .. totalBatches .. " complete: " .. (endIdx - startIdx + 1) .. " accounts processed")
                             
                             -- Small break to prevent thread hitching
                             Citizen.Wait(50)
@@ -257,8 +255,7 @@ function ig.bank.CalculateInterest()
                         Citizen.Wait(100) -- Break between batch threads
                     end
                     
-                    ig.func.Debug_1("Interest calculation complete: " .. affectedRows .. 
-                                   " accounts processed, $" .. math.ceil(totalInterestCharged) .. " total interest charged")
+                    ig.log.Info("Bank", "Interest calculation complete: " .. affectedRows .. " accounts processed, $" .. math.ceil(totalInterestCharged) .. " total interest charged")
                 end
             end)
         end)
@@ -273,7 +270,7 @@ function ig.bank.CheckNegativeBalances()
     local xJob = ig.data.GetJob("bank")
     
     if not xJob then
-        ig.func.Debug_1("Bank job not found for overdraft fee processing")
+        ig.log.Error("Bank", "Bank job not found for overdraft fee processing")
         return
     end
     
@@ -282,7 +279,7 @@ function ig.bank.CheckNegativeBalances()
     -- Get all accounts with negative balance (online or offline)
     ig.sql.bank.GetNegativeBalanceAccounts(function(negativeAccounts)
         if not negativeAccounts or #negativeAccounts == 0 then
-            ig.func.Debug_1("No accounts with negative balance found")
+            ig.log.Info("Bank", "No accounts with negative balance found")
             return
         end
         
@@ -322,8 +319,7 @@ function ig.bank.CheckNegativeBalances()
                 end
             end
             
-            ig.func.Debug_1("Overdraft fee processing complete: " .. affectedRows .. 
-                           " accounts charged $" .. overdraftFee .. " each (total: $" .. totalFeesCollected .. ")")
+            ig.log.Info("Bank", "Overdraft fee processing complete: " .. affectedRows .. " accounts charged $" .. overdraftFee .. " each (total: $" .. totalFeesCollected .. ")")
         end)
     end)
 end
@@ -335,5 +331,5 @@ AddEventHandler("onServerResourceStart", function()
         ig.cron.RunAt(conf.banking.overdrafttime.h, conf.banking.overdrafttime.m, ig.bank.CheckNegativeBalances)
         negative = true
     end
-    -- ig.func.Debug_1("[E] Added Cron Job: [F] ig.bank.CheckNegativeBalances() at " .. conf.banking.overdrafttime.h .. ":" .. string.format("%02d", conf.banking.overdrafttime.m))
+    -- ig.log.Debug("Bank", "Added Cron Job: ig.bank.CheckNegativeBalances() at " .. conf.banking.overdrafttime.h .. ":" .. string.format("%02d", conf.banking.overdrafttime.m))
 end)

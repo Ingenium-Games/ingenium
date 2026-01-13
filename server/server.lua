@@ -75,7 +75,7 @@ AddEventHandler("playerDropped", function()
         -- Save Data
         ig.sql.save.User(xPlayer, function()
             ig.sql.char.SetActive(xPlayer.GetIdentifier(), false, function()
-                ig.func.Debug_1("[E] 'playerDropped' : Player Disconnection.")
+                ig.log.Info("Server", "Player disconnection event triggered")
                 ig.data.RemovePlayer(src)
             end)
         end)

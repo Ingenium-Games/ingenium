@@ -43,7 +43,7 @@ RegisterNetEvent('Client:Drop:Notify', function(data)
         -- Store blip handle for cleanup
         dropBlipHandles[uuid] = blipHandle
         
-        ig.func.Debug_3("Created blip for drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
+        ig.log.Trace("Drops", "Created blip for drop at (" .. coords.x .. ", " .. coords.y .. ", " .. coords.z .. ")")
     end
     
     -- Trigger hook for custom scripts (phone notifications, etig.)
@@ -54,7 +54,7 @@ RegisterNetEvent('Client:Drop:Notify', function(data)
         uuid = uuid
     })
     
-    ig.func.Debug_1("Received drop notification" .. (isDeadDrop and " (dead drop)" or " (with blip)"))
+    ig.log.Info("Drops", "Received drop notification" .. (isDeadDrop and " (dead drop)" or " (with blip)"))
 end)
 
 --- Handle access denied
@@ -69,7 +69,7 @@ RegisterNetEvent('Client:Drop:AccessDenied', function(data)
         }
     })
     
-    ig.func.Debug_1("Access denied to restricted drop")
+    ig.log.Info("Drops", "Access denied to restricted drop")
 end)
 
 --- Clean up blip when drop is removed
@@ -77,7 +77,7 @@ RegisterNetEvent('Client:Drop:Removed', function(uuid)
     if dropBlipHandles[uuid] then
         ig.blip.Remove(dropBlipHandles[uuid])
         dropBlipHandles[uuid] = nil
-        ig.func.Debug_3("Removed blip for drop " .. uuid)
+        ig.log.Trace("Drops", "Removed blip for drop " .. uuid)
     end
 end)
 
@@ -103,7 +103,7 @@ CreateThread(function()
             -- Update the UI if inventory is currently open
             TriggerEvent("Client:Drop:InventoryUpdated", netId, value)
             
-            ig.func.Debug_3("Drop inventory updated via State Bag for NetID: " .. tostring(netId))
+            ig.log.Trace("Drops", "Drop inventory updated via State Bag for NetID: " .. tostring(netId))
         end
     end)
 end)
@@ -143,7 +143,7 @@ RegisterNetEvent('Client:Inventory:UpdateLive', function(fromNetId, toNetId)
                 }
             })
             
-            ig.func.Debug_3("Live inventory update sent to NUI")
+            ig.log.Trace("Drops", "Live inventory update sent to NUI")
         end
     end
 end)

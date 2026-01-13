@@ -91,7 +91,7 @@ end
 ---@param max any
 ---@param amount any
 function ig.rng.RandomValuesNoRepeats(min,max,amount)
-    if (max - min) <= amount then ig.func.Debug_1("Unable to use values from [F] ig.func.RandomValuesNoRepeats as min and max values do not allow for the amount required.") return end
+    if (max - min) <= amount then ig.log.Error("RNG", "Unable to use values for ig.func.RandomValuesNoRepeats - min and max values do not allow for the amount required") return end
     --
     local vars = {}
     repeat

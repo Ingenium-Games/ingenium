@@ -319,7 +319,7 @@ RegisterServerCallback({
             xPlayer.SetDuty(bool)
             return { success = true, duty = bool }
         else
-            ig.func.Debug_3("Ability to go on/off duty has ben disabled.")
+            ig.log.Trace("Character", "Ability to go on/off duty has been disabled")
             return { success = false, error = "Duty system disabled" }
         end
     end

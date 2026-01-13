@@ -161,7 +161,7 @@ AddEventHandler("Client:Character:Ready", function()
         SetWeaponsNoAutoreload(true)
         RemoveMultiplayerHudCash()
         
-        ig.func.Debug_1("RP Mode character initialization complete")
+        ig.log.Info("Character", "RP Mode character initialization complete")
     end
     --
 end)
@@ -189,7 +189,7 @@ AddEventHandler("Client:Character:OffDuty", function()
         -- Add Functions or Hooks here!
         
     else
-        ig.func.Debug_3("Ability to go off duty has ben disabled.")
+        ig.log.Trace("Character", "Ability to go off duty has been disabled")
     end
 end)
 
@@ -199,7 +199,7 @@ AddEventHandler("Client:Character:OnDuty", function(job)
         -- Add Functions or Hooks here!
        
     else
-        ig.func.Debug_3("Ability to go on duty has ben disabled.")
+        ig.log.Trace("Character", "Ability to go on duty has been disabled")
     end
 end)
 
