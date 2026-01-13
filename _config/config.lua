@@ -130,6 +130,89 @@ conf.enablejobpayroll = true
 conf.enablejobcenter = false
 conf.enableduty = true
 conf.paycycle = conf.min * 30
+
+-- Job Payroll Configuration
+-- Defines payment amounts and eligibility for each job
+-- Payment processing occurs every 30 minutes
+-- {enabled, payment_amount, minimum_duty_minutes}
+conf.jobpayroll = {
+    -- Police Department
+    ['police'] = {
+        enabled = true,
+        payment_amount = 150.00,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Sheriff Office
+    ['sheriff'] = {
+        enabled = true,
+        payment_amount = 140.00,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Fire Department / EMS
+    ['fire'] = {
+        enabled = true,
+        payment_amount = 130.00,
+        minimum_duty_minutes = 20
+    },
+    
+    ['medic'] = {
+        enabled = true,
+        payment_amount = 120.00,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Mechanics
+    ['mechanic'] = {
+        enabled = true,
+        payment_amount = 100.00,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Business
+    ['business'] = {
+        enabled = true,
+        payment_amount = 90.00,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Government
+    ['government'] = {
+        enabled = true,
+        payment_amount = 45,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Courts
+    ['courts'] = {
+        enabled = true,
+        payment_amount = 45,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Taxi
+    ['taxi'] = {
+        enabled = true,
+        payment_amount = 20,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Delivery / Postal
+    ['postal'] = {
+        enabled = true,
+        payment_amount = 20,
+        minimum_duty_minutes = 20
+    },
+    
+    -- Job examples - uncomment to enable
+    -- ['families'] = {enabled = true, payment_amount = 60.00, minimum_duty_minutes = 20},
+    -- ['ballers'] = {enabled = true, payment_amount = 60.00, minimum_duty_minutes = 20},
+    -- ['ls_mafia'] = {enabled = true, payment_amount = 65.00, minimum_duty_minutes = 20},
+}
+
+-- Payroll start time (if using cron-based scheduling)
+conf.payrolltime = {h = 0, m = 0}
 --[[
 CALLBACK SECURITY:
     -- Ticket validation settings for secure callbacks
