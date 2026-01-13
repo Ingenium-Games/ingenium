@@ -152,6 +152,12 @@ end, false)
 -- Listen for character events
 RegisterNetEvent("Client:Character:Play")
 AddEventHandler("Client:Character:Play", function(id)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     print("Playing character:", id)
     TriggerEvent("Client:Notify", "Loading character...", "green", 3000)
     
@@ -164,12 +170,24 @@ end)
 
 RegisterNetEvent("Client:Character:Create")
 AddEventHandler("Client:Character:Create", function(firstName, lastName)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     print("Creating character:", firstName, lastName)
     TriggerEvent("Client:Notify", "Creating character: " .. firstName .. " " .. lastName, "green", 3000)
 end)
 
 RegisterNetEvent("Client:Character:Delete")
 AddEventHandler("Client:Character:Delete", function(id)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     print("Deleting character:", id)
     TriggerEvent("Client:Notify", "Character deleted", "red", 3000)
 end)

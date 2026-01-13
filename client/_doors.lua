@@ -189,6 +189,12 @@ function ig.door.SetState(hash, state)
 end
 
 RegisterNetEvent("Client:Doors:Sync", function(hash, state)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
+    
     if IsDoorRegisteredWithSystem(hash) then
         ig.door.SetState(hash, state)
         DoorSystemSetDoorState(hash, state, 0)

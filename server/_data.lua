@@ -155,7 +155,7 @@ function ig.data.ServerSync()
         -- Start the consolidated save loop
         SetTimeout(conf.serversync, ConsolidatedSaveLoop)
         syncRegistered = true
-        ig.func.Debug_1("Consolidated save manager started")
+        ig.log.Info("Data", "Consolidated save manager started")
     end
 end
 
@@ -165,13 +165,13 @@ function ig.data.ReviveSync()
         local function Do()
             local result = ig.sql.char.ReviveDeadCharacters()
             if result then
-                ig.func.Debug_2("Revived Characters")
+                ig.log.Debug("Data", "Revived characters sync running")
             end
             SetTimeout(conf.revivesync, Do)
         end
         SetTimeout(conf.revivesync, Do)
         reviveRegistered = true
-        ig.func.Debug_1("Revive sync started (every minute)")
+        ig.log.Info("Data", "Revive sync started (every minute)")
     end
 end
 
@@ -289,7 +289,7 @@ end
 --- Restore drops from JSON after server restart
 function ig.data.RestoreDrops()
     if not ig.drops or type(ig.drops) ~= "table" then
-        ig.func.Debug_1("No drops to restore")
+        ig.log.Info("Data", "No drops to restore")
         return
     end
     
@@ -318,15 +318,15 @@ function ig.data.RestoreDrops()
                     --
                     restoredCount = restoredCount + 1
                 else
-                    ig.func.Debug_1("Failed to get xObject for restored drop: " .. uuid)
+                    ig.log.Error("Data", "Failed to get xObject for restored drop: " .. uuid)
                     failedCount = failedCount + 1
                 end
             else
-                ig.func.Debug_1("Failed to create entity for drop: " .. uuid)
+                ig.log.Error("Data", "Failed to create entity for drop: " .. uuid)
                 failedCount = failedCount + 1
             end
         else
-            ig.func.Debug_1("Invalid drop data for UUID: " .. uuid)
+            ig.log.Error("Data", "Invalid drop data for UUID: " .. uuid)
             failedCount = failedCount + 1
         end
     end

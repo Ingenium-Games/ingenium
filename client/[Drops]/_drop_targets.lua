@@ -34,5 +34,5 @@ CreateThread(function()
         },
     })
     
-    ig.func.Debug_1("Drop targets registered with ingenium targeting system")
+    ig.log.Info("Drops", "Drop targets registered with ingenium targeting system")
 end)

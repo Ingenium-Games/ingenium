@@ -11,7 +11,7 @@
 ]]--
 
 RegisterCommand("crossarms", function(source, args, rawCommand)
-    TriggerEvent("Animation:General:ArmsCrossed", true, GetPlayerPed(-1))
+    TriggerEvent("Client:Animation:ArmsCrossed", true, GetPlayerPed(-1))
 end, false)
 TriggerEvent("chat:removeSuggestion", "/crossarms")
 RegisterKeyMapping("crossarms", "Cross arms", "keyboard", "NumPad1")
@@ -19,7 +19,7 @@ RegisterKeyMapping("crossarms", "Cross arms", "keyboard", "NumPad1")
 -- ====================================================================================--
 
 RegisterCommand("handsup", function(source, args, rawCommand)
-    TriggerEvent("Animation:General:HandsUp", true, GetPlayerPed(-1))
+    TriggerEvent("Client:Animation:HandsUp", true, GetPlayerPed(-1))
 end, false)
 TriggerEvent("chat:removeSuggestion", "/handsup")
 RegisterKeyMapping("handsup", "Hands Up", "keyboard", "NumPad2")
@@ -27,7 +27,7 @@ RegisterKeyMapping("handsup", "Hands Up", "keyboard", "NumPad2")
 -- ====================================================================================--
 
 RegisterCommand("armhold", function(source, args, rawCommand)
-    TriggerEvent("Animation:General:HoldArm", true, GetPlayerPed(-1))
+    TriggerEvent("Client:Animation:HoldArm", true, GetPlayerPed(-1))
 end, false)
 TriggerEvent("chat:removeSuggestion", "/armhold")
 RegisterKeyMapping("armhold", "Arm Hold", "keyboard", "NumPad3")

@@ -578,7 +578,7 @@ function ig.func.CreatePed(name, x, y, z, h)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                ig.func.Debug_2("Timout Reached on creating object")
+                ig.log.Debug("Entity", "Timeout reached on creating object")
                 return false, false
             end
         end
@@ -618,7 +618,7 @@ function ig.func.CreateObject(name, x, y, z, isdoor)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                ig.func.Debug_2("Timout Reached on creating object")
+                ig.log.Debug("Entity", "Timeout reached on creating object")
                 return false, false
             end
         end
@@ -655,7 +655,7 @@ function ig.func.CreateVehicle(name, x, y, z, h)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                ig.func.Debug_2("Timout Reached on creating object")
+                ig.log.Debug("Entity", "Timeout reached on creating object")
                 return false, false
             end
         end
@@ -853,6 +853,31 @@ function ig.func.SetVehicleCondition(vehicle, Condition)
     ig.func.SetVehicleDoorStates(vehicle, Condition[9])
     -- 10 window states
     ig.func.SetVehicleWindowStates(vehicle, Condition[10])
+end
+
+-- returns the complete statebag data for a vehicle (captures all state changes made by any script)
+--- func desc
+---@param vehicle any
+function ig.func.GetVehicleStatebag(vehicle)
+    local statebag = {}
+    if GetEntityStatebag(vehicle) then
+        for key, value in pairs(GetEntityStatebag(vehicle)) do
+            statebag[key] = value
+        end
+    end
+    return statebag
+end
+
+-- apply all statebag data back to a vehicle
+--- func desc
+---@param vehicle any
+---@param statebag any
+function ig.func.SetVehicleStatebag(vehicle, statebag)
+    if statebag and type(statebag) == 'table' then
+        for key, value in pairs(statebag) do
+            Entity(vehicle).state[key] = value
+        end
+    end
 end
 
 -- returns all non-stock vehicle mods

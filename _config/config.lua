@@ -86,20 +86,6 @@ INSTANCE/ROUTINGBUCKET :
 ]]--
 conf.instancedefault = 0 -- Please do not change.
 --[[
-BANKLOANS START AMOUNT :
-    -- What do you want in your bank accounts in terms of a LOAN from the bank.
-    -- You can really ruin lives with debt.
-]]--
-conf.startingloan = 0
-conf.bankoverdraw = 10
---[[
-BANK LOANS TIMES TO PAY: 
-    -- Repayment Time to take money from bank account
-    -- Loan interest calculation time to apply interest.
-]]--
-conf.loanpayment = {h = 12, m = 0}
-conf.loaninterest = {h = 15, m = 0}
---[[
 PLAYER HUNGER / THIRST / HP / ARMOUR: 
     -- Values and times.
 ]]--
@@ -114,18 +100,6 @@ TIMEZONE ADJUSTMENT:
     -- Eg you are in utc 00:00 but want it to run on Australian Eastern Standard time, so add 10 hours.
 ]]--
 conf.altertime = 0
---[[
-JOBS AND DEFAULTS
-    -- DEFAULT STARTING BALANCES FOR ALL JOBS IPON INITIAL CREATION
-    -- Take money from Job account to pay staff?
-    -- Use the job center rather than have all jobs whitelisted. (Not really intended outside of private servers, private might do seasonal things, and offer different ways of setting up bosses etig.)
-    -- Permit jobs to be able to go off duty to not get paid for service while online.
-    -- The time taken serverside to do pay runs.
-]]--
-conf.enablejobpayroll = true
-conf.enablejobcenter = false
-conf.enableduty = true
-conf.paycycle = conf.min * 30
 --[[
 CALLBACK SECURITY:
     -- Ticket validation settings for secure callbacks
@@ -148,7 +122,6 @@ conf.callback.staleThreshold = 60 * conf.sec    -- 60 seconds of inactivity
 --[[
 DROP SYSTEM CONFIGURATION
 ]]--
-
 -- Logging configuration
 conf.log = conf.log or {}
 conf.log.enabled = false -- console logging default: OFF
@@ -182,6 +155,23 @@ conf.rp = {}
 conf.rp.idleCameraInterval = 5 * conf.sec       -- 5 seconds between idle camera checks
 conf.rp.npcWeaponInterval = 2.5 * conf.sec      -- 2.5 seconds between NPC weapon checks
 conf.rp.controlIdleInterval = 100               -- 100ms when no special states active
+--[[
+VEHICLE PERSISTENCE CONFIGURATION:
+    -- Controls how parked vehicles are handled
+    -- [1] enablePersistence - Enable/disable entire persistence system
+    -- [2] parkingMode - "place" (stay in spot) or "garage" (disappear until taken out)
+    -- [3] Protected while parked - If parkingMode="place", vehicles can't be damaged/deleted
+    -- [4] Auto-respawn on join - Respawn garaged vehicles when owner joins
+]]--
+conf.persistence = {}
+conf.persistence.enablePersistence = true       -- Enable vehicle persistence system
+conf.persistence.parkingMode = "place"          -- "place" = stays in world | "garage" = disappears until taken out
+conf.persistence.protectParkedVehicles = true   -- Prevent damage/deletion while parked (if parkingMode="place")
+conf.persistence.autoRespawnOnJoin = false      -- Auto-respawn garaged vehicles when owner joins
+conf.persistence.logging = {
+    enabled = false                             -- Enable persistence system logging
+}
 -- ====================================================================================--
-conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
+conf.resourcename = GetCurrentResourceName()
+conf.consolechannel = "script:"..tostring(conf.resourcename)
 conf.lock = nil

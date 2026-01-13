@@ -1,5 +1,4 @@
 
-local target = exports["ig.target"]
 local GetEntityBoneIndexByName = GetEntityBoneIndexByName
 local GetWorldPositionOfEntityBone = GetWorldPositionOfEntityBone
 local GetVehicleDoorLockStatus = GetVehicleDoorLockStatus
@@ -14,7 +13,7 @@ local function toggleDoor(vehicle, door)
     end
 end
 
-target:addGlobalVehicle({
+ig.target.addGlobalVehicle({
     {
         name = 'ig.target:driverF',
         icon = 'fa-solid fa-car-side',
@@ -32,7 +31,7 @@ target:addGlobalVehicle({
     }
 })
 
-target:addGlobalVehicle({
+ig.target.addGlobalVehicle({
     {
         name = 'ig.target:passengerF',
         icon = 'fa-solid fa-car-side',
@@ -48,7 +47,7 @@ target:addGlobalVehicle({
     }
 })
 
-target:addGlobalVehicle({
+ig.target.addGlobalVehicle({
     {
         name = 'ig.target:driverR',
         icon = 'fa-solid fa-car-side',
@@ -64,7 +63,7 @@ target:addGlobalVehicle({
     }
 })
 
-target:addGlobalVehicle({
+ig.target.addGlobalVehicle({
     {
         name = 'ig.target:passengerR',
         icon = 'fa-solid fa-car-side',
@@ -81,7 +80,7 @@ target:addGlobalVehicle({
 })
 
 
-target:addGlobalVehicle({
+ig.target.addGlobalVVehicle({
     {
         name = 'ig.target:bonnet',
         icon = 'fa-solid fa-car',
@@ -97,7 +96,7 @@ target:addGlobalVehicle({
     }
 })
 
-target:addGlobalVehicle({
+ig.target.addGlobalVehicle({
     {
         name = 'ig.target:trunk',
         icon = 'fa-solid fa-car-rear',

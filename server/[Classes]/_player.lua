@@ -12,6 +12,7 @@ function ig.class.Player(source, character_id)
     local Steam_ID, FiveM_ID, License_ID, Discord_ID = ig.func.identifiers(src)
     local user = ig.sql.user.Get(License_ID)
     local char = ig.sql.char.Get(Character_ID)
+    local bank = ig.sql.bank.GetBank(Character_ID)
     local self = {}
     --
     self.ID = src
@@ -139,10 +140,6 @@ function ig.class.Player(source, character_id)
     self.OldCoords = self.Coords
     --
     self.Ammo = json.decode(char.Ammo)
-    --
-    self.Accounts = json.decode(char.Accounts)
-    self.State.Cash = self.Accounts.Cash
-    self.State.Bank = self.Accounts.Bank
     --
     self.Licenses = json.decode(char.Licenses)
     --
@@ -459,46 +456,6 @@ function ig.class.Player(source, character_id)
             return false
         else
             return true
-        end
-    end
-    --
-    self.GetAccounts = function()
-        return self.Accounts
-    end
-    --
-    self.GetAccount = function(acc)
-        for k, v in pairs(self.Accounts) do
-            if k == acc then
-                return v
-            end
-        end
-    end
-    --
-    self.SetAccount = function(acc, v)
-        local num = ig.check.Number(v)
-        num = ig.math.Decimals(num, 2)
-        if self.Accounts[acc] then
-            if self.Accounts[acc] ~= num then
-                self.Accounts[acc] = num
-                self.IsDirty = true
-                self.DirtyFields.Accounts = true
-                self.EncodedAccounts = nil
-            end
-        else
-            ig.func.Debug_1("Account entered does not exist")
-        end
-    end
-    --
-    self.RefreshAccounts = function()
-        -- local cash = self.GetAccount("Cash")
-        local bank = self.GetAccount("Bank")
-        --[[
-        if cash then
-            self.State.Cash = cash
-        end
-        ]] --
-        if bank then
-            self.State.Bank = bank
         end
     end
     --

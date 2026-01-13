@@ -22,7 +22,7 @@ Citizen.CreateThread(function()
         SwitchTrainTrack(0, false)
         SwitchTrainTrack(3, false)
         SetRandomTrains(false)
-        ig.func.Debug_1("RP: Trains disabled")
+        ig.log.Info("RPFeatures", "Trains disabled")
     end
     
     -- Disable police dispatch if configured
@@ -30,14 +30,14 @@ Citizen.CreateThread(function()
         for i = 1, 15 do
             EnableDispatchService(i, false)
         end
-        ig.func.Debug_1("RP: Dispatch services disabled")
+        ig.log.Info("RPFeatures", "Dispatch services disabled")
     end
     
     -- Set audio flags for RP experience
     SetAudioFlag("PoliceScannerDisabled", true)
     SetAudioFlag("DisableFlightMusic", true)
     
-    ig.func.Debug_1("RP: One-time setup complete")
+    ig.log.Info("RPFeatures", "One-time setup complete")
 end)
 
 -- ====================================================================================--

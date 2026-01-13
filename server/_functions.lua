@@ -376,7 +376,7 @@ function ig.func.CreateVehicle(name, x, y, z, h, data, routingBucket)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            ig.func.Debug_2("Timout Reached on creating vehicle")
+            ig.log.Debug("Entity", "Timeout reached on creating vehicle")
             return false, false
         end
     end
@@ -416,7 +416,7 @@ function ig.func.CreatePed(name, x, y, z, h, routingBucket)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            ig.func.Debug_2("Timout Reached on creating ped")
+            ig.log.Debug("Entity", "Timeout reached on creating ped")
             return false, false
         end
     end
@@ -452,7 +452,7 @@ function ig.func.CreateObject(model, x, y, z, isdoor, data)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            ig.func.Debug_2("Timout Reached on creating object")
+            ig.log.Debug("Entity", "Timeout reached on creating object")
             return false, false
         end
     end

@@ -174,12 +174,12 @@ Citizen.CreateThread(function()
                 -- Player just died, start death effects
                 ig.fx.StartDeath()
                 deathFxActive = true
-                ig.func.Debug_2("Death FX started")
+                ig.log.Debug("RPFeatures", "Death FX started")
             elseif not IsEntityDead(ped) not ig.data.GetLocalPlayerState("IsDead") and deathFxActive then
                 -- Player revived, stop death effects
                 ig.fx.StopDeath()
                 deathFxActive = false
-                ig.func.Debug_2("Death FX stopped")
+                ig.log.Debug("RPFeatures", "Death FX stopped")
             end
         else
             -- Player not loaded

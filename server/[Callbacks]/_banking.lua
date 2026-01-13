@@ -24,7 +24,7 @@ RegisterServerCallback({
         local favorites = ig.sql.banking.GetFavorites(xPlayer.GetCharacter_ID())
         
         -- Send data to client
-        TriggerClientEvent("banking:openMenu", source, {
+        TriggerClientEvent("Client:Banking:OpenMenu", source, {
             characterName = characterName,
             iban = iban or "N/A",
             balance = bankBalance,
