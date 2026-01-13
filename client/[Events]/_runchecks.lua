@@ -12,6 +12,12 @@
 --- Triggered when the player's wanted status changes
 RegisterNetEvent("Client:RunChecks:IsWanted")
 AddEventHandler("Client:RunChecks:IsWanted", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local wanted = LocalPlayer.state.IsWanted
     -- Handle wanted status changes
     -- Example: Update UI, trigger wanted effects, etig.
@@ -28,6 +34,12 @@ end)
 --- Triggered when the player's supporter status changes
 RegisterNetEvent("Client:RunChecks:IsSupporter")
 AddEventHandler("Client:RunChecks:IsSupporter", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local isSupporter = LocalPlayer.state.IsSupporter
     -- Handle supporter status changes
     -- Example: Enable supporter features, update UI, etig.
@@ -42,6 +54,12 @@ end)
 --- Triggered when the player's death status changes
 RegisterNetEvent("Client:RunChecks:IsDead")
 AddEventHandler("Client:RunChecks:IsDead", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local isDead = LocalPlayer.state.IsDead
     -- Handle death status changes
     -- Example: Show death screen, respawn options, etig.
@@ -58,6 +76,12 @@ end)
 --- Triggered when the player's cuffed status changes
 RegisterNetEvent("Client:RunChecks:IsCuffed")
 AddEventHandler("Client:RunChecks:IsCuffed", function()
+            -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local isCuffed = LocalPlayer.state.IsCuffed
     -- Handle cuffed status changes
     -- Example: Restrict movement, play animations, etig.
@@ -79,6 +103,12 @@ end)
 --- Triggered when the player's escorted status changes
 RegisterNetEvent("Client:RunChecks:IsEscorted")
 AddEventHandler("Client:RunChecks:IsEscorted", function()
+            -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local isEscorted = LocalPlayer.state.IsEscorted
     -- Handle escorted status changes
     -- Example: Attach to escorting player, restrict actions, etig.
@@ -95,6 +125,12 @@ end)
 --- Triggered when the player's escorting status changes
 RegisterNetEvent("Client:RunChecks:IsEscorting")
 AddEventHandler("Client:RunChecks:IsEscorting", function()
+            -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local isEscorting = LocalPlayer.state.IsEscorting
     -- Handle escorting status changes
     -- Example: Attach escorted player, restrict actions, etig.
@@ -111,6 +147,12 @@ end)
 --- Triggered when the player's swimming status changes
 RegisterNetEvent("Client:RunChecks:IsSwimming")
 AddEventHandler("Client:RunChecks:IsSwimming", function()
+            -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local isSwimming = LocalPlayer.state.IsSwimming
     -- Handle swimming status changes
     -- Example: Apply swimming effects, update UI, etig.
@@ -121,46 +163,4 @@ AddEventHandler("Client:RunChecks:IsSwimming", function()
     end
 end)
 
--- ====================================================================================--
--- Banking/Economy State Checks
--- ====================================================================================--
 
---- Bank Account State Check
---- Triggered when the player's bank balance changes
-RegisterNetEvent("Client:RunChecks:Bank")
-AddEventHandler("Client:RunChecks:Bank", function()
-    local bank = LocalPlayer.state.Bank
-    -- Handle bank balance changes
-    -- Example: Update UI, show notifications, etig.
-    ig.log.Trace("Banking", "Bank balance updated: $" .. tostring(bank or 0))
-    -- Trigger UI update event
-    TriggerEvent("Client:HUD:UpdateBank", bank)
-end)
-
---- Cash State Check
---- Triggered when the player's cash amount changes
-RegisterNetEvent("Client:RunChecks:Cash")
-AddEventHandler("Client:RunChecks:Cash", function()
-    local cash = LocalPlayer.state.Cash
-    -- Handle cash changes
-    -- Example: Update UI, show notifications, etig.
-    ig.log.Trace("Banking", "Cash updated: $" .. tostring(cash or 0))
-    -- Trigger UI update event
-    TriggerEvent("Client:HUD:UpdateCash", cash)
-end)
-
---- Phone State Check
---- Triggered when the player's phone number changes
-RegisterNetEvent("Client:RunChecks:Phone")
-AddEventHandler("Client:RunChecks:Phone", function()
-    local phone = LocalPlayer.state.Phone
-    -- Handle phone changes
-    -- Example: Update phone app, sync contacts, etig.
-    if phone then
-        ig.log.Trace("Phone", "Phone number updated: " .. tostring(phone))
-        -- Trigger phone system update
-        TriggerEvent("Client:Phone:UpdateNumber", phone)
-    end
-end)
-
--- ====================================================================================--

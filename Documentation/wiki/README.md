@@ -4,7 +4,7 @@ Complete wiki-style reference documentation for all Ingenium framework functions
 
 ## Overview
 
-This wiki contains comprehensive documentation for **726 functions** across the Ingenium framework. Each function has its own dedicated markdown file with:
+This wiki contains comprehensive documentation for **745 functions** and **14 events** across the Ingenium framework. Each item has its own dedicated markdown file with:
 
 - ✅ Function signature and parameters
 - ✅ Detailed description
@@ -24,8 +24,8 @@ This wiki contains comprehensive documentation for **726 functions** across the 
 
 ### Most Common Namespaces
 
-- **[sql](#sql)** - 92 functions
-- **[func](#func)** - 63 functions
+- **[func](#func)** - 65 functions
+- **[vehicle](#vehicle)** - 32 functions
 - **[appearance](#appearance)** - 50 functions
 - **[voip](#voip)** - 43 functions
 - **[item](#item)** - 36 functions
@@ -33,7 +33,6 @@ This wiki contains comprehensive documentation for **726 functions** across the 
 - **[data](#data)** - 27 functions
 - **[job](#job)** - 27 functions
 - **[note](#note)** - 26 functions
-- **[vehicle](#vehicle)** - 21 functions
 
 ## Security Best Practices
 
@@ -55,7 +54,7 @@ Found an issue or want to improve the documentation?
 
 ---
 
-Total Functions: **726**
+Total Functions: **745** | Total Events: **14**
 
 ## All Namespaces
 
@@ -73,7 +72,7 @@ Total Functions: **726**
 - [data](#data) (27 functions)
 - [door](#door) (11 functions)
 - [drop](#drop) (7 functions)
-- [event](#event) (1 functions)
+- [event](#event) (14 events)
 - [file](#file) (4 functions)
 - [func](#func) (63 functions)
 - [fx](#fx) (2 functions)
@@ -311,6 +310,30 @@ Total Functions: **726**
 
 ## event
 
+Network and local events fired by Ingenium framework. Events follow the naming convention: `ResourceName:Side:EventName`
+
+### Client Events
+
+- [Client:EnteredVehicle](ig_event_ClientEnteredVehicle.md) - Local event fired when player enters a vehicle
+- [Client:LeftVehicle](ig_event_ClientLeftVehicle.md) - Local event fired when player exits a vehicle
+
+### Server Events
+
+- [Server:Vehicle:PlayerEntered](ig_event_ServerPlayerEnteredVehicle.md) - Network event sent from client when entering vehicle
+- [Server:Vehicle:PlayerLeft](ig_event_ServerPlayerLeftVehicle.md) - Network event sent from client when exiting vehicle
+- [Server:Vehicle:OnPlayerEntered](ig_event_ServerOnPlayerEnteredVehicle.md) - Internal server event on vehicle entry
+- [Server:Vehicle:OnPlayerLeft](ig_event_ServerOnPlayerLeftVehicle.md) - Internal server event on vehicle exit
+
+### Vehicle Persistence Events
+
+- [Server:VehiclePersistence:RegisterCondition](ig_event_VehiclePersistenceRegisterCondition.md) - Register vehicle condition on entry
+- [Server:VehiclePersistence:UpdateCondition](ig_event_VehiclePersistenceUpdateCondition.md) - Update vehicle condition on exit
+- [vehicle:persistence:registered](ig_event_VehiclePersistenceRegistered.md) - Server notification: vehicle registered
+- [vehicle:persistence:spawned](ig_event_VehiclePersistenceSpawned.md) - Server notification: vehicle spawned
+- [vehicle:persistence:despawned](ig_event_VehiclePersistenceDespawned.md) - Server notification: vehicle despawned
+
+### Framework Events
+
 - [ig.event.AddInteractJobEvent](ig_event_AddInteractJobEvent.md)
 
 ## file
@@ -358,6 +381,7 @@ Total Functions: **726**
 - [ig.func.GetVehicleModifications](ig_func_GetVehicleModifications.md)
 - [ig.func.GetVehicleMods](ig_func_GetVehicleMods.md)
 - [ig.func.GetVehicleSeatOfPed](ig_func_GetVehicleSeatOfPed.md)
+- [ig.func.GetVehicleStatebag](ig_func_GetVehicleStatebag.md)
 - [ig.func.GetVehicleTireStates](ig_func_GetVehicleTireStates.md)
 - [ig.func.GetVehicleWindowStates](ig_func_GetVehicleWindowStates.md)
 - [ig.func.GetVehiclesInArea](ig_func_GetVehiclesInArea.md)
@@ -377,6 +401,7 @@ Total Functions: **726**
 - [ig.func.SetVehicleExtrasFalse](ig_func_SetVehicleExtrasFalse.md)
 - [ig.func.SetVehicleModifications](ig_func_SetVehicleModifications.md)
 - [ig.func.SetVehicleMods](ig_func_SetVehicleMods.md)
+- [ig.func.SetVehicleStatebag](ig_func_SetVehicleStatebag.md)
 - [ig.func.SetVehicleTireStates](ig_func_SetVehicleTireStates.md)
 - [ig.func.SetVehicleWindowStates](ig_func_SetVehicleWindowStates.md)
 - [ig.func.Timestamp](ig_func_Timestamp.md)
@@ -922,6 +947,10 @@ Total Functions: **726**
 
 ## vehicle
 
+Vehicle data access and persistence functions.
+
+### Vehicle Information
+
 - [ig.vehicle.AddVehicle](ig_vehicle_AddVehicle.md)
 - [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md)
 - [ig.vehicle.FindVehicle](ig_vehicle_FindVehicle.md)
@@ -943,6 +972,20 @@ Total Functions: **726**
 - [ig.vehicle.Load](ig_vehicle_Load.md)
 - [ig.vehicle.RemoveVehicle](ig_vehicle_RemoveVehicle.md)
 - [ig.vehicle.SetVehicle](ig_vehicle_SetVehicle.md)
+
+### Vehicle Persistence
+
+- [ig.vehicle.InitializePersistence](ig_vehicle_InitializePersistence.md) - Initialize persistence system
+- [ig.vehicle.LoadPersistentVehicles](ig_vehicle_LoadPersistentVehicles.md) - Load from file
+- [ig.vehicle.SavePersistentVehicles](ig_vehicle_SavePersistentVehicles.md) - Save to file
+- [ig.vehicle.StartPeriodicSave](ig_vehicle_StartPeriodicSave.md) - Start auto-save thread
+- [ig.vehicle.HookVehicleEvents](ig_vehicle_HookVehicleEvents.md) - Setup event hooks
+- [ig.vehicle.RegisterPersistent](ig_vehicle_RegisterPersistent.md) - Register vehicle
+- [ig.vehicle.UpdateVehicleState](ig_vehicle_UpdateVehicleState.md) - Update condition/mods
+- [ig.vehicle.UpdateVehicleLocation](ig_vehicle_UpdateVehicleLocation.md) - Update position/fuel
+- [ig.vehicle.GetPersistentVehicle](ig_vehicle_GetPersistentVehicle.md) - Get vehicle data
+- [ig.vehicle.GetAllPersistentVehicles](ig_vehicle_GetAllPersistentVehicles.md) - Get all vehicles
+- [ig.vehicle.RestorePersistentVehicle](ig_vehicle_RestorePersistentVehicle.md) - Spawn from data
 
 ## voip
 

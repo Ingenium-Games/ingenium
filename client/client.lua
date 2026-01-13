@@ -24,6 +24,8 @@ Citizen.CreateThread(function()
                 --        
 
                 ig.ipl.LoadConfigurations()
+                --
+                ig.vehicle.InitializeClient()
             end)
             --
             return

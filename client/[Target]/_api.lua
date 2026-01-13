@@ -2,7 +2,7 @@
 -- Target API - Zone and Entity Targeting System
 -- ====================================================================================--
 
-ig.target = ig.target or {}
+ig.target = {}
 
 ---@param data table
 ---@return number

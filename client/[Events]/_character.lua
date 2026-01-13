@@ -7,6 +7,12 @@
 -- [C+S]
 RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
+    
     ShutdownLoadingScreenNui()
     -- Set false for switch command
     local ped = GetPlayerPed(-1)
@@ -43,6 +49,12 @@ end)
 -- [C+S]
 RegisterNetEvent("Client:Character:Create")
 AddEventHandler("Client:Character:Create", function()
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
+    
     local plyped = PlayerPedId()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
@@ -68,6 +80,12 @@ end)
 -- [S]
 RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
+    
     ig.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
@@ -89,6 +107,12 @@ end)
 
 RegisterNetEvent("Client:Character:NewSpawn")
 AddEventHandler("Client:Character:NewSpawn", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
+
     ig.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), conf.spawn.x, conf.spawn.y, conf.spawn.z)
@@ -100,6 +124,12 @@ end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
 AddEventHandler("Client:Character:LoadSkin", function(appearance)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
+    
     -- Use native appearance system
     if appearance then
         ig.appearance.SetAppearance(appearance)
@@ -124,6 +154,11 @@ end)
 -- Event to receive the data of the chosen character for the client.
 RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
     -- Wait for state to be synced to local character
     ig.func.IsBusyPleaseWait(5000)
     --
@@ -142,6 +177,12 @@ end)
 -- Event to trigger other resources once the client has received the chosen characters data from the server.
 RegisterNetEvent("Client:Character:Ready")
 AddEventHandler("Client:Character:Ready", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
+
     -- Character has loaded in, no need to respawn any more.
     exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")
@@ -168,6 +209,11 @@ end)
 
 RegisterNetEvent("Client:Character:Pre-Switch")
 AddEventHandler("Client:Character:Pre-Switch", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
     --
     ig.func.FadeOut(1000)
     --
@@ -178,6 +224,11 @@ end)
 -- Use this to remove any things connected to Characters like police blips etig.
 RegisterNetEvent("Client:Character:Switch")
 AddEventHandler("Client:Character:Switch", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
     --
     ig.data.SetLoadedStatus(false)
     --
@@ -185,6 +236,12 @@ end)
 
 RegisterNetEvent("Client:Character:OffDuty")
 AddEventHandler("Client:Character:OffDuty", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     if conf.enableduty then
         -- Add Functions or Hooks here!
         
@@ -195,6 +252,12 @@ end)
 
 RegisterNetEvent("Client:Character:OnDuty")
 AddEventHandler("Client:Character:OnDuty", function(job)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     if conf.enableduty then
         -- Add Functions or Hooks here!
        
@@ -205,11 +268,21 @@ end)
 
 RegisterNetEvent("Client:Character:SetJob")
 AddEventHandler("Client:Character:SetJob", function(name, grade)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
 
 end)
 
 RegisterNetEvent("Client:Character:Death")
 AddEventHandler("Client:Character:Death", function(data)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
     --
     if data.Log then
         -- agro = source id or -1 for server.

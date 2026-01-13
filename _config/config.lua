@@ -155,6 +155,23 @@ conf.rp = {}
 conf.rp.idleCameraInterval = 5 * conf.sec       -- 5 seconds between idle camera checks
 conf.rp.npcWeaponInterval = 2.5 * conf.sec      -- 2.5 seconds between NPC weapon checks
 conf.rp.controlIdleInterval = 100               -- 100ms when no special states active
+--[[
+VEHICLE PERSISTENCE CONFIGURATION:
+    -- Controls how parked vehicles are handled
+    -- [1] enablePersistence - Enable/disable entire persistence system
+    -- [2] parkingMode - "place" (stay in spot) or "garage" (disappear until taken out)
+    -- [3] Protected while parked - If parkingMode="place", vehicles can't be damaged/deleted
+    -- [4] Auto-respawn on join - Respawn garaged vehicles when owner joins
+]]--
+conf.persistence = {}
+conf.persistence.enablePersistence = true       -- Enable vehicle persistence system
+conf.persistence.parkingMode = "place"          -- "place" = stays in world | "garage" = disappears until taken out
+conf.persistence.protectParkedVehicles = true   -- Prevent damage/deletion while parked (if parkingMode="place")
+conf.persistence.autoRespawnOnJoin = false      -- Auto-respawn garaged vehicles when owner joins
+conf.persistence.logging = {
+    enabled = false                             -- Enable persistence system logging
+}
 -- ====================================================================================--
-conf.consolechannel = "script:"..tostring(GetCurrentResourceName())
+conf.resourcename = GetCurrentResourceName()
+conf.consolechannel = "script:"..tostring(conf.resourcename)
 conf.lock = nil

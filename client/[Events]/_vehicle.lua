@@ -33,7 +33,8 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
                 
                 -- Trigger local event for other systems
                 TriggerEvent("Client:EnteredVehicle", vehicle, seat, vehicleName, netId)
-                
+                TriggerServerEvent("Server:Vehicle:PlayerEntered", netId, seat, vehicleName)
+
                 ig.log.Trace("Vehicle", "Player entered vehicle: " .. vehicleName .. " in seat " .. seat)
             end
         end
@@ -52,6 +53,7 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
                 
                 -- Trigger local event for other systems
                 TriggerEvent("Client:LeftVehicle", vehicle, seat, vehicleName, netId)
+                TriggerServerEvent("Server:Vehicle:PlayerLeft", netId, seat, vehicleName)
                 
                 ig.log.Trace("Vehicle", "Player left vehicle: " .. vehicleName)
             end
@@ -92,6 +94,7 @@ Citizen.CreateThread(function()
             local netId = NetworkGetNetworkIdFromEntity(vehicle)
             
             TriggerEvent("Client:EnteredVehicle", vehicle, seat, vehicleName, netId)
+            TriggerServerEvent("Server:Vehicle:PlayerEntered", netId, seat, vehicleName)
             
             ig.log.Debug("Vehicle", "Vehicle entry detected via fallback thread")
         
@@ -105,6 +108,7 @@ Citizen.CreateThread(function()
                 local netId = NetworkGetNetworkIdFromEntity(vehicle)
                 
                 TriggerEvent("Client:LeftVehicle", vehicle, seat, vehicleName, netId)
+                TriggerServerEvent("Server:Vehicle:PlayerLeft", netId, seat, vehicleName)
                 
             end
             

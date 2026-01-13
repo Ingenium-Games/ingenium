@@ -1,6 +1,12 @@
 -- ====================================================================================--
 RegisterNetEvent("Client:Nui:Message")
 AddEventHandler("Client:Nui:Message", function(M, D, FOCUS)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     -- Send message
     SendNUIMessage(json.encode({
         message = M,

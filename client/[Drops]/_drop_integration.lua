@@ -7,6 +7,12 @@ local dropBlipHandles = {}
 
 --- Handle drop notification for targeted drops
 RegisterNetEvent('Client:Drop:Notify', function(data)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local coords = data.coords
     local isDeadDrop = data.isDeadDrop
     local netId = data.netId
@@ -59,6 +65,12 @@ end)
 
 --- Handle access denied
 RegisterNetEvent('Client:Drop:AccessDenied', function(data)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     -- Send NUI notification
     SendNUIMessage({
         message = "notification",
@@ -74,6 +86,12 @@ end)
 
 --- Clean up blip when drop is removed
 RegisterNetEvent('Client:Drop:Removed', function(uuid)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     if dropBlipHandles[uuid] then
         ig.blip.Remove(dropBlipHandles[uuid])
         dropBlipHandles[uuid] = nil
@@ -111,6 +129,12 @@ end)
 --- Listen for real-time inventory updates from other players
 --- Triggered when someone transfers items while UI is open
 RegisterNetEvent('Client:Inventory:UpdateLive', function(fromNetId, toNetId)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     -- Check if we currently have an inventory UI open for either of these entities
     -- Use the export from inventory.lua
     local currentExternal = exports['ingenium']:GetCurrentExternalInventory()
@@ -150,6 +174,12 @@ end)
 
 --- Event for when a drop's inventory is closed
 RegisterNetEvent('Client:Drop:InventoryUpdated', function(netId, inventory)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     -- This event can be used for additional UI updates if needed
     -- The inventory UI handles updates via State Bags automatically
 end)

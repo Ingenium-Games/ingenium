@@ -20,6 +20,7 @@ end)
 -- @param externalTitle Title to display for external inventory
 RegisterNetEvent("Client:Inventory:OpenDual")
 AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTitle)
+
     if inventoryOpen then return end
     
     local playerInventory = ig.inventory.GetInventory()

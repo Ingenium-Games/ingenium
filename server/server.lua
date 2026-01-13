@@ -26,6 +26,9 @@ AddEventHandler("onResourceStart", function(resourceName)
     ig.data.ReviveSync()
     -- Get character values every x seconds.
     ig.data.CharacterValues()
+    --
+    ig.vehicle.InitializePersistence()
+    --
 end)
 
 -- ====================================================================================--
@@ -87,8 +90,11 @@ AddEventHandler("playerDropped", function()
         print("   ^7[^5SQL^7]: Vehicles")
         Citizen.Wait(conf.sec)
         --
+        ig.vehicle.SavePersistentVehicles()
+        print("   ^7[^5JSON^7]: Persistent Vehicles")
+        --
         ig.sql.veh.Reset()
-        ig.sql.ResetActiveCharacters()
+        ig.sql.char.ResetActive()
         --
     end
 end)

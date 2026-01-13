@@ -136,6 +136,12 @@ RegisterServerCallback({
 })
 
 RegisterNetEvent("Server:Character:Spawn", function(req)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local src = tonumber(req)
     local xPlayer = ig.data.GetPlayer(src)
     TriggerClientEvent("Client:Character:ReSpawn", src, xPlayer.GetCoords())
@@ -209,6 +215,12 @@ RegisterServerCallback({
 -- Triggered after character has been loaded from db and informaiton is passed to client
 -- [C] - Keep as event, client-initiated notification
 RegisterNetEvent("Server:Character:Loaded", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local src = source
     local ped = GetPlayerPed(src)
     local xPlayer = ig.data.GetPlayer(src)
@@ -227,6 +239,12 @@ end)
 -- Triggered by the client after it has recieved its character data.
 -- [C] - Keep as event, client-initiated notification
 RegisterNetEvent("Server:Character:Ready", function()
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local src = source
     local xPlayer = ig.data.GetPlayer(src)
     -- update what instance they are in.
@@ -243,6 +261,12 @@ end)
 -- Use this to remove any things connected to Characters like police blips etig.
 -- [C+S] - Keep as event, can be called from server or client
 RegisterNetEvent("Server:Character:Switch", function(req)
+        -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
     local src = req or source
     local xPlayer = ig.data.GetPlayer(src)
     -- Remove Player Identifier from job as entity if no longer existing.

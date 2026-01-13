@@ -98,7 +98,13 @@ RegisterNUICallback("banking:removeFavorite", function(data, cb)
 end)
 
 -- Event to open banking menu
-RegisterNetEvent("banking:openMenu", function(data)
+RegisterNetEvent("Client:Banking:OpenMenu", function(data)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= GetCurrentResourceName() then
+        CancelEvent()
+        return
+    end
+    --
     SetNuiFocus(true, true)
     SendNUIMessage({
         message = "banking:open",
@@ -111,7 +117,7 @@ local function OpenBanking()
     TriggerServerCallback({
         eventName = "banking:open",
         eventCallback = function()
-            -- Server will send banking:openMenu event with data
+            -- Server will send Client:Banking:OpenMenu event with data
         end
     })
 end

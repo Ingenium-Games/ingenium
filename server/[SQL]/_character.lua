@@ -136,7 +136,7 @@ function ig.sql.char.SetInstance(character_id, instance_id, cb)
 end
 
 -- Should the Server crash, reset all Active Characters (for safety)
-function ig.sql.ResetActiveCharacters(cb)
+function ig.sql.char.ResetActive(cb)
     ig.sql.Update("UPDATE `characters` SET `Active` = FALSE;", {}, function(data)
         if cb then cb(data) end
     end)
