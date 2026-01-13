@@ -19,11 +19,18 @@ conf.forcedAnimations.requireUnarmedForHandsUp = true
 -- Require line of sight for forced animations
 conf.forcedAnimations.requireLineOfSight = true
 
--- Job-based permissions (jobs that can force animations on others)
+-- Job-based permission mode:
+-- nil = disabled (anyone can force animations)
+-- "requireJob" = only players with authorized jobs can force animations
+-- "noJobPermission" = only players WITHOUT authorized jobs can force animations
+conf.forcedAnimations.jobPermissionMode = nil
+
+-- Job-based permissions (jobs that are authorized or unauthorized based on jobPermissionMode)
 conf.forcedAnimations.authorizedJobs = {
     ["police"] = true,
     ["sheriff"] = true,
-    ["ambulance"] = false,
+    ["ambulance"] = true,
+    ["fib"] = true,
 }
 
 -- Allow players to force animations on others when aiming
@@ -42,5 +49,3 @@ conf.forcedAnimations.enableLogging = true
 
 -- Discord webhook for logging (optional)
 conf.forcedAnimations.discordWebhook = nil
-
-return conf.forcedAnimations

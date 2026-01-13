@@ -175,7 +175,7 @@ Citizen.CreateThread(function()
                 ig.fx.StartDeath()
                 deathFxActive = true
                 ig.log.Debug("RPFeatures", "Death FX started")
-            elseif not IsEntityDead(ped) not ig.data.GetLocalPlayerState("IsDead") and deathFxActive then
+            elseif not IsEntityDead(ped) and not ig.data.GetLocalPlayerState("IsDead") and deathFxActive then
                 -- Player revived, stop death effects
                 ig.fx.StopDeath()
                 deathFxActive = false

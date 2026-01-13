@@ -31,6 +31,20 @@ local GetObjects = RegisterServerCallback({
     end
 })
 
+--- Batch initialization callback: Returns all data needed for client startup in a single request
+--- Reduces network overhead by combining multiple callbacks into one
+local GetInitializationData = RegisterServerCallback({
+    eventName = "GetInitializationData",
+    eventCallback = function(source, ...)
+        return {
+            items = ig.item.GetItems(),
+            doors = ig.door.GetDoors(),
+            objects = ig.door.GetObjects(),
+            weapons = ig.weapons
+        }
+    end
+})
+
 local GetTattoos = RegisterServerCallback({
     eventName = "ig:GameData:GetTattoos",
     eventCallback = function(source)
