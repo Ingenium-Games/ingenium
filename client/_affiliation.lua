@@ -78,6 +78,225 @@ function ig.affiliation.CreateGroup(str, relations)
     return name, grouphash
 end
 
+--- Set relationship between two groups (bidirectional)
+---@param group1 string "First group name"
+---@param group2 string "Second group name"
+---@param relationship number "Relationship type: 0=Companion, 1=Respect, 2=Like, 3=Neutral, 4=Dislike, 5=Hate"
+function ig.affiliation.SetGroupRelationship(group1, group2, relationship)
+    local groups = ig.affiliation.GetGroups()
+    
+    if not groups[group1] then
+        ig.log.Error("Affiliation", "Group '" .. group1 .. "' not found")
+        return false
+    end
+    
+    if not groups[group2] then
+        ig.log.Error("Affiliation", "Group '" .. group2 .. "' not found")
+        return false
+    end
+    
+    local hash1 = groups[group1].hash
+    local hash2 = groups[group2].hash
+    
+    -- Set bidirectional relationship
+    SetRelationshipBetweenGroups(relationship, hash1, hash2)
+    SetRelationshipBetweenGroups(relationship, hash2, hash1)
+    
+    ig.log.Debug("Affiliation", "Set " .. group1 .. " <-> " .. group2 .. " to relationship level " .. relationship)
+    return true
+end
+
+--- Set relationship between two groups (single direction)
+---@param sourceGroup string "Source group name"
+---@param targetGroup string "Target group name"
+---@param relationship number "Relationship type: 0=Companion, 1=Respect, 2=Like, 3=Neutral, 4=Dislike, 5=Hate"
+function ig.affiliation.SetGroupRelationshipDirectional(sourceGroup, targetGroup, relationship)
+    local groups = ig.affiliation.GetGroups()
+    
+    if not groups[sourceGroup] then
+        ig.log.Error("Affiliation", "Source group '" .. sourceGroup .. "' not found")
+        return false
+    end
+    
+    if not groups[targetGroup] then
+        ig.log.Error("Affiliation", "Target group '" .. targetGroup .. "' not found")
+        return false
+    end
+    
+    local sourceHash = groups[sourceGroup].hash
+    local targetHash = groups[targetGroup].hash
+    
+    -- Set one-way relationship
+    SetRelationshipBetweenGroups(relationship, sourceHash, targetHash)
+    
+    ig.log.Debug("Affiliation", "Set " .. sourceGroup .. " -> " .. targetGroup .. " to relationship level " .. relationship)
+    return true
+end
+
+--- Clear relationship between two groups
+---@param group1 string "First group name"
+---@param group2 string "Second group name"
+function ig.affiliation.ClearGroupRelationship(group1, group2)
+    local groups = ig.affiliation.GetGroups()
+    
+    if not groups[group1] then
+        ig.log.Error("Affiliation", "Group '" .. group1 .. "' not found")
+        return false
+    end
+    
+    if not groups[group2] then
+        ig.log.Error("Affiliation", "Group '" .. group2 .. "' not found")
+        return false
+    end
+    
+    local hash1 = groups[group1].hash
+    local hash2 = groups[group2].hash
+    
+    -- Clear both directions
+    ClearRelationshipBetweenGroups(0, hash1, hash2)
+    ClearRelationshipBetweenGroups(0, hash2, hash1)
+    
+    ig.log.Debug("Affiliation", "Cleared relationship between " .. group1 .. " and " .. group2)
+    return true
+end
+
+--- Assign a ped to a relationship group
+---@param ped number "Ped entity ID"
+---@param groupName string "Group name"
+function ig.affiliation.SetPedGroup(ped, groupName)
+    if not DoesEntityExist(ped) then
+        ig.log.Error("Affiliation", "Ped entity does not exist")
+        return false
+    end
+    
+    local groups = ig.affiliation.GetGroups()
+    
+    if not groups[groupName] then
+        ig.log.Error("Affiliation", "Group '" .. groupName .. "' not found")
+        return false
+    end
+    
+    local groupHash = groups[groupName].hash
+    
+    SetPedRelationshipGroupHash(ped, groupHash)
+    
+    ig.log.Trace("Affiliation", "Assigned ped " .. ped .. " to group " .. groupName)
+    return true
+end
+
+--- Set a ped's default relationship group (affects how NPCs react)
+---@param ped number "Ped entity ID"
+---@param groupName string "Group name to set as default"
+function ig.affiliation.SetPedDefaultGroup(ped, groupName)
+    if not DoesEntityExist(ped) then
+        ig.log.Error("Affiliation", "Ped entity does not exist")
+        return false
+    end
+    
+    local groups = ig.affiliation.GetGroups()
+    
+    if not groups[groupName] then
+        ig.log.Error("Affiliation", "Group '" .. groupName .. "' not found")
+        return false
+    end
+    
+    local groupHash = groups[groupName].hash
+    
+    SetPedRelationshipGroupDefaultHash(ped, groupHash)
+    
+    ig.log.Trace("Affiliation", "Set ped " .. ped .. " default group to " .. groupName)
+    return true
+end
+
+--- Batch configure relationships for a group with multiple other groups
+---@param sourceGroup string "Source group name"
+---@param relationships table "Table of {groupName = relationshipLevel, ...}"
+---@param bidirectional boolean "If true, sets bidirectional relationships (default: false)"
+function ig.affiliation.ConfigureGroupRelationships(sourceGroup, relationships, bidirectional)
+    if not relationships or type(relationships) ~= "table" then
+        ig.log.Error("Affiliation", "Relationships must be a table")
+        return false
+    end
+    
+    local groups = ig.affiliation.GetGroups()
+    local configCount = 0
+    
+    if not groups[sourceGroup] then
+        ig.log.Error("Affiliation", "Source group '" .. sourceGroup .. "' not found")
+        return false
+    end
+    
+    for targetGroup, relationshipLevel in pairs(relationships) do
+        local success = false
+        if bidirectional then
+            success = ig.affiliation.SetGroupRelationship(sourceGroup, targetGroup, relationshipLevel)
+        else
+            success = ig.affiliation.SetGroupRelationshipDirectional(sourceGroup, targetGroup, relationshipLevel)
+        end
+        
+        if success then
+            configCount = configCount + 1
+        end
+    end
+    
+    ig.log.Info("Affiliation", "Configured " .. configCount .. " relationships for group " .. sourceGroup)
+    return configCount
+end
+
+--- Get relationship level between two groups
+---@param group1 string "First group name"
+---@param group2 string "Second group name"
+---@return number "Relationship level or -1 if groups not found"
+function ig.affiliation.GetGroupRelationship(group1, group2)
+    local groups = ig.affiliation.GetGroups()
+    
+    if not groups[group1] or not groups[group2] then
+        ig.log.Warn("Affiliation", "One or both groups not found")
+        return -1
+    end
+    
+    local hash1 = groups[group1].hash
+    local hash2 = groups[group2].hash
+    
+    local relationshipLevel = GetRelationshipBetweenGroups(hash1, hash2)
+    
+    return relationshipLevel
+end
+
+--- Get relationship level between two peds
+---@param ped1 number "First ped entity ID"
+---@param ped2 number "Second ped entity ID"
+---@return number "Relationship level or -1 if peds not found"
+function ig.affiliation.GetPedRelationship(ped1, ped2)
+    if not DoesEntityExist(ped1) or not DoesEntityExist(ped2) then
+        ig.log.Warn("Affiliation", "One or both peds do not exist")
+        return -1
+    end
+    
+    local relationshipLevel = GetRelationshipBetweenPeds(ped1, ped2)
+    
+    return relationshipLevel
+end
+
+--- Check if a group exists
+---@param groupName string "Group name to check"
+---@return boolean "True if group exists"
+function ig.affiliation.GroupExists(groupName)
+    local groups = ig.affiliation.GetGroups()
+    return groups[groupName] ~= nil
+end
+
+--- Get group hash by name
+---@param groupName string "Group name"
+---@return number "Group hash or nil if not found"
+function ig.affiliation.GetGroupHash(groupName)
+    local groups = ig.affiliation.GetGroups()
+    if groups[groupName] then
+        return groups[groupName].hash
+    end
+    return nil
+end
+
 --[[
 
 -- To create loop to set relationship or look to permenant solution.

@@ -4,7 +4,7 @@ Complete wiki-style reference documentation for all Ingenium framework functions
 
 ## Overview
 
-This wiki contains comprehensive documentation for **715 functions** across the Ingenium framework. Each function has its own dedicated markdown file with:
+This wiki contains comprehensive documentation for **726 functions** across the Ingenium framework. Each function has its own dedicated markdown file with:
 
 - ✅ Function signature and parameters
 - ✅ Detailed description
@@ -55,11 +55,11 @@ Found an issue or want to improve the documentation?
 
 ---
 
-Total Functions: **715**
+Total Functions: **726**
 
 ## All Namespaces
 
-- [affiliation](#affiliation) (3 functions)
+- [affiliation](#affiliation) (11 functions)
 - [ammo](#ammo) (2 functions)
 - [appearance](#appearance) (50 functions)
 - [bank](#bank) (3 functions)
@@ -117,9 +117,19 @@ Total Functions: **715**
 
 ## affiliation
 
-- [ig.affiliation.AddGroupToTable](ig_affiliation_AddGroupToTable.md)
+**Overview:** [Affiliation System](ig_affiliation_overview.md)
+
 - [ig.affiliation.CreateGroup](ig_affiliation_CreateGroup.md)
-- [ig.affiliation.GetGroups](ig_affiliation_GetGroups.md)
+- [ig.affiliation.SetGroupRelationship](ig_affiliation_SetGroupRelationship.md)
+- [ig.affiliation.SetGroupRelationshipDirectional](ig_affiliation_SetGroupRelationshipDirectional.md)
+- [ig.affiliation.ClearGroupRelationship](ig_affiliation_ClearGroupRelationship.md)
+- [ig.affiliation.GetGroupRelationship](ig_affiliation_GetGroupRelationship.md)
+- [ig.affiliation.SetPedGroup](ig_affiliation_SetPedGroup.md)
+- [ig.affiliation.SetPedDefaultGroup](ig_affiliation_SetPedDefaultGroup.md)
+- [ig.affiliation.GetPedRelationship](ig_affiliation_GetPedRelationship.md)
+- [ig.affiliation.ConfigureGroupRelationships](ig_affiliation_ConfigureGroupRelationships.md)
+- [ig.affiliation.GroupExists](ig_affiliation_GroupExists.md)
+- [ig.affiliation.GetGroupHash](ig_affiliation_GetGroupHash.md)
 
 ## ammo
 
