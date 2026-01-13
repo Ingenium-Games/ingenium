@@ -97,9 +97,12 @@ conf.bankoverdraw = 10
 BANK LOANS TIMES TO PAY: 
     -- Repayment Time to take money from bank account
     -- Loan interest calculation time to apply interest.
+    -- Interest rate applied daily as percentage
 ]]--
 conf.loanpayment = {h = 12, m = 0}
 conf.loaninterest = {h = 15, m = 0}
+conf.interestrate = 3.5 -- Daily interest rate in percentage (5%)
+conf.startingloanduration = 30 -- days if enabled
 --[[
 PLAYER HUNGER / THIRST / HP / ARMOUR: 
     -- Values and times.
