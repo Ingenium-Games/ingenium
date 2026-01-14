@@ -35,9 +35,10 @@ function ig.object.GetObjectFromUUID(uuid)
     return false
 end
 
---- func desc
----@param net any
----@param cb any
+--- Adds a new object instance to the object index if not already present
+---@param net integer "Network ID (16-bit integer)"
+---@param cb function "Callback function to instantiate object class"
+---@param ... any "Arguments to pass to callback function"
 function ig.object.AddObject(net, cb, ...)
     if not ig.objects.FindObject(net) then
         ig.odex[tostring(net)] = cb(...)
@@ -55,9 +56,8 @@ function ig.object.GetObjects()
     return ig.odex
 end
 
--- Set to nil for garbage collection
---- func desc
----@param uuid any
+--- Removes an object from the index by setting it to nil for garbage collection
+---@param uuid integer|string "UUID or Network ID of object to remove"
 function ig.object.RemoveObject(uuid)
     ig.odex[tostring(uuid)] = nil
 end

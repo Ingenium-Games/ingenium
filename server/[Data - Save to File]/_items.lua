@@ -5,14 +5,15 @@ ig.item = {} -- function level
 ig.items = {}
 -- ====================================================================================--
 
---- func desc
----@param . any
+--- Returns the table of all loaded items
+---@return table Item definitions indexed by item name
 function ig.item.GetItems()
     return ig.items
 end
 
---- func desc
----@param name any
+--- Checks if an item exists in the item database
+---@param name string "Item name to check"
+---@return boolean True if item exists
 function ig.item.Exists(name)
     if ig.items[name] then
         return true
@@ -21,82 +22,95 @@ function ig.item.Exists(name)
     end
 end
 
---- func desc
----@param name any
+--- Gets a complete item definition by name
+---@param name string "Item name"
+---@return table|nil Item definition or nil if not found
 function ig.item.GetItem(name)
     if ig.item.Exists(name) then
         return ig.items[name]
     end 
 end
 
---- 
----@param name any
+--- Checks if an item is consumeable
+---@param name string "Item name"
+---@return boolean|nil Whether item is consumeable
 function ig.item.IsConsumeable(name)
     return ig.items[name].Consumeable
 end
 
---- func desc
----@param name any
+--- Checks if an item is craftable
+---@param name string "Item name"
+---@return boolean|nil Whether item is craftable
 function ig.item.IsCraftable(name)
     return ig.items[name].Craftable
 end
 
---- func desc
----@param name any
+--- Checks if an item is a weapon
+---@param name string "Item name"
+---@return boolean|nil Whether item is a weapon
 function ig.item.IsWeapon(name)
     return ig.items[name].Weapon
 end
 
---- func desc
----@param name any
+--- Gets the ammo type for a weapon item
+---@param name string "Weapon item name"
+---@return string|nil Ammo type name
 function ig.item.GetWeaponAmmoType(name)
     return ig.items[name].Meta.Ammo
 end
 
---- func desc
----@param name any
+--- Gets the description/about text for an item
+---@param name string "Item name"
+---@return string|nil Item description
 function ig.item.GetAbout(name)
     return ig.items[name].Meta.About
 end
 
---- func desc
----@param name any
+--- Checks if an item can degrade
+---@param name string "Item name"
+---@return boolean|nil Whether item can degrade
 function ig.item.CanDegrade(name)
     return ig.items[name].Degrade
 end
 
---- func desc
----@param name any
+--- Checks if an item is stackable
+---@param name string "Item name"
+---@return boolean|nil Whether item is stackable
 function ig.item.CanStack(name)
     return ig.items[name].Stackable
 end
 
---- func desc
----@param name any
+--- Checks if an item can be hotkeyed
+---@param name string "Item name"
+---@return boolean|nil Whether item can be hotkeyed
 function ig.item.CanHotkey(name)
     return ig.items[name].Hotkey
 end
 
---- func desc
----@param name any
+--- Gets metadata table for an item
+---@param name string "Item name"
+---@return table|nil Item metadata
 function ig.item.GetMeta(name)
     return ig.items[name].Meta
 end
 
---- func desc
----@param name any
+--- Gets data table for an item
+---@param name string "Item name"
+---@return table|nil Item data
 function ig.item.GetData(name)
     return ig.items[name].Data
 end
 
---- func desc
----@param name any
+--- Gets monetary value of an item
+---@param name string "Item name"
+---@return number|nil Item value
 function ig.item.GetValue(name)
     return ig.items[name].Value
 end
 
---- func desc
----@param name any
+--- Finds the array index position of an item in the items table
+---@param name string "Item name to find"
+---@return integer|boolean Array index or false if not found
 function ig.item.ReturnPosition(name)
     for k,v in ipairs(ig.items) do
         if v == name then

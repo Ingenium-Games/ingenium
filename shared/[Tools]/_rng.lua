@@ -2,8 +2,8 @@
 ig.rng = {}
 -- ====================================================================================--
 
---- func desc
----@param . any
+--- Generates a random single digit (0-9)
+---@return integer Random digit between 0 and 9
 function ig.rng.num()
     local rand = math.random(0, 9)
     return rand
@@ -28,8 +28,9 @@ function ig.rng.char()
     return rand
 end
 
---- func desc
----@param num any
+--- Generates a random string of digits
+---@param num integer "Number of digits to generate"
+---@return string Random numeric string
 function ig.rng.nums(num)
     local rand = nil
     local len = num
@@ -48,8 +49,9 @@ function ig.rng.nums(num)
     return rand
 end
 
---- func desc
----@param num any
+--- Generates a random string of lowercase letters
+---@param num integer "Number of letters to generate"
+---@return string Random letter string
 function ig.rng.lets(num)
     local rand = nil
     local len = num
@@ -67,8 +69,9 @@ function ig.rng.lets(num)
     return rand
 end
 
---- func desc
----@param num any
+--- Generates a random string of mixed characters (digits and letters)
+---@param num integer "Number of characters to generate"
+---@return string Random mixed character string
 function ig.rng.chars(num)
     local rand = nil
     local len = num
@@ -86,10 +89,11 @@ function ig.rng.chars(num)
     return rand
 end
 
---- func desc
----@param min any
----@param max any
----@param amount any
+--- Generates unique random values within a range
+---@param min integer "Minimum value (inclusive)"
+---@param max integer "Maximum value (inclusive)"
+---@param amount integer "Number of unique values to generate"
+---@return table Array of unique random values
 function ig.rng.RandomValuesNoRepeats(min,max,amount)
     if (max - min) <= amount then ig.log.Error("RNG", "Unable to use values for ig.func.RandomValuesNoRepeats - min and max values do not allow for the amount required") return end
     --

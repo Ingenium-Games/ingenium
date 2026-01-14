@@ -18,10 +18,10 @@ function ig.npc.FindNpc(arg)
     return false, false, false
 end
 
---- func desc
----@wiki:ignore
----@param net any
----@param cb any
+--- Adds a new NPC instance to the NPC index if not already present
+---@param net integer "Network ID (16-bit integer)"
+---@param cb function "Callback function to instantiate NPC class"
+---@param ... any "Arguments to pass to callback function"
 function ig.npc.AddNpc(net, cb, ...)
     if not ig.npc.FindNpc(net) then
         ig.ndex[tonumber(net)] = cb(...)
@@ -39,10 +39,8 @@ function ig.npc.GetNpcs()
     return ig.ndex
 end
 
--- Set to nil for garbage collection
---- func desc
----@param net any
----@wiki:ignore
+--- Removes an NPC from the index by setting it to nil for garbage collection
+---@param net integer "Network ID (16-bit integer)"
 function ig.npc.RemoveNpc(net)
     ig.ndex[tonumber(net)] = nil
 end

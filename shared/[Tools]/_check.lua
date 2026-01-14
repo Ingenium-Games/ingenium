@@ -2,6 +2,9 @@
 ig.check = {}
 -- ====================================================================================--
 --- func desc
+---@param num any
+---@param min any
+---@param max any
 function ig.check.Number(num, min, max)
     local v = 0
     if min and max then
@@ -28,8 +31,9 @@ function ig.check.Number(num, min, max)
     end
 end
 
---- func desc
----@param bool any
+--- Validates and returns a boolean value, asserts if type is invalid
+---@param bool boolean "Boolean value to validate"
+---@return boolean
 function ig.check.Boolean(bool)
     local v = false
     assert(type(bool) == "boolean", "Invalid variable type at argument #1, expected boolean, got "..type(bool))
@@ -40,8 +44,9 @@ function ig.check.Boolean(bool)
     end
 end
 
---- func desc
----@param t any
+--- Validates and returns a table, asserts if type is invalid
+---@param t table "Table to validate"
+---@return table
 function ig.check.Table(t)
     local v = {}
     assert(type(t) == "table", "Invalid variable type at argument #1, expected table, got "..type(t))
@@ -52,8 +57,9 @@ function ig.check.Table(t)
     end
 end
 
---- func desc
----@param str any
+--- Validates and returns a string value, asserts if type is invalid
+---@param str string "String to validate"
+---@return string
 function ig.check.String(str)
     local v = ""
     assert(type(str) == "string", "Invalid variable type at argument #1, expected string, got "..type(str))

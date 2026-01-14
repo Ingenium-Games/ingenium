@@ -23,8 +23,10 @@ ig.doors = {} -- cached doors
     }
 ]]--
 
---- func desc
----@param coords any
+--- Finds a door in the doors table by coordinates
+---@param coords vector3 "Door coordinates to search for"
+---@return boolean Found status
+---@return integer|boolean Index in doors table or false
 function ig.door.Find(coords)
     for k, v in pairs(ig.doors) do
         -- is the door in the table?
@@ -35,8 +37,10 @@ function ig.door.Find(coords)
     return false, false
 end
 
---- func desc
----@param coords any
+--- Finds a door in the doors table by model hash
+---@param hash integer "Door model hash to search for"
+---@return boolean Found status
+---@return integer|boolean Index in doors table or false
 function ig.door.FindHash(hash)
     for k, v in pairs(ig.doors) do
         -- is the door in the table?
@@ -47,8 +51,9 @@ function ig.door.FindHash(hash)
     return false, false
 end
 
---- func desc
----@param coords any
+--- Sets a door's locked state by model hash
+---@param hash integer "Door model hash"
+---@param state boolean "Door state (true=locked, false=unlocked)"
 function ig.door.SetState(hash, state)
     for k, v in pairs(ig.doors) do
         -- is the door in the table?
@@ -59,8 +64,8 @@ function ig.door.SetState(hash, state)
     end
 end
 
---- func desc
----@param coords any
+--- Toggles a door's locked state by model hash
+---@param hash integer "Door model hash"
 function ig.door.ChangeState(hash)
     for k, v in pairs(ig.doors) do
         -- is the door in the table?
@@ -71,10 +76,8 @@ function ig.door.ChangeState(hash)
     end
 end
 
---- func desc
----@param model any
----@param coords any
----@param locked any
+--- Adds multiple doors from a Doors table to the door registry
+---@param Doors table "Table of door definitions with Ords (coordinates) property"
 function ig.door.Add(Doors)
     for k, v in pairs(Doors) do
         if not ig.door.Find(v.Ords) then

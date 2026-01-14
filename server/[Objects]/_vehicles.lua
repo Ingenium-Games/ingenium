@@ -41,10 +41,10 @@ function ig.vehicle.GetVehicleByPlate(plate)
     return false
 end
 
---- func desc
----@wiki:ignore
----@param net any
----@param cb any
+--- Adds a new Vehicle instance to the vehicle index
+---@param net integer "Network ID (16-bit integer)"
+---@param cb function "Callback function to instantiate Vehicle class"
+---@param ... any "Arguments to pass to callback function"
 function ig.vehicle.AddVehicle(net, cb, ...)
     -- local aa, bb, cc = ig.vehicle.FindVehicle(net)
     -- if (not aa) then
@@ -52,10 +52,11 @@ function ig.vehicle.AddVehicle(net, cb, ...)
     -- end
 end
 
---- func desc
----@wiki:ignore
----@param net any
----@param cb any
+--- Sets/replaces a Vehicle instance in the vehicle index
+---@param net integer "Network ID (16-bit integer)"
+---@param cb function "Callback function to instantiate Vehicle class"
+---@param ... any "Arguments to pass to callback function"
+---@return table The created vehicle instance
 function ig.vehicle.SetVehicle(net, cb, ...)
     ig.vdex[tonumber(net)] = cb(...)
     return ig.vdex[tonumber(net)]
@@ -77,10 +78,8 @@ function ig.vehicle.GetVehicles()
     return ig.vdex
 end
 
--- Set to nil for garbage collection
---- func desc
----@wiki:ignore
----@param arg any
+--- Removes a vehicle from the index by setting it to nil for garbage collection
+---@param arg integer|string "Network ID (16-bit integer) or vehicle plate"
 function ig.vehicle.RemoveVehicle(arg)
     if ig.vdex[tonumber(arg)] then
         ig.vdex[tonumber(arg)] = nil

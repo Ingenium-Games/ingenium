@@ -36,8 +36,9 @@ function ig.table.MatchKey(t, k)
     return false
 end
 
---- func desc
----@param t any
+--- Creates a shallow copy of a table with its metatable
+---@param t table "Table to clone"
+---@return table Cloned table
 function ig.table.Clone(t)
     local u = setmetatable({}, getmetatable(t))
     for i, v in pairs(t) do
@@ -67,9 +68,10 @@ function ig.table.Merge(t, u, bool)
     return r
 end
 
---- func desc
----@param p any
----@param t any
+--- Rearranges table keys according to a mapping table
+---@param p table "Mapping table with old->new key associations"
+---@param t table "Table to rearrange"
+---@return table New table with rearranged keys
 function ig.table.ReArrange(p, t)
     local r = ig.table.Clone(t)
     for i, v in pairs(p) do
@@ -79,15 +81,17 @@ function ig.table.ReArrange(p, t)
     return r
 end
 
---- func desc
----@param t any
+--- Returns the size (length) of an array table using # operator
+---@param t table "Array table to measure"
+---@return integer Number of elements
 function ig.table.Size(t)
     local r = #t
     return r
 end
 
---- func desc
----@param t any
+--- Counts all key-value pairs in a table (works for dictionaries and sparse arrays)
+---@param t table "Table to count"
+---@return integer Total number of key-value pairs
 function ig.table.SizeOf(t)
 	local count = 0
 
@@ -98,9 +102,10 @@ function ig.table.SizeOf(t)
 	return count
 end
 
---- func desc
----@param table any
----@param nb any
+--- Recursively converts a table to a formatted string representation for debugging
+---@param table table "Table to dump"
+---@param nb integer|nil "Indentation level (optional, defaults to 0)"
+---@return string Formatted string representation of table
 function ig.table.Dump(table, nb)
     if nb == nil then
         nb = 0

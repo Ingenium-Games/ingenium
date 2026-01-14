@@ -3,10 +3,11 @@ if not ig.class then
     ig.class = {}
 end
 -- ====================================================================================--
---- func desc
+--- Player class constructor - creates a player character object instance
 ---@wiki:ignore 
----@param source any
----@param character_id any
+---@param source integer "Player server ID (source)"
+---@param character_id integer "Character/instance ID from database"
+---@return table Player instance with properties and methods
 function ig.class.Player(source, character_id)
     local src = tonumber(source)
     local Character_ID = character_id

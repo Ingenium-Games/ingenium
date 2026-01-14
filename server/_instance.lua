@@ -38,8 +38,8 @@ function ig.inst.SetPlayer(source, num)
 end
 
 --- Sets the entity to the specified routing bucket
----@param entity any The entity handle
----@param num number The number of the instance/routing bucket
+---@param entity integer "Entity handle/ID"
+---@param num integer "The number of the instance/routing bucket"
 function ig.inst.SetEntity(entity, num)
     local current = GetEntityRoutingBucket(entity)
     if current ~= num then
@@ -53,8 +53,9 @@ function ig.inst.GetPlayerInstance(source)
     return GetPlayerRoutingBucket(source)
 end
 
---- Get entity routing bucket
----@param entity any
+--- Gets entity's current routing bucket
+---@param entity integer "Entity handle/ID"
+---@return integer Current routing bucket number
 function ig.inst.GetEntityInstance(entity)
     return GetEntityRoutingBucket(entity)
 end
@@ -71,8 +72,8 @@ function ig.inst.SetPlayerDefault(source)
     ig.func.Debug_1(xPlayer.GetName().." added to Global Instance.")
 end
 
---- Set entity routing bucket
----@param entity any
+--- Sets entity to default/global routing bucket
+---@param entity integer "Entity handle/ID"
 function ig.inst.SetEntityDefault(entity)
     SetEntityRoutingBucket(entity, conf.instancedefault)
 end

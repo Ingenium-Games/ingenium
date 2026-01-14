@@ -28,8 +28,8 @@ function ig.note.Load()
     -- No need for a separate update routine here
 end
 
---- func desc
----@param data any
+--- Adds a new note to the notes table
+---@param data table "Note data table with Coords, Note, and Time properties"
 function ig.note.Add(data)
     if type(data) == "table" then
         table.insert(ig.notes, data)
@@ -38,8 +38,9 @@ function ig.note.Add(data)
     end
 end
 
---- func desc
----@param id any
+--- Checks if a note exists by ID
+---@param id integer "Note ID"
+---@return boolean True if note exists
 function ig.note.Exist(id)
     if ig.notes[id] then
         return true

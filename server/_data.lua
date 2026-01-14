@@ -29,8 +29,9 @@ function ig.data.GetJobs()
     return ig.jdex
 end
 
---- func desc
----@param str any
+--- Gets a job object instance by name
+---@param str string "Job name/key"
+---@return table|nil Job instance or nil if not found
 function ig.data.GetJob(str)
     return ig.jdex[str]
 end
@@ -68,8 +69,8 @@ function ig.data.Initilize()
 end
 
 
---- func desc
----@param str any
+--- Saves/persists data to storage
+---@param str string "Data key or identifier"
 function ig.data.Save(str)
 
 end

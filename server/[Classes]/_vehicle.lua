@@ -4,10 +4,10 @@ if not ig.class then
 end
 -- ====================================================================================--
 
---- func desc
+--- Vehicle class constructor - creates a vehicle object instance
 ---@wiki:ignore 
----@param net any
----@param bool any
+---@param net integer "Network ID of the vehicle"
+---@return table Vehicle instance with properties and methods
 function ig.class.Vehicle(net)
     local data = {
         Fuel = math.random(25, 89),

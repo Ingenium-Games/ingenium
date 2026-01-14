@@ -12,8 +12,11 @@ function ig.func.Func(...)
     return val
 end
 
---- func desc
----@param func any
+--- Safely executes a function with error handling using xpcall
+---@param func function "Function to execute"
+---@param ... any "Arguments to pass to function"
+---@return boolean "Success status"
+---@return any "Return value or error"
 function ig.func.Err(func, ...)
     local arg = {...}
     return xpcall(function()
@@ -23,8 +26,8 @@ function ig.func.Err(func, ...)
     end)
 end
 
---- func desc
----@param err any
+--- Logs an error with stacktrace if error logging is enabled
+---@param err string|any "Error message or error object"
 function ig.func.Error(err)
     if conf.error then
         -- Use new debug system if available, otherwise fallback
@@ -42,8 +45,8 @@ function ig.func.Error(err)
     end
 end
 
---- func desc
----@param str any
+--- Logs info-level debug message if debug_1 is enabled
+---@param str string "Debug message to log"
 function ig.func.Debug_1(str)
     if conf.debug_1 then
         -- Use new debug system if available, otherwise fallback
@@ -55,8 +58,8 @@ function ig.func.Debug_1(str)
     end
 end
 
---- func desc
----@param str any
+--- Logs debug-level debug message if debug_2 is enabled
+---@param str string "Debug message to log"
 function ig.func.Debug_2(str)
     if conf.debug_2 then
         -- Use new debug system if available, otherwise fallback
@@ -68,8 +71,8 @@ function ig.func.Debug_2(str)
     end
 end
 
---- func desc
----@param str any
+--- Logs trace-level debug message if debug_3 is enabled
+---@param str string "Debug message to log"
 function ig.func.Debug_3(str)
     if conf.debug_3 then
         -- Use new debug system if available, otherwise fallback
@@ -81,8 +84,8 @@ function ig.func.Debug_3(str)
     end
 end
 
---- func desc
----@param str any
+--- Logs a warning message
+---@param str string "Warning message to log"
 function ig.func.Alert(str)
     -- Use new debug system if available, otherwise fallback
     if ig.debug and ig.debug.Warn then
@@ -97,8 +100,9 @@ function ig.func.Timestamp()
     return os.time(os.date("*t"))
 end
 
---- func desc
----@param time any
+--- Converts a Unix timestamp to formatted date/time string
+---@param time integer|nil "Unix timestamp (optional, uses current time if nil)"
+---@return string Formatted date/time string
 function ig.func.Timestring(time)
     local time = time or ig.func.Timestamp()
     return os.date("%c", time)
@@ -357,14 +361,14 @@ function ig.func.GetClosestPlayerPed(position, maxRadius)
 end
 
 --- Create a vehicle entity
----@param name any Vehicle model name or hash
----@param x any X coordinate
----@param y any Y coordinate
----@param z any Z coordinate
----@param h any Heading
----@param data any Optional vehicle data
----@param routingBucket number|nil Optional routing bucket (inherits from calling context if not specified)
----@return number|boolean entity The vehicle entity or false on failure
+---@param name string|integer "Vehicle model name (string) or hash (integer)"
+---@param x number "X coordinate"
+---@param y number "Y coordinate"
+---@param z number "Z coordinate"
+---@param h number "Heading in degrees"
+---@param data table|nil "Optional vehicle data/config"
+---@param routingBucket number|nil "Optional routing bucket (inherits from calling context if not specified)"
+---@return number|boolean entity The vehicle entity handle or false on failure
 ---@return number|boolean net The network ID or false on failure
 function ig.func.CreateVehicle(name, x, y, z, h, data, routingBucket)
     local hash = nil
@@ -398,13 +402,13 @@ function ig.func.CreateVehicle(name, x, y, z, h, data, routingBucket)
 end
 
 --- Create a ped entity (NPC)
----@param name any Ped model name or hash
----@param x any X coordinate
----@param y any Y coordinate
----@param z any Z coordinate
----@param h any Heading
----@param routingBucket number|nil Optional routing bucket (inherits from calling context if not specified)
----@return number|boolean entity The ped entity or false on failure
+---@param name string|integer "Ped model name (string) or hash (integer)"
+---@param x number "X coordinate"
+---@param y number "Y coordinate"
+---@param z number "Z coordinate"
+---@param h number "Heading in degrees"
+---@param routingBucket number|nil "Optional routing bucket (inherits from calling context if not specified)"
+---@return number|boolean entity The ped entity handle or false on failure
 ---@return number|boolean net The network ID or false on failure
 function ig.func.CreatePed(name, x, y, z, h, routingBucket)
     local hash = nil
@@ -433,12 +437,15 @@ function ig.func.CreatePed(name, x, y, z, h, routingBucket)
     return entity, net
 end
 
---- func desc
----@param name any
----@param x any
----@param y any
----@param z any
----@param isdoor any
+--- Create an object entity
+---@param model string|integer "Object model name (string) or hash (integer)"
+---@param x number "X coordinate"
+---@param y number "Y coordinate"
+---@param z number "Z coordinate"
+---@param isdoor boolean "Whether this object is a door"
+---@param data table|nil "Optional object data/config"
+---@return number|boolean entity The object entity handle or false on failure
+---@return number|boolean net The network ID or false on failure
 function ig.func.CreateObject(model, x, y, z, isdoor, data)
     local hash = nil
     if type(model) == "number" then
@@ -467,9 +474,10 @@ function ig.func.CreateObject(model, x, y, z, isdoor, data)
     return entity, net
 end
 
--- My own version of the native for the server to use.
---- func desc
----@param hash any
+--- Checks if a ped model is male based on configuration
+---@param hash integer "Ped model hash"
+---@return boolean|nil Is male (true/false) or nil if not configured
+---@return string|nil Gender label ('Male', 'Female', or nil)
 function ig.func.IsPedMale(hash)
     if conf.peds.male[hash] then
         return true, "Male"
@@ -479,9 +487,10 @@ function ig.func.IsPedMale(hash)
     end
 end
 
--- My own version of the native for the server to use.
---- func desc
----@param hash any
+--- Checks if a ped model is human (not an animal) based on configuration
+---@param hash integer "Ped model hash"
+---@return boolean Is human
+---@return string Type label ('Human' or 'Animal')
 function ig.func.IsPedHuman(hash)
     if conf.peds.animals[hash] then
         return false, "Animal"

@@ -3,9 +3,10 @@ if not ig.class then
     ig.class = {}
 end
 -- ====================================================================================--
---- func desc
+--- NPC (Non-Player Character) class constructor - creates an NPC object instance
 ---@wiki:ignore 
----@param net any
+---@param net integer "Network ID of the NPC ped"
+---@return table NPC instance with properties and methods
 function ig.class.Npc(net)
     local self = {}
     self.Net = net
