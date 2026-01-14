@@ -59,6 +59,21 @@ class FunctionScopeVerifier:
                     # Find function definitions: function ig.namespace.FunctionName(...)
                     pattern = r'function\s+ig\.([a-z]+)\.([A-Za-z_]\w*)\s*\('
                     for match in re.finditer(pattern, content):
+                        # Determine if the function is marked to be ignored by the
+                        # wiki generator. We look up to 5 lines above the
+                        # function definition for a comment containing
+                        # "@wiki:ignore". If present, skip this function.
+                        start_pos = match.start()
+                        # Compute current line index (0-based)
+                        line_no = content.count('\n', 0, start_pos)
+                        lines = content.splitlines()
+                        prev_lines = lines[max(0, line_no - 5):line_no]
+                        if any('@wiki:ignore' in l for l in prev_lines):
+                            if self.debug:
+                                namespace_tmp = match.group(1)
+                                func_tmp = match.group(2)
+                                print(f"  🔕 Skipping {namespace_tmp}.{func_tmp} due to @wiki:ignore")
+                            continue
                         namespace = match.group(1)
                         func_name = match.group(2)
                         
