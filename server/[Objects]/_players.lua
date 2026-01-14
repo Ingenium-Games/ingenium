@@ -5,6 +5,7 @@ ig.players = {} -- loaded past / present players
 ig.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
 
 --- Adds player to the player index.
+---@wiki:ignore
 ---@param source number "source [server_id]"
 function ig.player.AddPlayer(source)
     local num = tonumber(source)
@@ -22,6 +23,7 @@ function ig.player.GetPlayer(source)
 end
 
 --- Set the player id to the table.
+---@wiki:ignore
 ---@param source number
 ---@param data table
 function ig.player.SetPlayer(source, data)
@@ -29,6 +31,7 @@ function ig.player.SetPlayer(source, data)
 end
 
 --- Set to nil for garbage collection.
+---@wiki:ignore
 ---@param source number
 function ig.player.RemovePlayer(source)
     ig.pdex[tonumber(source)] = nil

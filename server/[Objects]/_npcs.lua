@@ -19,6 +19,7 @@ function ig.npc.FindNpc(arg)
 end
 
 --- func desc
+---@wiki:ignore
 ---@param net any
 ---@param cb any
 function ig.npc.AddNpc(net, cb, ...)
@@ -41,6 +42,7 @@ end
 -- Set to nil for garbage collection
 --- func desc
 ---@param net any
+---@wiki:ignore
 function ig.npc.RemoveNpc(net)
     ig.ndex[tonumber(net)] = nil
 end

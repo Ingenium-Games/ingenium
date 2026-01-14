@@ -35,7 +35,19 @@ jobs:
           python-version: '3.11'
 
       - name: Run function scope verification
-        run: python3 scripts/verify_function_scopes.py --verbose
+        id: verify
+        run: |
+          set +e
+          python3 scripts/verify_function_scopes.py --verbose
+          code=$?
+          set -e
+
+          # Upload will happen below via artifact; detect if mismatch JSON exists and is non-empty
+          if [ -f scripts/function_scope_mismatches.json ] && [ -s scripts/function_scope_mismatches.json ]; then
+            echo "HAS_MISMATCHES=true" >> $GITHUB_OUTPUT
+          else
+            echo "HAS_MISMATCHES=false" >> $GITHUB_OUTPUT
+          fi
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
 

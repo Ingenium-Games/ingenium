@@ -344,13 +344,11 @@ end
 -- ====================================================================================--
 
 --- Get all players
----@wiki:ignore
 function ig.data.GetPlayers()
     return ig.player.GetPlayers()
 end
 
 --- Get a player by source
----@wiki:ignore
 ---@param src number
 function ig.data.GetPlayer(src)
     return ig.player.GetPlayer(src)
@@ -379,7 +377,6 @@ function ig.data.RemovePlayer(src)
 end
 
 --- Get player by Character_ID
----@wiki:ignore
 ---@param characterId string
 function ig.data.GetPlayerByCharacterId(characterId)
     return ig.player.GetPlayerByCharacterId(characterId)

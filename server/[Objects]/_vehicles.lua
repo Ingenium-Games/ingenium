@@ -42,6 +42,7 @@ function ig.vehicle.GetVehicleByPlate(plate)
 end
 
 --- func desc
+---@wiki:ignore
 ---@param net any
 ---@param cb any
 function ig.vehicle.AddVehicle(net, cb, ...)
@@ -52,6 +53,7 @@ function ig.vehicle.AddVehicle(net, cb, ...)
 end
 
 --- func desc
+---@wiki:ignore
 ---@param net any
 ---@param cb any
 function ig.vehicle.SetVehicle(net, cb, ...)
@@ -77,6 +79,7 @@ end
 
 -- Set to nil for garbage collection
 --- func desc
+---@wiki:ignore
 ---@param arg any
 function ig.vehicle.RemoveVehicle(arg)
     if ig.vdex[tonumber(arg)] then
