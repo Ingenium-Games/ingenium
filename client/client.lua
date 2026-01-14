@@ -10,19 +10,39 @@ Citizen.CreateThread(function()
             ig.data.Initilize(function()
                 --
                 DisplayRadar(false)
-                -- Grab the Items prior to characters loading, this way any checks wont impact them
-                local items = TriggerServerCallback({eventName = "GetItems", args = {}})
-                ig.item.SetItems(items)
-                --
-                local doors = TriggerServerCallback({eventName = "GetDoors", args = {}})
-                ig.door.SetDoors(doors)
-                ig.door.AddDoorsToSystem(doors)
-                --                
-                local objects = TriggerServerCallback({eventName = "GetObjects", args = {}})
-                ig.objects.SetObjects(objects)
-                ig.objects.AddToEnviroment(objects)
+                
+                -- Batch initialization: Get all required data in a single server callback
+                local initData = TriggerServerCallback({
+                    eventName = "GetInitializationData",
+                    args = {}
+                })
+                
+                -- Load Items
+                if initData and initData.items then
+                    ig.item.SetItems(initData.items)
+                end
+                
+                -- Load Doors
+                if initData and initData.doors then
+                    ig.door.SetDoors(initData.doors)
+                    ig.door.AddDoorsToSystem(initData.doors)
+                end
+                
+                -- Load Objects
+                if initData and initData.objects then
+                    ig.objects.SetObjects(initData.objects)
+                    ig.objects.AddToEnviroment(initData.objects)
+                end
+                
+                -- Load Weapons and initialize weapon data (categories and components) for forced animations
+                if initData and initData.weapons then
+                    ig.weapon.InitializeWeaponData(initData.weapons)
+                else
+                    -- Fallback if batched request returns nil for weapons
+                    ig.weapon.InitializeWeaponData()
+                end
+                
                 --        
-
                 ig.ipl.LoadConfigurations()
                 --
                 ig.vehicle.InitializeClient()

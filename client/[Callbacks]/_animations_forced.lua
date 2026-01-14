@@ -25,7 +25,7 @@ RegisterClientCallback({
         else
             ClearPedTasks(ped)
             if IsPedAPlayer(ped) then
-           4     ig.data.SetLocalPlayerState("Animation", false, true)
+                ig.data.SetLocalPlayerState("Animation", false, true)
             end
             RemoveAnimDict(dict)
         end

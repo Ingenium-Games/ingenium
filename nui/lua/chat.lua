@@ -166,10 +166,9 @@ end
 -- Sync with default chat resource if it exists
 CreateThread(function()
     Wait(1000) -- Wait for resources to load
-    
     -- Disable default chat UI but keep functionality
     if GetResourceState('chat') == 'started' then
-        exports.chat:addMessage = function(message)
+        exports['chat'].addMessage = function(message)
             AddChatMessage(
                 message.args and message.args[1] or message.author or 'System',
                 message.args and message.args[2] or message.message or message.text or '',

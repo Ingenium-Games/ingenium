@@ -392,7 +392,7 @@ function ig.vehicle.HookVehicleEvents()
     end)
 end
 
-
+AddEventHanlder("onResourceStop", function(resource)
     if resource == GetCurrentResourceName() and ig.vehicle then
         ig.log.Info("Saving persistent vehicles on shutdown...")
         ig.vehicle.SavePersistentVehicles()
