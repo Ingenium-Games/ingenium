@@ -1,0 +1,918 @@
+﻿Update README with new exports	Set up job	´╗┐2026-01-14T10:37:39.5089400Z Current runner version: '2.330.0'
+Update README with new exports	Set up job	2026-01-14T10:37:39.5123202Z ##[group]Runner Image Provisioner
+Update README with new exports	Set up job	2026-01-14T10:37:39.5124482Z Hosted Compute Agent
+Update README with new exports	Set up job	2026-01-14T10:37:39.5125400Z Version: 20251211.462
+Update README with new exports	Set up job	2026-01-14T10:37:39.5126497Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+Update README with new exports	Set up job	2026-01-14T10:37:39.5127646Z Build Date: 2025-12-11T16:28:49Z
+Update README with new exports	Set up job	2026-01-14T10:37:39.5129082Z Worker ID: {87935054-c866-4101-a712-e178b9e77c1d}
+Update README with new exports	Set up job	2026-01-14T10:37:39.5130290Z ##[endgroup]
+Update README with new exports	Set up job	2026-01-14T10:37:39.5131273Z ##[group]Operating System
+Update README with new exports	Set up job	2026-01-14T10:37:39.5132217Z Ubuntu
+Update README with new exports	Set up job	2026-01-14T10:37:39.5133088Z 24.04.3
+Update README with new exports	Set up job	2026-01-14T10:37:39.5133832Z LTS
+Update README with new exports	Set up job	2026-01-14T10:37:39.5134694Z ##[endgroup]
+Update README with new exports	Set up job	2026-01-14T10:37:39.5135492Z ##[group]Runner Image
+Update README with new exports	Set up job	2026-01-14T10:37:39.5136649Z Image: ubuntu-24.04
+Update README with new exports	Set up job	2026-01-14T10:37:39.5137573Z Version: 20260105.202.1
+Update README with new exports	Set up job	2026-01-14T10:37:39.5139587Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260105.202/images/ubuntu/Ubuntu2404-Readme.md
+Update README with new exports	Set up job	2026-01-14T10:37:39.5142343Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260105.202
+Update README with new exports	Set up job	2026-01-14T10:37:39.5144330Z ##[endgroup]
+Update README with new exports	Set up job	2026-01-14T10:37:39.5149308Z ##[group]GITHUB_TOKEN Permissions
+Update README with new exports	Set up job	2026-01-14T10:37:39.5152086Z Actions: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5153263Z ArtifactMetadata: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5154170Z Attestations: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5155005Z Checks: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5155915Z Contents: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5156803Z Deployments: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5157768Z Discussions: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5159095Z Issues: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5159906Z Metadata: read
+Update README with new exports	Set up job	2026-01-14T10:37:39.5160796Z Models: read
+Update README with new exports	Set up job	2026-01-14T10:37:39.5161684Z Packages: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5162584Z Pages: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5163416Z PullRequests: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5164500Z RepositoryProjects: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5165601Z SecurityEvents: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5166453Z Statuses: write
+Update README with new exports	Set up job	2026-01-14T10:37:39.5167708Z ##[endgroup]
+Update README with new exports	Set up job	2026-01-14T10:37:39.5170821Z Secret source: Actions
+Update README with new exports	Set up job	2026-01-14T10:37:39.5172007Z Prepare workflow directory
+Update README with new exports	Set up job	2026-01-14T10:37:39.5730892Z Prepare all required actions
+Update README with new exports	Set up job	2026-01-14T10:37:39.5789393Z Getting action download info
+Update README with new exports	Set up job	2026-01-14T10:37:40.0632631Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Update README with new exports	Set up job	2026-01-14T10:37:40.1749728Z Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+Update README with new exports	Set up job	2026-01-14T10:37:40.4345075Z Download action repository 'peter-evans/create-pull-request@v5' (SHA:4e1beaa7521e8b457b572c090b25bd3db56bf1c5)
+Update README with new exports	Set up job	2026-01-14T10:37:41.1183088Z Complete job name: Update README with new exports
+Update README with new exports	Checkout repository	´╗┐2026-01-14T10:37:41.1895458Z ##[group]Run actions/checkout@v4
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1896359Z with:
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1896783Z   fetch-depth: 0
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1897234Z   repository: Ingenium-Games/ingenium
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1898282Z   token: ***
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1898796Z   ssh-strict: true
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1899222Z   ssh-user: git
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1899663Z   persist-credentials: true
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1900152Z   clean: true
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1900579Z   sparse-checkout-cone-mode: true
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1901090Z   fetch-tags: false
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1901522Z   show-progress: true
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1901956Z   lfs: false
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1902351Z   submodules: false
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1902802Z   set-safe-directory: true
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.1903586Z ##[endgroup]
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3065900Z Syncing repository: Ingenium-Games/ingenium
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3069235Z ##[group]Getting Git version info
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3070458Z Working directory is '/home/runner/work/ingenium/ingenium'
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3076122Z [command]/usr/bin/git version
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3131692Z git version 2.52.0
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3163337Z ##[endgroup]
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3179304Z Temporarily overriding HOME='/home/runner/work/_temp/441c49eb-8591-49bc-89c0-ecd6aadc4b07' before making global git config changes
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3182470Z Adding repository directory to the temporary git global config as a safe directory
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3197239Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ingenium/ingenium
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3244577Z Deleting the contents of '/home/runner/work/ingenium/ingenium'
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3250725Z ##[group]Initializing the repository
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3252042Z [command]/usr/bin/git init /home/runner/work/ingenium/ingenium
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3348963Z hint: Using 'master' as the name for the initial branch. This default branch name
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3350903Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3352601Z hint: to use in all of your new repositories, which will suppress this warning,
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3353983Z hint: call:
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3354753Z hint:
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3355724Z hint: 	git config --global init.defaultBranch <name>
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3356917Z hint:
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3358322Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3360240Z hint: 'development'. The just-created branch can be renamed via this command:
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3361715Z hint:
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3362463Z hint: 	git branch -m <name>
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3363305Z hint:
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3364471Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3369979Z Initialized empty Git repository in /home/runner/work/ingenium/ingenium/.git/
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3372886Z [command]/usr/bin/git remote add origin https://github.com/Ingenium-Games/ingenium
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3410641Z ##[endgroup]
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3413290Z ##[group]Disabling automatic garbage collection
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3414571Z [command]/usr/bin/git config --local gc.auto 0
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3450715Z ##[endgroup]
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3451992Z ##[group]Setting up auth
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3457403Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3490716Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3827303Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.3861027Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.4094907Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.4136906Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.4374948Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.4412779Z ##[endgroup]
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.4415906Z ##[group]Fetching the repository
+Update README with new exports	Checkout repository	2026-01-14T10:37:41.4424139Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9759924Z From https://github.com/Ingenium-Games/ingenium
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9761994Z  * [new branch]        4          -> origin/4
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9763169Z  * [new branch]        copilot/add-deployment-recipe-for-ingenium -> origin/copilot/add-deployment-recipe-for-ingenium
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9764713Z  * [new branch]        copilot/add-deployment-recipe-ingenuim -> origin/copilot/add-deployment-recipe-ingenuim
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9766172Z  * [new branch]        copilot/add-lightweight-voip-solution -> origin/copilot/add-lightweight-voip-solution
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9767745Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix -> origin/copilot/choreregenerate-lockfile-ci-fix
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9769574Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix-again -> origin/copilot/choreregenerate-lockfile-ci-fix-again
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9771791Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix-another-one -> origin/copilot/choreregenerate-lockfile-ci-fix-another-one
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9773421Z  * [new branch]        copilot/identify-code-improvements -> origin/copilot/identify-code-improvements
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9774776Z  * [new branch]        copilot/identify-code-inefficiencies -> origin/copilot/identify-code-inefficiencies
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9776137Z  * [new branch]        copilot/improve-slow-code-efficiency -> origin/copilot/improve-slow-code-efficiency
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9777547Z  * [new branch]        copilot/refactor-sql-execution-methods -> origin/copilot/refactor-sql-execution-methods
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9779303Z  * [new branch]        copilot/revert-sql-dependency-to-external -> origin/copilot/revert-sql-dependency-to-external
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9781053Z  * [new branch]        copilot/update-ci-script-for-scope-verification -> origin/copilot/update-ci-script-for-scope-verification
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9782386Z  * [new branch]        main       -> origin/main
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9783086Z  * [new tag]           0.4.0      -> 0.4.0
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9783636Z  * [new tag]           0.4.1      -> 0.4.1
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9784195Z  * [new tag]           0.4.2      -> 0.4.2
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9784725Z  * [new tag]           0.4.3      -> 0.4.3
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9785279Z  * [new tag]           0.4.4      -> 0.4.4
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9785825Z  * [new tag]           0.5.5      -> 0.5.5
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9786360Z  * [new tag]           0.5.6      -> 0.5.6
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9786915Z  * [new tag]           0.5.9      -> 0.5.9
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9787466Z  * [new tag]           0.6.0      -> 0.6.0
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9788432Z  * [new tag]           0.6.3      -> 0.6.3
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9789003Z  * [new tag]           0.6.8      -> 0.6.8
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9789571Z  * [new tag]           0.6.9      -> 0.6.9
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9790154Z  * [new tag]           0.7.0      -> 0.7.0
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9832089Z [command]/usr/bin/git branch --list --remote origin/main
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9858967Z   origin/main
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9869701Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9891206Z 78ae1576a91f750861951dc638e7de47814eb426
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9897309Z ##[endgroup]
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9898732Z ##[group]Determining the checkout info
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9900070Z ##[endgroup]
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9905157Z [command]/usr/bin/git sparse-checkout disable
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9947004Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9976843Z ##[group]Checking out the ref
+Update README with new exports	Checkout repository	2026-01-14T10:37:43.9981266Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+Update README with new exports	Checkout repository	2026-01-14T10:37:44.0833519Z Switched to a new branch 'main'
+Update README with new exports	Checkout repository	2026-01-14T10:37:44.0837739Z branch 'main' set up to track 'origin/main'.
+Update README with new exports	Checkout repository	2026-01-14T10:37:44.0850261Z ##[endgroup]
+Update README with new exports	Checkout repository	2026-01-14T10:37:44.0892483Z [command]/usr/bin/git log -1 --format=%H
+Update README with new exports	Checkout repository	2026-01-14T10:37:44.0917090Z 78ae1576a91f750861951dc638e7de47814eb426
+Update README with new exports	Set up Python	´╗┐2026-01-14T10:37:44.1152733Z ##[group]Run actions/setup-python@v4
+Update README with new exports	Set up Python	2026-01-14T10:37:44.1153105Z with:
+Update README with new exports	Set up Python	2026-01-14T10:37:44.1153338Z   python-version: 3.11
+Update README with new exports	Set up Python	2026-01-14T10:37:44.1153620Z   check-latest: false
+Update README with new exports	Set up Python	2026-01-14T10:37:44.1154034Z   token: ***
+Update README with new exports	Set up Python	2026-01-14T10:37:44.1154276Z   update-environment: true
+Update README with new exports	Set up Python	2026-01-14T10:37:44.1154560Z   allow-prereleases: false
+Update README with new exports	Set up Python	2026-01-14T10:37:44.1154826Z ##[endgroup]
+Update README with new exports	Set up Python	2026-01-14T10:37:44.2920128Z ##[group]Installed versions
+Update README with new exports	Set up Python	2026-01-14T10:37:44.3088429Z Successfully set up CPython (3.11.14)
+Update README with new exports	Set up Python	2026-01-14T10:37:44.3089560Z ##[endgroup]
+Update README with new exports	Auto-detect and update new exports	´╗┐2026-01-14T10:37:44.3221956Z ##[group]Run set +e
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3222252Z [36;1mset +e[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3222507Z [36;1mpython3 scripts/update_readme_exports.py[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3222805Z [36;1mcode=$?[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3222986Z [36;1mset -e[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3223181Z [36;1mif [ $code -eq 1 ]; then[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3223659Z [36;1m  echo "CHANGES_DETECTED=true" >> $GITHUB_OUTPUT[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3223965Z [36;1melse[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3224210Z [36;1m  echo "CHANGES_DETECTED=false" >> $GITHUB_OUTPUT[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3224496Z [36;1mfi[0m
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3449835Z shell: /usr/bin/bash -e {0}
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3450102Z env:
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3450352Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3450799Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3451227Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3451592Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3451990Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3452372Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3452740Z   GITHUB_WORKSPACE: /home/runner/work/ingenium/ingenium
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:44.3453025Z ##[endgroup]
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:45.2036389Z ­ƒöì Scanning for new functions...
+Update README with new exports	Auto-detect and update new exports	2026-01-14T10:37:45.2037016Z Ô£à README updated successfully
+Update README with new exports	Create or update PR with changes	´╗┐2026-01-14T10:37:45.2284501Z ##[group]Run peter-evans/create-pull-request@v5
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2284788Z with:
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2285057Z   commit-message: docs: auto-update README with new function exports
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2285455Z   title: docs: auto-update README with new function exports
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2287067Z   body: This PR automatically updates the README.md with newly detected function exports and updates function scope markers based on code analysis.
+Update README with new exports	Create or update PR with changes	
+Update README with new exports	Create or update PR with changes	**Changes made:**
+Update README with new exports	Create or update PR with changes	- Detected new export functions and documentation files
+Update README with new exports	Create or update PR with changes	- Updated function scope markers ([S], [C], [S C]) based on actual code locations
+Update README with new exports	Create or update PR with changes	- Verified that all markers accurately reflect where functions are defined
+Update README with new exports	Create or update PR with changes	
+Update README with new exports	Create or update PR with changes	ÔÜá´©Å **Please review** to ensure all changes are correct.
+Update README with new exports	Create or update PR with changes	
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2289026Z   branch: docs/auto-update-readme
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2289272Z   delete-branch: true
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2289470Z   labels: documentation, automated
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2289868Z   token: ***
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2290063Z   committer: GitHub <noreply@github.com>
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2290422Z   author: Twiitchter <Twiitchter@users.noreply.github.com>
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2290726Z   signoff: false
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2290897Z   draft: false
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2291064Z env:
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2291290Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2291692Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2292091Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2292436Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2292784Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2293133Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2293432Z ##[endgroup]
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.2985607Z ##[group]Prepare git configuration
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3003676Z [command]/usr/bin/git config --global --name-only --get-regexp safe.directory /home/runner/work/ingenium/ingenium
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3068896Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ingenium/ingenium
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3100117Z [command]/usr/bin/git config --local --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3125002Z http.https://github.com/.extraheader
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3136418Z [command]/usr/bin/git config --local --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3160244Z http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3170532Z [command]/usr/bin/git config --local --unset http.https://github.com/.extraheader ^AUTHORIZATION:
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3200611Z Unset config key 'http.https://github.com/.extraheader'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3202087Z ##[endgroup]
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3279185Z ##[group]Determining the base and head repositories
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3286233Z [command]/usr/bin/git config --local --get remote.origin.url
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3314338Z https://github.com/Ingenium-Games/ingenium
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3324681Z ##[endgroup]
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3325469Z Pull request branch target repository set to Ingenium-Games/ingenium
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3326808Z ##[group]Configuring credential for HTTPS authentication
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3338887Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3375672Z [command]/usr/bin/git rev-parse --git-dir
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3399377Z .git
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3420750Z ##[endgroup]
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3423330Z ##[group]Checking the base repository state
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3438885Z [command]/usr/bin/git symbolic-ref HEAD --short
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3463255Z main
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3469599Z Working base is branch 'main'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.3474165Z [command]/usr/bin/git remote prune origin
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7254360Z ##[endgroup]
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7267098Z Pull request branch to create or update set to 'docs/auto-update-readme'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7268646Z ##[group]Configuring the committer and author
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7269961Z Configured git committer as 'GitHub <noreply@github.com>'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7270931Z Configured git author as 'Twiitchter <Twiitchter@users.noreply.github.com>'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7271974Z ##[endgroup]
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7275737Z ##[group]Create or update the pull request branch
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7276316Z [command]/usr/bin/git symbolic-ref HEAD --short
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7307108Z main
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7316012Z Working base is branch 'main'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.7328048Z [command]/usr/bin/git checkout --progress -B 010339fc-89e9-4a28-9166-a0703876d8d6 HEAD --
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8030558Z Switched to a new branch '010339fc-89e9-4a28-9166-a0703876d8d6'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8043618Z [command]/usr/bin/git status --porcelain -unormal --
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8124625Z [command]/usr/bin/git diff --quiet --
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8175928Z [command]/usr/bin/git diff --quiet --staged --
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8211637Z [command]/usr/bin/git stash push --include-untracked
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8278800Z No local changes to save
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8285324Z Resetting working base branch 'main'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8289527Z [command]/usr/bin/git checkout --progress main --
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8348916Z Switched to branch 'main'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8353812Z Your branch is up to date with 'origin/main'.
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8362718Z [command]/usr/bin/git reset --hard origin/main
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8435005Z HEAD is now at 78ae1576 marking wiki ignore on add set remove players, npc and vehicles (locking down internal handle)
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:45.8448644Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --progress --no-recurse-submodules --force origin docs/auto-update-readme:refs/remotes/origin/docs/auto-update-readme
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2169087Z fatal: couldn't find remote ref docs/auto-update-readme
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2201446Z Pull request branch 'docs/auto-update-readme' does not exist yet.
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2212087Z [command]/usr/bin/git checkout --progress -B docs/auto-update-readme 010339fc-89e9-4a28-9166-a0703876d8d6 --
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2332302Z Switched to a new branch 'docs/auto-update-readme'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2357405Z [command]/usr/bin/git rev-list --right-only --count main...docs/auto-update-readme
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2398774Z 0
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2404130Z Branch 'docs/auto-update-readme' is not ahead of base 'main' and will not be created
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2410671Z [command]/usr/bin/git rev-parse HEAD
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2432009Z 78ae1576a91f750861951dc638e7de47814eb426
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2442733Z [command]/usr/bin/git branch --delete --force 010339fc-89e9-4a28-9166-a0703876d8d6
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2480287Z Deleted branch 010339fc-89e9-4a28-9166-a0703876d8d6 (was 78ae1576).
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2493783Z [command]/usr/bin/git checkout --progress main --
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2553224Z Switched to branch 'main'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2556625Z Your branch is up to date with 'origin/main'.
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2562227Z ##[endgroup]
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2563707Z ##[group]Restore git configuration
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2569239Z [command]/usr/bin/git config --local --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2604712Z http.https://github.com/.extraheader
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2612349Z [command]/usr/bin/git config --local --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2634985Z http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2642885Z [command]/usr/bin/git config --local --unset http.https://github.com/.extraheader ^AUTHORIZATION:
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2669531Z Unset config key 'http.https://github.com/.extraheader'
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2674601Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2705075Z Persisted git credentials restored
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2710375Z [command]/usr/bin/git config --global --unset safe.directory /home/runner/work/ingenium/ingenium
+Update README with new exports	Create or update PR with changes	2026-01-14T10:37:46.2736181Z ##[endgroup]
+Update README with new exports	Post Set up Python	´╗┐2026-01-14T10:37:46.2841555Z Post job cleanup.
+Update README with new exports	Post Checkout repository	´╗┐2026-01-14T10:37:46.4464405Z Post job cleanup.
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5407247Z [command]/usr/bin/git version
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5448331Z git version 2.52.0
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5489156Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/eab1e680-a2fc-421b-b4f1-eed6e293aee6/.gitconfig'
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5499831Z Temporarily overriding HOME='/home/runner/work/_temp/eab1e680-a2fc-421b-b4f1-eed6e293aee6' before making global git config changes
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5502164Z Adding repository directory to the temporary git global config as a safe directory
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5507558Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ingenium/ingenium
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5551189Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5587022Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5842037Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5890687Z http.https://github.com/.extraheader
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5900049Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.5936199Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.6173377Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Update README with new exports	Post Checkout repository	2026-01-14T10:37:46.6207819Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Update README with new exports	Complete job	´╗┐2026-01-14T10:37:46.6554442Z Cleaning up orphan processes
+Verify Function Scopes	Set up job	´╗┐2026-01-14T10:37:38.9197586Z Current runner version: '2.330.0'
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9244236Z ##[group]Runner Image Provisioner
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9245520Z Hosted Compute Agent
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9246374Z Version: 20251211.462
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9278312Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9279662Z Build Date: 2025-12-11T16:28:49Z
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9280930Z Worker ID: {a171f094-e4da-44cd-90ca-ab51785c0198}
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9282048Z ##[endgroup]
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9282879Z ##[group]Operating System
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9283981Z Ubuntu
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9284731Z 24.04.3
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9285385Z LTS
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9286252Z ##[endgroup]
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9287386Z ##[group]Runner Image
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9288362Z Image: ubuntu-24.04
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9289363Z Version: 20260105.202.1
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9291097Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260105.202/images/ubuntu/Ubuntu2404-Readme.md
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9293446Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260105.202
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9295842Z ##[endgroup]
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9322234Z ##[group]GITHUB_TOKEN Permissions
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9327818Z Actions: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9329038Z ArtifactMetadata: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9329950Z Attestations: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9330778Z Checks: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9331480Z Contents: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9332458Z Deployments: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9333384Z Discussions: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9334802Z Issues: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9335822Z Metadata: read
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9336583Z Models: read
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9359436Z Packages: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9360662Z Pages: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9361658Z PullRequests: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9363246Z RepositoryProjects: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9364214Z SecurityEvents: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9365062Z Statuses: write
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9365771Z ##[endgroup]
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9371721Z Secret source: Actions
+Verify Function Scopes	Set up job	2026-01-14T10:37:38.9373791Z Prepare workflow directory
+Verify Function Scopes	Set up job	2026-01-14T10:37:39.0452564Z Prepare all required actions
+Verify Function Scopes	Set up job	2026-01-14T10:37:39.0573557Z Getting action download info
+Verify Function Scopes	Set up job	2026-01-14T10:37:39.4241431Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Verify Function Scopes	Set up job	2026-01-14T10:37:39.5254536Z Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+Verify Function Scopes	Set up job	2026-01-14T10:37:39.6624665Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Verify Function Scopes	Set up job	2026-01-14T10:37:39.9292786Z Complete job name: Verify Function Scopes
+Verify Function Scopes	Checkout repository	´╗┐2026-01-14T10:37:40.0136784Z ##[group]Run actions/checkout@v4
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0138720Z with:
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0139441Z   fetch-depth: 0
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0140231Z   repository: Ingenium-Games/ingenium
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0141579Z   token: ***
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0142277Z   ssh-strict: true
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0142984Z   ssh-user: git
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0143725Z   persist-credentials: true
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0144596Z   clean: true
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0145339Z   sparse-checkout-cone-mode: true
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0146259Z   fetch-tags: false
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0147251Z   show-progress: true
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0148004Z   lfs: false
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0148695Z   submodules: false
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0149472Z   set-safe-directory: true
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.0150563Z ##[endgroup]
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1355910Z Syncing repository: Ingenium-Games/ingenium
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1359907Z ##[group]Getting Git version info
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1361915Z Working directory is '/home/runner/work/ingenium/ingenium'
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1369971Z [command]/usr/bin/git version
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1473072Z git version 2.52.0
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1511929Z ##[endgroup]
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1526245Z Temporarily overriding HOME='/home/runner/work/_temp/e0da2b9d-3f34-48a5-99df-b276230f7417' before making global git config changes
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1542064Z Adding repository directory to the temporary git global config as a safe directory
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1547156Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ingenium/ingenium
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1595456Z Deleting the contents of '/home/runner/work/ingenium/ingenium'
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1601774Z ##[group]Initializing the repository
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1608093Z [command]/usr/bin/git init /home/runner/work/ingenium/ingenium
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1748615Z hint: Using 'master' as the name for the initial branch. This default branch name
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1752232Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1755296Z hint: to use in all of your new repositories, which will suppress this warning,
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1759541Z hint: call:
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1762462Z hint:
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1763924Z hint: 	git config --global init.defaultBranch <name>
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1766282Z hint:
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1768327Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1771146Z hint: 'development'. The just-created branch can be renamed via this command:
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1773341Z hint:
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1774405Z hint: 	git branch -m <name>
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1775711Z hint:
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1777584Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1780644Z Initialized empty Git repository in /home/runner/work/ingenium/ingenium/.git/
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1785818Z [command]/usr/bin/git remote add origin https://github.com/Ingenium-Games/ingenium
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1819661Z ##[endgroup]
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1821907Z ##[group]Disabling automatic garbage collection
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1824026Z [command]/usr/bin/git config --local gc.auto 0
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1862837Z ##[endgroup]
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1865546Z ##[group]Setting up auth
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1868587Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.1904582Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.2293059Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.2330977Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.2579802Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.2618079Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.2880494Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.2933004Z ##[endgroup]
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.2936029Z ##[group]Fetching the repository
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:40.2990545Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5550680Z From https://github.com/Ingenium-Games/ingenium
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5555865Z  * [new branch]        4          -> origin/4
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5557185Z  * [new branch]        copilot/add-deployment-recipe-for-ingenium -> origin/copilot/add-deployment-recipe-for-ingenium
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5558728Z  * [new branch]        copilot/add-deployment-recipe-ingenuim -> origin/copilot/add-deployment-recipe-ingenuim
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5566180Z  * [new branch]        copilot/add-lightweight-voip-solution -> origin/copilot/add-lightweight-voip-solution
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5576339Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix -> origin/copilot/choreregenerate-lockfile-ci-fix
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5578211Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix-again -> origin/copilot/choreregenerate-lockfile-ci-fix-again
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5580423Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix-another-one -> origin/copilot/choreregenerate-lockfile-ci-fix-another-one
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5581967Z  * [new branch]        copilot/identify-code-improvements -> origin/copilot/identify-code-improvements
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5583267Z  * [new branch]        copilot/identify-code-inefficiencies -> origin/copilot/identify-code-inefficiencies
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5584605Z  * [new branch]        copilot/improve-slow-code-efficiency -> origin/copilot/improve-slow-code-efficiency
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5585963Z  * [new branch]        copilot/refactor-sql-execution-methods -> origin/copilot/refactor-sql-execution-methods
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5587701Z  * [new branch]        copilot/revert-sql-dependency-to-external -> origin/copilot/revert-sql-dependency-to-external
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5589228Z  * [new branch]        copilot/update-ci-script-for-scope-verification -> origin/copilot/update-ci-script-for-scope-verification
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5590325Z  * [new branch]        main       -> origin/main
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5590983Z  * [new tag]           0.4.0      -> 0.4.0
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5591437Z  * [new tag]           0.4.1      -> 0.4.1
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5591900Z  * [new tag]           0.4.2      -> 0.4.2
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5592357Z  * [new tag]           0.4.3      -> 0.4.3
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5592814Z  * [new tag]           0.4.4      -> 0.4.4
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5593304Z  * [new tag]           0.5.5      -> 0.5.5
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5593784Z  * [new tag]           0.5.6      -> 0.5.6
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5594269Z  * [new tag]           0.5.9      -> 0.5.9
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5594775Z  * [new tag]           0.6.0      -> 0.6.0
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5595171Z  * [new tag]           0.6.3      -> 0.6.3
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5595547Z  * [new tag]           0.6.8      -> 0.6.8
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5596013Z  * [new tag]           0.6.9      -> 0.6.9
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5596532Z  * [new tag]           0.7.0      -> 0.7.0
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5637727Z [command]/usr/bin/git branch --list --remote origin/main
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5667802Z   origin/main
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5678950Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5701472Z 78ae1576a91f750861951dc638e7de47814eb426
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5708412Z ##[endgroup]
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5709665Z ##[group]Determining the checkout info
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5714560Z ##[endgroup]
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5716457Z [command]/usr/bin/git sparse-checkout disable
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5778051Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5810023Z ##[group]Checking out the ref
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.5813620Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.6690038Z Switched to a new branch 'main'
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.6693447Z branch 'main' set up to track 'origin/main'.
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.6707706Z ##[endgroup]
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.6751277Z [command]/usr/bin/git log -1 --format=%H
+Verify Function Scopes	Checkout repository	2026-01-14T10:37:42.6778453Z 78ae1576a91f750861951dc638e7de47814eb426
+Verify Function Scopes	Set up Python	´╗┐2026-01-14T10:37:42.7019828Z ##[group]Run actions/setup-python@v4
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.7020185Z with:
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.7020404Z   python-version: 3.11
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.7020654Z   check-latest: false
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.7021060Z   token: ***
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.7021288Z   update-environment: true
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.7021544Z   allow-prereleases: false
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.7021789Z ##[endgroup]
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.9031369Z ##[group]Installed versions
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.9236417Z Successfully set up CPython (3.11.14)
+Verify Function Scopes	Set up Python	2026-01-14T10:37:42.9241391Z ##[endgroup]
+Verify Function Scopes	Run function scope verification	´╗┐2026-01-14T10:37:42.9389220Z ##[group]Run set +e
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9389503Z [36;1mset +e[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9389791Z [36;1mpython3 scripts/verify_function_scopes.py --verbose[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9390119Z [36;1mcode=$?[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9390290Z [36;1mset -e[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9390459Z [36;1m[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9390810Z [36;1m# Upload will happen below via artifact; detect if mismatch JSON exists and is non-empty[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9391657Z [36;1mif [ -f scripts/function_scope_mismatches.json ] && [ -s scripts/function_scope_mismatches.json ]; then[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9392162Z [36;1m  echo "HAS_MISMATCHES=true" >> $GITHUB_OUTPUT[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9392430Z [36;1melse[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9392648Z [36;1m  echo "HAS_MISMATCHES=false" >> $GITHUB_OUTPUT[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9392906Z [36;1mfi[0m
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9569988Z shell: /usr/bin/bash -e {0}
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9570283Z env:
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9570539Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9571038Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9571445Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9571794Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9572147Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9572519Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9572860Z   GITHUB_WORKSPACE: /home/runner/work/ingenium/ingenium
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:42.9573138Z ##[endgroup]
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6328767Z ­ƒöì Scanning codebase...
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6329816Z Found 689 total function definitions
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6331859Z Found 692 functions in README
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6332260Z 
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6332494Z ­ƒôè VERIFICATION RESULTS
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6332970Z Ô£à Correct: 689
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6333317Z ÔØî Mismatches: 0
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6333637Z ÔØô Not Found: 3
+Verify Function Scopes	Run function scope verification	2026-01-14T10:37:43.6334329Z Wrote mismatch report to /home/runner/work/ingenium/ingenium/scripts/function_scope_mismatches.json
+Verify Function Scopes	Upload mismatch report	´╗┐2026-01-14T10:37:43.6574682Z ##[group]Run actions/upload-artifact@v4
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6574955Z with:
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6575142Z   name: function_scope_mismatches
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6575396Z   path: scripts/function_scope_mismatches.json
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6575664Z   if-no-files-found: warn
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6575897Z   compression-level: 6
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6576096Z   overwrite: false
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6576295Z   include-hidden-files: false
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6576501Z env:
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6576727Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6577498Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6577901Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6578256Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6578619Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6578976Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.6579318Z ##[endgroup]
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.9658079Z With the provided path, there will be 1 file uploaded
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.9675147Z Artifact name is valid!
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:43.9675550Z Root directory input is valid!
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:44.0642691Z Beginning upload of artifact content to blob storage
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:44.1073243Z Uploaded bytes 198
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:44.1213480Z Finished uploading artifact content to blob storage!
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:44.1216708Z SHA256 digest of uploaded artifact zip is ef752c889920af9cfb3e2938834b0c4fec540c98884ddf9b9a94482df75ecce7
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:44.1219912Z Finalizing artifact upload
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:44.2486425Z Artifact function_scope_mismatches.zip successfully finalized. Artifact ID 5124870847
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:44.2487872Z Artifact function_scope_mismatches has been successfully uploaded! Final size is 198 bytes. Artifact ID is 5124870847
+Verify Function Scopes	Upload mismatch report	2026-01-14T10:37:44.2492518Z Artifact download URL: https://github.com/Ingenium-Games/ingenium/actions/runs/20991095847/artifacts/5124870847
+Verify Function Scopes	Post Set up Python	´╗┐2026-01-14T10:37:44.2617764Z Post job cleanup.
+Verify Function Scopes	Post Checkout repository	´╗┐2026-01-14T10:37:44.4555395Z Post job cleanup.
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.5685391Z [command]/usr/bin/git version
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.5729147Z git version 2.52.0
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.5778003Z Temporarily overriding HOME='/home/runner/work/_temp/a20f2102-d497-47e1-b189-1d6eb0b36a66' before making global git config changes
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.5779980Z Adding repository directory to the temporary git global config as a safe directory
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.5785753Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ingenium/ingenium
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.5837662Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.5883401Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.6282656Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.6330685Z http.https://github.com/.extraheader
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.6365340Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.6430616Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.6823228Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Verify Function Scopes	Post Checkout repository	2026-01-14T10:37:44.6891421Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Verify Function Scopes	Complete job	´╗┐2026-01-14T10:37:44.7428843Z Cleaning up orphan processes
+Create issues for missing scopes	Set up job	´╗┐2026-01-14T10:37:50.1743591Z Current runner version: '2.330.0'
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1783420Z ##[group]Runner Image Provisioner
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1784685Z Hosted Compute Agent
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1785460Z Version: 20251211.462
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1786416Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1787439Z Build Date: 2025-12-11T16:28:49Z
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1788367Z Worker ID: {011f72da-5baf-4d07-9a7b-986b699f17f6}
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1789667Z ##[endgroup]
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1790362Z ##[group]Operating System
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1791322Z Ubuntu
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1792315Z 24.04.3
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1793405Z LTS
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1794231Z ##[endgroup]
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1795076Z ##[group]Runner Image
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1795879Z Image: ubuntu-24.04
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1796560Z Version: 20260105.202.1
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1798026Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260105.202/images/ubuntu/Ubuntu2404-Readme.md
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1813066Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260105.202
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1815029Z ##[endgroup]
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1819485Z ##[group]GITHUB_TOKEN Permissions
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1822813Z Actions: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1823656Z ArtifactMetadata: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1824476Z Attestations: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1825229Z Checks: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1825959Z Contents: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1826650Z Deployments: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1827488Z Discussions: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1828203Z Issues: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1850441Z Metadata: read
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1851434Z Models: read
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1852318Z Packages: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1853021Z Pages: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1854160Z PullRequests: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1855171Z RepositoryProjects: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1855921Z SecurityEvents: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1856642Z Statuses: write
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1857389Z ##[endgroup]
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1860930Z Secret source: Actions
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.1862053Z Prepare workflow directory
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.2515169Z Prepare all required actions
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.2624261Z Getting action download info
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.7479591Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.8337499Z Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+Create issues for missing scopes	Set up job	2026-01-14T10:37:50.9268182Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Create issues for missing scopes	Set up job	2026-01-14T10:37:51.9761970Z Complete job name: Create issues for missing scopes
+Create issues for missing scopes	Checkout repository	´╗┐2026-01-14T10:37:52.0563483Z ##[group]Run actions/checkout@v4
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0565023Z with:
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0565792Z   fetch-depth: 0
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0566688Z   repository: Ingenium-Games/ingenium
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0568178Z   token: ***
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0569084Z   ssh-strict: true
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0569901Z   ssh-user: git
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0570726Z   persist-credentials: true
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0571687Z   clean: true
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0572478Z   sparse-checkout-cone-mode: true
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0573493Z   fetch-tags: false
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0574352Z   show-progress: true
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0575161Z   lfs: false
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0575949Z   submodules: false
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0576798Z   set-safe-directory: true
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.0578017Z ##[endgroup]
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2088890Z Syncing repository: Ingenium-Games/ingenium
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2092935Z ##[group]Getting Git version info
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2094756Z Working directory is '/home/runner/work/ingenium/ingenium'
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2101037Z [command]/usr/bin/git version
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2102716Z git version 2.52.0
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2105845Z ##[endgroup]
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2112913Z Temporarily overriding HOME='/home/runner/work/_temp/5f207194-1ae1-4422-a59d-5b055d2bc91c' before making global git config changes
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2116673Z Adding repository directory to the temporary git global config as a safe directory
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2120436Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ingenium/ingenium
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2124797Z Deleting the contents of '/home/runner/work/ingenium/ingenium'
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2127690Z ##[group]Initializing the repository
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2129684Z [command]/usr/bin/git init /home/runner/work/ingenium/ingenium
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2132785Z hint: Using 'master' as the name for the initial branch. This default branch name
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2136812Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2139702Z hint: to use in all of your new repositories, which will suppress this warning,
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2141923Z hint: call:
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2142912Z hint:
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2144195Z hint: 	git config --global init.defaultBranch <name>
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2145928Z hint:
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2147615Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2150372Z hint: 'development'. The just-created branch can be renamed via this command:
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2152293Z hint:
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2153347Z hint: 	git branch -m <name>
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2154515Z hint:
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2156808Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2159657Z Initialized empty Git repository in /home/runner/work/ingenium/ingenium/.git/
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2171417Z [command]/usr/bin/git remote add origin https://github.com/Ingenium-Games/ingenium
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2193052Z ##[endgroup]
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2196500Z ##[group]Disabling automatic garbage collection
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2199439Z [command]/usr/bin/git config --local gc.auto 0
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2233087Z ##[endgroup]
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2236235Z ##[group]Setting up auth
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2241484Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.2303988Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.3600995Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.3606510Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.3611709Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.3617112Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.3621532Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.3625373Z ##[endgroup]
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.3626891Z ##[group]Fetching the repository
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:52.3629310Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8374080Z From https://github.com/Ingenium-Games/ingenium
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8377367Z  * [new branch]        4          -> origin/4
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8381003Z  * [new branch]        copilot/add-deployment-recipe-for-ingenium -> origin/copilot/add-deployment-recipe-for-ingenium
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8384641Z  * [new branch]        copilot/add-deployment-recipe-ingenuim -> origin/copilot/add-deployment-recipe-ingenuim
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8388021Z  * [new branch]        copilot/add-lightweight-voip-solution -> origin/copilot/add-lightweight-voip-solution
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8391852Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix -> origin/copilot/choreregenerate-lockfile-ci-fix
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8395576Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix-again -> origin/copilot/choreregenerate-lockfile-ci-fix-again
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8399958Z  * [new branch]        copilot/choreregenerate-lockfile-ci-fix-another-one -> origin/copilot/choreregenerate-lockfile-ci-fix-another-one
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8416595Z  * [new branch]        copilot/identify-code-improvements -> origin/copilot/identify-code-improvements
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8421220Z  * [new branch]        copilot/identify-code-inefficiencies -> origin/copilot/identify-code-inefficiencies
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8424269Z  * [new branch]        copilot/improve-slow-code-efficiency -> origin/copilot/improve-slow-code-efficiency
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8427400Z  * [new branch]        copilot/refactor-sql-execution-methods -> origin/copilot/refactor-sql-execution-methods
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8433834Z  * [new branch]        copilot/revert-sql-dependency-to-external -> origin/copilot/revert-sql-dependency-to-external
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8437158Z  * [new branch]        copilot/update-ci-script-for-scope-verification -> origin/copilot/update-ci-script-for-scope-verification
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8440333Z  * [new branch]        main       -> origin/main
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8441903Z  * [new tag]           0.4.0      -> 0.4.0
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8443280Z  * [new tag]           0.4.1      -> 0.4.1
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8444649Z  * [new tag]           0.4.2      -> 0.4.2
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8446031Z  * [new tag]           0.4.3      -> 0.4.3
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8446569Z  * [new tag]           0.4.4      -> 0.4.4
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8447981Z  * [new tag]           0.5.5      -> 0.5.5
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8449424Z  * [new tag]           0.5.6      -> 0.5.6
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8450814Z  * [new tag]           0.5.9      -> 0.5.9
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8452251Z  * [new tag]           0.6.0      -> 0.6.0
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8452758Z  * [new tag]           0.6.3      -> 0.6.3
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8454126Z  * [new tag]           0.6.8      -> 0.6.8
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8454849Z  * [new tag]           0.6.9      -> 0.6.9
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8455449Z  * [new tag]           0.7.0      -> 0.7.0
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8482589Z [command]/usr/bin/git branch --list --remote origin/main
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8517113Z   origin/main
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8528282Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8549779Z 78ae1576a91f750861951dc638e7de47814eb426
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8555461Z ##[endgroup]
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8556118Z ##[group]Determining the checkout info
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8560848Z ##[endgroup]
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8566290Z [command]/usr/bin/git sparse-checkout disable
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8603120Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8629629Z ##[group]Checking out the ref
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.8634985Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.9291638Z Switched to a new branch 'main'
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.9293984Z branch 'main' set up to track 'origin/main'.
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.9301772Z ##[endgroup]
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.9340210Z [command]/usr/bin/git log -1 --format=%H
+Create issues for missing scopes	Checkout repository	2026-01-14T10:37:54.9364317Z 78ae1576a91f750861951dc638e7de47814eb426
+Create issues for missing scopes	Set up Python	´╗┐2026-01-14T10:37:54.9582778Z ##[group]Run actions/setup-python@v4
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:54.9583131Z with:
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:54.9583362Z   python-version: 3.11
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:54.9583614Z   check-latest: false
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:54.9584042Z   token: ***
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:54.9584265Z   update-environment: true
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:54.9584532Z   allow-prereleases: false
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:54.9584768Z ##[endgroup]
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:55.1321345Z ##[group]Installed versions
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:55.1434847Z Successfully set up CPython (3.11.14)
+Create issues for missing scopes	Set up Python	2026-01-14T10:37:55.1438873Z ##[endgroup]
+Create issues for missing scopes	Download mismatch report	´╗┐2026-01-14T10:37:55.1566571Z ##[group]Run actions/download-artifact@v4
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1566899Z with:
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1567121Z   name: function_scope_mismatches
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1567390Z   path: scripts
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1567611Z   merge-multiple: false
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1567864Z   repository: Ingenium-Games/ingenium
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1568122Z   run-id: 20991095847
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1568468Z env:
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1568727Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1569311Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1569721Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1570104Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1570491Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1570867Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.1571194Z ##[endgroup]
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.3773265Z Downloading single artifact
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.6563710Z Preparing to download the following artifacts:
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.6564961Z - function_scope_mismatches (ID: 5124870847, Size: 198, Expected Digest: sha256:ef752c889920af9cfb3e2938834b0c4fec540c98884ddf9b9a94482df75ecce7)
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.8359178Z Redirecting to blob download url: https://productionresultssa8.blob.core.windows.net/actions-results/5a6e3247-6c45-4ccc-9708-c31d73fed0e9/workflow-job-run-46fbfd73-fbe9-518b-9244-d5faf8ebc6a0/artifacts/6aa5388f734d2ebeb884c82285269be9e476812cb184473607fc13a3811bbdc6.zip
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:55.8361166Z Starting download of artifact to: /home/runner/work/ingenium/ingenium/scripts
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:56.0611263Z (node:1990) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:56.0628893Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:56.0665782Z SHA256 digest of downloaded artifact is ef752c889920af9cfb3e2938834b0c4fec540c98884ddf9b9a94482df75ecce7
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:56.0667608Z Artifact download completed successfully.
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:56.0668072Z Total of 1 artifact(s) downloaded
+Create issues for missing scopes	Download mismatch report	2026-01-14T10:37:56.0674702Z Download artifact has finished successfully
+Create issues for missing scopes	Install GitHub CLI	´╗┐2026-01-14T10:37:56.0769850Z ##[group]Run sudo apt-get update
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0770266Z [36;1msudo apt-get update[0m
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0770522Z [36;1msudo apt-get install -y gh[0m
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0873412Z shell: /usr/bin/bash -e {0}
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0873713Z env:
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0873989Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0874394Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0874783Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0875140Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0875490Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0875836Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.0876130Z ##[endgroup]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.2681045Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.3293709Z Get:6 https://packages.microsoft.com/repos/azure-cli noble InRelease [3564 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.3640661Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.3660749Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.3733927Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.3841841Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.3919597Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.4619184Z Get:8 https://packages.microsoft.com/repos/azure-cli noble/main amd64 Packages [1948 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.5969802Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.4 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.6028190Z Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [61.2 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.6103085Z Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [79.6 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.6761809Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1692 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.6872727Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [313 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.6924028Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [175 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.6955053Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [15.9 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.6970085Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1510 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.7210913Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [307 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.7294703Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [378 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.7336763Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [31.4 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.7392720Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [2426 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.7642532Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [554 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.8153056Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.8182517Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.8196650Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7308 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.8224057Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.8273352Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.8275745Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.9021081Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1404 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.9233962Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [228 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.9260317Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [21.5 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.9289314Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [9720 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.9313236Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [920 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.9444778Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [208 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.9493059Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [71.5 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:56.9521994Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [19.7 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:57.0025760Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [2302 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:57.0161390Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [527 kB]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:57.0190742Z Get:38 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Components [208 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:57.0203792Z Get:39 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse Translation-en [6188 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:37:57.0217254Z Get:40 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [208 B]
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:38:07.9388541Z Fetched 13.7 MB in 2s (6823 kB/s)
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:38:08.8913646Z Reading package lists...
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:38:08.9297900Z Reading package lists...
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:38:09.1643512Z Building dependency tree...
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:38:09.1652696Z Reading state information...
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:38:09.4754546Z gh is already the newest version (2.83.2).
+Create issues for missing scopes	Install GitHub CLI	2026-01-14T10:38:09.4755419Z 0 upgraded, 0 newly installed, 0 to remove and 120 not upgraded.
+Create issues for missing scopes	Authenticate gh CLI	´╗┐2026-01-14T10:38:09.4828350Z ##[group]Run echo "***" | gh auth login --with-token
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4829304Z [36;1mecho "***" | gh auth login --with-token[0m
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4849790Z shell: /usr/bin/bash -e {0}
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4850050Z env:
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4850297Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4850705Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4851095Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4851438Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4851772Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4852123Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+Create issues for missing scopes	Authenticate gh CLI	2026-01-14T10:38:09.4852408Z ##[endgroup]
+Create issues for missing scopes	Create issues from mismatch report	´╗┐2026-01-14T10:38:10.1156359Z ##[group]Run if [ -f scripts/function_scope_mismatches.json ]; then
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1156821Z [36;1mif [ -f scripts/function_scope_mismatches.json ]; then[0m
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1157360Z [36;1m  python3 scripts/create_missing_docs_issues.py --auto-create --yes --repo "Ingenium-Games/ingenium"[0m
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1157826Z [36;1melse[0m
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1158088Z [36;1m  echo "No mismatch report found; skipping issue creation."[0m
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1158384Z [36;1mfi[0m
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1178692Z shell: /usr/bin/bash -e {0}
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1179084Z env:
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1179347Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1179761Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1180151Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1180501Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1180833Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1181234Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1181583Z   GITHUB_WORKSPACE: /home/runner/work/ingenium/ingenium
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:10.1181876Z ##[endgroup]
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6299823Z ­ƒôï Parsing missing documentation report and verifier mismatches...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6320657Z Ô£à Found 12 namespaces with missing documentation
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6322312Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6322866Z ============================================================
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6324734Z MISSING DOCUMENTATION SUMMARY
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6325191Z ============================================================
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6325667Z data                 -   4 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6326068Z death                -   1 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6326468Z debug                -  11 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6326868Z discord              -   5 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6327277Z object               -   7 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6327753Z payroll              -   1 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6328160Z player               -   2 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6328523Z queue                -   7 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6328885Z ui                   -  11 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6329839Z util                 -   3 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6330226Z vehicle              -   4 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6330646Z weapon               -   6 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6331235Z ============================================================
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6331814Z TOTAL                -  62 functions
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6332396Z ============================================================
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6332734Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6333038Z ­ƒôØ ISSUE TEMPLATES
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6333267Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6333275Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6333447Z --- NAMESPACE: data ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6333982Z Title: ­ƒôØ Documentation: data namespace (4 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6334614Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6335122Z Functions: ig.data.Ad..., ig.data.Get..., ig.data.Remo...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6335603Z   ... and 1 more
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6335806Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6336001Z --- NAMESPACE: death ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6337051Z Title: ­ƒôØ Documentation: death namespace (1 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6337518Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6337859Z Functions: ig.death.Pla...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6338093Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6338213Z --- NAMESPACE: debug ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6338712Z Title: ­ƒôØ Documentation: debug namespace (11 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6339399Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6339843Z Functions: ig.debug.D..., ig.debug.E..., ig.debug.Erro...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6340307Z   ... and 8 more
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6340463Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6340598Z --- NAMESPACE: discord ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6341095Z Title: ­ƒôØ Documentation: discord namespace (5 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6341550Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6342398Z Functions: ig.discord.Ge..., ig.discord.Ge..., ig.discord.H...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6342890Z   ... and 2 more
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6343081Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6343204Z --- NAMESPACE: object ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6343747Z Title: ­ƒôØ Documentation: object namespace (7 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6344224Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6344688Z Functions: ig.object.A..., ig.object.Fi..., ig.object.FindOb...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6345209Z   ... and 4 more
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6345370Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6345506Z --- NAMESPACE: payroll ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6346000Z Title: ­ƒôØ Documentation: payroll namespace (1 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6346485Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6346859Z Functions: ig.payroll.Pro...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6347096Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6347217Z --- NAMESPACE: player ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6347718Z Title: ­ƒôØ Documentation: player namespace (2 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6348208Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6348673Z Functions: ig.player.GetPlaye..., ig.player.GetPlaye...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6363835Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6364087Z --- NAMESPACE: queue ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6364801Z Title: ­ƒôØ Documentation: queue namespace (7 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6365419Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6365983Z Functions: ig.queue.Get..., ig.queue.Get..., ig.queue.Handl...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6366536Z   ... and 4 more
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6366703Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6366837Z --- NAMESPACE: ui ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6367325Z Title: ­ƒôØ Documentation: ui namespace (11 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6367776Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6368196Z Functions: ig.ui.Hide..., ig.ui.Hi..., ig.ui.Hid...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6368623Z   ... and 8 more
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6368796Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6369140Z --- NAMESPACE: util ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6369682Z Title: ­ƒôØ Documentation: util namespace (3 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6370365Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6370939Z Functions: ig.util.CheckBo..., ig.util.Ensu..., ig.util.IsVehi...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6371403Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6371547Z --- NAMESPACE: vehicle ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6372133Z Title: ­ƒôØ Documentation: vehicle namespace (4 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6372690Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6373248Z Functions: ig.vehicle.Clea..., ig.vehicle.Init..., ig.vehicle.Locate...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6373799Z   ... and 1 more
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6373970Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6374089Z --- NAMESPACE: weapon ---
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6374587Z Title: ­ƒôØ Documentation: weapon namespace (6 functions)
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6375114Z Labels: documentation, wiki
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6375670Z Functions: ig.weapon.GetAllWe..., ig.weapon.GetInitia..., ig.weapon.GetWea...
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6376333Z   ... and 3 more
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6376500Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6376649Z ============================================================
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6377338Z Ô£à Created aggregated issue: https://github.com/Ingenium-Games/ingenium/issues/98
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6377867Z 
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6378006Z ============================================================
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6381725Z Created: 1 aggregated issue, Failed: 0
+Create issues for missing scopes	Create issues from mismatch report	2026-01-14T10:38:11.6382530Z ============================================================
+Create issues for missing scopes	Post Set up Python	´╗┐2026-01-14T10:38:11.6482851Z Post job cleanup.
+Create issues for missing scopes	Post Checkout repository	´╗┐2026-01-14T10:38:11.8676883Z Post job cleanup.
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:11.9626318Z [command]/usr/bin/git version
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:11.9657425Z git version 2.52.0
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:11.9700844Z Temporarily overriding HOME='/home/runner/work/_temp/58c0bd43-2cdc-463c-9c5e-f3d8997e9e90' before making global git config changes
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:11.9702267Z Adding repository directory to the temporary git global config as a safe directory
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:11.9707719Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ingenium/ingenium
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:11.9756103Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:11.9789529Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:11.9998225Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:12.0020795Z http.https://github.com/.extraheader
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:12.0033690Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:12.0065149Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:12.0265698Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Create issues for missing scopes	Post Checkout repository	2026-01-14T10:38:12.0297550Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Create issues for missing scopes	Complete job	´╗┐2026-01-14T10:38:12.0589302Z Cleaning up orphan processes

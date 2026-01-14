@@ -235,12 +235,15 @@ def main():
 
     # Prefer verifier JSON if present (produced by scripts/verify_function_scopes.py in CI)
     mismatch_json_path = REPO_ROOT / 'scripts' / 'function_scope_mismatches.json'
-    missing = {}
+
+    # Prefer verifier JSON when present (even if empty). Only fall back to the
+    # legacy text report when the JSON file is missing entirely. This ensures
+    # CI runs that intentionally produce an empty mismatch report don't get
+    # overridden by stale legacy reports.
     if mismatch_json_path.exists():
         missing = parse_mismatch_json(mismatch_json_path)
-        if missing:
-            print(f'ℹ️  Loaded {sum(len(v) for v in missing.values())} mismatches from {mismatch_json_path}')
-    if not missing:
+        print(f'ℹ️  Loaded {sum(len(v) for v in missing.values())} mismatches from {mismatch_json_path}')
+    else:
         # Fall back to legacy MISSING_DOCUMENTATION_REPORT.txt parsing
         missing = parse_missing_report()
     
