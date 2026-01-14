@@ -67,14 +67,14 @@ function ig.discord.HasRole(src, roleId, callback)
     -- Make Discord API request
     local guildId = conf.discord.guild_id
     if not guildId then
-        print("^1[ERROR] Discord guild ID not configured^7")
+        ig.debug.Error("Discord guild ID not configured")
         if callback then callback(false, {}) end
         return
     end
 
     local botToken = conf.discord.bot_token
     if not botToken then
-        print("^1[ERROR] Discord bot token not configured^7")
+        ig.debug.Error("Discord bot token not configured")
         if callback then callback(false, {}) end
         return
     end
@@ -124,7 +124,7 @@ function ig.discord.HasRole(src, roleId, callback)
                 if callback then callback(false, {}) end
             end
         else
-            print("^1[ERROR] Discord API request failed with status " .. tostring(statusCode) .. "^7")
+            ig.debug.Error("Discord API request failed with status " .. tostring(statusCode))
             if callback then callback(false, {}) end
         end
     end, "GET", "", {
@@ -204,7 +204,7 @@ function ig.discord.HasMemberRole(src, callback)
 
     local memberRole = conf.discord.member_role
     if not memberRole then
-        print("^1[ERROR] Discord member role not configured but member_role_enabled is true^7")
+        ig.debug.Error("Discord member role not configured but member_role_enabled is true")
         if callback then callback(false) end
         return
     end

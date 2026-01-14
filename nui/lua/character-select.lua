@@ -20,7 +20,7 @@ RegisterNUICallback("NUI:Client:CharacterPlay", function(data, cb)
                 if result and result.success then
                     SetFollowPedCamViewMode(0)
                 else
-                    print("^1Failed to join character: " .. (result and result.error or "Unknown error") .. "^0")
+                    ig.debug.Error("Failed to join character: " .. (result and result.error or "Unknown error"))
                 end
             end
         })
@@ -32,7 +32,7 @@ RegisterNUICallback("NUI:Client:CharacterPlay", function(data, cb)
         -- Keep Focus, return error.
         cb({
             message = "error",
-            data = "_character-select__join called with client already having a character"
+            data = "NUI:Client:CharacterPlay called with client already having a character"
         })
     end
 end)
@@ -41,7 +41,7 @@ RegisterNUICallback("NUI:Client:CharacterDelete", function(data, cb)
     if not data.ID then
         cb({
             message = "error",
-            data = "__delete called with no data.ID passed"
+            data = "NUI:Client:CharacterDelete called with no data.ID passed"
         })
         return
     end
@@ -55,7 +55,7 @@ RegisterNUICallback("NUI:Client:CharacterDelete", function(data, cb)
             args = {data.ID},
             callback = function(result)
                 if result and not result.success then
-                    print("^1Failed to delete character: " .. (result.error or "Unknown error") .. "^0")
+                    ig.debug.Error("Failed to delete character: " .. (result.error or "Unknown error"))
                 end
             end
         })
@@ -67,7 +67,7 @@ RegisterNUICallback("NUI:Client:CharacterDelete", function(data, cb)
         -- Keep Focus, return error.
         cb({
             message = "error",
-            data = "_character-select__delete called with client already having a character"
+            data = "NUI:Client:CharacterDelete called with client already having a character"
         })
     end
 
@@ -90,9 +90,9 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
             args = {data.First_Name, data.Last_Name, appearance},
             callback = function(result)
                 if result and result.success then
-                    print("^2Character registered successfully with ID: " .. (result.character_id or "unknown") .. "^0")
+                    ig.debug.Info("Character registered successfully with ID: " .. (result.character_id or "unknown"))
                 else
-                    print("^1Failed to register character: " .. (result and result.error or "Unknown error") .. "^0")
+                    ig.debug.Error("Failed to register character: " .. (result and result.error or "Unknown error"))
                 end
             end
         })
@@ -104,7 +104,7 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
         -- Keep Focus, return error.
         cb({
             message = "error",
-            data = "_character-select__register called with client already having a character"
+            data = "NUI:Client:CharacterCreate called with client already having a character"
         })
     end
 end)

@@ -213,7 +213,7 @@ function ig.validation.LogAndBanExploiter(source, reason)
         )
         
         -- Log to server console
-        print("^1" .. logMessage .. "^7")
+        ig.debug.Error(logMessage)
         
         -- Log to database/file if available
         TriggerEvent("txaLogger:CommandExecuted", logMessage)

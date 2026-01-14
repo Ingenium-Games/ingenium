@@ -523,6 +523,6 @@ end)
 if ig and ig.log and ig.log.Info then
     ig.log.Info("Ingenium VOIP", "Client-side voice system initialized")
 else
-    print("^2[Ingenium VOIP] Client-side voice system initialized^7")
+    ig.debug.Info("Client-side voice system initialized")
 end
 -- ====================================================================================--

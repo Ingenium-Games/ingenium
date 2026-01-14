@@ -265,9 +265,9 @@ RegisterClientCallback({
                 args = {appearance},
                 callback = function(result)
                     if result and result.success then
-                        print("^2Appearance saved successfully^0")
+                        ig.debug.Info("Appearance saved successfully")
                     else
-                        print("^1Failed to save appearance: " .. (result and result.error or "Unknown error") .. "^0")
+                        ig.debug.Error("Failed to save appearance: " .. (result and result.error or "Unknown error"))
                         ig.ui.Send("notification", {
                             text = "Failed to save appearance: " .. (result and result.error or "Unknown error"),
                             colour = "red",

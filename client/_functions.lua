@@ -30,10 +30,10 @@ function ig.func.Error(err)
             ig.debug.Error(err)
         else
             if type(err) == "string" then
-                print("   ^7[^3Error^7]:  ==    ", err)
+                ig.debug.Error(err)
                 print(debug.traceback(_, 2))
             else
-                print("   ^7[^3Error^7]:  ==    ", "Unable to type(err) == string. [err] = ", err)
+                ig.debug.Error("Unable to type(err) == string. [err] = " .. tostring(err))
                 print(debug.traceback(_, 2))
             end
         end
@@ -48,7 +48,7 @@ function ig.func.Debug_1(str)
         if ig.debug and ig.debug.Info then
             ig.debug.Info(str)
         else
-            print("   ^7[^6Debug L1^7]:  ==    ", str)
+            ig.debug.Info(str)
         end
     end
 end
@@ -61,7 +61,7 @@ function ig.func.Debug_2(str)
         if ig.debug and ig.debug.Debug then
             ig.debug.Debug(str)
         else
-            print("   ^7[^6Debug L2^7]:  ==    ", str)
+            ig.debug.Debug(str)
         end
     end
 end
@@ -74,7 +74,7 @@ function ig.func.Debug_3(str)
         if ig.debug and ig.debug.Trace then
             ig.debug.Trace(str)
         else
-            print("   ^7[^6Debug L3^7]:  ==    ", str)
+            ig.debug.Trace(str)
         end
     end
 end
@@ -86,7 +86,7 @@ function ig.func.Alert(str)
     if ig.debug and ig.debug.Warn then
         ig.debug.Warn(str)
     else
-        print("   ^7[^3Alert^7]:  ==    ", str)
+        ig.debug.Warn(str)
     end
 end
 

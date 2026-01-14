@@ -53,7 +53,7 @@ function ig.death.PlayerKilled()
         args = {data},
         callback = function(result)
             if result and not result.success then
-                print("^1Failed to report death: " .. (result.error or "Unknown error") .. "^0")
+                ig.debug.Error("Failed to report death: " .. (result.error or "Unknown error"))
             end
         end
     })

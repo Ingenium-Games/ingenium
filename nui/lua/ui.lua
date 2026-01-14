@@ -187,28 +187,7 @@ local function contextCloseHandler(data, cb)
 end
 
 RegisterNUICallback("NUI:Client:ContextClose", contextCloseHandler)
-
--- Character callbacks
-local function characterCreateHandler(data, cb)
-    TriggerEvent("Client:Character:Create", data.firstName, data.lastName)
-    TriggerEvent("Client:NUI:CharacterCreate", data.firstName, data.lastName)
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:CharacterCreate", characterCreateHandler)
-
-local function characterPlayHandler(data, cb)
-    TriggerEvent("Client:Character:Play", data.id)
-    TriggerEvent("Client:NUI:CharacterPlay", data.id)
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:CharacterPlay", characterPlayHandler)
-
-local function characterDeleteHandler(data, cb)
-    TriggerEvent("Client:Character:Delete", data.id)
-    TriggerEvent("Client:NUI:CharacterDelete", data.id)
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:CharacterDelete", characterDeleteHandler)
+-- Character callbacks have been moved to character-select.lua
+-- DO NOT register character-related NUI callbacks here as they duplicate character-select.lua
+-- and override the correct server callback implementation
+-- See character-select.lua for the proper implementation using TriggerServerCallback

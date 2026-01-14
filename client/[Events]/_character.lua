@@ -145,7 +145,7 @@ AddEventHandler("Client:Character:SaveSkin", function(bool)
         args = {appearance, bool},
         callback = function(result)
             if result and not result.success then
-                print("^1Failed to save skin: " .. (result.error or "Unknown error") .. "^0")
+                ig.debug.Error("Failed to save skin: " .. (result.error or "Unknown error"))
             end
         end
     })

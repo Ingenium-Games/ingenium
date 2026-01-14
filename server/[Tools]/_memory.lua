@@ -9,7 +9,7 @@ RegisterCommand('memory', function(source, args)
         collectgarbage('collect')
         local memAfter = collectgarbage('count')
         
-        print(('^3[Memory] Usage: %.2f MB (freed %.2f MB)^7'):format(
+        ig.debug.Debug(('[Memory] Usage: %.2f MB (freed %.2f MB)'):format(
             memAfter / 1024,
             (memBefore - memAfter) / 1024
         ))
@@ -42,7 +42,7 @@ RegisterCommand('memory', function(source, args)
             if v then counts.objects = counts.objects + 1 end 
         end
         
-        print(('^2[Active Entities] %d players, %d vehicles, %d NPCs, %d objects^7'):format(
+        ig.debug.Info(('[Active Entities] %d players, %d vehicles, %d NPCs, %d objects'):format(
             counts.players, counts.vehicles, counts.npcs, counts.objects
         ))
         
@@ -87,7 +87,7 @@ local function CleanupOrphanedEntities()
     
     local totalCleaned = cleaned.vehicles + cleaned.npcs + cleaned.objects
     if totalCleaned > 0 then
-        print(('^3[Cleanup] Removed %d orphaned entities (V:%d N:%d O:%d)^7'):format(
+        ig.debug.Debug(('[Cleanup] Removed %d orphaned entities (V:%d N:%d O:%d)'):format(
             totalCleaned, cleaned.vehicles, cleaned.npcs, cleaned.objects
         ))
         collectgarbage('collect')

@@ -21,7 +21,7 @@ local ZoneManager = {
 ---@return string zoneId Unique ID for this zone registration
 function ZoneManager.RegisterZone(zone, callback, getPointFunc, checkInterval)
     if not zone then
-        print("^1[ZoneManager] Error: Cannot register nil zone^7")
+        ig.debug.Error("Cannot register nil zone")
         return nil
     end
     
@@ -109,7 +109,7 @@ function ZoneManager.Start()
                 if ig and ig.log and ig.log.Debug then
                     ig.log.Debug("ZoneManager", "No active zones, stopping manager")
                 else
-                    print("^3[ZoneManager] No active zones, stopping manager^7")
+                    ig.debug.Debug("No active zones, stopping manager")
                 end
                 break
             end
@@ -123,7 +123,7 @@ function ZoneManager.Start()
     if ig and ig.log and ig.log.Debug then
         ig.log.Debug("ZoneManager", "Started consolidated zone manager")
     else
-        print("^2[ZoneManager] Started consolidated zone manager^7")
+        ig.debug.Info("Started consolidated zone manager")
     end
 end
 
@@ -219,21 +219,21 @@ ig.zoneManager = ZoneManager
 -- Command to check zone manager stats
 RegisterCommand('zonestats', function()
     local stats = ZoneManager.GetStats()
-    print("^3=== Zone Manager Statistics ===^7")
-    print(("^2Total Zones: %d^7"):format(stats.totalZones))
-    print(("^2Manager Running: %s^7"):format(tostring(stats.isRunning)))
-    print(("^2Check Interval: %dms^7"):format(stats.checkInterval))
-    print("^3Zones by Type:^7")
+    ig.debug.Debug(\"=== Zone Manager Statistics ===\")
+    ig.debug.Debug(\"Total Zones: \" .. stats.totalZones)
+    ig.debug.Debug(\"Manager Running: \" .. tostring(stats.isRunning))
+    ig.debug.Debug(\"Check Interval: \" .. stats.checkInterval .. \"ms\")
+    ig.debug.Debug(\"Zones by Type:\")
     for zoneType, count in pairs(stats.byType) do
-        print(("  ^2%s: %d^7"):format(zoneType, count))
+        ig.debug.Debug(\"  \" .. zoneType .. \": \" .. count)
     end
-    print("^3==============================^7")
+    ig.debug.Debug(\"==============================\")
 end, false)
 
 -- Command to list all client zones with details
 RegisterCommand('listzones', function()
     local zoneCount = 0
-    print("^3=== Client Zone List ===^7")
+    ig.debug.Debug("=== Client Zone List ===")
     
     for zoneId, zoneData in pairs(ZoneManager.zones) do
         zoneCount = zoneCount + 1
@@ -267,47 +267,47 @@ RegisterCommand('listzones', function()
         local isPaused = zone.paused and "^3PAUSED^7" or "^2ACTIVE^7"
         local isDestroyed = zone.destroyed and "^1DESTROYED^7" or "^2VALID^7"
         
-        print(("^3Zone #%d:^7"):format(zoneCount))
-        print(("  Name: ^2%s^7"):format(zoneName))
-        print(("  Type: ^2%s^7"):format(zoneType))
-        print(("  State: %s"):format(stateStr))
-        print(("  Interval: ^2%dms^7"):format(interval))
-        print(("  Status: %s / %s"):format(isPaused, isDestroyed))
+        ig.debug.Debug("Zone #" .. zoneCount .. ":")
+        ig.debug.Debug("  Name: " .. zoneName)
+        ig.debug.Debug("  Type: " .. zoneType)
+        ig.debug.Debug("  State: " .. stateStr)
+        ig.debug.Debug("  Interval: " .. interval .. "ms")
+        ig.debug.Debug("  Status: " .. isPaused .. " / " .. isDestroyed)
         
         -- Additional info for specific zone types
         if zone.center then
-            print(("  Center: ^2%.2f, %.2f, %.2f^7"):format(zone.center.x or 0, zone.center.y or 0, zone.center.z or 0))
+            ig.debug.Debug(("  Center: %.2f, %.2f, %.2f"):format(zone.center.x or 0, zone.center.y or 0, zone.center.z or 0))
         end
         
         if zone.radius then
-            print(("  Radius: ^2%.2f^7"):format(zone.radius))
+            ig.debug.Debug(("  Radius: %.2f"):format(zone.radius))
         end
         
         if zone.length and zone.width then
-            print(("  Dimensions: ^2%.2f x %.2f^7"):format(zone.length, zone.width))
+            ig.debug.Debug(("  Dimensions: %.2f x %.2f"):format(zone.length, zone.width))
         end
         
         if zone.heading then
-            print(("  Heading: ^2%.2f^7"):format(zone.heading))
+            ig.debug.Debug(("  Heading: %.2f"):format(zone.heading))
         end
         
-        print("  ---")
+        ig.debug.Debug("  ---")
     end
     
     if zoneCount == 0 then
-        print("^3No zones registered for this client^7")
+        ig.debug.Debug("No zones registered for this client")
     else
-        print(("^2Total: %d zones^7"):format(zoneCount))
+        ig.debug.Debug("Total: " .. zoneCount .. " zones")
     end
     
-    print("^3========================^7")
+    ig.debug.Debug("========================")
 end, false)
 
 -- Debug info
 if ig and ig.log and ig.log.Debug then
     ig.log.Debug("ZoneManager", "Consolidated zone manager loaded")
 else
-    print("^2[ZoneManager] Consolidated zone manager loaded^7")
+    ig.debug.Info("Consolidated zone manager loaded")
 end
 if ig and ig.log and ig.log.Debug then
     ig.log.Debug("ZoneManager", "Replaced onPlayerInOut() and onPointInOut() to use consolidated manager")
@@ -315,8 +315,8 @@ if ig and ig.log and ig.log.Debug then
     ig.log.Debug("ZoneManager", "Type /zonestats to see zone manager statistics")
     ig.log.Debug("ZoneManager", "Type /listzones to list all active zones")
 else
-    print("^3[ZoneManager] Replaced onPlayerInOut() and onPointInOut() to use consolidated manager^7")
-    print("^3[ZoneManager] All zones now automatically use single-thread management^7")
-    print("^3[ZoneManager] Type /zonestats to see zone manager statistics^7")
-    print("^3[ZoneManager] Type /listzones to list all active zones^7")
+    ig.debug.Warn("Replaced onPlayerInOut() and onPointInOut() to use consolidated manager")
+    ig.debug.Warn("All zones now automatically use single-thread management")
+    ig.debug.Warn("Type /zonestats to see zone manager statistics")
+    ig.debug.Warn("Type /listzones to list all active zones")
 end

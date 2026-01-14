@@ -1,0 +1,126 @@
+name: Wiki README Auto-Update & Function Scope Verification
+
+on:
+  push:
+    paths:
+      - 'Documentation/wiki/*.md'
+      - 'client/_functions.lua'
+      - 'server/_functions.lua'
+      - 'shared/**/*.lua'
+      - '.github/workflows/wiki-sync.yml'
+    branches:
+      - main
+
+  pull_request:
+    paths:
+      - 'Documentation/wiki/*.md'
+      - 'client/_functions.lua'
+      - 'server/_functions.lua'
+      - 'shared/**/*.lua'
+
+jobs:
+  verify-function-scopes:
+    runs-on: ubuntu-latest
+    name: Verify Function Scopes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Run function scope verification
+        run: python3 scripts/verify_function_scopes.py
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+
+  update-readme:
+    runs-on: ubuntu-latest
+    name: Update README with new exports
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Auto-detect and update new exports
+        id: update
+        run: |
+          python3 scripts/update_readme_exports.py
+          if [ $? -eq 1 ]; then
+            echo "CHANGES_DETECTED=true" >> $GITHUB_OUTPUT
+          else
+            echo "CHANGES_DETECTED=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+
+      - name: Create or update PR with changes
+        if: steps.update.outputs.CHANGES_DETECTED == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'docs: auto-update README with new function exports'
+          title: 'docs: auto-update README with new function exports'
+          body: |
+            This PR automatically updates the README.md with newly detected function exports and updates function scope markers based on code analysis.
+
+            **Changes made:**
+            - Detected new export functions and documentation files
+            - Updated function scope markers ([S], [C], [S C]) based on actual code locations
+            - Verified that all markers accurately reflect where functions are defined
+
+            ⚠️ **Please review** to ensure all changes are correct.
+          branch: docs/auto-update-readme
+          delete-branch: true
+          labels: documentation, automated
+
+  comment-pr:
+    runs-on: ubuntu-latest
+    name: Comment scope verification results on PR
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Run verification and generate report
+        id: verify
+        run: |
+          python3 scripts/verify_function_scopes.py > /tmp/verify_output.txt 2>&1 || true
+          cat /tmp/verify_output.txt
+          echo "OUTPUT<<EOF" >> $GITHUB_OUTPUT
+          cat /tmp/verify_output.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Comment PR with results
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const output = fs.readFileSync('/tmp/verify_output.txt', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 📋 Function Scope Verification\n\n\`\`\`\n${output}\n\`\`\``
+            });

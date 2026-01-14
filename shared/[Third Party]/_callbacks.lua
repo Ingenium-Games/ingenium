@@ -142,7 +142,7 @@ if IS_SERVER then
 		
 		-- Check if rate limit exceeded
 		if data.count >= rateLimitConfig.maxRequestsPerSecond then
-			print(("^3[CALLBACK SECURITY] Rate limit exceeded for source %s (max: %d/sec)^7"):format(
+			ig.debug.Warn(("[CALLBACK SECURITY] Rate limit exceeded for source %s (max: %d/sec)"):format(
 				source, rateLimitConfig.maxRequestsPerSecond
 			))
 			return false
@@ -155,28 +155,28 @@ if IS_SERVER then
 	-- Validate ticket and source
 	local function validateTicket(ticket, source)
 		if not ticket then
-			print("^3[CALLBACK SECURITY] Missing ticket in callback return^7")
+			ig.debug.Warn("[CALLBACK SECURITY] Missing ticket in callback return")
 			return false
 		end
 		
 		local ticketData = issuedTickets[ticket]
 		
 		if not ticketData then
-			print(("^3[CALLBACK SECURITY] Invalid or expired ticket: %s from source %s^7"):format(ticket, source))
+			ig.debug.Warn(("[CALLBACK SECURITY] Invalid or expired ticket: " .. ticket .. " from source " .. source))
 			return false
 		end
 		
 		-- Check expiration
 		local now = GetGameTimer()
 		if ticketData.expiresAt < now then
-			print(("^3[CALLBACK SECURITY] Expired ticket: %s from source %s^7"):format(ticket, source))
+			ig.debug.Warn(("[CALLBACK SECURITY] Expired ticket: " .. ticket .. " from source " .. source))
 			issuedTickets[ticket] = nil
 			return false
 		end
 		
 		-- Check source match
 		if ticketData.source ~= source then
-			print(("^3[CALLBACK SECURITY] Source mismatch - ticket source: %s, actual source: %s^7"):format(
+			ig.debug.Warn(("[CALLBACK SECURITY] Source mismatch - ticket source: %s, actual source: %s"):format(
 				ticketData.source, source
 			))
 			return false
@@ -197,6 +197,7 @@ if IS_SERVER then
 	-- ====================================================================================--
 	--
 	-- @table RegisterServerCallback
+	-- @wiki:ignore
 	--
 	-- @string eventName - The name of the event to be registered
 	-- @function eventCallback - The function to be executed when event is fired
@@ -233,6 +234,7 @@ if IS_SERVER then
 	exports("RegisterServerCallback", RegisterServerCallback)
 	--
 	-- @void UnregisterServerCallback
+	-- @wiki:ignore
 	--
 	-- @table eventData - The data from the RegisterServerCallback
 	_G.UnregisterServerCallback = function(eventData)
@@ -242,6 +244,7 @@ if IS_SERVER then
 	exports("UnregisterServerCallback", UnregisterServerCallback)
 	--
 	-- @any TriggerClientCallback
+	-- @wiki:ignore
 	--
 	-- @string/number source - The playerId to be triggered
 	-- @string eventName - The name of the event to be fired
@@ -282,7 +285,7 @@ if IS_SERVER then
 				
 				-- Validate ticket and source before processing
 				if not validateTicket(ticket, responseSource) then
-					print(("^3[CALLBACK SECURITY] Rejected callback return for event %s^7"):format(args.eventName))
+					ig.debug.Warn(("[CALLBACK SECURITY] Rejected callback return for event " .. args.eventName))
 					return
 				end
 				
@@ -334,6 +337,7 @@ if IS_SERVER then
 
 	--
 	-- @any TriggerServerCallback
+	-- @wiki:ignore
 	-- Simulate a client callback
 	--
 	-- @string/number source - The simulated playerId that triggers
@@ -391,6 +395,7 @@ if not IS_SERVER then
 
 	--
 	-- @table RegisterClientCallback
+	-- @wiki:ignore
 	--
 	-- @string eventName - The name of the event to be fired
 	-- @function eventCallback - The function to be executed when event is fired
@@ -419,6 +424,7 @@ if not IS_SERVER then
 	exports("RegisterClientCallback", RegisterClientCallback)
 	--
 	-- @void UnregisterClientCallback
+	-- @wiki:ignore
 	--
 	-- @table eventData - The data from RegisterClientCallback
 	_G.UnregisterClientCallback = function(eventData)
@@ -428,6 +434,7 @@ if not IS_SERVER then
 	exports("UnregisterClientCallback", UnregisterClientCallback)
 	--
 	-- @any TriggerServerCallback
+	-- @wiki:ignore
 	--
 	-- @string eventName - The name of the event to be fired
 	-- @table args - The arguments passed with the event
@@ -484,6 +491,7 @@ if not IS_SERVER then
 
 	--
 	-- @any TriggerClientCallback
+	-- @wiki:ignore
 	-- Simulate a server callback
 	--
 	-- @string eventName - The name of the event to be fired

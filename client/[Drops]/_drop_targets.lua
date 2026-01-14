@@ -25,7 +25,7 @@ CreateThread(function()
                         args = {netId},
                         callback = function(result)
                             if result and not result.success then
-                                print("^1Failed to access drop: " .. (result.error or "Unknown error") .. "^0")
+                                ig.debug.Error("Failed to access drop: " .. (result.error or "Unknown error"))
                             end
                         end
                     })

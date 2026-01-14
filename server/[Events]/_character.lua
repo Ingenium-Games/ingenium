@@ -180,14 +180,14 @@ RegisterServerCallback({
         local xPlayer = ig.data.GetPlayer(src)
         
         if not xPlayer then
-            print('^1[Appearance] No xPlayer found for source: ' .. src .. '^0')
+            ig.debug.Error('[Appearance] No xPlayer found for source: ' .. src)
             return { success = false, error = "Player not found" }
         end
         
         -- Validate appearance data
         local isValid, errorMsg = ig.appearance.ValidateAppearance(appearance)
         if not isValid then
-            print('^1[Appearance] Invalid appearance data for ' .. xPlayer.GetIdentifier() .. ': ' .. errorMsg .. '^0')
+            ig.debug.Error('[Appearance] Invalid appearance data for ' .. xPlayer.GetIdentifier() .. ': ' .. errorMsg)
             return { success = false, error = errorMsg }
         end
         
@@ -195,7 +195,7 @@ RegisterServerCallback({
         local identifier = xPlayer.GetIdentifier()
         ig.sql.char.SetAppearance(identifier, appearance, function()
             xPlayer.SetAppearance(appearance)
-            print('^2[Appearance] Saved appearance for ' .. identifier .. '^0')
+            ig.debug.Info('[Appearance] Saved appearance for ' .. identifier)
         end)
         
         return { success = true }
