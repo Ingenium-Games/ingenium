@@ -2,7 +2,7 @@
 
 ## Description
 
-Checks and returns whether unregisterserver condition is met
+Unregisters a server callback that was previously registered with `ig.callback.RegisterServer`. This removes the callback handler and cleans up the event registration.
 
 ## Signature
 
@@ -12,15 +12,21 @@ function ig.callback.UnregisterServer(eventData)
 
 ## Parameters
 
-- **`eventData`**: any
+- **`eventData`**: table|any - The event data returned from `RegisterServer`
 
 ## Example
 
 ```lua
--- Example usage
-local result = ig.callback.UnregisterServer(value)
+-- Register a server callback
+local eventData = ig.callback.RegisterServer('myCustomEvent', function(source, data)
+    print('Handling event')
+    return true
+end)
+
+-- Later, unregister the callback when no longer needed
+ig.callback.UnregisterServer(eventData)
 ```
 
 ## Source
 
-Defined in: `client/_callback.lua`
+Defined in: `server/_callback.lua`
