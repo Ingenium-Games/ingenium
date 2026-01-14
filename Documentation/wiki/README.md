@@ -188,6 +188,11 @@ cron namespace functions.
 
 ### data
 
+  - [ig.data.AddPlayer_Server](ig_data_AddPlayer_Server.md) [UNKNOWN]
+  - [ig.data.GetPlayer_Server](ig_data_GetPlayer_Server.md) [UNKNOWN]
+  - [ig.data.GetPlayers_Server](ig_data_GetPlayers_Server.md) [UNKNOWN]
+  - [ig.data.RemovePlayer_Server](ig_data_RemovePlayer_Server.md) [UNKNOWN]
+  - [ig.data.SetPlayer_Server](ig_data_SetPlayer_Server.md) [UNKNOWN]
 data namespace functions.
 
 - [ig.data.AddPlayer](ig_data_AddPlayer.md) [S] ⚠️ Missing Documentation
@@ -273,6 +278,7 @@ door namespace functions.
 
 ### drop
 
+  - [ig.drop.StartCleanupRoutine](ig_drop_StartCleanupRoutine.md) [UNKNOWN]
 drop namespace functions.
 
 - [ig.drop.Activate](ig_drop_Activate.md) [S]
@@ -594,6 +600,8 @@ name namespace functions.
 
 ### note
 
+  - [ig.note.CleanUp](ig_note_CleanUp.md) [UNKNOWN]
+  - [ig.note.Clean](ig_note_Clean.md) [UNKNOWN]
 note namespace functions.
 
 - [ig.note.Add](ig_note_Add.md) [S]
@@ -700,6 +708,7 @@ pick namespace functions.
 
 ### player
 
+  - [ig.player.GetPlayerByCharacter](ig_player_GetPlayerByCharacter.md) [UNKNOWN]
 player namespace functions.
 
 - [ig.player.AddPlayer](ig_player_AddPlayer.md) [S]
@@ -714,6 +723,7 @@ player namespace functions.
 
 ### queue
 
+  - [ig.queue.Join](ig_queue_Join.md) [UNKNOWN]
 queue namespace functions.
 
 - [ig.queue.GetQueueList](ig_queue_GetQueueList.md) [S] ⚠️ Missing Documentation
@@ -775,6 +785,93 @@ skill namespace functions.
 
 ### sql
 
+  - [ig.sql.ResetActiveCharacters](ig_sql_ResetActiveCharacters.md) [UNKNOWN]
+  - [ig.sql.bank_AddAccount](ig_sql_bank_AddAccount.md) [UNKNOWN]
+  - [ig.sql.bank_GetBank](ig_sql_bank_GetBank.md) [UNKNOWN]
+  - [ig.sql.bank_GetLoan](ig_sql_bank_GetLoan.md) [UNKNOWN]
+  - [ig.sql.bank_SetBank](ig_sql_bank_SetBank.md) [UNKNOWN]
+  - [ig.sql.bank_SetLoan](ig_sql_bank_SetLoan.md) [UNKNOWN]
+  - [ig.sql.bank_TakeOutLoan](ig_sql_bank_TakeOutLoan.md) [UNKNOWN]
+  - [ig.sql.bank_TickOverLoanDuration](ig_sql_bank_TickOverLoanDuration.md) [UNKNOWN]
+  - [ig.sql.bank_TickOverLoanInterest](ig_sql_bank_TickOverLoanInterest.md) [UNKNOWN]
+  - [ig.sql.bank_TickOverLoansInactive](ig_sql_bank_TickOverLoansInactive.md) [UNKNOWN]
+  - [ig.sql.banking_AddBankOffline](ig_sql_banking_AddBankOffline.md) [UNKNOWN]
+  - [ig.sql.banking_AddFavorite](ig_sql_banking_AddFavorite.md) [UNKNOWN]
+  - [ig.sql.banking_AddTransaction](ig_sql_banking_AddTransaction.md) [UNKNOWN]
+  - [ig.sql.banking_GetFavorites](ig_sql_banking_GetFavorites.md) [UNKNOWN]
+  - [ig.sql.banking_GetTransactions](ig_sql_banking_GetTransactions.md) [UNKNOWN]
+  - [ig.sql.banking_RemoveFavorite](ig_sql_banking_RemoveFavorite.md) [UNKNOWN]
+  - [ig.sql.char_AddOutfit](ig_sql_char_AddOutfit.md) [UNKNOWN]
+  - [ig.sql.char_Add](ig_sql_char_Add.md) [UNKNOWN]
+  - [ig.sql.char_Current](ig_sql_char_Current.md) [UNKNOWN]
+  - [ig.sql.char_Delete](ig_sql_char_Delete.md) [UNKNOWN]
+  - [ig.sql.char_GetAllNotDead](ig_sql_char_GetAllNotDead.md) [UNKNOWN]
+  - [ig.sql.char_GetAllPermited](ig_sql_char_GetAllPermited.md) [UNKNOWN]
+  - [ig.sql.char_GetAllWanted](ig_sql_char_GetAllWanted.md) [UNKNOWN]
+  - [ig.sql.char_GetAll](ig_sql_char_GetAll.md) [UNKNOWN]
+  - [ig.sql.char_GetAppearance](ig_sql_char_GetAppearance.md) [UNKNOWN]
+  - [ig.sql.char_GetArmour](ig_sql_char_GetArmour.md) [UNKNOWN]
+  - [ig.sql.char_GetByIban](ig_sql_char_GetByIban.md) [UNKNOWN]
+  - [ig.sql.char_GetCityId](ig_sql_char_GetCityId.md) [UNKNOWN]
+  - [ig.sql.char_GetCoords](ig_sql_char_GetCoords.md) [UNKNOWN]
+  - [ig.sql.char_GetCount](ig_sql_char_GetCount.md) [UNKNOWN]
+  - [ig.sql.char_GetFromCityId](ig_sql_char_GetFromCityId.md) [UNKNOWN]
+  - [ig.sql.char_GetFromPhone](ig_sql_char_GetFromPhone.md) [UNKNOWN]
+  - [ig.sql.char_GetHealth](ig_sql_char_GetHealth.md) [UNKNOWN]
+  - [ig.sql.char_GetHunger](ig_sql_char_GetHunger.md) [UNKNOWN]
+  - [ig.sql.char_GetOutfitByNumber](ig_sql_char_GetOutfitByNumber.md) [UNKNOWN]
+  - [ig.sql.char_GetOutfitsAsCount](ig_sql_char_GetOutfitsAsCount.md) [UNKNOWN]
+  - [ig.sql.char_GetPhone](ig_sql_char_GetPhone.md) [UNKNOWN]
+  - [ig.sql.char_GetStress](ig_sql_char_GetStress.md) [UNKNOWN]
+  - [ig.sql.char_GetThirst](ig_sql_char_GetThirst.md) [UNKNOWN]
+  - [ig.sql.char_Get](ig_sql_char_Get.md) [UNKNOWN]
+  - [ig.sql.char_ReviveDeadCharacters](ig_sql_char_ReviveDeadCharacters.md) [UNKNOWN]
+  - [ig.sql.char_SetActive](ig_sql_char_SetActive.md) [UNKNOWN]
+  - [ig.sql.char_SetAppearance](ig_sql_char_SetAppearance.md) [UNKNOWN]
+  - [ig.sql.char_SetArmour](ig_sql_char_SetArmour.md) [UNKNOWN]
+  - [ig.sql.char_SetCoords](ig_sql_char_SetCoords.md) [UNKNOWN]
+  - [ig.sql.char_SetDead](ig_sql_char_SetDead.md) [UNKNOWN]
+  - [ig.sql.char_SetHealth](ig_sql_char_SetHealth.md) [UNKNOWN]
+  - [ig.sql.char_SetHunger](ig_sql_char_SetHunger.md) [UNKNOWN]
+  - [ig.sql.char_SetInstance](ig_sql_char_SetInstance.md) [UNKNOWN]
+  - [ig.sql.char_SetStress](ig_sql_char_SetStress.md) [UNKNOWN]
+  - [ig.sql.char_SetThirst](ig_sql_char_SetThirst.md) [UNKNOWN]
+  - [ig.sql.char_SetWanted](ig_sql_char_SetWanted.md) [UNKNOWN]
+  - [ig.sql.gen_AccountNumber](ig_sql_gen_AccountNumber.md) [UNKNOWN]
+  - [ig.sql.gen_CarPlate](ig_sql_gen_CarPlate.md) [UNKNOWN]
+  - [ig.sql.gen_CharacterID](ig_sql_gen_CharacterID.md) [UNKNOWN]
+  - [ig.sql.gen_CityID](ig_sql_gen_CityID.md) [UNKNOWN]
+  - [ig.sql.gen_Iban](ig_sql_gen_Iban.md) [UNKNOWN]
+  - [ig.sql.gen_PhoneNumber](ig_sql_gen_PhoneNumber.md) [UNKNOWN]
+  - [ig.sql.save_Jobs](ig_sql_save_Jobs.md) [UNKNOWN]
+  - [ig.sql.save_Objects](ig_sql_save_Objects.md) [UNKNOWN]
+  - [ig.sql.save_User](ig_sql_save_User.md) [UNKNOWN]
+  - [ig.sql.save_Users](ig_sql_save_Users.md) [UNKNOWN]
+  - [ig.sql.save_Vehicle](ig_sql_save_Vehicle.md) [UNKNOWN]
+  - [ig.sql.save_Vehicles](ig_sql_save_Vehicles.md) [UNKNOWN]
+  - [ig.sql.user_AddCharacterSlot](ig_sql_user_AddCharacterSlot.md) [UNKNOWN]
+  - [ig.sql.user_Add](ig_sql_user_Add.md) [UNKNOWN]
+  - [ig.sql.user_Find](ig_sql_user_Find.md) [UNKNOWN]
+  - [ig.sql.user_GetAce](ig_sql_user_GetAce.md) [UNKNOWN]
+  - [ig.sql.user_GetBanReason](ig_sql_user_GetBanReason.md) [UNKNOWN]
+  - [ig.sql.user_GetBan](ig_sql_user_GetBan.md) [UNKNOWN]
+  - [ig.sql.user_GetLastLogin](ig_sql_user_GetLastLogin.md) [UNKNOWN]
+  - [ig.sql.user_GetLocale](ig_sql_user_GetLocale.md) [UNKNOWN]
+  - [ig.sql.user_GetPriority](ig_sql_user_GetPriority.md) [UNKNOWN]
+  - [ig.sql.user_GetSlots](ig_sql_user_GetSlots.md) [UNKNOWN]
+  - [ig.sql.user_Get](ig_sql_user_Get.md) [UNKNOWN]
+  - [ig.sql.user_SetAce](ig_sql_user_SetAce.md) [UNKNOWN]
+  - [ig.sql.user_SetBan](ig_sql_user_SetBan.md) [UNKNOWN]
+  - [ig.sql.user_SetLocale](ig_sql_user_SetLocale.md) [UNKNOWN]
+  - [ig.sql.user_SetPriority](ig_sql_user_SetPriority.md) [UNKNOWN]
+  - [ig.sql.user_Update](ig_sql_user_Update.md) [UNKNOWN]
+  - [ig.sql.veh_Add](ig_sql_veh_Add.md) [UNKNOWN]
+  - [ig.sql.veh_ChangeOwner](ig_sql_veh_ChangeOwner.md) [UNKNOWN]
+  - [ig.sql.veh_GetAll](ig_sql_veh_GetAll.md) [UNKNOWN]
+  - [ig.sql.veh_GetByPlate](ig_sql_veh_GetByPlate.md) [UNKNOWN]
+  - [ig.sql.veh_GetID](ig_sql_veh_GetID.md) [UNKNOWN]
+  - [ig.sql.veh_GetVehicles](ig_sql_veh_GetVehicles.md) [UNKNOWN]
+  - [ig.sql.veh_Reset](ig_sql_veh_Reset.md) [UNKNOWN]
 sql namespace functions.
 
 - [ig.sql.AwaitReady](ig_sql_AwaitReady.md) [S]
@@ -989,6 +1086,40 @@ vehicle namespace functions.
 
 ### voip
 
+  - [ig.voip.client_GetVoiceMode](ig_voip_client_GetVoiceMode.md) [UNKNOWN]
+  - [ig.voip.client_HandleAdminCallStateChange](ig_voip_client_HandleAdminCallStateChange.md) [UNKNOWN]
+  - [ig.voip.client_HandleCallStateChange](ig_voip_client_HandleCallStateChange.md) [UNKNOWN]
+  - [ig.voip.client_HandleConnectionStateChange](ig_voip_client_HandleConnectionStateChange.md) [UNKNOWN]
+  - [ig.voip.client_InitializeMumble](ig_voip_client_InitializeMumble.md) [UNKNOWN]
+  - [ig.voip.client_IsTalking](ig_voip_client_IsTalking.md) [UNKNOWN]
+  - [ig.voip.client_JoinRadioChannel](ig_voip_client_JoinRadioChannel.md) [UNKNOWN]
+  - [ig.voip.client_LeaveRadioChannel](ig_voip_client_LeaveRadioChannel.md) [UNKNOWN]
+  - [ig.voip.client_NextVoiceMode](ig_voip_client_NextVoiceMode.md) [UNKNOWN]
+  - [ig.voip.client_PreviousVoiceMode](ig_voip_client_PreviousVoiceMode.md) [UNKNOWN]
+  - [ig.voip.client_SetRadioTransmitting](ig_voip_client_SetRadioTransmitting.md) [UNKNOWN]
+  - [ig.voip.client_SetVoiceMode](ig_voip_client_SetVoiceMode.md) [UNKNOWN]
+  - [ig.voip.client_UpdateAdminCallTargets](ig_voip_client_UpdateAdminCallTargets.md) [UNKNOWN]
+  - [ig.voip.client_UpdateCallTargets](ig_voip_client_UpdateCallTargets.md) [UNKNOWN]
+  - [ig.voip.client_UpdateConnectionTargets](ig_voip_client_UpdateConnectionTargets.md) [UNKNOWN]
+  - [ig.voip.client_UpdateProximityTargets](ig_voip_client_UpdateProximityTargets.md) [UNKNOWN]
+  - [ig.voip.client_UpdateRadioTargets](ig_voip_client_UpdateRadioTargets.md) [UNKNOWN]
+  - [ig.voip.client_UpdateTalkingState](ig_voip_client_UpdateTalkingState.md) [UNKNOWN]
+  - [ig.voip.server_CleanupPlayer](ig_voip_server_CleanupPlayer.md) [UNKNOWN]
+  - [ig.voip.server_EndAdminCall](ig_voip_server_EndAdminCall.md) [UNKNOWN]
+  - [ig.voip.server_EndCall](ig_voip_server_EndCall.md) [UNKNOWN]
+  - [ig.voip.server_EndConnection](ig_voip_server_EndConnection.md) [UNKNOWN]
+  - [ig.voip.server_GetPlayersInProximity](ig_voip_server_GetPlayersInProximity.md) [UNKNOWN]
+  - [ig.voip.server_GetVoiceMode](ig_voip_server_GetVoiceMode.md) [UNKNOWN]
+  - [ig.voip.server_InitializePlayer](ig_voip_server_InitializePlayer.md) [UNKNOWN]
+  - [ig.voip.server_JoinRadioChannel](ig_voip_server_JoinRadioChannel.md) [UNKNOWN]
+  - [ig.voip.server_LeaveRadioChannel](ig_voip_server_LeaveRadioChannel.md) [UNKNOWN]
+  - [ig.voip.server_RemoveFromGrid](ig_voip_server_RemoveFromGrid.md) [UNKNOWN]
+  - [ig.voip.server_SetRadioTransmitting](ig_voip_server_SetRadioTransmitting.md) [UNKNOWN]
+  - [ig.voip.server_SetVoiceMode](ig_voip_server_SetVoiceMode.md) [UNKNOWN]
+  - [ig.voip.server_StartAdminCall](ig_voip_server_StartAdminCall.md) [UNKNOWN]
+  - [ig.voip.server_StartCall](ig_voip_server_StartCall.md) [UNKNOWN]
+  - [ig.voip.server_StartConnection](ig_voip_server_StartConnection.md) [UNKNOWN]
+  - [ig.voip.server_UpdateGrid](ig_voip_server_UpdateGrid.md) [UNKNOWN]
 voip namespace functions.
 
 - [ig.voip.Debug](ig_voip_Debug.md) [S C]
