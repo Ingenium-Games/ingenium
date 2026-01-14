@@ -42,3 +42,10 @@ nui/**/*.stories.js
 logs/
 *.log
 node_modules
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
