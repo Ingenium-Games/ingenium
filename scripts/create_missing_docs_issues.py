@@ -59,6 +59,34 @@ def parse_missing_report():
     
     return functions
 
+
+def parse_mismatch_json(json_path: Path):
+    """Parse verifier mismatch JSON into the same namespace->functions map.
+
+    Expects JSON of the form: {"mismatches": [{"func": "namespace.func", ...}, ...]}
+    """
+    if not json_path.exists():
+        return {}
+
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"ERROR: Failed to read mismatch JSON at {json_path}: {e}")
+        return {}
+
+    functions = {}
+    for m in data.get('mismatches', []):
+        func = m.get('func')
+        if not func or '.' not in func:
+            continue
+        ns, name = func.split('.', 1)
+        if ns not in functions:
+            functions[ns] = []
+        functions[ns].append(name)
+
+    return functions
+
 def generate_issue_body(namespace, missing_funcs):
     """Generate GitHub issue body"""
     issue_body = f"""## Missing Documentation: {namespace} Namespace
@@ -159,8 +187,18 @@ def main():
     if args.repo:
         REPO = args.repo
 
-    print('📋 Parsing missing documentation report...')
-    missing = parse_missing_report()
+    print('📋 Parsing missing documentation report and verifier mismatches...')
+
+    # Prefer verifier JSON if present (produced by scripts/verify_function_scopes.py in CI)
+    mismatch_json_path = REPO_ROOT / 'scripts' / 'function_scope_mismatches.json'
+    missing = {}
+    if mismatch_json_path.exists():
+        missing = parse_mismatch_json(mismatch_json_path)
+        if missing:
+            print(f'ℹ️  Loaded {sum(len(v) for v in missing.values())} mismatches from {mismatch_json_path}')
+    if not missing:
+        # Fall back to legacy MISSING_DOCUMENTATION_REPORT.txt parsing
+        missing = parse_missing_report()
     
     print(f'✅ Found {len(missing)} namespaces with missing documentation\n')
     

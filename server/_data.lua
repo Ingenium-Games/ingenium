@@ -344,17 +344,20 @@ end
 -- ====================================================================================--
 
 --- Get all players
+---@wiki:ignore
 function ig.data.GetPlayers()
     return ig.player.GetPlayers()
 end
 
 --- Get a player by source
+---@wiki:ignore
 ---@param src number
 function ig.data.GetPlayer(src)
     return ig.player.GetPlayer(src)
 end
 
 --- Set player data
+---@wiki:ignore
 ---@param src number
 ---@param data table
 function ig.data.SetPlayer(src, data)
@@ -362,18 +365,21 @@ function ig.data.SetPlayer(src, data)
 end
 
 --- Add a player
+---@wiki:ignore
 ---@param src number
 function ig.data.AddPlayer(src)
     ig.player.AddPlayer(src)
 end
 
 --- Remove a player
+---@wiki:ignore
 ---@param src number
 function ig.data.RemovePlayer(src)
     ig.player.RemovePlayer(src)
 end
 
 --- Get player by Character_ID
+---@wiki:ignore
 ---@param characterId string
 function ig.data.GetPlayerByCharacterId(characterId)
     return ig.player.GetPlayerByCharacterId(characterId)
