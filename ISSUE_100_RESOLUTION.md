@@ -34,6 +34,24 @@ The latest workflow run confirms that:
 - No false positives are being reported
 - The system is working as intended
 
+### Local Verification
+Running the verification script locally confirms:
+```
+📊 VERIFICATION RESULTS
+✅ Correct: 670
+❌ Mismatches: 0
+❓ Not Found: 22
+```
+
+Functions being skipped include:
+- `ig.data.AddPlayer`
+- `ig.data.SetPlayer`
+- `ig.data.RemovePlayer`
+- And 16+ more functions with `@wiki:ignore` markers
+
+### Note on Legacy Report
+The file `MISSING_DOCUMENTATION_REPORT.txt` contains stale data from before the `@wiki:ignore` fix was implemented. This file is used as a fallback by `scripts/create_missing_docs_issues.py` when the JSON file is not present. In CI/CD workflows, the JSON file is always generated, so the stale legacy report will not be used.
+
 ## Example of Working @wiki:ignore
 
 From `server/_data.lua`:
