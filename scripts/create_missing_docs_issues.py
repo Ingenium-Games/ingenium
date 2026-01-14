@@ -174,6 +174,50 @@ def create_github_issue(namespace, funcs):
         print(f"❌ Failed to create issue for {namespace}: {e.stderr}")
         return False
 
+
+def create_aggregate_issue(all_missing: dict):
+    """Create a single aggregated GitHub issue covering all namespaces/functions."""
+    total_funcs = sum(len(funcs) for funcs in all_missing.values())
+    total_ns = len(all_missing)
+    title = f"📝 Documentation: Missing wiki docs — {total_ns} namespaces, {total_funcs} functions"
+
+    # Build body
+    body = f"## Missing Documentation (aggregated)\n\n"
+    body += f"The verifier detected {total_funcs} functions across {total_ns} namespaces missing wiki documentation.\n\n"
+    for ns in sorted(all_missing.keys()):
+        funcs = all_missing[ns]
+        body += f"### ig.{ns} — {len(funcs)} functions\n"
+        for f in sorted(funcs):
+            body += f"- `{f}`\n"
+        body += "\n"
+
+    body += "### Actions\n\n- Create wiki pages for each listed function.\n- Reference these pages in Documentation/wiki/README.md.\n\n"
+
+    # Write to temp file and call gh
+    import tempfile
+    with tempfile.NamedTemporaryFile('w', encoding='utf-8', delete=False) as tf:
+        tf.write(body)
+        tmp_path = tf.name
+
+    cmd = [
+        'gh', 'issue', 'create',
+        '--repo', REPO,
+        '--title', title,
+        '--body-file', tmp_path,
+        '--label', 'documentation',
+        '--label', 'wiki',
+    ]
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        # gh prints the URL to stdout
+        url = result.stdout.strip()
+        print(f"✅ Created aggregated issue: {url}")
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Failed to create aggregated issue: {e.stderr}")
+        return False
+
 def main():
     """Main execution"""
     parser = argparse.ArgumentParser(description='Create GitHub issues for missing docs')
@@ -245,19 +289,16 @@ def main():
                 print('Aborting issue creation.')
                 return
 
-        created = 0
-        failed = 0
-        for namespace in sorted(missing.keys()):
-            funcs = missing[namespace]
-            ok = create_github_issue(namespace, funcs)
-            if ok:
-                created += 1
-            else:
-                failed += 1
-
-        print('\n' + '=' * 60)
-        print(f'Created: {created} issues, Failed: {failed}')
-        print('=' * 60)
+        # Create a single aggregated issue for this run
+        ok = create_aggregate_issue(missing)
+        if ok:
+            print('\n' + '=' * 60)
+            print('Created: 1 aggregated issue, Failed: 0')
+            print('=' * 60)
+        else:
+            print('\n' + '=' * 60)
+            print('Created: 0 issues, Failed: 1')
+            print('=' * 60)
     else:
         print('To create GitHub issues, run:')
         print('  python3 scripts/create_missing_docs_issues.py --auto-create')
