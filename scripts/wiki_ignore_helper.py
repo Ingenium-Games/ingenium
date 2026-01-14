@@ -13,10 +13,20 @@ import re
 import sys
 from pathlib import Path
 
+from pathlib import Path
+
+# Determine repository root: prefer CI-provided GITHUB_WORKSPACE, else use
+# the repository root relative to this script when running locally.
+env_repo = os.environ.get('GITHUB_WORKSPACE')
+if env_repo and Path(env_repo).exists():
+    REPO_ROOT = Path(env_repo)
+else:
+    REPO_ROOT = Path(__file__).resolve().parents[1]
+
 CODE_DIRS = {
-    'client': '/workspaces/ingenium/client',
-    'server': '/workspaces/ingenium/server',
-    'shared': '/workspaces/ingenium/shared',
+    'client': str(REPO_ROOT / 'client'),
+    'server': str(REPO_ROOT / 'server'),
+    'shared': str(REPO_ROOT / 'shared'),
 }
 
 def find_function_file(full_name):
@@ -125,10 +135,10 @@ def list_candidates(pattern=None):
 def main():
     if len(sys.argv) < 2:
         print('Usage:')
-        print('  python3 wiki_ignore_helper.py --list              List all functions')
-        print('  python3 wiki_ignore_helper.py --candidates        List internal candidates')
-        print('  python3 wiki_ignore_helper.py --add <func>        Add @wiki:ignore flag')
-        print('  python3 wiki_ignore_helper.py --search <pattern>  Search for functions')
+        print('  python wiki_ignore_helper.py --list              List all functions')
+        print('  python wiki_ignore_helper.py --candidates        List internal candidates')
+        print('  python wiki_ignore_helper.py --add <func>        Add @wiki:ignore flag')
+        print('  python wiki_ignore_helper.py --search <pattern>  Search for functions')
         sys.exit(1)
     
     if sys.argv[1] == '--candidates':

@@ -4,6 +4,7 @@ if not ig.class then
 end
 -- ====================================================================================--
 --- func desc
+---@wiki:ignore 
 ---@param net any
 function ig.class.Npc(net)
     local self = {}

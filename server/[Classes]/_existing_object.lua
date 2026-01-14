@@ -30,6 +30,7 @@ ROW_FORMAT=DYNAMIC
 ]] --
 
 --- func desc
+---@wiki:ignore 
 ---@param net any
 function ig.class.ExistingObject(net, data)
     local self = {}

@@ -151,15 +151,9 @@ end
 ---      return {success = true, data = someData}
 ---  end)
 function ig.callback.RegisterServer(eventName, handler)
-    if not IsDuplicityVersion() then
-        error('ig.callback.RegisterServer can only be used on the server side')
-        return nil
-    end
-    
-    return RegisterServerCallback({
-        eventName = eventName,
-        eventCallback = handler
-    })
+    -- Server wrapper moved to server/_callback.lua
+    error('ig.callback.RegisterServer is server-only; use server/_callback.lua')
+    return nil
 end
 
 ---Register a client callback handler
@@ -182,9 +176,8 @@ end
 ---Unregister a server callback
 ---@param eventData any The event data returned from RegisterServer
 function ig.callback.UnregisterServer(eventData)
-    if eventData then
-        UnregisterServerCallback(eventData)
-    end
+    -- Server wrapper moved to server/_callback.lua
+    error('ig.callback.UnregisterServer is server-only; use server/_callback.lua')
 end
 
 ---Unregister a client callback

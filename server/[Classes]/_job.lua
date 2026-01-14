@@ -4,6 +4,7 @@ if not ig.class then
 end
 -- ====================================================================================--
 --- func desc
+---@wiki:ignore 
 ---@param tab any
 function ig.class.Job(tab)
     local self = {}

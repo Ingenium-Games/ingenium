@@ -4,11 +4,24 @@ Create GitHub issues for functions with missing documentation.
 Usage: python3 scripts/create_missing_docs_issues.py [--auto-create]
 """
 
+import os
+import os
+import re
 import json
 import subprocess
+import argparse
+import shutil
 from pathlib import Path
 
-MISSING_REPORT_PATH = '/workspaces/ingenium/MISSING_DOCUMENTATION_REPORT.txt'
+# Determine repository root: prefer CI-provided GITHUB_WORKSPACE, else use
+# the repository root relative to this script when running locally.
+env_repo = os.environ.get('GITHUB_WORKSPACE')
+if env_repo and Path(env_repo).exists():
+    REPO_ROOT = Path(env_repo)
+else:
+    REPO_ROOT = Path(__file__).resolve().parents[1]
+
+MISSING_REPORT_PATH = REPO_ROOT / 'MISSING_DOCUMENTATION_REPORT.txt'
 REPO = 'Ingenium-Games/ingenium'
 
 def parse_missing_report():
@@ -16,17 +29,28 @@ def parse_missing_report():
     functions = {}
     current_namespace = None
     
-    with open(MISSING_REPORT_PATH, 'r') as f:
+    if not MISSING_REPORT_PATH.exists():
+        print(f"ERROR: Missing report not found at {MISSING_REPORT_PATH}")
+        return {}
+
+    with open(MISSING_REPORT_PATH, 'r', encoding='utf-8') as f:
         lines = f.readlines()
     
     for line in lines:
         line = line.strip()
         
         if line and not line.startswith('-') and line.endswith(':'):
-            # Namespace header
-            current_namespace = line.rstrip(':')
-            if current_namespace not in functions:
-                functions[current_namespace] = []
+            # Candidate namespace header (normalize to lowercase)
+            candidate = line.rstrip(':').strip()
+            ns = candidate.lower()
+            # Only accept valid namespace identifiers (lowercase, alnum and underscores)
+            if re.match(r'^[a-z][a-z0-9_]+$', ns):
+                current_namespace = ns
+                if current_namespace not in functions:
+                    functions[current_namespace] = []
+            else:
+                # Ignore generic headings like ACTIONS TAKEN, NEXT STEPS, etc.
+                current_namespace = None
         elif line.startswith('- '):
             # Function entry
             func_entry = line[2:].strip()
@@ -124,6 +148,17 @@ def create_github_issue(namespace, funcs):
 
 def main():
     """Main execution"""
+    parser = argparse.ArgumentParser(description='Create GitHub issues for missing docs')
+    parser.add_argument('--auto-create', action='store_true', help='Automatically create GitHub issues using gh CLI')
+    parser.add_argument('--repo', default=None, help='Repository to create issues in (owner/repo)')
+    parser.add_argument('--yes', action='store_true', help='Skip confirmation prompts when creating issues')
+    args = parser.parse_args()
+
+    # Allow overriding target repo
+    global REPO
+    if args.repo:
+        REPO = args.repo
+
     print('📋 Parsing missing documentation report...')
     missing = parse_missing_report()
     
@@ -154,9 +189,42 @@ def main():
             print(f'  ... and {len(funcs) - 3} more')
     
     print('\n' + '=' * 60)
-    print('To create GitHub issues, run:')
-    print('  python3 scripts/create_missing_docs_issues.py --auto-create')
-    print('=' * 60)
+
+    # If --auto-create, proceed to create issues using gh CLI
+    if args.auto_create:
+        gh_path = shutil.which('gh')
+        if not gh_path:
+            print('ERROR: gh CLI not found in PATH. Install GitHub CLI to enable --auto-create.')
+            return
+
+        if not missing:
+            print('No missing documentation namespaces found; nothing to create.')
+            return
+
+        if not args.yes:
+            resp = input(f"Create {len(missing)} GitHub issues in {REPO}? [y/N]: ")
+            if resp.strip().lower() != 'y':
+                print('Aborting issue creation.')
+                return
+
+        created = 0
+        failed = 0
+        for namespace in sorted(missing.keys()):
+            funcs = missing[namespace]
+            ok = create_github_issue(namespace, funcs)
+            if ok:
+                created += 1
+            else:
+                failed += 1
+
+        print('\n' + '=' * 60)
+        print(f'Created: {created} issues, Failed: {failed}')
+        print('=' * 60)
+    else:
+        print('To create GitHub issues, run:')
+        print('  python3 scripts/create_missing_docs_issues.py --auto-create')
+        print('Use --yes to skip confirmation: --auto-create --yes')
+        print('=' * 60)
 
 if __name__ == '__main__':
     main()

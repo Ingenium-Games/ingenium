@@ -6,6 +6,7 @@ ig.names = {} -- names table to be imported from Names.json
 local gender = {["m"] = {},["f"] = {},["u"] = {}}
 
 --- func desc
+---@wiki:ignore 
 ---@param . any
 function ig.name.Load()
     if ig.json.Exists(conf.file.names) then

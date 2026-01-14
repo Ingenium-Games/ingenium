@@ -19,13 +19,23 @@ WIKI_IGNORE_FLAGS = [
     '--WIKI-IGNORE',
     '--NO-WIKI',
 ]
-WIKI_DIR = '/workspaces/ingenium/Documentation/wiki'
+from pathlib import Path
+
+# Determine repository root: prefer CI-provided GITHUB_WORKSPACE, else use
+# the repository root relative to this script when running locally.
+env_repo = os.environ.get('GITHUB_WORKSPACE')
+if env_repo and Path(env_repo).exists():
+    REPO_ROOT = Path(env_repo)
+else:
+    REPO_ROOT = Path(__file__).resolve().parents[1]
+
+WIKI_DIR = REPO_ROOT / 'Documentation' / 'wiki'
 CODE_DIRS = {
-    'client': '/workspaces/ingenium/client',
-    'server': '/workspaces/ingenium/server',
-    'shared': '/workspaces/ingenium/shared',
+    'client': REPO_ROOT / 'client',
+    'server': REPO_ROOT / 'server',
+    'shared': REPO_ROOT / 'shared',
 }
-README_PATH = '/workspaces/ingenium/Documentation/wiki/README.md'
+README_PATH = WIKI_DIR / 'README.md'
 
 def read_file(path):
     """Read file contents"""
@@ -302,10 +312,10 @@ def main():
     print('\n' + report)
     
     # Save report
-    report_path = '/workspaces/ingenium/MISSING_DOCUMENTATION_REPORT.txt'
+    report_path = REPO_ROOT / 'MISSING_DOCUMENTATION_REPORT.txt'
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
-    print(f'\n📄 Report saved to MISSING_DOCUMENTATION_REPORT.txt')
+    print(f'\n📄 Report saved to {report_path}')
     
     # Summary
     print('=' * 60)

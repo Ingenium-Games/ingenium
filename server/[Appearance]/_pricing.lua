@@ -131,8 +131,7 @@ function ig.appearance.UpdatePrice(jobName, category, itemId, price)
     -- Mark as dirty for periodic save
     ig.appearance_pricing_dirty[jobName] = true
     
-    ig.debug.Info("[Appearance Pricing] Updated " .. categoryName .. " price for job " .. jobName .. ": item " .. itemId .. " = $" .. price), 
-        category, jobName, tostring(itemId), price))
+    ig.debug.Info("[Appearance Pricing] Updated " .. categoryName .. " price for job " .. jobName .. ": item " .. itemId .. " = $" .. price)
     
     return true
 end

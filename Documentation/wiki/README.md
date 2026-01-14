@@ -137,7 +137,7 @@ callback namespace functions.
 - [ig.callback.RegisterClient](ig_callback_RegisterClient.md) [C]
 - [ig.callback.RegisterServer](ig_callback_RegisterServer.md) [S C]
 - [ig.callback.UnregisterClient](ig_callback_UnregisterClient.md) [C]
-- [ig.callback.UnregisterServer](ig_callback_UnregisterServer.md) [C]
+- [ig.callback.UnregisterServer](ig_callback_UnregisterServer.md) [S C]
 
 ### camera
 

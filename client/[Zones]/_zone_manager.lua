@@ -219,15 +219,15 @@ ig.zoneManager = ZoneManager
 -- Command to check zone manager stats
 RegisterCommand('zonestats', function()
     local stats = ZoneManager.GetStats()
-    ig.debug.Debug(\"=== Zone Manager Statistics ===\")
-    ig.debug.Debug(\"Total Zones: \" .. stats.totalZones)
-    ig.debug.Debug(\"Manager Running: \" .. tostring(stats.isRunning))
-    ig.debug.Debug(\"Check Interval: \" .. stats.checkInterval .. \"ms\")
-    ig.debug.Debug(\"Zones by Type:\")
+    ig.debug.Debug("=== Zone Manager Statistics ===")
+    ig.debug.Debug("Total Zones:  ".. stats.totalZones)
+    ig.debug.Debug("Manager Running: ".. tostring(stats.isRunning))
+    ig.debug.Debug("Check Interval: "..stats.checkInterval.. " ms")
+    ig.debug.Debug("Zones by Type:")
     for zoneType, count in pairs(stats.byType) do
-        ig.debug.Debug(\"  \" .. zoneType .. \": \" .. count)
+        ig.debug.Debug("  " .. zoneType .. ": " .. count)
     end
-    ig.debug.Debug(\"==============================\")
+    ig.debug.Debug("==============================")
 end, false)
 
 -- Command to list all client zones with details

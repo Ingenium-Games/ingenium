@@ -4,6 +4,7 @@ end
 -- ====================================================================================--
 --- Only GET functions, do not alter characters out of world.
 --- func desc
+---@wiki:ignore 
 ---@param data any
 function ig.class.OfflinePlayer(data)
     local Character_ID = data.Character_ID

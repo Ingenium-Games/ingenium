@@ -4,6 +4,7 @@ ig.modkits = {} -- names table to be imported from Names.json
 -- ====================================================================================--
 
 --- func desc
+---@wiki:ignore 
 ---@param . any
 function ig.modkit.Load()
     if ig.json.Exists(conf.file.modkits) then

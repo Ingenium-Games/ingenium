@@ -5,6 +5,7 @@ ig.vehicles = {} -- names table to be imported from Vehicles.json
 -- ====================================================================================--
 
 --- func desc
+---@wiki:ignore 
 ---@param . any
 function ig.vehicle.Load()
     if ig.json.Exists(conf.file.vehicles) then

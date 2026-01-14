@@ -122,6 +122,7 @@ function ig.debug.Log(level, message, stackLevel)
     print(consoleMsg)
 
     -- Server-side file logging for errors and warnings (fallback)
+    -- Enhanced server-side logging to file, worth a mention in docs on this function.
     if IsDuplicityVersion() and (level == "ERROR" or level == "WARN") then
         TriggerEvent("ig:debug:logToFile", fileMsg, level)
     end

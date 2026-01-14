@@ -104,11 +104,9 @@ class ReadmeUpdater:
     
     def determine_scope_marker(self, func_key: str, functions_by_scope: Dict) -> str:
         """Determine the correct scope marker for a function."""
-        # Check if we have detailed info
+        # Check if we have detailed info (ignore duplicity checks)
         if func_key in self.function_info:
             info = self.function_info[func_key]
-            if info['has_duplicity']:
-                return "[S C]"
             locations = info['locations']
         else:
             # Fallback to old logic
@@ -126,19 +124,18 @@ class ReadmeUpdater:
             if in_shared:
                 locations.append('shared')
         
-        # Determine scope based on actual file locations
+        # Determine scope based on file locations only
         has_client = 'client' in locations
         has_server = 'server' in locations
         has_shared = 'shared' in locations
-        
-        if (has_client and has_server) or has_shared:
+
+        if has_shared or (has_client and has_server):
             return "[S C]"
-        elif has_client:
+        if has_client:
             return "[C]"
-        elif has_server:
+        if has_server:
             return "[S]"
-        else:
-            return "[UNKNOWN]"
+        return "[UNKNOWN]"
     
     def extract_functions_from_wiki_files(self) -> Dict[str, List[Tuple[str, str]]]:
         """Extract functions from .md files in wiki directory.
@@ -263,7 +260,14 @@ class ReadmeUpdater:
         return False
 
 def main():
-    repo_root = os.environ.get('GITHUB_WORKSPACE', '/workspaces/ingenium')
+    # Determine repository root: prefer CI-provided GITHUB_WORKSPACE, else use
+    # the repository root relative to this script when running locally.
+    env_repo = os.environ.get('GITHUB_WORKSPACE')
+    if env_repo and Path(env_repo).exists():
+        repo_root = env_repo
+    else:
+        repo_root = str(Path(__file__).resolve().parents[1])
+
     updater = ReadmeUpdater(repo_root)
     
     print("🔍 Scanning for new functions...")

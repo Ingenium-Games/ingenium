@@ -7,6 +7,7 @@ end
 -- ====================================================================================--
 
 --- func desc
+---@wiki:ignore 
 ---@param net any
 ---@param bool any
 function ig.class.OwnedVehicle(net, data)

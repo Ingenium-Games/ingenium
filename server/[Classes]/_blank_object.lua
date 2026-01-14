@@ -5,6 +5,7 @@ end
 -- ====================================================================================--
 
 --- func desc
+---@wiki:ignore 
 ---@param net any
 function ig.class.BlankObject(net)
     local self = {}

@@ -4,6 +4,7 @@ if not ig.class then
 end
 -- ====================================================================================--
 --- func desc
+---@wiki:ignore 
 ---@param source any
 ---@param character_id any
 function ig.class.Player(source, character_id)

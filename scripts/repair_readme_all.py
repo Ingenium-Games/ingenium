@@ -20,38 +20,48 @@ def load_actual_scopes():
     # This will be populated by analyzing the codebase
     scopes = {}
     
+    # Determine repository root for local vs CI
+    env_repo = os.environ.get('GITHUB_WORKSPACE')
+    if env_repo and os.path.exists(env_repo):
+        repo_root = env_repo
+    else:
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
     # Parse client directory
-    client_dir = '/workspaces/ingenium/client'
-    for file in os.listdir(client_dir):
-        if file.endswith('.lua'):
-            content = read_file(os.path.join(client_dir, file))
-            for match in re.finditer(r'function\s+(ig\.\w+\.\w+)\s*\(', content):
-                func_name = match.group(1)
-                if func_name not in scopes:
-                    scopes[func_name] = set()
-                scopes[func_name].add('C')
-    
+    client_dir = os.path.join(repo_root, 'client')
+    if os.path.exists(client_dir):
+        for file in os.listdir(client_dir):
+            if file.endswith('.lua'):
+                content = read_file(os.path.join(client_dir, file))
+                for match in re.finditer(r'function\s+(ig\.\w+\.\w+)\s*\(', content):
+                    func_name = match.group(1)
+                    if func_name not in scopes:
+                        scopes[func_name] = set()
+                    scopes[func_name].add('C')
+
     # Parse server directory
-    server_dir = '/workspaces/ingenium/server'
-    for file in os.listdir(server_dir):
-        if file.endswith('.lua'):
-            content = read_file(os.path.join(server_dir, file))
-            for match in re.finditer(r'function\s+(ig\.\w+\.\w+)\s*\(', content):
-                func_name = match.group(1)
-                if func_name not in scopes:
-                    scopes[func_name] = set()
-                scopes[func_name].add('S')
-    
+    server_dir = os.path.join(repo_root, 'server')
+    if os.path.exists(server_dir):
+        for file in os.listdir(server_dir):
+            if file.endswith('.lua'):
+                content = read_file(os.path.join(server_dir, file))
+                for match in re.finditer(r'function\s+(ig\.\w+\.\w+)\s*\(', content):
+                    func_name = match.group(1)
+                    if func_name not in scopes:
+                        scopes[func_name] = set()
+                    scopes[func_name].add('S')
+
     # Parse shared directory
-    shared_dir = '/workspaces/ingenium/shared'
-    for file in os.listdir(shared_dir):
-        if file.endswith('.lua'):
-            content = read_file(os.path.join(shared_dir, file))
-            for match in re.finditer(r'function\s+(ig\.\w+\.\w+)\s*\(', content):
-                func_name = match.group(1)
-                if func_name not in scopes:
-                    scopes[func_name] = set()
-                scopes[func_name].add('S')
+    shared_dir = os.path.join(repo_root, 'shared')
+    if os.path.exists(shared_dir):
+        for file in os.listdir(shared_dir):
+            if file.endswith('.lua'):
+                content = read_file(os.path.join(shared_dir, file))
+                for match in re.finditer(r'function\s+(ig\.\w+\.\w+)\s*\(', content):
+                    func_name = match.group(1)
+                    if func_name not in scopes:
+                        scopes[func_name] = set()
+                    scopes[func_name].add('S')
     
     # Convert sets to scope markers
     result = {}
@@ -68,7 +78,14 @@ def load_actual_scopes():
 def fix_all_scopes():
     """Apply all scope fixes from the verification output"""
     
-    readme_path = '/workspaces/ingenium/Documentation/wiki/README.md'
+    # Determine README path relative to repo root
+    env_repo = os.environ.get('GITHUB_WORKSPACE')
+    if env_repo and os.path.exists(env_repo):
+        repo_root = env_repo
+    else:
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    readme_path = os.path.join(repo_root, 'Documentation', 'wiki', 'README.md')
     content = read_file(readme_path)
     
     # Extract lines and process them
