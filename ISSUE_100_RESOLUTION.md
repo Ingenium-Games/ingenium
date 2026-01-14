@@ -65,12 +65,29 @@ The latest verification confirms that all `@wiki:ignore` markers are being respe
 
 ---
 
-## Manual Closure Instructions
+## Closure Instructions
 
-To close issue #100, run:
+### Option 1: Use the Helper Script (Recommended)
+
+Run the provided helper script:
+
+```bash
+./scripts/close_issue_100.sh
+```
+
+This script will:
+- Check that gh CLI is installed and authenticated
+- Add a detailed comment explaining the resolution
+- Close the issue
+
+### Option 2: Manual Closure
+
+Visit https://github.com/Ingenium-Games/ingenium/issues/100 and:
+1. Add a comment explaining the resolution (see the comment template in `scripts/close_issue_100.sh`)
+2. Close the issue
+
+### Option 3: Use gh CLI Directly
 
 ```bash
 gh issue close 100 --repo Ingenium-Games/ingenium --comment "Resolution: This issue has been resolved. The functions listed were marked with @wiki:ignore annotations and are now correctly skipped by the verification scripts. See ISSUE_100_RESOLUTION.md for details. Verified in workflow run 20992396608."
 ```
-
-Or visit: https://github.com/Ingenium-Games/ingenium/issues/100 and close manually with the comment above.
