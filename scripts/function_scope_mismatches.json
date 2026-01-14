@@ -1,24 +1,3 @@
 {
-  "mismatches": [
-    {
-      "func": "callback.RegisterServer",
-      "readme": "[S C]",
-      "actual": "[S]",
-      "locations": [
-        "server"
-      ],
-      "file": "server/_callback.lua",
-      "has_duplicity": false
-    },
-    {
-      "func": "callback.UnregisterServer",
-      "readme": "[S C]",
-      "actual": "[S]",
-      "locations": [
-        "server"
-      ],
-      "file": "server/_callback.lua",
-      "has_duplicity": false
-    }
-  ]
+  "mismatches": []
 }
