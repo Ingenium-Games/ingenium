@@ -3,20 +3,6 @@ ig.modkit = {} -- function level
 ig.modkits = {} -- names table to be imported from Names.json
 -- ====================================================================================--
 
---- func desc
----@wiki:ignore 
----@param . any
-function ig.modkit.Load()
-    if ig.json.Exists(conf.file.modkits) then
-        local file = ig.json.Read(conf.file.modkits)
-        ig.modkits = file
-    end
-end
-
--- ============================================
--- MODKIT HELPERS
--- ============================================
-
 ---Get all modkit data
 ---@return table All modkits data
 function ig.modkit.GetAll()

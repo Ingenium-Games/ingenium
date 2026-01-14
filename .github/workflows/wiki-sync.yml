@@ -192,3 +192,33 @@ jobs:
               repo: context.repo.repo,
               body: body
             });
+
+  create-issues:
+    runs-on: ubuntu-latest
+    name: Create issues for missing scopes
+    needs: verify-function-scopes
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Authenticate gh CLI
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Create issues from mismatch report
+        run: |
+          if [ -f scripts/function_scope_mismatches.json ]; then
+            python3 scripts/create_missing_docs_issues.py --auto-create --yes --repo "${{ github.repository }}"
+          else
+            echo "No mismatch report found; skipping issue creation."
+          fi
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}

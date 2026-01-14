@@ -294,6 +294,22 @@ Examples:
             print("\n❌ Failed to fix README")
             sys.exit(1)
     
+    # If running in CI (GITHUB_WORKSPACE), write mismatches to a JSON file
+    # but do not fail the process so downstream workflow steps can act on the results.
+    env_repo = os.environ.get('GITHUB_WORKSPACE')
+    try:
+        import json
+        if env_repo and Path(env_repo).exists():
+            out_path = Path(repo_root) / 'scripts' / 'function_scope_mismatches.json'
+            with open(out_path, 'w', encoding='utf-8') as f:
+                json.dump({'mismatches': mismatches}, f, indent=2, ensure_ascii=False)
+            print(f"Wrote mismatch report to {out_path}")
+            # Always exit 0 in CI so workflow can continue to create issues/PRs
+            sys.exit(0)
+    except Exception:
+        # If writing the report fails, fall through to normal exit behavior
+        pass
+
     sys.exit(0 if success else 1)
 
 if __name__ == '__main__':

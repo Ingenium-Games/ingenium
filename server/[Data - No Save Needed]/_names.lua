@@ -6,16 +6,6 @@ ig.names = {} -- names table to be imported from Names.json
 local gender = {["m"] = {},["f"] = {},["u"] = {}}
 
 --- func desc
----@wiki:ignore 
----@param . any
-function ig.name.Load()
-    if ig.json.Exists(conf.file.names) then
-        local file = ig.json.Read(conf.file.names)
-        ig.names = file
-    end
-end
-
---- func desc
 function ig.name.RandomMale()
     return ig.names.m[math.random(1,#ig.names.m)]
 end

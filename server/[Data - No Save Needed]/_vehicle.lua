@@ -2,19 +2,6 @@
 ig.vehicle = {} -- function level
 ig.vehicles = {} -- names table to be imported from Vehicles.json
 
--- ====================================================================================--
-
---- func desc
----@wiki:ignore 
----@param . any
-function ig.vehicle.Load()
-    if ig.json.Exists(conf.file.vehicles) then
-        local file = ig.json.Read(conf.file.vehicles)
-        ig.vehicles = file
-    end
-end
-
-
 -- ============================================
 -- VEHICLE HELPERS
 -- ============================================
