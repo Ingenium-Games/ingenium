@@ -138,46 +138,16 @@ end
 -- UTILITY FUNCTIONS
 -- ====================================================================================--
 
----Register a server callback handler
----This is a convenience wrapper for RegisterServerCallback
----Note: This can only be used on the SERVER side
----@param eventName string The name of the callback event
----@param handler function The function to handle the callback (receives source, ...)
----@return any eventData Event handler reference for unregistering
----
----@usage
----  -- Server-side only
----  ig.callback.RegisterServer('MyCallback', function(source, arg1, arg2)
----      return {success = true, data = someData}
----  end)
-function ig.callback.RegisterServer(eventName, handler)
-    -- Server wrapper moved to server/_callback.lua
-    error('ig.callback.RegisterServer is server-only; use server/_callback.lua')
-    return nil
-end
-
 ---Register a client callback handler
 ---This is a convenience wrapper for RegisterClientCallback
 ---@param eventName string The name of the callback event
 ---@param handler function The function to handle the callback
 ---@return any eventData Event handler reference for unregistering
----
----@usage
----  ig.callback.RegisterClient('MyCallback', function(arg1, arg2)
----      return {success = true, data = someData}
----  end)
 function ig.callback.RegisterClient(eventName, handler)
     return RegisterClientCallback({
         eventName = eventName,
         eventCallback = handler
     })
-end
-
----Unregister a server callback
----@param eventData any The event data returned from RegisterServer
-function ig.callback.UnregisterServer(eventData)
-    -- Server wrapper moved to server/_callback.lua
-    error('ig.callback.UnregisterServer is server-only; use server/_callback.lua')
 end
 
 ---Unregister a client callback
