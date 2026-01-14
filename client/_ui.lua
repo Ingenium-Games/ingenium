@@ -24,43 +24,43 @@ end
 
 -- Convenience wrappers for common messages
 function ig.ui.ShowMenu(data)
-    ig.ui.Send("menu:show", data, true)
+    ig.ui.Send("Client:NUI:MenuShow", data, true)
 end
 
 function ig.ui.HideMenu()
-    ig.ui.Send("menu:hide", {}, false)
+    ig.ui.Send("Client:NUI:MenuHide", {}, false)
 end
 
 function ig.ui.ShowInput(data)
-    ig.ui.Send("input:show", data, true)
+    ig.ui.Send("Client:NUI:InputShow", data, true)
 end
 
 function ig.ui.HideInput()
-    ig.ui.Send("input:hide", {}, false)
+    ig.ui.Send("Client:NUI:InputHide", {}, false)
 end
 
 function ig.ui.ShowContext(data)
-    ig.ui.Send("context:show", data, true)
+    ig.ui.Send("Client:NUI:ContextShow", data, true)
 end
 
 function ig.ui.HideContext()
-    ig.ui.Send("context:hide", {}, false)
+    ig.ui.Send("Client:NUI:ContextHide", {}, false)
 end
 
 function ig.ui.ShowHUD()
-    ig.ui.Send("hud:show", {}, false)
+    ig.ui.Send("Client:NUI:HUDShow", {}, false)
 end
 
 function ig.ui.HideHUD()
-    ig.ui.Send("hud:hide", {}, false)
+    ig.ui.Send("Client:NUI:HUDHide", {}, false)
 end
 
 function ig.ui.UpdateHUD(data)
-    ig.ui.Send("hud:update", data, false)
+    ig.ui.Send("Client:NUI:HUDUpdate", data, false)
 end
 
 function ig.ui.Notify(text, colour, fade)
-    ig.ui.Send("notification", { text = text, colour = colour, fade = fade }, false)
+    ig.ui.Send("Client:NUI:Notification", { text = text, colour = colour, fade = fade }, false)
 end
 
 -- Allow server to force open UI via client callback. Server should check ACE before calling.
