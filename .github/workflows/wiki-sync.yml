@@ -35,9 +35,59 @@ jobs:
           python-version: '3.11'
 
       - name: Run function scope verification
-        run: python3 scripts/verify_function_scopes.py
+        run: python3 scripts/verify_function_scopes.py --verbose
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
+
+  auto-fix-scopes:
+    runs-on: ubuntu-latest
+    name: Auto-fix scope markers
+    needs: verify-function-scopes
+    if: failure() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Auto-fix scope markers
+        id: fix
+        run: |
+          python3 scripts/verify_function_scopes.py --fix --verbose
+          if git diff --quiet; then
+            echo "CHANGES_MADE=false" >> $GITHUB_OUTPUT
+          else
+            echo "CHANGES_MADE=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+
+      - name: Create PR with fixes
+        if: steps.fix.outputs.CHANGES_MADE == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'docs: auto-fix function scope markers in README'
+          title: 'docs: auto-fix function scope markers in README'
+          body: |
+            This PR automatically fixes function scope markers ([S], [C], [S C]) in the README to match the actual code implementation.
+
+            **Changes made:**
+            - Updated scope markers based on actual function locations
+            - Detected IsDuplicityVersion() checks for dual-scope functions
+            - Verified all markers accurately reflect implementation
+
+            The verification script detected mismatches and automatically corrected them.
+
+            ⚠️ **Please review** to ensure all changes are correct.
+          branch: docs/auto-fix-scopes
+          delete-branch: true
+          labels: documentation, automated
 
   update-readme:
     runs-on: ubuntu-latest
@@ -103,12 +153,17 @@ jobs:
       - name: Run verification and generate report
         id: verify
         run: |
-          python3 scripts/verify_function_scopes.py > /tmp/verify_output.txt 2>&1 || true
+          # Check if there were mismatches by exit code
+          if python3 scripts/verify_function_scopes.py --verbose > /tmp/verify_output.txt 2>&1; then
+            echo "HAS_MISMATCHES=false" >> $GITHUB_OUTPUT
+          else
+            echo "HAS_MISMATCHES=true" >> $GITHUB_OUTPUT
+          fi
+          
           cat /tmp/verify_output.txt
-          echo "OUTPUT<<EOF" >> $GITHUB_OUTPUT
-          cat /tmp/verify_output.txt >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
         continue-on-error: true
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
 
       - name: Comment PR with results
         uses: actions/github-script@v7
@@ -117,10 +172,23 @@ jobs:
           script: |
             const fs = require('fs');
             const output = fs.readFileSync('/tmp/verify_output.txt', 'utf8');
+            const hasMismatches = '${{ steps.verify.outputs.HAS_MISMATCHES }}' === 'true';
+            
+            let body = `## 📋 Function Scope Verification\n\n`;
+            
+            if (hasMismatches) {
+              body += `⚠️ **Scope mismatches detected!**\n\n`;
+              body += `The following functions have incorrect scope markers in the README.\n\n`;
+              body += `**To fix automatically:**\n\`\`\`bash\npython3 scripts/verify_function_scopes.py --fix\n\`\`\`\n\n`;
+            } else {
+              body += `✅ **All scope markers are correct!**\n\n`;
+            }
+            
+            body += `<details>\n<summary>Detailed Report</summary>\n\n\`\`\`\n${output}\n\`\`\`\n</details>`;
             
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `## 📋 Function Scope Verification\n\n\`\`\`\n${output}\n\`\`\``
+              body: body
             });
