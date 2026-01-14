@@ -29,9 +29,37 @@ class ReadmeUpdater:
         self.server_dir = self.repo_root / "server"
         self.shared_dir = self.repo_root / "shared"
         
-        # Known dual-scope namespaces with IsDuplicityVersion
-        self.duplicity_namespaces = {'callback', 'log', 'debug', 'voip'}
+        # Store function details including duplicity check info
+        self.function_info = {}  # {func_key: {'locations': [], 'has_duplicity': bool}}
         
+    def check_function_has_duplicity(self, content: str, func_name: str) -> bool:
+        """Check if a function body contains IsDuplicityVersion() check.
+        
+        This indicates the function is designed to work on both client and server
+        even though it's only defined in one location.
+        """
+        # Find the function definition
+        pattern = rf'function\s+ig\.[a-z]+\.{re.escape(func_name)}\s*\([^)]*\)'
+        match = re.search(pattern, content)
+        
+        if not match:
+            return False
+        
+        # Get the function body (up to next function or end of file)
+        start_pos = match.end()
+        
+        # Find next function or end
+        next_func_pattern = r'\nfunction\s+'
+        next_match = re.search(next_func_pattern, content[start_pos:])
+        
+        if next_match:
+            func_body = content[start_pos:start_pos + next_match.start()]
+        else:
+            func_body = content[start_pos:]
+        
+        # Check for IsDuplicityVersion in the function body
+        return 'IsDuplicityVersion()' in func_body
+    
     def scan_function_definitions(self) -> Dict[str, List[str]]:
         """Scan all .lua files to find function definitions by scope."""
         functions_by_scope = defaultdict(list)
@@ -57,6 +85,18 @@ class ReadmeUpdater:
                             key = f"{namespace}.{func_name}"
                             if key not in functions_by_scope[scope]:
                                 functions_by_scope[scope].append(key)
+                            
+                            # Store detailed info
+                            if key not in self.function_info:
+                                self.function_info[key] = {
+                                    'locations': [],
+                                    'has_duplicity': False
+                                }
+                            self.function_info[key]['locations'].append(scope)
+                            
+                            # Check for IsDuplicityVersion pattern
+                            if self.check_function_has_duplicity(content, func_name):
+                                self.function_info[key]['has_duplicity'] = True
                 except:
                     pass
         
@@ -64,21 +104,38 @@ class ReadmeUpdater:
     
     def determine_scope_marker(self, func_key: str, functions_by_scope: Dict) -> str:
         """Determine the correct scope marker for a function."""
-        namespace = func_key.split('.')[0]
+        # Check if we have detailed info
+        if func_key in self.function_info:
+            info = self.function_info[func_key]
+            if info['has_duplicity']:
+                return "[S C]"
+            locations = info['locations']
+        else:
+            # Fallback to old logic
+            namespace = func_key.split('.')[0]
+            
+            in_client = func_key in functions_by_scope.get('client', [])
+            in_server = func_key in functions_by_scope.get('server', [])
+            in_shared = func_key in functions_by_scope.get('shared', [])
+            
+            locations = []
+            if in_client:
+                locations.append('client')
+            if in_server:
+                locations.append('server')
+            if in_shared:
+                locations.append('shared')
         
-        # Known dual-scope namespaces
-        if namespace in self.duplicity_namespaces:
+        # Determine scope based on actual file locations
+        has_client = 'client' in locations
+        has_server = 'server' in locations
+        has_shared = 'shared' in locations
+        
+        if (has_client and has_server) or has_shared:
             return "[S C]"
-        
-        in_client = func_key in functions_by_scope.get('client', [])
-        in_server = func_key in functions_by_scope.get('server', [])
-        in_shared = func_key in functions_by_scope.get('shared', [])
-        
-        if (in_client and in_server) or in_shared:
-            return "[S C]"
-        elif in_client:
+        elif has_client:
             return "[C]"
-        elif in_server:
+        elif has_server:
             return "[S]"
         else:
             return "[UNKNOWN]"
