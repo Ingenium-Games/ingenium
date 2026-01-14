@@ -1,22 +1,8 @@
 -- ====================================================================================--
-RegisterNetEvent("Client:Nui:Message")
-AddEventHandler("Client:Nui:Message", function(M, D, FOCUS)
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
-    --
-    -- Send message
-    SendNUIMessage(json.encode({
-        message = M,
-        data = D or {}
-    }))
-    -- 
-    SetNuiFocus((FOCUS or true), (FOCUS or true))
-end)
---
-RegisterNUICallback("_c__close", function(data, cb)
+-- NOTE: Generic `Client:Nui:Message` event removed. Internal code should use `ig.ui.Send(...)`.
+-- External resources should call the exported `SendMessage` from the NUI resource.
+-- Keep NUI close callback for frontend compatibility.
+local function closeHandler(data, cb)
     -- Check if player is loaded as a character, otherwise dont disable nui, itll be in the character seleciton screen.
     if ig.data.IsPlayerLoaded() then
         -- Remove Focus
@@ -32,4 +18,7 @@ RegisterNUICallback("_c__close", function(data, cb)
             data = "__close called with no loaded character"
         })
     end
-end)
+end
+
+RegisterNUICallback("NUI:Client:Close", closeHandler)
+ 

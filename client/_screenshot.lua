@@ -123,6 +123,12 @@ end
 -- Automatically take screenshot on player report
 RegisterNetEvent('ig:screenshot:takeOnReport')
 AddEventHandler('ig:screenshot:takeOnReport', function(reportData)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+
     if conf.screenshot.autoScreenshot.onReport then
         ig.screenshot.Take('player_report', reportData)
     end
@@ -131,6 +137,12 @@ end)
 -- Automatically take screenshot on error
 RegisterNetEvent('ig:screenshot:takeOnError')
 AddEventHandler('ig:screenshot:takeOnError', function(errorData)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+
     if conf.screenshot.autoScreenshot.onError then
         ig.screenshot.Take('client_error', errorData)
     end

@@ -109,12 +109,12 @@ AddEventHandler("Client:Interact:ParkingMachine", function(data)
     end
 end)
 
-RegisterNUICallback("GUI:Close", function(data, cb)
+RegisterNUICallback("NUI:Client:GUIClose", function(data, cb)
     CGui()
     cb("ok")
 end)
 
-RegisterNUICallback("GUI:SelectVehicle", function(data, cb)
+RegisterNUICallback("NUI:Client:GUISelectVehicle", function(data, cb)
     local Plate = data.Plate
     -- Optimized: Added early exit to avoid unnecessary iterations
     local Data = nil
@@ -139,6 +139,55 @@ RegisterNUICallback("GUI:SelectVehicle", function(data, cb)
     end
     
     -- Optimized: More efficient parking spot selection
+    local Position = ig.garage._MachinePosition
+    local bestSpot = nil
+    local bestDistance = math.huge
+    
+    for _, spot in ipairs(conf.garage.parkingspots) do
+        if c.func.IsVehicleSpawnClear(spot, 1.2) then
+            local distance = #(vector3(spot.x, spot.y, spot.z) - Position)
+            if distance < bestDistance then
+                bestDistance = distance
+                bestSpot = spot
+            end
+        end
+    end
+    
+    if bestSpot then
+        local net = TriggerServerCallback({eventName = "EnsurePlayerVehicle", args = {Data, bestSpot}})
+    else
+        TriggerEvent("Client:Notify", "No available parking spots nearby.", 2)
+    end
+    
+    CGui()
+    cb("ok")
+end)
+
+RegisterNUICallback("NUI:Client:GUISelectVehicle", function(data, cb)
+    -- call existing handler logic by invoking the registered callback name
+    -- replicate behaviour of GUI:SelectVehicle
+    local Plate = data.Plate
+    local Data = nil
+    for k,v in pairs(ig.garage._VehicleData) do
+        if v.Plate == Plate then
+            Data = v
+            break
+        end
+    end
+    
+    local billed = TriggerServerCallback({eventName = "ParkingBill", args = {}})
+    if not billed then
+        TriggerEvent("Client:Notify","You dont have the cash to return your vehicle.")
+        CGui()
+        cb("ok")
+        return
+    end
+    
+    if Data == nil then 
+        cb("ok")
+        return 
+    end
+    
     local Position = ig.garage._MachinePosition
     local bestSpot = nil
     local bestDistance = math.huge

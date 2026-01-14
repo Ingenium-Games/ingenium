@@ -1,6 +1,18 @@
 <template>
-  <div class="hud-container">
-    <div class="hud-stats">
+  <div 
+    class="hud-container"
+    :style="{ 
+      left: position.x + 'px', 
+      top: position.y + 'px',
+      zIndex: hudZIndex
+    }"
+    :class="{ 'hud-focused': isFocused }"
+  >
+    <div 
+      class="hud-stats" 
+      @mousedown="startDrag"
+      :title="isFocused ? 'Drag to reposition HUD' : 'Press F2 to enable drag mode'"
+    >
       <!-- Health -->
       <div class="hud-stat">
         <span class="hud-stat-label">Health</span>
@@ -32,49 +44,131 @@
           <div class="hud-stat-fill thirst" :style="{ width: `${uiStore.hudData.thirst}%` }"></div>
         </div>
       </div>
-    </div>
-    
-    <div class="hud-info">
-      <div class="hud-money">
-        <span class="hud-cash">${{ formatMoney(uiStore.hudData.cash) }}</span>
-        <span class="hud-bank">Bank: ${{ formatMoney(uiStore.hudData.bank) }}</span>
-      </div>
       
-      <div class="hud-job" v-if="uiStore.hudData.job">
-        {{ uiStore.hudData.job }} <span v-if="uiStore.hudData.jobGrade">- {{ uiStore.hudData.jobGrade }}</span>
+      <!-- Stress -->
+      <div class="hud-stat">
+        <span class="hud-stat-label">Stress</span>
+        <div class="hud-stat-bar">
+          <div class="hud-stat-fill stress" :style="{ width: `${uiStore.hudData.stress}%` }"></div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useUIStore } from '../stores/ui'
 
 const uiStore = useUIStore()
+const position = ref({ x: 20, y: window.innerHeight - 120 })
+const isDragging = ref(false)
+const dragStart = ref({ x: 0, y: 0 })
+const isFocused = ref(false)
 
-function formatMoney(value) {
-  if (value === null || value === undefined || isNaN(value)) {
-    return '0'
+// Compute z-index based on focus state
+const hudZIndex = computed(() => 
+  isFocused.value ? 1001 : 100
+)
+
+onMounted(() => {
+  const savedPos = localStorage.getItem('hud_position')
+  if (savedPos) {
+    try {
+      position.value = JSON.parse(savedPos)
+    } catch (e) {
+      console.error('Failed to parse HUD position:', e)
+    }
   }
-  return Number(value).toLocaleString()
+  
+  // Listen for HUD focus toggle messages from Lua
+  window.addEventListener('message', handleHudMessage)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('message', handleHudMessage)
+})
+
+function handleHudMessage(event) {
+  const { message, data } = event.data
+  
+  if (message === 'Client:NUI:HUDFocus') {
+    isFocused.value = data.focused
+  } else if (message === 'Client:NUI:HUDResetPosition') {
+    position.value = { x: 20, y: window.innerHeight - 120 }
+    localStorage.setItem('hud_position', JSON.stringify(position.value))
+  } else if (message === 'Client:NUI:HUDSetPosition') {
+    position.value = data.position
+    localStorage.setItem('hud_position', JSON.stringify(position.value))
+  }
 }
+
+function startDrag(e) {
+  // Only allow dragging when HUD is focused
+  if (!isFocused.value) return
+  
+  isDragging.value = true
+  dragStart.value = { x: e.clientX - position.value.x, y: e.clientY - position.value.y }
+  document.addEventListener('mousemove', handleDrag)
+  document.addEventListener('mouseup', stopDrag)
+}
+
+function handleDrag(e) {
+  if (isDragging.value) {
+    position.value.x = e.clientX - dragStart.value.x
+    position.value.y = e.clientY - dragStart.value.y
+  }
+}
+
+function stopDrag() {
+  isDragging.value = false
+  localStorage.setItem('hud_position', JSON.stringify(position.value))
+  document.removeEventListener('mousemove', handleDrag)
+  document.removeEventListener('mouseup', stopDrag)
+}
+
+onUnmounted(() => {
+  document.removeEventListener('mousemove', handleDrag)
+  document.removeEventListener('mouseup', stopDrag)
+})
 </script>
 
 <style scoped>
 .hud-container {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  z-index: 100;
+  transition: border 0.2s ease;
+}
+
+.hud-container.hud-focused {
+  border: 2px solid #4CAF50;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
 }
 
 .hud-stats {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  cursor: grab;
+  user-select: none;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  transition: background-color 0.2s, cursor 0.2s;
+}
+
+.hud-container.hud-focused .hud-stats {
+  cursor: grabbing;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hud-stats:hover {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .hud-stat {
@@ -121,36 +215,7 @@ function formatMoney(value) {
   background: linear-gradient(90deg, #0891b2, #06b6d4);
 }
 
-.hud-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.hud-money {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.hud-cash {
-  font-size: 18px;
-  font-weight: 700;
-  color: #10b981;
-}
-
-.hud-bank {
-  font-size: 12px;
-  font-weight: 500;
-  color: #60a5fa;
-}
-
-.hud-job {
-  font-size: 12px;
-  font-weight: 500;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+.hud-stat-fill.stress {
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
 }
 </style>

@@ -23,76 +23,83 @@ local bankLocations = {
 }
 
 -- Register NUI callbacks
-RegisterNUICallback("banking:close", function(data, cb)
+-- Directional NUI callbacks only
+RegisterNUICallback("NUI:Client:BankingClose", function(data, cb)
     SetNuiFocus(false, false)
     cb("ok")
 end)
 
-RegisterNUICallback("banking:transfer", function(data, cb)
+RegisterNUICallback("NUI:Client:BankingTransfer", function(data, cb)
     TriggerServerCallback({
-        eventName = "banking:transfer",
+        eventName = "Server:Bank:Transfer",
         args = {data},
         eventCallback = function(success, message)
             if not success then
                 TriggerEvent("Client:Notify", message or "Transfer failed", "red", 5000)
+            else
+                TriggerEvent("Client:Notify", message or "Transfer successful", "green", 3000)
             end
-            cb({success = success, message = message})
+            cb("ok")
         end
     })
 end)
 
-RegisterNUICallback("banking:withdraw", function(data, cb)
+RegisterNUICallback("NUI:Client:BankingWithdraw", function(data, cb)
     TriggerServerCallback({
-        eventName = "banking:withdraw",
+        eventName = "Server:Bank:Withdraw",
         args = {data},
         eventCallback = function(success, message)
             if not success then
                 TriggerEvent("Client:Notify", message or "Withdrawal failed", "red", 5000)
+            else
+                TriggerEvent("Client:Notify", message or "Withdrawal successful", "green", 3000)
             end
-            cb({success = success, message = message})
+            cb("ok")
         end
     })
 end)
 
-RegisterNUICallback("banking:deposit", function(data, cb)
+RegisterNUICallback("NUI:Client:BankingDeposit", function(data, cb)
     TriggerServerCallback({
-        eventName = "banking:deposit",
+        eventName = "Server:Bank:Deposit",
         args = {data},
         eventCallback = function(success, message)
             if not success then
                 TriggerEvent("Client:Notify", message or "Deposit failed", "red", 5000)
+            else
+                TriggerEvent("Client:Notify", message or "Deposit successful", "green", 3000)
             end
-            cb({success = success, message = message})
+            cb("ok")
         end
     })
 end)
 
-RegisterNUICallback("banking:addFavorite", function(data, cb)
+RegisterNUICallback("NUI:Client:BankingAddFavorite", function(data, cb)
     TriggerServerCallback({
-        eventName = "banking:addFavorite",
+        eventName = "Server:Bank:AddFavorite",
         args = {data},
         eventCallback = function(success, message)
             if not success then
                 TriggerEvent("Client:Notify", message or "Failed to add favorite", "red", 5000)
             else
-                TriggerEvent("Client:Notify", "Favorite added successfully", "green", 3000)
+                TriggerEvent("Client:Notify", message or "Favorite added", "green", 3000)
             end
-            cb({success = success, message = message})
+            cb("ok")
         end
     })
 end)
 
-RegisterNUICallback("banking:removeFavorite", function(data, cb)
+RegisterNUICallback("NUI:Client:BankingRemoveFavorite", function(data, cb)
     TriggerServerCallback({
-        eventName = "banking:removeFavorite",
+        eventName = "Server:Bank:RemoveFavorite",
         args = {data},
         eventCallback = function(success, message)
             if not success then
                 TriggerEvent("Client:Notify", message or "Failed to remove favorite", "red", 5000)
             else
-                TriggerEvent("Client:Notify", "Favorite removed successfully", "green", 3000)
+                TriggerEvent("Client:Notify", message or "Favorite removed", "green", 3000)
             end
-            cb({success = success, message = message})
+            cb("ok")
         end
     })
 end)
@@ -107,7 +114,7 @@ RegisterNetEvent("Client:Banking:OpenMenu", function(data)
     --
     SetNuiFocus(true, true)
     SendNUIMessage({
-        message = "banking:open",
+        message = "Client:NUI:BankingOpen",
         data = data
     })
 end)
@@ -115,7 +122,7 @@ end)
 -- Function to open banking
 local function OpenBanking()
     TriggerServerCallback({
-        eventName = "banking:open",
+        eventName = "Server:Bank:Open",
         eventCallback = function()
             -- Server will send Client:Banking:OpenMenu event with data
         end

@@ -9,7 +9,7 @@
 
 ---Open appearance customization UI
 ---@param config table|nil Configuration options
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:Open",
     eventCallback = function(config)
         config = config or {}
@@ -45,31 +45,31 @@ RegisterServerCallback({
         end
         
         -- Send data to NUI
-        TriggerEvent("Client:Nui:Message", "appearance:open", {
+            ig.ui.Send("appearance:open", {
             appearance = currentAppearance,
             constants = constants,
             peds = peds,
             tattoos = tattoos,
             config = config,
             pricing = pricing
-        })
+            }, true)
     end
 })
 
 ---Close appearance customization UI
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:Close",
     eventCallback = function()
         -- Deactivate customization mode
         ig.appearance.SetCustomizationActive(false)
         
         -- Close NUI
-        TriggerEvent("Client:Nui:Message", "appearance:close", {})
+           ig.ui.Send("appearance:close", {}, false)
     end
 })
 
 ---Update ped model
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateModel",
     eventCallback = function(model)
         ig.appearance.SetModel(model)
@@ -78,7 +78,7 @@ RegisterServerCallback({
 })
 
 ---Update head blend (heritage)
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateHeadBlend",
     eventCallback = function(headBlend)
         ig.appearance.SetHeadBlend(headBlend)
@@ -87,7 +87,7 @@ RegisterServerCallback({
 })
 
 ---Update single face feature
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateFaceFeature",
     eventCallback = function(index, value)
         ig.appearance.SetFaceFeature(index, value)
@@ -96,7 +96,7 @@ RegisterServerCallback({
 })
 
 ---Update all face features
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateFaceFeatures",
     eventCallback = function(features)
         ig.appearance.SetFaceFeatures(features)
@@ -105,7 +105,7 @@ RegisterServerCallback({
 })
 
 ---Update single head overlay
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateHeadOverlay",
     eventCallback = function(overlayId, data)
         ig.appearance.SetHeadOverlay(overlayId, data.style, data.opacity, data.color, data.secondColor)
@@ -114,7 +114,7 @@ RegisterServerCallback({
 })
 
 ---Update all head overlays
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateHeadOverlays",
     eventCallback = function(overlays)
         ig.appearance.SetHeadOverlays(overlays)
@@ -123,7 +123,7 @@ RegisterServerCallback({
 })
 
 ---Update hair
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateHair",
     eventCallback = function(hair)
         ig.appearance.SetHair(hair.style, hair.color, hair.highlight)
@@ -132,7 +132,7 @@ RegisterServerCallback({
 })
 
 ---Update eye color
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateEyeColor",
     eventCallback = function(color)
         ig.appearance.SetEyeColor(color)
@@ -141,7 +141,7 @@ RegisterServerCallback({
 })
 
 ---Update single component
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateComponent",
     eventCallback = function(componentId, drawable, texture)
         ig.appearance.SetComponent(componentId, drawable, texture)
@@ -150,7 +150,7 @@ RegisterServerCallback({
 })
 
 ---Update all components
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateComponents",
     eventCallback = function(components)
         ig.appearance.SetComponents(components)
@@ -159,7 +159,7 @@ RegisterServerCallback({
 })
 
 ---Update single prop
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateProp",
     eventCallback = function(propId, drawable, texture)
         ig.appearance.SetProp(propId, drawable, texture)
@@ -168,7 +168,7 @@ RegisterServerCallback({
 })
 
 ---Update all props
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:UpdateProps",
     eventCallback = function(props)
         ig.appearance.SetProps(props)
@@ -177,7 +177,7 @@ RegisterServerCallback({
 })
 
 ---Apply tattoo
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:ApplyTattoo",
     eventCallback = function(collection, hash)
         ig.appearance.ApplyTattoo(collection, hash)
@@ -186,7 +186,7 @@ RegisterServerCallback({
 })
 
 ---Remove all tattoos
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:ClearTattoos",
     eventCallback = function()
         ig.appearance.ClearTattoos()
@@ -195,7 +195,7 @@ RegisterServerCallback({
 })
 
 ---Apply multiple tattoos
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:ApplyTattoos",
     eventCallback = function(tattoos)
         ig.appearance.ApplyTattoos(tattoos)
@@ -208,7 +208,7 @@ RegisterServerCallback({
 -- ====================================================================================--
 
 ---Set camera view mode
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:SetCameraView",
     eventCallback = function(mode)
         ig.appearance.SetCameraView(mode)
@@ -217,7 +217,7 @@ RegisterServerCallback({
 })
 
 ---Rotate camera
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:RotateCamera",
     eventCallback = function(degrees)
         ig.appearance.RotateCamera(degrees)
@@ -226,7 +226,7 @@ RegisterServerCallback({
 })
 
 ---Turn ped around
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:TurnAround",
     eventCallback = function(duration)
         ig.appearance.TurnAround(duration)
@@ -239,7 +239,7 @@ RegisterServerCallback({
 -- ====================================================================================--
 
 ---Save appearance
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:Save",
     eventCallback = function()
         local appearance = ig.appearance.GetAppearance()
@@ -253,11 +253,11 @@ RegisterServerCallback({
             
             -- Close customization
             ig.appearance.SetCustomizationActive(false)
-            TriggerEvent("Client:Nui:Message", "appearance:close", {})
+            ig.ui.Send("appearance:close", {}, false)
             
             -- Trigger character registration NUI
             TriggerEvent("Client:Character:NewSpawn")
-            TriggerEvent("Client:Nui:Message", "register")
+            ig.ui.Send("register", {}, true)
         else
             -- Send to server for validation and saving using callback
             TriggerServerCallback({
@@ -268,18 +268,18 @@ RegisterServerCallback({
                         print("^2Appearance saved successfully^0")
                     else
                         print("^1Failed to save appearance: " .. (result and result.error or "Unknown error") .. "^0")
-                        TriggerEvent("Client:Nui:Message", "notification", {
+                        ig.ui.Send("notification", {
                             text = "Failed to save appearance: " .. (result and result.error or "Unknown error"),
-                            color = "red",
+                            colour = "red",
                             fade = 5000
-                        })
+                        }, false)
                     end
                 end
             })
             
             -- Close customization
             ig.appearance.SetCustomizationActive(false)
-            TriggerEvent("Client:Nui:Message", "appearance:close", {})
+                ig.ui.Send("appearance:close", {}, false)
         end
         
         return true
@@ -287,20 +287,20 @@ RegisterServerCallback({
 })
 
 ---Cancel appearance changes
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:Cancel",
     eventCallback = function()
         -- Restore previous appearance if stored
         -- For now, just close
         ig.appearance.SetCustomizationActive(false)
-        TriggerEvent("Client:Nui:Message", "appearance:close", {})
+            ig.ui.Send("appearance:close", {}, false)
         
         return true
     end
 })
 
 ---Get component variations for a component ID
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:GetComponentVariations",
     eventCallback = function(componentId)
         local ped = PlayerPedId()
@@ -320,7 +320,7 @@ RegisterServerCallback({
 })
 
 ---Get prop variations for a prop ID
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:GetPropVariations",
     eventCallback = function(propId)
         local ped = PlayerPedId()
@@ -348,7 +348,7 @@ RegisterServerCallback({
 })
 
 ---Get hair variations
-RegisterServerCallback({
+RegisterClientCallback({
     eventName = "Client:Appearance:GetHairVariations",
     eventCallback = function()
         local ped = PlayerPedId()

@@ -98,89 +98,88 @@ export function setupNuiHandlers() {
     
     switch (message) {
       // Chat system
-      case 'chat:addMessage':
+      case 'Client:NUI:ChatAddMessage':
         chatStore.addMessage(data)
         break
-      
-      case 'chat:show':
+
+      case 'Client:NUI:ChatShow':
         chatStore.show()
         break
-      
-      case 'chat:hide':
+
+      case 'Client:NUI:ChatHide':
         chatStore.hide()
         break
-      
-      case 'chat:clear':
+
+      case 'Client:NUI:ChatClear':
         chatStore.clearMessages()
         break
-      
-      case 'chat:setSuggestions':
+
+      case 'Client:NUI:ChatSetSuggestions':
         chatStore.setSuggestions(data.suggestions || [])
         break
-      
-      // Notification system (backwards compatible)
-      case 'notification':
+
+      // Notification system
+      case 'Client:NUI:Notification':
         notificationStore.addNotification({
           text: data.text,
           color: data.colour || data.color || 'black',
           fade: data.fade || 13500
         })
         break
-      
+
       // Character select
-      case 'character-select:show':
+      case 'Client:NUI:CharacterSelectShow':
         characterStore.setCharacters(data.characters || [])
         uiStore.showCharacterSelect = true
         break
-      
-      case 'character-select:hide':
+
+      case 'Client:NUI:CharacterSelectHide':
         uiStore.showCharacterSelect = false
         break
-      
+
       // HUD
-      case 'hud:show':
+      case 'Client:NUI:HUDShow':
         uiStore.showHUD = true
         break
-      
-      case 'hud:hide':
+
+      case 'Client:NUI:HUDHide':
         uiStore.showHUD = false
         break
-      
-      case 'hud:update':
+
+      case 'Client:NUI:HUDUpdate':
         uiStore.updateHUD(data)
         break
-      
+
       // Menu system
-      case 'menu:show':
+      case 'Client:NUI:MenuShow':
         uiStore.openMenu(data)
         break
-      
-      case 'menu:hide':
+
+      case 'Client:NUI:MenuHide':
         uiStore.showMenu = false
         break
-      
+
       // Input dialog
-      case 'input:show':
+      case 'Client:NUI:InputShow':
         uiStore.openInput(data)
         break
-      
-      case 'input:hide':
+
+      case 'Client:NUI:InputHide':
         uiStore.showInput = false
         break
-      
+
       // Context menu
-      case 'context:show':
+      case 'Client:NUI:ContextShow':
         uiStore.openContextMenu(data)
         break
-      
-      case 'context:hide':
+
+      case 'Client:NUI:ContextHide':
         uiStore.showContextMenu = false
         break
-      
+
       // Appearance customization
-      case 'appearance:open':
+      case 'Client:NUI:AppearanceOpen':
         if (!appearanceStore) {
-          // Lazy load appearance store
           import('../stores/appearance.js').then(module => {
             appearanceStore = module.useAppearanceStore()
             appearanceStore.open(data)
@@ -189,17 +188,16 @@ export function setupNuiHandlers() {
           appearanceStore.open(data)
         }
         break
-      
-      case 'appearance:close':
+
+      case 'Client:NUI:AppearanceClose':
         if (appearanceStore) {
           appearanceStore.close()
         }
         break
-      
+
       // Banking system
-      case 'banking:open':
+      case 'Client:NUI:BankingOpen':
         if (!bankingStore) {
-          // Lazy load banking store
           import('../stores/banking.js').then(module => {
             bankingStore = module.useBankingStore()
             bankingStore.open(data)
@@ -208,32 +206,32 @@ export function setupNuiHandlers() {
           bankingStore.open(data)
         }
         break
-      
-      case 'banking:close':
+
+      case 'Client:NUI:BankingClose':
         if (bankingStore) {
           bankingStore.close()
         }
         break
-      
-      case 'banking:updateBalance':
+
+      case 'Client:NUI:BankingUpdateBalance':
         if (bankingStore) {
           bankingStore.updateBalance(data.balance)
         }
         break
-      
-      case 'banking:updateCash':
+
+      case 'Client:NUI:BankingUpdateCash':
         if (bankingStore) {
           bankingStore.updateCash(data.cash)
         }
         break
-      
-      case 'banking:addTransaction':
+
+      case 'Client:NUI:BankingAddTransaction':
         if (bankingStore) {
           bankingStore.addTransaction(data)
         }
         break
-      
-      case 'banking:updateFavorites':
+
+      case 'Client:NUI:BankingUpdateFavorites':
         if (bankingStore && data.favorites) {
           bankingStore.favorites = data.favorites
         }
@@ -251,23 +249,29 @@ export function setupNuiHandlers() {
       // Close active UI elements
       if (chatStore.isVisible) {
         chatStore.hide()
-        sendNuiMessage('chatClose')
+        sendNuiMessage('NUI:Client:ChatClose')
       } else if (bankingStore && bankingStore.isVisible) {
         bankingStore.close()
-        sendNuiMessage('banking:close')
+        sendNuiMessage('NUI:Client:BankingClose')
       } else if (uiStore.showMenu) {
         uiStore.showMenu = false
-        sendNuiMessage('menu:close')
+        sendNuiMessage('NUI:Client:MenuClose')
       } else if (uiStore.showInput) {
         uiStore.showInput = false
-        sendNuiMessage('input:close')
+        sendNuiMessage('NUI:Client:InputClose')
       } else if (uiStore.showContextMenu) {
         uiStore.showContextMenu = false
-        sendNuiMessage('context:close')
+        sendNuiMessage('NUI:Client:ContextClose')
       } else if (!characterStore.isInCharacterSelect) {
         // Only send generic close if not in character select
-        sendNuiMessage('_c__close')
+        sendNuiMessage('NUI:Client:Close')
       }
     }
   })
 }
+
+/**
+ * Map legacy callback names to directional NUI:Client names.
+ * If no mapping exists, return the original callback.
+ */
+// Note: frontend now must call directional NUI endpoints directly (NUI:Client:...)

@@ -1,6 +1,10 @@
 <template>
   <div v-if="bankingStore.isVisible" class="banking-container">
-    <div class="banking-window">
+    <div 
+      class="banking-window"
+      :style="{ left: position.x + 'px', top: position.y + 'px' }"
+      @mousedown="startDrag"
+    >
       <!-- Header -->
       <div class="banking-header">
         <h2>Banking</h2>
@@ -228,14 +232,54 @@
 <script setup>
 import { useBankingStore } from '../stores/banking'
 import { sendNuiMessage } from '../utils/nui'
+import { ref, onMounted } from 'vue'
 
 const bankingStore = useBankingStore()
+const position = ref({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 })
+const isDragging = ref(false)
+const dragStart = ref({ x: 0, y: 0 })
+
+onMounted(() => {
+  const savedPosition = localStorage.getItem('banking_position')
+  if (savedPosition) {
+    try {
+      position.value = JSON.parse(savedPosition)
+    } catch (e) {
+      console.error('Failed to parse banking position:', e)
+    }
+  }
+})
+
+function startDrag(event) {
+  if (event.target.closest('.close-btn') || event.target.closest('button') || event.target.closest('input')) {
+    return
+  }
+  isDragging.value = true
+  dragStart.value = { x: event.clientX - position.value.x, y: event.clientY - position.value.y }
+  document.addEventListener('mousemove', handleDrag)
+  document.addEventListener('mouseup', stopDrag)
+}
+
+function handleDrag(event) {
+  if (!isDragging.value) return
+  position.value = {
+    x: event.clientX - dragStart.value.x,
+    y: event.clientY - dragStart.value.y
+  }
+}
+
+function stopDrag() {
+  isDragging.value = false
+  document.removeEventListener('mousemove', handleDrag)
+  document.removeEventListener('mouseup', stopDrag)
+  localStorage.setItem('banking_position', JSON.stringify(position.value))
+}
 
 /**
  * Close the banking menu
  */
 function CloseBank() {
-  sendNuiMessage('banking:close')
+  sendNuiMessage('NUI:Client:BankingClose')
   bankingStore.close()
 }
 
@@ -254,7 +298,7 @@ function HandleTransfer() {
     return
   }
   
-  sendNuiMessage('banking:transfer', {
+  sendNuiMessage('NUI:Client:BankingTransfer', {
     targetIban,
     amount: parsedAmount,
     description: description || ''
@@ -276,7 +320,7 @@ function HandleWithdrawal() {
     return
   }
   
-  sendNuiMessage('banking:withdraw', {
+  sendNuiMessage('NUI:Client:BankingWithdraw', {
     amount: parsedAmount
   })
 }
@@ -296,7 +340,7 @@ function HandleDeposit() {
     return
   }
   
-  sendNuiMessage('banking:deposit', {
+  sendNuiMessage('NUI:Client:BankingDeposit', {
     amount: parsedAmount
   })
 }
@@ -319,7 +363,7 @@ function UseFavorite(favorite) {
  * Remove a favorite
  */
 function RemoveFavorite(iban) {
-  sendNuiMessage('banking:removeFavorite', { iban })
+  sendNuiMessage('NUI:Client:BankingRemoveFavorite', { iban })
   bankingStore.removeFavorite(iban)
 }
 
@@ -346,14 +390,17 @@ function FormatDate(dateString) {
   width: 100vw;
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   background: rgba(0, 0, 0, 0.7);
   z-index: 1000;
   pointer-events: all;
 }
 
 .banking-window {
+  position: fixed;
+  cursor: grab;
+  user-select: none;
   background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   border-radius: 12px;
   width: 90%;

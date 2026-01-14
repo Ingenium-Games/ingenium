@@ -1,6 +1,10 @@
 <template>
   <div class="menu-overlay" @click.self="closeMenu">
-    <div class="menu-container">
+    <div 
+      class="menu-container"
+      :style="{ left: position.x + 'px', top: position.y + 'px' }"
+      @mousedown="startDrag"
+    >
       <div class="menu-header">
         <h2>{{ uiStore.menuData.title }}</h2>
         <button @click="closeMenu" class="close-btn">✖</button>
@@ -25,19 +29,59 @@
 <script setup>
 import { useUIStore } from '../stores/ui'
 import { sendNuiMessage } from '../utils/nui'
+import { ref, onMounted } from 'vue'
 
 const uiStore = useUIStore()
+const position = ref({ x: window.innerWidth / 2 - 200, y: window.innerHeight / 2 - 150 })
+const isDragging = ref(false)
+const dragStart = ref({ x: 0, y: 0 })
+
+onMounted(() => {
+  const savedPosition = localStorage.getItem('menu_position')
+  if (savedPosition) {
+    try {
+      position.value = JSON.parse(savedPosition)
+    } catch (e) {
+      console.error('Failed to parse menu position:', e)
+    }
+  }
+})
+
+function startDrag(event) {
+  if (event.target.closest('.close-btn') || event.target.closest('button.menu-item')) {
+    return
+  }
+  isDragging.value = true
+  dragStart.value = { x: event.clientX - position.value.x, y: event.clientY - position.value.y }
+  document.addEventListener('mousemove', handleDrag)
+  document.addEventListener('mouseup', stopDrag)
+}
+
+function handleDrag(event) {
+  if (!isDragging.value) return
+  position.value = {
+    x: event.clientX - dragStart.value.x,
+    y: event.clientY - dragStart.value.y
+  }
+}
+
+function stopDrag() {
+  isDragging.value = false
+  document.removeEventListener('mousemove', handleDrag)
+  document.removeEventListener('mouseup', stopDrag)
+  localStorage.setItem('menu_position', JSON.stringify(position.value))
+}
 
 function selectItem(item) {
   if (!item.disabled) {
-    sendNuiMessage('menu:select', { action: item.action, data: item.data })
+    sendNuiMessage('NUI:Client:MenuSelect', { action: item.action, data: item.data })
     closeMenu()
   }
 }
 
 function closeMenu() {
   uiStore.showMenu = false
-  sendNuiMessage('menu:close')
+  sendNuiMessage('NUI:Client:MenuClose')
 }
 </script>
 
@@ -50,12 +94,13 @@ function closeMenu() {
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   z-index: 1000;
 }
 
 .menu-container {
+  position: fixed;
   background: linear-gradient(135deg, rgba(26, 26, 26, 0.98), rgba(42, 42, 42, 0.98));
   border-radius: 12px;
   min-width: 400px;
@@ -64,6 +109,8 @@ function closeMenu() {
   overflow: hidden;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: grab;
+  user-select: none;
 }
 
 .menu-header {

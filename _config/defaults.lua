@@ -46,3 +46,30 @@ conf.default.itemdegrade = false
 -- City job tax rate on all payments
 conf.default.tax = 10.00
 
+-- ====================================================================================--
+-- Control & Keybinding Defaults
+-- ====================================================================================--
+
+-- Inventory Configuration
+conf.inventory = {
+    openKey = "I",                -- Default key to open/toggle inventory
+    closeKey = "ESC",             -- Key to close inventory (can also close via button)
+    allowHotkey = true            -- Enable/disable the hotkey entirely
+}
+
+-- HUD Configuration
+conf.hud = {
+    focusKey = "F2",              -- Key to toggle HUD drag/focus mode
+    allowDragging = true,         -- Allow users to drag and reposition HUD
+    persistPosition = true,       -- Save HUD position to localStorage
+    enableFocusHighlight = true,  -- Show border/highlight when HUD is in focus mode
+    normalZIndex = 100,           -- Default z-index (behind other menus)
+    focusedZIndex = 1001          -- Z-index when focused/dragging (above other menus)
+}
+
+-- Menu Configuration
+conf.menus = {
+    allowDragging = true,         -- Allow users to drag and reposition menus
+    persistPosition = true,       -- Save menu positions to localStorage
+    dragCursorStyle = "grab"      -- CSS cursor style when hovering draggable area
+}

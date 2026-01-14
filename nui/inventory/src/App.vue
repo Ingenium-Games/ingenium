@@ -1,5 +1,6 @@
 <template>
-  <div v-if="isVisible" class="inventory-container">
+  <Transition name="box-open">
+    <div v-if="isVisible" class="inventory-container">
     <div class="inventory-wrapper">
       <!-- Left Panel - External Storage/Object -->
       <InventoryPanel
@@ -21,7 +22,7 @@
         @item-action="handleItemAction"
       />
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script>
@@ -80,7 +81,7 @@ export default {
       const { message, data } = event.data
 
       switch (message) {
-        case 'openInventory':
+        case 'Client:NUI:InventoryOpenDual':
           // Open dual-panel inventory
           isVisible.value = true
           externalTitle.value = data.externalTitle || 'Storage'
@@ -100,7 +101,7 @@ export default {
           externalMaxSlots.value = data.externalMaxSlots || 50
           break
 
-        case 'openSingleInventory':
+        case 'Client:NUI:InventoryOpenSingle':
           // Open single-panel inventory (player only)
           isVisible.value = true
           externalTitle.value = ''
@@ -116,12 +117,12 @@ export default {
           externalMaxSlots.value = 0
           break
 
-        case 'closeInventory':
+        case 'Client:NUI:InventoryClose':
           isVisible.value = false
           closeInventory()
           break
 
-        case 'updateInventory':
+        case 'Client:NUI:InventoryUpdate':
           // Update inventory from server
           if (data.playerInventory) {
             playerInventory.value = mergeInventoryWithPositions(
@@ -211,7 +212,7 @@ export default {
      */
     const handleItemAction = ({ action, item, position, panelId }) => {
       // Send action to Lua backend
-      fetch(`https://${RESOURCE_NAME}/inventory_action`, {
+      fetch(`https://${RESOURCE_NAME}/NUI:Client:InventoryAction`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -236,7 +237,7 @@ export default {
       const compressedExternal = externalInventory.value.filter(item => item != null)
 
       // Send to server for validation and saving
-      fetch(`https://${RESOURCE_NAME}/inventory_close`, {
+      fetch(`https://${RESOURCE_NAME}/NUI:Client:InventoryClose`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -311,5 +312,41 @@ export default {
   gap: 20px;
   max-width: 90vw;
   max-height: 90vh;
+}
+
+/* Box opening animation */
+.box-open-enter-active {
+  animation: boxOpen 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.box-open-leave-active {
+  animation: boxClose 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@keyframes boxOpen {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotateX(-90deg) rotateY(0deg);
+    transform-origin: center center;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) rotateX(0deg) rotateY(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg) rotateY(0deg);
+  }
+}
+
+@keyframes boxClose {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg) rotateY(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotateX(90deg) rotateY(0deg);
+  }
 }
 </style>

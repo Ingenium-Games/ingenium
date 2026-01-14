@@ -139,7 +139,7 @@ function cancelCreate() {
 }
 
 function createCharacter() {
-  sendNuiMessage('character:create', {
+  sendNuiMessage('NUI:Client:CharacterCreate', {
     firstName: newCharacter.value.firstName,
     lastName: newCharacter.value.lastName
   })
@@ -148,7 +148,7 @@ function createCharacter() {
 
 function playCharacter() {
   if (characterStore.selectedCharacter) {
-    sendNuiMessage('character:play', {
+    sendNuiMessage('NUI:Client:CharacterPlay', {
       id: characterStore.selectedCharacter.id
     })
   }
@@ -156,7 +156,7 @@ function playCharacter() {
 
 function deleteCharacter() {
   if (characterStore.selectedCharacter && confirm('Are you sure you want to delete this character?')) {
-    sendNuiMessage('character:delete', {
+    sendNuiMessage('NUI:Client:CharacterDelete', {
       id: characterStore.selectedCharacter.id
     })
   }

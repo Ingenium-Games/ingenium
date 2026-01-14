@@ -125,7 +125,7 @@ end, false)
 -- Example 7: Character select integration (this would typically be triggered by the server)
 RegisterCommand("test-character-select", function()
     SendNUIMessage({
-        message = "character-select:show",
+        message = "Client:NUI:CharacterSelectShow",
         data = {
             characters = {
                 {
@@ -163,7 +163,7 @@ AddEventHandler("Client:Character:Play", function(id)
     
     -- Hide character select
     SendNUIMessage({
-        message = "character-select:hide",
+        message = "Client:NUI:CharacterSelectHide",
         data = {}
     })
 end)

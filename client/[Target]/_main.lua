@@ -313,7 +313,8 @@ local function getResponse(option, server)
     return response
 end
 
-RegisterNUICallback('select', function(data, cb)
+RegisterNUICallback('NUI:Client:TargetSelect', function(data, cb)
+    -- reuse the existing select handler logic
     cb(1)
     setNuiFocus(false)
 

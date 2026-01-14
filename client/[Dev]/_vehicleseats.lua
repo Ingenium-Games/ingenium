@@ -137,14 +137,14 @@ AddEventHandler('shuff', function()
 	local playerPed = PlayerPedId()
 
     if IsPedInAnyVehicle(playerPed, false) then
-		allowShuffle()
+        allowShuffle()
 
-		Wait(5000)
+        Wait(5000)
 
-		denyShuffle()
-	else
-		CancelEvent()
-	end
+        denyShuffle()
+    else
+        CancelEvent()
+    end
 end)
 
 RegisterCommand(Config.ShuffCommand, function(source, args, raw)

@@ -44,7 +44,7 @@ onMounted(() => {
 })
 
 function submitInput() {
-  sendNuiMessage('input:submit', { value: inputValue.value })
+  sendNuiMessage('NUI:Client:InputSubmit', { value: inputValue.value })
   inputValue.value = ''
   uiStore.showInput = false
 }
@@ -52,7 +52,7 @@ function submitInput() {
 function closeInput() {
   uiStore.showInput = false
   inputValue.value = ''
-  sendNuiMessage('input:close')
+  sendNuiMessage('NUI:Client:InputClose')
 }
 </script>
 

@@ -25,8 +25,14 @@ function ig.vehicle.InitializeClient()
 end
 
 ---Listen for persistence registration confirmation
-RegisterNetEvent('vehicle:persistence:registered')
-AddEventHandler('vehicle:persistence:registered', function(plate)
+RegisterNetEvent('Client:Vehicle:PersistenceRegistered')
+AddEventHandler('Client:Vehicle:PersistenceRegistered', function(plate)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+
     if conf.persistence.logging.logPersistence then
         ig.log.Info("Vehicle registered as persistent: " .. plate)
     end
@@ -38,16 +44,28 @@ AddEventHandler('vehicle:persistence:registered', function(plate)
 end)
 
 ---Listen for vehicle spawn notification
-RegisterNetEvent('vehicle:persistence:spawned')
-AddEventHandler('vehicle:persistence:spawned', function(plate)
+RegisterNetEvent('Client:Vehicle:Spawned')
+AddEventHandler('Client:Vehicle:Spawned', function(plate)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+
     if conf.persistence.logging.logSpawns then
         ig.log.Debug("Vehicle spawned: " .. plate)
     end
 end)
 
 ---Listen for vehicle despawn notification
-RegisterNetEvent('vehicle:persistence:despawned')
-AddEventHandler('vehicle:persistence:despawned', function(plate)
+RegisterNetEvent('Client:Vehicle:Despawned')
+AddEventHandler('Client:Vehicle:Despawned', function(plate)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+
     if conf.persistence.logging.logDespawns then
         ig.log.Debug("Vehicle despawned: " .. plate)
     end

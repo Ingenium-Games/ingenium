@@ -20,6 +20,11 @@ end)
 -- @param externalTitle Title to display for external inventory
 RegisterNetEvent("Client:Inventory:OpenDual")
 AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTitle)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
 
     if inventoryOpen then return end
     
@@ -36,7 +41,7 @@ AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTit
                 
                 -- Send data to Vue NUI
                 SendNUIMessage({
-                    message = "openInventory",
+                    message = "Client:NUI:InventoryOpenDual",
                     data = {
                         playerInventory = playerInventory,
                         externalInventory = externalInventory,
@@ -57,6 +62,12 @@ end)
 -- Open single-panel inventory (player only)
 RegisterNetEvent("Client:Inventory:OpenSingle")
 AddEventHandler("Client:Inventory:OpenSingle", function()
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+
     if inventoryOpen then return end
     
     local playerInventory = ig.inventory.GetInventory()
@@ -66,7 +77,7 @@ AddEventHandler("Client:Inventory:OpenSingle", function()
     
     -- Send data to Vue NUI
     SendNUIMessage({
-        message = "openSingleInventory",
+        message = "Client:NUI:InventoryOpenSingle",
         data = {
             playerInventory = playerInventory,
             playerMaxSlots = 50
@@ -80,10 +91,16 @@ end)
 -- Close inventory from server
 RegisterNetEvent("Client:Inventory:Close")
 AddEventHandler("Client:Inventory:Close", function()
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+
     if not inventoryOpen then return end
     
     SendNUIMessage({
-        message = "closeInventory",
+        message = "Client:NUI:InventoryClose",
         data = {}
     })
     
@@ -96,10 +113,16 @@ end)
 -- Update inventory from server (live updates)
 RegisterNetEvent("Client:Inventory:Update")
 AddEventHandler("Client:Inventory:Update", function(playerInventory, externalInventory)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+
     if not inventoryOpen then return end
     
     SendNUIMessage({
-        message = "updateInventory",
+        message = "Client:NUI:InventoryUpdate",
         data = {
             playerInventory = playerInventory,
             externalInventory = externalInventory
@@ -113,7 +136,7 @@ end)
 
 ---
 -- Handle inventory close from NUI
-RegisterNUICallback("inventory_close", function(data, cb)
+RegisterNUICallback("NUI:Client:InventoryClose", function(data, cb)
     inventoryOpen = false
     SetNuiFocus(false, false)
     
@@ -160,7 +183,7 @@ end)
 
 ---
 -- Handle item actions (Use, Give, Drop)
-RegisterNUICallback("inventory_action", function(data, cb)
+RegisterNUICallback("NUI:Client:InventoryAction", function(data, cb)
     local action = data.action
     local item = data.item
     local position = data.position
@@ -175,6 +198,7 @@ RegisterNUICallback("inventory_action", function(data, cb)
                 if success then
                     -- Item was consumed, update UI
                     TriggerEvent("Client:Inventory:Update", ig.inventory.GetInventory(), nil)
+                    TriggerEvent("Client:NUI:InventoryUpdate", ig.inventory.GetInventory(), nil)
                 end
             end
         })
@@ -182,6 +206,7 @@ RegisterNUICallback("inventory_action", function(data, cb)
         -- Give item to nearby player
         -- This would typically open a player selector
         TriggerEvent("Client:Inventory:GiveItem", item, position)
+        TriggerEvent("Client:NUI:InventoryGiveItem", item, position)
     elseif action == "drop" then
         -- Drop item on ground
         local playerCoords = GetEntityCoords(PlayerPedId())
@@ -192,6 +217,7 @@ RegisterNUICallback("inventory_action", function(data, cb)
                 if success then
                     -- Item was dropped, update UI
                     TriggerEvent("Client:Inventory:Update", ig.inventory.GetInventory(), nil)
+                    TriggerEvent("Client:NUI:InventoryUpdate", ig.inventory.GetInventory(), nil)
                 end
             end
         })
@@ -204,20 +230,30 @@ RegisterNUICallback("inventory_action", function(data, cb)
 end)
 
 -- ====================================================================================--
--- Keybind for Opening Inventory (Example: I key)
+-- Keybind for Opening Inventory - RegisterKeyMapping Implementation
 -- ====================================================================================--
 
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        
-        if IsControlJustReleased(0, 170) then -- I key (170 = INPUT_CELLPHONE_LEFT)
-            if not inventoryOpen and ig.data.IsPlayerLoaded() then
-                TriggerEvent("Client:Inventory:OpenSingle")
-            end
-        end
+--- Open inventory command handler
+RegisterCommand('openInventory', function()
+    if not inventoryOpen and ig.data.IsPlayerLoaded() then
+        TriggerEvent("Client:Inventory:OpenSingle")
     end
-end)
+end, false)
+
+-- Register the key mapping with FiveM
+-- Users can customize this in their FiveM keybinding settings
+if conf.inventory.allowHotkey and conf.inventory.openKey then
+    RegisterKeyMapping(
+        'openInventory',
+        'Open Inventory',
+        'keyboard',
+        conf.inventory.openKey:lower()
+    )
+    
+    ig.log.Info("Inventory", string.format("Inventory hotkey registered: %s", conf.inventory.openKey))
+else
+    ig.log.Warn("Inventory", "Inventory hotkey disabled by configuration")
+end
 
 -- ====================================================================================--
 -- Exports
@@ -227,6 +263,7 @@ end)
 -- Export function to open dual inventory
 exports("OpenDualInventory", function(netId, title)
     TriggerEvent("Client:Inventory:OpenDual", netId, title)
+    TriggerEvent("Client:NUI:InventoryOpenDual", netId, title)
 end)
 
 ---

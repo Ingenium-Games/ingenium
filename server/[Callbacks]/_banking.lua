@@ -4,7 +4,7 @@
 
 --- Open banking menu for a player
 RegisterServerCallback({
-    eventName = "banking:open",
+    eventName = "Server:Bank:Open",
     eventCallback = function(source)
         local xPlayer = ig.data.GetPlayer(source)
         if not xPlayer then
@@ -37,7 +37,7 @@ RegisterServerCallback({
 
 --- Handle money transfer between characters
 RegisterServerCallback({
-    eventName = "banking:transfer",
+    eventName = "Server:Bank:Transfer",
     eventCallback = function(source, data)
         local xPlayer = ig.data.GetPlayer(source)
         if not xPlayer then
@@ -88,7 +88,7 @@ RegisterServerCallback({
             targetPlayer.Notify(string.format("You received $%s from %s", amount, xPlayer.GetFull_Name()), "green", 5000)
             
             -- Send transaction to target NUI
-            TriggerClientEvent("banking:addTransaction", targetPlayer.GetID(), {
+            TriggerClientEvent("Client:Banking:AddTransaction", targetPlayer.GetID(), {
                 type = "Transfer In",
                 description = string.format("From %s: %s", xPlayer.GetFull_Name(), description),
                 amount = amount,
@@ -114,8 +114,8 @@ RegisterServerCallback({
         })
         
         -- Update sender's NUI
-        TriggerClientEvent("banking:updateBalance", source, { balance = xPlayer.GetBank() })
-        TriggerClientEvent("banking:addTransaction", source, {
+        TriggerClientEvent("Client:Banking:UpdateBalance", source, { balance = xPlayer.GetBank() })
+        TriggerClientEvent("Client:Banking:AddTransaction", source, {
             type = "Transfer Out",
             description = string.format("To %s %s: %s", targetCharacter.First_Name, targetCharacter.Last_Name, description),
             amount = -amount,
@@ -136,7 +136,7 @@ RegisterServerCallback({
 
 --- Handle cash withdrawal
 RegisterServerCallback({
-    eventName = "banking:withdraw",
+    eventName = "Server:Bank:Withdraw",
     eventCallback = function(source, data)
         local xPlayer = ig.data.GetPlayer(source)
         if not xPlayer then
@@ -173,9 +173,9 @@ RegisterServerCallback({
         })
         
         -- Update NUI
-        TriggerClientEvent("banking:updateBalance", source, { balance = xPlayer.GetBank() })
-        TriggerClientEvent("banking:updateCash", source, { cash = xPlayer.GetCash() })
-        TriggerClientEvent("banking:addTransaction", source, {
+        TriggerClientEvent("Client:Banking:UpdateBalance", source, { balance = xPlayer.GetBank() })
+        TriggerClientEvent("Client:Banking:UpdateCash", source, { cash = xPlayer.GetCash() })
+        TriggerClientEvent("Client:Banking:AddTransaction", source, {
             type = "Withdrawal",
             description = "ATM Withdrawal",
             amount = -amount,
@@ -196,7 +196,7 @@ RegisterServerCallback({
 
 --- Handle cash deposit
 RegisterServerCallback({
-    eventName = "banking:deposit",
+    eventName = "Server:Bank:Deposit",
     eventCallback = function(source, data)
         local xPlayer = ig.data.GetPlayer(source)
         if not xPlayer then
@@ -233,9 +233,9 @@ RegisterServerCallback({
         })
         
         -- Update NUI
-        TriggerClientEvent("banking:updateBalance", source, { balance = xPlayer.GetBank() })
-        TriggerClientEvent("banking:updateCash", source, { cash = xPlayer.GetCash() })
-        TriggerClientEvent("banking:addTransaction", source, {
+        TriggerClientEvent("Client:Banking:UpdateBalance", source, { balance = xPlayer.GetBank() })
+        TriggerClientEvent("Client:Banking:UpdateCash", source, { cash = xPlayer.GetCash() })
+        TriggerClientEvent("Client:Banking:AddTransaction", source, {
             type = "Deposit",
             description = "ATM Deposit",
             amount = amount,
@@ -256,7 +256,7 @@ RegisterServerCallback({
 
 --- Add a favorite payee
 RegisterServerCallback({
-    eventName = "banking:addFavorite",
+    eventName = "Server:Bank:AddFavorite",
     eventCallback = function(source, data)
         local xPlayer = ig.data.GetPlayer(source)
         if not xPlayer then
@@ -293,7 +293,7 @@ RegisterServerCallback({
 
 --- Remove a favorite payee
 RegisterServerCallback({
-    eventName = "banking:removeFavorite",
+    eventName = "Server:Bank:RemoveFavorite",
     eventCallback = function(source, data)
         local xPlayer = ig.data.GetPlayer(source)
         if not xPlayer then

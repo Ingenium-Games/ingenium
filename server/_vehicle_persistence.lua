@@ -238,7 +238,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
     end)
     
     -- Request client to capture full vehicle condition
-    TriggerClientEvent("vehicle:persistence:captureCondition", playerId, plate, vehicleEntity)
+    TriggerClientEvent("Client:Vehicle:CaptureCondition", playerId, plate, vehicleEntity)
     
     if conf.persistence.logging.enabled then
         ig.log.Info("Vehicle registered as persistent: " .. plate .. " by player " .. playerId)

@@ -5,31 +5,24 @@
 local chatVisible = false
 local chatInputActive = false
 
--- Register NUI callbacks
-RegisterNUICallback('chatSubmit', function(data, cb)
+-- Register NUI callbacks (directional names only)
+RegisterNUICallback('NUI:Client:ChatSubmit', function(data, cb)
     chatVisible = false
     chatInputActive = false
     SetNuiFocus(false, false)
     
     local message = data.message
     if message and #message > 0 then
-        -- Send message to server for logging
         TriggerServerEvent('ig:chat:serverMessage', message)
-        
-        -- Handle chat message or command
         if string.sub(message, 1, 1) == '/' then
-            -- This is a command - execute it locally
             ExecuteCommand(string.sub(message, 2))
-        else
-            -- Regular message is handled by server (it will broadcast)
-            -- No need to do anything else here
         end
     end
     
     cb('ok')
 end)
 
-RegisterNUICallback('chatClose', function(data, cb)
+RegisterNUICallback('NUI:Client:ChatClose', function(data, cb)
     chatVisible = false
     chatInputActive = false
     SetNuiFocus(false, false)
@@ -39,7 +32,7 @@ end)
 -- Function to add a message to chat
 function AddChatMessage(author, message, color)
     SendNUIMessage({
-        message = 'chat:addMessage',
+        message = 'Client:NUI:ChatAddMessage',
         data = {
             author = author,
             text = message,
@@ -54,7 +47,7 @@ function ShowChatInput()
         chatVisible = true
         chatInputActive = true
         SendNUIMessage({
-            message = 'chat:show',
+            message = 'Client:NUI:ChatShow',
             data = {}
         })
         SetNuiFocus(true, true)
@@ -67,7 +60,7 @@ function HideChat()
         chatVisible = false
         chatInputActive = false
         SendNUIMessage({
-            message = 'chat:hide',
+            message = 'Client:NUI:ChatHide',
             data = {}
         })
         SetNuiFocus(false, false)
@@ -77,7 +70,7 @@ end
 -- Function to clear chat messages
 function ClearChat()
     SendNUIMessage({
-        message = 'chat:clear',
+        message = 'Client:NUI:ChatClear',
         data = {}
     })
 end
@@ -85,7 +78,7 @@ end
 -- Function to set chat suggestions (commands)
 function SetChatSuggestions(suggestions)
     SendNUIMessage({
-        message = 'chat:setSuggestions',
+        message = 'Client:NUI:ChatSetSuggestions',
         data = {
             suggestions = suggestions
         }

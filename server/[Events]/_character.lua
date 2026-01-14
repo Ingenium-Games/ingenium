@@ -27,8 +27,12 @@ RegisterServerCallback({
 AddEventHandler("Server:Character:List", function(src, Primary_ID)
     local Slots = ig.sql.user.GetSlots(Primary_ID)
     local Characters = ig.sql.char.GetAllPermited(Primary_ID, Slots)
-    -- Send the data table to the client that requested it...
-    TriggerClientEvent("Client:Nui:Message", src, "connected", {["Characters"] = Characters, ["Slots"] = Slots})
+    -- Send the data table to the client that requested it using the secure callback system
+    TriggerClientCallback({
+        source = src,
+        eventName = "Client:UI:ForceOpen",
+        args = { "connected", { ["Characters"] = Characters, ["Slots"] = Slots } }
+    })
     -- Place the user in their own instance until the user has joined and loaded.
     ig.inst.SetPlayer(src)
 end)

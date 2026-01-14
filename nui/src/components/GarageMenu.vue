@@ -1,6 +1,10 @@
 <template>
   <div v-if="isVisible" class="garage-container">
-    <div class="garage-menu">
+    <div 
+      class="garage-menu"
+      :style="{ left: position.x + 'px', top: position.y + 'px' }"
+      @mousedown="startDrag"
+    >
       <div class="garage-header">
         <h2>Garage and Parked Vehicles</h2>
         <button class="close-btn" @click="closeGarage">✕</button>
@@ -38,18 +42,57 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { sendNuiMessage } from '../utils/nui'
 
 const isVisible = ref(false)
 const vehicles = ref([])
+const position = ref({ x: window.innerWidth / 2 - 300, y: window.innerHeight / 2 - 200 })
+const isDragging = ref(false)
+const dragStart = ref({ x: 0, y: 0 })
+
+onMounted(() => {
+  const savedPosition = localStorage.getItem('garage_position')
+  if (savedPosition) {
+    try {
+      position.value = JSON.parse(savedPosition)
+    } catch (e) {
+      console.error('Failed to parse garage position:', e)
+    }
+  }
+})
+
+function startDrag(event) {
+  if (event.target.closest('.close-btn') || event.target.closest('button')) {
+    return
+  }
+  isDragging.value = true
+  dragStart.value = { x: event.clientX - position.value.x, y: event.clientY - position.value.y }
+  document.addEventListener('mousemove', handleDrag)
+  document.addEventListener('mouseup', stopDrag)
+}
+
+function handleDrag(event) {
+  if (!isDragging.value) return
+  position.value = {
+    x: event.clientX - dragStart.value.x,
+    y: event.clientY - dragStart.value.y
+  }
+}
+
+function stopDrag() {
+  isDragging.value = false
+  document.removeEventListener('mousemove', handleDrag)
+  document.removeEventListener('mouseup', stopDrag)
+  localStorage.setItem('garage_position', JSON.stringify(position.value))
+}
 
 function retrieveVehicle(plate) {
-  sendNuiMessage('GUI:SelectVehicle', { Plate: plate })
+  sendNuiMessage('NUI:Client:GUISelectVehicle', { Plate: plate })
 }
 
 function closeGarage() {
-  sendNuiMessage('GUI:Close')
+  sendNuiMessage('NUI:Client:GUIClose')
   isVisible.value = false
   vehicles.value = []
 }
@@ -91,13 +134,16 @@ if (typeof window !== 'undefined') {
   width: 100vw;
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   background: rgba(0, 0, 0, 0.7);
   z-index: 1000;
 }
 
 .garage-menu {
+  position: fixed;
+  cursor: grab;
+  user-select: none;
   background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);

@@ -30,14 +30,14 @@ const uiStore = useUIStore()
 
 function selectItem(item) {
   if (!item.disabled) {
-    sendNuiMessage('context:select', { action: item.action, data: item.data })
+    sendNuiMessage('NUI:Client:ContextSelect', { action: item.action, data: item.data })
     closeContextMenu()
   }
 }
 
 function closeContextMenu() {
   uiStore.showContextMenu = false
-  sendNuiMessage('context:close')
+  sendNuiMessage('NUI:Client:ContextClose')
 }
 </script>
 

@@ -48,7 +48,7 @@ const hasTarget = computed(() => {
 })
 
 function selectOption(type, id) {
-  sendNuiMessage('select', [type, id])
+  sendNuiMessage('NUI:Client:TargetSelect', [type, id])
 }
 
 // Listen for NUI messages

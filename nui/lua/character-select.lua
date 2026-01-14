@@ -1,6 +1,6 @@
 -- ====================================================================================--
 
-RegisterNUICallback("_character-select__join", function(data, cb)
+RegisterNUICallback("NUI:Client:CharacterPlay", function(data, cb)
     if not data.ID then
         -- Keep Focus, return error.
         cb({
@@ -37,7 +37,7 @@ RegisterNUICallback("_character-select__join", function(data, cb)
     end
 end)
 
-RegisterNUICallback("_character-select__delete", function(data, cb)
+RegisterNUICallback("NUI:Client:CharacterDelete", function(data, cb)
     if not data.ID then
         cb({
             message = "error",
@@ -73,7 +73,7 @@ RegisterNUICallback("_character-select__delete", function(data, cb)
 
 end)
 
-RegisterNUICallback("_character-select__register", function(data, cb)
+RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
     -- Check if player is loaded as a character, otherwise dont disable nui, itll be in the character seleciton screen.
     if not ig.data.IsPlayerLoaded() then
         -- Remove Focus
