@@ -177,7 +177,7 @@ class FunctionScopeVerifier:
             
             # Pattern to find and replace: - [ig.namespace.Function](file.md) [OLD_MARKER]
             # We need to be precise to avoid replacing the wrong occurrence
-            pattern = rf'(\- \[ig\.{re.escape(namespace)}\.{re.escape(func_name)}\]\([^)]+\))\s*{re.escape(old_marker)}'
+            pattern = rf'(\- \[ig\.{re.escape(namespace)}\.{re.escape(func_name)}\]\([^)]+\))\s+{re.escape(old_marker)}'
             replacement = rf'\1 {new_marker}'
             
             new_content = re.sub(pattern, replacement, readme_content)
