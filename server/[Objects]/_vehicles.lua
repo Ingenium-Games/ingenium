@@ -67,7 +67,7 @@ function ig.vehicle.GetVehicle(arg)
     if ig.vdex[tonumber(arg)] ~= false then
         return ig.vdex[tonumber(arg)]
     else
-        ig.func.Debug_1("No Vehicle Found.")
+        ig.log.Debug("VEHICLE", "No Vehicle Found.")
         return false
     end
 end

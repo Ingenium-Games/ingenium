@@ -144,7 +144,7 @@ function ig.class.ExistingObject(net, data)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.log.Debug("Inventory", "Ignoring invalid item within .GetWeight() for " .. self.Net)
             end
         end
         return self.Weight
@@ -167,13 +167,13 @@ function ig.class.ExistingObject(net, data)
             -- If it is a weapon, does it have more than one in a stack? Or Does it not list itself as a weapon
             if self.Inventory[i].Weapon == true then
                 if type(ig.item.IsWeapon(self.Inventory[i].Item)) ~= "string" or self.Inventory[i].Quantity >= 1 then
-                    ig.func.Debug_1("Error in Creating Inventory, Weapon quanity or wepaon flag is broken.")
+                    ig.log.Debug("Inventory", "Error in Creating Inventory, Weapon quantity or weapon flag is broken for " .. self.Net)
                     break
                 end
             end
             -- Validate Quuality and Quantity are numbers.
             if type(self.Inventory[i].Quantity) ~= "number" or type(self.Inventory[i].Quality) ~= "number" then
-                ig.func.Debug_1("Error in Creating Inventory, Quantity or Quality is not a number.")
+                ig.log.Debug("Inventory", "Error in Creating Inventory, Quantity or Quality is not a number for " .. self.Net)
                 break
             end
             -- If the Quality is below 0, then destroy the item.
@@ -209,7 +209,7 @@ function ig.class.ExistingObject(net, data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
+            ig.log.Debug("Inventory", "Ignoring invalid .SteralizeItem() while .AddItem() was called, for Object : " .. self.Net)
             return
         end
         local info = {
@@ -239,7 +239,7 @@ function ig.class.ExistingObject(net, data)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            ig.func.Debug_1("Ignoring invalid .AddItem() for Object : " .. self.Net)
+            ig.log.Debug("Inventory", "Ignoring invalid .AddItem() for Object : " .. self.Net)
         end
         self.State.Inventory = self.Inventory
             self.DirtyFields.Inventory = true

@@ -252,7 +252,6 @@ end)
 - `ig.sql.banking.*` - SQL functions for transaction logging
 - `ig.data.GetJob()` - Retrieves job object
 - `ig.data.GetPlayer()` - Retrieves player object by Character ID
-- `ig.func.Debug_1()` - Debug logging function
 - `ig.cron.RunAt()` - Cron job scheduling
 
 ### Job Account Updates

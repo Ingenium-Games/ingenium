@@ -64,10 +64,10 @@ AddEventHandler("Client:RunChecks:IsDead", function()
     -- Handle death status changes
     -- Example: Show death screen, respawn options, etig.
     if isDead then
-        ig.log.Debug("Status", "Player died")
+        ig.log.Debug("STATUS", "Player died")
         -- Death handling is already in client/_death.lua
     else
-        ig.log.Debug("Status", "Player revived")
+        ig.log.Debug("STATUS", "Player revived")
         -- Revive handling
     end
 end)

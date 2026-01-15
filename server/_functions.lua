@@ -4,72 +4,6 @@
 -- ====================================================================================--
 
 --- func desc
----@param any any
-function ig.func.Func(...)
-    local arg = {...}
-    local status, val = ig.func.Err(unpack(arg))
-    return val
-end
-
---- Safely executes a function with error handling using xpcall
----@param func function "Function to execute"
----@param ... any "Arguments to pass to function"
----@return boolean "Success status"
----@return any "Return value or error"
-function ig.func.Err(func, ...)
-    local arg = {...}
-    return xpcall(function()
-        return ig.func.Func(unpack(arg))
-    end, function(err)
-        return ig.func.Error(err)
-    end)
-end
-
---- Logs an error with stacktrace if error logging is enabled
----@param err string|any "Error message or error object"
-function ig.func.Error(err)
-    if conf.error then
-        if type(err) == "string" then
-            ig.log.Error("FUNCTION", err)
-            print(debug.traceback(_, 2))
-        else
-            ig.log.Error("FUNCTION", "Unable to type(err) == string. [err] = %s", tostring(err))
-            print(debug.traceback(_, 2))
-        end
-    end
-end
-
---- Logs info-level debug message if debug_1 is enabled
----@param str string "Debug message to log"
-function ig.func.Debug_1(str)
-    if conf.debug_1 then
-        ig.log.Info("DEBUG", str)
-    end
-end
-
---- Logs debug-level debug message if debug_2 is enabled
----@param str string "Debug message to log"
-function ig.func.Debug_2(str)
-    if conf.debug_2 then
-        ig.log.Debug("DEBUG", str)
-    end
-end
-
---- Logs trace-level debug message if debug_3 is enabled
----@param str string "Debug message to log"
-function ig.func.Debug_3(str)
-    if conf.debug_3 then
-        ig.log.Trace("DEBUG", str)
-    end
-end
-
---- Logs a warning message
----@param str string "Warning message to log"
-function ig.func.Alert(str)
-    ig.log.Warn("ALERT", str)
-end
-
---- func desc
 function ig.func.Timestamp()
     return os.time(os.date("*t"))
 end
@@ -356,7 +290,7 @@ function ig.func.CreateVehicle(name, x, y, z, h, data, routingBucket)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            ig.log.Debug("Entity", "Timeout reached on creating vehicle")
+            ig.log.Debug("ENTITY", "Timeout reached on creating vehicle")
             return false, false
         end
     end
@@ -396,7 +330,7 @@ function ig.func.CreatePed(name, x, y, z, h, routingBucket)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            ig.log.Debug("Entity", "Timeout reached on creating ped")
+            ig.log.Debug("ENTITY", "Timeout reached on creating ped")
             return false, false
         end
     end
@@ -435,7 +369,7 @@ function ig.func.CreateObject(model, x, y, z, isdoor, data)
     while (not DoesEntityExist(entity)) do
         Citizen.Wait(0)
         if ((timer + 3000) < GetGameTimer()) then
-            ig.log.Debug("Entity", "Timeout reached on creating object")
+            ig.log.Debug("ENTITY", "Timeout reached on creating object")
             return false, false
         end
     end

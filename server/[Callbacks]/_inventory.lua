@@ -240,7 +240,7 @@ local OrganizeInventories = RegisterServerCallback({
                 currentExternal = xTarget.GetInventory()
             else
                 local xNpc = ig.data.GetNpc(net)
-                currentExternal = xNpig.GetInventory()
+                currentExternal = xNpc.GetInventory()
             end
         end
         
@@ -285,7 +285,7 @@ local OrganizeInventories = RegisterServerCallback({
                 -- If difference is small, it's likely concurrent access
                 -- Adjust client inventory to match server state
                 if difference <= 10 then
-                    ig.func.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
+                    ig.log.Debug("Inventory", ("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
                         itemName, submittedQty, currentQty, src
                     ))
                     
@@ -412,7 +412,7 @@ local TransferInventoryItem = RegisterServerCallback({
         -- Validate source player
         local xPlayer = ig.data.GetPlayer(src)
         if not xPlayer then
-            ig.func.Debug_1("Player not found for item transfer")
+            ig.log.Debug("Inventory", "Player not found for item transfer")
             return false
         end
         
@@ -469,20 +469,20 @@ local TransferInventoryItem = RegisterServerCallback({
         end
         
         if not fromInventory or not toInventory then
-            ig.func.Debug_1("Invalid inventory in transfer")
+            ig.log.Debug("Inventory", "Invalid inventory in transfer")
             return false
         end
         
         -- Validate item exists in source inventory
         local sourceItem = fromInventory.GetItemFromPosition(fromSlot)
         if not sourceItem or sourceItem.Item ~= itemData.Item then
-            ig.func.Debug_1("Item mismatch or not found in source inventory")
+            ig.log.Debug("Inventory", "Item mismatch or not found in source inventory")
             return false
         end
         
         -- Validate quantity
         if sourceItem.Quantity < itemData.Quantity then
-            ig.func.Debug_1("Insufficient quantity in source inventory")
+            ig.log.Debug("Inventory", "Insufficient quantity in source inventory")
             return false
         end
         
@@ -518,7 +518,7 @@ local TransferInventoryItem = RegisterServerCallback({
             end
         end
         
-        ig.func.Debug_3("Item transferred: " .. itemData.Item .. " x" .. itemData.Quantity)
+        ig.log.Trace("Inventory", "Item transferred: " .. itemData.Item .. " x" .. itemData.Quantity)
         
         return true
     end

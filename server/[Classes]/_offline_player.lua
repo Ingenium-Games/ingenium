@@ -176,7 +176,7 @@ function ig.class.OfflinePlayer(data)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.log.Debug("OfflinePlayer", "Ignoring invalid item within .GetWeight() for Offline Player License: " .. self.License_ID)
             end
         end
         return self.Weight
@@ -189,7 +189,7 @@ function ig.class.OfflinePlayer(data)
         
         if not valid then
             -- Log error but don't kick since player is offline
-            ig.func.Debug_1("Error unpacking offline player inventory: " .. (error or "unknown"))
+            ig.log.Debug("OfflinePlayer", "Error unpacking offline player inventory: " .. (error or "unknown"))
             self.Inventory = {}
             return
         end
@@ -215,7 +215,7 @@ function ig.class.OfflinePlayer(data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.func.Debug_1(
+            ig.log.Debug("OfflinePlayer",
                 "Ignoring invalid .SteralizeItem() while .AddItem() was called, for Offline Player License: " ..
                     self.License_ID)
             return

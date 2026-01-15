@@ -185,7 +185,7 @@ function ig.validation.ValidateInventoryIntegrity(beforePlayer, beforeExternal, 
     for item, beforeQty in pairs(beforeTotal) do
         local afterQty = afterTotal[item] or 0
         if afterQty < beforeQty then
-            ig.func.Debug_1(("Item quantity decreased: %s from %d to %d"):format(
+            ig.log.Debug(("Item quantity decreased: %s from %d to %d"):format(
                 item, beforeQty, afterQty
             ))
         end

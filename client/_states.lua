@@ -245,5 +245,4 @@ end
 for k, v in pairs(S) do
     ig.state.AddState("Stress", k, v[1] or nil, v[2] or nil, v[3] or nil)
 end
-
--- ig.func.Debug_1(ig.table.Dump(ig.states.Hunger))
+-- ====================================================================================--

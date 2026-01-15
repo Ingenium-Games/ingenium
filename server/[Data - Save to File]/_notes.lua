@@ -34,7 +34,7 @@ function ig.note.Add(data)
     if type(data) == "table" then
         table.insert(ig.notes, data)
     else
-        ig.func.Debug_1("Drop to be added, please check data sent.")
+        ig.log.Debug("NOTE", "Note to be added, please check data sent.")
     end
 end
 
@@ -64,7 +64,7 @@ function ig.note.CleanOld(maxAge)
     end
     
     if removed > 0 then
-        ig.func.Debug_2("Cleaned up " .. removed .. " old notes")
+        ig.log.Debug("NOTE", "Cleaned up " .. removed .. " old notes")
     end
     
     return removed
@@ -105,7 +105,7 @@ function ig.note.Create(coords, note, author, event, data)
     -- Sync to nearby clients
     TriggerClientEvent("Client:Notes:Add", -1, noteData)
     
-    ig.func.Debug_2("Created note " .. id .. " at " .. json.encode(coords))
+    ig.log.Debug("NOTE", "Created note " .. id .. " at " .. json.encode(coords))
     
     return id
 end
@@ -120,7 +120,7 @@ function ig.note.Remove(id)
         -- Sync to clients
         TriggerClientEvent("Client:Notes:Remove", -1, id)
         
-        ig.func.Debug_2("Removed note " .. id)
+        ig.log.Debug("NOTE", "Removed note " .. id)
         return true
     end
     
@@ -215,7 +215,7 @@ function ig.note.MarkRead(id, reader)
         TriggerEvent(note.Event, id, reader, note.Data)
     end
     
-    ig.func.Debug_3("Note " .. id .. " read by " .. (reader or "unknown"))
+    ig.log.Error("NOTE", "Note " .. id .. " read by " .. (reader or "unknown"))
     
     return true
 end
@@ -238,7 +238,7 @@ function ig.note.Update(id, newContent, editor)
     -- Sync to clients
     TriggerClientEvent("Client:Notes:Update", -1, id, note)
     
-    ig.func.Debug_3("Note " .. id .. " updated by " .. (editor or "unknown"))
+    ig.log.Debug("NOTE", "Note " .. id .. " updated by " .. (editor or "unknown"))
     
     return true
 end
@@ -426,7 +426,7 @@ end
 ---Resync all notes to clients
 function ig.note.ResyncAll()
     TriggerClientEvent("Client:Notes:Sync", -1, ig.notes)
-    ig.func.Debug_2("Resynced all notes to clients")
+    ig.log.Debug("NOTE", "Resynced all notes to clients")
 end
 
 -- Register read event

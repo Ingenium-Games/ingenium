@@ -95,7 +95,7 @@ Citizen.CreateThread(function()
             TriggerEvent("Client:EnteredVehicle", vehicle, seat, vehicleName, netId)
             TriggerServerEvent("Server:Vehicle:PlayerEntered", netId, seat, vehicleName)
             
-            ig.log.Debug("Vehicle", "Vehicle entry detected via fallback thread")
+            ig.log.Debug("VEHICLE", "Vehicle entry detected via fallback thread")
         
         -- Player left vehicle but event didn't trigger
         elseif vehicle == 0 and ig.vehicles.currentVehicle ~= 0 then
@@ -114,7 +114,7 @@ Citizen.CreateThread(function()
             ig.vehicles.currentVehicle = 0
             ig.vehicles.currentSeat = -1
             
-            ig.log.Debug("Vehicle", "Vehicle exit detected via fallback thread")
+            ig.log.Debug("VEHICLE", "Vehicle exit detected via fallback thread")
         end
     end
 end)

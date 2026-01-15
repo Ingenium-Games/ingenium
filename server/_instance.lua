@@ -27,7 +27,7 @@ function ig.inst.SetPlayer(source, num)
             SetPlayerRoutingBucket(src, num)
             SetEntityRoutingBucket(GetPlayerPed(src), num)
             xPlayer.SetInstance(num)
-            ig.func.Debug_1(xPlayer.GetName().." added to Instance: "..num)
+            ig.log.Debug("Instance/Bucket", xPlayer.GetName().." added to Instance: "..num)
             if num ~= conf.instancedefault then
                 SetRoutingBucketPopulationEnabled(num, false)
             elseif num == conf.instancedefault then
@@ -64,12 +64,12 @@ end
 ---@param source number
 function ig.inst.SetPlayerDefault(source)
     local src = tonumber(source)
-    local xPlayer = ig.data.GetPlayer(source)
-    SetPlayerRoutingBucket(source, conf.instancedefault)
-    SetEntityRoutingBucket(GetPlayerPed(source), conf.instancedefault)
+    local xPlayer = ig.data.GetPlayer(src)
+    SetPlayerRoutingBucket(src, conf.instancedefault)
+    SetEntityRoutingBucket(GetPlayerPed(src), conf.instancedefault)
     xPlayer.SetInstance(conf.instancedefault)
     SetRoutingBucketPopulationEnabled(conf.instancedefault, true)
-    ig.func.Debug_1(xPlayer.GetName().." added to Global Instance.")
+    ig.log.Debug("Instance/Bucket", xPlayer.GetName().." added to Global Instance.")
 end
 
 --- Sets entity to default/global routing bucket

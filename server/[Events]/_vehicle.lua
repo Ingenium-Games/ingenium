@@ -88,7 +88,7 @@ RegisterNetEvent("Server:VehiclePersistence:RegisterCondition", function(netId, 
     end
     
     if conf.persistence and conf.persistence.logging and conf.persistence.logging.enabled then
-        ig.log.Debug("Vehicle condition registered: " .. plate .. " from player " .. source)
+        ig.log.Debug("VEHICLE", "Vehicle condition registered: " .. plate .. " from player " .. source)
     end
 end)
 
@@ -129,7 +129,7 @@ RegisterNetEvent("Server:VehiclePersistence:UpdateCondition", function(netId, pl
     end
     
     if conf.persistence and conf.persistence.logging and conf.persistence.logging.enabled then
-        ig.log.Debug("Vehicle condition updated on exit: " .. plate .. " from player " .. source)
+        ig.log.Debug("VEHICLE", "Vehicle condition updated on exit: " .. plate .. " from player " .. source)
     end
 end)
 

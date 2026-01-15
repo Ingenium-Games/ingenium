@@ -420,15 +420,11 @@ Network and local events fired by Ingenium framework. Events follow the naming c
 
 ## func
 
-- [ig.func.Alert](ig_func_Alert.md)
 - [ig.func.ClearInterval](ig_func_ClearInterval.md)
 - [ig.func.CompareCoords](ig_func_CompareCoords.md)
 - [ig.func.CreateObject](ig_func_CreateObject.md)
 - [ig.func.CreatePed](ig_func_CreatePed.md)
 - [ig.func.CreateVehicle](ig_func_CreateVehicle.md)
-- [ig.func.Debug.1](ig_func_Debug_1.md)
-- [ig.func.Debug.2](ig_func_Debug_2.md)
-- [ig.func.Debug.3](ig_func_Debug_3.md)
 - [ig.func.DeleteVehicle](ig_func_DeleteVehicle.md)
 - [ig.func.Discord](ig_func_Discord.md)
 - [ig.func.Discorse](ig_func_Discorse.md)

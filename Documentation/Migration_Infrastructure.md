@@ -91,7 +91,6 @@ All config files use the existing pattern:
 
 ### Function Patterns
 Follows existing ingenium conventions:
-- Uses `ig.func.Debug_1/2/3()` for logging
 - Uses `Citizen.CreateThread()` for threads
 - Uses `LocalPlayer.state` for client state
 - Uses `Player(source).state` for server state

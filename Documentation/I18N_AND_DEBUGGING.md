@@ -92,52 +92,6 @@ conf.debug_2 = false  -- Hide DEBUG level messages
 conf.debug_3 = true   -- Show TRACE level messages
 ```
 
-### Using the New Debug System
-
-#### Direct Debug Functions
-```lua
--- Log at different levels
-ig.debug.Error("Critical error occurred")
-ig.debug.Warn("This might be a problem")
-ig.debug.Info("Important information")
-ig.debug.Debug("Debugging details")
-ig.debug.Trace("Detailed trace information")
-```
-
-#### Backward Compatible Functions
-The old debug functions still work and now use the enhanced system:
-```lua
-ig.func.Error("Error message")      -- Uses ig.debug.Error
-ig.func.Alert("Warning message")    -- Uses ig.debug.Warn
-ig.func.Debug_1("Info message")     -- Uses ig.debug.Info
-ig.func.Debug_2("Debug message")    -- Uses ig.debug.Debug
-ig.func.Debug_3("Trace message")    -- Uses ig.debug.Trace
-```
-
-### Debug Output Format
-Debug messages include context information:
-```
-[ERROR] [ingenium] /path/to/file.lua:42 in MyFunction() - Error message here
-```
-
-This shows:
-- **[ERROR]** - The log level
-- **[ingenium]** - The resource name
-- **/path/to/file.lua:42** - File and line number
-- **in MyFunction()** - Function name where the error occurred
-- **Error message here** - The actual message
-
----
-
-## Error Handling
-
-### Automatic Error Tracking
-All errors logged through the system automatically include:
-- Resource name
-- Source file path
-- Line number
-- Function name
-- Full stack trace
 
 ### Function Wrapping
 You can wrap functions to automatically catch and log errors:
@@ -335,23 +289,6 @@ function ComplexOperation(input)
     return result
 end
 ```
-
----
-
-## Migration Guide
-
-### From Old Debug System
-The old system still works, but here's how to migrate:
-
-| Old | New |
-|-----|-----|
-| `ig.func.Error(msg)` | `ig.debug.Error(msg)` |
-| `ig.func.Alert(msg)` | `ig.debug.Warn(msg)` |
-| `ig.func.Debug_1(msg)` | `ig.debug.Info(msg)` |
-| `ig.func.Debug_2(msg)` | `ig.debug.Debug(msg)` |
-| `ig.func.Debug_3(msg)` | `ig.debug.Trace(msg)` |
-
-Both systems work simultaneously, so you can migrate gradually.
 
 ---
 

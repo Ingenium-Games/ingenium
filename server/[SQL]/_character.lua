@@ -111,7 +111,7 @@ end
 
 --- SET - The `Active` = BOOLEAN for the `Character_ID`
 function ig.sql.char.SetActive(character_id, bool, cb)
-    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.char.SetActive, boolean was not passed") return end
+    if type(bool) ~= "boolean" then g.log.Debug("SQL", "ig.sql.char.SetActive, boolean was not passed") return end
     ig.sql.Update("UPDATE `characters` SET `Active` = ? WHERE `Character_ID` = ?;", {bool, character_id}, function(data)
         if cb then cb(data) end
     end)
@@ -119,7 +119,7 @@ end
 
 --- SET - The `Is_Dead` = BOOLEAN for the `Character_ID`
 function ig.sql.char.SetDead(character_id, bool, data, cb)
-    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.char.SetDead, boolean was not passed") return end
+    if type(bool) ~= "boolean" then g.log.Debug("SQL", "ig.sql.char.SetDead, boolean was not passed") return end
     ig.sql.Update("UPDATE `characters` SET `Is_Dead` = ?, `Dead_Time` = ?, `Dead_Data` = ? WHERE `Character_ID` = ?;",
         {bool, ig.func.Timestamp(), json.encode(data), character_id},
         function(affectedRows)
@@ -151,7 +151,7 @@ end
 
 --- Set - The `Wanted` Boolean
 function ig.sql.char.SetWanted(character_id, bool, cb)
-    if type(bool) ~= "boolean" then ig.func.Debug_1("ig.sql.char.SetWanted, boolean was not passed") return end
+    if type(bool) ~= "boolean" then g.log.Debug("SQL", "ig.sql.char.SetWanted, boolean was not passed") return end
     ig.sql.Update("UPDATE `characters` SET `Wanted` = ? WHERE `Character_ID` = ?;", {bool, character_id}, function(data)
         if cb then cb(data) end
     end)

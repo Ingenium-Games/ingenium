@@ -56,7 +56,7 @@ local adminAlerts = {}
 
 local function DebugPrint(msg)
     if QueueConfig.debugMode then
-        ig.func.Debug_1(("[QUEUE]: %s"):format(tostring(msg)))
+        ig.log.Debug(("[QUEUE]: %s"):format(tostring(msg)))
     end
 end
 

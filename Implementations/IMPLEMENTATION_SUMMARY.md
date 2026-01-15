@@ -93,7 +93,6 @@ end)
 ```
 
 #### Uses Existing Patterns
-- `ig.func.Debug_*()` for logging
 - `Citizen.CreateThread()` for threads
 - `LocalPlayer.state` for client state
 - `Player(source).state` for server state

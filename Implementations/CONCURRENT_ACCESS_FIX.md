@@ -299,15 +299,6 @@ Validation:
 └─ BAN PLAYER for duplication attempt
 ```
 
-## Logging and Monitoring
-
-### Concurrent Access Log
-```lua
-ig.func.Debug_1(("Concurrent access detected: %s quantity adjusted from %d to %d for player %d"):format(
-    itemName, submittedQty, currentQty, src
-))
-```
-
 **What to watch for:**
 - Frequent adjustments (> 10/minute) = possible UI lag issues
 - Large adjustments (8-10 items) = high concurrent access

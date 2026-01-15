@@ -26,8 +26,6 @@ ig.log.debug = nil                            -- Debug logging alias
 ig.log.trace = nil                            -- Trace logging alias
 ig.log.log = nil                              -- Generic log alias
 
-ig.func.Alert = nil                           -- Alert function alias
-
 -- ====================================================================================--
 -- Voice Communication
 -- ====================================================================================--

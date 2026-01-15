@@ -133,7 +133,7 @@ function ig.sql.veh.UpdateVehicleState(plate, condition, statebag, cb)
         {json.encode(condition), json.encode(condition), json.encode(statebag), plate},
         function(affectedRows)
             if conf.persistence.logging.enabled then
-                ig.log.Debug("Vehicle state updated: " .. plate)
+                ig.log.Trace("PERSISTANCE", "Vehicle state updated: " .. plate)
             end
             if cb then
                 cb(affectedRows)

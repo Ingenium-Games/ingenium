@@ -16,7 +16,7 @@ function ig.gsr.Add(data)
     if type(data) == "table" then
         table.insert(ig.gsrs, data)
     else
-        ig.func.Debug_1("Drop to be added, please check data sent.")
+        ig.log.Debug("GSR", "GSR to be added, please check data sent.")
     end
 end
 
@@ -75,7 +75,7 @@ function ig.gsr.Create(source, weaponHash, ammoType)
     
     ig.gsrs[id] = gsr
     
-    ig.func.Debug_3("Created GSR record " .. id .. " for player " .. source)
+    ig.log.Debug("GSR", "Created GSR record " .. id .. " for player " .. source)
     
     return id
 end
@@ -215,7 +215,7 @@ end
 function ig.gsr.Remove(id)
     if ig.gsrs[id] then
         ig.gsrs[id] = nil
-        ig.func.Debug_3("Removed GSR record " .. id)
+        ig.log.Error("GSR", "Removed GSR record " .. id)
         return true
     end
     
@@ -238,7 +238,7 @@ function ig.gsr.CleanOld(maxAge)
     end
     
     if removed > 0 then
-        ig.func.Debug_2("Cleaned up " .. removed .. " old GSR records")
+        ig.log.Debug("GSR", "Cleaned up " .. removed .. " old GSR records")
     end
     
     return removed
@@ -319,7 +319,7 @@ function ig.gsr.Clear(characterId)
     end
     
     if cleared > 0 then
-        ig.func.Debug_3("Cleared " .. cleared .. " GSR records for " .. characterId)
+        ig.log.Error("GSR", "Cleared " .. cleared .. " GSR records for " .. characterId)
     end
     
     return cleared

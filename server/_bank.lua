@@ -123,7 +123,7 @@ function ig.bank.CalculatePayments()
                         end
                         xJob.AddBank(totalPayments)
                         
-                        ig.log.Debug("Bank", "Loan payment batch " .. batchNum .. "/" .. totalBatches .. " complete: " .. #transactionLog .. " processed")
+                        ig.log.Debug("BANK", "Loan payment batch " .. batchNum .. "/" .. totalBatches .. " complete: " .. #transactionLog .. " processed")
                     end)
                 end
                 
@@ -152,7 +152,7 @@ AddEventHandler("onServerResourceStart", function()
     if not payments then
         ig.cron.RunAt(conf.banking.loanpaymenttime.h, conf.banking.loanpaymenttime.m, ig.bank.CalculatePayments)
         payments = true
-    end -- ig.log.Debug("Bank", "Added Cron Job: ig.bank.CalculatePayments()")
+    end -- ig.log.Debug("BANK", "Added Cron Job: ig.bank.CalculatePayments()")
 end)
 --
 
@@ -162,7 +162,7 @@ AddEventHandler("onServerResourceStart", function()
     if not interest then
         ig.cron.RunAt(conf.banking.loaninteresttime.h, conf.banking.loaninteresttime.m, ig.bank.CalculateInterest)
         interest = true
-    end -- ig.log.Debug("Bank", "Added Cron Job: ig.bank.CalculateInterest()")
+    end -- ig.log.Debug("BANK", "Added Cron Job: ig.bank.CalculateInterest()")
 end)
 
 ---- Updates the characters loan to add the interest on the outstanding amount each day.
@@ -239,7 +239,7 @@ function ig.bank.CalculateInterest()
                                 totalAccountsProcessed = totalAccountsProcessed + 1
                             end
                             
-                            ig.log.Debug("Bank", "Interest calculation batch " .. batchNum .. "/" .. totalBatches .. " complete: " .. (endIdx - startIdx + 1) .. " accounts processed")
+                            ig.log.Debug("BANK", "Interest calculation batch " .. batchNum .. "/" .. totalBatches .. " complete: " .. (endIdx - startIdx + 1) .. " accounts processed")
                             
                             -- Small break to prevent thread hitching
                             Citizen.Wait(50)
@@ -331,5 +331,5 @@ AddEventHandler("onServerResourceStart", function()
         ig.cron.RunAt(conf.banking.overdrafttime.h, conf.banking.overdrafttime.m, ig.bank.CheckNegativeBalances)
         negative = true
     end
-    -- ig.log.Debug("Bank", "Added Cron Job: ig.bank.CheckNegativeBalances() at " .. conf.banking.overdrafttime.h .. ":" .. string.format("%02d", conf.banking.overdrafttime.m))
+    -- ig.log.Debug("BANK", "Added Cron Job: ig.bank.CheckNegativeBalances() at " .. conf.banking.overdrafttime.h .. ":" .. string.format("%02d", conf.banking.overdrafttime.m))
 end)

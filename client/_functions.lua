@@ -3,69 +3,6 @@
 -- Generic functions (ig.func initialized in client/_var.lua)
 -- ====================================================================================--
 
---- func desc
----@param . any
-function ig.func.Func(...)
-    local arg = {...}
-    local status, val = ig.func.Err(unpack(arg))
-    return val
-end
-
---- func desc
----@param func any
-function ig.func.Err(func, ...)
-    local arg = {...}
-    return xpcall(function()
-        return ig.func.Func(unpack(arg))
-    end, function(err)
-        return ig.func.Error(err)
-    end)
-end
-
---- func desc
----@param err any
-function ig.func.Error(err)
-    if conf.error then
-        if type(err) == "string" then
-            ig.log.Error("CLIENT", "%s", err)
-            print(debug.traceback(_, 2))
-        else
-            ig.log.Error("CLIENT", "Unable to type(err) == string. [err] = %s", tostring(err))
-            print(debug.traceback(_, 2))
-        end
-    end
-end
-
---- func desc
----@param str any
-function ig.func.Debug_1(str)
-    if conf.debug_1 then
-        ig.log.Info("CLIENT", "%s", str)
-    end
-end
-
---- func desc
----@param str any
-function ig.func.Debug_2(str)
-    if conf.debug_2 then
-        ig.log.Debug("CLIENT", "%s", str)
-    end
-end
-
---- func desc
----@param str any
-function ig.func.Debug_3(str)
-    if conf.debug_3 then
-        ig.log.Trace("CLIENT", "%s", str)
-    end
-end
-
---- func desc
----@param str any
-function ig.func.Alert(str)
-    ig.log.Warn("CLIENT", "%s", str)
-end
-
 -- ====================================================================================--
 -- Credits to Linden
 -- 
@@ -554,7 +491,7 @@ function ig.func.CreatePed(name, x, y, z, h)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                ig.log.Debug("Entity", "Timeout reached on creating object")
+                ig.log.Debug("ENTITY", "Timeout reached on creating object")
                 return false, false
             end
         end
@@ -594,7 +531,7 @@ function ig.func.CreateObject(name, x, y, z, isdoor)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                ig.log.Debug("Entity", "Timeout reached on creating object")
+                ig.log.Debug("ENTITY", "Timeout reached on creating object")
                 return false, false
             end
         end
@@ -631,7 +568,7 @@ function ig.func.CreateVehicle(name, x, y, z, h)
         while (not DoesEntityExist(entity)) do
             Citizen.Wait(0)
             if ((timer + 3000) < GetGameTimer()) then
-                ig.log.Debug("Entity", "Timeout reached on creating object")
+                ig.log.Debug("ENTITY", "Timeout reached on creating object")
                 return false, false
             end
         end

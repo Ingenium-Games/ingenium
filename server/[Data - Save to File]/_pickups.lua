@@ -26,7 +26,7 @@ function ig.pick.Create(coords, model, event, data)
     -- Sync to clients
     TriggerClientEvent("Client:Pickups:Add", -1, pickup)
     
-    ig.func.Debug_2("Created pickup " .. uuid .. " at " .. json.encode(coords))
+    ig.log.Debug("PICKUP","Created pickup " .. uuid .. " at " .. json.encode(coords))
     
     return uuid
 end
@@ -41,7 +41,7 @@ function ig.pick.Remove(uuid)
         -- Sync to clients
         TriggerClientEvent("Client:Pickups:Remove", -1, uuid)
         
-        ig.func.Debug_2("Removed pickup " .. uuid)
+        ig.log.Debug("PICKUP", "Removed pickup " .. uuid)
         return true
     end
     
@@ -120,7 +120,7 @@ function ig.pick.Deactivate(uuid, duration)
         end)
     end
     
-    ig.func.Debug_3("Deactivated pickup " .. uuid .. (duration and (" for " .. duration .. "ms") or " permanently"))
+    ig.log.Debug("PICKUP", "Deactivated pickup " .. uuid .. (duration and (" for " .. duration .. "ms") or " permanently"))
     
     return true
 end
@@ -139,7 +139,7 @@ function ig.pick.Activate(uuid)
     -- Sync to clients
     TriggerClientEvent("Client:Pickups:Update", -1, uuid, pickup)
     
-    ig.func.Debug_3("Activated pickup " .. uuid)
+    ig.log.Debug("PICKUP", "Activated pickup " .. uuid)
     
     return true
 end
@@ -184,7 +184,7 @@ function ig.pick.CleanupOld(maxAge)
     end
     
     if removed > 0 then
-        ig.func.Debug_2("Cleaned up " .. removed .. " old pickups")
+        ig.log.Debug("PICKUP", "Cleaned up " .. removed .. " old pickups")
     end
     
     return removed
@@ -276,7 +276,7 @@ function ig.pick.Collect(source, uuid)
         ig.pick.Remove(uuid)
     end
     
-    ig.func.Debug_3("Player " .. source .. " collected pickup " .. uuid)
+    ig.log.Debug("PICKUP", "Player " .. source .. " collected pickup " .. uuid)
     
     return true
 end
@@ -310,7 +310,7 @@ function ig.pick.CreateZone(center, radius, count, models, data)
         table.insert(created, uuid)
     end
     
-    ig.func.Debug_2("Created pickup zone with " .. count .. " pickups")
+    ig.log.Debug("PICKUP", "Created pickup zone with " .. count .. " pickups")
     
     return created
 end
@@ -341,7 +341,7 @@ end
 ---Resync all pickups to clients
 function ig.pick.ResyncAll()
     TriggerClientEvent("Client:Pickups:Sync", -1, ig.picks)
-    ig.func.Debug_2("Resynced all pickups to clients")
+    ig.log.Debug("PICKUP", "Resynced all pickups to clients")
 end
 
 -- Register collection event

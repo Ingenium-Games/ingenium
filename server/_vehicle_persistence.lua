@@ -43,7 +43,7 @@ function ig.vehicle.InitializePersistence()
     ig.vehicle.HookVehicleEvents()
     
     ig.log.Info("Vehicle persistence system initialized")
-    ig.log.Debug("Loaded " .. ig.table.SizeOf(ig.vehicleCache) .. " persistent vehicles from cache")
+    ig.log.Debug("PERSISTENCE", "Loaded " .. ig.table.SizeOf(ig.vehicleCache) .. " persistent vehicles from cache")
 end
 
 ---Load persistent vehicles from JSON file into memory
@@ -53,7 +53,7 @@ function ig.vehicle.LoadPersistentVehicles()
     -- Check if file exists
     local fileHandle = io.open(filePath, "r")
     if not fileHandle then
-        ig.log.Debug("No persistent vehicles file found. Starting fresh.")
+        ig.log.Debug("PERSISTENCE", "No persistent vehicles file found. Starting fresh.")
         ig.vehicleCache = {}
         return
     end
@@ -68,7 +68,7 @@ function ig.vehicle.LoadPersistentVehicles()
     
     local success, data = pcall(json.decode, content)
     if not success or not data or not data.vehicles then
-        ig.log.Warn("Failed to load persistent vehicles: invalid JSON")
+        ig.log.Warn("PERSISTENCE", "Failed to load persistent vehicles: invalid JSON")
         ig.vehicleCache = {}
         return
     end
@@ -81,14 +81,14 @@ end
 ---Unparks them and adds to cache for respawn
 function ig.vehicle.RestoreParkedVehicles()
     if not ig.sql or not ig.sql.Query then
-        ig.log.Warn("SQL system not available for parked vehicle restoration")
+        ig.log.Warn("PERSISTENCE", "SQL system not available for parked vehicle restoration")
         return
     end
     
     local parkedVehicles = ig.sql.Query("SELECT * FROM `vehicles` WHERE `Parked` = TRUE;", {})
     
     if not parkedVehicles or #parkedVehicles == 0 then
-        ig.log.Debug("No parked vehicles to restore from database")
+        ig.log.Debug("PERSISTENCE", "No parked vehicles to restore from database")
         return
     end
     
@@ -122,7 +122,7 @@ function ig.vehicle.RestoreParkedVehicles()
     end
     
     if restoredCount > 0 then
-        ig.log.Info("Restored " .. restoredCount .. " parked vehicles from database")
+        ig.log.Info("PERSISTENCE", "Restored " .. restoredCount .. " parked vehicles from database")
     end
 end
 ---Save persistent vehicles to JSON file
@@ -141,13 +141,13 @@ function ig.vehicle.SavePersistentVehicles()
     
     local fileHandle = io.open(filePath, "w")
     if not fileHandle then
-        ig.log.Error("Failed to open persistent vehicles file for writing: " .. filePath)
+        ig.log.Error("PERSISTENCE", "Failed to open persistent vehicles file for writing: " .. filePath)
         return false
     end
     
     local success, json_str = pcall(json.encode, dataToSave)
     if not success then
-        ig.log.Error("Failed to encode persistent vehicles to JSON")
+        ig.log.Error("PERSISTENCE", "Failed to encode persistent vehicles to JSON")
         fileHandle:close()
         return false
     end
@@ -156,7 +156,7 @@ function ig.vehicle.SavePersistentVehicles()
     fileHandle:close()
     
     if conf.persistence.logging.enabled then
-        ig.log.Debug("Saved " .. ig.table.SizeOf(ig.vehicleCache) .. " persistent vehicles to file")
+        ig.log.Debug("PERSISTENCE", "Saved " .. ig.table.SizeOf(ig.vehicleCache) .. " persistent vehicles to file")
     end
     
     return true
@@ -169,7 +169,7 @@ function ig.vehicle.StartPeriodicSave()
             Wait(300000) -- 5 minutes
             
             if conf.persistence.logging.enabled then
-                ig.log.Debug("Starting periodic persistent vehicle save...")
+                ig.log.Debug("PERSISTENCE", "Starting periodic persistent vehicle save...")
             end
             
             ig.vehicle.SavePersistentVehicles()
@@ -192,7 +192,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
     -- Skip if already registered
     if ig.vehicleCache[plate] then
         if conf.persistence.logging.enabled then
-            ig.log.Debug("Vehicle already registered: " .. plate)
+            ig.log.Debug("PERSISTENCE", "Vehicle already registered: " .. plate)
         end
         
         -- Update interaction count
@@ -232,7 +232,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
     -- Update database with registration (for backup/admin queries)
     ig.sql.veh.RegisterPersistent(plate, vehicleType, npcOwner, function(affectedRows)
         if conf.persistence.logging.enabled then
-            ig.log.Info("Vehicle registered as persistent in DB: " .. plate)
+            ig.log.Info("PERSISTENCE", "Vehicle registered as persistent in DB: " .. plate)
         end
     end)
     
@@ -240,7 +240,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
     TriggerClientEvent("Client:Vehicle:CaptureCondition", playerId, plate, vehicleEntity)
     
     if conf.persistence.logging.enabled then
-        ig.log.Info("Vehicle registered as persistent: " .. plate .. " by player " .. playerId)
+        ig.log.Info("PERSISTENCE", "Vehicle registered as persistent: " .. plate .. " by player " .. playerId)
     end
 end
 
@@ -250,7 +250,7 @@ end
 ---@param modifications table Vehicle modifications from client
 function ig.vehicle.UpdateVehicleState(plate, condition, modifications)
     if not ig.vehicleCache[plate] then
-        ig.log.Warn("Attempting to update state for unregistered vehicle: " .. plate)
+        ig.log.Warn("PERSISTENCE", "Attempting to update state for unregistered vehicle: " .. plate)
         return
     end
     
@@ -316,7 +316,7 @@ function ig.vehicle.RestorePersistentVehicle(vehicleData)
     end
     
     if not HasModelLoaded(modelHash) then
-        ig.log.Error("Failed to load model for vehicle: " .. vehicleData.plate)
+        ig.log.Error("PERSISTENCE", "Failed to load model for vehicle: " .. vehicleData.plate)
         return nil
     end
     
@@ -324,7 +324,7 @@ function ig.vehicle.RestorePersistentVehicle(vehicleData)
     local vehicle = CreateVehicle(modelHash, coords.x, coords.y, coords.z, coords.h or 0.0, true, false)
     
     if not DoesEntityExist(vehicle) then
-        ig.log.Error("Failed to create vehicle entity: " .. vehicleData.plate)
+        ig.log.Error("PERSISTENCE", "Failed to create vehicle entity: " .. vehicleData.plate)
         SetModelAsNoLongerNeeded(modelHash)
         return nil
     end
@@ -351,7 +351,7 @@ function ig.vehicle.RestorePersistentVehicle(vehicleData)
     SetModelAsNoLongerNeeded(modelHash)
     
     if conf.persistence.logging.enabled then
-        ig.log.Info("Restored persistent vehicle: " .. vehicleData.plate)
+        ig.log.Info("PERSISTENCE", "Restored persistent vehicle: " .. vehicleData.plate)
     end
     
     return vehicle
@@ -393,7 +393,7 @@ end
 
 AddEventHandler("onResourceStop", function(resource)
     if resource == GetCurrentResourceName() and ig.vehicle then
-        ig.log.Info("Saving persistent vehicles on shutdown...")
+        ig.log.Info("PERSISTENCE", "Saving persistent vehicles on shutdown...")
         ig.vehicle.SavePersistentVehicles()
     end
 end)

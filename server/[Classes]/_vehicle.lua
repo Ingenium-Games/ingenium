@@ -198,7 +198,7 @@ function ig.class.Vehicle(net)
             self.DirtyFields.Keys = true
             self.EncodedKeys = nil
         else
-            ig.func.Debug_1("User: " .. id .. " Already has key to this vehicle.")
+            ig.log.Debug("Vehicle", "User: " .. id .. " Already has key to this vehicle.")
         end
         self.SetUpdated()
     end
@@ -212,7 +212,7 @@ function ig.class.Vehicle(net)
             self.DirtyFields.Keys = true
             self.EncodedKeys = nil
         else
-            ig.func.Debug_1("User: " .. id .. " Never had a key to this vehicle.")
+            ig.log.Debug("Vehicle", "User: " .. id .. " Never had a key to this vehicle.")
         end        
         self.SetUpdated()
     end
@@ -366,7 +366,7 @@ function ig.class.Vehicle(net)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.log.Debug("VEHICLE", "Ignoring invalid item within .GetWeight() for Vehicle ID: " .. self.Net)
             end
         end
         return self.Weight
@@ -378,7 +378,7 @@ function ig.class.Vehicle(net)
         local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            ig.func.Debug_1("Error unpacking vehicle inventory: " .. (error or "unknown"))
+            ig.log.Debug("VEHICLE", "Error unpacking vehicle inventory: " .. (error or "unknown"))
             self.Inventory = {}
             return
         end
@@ -404,8 +404,7 @@ function ig.class.Vehicle(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.func
-                .Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
+            ig.log.Debug("Vehicle", "Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
             return
         end
         local info = {
@@ -435,7 +434,7 @@ function ig.class.Vehicle(net)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            ig.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
+            ig.log.Debug("Vehicle", "Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
         end
     end
     --

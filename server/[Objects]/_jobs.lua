@@ -380,7 +380,7 @@ function ig.job.ProcessPayroll(jobName, useJobFunds)
                 totalPaid = totalPaid + salary
                 playersPaid = playersPaid + 1
             else
-                ig.func.Debug_1("Job " .. jobName .. " has insufficient funds for payroll")
+                ig.log.Debug("PAYROLL","Job " .. jobName .. " has insufficient funds for payroll")
             end
         else
             -- Spawn money (no job funds check)
@@ -390,7 +390,7 @@ function ig.job.ProcessPayroll(jobName, useJobFunds)
         end
     end
     
-    ig.func.Debug_2("Payroll for " .. jobName .. ": Paid " .. playersPaid .. " players $" .. totalPaid)
+    ig.log.Debug("PAYROLL", "Payroll for " .. jobName .. ": Paid " .. playersPaid .. " players $" .. totalPaid)
     
     return playersPaid, totalPaid
 end

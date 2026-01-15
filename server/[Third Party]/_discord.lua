@@ -230,4 +230,4 @@ Citizen.CreateThread(function()
     end
 end)
 
-ig.func.Debug_1("^2[Discord] Internal Discord module loaded^7")
+ig.log.Debug("DISCORD","^2[Discord] Internal Discord module loaded^7")

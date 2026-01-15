@@ -83,13 +83,6 @@ ig.debug.Debug("Debug details")    -- Level 4
 ig.debug.Trace("Trace flow")       -- Level 5
 ```
 
-#### Backward Compatibility
-All existing functions still work:
-- `ig.func.Error(msg)` → Uses `ig.debug.Error` if available
-- `ig.func.Alert(msg)` → Uses `ig.debug.Warn` if available
-- `ig.func.Debug_1(msg)` → Uses `ig.debug.Info` if available
-- `ig.func.Debug_2(msg)` → Uses `ig.debug.Debug` if available
-- `ig.func.Debug_3(msg)` → Uses `ig.debug.Trace` if available
 
 ### 3. New Files Created
 
@@ -202,15 +195,6 @@ local result = SafeProcess(playerData)
 4. Test with high volume of debug messages
 
 ## Migration Guide
-
-### From Old Debug System
-| Old Code | New Code | Notes |
-|----------|----------|-------|
-| `ig.func.Debug_1(msg)` | `ig.debug.Info(msg)` | Both work, new preferred |
-| `ig.func.Debug_2(msg)` | `ig.debug.Debug(msg)` | Both work, new preferred |
-| `ig.func.Debug_3(msg)` | `ig.debug.Trace(msg)` | Both work, new preferred |
-| `ig.func.Error(msg)` | `ig.debug.Error(msg)` | Both work, new preferred |
-| `ig.func.Alert(msg)` | `ig.debug.Warn(msg)` | Both work, new preferred |
 
 ### Adding New Translations
 1. Add key to `locale/en.lua` first (fallback)

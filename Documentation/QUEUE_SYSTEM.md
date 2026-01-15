@@ -394,8 +394,6 @@ The queue system has been refactored to leverage existing framework functions:
 ### Framework Functions Used
 
 1. **`ig.func.identifiers(source)`** - Retrieves all player identifiers (steam, fivem, license, discord, ip)
-2. **`ig.func.identifier(source)`** - Retrieves primary identifier (license)
-3. **`ig.func.Debug_1(msg)`** - Debug logging with framework's debug system
 4. **`ig.sql.FetchScalar(query, params)`** - Database scalar queries
 
 ### Identifier Handling

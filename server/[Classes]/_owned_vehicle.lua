@@ -193,7 +193,7 @@ function ig.class.OwnedVehicle(net, data)
             self.EncodedKeys = nil
             self.SetUpdated()
         else
-            ig.func.Debug_2("User: " .. id .. " Already has key to this vehicle.")
+            ig.log.Info("OwnedVehicle","User: " .. id .. " Already has key to this vehicle.")
         end
     end
     --- func desc
@@ -207,7 +207,7 @@ function ig.class.OwnedVehicle(net, data)
             self.EncodedKeys = nil
             self.SetUpdated()
         else
-            ig.func.Debug_2("User: " .. id .. " Never had a key to this vehicle.")
+            ig.log.Info("OwnedVehicle","User: " .. id .. " Never had a key to this vehicle.")
         end
     end
     --- func desc
@@ -362,7 +362,7 @@ function ig.class.OwnedVehicle(net, data)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.log.Debug("OwnedVehicle", "Ignoring invalid item within .GetWeight() for Vehicle ID: " .. self.Net)
             end
         end
         return self.Weight
@@ -374,7 +374,7 @@ function ig.class.OwnedVehicle(net, data)
         local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            ig.func.Debug_1("Error unpacking owned vehicle inventory: " .. (error or "unknown"))
+            ig.log.Debug("OwnedVehicle", "Error unpacking owned vehicle inventory: " .. (error or "unknown"))
             self.Inventory = {}
             self.State.Inventory = self.Inventory
             return
@@ -403,8 +403,8 @@ function ig.class.OwnedVehicle(net, data)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.func
-                .Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
+            ig.log.Debug("OwnedVehicle",
+                "Ignoring invalid .SteralizeItem() while .AddItem() was called, for Vehicle ID: " .. self.Net)
             return
         end
         local info = {
@@ -437,7 +437,7 @@ function ig.class.OwnedVehicle(net, data)
             self.EncodedInventory = nil
             self.SetUpdated()
         else
-            ig.func.Debug_1("Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
+            ig.log.Debug("OwnedVehicle", "Ignoring invalid .AddItem() for Vehicle ID: " .. self.Net)
         end
     end
     --

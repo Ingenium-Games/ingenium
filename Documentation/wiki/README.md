@@ -307,15 +307,12 @@ file namespace functions.
 
 func namespace functions.
 
-- [ig.func.Alert](ig_func_Alert.md) [S C]
+
 - [ig.func.ClearInterval](ig_func_ClearInterval.md) [S C]
 - [ig.func.CompareCoords](ig_func_CompareCoords.md) [C]
 - [ig.func.CreateObject](ig_func_CreateObject.md) [S C]
 - [ig.func.CreatePed](ig_func_CreatePed.md) [S C]
 - [ig.func.CreateVehicle](ig_func_CreateVehicle.md) [S C]
-- [ig.func.Debug_1](ig_func_Debug_1.md) [S C]
-- [ig.func.Debug_2](ig_func_Debug_2.md) [S C]
-- [ig.func.Debug_3](ig_func_Debug_3.md) [S C]
 - [ig.func.DeleteVehicle](ig_func_DeleteVehicle.md) [C]
 - [ig.func.Discord](ig_func_Discord.md) [S]
 - [ig.func.Discorse](ig_func_Discorse.md) [S]

@@ -106,7 +106,7 @@ function ig.class.Npc(net)
                 local item = ig.items[v.Item]
                 self.Weight = self.Weight + item.Weight
             else
-                ig.func.Debug_1("Ignoring invalid item within .GetWeight()")
+                ig.log.Debug("NPC", "Ignoring invalid item within .GetWeight() for NPC Net ID: " .. self.Net)
             end
         end
         return self.Weight
@@ -151,7 +151,7 @@ function ig.class.Npc(net)
         local processed, valid, error = ig.validation.ValidateAndUnpack(nil, inv)
         
         if not valid then
-            ig.func.Debug_1("Error unpacking NPC inventory: " .. (error or "unknown"))
+            ig.log.Debug("NPC", "Error unpacking NPC inventory: " .. (error or "unknown"))
             self.Inventory = {}
             self.State.Inventory = self.Inventory
             return
@@ -178,7 +178,7 @@ function ig.class.Npc(net)
     ---@param v table "Must contain a minimum of a name string at point 1 {\"Cash\"}"
     self.SteralizeItem = function(v)
         if type(v) ~= "table" then
-            ig.func.Debug_1("Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC: " .. self.Net)
+            ig.log.Debug("NPC", "Ignoring invalid .SteralizeItem() while .AddItem() was called, for NPC: " .. self.Net)
             return
         end
         local info = {
@@ -208,7 +208,7 @@ function ig.class.Npc(net)
                 self.Inventory[#self.Inventory + 1] = item
             end
         else
-            ig.func.Debug_1("Ignoring invalid .AddItem() for NPC: " .. self.Net)
+            ig.log.Debug("NPC", "Ignoring invalid .AddItem() for NPC: " .. self.Net)
         end
     end
     --

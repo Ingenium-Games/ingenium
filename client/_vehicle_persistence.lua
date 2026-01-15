@@ -53,7 +53,7 @@ AddEventHandler('Client:Vehicle:Spawned', function(plate)
     end
 
     if conf.persistence.logging.logSpawns then
-        ig.log.Debug("Vehicle spawned: " .. plate)
+        ig.log.Debug("VEHICLE", "Vehicle spawned: " .. plate)
     end
 end)
 
@@ -67,7 +67,7 @@ AddEventHandler('Client:Vehicle:Despawned', function(plate)
     end
 
     if conf.persistence.logging.logDespawns then
-        ig.log.Debug("Vehicle despawned: " .. plate)
+        ig.log.Debug("VEHICLE", "Vehicle despawned: " .. plate)
     end
 end)
 
