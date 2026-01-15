@@ -1,4 +1,5 @@
 -- ====================================================================================--
+-- UI system (ig.ui initialized in client/_var.lua)
 -- ig.ui - Global UI helper for Vue NUI
 -- Provides a single internal API for sending NUI messages and handling UI actions
 -- ====================================================================================--

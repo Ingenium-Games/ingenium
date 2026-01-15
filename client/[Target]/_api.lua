@@ -1,8 +1,8 @@
 -- ====================================================================================--
--- Target API - Zone and Entity Targeting System
+-- Target API - Zone and Entity Targeting System (ig.target initialized in client/_var.lua)
 -- ====================================================================================--
 
-ig.target = {}
+
 
 ---@param data table
 ---@return number

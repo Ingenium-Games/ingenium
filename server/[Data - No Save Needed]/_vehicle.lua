@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.vehicle = {} -- function level
-ig.vehicles = {} -- names table to be imported from Vehicles.json
+-- Vehicles (ig.vehicle, ig.vehicles initialized in server/_var.lua)
 
 -- ============================================
 -- VEHICLE HELPERS

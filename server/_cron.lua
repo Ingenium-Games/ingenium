@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.cron = {} -- functions
-ig.crons = {} -- table of jobs to action @ times.
+-- Cron job system (ig.cron, ig.crons initialized in server/_var.lua)
 -- ====================================================================================--
 
 -- https://github.com/esx-framework/esx-legacy/blob/main/%5Besx%5D/cron/server/main.lua

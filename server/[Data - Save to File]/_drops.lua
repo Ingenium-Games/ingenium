@@ -1,9 +1,9 @@
 -- ====================================================================================--
--- Drop System: Physical item drops in the world
+-- Drop System (ig.active_drops initialized in server/_var.lua)
+-- Physical item drops in the world
 -- ====================================================================================--
 ig.drop = ig.drop or {} -- function level
 ig.drops = ig.drops or {} -- dropped items table
-ig.active_drops = {} -- Drops currently being accessed by players
 -- ====================================================================================--
 
 --- Create a drop in the world with items

@@ -166,15 +166,11 @@ end
 -- Sync with default chat resource if it exists
 CreateThread(function()
     Wait(1000) -- Wait for resources to load
-    -- Disable default chat UI but keep functionality
+    -- Default chat resource is disabled in favor of Vue-based chat
     if GetResourceState('chat') == 'started' then
-        exports['chat'].addMessage = function(message)
-            AddChatMessage(
-                message.args and message.args[1] or message.author or 'System',
-                message.args and message.args[2] or message.message or message.text or '',
-                message.color or {255, 255, 255}
-            )
-        end
+        -- Note: Cannot override exports directly in FiveM
+        -- Users calling exports['chat'].addMessage will use default chat
+        -- Internal messages use AddChatMessage() for Vue-based chat
     end
 end)
 

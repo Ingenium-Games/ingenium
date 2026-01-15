@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.modkit = {} -- function level
-ig.modkits = {} -- names table to be imported from Names.json
+-- Modkits (ig.modkit, ig.modkits initialized in server/_var.lua)
 -- ====================================================================================--
 
 ---Get all modkit data

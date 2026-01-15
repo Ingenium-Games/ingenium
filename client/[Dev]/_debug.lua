@@ -114,7 +114,7 @@ end
 
 Citizen.CreateThread(function()
     while true do
-        if Debug.Enable then
+        if type(Debug) == "table" and Debug.Enable then
             Citizen.Wait(0)
             local ped = PlayerPedId()
             local pos = GetEntityCoords(ped)

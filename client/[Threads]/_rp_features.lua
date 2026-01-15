@@ -112,10 +112,13 @@ Citizen.CreateThread(function()
             -- Remove nearby dropped weapons (within 50 units)
             local playerCoords = GetEntityCoords(ped)
             
-            for _, pickupHash in ipairs(weaponPickupHashes) do
-                local pickup = GetClosestPickupOfType(pickupHash, playerCoords.x, playerCoords.y, playerCoords.z, 50.0)
-                if pickup and DoesPickupExist(pickup) then
-                    RemovePickup(pickup)
+            -- GetClosestPickupOfType is available in game natives
+            if GetClosestPickupOfType then
+                for _, pickupHash in ipairs(weaponPickupHashes) do
+                    local pickup = GetClosestPickupOfType(pickupHash, playerCoords.x, playerCoords.y, playerCoords.z, 50.0)
+                    if pickup and DoesPickupExist(pickup) then
+                        RemovePickup(pickup)
+                    end
                 end
             end
             

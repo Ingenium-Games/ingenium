@@ -1,6 +1,5 @@
 -- ====================================================================================--
--- In experimental state.
-ig.affiliation = {}
+-- Affiliation system (ig.affiliation initialized in client/_var.lua) - Experimental
 -- ====================================================================================--
 
 local defaultgroups = {

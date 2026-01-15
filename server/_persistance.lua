@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.persistance = {}
-ig.persistant = {}
+-- Persistence layer (ig.persistance, ig.persistant initialized in server/_var.lua)
 -- ====================================================================================--
 --
 local SPAWN_TIMEOUT = 10000

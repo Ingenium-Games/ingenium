@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.weapon = {} -- function level
-ig.weapons = {} -- dropped items table
+-- Weapons (ig.weapon, ig.weapons initialized in server/_var.lua)
 
 -- ============================================
 -- WEAPON HELPERS

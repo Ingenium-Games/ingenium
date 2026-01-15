@@ -3,9 +3,9 @@ conf.discord = {}
 -- ====================================================================================--
 -- Discord Bot Configuration (for internal Discord API integration)
 -- Guild ID - Your Discord server ID
-conf.discord.guild_id = "1147088071322509352"
+conf.discord.guild_id = "1461189503669502215"
 -- Bot Token - Your Discord bot token (keep this secure!)
-conf.discord.bot_token = "NzcwNzkyNzI4OTc5MDQ2NDMx.GkXggc.6-cASlf92vwq_5oHSRMezn2OZSzgRal0q5MoQs"
+conf.discord.bot_token = "NzcwNzkyNzI4OTc5MDQ2NDMx.G4BnxK.rKOgTe2JMb5P-Ztm-gI0tVUv-Okz4xy_jvkBa8"
 
 -- ====================================================================================--
 -- Member Role Configuration (Whitelist)
@@ -13,18 +13,18 @@ conf.discord.bot_token = "NzcwNzkyNzI4OTc5MDQ2NDMx.GkXggc.6-cASlf92vwq_5oHSRMezn
 -- Enable member role checking for whitelist access
 conf.discord.member_role_enabled = true
 -- Discord role ID that allows access to the server (member/whitelist role)
-conf.discord.member_role = "1147378938805506149"
+conf.discord.member_role = "1461189817004982353"
 
 -- ====================================================================================--
 -- Legacy Configuration (for backwards compatibility with discordroles resource)
 -- ====================================================================================--
 -- This is the gated access to the server via the defferals, needing the specified role.
 conf.discord.permissions = true
-conf.discord.role = "1147378938805506149"
+conf.discord.role = "1461189817004982353"
 
 -- ====================================================================================--
 -- Priority Queue Configuration
--- ====================================================================================--
+-- ====================================================================================
 -- Enable priority queue based on Discord roles
 conf.discord.priority_enabled = true
 -- Priority roles - array of role IDs with their priority power
@@ -40,4 +40,4 @@ conf.discord.priority_roles = {
 -- Rich Presence Configuration
 -- ====================================================================================--
 -- Rich Pressence ID
-conf.discord.id = "1147088071322509352"
+conf.discord.id = "1461189503669502215"

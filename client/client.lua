@@ -30,8 +30,12 @@ Citizen.CreateThread(function()
                 
                 -- Load Objects
                 if initData and initData.objects then
-                    ig.objects.SetObjects(initData.objects)
-                    ig.objects.AddToEnviroment(initData.objects)
+                    ig.objects = initData.objects
+                end
+                
+                -- Load Tattoos
+                if initData and initData.tattoos then
+                    ig.tattoos = initData.tattoos
                 end
                 
                 -- Load Weapons and initialize weapon data (categories and components) for forced animations

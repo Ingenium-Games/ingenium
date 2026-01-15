@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.pick = {} -- function level
-ig.picks = {} -- dropped items table
+-- Pickups (ig.pick, ig.picks initialized in server/_var.lua)
 -- ====================================================================================--
 
 ---Create a new pickup at coordinates

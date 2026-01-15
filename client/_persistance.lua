@@ -1,6 +1,5 @@
 --[[
-	
-ig.persistance = {}
+	Persistence (ig.persistance initialized in client/_var.lua)
 
 AddStateBagChangeHandler("Condition", nil, function(bagName, key, value, _unused, replicated)
 	if (bagName:find("entity") == nil) then

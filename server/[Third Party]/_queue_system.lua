@@ -594,8 +594,7 @@ end
 -- Main Queue Handler
 --------------------------------------------------------------------------------
 
-function ig.queue.HandleConnection(name, setKickReason, deferrals)
-    local src = source
+function ig.queue.HandleConnection(src, name, setKickReason, deferrals)
     local identifiers = GetPlayerIdentifiers(src)
     local connectTime = os.time()
     

@@ -1,11 +1,10 @@
 --
-ig.vehicle = {} -- function level
-ig.vehicles = {} -- loaded past / present players
+ig.vehicle = ig.vehicle or {}
+-- Vehicles management (ig.vehicles, ig.vdex initialized in server/_var.lua)
 
 -- ====================================================================================--
 -- Vehicles - ig.vdex = Object Table with xVehicle as referance obj, ig.vehicle = function table
 
-ig.vdex = {} -- the index/store for currently generated vehicles
 
 ---@param net integer "Network ID 16 bit integer"
 function ig.vehicle.FindVehicle(net)

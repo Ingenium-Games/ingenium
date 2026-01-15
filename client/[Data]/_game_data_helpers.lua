@@ -17,12 +17,15 @@ local modkitCache = nil
 ---Get all tattoo data (cached from server)
 ---@param callback function Callback function(tattoos)
 function ig.tattoo.GetAll(callback)
+    if not ig.tattoo then
+        ig.tattoo = {}
+    end
     if tattooCache then
-        callback(tattooCache)
+        if callback then callback(tattooCache) end
     else
         ig.callback.Async('ig:GameData:GetTattoos', function(data)
             tattooCache = data
-            callback(data)
+            if callback then callback(data) end
         end)
     end
 end

@@ -47,7 +47,9 @@ local REJECTED = 4
 local function ensure(obj, typeof, opt_typeof, errMessage)
 	local objtype = type(obj)
 	local di = debug_getinfo(2)
-	local errMessage = errMessage or (opt_typeof == nil and (di.name .. " expected %s, but got %s") or (di.name .. " expected %s or %s, but got %s"))
+	-- Guard against nil callback name
+	local callbackName = (di and di.name) or "unknown"
+	local errMessage = errMessage or (opt_typeof == nil and (callbackName .. " expected %s, but got %s") or (callbackName .. " expected %s or %s, but got %s"))
 	if typeof ~= "function" then
 		if objtype ~= typeof and objtype ~= opt_typeof then
 			error((errMessage):format(typeof, (opt_typeof == nil and objtype or opt_typeof), objtype))

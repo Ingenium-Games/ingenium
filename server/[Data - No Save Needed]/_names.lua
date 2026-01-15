@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.name = {} -- function level
-ig.names = {} -- names table to be imported from Names.json
+-- Names (ig.name, ig.names initialized in server/_var.lua)
 -- ====================================================================================--
 
 local gender = {["m"] = {},["f"] = {},["u"] = {}}

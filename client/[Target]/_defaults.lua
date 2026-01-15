@@ -13,6 +13,12 @@ local function toggleDoor(vehicle, door)
     end
 end
 
+-- Wait for target system to be available
+local function InitializeVehicleTargets()
+    while not ig.target or not ig.target.addGlobalVehicle do
+        Wait(100)
+    end
+
 ig.target.addGlobalVehicle({
     {
         name = 'ig.target:driverF',
@@ -111,3 +117,8 @@ ig.target.addGlobalVehicle({
         end
     }
 })
+
+end
+
+-- Initialize when ready
+CreateThread(InitializeVehicleTargets)

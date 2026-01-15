@@ -1,16 +1,6 @@
 -- ====================================================================================--
+-- Weapon system (ig.weapon, ig._weapon*, ig._weaponCategories, ig._weaponComponents initialized in client/_var.lua)
 -- Setters for this need something almost global as functions didnt work dynamically within the callbacks?
-ig.weapon = {}
--- _weapons.lua
-ig._weapon = nil
-ig._weaponname = nil
-
--- Weapon categories lookup table (populated during initialization)
-ig._weaponCategories = {}
-
--- Weapon components lookup table (populated during initialization)
--- Structure: {weaponHash} = {component1, component2, ...}
-ig._weaponComponents = {}
 -- ====================================================================================--
 
 function ig.weapon.Get()

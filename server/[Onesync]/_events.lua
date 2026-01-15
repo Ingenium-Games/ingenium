@@ -40,7 +40,7 @@ AddEventHandler("entityCreated", function(ent)
         -- Object
         if type == 3 then
             if not conf.disable.objects[model] then
-                ig.data.AddObject(net, ig.class.BlankObject, net)                      
+                ig.object.AddObject(net, ig.class.BlankObject, net)                      
             else
                 DeleteEntity(ent)
                 ig.func.Debug_1("Object has been Deleted.")
@@ -49,7 +49,7 @@ AddEventHandler("entityCreated", function(ent)
         -- Vehicle
         elseif type == 2 then
             if not conf.disable.vehicles[model] then                        
-                ig.data.AddVehicle(net, ig.class.Vehicle, net, false)
+                ig.vehicle.AddVehicle(net, ig.class.Vehicle, net, false)
             else
                 DeleteEntity(ent)
                 ig.func.Debug_1("Vehicle has been Deleted.")
@@ -60,7 +60,7 @@ AddEventHandler("entityCreated", function(ent)
             if not conf.disable.peds[model] then                        
                 -- not a human player
                 if not IsPedAPlayer(ent) then
-                    ig.data.AddNpc(net, ig.class.Npc, net)
+                    ig.npc.AddNpc(net, ig.class.Npc, net)
                 else
                 -- is a player
 
@@ -115,15 +115,15 @@ AddEventHandler("entityRemoved", function(ent)
     
     -- Object
     if type == 3 then
-        ig.data.RemoveObject(net)
+        ig.object.RemoveObject(net)
     -- Vehicle
     elseif type == 2 then            
-        ig.data.RemoveVehicle(net)
+        ig.vehicle.RemoveVehicle(net)
    -- Ped
     elseif type == 1 then
         -- not a human player
         if not IsPedAPlayer(ent) then
-            ig.data.RemoveNpc(net)
+            ig.npc.RemoveNpc(net)
         else
         -- is a player
             

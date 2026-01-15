@@ -17,7 +17,11 @@ local callback = function(req, res)
     return res -- the result data should always be returned
 end
 
-restfx.route(path, callback, 'GET') --> void
+if type(restfx) == "table" and type(restfx.route) == "function" then
+    restfx.route(path, callback, 'GET') --> void
+else
+    ig.log.Warn("restfx not available - skipping API route: " .. tostring(path))
+end
 
 local path2 = '/jobs'
 local callback2 = function(req, res)
@@ -38,4 +42,8 @@ local callback2 = function(req, res)
     return res -- the result data should always be returned
 end
 
-restfx.route(path2, callback2, 'GET') --> void
+if type(restfx) == "table" and type(restfx.route) == "function" then
+    restfx.route(path2, callback2, 'GET') --> void
+else
+    ig.log.Warn("restfx not available - skipping API route: " .. tostring(path2))
+end

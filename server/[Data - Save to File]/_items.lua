@@ -1,8 +1,7 @@
 --  To create json creator on web tool to enable users to create items.
 
 -- ====================================================================================--
-ig.item = {} -- function level
-ig.items = {}
+-- Item management (ig.item, ig.items initialized in server/_var.lua)
 -- ====================================================================================--
 
 --- Returns the table of all loaded items

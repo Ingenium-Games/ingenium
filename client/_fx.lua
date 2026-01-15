@@ -1,4 +1,4 @@
-ig.fx = {}
+-- Effects/graphics functions (ig.fx initialized in client/_var.lua)
 
 function ig.fx.StartDeath()
     AnimpostfxPlay("MP_job_load", 0, true)

@@ -1,8 +1,9 @@
 -- ====================================================================================--
--- Screenshot System - Client Side
+-- Screenshot System (ig.screenshot initialized in client/_var.lua)
+-- Client Side
 -- ====================================================================================--
 
-ig.screenshot = ig.screenshot or {}
+
 
 local screenshotInProgress = false
 

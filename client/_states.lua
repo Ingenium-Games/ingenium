@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.state = {} -- functions
-ig.states = {} -- table of potential states to become etig.
+-- States (ig.state, ig.states initialized in client/_var.lua)
 -- ====================================================================================--
 
 ---- Add States to the Table prior to being locked on server boot.

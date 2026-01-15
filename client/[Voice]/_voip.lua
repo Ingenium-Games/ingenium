@@ -37,17 +37,27 @@ local VOICE_CHANNEL = {
 
 --- Initialize Mumble voice system
 function ig.voip.client.InitializeMumble()
+    -- Guard against missing Mumble natives
+    if not MumbleSetActive then
+        ig.log.Warn("Voice", "Mumble natives not available")
+        return
+    end
+    
     -- Enable Mumble voice
     MumbleSetActive(true)
     
     -- Set voice volume
-    MumbleSetVoiceVolume(1.0)
+    if MumbleSetVoiceVolume then
+        MumbleSetVoiceVolume(1.0)
+    end
     
     -- Clear all voice targets initially
-    MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.PROXIMITY)
-    MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.RADIO)
-    MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.CALL)
-    MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.CONNECTION)
+    if MumbleClearVoiceTargetPlayers then
+        MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.PROXIMITY)
+        MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.RADIO)
+        MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.CALL)
+        MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.CONNECTION)
+    end
     MumbleClearVoiceTargetPlayers(VOICE_CHANNEL.ADMIN)
     
     -- Set default channel to proximity

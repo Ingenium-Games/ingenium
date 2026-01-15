@@ -1,7 +1,6 @@
 -- ====================================================================================--
-ig.modifier = {} -- function level
+-- Modifiers (ig.modifier, ig.oldmodifiers initialized in client/_var.lua)
 ig.modifiers = conf.default.modifiers
-ig.oldmodifiers = {}
 -- ====================================================================================--
 local _min = 1
 local _max = 10

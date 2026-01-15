@@ -1,8 +1,7 @@
 -- ====================================================================================--
--- Transaction Logging and Rate Limiting System
+-- Transaction Logging and Rate Limiting System (ig.security initialized in server/_var.lua)
 -- Provides audit trail and anti-spam protection for financial transactions
 -- ====================================================================================--
-ig.security = {}
 
 -- Transaction log storage (in production, this should write to database)
 local transactionLog = {}

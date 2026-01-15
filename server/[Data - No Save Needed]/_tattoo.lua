@@ -1,10 +1,8 @@
 --[[
-    Game Data Helper Functions (Server-side)
+    Game Data Helper Functions (Server-side)  (ig.tattoo, ig.tattoos initialized in server/_var.lua)
     Provides query and validation functions for tattoos, weapons, vehicles, and modkits
     Server is the authority - clients request data via callbacks
---]]
-ig.tattoo = {}
-ig.tattoos = {}
+]]--
 -- ============================================
 -- TATTOO HELPERS
 -- ============================================

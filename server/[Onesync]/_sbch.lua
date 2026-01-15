@@ -1,6 +1,6 @@
 -- ====================================================================================--
+-- Statebag handlers (ig.sbch initialized in server/_var.lua)
 -- player is the state used for _user.lua and _character.lua as they are merged into one.
-ig.sbch = {}
 -- ====================================================================================--
 ig.sbch.player = {}
 --

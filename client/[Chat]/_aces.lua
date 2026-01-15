@@ -1,8 +1,8 @@
 -- ====================================================================================--
+-- Chat ACE Suggestions (ig.ace, ig.aces initialized in client/_var.lua)
 -- Chat Suggestions get added based on user ACE permissions / grade.
-ig.ace = {}
-ig.aces = {}
 -- ====================================================================================--
+
 
 ig.ace.public = function()
     -- public

@@ -76,7 +76,7 @@ local function output(levelName, tag, fmt, ...)
     if not ((console_enabled() and should_console_log(levelName)) or should_file_log(levelName)) then
         return
     end
-    local ts = os.date("%Y-%m-%d %H:%M:%S")
+    local ts = (os and os.date("%Y-%m-%d %H:%M:%S")) or "[TIME_ERROR]"
     local message = fmt_message(fmt, ...)
     local out = string.format("[%s] [%s] [%s] %s", ts, levelName:upper(), tag or "INGENIUM", message)
     -- Console output (respect console enable + per-level toggles)

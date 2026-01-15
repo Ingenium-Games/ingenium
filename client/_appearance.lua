@@ -1,9 +1,7 @@
 -- ====================================================================================--
--- Client-Side Appearance Module
+-- Client-Side Appearance Module (ig.appearance initialized in client/_var.lua)
 -- Handles all character appearance customization
 -- ====================================================================================--
-
-ig.appearance = {}
 
 -- Local cache for appearance data
 local currentAppearance = nil

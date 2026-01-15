@@ -1,8 +1,6 @@
 --
-ig.player = {} -- function level
-ig.players = {} -- loaded past / present players
+-- Player management (ig.player, ig.players, ig.pdex initialized in server/_var.lua)
 --
-ig.pdex = {} -- player index = pdex (source numbers assigned by the server upon connection order)
 
 --- Adds player to the player index.
 ---@wiki:ignore

@@ -5,7 +5,7 @@
     Creates GPS blips for 1 minute then removes them
     Works with both database vehicles and persistent vehicles
 ]]
-
+ig.vehicle = ig.vehicle or {}
 -- ====================================================================================--
 -- Server-Side Locate Vehicles
 -- ====================================================================================--

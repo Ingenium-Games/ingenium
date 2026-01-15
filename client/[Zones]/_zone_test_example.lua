@@ -3,15 +3,18 @@
 -- This file demonstrates and tests the ig.zone and ig.ipls functionality
 -- 
 -- TO USE THIS TEST:
--- 1. Ensure this file is loaded (it's included by client/**/*.lua in fxmanifest)
+-- 1. Rename file from _zone_test_example.lua to zone_test_example.lua (remove leading underscore)
 -- 2. Start the server and join the game
 -- 3. Check console for test results
 -- 4. Use /zonetest command to see current zone info
 -- 5. Visit test locations to trigger callbacks
 -- 
 -- TO DISABLE THIS TEST:
--- Rename this file with .disabled extension or move it out of client/[Zones]/
+-- Keep the leading underscore in the filename (_zone_test_example.lua) - it won't load
 -- ====================================================================================--
+
+-- DISABLED BY DEFAULT - Rename this file by removing the leading underscore to enable
+--[=[
 
 -- Wait for game to be loaded
 CreateThread(function()
@@ -284,3 +287,4 @@ CreateThread(function()
     end)
     ]]
 end)
+--]=]

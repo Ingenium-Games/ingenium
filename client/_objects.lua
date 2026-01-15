@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.object = {} -- functions
-ig.objects = {} -- from server
+-- Object management (ig.object, ig.objects initialized in client/_var.lua)
 -- ====================================================================================--
 
 --[[

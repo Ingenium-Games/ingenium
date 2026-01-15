@@ -1,6 +1,4 @@
-ig.object = {}
-ig.objects = {}
-ig.odex = {} -- the odex/store for currently generated objects
+-- Object management (ig.object, ig.objects, ig.odex initialized in server/_var.lua)
 
 
 ---@param net integer "Network ID 16 bit integer"

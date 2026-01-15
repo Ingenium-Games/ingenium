@@ -16,8 +16,7 @@
     - NPC/World vehicles tracked in JSON + cache
 ]]
 
-if not ig.vehicle then ig.vehicle = {} end
-ig.vehicleCache = {} -- In-memory cache: plate -> vehicle data
+-- (ig.vehicleCache initialized in server/_var.lua)
 ig.persistentVehiclesFile = "data/persistent_vehicles.json"
 
 -- ====================================================================================--
@@ -392,7 +391,7 @@ function ig.vehicle.HookVehicleEvents()
     end)
 end
 
-AddEventHanlder("onResourceStop", function(resource)
+AddEventHandler("onResourceStop", function(resource)
     if resource == GetCurrentResourceName() and ig.vehicle then
         ig.log.Info("Saving persistent vehicles on shutdown...")
         ig.vehicle.SavePersistentVehicles()

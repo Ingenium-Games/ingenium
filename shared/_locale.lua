@@ -33,4 +33,9 @@ function _L(key, ...) -- Translate string first char uppercase
     return tostring(_(key, ...):gsub("^%l", string.upper))
 end
 
+-- Make `_` available globally for server scripts that call it directly
+_G._ = _
+
+-- Export helpers for other resources
 exports("_L", _L)
+exports("_", _)

@@ -1,10 +1,9 @@
 -- ====================================================================================--
--- Vehicle Event Tracking System (Optimized)
+-- Vehicle Event Tracking System (ig.vehicles initialized in client/_var.lua)
 -- Event-driven approach with lightweight fallback thread
 -- Replaces polling-based vehicle tracking from ig.base
 -- ====================================================================================--
 
-ig.vehicles = {}
 ig.vehicles.currentVehicle = 0
 ig.vehicles.currentSeat = -1
 

@@ -1,9 +1,6 @@
 -- ====================================================================================--
--- Shared Utility Functions
+-- Shared Utility Functions (ig.util initialized in shared/_ig.lua)
 -- Common helper functions to reduce code duplication
--- ====================================================================================--
-if not ig then ig = {} end
-ig.util = {}
 -- ====================================================================================--
 
 --- Ensures a value is a table (converts single values to array)

@@ -1,9 +1,7 @@
 -- ====================================================================================--
--- Client-Side Callback Wrapper
+-- Client-Side Callback Wrapper (ig.callback initialized in client/_var.lua)
 -- Provides convenient wrapper methods for the global callback system
 -- ====================================================================================--
-
-ig.callback = {}
 
 ---Await a server callback response synchronously
 ---This is a convenience wrapper around TriggerServerCallback

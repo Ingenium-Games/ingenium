@@ -1,7 +1,6 @@
 -- ====================================================================================--
--- Helper Functions
+-- Helper Functions (ig.game initialized in shared/_ig.lua)
 -- ====================================================================================--
-ig.game = {}
 
 --- Get current game mode
 ---@return string gamemode

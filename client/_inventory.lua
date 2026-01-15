@@ -1,8 +1,7 @@
 -- ====================================================================================--
+-- Inventory (ig.inventory, ig._inventory initialized in client/_var.lua)
 -- gets triggered via ig.nui to set the pulled current contents, then this can be used to confirm if items exist prior to menu activations.
 --
-ig.inventory = {} -- functions
-ig._inventory = {} -- from server
 -- ====================================================================================--
 AddEventHandler("Client:Character:SetInventory", function(inv)
     ig._inventory = inv

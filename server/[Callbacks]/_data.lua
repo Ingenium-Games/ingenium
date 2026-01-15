@@ -39,8 +39,9 @@ local GetInitializationData = RegisterServerCallback({
         return {
             items = ig.item.GetItems(),
             doors = ig.door.GetDoors(),
-            objects = ig.door.GetObjects(),
-            weapons = ig.weapons
+            objects = ig.object.GetObjects(),
+            tattoos = ig.tattoo.GetAll(),
+            weapons = ig.weapon.GetAll()
         }
     end
 })

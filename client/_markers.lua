@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.marker = {}
-ig.markers = {}
+-- Marker management (ig.marker, ig.markers initialized in client/_var.lua)
 -- ====================================================================================--
 -- https://docs.fivem.net/docs/game-references/markers/
 

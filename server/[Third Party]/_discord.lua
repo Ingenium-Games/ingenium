@@ -1,9 +1,7 @@
 --[[
-Internal Discord Integration Module
+Internal Discord Integration Module (ig.discord initialized in server/_var.lua)
 Provides Discord role checking for whitelist and queue priority
 ]]--
-
-ig.discord = {}
 
 -- Cache for Discord role data to reduce API calls
 local roleCache = {}

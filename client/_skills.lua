@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.skill = {} -- functions
-ig._skills = {} -- Server sent to client
+-- Skills (ig.skill, ig._skills initialized in client/_var.lua)
 -- ====================================================================================--
 
 --- Sets the table of active modifiers.

@@ -1,13 +1,10 @@
 -- ====================================================================================--
--- ig.zone - Ingenium Zone Management Wrapper
+-- ig.zone - Ingenium Zone Management Wrapper (ig.zone initialized in client/_var.lua)
 -- Wraps PolyZone functionality for internal Ingenium use
 -- 
 -- This provides a unified interface for all zone operations within Ingenium
 -- and enables future export for PolyZone compatibility with external resources
 -- ====================================================================================--
-
--- Initialize the ig.zone namespace
-ig.zone = {}
 
 -- Map zone types to their respective classes
 -- These reference the PolyZone classes loaded from client/[Zones]/ files

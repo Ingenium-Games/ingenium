@@ -1,7 +1,6 @@
 -- ====================================================================================--
--- Helper Functions
+-- Vehicle client helper functions (ig.vehicle initialized in client/_var.lua)
 -- ====================================================================================--
-ig.vehicle = {}
 
 --- Get current vehicle player is in
 ---@return number vehicle entity

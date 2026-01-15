@@ -1,5 +1,5 @@
 -- ====================================================================================--
-ig.table = {}
+-- Table utilities (ig.table initialized in shared/_ig.lua)
 -- ====================================================================================--
 
 --- Check if a value exists in a sequential array table

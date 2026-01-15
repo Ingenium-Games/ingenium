@@ -1,5 +1,5 @@
 -- ====================================================================================--
--- Enhanced Inventory Validation System
+-- Enhanced Inventory Validation System (ig.validation initialized in server/_var.lua)
 -- Server-Side Security Module
 -- 
 -- @module ig.validation
@@ -8,8 +8,6 @@
 -- @description Provides comprehensive validation to prevent inventory exploits
 --              including item duplication, quantity manipulation, and item injection
 -- ====================================================================================--
-
-ig.validation = {}
 
 -- ====================================================================================--
 -- Core Validation Functions

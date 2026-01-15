@@ -1,12 +1,9 @@
 -- ====================================================================================--
--- ig.ipl - Ingenium IPL (Interior Prop List) Management
+-- ig.ipl - Ingenium IPL (Interior Prop List) Management (ig.ipl, ig.ipls initialized in client/_var.lua)
 -- Handles loading and unloading of game interiors with zone-based triggers
 -- ====================================================================================--
 
--- Initialize the ig.ipl namespace
-
-ig.ipl = {} -- Function level
-ig.ipls = {} -- Data tables of loaded vs unloaded (Active vs inactive)
+-- IPL data structure initializations
 ig.ipls.active = {}
 ig.ipls.inactive = {}
 

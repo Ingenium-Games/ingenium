@@ -1,5 +1,5 @@
 -- ====================================================================================--
-ig.data = {}
+-- Client data management (ig.data initialized in client/_var.lua)
 -- ====================================================================================--
 
 --- Upon joining, these are core functions to run internally prior to sending the join request to the server

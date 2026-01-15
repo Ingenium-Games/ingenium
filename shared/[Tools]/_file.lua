@@ -1,5 +1,5 @@
 -- ====================================================================================--
-ig.file = {}
+-- File operations (ig.file initialized in shared/_ig.lua)
 -- ====================================================================================--
 --- Checks if a file exists in the data directory
 ---@param file string "File name (without data/ prefix)"

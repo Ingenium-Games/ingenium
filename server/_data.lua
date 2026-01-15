@@ -1,5 +1,5 @@
 -- ====================================================================================--
-ig.data = {} -- data table for functions.
+-- Server data management (ig.data initialized in server/_var.lua)
 -- ====================================================================================--
 
 -- Flags to prevent duplicate sync registrations

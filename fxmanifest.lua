@@ -9,113 +9,204 @@ version "1.0.0"
 provide "polyzone"
 provide "pma-voice"
 provide "ig.target"
---
+
 ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
+-- SHARED SCRIPTS (Available to both client and server)
+-- Load order is critical: namespaces first, then utilities, then feature modules
 shared_scripts {
+    -- Core namespace and configuration (MUST be first)
     "_config/config.lua",
-    "_config/**/*.lua",
+    "_config/defaults.lua",
+    "_config/banking.lua",
+    "_config/chat.lua",
+    "_config/dev.lua",
+    "_config/disable.lua",
+    "_config/discord.lua",
+    "_config/files.lua",
+    "_config/forced_animations.lua",
+    "_config/gamemode.lua",
+    "_config/garage.lua",
+    "_config/ipls.lua",
+    "_config/jobs.lua",
+    "_config/peds.lua",
+    "_config/phones.lua",
+    "_config/screenshot.lua",
+    "_config/urls.lua",
+    "_config/vehicles.lua",
+    "_config/voip.lua",
+    
+    -- Shared namespace initialization (MUST be before all other shared code)
     "shared/_ig.lua",
+    
+    -- Core utilities (can be used by everything else)
     "shared/_log.lua",
-    "shared/[Tools]/*.lua",
-    "shared/[Third Party]/*.lua",
-    "shared/[Voice]/_voip.lua",
     "shared/_locale.lua",
-    "shared/_protect.lua"
+    "shared/_protect.lua",
+    
+    -- Third-party integrations
+    "shared/[Third Party]/*.lua",
+    
+    -- Tools and debug utilities
+    "shared/[Tools]/*.lua",
+    
+    -- Voice system
+    "shared/[Voice]/*.lua",
+    
+    -- Localization
+    "locale/*.lua",
 }
 ------------------------------------------------------------------------------
+-- CLIENT SCRIPTS (Client-side only, has access to GTA natives)
+-- Load order: Initialize state before loading features
 client_scripts {
-    "@glm/init.lua",
+    -- Variable initialization MUST be first
     "client/_var.lua",
-    "locale/*.lua",
-    "shared/[Tools]/*.lua",
-    "shared/[Third Party]/*.lua",
-    "client/_callback.lua",
+    
+    -- Core system modules - load before dependent features
+    "client/_data.lua",
     "client/_functions.lua",
-    "client/[Data]/_game_data_helpers.lua",
-    -- PolyZone integration (must load before ig.zone wrapper)
-    "client/[Zones]/PolyZone.lua",
-    "client/[Zones]/BoxZone.lua",
-    "client/[Zones]/CircleZone.lua",
-    "client/[Zones]/EntityZone.lua",
-    "client/[Zones]/ComboZone.lua",
-    "client/[Zones]/_zone.lua",
-    "client/[Zones]/_zone_manager.lua",  -- Consolidated zone manager (must load after zones)
-    -- Target system (must load after zones, requires glm)
-    "client/[Target]/_var.lua",
-    "client/[Target]/_lib.lua",
-    "client/[Target]/_utils.lua",
-    "client/[Target]/_api.lua",
-    "client/[Target]/_defaults.lua",
-    "client/[Target]/_main.lua",
-    -- Development tools (requires target system)
-    "client/[Dev]/_var.lua",
-    "client/[Dev]/_debug.lua",
-    "client/[Dev]/_ammunation.lua",
-    "client/[Dev]/_doorcreator.lua",
-    "client/[Dev]/_vehicleseats.lua",
-    -- Garage system (requires target system and SQL)
-    "client/[Garage]/_var.lua",
-    "client/[Garage]/_client.lua",
-    "client/[Garage]/_blips.lua",
-    "client/[Garage]/_machine.lua",
-    -- IPL management (must load after zones)
+    "client/_callback.lua",
+    
+    -- Character and appearance systems
+    "client/_affiliation.lua",
+    "client/_appearance.lua",
+    
+    -- Inventory and items
+    "client/_inventory.lua",
+    "client/_items.lua",
+    "client/_status.lua",
+    "client/_ammo.lua",
+    "client/_weapon.lua",
+    
+    -- Visual systems
+    "client/_blips.lua",
+    "client/_markers.lua",
+    "client/_cameras.lua",
+    "client/_fx.lua",
+    "client/_text.lua",
+    "client/_ui.lua",
+    
+    -- World interaction
+    "client/_doors.lua",
+    "client/_objects.lua",
     "client/_ipls.lua",
-    -- VOIP system (loads before other client scripts for early initialization)
-    "client/[Voice]/_voip.lua",
-    -- PMA-Voice compatibility wrapper (loads last for exports)
-    "shared/[Voice]/_pma_wrapper.lua",
-    -- Other client scripts
-    "client/**/*.lua",
+    "client/_weather.lua",
+    "client/_time.lua",
+    
+    -- Vehicle systems
+    "client/_vehicle.lua",
+    "client/_vehicle_persistence.lua",
+    
+    -- Character state
+    "client/_death.lua",
+    "client/_animations.lua",
+    "client/_modifiers.lua",
+    "client/_skills.lua",
+    "client/_states.lua",
+    "client/_tattoo.lua",
+    
+    -- Utilities
+    "client/_drops.lua",
+    "client/_chat.lua",
+    "client/_commands.lua",
+    "client/_discord.lua",
+    "client/_persistance.lua",
+    "client/_screenshot.lua",
+    
+    -- Feature modules (depend on core systems)
+    "client/[Callbacks]/*.lua",
+    "client/[Chat]/*.lua",
+    "client/[Commands]/*.lua",
+    "client/[Data]/*.lua",
+    "client/[Dev]/*.lua",
+    "client/[Drops]/*.lua",
+    "client/[Events]/*.lua",
+    "client/[Garage]/*.lua",
+    "client/[Target]/*.lua",
+    "client/[Threads]/*.lua",
+    "client/[ToDo]/*.lua",
+    "client/[Voice]/*.lua",
+    "client/[Zones]/*.lua",
+    
+    -- Main client entry point (MUST be last)
+    "client/client.lua",
+    
+    -- NUI scripts
     "nui/lua/*.lua"
 }
 ------------------------------------------------------------------------------
+-- SERVER SCRIPTS (Server-side only)
+-- Load order: State, database, validation, then features
 server_scripts {
-    "@restfx/build/import.lua",
+    -- Variable initialization MUST be first
     "server/_var.lua",
-    "locale/*.lua",
+    
+    -- Core system modules
+    "server/_data.lua",
     "server/_functions.lua",
+    "server/_events.lua",
+    "server/_callback.lua",
+    "server/_time.lua",
     "server/_cron.lua",
-    "server/[Doors]/_doors.lua",
-    "server/[Security]/*.lua",
+    
+    -- Database and persistence (must be before features that use them)
+    "server/[SQL]/*.lua",
+    
+    -- Character and account systems
+    "server/_bank.lua",
+    "server/_payroll.lua",
+    "server/_persistance.lua",
+    "server/_save_routine.lua",
+    "server/_instance.lua",
+    
+    -- Security and validation (must be before handlers)
     "server/[Validation]/*.lua",
-    "server/[Tools]/_logging.lua",
-    "server/[Tools]/_memory.lua",
-    "server/[SQL]/_handler.lua",    
-    "server/[SQL]/_bank.lua",
-    "server/[SQL]/_banking.lua",
-    "server/[SQL]/_character.lua",
-    "server/[SQL]/_gen.lua",
-    "server/[SQL]/_saves.lua",
-    "server/[SQL]/_users.lua",
-    "server/[SQL]/_vehicles.lua",
-    -- Development tools (server-side commands)
-    "server/[Dev]/_var.lua",
-    "server/[Dev]/_commands.lua",
-    -- Garage system (server-side logic and callbacks)
-    "server/[Garage]/_var.lua",
-    "server/[Garage]/_callbacks.lua",
-    -- VOIP system (loads before other server scripts)
-    "server/[Voice]/_voip.lua",
-    -- Discord integration
-    "server/[Third Party]/_discord.lua",
-    "server/[Third Party]/_adaptivecards.lua",
-    "server/[Third Party]/_queue_config_new.lua",
-    "server/[Third Party]/_queue_system.lua",
-    "server/[Third Party]/_queue_commands.lua",
-    -- PMA-Voice compatibility wrapper (loads last for exports)
-    "shared/[Voice]/_pma_wrapper.lua",
-
-    "server/**/*.lua"
+    "server/[Security]/*.lua",
+    
+    -- OneSync and synchronization
+    "server/[Onesync]/*.lua",
+    
+    -- Vehicle systems
+    "server/_vehicle_persistence.lua",
+    
+    -- Game systems
+    "server/[Appearance]/*.lua",
+    "server/[Commands]/*.lua",
+    "server/[Data - No Save Needed]/*.lua",
+    "server/[Data - Save to File]/*.lua",
+    "server/[Deferals]/*.lua",
+    "server/[Doors]/*.lua",
+    "server/[Events]/*.lua",
+    "server/[Garage]/*.lua",
+    "server/[Objects]/*.lua",
+    
+    -- Integration and utilities
+    "server/_chat.lua",
+    "server/_commands.lua",
+    "server/_screenshot.lua",
+    "server/_tebex.lua",
+    "server/[Third Party]/*.lua",
+    "server/[Tools]/*.lua",
+    "server/[Voice]/*.lua",
+    
+    -- Development tools
+    "server/[Dev]/*.lua",
+    
+    -- API and advanced features
+    "server/[API]/*.lua",
+    
+    -- Classes (dependency injection, patterns)
+    "server/[Classes]/*.lua",
+    
+    -- Main server entry point (MUST be last)
+    "server/server.lua",
 }
 ------------------------------------------------------------------------------
 dependencies {
     "/onesync",
-    "restfx",
     "freecam",
     "screenshot-basic",
-    --"sit",
-    --"glm"
 }
 ------------------------------------------------------------------------------
 files {

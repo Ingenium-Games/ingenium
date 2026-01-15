@@ -70,9 +70,18 @@ delivery = {
 
 local blips = {}
 
+-- Wait for blip system to be available
+local function InitializeBlips()
+    while not c or not c.blip or not c.blip.CreateBlip do
+        Wait(100)
+    end
+
 for i = 1, #locations do
     blips[i] = c.blip.CreateBlip(vector3(locations[i].x, locations[i].y, locations[i].z), 110, 55, "Ammunation", 0.6)
 end
+end
+
+CreateThread(InitializeBlips)
 
 AddEventHandler("onResourceStop", function()
     for i = 1, #blips do

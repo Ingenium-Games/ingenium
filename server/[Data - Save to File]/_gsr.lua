@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.gsr = {} -- function level
-ig.gsrs = {} -- dropped items table
+-- GSR System (ig.gsr, ig.gsrs initialized in server/_var.lua)
 -- ====================================================================================--
 
 --- func desc

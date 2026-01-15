@@ -1,10 +1,7 @@
-ig.npc = {}
-ig.npcs = {}
+-- NPC management (ig.npc, ig.npcs, ig.ndex initialized in server/_var.lua)
 
 -- ====================================================================================--
 -- NPC"s 
-
-ig.ndex = {} -- the index/store for currently generated npcs
 
 ---@param net integer "Network ID 16 bit integer"
 function ig.npc.FindNpc(arg)

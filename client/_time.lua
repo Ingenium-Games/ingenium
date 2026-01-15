@@ -1,5 +1,5 @@
 -- ====================================================================================--
-ig.time = {}
+-- Time management (ig.time initialized in client/_var.lua)
 ig.times = {
     Live = {0, 0},
     OT = false,

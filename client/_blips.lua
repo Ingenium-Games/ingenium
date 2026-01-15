@@ -1,6 +1,5 @@
 -- ====================================================================================--
-ig.blip = {} -- functions
-ig.blips = {} -- stored made blips.
+-- Blip management (ig.blip, ig.blips initialized in client/_var.lua)
 SetThisScriptCanRemoveBlipsCreatedByAnyScript(true)
 -- ====================================================================================--
 

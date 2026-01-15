@@ -1,5 +1,5 @@
 -- ====================================================================================--
-ig.inst = {}
+-- Instance management (ig.inst initialized in server/_var.lua)
 -- ====================================================================================--
 -- ROUTING BUCKET NOTES:
 -- Routing buckets are used to isolate players from each other. Players in different

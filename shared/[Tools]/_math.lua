@@ -1,5 +1,5 @@
 -- ====================================================================================--
-ig.math = {}
+-- Math utilities (ig.math initialized in shared/_ig.lua)
 -- ====================================================================================--
 --- Rounds a number to a specified number of decimal places
 ---@param num number "Number to round"

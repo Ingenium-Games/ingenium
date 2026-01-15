@@ -180,7 +180,7 @@ AddEventHandler("playerConnecting", function(name, reject, d)
                 CancelEvent()
             else
                 Citizen.Wait(0)
-                ig.queue.HandleConnection(src, reject, d)
+                ig.queue.HandleConnection(src, name, reject, d)
             end
         end 
     end)
