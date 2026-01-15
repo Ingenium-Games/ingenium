@@ -45,7 +45,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.fx allow")
 RegisterCommand("fx", function(source, args, rawCommand)
     local src = source
-    local tbl = exports["ig.core"]:TriggerClientCallback({
+    local tbl = TriggerClientCallback({
         source = src,
         eventName = "Developer:Fx",
         args = args or {}
@@ -53,10 +53,10 @@ RegisterCommand("fx", function(source, args, rawCommand)
 end, true)
 
 --
-ExecuteCommand("add_ace group.developer command.fx allow")
+ExecuteCommand("add_ace group.developer command.fix allow")
 RegisterCommand("fix", function(source, args, rawCommand)
     local src = source
-    local tbl = exports["ig.core"]:TriggerClientCallback({
+    local tbl = TriggerClientCallback({
         source = src,
         eventName = "Developer:FixVehicle",
         args = args or {}
@@ -66,7 +66,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.noclip allow")
 RegisterCommand("noclip", function(source, args, rawCommand)
     local src = source
-    local tbl = exports["ig.core"]:TriggerClientCallback({
+    local tbl = TriggerClientCallback({
         source = src,
         eventName = "Developer:Noclip",
         args = {}
@@ -116,7 +116,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.debug allow")
 RegisterCommand("debug", function(source, args, rawCommand)
     local src = source
-    local tbl = exports["ig.core"]:TriggerClientCallback({
+    local tbl = TriggerClientCallback({
         source = src,
         eventName = "Developer:Debug",
         args = {}
@@ -126,7 +126,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.dv allow")
 RegisterCommand("dv", function(source, args, rawCommand)
     local src = source
-    local tbl = exports["ig.core"]:TriggerClientCallback({
+    local tbl = TriggerClientCallback({
         source = src,
         eventName = "Developer:DeleteVehicle",
         args = {}
@@ -138,7 +138,7 @@ RegisterCommand("cam", function(source, args, rawCommand)
     local src = source
     local xPlayer = ig.data.GetPlayer(src)
     local name = args[1] or "NoName"
-    local table = exports["ig.core"]:TriggerClientCallback({
+    local table = TriggerClientCallback({
         source = src,
         eventName = "Developer:GetCam",
         args = {}
@@ -202,7 +202,7 @@ end, true)
 ExecuteCommand("add_ace group.developer command.doordev allow")
 RegisterCommand("doordev", function(source, args, rawCommand)
     local src = source
-    exports["ig.core"]:TriggerClientCallback({
+    TriggerClientCallback({
         source = src,
         eventName = "Developer:DoorDev",
         args = args or {}
@@ -219,7 +219,7 @@ RegisterCommand("addoor", function(source, args, rawCommand)
     local time = args[5] or false
     local timestate = tonumber(args[6]) or nil
     local xPlayer = ig.data.GetPlayer(src)
-    local tbl = exports["ig.core"]:TriggerClientCallback({
+    local tbl = TriggerClientCallback({
         source = src,
         eventName = "Developer:GetDoor",
         args = {name, state, job, item, time, timestate}
