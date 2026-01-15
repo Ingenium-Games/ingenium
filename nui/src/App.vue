@@ -36,9 +36,9 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, watch } from 'vue'
 import { useUIStore } from './stores/ui'
-import { setupNuiHandlers } from './utils/nui'
+import { setupNuiHandlers, sendNuiMessage } from './utils/nui'
 import Chat from './components/Chat.vue'
 import CharacterSelect from './components/CharacterSelect.vue'
 import HUD from './components/HUD.vue'
@@ -53,8 +53,19 @@ import BankingMenu from './components/BankingMenu.vue'
 
 const uiStore = useUIStore()
 
+// Watch for changes to critical UI state
+watch(() => uiStore.showCharacterSelect, (newVal) => {
+  console.log('[App.vue] uiStore.showCharacterSelect changed to:', newVal)
+})
+
 onMounted(() => {
+  console.log('[App.vue] Mounted, setting up NUI handlers')
+  console.log('[App.vue] uiStore.showCharacterSelect initial value:', uiStore.showCharacterSelect)
   setupNuiHandlers()
+  
+  // Request character data from server now that NUI is ready
+  console.log('[App.vue] Requesting character data from server')
+  sendNuiMessage('Client:Request:CharacterList')
 })
 </script>
 

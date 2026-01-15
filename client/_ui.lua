@@ -3,19 +3,18 @@
 -- ig.ui - Global UI helper for Vue NUI
 -- Provides a single internal API for sending NUI messages and handling UI actions
 -- ====================================================================================--
-
-ig.ui = {}
-
 -- Send a raw NUI message (internal use). `focus` defaults to false when omitted.
 ---@param message string
 ---@param data table|nil
 ---@param focus boolean|nil
 function ig.ui.Send(message, data, focus)
+    print("^3[ig.ui.Send] Sending NUI message: " .. message .. "^7")
     local payload = {
         message = message,
         data = data or {}
     }
     -- Use table form (consistent with other UI code)
+    print("^3[ig.ui.Send] Payload: " .. json.encode(payload) .. "^7")
     SendNUIMessage(payload)
 
     if focus ~= nil then

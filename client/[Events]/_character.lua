@@ -7,12 +7,6 @@
 -- [C+S]
 RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
-    -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= GetCurrentResourceName() then
-        CancelEvent()
-        return
-    end
-    
     ShutdownLoadingScreenNui()
     -- Set false for switch command
     local ped = GetPlayerPed(-1)
@@ -25,22 +19,32 @@ AddEventHandler("Client:Character:OpeningMenu", function()
     SetGameplayCamRelativeHeading(-0.091852381825447 )
     SetGameplayCamRelativePitch(4.0307726860046, 1.0)
     
-    -- Trigger character select NUI
-    TriggerServerCallback({
-        eventName = "Server:Character:List",
-        args = {},
-        callback = function(data)
-            if data and data.Characters then
-                SendNUIMessage({
-                    message = "Client:NUI:CharacterSelectShow",
-                    data = {
-                        characters = data.Characters,
-                        slots = data.Slots
-                    }
-                })
-            end
-        end
-    })
+    -- Request character list from server
+    TriggerServerEvent("Server:Character:List")
+end)
+
+-- Receive character list from server
+RegisterNetEvent("Client:Character:ReceiveCharacterList")
+AddEventHandler("Client:Character:ReceiveCharacterList", function(data)
+    print("^2[Character] Received character list^7")
+    if data then
+        print("^2[Character] Data received: " .. json.encode(data) .. "^7")
+        print("^2[Character] Showing character select UI^7")
+        ig.ui.Send("Client:NUI:CharacterSelectShow", {
+            characters = data.characters,
+            slots = data.slots
+        }, true)
+    else
+        print("^1[Character] No data received!^7")
+    end
+end)
+
+-- Handle NUI callback to request character list
+RegisterNUICallback('Client:Request:CharacterList', function(data, cb)
+    print("^2[Character] NUI requesting character list^7")
+    -- Request character data from server
+    TriggerServerEvent("Server:Character:List")
+    cb({ok = true})
 end)
 
 --[[
@@ -66,28 +70,15 @@ end)
 -- [C+S]
 RegisterNetEvent("Client:Character:Create")
 AddEventHandler("Client:Character:Create", function()
-    -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= GetCurrentResourceName() then
-        CancelEvent()
-        return
-    end
-    
     local plyped = PlayerPedId()
     SetEntityCoords(plyped, -703.9, -152.62, 37.42)
     SetEntityHeading(plyped, 62)
     ig.func.FadeOut(1000)
     ig.func.IsBusyPleaseWait(1000)
     
-    -- Use native appearance system
-    local config = {
-        allowModelChange = true,
-        allowTattoos = true,
-        isCharacterCreation = true,
-        title = "Create Your Character"
-    }
-    
-    -- Open appearance customization via callback
-    ig.callback.TriggerCallback('Client:Appearance:Open', config)
+    -- For now, just create character with default appearance
+    -- Character creation is handled by the NUI callback which sends appearance data
+    -- The appearance customizer can be opened after character creation
     
     ig.func.FadeIn(1000)
     ig.func.IsBusyPleaseWait(1000)
@@ -97,39 +88,21 @@ end)
 -- [S]
 RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
-    -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= GetCurrentResourceName() then
-        CancelEvent()
-        return
-    end
-    
     ig.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), Coords.x, Coords.y, Coords.z)
     SetEntityHeading(GetPlayerPed(-1), Coords.h)
-    -- Use callback to load skin securely
-    TriggerServerCallback({
-        eventName = "Server:Character:LoadSkin",
-        args = {},
-        callback = function(result)
-            if result and result.success and result.appearance then
-                TriggerEvent("Client:Character:LoadSkin", result.appearance)
-            end
-        end
-    })
+    -- Request load skin directly from server
+    TriggerServerEvent("Server:Character:LoadSkin")
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     FreezeEntityPosition(GetPlayerPed(-1), false)
+    -- Hide character select UI
+    ig.ui.Send("Client:NUI:CharacterSelectHide", {}, false)
     ig.func.FadeIn(2000)
 end)
 
 RegisterNetEvent("Client:Character:NewSpawn")
 AddEventHandler("Client:Character:NewSpawn", function()
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= GetCurrentResourceName() then
-        CancelEvent()
-        return
-    end
-
     ig.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
     SetEntityCoords(GetPlayerPed(-1), conf.spawn.x, conf.spawn.y, conf.spawn.z)
@@ -141,12 +114,6 @@ end)
 
 RegisterNetEvent("Client:Character:LoadSkin")
 AddEventHandler("Client:Character:LoadSkin", function(appearance)
-    -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= GetCurrentResourceName() then
-        CancelEvent()
-        return
-    end
-    
     -- Use native appearance system
     if appearance then
         ig.appearance.SetAppearance(appearance)
@@ -155,27 +122,13 @@ end)
 
 RegisterNetEvent("Client:Character:SaveSkin")
 AddEventHandler("Client:Character:SaveSkin", function(bool)
-    local appearance = exports["fivem-appearance"]:getPedAppearance(GetPlayerPed(-1))
-    -- Use callback for secure save
-    TriggerServerCallback({
-        eventName = "Server:Character:SaveSkin",
-        args = {appearance, bool},
-        callback = function(result)
-            if result and not result.success then
-                ig.debug.Error("Failed to save skin: " .. (result.error or "Unknown error"))
-            end
-        end
-    })
+    local appearance = ig.appearance.GetAppearance()
+    TriggerServerEvent("Server:Character:SaveSkin", appearance, bool)
 end)
 
 -- Event to receive the data of the chosen character for the client.
 RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
     -- Wait for state to be synced to local character
     ig.func.IsBusyPleaseWait(5000)
     --
@@ -194,12 +147,6 @@ end)
 -- Event to trigger other resources once the client has received the chosen characters data from the server.
 RegisterNetEvent("Client:Character:Ready")
 AddEventHandler("Client:Character:Ready", function()
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= GetCurrentResourceName() then
-        CancelEvent()
-        return
-    end
-
     -- Character has loaded in, no need to respawn any more.
     exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")
@@ -226,12 +173,6 @@ end)
 
 RegisterNetEvent("Client:Character:Pre-Switch")
 AddEventHandler("Client:Character:Pre-Switch", function()
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
-    --
     ig.func.FadeOut(1000)
     --
     ig.func.FadeIn(2000)
@@ -241,24 +182,12 @@ end)
 -- Use this to remove any things connected to Characters like police blips etig.
 RegisterNetEvent("Client:Character:Switch")
 AddEventHandler("Client:Character:Switch", function()
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
-    --
     ig.data.SetLoadedStatus(false)
     --
 end)
 
 RegisterNetEvent("Client:Character:OffDuty")
 AddEventHandler("Client:Character:OffDuty", function()
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
-    --
     if conf.enableduty then
         -- Add Functions or Hooks here!
         
@@ -269,12 +198,6 @@ end)
 
 RegisterNetEvent("Client:Character:OnDuty")
 AddEventHandler("Client:Character:OnDuty", function(job)
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
-    --
     if conf.enableduty then
         -- Add Functions or Hooks here!
        
@@ -285,22 +208,10 @@ end)
 
 RegisterNetEvent("Client:Character:SetJob")
 AddEventHandler("Client:Character:SetJob", function(name, grade)
-    -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= GetCurrentResourceName() then
-        CancelEvent()
-        return
-    end
-
 end)
 
 RegisterNetEvent("Client:Character:Death")
 AddEventHandler("Client:Character:Death", function(data)
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
-    --
     if data.Log then
         -- agro = source id or -1 for server.
         local agro = data.Log.Source

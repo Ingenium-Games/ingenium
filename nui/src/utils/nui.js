@@ -84,6 +84,7 @@ function GetParentResourceName() {
  * Setup NUI message handlers
  */
 export function setupNuiHandlers() {
+  console.log('[setupNuiHandlers] Starting setup of NUI handlers')
   const uiStore = useUIStore()
   const notificationStore = useNotificationStore()
   const characterStore = useCharacterStore()
@@ -93,10 +94,22 @@ export function setupNuiHandlers() {
   let appearanceStore = null
   let bankingStore = null
   
-  window.addEventListener('message', (event) => {
-    const { message, data } = event.data
+  console.log('[setupNuiHandlers] Attaching window message event listener')
+  
+  // Simple message handler
+  const handleMessage = (event) => {
+    const payload = event.data || event.detail
     
-    switch (message) {
+    if (!payload || !payload.message) {
+      return
+    }
+    
+    const { message, data } = payload
+    
+    console.log('[handleMessage] Processing message:', message)
+    
+    try {
+      switch (message) {
       // Connection status
       case 'connected':
         // Server connection established, NUI is ready
@@ -135,7 +148,9 @@ export function setupNuiHandlers() {
 
       // Character select
       case 'Client:NUI:CharacterSelectShow':
+        console.log('[NUI] Character select show received with data:', data)
         characterStore.setCharacters(data.characters || [], data.slots || 1)
+        console.log('[NUI] UI Store showCharacterSelect set to true')
         uiStore.showCharacterSelect = true
         break
 
@@ -246,8 +261,13 @@ export function setupNuiHandlers() {
       default:
         console.log('Unhandled NUI message:', message, data)
         break
+      }
+    } catch (error) {
+      console.error('[handleMessage] Error in message handler:', error, error.stack)
     }
-  })
+  }
+  
+  window.addEventListener('message', handleMessage)
   
   // ESC key handler
   window.addEventListener('keydown', (event) => {
@@ -275,6 +295,7 @@ export function setupNuiHandlers() {
     }
   })
 }
+
 
 /**
  * Map legacy callback names to directional NUI:Client names.

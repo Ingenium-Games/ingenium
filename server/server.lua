@@ -46,7 +46,17 @@ RegisterServerCallback({
             -- This prevents them from seeing/hearing other players during character selection
             ig.inst.SetPlayer(src)
             TriggerClientEvent("Client:Character:OpeningMenu", src)
-            TriggerEvent("Server:Character:List", src, Primary_ID)
+            
+            -- Get character data and send directly to client
+            local Primary_ID = ig.func.identifier(src)
+            local Slots = ig.sql.user.GetSlots(Primary_ID)
+            local Characters = ig.sql.char.GetAllPermited(Primary_ID, Slots)
+            
+            -- Send character data to NUI directly
+            TriggerClientEvent("Client:Character:ReceiveCharacterList", src, {
+                characters = Characters,
+                slots = Slots
+            })
         end
         --
         if License_ID then

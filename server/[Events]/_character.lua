@@ -4,8 +4,9 @@
 -- [C+S] - Migrated to callback for security
 RegisterServerCallback({
     eventName = "Server:Character:List",
-    eventCallback = function(source, Primary_ID)
+    eventCallback = function(source)
         local src = tonumber(source)
+        local Primary_ID = ig.func.identifier(src)
         local p = promise.new()
         local Slots = ig.sql.user.GetSlots(Primary_ID)
         local Characters = ig.sql.char.GetAllPermited(Primary_ID, Slots)
@@ -22,122 +23,117 @@ RegisterServerCallback({
     end
 })
 
--- Legacy server-side event wrapper for backwards compatibility
--- This allows TriggerEvent("Server:Character:List", src, Primary_ID) to still work
-AddEventHandler("Server:Character:List", function(src, Primary_ID)
-    local Slots = ig.sql.user.GetSlots(Primary_ID)
-    local Characters = ig.sql.char.GetAllPermited(Primary_ID, Slots)
-    -- Send the data table to the client that requested it using the secure callback system
-    TriggerClientCallback({
-        source = src,
-        eventName = "Client:UI:ForceOpen",
-        args = { "connected", { ["Characters"] = Characters, ["Slots"] = Slots } }
-    })
-    -- Place the user in their own instance until the user has joined and loaded.
-    ig.inst.SetPlayer(src)
+-- [C] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:Join")
+AddEventHandler("Server:Character:Join", function(Character_ID)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
+    local src = source
+    -- If the User selected the NEW button on the NUI, the Character_ID will be listed as NEW, if this is the case, trigger the registration NUI?
+    if (Character_ID == "New") then
+        TriggerClientEvent("Client:Character:Create", src)
+    elseif Character_ID ~= nil then
+        local Coords = ig.sql.char.GetCoords(Character_ID)
+        ig.data.LoadPlayer(src, Character_ID)
+        TriggerClientEvent("Client:Character:ReSpawn", src, Coords)
+    elseif Character_ID == nil then
+        DropPlayer(src, "You dont have a character selected, this is impossible, bye.")
+    end
+end)
+
+-- [C] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:Delete")
+AddEventHandler("Server:Character:Delete", function(Character_ID)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
+    end
+    --
+    local src = source
+    local primary_id = ig.func.identifier(src)
+    ig.sql.char.Delete(Character_ID, function()
+        DropPlayer(src, "Character with id: "..Character_ID.." was Deleted Successfully, please rejoin.")
+    end)
 end)
 
 -- [C] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:Join",
-    eventCallback = function(source, Character_ID)
-        local src = tonumber(source)
-        -- If the User selected the NEW button on the NUI, the Character_ID will be listed as NEW, if this is the case, trigger the registration NUI?
-        if (Character_ID == "New") then
-            TriggerClientEvent("Client:Character:Create", src)
-            return { success = true, action = "create" }
-        elseif Character_ID ~= nil then
-            local Coords = ig.sql.char.GetCoords(Character_ID)
-            ig.data.LoadPlayer(src, Character_ID)
-            TriggerClientEvent("Client:Character:ReSpawn", src, Coords)
-            return { success = true, action = "spawn", coords = Coords }
-        elseif Character_ID == nil then
-            DropPlayer(src, "You dont have a character selected, this is impossible, bye.")
-            return { success = false, error = "No character selected" }
-        end
+RegisterNetEvent("Server:Character:Failed")
+AddEventHandler("Server:Character:Failed", function()
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
     end
-})
+    --
+    local src = source
+    DropPlayer(src, "Actually make a character...")
+end)
 
--- [C] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:Delete",
-    eventCallback = function(source, Character_ID)
-        local src = tonumber(source)
-        local primary_id = ig.func.identifier(src)
-        ig.sql.char.Delete(Character_ID, function()
-            DropPlayer(src, "Character with id: "..Character_ID.." was Deleted Successfully, please rejoin.")
-        end)
-        return { success = true, message = "Character deleted" }
+
+-- Need to move this and clean it the fuck up, its gross atm
+-- [S] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:Register")
+AddEventHandler("Server:Character:Register", function(first_name, last_name, appearance)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
     end
-})
-
--- [C] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:Failed",
-    eventCallback = function(source)
-        local src = tonumber(source)
-        DropPlayer(src, "Actually make a character...")
-        return { success = false, message = "Character creation failed" }
+    --
+    local src = source
+    -- Run a check to see if it being exploited.
+    if ig.data.GetPlayer(src) ~= false then
+        ig.func.Eventban(src, "Server:Character:Register")
+        return
     end
-})
-
-
--- Need to move this and clean it the fuck up, its gross atm.
--- [S] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:Register",
-    eventCallback = function(source, first_name, last_name, appearance)
-        -- Run a check to see if it being exploited.
-        if ig.data.GetPlayer(source) ~= false then
-            ig.func.Eventban(source, "Server:Character:Register")
-            return { success = false, error = "Already has character loaded" }
-        end
-        local p = promise.new()
-        local character_id = ig.sql.gen.CharacterID()
-        local city_id = ig.sql.gen.CityID()
-        local phone_number = ig.sql.gen.PhoneNumber()
-        local iban = ig.sql.gen.Iban()
-        local bank_number = ig.sql.gen.AccountNumber()
-        local primary_id = ig.func.identifier(source)
-        local data = {}
-        
-        data.Primary_ID = primary_id -- Owner
-        data.Character_ID = character_id -- Unique ID
-        data.First_Name = first_name
-        data.Last_Name = last_name
-        data.City_ID = city_id
-        data.Phone = phone_number
-        data.Iban = iban
-        data.Coords = json.encode(conf.spawn)
-        data.Job = json.encode(conf.default.job)
-        data.Modifiers = json.encode(conf.default.modifiers)
-        data.Skills = json.encode(conf.default.skills)
-        data.Appearance = json.encode(appearance)
-        
-        ig.sql.char.Add(data, function()
-            -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etig.
-            ig.sql.bank.AddAccount(character_id, bank_number, iban)
-            --
-            p:resolve()
-        end)
+    local p = promise.new()
+    local character_id = ig.sql.gen.CharacterID()
+    local city_id = ig.sql.gen.CityID()
+    local phone_number = ig.sql.gen.PhoneNumber()
+    local iban = ig.sql.gen.Iban()
+    local bank_number = ig.sql.gen.AccountNumber()
+    local primary_id = ig.func.identifier(src)
+    local data = {}
+    
+    data.Primary_ID = primary_id -- Owner
+    data.Character_ID = character_id -- Unique ID
+    data.First_Name = first_name
+    data.Last_Name = last_name
+    data.City_ID = city_id
+    data.Phone = phone_number
+    data.Iban = iban
+    data.Coords = json.encode(conf.spawn)
+    data.Job = json.encode(conf.default.job)
+    data.Modifiers = json.encode(conf.default.modifiers)
+    data.Skills = json.encode(conf.default.skills)
+    data.Appearance = json.encode(appearance)
+    
+    ig.sql.char.Add(data, function()
+        -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etig.
+        ig.sql.bank.AddAccount(character_id, bank_number, iban)
         --
-        -- Wait for database operations to complete before loading player
-        Citizen.Await(p)
-        
-        ig.data.LoadPlayer(source, character_id)
-        --[[
-                ADD YOUR CHARACTER CREATION EVENT BELOW
-        ]]--
-        TriggerEvent("Server:Character:Spawn", source)
-        --[[
-                ADD YOUR CHARACTER CREATION EVENT ABOVE
-        ]]--
-        local xPlayer = ig.data.GetPlayer(source)
-        xPlayer.AddItem({"Phone",1,100})
-        
-        return { success = true, character_id = character_id }
-    end
-})
+        p:resolve()
+    end)
+    --
+    -- Wait for database operations to complete before loading player
+    Citizen.Await(p)
+    
+    ig.data.LoadPlayer(src, character_id)
+    --[[
+            ADD YOUR CHARACTER CREATION EVENT BELOW
+    ]]--
+    TriggerEvent("Server:Character:Spawn", src)
+    --[[
+            ADD YOUR CHARACTER CREATION EVENT ABOVE
+    ]]--
+    local xPlayer = ig.data.GetPlayer(src)
+    xPlayer.AddItem({"Phone",1,100})
+end)
 
 RegisterNetEvent("Server:Character:Spawn", function(req)
         -- Security: Prevent external resource invocation
@@ -151,70 +147,79 @@ RegisterNetEvent("Server:Character:Spawn", function(req)
     TriggerClientEvent("Client:Character:ReSpawn", src, xPlayer.GetCoords())
 end)
 
--- [C] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:SaveSkin",
-    eventCallback = function(source, appearance, bool)
-        local src = source
-        local xPlayer = ig.data.GetPlayer(src)
-        if not xPlayer then
-            return { success = false, error = "Player not found" }
-        end
-        local identifier = xPlayer.GetIdentifier()
-        ig.sql.char.SetAppearance(identifier, appearance, function()
-            xPlayer.SetAppearance(appearance)
-        end)
-        if type(bool) == "boolean" and bool == true then
-            ig.inst.SetPlayerDefault(src)
-        end
-        return { success = true }
+-- [C] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:SaveSkin")
+AddEventHandler("Server:Character:SaveSkin", function(appearance, bool)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
     end
-})
+    --
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    if not xPlayer then
+        return
+    end
+    local identifier = xPlayer.GetIdentifier()
+    ig.sql.char.SetAppearance(identifier, appearance, function()
+        xPlayer.SetAppearance(appearance)
+    end)
+    if type(bool) == "boolean" and bool == true then
+        ig.inst.SetPlayerDefault(src)
+    end
+end)
 
 -- Save appearance with validation (new system)
--- [C] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:SaveAppearance",
-    eventCallback = function(source, appearance)
-        local src = source
-        local xPlayer = ig.data.GetPlayer(src)
-        
-        if not xPlayer then
-            ig.debug.Error('[Appearance] No xPlayer found for source: ' .. src)
-            return { success = false, error = "Player not found" }
-        end
-        
-        -- Validate appearance data
-        local isValid, errorMsg = ig.appearance.ValidateAppearance(appearance)
-        if not isValid then
-            ig.debug.Error('[Appearance] Invalid appearance data for ' .. xPlayer.GetIdentifier() .. ': ' .. errorMsg)
-            return { success = false, error = errorMsg }
-        end
-        
-        -- Save to database
-        local identifier = xPlayer.GetIdentifier()
-        ig.sql.char.SetAppearance(identifier, appearance, function()
-            xPlayer.SetAppearance(appearance)
-            ig.debug.Info('[Appearance] Saved appearance for ' .. identifier)
-        end)
-        
-        return { success = true }
+-- [C] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:SaveAppearance")
+AddEventHandler("Server:Character:SaveAppearance", function(appearance)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
     end
-})
+    --
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    
+    if not xPlayer then
+        ig.debug.Error('[Appearance] No xPlayer found for source: ' .. src)
+        return
+    end
+    
+    -- Validate appearance data
+    local isValid, errorMsg = ig.appearance.ValidateAppearance(appearance)
+    if not isValid then
+        ig.debug.Error('[Appearance] Invalid appearance data for ' .. xPlayer.GetIdentifier() .. ': ' .. errorMsg)
+        return
+    end
+    
+    -- Save to database
+    local identifier = xPlayer.GetIdentifier()
+    ig.sql.char.SetAppearance(identifier, appearance, function()
+        xPlayer.SetAppearance(appearance)
+        ig.debug.Info('[Appearance] Saved appearance for ' .. identifier)
+    end)
+end)
 
--- [C] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:LoadSkin",
-    eventCallback = function(source)
-        local src = source
-        local xPlayer = ig.data.GetPlayer(src)
-        if not xPlayer then
-            return { success = false, error = "Player not found" }
-        end
-        local appearance = xPlayer.GetAppearance()
-        return { success = true, appearance = appearance }
+-- [C] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:LoadSkin")
+AddEventHandler("Server:Character:LoadSkin", function()
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
     end
-})
+    --
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    if not xPlayer then
+        return
+    end
+    local appearance = xPlayer.GetAppearance()
+    TriggerClientEvent("Client:Character:LoadSkin", src, appearance)
+end)
 
 -- Triggered after character has been loaded from db and informaiton is passed to client
 -- [C] - Keep as event, client-initiated notification
@@ -280,75 +285,84 @@ RegisterNetEvent("Server:Character:Switch", function(req)
 end)
 
 -- Server Death Handler - if was killed by a player or not.
--- [C] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:Death",
-    eventCallback = function(source, data)
-        local src = source
-        local xPlayer = ig.data.GetPlayer(src)
-        if not xPlayer then
-            return { success = false, error = "Player not found" }
-        end
-        -- Death SQL added the state bag change handler
-        -- Mark as dead within DB
-        ig.sql.char.SetDead(xPlayer.GetCharacter_ID(), true, data)
-        --
-        if data.Log then
-            -- agro = source id or -1 for server.
-            local agro = data.Log.Source
-            if data.Cause == "Weapon" then
-
-            elseif data.Cause == "Vehicle" then
-
-            elseif data.Cause == "Obejct" then
-                
-            end
-        end
-        xPlayer.Notify("You have been downed, you must wait for someone to assist you.", "black", 15000)
-        xPlayer.Notify("If you do not wait, or leave, you will be unable to use this character for 7 days.", "red", 10000)
-        
-        return { success = true }
+-- [C] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:Death")
+AddEventHandler("Server:Character:Death", function(data)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
     end
-})
+    --
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    if not xPlayer then
+        return
+    end
+    -- Death SQL added the state bag change handler
+    -- Mark as dead within DB
+    ig.sql.char.SetDead(xPlayer.GetCharacter_ID(), true, data)
+    --
+    if data.Log then
+        -- agro = source id or -1 for server.
+        local agro = data.Log.Source
+        if data.Cause == "Weapon" then
+
+        elseif data.Cause == "Vehicle" then
+
+        elseif data.Cause == "Obejct" then
+            
+        end
+    end
+    xPlayer.Notify("You have been downed, you must wait for someone to assist you.", "black", 15000)
+    xPlayer.Notify("If you do not wait, or leave, you will be unable to use this character for 7 days.", "red", 10000)
+end)
 
 --@ req = server_id or source
 --@ t = {"name"="police","grade"=0}
--- [C+S] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:SetJob",
-    eventCallback = function(source, data)
-        local xPlayer = ig.data.GetPlayer(source)
-        if not xPlayer then
-            return { success = false, error = "Player not found" }
-        end
-        -- Force set to false incase already employeed
-        xPlayer.SetDuty(false)
-        -- Add New Job command permissions for ACL system
-        ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
-        -- If unemployed
-        if data.Name == "none" then
-            xPlayer.SetDuty(true)
-        end
-        return { success = true }
+-- [C+S] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:SetJob")
+AddEventHandler("Server:Character:SetJob", function(data)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
     end
-})
+    --
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    if not xPlayer then
+        return
+    end
+    -- Force set to false incase already employeed
+    xPlayer.SetDuty(false)
+    -- Add New Job command permissions for ACL system
+    ExecuteCommand(("add_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
+    -- If unemployed
+    if data.Name == "none" then
+        xPlayer.SetDuty(true)
+    end
+end)
 
--- [C] - Migrated to callback for security
-RegisterServerCallback({
-    eventName = "Server:Character:Duty",
-    eventCallback = function(source, boolean)
-        if conf.enableduty then
-            -- Add Functions or Hooks here!
-            local bool = boolean
-            local xPlayer = ig.data.GetPlayer(source)
-            if not xPlayer then
-                return { success = false, error = "Player not found" }
-            end
-            xPlayer.SetDuty(bool)
-            return { success = true, duty = bool }
-        else
-            ig.log.Trace("Character", "Ability to go on/off duty has been disabled")
-            return { success = false, error = "Duty system disabled" }
-        end
+-- [C] - Migrated to direct event for security
+RegisterNetEvent("Server:Character:Duty")
+AddEventHandler("Server:Character:Duty", function(boolean)
+    -- Security: Prevent external resource invocation
+    if GetInvokingResource() ~= conf.resourcename then
+        CancelEvent()
+        return
     end
-})
+    --
+    local src = source
+    if conf.enableduty then
+        -- Add Functions or Hooks here!
+        local bool = boolean
+        local xPlayer = ig.data.GetPlayer(src)
+        if not xPlayer then
+            return
+        end
+        xPlayer.SetDuty(bool)
+    else
+        ig.log.Trace("Character", "Ability to go on/off duty has been disabled")
+    end
+end)
