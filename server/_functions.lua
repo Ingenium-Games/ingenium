@@ -29,17 +29,12 @@ end
 ---@param err string|any "Error message or error object"
 function ig.func.Error(err)
     if conf.error then
-        -- Use new debug system if available, otherwise fallback
-        if ig.debug and ig.debug.Error then
-            ig.debug.Error(err)
+        if type(err) == "string" then
+            ig.log.Error("FUNCTION", err)
+            print(debug.traceback(_, 2))
         else
-            if type(err) == "string" then
-                ig.debug.Error(err)
-                print(debug.traceback(_, 2))
-            else
-                ig.debug.Error("Unable to type(err) == string. [err] = " .. tostring(err))
-                print(debug.traceback(_, 2))
-            end
+            ig.log.Error("FUNCTION", "Unable to type(err) == string. [err] = %s", tostring(err))
+            print(debug.traceback(_, 2))
         end
     end
 end
@@ -48,12 +43,7 @@ end
 ---@param str string "Debug message to log"
 function ig.func.Debug_1(str)
     if conf.debug_1 then
-        -- Use new debug system if available, otherwise fallback
-        if ig.debug and ig.debug.Info then
-            ig.debug.Info(str)
-        else
-            ig.debug.Info(str)
-        end
+        ig.log.Info("DEBUG", str)
     end
 end
 
@@ -61,12 +51,7 @@ end
 ---@param str string "Debug message to log"
 function ig.func.Debug_2(str)
     if conf.debug_2 then
-        -- Use new debug system if available, otherwise fallback
-        if ig.debug and ig.debug.Debug then
-            ig.debug.Debug(str)
-        else
-            ig.debug.Debug(str)
-        end
+        ig.log.Debug("DEBUG", str)
     end
 end
 
@@ -74,24 +59,14 @@ end
 ---@param str string "Debug message to log"
 function ig.func.Debug_3(str)
     if conf.debug_3 then
-        -- Use new debug system if available, otherwise fallback
-        if ig.debug and ig.debug.Trace then
-            ig.debug.Trace(str)
-        else
-            ig.debug.Trace(str)
-        end
+        ig.log.Trace("DEBUG", str)
     end
 end
 
 --- Logs a warning message
 ---@param str string "Warning message to log"
 function ig.func.Alert(str)
-    -- Use new debug system if available, otherwise fallback
-    if ig.debug and ig.debug.Warn then
-        ig.debug.Warn(str)
-    else
-        ig.debug.Warn(str)
-    end
+    ig.log.Warn("ALERT", str)
 end
 
 --- func desc

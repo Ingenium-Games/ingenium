@@ -20,7 +20,7 @@ RegisterNUICallback("NUI:Client:CharacterPlay", function(data, cb)
                 if result and result.success then
                     SetFollowPedCamViewMode(0)
                 else
-                    ig.debug.Error("Failed to join character: " .. (result and result.error or "Unknown error"))
+                    ig.log.Error("CHARSELECT", "Failed to join character: %s", (result and result.error or "Unknown error"))
                 end
             end
         })
@@ -55,7 +55,7 @@ RegisterNUICallback("NUI:Client:CharacterDelete", function(data, cb)
             args = {data.ID},
             callback = function(result)
                 if result and not result.success then
-                    ig.debug.Error("Failed to delete character: " .. (result.error or "Unknown error"))
+                    ig.log.Error("CHARSELECT", "Failed to delete character: %s", (result.error or "Unknown error"))
                 end
             end
         })
@@ -90,9 +90,9 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
             args = {data.First_Name, data.Last_Name, appearance},
             callback = function(result)
                 if result and result.success then
-                    ig.debug.Info("Character registered successfully with ID: " .. (result.character_id or "unknown"))
+                    ig.log.Info("CHARSELECT", "Character registered successfully with ID: %s", (result.character_id or "unknown"))
                 else
-                    ig.debug.Error("Failed to register character: " .. (result and result.error or "Unknown error"))
+                    ig.log.Error("CHARSELECT", "Failed to register character: %s", (result and result.error or "Unknown error"))
                 end
             end
         })

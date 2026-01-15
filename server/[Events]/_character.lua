@@ -184,14 +184,14 @@ AddEventHandler("Server:Character:SaveAppearance", function(appearance)
     local xPlayer = ig.data.GetPlayer(src)
     
     if not xPlayer then
-        ig.debug.Error('[Appearance] No xPlayer found for source: ' .. src)
+        ig.log.Error("APPEARANCE", "No xPlayer found for source: %d", src)
         return
     end
     
     -- Validate appearance data
     local isValid, errorMsg = ig.appearance.ValidateAppearance(appearance)
     if not isValid then
-        ig.debug.Error('[Appearance] Invalid appearance data for ' .. xPlayer.GetIdentifier() .. ': ' .. errorMsg)
+        ig.log.Error("APPEARANCE", "Invalid appearance data for %s: %s", xPlayer.GetIdentifier(), errorMsg)
         return
     end
     
@@ -199,7 +199,7 @@ AddEventHandler("Server:Character:SaveAppearance", function(appearance)
     local identifier = xPlayer.GetIdentifier()
     ig.sql.char.SetAppearance(identifier, appearance, function()
         xPlayer.SetAppearance(appearance)
-        ig.debug.Info('[Appearance] Saved appearance for ' .. identifier)
+        ig.log.Info("APPEARANCE", "Saved appearance for %s", identifier)
     end)
 end)
 

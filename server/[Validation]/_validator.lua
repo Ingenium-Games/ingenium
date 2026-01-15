@@ -211,7 +211,7 @@ function ig.validation.LogAndBanExploiter(source, reason)
         )
         
         -- Log to server console
-        ig.debug.Error(logMessage)
+        ig.log.Error("VALIDATOR", logMessage)
         
         -- Log to database/file if available
         TriggerEvent("txaLogger:CommandExecuted", logMessage)

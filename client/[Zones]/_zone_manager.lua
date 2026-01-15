@@ -21,7 +21,7 @@ local ZoneManager = {
 ---@return string zoneId Unique ID for this zone registration
 function ZoneManager.RegisterZone(zone, callback, getPointFunc, checkInterval)
     if not zone then
-        ig.debug.Error("Cannot register nil zone")
+        ig.log.Error("ZONES", "Cannot register nil zone")
         return nil
     end
     
@@ -106,11 +106,7 @@ function ZoneManager.Start()
             -- If no zones are registered, stop the manager
             if not anyZonesActive then
                 ZoneManager.isRunning = false
-                if ig and ig.log and ig.log.Debug then
-                    ig.log.Debug("ZoneManager", "No active zones, stopping manager")
-                else
-                    ig.debug.Debug("No active zones, stopping manager")
-                end
+                ig.log.Debug("ZONES", "No active zones, stopping manager")
                 break
             end
             
@@ -120,11 +116,7 @@ function ZoneManager.Start()
         end
     end)
     
-    if ig and ig.log and ig.log.Debug then
-        ig.log.Debug("ZoneManager", "Started consolidated zone manager")
-    else
-        ig.debug.Info("Started consolidated zone manager")
-    end
+    ig.log.Info("ZONES", "Started consolidated zone manager")
 end
 
 -- Stop the zone manager
@@ -219,21 +211,21 @@ ig.zoneManager = ZoneManager
 -- Command to check zone manager stats
 RegisterCommand('zonestats', function()
     local stats = ZoneManager.GetStats()
-    ig.debug.Debug("=== Zone Manager Statistics ===")
-    ig.debug.Debug("Total Zones:  ".. stats.totalZones)
-    ig.debug.Debug("Manager Running: ".. tostring(stats.isRunning))
-    ig.debug.Debug("Check Interval: "..stats.checkInterval.. " ms")
-    ig.debug.Debug("Zones by Type:")
+    ig.log.Debug("ZONES", "=== Zone Manager Statistics ===")
+    ig.log.Debug("ZONES", "Total Zones: %d", stats.totalZones)
+    ig.log.Debug("ZONES", "Manager Running: %s", tostring(stats.isRunning))
+    ig.log.Debug("ZONES", "Check Interval: %d ms", stats.checkInterval)
+    ig.log.Debug("ZONES", "Zones by Type:")
     for zoneType, count in pairs(stats.byType) do
-        ig.debug.Debug("  " .. zoneType .. ": " .. count)
+        ig.log.Debug("ZONES", "  %s: %d", zoneType, count)
     end
-    ig.debug.Debug("==============================")
+    ig.log.Debug("ZONES", "==============================")
 end, false)
 
 -- Command to list all client zones with details
 RegisterCommand('listzones', function()
     local zoneCount = 0
-    ig.debug.Debug("=== Client Zone List ===")
+    ig.log.Debug("ZONES", "=== Client Zone List ===")
     
     for zoneId, zoneData in pairs(ZoneManager.zones) do
         zoneCount = zoneCount + 1
@@ -267,56 +259,45 @@ RegisterCommand('listzones', function()
         local isPaused = zone.paused and "^3PAUSED^7" or "^2ACTIVE^7"
         local isDestroyed = zone.destroyed and "^1DESTROYED^7" or "^2VALID^7"
         
-        ig.debug.Debug("Zone #" .. zoneCount .. ":")
-        ig.debug.Debug("  Name: " .. zoneName)
-        ig.debug.Debug("  Type: " .. zoneType)
-        ig.debug.Debug("  State: " .. stateStr)
-        ig.debug.Debug("  Interval: " .. interval .. "ms")
-        ig.debug.Debug("  Status: " .. isPaused .. " / " .. isDestroyed)
+        ig.log.Debug("ZONES", "Zone #%d:", zoneCount)
+        ig.log.Debug("ZONES", "  Name: %s", zoneName)
+        ig.log.Debug("ZONES", "  Type: %s", zoneType)
+        ig.log.Debug("ZONES", "  State: %s", stateStr)
+        ig.log.Debug("ZONES", "  Interval: %sms", interval)
+        ig.log.Debug("ZONES", "  Status: %s / %s", isPaused, isDestroyed)
         
         -- Additional info for specific zone types
         if zone.center then
-            ig.debug.Debug(("  Center: %.2f, %.2f, %.2f"):format(zone.center.x or 0, zone.center.y or 0, zone.center.z or 0))
+            ig.log.Debug("ZONES", "  Center: %.2f, %.2f, %.2f", zone.center.x or 0, zone.center.y or 0, zone.center.z or 0)
         end
         
         if zone.radius then
-            ig.debug.Debug(("  Radius: %.2f"):format(zone.radius))
+            ig.log.Debug("ZONES", "  Radius: %.2f", zone.radius)
         end
         
         if zone.length and zone.width then
-            ig.debug.Debug(("  Dimensions: %.2f x %.2f"):format(zone.length, zone.width))
+            ig.log.Debug("ZONES", "  Dimensions: %.2f x %.2f", zone.length, zone.width)
         end
         
         if zone.heading then
-            ig.debug.Debug(("  Heading: %.2f"):format(zone.heading))
+            ig.log.Debug("ZONES", "  Heading: %.2f", zone.heading)
         end
         
-        ig.debug.Debug("  ---")
+        ig.log.Debug("ZONES", "  ---")
     end
     
     if zoneCount == 0 then
-        ig.debug.Debug("No zones registered for this client")
+        ig.log.Debug("ZONES", "No zones registered for this client")
     else
-        ig.debug.Debug("Total: " .. zoneCount .. " zones")
+        ig.log.Debug("ZONES", "Total: %d zones", zoneCount)
     end
     
-    ig.debug.Debug("========================")
+    ig.log.Debug("ZONES", "========================")
 end, false)
 
 -- Debug info
-if ig and ig.log and ig.log.Debug then
-    ig.log.Debug("ZoneManager", "Consolidated zone manager loaded")
-else
-    ig.debug.Info("Consolidated zone manager loaded")
-end
-if ig and ig.log and ig.log.Debug then
-    ig.log.Debug("ZoneManager", "Replaced onPlayerInOut() and onPointInOut() to use consolidated manager")
-    ig.log.Debug("ZoneManager", "All zones now automatically use single-thread management")
-    ig.log.Debug("ZoneManager", "Type /zonestats to see zone manager statistics")
-    ig.log.Debug("ZoneManager", "Type /listzones to list all active zones")
-else
-    ig.debug.Warn("Replaced onPlayerInOut() and onPointInOut() to use consolidated manager")
-    ig.debug.Warn("All zones now automatically use single-thread management")
-    ig.debug.Warn("Type /zonestats to see zone manager statistics")
-    ig.debug.Warn("Type /listzones to list all active zones")
-end
+ig.log.Info("ZONES", "Consolidated zone manager loaded")
+ig.log.Info("ZONES", "Replaced onPlayerInOut() and onPointInOut() to use consolidated manager")
+ig.log.Info("ZONES", "All zones now automatically use single-thread management")
+ig.log.Info("ZONES", "Type /zonestats to see zone manager statistics")
+ig.log.Info("ZONES", "Type /listzones to list all active zones")

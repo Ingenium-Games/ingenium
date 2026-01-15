@@ -195,7 +195,7 @@ Citizen.CreateThread(function()
     
     -- Log configuration
     if QueueConf.Debug then
-        ig.debug.Debug("[Queue Config] Loaded with following settings")
+        ig.log.Debug("QUEUE", "Loaded with following settings")
         print(("  Max Players: %d"):format(QueueConf.MaxPlayers))
         print(("  Grace Period: %s (power: %d, duration: %ds)"):format(
             QueueConf.GraceEnabled and "Enabled" or "Disabled",

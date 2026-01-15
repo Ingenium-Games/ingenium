@@ -144,9 +144,7 @@ if IS_SERVER then
 		
 		-- Check if rate limit exceeded
 		if data.count >= rateLimitConfig.maxRequestsPerSecond then
-			ig.debug.Warn(("[CALLBACK SECURITY] Rate limit exceeded for source %s (max: %d/sec)"):format(
-				source, rateLimitConfig.maxRequestsPerSecond
-			))
+			ig.log.Warn("CALLBACK:SECURITY", "Rate limit exceeded for source %d (max: %d/sec)", source, rateLimitConfig.maxRequestsPerSecond)
 			return false
 		end
 		
@@ -157,30 +155,28 @@ if IS_SERVER then
 	-- Validate ticket and source
 	local function validateTicket(ticket, source)
 		if not ticket then
-			ig.debug.Warn("[CALLBACK SECURITY] Missing ticket in callback return")
+			ig.log.Warn("CALLBACK:SECURITY", "Missing ticket in callback return")
 			return false
 		end
 		
 		local ticketData = issuedTickets[ticket]
 		
 		if not ticketData then
-			ig.debug.Warn(("[CALLBACK SECURITY] Invalid or expired ticket: " .. ticket .. " from source " .. source))
+			ig.log.Warn("CALLBACK:SECURITY", "Invalid or expired ticket: %s from source %d", ticket, source)
 			return false
 		end
 		
 		-- Check expiration
 		local now = GetGameTimer()
 		if ticketData.expiresAt < now then
-			ig.debug.Warn(("[CALLBACK SECURITY] Expired ticket: " .. ticket .. " from source " .. source))
+			ig.log.Warn("CALLBACK:SECURITY", "Expired ticket: %s from source %d", ticket, source)
 			issuedTickets[ticket] = nil
 			return false
 		end
 		
 		-- Check source match
 		if ticketData.source ~= source then
-			ig.debug.Warn(("[CALLBACK SECURITY] Source mismatch - ticket source: %s, actual source: %s"):format(
-				ticketData.source, source
-			))
+			ig.log.Warn("CALLBACK:SECURITY", "Source mismatch - ticket source: %d, actual source: %d", ticketData.source, source)
 			return false
 		end
 		
@@ -216,17 +212,47 @@ if IS_SERVER then
 		local eventCallback = args.eventCallback
 		-- save the event name on this call
 		local eventName = args.eventName
+		
+		ig.log.Debug("CALLBACK:SERVER", "Registering server callback: %s", eventName)
+		
 		-- save the event data to return
 		local eventData = RegisterNetEvent("Server:Callback:"..eventName, function(packed, src, cb)
-			-- save the source on this call
-			local source = tonumber(source)
-			-- check if this is a simulated callback (TriggerServerCallback)
-			if not source then
-				-- return the simulated data
-				cb( msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ) )
+			-- Handle both client and server callbacks:
+			-- Client call (TriggerServerEvent): packed only, source is a FiveM global
+			-- Server call (TriggerEvent): packed, src, and cb as explicit parameters
+			local actualSource = src or source
+			
+			ig.log.Trace("CALLBACK:SERVER", "Received callback request: %s from source: %d (isSimulated: %s)", eventName, actualSource, tostring(cb ~= nil))
+			
+			-- Unpack arguments safely
+			local unpacked = msgpack_unpack(packed)
+			local callbackArgs = {table_unpack(unpacked)}
+			
+			ig.log.Trace("CALLBACK:SERVER", "Arguments count: %d", #callbackArgs)
+			
+			-- Execute the callback
+			local success, result = pcall(function()
+				return eventCallback(actualSource, table_unpack(callbackArgs))
+			end)
+			
+			if not success then
+				ig.log.Error("CALLBACK:SERVER", "Error executing callback %s: %s", eventName, tostring(result))
+				result = nil
+			end
+			
+			ig.log.Debug("CALLBACK:SERVER", "Callback %s executed, preparing response", eventName)
+			
+			-- check if this is a simulated callback (TriggerServerCallback on server)
+			if cb then
+				-- return the simulated data (server-side TriggerServerCallback)
+				ig.log.Trace("CALLBACK:SERVER", "Sending response via simulated callback (server-to-server)")
+				cb( msgpack_pack_args( result ) )
 			else
-				-- return the data
-				TriggerClientEvent(("Client:Callback:Response:%s:%s"):format(eventName, source), source, msgpack_pack_args( eventCallback(source, table_unpack(msgpack_unpack(packed)) ) ))
+				-- return the data to client (client-side TriggerServerCallback)
+				local responseName = ("Client:Callback:Response:%s:%s"):format(eventName, actualSource)
+				ig.log.Debug("CALLBACK:SERVER", "Sending response to client via event: %s", responseName)
+				TriggerClientEvent(responseName, actualSource, msgpack_pack_args( result ))
+				ig.log.Trace("CALLBACK:SERVER", "Response sent to client")
 			end
 		end)
 		-- return the event data to UnregisterServerCallback
@@ -287,7 +313,7 @@ if IS_SERVER then
 				
 				-- Validate ticket and source before processing
 				if not validateTicket(ticket, responseSource) then
-					ig.debug.Warn(("[CALLBACK SECURITY] Rejected callback return for event " .. args.eventName))
+				ig.log.Warn("CALLBACK:SECURITY", "Rejected callback return for event %s", args.eventName)
 					return
 				end
 				
@@ -446,25 +472,59 @@ if not IS_SERVER then
 	_G.TriggerServerCallback = function(args)
 		ensure(args, "table"); ensure(args.args, "table", "nil"); ensure(args.eventName, "string"); ensure(args.timeout, "number", "nil"); ensure(args.timedout, "function", "nil"); ensure(args.callback, "function", "nil")
 		
+		ig.log.Debug("CALLBACK:CLIENT", "TriggerServerCallback: %s (async: %s)", args.eventName, tostring(args.callback ~= nil))
+		ig.log.Trace("CALLBACK:CLIENT", "Arguments: %s", json.encode(args.args or {}))
+		ig.log.Trace("CALLBACK:CLIENT", "Server ID: %d", SERVER_ID)
+		
 		-- create a new promise
 		local prom = promise.new()
 		-- save the callback function on this call
 		local eventCallback = args.callback
+		
+		-- Create response event name
+		local responseEventName = ("Client:Callback:Response:%s:%s"):format(args.eventName, SERVER_ID)
+		ig.log.Trace("CALLBACK:CLIENT", "Listening for response: %s", responseEventName)
+		
 		-- save the event data to remove it when resolved
-		local eventData = RegisterNetEvent(("Client:Callback:Response:%s:%s"):format(args.eventName, SERVER_ID),
+		local eventData = RegisterNetEvent(responseEventName,
 		function(packed)
+			ig.log.Debug("CALLBACK:CLIENT", "Received response for: %s", args.eventName)
+			
+			local success, result = pcall(function()
+				return table_unpack(msgpack_unpack(packed))
+			end)
+			
+			if not success then
+				ig.log.Error("CALLBACK:CLIENT", "Error unpacking response: %s", tostring(result))
+				return
+			end
+			
+			ig.log.Trace("CALLBACK:CLIENT", "Response unpacked successfully")
+			
 			-- check if this call is async
 			-- & the promise wasn"t rejected or resolved
-			if eventCallback and prom.state == PENDING then eventCallback( table_unpack(msgpack_unpack(packed)) ) end
-			prom:resolve( table_unpack(msgpack_unpack(packed)) )
+			if eventCallback and prom.state == PENDING then
+				ig.log.Trace("CALLBACK:CLIENT", "Executing async callback")
+				local callSuccess, callResult = pcall(function()
+					eventCallback( result )
+				end)
+				if not callSuccess then
+					ig.log.Error("CALLBACK:CLIENT", "Error in async callback: %s", tostring(callResult))
+				end
+			end
+			
+			prom:resolve( result )
 		end)
 
 		-- fire the callback event
-		TriggerServerEvent("Server:Callback:"..args.eventName, msgpack_pack( args.args ))
+		ig.log.Debug("CALLBACK:CLIENT", "Triggering server event: Server:Callback:%s", args.eventName)
+		TriggerServerEvent("Server:Callback:"..args.eventName, msgpack_pack( args.args or {} ))
+		ig.log.Trace("CALLBACK:CLIENT", "Server event triggered")
 
 		-- timeout response
 		if args.timeout ~= nil and args.timedout then
 			local timedout = args.timedout
+			ig.log.Trace("CALLBACK:CLIENT", "Setting timeout: %d seconds", args.timeout)
 			SetTimeout(args.timeout * 1000, function()
 				-- check if the promise wasn"t resolved yet
 				if
@@ -472,6 +532,7 @@ if not IS_SERVER then
 					prom.state == REJECTED or
 					prom.state == REJECTING
 				then
+					ig.log.Warn("CALLBACK:CLIENT", "Timeout reached for: %s (state: %d)", args.eventName, prom.state)
 					-- call the timeout callback
 					timedout(prom.state)
 					-- reject the promise if it wasn"t rejected
@@ -484,8 +545,10 @@ if not IS_SERVER then
 
 		-- check if this call is async
 		if not eventCallback then
+			ig.log.Debug("CALLBACK:CLIENT", "Awaiting synchronous response for: %s", args.eventName)
 			local result = Citizen.Await(prom)
 			RemoveEventHandler(eventData)
+			ig.log.Debug("CALLBACK:CLIENT", "Synchronous callback completed: %s", args.eventName)
 			return result
 		end
 	end

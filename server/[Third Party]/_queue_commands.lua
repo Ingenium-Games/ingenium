@@ -28,8 +28,8 @@ end
 -- Helper function to send message (console or player)
 local function SendMessage(src, message, isError)
     if src == 0 then
-        local color = isError and "^1" or "^3"
-        ig.debug.Warn(message)
+        local level = isError and "error" or "warn"
+        ig.log.Warn("QUEUE", message)
     else
         TriggerClientEvent("chat:addMessage", src, {
             color = isError and {255, 0, 0} or {255, 165, 0},
@@ -54,7 +54,7 @@ RegisterCommand("queue:list", function(source, args, rawCommand)
     
     if queueSize == 0 then
         if src == 0 then
-            ig.debug.Warn("[Queue] No players in queue")
+            ig.log.Warn("QUEUE", "No players in queue")
         else
             TriggerClientEvent("chat:addMessage", src, {
                 color = {255, 165, 0},
@@ -65,7 +65,7 @@ RegisterCommand("queue:list", function(source, args, rawCommand)
     end
     
     if src == 0 then
-        ig.debug.Debug("[Queue] Current queue (" .. queueSize .. " players)")
+        ig.log.Debug("QUEUE", "Current queue (%d players)", queueSize)
         for _, player in ipairs(queueList) do
             print(("  %d. %s (Priority: %d, Time: %ds, ID: %s)"):format(
                 player.position,
@@ -107,7 +107,7 @@ RegisterCommand("queue:alert", function(source, args, rawCommand)
     
     if #args < 1 then
         if src == 0 then
-            ig.debug.Error("[Queue] Usage: queue:alert <message> [duration in seconds]")
+            ig.log.Error("QUEUE", "Usage: queue:alert <message> [duration in seconds]")
         else
             TriggerClientEvent("chat:addMessage", src, {
                 color = {255, 0, 0},
@@ -133,7 +133,7 @@ RegisterCommand("queue:alert", function(source, args, rawCommand)
     
     if #message == 0 then
         if src == 0 then
-            ig.debug.Error("[Queue] Message cannot be empty")
+            ig.log.Error("QUEUE", "Message cannot be empty")
         else
             TriggerClientEvent("chat:addMessage", src, {
                 color = {255, 0, 0},
@@ -147,7 +147,7 @@ RegisterCommand("queue:alert", function(source, args, rawCommand)
     ig.queue.SendAlert(message, duration)
     
     if src == 0 then
-        ig.debug.Info("[Queue] Alert sent: " .. message .. " (duration: " .. duration .. "s)")
+        ig.log.Info("QUEUE", "Alert sent: %s (duration: %ds)", message, duration)
     else
         TriggerClientEvent("chat:addMessage", src, {
             color = {0, 255, 0},
@@ -168,7 +168,7 @@ RegisterCommand("queue:remove", function(source, args, rawCommand)
     
     if #args < 1 then
         if src == 0 then
-            ig.debug.Error("[Queue] Usage: queue:remove <player_id|position]")
+            ig.log.Error("QUEUE", "Usage: queue:remove <player_id|position>")
         else
             TriggerClientEvent("chat:addMessage", src, {
                 color = {255, 0, 0},
@@ -186,7 +186,7 @@ RegisterCommand("queue:remove", function(source, args, rawCommand)
     if position then
         if position < 1 or position > #queueList then
             if src == 0 then
-                ig.debug.Error("[Queue] Invalid position")
+                ig.log.Error("QUEUE", "Invalid position")
             else
                 TriggerClientEvent("chat:addMessage", src, {
                     color = {255, 0, 0},
@@ -201,7 +201,7 @@ RegisterCommand("queue:remove", function(source, args, rawCommand)
         
         if removed then
             if src == 0 then
-                ig.debug.Info("[Queue] Removed " .. player.name .. " from queue")
+                ig.log.Info("QUEUE", "Removed %s from queue", player.name)
             else
                 TriggerClientEvent("chat:addMessage", src, {
                     color = {0, 255, 0},
@@ -210,7 +210,7 @@ RegisterCommand("queue:remove", function(source, args, rawCommand)
             end
         else
             if src == 0 then
-                ig.debug.Error("[Queue] Failed to remove player")
+                ig.log.Error("QUEUE", "Failed to remove player")
             else
                 TriggerClientEvent("chat:addMessage", src, {
                     color = {255, 0, 0},
@@ -228,7 +228,7 @@ RegisterCommand("queue:remove", function(source, args, rawCommand)
                     local removed = ig.queue.RemovePlayer(player.identifiers)
                     if removed then
                         if src == 0 then
-                            ig.debug.Info("[Queue] Removed " .. player.name .. " from queue")
+                            ig.log.Info("QUEUE", "Removed %s from queue", player.name)
                         else
                             TriggerClientEvent("chat:addMessage", src, {
                                 color = {0, 255, 0},
@@ -245,7 +245,7 @@ RegisterCommand("queue:remove", function(source, args, rawCommand)
         
         if not found then
             if src == 0 then
-                ig.debug.Error("[Queue] Player not found in queue")
+                ig.log.Error("QUEUE", "Player not found in queue")
             else
                 TriggerClientEvent("chat:addMessage", src, {
                     color = {255, 0, 0},
@@ -285,7 +285,7 @@ RegisterCommand("queue:shutdown", function(source, args, rawCommand)
     ig.queue.InitiateShutdown(reason, delay)
     
     if src == 0 then
-        ig.debug.Debug("[Queue] Shutdown initiated: " .. reason .. " (delay: " .. delay .. "s)")
+        ig.log.Debug("QUEUE", "Shutdown initiated: %s (delay: %ds)", reason, delay)
     else
         TriggerClientEvent("chat:addMessage", src, {
             color = {255, 165, 0},
@@ -322,4 +322,4 @@ RegisterCommand("queue:help", function(source, args, rawCommand)
     end
 end, false)
 
-ig.debug.Info("[Queue] Admin commands loaded")
+ig.log.Info("QUEUE", "Admin commands loaded")

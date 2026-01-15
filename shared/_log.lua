@@ -86,7 +86,7 @@ local function output(levelName, tag, fmt, ...)
 
     -- Server-side file logging (respect file toggle + per-level toggles)
     if IsDuplicityVersion() and should_file_log(levelName) then
-        TriggerEvent("ig:debug:logToFile", out, levelName:upper())
+        TriggerEvent("Ingenium:Log:ToFile", out, levelName:upper())
     end
 end
 

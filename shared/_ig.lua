@@ -26,10 +26,6 @@ ig.log.debug = nil                            -- Debug logging alias
 ig.log.trace = nil                            -- Trace logging alias
 ig.log.log = nil                              -- Generic log alias
 
-ig.debug = {}                                 -- Debug utilities
-ig.debug.levels = {}                          -- Debug level definitions
-ig.debug.colors = {}                          -- Debug color definitions
-
 ig.func.Alert = nil                           -- Alert function alias
 
 -- ====================================================================================--

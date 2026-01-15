@@ -18,9 +18,9 @@ function ig.appearance.Initialize()
     if not appearanceConstants then
         appearanceConstants = ig.callback.Await('ig:GameData:GetAppearanceConstants')
         if appearanceConstants then
-            ig.debug.Info('[Appearance] Constants loaded successfully')
+            ig.log.Info("APPEARANCE", "Constants loaded successfully")
         else
-            ig.debug.Error('[Appearance] Failed to load constants')
+            ig.log.Error("APPEARANCE", "Failed to load constants")
         end
     end
 end
@@ -659,4 +659,4 @@ Citizen.CreateThread(function()
     ig.appearance.Initialize()
 end)
 
-ig.debug.Info('[Client] Appearance module loaded')
+ig.log.Info("CLIENT", "Appearance module loaded")

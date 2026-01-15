@@ -9,10 +9,7 @@ RegisterCommand('memory', function(source, args)
         collectgarbage('collect')
         local memAfter = collectgarbage('count')
         
-        ig.debug.Debug(('[Memory] Usage: %.2f MB (freed %.2f MB)'):format(
-            memAfter / 1024,
-            (memBefore - memAfter) / 1024
-        ))
+        ig.log.Debug("MEMORY", "Usage: %.2f MB (freed %.2f MB)", memAfter / 1024, (memBefore - memAfter) / 1024)
         
         -- Count active objects
         local counts = {
@@ -42,9 +39,7 @@ RegisterCommand('memory', function(source, args)
             if v then counts.objects = counts.objects + 1 end 
         end
         
-        ig.debug.Info(('[Active Entities] %d players, %d vehicles, %d NPCs, %d objects'):format(
-            counts.players, counts.vehicles, counts.npcs, counts.objects
-        ))
+        ig.log.Info("MEMORY", "Active Entities: %d players, %d vehicles, %d NPCs, %d objects", counts.players, counts.vehicles, counts.npcs, counts.objects)
         
         if source > 0 then
             TriggerClientEvent('chat:addMessage', source, {
@@ -87,9 +82,7 @@ local function CleanupOrphanedEntities()
     
     local totalCleaned = cleaned.vehicles + cleaned.npcs + cleaned.objects
     if totalCleaned > 0 then
-        ig.debug.Debug(('[Cleanup] Removed %d orphaned entities (V:%d N:%d O:%d)'):format(
-            totalCleaned, cleaned.vehicles, cleaned.npcs, cleaned.objects
-        ))
+        ig.log.Debug("CLEANUP", "Removed %d orphaned entities (V:%d N:%d O:%d)", totalCleaned, cleaned.vehicles, cleaned.npcs, cleaned.objects)
         collectgarbage('collect')
     end
     

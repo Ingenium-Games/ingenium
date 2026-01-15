@@ -161,4 +161,4 @@ function ig.modkit.ClearCache()
     modkitCache = nil
 end
 
-ig.debug.Info('[Game Data] Client-side helpers loaded')
+ig.log.Info('GAMEDATA', 'Client-side helpers loaded')

@@ -97,11 +97,11 @@ AddEventHandler("playerDropped", function()
     if not ig.player.ArePlayersActive() then
         --
         ig.sql.save.Vehicles()
-        ig.debug.Info("SQL: Vehicles")
+        ig.log.Info("SERVER", "SQL: Vehicles")
         Citizen.Wait(conf.sec)
         --
         ig.vehicle.SavePersistentVehicles()
-        ig.debug.Info("JSON: Persistent Vehicles")
+        ig.log.Info("SERVER", "JSON: Persistent Vehicles")
         --
         ig.sql.veh.Reset()
         ig.sql.char.ResetActive()

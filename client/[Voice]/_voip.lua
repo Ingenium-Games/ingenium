@@ -68,7 +68,7 @@ function ig.voip.client.InitializeMumble()
         MumbleSetAudioInputDistance(localVoiceState.voiceDistance)
     end
     
-    ig.debug.Debug("Mumble", "Voice system initialized")
+    ig.log.Debug("VOICE", "Mumble voice system initialized")
 end
 
 --- Update voice targets for proximity voice
@@ -540,6 +540,6 @@ end)
 if ig and ig.log and ig.log.Info then
     ig.log.Info("Ingenium VOIP", "Client-side voice system initialized")
 else
-    ig.debug.Info("Client-side voice system initialized")
+    ig.log.Info("VOICE", "Client-side voice system initialized")
 end
 -- ====================================================================================--

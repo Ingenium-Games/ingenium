@@ -27,7 +27,7 @@ local EnsurePlayerVehicle = RegisterServerCallback({
         while not DoesEntityExist(entity) do
             local elapsed = GetGameTimer() - startTime
             if elapsed >= timeout then
-                ig.funig.Debug_1("Timeout reached on creating vehicle")
+                ig.log.Debug("GARAGE", "Timeout reached on creating vehicle")
                 return false, false
             end
             -- Wait 10ms to balance CPU usage with responsiveness

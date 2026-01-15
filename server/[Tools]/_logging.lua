@@ -34,7 +34,7 @@ local function WriteBatchForLevel(level, messagesConcat)
     end)
 
     if not ok then
-        -- Avoid using ig.log here to prevent recursive logging via ig:debug:logToFile
+        -- Avoid using ig.log here to prevent recursive logging via Ingenium:Log:ToFile
         print(('[Logging] Failed to write to log file: %s - %s'):format(filePath, tostring(err)))
     end
 end
@@ -89,7 +89,7 @@ local function QueueLogEntry(message, level)
 end
 
 -- Event handler for logging
-RegisterNetEvent("ig:debug:logToFile", function(message, level)
+RegisterNetEvent("Ingenium:Log:ToFile", function(message, level)
     QueueLogEntry(message, level)
 end)
 

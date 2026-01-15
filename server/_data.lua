@@ -282,7 +282,7 @@ function ig.data.LoadJSONData(callback)
     ig.peds = ig.table.MakeReadOnly(ig.peds, "ig.peds")
     ig.appearance_constants = ig.table.MakeReadOnly(ig.appearance_constants, "ig.appearance_constants")
     
-    ig.debug.Info('[Data] Static reference data protected from modification')
+    ig.log.Info("DATA", "Static reference data protected from modification")
 
     if callback then callback() end
 end

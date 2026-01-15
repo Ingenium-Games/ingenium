@@ -406,7 +406,7 @@ CreateThread(function()
     end
     
     Wait(10000) -- Initial 10 second delay
-    ig.debug.Debug("[Cleanup Manager] Starting consolidated cleanup routines")
+    ig.log.Debug("GSR", "Starting consolidated cleanup routines")
     ConsolidatedCleanupLoop()
 end)
 

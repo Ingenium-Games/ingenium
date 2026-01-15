@@ -157,7 +157,7 @@ CreateThread(function()
     if ig and ig.log and ig.log.Info then
         ig.log.Info("Banking", "ATM targets registered")
     else
-        ig.debug.Info("ATM targets registered")
+        ig.log.Info("BANKING", "ATM targets registered")
     end
 end)
 
@@ -195,7 +195,7 @@ CreateThread(function()
     if ig and ig.log and ig.log.Info then
         ig.log.Info("Banking", "Bank location zones registered")
     else
-        ig.debug.Info("Bank location zones registered")
+        ig.log.Info("BANKING", "Bank location zones registered")
     end
 end)
 

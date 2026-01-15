@@ -30,7 +30,7 @@ function ig.appearance.LoadJobPricing(jobName)
     -- Check if file exists and load it
     if ig.json.Exists(path) then
         ig.appearance_pricing[jobName] = ig.json.Read(path)
-        ig.debug.Info("Loaded pricing for job: " .. jobName)
+        ig.log.Info("APPEARANCE", "Loaded pricing for job: %s", jobName)
         return ig.appearance_pricing[jobName]
     end
     
@@ -51,7 +51,7 @@ function ig.appearance.GetPricing(jobName)
     
     -- Fallback to default if job pricing not found
     if not pricing then
-        ig.debug.Warn("No pricing found for job: " .. jobName .. ", using default")
+        ig.log.Warn("APPEARANCE", "No pricing found for job: %s, using default", jobName)
         return ig.appearance.GetDefaultPricing()
     end
     
@@ -68,7 +68,7 @@ function ig.appearance.GetDefaultPricing()
             if ig and ig.log and ig.log.Info then
                 ig.log.Info("Appearance Pricing", "Loaded default pricing")
             else
-                ig.debug.Info("Loaded default pricing")
+                ig.log.Info("APPEARANCE", "Loaded default pricing")
             end
         else
             -- Create minimal default if file doesn't exist
@@ -87,7 +87,7 @@ function ig.appearance.GetDefaultPricing()
                 },
                 modifiers = {}
             }
-            ig.debug.Warn("Created minimal default pricing (file not found)")
+            ig.log.Warn("APPEARANCE", "Created minimal default pricing (file not found)")
         end
     end
     
@@ -106,14 +106,14 @@ end
 ---@return boolean Success status
 function ig.appearance.UpdatePrice(jobName, category, itemId, price)
     if not jobName or jobName == "" or jobName == "_default" then
-        ig.debug.Error("Cannot update default pricing")
+        ig.log.Error("APPEARANCE", "Cannot update default pricing")
         return false
     end
     
     -- Load pricing if not already loaded
     local pricing = ig.appearance.LoadJobPricing(jobName)
     if not pricing then
-        ig.debug.Error("Failed to load pricing for job: " .. jobName)
+        ig.log.Error("APPEARANCE", "Failed to load pricing for job: %s", jobName)
         return false
     end
     
@@ -131,7 +131,7 @@ function ig.appearance.UpdatePrice(jobName, category, itemId, price)
     -- Mark as dirty for periodic save
     ig.appearance_pricing_dirty[jobName] = true
     
-    ig.debug.Info("[Appearance Pricing] Updated " .. categoryName .. " price for job " .. jobName .. ": item " .. itemId .. " = $" .. price)
+    ig.log.Info("APPEARANCE", "[Appearance Pricing] Updated %s price for job %s: item %s = $%d", categoryName, jobName, itemId, price)
     
     return true
 end
@@ -149,7 +149,7 @@ function ig.appearance.SaveAllDirtyPricing()
     end
     
     if saved > 0 then
-        ig.debug.Info("Saved " .. saved .. " dirty pricing file(s)")
+        ig.log.Info("APPEARANCE", "Saved %d dirty pricing file(s)", saved)
     end
 end
 
@@ -164,7 +164,7 @@ function ig.appearance.SaveAllPricing()
         end
     end
     
-    ig.debug.Info("Saved " .. saved .. " pricing file(s) on resource stop")
+    ig.log.Info("APPEARANCE", "Saved %d pricing file(s) on resource stop", saved)
 end
 
 -- ====================================================================================--
@@ -188,7 +188,7 @@ end
 
 AddEventHandler("onResourceStop", function(resource)
     if GetCurrentResourceName() ~= resource then return end
-    ig.debug.Warn("Saving all pricing data on resource stop...")
+    ig.log.Warn("APPEARANCE", "Saving all pricing data on resource stop...")
     ig.appearance.SaveAllPricing()
 end)
 
@@ -363,4 +363,4 @@ function ig.appearance.CalculateCost(jobName, oldAppearance, newAppearance)
     return math.floor(totalCost), itemizedCosts
 end
 
-ig.debug.Info('[Server] Appearance pricing module loaded')
+ig.log.Info("APPEARANCE", "Appearance pricing module loaded")

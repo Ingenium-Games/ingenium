@@ -14,7 +14,7 @@ function ig.data.Initilize(cb)
         args = {},
         callback = function(result)
             if result and not result.success then
-                ig.debug.Error("Failed to connect: " .. (result.error or "Unknown error"))
+                ig.log.Error("CLIENT", "Failed to connect: %s", (result.error or "Unknown error"))
             end
         end
     })
