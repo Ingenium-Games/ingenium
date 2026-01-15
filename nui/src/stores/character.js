@@ -5,13 +5,15 @@ export const useCharacterStore = defineStore('character', () => {
   const characters = ref([])
   const selectedCharacter = ref(null)
   const isCreatingCharacter = ref(false)
+  const slots = ref(1)
   
   const isInCharacterSelect = computed(() => {
     return characters.value.length > 0 || isCreatingCharacter.value
   })
   
-  function setCharacters(chars) {
+  function setCharacters(chars, slotCount) {
     characters.value = chars
+    slots.value = slotCount || 1
     selectedCharacter.value = null
     isCreatingCharacter.value = false
   }
@@ -33,6 +35,7 @@ export const useCharacterStore = defineStore('character', () => {
     characters,
     selectedCharacter,
     isCreatingCharacter,
+    slots,
     isInCharacterSelect,
     setCharacters,
     selectCharacter,

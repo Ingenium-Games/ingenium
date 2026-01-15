@@ -97,6 +97,12 @@ export function setupNuiHandlers() {
     const { message, data } = event.data
     
     switch (message) {
+      // Connection status
+      case 'connected':
+        // Server connection established, NUI is ready
+        console.log('NUI connected to server')
+        break
+
       // Chat system
       case 'Client:NUI:ChatAddMessage':
         chatStore.addMessage(data)
@@ -129,7 +135,7 @@ export function setupNuiHandlers() {
 
       // Character select
       case 'Client:NUI:CharacterSelectShow':
-        characterStore.setCharacters(data.characters || [])
+        characterStore.setCharacters(data.characters || [], data.slots || 1)
         uiStore.showCharacterSelect = true
         break
 

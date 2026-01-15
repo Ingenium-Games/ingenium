@@ -287,11 +287,11 @@ if toggleHotkey then
         return enableTargeting()
     end, false)
 
-    RegisterKeyMapping("ig.target", "Toggle targeting", "keyboard", 'LALT')
+    RegisterKeyMapping("ig.target", "Toggle targeting", "keyboard", 'lalt')
 else
     RegisterCommand('+ig.target', function() CreateThread(enableTargeting) end, false)
     RegisterCommand('-ig.target', disableTargeting, false)
-    RegisterKeyMapping('+ig.target', 'Toggle targeting', 'keyboard', 'LALT')
+    RegisterKeyMapping('+ig.target', 'Toggle targeting', 'keyboard', 'lalt')
 end
 
 local function getResponse(option, server)

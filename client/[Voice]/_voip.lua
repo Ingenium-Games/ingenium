@@ -73,6 +73,10 @@ end
 
 --- Update voice targets for proximity voice
 function ig.voip.client.UpdateProximityTargets()
+    if not ig.voip.GetVoiceMode then
+        return
+    end
+    
     local playerId = PlayerId()
     local playerPed = PlayerPedId()
     local playerCoords = GetEntityCoords(playerPed)
@@ -212,6 +216,9 @@ end
 --- Set voice mode
 ---@param modeIndex number The voice mode index (1-based)
 function ig.voip.client.SetVoiceMode(modeIndex)
+    if not ig.voip.GetVoiceMode then
+        return
+    end
     local mode = ig.voip.GetVoiceMode(modeIndex)
     if not mode then
         return

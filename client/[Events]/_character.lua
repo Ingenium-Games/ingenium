@@ -24,6 +24,23 @@ AddEventHandler("Client:Character:OpeningMenu", function()
     SetGameplayCamRelativeRotation(4.0307750701904,0.054180480539799,-71.305198669434)
     SetGameplayCamRelativeHeading(-0.091852381825447 )
     SetGameplayCamRelativePitch(4.0307726860046, 1.0)
+    
+    -- Trigger character select NUI
+    TriggerServerCallback({
+        eventName = "Server:Character:List",
+        args = {},
+        callback = function(data)
+            if data and data.Characters then
+                SendNUIMessage({
+                    message = "Client:NUI:CharacterSelectShow",
+                    data = {
+                        characters = data.Characters,
+                        slots = data.Slots
+                    }
+                })
+            end
+        end
+    })
 end)
 
 --[[
@@ -186,7 +203,7 @@ AddEventHandler("Client:Character:Ready", function()
     -- Character has loaded in, no need to respawn any more.
     exports.spawnmanager:setAutoSpawn(false)
     TriggerServerEvent("Server:Character:Ready")
-    exports["AdvancedParking"]:Enable(true)
+    --exports["AdvancedParking"]:Enable(true)
     
     -- RP Mode specific initialization (migrated from ig.base)
     if conf.gamemode == "RP" then

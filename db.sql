@@ -12,7 +12,7 @@
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40111 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
 
 
 -- Dumping database structure for db
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `banking_accounts` (
   `Loan` decimal(10,2) DEFAULT NULL,
   `Duration` int(3) DEFAULT NULL,
   `Active` tinyint(1) NOT NULL DEFAULT 0,
-  `Banking_Favorites`longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '[]' ,
+  `Banking_Favorites` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '[]',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `Character_ID` (`Character_ID`),
   UNIQUE KEY `Account_Number` (`Account_Number`),
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `banking_job_accounts` (
   `Members` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Accounts` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
-  UNIQUE KEY `Job` (`Job`) USING BTREE,
+  UNIQUE KEY `Job` (`Job`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Create banking_transactions table for transaction history
@@ -121,37 +121,36 @@ CREATE TABLE IF NOT EXISTS `banking_transactions` (
   `Date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   KEY `Character_ID` (`Character_ID`),
-  KEY `Date` (`Date`),
-  CONSTRAINT `Remove_Character_ID_On_Character_Delete` FOREIGN KEY (`Character_ID`) REFERENCES `characters` (`Character_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `Date` (`Date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Banking transaction history';
 
--- Dumping data for table db.job_accounts: ~25 rows (approximately)
-INSERT INTO `job_accounts` (`ID`, `Name`, `Description`, `Boss`, `Members`, `Accounts`, `Stock`, `Inventory`) VALUES
-	(1, 'pepe', 'Pepe\'s Pizzaria : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(2, 'taxi', 'Taxi Service : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(3, 'chicken', 'Cluckin\' Bell : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(4, 'pdm', 'Premium Motor Sport : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(5, 'lostmc', 'Lost MC : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(6, 'city', 'State Department : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(7, 'triads', 'Triads : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(8, 'marabunta', 'Marabuntas : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(9, 'aztecas', 'Aztecas : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(10, 'lostsc', 'Lost SC : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(11, 'altruists', 'Altruists : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(12, 'vargos', 'Vargos : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(13, 'garbage', 'Desperado\'s Waste Services : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(14, 'none', 'Unemployed : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(15, 'logistics', 'OP Logistics : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(16, 'bank', 'Fleeca : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(17, 'news', 'Wezeal News : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(18, 'lumber', 'Chippy Chop\'ns Wood Shop\'n : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(19, 'mining', 'Caveat Cutters Union : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(20, 'police', 'Police Department : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(21, 'postal', 'Go Postal : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(22, 'famillies', 'Famillies : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(23, 'medic', 'Emergancy Medical Services : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(24, 'mechanic', 'Benny\'s Original Motorworks : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]'),
-	(25, 'ballers', 'Ballers : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}', '[]', '[]');
+-- Dumping data for table db.banking_job_accounts: ~25 rows (approximately)
+INSERT INTO `banking_job_accounts` (`ID`, `Job`, `Description`, `Boss`, `Members`, `Accounts`) VALUES
+	(1, 'pepe', 'Pepe\'s Pizzaria : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(2, 'taxi', 'Taxi Service : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(3, 'chicken', 'Cluckin\' Bell : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(4, 'pdm', 'Premium Motor Sport : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(5, 'lostmc', 'Lost MC : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(6, 'city', 'State Department : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(7, 'triads', 'Triads : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(8, 'marabunta', 'Marabuntas : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(9, 'aztecas', 'Aztecas : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(10, 'lostsc', 'Lost SC : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(11, 'altruists', 'Altruists : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(12, 'vargos', 'Vargos : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(13, 'garbage', 'Desperado\'s Waste Services : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(14, 'none', 'Unemployed : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(15, 'logistics', 'OP Logistics : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(16, 'bank', 'Fleeca : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(17, 'news', 'Wezeal News : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(18, 'lumber', 'Chippy Chop\'ns Wood Shop\'n : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(19, 'mining', 'Caveat Cutters Union : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(20, 'police', 'Police Department : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(21, 'postal', 'Go Postal : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(22, 'famillies', 'Famillies : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(23, 'medic', 'Emergancy Medical Services : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(24, 'mechanic', 'Benny\'s Original Motorworks : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}'),
+	(25, 'ballers', 'Ballers : Description for role here.', 'Not Owned', '[]', '{"Safe":0.0,"Bank":5000.0}');
 
 -- Dumping structure for table db.logistics
 CREATE TABLE IF NOT EXISTS `logistics` (
@@ -264,4 +263,4 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+/*!40111 SET NOTE_VERBOSITY=IFNULL(@OLD_NOTE_VERBOSITY, 1) */;

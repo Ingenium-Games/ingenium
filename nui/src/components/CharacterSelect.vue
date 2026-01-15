@@ -89,11 +89,18 @@
       <!-- Character List -->
       <div class="character-select-list">
         <h2 class="text-xl font-bold mb-4 text-white">Select Character</h2>
+        
+        <!-- Slots Full Message -->
+        <div v-if="!canCreateMore" class="slots-full-message">
+          <p>You have used up all character slots, please visit the server owners Tebex page to purchase more.</p>
+        </div>
+        
         <div class="character-select-row">
           <button
             @click="selectNew"
+            :disabled="!canCreateMore"
             class="character-select-character new"
-            title="Create New Character"
+            :title="canCreateMore ? 'Create New Character' : `Maximum characters reached (${slots}/${slots})`"
           >
             <span class="icon">+</span>
             <span class="label">New</span>
@@ -116,14 +123,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useCharacterStore } from '../stores/character'
 import { sendNuiMessage } from '../utils/nui'
 
 const characterStore = useCharacterStore()
+const slots = ref(1)
 const newCharacter = ref({
   firstName: '',
   lastName: ''
+})
+
+// Set slots from parent data (passed from Lua)
+const setSlots = (slotCount) => {
+  slots.value = slotCount || 1
+}
+
+// Check if player can create more characters
+const canCreateMore = computed(() => {
+  return characterStore.characters.length < slots.value
+})
+
+const availableSlots = computed(() => {
+  return slots.value - characterStore.characters.length
 })
 
 function selectCharacter(char) {
@@ -131,6 +153,10 @@ function selectCharacter(char) {
 }
 
 function selectNew() {
+  if (!canCreateMore.value) {
+    alert(`You have reached the maximum number of characters (${slots.value})`)
+    return
+  }
   characterStore.startCreatingCharacter()
 }
 
@@ -278,6 +304,17 @@ function formatDate(dateString) {
   font-weight: 600;
 }
 
+.slots-full-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 20px;
+  color: #fca5a5;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .character-select-row {
   display: flex;
   gap: 15px;
@@ -312,6 +349,18 @@ function formatDate(dateString) {
 
 .character-select-character.new {
   border-color: #10b981;
+}
+
+.character-select-character:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.character-select-character:disabled:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.05);
+  transform: none;
 }
 
 .character-select-character .icon {
