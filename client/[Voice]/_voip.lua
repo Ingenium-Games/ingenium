@@ -68,7 +68,7 @@ function ig.voip.client.InitializeMumble()
         MumbleSetAudioInputDistance(localVoiceState.voiceDistance)
     end
     
-    ig.voip.Debug("Mumble voice system initialized")
+    ig.debug.Debug("Mumble", "Voice system initialized")
 end
 
 --- Update voice targets for proximity voice

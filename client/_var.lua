@@ -23,21 +23,19 @@ ig._loaded = false
 ig._character = nil
 
 -- ====================================================================================--
--- Core System Tables
+-- DECLARE ALL PARENT TABLES FIRST (before assigning sub-properties)
 -- ====================================================================================--
+
+-- Core System Tables
 ig.data = {}           -- Data management
 ig.func = {}           -- Generic functions
 ig.callback = {}       -- Callback system
 
--- ====================================================================================--
 -- Character and Appearance
--- ====================================================================================--
 ig.appearance = {}     -- Appearance functions
 ig.affiliation = {}    -- Affiliation/faction system
 
--- ====================================================================================--
 -- Item and Inventory Management
--- ====================================================================================--
 ig.item = {}           -- Item functions
 ig.inventory = {}      -- Inventory functions
 ig._inventory = {}     -- Inventory data
@@ -52,140 +50,113 @@ ig._ammo = {           -- Ammo tracking
     [".308"]=0
 }
 
--- ====================================================================================--
 -- Weapon System
--- ====================================================================================--
 ig.weapon = {}         -- Weapon functions
-ig._weapon = nil                              -- Current weapon
-ig._weaponname = nil                          -- Current weapon name
-ig._weaponCategories = {}                     -- Weapon category lookup
-ig._weaponComponents = {}                     -- Weapon components lookup
-
+ig._weapon = nil       -- Current weapon
+ig._weaponname = nil   -- Current weapon name
+ig._weaponCategories = {}    -- Weapon category lookup
+ig._weaponComponents = {}    -- Weapon components lookup
 ig.ammo = {}           -- Ammo functions
-ig._ammotype = nil                            -- Current ammo type
+ig._ammotype = nil     -- Current ammo type
 
--- ====================================================================================--
 -- Door and Object Management
--- ====================================================================================--
 ig.door = {}           -- Door functions
 ig.doors = {}          -- Door data
-
 ig.object = {}         -- Object functions
 ig.objects = {}        -- Object data
 
--- ====================================================================================--
 -- Tattoo System
--- ====================================================================================--
 ig.tattoo = {}         -- Tattoo functions
 ig.tattoos = {}        -- Tattoo data
 
--- ====================================================================================--
 -- Skills and Traits
--- ====================================================================================--
 ig.skill = {}          -- Skill functions
 ig._skills = {}        -- Skill data
-
 ig.trait = {}          -- Trait functions
 ig.traits = {}         -- Trait data
 
--- ====================================================================================--
 -- Vehicle System
--- ====================================================================================--
-ig.vehicle = {}        -- Vehicle functions (client/[Events])
+ig.vehicle = {}        -- Vehicle functions
 ig.vehicles = {}       -- Vehicle data
 
--- ====================================================================================--
 -- Positioning and Zones
--- ====================================================================================--
-ig.zone = {}           -- Zone management wrapper (wraps PolyZone)
+ig.zone = {}           -- Zone management wrapper
 ig.state = {}          -- State functions
 ig.states = {}         -- State data
 
--- ====================================================================================--
 -- Visual Effects and UI
--- ====================================================================================--
 ig.blip = {}           -- Blip functions
 ig.blips = {}          -- Blip data
-
 ig.marker = {}         -- Marker functions
 ig.markers = {}        -- Marker data
-
 ig.camera = {}         -- Camera functions
 ig.cameras = {}        -- Camera data
-
 ig.fx = {}             -- Effects/graphics functions
-
 ig.text = {}           -- Text display
 ig.chat = {}           -- Chat functions
 ig.chats = {}          -- Chat messages
-
 ig.ui = {}             -- UI system
 
--- ====================================================================================--
 -- Item Drops and Pickups
--- ====================================================================================--
 ig.drop = {}           -- Drop functions
 
--- ====================================================================================--
--- Sub-table Variables (Data Storage)
--- ====================================================================================--
-ig.ipls.active = {}                           -- Active IPLs
-ig.ipls.inactive = {}                         -- Inactive IPLs
-
-ig.vehicles.currentVehicle = 0                -- Currently occupied vehicle
-ig.vehicles.currentSeat = -1                  -- Current seat in vehicle
-
-ig.vehicle.locateBlips = {}                   -- Active locate blips
-
-ig.voip.client = {}                           -- Client voice data
-
-ig.zone.Poly = nil                            -- PolyZone class
-ig.zone.Box = nil                             -- BoxZone class
-ig.zone.Circle = nil                          -- CircleZone class
-ig.zone.Entity = nil                          -- EntityZone class
-ig.zone.Combo = nil                           -- ComboZone class
-ig.zone.GetPlayerPosition = nil               -- PolyZone utility
-ig.zone.GetPlayerHeadPosition = nil           -- PolyZone utility
-ig.zone.EnsureMetatable = nil                 -- PolyZone utility
-
--- ====================================================================================--
 -- Player Status and States
--- ====================================================================================
 ig.death = {}          -- Death handling
 ig.modifier = {}       -- Modifier functions
 ig.oldmodifiers = {}   -- Old modifiers cache
-
 ig.animation = {}      -- Animation functions
 
--- ====================================================================================--
 -- IPL and World Management
--- ====================================================================================--
 ig.ipl = {}            -- IPL functions
 ig.ipls = {}           -- IPL data
-
 ig.weather = {}        -- Weather system
 ig.time = {}           -- Time system (client)
 
--- ====================================================================================--
 -- Persistence and Data Saving
--- ====================================================================================--
 ig.persistance = {}    -- Persistence functions
 ig._vehicle_persistence = {} -- Vehicle persistence
 
--- ====================================================================================--
 -- Chat and Security
--- ====================================================================================--
 ig.ace = {}            -- ACE permission functions
 ig.aces = {}           -- ACE permissions data
 
--- ====================================================================================--
 -- Admin and Debug Tools
--- ====================================================================================--
 ig.screenshot = {}     -- Screenshot system
 
--- ====================================================================================--
 -- Target System (Interaction)
--- ====================================================================================--
 ig.target = {}         -- Target/interaction system
+
+-- Game Data and Modkits
+ig.modkit = {}         -- Modkit functions
+ig.modkits = {}        -- Modkit data
+
+-- Voice System
+ig.voip = {}           -- Voice system
+
+-- ====================================================================================--
+-- NOW assign sub-table properties (all parent tables exist)
+-- ====================================================================================--
+
+-- IPL sub-tables
+ig.ipls.active = {}    -- Active IPLs
+ig.ipls.inactive = {}  -- Inactive IPLs
+
+-- Vehicle sub-properties
+ig.vehicles.currentVehicle = 0      -- Currently occupied vehicle
+ig.vehicles.currentSeat = -1        -- Current seat in vehicle
+ig.vehicle.locateBlips = {}         -- Active locate blips
+
+-- Voice sub-tables
+ig.voip.client = {}                 -- Client voice data
+
+-- Zone sub-properties
+ig.zone.Poly = nil                  -- PolyZone class
+ig.zone.Box = nil                   -- BoxZone class
+ig.zone.Circle = nil                -- CircleZone class
+ig.zone.Entity = nil                -- EntityZone class
+ig.zone.Combo = nil                 -- ComboZone class
+ig.zone.GetPlayerPosition = nil     -- PolyZone utility
+ig.zone.GetPlayerHeadPosition = nil -- PolyZone utility
+ig.zone.EnsureMetatable = nil       -- PolyZone utility
 
 -- ====================================================================================--

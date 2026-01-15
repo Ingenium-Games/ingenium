@@ -127,7 +127,16 @@ client_scripts {
     "client/[Threads]/*.lua",
     "client/[ToDo]/*.lua",
     "client/[Voice]/*.lua",
-    "client/[Zones]/*.lua",
+    
+    -- Zone system (PolyZone must load first)
+    "client/[Zones]/PolyZone.lua",
+    "client/[Zones]/BoxZone.lua",
+    "client/[Zones]/CircleZone.lua",
+    "client/[Zones]/EntityZone.lua",
+    "client/[Zones]/ComboZone.lua",
+    "client/[Zones]/_zone.lua",
+    "client/[Zones]/_zone_manager.lua",
+    "client/[Zones]/_zone_test_example.lua",
     
     -- Main client entry point (MUST be last)
     "client/client.lua",
