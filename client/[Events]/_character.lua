@@ -162,7 +162,7 @@ end)
 -- NOTE: Triggered from Server:Character:Join via TriggerClientEvent("Client:Character:ReSpawn", src, Coords)
 RegisterNetEvent("Client:Character:ReSpawn")
 AddEventHandler("Client:Character:ReSpawn", function(Coords)
-    ig.log.Info("Character", "Spawning character at saved location")
+    ig.log.Info("Character", "Spawning character at saved location: " .. json.encode(Coords))
     
     local ped = PlayerPedId()
     
@@ -182,6 +182,7 @@ AddEventHandler("Client:Character:ReSpawn", function(Coords)
         
         -- Hide character select UI via wrapper function
         -- NOTE: This sends Client:NUI:CharacterSelectHide to NUI
+        ig.log.Debug("Character", "Hiding character select UI")
         ig.nui.character.HideSelect()
         SetNuiFocus(false, false)
         

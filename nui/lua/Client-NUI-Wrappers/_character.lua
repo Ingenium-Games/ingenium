@@ -18,6 +18,7 @@ if not ig.nui.character then ig.nui.character = {} end
 
 -- Show character selection UI
 -- Called from: Client:Character:OpeningMenu
+-- NOTE: NUI will request character data via Client:Request:CharacterList callback when mounted
 function ig.nui.character.ShowSelect()
     ig.ui.Send("Client:NUI:CharacterSelectShow", {}, true)
 end

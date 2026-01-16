@@ -79,15 +79,17 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
     -- Verify player is not already loaded
     if not ig.data.IsPlayerLoaded() then
         SetNuiFocus(false, false)
-        ig.log.Trace("Character", "NUI: Player creating new character")
+        ig.log.Trace("Character", "NUI: Player creating new character - First: " .. data.First_Name .. ", Last: " .. data.Last_Name)
         
         -- Get appearance from nui/src/stores/appearance.js (user customization)
         local appearance = ig.appearance.PendingAppearance or ig.appearance.GetAppearance()
+        ig.log.Debug("Character", "Character appearance data: " .. json.encode(appearance or "nil"))
         ig.appearance.PendingAppearance = nil
         
         SetFollowPedCamViewMode(0)
         
         -- Send to server with character data and appearance
+        ig.log.Debug("Character", "Sending Server:Character:Register event with: First=" .. data.First_Name .. ", Last=" .. data.Last_Name)
         -- NOTE: server/[Events]/_character_lifecycle.lua handles Server:Character:Register
         TriggerServerEvent("Server:Character:Register", data.First_Name, data.Last_Name, appearance)
         

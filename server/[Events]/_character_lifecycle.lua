@@ -136,9 +136,11 @@ AddEventHandler("Server:Character:Register", function(first_name, last_name, app
     end
     
     local src = source
+    ig.log.Debug("Character", "Character registration started for player " .. src .. ": " .. first_name .. " " .. last_name)
     
     -- Prevent double-loading (security check)
     if ig.data.GetPlayer(src) ~= false then
+        ig.log.Error("Character", "Character registration: Player " .. src .. " already loaded!")
         ig.func.Eventban(src, "Server:Character:Register")
         return
     end
@@ -150,6 +152,8 @@ AddEventHandler("Server:Character:Register", function(first_name, last_name, app
     local phone_number = ig.sql.gen.PhoneNumber()
     local iban = ig.sql.gen.Iban()
     local bank_number = ig.sql.gen.AccountNumber()
+    
+    ig.log.Trace("Character", "Generated IDs - CharID: " .. character_id .. ", Phone: " .. phone_number)
     
     local data = {
         Primary_ID = primary_id,
@@ -170,6 +174,7 @@ AddEventHandler("Server:Character:Register", function(first_name, last_name, app
     
     -- Insert character into database and chain related operations
     ig.sql.char.Add(data, function()
+        ig.log.Debug("Character", "Character " .. character_id .. " added to database")
         -- Create associated bank account with generated IBAN
         ig.sql.bank.AddAccount(character_id, bank_number, iban)
         p:resolve()
@@ -178,15 +183,24 @@ AddEventHandler("Server:Character:Register", function(first_name, last_name, app
     -- Wait for database operations to complete
     Citizen.Await(p)
     
+    ig.log.Debug("Character", "Database operations completed, loading player...")
+    
     -- Load the newly created character
     ig.data.LoadPlayer(src, character_id)
     
     -- Trigger character creation event (for custom spawn logic, etc.)
     TriggerEvent("Server:Character:Spawn", src)
     
+    ig.log.Info("Character", "Character " .. character_id .. " created successfully for player " .. src)
+    
     -- Give new character a phone
     local xPlayer = ig.data.GetPlayer(src)
-    xPlayer.AddItem({"Phone", 1, 100})
+    if xPlayer then
+        xPlayer.AddItem({"Phone", 1, 100})
+        ig.log.Trace("Character", "Phone added to character inventory")
+    else
+        ig.log.Error("Character", "Failed to get player after loading - character may not be accessible!")
+    end
 end)
 
 -- Alternate spawn trigger (used after character creation)
@@ -199,8 +213,14 @@ RegisterNetEvent("Server:Character:Spawn", function(req)
     local src = tonumber(req)
     local xPlayer = ig.data.GetPlayer(src)
     
+    ig.log.Debug("Character", "Server:Character:Spawn called for player " .. src)
+    
     if xPlayer then
-        TriggerClientEvent("Client:Character:ReSpawn", src, xPlayer.GetCoords())
+        local coords = xPlayer.GetCoords()
+        ig.log.Trace("Character", "Spawning player at: " .. coords.x .. ", " .. coords.y .. ", " .. coords.z)
+        TriggerClientEvent("Client:Character:ReSpawn", src, coords)
+    else
+        ig.log.Error("Character", "Server:Character:Spawn: Player not found!")
     end
 end)
 
