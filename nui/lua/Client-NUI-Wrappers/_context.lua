@@ -10,9 +10,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.context then ig.nui.context = {} end
-
 -- Show context menu
 -- Called from: Client code (targeting, interactions)
 function ig.nui.context.Show(options, actions)

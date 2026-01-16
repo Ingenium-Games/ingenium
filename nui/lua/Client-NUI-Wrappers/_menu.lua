@@ -10,9 +10,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.menu then ig.nui.menu = {} end
-
 -- Show menu with items
 -- Called from: Client code to display menu
 function ig.nui.menu.Show(items, options)

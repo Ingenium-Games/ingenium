@@ -10,9 +10,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.input then ig.nui.input = {} end
-
 -- Show input dialog
 -- Called from: Client code to request user input
 function ig.nui.input.Show(label, placeholder, options)

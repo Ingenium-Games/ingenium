@@ -157,6 +157,12 @@ function selectNew() {
     alert(`You have reached the maximum number of characters (${slots.value})`)
     return
   }
+  
+  // Trigger Lua event to start appearance customization
+  console.log('[CharacterSelect] Sending NUI:Client:CharacterCreateStart')
+  sendNuiMessage('NUI:Client:CharacterCreateStart', {})
+  
+  // Update Vue state to show creation UI
   characterStore.startCreatingCharacter()
 }
 
@@ -165,9 +171,13 @@ function cancelCreate() {
 }
 
 function createCharacter() {
+  const appearance = appearanceStore.getAppearance()
+  
+  console.log('[CharacterSelect] Sending NUI:Client:CharacterCreate with name and appearance')
   sendNuiMessage('NUI:Client:CharacterCreate', {
     firstName: newCharacter.value.firstName,
-    lastName: newCharacter.value.lastName
+    lastName: newCharacter.value.lastName,
+    appearance: appearance
   })
   newCharacter.value = { firstName: '', lastName: '' }
 }

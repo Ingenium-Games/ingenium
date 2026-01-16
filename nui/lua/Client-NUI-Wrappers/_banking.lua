@@ -10,9 +10,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.banking then ig.nui.banking = {} end
-
 -- Show banking menu
 -- Called from: Client code when player opens bank/ATM
 function ig.nui.banking.Show(bankData, options)

@@ -74,17 +74,57 @@ RegisterNUICallback("NUI:Client:CharacterDelete", function(data, cb)
     end
 end)
 
--- Player creates a new character from NUI
+-- Start new character creation - opens appearance customizer
+-- Called FIRST when player clicks "New Character" - shows appearance customization screen
+-- NOTE: Name form is shown by NUI AFTER this completes
+RegisterNUICallback("NUI:Client:CharacterCreateStart", function(data, cb)
+    if not ig.data.IsPlayerLoaded() then
+        ig.log.Info("Character", "NUI: Starting new character creation - opening appearance customizer")
+        
+        local plyped = PlayerPedId()
+        SetEntityCoords(plyped, -703.9, -152.62, 37.42)
+        SetEntityHeading(plyped, 62)
+        
+        ig.func.FadeOut(1000)
+        ig.func.IsBusyPleaseWait(500)
+        
+        -- Wait for fade completion
+        SetTimeout(500, function()
+            -- Show appearance customizer UI via wrapper function
+            -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
+            -- NUI will show name form AFTER player completes appearance customization
+            ig.nui.character.ShowCreate()
+            SetNuiFocus(true, true)
+            ig.func.FadeIn(1000)
+            ig.func.IsBusyPleaseWait(500)
+            
+            ig.log.Debug("Character", "Appearance customizer opened, awaiting completion")
+        end)
+        
+        cb({
+            message = "ok",
+            data = "Appearance customizer opened"
+        })
+    else
+        cb({
+            message = "error",
+            data = "Player already has a character loaded"
+        })
+    end
+end)
+
+-- Complete new character creation - called AFTER appearance customization is done
+-- At this point NUI has collected: firstName, lastName, AND appearance data
 RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
-    -- Verify player is not already loaded
     if not ig.data.IsPlayerLoaded() then
         SetNuiFocus(false, false)
         
         -- Get name fields (NUI sends camelCase: firstName, lastName)
         local firstName = data.firstName or data.First_Name
         local lastName = data.lastName or data.Last_Name
+        local appearance = data.appearance or data.Appearance
         
-        -- Validate that we have character name data
+        -- Validate that we have ALL required data
         if not firstName or not lastName then
             ig.log.Error("Character", "NUI: CharacterCreate missing name data: " .. json.encode(data or {}))
             cb({
@@ -94,23 +134,27 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
             return
         end
         
-        ig.log.Trace("Character", "NUI: Player creating new character - First: " .. firstName .. ", Last: " .. lastName)
+        if not appearance then
+            ig.log.Error("Character", "NUI: CharacterCreate missing appearance data")
+            cb({
+                message = "error",
+                data = "Missing appearance customization"
+            })
+            return
+        end
         
-        -- Get appearance from nui/src/stores/appearance.js (user customization)
-        local appearance = ig.appearance.PendingAppearance or ig.appearance.GetAppearance()
-        ig.log.Debug("Character", "Character appearance data: " .. json.encode(appearance or "nil"))
-        ig.appearance.PendingAppearance = nil
+        ig.log.Info("Character", "NUI: Creating new character - First: " .. firstName .. ", Last: " .. lastName)
+        ig.log.Debug("Character", "Character appearance data: " .. json.encode(appearance))
         
         SetFollowPedCamViewMode(0)
         
-        -- Send to server with character data and appearance
-        ig.log.Debug("Character", "Sending Server:Character:Register event with: First=" .. firstName .. ", Last=" .. lastName)
-        -- NOTE: server/[Events]/_character_lifecycle.lua handles Server:Character:Register
+        -- Send to server with ALL character data (name + appearance)
+        ig.log.Debug("Character", "Sending Server:Character:Register with complete data")
         TriggerServerEvent("Server:Character:Register", firstName, lastName, appearance)
         
         cb({
             message = "ok",
-            data = nil
+            data = "Character creation submitted"
         })
     else
         cb({

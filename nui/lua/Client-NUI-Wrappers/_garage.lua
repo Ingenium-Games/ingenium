@@ -10,9 +10,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.garage then ig.nui.garage = {} end
-
 -- Show garage menu
 -- Called from: Client code when player opens garage
 function ig.nui.garage.Show(garageData, options)

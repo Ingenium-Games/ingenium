@@ -11,9 +11,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.inventory then ig.nui.inventory = {} end
-
 -- Show inventory
 -- Called from: Client code to display player inventory
 function ig.nui.inventory.Show(inventoryData, options)

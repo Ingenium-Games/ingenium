@@ -10,9 +10,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.target then ig.nui.target = {} end
-
 -- Show target menu
 -- Called from: Target system when player looks at interactive entity
 function ig.nui.target.Show(targetData, actions)

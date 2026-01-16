@@ -10,9 +10,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.notify then ig.nui.notify = {} end
-
 -- Show notification
 -- Called from: Client code to display notification/alert
 function ig.nui.notify.Show(message, notifType, options)

@@ -12,9 +12,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.chat then ig.nui.chat = {} end
-
 -- Show chat input
 -- Called from: Keybind or client code
 function ig.nui.chat.Show(options)

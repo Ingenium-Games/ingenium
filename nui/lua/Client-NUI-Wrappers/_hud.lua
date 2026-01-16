@@ -12,9 +12,6 @@
 --
 -- ====================================================================================--
 
-if not ig.nui then ig.nui = {} end
-if not ig.nui.hud then ig.nui.hud = {} end
-
 -- Show HUD
 -- Called from: Client code to display HUD
 function ig.nui.hud.Show(options)

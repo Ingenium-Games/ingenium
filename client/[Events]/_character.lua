@@ -49,58 +49,26 @@
 -- Called when player first joins - shows character selection menu
 RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
-    ShutdownLoadingScreenNui()
-    
-    -- Position player in character select area
-    local ped = GetPlayerPed(-1)
     ig.data.SetLoadedStatus(false)
-    FreezeEntityPosition(ped, true)
-    SetFollowPedCamViewMode(4)
-    SetEntityCoords(ped, -43.143894195557, 822.04595947266, 231.33236694336)
-    SetEntityHeading(ped, 288.78283691406)
-    SetGameplayCamRelativeRotation(4.0307750701904, 0.054180480539799, -71.305198669434)
-    SetGameplayCamRelativeHeading(-0.091852381825447)
-    SetGameplayCamRelativePitch(4.0307726860046, 1.0)
-    
-    ig.log.Info("Character", "Character menu opened, awaiting NUI selection")
-    
-    -- Show character select UI via wrapper function
-    -- NOTE: This sends Client:NUI:CharacterSelectShow to NUI (nui/lua/Client-NUI-Wrappers/_character.lua)
-    -- NUI will then send NUI:Client:CharacterList callback when ready
-    ig.nui.character.ShowSelect()
-    SetNuiFocus(true, true)
+    ig.func.FadeOut(0)
+    ig.func.IsBusyPleaseWait(3000)
+    SetTimeout(2500, function()
+            -- Position player in character select area
+            local ped = GetPlayerPed(-1)
+            --
+            FreezeEntityPosition(ped, true)
+            SetFollowPedCamViewMode(4)
+            SetEntityCoords(ped, -43.143894195557, 822.04595947266, 231.33236694336)
+            SetEntityHeading(ped, 288.78283691406)
+            SetGameplayCamRelativeRotation(4.0307750701904, 0.054180480539799, -71.305198669434)
+            SetGameplayCamRelativeHeading(-0.091852381825447)
+            SetGameplayCamRelativePitch(4.0307726860046, 1.0)
+            --
+            ig.log.Info("Character", "Character menu will open when Vue Mounts, awaiting NUI selection")
+
+        ShutdownLoadingScreenNui()
+    end)
 end)
-
-
--- ====================================================================================--
--- STAGE 1B: Character List Fetching (via Callback)
--- ====================================================================================--
-
--- NOTE: NUI callbacks are registered in nui/lua/NUI-Client/character-select.lua
--- This event handler is called FROM SERVER when character list is requested
--- The flow is:
---   1. NUI shows select screen
---   2. NUI requests character list (NUI:Client:CharacterList)
---   3. Server returns list via RegisterServerCallback
---   4. NUI displays characters
---   5. Player selects/creates character (sends NUI:Client:CharacterPlay/Create/Delete)
---   6. nui/lua/NUI-Client/character-select.lua handles these callbacks
---
--- This event handler is deprecated - kept for compatibility only
-RegisterNetEvent("Client:Character:ReceiveCharacterList")
-AddEventHandler("Client:Character:ReceiveCharacterList", function(data)
-    ig.log.Trace("Character", "Received character list via event")
-    if data then
-        ig.ui.Send("Client:NUI:CharacterSelectShow", {
-            characters = data.Characters,
-            slots = data.Slots
-        }, true)
-    else
-        ig.log.Error("Character", "No character data received from server")
-    end
-end)
-
-
 
 -- ====================================================================================--
 -- STAGE 2: Character Selection & Creation
