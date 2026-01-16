@@ -110,22 +110,26 @@ RegisterNUICallback("Client:Request:CharacterList", function(data, cb)
     
     -- Request character list from server using ig.callback.Async wrapper
     ig.callback.Async("Server:Character:List", function(result)
+        ig.log.Debug("Character", "Server callback returned: " .. json.encode(result or "nil"))
+        
         if result then
-            ig.log.Trace("Character", "Received character list from server")
-            -- Send character data to NUI in the proper message format
-            SendNUIMessage({
-                action = "Client:NUI:CharacterSelectShow",
-                data = {
-                    characters = result.Characters or {},
-                    slots = result.Slots or 1
-                }
+            ig.log.Trace("Character", "Received character list from server - Characters: " .. #(result.Characters or {}) .. ", Slots: " .. (result.Slots or 0))
+            
+            -- Send character data to NUI using standard ig.ui.Send wrapper
+            ig.ui.Send("Client:NUI:CharacterSelectShow", {
+                characters = result.Characters or {},
+                slots = result.Slots or 1
             })
+            
+            ig.log.Debug("Character", "Sent NUI message with " .. #(result.Characters or {}) .. " characters")
+            
             -- Return success to callback
             cb({
                 message = "ok",
                 data = "Character list loaded"
             })
         else
+            ig.log.Error("Character", "Failed to retrieve character list from server")
             cb({
                 message = "error",
                 data = "Failed to retrieve character list"
