@@ -190,7 +190,7 @@ TriggerServerCallback({
     args = {deathData},
     callback = function(result)
         if result and not result.success then
-            ig.debug.Error("Failed to report death: " .. (result.error or "Unknown error"))
+            
         end
     end
 })
@@ -202,7 +202,7 @@ TriggerServerCallback({
 -- ✅ CORRECT: Using high-level wrapper for cleaner code
 ig.callback.Async('Server:Character:Death', function(result)
     if result and not result.success then
-        ig.debug.Error("Failed to report death: " .. (result.error or "Unknown error"))
+        
     end
 end, deathData)
 ```

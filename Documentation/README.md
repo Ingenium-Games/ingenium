@@ -60,15 +60,6 @@ Set your preferred language in `_config/config.lua`:
 conf.locale = "en"  -- Options: "en", "fr", "es", "de", "pt"
 ```
 
-#### Debug Configuration
-Configure debug levels in `_config/config.lua`:
-```lua
-conf.error = true    -- Critical errors
-conf.debug_1 = true  -- Info level
-conf.debug_2 = false -- Debug level  
-conf.debug_3 = true  -- Trace level
-```
-
 #### MySQL Connection
 Set one of the following in your `server.cfg`:
 

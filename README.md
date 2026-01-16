@@ -368,18 +368,6 @@ Set your preferred language in `_config/config.lua`:
 ```lua
 conf.locale = "en"  -- Options: "en", "fr", "es", "de", "pt"
 ```
-
-### Debug Configuration
-
-Configure debug output levels in `_config/config.lua`:
-
-```lua
-conf.error = true    -- Critical errors
-conf.debug_1 = true  -- Info level
-conf.debug_2 = false -- Debug level
-conf.debug_3 = true  -- Trace level
-```
-
 ---
 
 ## Database Optimization

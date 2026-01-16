@@ -11,10 +11,6 @@ local function get_current_level()
         return tonumber(conf.log.level) or levels.info
     end
 
-    -- Fallback to debug flags if present
-    if conf and conf.debug_3 then return levels.debug end
-    if conf and conf.debug_2 then return levels.debug end
-    if conf and conf.debug_1 then return levels.info end
     return levels.info
 end
 
@@ -114,5 +110,3 @@ ig.log.info = ig.log.Info
 ig.log.debug = ig.log.Debug
 ig.log.trace = ig.log.Trace
 ig.log.log = ig.log.Log
-
-return ig.log

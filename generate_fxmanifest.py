@@ -39,6 +39,7 @@ class LuaFileAnalyzer:
         self.dependencies: Dict[str, Set[str]] = defaultdict(set)
         self.exports: Dict[str, Set[str]] = defaultdict(set)
         self.bracket_dirs: Dict[str, List[str]] = defaultdict(list)  # Track [Bracket] directories
+        self.locale_files: List[str] = []  # Track locale files separately
         
     def should_exclude(self, path: Path) -> bool:
         """Check if path matches exclusion patterns."""
@@ -143,6 +144,27 @@ class LuaFileAnalyzer:
                         'exports': self.extract_exports(content),
                         'dependencies': self.extract_dependencies(content, filepath),
                     }
+                except Exception as e:
+                    print(f"Error analyzing {filepath}: {e}", file=sys.stderr)
+        
+        # Process locale folder (special handling - shared context)
+        locale_dir = self.root / 'locale'
+        if locale_dir.exists():
+            for filepath in sorted(locale_dir.glob('*.lua')):
+                try:
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                    
+                    rel_path = filepath.relative_to(self.root)
+                    key = str(rel_path).replace('\\', '/')
+                    
+                    self.files[key] = {
+                        'context': 'locale',  # Special context for locale files
+                        'path': filepath,
+                        'exports': self.extract_exports(content),
+                        'dependencies': self.extract_dependencies(content, filepath),
+                    }
+                    self.locale_files.append(key)
                 except Exception as e:
                     print(f"Error analyzing {filepath}: {e}", file=sys.stderr)
         
@@ -277,6 +299,10 @@ shared_scripts {{
         for foundation in foundation_files:
             if foundation in self.files:
                 manifest += f'    "{foundation}",\n'
+        
+        # Add locale files after shared/_locale.lua
+        for locale_file in sorted(self.locale_files):
+            manifest += f'    "{locale_file}",\n'
         
         # Add other config files
         for script in shared_scripts:

@@ -55,7 +55,6 @@ local weaponName = ig.weapons[weaponHash].displayName
 
 -- These will throw errors:
 ig.vehicles[vehicleHash].displayName = "Hacked" -- ERROR
-conf.debug_1 = false -- ERROR
 conf.spawn.x = 9999 -- ERROR
 ```
 
@@ -103,7 +102,6 @@ To verify protection is working:
 
 2. Test in console:
    ```lua
-   conf.debug_1 = false  -- Should error
    ig.vehicles[0x12345].name = "test"  -- Should error
    ```
 

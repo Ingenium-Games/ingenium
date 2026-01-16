@@ -2,9 +2,45 @@
 
 ## Project Overview
 
-**Ingenium** is a FiveM framework built on a **class-based entity system** with **Vue 3 Single-App NUI architecture**. The server maintains all entity state (Players, Vehicles, NPCs, Objects, Jobs), automatically syncs to clients via StateBags, and persists to MySQL2 database at scheduled intervals for key data and uses file based saving for data that is hevily dynamic
+**Ingenium** is a proprietary FiveM framework built on a **class-based entity system** with **Vue 3 Single-App NUI architecture**. The server maintains all entity state (Players, Vehicles, NPCs, Objects, Jobs), automatically syncs to clients via StateBags, and persists to MySQL2 database at scheduled intervals for key data and uses file-based saving for heavily dynamic data.
 
 **Key Constraint:** OneSync Infinity is mandatory for StateBag replication.
+
+**Important:** This is closed-source proprietary software. Only authorized personnel should use this codebase.
+
+---
+
+## Critical Developer Workflows
+
+### NUI Build & Deployment
+
+**Never skip the build step.** The Vue app must be compiled to `nui/dist/index.html` for production:
+
+```bash
+cd nui
+npm install          # Only on first setup or dependency changes
+npm run build        # REQUIRED before committing UI changes
+npm run watch        # For rapid development with auto-rebuild
+npm run dev          # Dev server (HMR at localhost:3000, NOT for production)
+```
+
+**Key Pattern:** Dev server is for development iteration only. Always use `npm run build` for in-game testing. The built files are committed to git.
+
+### Server Testing Workflow
+
+1. **Check logs**: Console shows `ig.log.Info()` level messages during development
+2. **Verify dirty flags**: Before assuming data won't save, check `GetIsDirty()` in SQL module
+3. **Query stats**: Run `/sqlstats` command to see performance metrics and slow queries
+4. **Validate immediately**: Use `ig.check.*` module during development to catch validation issues early
+
+### Documentation Requirements (MANDATORY)
+
+**Every PR that changes code must include documentation:**
+- New functions → Add to `/Documentation/` API reference
+- New events/exports → Add to `Documentation/SQL_Events_Exports.md`
+- Architecture changes → Create/update `/Implementations/FEATURE_NAME.md`
+- Update `Documentation/README.md` with new links
+- **Missing documentation = PR BLOCKER**
 
 ---
 
@@ -95,25 +131,77 @@ ig.json.Write('scenes', ig.scenes)
 
 ## Directory Structure & Patterns
 
-### Server
-- `server/[Classes]/*` — Entity class definitions (Player, Vehicle, NPC, Object, Job)
-- `server/[SQL]/*` — MySQL2 integration (pool, queries, transactions)
-- `server/[Validation]/*` — Centralized validation via `ig.validation.Name(arg, rules)`
-- `server/[Events]/*` — Event handlers, particularly character load/unload
-- `server/_data.lua` — Entity index management (`ig.pdex`, `ig.vdex`, `ig.ndex`, `ig.odex`)
-- `server/_save_routine.lua` — Dirty flag checking and async database saves
+### Server Structure (Detailed)
 
-### Client
-- `client/[Target]/*` — Interaction system (zones + target menu)
+**Core Systems:**
+- `server/[Classes]/*` — Entity classes: `_player.lua`, `_vehicle.lua`, `_npc.lua`, `_job.lua`, `_offline_player.lua`, `_blank_object.lua`
+- `server/[SQL]/*` — Database layer: `_pool.js`, `_query.js`, `_handler.lua`, `_saves.lua`, `_character.lua`, `_jobs.lua`, `_vehicles.lua`
+- `server/[Validation]/*` — Centralized validation system using `ig.check.*` module
+- `server/[Events]/*` — Event handlers, particularly character lifecycle (load/unload)
+- `server/[Data - Save to File]/*` — JSON-based persistence (drops, pickups, scenes)
+- `server/[Data - No Save Needed]/*` — Runtime-only data structures
+- `server/[Security]/*` — Anti-exploit systems and StateBag protection
+- `server/[API]/*` — Public exports and API endpoints
+
+**Key Files:**
+- `server/_var.lua` — Global namespace initialization (`ig.*`)
+- `server/_data.lua` — Entity index management (`ig.pdex`, `ig.vdex`, `ig.ndex`, `ig.odex`, `ig.jdex`)
+- `server/_save_routine.lua` — Dirty flag checking and ConsolidatedSaveLoop
+- `server/_functions.lua` — Utility functions and helpers
+- `server/_payroll.lua` — Job account management
+
+**Config System:**
+- `_config/config.lua` — Master configuration with all intervals
+- `_config/defaults.lua` — Default values (fallback)
+- `_config/disable.lua` — Feature toggles for disabling systems
+
+### Client Structure
+
+- `client/[Target]/*` — Interaction system integration
 - `client/[Zones]/*` — PolyZone wrapper (`ig.zone.Add()`, `ig.zone.Check()`)
-- `client/[Garage]/*` — Vehicle management example
-- `client/_vehicle.lua` — Client-side vehicle reading from StateBags
+- `client/[Garage]/*` — Vehicle management reference implementation
+- `client/[Events]/*` — Event listeners for server-client communication
+- `client/_vehicle.lua` — StateBag-based vehicle state reading
+- `client/_data.lua` — Client-side data initialization and listeners
 
-### NUI
-- `nui/src/components/` — Vue 3 components (CharacterSelect, Menu, HUD, etc.)
-- `nui/src/stores/` — Pinia state (character.js, notifications.js, ui.js)
-- `nui/src/utils/nui.js` — SendNUIMessage/NUI callback handler
-- `nui/lua/ui.lua` — Export API (`exports['ingenium']:ShowMenu()`, `exports['ingenium']:Notify()`)
+### NUI Structure
+
+**Vue Application:**
+- `nui/src/components/` — Vue 3 SFCs: CharacterSelect, Menu, HUD, ContextMenu, InputDialog, NotificationContainer
+- `nui/src/stores/` — Pinia stores (ui.js, character.js, notifications.js, appearance.js)
+- `nui/src/utils/nui.js` — Centralized NUI message handler (all `SendNUIMessage` → Vue router)
+- `nui/src/App.vue` — Root component with conditional rendering
+- `nui/lua/ui.lua` — Export API (`exports['ingenium']:ShowMenu()`, etc.)
+
+**Build Artifacts:**
+- `nui/dist/index.html` — Compiled production bundle (committed to git)
+- `nui/vite.config.js` — Build configuration with HMR settings
+
+### Shared & Data
+
+- `shared/` — Cross-platform Lua utilities
+- `data/` — JSON game data: `items.json`, `vehicles.json`, `weapons.json`, `jobs.json`, `peds.json`, `tattoos.json`
+- `locale/` — Internationalization files: `en.lua`, `fr.lua`, `es.lua`, `de.lua`, `pt.lua`
+
+---
+
+## Recent System Updates (2026)
+
+### Character Connection System (January 2026)
+- Fixed 8 critical issues in character selection, loading, and initialization lifecycle
+- Improved client-server synchronization for character state
+- See `Documentation/CHARACTER_CONNECTION_FIXES.md` for technical details
+
+### Internationalization & Debugging (2025)
+- Multi-language support with locale system (`conf.locale` in `config.lua`)
+- Enhanced error tracking with file paths, line numbers, and resource context
+- Structured debug levels: ERROR, WARN, INFO, DEBUG, TRACE
+- See `Documentation/I18N_AND_DEBUGGING.md` for implementation
+
+### Banking & Loan System (2025)
+- Integrated banking account management
+- Loan system with repayment tracking
+- See `Documentation/BANKING_LOAN_SYSTEM_IMPLEMENTATION.md`
 
 ---
 
@@ -152,7 +240,7 @@ The dev server is NOT used in production; always commit built files.
 
 ### Testing Changes
 
-- **Server**: Load resource, check console for `ig.debug_1` logs
+- **Server**: Load resource, check console for `ig.log.Info()` logs 
 - **Client**: Use `ig.debug` commands in chat; read from StateBags with `Entity(ped).state.Property`
 - **Database**: Verify dirty flags saved via `ig.sql` events or direct query
 
@@ -234,8 +322,11 @@ xPlayer.AddCash(amount)
 - [Documentation/Class_System_Architecture.md](../Documentation/Class%20System%20Architecture.md) — Entity lifecycle & patterns
 - [Documentation/SQL_Architecture.md](../Documentation/SQL_Architecture.md) — Database layer design
 - [Documentation/Validation_Architecture.md](../Documentation/Validation_Architecture.md) — Input validation strategy
+- [Documentation/I18N_AND_DEBUGGING.md](../Documentation/I18N_AND_DEBUGGING.md) — Localization and debug system
 - [nui/ARCHITECTURE.md](../nui/ARCHITECTURE.md) — NUI component hierarchy & data flow
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — Code standards & documentation requirements
+- [server/_data.lua](../server/_data.lua) — Data loading patterns
+- [server/[SQL]/_saves.lua](../server/[SQL]/_saves.lua) — Dirty flag save system
 
 ---
 
@@ -249,6 +340,8 @@ xPlayer.AddCash(amount)
 6. **UI in Old HTML:** Add Vue components to `nui/src/components/`, not separate HTML files
 7. **Skipping Validation:** `ig.check` module prevents type/range exploits
 8. **Manual SQL Persistence:** Don't manually call SQL save functions; rely on dirty flags + ConsolidatedSaveLoop intervals
+9. **Modifying Read-Only Data:** Static reference data (weapons, vehicles, tattoos, peds, appearance-constants) is protected via `MakeReadOnly()` — don't try to modify
+10. **Forgetting NUI Build:** Always run `npm run build` after UI changes before committing; dev server is for development only
 
 ---
 

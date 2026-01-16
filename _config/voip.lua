@@ -170,6 +170,6 @@ conf.voip.updateRate = 500
 DEBUG MODE :
     Enable debug logging for VOIP system.
 ]]--
-conf.voip.debug = conf.debug_1 or false
+conf.voip.debug = conf.log.enabled and true or false
 
 -- ====================================================================================--
