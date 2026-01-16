@@ -73,11 +73,11 @@ local GetInitializationData = RegisterServerCallback({
         end
         
         ig.log.Info("Callbacks", "GetInitializationData: successfully collected data")
-        ig.log.Debug("Callbacks", "  - items: %d", data.items and ig.table.Count(data.items) or 0)
-        ig.log.Debug("Callbacks", "  - doors: %d", data.doors and ig.table.Count(data.doors) or 0)
-        ig.log.Debug("Callbacks", "  - peds: %d (type: %s)", data.peds and ig.table.Count(data.peds) or 0, type(data.peds))
-        ig.log.Debug("Callbacks", "  - tattoos: %d", data.tattoos and ig.table.Count(data.tattoos) or 0)
-        ig.log.Debug("Callbacks", "  - appearance_constants keys: %s", data.appearance_constants and ig.table.Count(data.appearance_constants) or 0)
+        ig.log.Debug("Callbacks", "  - items: %d", data.items and ig.table.SizeOf(data.items) or 0)
+        ig.log.Debug("Callbacks", "  - doors: %d", data.doors and ig.table.SizeOf(data.doors) or 0)
+        ig.log.Debug("Callbacks", "  - peds: %d (type: %s)", data.peds and ig.table.SizeOf(data.peds) or 0, type(data.peds))
+        ig.log.Debug("Callbacks", "  - tattoos: %d", data.tattoos and ig.table.SizeOf(data.tattoos) or 0)
+        ig.log.Debug("Callbacks", "  - appearance_constants keys: %d", data.appearance_constants and ig.table.SizeOf(data.appearance_constants) or 0)
         
         return data
     end

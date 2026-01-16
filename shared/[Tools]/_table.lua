@@ -102,6 +102,34 @@ function ig.table.SizeOf(t)
 	return count
 end
 
+--- Flexible count function - counts keys or occurrences of a value
+--- If no value provided, counts total keys (same as SizeOf)
+--- If value provided, counts how many times that value appears
+---@param t table "Table to count in"
+---@param value any|nil "Optional: specific value to count occurrences of"
+---@return integer Count of keys or value occurrences
+function ig.table.Count(t, value)
+    if not t then return 0 end
+    
+    -- If no value specified, count all keys
+    if value == nil then
+        local count = 0
+        for _ in pairs(t) do
+            count = count + 1
+        end
+        return count
+    end
+    
+    -- Count occurrences of specific value
+    local count = 0
+    for _, v in pairs(t) do
+        if v == value then
+            count = count + 1
+        end
+    end
+    return count
+end
+
 --- Recursively converts a table to a formatted string representation for debugging
 ---@param table table "Table to dump"
 ---@param nb integer|nil "Indentation level (optional, defaults to 0)"

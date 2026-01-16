@@ -43,7 +43,7 @@ function ig.nui.character.ShowCreate()
     
     -- Get ped data from server if needed (check cache first, fallback to server request)
     local peds = ig.peds
-    if not peds or ig.table.Count(peds) == 0 then
+    if not peds or ig.table.SizeOf(peds) == 0 then
         ig.log.Warn("NUI-Wrapper", "ShowCreate: ig.peds is empty, fetching from server")
         peds = ig.callback.Await('ig:GameData:GetPeds')
     end
