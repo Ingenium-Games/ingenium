@@ -3,14 +3,6 @@
 -- ====================================================================================--
 
 --- func desc
----@param . any
-function ig.gsr.Load()
-    if ig.json.Exists(conf.file.gsr) then
-        ig.gsrs = ig.json.Read(conf.file.gsr)
-    end
-end
-
---- func desc
 ---@param data any
 function ig.gsr.Add(data)
     if type(data) == "table" then

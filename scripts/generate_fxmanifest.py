@@ -283,8 +283,25 @@ client_scripts {
 server_scripts {
 '''
         
+        # Foundation server files that must load first
+        server_foundation_files = [
+            'server/_var.lua',
+            'server/_data.lua',
+            'server/_callback.lua',
+            'server/_functions.lua',
+        ]
+        
+        # Load foundation files first (add them regardless, as they're critical)
+        for foundation in server_foundation_files:
+            manifest += f'    "{foundation}",\n'
+        
+        # Load garage var after core foundations
+        manifest += f'    "server/[Garage]/_var.lua",\n'
+        
+        # Add rest of server scripts (excluding foundation files and garage var)
         for script in server_scripts:
-            manifest += f'    "{script}",\n'
+            if script not in server_foundation_files and script != 'server/[Garage]/_var.lua':
+                manifest += f'    "{script}",\n'
         
         # Add bracket directories for server as catch-all
         for bracket_dir in sorted(self.bracket_dirs['server']):

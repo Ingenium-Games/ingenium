@@ -134,6 +134,9 @@ client_scripts {
 ------------------------------------------------------------------------------
 server_scripts {
     "server/_var.lua",
+    "server/_data.lua",
+    "server/_callback.lua",
+    "server/_functions.lua",
     "server/[Garage]/_var.lua",
     "server/[API]/_api.lua",
     "server/[Appearance]/_pricing.lua",
@@ -203,12 +206,10 @@ server_scripts {
     "server/[Validation]/_validator.lua",
     "server/[Voice]/_voip.lua",
     "server/_bank.lua",
-    "server/_callback.lua",
     "server/_chat.lua",
     "server/_commands.lua",
     "server/_cron.lua",
     "server/_events.lua",
-    "server/_functions.lua",
     "server/_instance.lua",
     "server/_payroll.lua",
     "server/_persistance.lua",

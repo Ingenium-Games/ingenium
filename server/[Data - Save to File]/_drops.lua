@@ -2,9 +2,6 @@
 -- Drop System (ig.active_drops initialized in server/_var.lua)
 -- Physical item drops in the world
 -- ====================================================================================--
-ig.drop = ig.drop or {} -- function level
-ig.drops = ig.drops or {} -- dropped items table
--- ====================================================================================--
 
 --- Create a drop in the world with items
 ---@param coords table {x, y, z, h}
