@@ -94,7 +94,6 @@ RegisterNUICallback("NUI:Client:CharacterCreateStart", function(data, cb)
             -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
             -- NUI will show name form AFTER player completes appearance customization
             ig.nui.character.ShowCreate()
-            SetNuiFocus(true, true)
             ig.func.FadeIn(1000)
             ig.func.IsBusyPleaseWait(500)
             
@@ -180,7 +179,7 @@ RegisterNUICallback("Client:Request:CharacterList", function(data, cb)
             ig.ui.Send("Client:NUI:CharacterSelectShow", {
                 characters = result.Characters or {},
                 slots = result.Slots or 1
-            })
+            }, true)
             
             ig.log.Debug("Character", "Sent NUI message with " .. #(result.Characters or {}) .. " characters")
             

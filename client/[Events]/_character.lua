@@ -108,7 +108,6 @@ AddEventHandler("Client:Character:Create", function()
         -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
         -- NUI will send back Client:Character:AppearanceComplete callback when done
         ig.nui.character.ShowCreate()
-        SetNuiFocus(true, true)
         ig.func.FadeIn(1000)
         ig.func.IsBusyPleaseWait(500)
     end)
