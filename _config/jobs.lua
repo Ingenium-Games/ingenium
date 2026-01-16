@@ -3,8 +3,6 @@
 -- Defines all job properties including payroll settings
 -- ====================================================================================--
 
-if not conf then conf = {} end
-
 -- Job System Toggles
 conf.enablepayroll = true       -- Enable job payroll system
 conf.enablejobcentre = false    -- Enable job center (job selection system)

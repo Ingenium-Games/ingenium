@@ -1,7 +1,6 @@
 -- ====================================================================================--
 -- Screenshot Configuration
 -- ====================================================================================--
-if not conf then conf = {} end
 conf.screenshot = {
     -- Enable/disable screenshot system
     enabled = true,

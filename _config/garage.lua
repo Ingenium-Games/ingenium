@@ -2,8 +2,8 @@
 -- Garage System Configuration
 -- ====================================================================================--
 
-if not conf then conf = {} end
-if not conf.garage then conf.garage = {} end
+
+conf.garage = {}
 
 -- Version check URL
 conf.garage.version_check_url = ""

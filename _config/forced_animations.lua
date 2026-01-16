@@ -3,9 +3,7 @@
 -- Server-side configuration for forced animation mechanics
 -- Data-driven: Uses weapons.json categories instead of hardcoded weapon hashes
 -- ====================================================================================--
-
-if not conf then conf = {} end
-if not conf.forcedAnimations then conf.forcedAnimations = {} end
+conf.forcedAnimations = {}
 
 -- Maximum distance for forced animations
 conf.forcedAnimations.maxDistance = 15.0

@@ -126,6 +126,26 @@ class LuaFileAnalyzer:
             'server': self.root / 'server',
         }
         
+        # First, process _config folder (special handling - not context-specific)
+        config_dir = self.root / '_config'
+        if config_dir.exists():
+            for filepath in sorted(config_dir.glob('*.lua')):
+                try:
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                    
+                    rel_path = filepath.relative_to(self.root)
+                    key = str(rel_path).replace('\\', '/')
+                    
+                    self.files[key] = {
+                        'context': 'config',  # Special context for config files
+                        'path': filepath,
+                        'exports': self.extract_exports(content),
+                        'dependencies': self.extract_dependencies(content, filepath),
+                    }
+                except Exception as e:
+                    print(f"Error analyzing {filepath}: {e}", file=sys.stderr)
+        
         for context, directory in contexts.items():
             if not directory.exists():
                 continue
@@ -214,11 +234,18 @@ class LuaFileAnalyzer:
         client_scripts = [f for f in order if self.files[f]['context'] == 'client']
         server_scripts = [f for f in order if self.files[f]['context'] == 'server']
         
-        # Handle config files
-        config_files = [
-            '_config/config.lua',
-            '_config/defaults.lua',
-        ]
+        # Dynamically find all config files in _config folder
+        config_files = []
+        config_priority = ['_config/config.lua', '_config/defaults.lua']  # Load these first
+        
+        # Add priority config files
+        for config in config_priority:
+            if config in self.files:
+                config_files.append(config)
+        
+        # Add all other config files (sorted alphabetically)
+        other_configs = sorted([f for f in self.files.keys() if f.startswith('_config/') and f not in config_priority])
+        config_files.extend(other_configs)
         
         manifest = f'''------------------------------------------------------------------------------
 fx_version "cerulean"
@@ -391,26 +418,26 @@ server_scripts {
         
         # Load all groups in order
         for foundation in server_foundation_files:
-            manifest += f'    "{foundation}",\\n'
+            manifest += f'    "{foundation}",\n'
         
         for early in server_early_files:
             if early in self.files:
-                manifest += f'    "{early}",\\n'
+                manifest += f'    "{early}",\n'
         
         for data in server_data_files:
             if data in self.files:
-                manifest += f'    "{data}",\\n'
+                manifest += f'    "{data}",\n'
         
         for core in server_core_files:
             if core in self.files:
-                manifest += f'    "{core}",\\n'
+                manifest += f'    "{core}",\n'
         
         for save in server_save_files:
             if save in self.files:
-                manifest += f'    "{save}",\\n'
+                manifest += f'    "{save}",\n'
         
         # Finally add server.lua
-        manifest += f'    "server/server.lua",\\n'        
+        manifest += f'    "server/server.lua",\n'        
         # Add any remaining scripts not explicitly listed (catch-all for new files)
         all_ordered_files = set(server_foundation_files + server_early_files + server_data_files + server_core_files + server_save_files + ['server/server.lua'])
         for script in server_scripts:

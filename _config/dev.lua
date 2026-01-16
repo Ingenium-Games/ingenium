@@ -1,10 +1,7 @@
 -- ====================================================================================--
 -- Development Tools Configuration
 -- ====================================================================================--
-
-if not conf then conf = {} end
-if not conf.dev then conf.dev = {} end
-
+conf.dev = {}
 -- Enable/disable development tools (set to false in production)
 conf.dev.enabled = true
 

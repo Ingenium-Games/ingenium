@@ -3,8 +3,6 @@
 -- Defines all banking system properties including loans and interest
 -- ====================================================================================--
 
-if not conf then conf = {} end
-
 -- Banking System Configuration
 conf.banking = {}
 

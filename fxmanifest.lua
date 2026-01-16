@@ -4,7 +4,7 @@ game "gta5"
 lua54 "yes"
 author "Twiitchter"
 description "Ingenium"
-version "1.0.4"
+version "1.0.5"
 ------------------------------------------------------------------------------
 provide "polyzone"
 provide "pma-voice"
@@ -14,6 +14,24 @@ ui_page "nui/dist/index.html"
 shared_scripts {
     "_config/config.lua",
     "_config/defaults.lua",
+    "_config/banking.lua",
+    "_config/chat.lua",
+    "_config/dev.lua",
+    "_config/disable.lua",
+    "_config/discord.example.lua",
+    "_config/discord.lua",
+    "_config/files.lua",
+    "_config/forced_animations.lua",
+    "_config/gamemode.lua",
+    "_config/garage.lua",
+    "_config/ipls.lua",
+    "_config/jobs.lua",
+    "_config/peds.lua",
+    "_config/phones.lua",
+    "_config/screenshot.lua",
+    "_config/urls.lua",
+    "_config/vehicles.lua",
+    "_config/voip.lua",
     "shared/_ig.lua",
     "shared/_log.lua",
     "shared/_locale.lua",
