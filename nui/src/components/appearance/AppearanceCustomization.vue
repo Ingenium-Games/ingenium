@@ -336,15 +336,15 @@ function handleCancel() {
 }
 
 .camera-sidebar {
-  width: 220px;
+  width: 180px;
   flex-shrink: 0;
-  padding: 16px;
+  padding: 12px;
   background: rgba(26, 26, 26, 0.5);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .sidebar-title {

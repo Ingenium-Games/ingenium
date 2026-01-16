@@ -28,23 +28,53 @@ end
 -- Show appearance creation UI
 -- Called from: Client:Character:Create
 function ig.nui.character.ShowCreate()
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Starting appearance creation UI")
+    
     -- Get appearance constants (check cache first, fallback to server request)
     local constants = ig.appearance_constants or ig.callback.Await('ig:GameData:GetAppearanceConstants')
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Constants loaded: %s", constants and "YES" or "NIL")
     
     -- Get ped data from server if needed (check cache first, fallback to server request)
     local peds = ig.peds or ig.callback.Await('ig:GameData:GetPeds')
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Peds loaded: %s keys", peds and (function() local c=0 for _ in pairs(peds) do c=c+1 end return c end)() or 0)
     
     -- Get tattoo data (check cache first, fallback to server request)
     local tattoos = ig.tattoos or ig.callback.Await('ig:GameData:GetTattoos')
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Tattoos loaded: %s", tattoos and "YES" or "NIL")
     
-    -- Get default appearance for new character
-    local defaultAppearance = constants.defaultAppearance or {
+    -- Get default appearance for new character with proper structure
+    local defaultAppearance = {
         model = "mp_m_freemode_01",
+        headBlend = {
+            shapeFirst = 0,
+            shapeSecond = 0,
+            skinFirst = 0,
+            skinSecond = 0,
+            shapeMix = 0.5,
+            skinMix = 0.5,
+            thirdMix = 0.0
+        },
+        faceFeatures = {},
+        headOverlays = {},
+        hair = {
+            style = 0,
+            color = 0,
+            highlight = 0
+        },
+        eyeColor = 0,
         components = {},
         props = {},
-        hair = {color = 0, highlight = 0},
-        eyeColor = 0
+        tattoos = {}
     }
+    
+    -- Override with constants default if available
+    if constants and constants.defaultAppearance then
+        for k, v in pairs(constants.defaultAppearance) do
+            defaultAppearance[k] = v
+        end
+    end
+    
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Default appearance model=%s", defaultAppearance.model)
     
     -- Config for character creation (allow model change, allow tattoos)
     local config = {
@@ -53,7 +83,7 @@ function ig.nui.character.ShowCreate()
         isCharacterCreation = true
     }
     
-    ig.ui.Send("Client:NUI:AppearanceOpen", {
+    local data = {
         appearance = defaultAppearance,
         constants = constants,
         peds = peds,
@@ -61,7 +91,14 @@ function ig.nui.character.ShowCreate()
         config = config,
         mode = "create",
         onComplete = "Client:Character:AppearanceComplete"
-    }, true)
+    }
+    
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Sending to NUI - appearance model=%s, peds=%s, constants=%s", 
+        data.appearance.model, 
+        data.peds and "YES" or "NIL",
+        data.constants and "YES" or "NIL")
+    
+    ig.ui.Send("Client:NUI:AppearanceOpen", data, true)
 end
 
 -- Show appearance customization UI

@@ -59,6 +59,14 @@ export const useAppearanceStore = defineStore('appearance', () => {
   
   // Actions
   function open(data) {
+    console.log('[AppearanceStore] Opening with data:', data)
+    console.log('[AppearanceStore] - appearance:', data.appearance)
+    console.log('[AppearanceStore] - constants:', data.constants)
+    console.log('[AppearanceStore] - peds type:', typeof data.peds, 'is array:', Array.isArray(data.peds))
+    console.log('[AppearanceStore] - peds keys:', data.peds ? Object.keys(data.peds).length : 0)
+    console.log('[AppearanceStore] - tattoos:', data.tattoos ? Object.keys(data.tattoos).length : 0)
+    console.log('[AppearanceStore] - config:', data.config)
+    
     currentAppearance.value = data.appearance
     constants.value = data.constants
     peds.value = data.peds
@@ -74,6 +82,11 @@ export const useAppearanceStore = defineStore('appearance', () => {
     
     isOpen.value = true
     currentTab.value = data.config?.allowModelChange !== false ? 'model' : 'heritage'
+    
+    console.log('[AppearanceStore] Store state after open:')
+    console.log('[AppearanceStore] - isOpen:', isOpen.value)
+    console.log('[AppearanceStore] - currentTab:', currentTab.value)
+    console.log('[AppearanceStore] - peds in store:', peds.value ? Object.keys(peds.value).length : 0)
   }
   
   function close() {
