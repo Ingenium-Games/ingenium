@@ -103,4 +103,36 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
     end
 end)
 
+-- NUI requests character list from client
+-- This is called by NUI when App.vue mounts to get character data
+RegisterNUICallback("Client:Request:CharacterList", function(data, cb)
+    ig.log.Trace("Character", "NUI: Requesting character list")
+    
+    -- Request character list from server using TriggerServerCallback
+    -- Server:Character:List is a RegisterServerCallback that returns character data
+    TriggerServerCallback("Server:Character:List", function(result)
+        if result then
+            ig.log.Trace("Character", "Received character list from server")
+            -- Send character data to NUI in the proper message format
+            SendNUIMessage({
+                action = "Client:NUI:CharacterSelectShow",
+                data = {
+                    characters = result.Characters or {},
+                    slots = result.Slots or 1
+                }
+            })
+            -- Return success to callback
+            cb({
+                message = "ok",
+                data = "Character list loaded"
+            })
+        else
+            cb({
+                message = "error",
+                data = "Failed to retrieve character list"
+            })
+        end
+    end)
+end)
+
 ig.log.Info("NUI-Client", "Character callbacks registered")
