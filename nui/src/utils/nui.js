@@ -150,7 +150,11 @@ export function setupNuiHandlers() {
       case 'Client:NUI:CharacterSelectShow':
         console.log('[NUI] Character select show received with data:', data)
         // Shutdown the loading screen before showing character select
-        ShutdownLoadingScreenNui()
+        try {
+          invokeNative('0xB9234AFB', undefined)
+        } catch (e) {
+          console.warn('[NUI] Failed to shutdown loading screen:', e)
+        }
         characterStore.setCharacters(data.characters || [], data.slots || 1)
         console.log('[NUI] UI Store showCharacterSelect set to true')
         uiStore.showCharacterSelect = true
