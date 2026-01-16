@@ -16,7 +16,9 @@ Citizen.CreateThread(function()
                 DisplayRadar(false)
                 
                 -- Batch initialization: Get all required data in a single server callback
+                ig.log.Info("Client", "Requesting GetInitializationData from server...")
                 local initData = ig.callback.Await("GetInitializationData")
+                ig.log.Info("Client", "GetInitializationData response received: %s", initData and "YES" or "NIL")
                 
                 if initData then
                     -- Load Items

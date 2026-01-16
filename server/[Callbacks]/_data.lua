@@ -36,13 +36,49 @@ local GetObjects = RegisterServerCallback({
 local GetInitializationData = RegisterServerCallback({
     eventName = "GetInitializationData",
     eventCallback = function(source, ...)
-        return {
-            items = ig.item.GetItems(),
-            doors = ig.door.GetDoors(),
-            objects = ig.object.GetObjects(),
-            tattoos = ig.tattoo.GetAll(),
-            weapons = ig.weapon.GetAll()
-        }
+        ig.log.Info("Callbacks", "GetInitializationData called from source: %d", source)
+        
+        local function safeGetData()
+            ig.log.Debug("Callbacks", "Fetching items...")
+            local items = ig.item.GetItems()
+            ig.log.Debug("Callbacks", "Fetching doors...")
+            local doors = ig.door.GetDoors()
+            ig.log.Debug("Callbacks", "Fetching objects...")
+            local objects = ig.object.GetObjects()
+            ig.log.Debug("Callbacks", "Fetching tattoos...")
+            local tattoos = ig.tattoo.GetAll()
+            ig.log.Debug("Callbacks", "Fetching weapons...")
+            local weapons = ig.weapon.GetAll()
+            ig.log.Debug("Callbacks", "Fetching peds...")
+            local peds = ig.ped.GetAll()
+            ig.log.Debug("Callbacks", "Fetching appearance constants...")
+            local appearance_constants = ig.appearance.GetConstants()
+            
+            return {
+                items = items,
+                doors = doors,
+                objects = objects,
+                tattoos = tattoos,
+                weapons = weapons,
+                peds = peds,
+                appearance_constants = appearance_constants
+            }
+        end
+        
+        local success, data = pcall(safeGetData)
+        
+        if not success then
+            ig.log.Error("Callbacks", "ERROR in GetInitializationData: %s", tostring(data))
+            return {}
+        end
+        
+        ig.log.Info("Callbacks", "GetInitializationData: successfully collected data")
+        ig.log.Debug("Callbacks", "  - items: %d", #(data.items or {}))
+        ig.log.Debug("Callbacks", "  - doors: %d", #(data.doors or {}))
+        ig.log.Debug("Callbacks", "  - peds: %d", #(data.peds or {}))
+        ig.log.Debug("Callbacks", "  - appearance_constants keys: %s", next(data.appearance_constants or {}) and "yes" or "no")
+        
+        return data
     end
 })
 
@@ -85,6 +121,20 @@ local GetModkits = RegisterServerCallback({
     eventName = "ig:GameData:GetModkits",
     eventCallback = function(source)
         return ig.modkits
+    end
+})
+
+local GetAppearanceConstants = RegisterServerCallback({
+    eventName = "ig:GameData:GetAppearanceConstants",
+    eventCallback = function(source)
+        return ig.appearance.GetConstants()
+    end
+})
+
+local GetPeds = RegisterServerCallback({
+    eventName = "ig:GameData:GetPeds",
+    eventCallback = function(source)
+        return ig.ped.GetAll()
     end
 })
 
