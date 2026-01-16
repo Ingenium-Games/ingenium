@@ -80,13 +80,15 @@ end)
 RegisterNUICallback("NUI:Client:CharacterCreateStart", function(data, cb)
     if not ig.data.IsPlayerLoaded() then
         ig.log.Info("Character", "NUI: Starting new character creation - opening appearance customizer")
-        
+        ShutdownLoadingScreenNui()
+
+        ig.func.IsBusyPleaseWait(500)
+
         local plyped = PlayerPedId()
         SetEntityCoords(plyped, -703.9, -152.62, 37.42)
         SetEntityHeading(plyped, 62)
         
-        ig.func.FadeOut(1000)
-        ig.func.IsBusyPleaseWait(500)
+
         
         -- Wait for fade completion
         SetTimeout(500, function()

@@ -28,7 +28,37 @@ end
 -- Show appearance creation UI
 -- Called from: Client:Character:Create
 function ig.nui.character.ShowCreate()
+    -- Get appearance constants (check cache first, fallback to server request)
+    local constants = ig.appearance_constants or ig.callback.Await('ig:GameData:GetAppearanceConstants')
+    
+    -- Get ped data from server if needed (check cache first, fallback to server request)
+    local peds = ig.peds or ig.callback.Await('ig:GameData:GetPeds')
+    
+    -- Get tattoo data (check cache first, fallback to server request)
+    local tattoos = ig.tattoos or ig.callback.Await('ig:GameData:GetTattoos')
+    
+    -- Get default appearance for new character
+    local defaultAppearance = constants.defaultAppearance or {
+        model = "mp_m_freemode_01",
+        components = {},
+        props = {},
+        hair = {color = 0, highlight = 0},
+        eyeColor = 0
+    }
+    
+    -- Config for character creation (allow model change, allow tattoos)
+    local config = {
+        allowModelChange = true,
+        allowTattoos = true,
+        isCharacterCreation = true
+    }
+    
     ig.ui.Send("Client:NUI:AppearanceOpen", {
+        appearance = defaultAppearance,
+        constants = constants,
+        peds = peds,
+        tattoos = tattoos,
+        config = config,
         mode = "create",
         onComplete = "Client:Character:AppearanceComplete"
     }, true)
@@ -37,7 +67,31 @@ end
 -- Show appearance customization UI
 -- Called from: other resources for appearance editing
 function ig.nui.character.ShowCustomize()
+    -- Get appearance constants (check cache first, fallback to server request)
+    local constants = ig.appearance_constants or ig.callback.Await('ig:GameData:GetAppearanceConstants')
+    
+    -- Get ped data from server if needed (check cache first, fallback to server request)
+    local peds = ig.peds or ig.callback.Await('ig:GameData:GetPeds')
+    
+    -- Get tattoo data (check cache first, fallback to server request)
+    local tattoos = ig.tattoos or ig.callback.Await('ig:GameData:GetTattoos')
+    
+    -- Get current player appearance
+    local currentAppearance = ig.appearance.GetAppearance()
+    
+    -- Config for appearance customization
+    local config = {
+        allowModelChange = true,
+        allowTattoos = true,
+        isCharacterCreation = false
+    }
+    
     ig.ui.Send("Client:NUI:AppearanceOpen", {
+        appearance = currentAppearance,
+        constants = constants,
+        peds = peds,
+        tattoos = tattoos,
+        config = config,
         mode = "customize",
         onComplete = "Client:Character:AppearanceComplete"
     }, true)

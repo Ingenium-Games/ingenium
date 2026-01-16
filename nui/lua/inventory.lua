@@ -30,32 +30,28 @@ AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTit
     
     local playerInventory = ig.inventory.GetInventory()
     
-    -- Get external inventory via callback
-    TriggerServerCallback({
-        eventName = "GetInventory",
-        args = {externalNetId},
-        callback = function(externalInventory)
-            if externalInventory then
-                inventoryOpen = true
-                currentExternalNetId = externalNetId
-                
-                -- Send data to Vue NUI
-                SendNUIMessage({
-                    message = "Client:NUI:InventoryOpenDual",
-                    data = {
-                        playerInventory = playerInventory,
-                        externalInventory = externalInventory,
-                        externalTitle = externalTitle or "Storage",
-                        externalNetId = externalNetId,
-                        playerMaxSlots = 50,
-                        externalMaxSlots = 50
-                    }
-                })
-                
-                SetNuiFocus(true, true)
-            end
-        end
-    })
+    -- Get external inventory via callback using ig.callback wrapper
+    local externalInventory = ig.callback.Await("GetInventory", externalNetId)
+    
+    if externalInventory then
+        inventoryOpen = true
+        currentExternalNetId = externalNetId
+        
+        -- Send data to Vue NUI
+        SendNUIMessage({
+            message = "Client:NUI:InventoryOpenDual",
+            data = {
+                playerInventory = playerInventory,
+                externalInventory = externalInventory,
+                externalTitle = externalTitle or "Storage",
+                externalNetId = externalNetId,
+                playerMaxSlots = 50,
+                externalMaxSlots = 50
+            }
+        })
+        
+        SetNuiFocus(true, true)
+    end
 end)
 
 ---

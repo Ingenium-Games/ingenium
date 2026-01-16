@@ -69,6 +69,10 @@ ig.objects = {}        -- Object data
 ig.tattoo = {}         -- Tattoo functions
 ig.tattoos = {}        -- Tattoo data
 
+-- Appearance System
+ig.appearance_constants = {} -- Appearance constants (eye colors, face features, etc)
+ig.peds = {}           -- Ped data (character models)
+
 -- Skills and Traits
 ig.skill = {}          -- Skill functions
 ig._skills = {}        -- Skill data

@@ -159,11 +159,9 @@ function selectNew() {
   }
   
   // Trigger Lua event to start appearance customization
+  // Do NOT show name form yet - wait for appearance customization to complete
   console.log('[CharacterSelect] Sending NUI:Client:CharacterCreateStart')
   sendNuiMessage('NUI:Client:CharacterCreateStart', {})
-  
-  // Update Vue state to show creation UI
-  characterStore.startCreatingCharacter()
 }
 
 function cancelCreate() {
