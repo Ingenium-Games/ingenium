@@ -52,9 +52,9 @@ AddEventHandler("Client:Character:OpeningMenu", function()
     ig.data.SetLoadedStatus(false)
     ig.func.FadeOut(0)
     ig.func.IsBusyPleaseWait(3000)
-    SetTimeout(2500, function()
+    SetTimeout(2000, function()
             -- Position player in character select area
-            local ped = GetPlayerPed(-1)
+            local ped = PlayerPedId()
             --
             FreezeEntityPosition(ped, true)
             SetFollowPedCamViewMode(4)
@@ -65,8 +65,6 @@ AddEventHandler("Client:Character:OpeningMenu", function()
             SetGameplayCamRelativePitch(4.0307726860046, 1.0)
             --
             ig.log.Info("Character", "Character menu will open when Vue Mounts, awaiting NUI selection")
-
-        ShutdownLoadingScreenNui()
     end)
 end)
 
