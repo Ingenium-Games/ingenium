@@ -323,8 +323,152 @@ shared_scripts {{
 client_scripts {
 '''
         
+        # Enforce specific load order for client scripts
+        # Group 1: Foundation files (must load first)
+        client_foundation_files = [
+            'client/_var.lua',
+            'client/_data.lua',
+            'client/_functions.lua',
+            'client/_callback.lua',
+        ]
+        
+        # Group 2: Framework initialization files
+        client_init_files = [
+            'client/[Garage]/_var.lua',
+            'client/[Target]/_var.lua',
+            'client/_affiliation.lua',
+            'client/_ammo.lua',
+            'client/_animations.lua',
+            'client/_appearance.lua',
+            'client/_blips.lua',
+            'client/_cameras.lua',
+            'client/_chat.lua',
+            'client/_commands.lua',
+            'client/_death.lua',
+            'client/_discord.lua',
+            'client/_doors.lua',
+            'client/_drops.lua',
+            'client/_fx.lua',
+            'client/_inventory.lua',
+            'client/_ipls.lua',
+            'client/_items.lua',
+            'client/_markers.lua',
+            'client/_modifiers.lua',
+            'client/_objects.lua',
+            'client/_persistance.lua',
+            'client/_screenshot.lua',
+            'client/_skills.lua',
+            'client/_states.lua',
+            'client/_status.lua',
+            'client/_tattoo.lua',
+            'client/_text.lua',
+            'client/_time.lua',
+            'client/_ui.lua',
+            'client/_vehicle.lua',
+            'client/_vehicle_persistence.lua',
+            'client/_weapon.lua',
+            'client/_weather.lua',
+        ]
+        
+        # Group 3: PolyZone MUST load before all zone types
+        client_polyzone_files = [
+            'client/[Zones]/PolyZone.lua',
+            'client/[Zones]/BoxZone.lua',
+            'client/[Zones]/CircleZone.lua',
+            'client/[Zones]/ComboZone.lua',
+            'client/[Zones]/EntityZone.lua',
+            'client/[Zones]/_zone.lua',
+            'client/[Zones]/_zone_manager.lua',
+            'client/[Zones]/_zone_test_example.lua',
+        ]
+        
+        # Group 4: Callbacks and core handlers
+        client_callbacks_files = [
+            'client/[Callbacks]/_animations_forced.lua',
+            'client/[Callbacks]/_appearance.lua',
+            'client/[Callbacks]/_banking.lua',
+            'client/[Callbacks]/_character.lua',
+            'client/[Callbacks]/_chat.lua',
+            'client/[Callbacks]/_commands.lua',
+            'client/[Callbacks]/_inventory.lua',
+        ]
+        
+        # Group 5: System modules
+        client_system_files = [
+            'client/[Chat]/_aces.lua',
+            'client/[Commands]/_locate_vehicles.lua',
+            'client/[Dev]/_ammunation.lua',
+            'client/[Dev]/_doorcreator.lua',
+            'client/[Dev]/_examples.lua',
+            'client/[Dev]/_vehicleseats.lua',
+            'client/[Drops]/_drop_integration.lua',
+            'client/[Drops]/_drop_targets.lua',
+            'client/[Events]/_character.lua',
+            'client/[Events]/_gamemode.lua',
+            'client/[Events]/_runchecks.lua',
+            'client/[Events]/_vehicle.lua',
+            'client/[Events]/_vehicles.lua',
+            'client/[Garage]/_client.lua',
+            'client/[Garage]/_machine.lua',
+            'client/[Target]/_api.lua',
+            'client/[Target]/_defaults.lua',
+            'client/[Target]/_lib.lua',
+            'client/[Target]/_main.lua',
+            'client/[Target]/_utils.lua',
+            'client/[Voice]/_voip.lua',
+            'client/[ToDo]/_persitance.lua',
+            'client/[ToDo]/_traits.lua',
+        ]
+        
+        # Group 6: Threads (must load after GetLoadedStatus is available)
+        client_thread_files = [
+            'client/[Threads]/_forced_animations.lua',
+            'client/[Threads]/_player_load_restriction.lua',
+            'client/[Threads]/_rp_controls.lua',
+            'client/[Threads]/_rp_features.lua',
+            'client/[Threads]/_weapon.lua',
+        ]
+        
+        # Group 7: Main client initialization (must load after everything else)
+        client_main_files = [
+            'client/client.lua',
+        ]
+        
+        # Load all groups in order
+        for foundation in client_foundation_files:
+            if foundation in self.files:
+                manifest += f'    "{foundation}",\n'
+        
+        for init in client_init_files:
+            if init in self.files:
+                manifest += f'    "{init}",\n'
+        
+        for polyzone in client_polyzone_files:
+            if polyzone in self.files:
+                manifest += f'    "{polyzone}",\n'
+        
+        for callbacks in client_callbacks_files:
+            if callbacks in self.files:
+                manifest += f'    "{callbacks}",\n'
+        
+        for system in client_system_files:
+            if system in self.files:
+                manifest += f'    "{system}",\n'
+        
+        for thread in client_thread_files:
+            if thread in self.files:
+                manifest += f'    "{thread}",\n'
+        
+        for main in client_main_files:
+            if main in self.files:
+                manifest += f'    "{main}",\n'
+        
+        # Add any remaining client scripts not explicitly listed (catch-all for new files)
+        all_ordered_client_files = set(client_foundation_files + client_init_files + client_polyzone_files + 
+                                      client_callbacks_files + client_system_files + client_thread_files + client_main_files)
         for script in client_scripts:
-            manifest += f'    "{script}",\n'
+            if script not in all_ordered_client_files:
+                manifest += f'    "{script}",\n'
         
         # Add bracket directories for client as catch-all
         for bracket_dir in sorted(self.bracket_dirs['client']):
