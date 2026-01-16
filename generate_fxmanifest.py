@@ -25,7 +25,7 @@ EXCLUDE_PATTERNS = {
     '[Example',  # [Example Doors], [Example Items]
     '[Stubs]',
     'logs',
-    'data',  # JSON data files
+    'data/',  # Only exclude the data/ folder, not files with 'data' in name
     'nui',   # UI files handled separately
     '*.md',
 }

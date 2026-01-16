@@ -4,7 +4,7 @@ game "gta5"
 lua54 "yes"
 author "Twiitchter"
 description "Ingenium"
-version "1.0.6"
+version "1.0.7"
 ------------------------------------------------------------------------------
 provide "polyzone"
 provide "pma-voice"
@@ -59,6 +59,7 @@ shared_scripts {
 ------------------------------------------------------------------------------
 client_scripts {
     "client/_var.lua",
+    "client/_data.lua",
     "client/_functions.lua",
     "client/_callback.lua",
     "client/[Garage]/_var.lua",
@@ -139,6 +140,8 @@ client_scripts {
     "client/[Threads]/_rp_features.lua",
     "client/[Threads]/_weapon.lua",
     "client/client.lua",
+    "client/[Callbacks]/_data.lua",
+    "client/[Data]/_game_data_helpers.lua",
     "client/[Callbacks]/*.lua",
     "client/[Chat]/*.lua",
     "client/[Commands]/*.lua",
@@ -242,6 +245,7 @@ server_scripts {
     "server/[Data - Save to File]/_notes.lua",
     "server/[Data - Save to File]/_pickups.lua",
     "server/server.lua",
+    "server/[Callbacks]/_data.lua",
     "server/[API]/*.lua",
     "server/[Appearance]/*.lua",
     "server/[Callbacks]/*.lua",

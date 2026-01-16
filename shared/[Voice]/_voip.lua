@@ -130,11 +130,11 @@ function ig.voip.GetSurroundingGridCells(gridX, gridY)
     return cells
 end
 
---- Debug logging helper
+--- VOIP logging helper (integrated with ig.log system)
 ---@param message string The debug message
 function ig.voip.Debug(message)
-    if conf and conf.voip and conf.voip.debug then
-        print(("[VOIP DEBUG] %s"):format(message))
+    if ig and ig.log and ig.log.Debug then
+        ig.log.Debug("VOIP", message)
     end
 end
 
