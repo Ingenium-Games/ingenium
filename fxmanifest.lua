@@ -155,7 +155,8 @@ client_scripts {
     "client/[ToDo]/*.lua",
     "client/[Voice]/*.lua",
     "client/[Zones]/*.lua",
-    "nui/lua/*.lua"
+    "nui/lua/*.lua",
+    "nui/lua/**/*.lua"
 }
 ------------------------------------------------------------------------------
 server_scripts {

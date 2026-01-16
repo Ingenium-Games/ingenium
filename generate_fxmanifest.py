@@ -474,7 +474,8 @@ client_scripts {
         for bracket_dir in sorted(self.bracket_dirs['client']):
             manifest += f'    "{bracket_dir}/*.lua",\n'
         
-        manifest += '''    "nui/lua/*.lua"
+        manifest += '''    "nui/lua/*.lua",
+    "nui/lua/**/*.lua"
 }
 ------------------------------------------------------------------------------
 server_scripts {
