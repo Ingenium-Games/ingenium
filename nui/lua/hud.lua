@@ -54,24 +54,11 @@ if conf.hud.focusKey then
 end
 
 -- ====================================================================================--
--- HUD Position Sync
+-- HUD Position Sync - CALLBACK MOVED TO NUI-Client
 -- ====================================================================================--
-
---- Update HUD position when dragged in NUI
-RegisterNUICallback("NUI:Client:HUDPositionUpdate", function(data, cb)
-    if data.position then
-        hudPosition = data.position
-        
-        -- Save to localStorage via NUI (already handled by HUD.vue)
-        -- We just need to track server-side if needed
-        TriggerEvent("Client:HUD:PositionChanged", hudPosition)
-    end
-    
-    cb({
-        message = "ok",
-        data = nil
-    })
-end)
+-- HUDPositionUpdate callback moved to nui/lua/NUI-Client/_hud.lua
+-- This file now contains wrapper functions and exports only
+-- ====================================================================================--
 
 -- ====================================================================================--
 -- HUD Reset Command

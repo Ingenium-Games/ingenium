@@ -128,65 +128,17 @@ exports('SendMessage', function(message, data, focus)
 end)
 
 -- ====================================================================================--
--- NUI Callbacks for Vue System
+-- NUI Callbacks - CONSOLIDATED IN NUI-Client FOLDER
+-- ====================================================================================--
+-- All NUI callbacks have been moved to their function-specific locations:
+--   - nui/lua/NUI-Client/_menu.lua (MenuSelect, MenuClose)
+--   - nui/lua/NUI-Client/_input.lua (InputSubmit, InputClose)
+--   - nui/lua/NUI-Client/_context.lua (ContextSelect, ContextClose)
+--   - nui/lua/NUI-Client/character-select.lua (Character callbacks)
+--
+-- DO NOT register callbacks here - they are centralized in NUI-Client/
 -- ====================================================================================--
 
--- Menu callbacks
--- Menu callbacks
-local function menuSelectHandler(data, cb)
-    -- Trigger legacy and directional events for compatibility
-    TriggerEvent("Client:Menu:Select", data.action, data.data)
-    TriggerEvent("Client:NUI:MenuSelect", data.action, data.data)
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:MenuSelect", menuSelectHandler)
-
-local function menuCloseHandler(data, cb)
-    SetNuiFocus(false, false)
-    TriggerEvent("Client:Menu:Close")
-    TriggerEvent("Client:NUI:MenuClose")
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:MenuClose", menuCloseHandler)
-
--- Input callbacks
-local function inputSubmitHandler(data, cb)
-    TriggerEvent("Client:Input:Submit", data.value)
-    TriggerEvent("Client:NUI:InputSubmit", data.value)
-    SetNuiFocus(false, false)
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:InputSubmit", inputSubmitHandler)
-
-local function inputCloseHandler(data, cb)
-    SetNuiFocus(false, false)
-    TriggerEvent("Client:Input:Close")
-    TriggerEvent("Client:NUI:InputClose")
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:InputClose", inputCloseHandler)
-
--- Context menu callbacks
-local function contextSelectHandler(data, cb)
-    TriggerEvent("Client:Context:Select", data.action, data.data)
-    TriggerEvent("Client:NUI:ContextSelect", data.action, data.data)
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:ContextSelect", contextSelectHandler)
-
-local function contextCloseHandler(data, cb)
-    SetNuiFocus(false, false)
-    TriggerEvent("Client:Context:Close")
-    TriggerEvent("Client:NUI:ContextClose")
-    cb({ message = "ok" })
-end
-
-RegisterNUICallback("NUI:Client:ContextClose", contextCloseHandler)
 -- Character callbacks have been moved to character-select.lua
 -- DO NOT register character-related NUI callbacks here as they duplicate character-select.lua
 -- and override the correct server callback implementation

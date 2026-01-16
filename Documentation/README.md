@@ -2,7 +2,20 @@
 
 Welcome to the ingenium documentation hub. This centralized resource provides comprehensive information about the ingenium FiveM framework.
 
+## ⚡ Latest Updates
+
+### Character Connection Fixes (2026-01-16) ✅ COMPLETE
+- **[Character Connection Status](./CHARACTER_CONNECTION_STATUS.md)** - Overview of all fixes applied
+- **[Character Connection Fixes](./CHARACTER_CONNECTION_FIXES.md)** - Detailed technical documentation
+- **[Character Connection Code Reference](./CHARACTER_CONNECTION_CODE_REFERENCE.md)** - Side-by-side code comparisons
+- **Issues Fixed**: 8 critical issues resolved in client-server character lifecycle
+- **Impact**: Character selection, loading, and initialization now fully functional
+
 ## 📚 Core Systems
+
+### Character System (Recently Updated)
+- **[Class System Architecture](./Class%20System%20Architecture.md)** - Entity lifecycle and class patterns
+- **[CLIENT_CHARACTER_LIFECYCLE_ANALYSIS](./CLIENT_CHARACTER_LIFECYCLE_ANALYSIS.md)** - Client-side analysis (reference)
 
 ### Internationalization & Debugging
 - **[i18n and Debugging Guide](./I18N_AND_DEBUGGING.md)** - Multi-language support and enhanced error tracking

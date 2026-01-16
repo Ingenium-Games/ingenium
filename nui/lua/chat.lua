@@ -1,33 +1,18 @@
 -- ====================================================================================--
 -- Chat System Integration with Vue NUI
 -- ====================================================================================--
+-- IMPORTANT: NUI Callbacks have been moved to nui/lua/NUI-Client/_chat.lua
+-- This file now contains wrapper functions and exports only
+-- ====================================================================================--
 
 local chatVisible = false
 local chatInputActive = false
 
--- Register NUI callbacks (directional names only)
-RegisterNUICallback('NUI:Client:ChatSubmit', function(data, cb)
-    chatVisible = false
-    chatInputActive = false
-    SetNuiFocus(false, false)
-    
-    local message = data.message
-    if message and #message > 0 then
-        TriggerServerEvent('ig:chat:serverMessage', message)
-        if string.sub(message, 1, 1) == '/' then
-            ExecuteCommand(string.sub(message, 2))
-        end
-    end
-    
-    cb('ok')
-end)
 
-RegisterNUICallback('NUI:Client:ChatClose', function(data, cb)
-    chatVisible = false
-    chatInputActive = false
-    SetNuiFocus(false, false)
-    cb('ok')
-end)
+-- ====================================================================================--
+-- WRAPPER FUNCTIONS (Client→NUI)
+-- ====================================================================================--
+-- These functions send messages FROM CLIENT TO NUI
 
 -- Function to add a message to chat
 function AddChatMessage(author, message, color)
@@ -174,4 +159,4 @@ CreateThread(function()
     end
 end)
 
-print('[IG Chat] Vue-based chat system loaded')
+print('[IG Chat] Vue-based chat system loaded - NUI callbacks in nui/lua/NUI-Client/_chat.lua')

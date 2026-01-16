@@ -63,6 +63,20 @@ client_scripts {
     -- Variable initialization MUST be first
     "client/_var.lua",
     
+    -- NUI Wrapper Functions (Client-to-NUI message senders)
+    -- MUST load after _var.lua but before NUI callbacks
+    "nui/lua/Client-NUI-Wrappers/_character.lua",
+    "nui/lua/Client-NUI-Wrappers/_menu.lua",
+    "nui/lua/Client-NUI-Wrappers/_input.lua",
+    "nui/lua/Client-NUI-Wrappers/_context.lua",
+    "nui/lua/Client-NUI-Wrappers/_chat.lua",
+    "nui/lua/Client-NUI-Wrappers/_banking.lua",
+    "nui/lua/Client-NUI-Wrappers/_inventory.lua",
+    "nui/lua/Client-NUI-Wrappers/_garage.lua",
+    "nui/lua/Client-NUI-Wrappers/_target.lua",
+    "nui/lua/Client-NUI-Wrappers/_hud.lua",
+    "nui/lua/Client-NUI-Wrappers/_notification.lua",
+    
     -- Core system modules - load before dependent features
     "client/_data.lua",
     "client/_functions.lua",
@@ -116,6 +130,21 @@ client_scripts {
     
     -- Feature modules (depend on core systems)
     "client/[Callbacks]/*.lua",
+    
+    -- NUI-Client Callback Handlers (NUI-to-Client message receivers)
+    "nui/lua/NUI-Client/character-select.lua",
+    "nui/lua/NUI-Client/_appearance.lua",
+    "nui/lua/NUI-Client/_menu.lua",
+    "nui/lua/NUI-Client/_input.lua",
+    "nui/lua/NUI-Client/_context.lua",
+    "nui/lua/NUI-Client/_chat.lua",
+    "nui/lua/NUI-Client/_banking.lua",
+    "nui/lua/NUI-Client/_inventory.lua",
+    "nui/lua/NUI-Client/_garage.lua",
+    "nui/lua/NUI-Client/_target.lua",
+    "nui/lua/NUI-Client/_hud.lua",
+    "nui/lua/NUI-Client/_notification.lua",
+    
     "client/[Chat]/*.lua",
     "client/[Commands]/*.lua",
     "client/[Data]/*.lua",

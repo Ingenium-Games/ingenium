@@ -1,36 +1,14 @@
 -- ====================================================================================--
--- Character NUI Callbacks - Handle messages from the Character Select NUI
+-- Character NUI Callbacks - CONSOLIDATED
 -- ====================================================================================--
-
--- Handle character creation from NUI
-RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
-    cb("ok")
-    
-    if data and data.firstName and data.lastName then
-        -- Trigger server character registration with appearance data
-        local appearance = exports["fivem-appearance"]:getPedAppearance(GetPlayerPed(-1))
-        TriggerServerEvent("Server:Character:Register", data.firstName, data.lastName, appearance)
-    else
-        TriggerServerEvent("Server:Character:Failed")
-    end
-end)
-
--- Handle character play/join from NUI
-RegisterNUICallback("NUI:Client:CharacterPlay", function(data, cb)
-    cb("ok")
-    
-    if data and data.id then
-        TriggerServerEvent("Server:Character:Join", data.id)
-    else
-        TriggerServerEvent("Server:Character:Failed")
-    end
-end)
-
--- Handle character delete from NUI
-RegisterNUICallback("NUI:Client:CharacterDelete", function(data, cb)
-    cb("ok")
-    
-    if data and data.id then
-        TriggerServerEvent("Server:Character:Delete", data.id)
-    end
-end)
+-- IMPORTANT: All character NUI callbacks have been consolidated in:
+-- nui/lua/NUI-Client/character-select.lua
+--
+-- Moved callbacks:
+--   - NUI:Client:CharacterCreate
+--   - NUI:Client:CharacterPlay
+--   - NUI:Client:CharacterDelete
+--
+-- DO NOT register callbacks here - they are centralized in nui/lua/NUI-Client/character-select.lua
+-- See that file for the proper implementation
+-- ====================================================================================--

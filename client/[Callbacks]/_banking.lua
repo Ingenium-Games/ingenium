@@ -1,6 +1,9 @@
 -- ====================================================================================--
 -- Banking Client - ATM and Bank Interactions
 -- ====================================================================================--
+-- IMPORTANT: NUI Callbacks consolidated in nui/lua/NUI-Client/_banking.lua
+-- This file now contains location data and event handlers only
+-- ====================================================================================--
 
 -- ATM prop models
 local atmModels = {
@@ -22,87 +25,20 @@ local bankLocations = {
     {coords = vector3(1175.02, 2706.87, 38.09), radius = 2.0, name = "Fleeca Bank"}
 }
 
--- Register NUI callbacks
--- Directional NUI callbacks only
-RegisterNUICallback("NUI:Client:BankingClose", function(data, cb)
-    SetNuiFocus(false, false)
-    cb("ok")
-end)
-
-RegisterNUICallback("NUI:Client:BankingTransfer", function(data, cb)
-    TriggerServerCallback({
-        eventName = "Server:Bank:Transfer",
-        args = {data},
-        eventCallback = function(success, message)
-            if not success then
-                TriggerEvent("Client:Notify", message or "Transfer failed", "red", 5000)
-            else
-                TriggerEvent("Client:Notify", message or "Transfer successful", "green", 3000)
-            end
-            cb("ok")
-        end
-    })
-end)
-
-RegisterNUICallback("NUI:Client:BankingWithdraw", function(data, cb)
-    TriggerServerCallback({
-        eventName = "Server:Bank:Withdraw",
-        args = {data},
-        eventCallback = function(success, message)
-            if not success then
-                TriggerEvent("Client:Notify", message or "Withdrawal failed", "red", 5000)
-            else
-                TriggerEvent("Client:Notify", message or "Withdrawal successful", "green", 3000)
-            end
-            cb("ok")
-        end
-    })
-end)
-
-RegisterNUICallback("NUI:Client:BankingDeposit", function(data, cb)
-    TriggerServerCallback({
-        eventName = "Server:Bank:Deposit",
-        args = {data},
-        eventCallback = function(success, message)
-            if not success then
-                TriggerEvent("Client:Notify", message or "Deposit failed", "red", 5000)
-            else
-                TriggerEvent("Client:Notify", message or "Deposit successful", "green", 3000)
-            end
-            cb("ok")
-        end
-    })
-end)
-
-RegisterNUICallback("NUI:Client:BankingAddFavorite", function(data, cb)
-    TriggerServerCallback({
-        eventName = "Server:Bank:AddFavorite",
-        args = {data},
-        eventCallback = function(success, message)
-            if not success then
-                TriggerEvent("Client:Notify", message or "Failed to add favorite", "red", 5000)
-            else
-                TriggerEvent("Client:Notify", message or "Favorite added", "green", 3000)
-            end
-            cb("ok")
-        end
-    })
-end)
-
-RegisterNUICallback("NUI:Client:BankingRemoveFavorite", function(data, cb)
-    TriggerServerCallback({
-        eventName = "Server:Bank:RemoveFavorite",
-        args = {data},
-        eventCallback = function(success, message)
-            if not success then
-                TriggerEvent("Client:Notify", message or "Failed to remove favorite", "red", 5000)
-            else
-                TriggerEvent("Client:Notify", message or "Favorite removed", "green", 3000)
-            end
-            cb("ok")
-        end
-    })
-end)
+-- ====================================================================================--
+-- NUI Callbacks - CONSOLIDATED
+-- ====================================================================================--
+-- Banking NUI callbacks moved to: nui/lua/NUI-Client/_banking.lua
+-- Callbacks:
+--   - NUI:Client:BankingClose → nui/lua/NUI-Client/_banking.lua
+--   - NUI:Client:BankingTransfer → nui/lua/NUI-Client/_banking.lua
+--   - NUI:Client:BankingWithdraw → nui/lua/NUI-Client/_banking.lua
+--   - NUI:Client:BankingDeposit → nui/lua/NUI-Client/_banking.lua
+--   - NUI:Client:BankingAddFavorite → nui/lua/NUI-Client/_banking.lua
+--   - NUI:Client:BankingRemoveFavorite → nui/lua/NUI-Client/_banking.lua
+--
+-- DO NOT register callbacks here - they are centralized in nui/lua/NUI-Client/_banking.lua
+-- ====================================================================================--
 
 -- Event to open banking menu
 RegisterNetEvent("Client:Banking:OpenMenu", function(data)

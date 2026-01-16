@@ -1,65 +1,20 @@
 -- ====================================================================================--
--- NUI Close Event Handlers
+-- NUI Close Event Handlers - CONSOLIDATED
 -- ====================================================================================--
-
--- Handle chat submit from NUI
-RegisterNUICallback("chatSubmit", function(data, cb)
-    cb("ok")
-    if data and data.message then
-        TriggerServerEvent("chat:message", data.message)
-    end
-end)
-
--- Handle chat close from NUI
-RegisterNUICallback("chatClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
-
--- Handle menu close from NUI
-RegisterNUICallback("NUI:Client:MenuClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
-
--- Handle input close from NUI
-RegisterNUICallback("NUI:Client:InputClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
-
--- Handle context close from NUI
-RegisterNUICallback("NUI:Client:ContextClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
-
--- Handle banking close from NUI
-RegisterNUICallback("NUI:Client:BankingClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
-
--- Handle appearance close from NUI
-RegisterNUICallback("NUI:Client:AppearanceClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
-
--- Handle target close from NUI
-RegisterNUICallback("NUI:Client:TargetClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
-
--- Handle garage close from NUI
-RegisterNUICallback("NUI:Client:GarageClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
-
--- Handle character select close from NUI
-RegisterNUICallback("NUI:Client:CharacterSelectClose", function(data, cb)
-    cb("ok")
-    SetNuiFocus(false, false)
-end)
+-- IMPORTANT: All NUI callbacks have been consolidated in nui/lua/NUI-Client/
+-- 
+-- Moved callbacks:
+--   - chatSubmit → nui/lua/NUI-Client/_chat.lua (NUI:Client:ChatSubmit)
+--   - chatClose → nui/lua/NUI-Client/_chat.lua (NUI:Client:ChatClose)
+--   - NUI:Client:MenuClose → nui/lua/NUI-Client/_menu.lua
+--   - NUI:Client:InputClose → nui/lua/NUI-Client/_input.lua
+--   - NUI:Client:ContextClose → nui/lua/NUI-Client/_context.lua
+--   - NUI:Client:BankingClose → nui/lua/NUI-Client/_banking.lua
+--   - NUI:Client:AppearanceClose → nui/lua/NUI-Client/_appearance.lua
+--   - NUI:Client:TargetClose → nui/lua/NUI-Client/_target.lua
+--   - NUI:Client:GarageClose → nui/lua/NUI-Client/_garage.lua
+--   - NUI:Client:CharacterSelectClose → nui/lua/NUI-Client/character-select.lua
+--
+-- DO NOT register callbacks here - they are centralized in nui/lua/NUI-Client/
+-- See those files for the proper implementation
+-- ====================================================================================--

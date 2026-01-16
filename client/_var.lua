@@ -96,6 +96,19 @@ ig.text = {}           -- Text display
 ig.chat = {}           -- Chat functions
 ig.chats = {}          -- Chat messages
 ig.ui = {}             -- UI system
+ig.nui = {}            -- NUI system
+ig.nui.character = {}
+ig.nui.menu = {}       -- Menu wrapper functions (Phase 3.5)
+ig.nui.input = {}      -- Input wrapper functions (Phase 3.5)
+ig.nui.context = {}    -- Context wrapper functions (Phase 3.5)
+ig.nui.chat = {}       -- Chat wrapper functions (Phase 3.5)
+ig.nui.banking = {}    -- Banking wrapper functions (Phase 3.5)
+ig.nui.inventory = {}  -- Inventory wrapper functions (Phase 3.5)
+ig.nui.garage = {}     -- Garage wrapper functions (Phase 3.5)
+ig.nui.target = {}     -- Target wrapper functions (Phase 3.5)
+ig.nui.hud = {}        -- HUD wrapper functions (Phase 3.5)
+ig.nui.notify = {}     -- Notification wrapper functions (Phase 3.5)
+
 
 -- Item Drops and Pickups
 ig.drop = {}           -- Drop functions
