@@ -73,10 +73,11 @@ local GetInitializationData = RegisterServerCallback({
         end
         
         ig.log.Info("Callbacks", "GetInitializationData: successfully collected data")
-        ig.log.Debug("Callbacks", "  - items: %d", #(data.items or {}))
-        ig.log.Debug("Callbacks", "  - doors: %d", #(data.doors or {}))
-        ig.log.Debug("Callbacks", "  - peds: %d", #(data.peds or {}))
-        ig.log.Debug("Callbacks", "  - appearance_constants keys: %s", next(data.appearance_constants or {}) and "yes" or "no")
+        ig.log.Debug("Callbacks", "  - items: %d", data.items and ig.table.Count(data.items) or 0)
+        ig.log.Debug("Callbacks", "  - doors: %d", data.doors and ig.table.Count(data.doors) or 0)
+        ig.log.Debug("Callbacks", "  - peds: %d (type: %s)", data.peds and ig.table.Count(data.peds) or 0, type(data.peds))
+        ig.log.Debug("Callbacks", "  - tattoos: %d", data.tattoos and ig.table.Count(data.tattoos) or 0)
+        ig.log.Debug("Callbacks", "  - appearance_constants keys: %s", data.appearance_constants and ig.table.Count(data.appearance_constants) or 0)
         
         return data
     end

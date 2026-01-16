@@ -64,6 +64,7 @@ export const useAppearanceStore = defineStore('appearance', () => {
     console.log('[AppearanceStore] - constants:', data.constants)
     console.log('[AppearanceStore] - peds type:', typeof data.peds, 'is array:', Array.isArray(data.peds))
     console.log('[AppearanceStore] - peds keys:', data.peds ? Object.keys(data.peds).length : 0)
+    console.log('[AppearanceStore] - peds sample:', data.peds ? JSON.stringify(data.peds).substring(0, 500) : 'null')
     console.log('[AppearanceStore] - tattoos:', data.tattoos ? Object.keys(data.tattoos).length : 0)
     console.log('[AppearanceStore] - config:', data.config)
     

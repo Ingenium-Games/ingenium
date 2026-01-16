@@ -187,25 +187,27 @@ function handleCancel() {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   z-index: 2000;
   padding: 20px;
 }
 
 .appearance-container {
-  width: 100%;
-  max-width: 1200px;
-  max-height: 90vh;
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.98), rgba(42, 42, 42, 0.98));
+  width: 600px;
+  max-width: 600px;
+  max-height: calc(100vh - 40px);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.92), rgba(42, 42, 42, 0.92));
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  margin-left: 20px;
 }
 
 .appearance-header {

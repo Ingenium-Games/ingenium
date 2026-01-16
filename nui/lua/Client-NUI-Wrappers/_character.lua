@@ -30,13 +30,29 @@ end
 function ig.nui.character.ShowCreate()
     ig.log.Info("NUI-Wrapper", "ShowCreate: Starting appearance creation UI")
     
+    -- Log what we have in ig.peds before attempting callback
+    local pedsCount = 0
+    if ig.peds then
+        for _ in pairs(ig.peds) do pedsCount = pedsCount + 1 end
+    end
+    ig.log.Info("NUI-Wrapper", "ShowCreate: ig.peds has %d entries before callback", pedsCount)
+    
     -- Get appearance constants (check cache first, fallback to server request)
     local constants = ig.appearance_constants or ig.callback.Await('ig:GameData:GetAppearanceConstants')
     ig.log.Info("NUI-Wrapper", "ShowCreate: Constants loaded: %s", constants and "YES" or "NIL")
     
     -- Get ped data from server if needed (check cache first, fallback to server request)
-    local peds = ig.peds or ig.callback.Await('ig:GameData:GetPeds')
-    ig.log.Info("NUI-Wrapper", "ShowCreate: Peds loaded: %s keys", peds and (function() local c=0 for _ in pairs(peds) do c=c+1 end return c end)() or 0)
+    local peds = ig.peds
+    if not peds or ig.table.Count(peds) == 0 then
+        ig.log.Warn("NUI-Wrapper", "ShowCreate: ig.peds is empty, fetching from server")
+        peds = ig.callback.Await('ig:GameData:GetPeds')
+    end
+    
+    local pedsCountAfter = 0
+    if peds then
+        for _ in pairs(peds) do pedsCountAfter = pedsCountAfter + 1 end
+    end
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Peds loaded: %d entries", pedsCountAfter)
     
     -- Get tattoo data (check cache first, fallback to server request)
     local tattoos = ig.tattoos or ig.callback.Await('ig:GameData:GetTattoos')
@@ -99,6 +115,13 @@ function ig.nui.character.ShowCreate()
         data.constants and "YES" or "NIL")
     
     ig.ui.Send("Client:NUI:AppearanceOpen", data, true)
+    
+    -- Ensure focus is set after a brief delay to prevent race condition
+    -- with character select menu closing
+    SetTimeout(100, function()
+        SetNuiFocus(true, true)
+        ig.log.Debug("NUI-Wrapper", "ShowCreate: Focus explicitly set to true")
+    end)
 end
 
 -- Show appearance customization UI

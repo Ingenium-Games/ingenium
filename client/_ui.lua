@@ -18,7 +18,7 @@ function ig.ui.Send(message, data, focus)
     SendNUIMessage(payload)
 
     if focus ~= nil then
-        SetNuiFocus( (focus and false) or true, (focus and false) or true )
+        SetNuiFocus(focus, focus)
     end
 end
 
