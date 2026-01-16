@@ -7,6 +7,7 @@ Scans Lua files, detects dependencies via function calls, and generates optimize
 import os
 import re
 import sys
+import argparse
 from pathlib import Path
 from typing import Dict, Set, List, Tuple
 from collections import defaultdict, deque
@@ -37,10 +38,14 @@ class LuaFileAnalyzer:
         self.files: Dict[str, dict] = {}
         self.dependencies: Dict[str, Set[str]] = defaultdict(set)
         self.exports: Dict[str, Set[str]] = defaultdict(set)
+        self.bracket_dirs: Dict[str, List[str]] = defaultdict(list)  # Track [Bracket] directories
         
     def should_exclude(self, path: Path) -> bool:
         """Check if path matches exclusion patterns."""
         path_str = str(path)
+        # Don't exclude [Bracket] directories - we want them!
+        if path.name.startswith('[') and path.name.endswith(']'):
+            return False
         for pattern in EXCLUDE_PATTERNS:
             if pattern in path_str or path.name.endswith(pattern):
                 return True
@@ -125,6 +130,15 @@ class LuaFileAnalyzer:
             if not directory.exists():
                 continue
             
+            # First, detect all [Bracket] directories
+            for item in sorted(directory.iterdir()):
+                if item.is_dir() and item.name.startswith('[') and item.name.endswith(']'):
+                    if not self.should_exclude(item):
+                        rel_path = item.relative_to(self.root)
+                        glob_pattern = f"{str(rel_path).replace(chr(92), '/')}"
+                        if glob_pattern not in self.bracket_dirs[context]:
+                            self.bracket_dirs[context].append(glob_pattern)
+            
             lua_files = self.find_lua_files(str(directory), context)
             
             for filepath in lua_files:
@@ -192,7 +206,7 @@ class LuaFileAnalyzer:
         
         return order
     
-    def generate_manifest(self) -> str:
+    def generate_manifest(self, version: str = "1.0.0") -> str:
         """Generate fxmanifest.lua content."""
         order = self.determine_load_order()
         
@@ -206,36 +220,50 @@ class LuaFileAnalyzer:
             '_config/defaults.lua',
         ]
         
-        manifest = '''------------------------------------------------------------------------------
+        manifest = f'''------------------------------------------------------------------------------
 fx_version "cerulean"
 game "gta5"
 lua54 "yes"
 author "Twiitchter"
 description "Ingenium"
-version "1.0.0"
+version "{version}"
 ------------------------------------------------------------------------------
 provide "polyzone"
 provide "pma-voice"
-provide "ig.target"
 
 ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
-shared_scripts {
+shared_scripts {{
 '''
         
         # Add config files first
         for config in config_files:
             manifest += f'    "{config}",\n'
         
+        # Add foundation shared files that should load early
+        foundation_files = [
+            'shared/_ig.lua',
+            'shared/_log.lua',
+            'shared/_locale.lua',
+            'shared/_protect.lua',
+        ]
+        for foundation in foundation_files:
+            if foundation in self.files:
+                manifest += f'    "{foundation}",\n'
+        
         # Add other config files
         for script in shared_scripts:
             if script.startswith('_config'):
                 manifest += f'    "{script}",\n'
         
-        # Add rest of shared scripts
+        # Add rest of shared scripts (excluding foundation files)
         for script in shared_scripts:
-            if not script.startswith('_config'):
+            if not script.startswith('_config') and script not in foundation_files:
                 manifest += f'    "{script}",\n'
+        
+        # Add bracket directories for shared as catch-all
+        for bracket_dir in sorted(self.bracket_dirs['shared']):
+            manifest += f'    "{bracket_dir}/*.lua",\n'
         
         manifest += '''}
 ------------------------------------------------------------------------------
@@ -245,6 +273,10 @@ client_scripts {
         for script in client_scripts:
             manifest += f'    "{script}",\n'
         
+        # Add bracket directories for client as catch-all
+        for bracket_dir in sorted(self.bracket_dirs['client']):
+            manifest += f'    "{bracket_dir}/*.lua",\n'
+        
         manifest += '''    "nui/lua/*.lua"
 }
 ------------------------------------------------------------------------------
@@ -253,6 +285,10 @@ server_scripts {
         
         for script in server_scripts:
             manifest += f'    "{script}",\n'
+        
+        # Add bracket directories for server as catch-all
+        for bracket_dir in sorted(self.bracket_dirs['server']):
+            manifest += f'    "{bracket_dir}/*.lua",\n'
         
         manifest += '''}
 ------------------------------------------------------------------------------
@@ -279,6 +315,11 @@ files {
 
 def main():
     """Main entry point."""
+    parser = argparse.ArgumentParser(description='Generate fxmanifest.lua for Ingenium resource')
+    parser.add_argument('--version', '-v', type=str, default='1.0.0', 
+                        help='Version number for the manifest (e.g., 1.0.4)')
+    args = parser.parse_args()
+    
     resource_path = os.path.dirname(os.path.abspath(__file__))
     
     print(f"Scanning resource: {resource_path}")
@@ -296,8 +337,8 @@ def main():
         context = analyzer.files[script]['context']
         print(f"  {i:2d}. [{context:6s}] {script}")
     
-    print("\nGenerating fxmanifest.lua...")
-    manifest = analyzer.generate_manifest()
+    print(f"\nGenerating fxmanifest.lua (version {args.version})...")
+    manifest = analyzer.generate_manifest(version=args.version)
     
     manifest_path = os.path.join(resource_path, 'fxmanifest.lua')
     with open(manifest_path, 'w', encoding='utf-8') as f:
@@ -305,6 +346,7 @@ def main():
     
     print(f"✓ fxmanifest.lua generated successfully")
     print(f"  Output: {manifest_path}")
+    print(f"  Version: {args.version}")
 
 
 if __name__ == '__main__':

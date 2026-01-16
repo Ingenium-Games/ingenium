@@ -4,147 +4,119 @@ game "gta5"
 lua54 "yes"
 author "Twiitchter"
 description "Ingenium"
-version "1.0.0"
+version "1.0.4"
 ------------------------------------------------------------------------------
 provide "polyzone"
 provide "pma-voice"
-provide "ig.target"
 
 ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
--- SHARED SCRIPTS (Available to both client and server)
--- Load order is critical: namespaces first, then utilities, then feature modules
 shared_scripts {
-    -- Core namespace and configuration (MUST be first)
     "_config/config.lua",
     "_config/defaults.lua",
-    "_config/banking.lua",
-    "_config/chat.lua",
-    "_config/dev.lua",
-    "_config/disable.lua",
-    "_config/discord.lua",
-    "_config/files.lua",
-    "_config/forced_animations.lua",
-    "_config/gamemode.lua",
-    "_config/garage.lua",
-    "_config/ipls.lua",
-    "_config/jobs.lua",
-    "_config/peds.lua",
-    "_config/phones.lua",
-    "_config/screenshot.lua",
-    "_config/urls.lua",
-    "_config/vehicles.lua",
-    "_config/voip.lua",
-    
-    -- Shared namespace initialization (MUST be before all other shared code)
     "shared/_ig.lua",
-    
-    -- Core utilities (can be used by everything else)
     "shared/_log.lua",
     "shared/_locale.lua",
     "shared/_protect.lua",
-    
-    -- Third-party integrations
+    "shared/[Third Party]/_callbacks.lua",
+    "shared/[Tools]/_check.lua",
+    "shared/[Tools]/_file.lua",
+    "shared/[Tools]/_gamemode.lua",
+    "shared/[Tools]/_json.lua",
+    "shared/[Tools]/_math.lua",
+    "shared/[Tools]/_rng.lua",
+    "shared/[Tools]/_table.lua",
+    "shared/[Tools]/_util.lua",
+    "shared/[Voice]/_pma_wrapper.lua",
+    "shared/[Voice]/_voip.lua",
     "shared/[Third Party]/*.lua",
-    
-    -- Tools and debug utilities
     "shared/[Tools]/*.lua",
-    
-    -- Voice system
     "shared/[Voice]/*.lua",
-    
-    -- Localization
-    "locale/*.lua",
 }
 ------------------------------------------------------------------------------
--- CLIENT SCRIPTS (Client-side only, has access to GTA natives)
--- Load order: Initialize state before loading features
 client_scripts {
-    -- Variable initialization MUST be first
     "client/_var.lua",
-    
-    -- NUI Wrapper Functions (Client-to-NUI message senders)
-    -- MUST load after _var.lua but before NUI callbacks
-    "nui/lua/Client-NUI-Wrappers/_character.lua",
-    "nui/lua/Client-NUI-Wrappers/_menu.lua",
-    "nui/lua/Client-NUI-Wrappers/_input.lua",
-    "nui/lua/Client-NUI-Wrappers/_context.lua",
-    "nui/lua/Client-NUI-Wrappers/_chat.lua",
-    "nui/lua/Client-NUI-Wrappers/_banking.lua",
-    "nui/lua/Client-NUI-Wrappers/_inventory.lua",
-    "nui/lua/Client-NUI-Wrappers/_garage.lua",
-    "nui/lua/Client-NUI-Wrappers/_target.lua",
-    "nui/lua/Client-NUI-Wrappers/_hud.lua",
-    "nui/lua/Client-NUI-Wrappers/_notification.lua",
-    
-    -- Core system modules - load before dependent features
-    "client/_data.lua",
-    "client/_functions.lua",
-    "client/_callback.lua",
-    
-    -- Character and appearance systems
+    "client/[Garage]/_var.lua",
+    "client/[Target]/_var.lua",
+    "client/[Callbacks]/_animations_forced.lua",
+    "client/[Callbacks]/_appearance.lua",
+    "client/[Callbacks]/_banking.lua",
+    "client/[Callbacks]/_character.lua",
+    "client/[Callbacks]/_chat.lua",
+    "client/[Callbacks]/_commands.lua",
+    "client/[Callbacks]/_inventory.lua",
+    "client/[Chat]/_aces.lua",
+    "client/[Commands]/_locate_vehicles.lua",
+    "client/[Dev]/_ammunation.lua",
+    "client/[Dev]/_doorcreator.lua",
+    "client/[Dev]/_examples.lua",
+    "client/[Dev]/_vehicleseats.lua",
+    "client/[Drops]/_drop_integration.lua",
+    "client/[Drops]/_drop_targets.lua",
+    "client/[Events]/_character.lua",
+    "client/[Events]/_gamemode.lua",
+    "client/[Events]/_runchecks.lua",
+    "client/[Events]/_vehicle.lua",
+    "client/[Events]/_vehicles.lua",
+    "client/[Garage]/_client.lua",
+    "client/[Garage]/_machine.lua",
+    "client/[Target]/_api.lua",
+    "client/[Target]/_defaults.lua",
+    "client/[Target]/_lib.lua",
+    "client/[Target]/_main.lua",
+    "client/[Target]/_utils.lua",
+    "client/[Threads]/_forced_animations.lua",
+    "client/[Threads]/_player_load_restriction.lua",
+    "client/[Threads]/_rp_controls.lua",
+    "client/[Threads]/_rp_features.lua",
+    "client/[Threads]/_weapon.lua",
+    "client/[ToDo]/_persitance.lua",
+    "client/[ToDo]/_traits.lua",
+    "client/[Voice]/_voip.lua",
+    "client/[Zones]/BoxZone.lua",
+    "client/[Zones]/CircleZone.lua",
+    "client/[Zones]/ComboZone.lua",
+    "client/[Zones]/EntityZone.lua",
+    "client/[Zones]/PolyZone.lua",
+    "client/[Zones]/_zone.lua",
+    "client/[Zones]/_zone_manager.lua",
+    "client/[Zones]/_zone_test_example.lua",
     "client/_affiliation.lua",
-    "client/_appearance.lua",
-    
-    -- Inventory and items
-    "client/_inventory.lua",
-    "client/_items.lua",
-    "client/_status.lua",
     "client/_ammo.lua",
-    "client/_weapon.lua",
-    
-    -- Visual systems
-    "client/_blips.lua",
-    "client/_markers.lua",
-    "client/_cameras.lua",
-    "client/_fx.lua",
-    "client/_text.lua",
-    "client/_ui.lua",
-    
-    -- World interaction
-    "client/_doors.lua",
-    "client/_objects.lua",
-    "client/_ipls.lua",
-    "client/_weather.lua",
-    "client/_time.lua",
-    
-    -- Vehicle systems
-    "client/_vehicle.lua",
-    "client/_vehicle_persistence.lua",
-    
-    -- Character state
-    "client/_death.lua",
     "client/_animations.lua",
-    "client/_modifiers.lua",
-    "client/_skills.lua",
-    "client/_states.lua",
-    "client/_tattoo.lua",
-    
-    -- Utilities
-    "client/_drops.lua",
+    "client/_appearance.lua",
+    "client/_blips.lua",
+    "client/_callback.lua",
+    "client/_cameras.lua",
     "client/_chat.lua",
     "client/_commands.lua",
+    "client/_death.lua",
     "client/_discord.lua",
+    "client/_doors.lua",
+    "client/_drops.lua",
+    "client/_functions.lua",
+    "client/_fx.lua",
+    "client/_inventory.lua",
+    "client/_ipls.lua",
+    "client/_items.lua",
+    "client/_markers.lua",
+    "client/_modifiers.lua",
+    "client/_objects.lua",
     "client/_persistance.lua",
     "client/_screenshot.lua",
-    
-    -- Feature modules (depend on core systems)
+    "client/_skills.lua",
+    "client/_states.lua",
+    "client/_status.lua",
+    "client/_tattoo.lua",
+    "client/_text.lua",
+    "client/_time.lua",
+    "client/_ui.lua",
+    "client/_vehicle.lua",
+    "client/_vehicle_persistence.lua",
+    "client/_weapon.lua",
+    "client/_weather.lua",
+    "client/client.lua",
     "client/[Callbacks]/*.lua",
-    
-    -- NUI-Client Callback Handlers (NUI-to-Client message receivers)
-    "nui/lua/NUI-Client/character-select.lua",
-    "nui/lua/NUI-Client/_appearance.lua",
-    "nui/lua/NUI-Client/_menu.lua",
-    "nui/lua/NUI-Client/_input.lua",
-    "nui/lua/NUI-Client/_context.lua",
-    "nui/lua/NUI-Client/_chat.lua",
-    "nui/lua/NUI-Client/_banking.lua",
-    "nui/lua/NUI-Client/_inventory.lua",
-    "nui/lua/NUI-Client/_garage.lua",
-    "nui/lua/NUI-Client/_target.lua",
-    "nui/lua/NUI-Client/_hud.lua",
-    "nui/lua/NUI-Client/_notification.lua",
-    
     "client/[Chat]/*.lua",
     "client/[Commands]/*.lua",
     "client/[Data]/*.lua",
@@ -156,89 +128,116 @@ client_scripts {
     "client/[Threads]/*.lua",
     "client/[ToDo]/*.lua",
     "client/[Voice]/*.lua",
-    
-    -- Zone system (PolyZone must load first)
-    "client/[Zones]/PolyZone.lua",
-    "client/[Zones]/BoxZone.lua",
-    "client/[Zones]/CircleZone.lua",
-    "client/[Zones]/EntityZone.lua",
-    "client/[Zones]/ComboZone.lua",
-    "client/[Zones]/_zone.lua",
-    "client/[Zones]/_zone_manager.lua",
-    "client/[Zones]/_zone_test_example.lua",
-    
-    -- Main client entry point (MUST be last)
-    "client/client.lua",
-    
-    -- NUI scripts
+    "client/[Zones]/*.lua",
     "nui/lua/*.lua"
 }
 ------------------------------------------------------------------------------
--- SERVER SCRIPTS (Server-side only)
--- Load order: State, database, validation, then features
 server_scripts {
-    -- Variable initialization MUST be first
     "server/_var.lua",
-    
-    -- Core system modules
-    "server/_data.lua",
-    "server/_functions.lua",
-    "server/_events.lua",
-    "server/_callback.lua",
-    "server/_time.lua",
-    "server/_cron.lua",
-    
-    -- Database and persistence (must be before features that use them)
-    "server/[SQL]/*.lua",
-    
-    -- Character and account systems
+    "server/[Garage]/_var.lua",
+    "server/[API]/_api.lua",
+    "server/[Appearance]/_pricing.lua",
+    "server/[Callbacks]/_animations_forced.lua",
+    "server/[Callbacks]/_appearance.lua",
+    "server/[Callbacks]/_banking.lua",
+    "server/[Callbacks]/_inventory.lua",
+    "server/[Callbacks]/_players.lua",
+    "server/[Callbacks]/_vehicles.lua",
+    "server/[Classes]/_blank_object.lua",
+    "server/[Classes]/_existing_object.lua",
+    "server/[Classes]/_job.lua",
+    "server/[Classes]/_npc.lua",
+    "server/[Classes]/_offline_player.lua",
+    "server/[Classes]/_owned_vehicle.lua",
+    "server/[Classes]/_player.lua",
+    "server/[Classes]/_vehicle.lua",
+    "server/[Commands]/_locate_vehicles.lua",
+    "server/[Data - No Save Needed]/_appearance.lua",
+    "server/[Data - No Save Needed]/_modkit.lua",
+    "server/[Data - No Save Needed]/_names.lua",
+    "server/[Data - No Save Needed]/_npc.lua",
+    "server/[Data - No Save Needed]/_objects.lua",
+    "server/[Data - No Save Needed]/_peds.lua",
+    "server/[Data - No Save Needed]/_tattoo.lua",
+    "server/[Data - No Save Needed]/_vehicle.lua",
+    "server/[Data - No Save Needed]/_weapons.lua",
+    "server/[Data - Save to File]/_drops.lua",
+    "server/[Data - Save to File]/_gsr.lua",
+    "server/[Data - Save to File]/_items.lua",
+    "server/[Data - Save to File]/_jobs.lua",
+    "server/[Data - Save to File]/_notes.lua",
+    "server/[Data - Save to File]/_pickups.lua",
+    "server/[Deferals]/_deferals.lua",
+    "server/[Dev]/_commands.lua",
+    "server/[Doors]/_doors.lua",
+    "server/[Events]/_character.lua",
+    "server/[Events]/_character_lifecycle.lua",
+    "server/[Events]/_feedback.lua",
+    "server/[Events]/_vehicle.lua",
+    "server/[Garage]/_callbacks.lua",
+    "server/[Objects]/_jobs.lua",
+    "server/[Objects]/_npcs.lua",
+    "server/[Objects]/_objects.lua",
+    "server/[Objects]/_players.lua",
+    "server/[Objects]/_vehicles.lua",
+    "server/[Onesync]/_events.lua",
+    "server/[Onesync]/_sbch.lua",
+    "server/[SQL]/_bank.lua",
+    "server/[SQL]/_banking.lua",
+    "server/[SQL]/_character.lua",
+    "server/[SQL]/_gen.lua",
+    "server/[SQL]/_handler.lua",
+    "server/[SQL]/_jobs.lua",
+    "server/[SQL]/_saves.lua",
+    "server/[SQL]/_users.lua",
+    "server/[SQL]/_vehicles.lua",
+    "server/[Security]/_statebag_protection.lua",
+    "server/[Security]/_transaction_security.lua",
+    "server/[Third Party]/_adaptivecards.lua",
+    "server/[Third Party]/_discord.lua",
+    "server/[Third Party]/_queue_commands.lua",
+    "server/[Third Party]/_queue_config_new.lua",
+    "server/[Third Party]/_queue_system.lua",
+    "server/[Tools]/_logging.lua",
+    "server/[Tools]/_memory.lua",
+    "server/[Validation]/_validator.lua",
+    "server/[Voice]/_voip.lua",
     "server/_bank.lua",
+    "server/_callback.lua",
+    "server/_chat.lua",
+    "server/_commands.lua",
+    "server/_cron.lua",
+    "server/_events.lua",
+    "server/_functions.lua",
+    "server/_instance.lua",
     "server/_payroll.lua",
     "server/_persistance.lua",
     "server/_save_routine.lua",
-    "server/_instance.lua",
-    
-    -- Security and validation (must be before handlers)
-    "server/[Validation]/*.lua",
-    "server/[Security]/*.lua",
-    
-    -- OneSync and synchronization
-    "server/[Onesync]/*.lua",
-    
-    -- Vehicle systems
+    "server/_screenshot.lua",
+    "server/_tebex.lua",
+    "server/_time.lua",
     "server/_vehicle_persistence.lua",
-    
-    -- Game systems
+    "server/server.lua",
+    "server/[API]/*.lua",
     "server/[Appearance]/*.lua",
+    "server/[Callbacks]/*.lua",
+    "server/[Classes]/*.lua",
     "server/[Commands]/*.lua",
     "server/[Data - No Save Needed]/*.lua",
     "server/[Data - Save to File]/*.lua",
     "server/[Deferals]/*.lua",
+    "server/[Dev]/*.lua",
     "server/[Doors]/*.lua",
     "server/[Events]/*.lua",
     "server/[Garage]/*.lua",
     "server/[Objects]/*.lua",
-    
-    -- Integration and utilities
-    "server/_chat.lua",
-    "server/_commands.lua",
-    "server/_screenshot.lua",
-    "server/_tebex.lua",
+    "server/[Onesync]/*.lua",
+    "server/[SQL]/*.lua",
+    "server/[Security]/*.lua",
     "server/[Third Party]/*.lua",
     "server/[Tools]/*.lua",
+    "server/[Validation]/*.lua",
     "server/[Voice]/*.lua",
-    
-    -- Development tools
-    "server/[Dev]/*.lua",
-    
-    -- API and advanced features
-    "server/[API]/*.lua",
-    
-    -- Classes (dependency injection, patterns)
-    "server/[Classes]/*.lua",
-    
-    -- Main server entry point (MUST be last)
-    "server/server.lua",
 }
 ------------------------------------------------------------------------------
 dependencies {
