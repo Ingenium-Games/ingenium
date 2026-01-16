@@ -1,7 +1,5 @@
 -- Simple centralized logging helper
 -- Provides ig.log(level, tag, fmt, ...)
-if not ig then ig = {} end
-ig.log = ig.log or {}
 
 local levels = { error = 1, warn = 2, info = 3, debug = 4, trace = 5 }
 

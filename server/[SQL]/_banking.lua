@@ -2,10 +2,6 @@
 -- Banking SQL Functions
 -- ====================================================================================--
 
-if not ig.sql.banking then
-    ig.sql.banking = {}
-end
-
 --- Get transaction history for a character
 --- @param characterId string Character ID
 --- @param limit number Number of transactions to retrieve

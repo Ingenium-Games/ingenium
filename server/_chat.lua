@@ -2,10 +2,6 @@
 -- Chat System - Server Side Logging
 -- ====================================================================================--
 
-if not IsDuplicityVersion() then return end
-
-ig.chat = ig.chat or {}
-
 local chatLogQueue = {}
 local isWritingChatLog = false
 

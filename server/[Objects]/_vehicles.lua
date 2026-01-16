@@ -1,5 +1,3 @@
---
-ig.vehicle = ig.vehicle or {}
 -- Vehicles management (ig.vehicles, ig.vdex initialized in server/_var.lua)
 
 -- ====================================================================================--

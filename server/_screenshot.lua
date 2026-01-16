@@ -2,8 +2,6 @@
 -- Screenshot System - Server Side
 -- ====================================================================================--
 
-ig.screenshot = ig.screenshot or {}
-
 -- Function to validate webhook URL
 function ig.screenshot.ValidateWebhook(webhook)
     if not webhook or webhook == "" then

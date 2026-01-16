@@ -2,7 +2,6 @@
 -- Statebag handlers (ig.sbch initialized in server/_var.lua)
 -- player is the state used for _user.lua and _character.lua as they are merged into one.
 -- ====================================================================================--
-ig.sbch.player = {}
 --
 -- Typically these are invoked via the xplayer table to modify states as its the server, and people are acustomed to xplayer tables etig.
 -- however the clients can also invoke state changes, like the dead version, so when they do this,

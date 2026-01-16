@@ -4,8 +4,6 @@
 -- Uses in-memory Lua table with player.State.Duty for tracking (zero database overhead)
 -- ====================================================================================--
 
-if not ig.payroll then ig.payroll = {} end
-
 -- In-memory tracking table: {CharacterId} -> {job, onDutyStart, sourceId}
 -- Populated via player.State.Duty changes, used for payroll processing
 local onDutyPlayers = {}

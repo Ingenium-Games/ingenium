@@ -1,6 +1,4 @@
 -- Initialize ig.garage namespace for internal runtime variables
-if not ig then ig = {} end
-if not ig.garage then ig.garage = {} end
 
 -- Note: ParkingSpots has been moved to conf.garage.parkingspots in _config/garage.lua
 

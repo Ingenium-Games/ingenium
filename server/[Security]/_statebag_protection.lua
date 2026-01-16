@@ -3,11 +3,6 @@
 -- Prevents clients from modifying sensitive entity state data
 -- ====================================================================================--
 
--- Initialize ig.security namespace if not already present
-if not ig.security then
-    ig.security = {}
-end
-
 -- Whitelist of keys that clients are allowed to modify
 local ALLOWED_CLIENT_KEYS = {
     ["Animation"] = true,

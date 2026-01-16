@@ -3,9 +3,6 @@
 -- Provides server-only wrapper methods for the global callback system
 -- ====================================================================================--
 
-ig = ig or {}
-ig.callback = ig.callback or {}
-
 ---Register a server callback handler
 ---This is a convenience wrapper for RegisterServerCallback
 ---Note: This can only be used on the SERVER side

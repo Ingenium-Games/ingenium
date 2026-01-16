@@ -3,8 +3,6 @@
     Provides query and validation functions for ped models
     Server is the authority - clients request data via callbacks
 --]]
-ig.ped = ig.ped or {}
-ig.peds = ig.peds or {}
 -- ============================================
 -- PED HELPERS
 -- ============================================

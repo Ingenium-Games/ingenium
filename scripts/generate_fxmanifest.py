@@ -283,7 +283,8 @@ client_scripts {
 server_scripts {
 '''
         
-        # Foundation server files that must load first
+        # Enforce specific load order groups
+        # Group 1: Foundation files (must load first)
         server_foundation_files = [
             'server/_var.lua',
             'server/_data.lua',
@@ -291,18 +292,130 @@ server_scripts {
             'server/_functions.lua',
         ]
         
-        # Load foundation files first (add them regardless, as they're critical)
+        # Group 2: Files that load after foundation
+        server_early_files = [
+            'server/[Garage]/_var.lua',
+            'server/[API]/_api.lua',
+            'server/[Appearance]/_pricing.lua',
+            'server/[Callbacks]/_animations_forced.lua',
+            'server/[Callbacks]/_appearance.lua',
+            'server/[Callbacks]/_banking.lua',
+            'server/[Callbacks]/_inventory.lua',
+            'server/[Callbacks]/_players.lua',
+            'server/[Callbacks]/_vehicles.lua',
+            'server/[Classes]/_blank_object.lua',
+            'server/[Classes]/_existing_object.lua',
+            'server/[Classes]/_job.lua',
+            'server/[Classes]/_npc.lua',
+            'server/[Classes]/_offline_player.lua',
+            'server/[Classes]/_owned_vehicle.lua',
+            'server/[Classes]/_player.lua',
+            'server/[Classes]/_vehicle.lua',
+        ]
+        
+        # Group 3: Data module files
+        server_data_files = [
+            'server/[Data - No Save Needed]/_appearance.lua',
+            'server/[Data - No Save Needed]/_modkit.lua',
+            'server/[Data - No Save Needed]/_names.lua',
+            'server/[Data - No Save Needed]/_npc.lua',
+            'server/[Data - No Save Needed]/_objects.lua',
+            'server/[Data - No Save Needed]/_peds.lua',
+            'server/[Data - No Save Needed]/_tattoo.lua',
+            'server/[Data - No Save Needed]/_vehicle.lua',
+            'server/[Data - No Save Needed]/_weapons.lua',
+        ]
+        
+        # Group 4: Core dependency files (before Data - Save to File)
+        server_core_files = [
+            'server/[Commands]/_locate_vehicles.lua',
+            'server/[Deferals]/_deferals.lua',
+            'server/[Dev]/_commands.lua',
+            'server/[Doors]/_doors.lua',
+            'server/[Events]/_character.lua',
+            'server/[Events]/_character_lifecycle.lua',
+            'server/[Events]/_feedback.lua',
+            'server/[Events]/_vehicle.lua',
+            'server/[Garage]/_callbacks.lua',
+            'server/[Objects]/_jobs.lua',
+            'server/[Objects]/_npcs.lua',
+            'server/[Objects]/_objects.lua',
+            'server/[Objects]/_players.lua',
+            'server/[Objects]/_vehicles.lua',
+            'server/[Onesync]/_events.lua',
+            'server/[Onesync]/_sbch.lua',
+            'server/[SQL]/_bank.lua',
+            'server/[SQL]/_banking.lua',
+            'server/[SQL]/_character.lua',
+            'server/[SQL]/_gen.lua',
+            'server/[SQL]/_handler.lua',
+            'server/[SQL]/_jobs.lua',
+            'server/[SQL]/_saves.lua',
+            'server/[SQL]/_users.lua',
+            'server/[SQL]/_vehicles.lua',
+            'server/[Security]/_statebag_protection.lua',
+            'server/[Security]/_transaction_security.lua',
+            'server/[Third Party]/_adaptivecards.lua',
+            'server/[Third Party]/_discord.lua',
+            'server/[Third Party]/_queue_commands.lua',
+            'server/[Third Party]/_queue_config_new.lua',
+            'server/[Third Party]/_queue_system.lua',
+            'server/[Tools]/_logging.lua',
+            'server/[Tools]/_memory.lua',
+            'server/[Validation]/_validator.lua',
+            'server/[Voice]/_voip.lua',
+            'server/_bank.lua',
+            'server/_chat.lua',
+            'server/_commands.lua',
+            'server/_cron.lua',
+            'server/_events.lua',
+            'server/_instance.lua',
+            'server/_payroll.lua',
+            'server/_persistance.lua',
+            'server/_save_routine.lua',
+            'server/_screenshot.lua',
+            'server/_tebex.lua',
+            'server/_time.lua',
+            'server/_vehicle_persistence.lua',
+        ]
+        
+        # Group 5: Data - Save to File (must load after dependencies)
+        server_save_files = [
+            'server/[Data - Save to File]/_drops.lua',
+            'server/[Data - Save to File]/_gsr.lua',
+            'server/[Data - Save to File]/_items.lua',
+            'server/[Data - Save to File]/_jobs.lua',
+            'server/[Data - Save to File]/_notes.lua',
+            'server/[Data - Save to File]/_pickups.lua',
+        ]
+        
+        # Load all groups in order
         for foundation in server_foundation_files:
-            manifest += f'    "{foundation}",\n'
+            manifest += f'    "{foundation}",\\n'
         
-        # Load garage var after core foundations
-        manifest += f'    "server/[Garage]/_var.lua",\n'
+        for early in server_early_files:
+            if early in self.files:
+                manifest += f'    "{early}",\\n'
         
-        # Add rest of server scripts (excluding foundation files and garage var)
+        for data in server_data_files:
+            if data in self.files:
+                manifest += f'    "{data}",\\n'
+        
+        for core in server_core_files:
+            if core in self.files:
+                manifest += f'    "{core}",\\n'
+        
+        for save in server_save_files:
+            if save in self.files:
+                manifest += f'    "{save}",\\n'
+        
+        # Finally add server.lua
+        manifest += f'    "server/server.lua",\\n'        
+        # Add any remaining scripts not explicitly listed (catch-all for new files)
+        all_ordered_files = set(server_foundation_files + server_early_files + server_data_files + server_core_files + server_save_files + ['server/server.lua'])
         for script in server_scripts:
-            if script not in server_foundation_files and script != 'server/[Garage]/_var.lua':
-                manifest += f'    "{script}",\n'
-        
+            if script not in all_ordered_files:
+                manifest += f'    "{script}",\n'        
         # Add bracket directories for server as catch-all
         for bracket_dir in sorted(self.bracket_dirs['server']):
             manifest += f'    "{bracket_dir}/*.lua",\n'

@@ -14,7 +14,6 @@
 ]]--
 
 -- Initialize queue namespace
-ig.queue = ig.queue or {}
 
 -- Queue state management
 local QueueState = {

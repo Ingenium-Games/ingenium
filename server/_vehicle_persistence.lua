@@ -17,7 +17,7 @@
 ]]
 
 -- (ig.vehicleCache initialized in server/_var.lua)
-ig.persistentVehiclesFile = "data/persistent_vehicles.json"
+ig._persistentVehiclesFile = "data/persistent_vehicles.json"
 
 -- ====================================================================================--
 
@@ -48,7 +48,7 @@ end
 
 ---Load persistent vehicles from JSON file into memory
 function ig.vehicle.LoadPersistentVehicles()
-    local filePath = GetResourcePath(GetCurrentResourceName()) .. "/" .. ig.persistentVehiclesFile
+    local filePath = GetResourcePath(GetCurrentResourceName()) .. "/" .. ig._persistentVehiclesFile
     
     -- Check if file exists
     local fileHandle = io.open(filePath, "r")
@@ -133,7 +133,7 @@ function ig.vehicle.SavePersistentVehicles()
         vehicles = ig.vehicleCache
     }
     
-    local filePath = GetResourcePath(GetCurrentResourceName()) .. "/" .. ig.persistentVehiclesFile
+    local filePath = GetResourcePath(GetCurrentResourceName()) .. "/" .. ig._persistentVehiclesFile
     
     -- Create data directory if needed
     local dataDir = GetResourcePath(GetCurrentResourceName()) .. "/data"

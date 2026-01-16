@@ -26,105 +26,77 @@ ig._dataloaded = false
 -- ====================================================================================--
 -- Core System Tables
 -- ====================================================================================--
-ig.data = {}           -- Core data functions
-ig.func = {}           -- Generic functions
-ig.event = {}          -- Event handlers
-ig.time = {}           -- Time and cron functions
+ig.active_drops = {}   -- Currently active drops
+ig.bank = {}           -- Banking functions
+ig.callback = {}       -- Callback system
+ig.chat = {}           -- Chat functions
 ig.cron = {}           -- Cron job functions
 ig.crons = {}          -- Active cron jobs
+ig.data = {}           -- Core data functions
+ig.discord = {}        -- Discord integration
+ig.door = {}           -- Door functions
+ig.doors = {}          -- Door data
+ig.event = {}          -- Event handlers
+ig.func = {}           -- Generic functions
+ig.gsr = {}            -- GSR (gunshot residue) functions
+ig.gsrs = {}           -- GSR data
 ig.inst = {}           -- Instance management
-ig.persistance = {}    -- Persistence layer
-ig.persistant = {}     -- Persistent data
-
--- ====================================================================================--
--- Security and Validation
--- ====================================================================================--
-ig.security = {}       -- Transaction security
-ig.validation = {}     -- Data validation
-ig.validation.HandleExploit = nil             -- Exploit handling function
-
-
--- ====================================================================================--
--- Player and Object Management
--- ====================================================================================--
-ig.player = {}         -- Player functions
-ig.players = {}        -- Active players list
-ig.pdex = {}           -- Player index (by source)
-
+ig.item = {}           -- Item functions
+ig.items = {}          -- Item data
+ig.job = {}            -- Job functions
+ig.jdex = {}           -- Job index
+ig.jobs = {}           -- Job definitions
+ig.modkit = {}         -- Modkit functions
+ig.modkits = {}        -- Modkit data
+ig.name = {}           -- Name functions
+ig.names = {}          -- Name data
+ig.ndex = {}           -- NPC index
+ig.note = {}           -- Note functions
 ig.npc = {}            -- NPC functions
 ig.npcs = {}           -- Active NPCs
-ig.ndex = {}           -- NPC index
-
-ig.job = {}            -- Job functions
-ig.jobs = {}           -- Job definitions
-ig.jdex = {}           -- Job index
-
 ig.object = {}         -- Object functions
 ig.objects = {}        -- Active objects
 ig.odex = {}           -- Object index
-
--- ====================================================================================--
--- Vehicle Management
--- ====================================================================================--
-ig.vehicle = {}        -- Vehicle functions
-ig.vehicles = {}       -- Vehicle data
-ig.vdex = {}           -- Vehicle index
-ig.vehicleCache = {}   -- In-memory vehicle cache (plate -> vehicle data)
-
--- ====================================================================================--
--- Data Storage and Persistence
--- ====================================================================================--
-ig.item = {}           -- Item functions
-ig.items = {}          -- Item data
-ig.note = {}           -- Note functions
+ig.payroll = {}        -- Payroll functions
+ig.pdex = {}           -- Player index (by source)
+ig.persistance = {}    -- Persistence layer
+ig.persistant = {}     -- Persistent data
 ig.pick = {}           -- Pickup functions
 ig.picks = {}          -- Pickup data
-ig.gsr = {}            -- GSR (gunshot residue) functions
-ig.gsrs = {}           -- GSR data
-ig.active_drops = {}   -- Currently active drops
-ig.name = {}           -- Name functions
-ig.names = {}          -- Name data
+ig.player = {}         -- Player functions
+ig.players = {}        -- Active players list
+ig.queue = {}          -- Queue system
+ig.sbch = {}           -- Statebag change handler
+ig.sbch.player = {}    -- Statebag player handlers
+ig.screenshot = {}     -- Screenshot system
+ig.security = {}       -- Transaction security
 ig.tattoo = {}         -- Tattoo functions
 ig.tattoos = {}        -- Tattoo data
+ig.tebex = {}          -- Tebex integration
+ig.time = {}           -- Time and cron functions
+ig.validation = {}     -- Data validation
+ig.validation.HandleExploit = nil             -- Exploit handling function
+ig.vehicle = {}        -- Vehicle functions
+ig.vehicleCache = {}   -- In-memory vehicle cache (plate -> vehicle data)
+ig.vehicles = {}       -- Vehicle data
+ig.vdex = {}           -- Vehicle index
+ig.voip = {}           -- Voice system
+ig.voip.server = {}    -- Server voice data
 ig.weapon = {}         -- Weapon functions
 ig.weapons = {}        -- Weapon data
-ig.modkit = {}         -- Modkit functions
-ig.modkits = {}        -- Modkit data
-ig.door = {}
-ig.doors = {}          -- Door data
-
--- ====================================================================================--
--- Banking and Economy
--- ====================================================================================--
-ig.bank = {}           -- Banking functions
-ig.tebex = {}          -- Tebex integration
-
--- ====================================================================================--
--- OneSync and Synchronization
--- ====================================================================================--
-ig.sbch = {}           -- Statebag change handler
-
--- ====================================================================================--
--- Third Party Integration
--- ====================================================================================--
-ig.discord = {}        -- Discord integration
 
 -- ====================================================================================--
 -- Sub-table Variables (Data Storage)
 -- ====================================================================================--
-ig.sql = {}
-ig.sql.bank = {}                              -- Bank data functions
-ig.sql.gen = {}                               -- General SQL functions
-ig.sql.char = {}                              -- Character SQL functions
-ig.sql.jobs = {}                              -- Jobs SQL functions
-ig.sql.save = {}                              -- Save data SQL functions
-ig.sql.user = {}                              -- User SQL functions
-ig.sql.veh = {}                               -- Vehicle SQL functions
-
-ig.voip.server = {}                           -- Server voice data
-
-ig.sbch.player = {}                           -- Statebag player handlers
-
+ig.sql = {}            -- SQL functions namespace
+ig.sql.bank = {}       -- Bank data functions
+ig.sql.banking = {}    -- Banking functions
+ig.sql.char = {}       -- Character SQL functions
+ig.sql.gen = {}        -- General SQL functions
+ig.sql.jobs = {}       -- Jobs SQL functions
+ig.sql.save = {}       -- Save data SQL functions
+ig.sql.user = {}       -- User SQL functions
+ig.sql.veh = {}        -- Vehicle SQL functions
 -- ====================================================================================--
 -- Note: GLM (Math Library) is initialized on shared side (shared/_ig.lua)
 -- It is automatically available globally as math after shared/_ig.lua loads

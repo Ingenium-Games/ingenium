@@ -6,32 +6,24 @@ ig = {}
 
 -- Utility and Helper Functions
 ig.check = {}      -- Validation and checking functions
-ig.game = {}       -- Game mode utilities
-ig.json = {}       -- JSON parsing utilities
-ig.rng = {}        -- Random number generation
-ig.math = {}       -- Math utilities (wrapper for shared math functions)
-ig.util = {}       -- General utilities
-ig.table = {}      -- Table manipulation utilities
 ig.file = {}       -- File operations
 ig.func = {}       -- Generic functions (shared across all contexts)
-
--- ====================================================================================--
--- Logging and Debugging
--- ====================================================================================--
-ig.log = {}                                   -- Logging functions
-ig.log.error = nil                            -- Error logging alias
-ig.log.warn = nil                             -- Warning logging alias
-ig.log.info = nil                             -- Info logging alias
-ig.log.debug = nil                            -- Debug logging alias
-ig.log.trace = nil                            -- Trace logging alias
-ig.log.log = nil                              -- Generic log alias
-
--- ====================================================================================--
--- Voice Communication
--- ====================================================================================--
-ig.voip = {}                                  -- Voice system
-ig.voip.VoiceModes = {}                       -- Voice mode definitions
+ig.game = {}       -- Game mode utilities
+ig.json = {}       -- JSON parsing utilities
+ig.log = {}        -- Logging functions
+ig.log.debug = nil -- Debug logging alias
+ig.log.error = nil -- Error logging alias
+ig.log.info = nil  -- Info logging alias
+ig.log.log = nil   -- Generic log alias
+ig.log.trace = nil -- Trace logging alias
+ig.log.warn = nil  -- Warning logging alias
+ig.math = {}       -- Math utilities (wrapper for shared math functions)
+ig.rng = {}        -- Random number generation
+ig.table = {}      -- Table manipulation utilities
+ig.util = {}       -- General utilities
+ig.voip = {}       -- Voice system
 ig.voip.StateType = {}                        -- Voice state types
+ig.voip.VoiceModes = {}                       -- Voice mode definitions
 
 -- ====================================================================================--
 -- GLM (Math Library) Integration - Global Setup

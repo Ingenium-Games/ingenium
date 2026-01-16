@@ -1,6 +1,3 @@
-ig.appearance = ig.appearance or {}
-ig.appearance_constants = ig.appearance_constants or {}
-
 -- ============================================
 -- APPEARANCE CONSTANTS HELPERS
 -- ============================================
