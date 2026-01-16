@@ -79,7 +79,22 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
     -- Verify player is not already loaded
     if not ig.data.IsPlayerLoaded() then
         SetNuiFocus(false, false)
-        ig.log.Trace("Character", "NUI: Player creating new character - First: " .. data.First_Name .. ", Last: " .. data.Last_Name)
+        
+        -- Get name fields (NUI sends camelCase: firstName, lastName)
+        local firstName = data.firstName or data.First_Name
+        local lastName = data.lastName or data.Last_Name
+        
+        -- Validate that we have character name data
+        if not firstName or not lastName then
+            ig.log.Error("Character", "NUI: CharacterCreate missing name data: " .. json.encode(data or {}))
+            cb({
+                message = "error",
+                data = "Missing first name or last name"
+            })
+            return
+        end
+        
+        ig.log.Trace("Character", "NUI: Player creating new character - First: " .. firstName .. ", Last: " .. lastName)
         
         -- Get appearance from nui/src/stores/appearance.js (user customization)
         local appearance = ig.appearance.PendingAppearance or ig.appearance.GetAppearance()
@@ -89,9 +104,9 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
         SetFollowPedCamViewMode(0)
         
         -- Send to server with character data and appearance
-        ig.log.Debug("Character", "Sending Server:Character:Register event with: First=" .. data.First_Name .. ", Last=" .. data.Last_Name)
+        ig.log.Debug("Character", "Sending Server:Character:Register event with: First=" .. firstName .. ", Last=" .. lastName)
         -- NOTE: server/[Events]/_character_lifecycle.lua handles Server:Character:Register
-        TriggerServerEvent("Server:Character:Register", data.First_Name, data.Last_Name, appearance)
+        TriggerServerEvent("Server:Character:Register", firstName, lastName, appearance)
         
         cb({
             message = "ok",
