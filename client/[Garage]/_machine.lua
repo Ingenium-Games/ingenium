@@ -69,10 +69,7 @@ end
 
 -- Open Gui and Focus NUI
 function OGui()
-    ig.garage._VehicleData = TriggerServerCallback({
-        eventName = "GetCars",
-        args = {}
-    })
+    ig.garage._VehicleData = ig.callback.Await("GetCars")
     MachineAnimation()
     Citizen.Wait(1400)
     SetNuiFocus(true, true)
@@ -125,7 +122,7 @@ RegisterNUICallback("NUI:Client:GUISelectVehicle", function(data, cb)
         end
     end
     
-    local billed = TriggerServerCallback({eventName = "ParkingBill", args = {}})
+    local billed = ig.callback.Await("ParkingBill")
     if not billed then
         TriggerEvent("Client:Notify","You dont have the cash to return your vehicle.")
         CGui()
@@ -154,7 +151,7 @@ RegisterNUICallback("NUI:Client:GUISelectVehicle", function(data, cb)
     end
     
     if bestSpot then
-        local net = TriggerServerCallback({eventName = "EnsurePlayerVehicle", args = {Data, bestSpot}})
+        local net = ig.callback.Await("EnsurePlayerVehicle", Data, bestSpot)
     else
         TriggerEvent("Client:Notify", "No available parking spots nearby.", 2)
     end
@@ -175,7 +172,7 @@ RegisterNUICallback("NUI:Client:GUISelectVehicle", function(data, cb)
         end
     end
     
-    local billed = TriggerServerCallback({eventName = "ParkingBill", args = {}})
+    local billed = ig.callback.Await("ParkingBill")
     if not billed then
         TriggerEvent("Client:Notify","You dont have the cash to return your vehicle.")
         CGui()
@@ -203,7 +200,7 @@ RegisterNUICallback("NUI:Client:GUISelectVehicle", function(data, cb)
     end
     
     if bestSpot then
-        local net = TriggerServerCallback({eventName = "EnsurePlayerVehicle", args = {Data, bestSpot}})
+        local net = ig.callback.Await("EnsurePlayerVehicle", Data, bestSpot)
     else
         TriggerEvent("Client:Notify", "No available parking spots nearby.", 2)
     end

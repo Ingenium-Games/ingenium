@@ -11,7 +11,7 @@ function ig.skill.SetSkills()
         -- print(ig._skills)
         -- print(ig.table.Dump(ig._skills))
     else
-        ig._skills = TriggerServerCallback({eventName = "GetSkills"})
+        ig._skills = ig.callback.Await("GetSkills")
         ig.log.Debug("Skills", "SetSkills() using Event")
     end
 end

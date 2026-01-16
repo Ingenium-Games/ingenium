@@ -111,9 +111,11 @@ end
 -- ====================================================================================--
 
 RegisterCommand("locatevehicles", function(source, args, rawCommand)
-    TriggerServerCallback("Server:Vehicle:LocateVehicles", {}, function(result)
-        if not result.success then
-            TriggerEvent("Client:Notify", result.error or "Failed to locate vehicles", "error", 5000)
+    ig.callback.Async("Server:Vehicle:LocateVehicles", function(result)
+        if result and result.success then
+            -- Blips will be created by Client:Vehicle:CreateLocateBlips event
+        else
+            TriggerEvent("Client:Notify", result and result.error or "Failed to locate vehicles", "error", 5000)
         end
     end)
 end, false)

@@ -21,7 +21,7 @@ function ig.modifier.SetModifiers()
         -- print(ig.modifiers)
         -- print(ig.table.Dump(ig.modifiers))
     else
-        ig.modifiers = TriggerServerCallback({eventName = "GetModifiers"})
+        ig.modifiers = ig.callback.Await("GetModifiers")
         ig.log.Debug("Modifiers", "SetModifiers() using Event")
     end
     ig.oldmodifiers = ig.modifiers

@@ -108,9 +108,8 @@ end)
 RegisterNUICallback("Client:Request:CharacterList", function(data, cb)
     ig.log.Trace("Character", "NUI: Requesting character list")
     
-    -- Request character list from server using TriggerServerCallback
-    -- Server:Character:List is a RegisterServerCallback that returns character data
-    TriggerServerCallback("Server:Character:List", function(result)
+    -- Request character list from server using ig.callback.Async wrapper
+    ig.callback.Async("Server:Character:List", function(result)
         if result then
             ig.log.Trace("Character", "Received character list from server")
             -- Send character data to NUI in the proper message format
