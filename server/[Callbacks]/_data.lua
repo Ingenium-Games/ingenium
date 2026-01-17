@@ -108,12 +108,8 @@ local GetModkits = RegisterServerCallback({
     end
 })
 
-local GetAppearanceConstants = RegisterServerCallback({
-    eventName = "ig:GameData:GetAppearanceConstants",
-    eventCallback = function(source)
-        return ig.appearance.GetConstants()
-    end
-})
+-- GetAppearanceConstants callback removed - appearance constants are loaded
+-- client-side from JSON and made read-only. No server request needed.
 
 local GetPeds = RegisterServerCallback({
     eventName = "ig:GameData:GetPeds",

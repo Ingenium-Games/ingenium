@@ -51,19 +51,17 @@ RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
     --
     ig.data.SetLoadedStatus(false)
-    ig.func.IsBusyPleaseWait(3000)
     --
     local ped = PlayerPedId()
     --
-    FreezeEntityPosition(ped, true)
-    SetFollowPedCamViewMode(4)
-    SetEntityCoords(ped, -43.143894195557, 822.04595947266, 231.33236694336)
-    SetEntityHeading(ped, 288.78283691406)
-    SetGameplayCamRelativeRotation(4.0307750701904, 0.054180480539799, -71.305198669434)
-    SetGameplayCamRelativeHeading(-0.091852381825447)
-    SetGameplayCamRelativePitch(4.0307726860046, 1.0)
+    SetFollowPedCamViewMode(0)
+    SetEntityCoords(ped, 0, 0, 0)
+    SetEntityHeading(ped, 0)
     --
-    
+    FreezeEntityPosition(ped, true)
+    --
+    ig.func.IsBusyPleaseWait(500)
+    -- All further logic is now directed by awaintg he VUE nui to be correctlyt mounted prior to starting off player sessions
 end)
 
 -- ====================================================================================--

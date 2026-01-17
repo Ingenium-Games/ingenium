@@ -85,6 +85,7 @@ RegisterNUICallback("NUI:Client:NewCharacter", function(data, cb)
             -- Show appearance customizer UI via wrapper function
             -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
             -- NUI will show name form AFTER player completes appearance customization
+        ig.func.IsBusyPleaseWait(3000)
         ig.nui.character.ShowCreate()
         ShutdownLoadingScreenNui()
         ig.log.Debug("Character", "Appearance customizer opened, awaiting completion")

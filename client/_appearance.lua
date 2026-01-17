@@ -5,33 +5,19 @@
 
 -- Local cache for appearance data
 local currentAppearance = nil
-local appearanceConstants = nil
 local customizationActive = false
 
 -- ====================================================================================--
 -- INITIALIZATION
 -- ====================================================================================--
+-- Note: appearance_constants are loaded from JSON in client.lua and made read-only
+-- No server callback needed - static reference data loaded client-side
 
----Initialize appearance system
----Loads appearance constants from server
-function ig.appearance.Initialize()
-    if not appearanceConstants then
-        appearanceConstants = ig.callback.Await('ig:GameData:GetAppearanceConstants')
-        if appearanceConstants then
-            ig.log.Info("APPEARANCE", "Constants loaded successfully")
-        else
-            ig.log.Error("APPEARANCE", "Failed to load constants")
-        end
-    end
-end
-
----Get appearance constants
+---Get appearance constants (loaded from JSON in client.lua)
 ---@return table|nil Appearance constants or nil
 function ig.appearance.GetConstants()
-    if not appearanceConstants then
-        ig.appearance.Initialize()
-    end
-    return appearanceConstants
+    -- Return the global appearance constants loaded from JSON in client.lua
+    return ig.appearance_constants
 end
 
 -- ====================================================================================--

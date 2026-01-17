@@ -99,12 +99,7 @@ local GetPedByName = RegisterServerCallback({
     end
 })
 
-local GetAppearanceConstants = RegisterServerCallback({
-    eventName = "ig:GameData:GetAppearanceConstants",
-    eventCallback = function(source)
-        return ig.appearance_constants
-    end
-})
+-- GetAppearanceConstants callback removed - duplicate of the one in server/[Callbacks]/_data.lua
 
 local ValidateAppearance = RegisterServerCallback({
     eventName = "ig:Appearance:ValidateAppearance",
