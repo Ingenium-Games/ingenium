@@ -166,6 +166,27 @@ function ig.table.Dump(table, nb)
     end
 end
 
+
+--- Convert read-only table (or any table with metatables) to plain serializable table
+--- Required for json.encode() which cannot serialize tables with metatables
+---@param tbl table The table to convert (can be read-only proxy or regular table)
+---@return table Plain table without metatables, safe for JSON serialization
+function ig.table.Convert2Plain(tbl)
+    if not tbl or type(tbl) ~= "table" then
+        return tbl
+    end
+    
+    local plain = {}
+    for k, v in pairs(tbl) do
+        if type(v) == "table" then
+            plain[k] = ig.table.Convert2Plain(v)  -- Recursive for nested tables
+        else
+            plain[k] = v
+        end
+    end
+    return plain
+end
+
 --- Makes a table read-only by preventing modifications
 --- Recursively protects nested tables as well
 ---@param t table The table to make read-only

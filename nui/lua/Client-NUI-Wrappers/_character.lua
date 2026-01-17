@@ -12,6 +12,7 @@
 --   - ig.nui.character.HideAppearance() => Client:NUI:AppearanceClose
 --
 -- ====================================================================================--
+
 -- Show character selection UI
 -- Called from: Client:Character:OpeningMenu
 -- NOTE: NUI will request character data via Client:Request:CharacterList callback when mounted
@@ -98,11 +99,17 @@ function ig.nui.character.ShowCreate()
         isCharacterCreation = true
     }
     
+    -- Convert read-only tables to plain tables for JSON serialization
+    -- MakeReadOnly creates proxy tables with metatables that json.encode() cannot serialize
+    local plainPeds = ig.table.Convert2Plain(peds)
+    local plainTattoos = ig.table.Convert2Plain(tattoos)
+    local plainConstants = ig.table.Convert2Plain(constants)
+    
     local data = {
         appearance = defaultAppearance,
-        constants = constants,
-        peds = peds,
-        tattoos = tattoos,
+        constants = plainConstants,
+        peds = plainPeds,
+        tattoos = plainTattoos,
         config = config,
         mode = "create",
         onComplete = "Client:Character:AppearanceComplete"
@@ -114,8 +121,8 @@ function ig.nui.character.ShowCreate()
         data.constants and "YES" or "NIL")
     
     ig.log.Info("NUI-Wrapper", "ShowCreate: Sending appearance data to NUI with %d peds, %d tattoo entries", 
-        peds and ig.table.SizeOf(peds) or 0,
-        tattoos and ig.table.SizeOf(tattoos) or 0)
+        plainPeds and ig.table.SizeOf(plainPeds) or 0,
+        plainTattoos and ig.table.SizeOf(plainTattoos) or 0)
     
     ig.ui.Send("Client:NUI:AppearanceOpen", data, true)
     
@@ -145,11 +152,16 @@ function ig.nui.character.ShowCustomize()
         isCharacterCreation = false
     }
     
+    -- Convert read-only tables to plain tables for JSON serialization
+    local plainPeds = ig.table.Convert2Plain(peds)
+    local plainTattoos = ig.table.Convert2Plain(tattoos)
+    local plainConstants = ig.table.Convert2Plain(constants)
+    
     ig.ui.Send("Client:NUI:AppearanceOpen", {
         appearance = currentAppearance,
-        constants = constants,
-        peds = peds,
-        tattoos = tattoos,
+        constants = plainConstants,
+        peds = plainPeds,
+        tattoos = plainTattoos,
         config = config,
         mode = "customize",
         onComplete = "Client:Character:AppearanceComplete"
