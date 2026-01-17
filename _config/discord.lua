@@ -41,3 +41,4 @@ conf.discord.priority_roles = {
 -- ====================================================================================--
 -- Rich Pressence ID
 conf.discord.id = "1461189503669502215"
+conf.discord.invitelink = "https://discord.gg/cuQEM9pB"

@@ -28,7 +28,7 @@ Locales["en"] = {
     ["defer_issue"] = "Issue ⁉️",
     ["defer_forbidden_characters"] = "Your name contains forbidden characters.",
     ["defer_banned"] = "You have been banned by command or automatic event.",
-    ["defer_no_discord"] = "You have not joined our discord.",
+    ["defer_no_discord"] = string.format("You have not joined our discord, please join with this link: %s", conf.discord.invitelink) or "Tell owner to add link in conf.discord.invitelink",
     
     -- Inventory Messages
     ["inv_no_item_found"] = "No Item Found...",
