@@ -30,7 +30,7 @@ export const useAppearanceStore = defineStore('appearance', () => {
   // Computed
   const isFreemode = computed(() => {
     if (!currentAppearance.value || !currentAppearance.value.model) return false
-    const model = currentAppearance.value.model
+    const model = currentAppearance.value.model.toLowerCase()
     return model === 'mp_m_freemode_01' || model === 'mp_f_freemode_01'
   })
   

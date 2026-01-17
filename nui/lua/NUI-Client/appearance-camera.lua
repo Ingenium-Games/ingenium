@@ -121,18 +121,20 @@ local function TransitionToCamera(viewName)
         return
     end
     
-    if appearanceCameras.current then
+    if appearanceCameras.current and appearanceCameras.current ~= targetCam then
         -- Smooth transition from current to target camera
         SetCamActiveWithInterp(targetCam, appearanceCameras.current, 800, 1, 1)
         ig.log.Debug("AppearanceCamera", "Transitioning from current to %s camera", viewName)
-    else
+        appearanceCameras.current = targetCam
+    elseif not appearanceCameras.current then
         -- First camera activation
         RenderScriptCams(true, false, 0, true, false)
         SetCamActive(targetCam, true)
+        appearanceCameras.current = targetCam
         ig.log.Debug("AppearanceCamera", "Activated %s camera (first activation)", viewName)
+    else
+        ig.log.Debug("AppearanceCamera", "Camera %s already active", viewName)
     end
-    
-    appearanceCameras.current = targetCam
 end
 
 --- Rotates the ped on its Z-axis
@@ -229,9 +231,17 @@ RegisterNUICallback("Client:Appearance:InitializeCameras", function(data, cb)
     local success = CreateAppearanceCameras(playerPed)
     
     if success then
+        -- Enable script cameras before transitioning
+        RenderScriptCams(true, false, 0, true, false)
+        
         -- Start with full body view
         Citizen.Wait(100)
-        TransitionToCamera("full")
+        SetCamActive(appearanceCameras.full, true)
+        appearanceCameras.current = appearanceCameras.full
+        
+        ig.log.Info("AppearanceCamera", "Initialized with full camera view")
+    else
+        ig.log.Error("AppearanceCamera", "Failed to create cameras")
     end
     
     cb({ success = success })
