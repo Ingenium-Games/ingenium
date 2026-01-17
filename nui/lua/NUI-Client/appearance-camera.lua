@@ -197,6 +197,9 @@ local function CleanupAppearanceCameras()
     -- Restore game camera
     RenderScriptCams(false, false, 0, true, false)
     
+    -- Restore follow camera mode
+    SetFollowPedCamViewMode(0)  -- Reset to third-person follow cam
+    
     currentPed = nil
     baseCoords = nil
     baseHeading = nil
@@ -231,7 +234,8 @@ RegisterNUICallback("Client:Appearance:InitializeCameras", function(data, cb)
     local success = CreateAppearanceCameras(playerPed)
     
     if success then
-        -- Enable script cameras before transitioning
+        -- Disable follow camera mode and enable script cameras
+        SetFollowPedCamViewMode(4)  -- Set to first-person to disable follow cam
         RenderScriptCams(true, false, 0, true, false)
         
         -- Start with full body view

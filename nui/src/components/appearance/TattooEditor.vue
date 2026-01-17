@@ -107,7 +107,8 @@ function isTattooApplied(tattoo) {
 }
 
 function getGenderHash(tattoo) {
-  const isFemale = appearanceStore.currentAppearance?.model === 'mp_f_freemode_01'
+  const model = appearanceStore.currentAppearance?.model?.toLowerCase() || ''
+  const isFemale = model === 'mp_f_freemode_01'
   return isFemale ? tattoo.hashFemale : tattoo.hashMale
 }
 

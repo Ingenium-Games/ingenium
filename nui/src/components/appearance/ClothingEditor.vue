@@ -22,10 +22,11 @@
               :value="getCurrentComponent(component.id).drawable"
               @input="updateDrawable(component.id, $event.target.value)"
               min="0"
-              max="255"
+              :max="getMaxDrawable(component.id)"
               class="number-input"
               :aria-label="`${component.name} drawable`"
             />
+            <span class="max-label">/ {{ getMaxDrawable(component.id) }}</span>
             <button @click="incrementDrawable(component.id)" class="adj-btn" aria-label="Next drawable">+</button>
           </div>
         </div>
@@ -39,10 +40,11 @@
               :value="getCurrentComponent(component.id).texture"
               @input="updateTexture(component.id, $event.target.value)"
               min="0"
-              max="255"
+              :max="getMaxTexture(component.id)"
               class="number-input"
               :aria-label="`${component.name} texture`"
             />
+            <span class="max-label">/ {{ getMaxTexture(component.id) }}</span>
             <button @click="incrementTexture(component.id)" class="adj-btn" aria-label="Next texture">+</button>
           </div>
         </div>
@@ -52,10 +54,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
+import { callClientCallback } from '../../utils/nui'
 
 const appearanceStore = useAppearanceStore()
+
+// Track available variations for each component
+const componentVariations = ref({})
 
 const components = computed(() => {
   return appearanceStore.constants?.components || []
@@ -66,6 +72,32 @@ const showPricing = computed(() => {
          appearanceStore.pricing?.pricing?.clothing?.enabled
 })
 
+// Fetch variations when component changes
+async function refreshComponentVariations(componentId) {
+  try {
+    const result = await callClientCallback('Client:Appearance:GetComponentVariations', componentId)
+    if (result.ok) {
+      componentVariations.value[componentId] = {
+        drawableCount: result.drawableCount,
+        textureCount: result.textureCount,
+        currentDrawable: result.currentDrawable,
+        currentTexture: result.currentTexture
+      }
+    }
+  } catch (error) {
+    console.error(`Failed to get variations for component ${componentId}:`, error)
+  }
+}
+
+// Get max values for validation
+function getMaxDrawable(componentId) {
+  return componentVariations.value[componentId]?.drawableCount - 1 || 255
+}
+
+function getMaxTexture(componentId) {
+  return componentVariations.value[componentId]?.textureCount - 1 || 255
+}
+
 function getComponentPrice(componentId) {
   if (!showPricing.value) return 0
   return appearanceStore.getItemPrice('clothing', componentId)
@@ -73,45 +105,62 @@ function getComponentPrice(componentId) {
 
 function getCurrentComponent(componentId) {
   const comps = appearanceStore.currentAppearance?.components || []
-  const found = comps.find(c => ig.component_id === componentId)
+  const found = comps.find(c => c.component_id === componentId)
   return found || { drawable: 0, texture: 0 }
 }
 
-function updateDrawable(componentId, value) {
+async function updateDrawable(componentId, value) {
   const current = getCurrentComponent(componentId)
-  const drawable = Math.max(0, Math.min(255, parseInt(value) || 0))
-  appearanceStore.updateComponent(componentId, drawable, current.texture)
+  const maxDrawable = getMaxDrawable(componentId)
+  const drawable = Math.max(0, Math.min(maxDrawable, parseInt(value) || 0))
+  await appearanceStore.updateComponent(componentId, drawable, current.texture)
+  // Refresh variations after drawable change (texture count may change)
+  await refreshComponentVariations(componentId)
 }
 
-function updateTexture(componentId, value) {
+async function updateTexture(componentId, value) {
   const current = getCurrentComponent(componentId)
-  const texture = Math.max(0, Math.min(255, parseInt(value) || 0))
-  appearanceStore.updateComponent(componentId, current.drawable, texture)
+  const maxTexture = getMaxTexture(componentId)
+  const texture = Math.max(0, Math.min(maxTexture, parseInt(value) || 0))
+  await appearanceStore.updateComponent(componentId, current.drawable, texture)
 }
 
-function incrementDrawable(componentId) {
+async function incrementDrawable(componentId) {
   const current = getCurrentComponent(componentId)
-  const drawable = Math.min(255, current.drawable + 1)
-  appearanceStore.updateComponent(componentId, drawable, current.texture)
+  const maxDrawable = getMaxDrawable(componentId)
+  const drawable = Math.min(maxDrawable, current.drawable + 1)
+  await appearanceStore.updateComponent(componentId, drawable, current.texture)
+  await refreshComponentVariations(componentId)
 }
 
-function decrementDrawable(componentId) {
+async function decrementDrawable(componentId) {
   const current = getCurrentComponent(componentId)
   const drawable = Math.max(0, current.drawable - 1)
-  appearanceStore.updateComponent(componentId, drawable, current.texture)
+  await appearanceStore.updateComponent(componentId, drawable, current.texture)
+  await refreshComponentVariations(componentId)
 }
 
-function incrementTexture(componentId) {
+async function incrementTexture(componentId) {
   const current = getCurrentComponent(componentId)
-  const texture = Math.min(255, current.texture + 1)
-  appearanceStore.updateComponent(componentId, current.drawable, texture)
+  const maxTexture = getMaxTexture(componentId)
+  const texture = Math.min(maxTexture, current.texture + 1)
+  await appearanceStore.updateComponent(componentId, current.drawable, texture)
 }
 
-function decrementTexture(componentId) {
+async function decrementTexture(componentId) {
   const current = getCurrentComponent(componentId)
   const texture = Math.max(0, current.texture - 1)
-  appearanceStore.updateComponent(componentId, current.drawable, texture)
+  await appearanceStore.updateComponent(componentId, current.drawable, texture)
 }
+
+// Load variations for all components when they become available
+watch(components, async (newComponents) => {
+  if (newComponents && newComponents.length > 0) {
+    for (const component of newComponents) {
+      await refreshComponentVariations(component.id)
+    }
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>
@@ -195,6 +244,13 @@ function decrementTexture(componentId) {
   display: flex;
   gap: 4px;
   align-items: center;
+}
+
+.max-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  min-width: 40px;
+  text-align: center;
 }
 
 .adj-btn {
