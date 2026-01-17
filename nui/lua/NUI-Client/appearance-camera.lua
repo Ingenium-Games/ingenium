@@ -210,7 +210,7 @@ RegisterNUICallback("Client:Appearance:InitializeCameras", function(data, cb)
     
     if success then
         -- Start with face camera
-        TransitionToCamera("body")
+        TransitionToCamera("full")
     end
     
     cb({ success = success })
@@ -218,9 +218,11 @@ end)
 
 --- Set camera view (face, body, legs, full)
 RegisterNUICallback("Client:Appearance:SetCameraView", function(data, cb)
+    ig.log.Debug("AppearanceCamera", "Received data: %s (type: %s)", json.encode(data), type(data))
+    
     local view = data.view or data
     
-    ig.log.Debug("AppearanceCamera", "Setting camera view to: %s", view)
+    ig.log.Debug("AppearanceCamera", "Setting camera view to: %s (type: %s)", view, type(view))
     
     TransitionToCamera(view)
     
@@ -229,9 +231,11 @@ end)
 
 --- Rotate ped (left, right, reset)
 RegisterNUICallback("Client:Appearance:RotatePed", function(data, cb)
+    ig.log.Debug("AppearanceCamera", "Received rotation data: %s (type: %s)", json.encode(data), type(data))
+    
     local direction = data.direction or data
     
-    ig.log.Debug("AppearanceCamera", "Rotating ped: %s", direction)
+    ig.log.Debug("AppearanceCamera", "Rotating ped: %s (type: %s)", direction, type(direction))
     
     RotatePed(direction)
     
