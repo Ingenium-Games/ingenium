@@ -17,7 +17,7 @@ local currentPed = nil
 local baseCoords = nil
 local baseHeading = nil
 local originalCamActive = false
-
+ 
 --- Creates all cameras around the ped for appearance customization
 ---@param ped number Entity ID of the ped
 local function CreateAppearanceCameras(ped)
@@ -134,10 +134,16 @@ end
 --- Rotates the ped on its Z-axis
 ---@param direction string "left", "right", or "reset"
 local function RotatePed(direction)
-    if not currentPed or not DoesEntityExist(currentPed) then
+    -- Refresh current ped reference in case it changed during character selection
+    local playerPed = PlayerPedId()
+    
+    if not DoesEntityExist(playerPed) then
         ig.log.Error("AppearanceCamera", "Cannot rotate - ped does not exist")
         return
     end
+    
+    -- Update stored reference
+    currentPed = playerPed
     
     local currentHeading = GetEntityHeading(currentPed)
     local newHeading = currentHeading
@@ -200,16 +206,27 @@ end
 RegisterNUICallback("Client:Appearance:InitializeCameras", function(data, cb)
     ig.log.Info("AppearanceCamera", "Initializing cameras for appearance customization")
     
-    local playerPed = PlayerPedId()
-    
     -- Cleanup any existing cameras first
     CleanupAppearanceCameras()
+    
+    -- Wait for ped model to fully load after character selection or model change
+    Citizen.Wait(250)
+    
+    local playerPed = PlayerPedId()
+    
+    -- Verify ped exists before creating cameras
+    if not DoesEntityExist(playerPed) then
+        ig.log.Error("AppearanceCamera", "Player ped does not exist yet, retrying...")
+        Citizen.Wait(500)
+        playerPed = PlayerPedId()
+    end
     
     -- Create new cameras
     local success = CreateAppearanceCameras(playerPed)
     
     if success then
-        -- Start with face camera
+        -- Start with full body view
+        Citizen.Wait(100)
         TransitionToCamera("full")
     end
     

@@ -639,10 +639,7 @@ function ig.appearance.IsCustomizationActive()
     return customizationActive
 end
 
--- Initialize on resource start
-Citizen.CreateThread(function()
-    Citizen.Wait(1000)
-    ig.appearance.Initialize()
-end)
+-- Note: appearance constants are loaded from JSON in client.lua at startup
+-- No initialization callback needed - static reference data loaded client-side
 
 ig.log.Info("CLIENT", "Appearance module loaded")
