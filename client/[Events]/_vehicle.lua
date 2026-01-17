@@ -4,9 +4,6 @@
 -- Replaces polling-based vehicle tracking from ig.base
 -- ====================================================================================--
 
-ig.vehicles.currentVehicle = 0
-ig.vehicles.currentSeat = -1
-
 -- ====================================================================================--
 -- Event-Driven Vehicle Tracking using gameEventTriggered
 -- ====================================================================================--
@@ -24,8 +21,8 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
             local seat = eventData[3]
             
             if DoesEntityExist(vehicle) then
-                ig.vehicles.currentVehicle = vehicle
-                ig.vehicles.currentSeat = seat
+                ig.vehicle._currentVehicle = vehicle
+                ig.vehicle._currentSeat = seat
                 
                 local vehicleName = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
                 local netId = NetworkGetNetworkIdFromEntity(vehicle)
@@ -44,7 +41,7 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
         -- eventData[1] = ped, eventData[2] = vehicle
         if eventData[1] == ped then
             local vehicle = eventData[2] or currentVehicle
-            local seat = ig.vehicles.currentSeat
+            local seat = ig.vehicle._currentSeat
             
             if DoesEntityExist(vehicle) then
                 local vehicleName = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
@@ -58,8 +55,8 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
             end
             
             -- Reset tracking
-            ig.vehicles.currentVehicle = 0
-            ig.vehicles.currentSeat = -1
+            ig.vehicle._currentVehicle = 0
+            ig.vehicle._currentSeat = -1
         end
     end
 end)
@@ -77,7 +74,7 @@ Citizen.CreateThread(function()
         local vehicle = GetVehiclePedIsIn(ped, false)
         
         -- Player entered a vehicle but event didn't trigger
-        if vehicle ~= 0 and vehicle ~= ig.vehicles.currentVehicle then
+        if vehicle ~= 0 and vehicle ~= ig.vehicle._currentVehicle then
             local seat = -1
             for i = -1, GetVehicleMaxNumberOfPassengers(vehicle) - 1 do
                 if GetPedInVehicleSeat(vehicle, i) == ped then
@@ -86,8 +83,8 @@ Citizen.CreateThread(function()
                 end
             end
             
-            ig.vehicles.currentVehicle = vehicle
-            ig.vehicles.currentSeat = seat
+            ig.vehicle._currentVehicle = vehicle
+            ig.vehicle._currentSeat = seat
             
             local vehicleName = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
             local netId = NetworkGetNetworkIdFromEntity(vehicle)
@@ -98,9 +95,9 @@ Citizen.CreateThread(function()
             ig.log.Debug("VEHICLE", "Vehicle entry detected via fallback thread")
         
         -- Player left vehicle but event didn't trigger
-        elseif vehicle == 0 and ig.vehicles.currentVehicle ~= 0 then
-            local vehicle = ig.vehicles.currentVehicle
-            local seat = ig.vehicles.currentSeat
+        elseif vehicle == 0 and ig.vehicle._currentVehicle ~= 0 then
+            local vehicle = ig.vehicle._currentVehicle
+            local seat = ig.vehicle._currentSeat
             
             if DoesEntityExist(vehicle) then
                 local vehicleName = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
@@ -111,8 +108,8 @@ Citizen.CreateThread(function()
                 
             end
             
-            ig.vehicles.currentVehicle = 0
-            ig.vehicles.currentSeat = -1
+            ig.vehicle._currentVehicle = 0
+            ig.vehicle._currentSeat = -1
             
             ig.log.Debug("VEHICLE", "Vehicle exit detected via fallback thread")
         end

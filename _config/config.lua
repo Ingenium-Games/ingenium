@@ -6,13 +6,13 @@ conf.min = 60 * conf.sec
 conf.hour = 60 * conf.min
 conf.day = 24 * conf.hour
 -- ====================================================================================--
-
 -- Logging configuration
 conf.log = conf.log or {}
-conf.log.enabled = false -- console logging default: OFF
+conf.log.enabled = true -- console logging default: OFF
 conf.log.level = "trace" -- default to the most verbose so file logging captures all levels
 conf.log.writeToFile = true -- file logging default: ON
 conf.log.levels = { error=true, warn=true, info=true, debug=true, trace=true } -- optional table: { error=true, warn=true, info=true, debug=true, trace=true }
+
 --[[
 GENERIC :
     [1] Map name.

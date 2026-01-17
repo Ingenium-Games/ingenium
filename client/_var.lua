@@ -125,8 +125,8 @@ ig.nui.target = {}     -- Target wrapper functions (Phase 3.5)
 
 
 -- Vehicle sub-properties
-ig.vehicles.currentVehicle = 0      -- Currently occupied vehicle
-ig.vehicles.currentSeat = -1        -- Current seat in vehicle
+ig.vehicle._currentVehicle = 0
+ig.vehicle._currentSeat = -1
 ig.vehicle.locateBlips = {}         -- Active locate blips
 
 -- Voice sub-tables
