@@ -40,23 +40,12 @@ RegisterServerCallback({
         local Username = GetPlayerName(src)
         local Primary_ID = ig.func.identifier(src)
         local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = ig.func.identifiers(src)
-        --
-        local function Startup()
+        -- Run funciton AFTER clients data is registered within the database.
+        local function ClientDataCollected()
             -- Place player in their own routing bucket BEFORE showing character menu
             -- This prevents them from seeing/hearing other players during character selection
             ig.inst.SetPlayer(src)
             TriggerClientEvent("Client:Character:OpeningMenu", src)
-            
-            -- Get character data and send directly to client
-            local Primary_ID = ig.func.identifier(src)
-            local Slots = ig.sql.user.GetSlots(Primary_ID)
-            local Characters = ig.sql.char.GetAllPermited(Primary_ID, Slots)
-            
-            -- Send character data to NUI directly
-            TriggerClientEvent("Client:Character:ReceiveCharacterList", src, {
-                characters = Characters,
-                slots = Slots
-            })
         end
         --
         if License_ID then
@@ -65,10 +54,10 @@ RegisterServerCallback({
             local exists = ig.sql.user.Find(License_ID)
             if (exists == nil) then
                 -- If no user present.    
-                ig.sql.user.Add(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+                ig.sql.user.Add(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, ClientDataCollected)
             else
                 -- If user exists, update based on connection info.
-                ig.sql.user.Update(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+                ig.sql.user.Update(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, ClientDataCollected)
             end
             return { success = true }
         else

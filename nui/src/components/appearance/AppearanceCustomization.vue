@@ -187,20 +187,21 @@ function handleCancel() {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(2px);
+  background: transparent;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   z-index: 2000;
   padding: 20px;
+  pointer-events: none;
 }
 
 .appearance-container {
   width: 600px;
   max-width: 600px;
   max-height: calc(100vh - 40px);
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.92), rgba(42, 42, 42, 0.92));
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(42, 42, 42, 0.95));
+  pointer-events: all;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);

@@ -49,11 +49,10 @@
 -- Called when player first joins - shows character selection menu
 RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
+    ShutdownLoadingScreenNui()
     ig.data.SetLoadedStatus(false)
-    ig.func.FadeOut(0)
     ig.func.IsBusyPleaseWait(3000)
-    SetTimeout(2000, function()
-            -- Position player in character select area
+
             local ped = PlayerPedId()
             --
             FreezeEntityPosition(ped, true)
@@ -65,7 +64,6 @@ AddEventHandler("Client:Character:OpeningMenu", function()
             SetGameplayCamRelativePitch(4.0307726860046, 1.0)
             --
             ig.log.Info("Character", "Character menu will open when Vue Mounts, awaiting NUI selection")
-    end)
 end)
 
 -- ====================================================================================--
@@ -87,29 +85,6 @@ end)
 -- ====================================================================================--
 -- STAGE 3: Character Creation UI
 -- ====================================================================================--
-
--- Show character creation customization screen
-RegisterNetEvent("Client:Character:Create")
-AddEventHandler("Client:Character:Create", function()
-    ig.log.Info("Character", "Character creation started")
-    
-    local plyped = PlayerPedId()
-    SetEntityCoords(plyped, -703.9, -152.62, 37.42)
-    SetEntityHeading(plyped, 62)
-    
-    ig.func.FadeOut(1000)
-    ig.func.IsBusyPleaseWait(500)
-    
-    -- Wait for fade completion
-    SetTimeout(500, function()
-        -- Show appearance customizer UI via wrapper function
-        -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
-        -- NUI will send back Client:Character:AppearanceComplete callback when done
-        ig.nui.character.ShowCreate()
-        ig.func.FadeIn(1000)
-        ig.func.IsBusyPleaseWait(500)
-    end)
-end)
 
 -- Called when appearance customization is complete
 -- NOTE: This callback is registered in nui/lua/NUI-Client/_appearance.lua (function-specific location)

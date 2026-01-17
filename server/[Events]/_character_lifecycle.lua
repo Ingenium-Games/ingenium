@@ -93,12 +93,6 @@ AddEventHandler("Server:Character:Join", function(Character_ID)
     
     local src = source
     
-    -- Handle new character creation
-    if Character_ID == "New" then
-        TriggerClientEvent("Client:Character:Create", src)
-        return
-    end
-    
     -- Handle existing character selection
     if Character_ID ~= nil then
         local Coords = ig.sql.char.GetCoords(Character_ID)

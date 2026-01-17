@@ -59,7 +59,7 @@ const filters = [
   { value: 'all', label: 'All' },
   { value: 'male', label: 'Male' },
   { value: 'female', label: 'Female' },
-  { value: 'freemode', label: 'Freemode' }
+  { value: 'freemode', label: 'Custom' }
 ]
 
 const filteredPeds = computed(() => {

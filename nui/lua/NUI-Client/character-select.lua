@@ -80,7 +80,6 @@ end)
 RegisterNUICallback("NUI:Client:CharacterCreateStart", function(data, cb)
     if not ig.data.IsPlayerLoaded() then
         ig.log.Info("Character", "NUI: Starting new character creation - opening appearance customizer")
-        ShutdownLoadingScreenNui()
 
         -- Hide character select UI immediately
         ig.nui.character.HideSelect()
@@ -90,7 +89,6 @@ RegisterNUICallback("NUI:Client:CharacterCreateStart", function(data, cb)
         local plyped = PlayerPedId()
         SetEntityCoords(plyped, -703.9, -152.62, 37.42)
         SetEntityHeading(plyped, 62)
-        
 
         
         -- Wait for fade completion
