@@ -54,6 +54,7 @@ const appearanceStore = useAppearanceStore()
 const searchQuery = ref('')
 const currentFilter = ref('all')
 const gridRef = ref(null)
+const isLoading = ref(false)
 
 const filters = [
   { value: 'all', label: 'All' },
@@ -98,11 +99,21 @@ const filteredPeds = computed(() => {
 })
 
 function isFreemodePed(ped) {
-  return ped.name === 'mp_m_freemode_01' || ped.name === 'mp_f_freemode_01'
+  // Check if ped has type 'freemode' OR matches the freemode ped names (case-insensitive)
+  return ped.type === 'freemode' || 
+         ped.name.toLowerCase() === 'mp_m_freemode_01' || 
+         ped.name.toLowerCase() === 'mp_f_freemode_01'
 }
 
 async function selectModel(ped) {
-  await appearanceStore.updateModel(ped.name)
+  isLoading.value = true
+  try {
+    // Add small delay to ensure model loads properly
+    await new Promise(resolve => setTimeout(resolve, 100))
+    await appearanceStore.updateModel(ped.name)
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 

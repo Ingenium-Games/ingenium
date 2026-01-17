@@ -49,7 +49,7 @@
 -- Called when player first joins - shows character selection menu
 RegisterNetEvent("Client:Character:OpeningMenu")
 AddEventHandler("Client:Character:OpeningMenu", function()
-    ShutdownLoadingScreenNui()
+    
     ig.data.SetLoadedStatus(false)
     ig.func.IsBusyPleaseWait(3000)
 
@@ -64,6 +64,8 @@ AddEventHandler("Client:Character:OpeningMenu", function()
             SetGameplayCamRelativePitch(4.0307726860046, 1.0)
             --
             ig.log.Info("Character", "Character menu will open when Vue Mounts, awaiting NUI selection")
+
+            ShutdownLoadingScreenNui()
 end)
 
 -- ====================================================================================--

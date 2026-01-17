@@ -117,8 +117,14 @@ export const useAppearanceStore = defineStore('appearance', () => {
   async function updateModel(model) {
     isLoading.value = true
     try {
+      console.log('[AppearanceStore] Updating model to:', model)
+      // Add delay to ensure game can load the ped properly
+      await new Promise(resolve => setTimeout(resolve, 150))
       await callClientCallback('Client:Appearance:UpdateModel', model)
       currentAppearance.value.model = model
+      console.log('[AppearanceStore] Model updated successfully')
+    } catch (error) {
+      console.error('[AppearanceStore] Failed to update model:', error)
     } finally {
       isLoading.value = false
     }
