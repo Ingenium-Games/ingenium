@@ -149,7 +149,7 @@ const availableSlots = computed(() => {
 })
 
 function selectCharacter(char) {
-  sendNuiMessage('NUI:Client:CharacterCreateStart', { id: characterStore.selectedCharacter.id })
+  sendNuiMessage('NUI:Client:NewCharacter', { id: characterStore.selectedCharacter.id })
   characterStore.selectCharacter(char)
 }
 
@@ -161,8 +161,8 @@ function selectNew() {
   
   // Trigger Lua event to start appearance customization
   // Do NOT show name form yet - wait for appearance customization to complete
-  console.log('[CharacterSelect] Sending NUI:Client:CharacterCreateStart')
-  sendNuiMessage('NUI:Client:CharacterCreateStart', {})
+  console.log('[CharacterSelect] Sending NUI:Client:NewCharacter')
+  sendNuiMessage('NUI:Client:NewCharacter', {})
 }
 
 function cancelCreate() {

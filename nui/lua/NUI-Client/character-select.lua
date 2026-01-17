@@ -77,20 +77,16 @@ end)
 -- Start new character creation - opens appearance customizer
 -- Called FIRST when player clicks "New Character" - shows appearance customization screen
 -- NOTE: Name form is shown by NUI AFTER this completes
-RegisterNUICallback("NUI:Client:CharacterCreateStart", function(data, cb)
+RegisterNUICallback("NUI:Client:NewCharacter", function(data, cb)
     if not ig.data.IsPlayerLoaded() then
         ig.log.Info("Character", "NUI: Starting new character creation - opening appearance customizer")
-
         -- Hide character select UI immediately
         ig.nui.character.HideSelect()
-
-
-        ig.func.FadeIn(1000)
-
             -- Show appearance customizer UI via wrapper function
             -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
             -- NUI will show name form AFTER player completes appearance customization
         ig.nui.character.ShowCreate()
+        ShutdownLoadingScreenNui()
         ig.log.Debug("Character", "Appearance customizer opened, awaiting completion")
 
         
