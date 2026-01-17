@@ -88,9 +88,15 @@ export const useAppearanceStore = defineStore('appearance', () => {
     console.log('[AppearanceStore] - isOpen:', isOpen.value)
     console.log('[AppearanceStore] - currentTab:', currentTab.value)
     console.log('[AppearanceStore] - peds in store:', peds.value ? Object.keys(peds.value).length : 0)
+    
+    // Initialize cameras for appearance customization
+    callClientCallback('Client:Appearance:InitializeCameras', {})
   }
   
   function close() {
+    // Cleanup cameras before closing
+    callClientCallback('Client:Appearance:CleanupCameras', {})
+    
     isOpen.value = false
     currentAppearance.value = null
     constants.value = null

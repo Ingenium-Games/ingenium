@@ -44,6 +44,7 @@
 
 <script setup>
 import { useAppearanceStore } from '../../stores/appearance'
+import { callClientCallback } from '../../utils/nui'
 
 const appearanceStore = useAppearanceStore()
 
@@ -54,16 +55,18 @@ const views = [
   { value: 'full', label: 'Full' }
 ]
 
-function setView(view) {
+async function setView(view) {
   appearanceStore.setCameraMode(view)
+  await callClientCallback('Client:Appearance:SetCameraView', { view })
 }
 
-function rotate(degrees) {
-  appearanceStore.rotateCamera(degrees)
+async function rotate(degrees) {
+  const direction = degrees < 0 ? 'left' : 'right'
+  await callClientCallback('Client:Appearance:RotatePed', { direction })
 }
 
-function turnAround() {
-  appearanceStore.turnAround()
+async function turnAround() {
+  await callClientCallback('Client:Appearance:RotatePed', { direction: 'reset' })
 }
 </script>
 
