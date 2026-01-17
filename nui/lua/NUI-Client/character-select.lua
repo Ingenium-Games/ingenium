@@ -168,8 +168,8 @@ RegisterNUICallback("Client:Request:OnJoinGetCharactersFromServer", function(dat
     local ped = PlayerPedId()
     --
     SetFollowPedCamViewMode(0)
-    SetEntityCoords(ped, -550.21, 1340.24, 429.22)
-    SetEntityHeading(ped, 0)
+    SetEntityCoords(ped, -550.21, 1340.24, 559.22)
+    SetEntityHeading(ped, 189)
     --
     FreezeEntityPosition(ped, true)
     --

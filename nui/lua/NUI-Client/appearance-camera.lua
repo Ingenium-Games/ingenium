@@ -57,6 +57,7 @@ local function CreateAppearanceCameras(ped)
         false,
         2
     )
+    ig.camera.PointAtEntity(appearanceCameras.face, ped, 0.0, 0.0, 0.6, true)  -- Point at head height
     
     -- Body camera - chest level
     appearanceCameras.body = ig.camera.Basic(
@@ -70,6 +71,7 @@ local function CreateAppearanceCameras(ped)
         false,
         2
     )
+    ig.camera.PointAtEntity(appearanceCameras.body, ped, 0.0, 0.0, 0.0, true)  -- Point at center
     
     -- Legs camera - lower body
     appearanceCameras.legs = ig.camera.Basic(
@@ -83,6 +85,7 @@ local function CreateAppearanceCameras(ped)
         false,
         2
     )
+    ig.camera.PointAtEntity(appearanceCameras.legs, ped, 0.0, 0.0, -0.5, true)  -- Point at lower body
     
     -- Full body camera - further back and higher for full view
     local fullDistance = 2.0
@@ -100,6 +103,7 @@ local function CreateAppearanceCameras(ped)
         false,
         2
     )
+    ig.camera.PointAtEntity(appearanceCameras.full, ped, 0.0, 0.0, 0.0, true)  -- Point at center for full view
     
     ig.log.Info("AppearanceCamera", "Created cameras at base coords: %.2f, %.2f, %.2f (heading: %.2f)", 
         coords.x, coords.y, coords.z, heading)
