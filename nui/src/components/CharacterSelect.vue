@@ -149,6 +149,7 @@ const availableSlots = computed(() => {
 })
 
 function selectCharacter(char) {
+  sendNuiMessage('NUI:Client:CharacterCreateStart', { id: characterStore.selectedCharacter.id })
   characterStore.selectCharacter(char)
 }
 

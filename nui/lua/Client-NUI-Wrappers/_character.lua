@@ -36,16 +36,22 @@ function ig.nui.character.ShowCreate()
         for _ in pairs(ig.peds) do pedsCount = pedsCount + 1 end
     end
     ig.log.Info("NUI-Wrapper", "ShowCreate: ig.peds has %d entries before callback", pedsCount)
+    ig.log.Info("NUI-Wrapper", "ShowCreate: ig.peds type: %s", type(ig.peds))
     
     -- Get appearance constants (check cache first, fallback to server request)
-    local constants = ig.appearance_constants or ig.callback.Await('ig:GameData:GetAppearanceConstants')
-    ig.log.Info("NUI-Wrapper", "ShowCreate: Constants loaded: %s", constants and "YES" or "NIL")
+    local constants = ig.appearance_constants
+    if not constants or ig.table.SizeOf(constants) == 0 then
+        ig.log.Warn("NUI-Wrapper", "ShowCreate: ig.appearance_constants is empty, fetching from server")
+        constants = ig.callback.Await('ig:GameData:GetAppearanceConstants')
+    end
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Constants loaded: %s (keys: %d)", constants and "YES" or "NIL", constants and ig.table.SizeOf(constants) or 0)
     
     -- Get ped data from server if needed (check cache first, fallback to server request)
     local peds = ig.peds
     if not peds or ig.table.SizeOf(peds) == 0 then
         ig.log.Warn("NUI-Wrapper", "ShowCreate: ig.peds is empty, fetching from server")
         peds = ig.callback.Await('ig:GameData:GetPeds')
+        ig.log.Info("NUI-Wrapper", "ShowCreate: Server returned peds type: %s", type(peds))
     end
     
     local pedsCountAfter = 0
@@ -55,8 +61,12 @@ function ig.nui.character.ShowCreate()
     ig.log.Info("NUI-Wrapper", "ShowCreate: Peds loaded: %d entries", pedsCountAfter)
     
     -- Get tattoo data (check cache first, fallback to server request)
-    local tattoos = ig.tattoos or ig.callback.Await('ig:GameData:GetTattoos')
-    ig.log.Info("NUI-Wrapper", "ShowCreate: Tattoos loaded: %s", tattoos and "YES" or "NIL")
+    local tattoos = ig.tattoos
+    if not tattoos or ig.table.SizeOf(tattoos) == 0 then
+        ig.log.Warn("NUI-Wrapper", "ShowCreate: ig.tattoos is empty, fetching from server")
+        tattoos = ig.callback.Await('ig:GameData:GetTattoos')
+    end
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Tattoos loaded: %s (keys: %d)", tattoos and "YES" or "NIL", tattoos and ig.table.SizeOf(tattoos) or 0)
     
     -- Get default appearance for new character with proper structure
     local defaultAppearance = {
@@ -114,14 +124,13 @@ function ig.nui.character.ShowCreate()
         data.peds and "YES" or "NIL",
         data.constants and "YES" or "NIL")
     
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Sending appearance data to NUI with %d peds, %d tattoo entries", 
+        peds and ig.table.SizeOf(peds) or 0,
+        tattoos and ig.table.SizeOf(tattoos) or 0)
+    
     ig.ui.Send("Client:NUI:AppearanceOpen", data, true)
     
-    -- Ensure focus is set after a brief delay to prevent race condition
-    -- with character select menu closing
-    SetTimeout(100, function()
-        SetNuiFocus(true, true)
-        ig.log.Debug("NUI-Wrapper", "ShowCreate: Focus explicitly set to true")
-    end)
+    ig.log.Debug("NUI-Wrapper", "ShowCreate: Complete - NUI focus should now be active")
 end
 
 -- Show appearance customization UI

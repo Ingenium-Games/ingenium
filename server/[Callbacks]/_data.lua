@@ -77,7 +77,21 @@ local GetInitializationData = RegisterServerCallback({
         ig.log.Debug("Callbacks", "  - doors: %d", data.doors and ig.table.SizeOf(data.doors) or 0)
         ig.log.Debug("Callbacks", "  - peds: %d (type: %s)", data.peds and ig.table.SizeOf(data.peds) or 0, type(data.peds))
         ig.log.Debug("Callbacks", "  - tattoos: %d", data.tattoos and ig.table.SizeOf(data.tattoos) or 0)
+        ig.log.Debug("Callbacks", "  - weapons: %d", data.weapons and ig.table.SizeOf(data.weapons) or 0)
         ig.log.Debug("Callbacks", "  - appearance_constants keys: %d", data.appearance_constants and ig.table.SizeOf(data.appearance_constants) or 0)
+        
+        -- Check if peds data is actually valid
+        if data.peds then
+            local pedSample = next(data.peds)
+            if pedSample then
+                ig.log.Debug("Callbacks", "  - peds sample key: %s", tostring(pedSample))
+                ig.log.Debug("Callbacks", "  - peds sample data: %s", json.encode(data.peds[pedSample]))
+            else
+                ig.log.Warn("Callbacks", "  - peds table exists but is EMPTY!")
+            end
+        else
+            ig.log.Error("Callbacks", "  - peds is NIL!")
+        end
         
         return data
     end

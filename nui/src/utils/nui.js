@@ -200,6 +200,8 @@ export function setupNuiHandlers() {
 
       // Appearance customization
       case 'Client:NUI:AppearanceOpen':
+        // uiStore.showCharacterSelect = false not needed to close as within nui event to open, the handled callback is sending this to the NUI upon reciving before its loop.
+
         if (!appearanceStore) {
           import('../stores/appearance.js').then(module => {
             appearanceStore = module.useAppearanceStore()
