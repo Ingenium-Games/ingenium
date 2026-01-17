@@ -220,11 +220,30 @@ end)
 RegisterNUICallback("Client:Appearance:SetCameraView", function(data, cb)
     ig.log.Debug("AppearanceCamera", "Received data: %s (type: %s)", json.encode(data), type(data))
     
-    local view = data.view or data
+    -- Extract view from various possible data structures
+    local view = nil
+    if type(data) == "table" then
+        -- Check if it's an array with one element
+        if data[1] then
+            if type(data[1]) == "table" then
+                view = data[1].view  -- [{view: "body"}]
+            else
+                view = data[1]  -- ["body"]
+            end
+        else
+            view = data.view  -- {view: "body"}
+        end
+    elseif type(data) == "string" then
+        view = data  -- "body"
+    end
     
-    ig.log.Debug("AppearanceCamera", "Setting camera view to: %s (type: %s)", view, type(view))
+    ig.log.Debug("AppearanceCamera", "Extracted camera view: %s (type: %s)", view, type(view))
     
-    TransitionToCamera(view)
+    if view then
+        TransitionToCamera(view)
+    else
+        ig.log.Error("AppearanceCamera", "Failed to extract camera view from data")
+    end
     
     cb({ success = true })
 end)
@@ -233,11 +252,30 @@ end)
 RegisterNUICallback("Client:Appearance:RotatePed", function(data, cb)
     ig.log.Debug("AppearanceCamera", "Received rotation data: %s (type: %s)", json.encode(data), type(data))
     
-    local direction = data.direction or data
+    -- Extract direction from various possible data structures
+    local direction = nil
+    if type(data) == "table" then
+        -- Check if it's an array with one element
+        if data[1] then
+            if type(data[1]) == "table" then
+                direction = data[1].direction  -- [{direction: "left"}]
+            else
+                direction = data[1]  -- ["left"]
+            end
+        else
+            direction = data.direction  -- {direction: "left"}
+        end
+    elseif type(data) == "string" then
+        direction = data  -- "left"
+    end
     
-    ig.log.Debug("AppearanceCamera", "Rotating ped: %s (type: %s)", direction, type(direction))
+    ig.log.Debug("AppearanceCamera", "Extracted rotation direction: %s (type: %s)", direction, type(direction))
     
-    RotatePed(direction)
+    if direction then
+        RotatePed(direction)
+    else
+        ig.log.Error("AppearanceCamera", "Failed to extract rotation direction from data")
+    end
     
     cb({ success = true })
 end)

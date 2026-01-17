@@ -84,24 +84,15 @@ RegisterNUICallback("NUI:Client:CharacterCreateStart", function(data, cb)
         -- Hide character select UI immediately
         ig.nui.character.HideSelect()
 
-        ig.func.IsBusyPleaseWait(2500)
 
-        local plyped = PlayerPedId()
-        SetEntityCoords(plyped, -703.9, -152.62, 37.42)
-        SetEntityHeading(plyped, 62)
+        ig.func.FadeIn(1000)
 
-        
-        -- Wait for fade completion
-        SetTimeout(2500, function()
-            ig.func.FadeIn(1000)
-            ig.func.IsBusyPleaseWait(1000)
-            Wait(1000)
             -- Show appearance customizer UI via wrapper function
             -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
             -- NUI will show name form AFTER player completes appearance customization
-            ig.nui.character.ShowCreate()
-            ig.log.Debug("Character", "Appearance customizer opened, awaiting completion")
-        end)
+        ig.nui.character.ShowCreate()
+        ig.log.Debug("Character", "Appearance customizer opened, awaiting completion")
+
         
         cb({
             message = "ok",
