@@ -20,7 +20,7 @@
 **Status**: Fixed and verified  
 **Issues Found**: 5 duplicate handlers
 **Fixes Applied**:
-1. ❌ Removed `RegisterNUICallback('Client:Request:CharacterList')` from client  
+1. ❌ Removed `RegisterNUICallback('Client:Request:OnJoinGetCharactersFromServer')` from client  
 2. ❌ Removed `RegisterNUICallback('Client:Character:Select')` from client  
 3. ❌ Removed `RegisterNUICallback('Client:Character:CreateNew')` from client  
 4. ❌ Removed `RegisterNUICallback('Client:Character:Delete')` from client  

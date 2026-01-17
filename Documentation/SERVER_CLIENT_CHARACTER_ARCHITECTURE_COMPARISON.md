@@ -280,7 +280,7 @@ Time  Server                          Client/NUI                Status
  4.5  ← Return {Characters, Slots}   ❌ Client has no callback handler!
  5.0  [Dead data - nowhere to go]     [Waiting for event]
  5.5  [Timeout]                       Still waiting...
- 6.0                                  NUI Callback: Client:Request:CharacterList
+ 6.0                                  NUI Callback: Client:Request:OnJoinGetCharactersFromServer
  6.5                                  → TriggerServerEvent("Server:Character:List") (AGAIN)
  7.0  [Duplicate request]
  7.5                                  ❌ STUCK - No response delivered

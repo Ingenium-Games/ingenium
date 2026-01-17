@@ -16,7 +16,7 @@ AddEventHandler("Client:Character:ReceiveCharacterList", function(data)
     end
 end)
 
-RegisterNUICallback('Client:Request:CharacterList', function(data, cb)
+RegisterNUICallback('Client:Request:OnJoinGetCharactersFromServer', function(data, cb)
     TriggerServerEvent("Server:Character:List")  -- ❌ Fire-and-forget!
     cb({ok = true})
 end)
@@ -32,7 +32,7 @@ RegisterServerCallback({
 ### ✅ AFTER (Fixed)
 ```lua
 -- client/[Events]/_character.lua
-RegisterNUICallback('Client:Request:CharacterList', function(data, cb)
+RegisterNUICallback('Client:Request:OnJoinGetCharactersFromServer', function(data, cb)
     TriggerServerCallback("Server:Character:List", function(result)  -- ✓ Callback!
         if result and result.Characters then
             cb({

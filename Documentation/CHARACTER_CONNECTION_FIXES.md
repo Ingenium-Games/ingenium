@@ -33,7 +33,7 @@ TriggerServerEvent("Server:Character:List")  -- ❌ Wrong trigger direction
 **Solution**: Use `TriggerServerCallback` from client NUI callback
 ```lua
 -- AFTER (Fixed)
-RegisterNUICallback('Client:Request:CharacterList', function(data, cb)
+RegisterNUICallback('Client:Request:OnJoinGetCharactersFromServer', function(data, cb)
     TriggerServerCallback("Server:Character:List", function(result)
         if result and result.Characters then
             cb({ok = true, characters = result.Characters, slots = result.Slots})
@@ -149,7 +149,7 @@ end
 **Problem**: NUI couldn't properly select characters or create new ones
 ```lua
 -- BEFORE (Broken)
-RegisterNUICallback('Client:Request:CharacterList', function(data, cb)
+RegisterNUICallback('Client:Request:OnJoinGetCharactersFromServer', function(data, cb)
     TriggerServerEvent("Server:Character:List")  -- ❌ Fire-and-forget
     cb({ok = true})
 end)

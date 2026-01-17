@@ -208,7 +208,7 @@ nui/lua/NUI-Client/character-select.lua
 ### ❌ WRONG Structure (What We Fixed)
 ```
 client/[Events]/_character.lua
-├─ RegisterNUICallback("Client:Request:CharacterList") ← DUPLICATE
+├─ RegisterNUICallback("Client:Request:OnJoinGetCharactersFromServer") ← DUPLICATE
 ├─ RegisterNUICallback('Client:Character:Select')     ← DUPLICATE
 ├─ RegisterNUICallback('Client:Character:CreateNew')  ← DUPLICATE
 ├─ RegisterNUICallback('Client:Character:Delete')     ← DUPLICATE

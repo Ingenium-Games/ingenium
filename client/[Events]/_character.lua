@@ -46,23 +46,8 @@
 -- STAGE 1: Character Menu Opening
 -- ====================================================================================--
 
--- Called when player first joins - shows character selection menu
-RegisterNetEvent("Client:Character:OpeningMenu")
-AddEventHandler("Client:Character:OpeningMenu", function()
-    --
-    ig.data.SetLoadedStatus(false)
-    --
-    local ped = PlayerPedId()
-    --
-    SetFollowPedCamViewMode(0)
-    SetEntityCoords(ped, 0, 0, 0)
-    SetEntityHeading(ped, 0)
-    --
-    FreezeEntityPosition(ped, true)
-    --
-    ig.func.IsBusyPleaseWait(500)
-    -- All further logic is now directed by awaintg he VUE nui to be correctlyt mounted prior to starting off player sessions
-end)
+-- MOVED TO NUI
+
 
 -- ====================================================================================--
 -- STAGE 2: Character Selection & Creation

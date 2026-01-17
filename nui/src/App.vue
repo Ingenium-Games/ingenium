@@ -65,7 +65,7 @@ onMounted(() => {
   
   // Request character data from server now that NUI is ready
   console.log('[App.vue] Requesting character data from server')
-  sendNuiMessage('Client:Request:CharacterList')
+  sendNuiMessage('Client:Request:OnJoinGetCharactersFromServer')
 })
 </script>
 

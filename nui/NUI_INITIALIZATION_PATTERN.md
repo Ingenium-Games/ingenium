@@ -27,14 +27,14 @@ Instead of Lua **pushing** data to NUI immediately, have NUI **request** data wh
 ```javascript
 onMounted(() => {
   // NUI is now ready - request data from server
-  sendNuiMessage('Client:Request:CharacterList')
+  sendNuiMessage('Client:Request:OnJoinGetCharactersFromServer')
   setupNuiHandlers()
 })
 ```
 
 **2. Client receives request callback** (`client/_character.lua`):
 ```lua
-RegisterNUICallback('Client:Request:CharacterList', function(data, cb)
+RegisterNUICallback('Client:Request:OnJoinGetCharactersFromServer', function(data, cb)
   -- NUI is ready, now request server data
   TriggerServerEvent("Server:Character:GetList")
   cb({ok = true})

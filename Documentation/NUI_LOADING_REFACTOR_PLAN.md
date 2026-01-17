@@ -27,7 +27,7 @@ The current character loading flow involves multiple loose events and lacks a co
 ```
 Server:Character:List 
   → Client:Character:ReceiveCharacterList 
-    → Client:Request:CharacterList (NUI callback)
+    → Client:Request:OnJoinGetCharactersFromServer (NUI callback)
       → TriggerServerEvent (Server:Character:List again)
         → Server:Character:Join
           → Client:Character:ReSpawn

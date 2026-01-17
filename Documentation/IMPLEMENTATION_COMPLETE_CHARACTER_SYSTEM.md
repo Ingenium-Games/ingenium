@@ -42,7 +42,7 @@
 ### B) Double Events ✅ FIXED
 **Problems Found**: 5 duplicate handlers
 ```
-❌ RegisterNUICallback('Client:Request:CharacterList')
+❌ RegisterNUICallback('Client:Request:OnJoinGetCharactersFromServer')
 ❌ RegisterNUICallback('Client:Character:Select')
 ❌ RegisterNUICallback('Client:Character:CreateNew')
 ❌ RegisterNUICallback('Client:Character:Delete')

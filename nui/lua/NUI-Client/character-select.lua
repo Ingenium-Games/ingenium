@@ -85,9 +85,9 @@ RegisterNUICallback("NUI:Client:NewCharacter", function(data, cb)
             -- Show appearance customizer UI via wrapper function
             -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
             -- NUI will show name form AFTER player completes appearance customization
-        ig.func.IsBusyPleaseWait(3000)
+
         ig.nui.character.ShowCreate()
-        ShutdownLoadingScreenNui()
+
         ig.log.Debug("Character", "Appearance customizer opened, awaiting completion")
 
         
@@ -156,16 +156,32 @@ end)
 
 -- NUI requests character list from client
 -- This is called by NUI when App.vue mounts to get character data
-RegisterNUICallback("Client:Request:CharacterList", function(data, cb)
+RegisterNUICallback("Client:Request:OnJoinGetCharactersFromServer", function(data, cb)
     ig.log.Trace("Character", "NUI: Requesting character list")
-    
+    ---
+    --- THIS IS THE INIT LOGGIC FOR MAKING THE CHARACTER BE AT A CERTAIN PLACE.
+    ---
+    ig.func.IsBusyPleaseWait(3000)
+
+    ig.data.SetLoadedStatus(false)
+    --
+    local ped = PlayerPedId()
+    --
+    SetFollowPedCamViewMode(0)
+    SetEntityCoords(ped, -550.21, 1340.24, 429.22)
+    SetEntityHeading(ped, 0)
+    --
+    FreezeEntityPosition(ped, true)
+    --
+    ig.func.IsBusyPleaseWait(500)
     -- Request character list from server using ig.callback.Async wrapper
     ig.callback.Async("Server:Character:List", function(result)
         ig.log.Debug("Character", "Server callback returned: " .. json.encode(result or "nil"))
         
         if result then
             ig.log.Trace("Character", "Received character list from server - Characters: " .. #(result.Characters or {}) .. ", Slots: " .. (result.Slots or 0))
-            
+            ig.func.IsBusyPleaseWait(1000)
+            ShutdownLoadingScreenNui()
             -- Send character data to NUI using standard ig.ui.Send wrapper
             ig.ui.Send("Client:NUI:CharacterSelectShow", {
                 characters = result.Characters or {},

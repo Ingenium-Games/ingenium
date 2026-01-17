@@ -39,7 +39,7 @@
 │     │                                                                       │
 │     └─> [DEADLOCK] NUI never receives character list                      │
 │                                                                             │
-│  5. NUI: Client:Request:CharacterList callback                            │
+│  5. NUI: Client:Request:OnJoinGetCharactersFromServer callback                            │
 │     └─> TriggerServerEvent("Server:Character:List") again                │
 │     │   [ISSUE 3: Redundant, duplicate request]                          │
 │     │                                                                       │
@@ -125,11 +125,11 @@ end)
 ---
 
 ### Issue 3: Redundant NUI Callback (UNNECESSARY)
-**Problem**: `Client:Request:CharacterList` NUI callback is redundant
+**Problem**: `Client:Request:OnJoinGetCharactersFromServer` NUI callback is redundant
 
 **Current**:
 ```lua
-RegisterNUICallback('Client:Request:CharacterList', function(data, cb)
+RegisterNUICallback('Client:Request:OnJoinGetCharactersFromServer', function(data, cb)
     -- Request character data from server (duplicate of step 3)
     TriggerServerEvent("Server:Character:List")
     cb({ok = true})
