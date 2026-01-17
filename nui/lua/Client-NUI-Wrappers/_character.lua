@@ -30,43 +30,32 @@ end
 function ig.nui.character.ShowCreate()
     ig.log.Info("NUI-Wrapper", "ShowCreate: Starting appearance creation UI")
     
-    -- Log what we have in ig.peds before attempting callback
-    local pedsCount = 0
-    if ig.peds then
-        for _ in pairs(ig.peds) do pedsCount = pedsCount + 1 end
-    end
-    ig.log.Info("NUI-Wrapper", "ShowCreate: ig.peds has %d entries before callback", pedsCount)
-    ig.log.Info("NUI-Wrapper", "ShowCreate: ig.peds type: %s", type(ig.peds))
-    
-    -- Get appearance constants (check cache first, fallback to server request)
+    -- Use cached data from initialization (loaded via GetInitializationData)
+    -- Static reference data should already be loaded - if not, that's a critical error
     local constants = ig.appearance_constants
-    if not constants or ig.table.SizeOf(constants) == 0 then
-        ig.log.Warn("NUI-Wrapper", "ShowCreate: ig.appearance_constants is empty, fetching from server")
-        constants = ig.callback.Await('ig:GameData:GetAppearanceConstants')
-    end
-    ig.log.Info("NUI-Wrapper", "ShowCreate: Constants loaded: %s (keys: %d)", constants and "YES" or "NIL", constants and ig.table.SizeOf(constants) or 0)
-    
-    -- Get ped data from server if needed (check cache first, fallback to server request)
     local peds = ig.peds
-    if not peds or ig.table.SizeOf(peds) == 0 then
-        ig.log.Warn("NUI-Wrapper", "ShowCreate: ig.peds is empty, fetching from server")
-        peds = ig.callback.Await('ig:GameData:GetPeds')
-        ig.log.Info("NUI-Wrapper", "ShowCreate: Server returned peds type: %s", type(peds))
-    end
-    
-    local pedsCountAfter = 0
-    if peds then
-        for _ in pairs(peds) do pedsCountAfter = pedsCountAfter + 1 end
-    end
-    ig.log.Info("NUI-Wrapper", "ShowCreate: Peds loaded: %d entries", pedsCountAfter)
-    
-    -- Get tattoo data (check cache first, fallback to server request)
     local tattoos = ig.tattoos
-    if not tattoos or ig.table.SizeOf(tattoos) == 0 then
-        ig.log.Warn("NUI-Wrapper", "ShowCreate: ig.tattoos is empty, fetching from server")
-        tattoos = ig.callback.Await('ig:GameData:GetTattoos')
+    
+    -- Validate that required data is loaded
+    local pedsCount = peds and ig.table.SizeOf(peds) or 0
+    local tattoosCount = tattoos and ig.table.SizeOf(tattoos) or 0
+    local constantsCount = constants and ig.table.SizeOf(constants) or 0
+    
+    ig.log.Info("NUI-Wrapper", "ShowCreate: Using cached initialization data")
+    ig.log.Info("NUI-Wrapper", "  - Peds: %d entries", pedsCount)
+    ig.log.Info("NUI-Wrapper", "  - Tattoos: %d entries", tattoosCount)
+    ig.log.Info("NUI-Wrapper", "  - Constants: %d keys", constantsCount)
+    
+    -- Critical error if data is missing (initialization failed)
+    if pedsCount == 0 then
+        ig.log.Error("NUI-Wrapper", "CRITICAL: ig.peds is empty! Client initialization failed.")
     end
-    ig.log.Info("NUI-Wrapper", "ShowCreate: Tattoos loaded: %s (keys: %d)", tattoos and "YES" or "NIL", tattoos and ig.table.SizeOf(tattoos) or 0)
+    if tattoosCount == 0 then
+        ig.log.Warn("NUI-Wrapper", "WARNING: ig.tattoos is empty. Tattoos may not be available.")
+    end
+    if constantsCount == 0 then
+        ig.log.Error("NUI-Wrapper", "CRITICAL: ig.appearance_constants is empty! Appearance customization will fail.")
+    end
     
     -- Get default appearance for new character with proper structure
     local defaultAppearance = {
@@ -136,14 +125,15 @@ end
 -- Show appearance customization UI
 -- Called from: other resources for appearance editing
 function ig.nui.character.ShowCustomize()
-    -- Get appearance constants (check cache first, fallback to server request)
-    local constants = ig.appearance_constants or ig.callback.Await('ig:GameData:GetAppearanceConstants')
+    -- Use cached data from initialization
+    local constants = ig.appearance_constants
+    local peds = ig.peds
+    local tattoos = ig.tattoos
     
-    -- Get ped data from server if needed (check cache first, fallback to server request)
-    local peds = ig.peds or ig.callback.Await('ig:GameData:GetPeds')
-    
-    -- Get tattoo data (check cache first, fallback to server request)
-    local tattoos = ig.tattoos or ig.callback.Await('ig:GameData:GetTattoos')
+    -- Log if data is missing (should not happen)
+    if not peds or ig.table.SizeOf(peds) == 0 then
+        ig.log.Error("NUI-Wrapper", "ShowCustomize: ig.peds is empty! Cannot customize appearance.")
+    end
     
     -- Get current player appearance
     local currentAppearance = ig.appearance.GetAppearance()

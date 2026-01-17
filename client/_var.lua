@@ -104,6 +104,7 @@ ig._weaponname = nil   -- Current weapon name
 -- ====================================================================================--
 -- NOW assign sub-table properties (all parent tables exist)
 -- ====================================================================================--
+ig.items = false
 
 -- IPL sub-tables
 ig.ipls.active = {}    -- Active IPLs

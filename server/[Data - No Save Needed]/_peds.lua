@@ -10,7 +10,9 @@
 ---Get all ped data
 ---@return table All peds data
 function ig.ped.GetAll()
-    return ig.peds
+    -- Return original unprotected data for network transmission
+    -- ig.peds is protected by MakeReadOnly and won't serialize
+    return ig._original_peds or ig.peds
 end
 
 ---Get ped data by hash

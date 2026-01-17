@@ -31,37 +31,23 @@ local GetObjects = RegisterServerCallback({
     end
 })
 
---- Batch initialization callback: Returns all data needed for client startup in a single request
---- Reduces network overhead by combining multiple callbacks into one
+--- Batch initialization callback: Returns DYNAMIC data needed for client startup
+--- Static reference data (peds, tattoos, weapons, etc.) is loaded from client files
+--- This only sends current runtime state that changes during gameplay
 local GetInitializationData = RegisterServerCallback({
     eventName = "GetInitializationData",
     eventCallback = function(source, ...)
-        ig.log.Info("Callbacks", "GetInitializationData called from source: %d", source)
+        ig.log.Info("Callbacks", "GetInitializationData called from source: %d (dynamic data only)", source)
         
         local function safeGetData()
-            ig.log.Debug("Callbacks", "Fetching items...")
-            local items = ig.item.GetItems()
-            ig.log.Debug("Callbacks", "Fetching doors...")
+            ig.log.Debug("Callbacks", "Fetching dynamic runtime data...")
+            -- Only return dynamic data that changes during gameplay
             local doors = ig.door.GetDoors()
-            ig.log.Debug("Callbacks", "Fetching objects...")
             local objects = ig.object.GetObjects()
-            ig.log.Debug("Callbacks", "Fetching tattoos...")
-            local tattoos = ig.tattoo.GetAll()
-            ig.log.Debug("Callbacks", "Fetching weapons...")
-            local weapons = ig.weapon.GetAll()
-            ig.log.Debug("Callbacks", "Fetching peds...")
-            local peds = ig.ped.GetAll()
-            ig.log.Debug("Callbacks", "Fetching appearance constants...")
-            local appearance_constants = ig.appearance.GetConstants()
             
             return {
-                items = items,
-                doors = doors,
-                objects = objects,
-                tattoos = tattoos,
-                weapons = weapons,
-                peds = peds,
-                appearance_constants = appearance_constants
+                doors = doors,      -- Current door states (locked/unlocked)
+                objects = objects   -- Current spawned objects
             }
         end
         
@@ -72,26 +58,9 @@ local GetInitializationData = RegisterServerCallback({
             return {}
         end
         
-        ig.log.Info("Callbacks", "GetInitializationData: successfully collected data")
-        ig.log.Debug("Callbacks", "  - items: %d", data.items and ig.table.SizeOf(data.items) or 0)
+        ig.log.Info("Callbacks", "GetInitializationData: successfully collected dynamic data")
         ig.log.Debug("Callbacks", "  - doors: %d", data.doors and ig.table.SizeOf(data.doors) or 0)
-        ig.log.Debug("Callbacks", "  - peds: %d (type: %s)", data.peds and ig.table.SizeOf(data.peds) or 0, type(data.peds))
-        ig.log.Debug("Callbacks", "  - tattoos: %d", data.tattoos and ig.table.SizeOf(data.tattoos) or 0)
-        ig.log.Debug("Callbacks", "  - weapons: %d", data.weapons and ig.table.SizeOf(data.weapons) or 0)
-        ig.log.Debug("Callbacks", "  - appearance_constants keys: %d", data.appearance_constants and ig.table.SizeOf(data.appearance_constants) or 0)
-        
-        -- Check if peds data is actually valid
-        if data.peds then
-            local pedSample = next(data.peds)
-            if pedSample then
-                ig.log.Debug("Callbacks", "  - peds sample key: %s", tostring(pedSample))
-                ig.log.Debug("Callbacks", "  - peds sample data: %s", json.encode(data.peds[pedSample]))
-            else
-                ig.log.Warn("Callbacks", "  - peds table exists but is EMPTY!")
-            end
-        else
-            ig.log.Error("Callbacks", "  - peds is NIL!")
-        end
+        ig.log.Debug("Callbacks", "  - objects: %d", data.objects and ig.table.SizeOf(data.objects) or 0)
         
         return data
     end

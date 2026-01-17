@@ -8,7 +8,8 @@
 ---Get all vehicle data
 ---@return table All vehicles data
 function ig.vehicle.GetAll()
-    return ig.vehicles
+    -- Return original unprotected data for network transmission
+    return ig._original_vehicles or ig.vehicles
 end
 
 ---Get vehicle data by hash

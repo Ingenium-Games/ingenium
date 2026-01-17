@@ -10,7 +10,8 @@
 ---Get all tattoo data
 ---@return table All tattoos data
 function ig.tattoo.GetAll()
-    return ig.tattoos
+    -- Return original unprotected data for network transmission
+    return ig._original_tattoos or ig.tattoos
 end
 
 ---Get tattoo data by hash

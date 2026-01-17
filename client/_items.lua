@@ -1,13 +1,6 @@
 -- ====================================================================================--
 -- Item management (ig.item initialized in client/_var.lua)
-ig.items = false
 -- ====================================================================================--
-
-function ig.item.SetItems(items)
-    if not ig.items then
-        ig.items = items
-    end
-end
 
 function ig.item.GetItems()
     return ig.items

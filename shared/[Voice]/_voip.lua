@@ -133,9 +133,7 @@ end
 --- VOIP logging helper (integrated with ig.log system)
 ---@param message string The debug message
 function ig.voip.Debug(message)
-    if ig and ig.log and ig.log.Debug then
-        ig.log.Debug("VOIP", message)
-    end
+    ig.log.Debug("VOIP", message)
 end
 
 -- ====================================================================================--

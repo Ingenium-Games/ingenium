@@ -5,7 +5,8 @@
 ---Get all appearance constants
 ---@return table Appearance constants
 function ig.appearance.GetConstants()
-    return ig.appearance_constants
+    -- Return original unprotected data for network transmission
+    return ig._original_appearance_constants or ig.appearance_constants
 end
 
 ---Get eye colors

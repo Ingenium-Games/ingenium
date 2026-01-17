@@ -271,6 +271,14 @@ function ig.data.LoadJSONData(callback)
 
     ig.log.Info('Data', 'JSON data loading complete')
 
+    -- Store original unprotected references for network transmission
+    -- MakeReadOnly creates proxy tables with metatables that don't serialize over network
+    ig._original_tattoos = ig.tattoos
+    ig._original_weapons = ig.weapons
+    ig._original_vehicles = ig.vehicles
+    ig._original_peds = ig.peds
+    ig._original_appearance_constants = ig.appearance_constants
+    
     -- Protect static reference data from modification
     -- These tables should NEVER be modified at runtime
     -- Dynamic tables (items, drops, jobs, doors, objects, etc.) are intentionally left

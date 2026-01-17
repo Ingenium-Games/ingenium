@@ -11,6 +11,17 @@ provide "pma-voice"
 
 ui_page "nui/dist/index.html"
 ------------------------------------------------------------------------------
+-- Static reference data files distributed to clients
+-- These are downloaded automatically by FiveM and can be read locally
+files {
+    'data/peds.json',
+    'data/tattoos.json',
+    'data/appearance-constants.json',
+    'data/weapons.json',
+    'data/vehicles.json',
+    'data/items.json'
+}
+------------------------------------------------------------------------------
 shared_scripts {
     "_config/config.lua",
     "_config/defaults.lua",

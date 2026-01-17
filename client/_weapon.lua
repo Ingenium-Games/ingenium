@@ -4,15 +4,7 @@
 -- ====================================================================================--
 
 function ig.weapon.Get()
-    return ig._weapon
-end
-
-function ig.weapon.GetComponents()
-    return ig._components
-end
-
-function ig.weapon.GetName()
-    return ig._weaponname
+    return ig.weapons
 end
 
 --- Initialize weapon data from server including categories and components

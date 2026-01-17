@@ -8,7 +8,8 @@
 ---Get all weapon data
 ---@return table All weapons data
 function ig.weapon.GetAll()
-    return ig.weapons
+    -- Return original unprotected data for network transmission
+    return ig._original_weapons or ig.weapons
 end
 
 --- func desc
