@@ -34,7 +34,12 @@
           
           <div class="form-actions">
             <button type="submit" class="btn-create">Create</button>
-            <button type="button" @click.prevent.stop="cancelCreate" class="btn-cancel">Cancel</button>
+            <button 
+              type="button" 
+              @mousedown="() => { console.log('[CharacterSelect] Cancel button MOUSEDOWN'); cancelCreate() }"
+              @click.prevent.stop="() => { console.log('[CharacterSelect] Cancel button CLICK'); cancelCreate() }"
+              class="btn-cancel"
+            >Cancel</button>
           </div>
         </fieldset>
       </form>
@@ -207,20 +212,24 @@ function cancelCreate() {
 }
 
 async function confirmCancelCreate() {
+  console.log('[CharacterSelect] Confirm cancel pressed')
   showCancelConfirm.value = false
   
   try {
-    // Hide/delete the ped on client
-    await sendNuiMessage('NUI:Client:CancelCharacterCreation', {})
+    console.log('[CharacterSelect] Sending NUI:Client:CancelCharacterCreation to Lua')
+    // Don't await - just send the message
+    sendNuiMessage('NUI:Client:CancelCharacterCreation', {})
     
-    // Reset form state
+    console.log('[CharacterSelect] Resetting form state')
     newCharacter.value = { firstName: '', lastName: '' }
     
-    // Reset appearance store
+    console.log('[CharacterSelect] Closing appearance store')
     appearanceStore.close()
     
-    // Return to character selection
+    console.log('[CharacterSelect] Canceling character creation in store')
     characterStore.cancelCreatingCharacter()
+    
+    console.log('[CharacterSelect] Cancel complete')
   } catch (error) {
     console.error('[CharacterSelect] Error canceling character creation:', error)
     // Still return to character selection even on error

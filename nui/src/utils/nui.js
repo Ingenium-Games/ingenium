@@ -99,7 +99,10 @@ function shouldThrottle(eventName) {
  */
 export async function sendNuiMessage(callback, data = {}) {
   try {
+    console.log(`[NUI] Sending message: ${callback}`, data)
     const resourceName = await GetParentResourceName()
+    console.log(`[NUI] Resource: ${resourceName}, URL: https://${resourceName}/${callback}`)
+    
     const response = await fetch(`https://${resourceName}/${callback}`, {
       method: 'POST',
       headers: {
@@ -107,11 +110,11 @@ export async function sendNuiMessage(callback, data = {}) {
       },
       body: JSON.stringify(data)
     })
+    
+    console.log(`[NUI] Response status: ${response.status} for callback: ${callback}`)
     return response
   } catch (error) {
-    if (!import.meta.env.DEV) {
-      console.error('Failed to send NUI message:', error)
-    }
+    console.error(`[NUI] Failed to send NUI message: ${callback}`, error)
   }
 }
 
@@ -203,7 +206,10 @@ export function setupNuiHandlers() {
     
     const { message, data } = payload
     
+    console.log('[handleMessage] ========================================')
     console.log('[handleMessage] Processing message:', message)
+    console.log('[handleMessage] Data:', data)
+    console.log('[handleMessage] ========================================')
     
     try {
       switch (message) {
