@@ -115,7 +115,7 @@ local function CreateAppearanceCameras(ped)
         coords.z + 0.5,  -- Mid-body height
         -5.0,  -- Slight downward angle
         0.0,
-        heading + 135.0,  -- Look towards ped (opposite of position angle)
+        heading - 45.0,  -- Look back towards ped (opposite of 135° offset = -45°)
         fov * 1.2,  -- Wider FOV for full body
         false,
         2

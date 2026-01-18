@@ -214,10 +214,13 @@ RegisterNUICallback('Client:Appearance:GetAvailableCustomization', function(data
     -- Build components list with actual drawable counts
     local components = {}
     for i = 0, 11 do  -- Standard component IDs (0-11)
-        -- Skip component 0 (face/head) - this is for face structure, not clothing
+        -- Skip component 0 (face/head) ONLY for freemode peds - it's for face structure
+        -- For non-freemode peds, component 0 may be used for other purposes
         -- Skip component 2 (hair) - has its own dedicated tab
         -- Face items like sunglasses are props (prop 1 = glasses)
-        if i ~= 0 and i ~= 2 then
+        local skipComponent = (i == 2) or (i == 0 and isFreemode)
+        
+        if not skipComponent then
             local drawableCount = GetNumberOfPedDrawableVariations(ped, i)
             if drawableCount > 0 then
                 table.insert(components, {
