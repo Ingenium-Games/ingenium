@@ -115,12 +115,12 @@ local function CreateAppearanceCameras(ped)
         coords.z + 0.5,  -- Mid-body height
         -5.0,  -- Slight downward angle
         0.0,
-        heading - 45.0,  -- Look back towards ped (opposite of 135° offset = -45°)
+        heading - 180.0,  -- Initial rotation
         fov * 1.2,  -- Wider FOV for full body
         false,
         2
     )
-    -- No PointAtEntity - let camera naturally look in the direction it's facing
+    ig.camera.PointAtEntity(appearanceCameras.full, ped, 0.0, 0.0, 0.0, true)  -- Point at center of ped
     
     -- Set all cameras to inactive initially (best practice)
     SetCamActive(appearanceCameras.face, false)
