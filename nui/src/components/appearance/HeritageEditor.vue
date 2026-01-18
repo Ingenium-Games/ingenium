@@ -5,25 +5,53 @@
       <div class="parent-selectors">
         <div class="parent-selector">
           <label>Mother</label>
+          <div class="gender-toggle">
+            <button 
+              :class="['toggle-btn', { active: motherFaceGender === 'female' }]"
+              @click="motherFaceGender = 'female'"
+            >
+              Female
+            </button>
+            <button 
+              :class="['toggle-btn', { active: motherFaceGender === 'male' }]"
+              @click="motherFaceGender = 'male'"
+            >
+              Male
+            </button>
+          </div>
           <select
             :value="headBlend.shapeFirst"
             @change="updateShapeFirst($event.target.value)"
             class="parent-select"
             aria-label="Select mother"
           >
-            <option v-for="i in MAX_PARENT_HEADS" :key="i-1" :value="i-1">{{ i-1 }}</option>
+            <option v-for="faceId in motherFaceList" :key="faceId" :value="faceId">{{ faceId }}</option>
           </select>
         </div>
         
         <div class="parent-selector">
           <label>Father</label>
+          <div class="gender-toggle">
+            <button 
+              :class="['toggle-btn', { active: fatherFaceGender === 'male' }]"
+              @click="fatherFaceGender = 'male'"
+            >
+              Male
+            </button>
+            <button 
+              :class="['toggle-btn', { active: fatherFaceGender === 'female' }]"
+              @click="fatherFaceGender = 'female'"
+            >
+              Female
+            </button>
+          </div>
           <select
             :value="headBlend.shapeSecond"
             @change="updateShapeSecond($event.target.value)"
             class="parent-select"
             aria-label="Select father"
           >
-            <option v-for="i in MAX_PARENT_HEADS" :key="i-1" :value="i-1">{{ i-1 }}</option>
+            <option v-for="faceId in fatherFaceList" :key="faceId" :value="faceId">{{ faceId }}</option>
           </select>
         </div>
       </div>
@@ -51,25 +79,53 @@
       <div class="parent-selectors">
         <div class="parent-selector">
           <label>Mother</label>
+          <div class="gender-toggle">
+            <button 
+              :class="['toggle-btn', { active: motherSkinGender === 'female' }]"
+              @click="motherSkinGender = 'female'"
+            >
+              Female
+            </button>
+            <button 
+              :class="['toggle-btn', { active: motherSkinGender === 'male' }]"
+              @click="motherSkinGender = 'male'"
+            >
+              Male
+            </button>
+          </div>
           <select
             :value="headBlend.skinFirst"
             @change="updateSkinFirst($event.target.value)"
             class="parent-select"
             aria-label="Select mother skin"
           >
-            <option v-for="i in MAX_PARENT_HEADS" :key="i-1" :value="i-1">{{ i-1 }}</option>
+            <option v-for="faceId in motherSkinList" :key="faceId" :value="faceId">{{ faceId }}</option>
           </select>
         </div>
         
         <div class="parent-selector">
           <label>Father</label>
+          <div class="gender-toggle">
+            <button 
+              :class="['toggle-btn', { active: fatherSkinGender === 'male' }]"
+              @click="fatherSkinGender = 'male'"
+            >
+              Male
+            </button>
+            <button 
+              :class="['toggle-btn', { active: fatherSkinGender === 'female' }]"
+              @click="fatherSkinGender = 'female'"
+            >
+              Female
+            </button>
+          </div>
           <select
             :value="headBlend.skinSecond"
             @change="updateSkinSecond($event.target.value)"
             class="parent-select"
             aria-label="Select father skin"
           >
-            <option v-for="i in MAX_PARENT_HEADS" :key="i-1" :value="i-1">{{ i-1 }}</option>
+            <option v-for="faceId in fatherSkinList" :key="faceId" :value="faceId">{{ faceId }}</option>
           </select>
         </div>
       </div>
@@ -95,12 +151,38 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
 
 const appearanceStore = useAppearanceStore()
 
-const MAX_PARENT_HEADS = 46
+// Gender toggles for face and skin heritage
+const motherFaceGender = ref('female')
+const fatherFaceGender = ref('male')
+const motherSkinGender = ref('female')
+const fatherSkinGender = ref('male')
+
+// Get heritage face lists from constants
+const heritageFaces = computed(() => {
+  return appearanceStore.constants?.heritageFaces || { male: [], female: [] }
+})
+
+// Computed lists based on gender selection
+const motherFaceList = computed(() => {
+  return heritageFaces.value[motherFaceGender.value] || []
+})
+
+const fatherFaceList = computed(() => {
+  return heritageFaces.value[fatherFaceGender.value] || []
+})
+
+const motherSkinList = computed(() => {
+  return heritageFaces.value[motherSkinGender.value] || []
+})
+
+const fatherSkinList = computed(() => {
+  return heritageFaces.value[fatherSkinGender.value] || []
+})
 
 const headBlend = computed(() => {
   return appearanceStore.currentAppearance?.headBlend || {
@@ -193,6 +275,37 @@ function updateSkinMix(value) {
   font-size: 13px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
+}
+
+.gender-toggle {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 6px 8px;
+  background: rgba(42, 42, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-btn:hover {
+  background: rgba(42, 42, 42, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.toggle-btn.active {
+  background: rgba(66, 135, 245, 0.3);
+  border-color: rgba(66, 135, 245, 0.6);
+  color: #4287f5;
 }
 
 .parent-select {
