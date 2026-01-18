@@ -130,12 +130,23 @@ export const useAppearanceStore = defineStore('appearance', () => {
       // Add delay to ensure game can load the ped properly
       await new Promise(resolve => setTimeout(resolve, 150))
       await callClientCallback('Client:Appearance:UpdateModel', model)
-      currentAppearance.value.model = model
+      
+      // Reset all appearance data when model changes
+      currentAppearance.value = {
+        model: model,
+        components: [],
+        props: [],
+        faceFeatures: {},
+        headBlend: {},
+        headOverlays: [],
+        eyeColor: 0,
+        hair: { style: 0, color: 0, highlight: 0 }
+      }
       
       // Refresh available customization options for the new model
       await refreshAvailableCustomization()
       
-      console.log('[AppearanceStore] Model updated successfully')
+      console.log('[AppearanceStore] Model updated successfully, all appearance data reset')
     } catch (error) {
       console.error('[AppearanceStore] Failed to update model:', error)
     } finally {

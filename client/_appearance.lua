@@ -36,12 +36,35 @@ function ig.appearance.SetModel(model, callback)
     end
     
     local ped = PlayerPedId()
+    local coords = GetEntityCoords(ped)
+    local heading = GetEntityHeading(ped)
+    
     SetPlayerModel(PlayerId(), modelHash)
     SetPedDefaultComponentVariation(PlayerPedId())
     SetModelAsNoLongerNeeded(modelHash)
     
+    -- Get the new ped after model change
+    ped = PlayerPedId()
+    
+    -- Restore position and heading
+    SetEntityCoords(ped, coords.x, coords.y, coords.z, false, false, false, true)
+    SetEntityHeading(ped, heading)
+    
+    -- Freeze ped in place for appearance customization
+    FreezeEntityPosition(ped, true)
+    
+    -- Make invincible during customization
+    SetEntityInvincible(ped, true)
+    
+    -- Disable ragdoll
+    SetPedCanRagdoll(ped, false)
+    
+    -- For animal models, set additional flags
+    SetPedConfigFlag(ped, 32, false)  -- Can be stunned
+    SetPedConfigFlag(ped, 281, true)  -- No writhe
+    
     if callback then
-        callback(PlayerPedId())
+        callback(ped)
     end
 end
 

@@ -34,7 +34,17 @@ RegisterNUICallback('Client:Appearance:UpdateModel', function(data, cb)
     end
     
     ig.log.Trace("Appearance", "Update model: %s", model)
-    ig.appearance.SetModel(model, function()
+    
+    -- Cleanup old cameras before model change
+    TriggerEvent('Client:Appearance:CleanupCameras', {})
+    
+    ig.appearance.SetModel(model, function(newPed)
+        -- Wait a frame for model to fully initialize
+        Citizen.Wait(100)
+        
+        -- Recreate cameras for new ped
+        TriggerEvent('Client:Appearance:InitializeCameras', {})
+        
         cb({ok = true})
     end)
 end)
@@ -205,8 +215,9 @@ RegisterNUICallback('Client:Appearance:GetAvailableCustomization', function(data
     local components = {}
     for i = 0, 11 do  -- Standard component IDs (0-11)
         -- Skip component 0 (face/head) - this is for face structure, not clothing
+        -- Skip component 2 (hair) - has its own dedicated tab
         -- Face items like sunglasses are props (prop 1 = glasses)
-        if i ~= 0 then
+        if i ~= 0 and i ~= 2 then
             local drawableCount = GetNumberOfPedDrawableVariations(ped, i)
             if drawableCount > 0 then
                 table.insert(components, {
