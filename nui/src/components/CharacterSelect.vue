@@ -210,9 +210,10 @@ function confirmCancelCreate() {
   // Hide/delete the ped
   sendNuiMessage('NUI:Client:CancelCharacterCreation', {})
   
-  // Return to character selection
+  // Reset state
   characterStore.cancelCreatingCharacter()
   appearanceStore.close()
+  newCharacter.value = { firstName: '', lastName: '' }
 }
 
 function declineCancelCreate() {
@@ -528,10 +529,10 @@ function formatDate(dateString) {
   bottom: 30px;
   left: 30px;
   padding: 15px 30px;
-  background: rgba(239, 68, 68, 0.9);
-  border: 2px solid rgba(239, 68, 68, 1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(239, 68, 68, 0.5);
   border-radius: 8px;
-  color: white;
+  color: rgba(239, 68, 68, 0.7);
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -543,7 +544,9 @@ function formatDate(dateString) {
 }
 
 .quit-btn:hover {
-  background: rgba(220, 38, 38, 1);
+  background: rgba(239, 68, 68, 0.9);
+  border-color: rgba(239, 68, 68, 1);
+  color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }

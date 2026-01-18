@@ -13,14 +13,29 @@ const throttleState = {
   warningTimeout: null
 }
 
-const THROTTLE_DELAY = 100 // Minimum ms between calls
-const SPAM_THRESHOLD = 10  // Max calls within spam window
+// Differentiated throttling by event type
+const THROTTLE_CONFIG = {
+  // Cameras and rotation - very strict
+  'Client:Appearance:SetCameraView': { delay: 200, threshold: 5 },
+  'Client:Appearance:RotatePed': { delay: 150, threshold: 8 },
+  
+  // Clothing and props - moderate
+  'Client:Appearance:UpdateComponent': { delay: 50, threshold: 20 },
+  'Client:Appearance:UpdateProp': { delay: 50, threshold: 20 },
+  'Client:Appearance:UpdateFeature': { delay: 50, threshold: 20 },
+  'Client:Appearance:UpdateOverlay': { delay: 50, threshold: 20 },
+  'Client:Appearance:UpdateHeadBlend': { delay: 50, threshold: 20 },
+  
+  // Default for other events
+  default: { delay: 100, threshold: 10 }
+}
+
 const SPAM_WINDOW = 1000   // 1 second spam detection window
 
 /**
  * Check if a callback is being spammed
  */
-function checkSpam(eventName) {
+function checkSpam(eventName, threshold) {
   const now = Date.now()
   
   // Initialize tracking for this event
@@ -37,7 +52,7 @@ function checkSpam(eventName) {
   throttleState.callCounts[eventName].push(now)
   
   // Check if spamming
-  if (throttleState.callCounts[eventName].length > SPAM_THRESHOLD) {
+  if (throttleState.callCounts[eventName].length > threshold) {
     if (!throttleState.spamWarningShown) {
       console.warn(`[NUI] Please slow down - too many rapid requests for ${eventName}`)
       throttleState.spamWarningShown = true
@@ -62,14 +77,15 @@ function checkSpam(eventName) {
 function shouldThrottle(eventName) {
   const now = Date.now()
   const lastCall = throttleState.lastCallTimes[eventName] || 0
+  const config = THROTTLE_CONFIG[eventName] || THROTTLE_CONFIG.default
   
   // Check for spam
-  if (checkSpam(eventName)) {
+  if (checkSpam(eventName, config.threshold)) {
     return true // Block this call
   }
   
   // Check throttle delay
-  if (now - lastCall < THROTTLE_DELAY) {
+  if (now - lastCall < config.delay) {
     return true // Too soon, block
   }
   

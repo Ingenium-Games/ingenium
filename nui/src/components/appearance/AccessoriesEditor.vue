@@ -248,6 +248,12 @@ watch(props, async (newProps) => {
 .adj-btn:hover {
   background: rgba(58, 58, 58, 0.9);
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+.max-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  margin: 0 4px;
   color: white;
 }
 

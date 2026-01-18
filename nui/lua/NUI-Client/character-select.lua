@@ -182,8 +182,13 @@ RegisterNUICallback("NUI:Client:QuitServer", function(data, cb)
     
     SetNuiFocus(false, false)
     
-    -- Drop player from server
+    -- Use native disconnect command
     TriggerServerEvent("Server:Player:Disconnect")
+    
+    -- Also trigger disconnect directly
+    if GetPlayerName then
+        DisconnectPlayer(GetPlayerName())
+    end
     
     cb({
         message = "ok",
