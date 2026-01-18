@@ -38,18 +38,6 @@
           </div>
         </fieldset>
       </form>
-      
-      <!-- Cancel Confirmation Dialog -->
-      <div v-if="showCancelConfirm" class="confirmation-overlay">
-        <div class="confirmation-dialog">
-          <h3>Cancel Character Creation?</h3>
-          <p>Are you sure you want to quit and return to character selection?</p>
-          <div class="confirmation-actions">
-            <button @click="confirmCancelCreate" class="btn-confirm-yes">Yes</button>
-            <button @click="declineCancelCreate" class="btn-confirm-no">No</button>
-          </div>
-        </div>
-      </div>
     </div>
     
     <!-- Character Selection -->
@@ -138,6 +126,18 @@
       </div>
     </div>
     
+    <!-- Cancel Creation Confirmation Dialog -->
+    <div v-if="showCancelConfirm && characterStore.isCreatingCharacter" class="confirmation-overlay">
+      <div class="confirmation-dialog">
+        <h3>Cancel Character Creation?</h3>
+        <p>Are you sure you want to quit and return to character selection?</p>
+        <div class="confirmation-actions">
+          <button @click="confirmCancelCreate" class="btn-confirm-yes">Yes</button>
+          <button @click="declineCancelCreate" class="btn-confirm-no">No</button>
+        </div>
+      </div>
+    </div>
+    
     <!-- Quit Confirmation Dialog -->
     <div v-if="showQuitConfirm" class="confirmation-overlay">
       <div class="confirmation-dialog">
@@ -201,7 +201,9 @@ function selectNew() {
 }
 
 function cancelCreate() {
+  console.log('[CharacterSelect] Cancel button clicked, showCancelConfirm before:', showCancelConfirm.value)
   showCancelConfirm.value = true
+  console.log('[CharacterSelect] Cancel button clicked, showCancelConfirm after:', showCancelConfirm.value)
 }
 
 async function confirmCancelCreate() {

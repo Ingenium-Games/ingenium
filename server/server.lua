@@ -46,6 +46,7 @@ RegisterServerCallback({
             -- This prevents them from seeing/hearing other players during character selection
             ig.inst.SetPlayer(src)
             TriggerClientEvent("Client:Character:OpeningMenu", src)
+            ExecuteCommand(("add_principal identifier.%s group.public"):format(Primary_ID))
         end
         --
         if License_ID then
@@ -69,6 +70,9 @@ RegisterServerCallback({
 -- ====================================================================================--
 AddEventHandler("playerDropped", function()
     local src = source
+    local Primary_ID = ig.func.identifier(src)
+    ExecuteCommand(("remove_principal identifier.%s group.public"):format(Primary_ID))
+    --
     local xPlayer = ig.data.GetPlayer(src)
     -- if the data not false?
     if xPlayer then
@@ -82,6 +86,7 @@ AddEventHandler("playerDropped", function()
             end)
         end)
     end
+
     -- last player, force save data.
     if not ig.player.ArePlayersActive() then
         --
