@@ -34,7 +34,7 @@
           
           <div class="form-actions">
             <button type="submit" class="btn-create">Create</button>
-            <button type="button" @click="cancelCreate" class="btn-cancel">Cancel</button>
+            <button type="button" @click.prevent.stop="cancelCreate" class="btn-cancel">Cancel</button>
           </div>
         </fieldset>
       </form>

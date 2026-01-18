@@ -158,8 +158,9 @@ end)
 RegisterNUICallback("NUI:Client:CancelCharacterCreation", function(data, cb)
     ig.log.Info("Character", "NUI: Canceling character creation")
     
-    -- Close appearance customizer UI
-    ig.nui.character.HideCreate()
+    -- IMPORTANT: Use HideAppearance() not HideCreate() - HideCreate doesn't exist!
+    -- HideAppearance sends Client:NUI:AppearanceClose to NUI which triggers appearanceStore.close()
+    ig.nui.character.HideAppearance()
     
     -- Delete/hide the ped (it will be recreated when they try again)
     local ped = PlayerPedId()
@@ -185,7 +186,7 @@ RegisterNUICallback("NUI:Client:QuitServer", function(data, cb)
     
     SetNuiFocus(false, false)
     
-    ExecuteCommand("disconnect")
+    -- Add dissconnect logic here.
     
     cb({
         message = "ok",
