@@ -154,6 +154,43 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
     end
 end)
 
+-- Cancel character creation - return to selection screen
+RegisterNUICallback("NUI:Client:CancelCharacterCreation", function(data, cb)
+    ig.log.Info("Character", "NUI: Canceling character creation")
+    
+    -- Close appearance customizer
+    ig.nui.character.HideCreate()
+    
+    -- Delete/hide the ped (it will be recreated when they try again)
+    local ped = PlayerPedId()
+    if DoesEntityExist(ped) then
+        SetEntityVisible(ped, false, false)
+    end
+    
+    -- Show character selection again
+    ig.nui.character.ShowSelect()
+    
+    cb({
+        message = "ok",
+        data = "Character creation canceled"
+    })
+end)
+
+-- Quit server - drop player
+RegisterNUICallback("NUI:Client:QuitServer", function(data, cb)
+    ig.log.Info("Character", "NUI: Player quitting server")
+    
+    SetNuiFocus(false, false)
+    
+    -- Drop player from server
+    TriggerServerEvent("Server:Player:Disconnect")
+    
+    cb({
+        message = "ok",
+        data = "Disconnecting from server"
+    })
+end)
+
 -- NUI requests character list from client
 -- This is called by NUI when App.vue mounts to get character data
 RegisterNUICallback("Client:Request:OnJoinGetCharactersFromServer", function(data, cb)

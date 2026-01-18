@@ -22,7 +22,7 @@ export const useAppearanceStore = defineStore('appearance', () => {
   const currentTab = ref('model')
   
   // Camera mode
-  const cameraMode = ref('face')
+  const cameraMode = ref('full')  // Default to full camera on open
   
   // Loading state
   const isLoading = ref(false)
@@ -83,6 +83,7 @@ export const useAppearanceStore = defineStore('appearance', () => {
     
     isOpen.value = true
     currentTab.value = data.config?.allowModelChange !== false ? 'model' : 'heritage'
+    cameraMode.value = 'full'  // Reset to default camera on open
     
     console.log('[AppearanceStore] Store state after open:')
     console.log('[AppearanceStore] - isOpen:', isOpen.value)

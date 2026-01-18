@@ -151,7 +151,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
 
 const appearanceStore = useAppearanceStore()
@@ -237,6 +237,35 @@ function updateSkinMix(value) {
     skinMix: parseFloat(value)
   })
 }
+
+// Watch gender changes and default to first face in list
+watch(motherFaceGender, (newGender) => {
+  const list = heritageFaces.value[newGender] || []
+  if (list.length > 0) {
+    updateShapeFirst(list[0])
+  }
+})
+
+watch(fatherFaceGender, (newGender) => {
+  const list = heritageFaces.value[newGender] || []
+  if (list.length > 0) {
+    updateShapeSecond(list[0])
+  }
+})
+
+watch(motherSkinGender, (newGender) => {
+  const list = heritageFaces.value[newGender] || []
+  if (list.length > 0) {
+    updateSkinFirst(list[0])
+  }
+})
+
+watch(fatherSkinGender, (newGender) => {
+  const list = heritageFaces.value[newGender] || []
+  if (list.length > 0) {
+    updateSkinSecond(list[0])
+  }
+})
 </script>
 
 <style scoped>

@@ -4,6 +4,81 @@ import { useCharacterStore } from '../stores/character'
 import { useChatStore } from '../stores/chat'
 
 /**
+ * Throttle state management for preventing spam
+ */
+const throttleState = {
+  lastCallTimes: {},
+  callCounts: {},
+  spamWarningShown: false,
+  warningTimeout: null
+}
+
+const THROTTLE_DELAY = 100 // Minimum ms between calls
+const SPAM_THRESHOLD = 10  // Max calls within spam window
+const SPAM_WINDOW = 1000   // 1 second spam detection window
+
+/**
+ * Check if a callback is being spammed
+ */
+function checkSpam(eventName) {
+  const now = Date.now()
+  
+  // Initialize tracking for this event
+  if (!throttleState.callCounts[eventName]) {
+    throttleState.callCounts[eventName] = []
+  }
+  
+  // Clean old timestamps outside spam window
+  throttleState.callCounts[eventName] = throttleState.callCounts[eventName].filter(
+    timestamp => (now - timestamp) < SPAM_WINDOW
+  )
+  
+  // Add current call
+  throttleState.callCounts[eventName].push(now)
+  
+  // Check if spamming
+  if (throttleState.callCounts[eventName].length > SPAM_THRESHOLD) {
+    if (!throttleState.spamWarningShown) {
+      console.warn(`[NUI] Please slow down - too many rapid requests for ${eventName}`)
+      throttleState.spamWarningShown = true
+      
+      // Reset warning flag after 5 seconds
+      if (throttleState.warningTimeout) {
+        clearTimeout(throttleState.warningTimeout)
+      }
+      throttleState.warningTimeout = setTimeout(() => {
+        throttleState.spamWarningShown = false
+      }, 5000)
+    }
+    return true
+  }
+  
+  return false
+}
+
+/**
+ * Check if callback should be throttled
+ */
+function shouldThrottle(eventName) {
+  const now = Date.now()
+  const lastCall = throttleState.lastCallTimes[eventName] || 0
+  
+  // Check for spam
+  if (checkSpam(eventName)) {
+    return true // Block this call
+  }
+  
+  // Check throttle delay
+  if (now - lastCall < THROTTLE_DELAY) {
+    return true // Too soon, block
+  }
+  
+  // Update last call time
+  throttleState.lastCallTimes[eventName] = now
+  return false // Allow call
+}
+
+/**
  * Send a message back to the client Lua script
  */
 export async function sendNuiMessage(callback, data = {}) {
@@ -28,6 +103,12 @@ export async function sendNuiMessage(callback, data = {}) {
  * Call a client callback and wait for response
  */
 export async function callClientCallback(callback, ...args) {
+  // Check throttle
+  if (shouldThrottle(callback)) {
+    console.debug(`[NUI] Throttled: ${callback}`)
+    return { ok: false, error: 'Throttled' }
+  }
+  
   try {
     const resourceName = await GetParentResourceName()
     const response = await fetch(`https://${resourceName}/${callback}`, {

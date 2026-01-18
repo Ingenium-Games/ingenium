@@ -199,6 +199,41 @@ RegisterNUICallback('Client:Appearance:GetComponentVariations', function(data, c
     })
 end)
 
+-- Get available prop variations
+RegisterNUICallback('Client:Appearance:GetPropVariations', function(data, cb)
+    local propId = data[1]
+    
+    if not propId then
+        cb({ok = false, error = "Missing prop ID"})
+        return
+    end
+    
+    local ped = PlayerPedId()
+    if not DoesEntityExist(ped) then
+        cb({ok = false, error = "Ped does not exist"})
+        return
+    end
+    
+    local drawableCount = GetNumberOfPedPropDrawableVariations(ped, propId)
+    local currentDrawable = GetPedPropIndex(ped, propId)
+    local textureCount = 0
+    
+    if currentDrawable >= 0 then
+        textureCount = GetNumberOfPedPropTextureVariations(ped, propId, currentDrawable)
+    end
+    
+    ig.log.Trace("Appearance", "Prop %d variations: drawables=%d, textures=%d", 
+        propId, drawableCount, textureCount)
+    
+    cb({
+        ok = true,
+        drawableCount = drawableCount,
+        textureCount = textureCount,
+        currentDrawable = currentDrawable,
+        currentTexture = GetPedPropTextureIndex(ped, propId)
+    })
+end)
+
 -- Get all available components and props for current ped
 RegisterNUICallback('Client:Appearance:GetAvailableCustomization', function(data, cb)
     local ped = PlayerPedId()

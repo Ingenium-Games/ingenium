@@ -38,6 +38,18 @@
           </div>
         </fieldset>
       </form>
+      
+      <!-- Cancel Confirmation Dialog -->
+      <div v-if="showCancelConfirm" class="confirmation-overlay">
+        <div class="confirmation-dialog">
+          <h3>Cancel Character Creation?</h3>
+          <p>Are you sure you want to quit and return to character selection?</p>
+          <div class="confirmation-actions">
+            <button @click="confirmCancelCreate" class="btn-confirm-yes">Yes</button>
+            <button @click="declineCancelCreate" class="btn-confirm-no">No</button>
+          </div>
+        </div>
+      </div>
     </div>
     
     <!-- Character Selection -->
@@ -86,6 +98,12 @@
         </button>
       </div>
       
+      <!-- Quit Button (bottom left) -->
+      <button @click="quitServer" class="quit-btn" title="Quit Server">
+        <span class="icon">✖</span>
+        <span class="label">Quit</span>
+      </button>
+      
       <!-- Character List -->
       <div class="character-select-list">
         <h2 class="text-xl font-bold mb-4 text-white">Select Character</h2>
@@ -119,15 +137,32 @@
         </div>
       </div>
     </div>
+    
+    <!-- Quit Confirmation Dialog -->
+    <div v-if="showQuitConfirm" class="confirmation-overlay">
+      <div class="confirmation-dialog">
+        <h3>Leave Server?</h3>
+        <p>Are you sure you want to leave this server?</p>
+        <div class="confirmation-actions">
+          <button @click="confirmQuit" class="btn-confirm-yes">Yes</button>
+          <button @click="declineQuit" class="btn-confirm-no">No</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { useCharacterStore } from '../stores/character'
+import { useAppearanceStore } from '../stores/appearance'
 import { sendNuiMessage } from '../utils/nui'
 
 const characterStore = useCharacterStore()
+const appearanceStore = useAppearanceStore()
+
+const showCancelConfirm = ref(false)
+const showQuitConfirm = ref(false)
 const slots = ref(1)
 const newCharacter = ref({
   firstName: '',
@@ -166,7 +201,35 @@ function selectNew() {
 }
 
 function cancelCreate() {
+  showCancelConfirm.value = true
+}
+
+function confirmCancelCreate() {
+  showCancelConfirm.value = false
+  
+  // Hide/delete the ped
+  sendNuiMessage('NUI:Client:CancelCharacterCreation', {})
+  
+  // Return to character selection
   characterStore.cancelCreatingCharacter()
+  appearanceStore.close()
+}
+
+function declineCancelCreate() {
+  showCancelConfirm.value = false
+}
+
+function quitServer() {
+  showQuitConfirm.value = true
+}
+
+function confirmQuit() {
+  showQuitConfirm.value = false
+  sendNuiMessage('NUI:Client:QuitServer', {})
+}
+
+function declineQuit() {
+  showQuitConfirm.value = false
 }
 
 function createCharacter() {
@@ -456,6 +519,111 @@ function formatDate(dateString) {
 }
 
 .btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Quit Button */
+.quit-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  padding: 15px 30px;
+  background: rgba(239, 68, 68, 0.9);
+  border: 2px solid rgba(239, 68, 68, 1);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  z-index: 100;
+}
+
+.quit-btn:hover {
+  background: rgba(220, 38, 38, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.quit-btn .icon {
+  font-size: 20px;
+}
+
+/* Confirmation Dialog */
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.confirmation-dialog {
+  background: rgba(30, 30, 30, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+
+.confirmation-dialog h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.confirmation-dialog p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-confirm-yes,
+.btn-confirm-no {
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  min-width: 100px;
+}
+
+.btn-confirm-yes {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-confirm-yes:hover {
+  background: #dc2626;
+}
+
+.btn-confirm-no {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-confirm-no:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 </style>

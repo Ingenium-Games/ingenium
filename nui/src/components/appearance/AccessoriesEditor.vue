@@ -17,10 +17,11 @@
               :value="getCurrentProp(prop.id).drawable"
               @input="updateDrawable(prop.id, $event.target.value)"
               min="-1"
-              max="255"
+              :max="getMaxDrawable(prop.id)"
               class="number-input"
               :aria-label="`${prop.name} drawable`"
             />
+            <span class="max-label">/ {{ (propVariations[prop.id]?.drawableCount || 1) }}</span>
             <button @click="incrementDrawable(prop.id)" class="adj-btn" aria-label="Next drawable">+</button>
           </div>
           <span class="hint">-1 to remove</span>
@@ -35,10 +36,11 @@
               :value="getCurrentProp(prop.id).texture"
               @input="updateTexture(prop.id, $event.target.value)"
               min="0"
-              max="255"
+              :max="getMaxTexture(prop.id)"
               class="number-input"
               :aria-label="`${prop.name} texture`"
             />
+            <span class="max-label">/ {{ (propVariations[prop.id]?.textureCount || 1) }}</span>
             <button @click="incrementTexture(prop.id)" class="adj-btn" aria-label="Next texture">+</button>
           </div>
         </div>
@@ -48,14 +50,46 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
+import { callClientCallback } from '../../utils/nui'
 
 const appearanceStore = useAppearanceStore()
+
+// Track available variations for each prop
+const propVariations = ref({})
 
 const props = computed(() => {
   return appearanceStore.constants?.props || []
 })
+
+// Fetch variations when prop changes
+async function refreshPropVariations(propId) {
+  try {
+    const result = await callClientCallback('Client:Appearance:GetPropVariations', propId)
+    if (result.ok) {
+      propVariations.value[propId] = {
+        drawableCount: result.drawableCount,
+        textureCount: result.textureCount,
+        currentDrawable: result.currentDrawable,
+        currentTexture: result.currentTexture
+      }
+    }
+  } catch (error) {
+    console.error(`Failed to get variations for prop ${propId}:`, error)
+  }
+}
+
+// Get max values for validation (max index = count - 1)
+function getMaxDrawable(propId) {
+  const count = propVariations.value[propId]?.drawableCount
+  return count ? count - 1 : 255
+}
+
+function getMaxTexture(propId) {
+  const count = propVariations.value[propId]?.textureCount
+  return count ? count - 1 : 255
+}
 
 function getCurrentProp(propId) {
   const propsList = appearanceStore.currentAppearance?.props || []
@@ -63,41 +97,64 @@ function getCurrentProp(propId) {
   return found || { drawable: -1, texture: 0 }
 }
 
-function updateDrawable(propId, value) {
+async function updateDrawable(propId, value) {
   const current = getCurrentProp(propId)
-  const drawable = Math.max(-1, Math.min(255, parseInt(value) || -1))
-  appearanceStore.updateProp(propId, drawable, current.texture)
+  const maxDrawable = getMaxDrawable(propId)
+  const drawable = Math.max(-1, Math.min(maxDrawable, parseInt(value) || -1))
+  
+  // Reset texture to 0 when drawable changes
+  await appearanceStore.updateProp(propId, drawable, 0)
+  // Refresh variations after drawable change (texture count may change)
+  await refreshPropVariations(propId)
 }
 
-function updateTexture(propId, value) {
+async function updateTexture(propId, value) {
   const current = getCurrentProp(propId)
-  const texture = Math.max(0, Math.min(255, parseInt(value) || 0))
-  appearanceStore.updateProp(propId, current.drawable, texture)
+  const maxTexture = getMaxTexture(propId)
+  const texture = Math.max(0, Math.min(maxTexture, parseInt(value) || 0))
+  await appearanceStore.updateProp(propId, current.drawable, texture)
 }
 
-function incrementDrawable(propId) {
+async function incrementDrawable(propId) {
   const current = getCurrentProp(propId)
-  const drawable = Math.min(255, current.drawable + 1)
-  appearanceStore.updateProp(propId, drawable, current.texture)
+  const maxDrawable = getMaxDrawable(propId)
+  const drawable = Math.min(maxDrawable, current.drawable + 1)
+  
+  // Reset texture to 0 when drawable changes
+  await appearanceStore.updateProp(propId, drawable, 0)
+  await refreshPropVariations(propId)
 }
 
-function decrementDrawable(propId) {
+async function decrementDrawable(propId) {
   const current = getCurrentProp(propId)
   const drawable = Math.max(-1, current.drawable - 1)
-  appearanceStore.updateProp(propId, drawable, current.texture)
+  
+  // Reset texture to 0 when drawable changes
+  await appearanceStore.updateProp(propId, drawable, 0)
+  await refreshPropVariations(propId)
 }
 
-function incrementTexture(propId) {
+async function incrementTexture(propId) {
   const current = getCurrentProp(propId)
-  const texture = Math.min(255, current.texture + 1)
-  appearanceStore.updateProp(propId, current.drawable, texture)
+  const maxTexture = getMaxTexture(propId)
+  const texture = Math.min(maxTexture, current.texture + 1)
+  await appearanceStore.updateProp(propId, current.drawable, texture)
 }
 
-function decrementTexture(propId) {
+async function decrementTexture(propId) {
   const current = getCurrentProp(propId)
   const texture = Math.max(0, current.texture - 1)
-  appearanceStore.updateProp(propId, current.drawable, texture)
+  await appearanceStore.updateProp(propId, current.drawable, texture)
 }
+
+// Load variations for all props when they become available
+watch(props, async (newProps) => {
+  if (newProps && newProps.length > 0) {
+    for (const prop of newProps) {
+      await refreshPropVariations(prop.id)
+    }
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>
