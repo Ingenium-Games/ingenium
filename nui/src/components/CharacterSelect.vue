@@ -204,16 +204,26 @@ function cancelCreate() {
   showCancelConfirm.value = true
 }
 
-function confirmCancelCreate() {
+async function confirmCancelCreate() {
   showCancelConfirm.value = false
   
-  // Hide/delete the ped
-  sendNuiMessage('NUI:Client:CancelCharacterCreation', {})
-  
-  // Reset state
-  characterStore.cancelCreatingCharacter()
-  appearanceStore.close()
-  newCharacter.value = { firstName: '', lastName: '' }
+  try {
+    // Hide/delete the ped on client
+    await sendNuiMessage('NUI:Client:CancelCharacterCreation', {})
+    
+    // Reset form state
+    newCharacter.value = { firstName: '', lastName: '' }
+    
+    // Reset appearance store
+    appearanceStore.close()
+    
+    // Return to character selection
+    characterStore.cancelCreatingCharacter()
+  } catch (error) {
+    console.error('[CharacterSelect] Error canceling character creation:', error)
+    // Still return to character selection even on error
+    characterStore.cancelCreatingCharacter()
+  }
 }
 
 function declineCancelCreate() {

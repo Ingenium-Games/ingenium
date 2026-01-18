@@ -158,7 +158,7 @@ end)
 RegisterNUICallback("NUI:Client:CancelCharacterCreation", function(data, cb)
     ig.log.Info("Character", "NUI: Canceling character creation")
     
-    -- Close appearance customizer
+    -- Close appearance customizer UI
     ig.nui.character.HideCreate()
     
     -- Delete/hide the ped (it will be recreated when they try again)
@@ -167,7 +167,10 @@ RegisterNUICallback("NUI:Client:CancelCharacterCreation", function(data, cb)
         SetEntityVisible(ped, false, false)
     end
     
-    -- Show character selection again
+    -- Reset camera to third person
+    SetFollowPedCamViewMode(0)
+    
+    -- Show character selection UI
     ig.nui.character.ShowSelect()
     
     cb({
@@ -182,13 +185,7 @@ RegisterNUICallback("NUI:Client:QuitServer", function(data, cb)
     
     SetNuiFocus(false, false)
     
-    -- Use native disconnect command
-    TriggerServerEvent("Server:Player:Disconnect")
-    
-    -- Also trigger disconnect directly
-    if GetPlayerName then
-        DisconnectPlayer(GetPlayerName())
-    end
+    ExecuteCommand("disconnect")
     
     cb({
         message = "ok",
