@@ -43,14 +43,18 @@ function getCurrentValue(featureId) {
   }
   
   const features = appearanceStore.currentAppearance?.faceFeatures || {}
-  return features[featureId] !== undefined ? features[featureId] : 0.0
+  const storedValue = features[featureId] !== undefined ? features[featureId] : 0.0
+  // Invert stored value for display (since we store it inverted)
+  return storedValue * -1
 }
 
 function updateFeature(featureId, value) {
-  const numValue = parseFloat(value)
+  // Invert the value because game engine has it backwards
+  // User sees positive = increase, but game needs negative = increase
+  const numValue = parseFloat(value) * -1
   
-  // Store pending update
-  pendingUpdates.value[featureId] = numValue
+  // Store pending update (with original value for display)
+  pendingUpdates.value[featureId] = parseFloat(value)
   
   // Clear existing timer
   if (debounceTimers.value[featureId]) {

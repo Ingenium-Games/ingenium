@@ -31,7 +31,7 @@
             :value="getCurrentOverlay(overlay.id).opacity"
             @input="updateOverlayOpacity(overlay.id, $event.target.value)"
             min="0"
-            max="1"
+            max="0.99"
             step="0.01"
             class="slider"
             :aria-label="`${overlay.name} opacity`"

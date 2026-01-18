@@ -217,8 +217,9 @@ RegisterNUICallback('Client:Appearance:GetAvailableCustomization', function(data
         -- Skip component 0 (face/head) ONLY for freemode peds - it's for face structure
         -- For non-freemode peds, component 0 may be used for other purposes
         -- Skip component 2 (hair) - has its own dedicated tab
+        -- Skip component 7 (accessories) for freemode - has its own props menu
         -- Face items like sunglasses are props (prop 1 = glasses)
-        local skipComponent = (i == 2) or (i == 0 and isFreemode)
+        local skipComponent = (i == 2) or (i == 0 and isFreemode) or (i == 7 and isFreemode)
         
         if not skipComponent then
             local drawableCount = GetNumberOfPedDrawableVariations(ped, i)
