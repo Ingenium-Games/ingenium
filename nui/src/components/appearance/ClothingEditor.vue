@@ -115,7 +115,9 @@ async function updateDrawable(componentId, value) {
   const current = getCurrentComponent(componentId)
   const maxDrawable = getMaxDrawable(componentId)
   const drawable = Math.max(0, Math.min(maxDrawable, parseInt(value) || 0))
-  await appearanceStore.updateComponent(componentId, drawable, current.texture)
+  
+  // Reset texture to 0 when drawable changes
+  await appearanceStore.updateComponent(componentId, drawable, 0)
   // Refresh variations after drawable change (texture count may change)
   await refreshComponentVariations(componentId)
 }
@@ -131,14 +133,18 @@ async function incrementDrawable(componentId) {
   const current = getCurrentComponent(componentId)
   const maxDrawable = getMaxDrawable(componentId)
   const drawable = Math.min(maxDrawable, current.drawable + 1)
-  await appearanceStore.updateComponent(componentId, drawable, current.texture)
+  
+  // Reset texture to 0 when drawable changes
+  await appearanceStore.updateComponent(componentId, drawable, 0)
   await refreshComponentVariations(componentId)
 }
 
 async function decrementDrawable(componentId) {
   const current = getCurrentComponent(componentId)
   const drawable = Math.max(0, current.drawable - 1)
-  await appearanceStore.updateComponent(componentId, drawable, current.texture)
+  
+  // Reset texture to 0 when drawable changes
+  await appearanceStore.updateComponent(componentId, drawable, 0)
   await refreshComponentVariations(componentId)
 }
 
