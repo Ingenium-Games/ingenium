@@ -204,13 +204,17 @@ RegisterNUICallback('Client:Appearance:GetAvailableCustomization', function(data
     -- Build components list with actual drawable counts
     local components = {}
     for i = 0, 11 do  -- Standard component IDs (0-11)
-        local drawableCount = GetNumberOfPedDrawableVariations(ped, i)
-        if drawableCount > 0 then
-            table.insert(components, {
-                id = i,
-                name = GetComponentName(i),
-                drawableCount = drawableCount
-            })
+        -- Skip component 0 (face/head) - this is for face structure, not clothing
+        -- Face items like sunglasses are props (prop 1 = glasses)
+        if i ~= 0 then
+            local drawableCount = GetNumberOfPedDrawableVariations(ped, i)
+            if drawableCount > 0 then
+                table.insert(components, {
+                    id = i,
+                    name = GetComponentName(i),
+                    drawableCount = drawableCount
+                })
+            end
         end
     end
     

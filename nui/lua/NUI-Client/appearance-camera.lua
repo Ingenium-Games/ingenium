@@ -47,7 +47,7 @@ local function CreateAppearanceCameras(ped)
     local offsetY = math.cos(radians) * distance
     
     -- Calculate right offset (perpendicular to heading)
-    local rightRadians = math.rad(heading + 90.0)  -- 90 degrees to the right
+    local rightRadians = math.rad(heading - 90.0)  -- 90 degrees to the right (corrected for GTA coords)
     local rightX = math.sin(rightRadians) * rightOffset
     local rightY = math.cos(rightRadians) * rightOffset
     
