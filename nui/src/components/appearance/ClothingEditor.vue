@@ -26,7 +26,7 @@
               class="number-input"
               :aria-label="`${component.name} drawable`"
             />
-            <span class="max-label">/ {{ getMaxDrawable(component.id) }}</span>
+            <span class="max-label">/ {{ (componentVariations[component.id]?.drawableCount || 1) }}</span>
             <button @click="incrementDrawable(component.id)" class="adj-btn" aria-label="Next drawable">+</button>
           </div>
         </div>
@@ -44,7 +44,7 @@
               class="number-input"
               :aria-label="`${component.name} texture`"
             />
-            <span class="max-label">/ {{ getMaxTexture(component.id) }}</span>
+            <span class="max-label">/ {{ (componentVariations[component.id]?.textureCount || 1) }}</span>
             <button @click="incrementTexture(component.id)" class="adj-btn" aria-label="Next texture">+</button>
           </div>
         </div>
@@ -89,13 +89,15 @@ async function refreshComponentVariations(componentId) {
   }
 }
 
-// Get max values for validation
+// Get max values for validation (max index = count - 1)
 function getMaxDrawable(componentId) {
-  return componentVariations.value[componentId]?.drawableCount - 1 || 255
+  const count = componentVariations.value[componentId]?.drawableCount
+  return count ? count - 1 : 0
 }
 
 function getMaxTexture(componentId) {
-  return componentVariations.value[componentId]?.textureCount - 1 || 255
+  const count = componentVariations.value[componentId]?.textureCount
+  return count ? count - 1 : 0
 }
 
 function getComponentPrice(componentId) {

@@ -46,8 +46,8 @@ function ig.appearance.SetModel(model, callback)
     -- Get the new ped after model change
     ped = PlayerPedId()
     
-    -- Restore position and heading
-    SetEntityCoords(ped, coords.x, coords.y, coords.z, false, false, false, true)
+    -- Restore position and heading (no axis, no offset, no collision, no ground placement)
+    SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false)
     SetEntityHeading(ped, heading)
     
     -- Freeze ped in place for appearance customization
