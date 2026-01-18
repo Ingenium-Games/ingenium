@@ -91,6 +91,9 @@ export const useAppearanceStore = defineStore('appearance', () => {
     
     // Initialize cameras for appearance customization
     callClientCallback('Client:Appearance:InitializeCameras', {})
+    
+    // Refresh available customization options for current ped
+    refreshAvailableCustomization()
   }
   
   function close() {
@@ -128,6 +131,10 @@ export const useAppearanceStore = defineStore('appearance', () => {
       await new Promise(resolve => setTimeout(resolve, 150))
       await callClientCallback('Client:Appearance:UpdateModel', model)
       currentAppearance.value.model = model
+      
+      // Refresh available customization options for the new model
+      await refreshAvailableCustomization()
+      
       console.log('[AppearanceStore] Model updated successfully')
     } catch (error) {
       console.error('[AppearanceStore] Failed to update model:', error)
@@ -143,6 +150,20 @@ export const useAppearanceStore = defineStore('appearance', () => {
       currentAppearance.value.headBlend = { ...headBlend }
     } finally {
       isLoading.value = false
+    }
+  }
+  
+  async function refreshAvailableCustomization() {
+    try {
+      const result = await callClientCallback('Client:Appearance:GetAvailableCustomization', {})
+      if (result.ok && constants.value) {
+        // Update constants with actual available components and props
+        constants.value.components = result.components || []
+        constants.value.props = result.props || []
+        console.log('[AppearanceStore] Refreshed customization - Components:', result.components?.length, 'Props:', result.props?.length, 'Freemode:', result.isFreemode)
+      }
+    } catch (error) {
+      console.error('[AppearanceStore] Failed to refresh customization options:', error)
     }
   }
   
@@ -455,6 +476,7 @@ export const useAppearanceStore = defineStore('appearance', () => {
     setTab,
     setCameraMode,
     updateModel,
+    refreshAvailableCustomization,
     updateHeadBlend,
     updateFaceFeature,
     updateHeadOverlay,

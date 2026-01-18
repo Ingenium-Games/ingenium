@@ -117,6 +117,9 @@ const appearanceStore = useAppearanceStore()
 
 const availableTabs = computed(() => {
   const tabs = []
+  const isFreemode = appearanceStore.isFreemode
+  const hasComponents = appearanceStore.constants?.components?.length > 0
+  const hasProps = appearanceStore.constants?.props?.length > 0
   
   // Model tab - only if config allows
   if (appearanceStore.config.allowModelChange !== false) {
@@ -124,37 +127,37 @@ const availableTabs = computed(() => {
   }
   
   // Heritage tab - only for freemode
-  if (appearanceStore.config.allowHeritage !== false) {
+  if (appearanceStore.config.allowHeritage !== false && isFreemode) {
     tabs.push({ id: 'heritage', label: 'Heritage' })
   }
   
-  // Face features
-  if (appearanceStore.config.allowFaceFeatures !== false) {
+  // Face features - only for freemode
+  if (appearanceStore.config.allowFaceFeatures !== false && isFreemode) {
     tabs.push({ id: 'face', label: 'Face Features' })
   }
   
-  // Hair & Appearance
-  if (appearanceStore.config.allowHair !== false) {
+  // Hair & Appearance - only for freemode
+  if (appearanceStore.config.allowHair !== false && isFreemode) {
     tabs.push({ id: 'hair', label: 'Hair & Eyes' })
   }
   
-  // Overlays (makeup, facial hair, etc)
-  if (appearanceStore.config.allowOverlays !== false) {
+  // Overlays (makeup, facial hair, etc) - only for freemode
+  if (appearanceStore.config.allowOverlays !== false && isFreemode) {
     tabs.push({ id: 'overlays', label: 'Appearance' })
   }
   
-  // Clothing
-  if (appearanceStore.config.allowClothing !== false) {
+  // Clothing - only if components available
+  if (appearanceStore.config.allowClothing !== false && hasComponents) {
     tabs.push({ id: 'clothing', label: 'Clothing' })
   }
   
-  // Accessories
-  if (appearanceStore.config.allowAccessories !== false) {
+  // Accessories - only if props available
+  if (appearanceStore.config.allowAccessories !== false && hasProps) {
     tabs.push({ id: 'accessories', label: 'Accessories' })
   }
   
-  // Tattoos
-  if (appearanceStore.config.allowTattoos !== false) {
+  // Tattoos - only for freemode
+  if (appearanceStore.config.allowTattoos !== false && isFreemode) {
     tabs.push({ id: 'tattoos', label: 'Tattoos' })
   }
   

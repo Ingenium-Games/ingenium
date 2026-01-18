@@ -105,6 +105,12 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.full, ped, 0.0, 0.0, 0.0, true)  -- Point at center for full view
     
+    -- Set all cameras to inactive initially (best practice)
+    SetCamActive(appearanceCameras.face, false)
+    SetCamActive(appearanceCameras.body, false)
+    SetCamActive(appearanceCameras.legs, false)
+    SetCamActive(appearanceCameras.full, false)
+    
     ig.log.Info("AppearanceCamera", "Created cameras at base coords: %.2f, %.2f, %.2f (heading: %.2f)", 
         coords.x, coords.y, coords.z, heading)
     
@@ -122,13 +128,12 @@ local function TransitionToCamera(viewName)
     end
     
     if appearanceCameras.current and appearanceCameras.current ~= targetCam then
-        -- Smooth transition from current to target camera
+        -- Smooth transition from current to target camera (800ms)
         SetCamActiveWithInterp(targetCam, appearanceCameras.current, 800, 1, 1)
         ig.log.Debug("AppearanceCamera", "Transitioning from current to %s camera", viewName)
         appearanceCameras.current = targetCam
     elseif not appearanceCameras.current then
-        -- First camera activation
-        RenderScriptCams(true, false, 0, true, false)
+        -- First camera activation (shouldn't happen since we initialize with full)
         SetCamActive(targetCam, true)
         appearanceCameras.current = targetCam
         ig.log.Debug("AppearanceCamera", "Activated %s camera (first activation)", viewName)
@@ -175,30 +180,35 @@ end
 
 --- Cleans up all appearance cameras
 local function CleanupAppearanceCameras()
+    -- Deactivate all cameras before destroying
     if appearanceCameras.face then
+        SetCamActive(appearanceCameras.face, false)
         ig.camera.CleanUp(appearanceCameras.face)
         appearanceCameras.face = nil
     end
     if appearanceCameras.body then
+        SetCamActive(appearanceCameras.body, false)
         ig.camera.CleanUp(appearanceCameras.body)
         appearanceCameras.body = nil
     end
     if appearanceCameras.legs then
+        SetCamActive(appearanceCameras.legs, false)
         ig.camera.CleanUp(appearanceCameras.legs)
         appearanceCameras.legs = nil
     end
     if appearanceCameras.full then
+        SetCamActive(appearanceCameras.full, false)
         ig.camera.CleanUp(appearanceCameras.full)
         appearanceCameras.full = nil
     end
     
     appearanceCameras.current = nil
     
-    -- Restore game camera
-    RenderScriptCams(false, false, 0, true, false)
+    -- Stop rendering script cameras with smooth 1000ms transition
+    RenderScriptCams(false, true, 1000, false, false)
     
-    -- Restore follow camera mode
-    SetFollowPedCamViewMode(0)  -- Reset to third-person follow cam
+    -- Clear streaming focus (reset to player ped)
+    ClearFocus()
     
     currentPed = nil
     baseCoords = nil
@@ -234,14 +244,17 @@ RegisterNUICallback("Client:Appearance:InitializeCameras", function(data, cb)
     local success = CreateAppearanceCameras(playerPed)
     
     if success then
-        -- Disable follow camera mode and enable script cameras
-        SetFollowPedCamViewMode(4)  -- Set to first-person to disable follow cam
-        RenderScriptCams(true, false, 0, true, false)
+        -- Set streaming focus to the ped location for proper loading
+        local coords = GetEntityCoords(playerPed)
+        SetFocusPosAndVel(coords.x, coords.y, coords.z, 0.0, 0.0, 0.0)
         
-        -- Start with full body view
+        -- Activate only the full camera (others are already set to false in CreateAppearanceCameras)
         Citizen.Wait(100)
         SetCamActive(appearanceCameras.full, true)
         appearanceCameras.current = appearanceCameras.full
+        
+        -- Now render script cameras with smooth 1000ms transition
+        RenderScriptCams(true, true, 1000, false, false)
         
         ig.log.Info("AppearanceCamera", "Initialized with full camera view")
     else

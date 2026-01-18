@@ -178,6 +178,87 @@ RegisterNUICallback('Client:Appearance:GetComponentVariations', function(data, c
     })
 end)
 
+-- Get all available components and props for current ped
+RegisterNUICallback('Client:Appearance:GetAvailableCustomization', function(data, cb)
+    local ped = PlayerPedId()
+    
+    if not DoesEntityExist(ped) then
+        cb({ok = false, error = "Ped does not exist"})
+        return
+    end
+    
+    local model = GetEntityModel(ped)
+    local isFreemode = ig.appearance.IsFreemode()
+    
+    -- Build components list with actual drawable counts
+    local components = {}
+    for i = 0, 11 do  -- Standard component IDs (0-11)
+        local drawableCount = GetNumberOfPedDrawableVariations(ped, i)
+        if drawableCount > 0 then
+            table.insert(components, {
+                id = i,
+                name = GetComponentName(i),
+                drawableCount = drawableCount
+            })
+        end
+    end
+    
+    -- Build props list with actual drawable counts
+    local props = {}
+    for i = 0, 9 do  -- Standard prop IDs (0-9)
+        local drawableCount = GetNumberOfPedPropDrawableVariations(ped, i)
+        if drawableCount > 0 then
+            table.insert(props, {
+                id = i,
+                name = GetPropName(i),
+                drawableCount = drawableCount
+            })
+        end
+    end
+    
+    ig.log.Info("Appearance", "Available customization - Components: %d, Props: %d, Freemode: %s", 
+        #components, #props, tostring(isFreemode))
+    
+    cb({
+        ok = true,
+        isFreemode = isFreemode,
+        components = components,
+        props = props,
+        model = model
+    })
+end)
+
+-- Helper function to get component name
+function GetComponentName(componentId)
+    local names = {
+        [0] = "Face",
+        [1] = "Mask",
+        [2] = "Hair",
+        [3] = "Torso",
+        [4] = "Legs",
+        [5] = "Bags",
+        [6] = "Shoes",
+        [7] = "Accessories",
+        [8] = "Undershirt",
+        [9] = "Body Armor",
+        [10] = "Decals",
+        [11] = "Tops"
+    }
+    return names[componentId] or "Component " .. componentId
+end
+
+-- Helper function to get prop name
+function GetPropName(propId)
+    local names = {
+        [0] = "Hats",
+        [1] = "Glasses",
+        [2] = "Ears",
+        [6] = "Watches",
+        [7] = "Bracelets"
+    }
+    return names[propId] or "Prop " .. propId
+end
+
 -- Update prop
 RegisterNUICallback('Client:Appearance:UpdateProp', function(data, cb)
     local propId = data[1]
