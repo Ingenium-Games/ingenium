@@ -193,6 +193,7 @@ export function setupNuiHandlers() {
   // Import appearance and banking stores dynamically to avoid circular dependencies
   let appearanceStore = null
   let bankingStore = null
+  let jobStore = null
   
   console.log('[setupNuiHandlers] Attaching window message event listener')
   
@@ -363,6 +364,60 @@ export function setupNuiHandlers() {
         }
         break
       
+      // Job management system
+      case 'Client:NUI:JobOpen':
+        if (!jobStore) {
+          import('../stores/job.js').then(module => {
+            jobStore = module.useJobStore()
+            jobStore.open(data)
+          })
+        } else {
+          jobStore.open(data)
+        }
+        break
+      
+      case 'Client:NUI:JobClose':
+        if (jobStore) {
+          jobStore.close()
+        }
+        break
+      
+      case 'Client:NUI:JobUpdateAccounts':
+        if (jobStore) {
+          jobStore.updateAccounts(data.accounts)
+        }
+        break
+      
+      case 'Client:NUI:JobUpdateMemos':
+        if (jobStore) {
+          jobStore.updateMemos(data.memos)
+        }
+        break
+      
+      case 'Client:NUI:JobUpdateEmployees':
+        if (jobStore) {
+          jobStore.updateEmployees(data.employees)
+        }
+        break
+      
+      case 'Client:NUI:JobUpdatePrices':
+        if (jobStore) {
+          jobStore.updatePrices(data.prices)
+        }
+        break
+      
+      case 'Client:NUI:JobUpdateLocations':
+        if (jobStore) {
+          jobStore.updateLocations(data.locations)
+        }
+        break
+      
+      case 'Client:NUI:JobUpdateFinancials':
+        if (jobStore) {
+          jobStore.updateFinancials(data.financials)
+        }
+        break
+      
       default:
         console.log('Unhandled NUI message:', message, data)
         break
@@ -381,6 +436,9 @@ export function setupNuiHandlers() {
       if (chatStore.isVisible) {
         chatStore.hide()
         sendNuiMessage('NUI:Client:ChatClose')
+      } else if (jobStore && jobStore.isVisible) {
+        jobStore.close()
+        sendNuiMessage('NUI:Client:JobClose')
       } else if (bankingStore && bankingStore.isVisible) {
         bankingStore.close()
         sendNuiMessage('NUI:Client:BankingClose')

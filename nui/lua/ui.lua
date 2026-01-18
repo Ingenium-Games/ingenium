@@ -115,6 +115,99 @@ exports('UpdateHUD', function(data)
     })
 end)
 
+--- Show the job management menu
+--- @param data table Job menu configuration with job and user data
+--- Example:
+--- exports['ingenium']:ShowJobMenu({
+---   job = {
+---     name = "police",
+---     label = "Police Department",
+---     boss = "C01:xxxxx",
+---     grades = {...},
+---     accounts = { safe = 1000, bank = 50000 },
+---     ...
+---   },
+---   user = {
+---     characterId = "C01:xxxxx",
+---     characterName = "John Doe",
+---     jobName = "police",
+---     jobGrade = 5,
+---     isBoss = true
+---   },
+---   employees = {...},
+---   financials = {...}
+--- })
+exports('ShowJobMenu', function(data)
+    SendNUIMessage({
+        message = "Client:NUI:JobOpen",
+        data = data
+    })
+    SetNuiFocus(true, true)
+end)
+
+--- Hide the job management menu
+exports('HideJobMenu', function()
+    SendNUIMessage({
+        message = "Client:NUI:JobClose",
+        data = {}
+    })
+    SetNuiFocus(false, false)
+end)
+
+--- Update job accounts (safe/bank balances)
+--- @param accounts table Account balances { safe = number, bank = number }
+exports('UpdateJobAccounts', function(accounts)
+    SendNUIMessage({
+        message = "Client:NUI:JobUpdateAccounts",
+        data = { accounts = accounts }
+    })
+end)
+
+--- Update job memos
+--- @param memos table Array of memo objects
+exports('UpdateJobMemos', function(memos)
+    SendNUIMessage({
+        message = "Client:NUI:JobUpdateMemos",
+        data = { memos = memos }
+    })
+end)
+
+--- Update job employee list
+--- @param employees table Array of employee objects
+exports('UpdateJobEmployees', function(employees)
+    SendNUIMessage({
+        message = "Client:NUI:JobUpdateEmployees",
+        data = { employees = employees }
+    })
+end)
+
+--- Update job prices
+--- @param prices table Price data { item_name = price }
+exports('UpdateJobPrices', function(prices)
+    SendNUIMessage({
+        message = "Client:NUI:JobUpdatePrices",
+        data = { prices = prices }
+    })
+end)
+
+--- Update job locations
+--- @param locations table Location data { sales = {}, delivery = {}, safe = {} }
+exports('UpdateJobLocations', function(locations)
+    SendNUIMessage({
+        message = "Client:NUI:JobUpdateLocations",
+        data = { locations = locations }
+    })
+end)
+
+--- Update job financial data
+--- @param financials table Financial data { income = {}, expenses = {}, totals }
+exports('UpdateJobFinancials', function(financials)
+    SendNUIMessage({
+        message = "Client:NUI:JobUpdateFinancials",
+        data = { financials = financials }
+    })
+end)
+
 --- Generic message sender for external resources
 --- Note: external resources should use exports only; internal code should use `ig.ui`
 exports('SendMessage', function(message, data, focus)
