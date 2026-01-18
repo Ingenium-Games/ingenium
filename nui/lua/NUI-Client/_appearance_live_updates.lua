@@ -25,17 +25,6 @@
 --
 -- ====================================================================================--
 
--- Set camera view
-RegisterNUICallback('Client:Appearance:SetCameraView', function(data, cb)
-    local mode = data[1] or "face"
-    ig.log.Trace("Appearance", "Set camera view: %s", mode)
-    
-    -- TODO: Implement camera view logic
-    -- ig.appearance.SetCameraView(mode)
-    
-    cb({ok = true})
-end)
-
 -- Update model
 RegisterNUICallback('Client:Appearance:UpdateModel', function(data, cb)
     local model = data[1]
@@ -137,6 +126,28 @@ RegisterNUICallback('Client:Appearance:UpdateComponent', function(data, cb)
     
     if not componentId then
         cb({ok = false, error = "Missing component data"})
+        return
+    end
+    
+    local ped = PlayerPedId()
+    if not DoesEntityExist(ped) then
+        cb({ok = false, error = "Ped does not exist"})
+        return
+    end
+    
+    -- Validate drawable and texture exist before setting
+    local maxDrawable = GetNumberOfPedDrawableVariations(ped, componentId)
+    local maxTexture = GetNumberOfPedTextureVariations(ped, componentId, drawable)
+    
+    if drawable >= maxDrawable then
+        ig.log.Warn("Appearance", "Invalid drawable %d for component %d (max: %d)", drawable, componentId, maxDrawable - 1)
+        cb({ok = false, error = "Invalid drawable"})
+        return
+    end
+    
+    if texture >= maxTexture then
+        ig.log.Warn("Appearance", "Invalid texture %d for component %d drawable %d (max: %d)", texture, componentId, drawable, maxTexture - 1)
+        cb({ok = false, error = "Invalid texture"})
         return
     end
     
@@ -288,7 +299,7 @@ RegisterNUICallback('Client:Appearance:ApplyTattoo', function(data, cb)
     end
     
     ig.log.Trace("Appearance", "Apply tattoo: %s / %s", collection, hash)
-    ig.appearance.AddTattoo(collection, hash)
+    ig.appearance.ApplyTattoo(collection, hash)  -- Fixed: was AddTattoo, should be ApplyTattoo
     cb({ok = true})
 end)
 

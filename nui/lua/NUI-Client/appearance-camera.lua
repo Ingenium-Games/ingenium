@@ -9,6 +9,7 @@ local appearanceCameras = {
     face = nil,
     body = nil,
     legs = nil,
+    feet = nil,
     full = nil,
     current = nil
 }
@@ -38,17 +39,23 @@ local function CreateAppearanceCameras(ped)
     -- Camera distance from ped (1.0 unit as requested)
     local distance = 1.0
     local fov = 50.0
+    local rightOffset = 0.5  -- Offset to the right to center character on screen
     
     -- Calculate camera positions in front of the ped based on heading
     local radians = math.rad(heading)
     local offsetX = math.sin(radians) * distance
     local offsetY = math.cos(radians) * distance
     
+    -- Calculate right offset (perpendicular to heading)
+    local rightRadians = math.rad(heading + 90.0)  -- 90 degrees to the right
+    local rightX = math.sin(rightRadians) * rightOffset
+    local rightY = math.cos(rightRadians) * rightOffset
+    
     -- Create cameras at different heights
     -- Face camera - eye level + slight up
     appearanceCameras.face = ig.camera.Basic(
-        coords.x + offsetX,
-        coords.y + offsetY,
+        coords.x + offsetX + rightX,
+        coords.y + offsetY + rightY,
         coords.z + 0.6,  -- Head height
         -10.0,  -- Slight downward angle
         0.0,
@@ -61,8 +68,8 @@ local function CreateAppearanceCameras(ped)
     
     -- Body camera - chest level
     appearanceCameras.body = ig.camera.Basic(
-        coords.x + offsetX,
-        coords.y + offsetY,
+        coords.x + offsetX + rightX,
+        coords.y + offsetY + rightY,
         coords.z + 0.2,  -- Chest height
         0.0,  -- Level angle
         0.0,
@@ -75,8 +82,8 @@ local function CreateAppearanceCameras(ped)
     
     -- Legs camera - lower body
     appearanceCameras.legs = ig.camera.Basic(
-        coords.x + offsetX,
-        coords.y + offsetY,
+        coords.x + offsetX + rightX,
+        coords.y + offsetY + rightY,
         coords.z - 0.5,  -- Lower body height
         10.0,  -- Slight upward angle
         0.0,
@@ -87,14 +94,28 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.legs, ped, 0.0, 0.0, -0.5, true)  -- Point at lower body
     
+    -- Feet camera - shoes and feet
+    appearanceCameras.feet = ig.camera.Basic(
+        coords.x + offsetX + rightX,
+        coords.y + offsetY + rightY,
+        coords.z - 0.8,  -- Feet height
+        15.0,  -- Upward angle to see feet
+        0.0,
+        heading - 180.0,
+        fov,
+        false,
+        2
+    )
+    ig.camera.PointAtEntity(appearanceCameras.feet, ped, 0.0, 0.0, -0.8, true)  -- Point at feet
+    
     -- Full body camera - further back and higher for full view
     local fullDistance = 2.0
     local fullOffsetX = math.sin(radians) * fullDistance
     local fullOffsetY = math.cos(radians) * fullDistance
     
     appearanceCameras.full = ig.camera.Basic(
-        coords.x + fullOffsetX,
-        coords.y + fullOffsetY,
+        coords.x + fullOffsetX + rightX,
+        coords.y + fullOffsetY + rightY,
         coords.z + 0.5,  -- Mid-body height
         -5.0,  -- Slight downward angle
         0.0,
@@ -109,6 +130,7 @@ local function CreateAppearanceCameras(ped)
     SetCamActive(appearanceCameras.face, false)
     SetCamActive(appearanceCameras.body, false)
     SetCamActive(appearanceCameras.legs, false)
+    SetCamActive(appearanceCameras.feet, false)
     SetCamActive(appearanceCameras.full, false)
     
     ig.log.Info("AppearanceCamera", "Created cameras at base coords: %.2f, %.2f, %.2f (heading: %.2f)", 
@@ -195,6 +217,11 @@ local function CleanupAppearanceCameras()
         SetCamActive(appearanceCameras.legs, false)
         ig.camera.CleanUp(appearanceCameras.legs)
         appearanceCameras.legs = nil
+    end
+    if appearanceCameras.feet then
+        SetCamActive(appearanceCameras.feet, false)
+        ig.camera.CleanUp(appearanceCameras.feet)
+        appearanceCameras.feet = nil
     end
     if appearanceCameras.full then
         SetCamActive(appearanceCameras.full, false)

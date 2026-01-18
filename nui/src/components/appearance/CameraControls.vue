@@ -52,6 +52,7 @@ const views = [
   { value: 'face', label: 'Face' },
   { value: 'body', label: 'Body' },
   { value: 'legs', label: 'Legs' },
+  { value: 'feet', label: 'Feet' },
   { value: 'full', label: 'Full' }
 ]
 
