@@ -68,7 +68,9 @@ local gameModeHandlers = {
     }
 }
 
--- TDM shares handlers with DM
+-- TDM shares handlers with DM (reference copy for clarity)
+-- If handlers need to be modified at runtime, use shallow copy instead:
+-- gameModeHandlers.TDM = {onEnteredVehicle = gameModeHandlers.DM.onEnteredVehicle, ...}
 gameModeHandlers.TDM = gameModeHandlers.DM
 
 -- ====================================================================================--

@@ -3,11 +3,13 @@
 -- ====================================================================================--
 
 -- Create chat logger instance using shared file logging utility
+-- Uses config-based directory with fallback
+local chatLogDir = conf.chat.logging.logDirectory or "logs/chat"
 local chatLogger = ig.fileLog.Create({
-    logDirectory = "logs/chat",
+    logDirectory = chatLogDir,
     filePattern = function()
         local date = os.date("%Y-%m-%d")
-        return (conf.chat.logging.logDirectory or "logs/chat") .. "/" .. string.format("chat_%s.log", date)
+        return chatLogDir .. "/" .. string.format("chat_%s.log", date)
     end,
     batchSize = 100,
     flushDelay = 0,  -- Process immediately for chat logs

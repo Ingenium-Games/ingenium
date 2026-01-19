@@ -32,7 +32,10 @@ function ig.fileLog.Create(config)
     logger.config.logDirectory = logger.config.logDirectory or "logs"
     logger.config.batchSize = logger.config.batchSize or 100
     logger.config.flushDelay = logger.config.flushDelay or 500
-    logger.config.periodicFlush = logger.config.periodicFlush ~= false
+    -- periodicFlush defaults to true unless explicitly set to false
+    if logger.config.periodicFlush == nil then
+        logger.config.periodicFlush = true
+    end
     logger.config.periodicFlushInterval = logger.config.periodicFlushInterval or 5000
     
     --- Ensure log directory exists (FiveM creates it on first write)
@@ -139,6 +142,8 @@ function ig.fileLog.Create(config)
     logger.EnsureDirectory()
     
     -- Start periodic flush thread if enabled
+    -- NOTE: Creates one thread per logger instance. Use this utility sparingly.
+    -- For high-volume logging, consider a single global flush thread managing multiple loggers.
     if logger.config.periodicFlush then
         Citizen.CreateThread(function()
             while true do
@@ -156,12 +161,14 @@ end
 --- @param filename string Name of log file
 --- @param options table Optional configuration overrides
 --- @return table Logger instance
+--- NOTE: Single-file loggers ignore the level parameter in writes
 function ig.fileLog.CreateSimple(logDirectory, filename, options)
     options = options or {}
     
     local config = {
         logDirectory = logDirectory,
-        filePattern = function()
+        filePattern = function(_level)
+            -- Single file logger - level parameter ignored
             return logDirectory .. "/" .. filename
         end,
         batchSize = options.batchSize,
