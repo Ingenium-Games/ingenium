@@ -437,7 +437,6 @@ RegisterNUICallback('Client:Appearance:CancelToCharacterSelect', function(data, 
         if result then
             ig.log.Trace("Character", "Received character list from server - Characters: " .. #(result.Characters or {}) .. ", Slots: " .. (result.Slots or 0))
             ig.func.IsBusyPleaseWait(1000)
-            ShutdownLoadingScreenNui()
             -- Send character data to NUI using standard ig.ui.Send wrapper
             ig.ui.Send("Client:NUI:CharacterSelectShow", {
                 characters = result.Characters or {},

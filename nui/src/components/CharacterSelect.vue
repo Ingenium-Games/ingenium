@@ -201,6 +201,10 @@ function selectNew() {
     return
   }
   
+  // Set the character creation flag BEFORE opening appearance
+  console.log('[CharacterSelect] Setting isCreatingCharacter = true')
+  characterStore.startCreatingCharacter()
+  
   // Trigger Lua event to start appearance customization
   // Do NOT show name form yet - wait for appearance customization to complete
   console.log('[CharacterSelect] Sending NUI:Client:NewCharacter')
