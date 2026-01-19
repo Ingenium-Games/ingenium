@@ -5,7 +5,7 @@ function ig.sql.bank.AddAccount(Character_ID, Account_Number, IBan, cb)
     if not startingloan then
         local Amount = ig.check.Number(conf.default.bank)
         ig.sql.Insert(
-            "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Bank`, `Iban`) VALUES (?, ?, ?, ?);",
+            "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Balance`, `Iban`) VALUES (?, ?, ?, ?);",
             {Character_ID, Account_Number, Amount, IBan},
             function(insertId)
                 if cb then
@@ -17,7 +17,7 @@ function ig.sql.bank.AddAccount(Character_ID, Account_Number, IBan, cb)
         local Loan = conf.banking.startingloanamount
         local Duration = conf.banking.startingloanduration -- 30 days
         ig.sql.Insert(
-            "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Bank`, `Iban`, `Loan`, `Duration`) VALUES (?, ?, ?, ?, ?, ?);",
+            "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Balance`, `Iban`, `Loan`, `Duration`) VALUES (?, ?, ?, ?, ?, ?);",
             {Character_ID, Account_Number, Amount, IBan, Loan, Duration},
             function(insertId)
                 if cb then
@@ -27,23 +27,23 @@ function ig.sql.bank.AddAccount(Character_ID, Account_Number, IBan, cb)
     end
 end
 
---- Get - The `Bank` from the `Character_ID`
+--- Get - The `Balance` from the `Character_ID`
 -- @`Character_ID`
 -- cb if any.
 function ig.sql.bank.GetBank(character_id, cb)
-    local result = ig.sql.FetchScalar("SELECT `Bank` FROM `banking_accounts` WHERE `Character_ID` = ?;", {character_id})
+    local result = ig.sql.FetchScalar("SELECT `Balance` FROM `banking_accounts` WHERE `Character_ID` = ?;", {character_id})
     if cb then
         cb(result)
     end
     return result
 end
 
---- SET - The `Bank` from the `Character_ID`
+--- SET - The `Balance` from the `Character_ID`
 -- @`Character_ID`
 -- @Bank - INT VALUE
 -- cb if any.
 function ig.sql.bank.SetBank(character_id, bank, cb)
-    ig.sql.Update("UPDATE `banking_accounts` SET `Bank` = ? WHERE `Character_ID` = ?;", {bank, character_id}, function(affectedRows)
+    ig.sql.Update("UPDATE `banking_accounts` SET `Balance` = ? WHERE `Character_ID` = ?;", {bank, character_id}, function(affectedRows)
         if cb then
             cb(affectedRows)
         end
@@ -121,7 +121,7 @@ end
 -- @param cb callback function with results table
 function ig.sql.bank.GetAllLoansEnabled(cb)
     local query = [[
-        SELECT `Character_ID`, `Bank`, `Loan`, `Duration`, `Active` 
+        SELECT `Character_ID`, `Balance`, `Loan`, `Duration`, `Active` 
         FROM `banking_accounts` 
         WHERE `Loan` > 0 AND `Active` = TRUE
     ]]
@@ -175,7 +175,7 @@ function ig.sql.bank.ProcessBulkLoanPayments(loans, cb)
             query = [[
                 UPDATE `banking_accounts` 
                 SET 
-                    `Bank` = `Bank` - ?,
+                    `Balance` = `Balance` - ?,
                     `Loan` = `Loan` - ?
                 WHERE `Character_ID` = ? AND `Loan` > 0
             ]],
@@ -202,7 +202,7 @@ function ig.sql.bank.ProcessLoanPayment(characterId, paymentAmount, cb)
     local query = [[
         UPDATE `banking_accounts` 
         SET 
-            `Bank` = `Bank` - ?,
+            `Balance` = `Balance` - ?,
             `Loan` = `Loan` - ?
         WHERE `Character_ID` = ? AND `Loan` > 0
     ]]
@@ -219,9 +219,9 @@ end
 -- @param cb callback function with results
 function ig.sql.bank.GetAccountsWithNegativeBalance(cb)
     local query = [[
-        SELECT `Character_ID`, `Bank`, `Loan` 
+        SELECT `Character_ID`, `Balance`, `Loan` 
         FROM `banking_accounts` 
-        WHERE `Bank` < 0
+        WHERE `Balance` < 0
     ]]
     
     local result = ig.sql.Query(query, {})
@@ -253,9 +253,9 @@ end
 -- @param cb callback function with results table
 function ig.sql.bank.GetNegativeBalanceAccounts(cb)
     local query = [[
-        SELECT `Character_ID`, `Bank` 
+        SELECT `Character_ID`, `Balance` 
         FROM `banking_accounts` 
-        WHERE `Bank` < 0
+        WHERE `Balance` < 0
     ]]
     
     local result = ig.sql.Query(query, {})
@@ -273,8 +273,8 @@ function ig.sql.bank.ApplyOverdraftFees(feeAmount, cb)
     local fee = tonumber(feeAmount) or 0
     local query = [[
         UPDATE `banking_accounts` 
-        SET `Bank` = `Bank` - ? 
-        WHERE `Bank` < 0
+        SET `Balance` = `Balance` - ? 
+        WHERE `Balance` < 0
     ]]
     
     ig.sql.Update(query, {fee}, function(affectedRows)

@@ -46,7 +46,7 @@ function ig.bank.CalculatePayments()
                         query = [[
                             UPDATE `banking_accounts` 
                             SET 
-                                `Bank` = `Bank` - ?,
+                                `Balance` = `Balance` - ?,
                                 `Loan` = `Loan` - ?,
                                 `Duration` = `Duration` - 1
                             WHERE `Character_ID` = ? AND `Loan` > 0 AND `Duration` > 0

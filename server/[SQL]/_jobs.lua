@@ -9,7 +9,7 @@ ig.sql.jobs = {}
 -- @param cb callback function with balance
 function ig.sql.jobs.GetJobAccountBalance(jobName, cb)
     local result = ig.sql.FetchScalar(
-        "SELECT `Bank` FROM `banking_job_accounts` WHERE `Job` = ? LIMIT 1;",
+        "SELECT `Balance` FROM `banking_job_accounts` WHERE `Job` = ? LIMIT 1;",
         {jobName}
     )
     if cb then
@@ -28,9 +28,9 @@ function ig.sql.jobs.ProcessPayment(jobName, paymentAmount, cb)
     
     local query = [[
         UPDATE `banking_job_accounts` 
-        SET `Bank` = CASE 
-            WHEN `Bank` >= ? THEN `Bank` - ?
-            ELSE `Bank`
+        SET `Balance` = CASE 
+            WHEN `Balance` >= ? THEN `Balance` - ?
+            ELSE `Balance`
         END
         WHERE `Job` = ?
     ]]
@@ -57,9 +57,9 @@ function ig.sql.jobs.AddPaymentToPlayer(jobName, characterId, paymentAmount, cb)
     table.insert(queries, {
         query = [[
             UPDATE `banking_job_accounts` 
-            SET `Bank` = CASE 
-                WHEN `Bank` >= ? THEN `Bank` - ?
-                ELSE `Bank`
+            SET `Balance` = CASE 
+                WHEN `Balance` >= ? THEN `Balance` - ?
+                ELSE `Balance`
             END
             WHERE `Job` = ?
         ]],
@@ -70,7 +70,7 @@ function ig.sql.jobs.AddPaymentToPlayer(jobName, characterId, paymentAmount, cb)
     table.insert(queries, {
         query = [[
             UPDATE `banking_accounts` 
-            SET `Bank` = `Bank` + ? 
+            SET `Balance` = `Balance` + ? 
             WHERE `Character_ID` = ?
         ]],
         parameters = {amount, characterId}
@@ -137,9 +137,9 @@ function ig.sql.jobs.ProcessBulkPayments(jobName, payments, cb)
         table.insert(queries, {
             query = [[
                 UPDATE `banking_job_accounts` 
-                SET `Bank` = CASE 
-                    WHEN `Bank` >= ? THEN `Bank` - ?
-                    ELSE `Bank`
+                SET `Balance` = CASE 
+                    WHEN `Balance` >= ? THEN `Balance` - ?
+                    ELSE `Balance`
                 END
                 WHERE `Job` = ?
             ]],
@@ -154,7 +154,7 @@ function ig.sql.jobs.ProcessBulkPayments(jobName, payments, cb)
             table.insert(queries, {
                 query = [[
                     UPDATE `banking_accounts` 
-                    SET `Bank` = `Bank` + ? 
+                    SET `Balance` = `Balance` + ? 
                     WHERE `Character_ID` = ?
                 ]],
                 parameters = {payment.paymentAmount, payment.characterId}
@@ -175,7 +175,7 @@ end
 -- @return current balance or 0
 function ig.sql.jobs.GetJobAccountBalanceSync(jobName)
     return ig.sql.FetchScalar(
-        "SELECT `Bank` FROM `banking_job_accounts` WHERE `Job` = ? LIMIT 1;",
+        "SELECT `Balance` FROM `banking_job_accounts` WHERE `Job` = ? LIMIT 1;",
         {jobName}
     ) or 0
 end

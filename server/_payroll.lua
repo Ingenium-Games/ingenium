@@ -218,9 +218,9 @@ local function ProcessPaymentBatch(jobName, payments, paymentAmount)
         table.insert(queries, {
             query = [[
                 UPDATE `banking_job_accounts` 
-                SET `Bank` = CASE 
-                    WHEN `Bank` >= ? THEN `Bank` - ?
-                    ELSE `Bank`
+                SET `Balance` = CASE 
+                    WHEN `Balance` >= ? THEN `Balance` - ?
+                    ELSE `Balance`
                 END
                 WHERE `Job` = ?
             ]],
@@ -235,7 +235,7 @@ local function ProcessPaymentBatch(jobName, payments, paymentAmount)
             table.insert(queries, {
                 query = [[
                     UPDATE `banking_accounts` 
-                    SET `Bank` = `Bank` + ? 
+                    SET `Balance` = `Balance` + ? 
                     WHERE `Character_ID` = ?
                 ]],
                 parameters = {paymentAmount, payment.characterId}
