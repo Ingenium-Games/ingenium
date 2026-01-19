@@ -47,9 +47,9 @@ local function CreateAppearanceCameras(ped)
     local rightY = math.cos(rightRadians) * rightOffset
     
     -- Create cameras at different heights
-    -- All cameras use the full camera distance (away from ped) with adjusted FOV and height
-    -- Face camera - far back, tight FOV, head level
-    local faceRadians = math.rad(heading + 135.0)
+    -- All cameras positioned directly behind ped (180°) with FOV adjustments for different views
+    -- Face camera - directly behind, tight FOV, head level
+    local faceRadians = math.rad(heading + 180.0)  -- Directly behind
     local faceDistance = 2.0
     local faceOffsetX = math.sin(faceRadians) * faceDistance
     local faceOffsetY = math.cos(faceRadians) * faceDistance
@@ -67,8 +67,8 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.face, ped, 0.0, 0.0, 0.65, true)  -- Point at head
     
-    -- Body camera - far back, moderate FOV, chest level
-    local bodyRadians = math.rad(heading + 135.0)
+    -- Body camera - directly behind, moderate FOV, chest level
+    local bodyRadians = math.rad(heading + 180.0)  -- Directly behind
     local bodyDistance = 2.0
     local bodyOffsetX = math.sin(bodyRadians) * bodyDistance
     local bodyOffsetY = math.cos(bodyRadians) * bodyDistance
@@ -86,8 +86,8 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.body, ped, 0.0, 0.0, 0.3, true)  -- Point at chest
     
-    -- Legs camera - far back, moderate FOV, knee level
-    local legsRadians = math.rad(heading + 135.0)
+    -- Legs camera - directly behind, moderate FOV, knee level
+    local legsRadians = math.rad(heading + 180.0)  -- Directly behind
     local legsDistance = 2.0
     local legsOffsetX = math.sin(legsRadians) * legsDistance
     local legsOffsetY = math.cos(legsRadians) * legsDistance
@@ -105,8 +105,8 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.legs, ped, 0.0, 0.0, -0.3, true)  -- Point at knees
     
-    -- Feet camera - far back, tight FOV, foot level
-    local feetRadians = math.rad(heading + 135.0)
+    -- Feet camera - directly behind, tight FOV, foot level
+    local feetRadians = math.rad(heading + 180.0)  -- Directly behind
     local feetDistance = 2.0
     local feetOffsetX = math.sin(feetRadians) * feetDistance
     local feetOffsetY = math.cos(feetRadians) * feetDistance

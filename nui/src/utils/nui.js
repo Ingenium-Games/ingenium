@@ -24,7 +24,7 @@ const THROTTLE_CONFIG = {
   'Client:Appearance:UpdateProp': { delay: 50, threshold: 20 },
   'Client:Appearance:UpdateFeature': { delay: 50, threshold: 20 },
   'Client:Appearance:UpdateOverlay': { delay: 50, threshold: 20 },
-  'Client:Appearance:UpdateHeadBlend': { delay: 50, threshold: 20 },
+  // Removed UpdateHeadBlend - sliders need immediate response without throttling
   
   // Default for other events
   default: { delay: 100, threshold: 10 }

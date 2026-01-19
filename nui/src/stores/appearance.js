@@ -156,13 +156,11 @@ export const useAppearanceStore = defineStore('appearance', () => {
   }
   
   async function updateHeadBlend(headBlend) {
-    isLoading.value = true
-    try {
-      await callClientCallback('Client:Appearance:UpdateHeadBlend', headBlend)
-      currentAppearance.value.headBlend = { ...headBlend }
-    } finally {
-      isLoading.value = false
-    }
+    // Don't set loading state - makes sliders feel unresponsive
+    // Fire and forget for smooth slider interaction
+    callClientCallback('Client:Appearance:UpdateHeadBlend', headBlend)
+    // Update store immediately for reactive UI
+    currentAppearance.value.headBlend = { ...headBlend }
   }
   
   async function refreshAvailableCustomization() {
