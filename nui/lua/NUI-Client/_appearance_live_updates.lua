@@ -400,7 +400,17 @@ RegisterNUICallback('Client:Appearance:Save', function(data, cb)
     -- Get current appearance from game
     local appearance = ig.appearance.GetAppearance()
     
-    cb({ok = true, appearance = appearance})
+    -- Send to server using SECURE CALLBACK
+    ig.callback.Async("Server:Character:SaveAppearance", function(result)
+        if result and result.success then
+            ig.log.Info("Appearance", "Appearance saved successfully")
+            cb({ok = true, appearance = appearance, message = result.message})
+        else
+            ig.log.Error("Appearance", "Failed to save appearance: %s", result and result.error or "Unknown error")
+            cb({ok = false, error = result and result.error or "Failed to save appearance"})
+        end
+    end, appearance)
+    cb({ok = true})
 end)
 
 -- Cancel appearance customization

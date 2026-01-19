@@ -357,32 +357,45 @@ AddEventHandler("Server:Character:SaveSkin", function(appearance, bool)
     end
 end)
 
--- Save appearance with validation
-RegisterNetEvent("Server:Character:SaveAppearance")
-AddEventHandler("Server:Character:SaveAppearance", function(appearance)
-    local src = source
-    local xPlayer = ig.data.GetPlayer(src)
-    
-    if not xPlayer then
-        ig.log.Error("APPEARANCE", "No xPlayer found for source: %d", src)
-        return
+-- Save appearance with validation (SECURE CALLBACK)
+RegisterServerCallback({
+    eventName = "Server:Character:SaveAppearance",
+    eventCallback = function(source, appearance)
+        local src = tonumber(source)
+        local xPlayer = ig.data.GetPlayer(src)
+        
+        if not xPlayer then
+            ig.log.Error("APPEARANCE", "No xPlayer found for source: %d", src)
+            return { success = false, error = "Player not found" }
+        end
+        
+        -- Validate appearance data structure
+        local isValid, errorMsg = ig.appearance.ValidateAppearance(appearance)
+        if not isValid then
+            ig.log.Error("APPEARANCE", "Invalid appearance data for %s: %s", 
+                xPlayer.GetIdentifier(), errorMsg)
+            return { success = false, error = errorMsg or "Invalid appearance data" }
+        end
+        
+        -- Save validated appearance to database
+        local identifier = xPlayer.GetIdentifier()
+        local p = promise.new()
+        
+        ig.sql.char.SetAppearance(identifier, appearance, function()
+            xPlayer.SetAppearance(appearance)
+            ig.log.Info("APPEARANCE", "Saved appearance for %s", identifier)
+            p:resolve()
+        end)
+        
+        -- Wait for database save to complete
+        Citizen.Await(p)
+        
+        return {
+            success = true,
+            message = "Appearance saved successfully"
+        }
     end
-    
-    -- Validate appearance data structure
-    local isValid, errorMsg = ig.appearance.ValidateAppearance(appearance)
-    if not isValid then
-        ig.log.Error("APPEARANCE", "Invalid appearance data for %s: %s", 
-            xPlayer.GetIdentifier(), errorMsg)
-        return
-    end
-    
-    -- Save validated appearance to database
-    local identifier = xPlayer.GetIdentifier()
-    ig.sql.char.SetAppearance(identifier, appearance, function()
-        xPlayer.SetAppearance(appearance)
-        ig.log.Info("APPEARANCE", "Saved appearance for %s", identifier)
-    end)
-end)
+})
 -- ====================================================================================--
 -- STAGE 6: CHARACTER STATE MANAGEMENT (Job, Duty, Death)
 -- ====================================================================================--
