@@ -151,7 +151,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref, watch, onMounted, nextTick } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
 
 const appearanceStore = useAppearanceStore()
@@ -313,7 +313,7 @@ watch(() => appearanceStore.currentAppearance?.model, (newModel, oldModel) => {
     
       // THEN: Reset all 4 heritage fields using the computed property lists
       // Need to use setTimeout to ensure computed properties have updated
-      setTimeout(() => {
+      nextTick(() => {
         if (motherFaceList.value.length > 0) {
           console.log('[HeritageEditor] Resetting shapeFirst (Mother Face) to:', motherFaceList.value[0])
           updateShapeFirst(motherFaceList.value[0])
@@ -333,7 +333,7 @@ watch(() => appearanceStore.currentAppearance?.model, (newModel, oldModel) => {
           console.log('[HeritageEditor] Resetting skinSecond (Father Skin) to:', fatherSkinList.value[0])
           updateSkinSecond(fatherSkinList.value[0])
         }
-      }, 0)
+      })
   }
 })
 </script>
@@ -488,3 +488,4 @@ watch(() => appearanceStore.currentAppearance?.model, (newModel, oldModel) => {
   transform: scale(1.2);
 }
 </style>
+
