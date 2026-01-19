@@ -75,6 +75,11 @@ function checkSpam(eventName, threshold) {
  * Check if callback should be throttled
  */
 function shouldThrottle(eventName) {
+  // Explicitly exclude UpdateHeadBlend from throttling for smooth slider updates
+  if (eventName === 'Client:Appearance:UpdateHeadBlend') {
+    return false // Never throttle heritage sliders
+  }
+  
   const now = Date.now()
   const lastCall = throttleState.lastCallTimes[eventName] || 0
   const config = THROTTLE_CONFIG[eventName] || THROTTLE_CONFIG.default
