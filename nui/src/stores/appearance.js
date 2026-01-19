@@ -23,6 +23,9 @@ export const useAppearanceStore = defineStore('appearance', () => {
   const errorMessage = ref('')
   const showError = ref(false)
   
+  // Character creation state
+  const showNameForm = ref(false)
+  
   // Current tab
   const currentTab = ref('model')
   
@@ -435,16 +438,20 @@ export const useAppearanceStore = defineStore('appearance', () => {
         }
       }
       
-      await callClientCallback('Client:Appearance:Save')
-      
-      // If this was character creation, trigger registration
-      if (config.value.isCharacterCreation) {
-        // Character creation will be handled by the NUI
-        // The appearance is already saved, now show registration form
-        close()
-      } else {
-        close()
+      // Check if this is character creation
+      const characterStore = useCharacterStore()
+      if (characterStore.isCreatingCharacter) {
+        // Character creation - show name form instead of saving
+        showNameForm.value = true
+        // Name form is now in AppearanceCustomization.vue
+        // Don't close appearance yet - will close after name is submitted
+        isLoading.value = false
+        return
       }
+      
+      // Normal appearance save
+      await callClientCallback('Client:Appearance:Save')
+      close()
     } finally {
       isLoading.value = false
     }
@@ -515,6 +522,9 @@ export const useAppearanceStore = defineStore('appearance', () => {
     // Error state
     errorMessage,
     showError,
+    
+    // Character creation
+    showNameForm,
     
     // Computed
     isFreemode,

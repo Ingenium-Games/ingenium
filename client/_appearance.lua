@@ -115,8 +115,7 @@ function ig.appearance.GetHeadBlend()
     if not ig.appearance.IsFreemode() then return nil end
     
     local ped = PlayerPedId()
-    local headBlendData = {}
-    local success = GetPedHeadBlendData(ped, headBlendData)
+    local success, shapeFirst, shapeSecond, shapeThird, skinFirst, skinSecond, skinThird, shapeMix, skinMix, thirdMix = GetPedHeadBlendData(ped)
     
     if not success then
         return {
@@ -131,13 +130,13 @@ function ig.appearance.GetHeadBlend()
     end
     
     return {
-        shapeFirst = headBlendData.shapeFirst or 0,
-        shapeSecond = headBlendData.shapeSecond or 0,
-        skinFirst = headBlendData.skinFirst or 0,
-        skinSecond = headBlendData.skinSecond or 0,
-        shapeMix = headBlendData.shapeMix or 0.5,
-        skinMix = headBlendData.skinMix or 0.5,
-        thirdMix = headBlendData.thirdMix or 0.0
+        shapeFirst = shapeFirst or 0,
+        shapeSecond = shapeSecond or 0,
+        skinFirst = skinFirst or 0,
+        skinSecond = skinSecond or 0,
+        shapeMix = shapeMix or 0.5,
+        skinMix = skinMix or 0.5,
+        thirdMix = thirdMix or 0.0
     }
 end
 

@@ -106,6 +106,42 @@
         </div>
       </div>
       
+      <!-- Character Name Form Dialog -->
+      <div v-if="appearanceStore.showNameForm" class="confirmation-overlay">
+        <div class="confirmation-dialog name-form-dialog">
+          <h3>Enter Character Name</h3>
+          <p>Please enter a first and last name for your character.</p>
+          <div class="name-form">
+            <div class="form-group">
+              <label>First Name</label>
+              <input 
+                v-model="firstName" 
+                type="text" 
+                placeholder="Enter first name"
+                maxlength="50"
+                @keyup.enter="submitCharacterName"
+                class="name-input"
+              />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input 
+                v-model="lastName" 
+                type="text" 
+                placeholder="Enter last name"
+                maxlength="50"
+                @keyup.enter="submitCharacterName"
+                class="name-input"
+              />
+            </div>
+          </div>
+          <div class="confirmation-actions">
+            <button @click="cancelNameForm" class="btn-confirm-no">Cancel</button>
+            <button @click="submitCharacterName" class="btn-confirm-yes">Create Character</button>
+          </div>
+        </div>
+      </div>
+      
       <!-- Cancel Confirmation Modal -->
       <div v-if="showCancelConfirm" class="confirmation-overlay">
         <div class="confirmation-dialog">
@@ -139,6 +175,8 @@ import CostConfirmationModal from './CostConfirmationModal.vue'
 
 const appearanceStore = useAppearanceStore()
 const showCancelConfirm = ref(false)
+const firstName = ref('')
+const lastName = ref('')
 
 const availableTabs = computed(() => {
   const tabs = []
@@ -219,6 +257,67 @@ async function confirmCancel() {
 
 function declineCancel() {
   showCancelConfirm.value = false
+}
+
+function cancelNameForm() {
+  appearanceStore.showNameForm = false
+  firstName.value = ''
+  lastName.value = ''
+}
+
+async function submitCharacterName() {
+  const characterStore = useCharacterStore()
+  
+  // Security: Only allow submission if character creation is active
+  // This prevents NUI manipulation to create multiple characters
+  if (!characterStore.isCreatingCharacter) {
+    console.warn('[AppearanceCustomization] Character creation submission blocked - not in creation mode')
+    return
+  }
+  
+  // Validate names
+  if (!firstName.value || !firstName.value.trim()) {
+    alert('Please enter a first name')
+    return
+  }
+  
+  if (!lastName.value || !lastName.value.trim()) {
+    alert('Please enter a last name')
+    return
+  }
+  
+  // Get appearance data
+  const appearance = appearanceStore.currentAppearance
+  
+  if (!appearance) {
+    alert('Error: No appearance data found. Please try again.')
+    return
+  }
+  
+  // Immediately reset creation state to prevent duplicate submissions
+  // This must happen BEFORE the NUI call to prevent race conditions
+  characterStore.cancelCreatingCharacter()
+  
+  // Hide name form
+  appearanceStore.showNameForm = false
+  
+  // Close appearance menu
+  appearanceStore.close()
+  
+  // Send to Lua callback using NUI utils
+  await fetch(`https://ingenium/NUI:Client:CharacterCreate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      firstName: firstName.value.trim(),
+      lastName: lastName.value.trim(),
+      appearance: appearance
+    })
+  })
+  
+  // Clear form
+  firstName.value = ''
+  lastName.value = ''
 }
 </script>
 
@@ -575,6 +674,51 @@ function declineCancel() {
   background: rgba(108, 117, 125, 0.3);
   border-color: rgba(108, 117, 125, 0.6);
   transform: translateY(-1px);
+}
+
+/* Name Form Dialog */
+.name-form-dialog {
+  min-width: 450px;
+}
+
+.name-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.form-group label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.name-input {
+  padding: 12px 16px;
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.name-input:focus {
+  border-color: rgba(66, 135, 245, 0.6);
+  background: rgba(30, 30, 30, 0.9);
+}
+
+.name-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* Responsive Design */
