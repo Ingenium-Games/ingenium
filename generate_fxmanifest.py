@@ -314,10 +314,6 @@ shared_scripts {{
             if not script.startswith('_config') and script not in foundation_files:
                 manifest += f'    "{script}",\n'
         
-        # Add bracket directories for shared as catch-all
-        for bracket_dir in sorted(self.bracket_dirs['shared']):
-            manifest += f'    "{bracket_dir}/*.lua",\n'
-        
         manifest += '''}
 ------------------------------------------------------------------------------
 client_scripts {
@@ -470,10 +466,6 @@ client_scripts {
             if script not in all_ordered_client_files:
                 manifest += f'    "{script}",\n'
         
-        # Add bracket directories for client as catch-all
-        for bracket_dir in sorted(self.bracket_dirs['client']):
-            manifest += f'    "{bracket_dir}/*.lua",\n'
-        
         manifest += '''    "nui/lua/*.lua",
     "nui/lua/**/*.lua"
 }
@@ -613,10 +605,7 @@ server_scripts {
         all_ordered_files = set(server_foundation_files + server_early_files + server_data_files + server_core_files + server_save_files + ['server/server.lua'])
         for script in server_scripts:
             if script not in all_ordered_files:
-                manifest += f'    "{script}",\n'        
-        # Add bracket directories for server as catch-all
-        for bracket_dir in sorted(self.bracket_dirs['server']):
-            manifest += f'    "{bracket_dir}/*.lua",\n'
+                manifest += f'    "{script}",\n'
         
         manifest += '''}
 ------------------------------------------------------------------------------

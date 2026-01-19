@@ -4,23 +4,12 @@ game "gta5"
 lua54 "yes"
 author "Twiitchter"
 description "Ingenium"
-version "1.0.7"
+version "1.0.0"
 ------------------------------------------------------------------------------
 provide "polyzone"
 provide "pma-voice"
 
 ui_page "nui/dist/index.html"
-------------------------------------------------------------------------------
--- Static reference data files distributed to clients
--- These are downloaded automatically by FiveM and can be read locally
-files {
-    'data/peds.json',
-    'data/tattoos.json',
-    'data/appearance-constants.json',
-    'data/weapons.json',
-    'data/vehicles.json',
-    'data/items.json'
-}
 ------------------------------------------------------------------------------
 shared_scripts {
     "_config/config.lua",
@@ -63,9 +52,6 @@ shared_scripts {
     "shared/[Tools]/_util.lua",
     "shared/[Voice]/_pma_wrapper.lua",
     "shared/[Voice]/_voip.lua",
-    "shared/[Third Party]/*.lua",
-    "shared/[Tools]/*.lua",
-    "shared/[Voice]/*.lua",
 }
 ------------------------------------------------------------------------------
 client_scripts {
@@ -117,7 +103,6 @@ client_scripts {
     "client/[Zones]/_zone_test_example.lua",
     "client/[Callbacks]/_animations_forced.lua",
     "client/[Callbacks]/_appearance.lua",
-    "client/[Callbacks]/_banking.lua",
     "client/[Callbacks]/_character.lua",
     "client/[Callbacks]/_chat.lua",
     "client/[Callbacks]/_commands.lua",
@@ -152,18 +137,7 @@ client_scripts {
     "client/[Threads]/_weapon.lua",
     "client/client.lua",
     "client/[Callbacks]/_data.lua",
-    "client/[Callbacks]/*.lua",
-    "client/[Chat]/*.lua",
-    "client/[Commands]/*.lua",
-    "client/[Dev]/*.lua",
-    "client/[Drops]/*.lua",
-    "client/[Events]/*.lua",
-    "client/[Garage]/*.lua",
-    "client/[Target]/*.lua",
-    "client/[Threads]/*.lua",
-    "client/[ToDo]/*.lua",
-    "client/[Voice]/*.lua",
-    "client/[Zones]/*.lua",
+    "client/_banking.lua",
     "nui/lua/*.lua",
     "nui/lua/**/*.lua"
 }
@@ -256,26 +230,6 @@ server_scripts {
     "server/[Data - Save to File]/_pickups.lua",
     "server/server.lua",
     "server/[Callbacks]/_data.lua",
-    "server/[API]/*.lua",
-    "server/[Appearance]/*.lua",
-    "server/[Callbacks]/*.lua",
-    "server/[Classes]/*.lua",
-    "server/[Commands]/*.lua",
-    "server/[Data - No Save Needed]/*.lua",
-    "server/[Data - Save to File]/*.lua",
-    "server/[Deferals]/*.lua",
-    "server/[Dev]/*.lua",
-    "server/[Doors]/*.lua",
-    "server/[Events]/*.lua",
-    "server/[Garage]/*.lua",
-    "server/[Objects]/*.lua",
-    "server/[Onesync]/*.lua",
-    "server/[SQL]/*.lua",
-    "server/[Security]/*.lua",
-    "server/[Third Party]/*.lua",
-    "server/[Tools]/*.lua",
-    "server/[Validation]/*.lua",
-    "server/[Voice]/*.lua",
 }
 ------------------------------------------------------------------------------
 dependencies {

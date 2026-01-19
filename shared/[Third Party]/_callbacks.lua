@@ -70,6 +70,9 @@ if IS_SERVER then
 	local TICKET_VALIDITY_MS = conf.callback.ticketValidity
 	local TICKET_LENGTH = conf.callback.ticketLength
 	
+	-- Registry to track registered callbacks and prevent duplicates
+	local registeredCallbacks = {}
+	
 	-- Rate Limiting Configuration
 	local rateLimitConfig = {
 		enabled = conf.callback.rateLimitEnabled,
@@ -213,7 +216,16 @@ if IS_SERVER then
 		-- save the event name on this call
 		local eventName = args.eventName
 		
+		-- CRITICAL: Unregister existing handler to prevent duplicates
+		if registeredCallbacks[eventName] then
+			ig.log.Warn("CALLBACK:SERVER", "Re-registering callback (removing old handler): %s", eventName)
+			RemoveEventHandler(registeredCallbacks[eventName])
+		end
+		
 		ig.log.Debug("CALLBACK:SERVER", "Registering server callback: %s", eventName)
+		
+		-- Flag to ensure handler only fires once per request
+		local handlerFired = {}
 		
 		-- save the event data to return
 		local eventData = RegisterNetEvent("Server:Callback:"..eventName, function(packed, src, cb)
@@ -221,6 +233,16 @@ if IS_SERVER then
 			-- Client call (TriggerServerEvent): packed only, source is a FiveM global
 			-- Server call (TriggerEvent): packed, src, and cb as explicit parameters
 			local actualSource = src or source
+			
+			-- Create unique request ID to prevent duplicate processing
+			local requestId = string.format("%s-%d-%d", eventName, actualSource, os.clock() * 1000)
+			
+			-- CRITICAL: Prevent duplicate processing
+			if handlerFired[requestId] then
+				ig.log.Warn("CALLBACK:SERVER", "Duplicate request ignored: %s from source: %d", eventName, actualSource)
+				return
+			end
+			handlerFired[requestId] = true
 			
 			ig.log.Trace("CALLBACK:SERVER", "Received callback request: %s from source: %d (isSimulated: %s)", eventName, actualSource, tostring(cb ~= nil))
 			
@@ -254,7 +276,16 @@ if IS_SERVER then
 				TriggerClientEvent(responseName, actualSource, msgpack_pack_args( result ))
 				ig.log.Trace("CALLBACK:SERVER", "Response sent to client")
 			end
+			
+			-- Clean up request ID after short delay
+			SetTimeout(1000, function()
+				handlerFired[requestId] = nil
+			end)
 		end)
+		
+		-- Store the event handler for potential cleanup
+		registeredCallbacks[eventName] = eventData
+		
 		-- return the event data to UnregisterServerCallback
 		return eventData
 	end
@@ -266,6 +297,13 @@ if IS_SERVER then
 	--
 	-- @table eventData - The data from the RegisterServerCallback
 	_G.UnregisterServerCallback = function(eventData)
+		-- Remove from registry by finding the matching eventData
+		for eventName, storedEventData in pairs(registeredCallbacks) do
+			if storedEventData == eventData then
+				registeredCallbacks[eventName] = nil
+				break
+			end
+		end
 		RemoveEventHandler(eventData)
 	end
 
