@@ -266,6 +266,33 @@ watch(fatherSkinGender, (newGender) => {
     updateSkinSecond(list[0])
   }
 })
+
+// Initialize defaults on mount
+onMounted(() => {
+  // Set mother face to first female face
+  const motherList = heritageFaces.value['female'] || []
+  if (motherList.length > 0 && !headBlend.value.shapeFirst) {
+    updateShapeFirst(motherList[0])
+  }
+  
+  // Set father face to first male face
+  const fatherList = heritageFaces.value['male'] || []
+  if (fatherList.length > 0 && !headBlend.value.shapeSecond) {
+    updateShapeSecond(fatherList[0])
+  }
+  
+  // Set mother skin to first female skin
+  const motherSkinList = heritageFaces.value['female'] || []
+  if (motherSkinList.length > 0 && !headBlend.value.skinFirst) {
+    updateSkinFirst(motherSkinList[0])
+  }
+  
+  // Set father skin to first male skin
+  const fatherSkinList = heritageFaces.value['male'] || []
+  if (fatherSkinList.length > 0 && !headBlend.value.skinSecond) {
+    updateSkinSecond(fatherSkinList[0])
+  }
+})
 </script>
 
 <style scoped>

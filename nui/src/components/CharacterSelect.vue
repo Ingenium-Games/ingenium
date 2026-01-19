@@ -36,8 +36,7 @@
             <button type="submit" class="btn-create">Create</button>
             <button 
               type="button" 
-              @mousedown="() => { console.log('[CharacterSelect] Cancel button MOUSEDOWN'); cancelCreate() }"
-              @click.prevent.stop="() => { console.log('[CharacterSelect] Cancel button CLICK'); cancelCreate() }"
+              @click.prevent.stop="cancelCreate"
               class="btn-cancel"
             >Cancel</button>
           </div>
