@@ -134,9 +134,15 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
         ig.log.Info("Character", "NUI: Creating new character - First: " .. firstName .. ", Last: " .. lastName)
         ig.log.Debug("Character", "Character appearance data: " .. json.encode(appearance))
         
-        -- Send to server with ALL character data (name + appearance)
+        -- Send to server with ALL character data (name + appearance) using SECURE CALLBACK
         ig.log.Debug("Character", "Sending Server:Character:Register with complete data")
-        TriggerServerEvent("Server:Character:Register", firstName, lastName, appearance)
+        ig.callback.Async("Server:Character:Register", function(result)
+            if result and result.success then
+                ig.log.Info("Character", "Character created successfully: " .. (result.character_id or "unknown"))
+            else
+                ig.log.Error("Character", "Character creation failed: " .. (result and result.error or "Unknown error"))
+            end
+        end, firstName, lastName, appearance)
         
         cb({
             message = "ok",
@@ -177,6 +183,7 @@ RegisterNUICallback("NUI:Client:QuitServer", function(data, cb)
     SetNuiFocus(false, false)
     
     -- Add dissconnect logic here.
+    TriggerServerEvent("Server:Character:Quit")
     
     cb({
         message = "ok",

@@ -60,12 +60,6 @@ end)
 ---@param condition table Vehicle condition data (client visual state)
 ---@param modifications table Vehicle modifications (client visual state)
 RegisterNetEvent("Server:VehiclePersistence:RegisterCondition", function(netId, plate, condition, modifications)
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
-    --
     local source = source
     
     if not plate or plate == "" then
@@ -100,11 +94,6 @@ end)
 ---@param coords table Vehicle coordinates
 ---@param fuel number Fuel level
 RegisterNetEvent("Server:VehiclePersistence:UpdateCondition", function(netId, plate, condition, modifications, coords, fuel)
-        -- Security: Prevent external resource invocation
-    if GetInvokingResource() ~= conf.resourcename then
-        CancelEvent()
-        return
-    end
     --
     local source = source
     

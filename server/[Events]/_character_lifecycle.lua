@@ -47,16 +47,6 @@
 --
 -- ====================================================================================--
 
--- Shared security check function for all character events
--- @param eventName string - Name of the event being called (for logging)
--- @return boolean - True if resource is calling this event legitimately
-local function isValidCharacterEvent(eventName)
-    if GetInvokingResource() ~= conf.resourcename then
-        return false
-    end
-    return true
-end
-
 -- ====================================================================================--
 -- STAGE 1: Character List & Selection
 -- ====================================================================================--
@@ -86,11 +76,6 @@ RegisterServerCallback({
 -- Player selects a character from the NUI menu
 RegisterNetEvent("Server:Character:Join")
 AddEventHandler("Server:Character:Join", function(Character_ID)
-    if not isValidCharacterEvent("Server:Character:Join") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     
     -- Handle existing character selection
@@ -122,22 +107,19 @@ end)
 -- ====================================================================================--
 
 -- Player creates a new character (called after character creation NUI submission)
-RegisterNetEvent("Server:Character:Register")
-AddEventHandler("Server:Character:Register", function(first_name, last_name, appearance)
-    if not isValidCharacterEvent("Server:Character:Register") then
-        CancelEvent()
-        return
-    end
-    
-    local src = source
-    ig.log.Debug("Character", "Character registration started for player " .. src .. ": " .. first_name .. " " .. last_name)
-    
-    -- Prevent double-loading (security check)
-    if ig.data.GetPlayer(src) ~= false then
-        ig.log.Error("Character", "Character registration: Player " .. src .. " already loaded!")
-        ig.func.Eventban(src, "Server:Character:Register")
-        return
-    end
+-- SECURE CALLBACK - Validates client data server-side
+RegisterServerCallback({
+    eventName = "Server:Character:Register",
+    eventCallback = function(source, first_name, last_name, appearance)
+        local src = tonumber(source)
+        ig.log.Debug("Character", "Character registration started for player " .. src .. ": " .. first_name .. " " .. last_name)
+        
+        -- Prevent double-loading (security check)
+        if ig.data.GetPlayer(src) ~= false then
+            ig.log.Error("Character", "Character registration: Player " .. src .. " already loaded!")
+            ig.func.Eventban(src, "Server:Character:Register")
+            return { success = false, error = "Player already loaded" }
+        end
     
     -- Generate unique IDs and initial data
     local primary_id = ig.func.identifier(src)
@@ -194,16 +176,20 @@ AddEventHandler("Server:Character:Register", function(first_name, last_name, app
         ig.log.Trace("Character", "Phone added to character inventory")
     else
         ig.log.Error("Character", "Failed to get player after loading - character may not be accessible!")
+        return { success = false, error = "Failed to load character after creation" }
     end
-end)
+    
+    -- Return success response to client
+    return {
+        success = true,
+        character_id = character_id,
+        message = "Character created successfully"
+    }
+    end
+})
 
 -- Alternate spawn trigger (used after character creation)
 RegisterNetEvent("Server:Character:Spawn", function(req)
-    if not isValidCharacterEvent("Server:Character:Spawn") then
-        CancelEvent()
-        return
-    end
-    
     local src = tonumber(req)
     local xPlayer = ig.data.GetPlayer(src)
     
@@ -226,10 +212,7 @@ end)
 -- Sets critical ped flags and game state
 RegisterNetEvent("Server:Character:Loaded")
 AddEventHandler("Server:Character:Loaded", function()
-    if not isValidCharacterEvent("Server:Character:Loaded") then
-        CancelEvent()
-        return
-    end
+
     
     local src = source
     local ped = GetPlayerPed(src)
@@ -264,11 +247,6 @@ end)
 -- Finalizes player state, manages permissions, and triggers state synchronization
 RegisterNetEvent("Server:Character:Ready")
 AddEventHandler("Server:Character:Ready", function()
-    if not isValidCharacterEvent("Server:Character:Ready") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     local xPlayer = ig.data.GetPlayer(src)
     
@@ -301,11 +279,6 @@ end)
 -- Called when player switches characters or is about to disconnect
 -- Cleans up character-specific data (job permissions, active markers, etc.)
 RegisterNetEvent("Server:Character:Switch", function(req)
-    if not isValidCharacterEvent("Server:Character:Switch") then
-        CancelEvent()
-        return
-    end
-    
     local src = req or source
     local xPlayer = ig.data.GetPlayer(src)
     
@@ -323,11 +296,6 @@ end)
 -- Player deletes a character from the selection menu
 RegisterNetEvent("Server:Character:Delete")
 AddEventHandler("Server:Character:Delete", function(Character_ID)
-    if not isValidCharacterEvent("Server:Character:Delete") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     
     -- Delete character from database
@@ -339,13 +307,15 @@ end)
 -- Client failed to create/select character properly
 RegisterNetEvent("Server:Character:Failed")
 AddEventHandler("Server:Character:Failed", function()
-    if not isValidCharacterEvent("Server:Character:Failed") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     DropPlayer(src, "Character creation/selection failed. Please rejoin.")
+end)
+
+-- Client failed to create/select character properly
+RegisterNetEvent("Server:Character:Quit")
+AddEventHandler("Server:Character:Quit", function()
+    local src = source
+    DropPlayer(src, "You have quit.")
 end)
 
 -- ====================================================================================--
@@ -355,11 +325,6 @@ end)
 -- Load appearance from database
 RegisterNetEvent("Server:Character:LoadSkin")
 AddEventHandler("Server:Character:LoadSkin", function()
-    if not isValidCharacterEvent("Server:Character:LoadSkin") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     local xPlayer = ig.data.GetPlayer(src)
     
@@ -374,11 +339,6 @@ end)
 -- Save appearance (legacy, kept for compatibility)
 RegisterNetEvent("Server:Character:SaveSkin")
 AddEventHandler("Server:Character:SaveSkin", function(appearance, bool)
-    if not isValidCharacterEvent("Server:Character:SaveSkin") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     local xPlayer = ig.data.GetPlayer(src)
     
@@ -400,11 +360,6 @@ end)
 -- Save appearance with validation
 RegisterNetEvent("Server:Character:SaveAppearance")
 AddEventHandler("Server:Character:SaveAppearance", function(appearance)
-    if not isValidCharacterEvent("Server:Character:SaveAppearance") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     local xPlayer = ig.data.GetPlayer(src)
     
@@ -435,11 +390,6 @@ end)
 -- Handle player death (marked as "down" for recovery or jailing)
 RegisterNetEvent("Server:Character:Death")
 AddEventHandler("Server:Character:Death", function(data)
-    if not isValidCharacterEvent("Server:Character:Death") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     local xPlayer = ig.data.GetPlayer(src)
     
@@ -470,11 +420,6 @@ end)
 -- @param data table - {Name = "police", Grade = 0}
 RegisterNetEvent("Server:Character:SetJob")
 AddEventHandler("Server:Character:SetJob", function(data)
-    if not isValidCharacterEvent("Server:Character:SetJob") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     local xPlayer = ig.data.GetPlayer(src)
     
@@ -500,11 +445,6 @@ end)
 -- Toggle on-duty status (if configured)
 RegisterNetEvent("Server:Character:Duty")
 AddEventHandler("Server:Character:Duty", function(boolean)
-    if not isValidCharacterEvent("Server:Character:Duty") then
-        CancelEvent()
-        return
-    end
-    
     local src = source
     
     if not conf.enableduty then
