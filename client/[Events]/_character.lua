@@ -52,26 +52,34 @@ AddEventHandler("Client:Character:Loaded", function()
 
     -- Reset position or mark at airport or config spawn location
     local ords = ig.data.GetLocalPlayerState("Coords") or conf.spawn
+    local cam, cam
+    cam = ig.camera.Basic(-550.21, 1340.24, 559.22, 189.53, 0.00, 0.00, 45.00, 100.00) -- Intro Locaiton abouve LS
+    cam2 = ig.camera.Basic(ords["x"], ords["y"], ords["z"] + 200, 300.00, 0.00, 0.00, 100.00)
+    SetCamActive(cam, false)
+    SetCamActive(cam2, false)
+
+    RenderScriptCams(true, true, 1000, false, false)
+    SetCamActive(cam, true)
+
+    ig.func.IsBusyPleaseWait(1500)
+    PointCamAtCoord(cam, ords["x"], ords["y"], ords["z"] + 200)
+    SetCamActiveWithInterp(cam, NetworkCanSpendMoney_2, 900, 1, 1)
+    
     SetEntityCoords(ped, ords["x"], ords["y"], ords["z"])
     SetEntityHeading(ped, ords["h"])
 
-    local cam2, cam3
-    ig.func.IsBusyPleaseWait(1500)
-    cam2 = ig.camera.Basic(313.78, -1403.07, 189.53, 0.00, 0.00, 45.00, 100.00)
-    PointCamAtCoord(cam2, ords["x"], ords["y"], ords["z"] + 200)
-    SetCamActiveWithInterp(cam2, cam, 900, 1, 1)
-    ig.func.IsBusyPleaseWait(900)
-    cam3 = ig.camera.Basic(ords["x"], ords["y"], ords["z"] + 200, 300.00, 0.00, 0.00, 100.00)
-    PointCamAtCoord(cam, ords["x"], ords["y"], ords["z"] + 2)
-    SetCamActiveWithInterp(cam3, cam2, 3700, 1, 1)
-    ig.func.IsBusyPleaseWait(3700)
+    ig.func.IsBusyPleaseWait(1250)
+
     PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
+
     RenderScriptCams(false, true, 500, 1, 1)
+
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
+
     FreezeEntityPosition(ped, false)
-    c.func.IsBusyPleaseWait(500)
-    SetCamActive(cam2, false)
-    SetCamActive(cam3, false)
+    SetEntityVisible(ped, true, true)
+
+    ig.func.IsBusyPleaseWait(500)
 
     -- Apply RP mode specific configurations if enabled
     if conf.gamemode == "RP" then
@@ -89,7 +97,8 @@ AddEventHandler("Client:Character:Loaded", function()
         ig.log.Info("Character", "RP Mode character initialization complete")
     end
 
-
+    ig.camera.CleanUp(cam2)
+    ig.camera.CleanUp(cam3)
 end)
 
 -- ====================================================================================--

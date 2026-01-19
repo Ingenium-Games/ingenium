@@ -45,11 +45,6 @@ local function CreateAppearanceCameras(ped)
     local distance = 1.0
     local fov = 50.0
     
-    -- Calculate right offset (perpendicular to heading)
-    local rightRadians = math.rad(heading - 90.0)  -- 90 degrees to the right
-    local rightX = math.sin(rightRadians) * rightOffset
-    local rightY = math.cos(rightRadians) * rightOffset
-    
     -- Create cameras at different heights
     -- All cameras positioned directly behind ped (180°)
     -- Face camera - directly behind, very tight FOV for detailed face view
