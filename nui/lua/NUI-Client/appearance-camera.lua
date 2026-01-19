@@ -114,7 +114,7 @@ local function CreateAppearanceCameras(ped)
     appearanceCameras.feet = ig.camera.Basic(
         coords.x + feetOffsetX,
         coords.y + feetOffsetY,
-        coords.z - 0.5,  -- Foot level
+        coords.z - 0.7,  -- Foot level (lowered by 0.2)
         0.0,
         0.0,
         heading - 180.0,
@@ -122,11 +122,11 @@ local function CreateAppearanceCameras(ped)
         false,
         2
     )
-    ig.camera.PointAtEntity(appearanceCameras.feet, ped, 0.0, 0.0, -0.6, true)  -- Point at feet
+    ig.camera.PointAtEntity(appearanceCameras.feet, ped, 0.0, 0.0, -0.7, true)  -- Point at feet
     
-    -- Full body camera - behind and to the side for full view
+    -- Full body camera - directly behind for centered full view
     local fullDistance = 2.5
-    local fullRadians = math.rad(heading + 135.0)  -- Behind and to the right
+    local fullRadians = math.rad(heading + 180.0)  -- Directly behind ped
     local fullOffsetX = math.sin(fullRadians) * fullDistance
     local fullOffsetY = math.cos(fullRadians) * fullDistance
     
@@ -134,9 +134,9 @@ local function CreateAppearanceCameras(ped)
         coords.x + fullOffsetX,
         coords.y + fullOffsetY,
         coords.z + 0.5,  -- Mid-body height
-        -5.0,  -- Slight downward angle
+        0.0,  -- Level angle
         0.0,
-        heading - 180.0,  -- Initial rotation
+        heading - 180.0,  -- Face the ped
         fov * 1.2,  -- Wider FOV for full body
         false,
         2

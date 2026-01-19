@@ -268,88 +268,105 @@ watch(fatherSkinGender, (newGender) => {
 })
 
 // Watch for when appearance store opens - initialize heritage defaults
-watch(() => appearanceStore.isOpen, (isOpen) => {
+watch(() => appearanceStore.isOpen, async (isOpen) => {
   if (isOpen) {
-    nextTick(() => {
-      // Check if this is a freemode ped that needs heritage
-      const model = appearanceStore.currentAppearance?.model
-      const isFreemode = model === 'mp_m_freemode_01' || model === 'mp_f_freemode_01'
+    await nextTick()
+    
+    // Check if this is a freemode ped that needs heritage
+    const model = appearanceStore.currentAppearance?.model
+    const isFreemode = model === 'mp_m_freemode_01' || model === 'mp_f_freemode_01'
+    
+    if (isFreemode) {
+      const femaleList = heritageFaces.value['female'] || []
+      const maleList = heritageFaces.value['male'] || []
       
-      if (isFreemode) {
-        const femaleList = heritageFaces.value['female'] || []
-        const maleList = heritageFaces.value['male'] || []
+      console.log('[HeritageEditor] Store opened with freemode ped, initializing heritage')
+      console.log('[HeritageEditor] Female list:', femaleList.length, 'Male list:', maleList.length)
+      console.log('[HeritageEditor] Current headBlend:', JSON.stringify(headBlend.value))
+      
+      if (femaleList.length > 0 && maleList.length > 0) {
+        // Check if heritage needs initialization (all values are 0 or undefined)
+        const needsInit = !headBlend.value.shapeFirst && !headBlend.value.shapeSecond &&
+                         !headBlend.value.skinFirst && !headBlend.value.skinSecond
         
-        console.log('[HeritageEditor] Store opened with freemode ped, initializing heritage')
-        console.log('[HeritageEditor] Female list:', femaleList.length, 'Male list:', maleList.length)
-        console.log('[HeritageEditor] Current headBlend:', JSON.stringify(headBlend.value))
-        
-        if (femaleList.length > 0 && maleList.length > 0) {
-          // Check if heritage needs initialization (all values are 0 or undefined)
-          const needsInit = !headBlend.value.shapeFirst && !headBlend.value.shapeSecond &&
-                           !headBlend.value.skinFirst && !headBlend.value.skinSecond
+        if (needsInit) {
+          console.log('[HeritageEditor] Initializing all heritage defaults')
           
-          if (needsInit) {
-            console.log('[HeritageEditor] Initializing all heritage defaults')
-            
-            // Set gender toggles
-            motherFaceGender.value = 'female'
-            fatherFaceGender.value = 'male'
-            motherSkinGender.value = 'female'
-            fatherSkinGender.value = 'male'
-            
-            // Set all 4 heritage values
-            appearanceStore.updateHeadBlend({
-              shapeFirst: femaleList[0],    // Mother face
-              shapeSecond: maleList[0],     // Father face
-              skinFirst: femaleList[0],     // Mother skin
-              skinSecond: maleList[0],      // Father skin
-              shapeMix: 0.5,
-              skinMix: 0.5,
-              thirdMix: 0.0
-            })
-          }
+          // Set gender toggles
+          motherFaceGender.value = 'female'
+          fatherFaceGender.value = 'male'
+          motherSkinGender.value = 'female'
+          fatherSkinGender.value = 'male'
+          
+          // Set all 4 heritage values
+          await appearanceStore.updateHeadBlend({
+            shapeFirst: femaleList[0],    // Mother face
+            shapeSecond: maleList[0],     // Father face
+            skinFirst: femaleList[0],     // Mother skin
+            skinSecond: maleList[0],      // Father skin
+            shapeMix: 0.5,
+            skinMix: 0.5,
+            thirdMix: 0.0
+          })
+          
+          await nextTick()
+          console.log('[HeritageEditor] Initial heritage set, values:', JSON.stringify(headBlend.value))
         }
       }
-    })
+    }
   }
 })
 
 // Watch model changes - reset to defaults when switching to freemode
-watch(() => appearanceStore.currentAppearance?.model, (newModel, oldModel) => {
+watch(() => appearanceStore.currentAppearance?.model, async (newModel, oldModel) => {
   // Check if the new model is freemode
   const isNewFreemode = newModel === 'mp_m_freemode_01' || newModel === 'mp_f_freemode_01'
+  const wasOldFreemode = oldModel === 'mp_m_freemode_01' || oldModel === 'mp_f_freemode_01'
   
-  // Reset heritage to defaults whenever switching TO a freemode ped
-  // This ensures clean slate when changing models
+  // Always reset heritage when selecting ANY freemode ped
+  // This ensures defaults are set whether switching from non-freemode OR between freemode peds
   if (isNewFreemode) {
-    console.log('[HeritageEditor] Model changed to freemode, resetting all heritage fields to defaults')
+    console.log('[HeritageEditor] Model changed to freemode (%s -> %s), forcing heritage defaults', oldModel, newModel)
+    
+    // Wait for next tick to ensure model has finished loading
+    await nextTick()
     
     const femaleList = heritageFaces.value['female'] || []
     const maleList = heritageFaces.value['male'] || []
     
+    console.log('[HeritageEditor] Heritage lists - Female:', femaleList.length, 'Male:', maleList.length)
+    console.log('[HeritageEditor] First female:', femaleList[0], 'First male:', maleList[0])
+    
     if (femaleList.length > 0 && maleList.length > 0) {
-      // FIRST: Reset gender toggles to defaults
+      // Reset gender toggles to defaults
       motherFaceGender.value = 'female'
       fatherFaceGender.value = 'male'
       motherSkinGender.value = 'female'
       fatherSkinGender.value = 'male'
       
-      // THEN: Update all heritage values in one go
-      nextTick(() => {
-        console.log('[HeritageEditor] Setting heritage - Mother Face:', femaleList[0], 'Father Face:', maleList[0])
-        console.log('[HeritageEditor] Setting heritage - Mother Skin:', femaleList[0], 'Father Skin:', maleList[0])
-        
-        // Update all 4 values at once using the store's updateHeadBlend
-        appearanceStore.updateHeadBlend({
-          shapeFirst: femaleList[0],    // Mother face - first female
-          shapeSecond: maleList[0],      // Father face - first male
-          skinFirst: femaleList[0],      // Mother skin - first female
-          skinSecond: maleList[0],       // Father skin - first male
-          shapeMix: 0.5,                 // 50% blend
-          skinMix: 0.5,                  // 50% blend
-          thirdMix: 0.0                  // No third parent
-        })
-      })
+      // ALWAYS force-set all heritage values when switching to freemode
+      // Don't check if they exist - just set them to ensure defaults are applied
+      const defaultValues = {
+        shapeFirst: femaleList[0],    // Mother face - first female
+        shapeSecond: maleList[0],      // Father face - first male
+        skinFirst: femaleList[0],     // Mother skin - first female
+        skinSecond: maleList[0],       // Father skin - first male
+        shapeMix: 0.5,                 // 50% blend
+        skinMix: 0.5,                  // 50% blend
+        thirdMix: 0.0                  // No third parent
+      }
+      
+      console.log('[HeritageEditor] Forcing heritage values:', JSON.stringify(defaultValues))
+      
+      // Update the store - this is async so we should await it
+      await appearanceStore.updateHeadBlend(defaultValues)
+      
+      // Give Vue another tick to update the DOM
+      await nextTick()
+      
+      console.log('[HeritageEditor] Heritage values set, verifying:', JSON.stringify(headBlend.value))
+    } else {
+      console.error('[HeritageEditor] Cannot set heritage defaults - lists are empty')
     }
   }
 })
