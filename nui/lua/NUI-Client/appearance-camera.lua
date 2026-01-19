@@ -277,9 +277,6 @@ local function CleanupAppearanceCameras()
     -- Stop rendering script cameras with smooth 1000ms transition
     RenderScriptCams(false, true, 1000, false, false)
     
-    -- Clear streaming focus (reset to player ped)
-    ClearFocus()
-    
     currentPed = nil
     baseCoords = nil
     baseHeading = nil

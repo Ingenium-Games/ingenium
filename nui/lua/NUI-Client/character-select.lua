@@ -29,8 +29,7 @@ RegisterNUICallback("NUI:Client:CharacterPlay", function(data, cb)
         -- Send to server for validation and loading
         -- NOTE: server/[Events]/_character_lifecycle.lua handles Server:Character:Join
         TriggerServerEvent("Server:Character:Join", data.ID)
-        
-        SetFollowPedCamViewMode(0)
+
         cb({
             message = "ok",
             data = nil
@@ -85,9 +84,8 @@ RegisterNUICallback("NUI:Client:NewCharacter", function(data, cb)
             -- Show appearance customizer UI via wrapper function
             -- NOTE: This sends Client:NUI:AppearanceOpen to NUI
             -- NUI will show name form AFTER player completes appearance customization
-
         ig.nui.character.ShowCreate()
-
+        
         ig.log.Debug("Character", "Appearance customizer opened, awaiting completion")
 
         
@@ -135,8 +133,6 @@ RegisterNUICallback("NUI:Client:CharacterCreate", function(data, cb)
         
         ig.log.Info("Character", "NUI: Creating new character - First: " .. firstName .. ", Last: " .. lastName)
         ig.log.Debug("Character", "Character appearance data: " .. json.encode(appearance))
-        
-        SetFollowPedCamViewMode(0)
         
         -- Send to server with ALL character data (name + appearance)
         ig.log.Debug("Character", "Sending Server:Character:Register with complete data")
@@ -200,6 +196,9 @@ RegisterNUICallback("Client:Request:OnJoinGetCharactersFromServer", function(dat
     ig.data.SetLoadedStatus(false)
     --
     local ped = PlayerPedId()
+    if DoesEntityExist(ped) then
+        SetEntityVisible(ped, false, false)
+    end
     --
     SetEntityCoords(ped, -550.21, 1340.24, 559.22)
     SetEntityHeading(ped, 189.21)

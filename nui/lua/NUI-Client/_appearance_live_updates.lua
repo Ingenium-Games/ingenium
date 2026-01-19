@@ -400,11 +400,6 @@ end)
 RegisterNUICallback('Client:Appearance:Cancel', function(data, cb)
     ig.log.Trace("Appearance", "Cancel appearance customization")
     --
-    local ped = PlayerPedId()
-    if DoesEntityExist(ped) then
-        SetEntityVisible(ped, false, false)
-    end
-    --
     ig.nui.character.HideAppearance()
     --
     ig.func.IsBusyPleaseWait(2500)
@@ -415,21 +410,22 @@ end)
 -- Cancel appearance and return to character selection (for character creation)
 RegisterNUICallback('Client:Appearance:CancelToCharacterSelect', function(data, cb)
     ig.log.Info("Appearance", "Canceling character creation - returning to character selection")
-    ---
-    --- THIS IS THE INIT LOGGIC FOR MAKING THE CHARACTER BE AT A CERTAIN PLACE.
-    ---
-    ig.func.IsBusyPleaseWait(3000)
-
-    ig.data.SetLoadedStatus(false)
+    --
+    ig.nui.character.HideAppearance()
     --
     local ped = PlayerPedId()
+    if DoesEntityExist(ped) then
+        SetEntityVisible(ped, false, false)
+    end
     --
     SetEntityCoords(ped, -550.21, 1340.24, 559.22)
     SetEntityHeading(ped, 189.21)
     --
     FreezeEntityPosition(ped, true)
-    --
-    ig.func.IsBusyPleaseWait(500)
+    ---
+    --- THIS IS THE INIT LOGGIC FOR MAKING THE CHARACTER BE AT A CERTAIN PLACE.
+    ---
+    ig.func.IsBusyPleaseWait(3000)
     -- Request character list from server using ig.callback.Async wrapper
     ig.callback.Async("Server:Character:List", function(result)
         ig.log.Debug("Character", "Server callback returned: " .. json.encode(result or "nil"))
