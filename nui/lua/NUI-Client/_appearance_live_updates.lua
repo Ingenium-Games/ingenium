@@ -420,13 +420,12 @@ RegisterNUICallback('Client:Appearance:CancelToCharacterSelect', function(data, 
     if DoesEntityExist(ped) then
         SetEntityVisible(ped, false, false)
     end
-    --
-    ig.nui.character.HideAppearance()
+
     -- Trigger event to reopen character selection
     -- The character selection handler should restore camera and UI
     ig.func.IsBusyPleaseWait(2500)
     --
-    ig.nui.character.ShowSelect()
+    ig.ui.Send("Client:NUI:CharacterSelectShow", {}, true)
     --   
     cb({ok = true})
 end)
