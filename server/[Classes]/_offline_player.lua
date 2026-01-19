@@ -41,8 +41,6 @@ function ig.class.OfflinePlayer(data)
     --
     self.Ammo = json.decode(data.Ammo)
     --
-    self.Accounts = json.decode(data.Accounts)
-    --
     self.Licenses = json.decode(data.Licenses)
     --
     self.Inventory = json.decode(data.Inventory)
@@ -106,32 +104,6 @@ function ig.class.OfflinePlayer(data)
             if k == license then
                 return v
             end
-        end
-    end
-    --
-    self.GetAccounts = function()
-        return self.Accounts
-    end
-    --
-    self.GetAccount = function(acc)
-        for k, v in pairs(self.Accounts) do
-            if k == acc then
-                return v
-            end
-        end
-    end
-    --
-    self.GetCash = function()
-        local acc = self.GetAccount("Cash")
-        if acc then
-            return acc
-        end
-    end
-    --
-    self.GetBank = function()
-        local acc = self.GetAccount("Bank")
-        if acc then
-            return acc
         end
     end
     --
@@ -284,6 +256,21 @@ function ig.class.OfflinePlayer(data)
         end
         return inv
     end
+    --    --
+    self.GetCash = function()
+        local amount, position = self.GetItemQuantity("Cash")
+        local a, p = self.GetItemQuantity("Change")
+        if amount then
+            if a > 0 then
+                return ig.math.Decimals((amount + (a / 100)), 2)
+            else
+                return ig.math.Decimals(amount, 2)
+            end
+        else
+            return 0
+        end
+    end
+    --
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
     -- ====================================================================================--

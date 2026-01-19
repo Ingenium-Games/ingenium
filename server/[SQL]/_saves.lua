@@ -28,7 +28,7 @@ end
 
 local PlayerSaveData = -1
 ig.sql.PrepareQuery(
-    "UPDATE `characters` SET `Health` = ?, `Armour` = ?, `Hunger` = ?, `Thirst` = ?, `Stress` = ?, `Coords` = ?, `Skills` = ?, `Accounts` = ?, `Modifiers` = ?, `Inventory` = ?, `Ammo` = ?, `Job` = ? WHERE `Character_ID` = ?;",
+    "UPDATE `characters` SET `Health` = ?, `Armour` = ?, `Hunger` = ?, `Thirst` = ?, `Stress` = ?, `Coords` = ?, `Skills` = ?, `Modifiers` = ?, `Inventory` = ?, `Ammo` = ?, `Job` = ? WHERE `Character_ID` = ?;",
     function(id)
         PlayerSaveData = id
     end)
@@ -51,7 +51,6 @@ function ig.sql.save.User(data, cb)
     -- Tables require JSON Encoding - Use cached versions
     local Skills = data.GetEncodedSkills()
     local Coords = data.GetEncodedCoords()
-    local Accounts = data.GetEncodedAccounts()
     local Modifiers = data.GetEncodedModifiers()
     local Inventory = data.GetEncodedInventory()
     local Ammo = data.GetEncodedAmmo()
@@ -68,7 +67,6 @@ function ig.sql.save.User(data, cb)
         -- Table Informaiton.
         Skills,
         Coords,
-        Accounts,
         Modifiers,
         Inventory,
         Ammo,
@@ -104,7 +102,6 @@ function ig.sql.save.Users(cb)
             -- Tables require JSON Encoding - Use cached versions
             local Skills = data.GetEncodedSkills()
             local Coords = data.GetEncodedCoords()
-            local Accounts = data.GetEncodedAccounts()
             local Modifiers = data.GetEncodedModifiers()
             local Inventory = data.GetEncodedInventory()
             local Ammo = data.GetEncodedAmmo()
@@ -121,7 +118,6 @@ function ig.sql.save.Users(cb)
                 -- Table Informaiton.
                 Skills,
                 Coords,
-                Accounts,
                 Modifiers,
                 Inventory,
                 Ammo,

@@ -14,7 +14,6 @@ function ig.class.Player(source, character_id)
     local Steam_ID, FiveM_ID, License_ID, Discord_ID = ig.func.identifiers(src)
     local user = ig.sql.user.Get(License_ID)
     local char = ig.sql.char.Get(Character_ID)
-    local bank = ig.sql.bank.GetBank(Character_ID)
     local self = {}
     --
     self.ID = src
@@ -165,7 +164,6 @@ function ig.class.Player(source, character_id)
     --
     -- Cached JSON Encoding for Performance
     self.EncodedInventory = nil
-    self.EncodedAccounts = nil
     self.EncodedModifiers = nil
     self.EncodedSkills = nil
     self.EncodedAmmo = nil
@@ -520,25 +518,6 @@ function ig.class.Player(source, character_id)
         if ig.security and ig.security.LogPlayerTransaction then
             ig.security.LogPlayerTransaction(self, "set_cash", num, "SetCash API call")
         end
-        --[[
-        local num = ig.check.Number(v)
-        local acc = self.GetAccount("Cash")
-        if acc then
-            acc = ig.math.Decimals(num, 2)
-            if acc < 0 then
-                acc = 0
-                self.Kick(
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                ig.log.Error("Player",
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
-                        self.ID)
-                CancelEvent()
-            else
-                self.SetAccount("Cash", acc)
-                self.State.Cash = acc
-            end
-        end
-        ]] --
     end
     --
     self.AddCash = function(v)
@@ -587,25 +566,6 @@ function ig.class.Player(source, character_id)
         if ig.security and ig.security.LogPlayerTransaction then
             ig.security.LogPlayerTransaction(self, "add_cash", num, "AddCash API call")
         end
-        --[[
-        local num = ig.check.Number(v)
-        local acc = self.GetAccount("Cash")
-        if acc then
-            acc = acc + ig.math.Decimals(num, 2)
-            if acc < 0 then
-                acc = 0
-                self.Kick(
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                ig.log.Error("Player",
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
-                        self.ID)
-                CancelEvent()
-            else
-                self.SetAccount("Cash", acc)
-                self.State.Cash = acc
-            end
-        end
-        ]] --
     end
     --
     self.RemoveCash = function(v)
@@ -670,105 +630,18 @@ function ig.class.Player(source, character_id)
         if ig.security and ig.security.LogPlayerTransaction then
             ig.security.LogPlayerTransaction(self, "remove_cash", num, "RemoveCash API call")
         end
-        --[[
-        local num = ig.check.Number(v)
-        local acc = self.GetAccount("Cash")
-        if acc then
-            acc = acc - ig.math.Decimals(num, 2)
-            if acc < 0 then
-                acc = 0
-                self.Kick(
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin")
-                ig.log.Error("Player",  
-                    "A bug has occoured to make your cash a negative amount, as you cannot have negative money in hand, please report this to the Server Admin: for " ..
-                        self.ID)
-                CancelEvent()
-            else
-                self.SetAccount("Cash", acc)
-                self.State.Cash = acc
-            end
-        end
-        ]] --
     end
-    --
-    self.GetBank = function()
-        local acc = self.GetAccount("Bank")
-        if acc then
-            return ig.math.Decimals(acc, 2)
-        end
-    end
-    --
-    self.SetBank = function(v)
-        -- Rate limiting check
-        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "set_bank") then
-            return
-        end
-        
-        local num = ig.check.Number(v)
-        local acc = ig.math.Decimals(num, 2)
-        if acc then
-            self.SetAccount("Bank", acc)
-            self.State.Bank = self.GetBank()
-            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Set to $" .. num,
-                "[]")
-            
-            -- Transaction logging
-            if ig.security and ig.security.LogPlayerTransaction then
-                ig.security.LogPlayerTransaction(self, "set_bank", num, "SetBank API call")
-            end
-        end
-    end
-    --
-    self.AddBank = function(v)
-        -- Rate limiting check
-        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "add_bank") then
-            return
-        end
-        
-        local num = ig.check.Number(v)
-        local acc = self.GetAccount("Bank")
-        if acc then
-            acc = acc + ig.math.Decimals(num, 2)
-            self.SetAccount("Bank", acc)
-            self.State.Bank = self.GetBank()
-            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Credited $" .. num,
-                "[]")
-            
-            -- Transaction logging
-            if ig.security and ig.security.LogPlayerTransaction then
-                ig.security.LogPlayerTransaction(self, "add_bank", num, "AddBank API call")
-            end
-        end
-    end
-    --
-    self.RemoveBank = function(v)
-        -- Rate limiting check
-        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "remove_bank") then
-            return
-        end
-        
-        local num = ig.check.Number(v)
-        local acc = self.GetAccount("Bank")
-        if acc then
-            acc = acc - ig.math.Decimals(num, 2)
-            self.SetAccount("Bank", acc)
-            self.State.Bank = self.GetBank()
-            TriggerClientEvent("high_phone:receivedMessage", self.ID, conf.phone["bank"], "Account Debited $" .. num,
-                "[]")
-            
-            -- Transaction logging
-            if ig.security and ig.security.LogPlayerTransaction then
-                ig.security.LogPlayerTransaction(self, "remove_bank", num, "RemoveBank API call")
-            end
-        end
-    end
-    --
+
     self.PayBalance = function(v)
         local num = ig.check.Number(v)
         if self.GetCash() >= num then
             self.RemoveCash(num)
         else
-            self.RemoveBank(num)
+            self.Notify("You do not have enough cash to pay the balance.")
+            ig.log.Error("Player",
+                "Insufficient funds in self.PayBalance: for " ..
+                    self.First_Name .. " " .. self.Last_Name .. " (" .. self.ID .. ") trying to pay " .. tostring(num))
+            CancelEvent()
         end
     end
     --
@@ -1209,14 +1082,6 @@ function ig.class.Player(source, character_id)
         return self.EncodedInventory
     end
     --
-    self.GetEncodedAccounts = function()
-        if not self.EncodedAccounts or self.DirtyFields.Accounts then
-            self.EncodedAccounts = json.encode(self.GetAccounts())
-            self.DirtyFields.Accounts = false
-        end
-        return self.EncodedAccounts
-    end
-    --
     self.GetEncodedModifiers = function()
         if not self.EncodedModifiers or self.DirtyFields.Modifiers then
             self.EncodedModifiers = json.encode(self.GetModifiers())
@@ -1431,7 +1296,9 @@ function ig.class.Player(source, character_id)
     end
     --
     -- ====================================================================================--
+    -- RUN FUNCTIONS TO INIT CLASS STATE ON ENTITY
     self.UnpackInventory(self.Inventory)
+    self.SetJob(self.GetJob().Name, self.GetJob().Grade)
     -- ====================================================================================--
     return self
 end

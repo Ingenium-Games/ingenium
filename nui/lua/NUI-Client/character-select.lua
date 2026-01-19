@@ -28,7 +28,7 @@ RegisterNUICallback("NUI:Client:CharacterPlay", function(data, cb)
         
         -- Send to server for validation and loading
         -- NOTE: server/[Events]/_character_lifecycle.lua handles Server:Character:Join
-        TriggerServerEvent("Server:Character:Join", data.ID)
+        ig.callback.Await("Server:Character:Join", data.ID)
 
         cb({
             message = "ok",
@@ -59,7 +59,7 @@ RegisterNUICallback("NUI:Client:CharacterDelete", function(data, cb)
         
         -- Send to server for validation and deletion
         -- NOTE: server/[Events]/_character_lifecycle.lua handles Server:Character:Delete
-        TriggerServerEvent("Server:Character:Delete", data.ID)
+        ig.callback.Await("Server:Character:Delete", data.ID)
         
         cb({
             message = "ok",

@@ -6,6 +6,10 @@
 ---@param group any "Check permissions and import the chat suggestions."
 function ig.chat.AddSuggestions()
     local ace = LocalPlayer.state.Ace
+    if not ace then
+        ig.log.Warn("Chat", "Ace permission not yet synced from server, skipping chat suggestions")
+        return
+    end
     if ig.ace[ace] then
         ig.ace[ace]()
         ig.log.Info("Chat", "Added chat suggestions for group: "..ace.." and below")

@@ -91,9 +91,7 @@ AddEventHandler("Client:Character:ReSpawn", function(Coords)
     
     ig.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
-    
-    -- Wait for fade to complete before moving
-    SetTimeout(500, function()
+
         SetEntityCoords(ped, Coords.x, Coords.y, Coords.z)
         SetEntityHeading(ped, Coords.h)
         
@@ -110,7 +108,6 @@ AddEventHandler("Client:Character:ReSpawn", function(Coords)
         SetNuiFocus(false, false)
         
         ig.func.FadeIn(2000)
-    end)
 end)
 
 -- Spawn new character at default spawn location
@@ -121,14 +118,11 @@ AddEventHandler("Client:Character:NewSpawn", function()
     
     ig.func.FadeOut(1000)
     SetFollowPedCamViewMode(0)
-    
-    SetTimeout(500, function()
-        SetEntityCoords(GetPlayerPed(-1), conf.spawn.x, conf.spawn.y, conf.spawn.z)
-        SetEntityHeading(GetPlayerPed(-1), conf.spawn.h)
-        PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
-        FreezeEntityPosition(GetPlayerPed(-1), false)
-        ig.func.FadeIn(2000)
-    end)
+    SetEntityCoords(GetPlayerPed(-1), conf.spawn.x, conf.spawn.y, conf.spawn.z)
+    SetEntityHeading(GetPlayerPed(-1), conf.spawn.h)
+    PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
+    FreezeEntityPosition(GetPlayerPed(-1), false)
+    ig.func.FadeIn(2000)
 end)
 
 -- ====================================================================================--

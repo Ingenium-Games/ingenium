@@ -73,34 +73,26 @@ RegisterServerCallback({
     end
 })
 
--- Player selects a character from the NUI menu
-RegisterNetEvent("Server:Character:Join")
-AddEventHandler("Server:Character:Join", function(Character_ID)
-    local src = source
-    
-    -- Handle existing character selection
-    if Character_ID ~= nil then
-        local Coords = ig.sql.char.GetCoords(Character_ID)
-        ig.data.LoadPlayer(src, Character_ID)
-        
-        -- Trigger client to spawn at location
-        TriggerClientEvent("Client:Character:ReSpawn", src, Coords)
-        
-        -- Send character appearance to client after a short delay (allow spawn to complete)
-        SetTimeout(500, function()
+RegisterServerCallback({
+    eventName = "Server:Character:Join",
+    eventCallback = function(source, Character_ID)
+        local src = tonumber(source)
+        -- Handle existing character selection
+        if Character_ID ~= nil then
+            -- create palyer class and mark as active within db.
+            ig.data.LoadPlayer(src, Character_ID)
+            -- Trigger client to spawn at location
             local xPlayer = ig.data.GetPlayer(src)
             if xPlayer then
-                local appearance = xPlayer.GetAppearance()
-                TriggerClientEvent("Client:Character:LoadSkin", src, appearance)
+                TriggerClientEvent("Client:Character:Loaded", src, Coords)
             end
-        end)
-        
-        return
+        else
+            DropPlayer(src, "No character selected. Please rejoin.")
+        end
     end
+})
     
-    -- Invalid state - no character selected
-    DropPlayer(src, "No character selected. Please rejoin.")
-end)
+
 
 -- ====================================================================================--
 -- STAGE 2: Character Creation (New Characters)
@@ -188,22 +180,6 @@ RegisterServerCallback({
     end
 })
 
--- Alternate spawn trigger (used after character creation)
-RegisterNetEvent("Server:Character:Spawn", function(req)
-    local src = tonumber(req)
-    local xPlayer = ig.data.GetPlayer(src)
-    
-    ig.log.Debug("Character", "Server:Character:Spawn called for player " .. src)
-    
-    if xPlayer then
-        local coords = xPlayer.GetCoords()
-        ig.log.Trace("Character", "Spawning player at: " .. coords.x .. ", " .. coords.y .. ", " .. coords.z)
-        TriggerClientEvent("Client:Character:ReSpawn", src, coords)
-    else
-        ig.log.Error("Character", "Server:Character:Spawn: Player not found!")
-    end
-end)
-
 -- ====================================================================================--
 -- STAGE 3: Character Loading & Initialization
 -- ====================================================================================--
@@ -214,6 +190,15 @@ RegisterNetEvent("Server:Character:Loaded")
 AddEventHandler("Server:Character:Loaded", function()
 
     
+    ig.log.Info("Character", "Player " .. src .. " character loaded - ped flags configured")
+    
+
+end)
+
+-- Called after client is fully ready to play (after loading screen, HUD initialized, etc.)
+-- Finalizes player state, manages permissions, and triggers state synchronization
+RegisterNetEvent("Server:Character:Ready")
+AddEventHandler("Server:Character:Ready", function()
     local src = source
     local ped = GetPlayerPed(src)
     
@@ -234,42 +219,16 @@ AddEventHandler("Server:Character:Loaded", function()
     for _, flag in ipairs(pedFlags) do
         SetPedConfigFlag(ped, flag, false)
     end
-    
-    ig.log.Info("Character", "Player " .. src .. " character loaded - ped flags configured")
-    
-    -- Trigger final client-side initialization
-    SetTimeout(500, function()
-        TriggerClientEvent("Client:Character:Loaded", src)
-    end)
-end)
 
--- Called after client is fully ready to play (after loading screen, HUD initialized, etc.)
--- Finalizes player state, manages permissions, and triggers state synchronization
-RegisterNetEvent("Server:Character:Ready")
-AddEventHandler("Server:Character:Ready", function()
-    local src = source
     local xPlayer = ig.data.GetPlayer(src)
     
     if not xPlayer then
-        return
+        DropPlayer(src, "Server failed to generate character information, please report to server owner.")
     end
     
-    -- Update instance bucket based on character's assigned instance
-    ig.inst.SetPlayer(src, xPlayer.GetInstance())
-    
-    -- Remove player from previous job ACL group (clean transition)
-    ExecuteCommand(("remove_principal identifier.%s job.%s"):format(
-        xPlayer.GetIdentifier(), 
-        xPlayer.GetJob().Name
-    ))
-    
     -- Re-assign to current job ACL group (triggers ACE permission sync)
-    local job = xPlayer.GetJob()
-    xPlayer.SetJob(job.Name, job.Grade)
-    
-    -- Trigger state synchronization for cash and bank (ensures clients see updates)
-    xPlayer.GetCash()
-    xPlayer.GetBank()
+    -- Trigger state synchronization for cash and bank (ensures clients see updates
+
 end)
 
 -- ====================================================================================--

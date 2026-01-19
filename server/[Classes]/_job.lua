@@ -14,7 +14,6 @@ function ig.class.Job(tab)
     self.Grades = tab.Grades
     self.Members = tab.Members
     self.Description = tab.Description
-    self.Accounts = tab.Accounts
     --
     self.Inventory = json.decode(tab.Inventory)
     self.Stock = json.decode(tab.Stock)
@@ -60,142 +59,6 @@ function ig.class.Job(tab)
             self.SetUpdated()
         else
             ig.log.Debug("Job", "Unable to set description as length is too long. Must be less than 1500 characters.")
-        end
-    end
-    --- func desc
-    ---@param b any
-    self.GetAccounts = function(b)
-        local bool = ig.check.Boolean(b)
-        if bool then
-            local Accounts = {}
-            for k, v in pairs(self.Accounts) do
-                Accounts[k] = v
-            end
-            return Accounts
-        else
-            return self.Accounts
-        end
-    end
-    --- func desc
-    ---@param acc any
-    self.GetAccount = function(acc)
-        for k, v in pairs(self.Accounts) do
-            if k == acc then
-                return v
-            end
-        end
-    end
-    --- func desc
-    ---@param acc any
-    ---@param v any
-    self.SetAccount = function(acc, v)
-        local num = ig.check.Number(v)
-        if self.Accounts[acc] then
-            self.Accounts[acc] = ig.math.Decimals(num, 2)
-            self.SetUpdated()
-        else
-            ig.log.Debug("Job", "Account entered does not exist")
-        end
-    end
-    --- func desc
-    self.GetSafe = function()
-        local acc = self.GetAccount("Safe")
-        if acc then
-            return acc
-        end
-    end
-    --- func desc
-    ---@param v any
-    self.SetSafe = function(v)
-        local num = ig.check.Number(v)
-        if num >= 0 then
-            local acc = ig.math.Decimals(num, 2)
-            self.SetAccount("Safe", acc)
-        end
-    end
-    --- func desc
-    ---@param v any
-    self.AddSafe = function(v)
-        local num = ig.check.Number(v)
-        if num > 0 then
-            local acc = self.GetAccount("Safe")
-            if acc then
-                local bkp = acc
-                acc = acc + ig.math.Decimals(num, 2)
-                if acc < 0 then
-                    self.SetAccount("Safe", bkp)
-                    ig.log.Debug("Job", "Job " .. self.Name .. " has AddSafe() Cancelled due to Negative balance remaining.")
-                    CancelEvent()
-                else
-                    self.SetAccount("Safe", acc)
-                end
-            end
-        end
-    end
-    --- func desc
-    ---@param v any
-    self.RemoveSafe = function(v)
-        local num = ig.check.Number(v)
-        if num > 0 then
-            local acc = self.GetAccount("Safe")
-            if acc then
-                local bkp = acc
-                acc = acc - ig.math.Decimals(num, 2)
-                if acc < 0 then
-                    self.SetAccount("Safe", bkp)
-                    ig.log.Debug("Job", "Job " .. self.Name ..
-                                       " has RemoveSafe() Cancelled due to Negative balance remaining.")
-                    CancelEvent()
-                else
-                    self.SetAccount("Safe", acc)
-                end
-            end
-        end
-    end
-    --- func desc
-    self.GetBank = function()
-        local acc = self.GetAccount("Bank")
-        if acc then
-            return acc
-        end
-    end
-    --- func desc
-    ---@param v any
-    self.SetBank = function(v)
-        local num = ig.check.Number(v)
-        local acc = ig.math.Decimals(num, 0)
-        self.SetAccount("Bank", acc)
-    end
-    --- func desc
-    ---@param v any
-    self.AddBank = function(v)
-        local num = ig.check.Number(v)
-        if num > 0 then
-            local acc = self.GetAccount("Bank")
-            if acc then
-                acc = acc + ig.math.Decimals(num, 2)
-                if acc < 0 then
-                    self.SetAccount("Bank", acc)
-                else
-                    self.SetAccount("Bank", acc)
-                end
-            end
-        end
-    end
-    --- func desc
-    ---@param v any
-    self.RemoveBank = function(v)
-        local num = ig.check.Number(v)
-        if num > 0 then
-            local acc = self.GetAccount("Bank")
-            if acc then
-                acc = acc - ig.math.Decimals(num, 2)
-                if acc < 0 then
-                    self.SetAccount("Bank", acc)
-                else
-                    self.SetAccount("Bank", acc)
-                end
-            end
         end
     end
     --- func desc
@@ -420,6 +283,193 @@ function ig.class.Job(tab)
         end
         return inv
     end
+    --    --
+    self.GetCash = function()
+        local amount, position = self.GetItemQuantity("Cash")
+        local a, p = self.GetItemQuantity("Change")
+        if amount then
+            if a > 0 then
+                return ig.math.Decimals((amount + (a / 100)), 2)
+            else
+                return ig.math.Decimals(amount, 2)
+            end
+        else
+            return 0
+        end
+    end
+    --
+    self.SetCash = function(v)
+        -- Rate limiting check
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "set_cash") then
+            return
+        end
+        
+        -- negative check first
+        if v < 0.00 then
+            self.Notify("Nope")
+            ig.log.Error("Player",
+                "self.SetCash: for " ..
+                    self.ID)
+            CancelEvent()
+            return
+        end
+
+        -- DollarBillz Yall
+        local amount, position = self.GetItemQuantity("Cash")
+        local a, p = self.GetItemQuantity("Change")
+
+        local num = ig.check.Number(v)
+        local mod = ig.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+
+        if amount > 0 then
+            self.Inventory[position].Quantity = ig.math.Decimals(num, 0)
+        else
+            self.AddItem({"Cash", num, 100, false, false})
+        end
+
+        -- Coins
+        if mod > 0 then
+            if a > 0 then
+                self.Inventory[p].Quantity = a + mod
+            else
+                self.AddItem({"Change", mod, 100, false, false})
+            end
+        end 
+
+        self.State.Cash = self.GetCash()
+        TriggerClientEvent("Client:Inventory:Update", self.ID)
+        
+        -- Transaction logging
+        if ig.security and ig.security.LogPlayerTransaction then
+            ig.security.LogPlayerTransaction(self, "set_cash", num, "SetCash API call")
+        end
+    end
+    --
+    self.AddCash = function(v)
+        -- Rate limiting check
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "add_cash") then
+            return
+        end
+        
+        -- negative check first
+        if v < 0 then
+            self.Notify("Nope")
+            ig.log.Error("Player",
+                "self.AddCash: for " ..
+                    self.ID)
+            CancelEvent()
+            return
+        end
+
+        -- DollarBillz Yall
+        local amount, position = self.GetItemQuantity("Cash")
+        local a, p = self.GetItemQuantity("Change")
+
+        local num = ig.check.Number(v)
+        local mod = ig.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+
+        -- Dallar Billz
+        if amount > 0 then
+            self.Inventory[position].Quantity = amount + ig.math.Decimals(num, 0)
+        else
+            self.AddItem({"Cash", ig.math.Decimals(num, 0), 100, false, false})
+        end
+
+        -- Coins
+        if mod > 0 then
+            if a > 0 then
+                self.Inventory[p].Quantity = a + mod
+            else
+                self.AddItem({"Change", mod, 100, false, false})
+            end
+        end
+
+        self.State.Cash = self.GetCash()
+        TriggerClientEvent("Client:Inventory:Update", self.ID)
+        
+        -- Transaction logging
+        if ig.security and ig.security.LogPlayerTransaction then
+            ig.security.LogPlayerTransaction(self, "add_cash", num, "AddCash API call")
+        end
+    end
+    --
+    self.RemoveCash = function(v)
+        -- Rate limiting check
+        if ig.security and ig.security.CheckTransactionRateLimit and ig.security.CheckTransactionRateLimit(self, "remove_cash") then
+            return
+        end
+        
+        -- negative check first
+        if self.GetCash() < ig.math.Decimals(v, 2) then
+            self.Notify("Nope")
+            ig.log.Error("Player",
+                "self.RemoveCash: for " ..
+                    self.ID)
+            CancelEvent()
+            return
+        end
+
+        local amount, position = self.GetItemQuantity("Cash")
+        local a, p = self.GetItemQuantity("Change")
+
+        local num = ig.check.Number(v)
+        local mod = ig.math.Decimals((math.fmod(num, 1) * 100), 0) -- each decimal is a cent
+        local billz = ig.math.Decimals(num, 0)
+
+        -- Dollarr Billz
+        if amount >= 1 then
+            if (amount - billz) == 0 then
+                self.RemoveItem("Cash", position, billz)
+            elseif (amount - billz) > 0 then
+                self.Inventory[position].Quantity = self.Inventory[position].Quantity - billz
+            end
+        end
+
+        -- Coins
+        if mod > 0 then
+            if a >= 0 then
+                if (a - mod) == 0 then
+                    self.RemoveItem("Change", p, mod)
+                elseif (a - mod) > 0 then
+                    self.Inventory[p].Quantity = a - mod
+                    -- If you got chash, break it into change.
+                elseif (a - mod) <= 0 then
+                    local _a, _p = self.GetItemQuantity("Cash")
+                    if (_a - num) > 0 then
+                        self.Inventory[_p].Quantity = self.Inventory[_p].Quantity - 1
+                        self.AddItem({"Change", 100, 100})
+                        --
+                        local __a, __p = self.GetItemQuantity("Change")
+                        self.Inventory[__p].Quantity = __a - mod
+                    else
+                        self.Notify("You dont have the cash to break...")
+                    end
+                end
+            end
+        end
+
+        self.State.Cash = self.GetCash()
+        TriggerClientEvent("Client:Inventory:Update", self.ID)
+        
+        -- Transaction logging
+        if ig.security and ig.security.LogPlayerTransaction then
+            ig.security.LogPlayerTransaction(self, "remove_cash", num, "RemoveCash API call")
+        end
+    end
+
+    self.PayBalance = function(v)
+        local num = ig.check.Number(v)
+        if self.GetCash() >= num then
+            self.RemoveCash(num)
+        else
+            self.Notify("You do not have enough cash to pay the balance.")
+            ig.log.Error("Player",
+                "Insufficient funds in self.PayBalance: for " ..
+                    self.First_Name .. " " .. self.Last_Name .. " (" .. self.ID .. ") trying to pay " .. tostring(num))
+            CancelEvent()
+        end
+    end
+    --
     -- ====================================================================================--
     self.UnpackInventory(self.Inventory)
     -- ====================================================================================--
