@@ -61,7 +61,7 @@ local function CreateAppearanceCameras(ped)
         coords.z + 0.7,  -- Head level
         0.0,
         0.0,
-        heading - 180.0,
+        heading,  -- Face towards ped (camera is behind, so use ped heading)
         24.5,  -- Very tight FOV for detailed face view (30% more zoom)
         false,
         2
@@ -80,7 +80,7 @@ local function CreateAppearanceCameras(ped)
         coords.z + 0.2,  -- Chest/hand level
         0.0,
         0.0,
-        heading - 180.0,
+        heading,  -- Face towards ped (camera is behind, so use ped heading)
         32.0,  -- Tight FOV to see hands/wrists clearly
         false,
         2
@@ -99,7 +99,7 @@ local function CreateAppearanceCameras(ped)
         coords.z + 0.4,  -- Chest level
         0.0,
         0.0,
-        heading - 180.0,
+        heading,  -- Face towards ped (camera is behind, so use ped heading)
         45.0,  -- Moderate FOV for torso
         false,
         2
@@ -118,7 +118,7 @@ local function CreateAppearanceCameras(ped)
         coords.z - 0.2,  -- Knee level
         0.0,
         0.0,
-        heading - 180.0,
+        heading,  -- Face towards ped (camera is behind, so use ped heading)
         50.0,  -- Moderate FOV for legs
         false,
         2
@@ -137,7 +137,7 @@ local function CreateAppearanceCameras(ped)
         coords.z - 0.7,  -- Foot level (lowered by 0.2)
         0.0,
         0.0,
-        heading - 180.0,
+        heading,  -- Face towards ped (camera is behind, so use ped heading)
         40.0,  -- Tight FOV to zoom on feet
         false,
         2
@@ -156,7 +156,7 @@ local function CreateAppearanceCameras(ped)
         coords.z + 0.5,  -- Mid-body height
         0.0,  -- Level angle
         0.0,
-        heading - 180.0,  -- Face the ped
+        heading,  -- Face towards ped (camera is behind, so use ped heading)
         fov * 1.2,  -- Wider FOV for full body
         false,
         2

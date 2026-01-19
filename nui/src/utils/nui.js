@@ -259,7 +259,21 @@ export function setupNuiHandlers() {
       // Character select
       case 'Client:NUI:CharacterSelectShow':
         console.log('[NUI] Character select show received with data:', data)
-        characterStore.setCharacters(data.characters || [], data.slots || 1)
+        // Transform character data from server format to NUI format
+        const transformedCharacters = (data.characters || []).map(char => ({
+          id: char.Character_ID || char.id,
+          name: `${char.First_Name || char.firstName || ''} ${char.Last_Name || char.lastName || ''}`.trim(),
+          firstName: char.First_Name || char.firstName,
+          lastName: char.Last_Name || char.lastName,
+          cityId: char.City_ID || char.cityId,
+          phone: char.Phone || char.phone,
+          created: char.Created || char.created,
+          lastSeen: char.Last_Seen || char.lastSeen,
+          photo: char.Photo || char.photo,
+          // Include all original data for reference
+          ...char
+        }))
+        characterStore.setCharacters(transformedCharacters, data.slots || 1)
         console.log('[NUI] UI Store showCharacterSelect set to true')
         uiStore.showCharacterSelect = true
         break
