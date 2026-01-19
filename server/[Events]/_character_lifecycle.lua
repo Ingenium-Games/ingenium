@@ -156,9 +156,6 @@ RegisterServerCallback({
     -- Load the newly created character
     ig.data.LoadPlayer(src, character_id)
     
-    -- Trigger character creation event (for custom spawn logic, etc.)
-    TriggerEvent("Server:Character:Spawn", src)
-    
     ig.log.Info("Character", "Character " .. character_id .. " created successfully for player " .. src)
     
     -- Give new character a phone
@@ -183,17 +180,6 @@ RegisterServerCallback({
 -- ====================================================================================--
 -- STAGE 3: Character Loading & Initialization
 -- ====================================================================================--
-
--- Called after client receives character data and has spawned the ped
--- Sets critical ped flags and game state
-RegisterNetEvent("Server:Character:Loaded")
-AddEventHandler("Server:Character:Loaded", function()
-
-    
-    ig.log.Info("Character", "Player " .. src .. " character loaded - ped flags configured")
-    
-
-end)
 
 -- Called after client is fully ready to play (after loading screen, HUD initialized, etc.)
 -- Finalizes player state, manages permissions, and triggers state synchronization
@@ -225,10 +211,10 @@ AddEventHandler("Server:Character:Ready", function()
     if not xPlayer then
         DropPlayer(src, "Server failed to generate character information, please report to server owner.")
     end
-    
-    -- Re-assign to current job ACL group (triggers ACE permission sync)
-    -- Trigger state synchronization for cash and bank (ensures clients see updates
 
+    -- Return users back to their last known instance or routing bucket.
+    SetPlayerRoutingBucket(xPlayer.GetID(), xPlayer.GetInstance())
+    SetEntityRoutingBucket(xPlayer.GetPed(), xPlayer.GetInstance())
 end)
 
 -- ====================================================================================--
@@ -280,41 +266,6 @@ end)
 -- ====================================================================================--
 -- CHARACTER CUSTOMIZATION (Appearance & Cosmetics)
 -- ====================================================================================--
-
--- Load appearance from database
-RegisterNetEvent("Server:Character:LoadSkin")
-AddEventHandler("Server:Character:LoadSkin", function()
-    local src = source
-    local xPlayer = ig.data.GetPlayer(src)
-    
-    if not xPlayer then
-        return
-    end
-    
-    local appearance = xPlayer.GetAppearance()
-    TriggerClientEvent("Client:Character:LoadSkin", src, appearance)
-end)
-
--- Save appearance (legacy, kept for compatibility)
-RegisterNetEvent("Server:Character:SaveSkin")
-AddEventHandler("Server:Character:SaveSkin", function(appearance, bool)
-    local src = source
-    local xPlayer = ig.data.GetPlayer(src)
-    
-    if not xPlayer then
-        return
-    end
-    
-    local identifier = xPlayer.GetIdentifier()
-    ig.sql.char.SetAppearance(identifier, appearance, function()
-        xPlayer.SetAppearance(appearance)
-    end)
-    
-    -- Reset to default instance if requested
-    if type(bool) == "boolean" and bool == true then
-        ig.inst.SetPlayerDefault(src)
-    end
-end)
 
 -- Save appearance with validation (SECURE CALLBACK)
 RegisterServerCallback({

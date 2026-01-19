@@ -1,166 +1,4 @@
--- ====================================================================================--
--- CHARACTER CLIENT LIFECYCLE
--- ====================================================================================--
--- Manages client-side character joining, loading, and state management.
--- 
--- Flow:
--- 1. Client:Character:OpeningMenu -> Show character select UI
--- 2. NUI requests character list -> TriggerServerCallback("Server:Character:List")
--- 3. Server returns list -> NUI displays options
--- 4. NUI selects character -> TriggerServerEvent("Server:Character:Join")
--- 5. Server loads character -> TriggerClientEvent("Client:Character:ReSpawn")
--- 6. Client spawns ped -> TriggerServerEvent("Server:Character:Loaded")
--- 7. Client initializes HUD -> TriggerServerEvent("Server:Character:Ready")
---
--- ====================================================================================--
 
--- ====================================================================================--
--- NUI COMMUNICATION ARCHITECTURE REFERENCE
--- ====================================================================================--
--- This file receives events from SERVER and sends them to NUI.
--- It also registers callbacks that NUI sends back to CLIENT.
---
--- **CLIENT→NUI WRAPPERS** (Wrapper functions that send to NUI):
---   Location: nui/lua/Client-NUI-Wrappers/_character.lua
---   Function: ig.nui.character.ShowSelect() → Sends Client:NUI:CharacterSelectShow to NUI
---   Function: ig.nui.character.HideSelect() → Sends Client:NUI:CharacterSelectHide to NUI
---   Function: ig.nui.character.ShowCreate() → Sends Client:NUI:AppearanceOpen to NUI
---   Function: ig.nui.character.ShowCustomize() → Sends Client:NUI:AppearanceOpen to NUI
---   Function: ig.nui.character.HideAppearance() → Sends Client:NUI:AppearanceClose to NUI
---
--- **NUI→CLIENT CALLBACKS** (Handlers for messages FROM NUI):
---   Location: nui/lua/NUI-Client/character-select.lua (selection callbacks)
---   Location: nui/lua/NUI-Client/_appearance.lua (appearance callbacks)
---   Callback: RegisterNUICallback("NUI:Client:CharacterPlay") → Player selected character
---   Callback: RegisterNUICallback("NUI:Client:CharacterCreate") → Player created new character
---   Callback: RegisterNUICallback("NUI:Client:CharacterDelete") → Player deleted character
---   Callback: RegisterNUICallback("NUI:Client:AppearanceComplete") → Player finished appearance customization
---
--- **IMPORTANT**: All RegisterNUICallback() handlers are CENTRALIZED in nui/lua/NUI-Client/
--- DO NOT register duplicate callbacks in this file - they belong in their respective NUI-Client files
---
--- ====================================================================================--
-
-
--- ====================================================================================--
--- STAGE 1: Character Menu Opening
--- ====================================================================================--
-
--- MOVED TO NUI
-
-
--- ====================================================================================--
--- STAGE 2: Character Selection & Creation
--- ====================================================================================--
-
--- NOTE: NUI→Client callbacks for character selection are registered in:
---   nui/lua/NUI-Client/character-select.lua
---
--- These NUI callbacks handle player selections:
---   - NUI:Client:CharacterPlay (select existing) → Server:Character:Join
---   - NUI:Client:CharacterCreate (new character) → Server:Character:Register
---   - NUI:Client:CharacterDelete (delete) → Server:Character:Delete
---
--- Do NOT register duplicate callbacks here - they are centralized in NUI-Client/
-
-
-
--- ====================================================================================--
--- STAGE 3: Character Creation UI
--- ====================================================================================--
-
--- Called when appearance customization is complete
--- NOTE: This callback is registered in nui/lua/NUI-Client/_appearance.lua (function-specific location)
--- NOT here - do not add RegisterNUICallback('Client:Character:AppearanceComplete') here
--- All NUI callbacks are centralized in their respective NUI-Client handler files
-
-
-
--- ====================================================================================--
--- STAGE 4: Character Spawning
--- ====================================================================================--
-
--- Respawn player in their last saved location
--- Called from server after character is loaded from database
--- NOTE: Triggered from Server:Character:Join via TriggerClientEvent("Client:Character:ReSpawn", src, Coords)
-RegisterNetEvent("Client:Character:ReSpawn")
-AddEventHandler("Client:Character:ReSpawn", function(Coords)
-    ig.log.Info("Character", "Spawning character at saved location: " .. json.encode(Coords))
-    
-    local ped = PlayerPedId()
-    
-    ig.func.FadeOut(1000)
-    SetFollowPedCamViewMode(0)
-
-        SetEntityCoords(ped, Coords.x, Coords.y, Coords.z)
-        SetEntityHeading(ped, Coords.h)
-        
-        -- Request character appearance from server
-        TriggerServerEvent("Server:Character:LoadSkin")
-        
-        PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
-        FreezeEntityPosition(ped, false)
-        
-        -- Hide character select UI via wrapper function
-        -- NOTE: This sends Client:NUI:CharacterSelectHide to NUI
-        ig.log.Debug("Character", "Hiding character select UI")
-        ig.nui.character.HideSelect()
-        SetNuiFocus(false, false)
-        
-        ig.func.FadeIn(2000)
-end)
-
--- Spawn new character at default spawn location
--- Called from Server:Character:Spawn after new character creation
-RegisterNetEvent("Client:Character:NewSpawn")
-AddEventHandler("Client:Character:NewSpawn", function()
-    ig.log.Info("Character", "Spawning new character at default location")
-    
-    ig.func.FadeOut(1000)
-    SetFollowPedCamViewMode(0)
-    SetEntityCoords(GetPlayerPed(-1), conf.spawn.x, conf.spawn.y, conf.spawn.z)
-    SetEntityHeading(GetPlayerPed(-1), conf.spawn.h)
-    PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
-    FreezeEntityPosition(GetPlayerPed(-1), false)
-    ig.func.FadeIn(2000)
-end)
-
--- ====================================================================================--
--- STAGE 5: Character Data Loading & Initialization
--- ====================================================================================--
-
--- Receive and apply character appearance from server
-RegisterNetEvent("Client:Character:LoadSkin")
-AddEventHandler("Client:Character:LoadSkin", function(appearance)
-    ig.log.Trace("Character", "Loading character appearance")
-    
-    if appearance then
-        -- Use native appearance system to set character model
-        ig.appearance.SetAppearance(appearance)
-    else
-        ig.log.Warn("Character", "No appearance data received")
-    end
-end)
-
--- Save character appearance (called when player modifies appearance)
-RegisterNetEvent("Client:Character:SaveSkin")
-AddEventHandler("Client:Character:SaveSkin", function(bool)
-    local appearance = ig.appearance.GetAppearance()
-    TriggerServerEvent("Server:Character:SaveSkin", appearance, bool)
-end)
-
--- Called after character spawns and appearance is loaded
--- Initializes all character-dependent systems with STATE VERIFICATION
--- NOTE: Triggered from Server:Character:Loaded after ped flags are set
---       This is the final initialization point before Ready event
---
--- Flow:
---   1. Server: Server:Character:LoadSkin → Client:Character:LoadSkin (appearance)
---   2. Client: TriggerServerEvent("Server:Character:Loaded") [IMPORTANT: client confirms ped ready]
---   3. Server: Server:Character:Loaded → Sets ped flags → Waits 500ms → TriggerClientEvent("Client:Character:Loaded")
---   4. Client: Client:Character:Loaded → State verification → TriggerEvent("Client:Character:Ready")
---   5. Client: Client:Character:Ready → TriggerServerEvent("Server:Character:Ready")
---   6. Server: Server:Character:Ready → Final setup complete
 RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
     ig.log.Info("Character", "Character loaded - initializing systems")
@@ -170,9 +8,9 @@ AddEventHandler("Client:Character:Loaded", function()
     local maxWait = 0
     local timeStep = 50  -- Check every 50ms
     local timeout = 5000 -- Max 5 seconds
-    
+    local ped = GetPlayerPed(-1)
+
     local function checkStateSync()
-        local ped = GetPlayerPed(-1)
         local state = Entity(ped).state
         
         -- Check if critical state fields are synced from server
@@ -201,33 +39,30 @@ AddEventHandler("Client:Character:Loaded", function()
     ig.skill.SetSkills()
     ig.status.SetPlayer()
     ig.modifier.SetModifiers()
-    
-    -- Notify server that client is fully ready
-    -- NOTE: This tells server that ped is fully initialized and state is verified
-    TriggerServerEvent("Server:Character:Loaded")
-    
-    -- Trigger internal event for other resources
-    TriggerEvent("Client:Character:Ready")
-end)
 
+    -- Reset position or mark at airport or config spawn location
+    local ords = ig.data.GetLocalPlayerState("Coords") or conf.spawn
+    SetEntityCoords(ped, ords["x"], ords["y"], ords["z"])
+    SetEntityHeading(ped, ords["h"])
 
+    local cam2, cam3
+    c.func.IsBusyPleaseWait(1500)
+    cam2 = c.camera.Basic(313.78, -1403.07, 189.53, 0.00, 0.00, 45.00, 100.00)
+    PointCamAtCoord(cam2, ords["x"], ords["y"], ords["z"] + 200)
+    SetCamActiveWithInterp(cam2, cam, 900, 1, 1)
+    c.func.IsBusyPleaseWait(900)
+    cam3 = c.camera.Basic(ords["x"], ords["y"], ords["z"] + 200, 300.00, 0.00, 0.00, 100.00)
+    PointCamAtCoord(cam, ords["x"], ords["y"], ords["z"] + 2)
+    SetCamActiveWithInterp(cam3, cam2, 3700, 1, 1)
+    c.func.IsBusyPleaseWait(3700)
+    PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
+    RenderScriptCams(false, true, 500, 1, 1)
+    PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
+    FreezeEntityPosition(ped, false)
+    c.func.IsBusyPleaseWait(500)
+    SetCamActive(cam2, false)
+    SetCamActive(cam3, false)
 
--- ====================================================================================--
--- STAGE 6: Character Ready & Game State
--- ====================================================================================--
-
--- Called after Client:Character:Loaded completes
--- Character is fully loaded, all systems initialized, ready to play
-RegisterNetEvent("Client:Character:Ready")
-AddEventHandler("Client:Character:Ready", function()
-    ig.log.Info("Character", "Character fully ready - initializing gameplay")
-    
-    -- Disable auto-respawn (we handle respawning manually)
-    exports.spawnmanager:setAutoSpawn(false)
-    
-    -- Notify server that client is fully initialized and ready to play
-    TriggerServerEvent("Server:Character:Ready")
-    
     -- Apply RP mode specific configurations if enabled
     if conf.gamemode == "RP" then
         local ped = PlayerPedId()
@@ -243,6 +78,26 @@ AddEventHandler("Client:Character:Ready", function()
         
         ig.log.Info("Character", "RP Mode character initialization complete")
     end
+        
+    -- Notify server that client is fully ready
+    -- NOTE: This tells server that ped is fully initialized and state is - Will force update Instance or bucket to last known bucket or instance.
+    TriggerServerEvent("Server:Character:Ready")
+
+    -- Trigger internal event for other resources
+    TriggerEvent("Client:Character:Ready")
+
+end)
+
+-- ====================================================================================--
+-- STAGE 6: Character Ready & Game State
+-- ====================================================================================--
+
+-- Called after Client:Character:Loaded completes
+-- Character is fully loaded, all systems initialized, ready to play
+RegisterNetEvent("Client:Character:Ready")
+AddEventHandler("Client:Character:Ready", function()
+    ig.log.Info("Character", "Character fully ready - initializing gameplay")
+
 end)
 
 -- ====================================================================================--

@@ -192,7 +192,6 @@ function ig.data.LoadPlayer(source, Character_ID)
     end)
     -- Wait for the player to be loaded prior to sending the "ok" to load to the client.
     Citizen.Await(p)
-    TriggerClientEvent("Client:Character:Loaded", src)
 end
 
 -- ====================================================================================--

@@ -965,9 +965,6 @@ end
 ---@param vehicle any
 function ig.func.DeleteVehicle(vehicle)
     if (not DoesEntityExist(vehicle)) then return end
-    if (GetResourceState("AdvancedParking") == "started") then
-        exports["AdvancedParking"]:DeleteVehicle(vehicle)
-    end
     SetEntityAsMissionEntity(vehicle,  false,  true)
     DeleteVehicle(vehicle)
 end
