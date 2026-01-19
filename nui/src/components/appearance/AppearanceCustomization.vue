@@ -101,6 +101,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
+import { useCharacterStore } from '../../stores/character'
 import { formatCurrency } from '../../utils/currency'
 import ModelSelector from './ModelSelector.vue'
 import HeritageEditor from './HeritageEditor.vue'
@@ -169,7 +170,17 @@ function handleSave() {
 }
 
 function handleCancel() {
-  appearanceStore.cancel()
+  // If this is character creation, trigger the confirmation dialog
+  // by emitting a custom event that CharacterSelect will listen to
+  const characterStore = useCharacterStore()
+  
+  if (characterStore.isCreatingCharacter) {
+    // Emit event for CharacterSelect to show confirmation
+    window.dispatchEvent(new CustomEvent('appearance:cancel-request'))
+  } else {
+    // Normal appearance edit - just cancel
+    appearanceStore.cancel()
+  }
 }
 </script>
 

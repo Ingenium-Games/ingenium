@@ -75,29 +75,32 @@ function checkSpam(eventName, threshold) {
  * Check if callback should be throttled
  */
 function shouldThrottle(eventName) {
+  // TEMPORARILY DISABLED FOR DEBUGGING
+  return false
+  
   // Explicitly exclude these from throttling for smooth slider/immediate updates
-  if (eventName === 'Client:Appearance:UpdateHeadBlend' || 
-      eventName === 'Client:Appearance:UpdateHeadOverlay') {
-    return false // Never throttle these events
-  }
-  
-  const now = Date.now()
-  const lastCall = throttleState.lastCallTimes[eventName] || 0
-  const config = THROTTLE_CONFIG[eventName] || THROTTLE_CONFIG.default
-  
-  // Check for spam
-  if (checkSpam(eventName, config.threshold)) {
-    return true // Block this call
-  }
-  
-  // Check throttle delay
-  if (now - lastCall < config.delay) {
-    return true // Too soon, block
-  }
-  
-  // Update last call time
-  throttleState.lastCallTimes[eventName] = now
-  return false // Allow call
+  // if (eventName === 'Client:Appearance:UpdateHeadBlend' || 
+  //     eventName === 'Client:Appearance:UpdateHeadOverlay') {
+  //   return false // Never throttle these events
+  // }
+  // 
+  // const now = Date.now()
+  // const lastCall = throttleState.lastCallTimes[eventName] || 0
+  // const config = THROTTLE_CONFIG[eventName] || THROTTLE_CONFIG.default
+  // 
+  // // Check for spam
+  // if (checkSpam(eventName, config.threshold)) {
+  //   return true // Block this call
+  // }
+  // 
+  // // Check throttle delay
+  // if (now - lastCall < config.delay) {
+  //   return true // Too soon, block
+  // }
+  // 
+  // // Update last call time
+  // throttleState.lastCallTimes[eventName] = now
+  // return false // Allow call
 }
 
 /**

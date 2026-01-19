@@ -160,7 +160,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useCharacterStore } from '../stores/character'
 import { useAppearanceStore } from '../stores/appearance'
 import { sendNuiMessage } from '../utils/nui'
@@ -174,6 +174,20 @@ const slots = ref(1)
 const newCharacter = ref({
   firstName: '',
   lastName: ''
+})
+
+// Listen for cancel requests from appearance menu
+function handleCancelRequest() {
+  console.log('[CharacterSelect] Received appearance:cancel-request event')
+  cancelCreate()
+}
+
+onMounted(() => {
+  window.addEventListener('appearance:cancel-request', handleCancelRequest)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('appearance:cancel-request', handleCancelRequest)
 })
 
 // Set slots from parent data (passed from Lua)
