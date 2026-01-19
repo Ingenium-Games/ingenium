@@ -490,6 +490,11 @@ if not IS_SERVER then
 		function(packed)
 			ig.log.Debug("CALLBACK:CLIENT", "Received response for: %s", args.eventName)
 			
+			-- CRITICAL FIX: Remove event handler immediately to prevent duplicate responses
+			-- This must happen BEFORE any processing to avoid race conditions
+			RemoveEventHandler(eventData)
+			ig.log.Trace("CALLBACK:CLIENT", "Event handler removed for: %s", responseEventName)
+			
 			local success, result = pcall(function()
 				return table_unpack(msgpack_unpack(packed))
 			end)
@@ -547,9 +552,12 @@ if not IS_SERVER then
 		if not eventCallback then
 			ig.log.Debug("CALLBACK:CLIENT", "Awaiting synchronous response for: %s", args.eventName)
 			local result = Citizen.Await(prom)
-			RemoveEventHandler(eventData)
+			-- No need to remove handler here - already removed in response handler
 			ig.log.Debug("CALLBACK:CLIENT", "Synchronous callback completed: %s", args.eventName)
 			return result
+		else
+			ig.log.Debug("CALLBACK:CLIENT", "Async callback registered for: %s", args.eventName)
+			-- Event handler already removed in response handler, no cleanup needed
 		end
 	end
 	exports("TriggerServerCallback", TriggerServerCallback)
