@@ -40,6 +40,7 @@ ig.drop = {}           -- Drop functions
 ig.drops = {}          -- Drop data
 ig.event = {}          -- Event handlers
 ig.file = {}           -- File operations
+ig.fileLog = {}
 ig.func = {}           -- Generic functions
 ig.garage = {}         -- Garage functions
 ig.garages = {}        -- Garage data

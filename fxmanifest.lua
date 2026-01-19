@@ -209,6 +209,7 @@ server_scripts {
     "server/[Third Party]/_queue_commands.lua",
     "server/[Third Party]/_queue_config_new.lua",
     "server/[Third Party]/_queue_system.lua",
+    "server/[Tools]/_file_logging.lua",
     "server/[Tools]/_logging.lua",
     "server/[Tools]/_memory.lua",
     "server/[Validation]/_validator.lua",
@@ -235,7 +236,6 @@ server_scripts {
     "server/server.lua",
     "server/[Callbacks]/_data.lua",
     "server/[Commands]/_job_management.lua",
-    "server/[Tools]/_file_logging.lua",
 }
 ------------------------------------------------------------------------------
 dependencies {

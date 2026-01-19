@@ -484,6 +484,7 @@ server_scripts {
         
         # Group 2: Files that load after foundation
         server_early_files = [
+            'server/[Tools]/_file_logging.lua',
             'server/[Garage]/_var.lua',
             'server/[API]/_api.lua',
             'server/[Appearance]/_pricing.lua',
