@@ -260,19 +260,22 @@ export function setupNuiHandlers() {
       case 'Client:NUI:CharacterSelectShow':
         console.log('[NUI] Character select show received with data:', data)
         // Transform character data from server format to NUI format
-        const transformedCharacters = (data.characters || []).map(char => ({
-          id: char.Character_ID || char.id,
-          name: `${char.First_Name || char.firstName || ''} ${char.Last_Name || char.lastName || ''}`.trim(),
-          firstName: char.First_Name || char.firstName,
-          lastName: char.Last_Name || char.lastName,
-          cityId: char.City_ID || char.cityId,
-          phone: char.Phone || char.phone,
-          created: char.Created || char.created,
-          lastSeen: char.Last_Seen || char.lastSeen,
-          photo: char.Photo || char.photo,
-          // Include all original data for reference
-          ...char
-        }))
+        const transformedCharacters = (data.characters || [])
+          .filter(char => char != null)  // Filter out null/undefined entries
+          .map(char => ({
+            id: char.Character_ID || char.id,
+            name: `${char.First_Name || char.firstName || ''} ${char.Last_Name || char.lastName || ''}`.trim(),
+            firstName: char.First_Name || char.firstName,
+            lastName: char.Last_Name || char.lastName,
+            cityId: char.City_ID || char.cityId,
+            phone: char.Phone || char.phone,
+            created: char.Created || char.created,
+            lastSeen: char.Last_Seen || char.lastSeen,
+            photo: char.Photo || char.photo,
+            // Include all original data for reference
+            ...char
+          }))
+        console.log('[NUI] Transformed characters:', transformedCharacters)
         characterStore.setCharacters(transformedCharacters, data.slots || 1)
         console.log('[NUI] UI Store showCharacterSelect set to true')
         uiStore.showCharacterSelect = true
