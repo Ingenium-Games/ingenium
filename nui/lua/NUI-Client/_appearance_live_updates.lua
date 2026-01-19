@@ -415,19 +415,50 @@ end)
 -- Cancel appearance and return to character selection (for character creation)
 RegisterNUICallback('Client:Appearance:CancelToCharacterSelect', function(data, cb)
     ig.log.Info("Appearance", "Canceling character creation - returning to character selection")
+    ---
+    --- THIS IS THE INIT LOGGIC FOR MAKING THE CHARACTER BE AT A CERTAIN PLACE.
+    ---
+    ig.func.IsBusyPleaseWait(3000)
+
+    ig.data.SetLoadedStatus(false)
     --
     local ped = PlayerPedId()
-    if DoesEntityExist(ped) then
-        SetEntityVisible(ped, false, false)
-    end
-
-    -- Trigger event to reopen character selection
-    -- The character selection handler should restore camera and UI
-    ig.func.IsBusyPleaseWait(2500)
     --
-    ig.ui.Send("Client:NUI:CharacterSelectShow", {}, true)
-    --   
-    cb({ok = true})
+    SetEntityCoords(ped, -550.21, 1340.24, 559.22)
+    SetEntityHeading(ped, 189.21)
+    --
+    FreezeEntityPosition(ped, true)
+    --
+    ig.func.IsBusyPleaseWait(500)
+    -- Request character list from server using ig.callback.Async wrapper
+    ig.callback.Async("Server:Character:List", function(result)
+        ig.log.Debug("Character", "Server callback returned: " .. json.encode(result or "nil"))
+        
+        if result then
+            ig.log.Trace("Character", "Received character list from server - Characters: " .. #(result.Characters or {}) .. ", Slots: " .. (result.Slots or 0))
+            ig.func.IsBusyPleaseWait(1000)
+            ShutdownLoadingScreenNui()
+            -- Send character data to NUI using standard ig.ui.Send wrapper
+            ig.ui.Send("Client:NUI:CharacterSelectShow", {
+                characters = result.Characters or {},
+                slots = result.Slots or 1
+            }, true)
+            
+            ig.log.Debug("Character", "Sent NUI message with " .. #(result.Characters or {}) .. " characters")
+            
+            -- Return success to callback
+            cb({
+                message = "ok",
+                data = "Character list loaded"
+            })
+        else
+            ig.log.Error("Character", "Failed to retrieve character list from server")
+            cb({
+                message = "error",
+                data = "Failed to retrieve character list"
+            })
+        end
+    end)
 end)
 
 ig.log.Info("NUI-Client", "Appearance live update callbacks registered")
