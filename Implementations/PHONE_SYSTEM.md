@@ -62,7 +62,7 @@ The Ingenium Phone System is a fully integrated NUI-based phone with Vue 3, feat
 
 ### From Inventory
 
-Players can use the Phone item from their inventory. On first use, the phone generates a unique IMEI and creates a database record.
+Players can use the Phone item from their inventory. On first use, the phone generates a unique IMEI, a unique 6-7 digit phone number, and creates a database record. The phone number is tied to the physical device, not the character, enabling true SIM card behavior where phones can be traded or transferred with their numbers.
 
 ```lua
 -- Server automatically handles via event:
@@ -70,6 +70,15 @@ AddEventHandler("Inventory:Consume:Phone", function(source, position, quantity)
     ig.phone.Use(source, position)
 end)
 ```
+
+### Phone Number Generation
+
+Phone numbers are automatically generated when a new phone device is initialized:
+- Generated using `ig.phone.GeneratePhoneNumber()`
+- 6-7 digit numbers created using `ig.rng.nums()`
+- Uniqueness verified against existing phones in database
+- Maximum 10 attempts to find a unique number
+- Numbers are device-tied and persist with the phone item
 
 ### Phone Data Structure
 
@@ -290,7 +299,7 @@ Same pattern as settings:
 2. **No Messaging Yet** - Message buttons are placeholders
 3. **No History** - No call or message history tracking yet
 4. **Single Phone** - Each player can only have one active phone at a time
-5. **No SIM Swap** - Phone number is tied to character, not phone item
+5. **Device-Tied Phone Numbers** - Phone numbers are now tied to physical phone devices (stored in the phones database table). Each phone item receives a unique phone number when first initialized. This enables proper SIM swap functionality where players can trade/transfer phones with their associated numbers.
 
 ## Performance Considerations
 

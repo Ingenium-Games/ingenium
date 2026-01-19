@@ -8,6 +8,46 @@ if not ig.phone then
 end
 
 -- ====================================================================================--
+-- Phone Number Generation
+-- ====================================================================================--
+
+--- Generate a unique phone number for a new phone device
+--- Generates a 6-7 digit number and verifies uniqueness in database
+--- First digit is always 1-9 to avoid leading zeros
+---@return string|nil Phone number or nil if unable to generate unique number
+function ig.phone.GeneratePhoneNumber()
+    local maxAttempts = 10
+    local attempts = 0
+    
+    repeat
+        attempts = attempts + 1
+        
+        -- Generate a 6 or 7 digit phone number
+        local length = math.random(6, 7)
+        
+        -- First digit: 1-9 (avoid leading zero)
+        local firstDigit = math.random(1, 9)
+        
+        -- Remaining digits: 0-9
+        local remainingDigits = ig.rng.nums(length - 1)
+        
+        local phoneNumber = tostring(firstDigit) .. remainingDigits
+        
+        -- Check if this number already exists
+        local existing = ig.sql.phone.GetByNumber(phoneNumber)
+        if not existing then
+            ig.log.Debug("Phone", "Generated unique phone number: " .. phoneNumber)
+            return phoneNumber
+        end
+        
+        ig.log.Debug("Phone", "Phone number collision, retrying... (" .. attempts .. "/" .. maxAttempts .. ")")
+    until attempts >= maxAttempts
+    
+    ig.log.Error("Phone", "Failed to generate unique phone number after " .. maxAttempts .. " attempts")
+    return nil
+end
+
+-- ====================================================================================--
 -- Phone Data Retrieval
 -- ====================================================================================--
 
@@ -32,7 +72,7 @@ function ig.phone.GetFromInventory(xPlayer, position)
 end
 
 --- Get or create phone data for inventory item
---- If phone doesn't have IMEI, creates new phone record
+--- If phone doesn't have IMEI, creates new phone record with generated phone number
 ---@param xPlayer table Player object
 ---@param position number Inventory position
 ---@return table|nil Phone data or nil on error
@@ -56,9 +96,16 @@ function ig.phone.GetOrCreate(xPlayer, position)
         ig.log.Warn("Phone", "Phone has IMEI but no database record, recreating")
     end
     
-    -- Create new phone record
+    -- Generate a unique phone number for this device
+    local phoneNumber = ig.phone.GeneratePhoneNumber()
+    if not phoneNumber then
+        ig.log.Error("Phone", "Failed to generate phone number")
+        return nil
+    end
+    
+    -- Create new phone record with generated phone number
     local success, imei = ig.sql.phone.Create({
-        Phone_Number = xPlayer.Phone,
+        Phone_Number = phoneNumber,
         Character_ID = xPlayer.Character_ID
     })
     
@@ -77,6 +124,9 @@ function ig.phone.GetOrCreate(xPlayer, position)
     
     -- Retrieve and return the created phone data
     local phoneData = ig.sql.phone.Get(imei)
+    
+    ig.log.Info("Phone", "Created phone device with number " .. phoneNumber .. " for character " .. xPlayer.Character_ID)
+    
     return phoneData
 end
 
@@ -237,14 +287,15 @@ function ig.phone.Use(source, position)
     end
     
     -- Trigger client to show phone animation and prop
+    -- Always use Phone_Number from database (device-tied)
     TriggerClientEvent("Client:Phone:Use", source, {
         imei = phoneData.IMEI,
-        phoneNumber = phoneData.Phone_Number or xPlayer.Phone,
+        phoneNumber = phoneData.Phone_Number,
         contacts = phoneData.Contacts,
         settings = phoneData.Settings
     })
     
-    ig.log.Debug("Phone", "Phone used by " .. xPlayer.Name .. " (IMEI: " .. phoneData.IMEI .. ")")
+    ig.log.Debug("Phone", "Phone used by " .. xPlayer.Name .. " (IMEI: " .. phoneData.IMEI .. ", Number: " .. phoneData.Phone_Number .. ")")
 end
 
 -- ====================================================================================--

@@ -141,6 +141,11 @@ ig.sbch.player.Cash = AddStateBagChangeHandler("Cash", nil, function(bagName, ke
 end)
 --
 -- Phone
+-- Note: The Phone statebag is maintained for backward compatibility with existing systems.
+-- As of the phone device decoupling implementation, phone numbers are now tied to physical
+-- phone devices (stored in phones.Phone_Number) rather than characters. Consider migrating
+-- systems that rely on character phone numbers to use device-based phone lookups instead.
+-- For migration assistance, see phone device documentation.
 ig.sbch.player.Phone = AddStateBagChangeHandler("Phone", nil, function(bagName, key, value, _, _)
     local src = bagName:gsub("player:", "")
     local xPlayer = ig.data.GetPlayer(src)
