@@ -544,6 +544,7 @@ if not IS_SERVER then
 			
 			if not success then
 				ig.log.Error("CALLBACK:CLIENT", "Error unpacking response: %s", tostring(result))
+				RemoveEventHandler(eventData)
 				return
 			end
 			
@@ -562,6 +563,10 @@ if not IS_SERVER then
 			end
 			
 			prom:resolve( result )
+			
+			-- Remove handler after processing response (for both sync and async)
+			RemoveEventHandler(eventData)
+			ig.log.Trace("CALLBACK:CLIENT", "Event handler removed after response processed: %s", args.eventName)
 		end)
 
 		-- fire the callback event
@@ -595,17 +600,12 @@ if not IS_SERVER then
 		if not eventCallback then
 			ig.log.Debug("CALLBACK:CLIENT", "Awaiting synchronous response for: %s", args.eventName)
 			local result = Citizen.Await(prom)
-			RemoveEventHandler(eventData)
-			ig.log.Trace("CALLBACK:CLIENT", "Event handler removed after sync completion: %s", args.eventName)
 			ig.log.Debug("CALLBACK:CLIENT", "Synchronous callback completed: %s", args.eventName)
 			return result
 		else
 			ig.log.Debug("CALLBACK:CLIENT", "Async callback registered for: %s", args.eventName)
-			-- For async callbacks, clean up after a delay to ensure callback completes
-			SetTimeout(100, function()
-				RemoveEventHandler(eventData)
-				ig.log.Trace("CALLBACK:CLIENT", "Event handler removed after async completion: %s", args.eventName)
-			end)
+			-- For async callbacks, DO NOT remove handler early
+			-- Handler will be removed when response arrives and handler fires
 		end
 	end
 	exports("TriggerServerCallback", TriggerServerCallback)
