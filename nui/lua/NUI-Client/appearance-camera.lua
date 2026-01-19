@@ -47,57 +47,78 @@ local function CreateAppearanceCameras(ped)
     local rightY = math.cos(rightRadians) * rightOffset
     
     -- Create cameras at different heights
-    -- Face camera - eye level + slight up
+    -- All cameras use the full camera distance (away from ped) with adjusted FOV and height
+    -- Face camera - far back, tight FOV, head level
+    local faceRadians = math.rad(heading + 135.0)
+    local faceDistance = 2.0
+    local faceOffsetX = math.sin(faceRadians) * faceDistance
+    local faceOffsetY = math.cos(faceRadians) * faceDistance
+    
     appearanceCameras.face = ig.camera.Basic(
-        coords.x + rightX,
-        coords.y + rightY,
-        coords.z + 0.65,  -- Head height (slightly higher)
-        0.0,  -- Level angle
+        coords.x + faceOffsetX,
+        coords.y + faceOffsetY,
+        coords.z + 0.7,  -- Head level
         0.0,
-        heading - 180.0,  -- Face the ped
-        fov,
+        0.0,
+        heading - 180.0,
+        35.0,  -- Tighter FOV to zoom on face
         false,
         2
     )
     ig.camera.PointAtEntity(appearanceCameras.face, ped, 0.0, 0.0, 0.65, true)  -- Point at head
     
-    -- Body camera - chest level
+    -- Body camera - far back, moderate FOV, chest level
+    local bodyRadians = math.rad(heading + 135.0)
+    local bodyDistance = 2.0
+    local bodyOffsetX = math.sin(bodyRadians) * bodyDistance
+    local bodyOffsetY = math.cos(bodyRadians) * bodyDistance
+    
     appearanceCameras.body = ig.camera.Basic(
-        coords.x + rightX,
-        coords.y + rightY,
-        coords.z + 0.3,  -- Chest height (slightly higher)
-        0.0,  -- Level angle
+        coords.x + bodyOffsetX,
+        coords.y + bodyOffsetY,
+        coords.z + 0.4,  -- Chest level
+        0.0,
         0.0,
         heading - 180.0,
-        fov,
+        45.0,  -- Moderate FOV for torso
         false,
         2
     )
     ig.camera.PointAtEntity(appearanceCameras.body, ped, 0.0, 0.0, 0.3, true)  -- Point at chest
     
-    -- Legs camera - lower body
+    -- Legs camera - far back, moderate FOV, knee level
+    local legsRadians = math.rad(heading + 135.0)
+    local legsDistance = 2.0
+    local legsOffsetX = math.sin(legsRadians) * legsDistance
+    local legsOffsetY = math.cos(legsRadians) * legsDistance
+    
     appearanceCameras.legs = ig.camera.Basic(
-        coords.x + rightX,
-        coords.y + rightY,
-        coords.z - 0.3,  -- Lower body height (higher up)
-        0.0,  -- Level angle
+        coords.x + legsOffsetX,
+        coords.y + legsOffsetY,
+        coords.z - 0.2,  -- Knee level
+        0.0,
         0.0,
         heading - 180.0,
-        fov,
+        50.0,  -- Moderate FOV for legs
         false,
         2
     )
     ig.camera.PointAtEntity(appearanceCameras.legs, ped, 0.0, 0.0, -0.3, true)  -- Point at knees
     
-    -- Feet camera - shoes and feet
+    -- Feet camera - far back, tight FOV, foot level
+    local feetRadians = math.rad(heading + 135.0)
+    local feetDistance = 2.0
+    local feetOffsetX = math.sin(feetRadians) * feetDistance
+    local feetOffsetY = math.cos(feetRadians) * feetDistance
+    
     appearanceCameras.feet = ig.camera.Basic(
-        coords.x + rightX,
-        coords.y + rightY,
-        coords.z - 0.6,  -- Feet height (higher up)
-        0.0,  -- Level angle
+        coords.x + feetOffsetX,
+        coords.y + feetOffsetY,
+        coords.z - 0.5,  -- Foot level
+        0.0,
         0.0,
         heading - 180.0,
-        fov,
+        40.0,  -- Tight FOV to zoom on feet
         false,
         2
     )

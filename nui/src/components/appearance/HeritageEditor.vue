@@ -267,35 +267,51 @@ watch(fatherSkinGender, (newGender) => {
   }
 })
 
-// Initialize defaults on mount
-onMounted(() => {
-  nextTick(() => {
-    // Always initialize all heritage values to proper defaults for freemode peds
-    const femaleList = heritageFaces.value['female'] || []
-    const maleList = heritageFaces.value['male'] || []
-    
-    console.log('[HeritageEditor] onMounted - initializing heritage')
-    console.log('[HeritageEditor] Female list length:', femaleList.length, 'Male list length:', maleList.length)
-    console.log('[HeritageEditor] Current headBlend:', JSON.stringify(headBlend.value))
-    
-    if (femaleList.length > 0 && maleList.length > 0) {
-      // Always set defaults on mount - don't check existing values
-      // This ensures proper initialization when appearance menu opens
-      console.log('[HeritageEditor] Setting all heritage defaults')
+// Watch for when appearance store opens - initialize heritage defaults
+watch(() => appearanceStore.isOpen, (isOpen) => {
+  if (isOpen) {
+    nextTick(() => {
+      // Check if this is a freemode ped that needs heritage
+      const model = appearanceStore.currentAppearance?.model
+      const isFreemode = model === 'mp_m_freemode_01' || model === 'mp_f_freemode_01'
       
-      // Set gender toggles
-      motherFaceGender.value = 'female'
-      fatherFaceGender.value = 'male'
-      motherSkinGender.value = 'female'
-      fatherSkinGender.value = 'male'
-      
-      // Set all 4 heritage values to first in their respective lists
-      updateShapeFirst(femaleList[0])    // Mother face
-      updateShapeSecond(maleList[0])     // Father face  
-      updateSkinFirst(femaleList[0])     // Mother skin
-      updateSkinSecond(maleList[0])      // Father skin
-    }
-  })
+      if (isFreemode) {
+        const femaleList = heritageFaces.value['female'] || []
+        const maleList = heritageFaces.value['male'] || []
+        
+        console.log('[HeritageEditor] Store opened with freemode ped, initializing heritage')
+        console.log('[HeritageEditor] Female list:', femaleList.length, 'Male list:', maleList.length)
+        console.log('[HeritageEditor] Current headBlend:', JSON.stringify(headBlend.value))
+        
+        if (femaleList.length > 0 && maleList.length > 0) {
+          // Check if heritage needs initialization (all values are 0 or undefined)
+          const needsInit = !headBlend.value.shapeFirst && !headBlend.value.shapeSecond &&
+                           !headBlend.value.skinFirst && !headBlend.value.skinSecond
+          
+          if (needsInit) {
+            console.log('[HeritageEditor] Initializing all heritage defaults')
+            
+            // Set gender toggles
+            motherFaceGender.value = 'female'
+            fatherFaceGender.value = 'male'
+            motherSkinGender.value = 'female'
+            fatherSkinGender.value = 'male'
+            
+            // Set all 4 heritage values
+            appearanceStore.updateHeadBlend({
+              shapeFirst: femaleList[0],    // Mother face
+              shapeSecond: maleList[0],     // Father face
+              skinFirst: femaleList[0],     // Mother skin
+              skinSecond: maleList[0],      // Father skin
+              shapeMix: 0.5,
+              skinMix: 0.5,
+              thirdMix: 0.0
+            })
+          }
+        }
+      }
+    })
+  }
 })
 
 // Watch model changes - reset to defaults when switching to freemode
