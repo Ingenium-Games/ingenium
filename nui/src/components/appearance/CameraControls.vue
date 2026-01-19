@@ -50,6 +50,7 @@ const appearanceStore = useAppearanceStore()
 
 const views = [
   { value: 'face', label: 'Face' },
+  { value: 'hands', label: 'Hands' },
   { value: 'body', label: 'Body' },
   { value: 'legs', label: 'Legs' },
   { value: 'feet', label: 'Feet' },

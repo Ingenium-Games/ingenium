@@ -95,6 +95,17 @@
       <!-- Cost Confirmation Modal -->
       <CostConfirmationModal />
       
+      <!-- Error Dialog -->
+      <div v-if="appearanceStore.showError" class="confirmation-overlay">
+        <div class="confirmation-dialog">
+          <h3>Validation Error</h3>
+          <p>{{ appearanceStore.errorMessage }}</p>
+          <div class="confirmation-actions">
+            <button @click="appearanceStore.closeError()" class="btn-confirm-no">OK</button>
+          </div>
+        </div>
+      </div>
+      
       <!-- Cancel Confirmation Modal -->
       <div v-if="showCancelConfirm" class="confirmation-overlay">
         <div class="confirmation-dialog">

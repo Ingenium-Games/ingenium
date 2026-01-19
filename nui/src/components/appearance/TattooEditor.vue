@@ -66,6 +66,18 @@
         No tattoos available for this zone
       </div>
     </div>
+    
+    <!-- Clear All Confirmation Dialog -->
+    <div v-if="showClearConfirm" class="confirmation-overlay" @click.self="showClearConfirm = false">
+      <div class="confirmation-dialog">
+        <h3>Clear All Tattoos?</h3>
+        <p>Are you sure you want to remove all tattoos? This cannot be undone.</p>
+        <div class="confirmation-actions">
+          <button @click="confirmClearAll" class="btn-confirm-yes">Yes, Clear All</button>
+          <button @click="showClearConfirm = false" class="btn-confirm-no">Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,6 +88,7 @@ import { useAppearanceStore } from '../../stores/appearance'
 const appearanceStore = useAppearanceStore()
 
 const currentZone = ref('ZONE_TORSO')
+const showClearConfirm = ref(false)
 
 const zones = computed(() => {
   if (!appearanceStore.tattoos) return []
@@ -135,11 +148,12 @@ function removeTattoo(tattoo) {
 }
 
 function clearAll() {
-  // TODO: Replace with custom modal component matching app design
-  // For now, using native confirm for functionality
-  if (window.confirm('Are you sure you want to remove all tattoos?')) {
-    appearanceStore.clearAllTattoos()
-  }
+  showClearConfirm.value = true
+}
+
+function confirmClearAll() {
+  showClearConfirm.value = false
+  appearanceStore.clearAllTattoos()
 }
 </script>
 
@@ -347,4 +361,83 @@ function clearAll() {
   color: rgba(255, 255, 255, 0.5);
   font-size: 13px;
 }
-</style>
+/* Confirmation Dialog */
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  pointer-events: all;
+}
+
+.confirmation-dialog {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(45, 45, 45, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 30px;
+  min-width: 400px;
+  max-width: 500px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.confirmation-dialog h3 {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+}
+
+.confirmation-dialog p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0 0 25px 0;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn-confirm-yes,
+.btn-confirm-no {
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+}
+
+.btn-confirm-yes {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.4);
+  color: #dc3545;
+}
+
+.btn-confirm-yes:hover {
+  background: rgba(220, 53, 69, 0.3);
+  border-color: rgba(220, 53, 69, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn-confirm-no {
+  background: rgba(108, 117, 125, 0.2);
+  border: 1px solid rgba(108, 117, 125, 0.4);
+  color: #adb5bd;
+}
+
+.btn-confirm-no:hover {
+  background: rgba(108, 117, 125, 0.3);
+  border-color: rgba(108, 117, 125, 0.6);
+  transform: translateY(-1px);
+}</style>

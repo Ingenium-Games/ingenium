@@ -19,6 +19,10 @@ export const useAppearanceStore = defineStore('appearance', () => {
   const itemizedCosts = ref([])
   const showCostConfirmation = ref(false)
   
+  // Error state
+  const errorMessage = ref('')
+  const showError = ref(false)
+  
   // Current tab
   const currentTab = ref('model')
   
@@ -403,6 +407,23 @@ export const useAppearanceStore = defineStore('appearance', () => {
   async function save() {
     isLoading.value = true
     try {
+      // Validate heritage for freemode peds
+      if (isFreemode.value) {
+        const headBlend = currentAppearance.value?.headBlend
+        if (!headBlend || 
+            headBlend.shapeFirst === undefined || headBlend.shapeFirst === null ||
+            headBlend.shapeSecond === undefined || headBlend.shapeSecond === null ||
+            headBlend.skinFirst === undefined || headBlend.skinFirst === null ||
+            headBlend.skinSecond === undefined || headBlend.skinSecond === null) {
+          
+          // Show error dialog
+          errorMessage.value = 'Please select all heritage options (Mother, Father, and Skin selections) before saving.'
+          showError.value = true
+          isLoading.value = false
+          return
+        }
+      }
+      
       // Calculate cost if pricing is enabled
       if (pricingEnabled.value) {
         calculateTotalCost()
@@ -460,6 +481,11 @@ export const useAppearanceStore = defineStore('appearance', () => {
     close()
   }
   
+  function closeError() {
+    showError.value = false
+    errorMessage.value = ''
+  }
+  
   // Watch for appearance changes to recalculate cost
   watch(() => currentAppearance.value, () => {
     if (pricingEnabled.value && initialAppearance.value) {
@@ -485,6 +511,10 @@ export const useAppearanceStore = defineStore('appearance', () => {
     currentCost,
     itemizedCosts,
     showCostConfirmation,
+    
+    // Error state
+    errorMessage,
+    showError,
     
     // Computed
     isFreemode,
@@ -513,6 +543,7 @@ export const useAppearanceStore = defineStore('appearance', () => {
     turnAround,
     save,
     cancel,
+    closeError,
     
     // Pricing actions
     getItemPrice,

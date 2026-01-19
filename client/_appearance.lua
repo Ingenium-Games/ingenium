@@ -115,18 +115,29 @@ function ig.appearance.GetHeadBlend()
     if not ig.appearance.IsFreemode() then return nil end
     
     local ped = PlayerPedId()
-    local shapeFirst = GetPedHeadBlendFirstIndex(ped)
-    local shapeSecond = GetPedHeadBlendSecondIndex(ped)
-    local skinFirst = GetPedHeadBlendThirdIndex(ped)
+    local headBlendData = {}
+    local success = GetPedHeadBlendData(ped, headBlendData)
+    
+    if not success then
+        return {
+            shapeFirst = 0,
+            shapeSecond = 0,
+            skinFirst = 0,
+            skinSecond = 0,
+            shapeMix = 0.5,
+            skinMix = 0.5,
+            thirdMix = 0.0
+        }
+    end
     
     return {
-        shapeFirst = shapeFirst,
-        shapeSecond = shapeSecond,
-        skinFirst = skinFirst,
-        skinSecond = skinFirst, -- Note: Game doesn't distinguish skin indices
-        shapeMix = 0.5, -- These can't be read from the game
-        skinMix = 0.5,
-        thirdMix = 0.0
+        shapeFirst = headBlendData.shapeFirst or 0,
+        shapeSecond = headBlendData.shapeSecond or 0,
+        skinFirst = headBlendData.skinFirst or 0,
+        skinSecond = headBlendData.skinSecond or 0,
+        shapeMix = headBlendData.shapeMix or 0.5,
+        skinMix = headBlendData.skinMix or 0.5,
+        thirdMix = headBlendData.thirdMix or 0.0
     }
 end
 
