@@ -2,9 +2,6 @@
 
 -- ====================================================================================--
 
--- Disable auto-spawn at startup to prevent players from spawning during character selection
-exports.spawnmanager:setAutoSpawn(false)
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)

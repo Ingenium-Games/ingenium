@@ -31,16 +31,19 @@ local function CreateAppearanceCameras(ped)
     -- Store ped reference
     currentPed = ped
     
+    -- Force ped to face north (0°) before creating cameras
+    SetEntityHeading(ped, 0.0)
+    Citizen.Wait(50)  -- Small wait for heading to apply
+    
     -- Get ped coordinates and use fixed heading (ped is always facing north/0°)
     local coords = GetEntityCoords(ped)
     local heading = 0.0  -- Ped is always facing north (0°)
     baseCoords = coords
     baseHeading = heading
     
-    -- Camera distance from ped (1.0 unit as requested)
+    -- Camera distance from ped
     local distance = 1.0
     local fov = 50.0
-    local angleOffset = -30.0  -- Offset camera 30° to the left to show ped's right side and maximize screen space
     
     -- Calculate right offset (perpendicular to heading)
     local rightRadians = math.rad(heading - 90.0)  -- 90 degrees to the right
@@ -48,9 +51,9 @@ local function CreateAppearanceCameras(ped)
     local rightY = math.cos(rightRadians) * rightOffset
     
     -- Create cameras at different heights
-    -- All cameras positioned behind and to the left (180° + angleOffset) to show right side of ped
-    -- Face camera - offset behind, very tight FOV for detailed face view (30% more zoom)
-    local faceRadians = math.rad(heading + 180.0 + angleOffset)  -- Behind and to the left
+    -- All cameras positioned directly behind ped (180°)
+    -- Face camera - directly behind, very tight FOV for detailed face view
+    local faceRadians = math.rad(heading + 180.0)  -- Directly behind
     local faceDistance = 2.0
     local faceOffsetX = math.sin(faceRadians) * faceDistance
     local faceOffsetY = math.cos(faceRadians) * faceDistance
@@ -68,8 +71,8 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.face, ped, 0.0, 0.0, 0.65, true)  -- Point at head
     
-    -- Hands camera - offset behind, tight FOV, chest/hand level for accessories
-    local handsRadians = math.rad(heading + 180.0 + angleOffset)  -- Behind and to the left
+    -- Hands camera - directly behind, tight FOV, chest/hand level for accessories
+    local handsRadians = math.rad(heading + 180.0)  -- Directly behind
     local handsDistance = 2.0
     local handsOffsetX = math.sin(handsRadians) * handsDistance
     local handsOffsetY = math.cos(handsRadians) * handsDistance
@@ -87,8 +90,8 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.hands, ped, 0.0, 0.0, 0.2, true)  -- Point at hands/chest area
     
-    -- Body camera - offset behind, moderate FOV, chest level
-    local bodyRadians = math.rad(heading + 180.0 + angleOffset)  -- Behind and to the left
+    -- Body camera - directly behind, moderate FOV, chest level
+    local bodyRadians = math.rad(heading + 180.0)  -- Directly behind
     local bodyDistance = 2.0
     local bodyOffsetX = math.sin(bodyRadians) * bodyDistance
     local bodyOffsetY = math.cos(bodyRadians) * bodyDistance
@@ -106,8 +109,8 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.body, ped, 0.0, 0.0, 0.3, true)  -- Point at chest
     
-    -- Legs camera - offset behind, moderate FOV, knee level
-    local legsRadians = math.rad(heading + 180.0 + angleOffset)  -- Behind and to the left
+    -- Legs camera - directly behind, moderate FOV, knee level
+    local legsRadians = math.rad(heading + 180.0)  -- Directly behind
     local legsDistance = 2.0
     local legsOffsetX = math.sin(legsRadians) * legsDistance
     local legsOffsetY = math.cos(legsRadians) * legsDistance
@@ -125,8 +128,8 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.legs, ped, 0.0, 0.0, -0.3, true)  -- Point at knees
     
-    -- Feet camera - offset behind, tight FOV, foot level
-    local feetRadians = math.rad(heading + 180.0 + angleOffset)  -- Behind and to the left
+    -- Feet camera - directly behind, tight FOV, foot level
+    local feetRadians = math.rad(heading + 180.0)  -- Directly behind
     local feetDistance = 2.0
     local feetOffsetX = math.sin(feetRadians) * feetDistance
     local feetOffsetY = math.cos(feetRadians) * feetDistance
@@ -144,9 +147,9 @@ local function CreateAppearanceCameras(ped)
     )
     ig.camera.PointAtEntity(appearanceCameras.feet, ped, 0.0, 0.0, -0.7, true)  -- Point at feet
     
-    -- Full body camera - offset behind for optimal screen space usage
+    -- Full body camera - directly behind for centered full view
     local fullDistance = 2.5
-    local fullRadians = math.rad(heading + 180.0 + angleOffset)  -- Behind and to the left
+    local fullRadians = math.rad(heading + 180.0)  -- Directly behind ped
     local fullOffsetX = math.sin(fullRadians) * fullDistance
     local fullOffsetY = math.cos(fullRadians) * fullDistance
     

@@ -147,7 +147,8 @@ end
 function ig.status.StartHungerDecrease()
     local function Do()
         if ig.data.GetLoadedStatus() then
-            local default = (1 * ig.modifier.GetHungerModifier()) / 100
+            local hungerMod = ig.modifier.GetHungerModifier() or 1.0
+            local default = (1 * hungerMod) / 100
             ig.status.RemoveHunger(default)
             SetTimeout(_hunger, Do)
         else
@@ -162,7 +163,8 @@ end
 function ig.status.StartThirstDecrease()
     local function Do()
         if ig.data.GetLoadedStatus() then
-            local default = (1 * ig.modifier.GetThirstModifier()) / 100
+            local thirstMod = ig.modifier.GetThirstModifier() or 1.0
+            local default = (1 * thirstMod) / 100
             ig.status.RemoveThirst(default)
             SetTimeout(_thirst, Do)
         else

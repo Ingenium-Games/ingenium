@@ -23,12 +23,15 @@ RegisterNUICallback("NUI:Client:CharacterPlay", function(data, cb)
     
     -- Verify player is not already loaded
     if not ig.data.IsPlayerLoaded() then
-        SetNuiFocus(false, false)
         ig.log.Trace("Character", "NUI: Player selected character " .. data.ID)
         
         -- Send to server for validation and loading
         -- NOTE: server/[Events]/_character_lifecycle.lua handles Server:Character:Join
         ig.callback.Await("Server:Character:Join", data.ID)
+        
+        -- Close NUI after character join completes
+        SetNuiFocus(false, false)
+        ig.nui.character.HideSelect()
 
         cb({
             message = "ok",

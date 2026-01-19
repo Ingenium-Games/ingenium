@@ -2,286 +2,245 @@
   "none": {
     "Unemployed": {
       "org": "Unemployed",
-      "rank": 1,
-      "pay": 8
+      "rank": 1
     }
   },
   "police": {
     "Cadet": {
       "org": "Police Department",
-      "rank": 1,
-      "pay": 17
+      "rank": 1
     },
     "Junior Officer": {
       "org": "Police Department",
-      "rank": 2,
-      "pay": 22
+      "rank": 2
     },
     "Officer": {
       "org": "Police Department",
-      "rank": 3,
-      "pay": 26
+      "rank": 3
     },
     "Senior Officer": {
       "org": "Police Department",
-      "rank": 4,
-      "pay": 29
+      "rank": 4
     },
     "Cheif of Police": {
       "org": "Police Department",
-      "rank": 5,
-      "pay": 33
+      "rank": 5
     }
   },
   "medic": {
     "Trainee": {
       "org": "Emergancy Medical Services",
-      "rank": 1,
-      "pay": 19
+      "rank": 1
     },
     "Paramedic": {
       "org": "Emergancy Medical Services",
-      "rank": 2,
-      "pay": 24
+      "rank": 2
     },
     "Doctor": {
       "org": "Emergancy Medical Services",
-      "rank": 3,
-      "pay": 29
+      "rank": 3
     },
     "Cheif Medical Officer": {
       "org": "Emergancy Medical Services",
-      "rank": 4,
-      "pay": 33
+      "rank": 4
     }
   },
   "pdm": {
     "Pre-Delivery": {
       "org": "Premium Motor Sport",
-      "rank": 1,
-      "pay": 13
+      "rank": 1
     },
     "Floor Sales": {
       "org": "Premium Motor Sport",
-      "rank": 2,
-      "pay": 18
+      "rank": 2
     },
     "Sales Expert": {
       "org": "Premium Motor Sport",
-      "rank": 3,
-      "pay": 23
+      "rank": 3
     },
     "Operations Director": {
       "org": "Premium Motor Sport",
-      "rank": 4,
-      "pay": 27
+      "rank": 4
     }
   },
   "mechanic": {
     "Apprentice": {
       "org": "Benny's Original Motorworks",
-      "rank": 1,
-      "pay": 12
+      "rank": 1
     },
     "Mechanic": {
       "org": "Benny's Original Motorworks",
-      "rank": 2,
-      "pay": 22
+      "rank": 2
     },
     "Import Logistics": {
       "org": "Benny's Original Motorworks",
-      "rank": 3,
-      "pay": 26
+      "rank": 3
     },
     "Boss Man": {
       "org": "Benny's Original Motorworks",
-      "rank": 4,
-      "pay": 30
+      "rank": 4
     }
   },
   "news": {
     "Intern": {
       "org": "Wezeal News",
-      "rank": 1,
-      "pay": 10
+      "rank": 1
     },
     "Camera Crew": {
       "org": "Wezeal News",
-      "rank": 2,
-      "pay": 16
+      "rank": 2
     },
     "Reporter": {
       "org": "Wezeal News",
-      "rank": 3,
-      "pay": 21
+      "rank": 3
     },
     "DJ Mixer": {
       "org": "Wezeal News",
-      "rank": 4,
-      "pay": 25
+      "rank": 4
     },
     "News Anchor": {
       "org": "Wezeal News",
-      "rank": 5,
-      "pay": 29
+      "rank": 5
     }
   },
   "garbage": {
     "Waste Colector": {
       "org": "Desperado's Waste Services",
-      "rank": 1,
-      "pay": 15
+      "rank": 1
     },
     "Heavy Colections": {
       "org": "Desperado's Waste Services",
-      "rank": 2,
-      "pay": 22
+      "rank": 2
     },
     "Renew Technition": {
       "org": "Desperado's Waste Services",
-      "rank": 3,
-      "pay": 25
+      "rank": 3
     },
     "Service Logistic Manager": {
       "org": "Desperado's Waste Services",
-      "rank": 4,
-      "pay": 28
+      "rank": 4
     }
   },
   "vargos": {
     "Repin Yellow": {
       "org": "Vargos",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "ballers": {
     "Repin Purple": {
       "org": "Ballers",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "famillies": {
     "Repin Green": {
       "org": "Famillies",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "aztecas": {
     "Repin Red": {
       "org": "Aztecas",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "pepe": {
     "Delivery Driver": {
       "org": "Pepe's Pizzaria",
-      "rank": 1,
-      "pay": 10
+      "rank": 1
     },
     "Pizza Chef": {
       "org": "Pepe's Pizzaria",
-      "rank": 2,
-      "pay": 18
+      "rank": 2
     },
     "Franchisee": {
       "org": "Pepe's Pizzaria",
-      "rank": 3,
-      "pay": 24
+      "rank": 3
     }
   },
   "postal": {
     "Delivery Driver": {
       "org": "Go Postal",
-      "rank": 1,
-      "pay": 13
+      "rank": 1
     }
   },
   "mining": {
     "Miner": {
       "org": "Caveat Cutters Union",
-      "rank": 1,
-      "pay": 13
+      "rank": 1
     }
   },
   "lumber": {
     "Wood Cutter": {
       "org": "Chippy Chop'ns Wood Shop'n",
-      "rank": 1,
-      "pay": 13
+      "rank": 1
     }
   },
   "chicken": {
     "Chicken Packer": {
       "org": "Cluckin' Bell",
-      "rank": 1,
-      "pay": 13
+      "rank": 1
     }
   },
   "bank": {
     "Associate": {
       "org": "Fleeca",
-      "rank": 1,
-      "pay": 21
+      "rank": 1
     }
   },
   "city": {
     "Major": {
       "org": "State Department",
-      "rank": 1,
-      "pay": 37
+      "rank": 1
     }
   },
   "logistics": {
     "Driver": {
       "org": "OP Logistics",
-      "rank": 1,
-      "pay": 9
+      "rank": 1
     }
   },
   "altruists": {
     "Repin Nude": {
       "org": "Altruists",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "lostsc": {
     "Repin Bikes": {
       "org": "Lost SC",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "marabunta": {
     "Repin Things": {
       "org": "Marabuntas",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "triads": {
     "Repin Golden Dragons": {
       "org": "Triads",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "lostmc": {
     "Repin Bikes": {
       "org": "Lost MC",
-      "rank": 1,
-      "pay": 5
+      "rank": 1
     }
   },
   "taxi": {
     "Driver": {
       "org": "Taxi Service",
-      "rank": 1,
-      "pay": 6
+      "rank": 1
+    }
+  },
+  "none": {
+    "Unemployed": {
+      "org": "Unemployed",
+      "rank": 1
     }
   }
 }

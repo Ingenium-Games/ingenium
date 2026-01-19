@@ -6,6 +6,12 @@ end
 
 -- Optimized: Create entities only once, avoiding duplication
 local function CreateGarageEntities()
+    -- Check if garage system is initialized
+    if not ig.garage or not ig.garage._Props or not ig.garage._CreatedEntities then
+        ig.log.Warn("Garage", "Garage system not initialized, skipping entity creation")
+        return
+    end
+    
     -- Clean up existing entities first
     for k,v in pairs(ig.garage._CreatedEntities) do
         if DoesEntityExist(v) then
