@@ -259,23 +259,28 @@ export function setupNuiHandlers() {
       // Character select
       case 'Client:NUI:CharacterSelectShow':
         console.log('[NUI] Character select show received with data:', data)
+        console.log('[NUI] Raw characters:', JSON.stringify(data.characters, null, 2))
         // Transform character data from server format to NUI format
         const transformedCharacters = (data.characters || [])
           .filter(char => char != null)  // Filter out null/undefined entries
-          .map(char => ({
-            id: char.Character_ID || char.id,
-            name: `${char.First_Name || char.firstName || ''} ${char.Last_Name || char.lastName || ''}`.trim(),
-            firstName: char.First_Name || char.firstName,
-            lastName: char.Last_Name || char.lastName,
-            cityId: char.City_ID || char.cityId,
-            phone: char.Phone || char.phone,
-            created: char.Created || char.created,
-            lastSeen: char.Last_Seen || char.lastSeen,
-            photo: char.Photo || char.photo,
-            // Include all original data for reference
-            ...char
-          }))
-        console.log('[NUI] Transformed characters:', transformedCharacters)
+          .map(char => {
+            const transformed = {
+              id: char.Character_ID || char.id,
+              name: `${char.First_Name || char.firstName || ''} ${char.Last_Name || char.lastName || ''}`.trim(),
+              firstName: char.First_Name || char.firstName,
+              lastName: char.Last_Name || char.lastName,
+              cityId: char.City_ID || char.cityId,
+              phone: char.Phone || char.phone,
+              created: char.Created || char.created,
+              lastSeen: char.Last_Seen || char.lastSeen,
+              photo: char.Photo || char.photo,
+              // Include all original data for reference
+              ...char
+            }
+            console.log('[NUI] Transformed character:', JSON.stringify(transformed, null, 2))
+            return transformed
+          })
+        console.log('[NUI] Total transformed characters:', transformedCharacters.length)
         characterStore.setCharacters(transformedCharacters, data.slots || 1)
         console.log('[NUI] UI Store showCharacterSelect set to true')
         uiStore.showCharacterSelect = true

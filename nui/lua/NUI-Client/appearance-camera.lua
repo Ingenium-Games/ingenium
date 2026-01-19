@@ -31,9 +31,9 @@ local function CreateAppearanceCameras(ped)
     -- Store ped reference
     currentPed = ped
     
-    -- Get ped coordinates and heading
+    -- Get ped coordinates and use fixed heading (ped is always facing north/0°)
     local coords = GetEntityCoords(ped)
-    local heading = GetEntityHeading(ped)
+    local heading = 0.0  -- Ped is always facing north (0°)
     baseCoords = coords
     baseHeading = heading
     

@@ -199,8 +199,10 @@ const availableSlots = computed(() => {
 })
 
 function selectCharacter(char) {
-  sendNuiMessage('NUI:Client:NewCharacter', { id: characterStore.selectedCharacter.id })
+  console.log('[CharacterSelect] Selecting character:', char)
   characterStore.selectCharacter(char)
+  // Send the selected character's ID to Lua (char.id, not selectedCharacter.id)
+  sendNuiMessage('NUI:Client:CharacterPlay', { ID: char.id })
 }
 
 function selectNew() {

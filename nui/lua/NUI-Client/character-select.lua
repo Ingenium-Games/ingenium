@@ -208,7 +208,7 @@ RegisterNUICallback("Client:Request:OnJoinGetCharactersFromServer", function(dat
     end
     --
     SetEntityCoords(ped, -550.21, 1340.24, 559.22)
-    SetEntityHeading(ped, 189.21)
+    SetEntityHeading(ped, 0)
     --
     FreezeEntityPosition(ped, true)
     --
