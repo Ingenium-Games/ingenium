@@ -41,24 +41,6 @@ function ig.sql.gen.CityID(cb)
     return new
 end
 
-function ig.sql.gen.PhoneNumber(cb)
-    local bool = false
-    local new = nil
-    repeat
-        new = math.random(200000, 799999)
-        local r = ig.sql.FetchScalar("SELECT `Primary_ID` FROM `characters` WHERE `Phone` = ? LIMIT 1;", {new})
-        if r then
-            bool = true
-        else
-            bool = false
-        end
-    until bool == false
-    if cb then
-        cb()
-    end
-    return new
-end
-
 function ig.sql.gen.AccountNumber(cb)
     local bool = false
     local new = nil

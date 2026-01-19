@@ -117,7 +117,6 @@ RegisterServerCallback({
     local primary_id = ig.func.identifier(src)
     local character_id = ig.sql.gen.CharacterID()
     local city_id = ig.sql.gen.CityID()
-    local phone_number = ig.sql.gen.PhoneNumber()
     local iban = ig.sql.gen.Iban()
     local bank_number = ig.sql.gen.AccountNumber()
     
@@ -129,7 +128,6 @@ RegisterServerCallback({
         First_Name = first_name,
         Last_Name = last_name,
         City_ID = city_id,
-        Phone = phone_number,
         Iban = iban,
         Coords = json.encode(conf.spawn),
         Job = json.encode(conf.default.job),

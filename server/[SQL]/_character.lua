@@ -6,7 +6,7 @@ ig.sql.char = {}
 -- SHould remake htis one..
 function ig.sql.char.Add(t, cb)
     ig.sql.Insert(
-        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Iban`, `Phone`, `Coords`, `Modifiers`, `Appearance`, `Skills`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Iban`, `Coords`, `Modifiers`, `Appearance`, `Skills`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         {
             ig.func.Timestamp(),
             ig.func.Timestamp(),
@@ -16,7 +16,6 @@ function ig.sql.char.Add(t, cb)
             t.First_Name,
             t.Last_Name,
             t.Iban,
-            t.Phone,
             t.Coords,
             t.Modifiers,
             t.Appearance,
@@ -154,20 +153,6 @@ function ig.sql.char.SetWanted(character_id, bool, cb)
     ig.sql.Update("UPDATE `characters` SET `Wanted` = ? WHERE `Character_ID` = ?;", {bool, character_id}, function(data)
         if cb then cb(data) end
     end)
-end
-
---- Get - The `Character_ID` by phone number
-function ig.sql.char.GetFromPhone(phone, cb)
-    local result = ig.sql.FetchScalar("SELECT `Character_ID` FROM `characters` WHERE `Phone` = ? LIMIT 1;", {phone})
-    if cb then cb(result) end
-    return result
-end
-
---- Get - The `Phone` by Character_ID
-function ig.sql.char.GetPhone(character_id, cb)
-    local result = ig.sql.FetchScalar("SELECT `Phone` FROM `characters` WHERE `Character_ID` = ? LIMIT 1;", {character_id})
-    if cb then cb(result) end
-    return result
 end
 
 --- Get - The `City_ID` by Character_ID
