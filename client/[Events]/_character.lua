@@ -40,6 +40,16 @@ AddEventHandler("Client:Character:Loaded", function()
     ig.status.SetPlayer()
     ig.modifier.SetModifiers()
 
+            
+    -- Notify server that client is fully ready
+    -- NOTE: This tells server that ped is fully initialized and state is - Will force update Instance or bucket to last known bucket or instance.
+    TriggerServerEvent("Server:Character:Ready")
+
+    -- Trigger internal event for other resources
+    TriggerEvent("Client:Character:Ready")
+
+    
+
     -- Reset position or mark at airport or config spawn location
     local ords = ig.data.GetLocalPlayerState("Coords") or conf.spawn
     SetEntityCoords(ped, ords["x"], ords["y"], ords["z"])
@@ -78,13 +88,7 @@ AddEventHandler("Client:Character:Loaded", function()
         
         ig.log.Info("Character", "RP Mode character initialization complete")
     end
-        
-    -- Notify server that client is fully ready
-    -- NOTE: This tells server that ped is fully initialized and state is - Will force update Instance or bucket to last known bucket or instance.
-    TriggerServerEvent("Server:Character:Ready")
 
-    -- Trigger internal event for other resources
-    TriggerEvent("Client:Character:Ready")
 
 end)
 
