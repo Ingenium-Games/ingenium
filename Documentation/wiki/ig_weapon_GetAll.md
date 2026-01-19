@@ -2,38 +2,49 @@
 
 ## Description
 
-Retrieves all weapon data from the cache or server. Calls the provided callback function with the weapon data. Uses cached data if available, otherwise fetches from server.
+Returns all weapon data from the server's weapon registry. This includes all available weapons with their properties such as hash, name, label, category, ammo type, and other metadata. Returns the original unprotected data for network transmission.
 
 ## Signature
 
 ```lua
-function ig.weapon.GetAll(callback)
+function ig.weapon.GetAll()
 ```
 
 ## Parameters
 
-- **`callback`**: function - Callback function that receives the weapon data
+None
+
+## Returns
+
+- **`table`** - Table containing all weapons data indexed by weapon hash
 
 ## Example
 
 ```lua
--- Get all weapons with callback
-ig.weapon.GetAll(function(weapons)
-    print("Loaded weapons:", #weapons)
-    for _, weapon in ipairs(weapons) do
-        print("Weapon:", weapon.name, weapon.hash)
-    end
-end)
+-- Get all weapons
+local weapons = ig.weapon.GetAll()
+for hash, weapon in pairs(weapons) do
+    print(string.format("%s - %s (%s)", weapon.name, weapon.label, weapon.category))
+end
 
--- Use in async context
-ig.weapon.GetAll(function(data)
-    if data then
-        -- Process weapon data
-        print("Total weapons:", #data)
-    end
-end)
+-- Count weapons by category
+local categoryCounts = {}
+for _, weapon in pairs(weapons) do
+    categoryCounts[weapon.category] = (categoryCounts[weapon.category] or 0) + 1
+end
+for category, count in pairs(categoryCounts) do
+    print(string.format("%s: %d weapons", category, count))
+end
 ```
+
+## Related Functions
+
+- [ig.weapon.GetByHash](ig_weapon_GetByHash.md) - Get specific weapon by hash
+- [ig.weapon.GetByName](ig_weapon_GetByName.md) - Get weapon by name
+- [ig.weapon.GetByCategory](ig_weapon_GetByCategory.md) - Get weapons by category
+- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md) - Get weapon display name
+- [ig.weapon.IsMelee](ig_weapon_IsMelee.md) - Check if weapon is melee
 
 ## Source
 
-Defined in: `client/[Data]/_game_data_helpers.lua`
+Defined in: `server/[Data - No Save Needed]/_weapons.lua`
