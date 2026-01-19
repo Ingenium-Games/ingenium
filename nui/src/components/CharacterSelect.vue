@@ -199,10 +199,9 @@ const availableSlots = computed(() => {
 })
 
 function selectCharacter(char) {
-  console.log('[CharacterSelect] Selecting character:', char)
+  console.log('[CharacterSelect] Selecting character (highlighting only):', char)
+  // Only highlight the character - don't join yet (user must click "Enter" button)
   characterStore.selectCharacter(char)
-  // Send the selected character's ID to Lua (char.id, not selectedCharacter.id)
-  sendNuiMessage('NUI:Client:CharacterPlay', { ID: char.id })
 }
 
 function selectNew() {
@@ -282,16 +281,18 @@ function createCharacter() {
 
 function playCharacter() {
   if (characterStore.selectedCharacter) {
+    console.log('[CharacterSelect] Playing character (joining server):', characterStore.selectedCharacter)
     sendNuiMessage('NUI:Client:CharacterPlay', {
-      id: characterStore.selectedCharacter.id
+      ID: characterStore.selectedCharacter.id  // Use uppercase ID to match server expectations
     })
   }
 }
 
 function deleteCharacter() {
   if (characterStore.selectedCharacter && confirm('Are you sure you want to delete this character?')) {
+    console.log('[CharacterSelect] Deleting character:', characterStore.selectedCharacter)
     sendNuiMessage('NUI:Client:CharacterDelete', {
-      id: characterStore.selectedCharacter.id
+      ID: characterStore.selectedCharacter.id  // Use uppercase ID to match server expectations
     })
   }
 }
