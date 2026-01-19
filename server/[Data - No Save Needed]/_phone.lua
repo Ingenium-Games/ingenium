@@ -13,6 +13,7 @@ end
 
 --- Generate a unique phone number for a new phone device
 --- Generates a 6-7 digit number and verifies uniqueness in database
+--- First digit is always 1-9 to avoid leading zeros
 ---@return string|nil Phone number or nil if unable to generate unique number
 function ig.phone.GeneratePhoneNumber()
     local maxAttempts = 10
@@ -23,7 +24,14 @@ function ig.phone.GeneratePhoneNumber()
         
         -- Generate a 6 or 7 digit phone number
         local length = math.random(6, 7)
-        local phoneNumber = ig.rng.nums(length)
+        
+        -- First digit: 1-9 (avoid leading zero)
+        local firstDigit = math.random(1, 9)
+        
+        -- Remaining digits: 0-9
+        local remainingDigits = ig.rng.nums(length - 1)
+        
+        local phoneNumber = tostring(firstDigit) .. remainingDigits
         
         -- Check if this number already exists
         local existing = ig.sql.phone.GetByNumber(phoneNumber)
