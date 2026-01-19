@@ -2,8 +2,20 @@
 -- Chat System - Server Side Logging
 -- ====================================================================================--
 
-local chatLogQueue = {}
-local isWritingChatLog = false
+-- Create chat logger instance using shared file logging utility
+-- Uses config-based directory with fallback
+local chatLogDir = conf.chat.logging.logDirectory or "logs/chat"
+local chatLogger = ig.fileLog.Create({
+    logDirectory = chatLogDir,
+    filePattern = function()
+        local date = os.date("%Y-%m-%d")
+        return chatLogDir .. "/" .. string.format("chat_%s.log", date)
+    end,
+    batchSize = 100,
+    flushDelay = 0,  -- Process immediately for chat logs
+    periodicFlush = true,
+    periodicFlushInterval = 5000
+})
 
 -- Function to format chat log entry
 function ig.chat.FormatLogEntry(source, playerName, message, isCommand)
@@ -38,58 +50,6 @@ function ig.chat.FormatLogEntry(source, playerName, message, isCommand)
     )
 end
 
--- Ensure chat log directory exists
-local function EnsureChatLogDirectory()
-    -- FiveM will create the directory when we write to it
-    return true
-end
-
--- Get current chat log file path
-local function GetChatLogFilePath()
-    local date = os.date("%Y-%m-%d")
-    local logDir = conf.chat.logging.logDirectory or "logs/chat"
-    local filename = string.format("chat_%s.log", date)
-    return logDir .. "/" .. filename
-end
-
--- Write chat log entry to file
-local function WriteChatLogEntry(entry)
-    local filePath = GetChatLogFilePath()
-    
-    -- Open file in append mode with error handling
-    local file, err = io.open(filePath, "a")
-    if file then
-        file:write(entry .. "\n")
-        file:close()
-    else
-            ig.log.Error("IG Chat", "Failed to write to chat log file: %s - %s", filePath, tostring(err))
-    end
-end
-
--- Process chat log queue
-local function ProcessChatLogQueue()
-    if isWritingChatLog or #chatLogQueue == 0 then
-        return
-    end
-    
-    isWritingChatLog = true
-    
-    while #chatLogQueue > 0 do
-        local entry = table.remove(chatLogQueue, 1)
-        WriteChatLogEntry(entry)
-    end
-    
-    isWritingChatLog = false
-end
-
--- Queue a chat log entry
-local function QueueChatLogEntry(entry)
-    table.insert(chatLogQueue, entry)
-    
-    -- Process queue on next tick to batch writes
-    SetTimeout(0, ProcessChatLogQueue)
-end
-
 -- Log chat message
 function ig.chat.LogMessage(source, playerName, message, isCommand)
     if not conf.chat or not conf.chat.logging or not conf.chat.logging.enabled then
@@ -110,7 +70,7 @@ function ig.chat.LogMessage(source, playerName, message, isCommand)
     
     -- Log to file
     if conf.chat.logging.logToFile then
-        QueueChatLogEntry(logEntry)
+        chatLogger.QueueEntry(logEntry, "chat")
     end
     
     -- Log to txAdmin
@@ -195,17 +155,6 @@ local function CleanupOldLogs()
     -- In production, you might want to use a separate cleanup script
     ig.log.Info("IG Chat", "Chat Log: Would delete chat logs older than %d days", maxDays)
 end
-
--- Initialize
-EnsureChatLogDirectory()
-
--- Periodic log queue flush (every 5 seconds)
-CreateThread(function()
-    while true do
-        Wait(5000)
-        ProcessChatLogQueue()
-    end
-end)
 
 -- Periodic cleanup check (once per day) - registered with cron system
 local chatLogCleanupRegistered = false

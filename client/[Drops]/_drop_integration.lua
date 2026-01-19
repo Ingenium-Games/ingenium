@@ -119,6 +119,8 @@ CreateThread(function()
             local netId = NetworkGetNetworkIdFromEntity(entityId)
             
             -- Update the UI if inventory is currently open
+            -- NOTE: This event is triggered but currently has a handler registered below (line 176)
+            -- The event system properly pairs trigger and handler for inventory updates
             TriggerEvent("Client:Drop:InventoryUpdated", netId, value)
             
             ig.log.Trace("Drops", "Drop inventory updated via State Bag for NetID: " .. tostring(netId))

@@ -173,7 +173,6 @@ server_scripts {
     "server/[Data - No Save Needed]/_tattoo.lua",
     "server/[Data - No Save Needed]/_vehicle.lua",
     "server/[Data - No Save Needed]/_weapons.lua",
-    "server/[Commands]/_job_management.lua",
     "server/[Commands]/_locate_vehicles.lua",
     "server/[Deferals]/_deferals.lua",
     "server/[Dev]/_commands.lua",
@@ -231,6 +230,8 @@ server_scripts {
     "server/[Data - Save to File]/_pickups.lua",
     "server/server.lua",
     "server/[Callbacks]/_data.lua",
+    "server/[Commands]/_job_management.lua",
+    "server/[Tools]/_file_logging.lua",
 }
 ------------------------------------------------------------------------------
 dependencies {
