@@ -543,11 +543,11 @@ function formatDate(dateString) {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Cancel button positioned outside form - styled like quit button */
+/* Cancel button positioned outside form at bottom-right corner */
 .btn-cancel-outside {
   position: fixed;
   bottom: 30px;
-  left: 30px;
+  right: 30px;
   padding: 15px 30px;
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid rgba(239, 68, 68, 0.5);

@@ -294,27 +294,39 @@ onMounted(() => {
   }
 })
 
-// Watch model changes - reset to defaults when switching back to freemode
+// Watch model changes - reset to defaults when switching to freemode
 watch(() => appearanceStore.currentAppearance?.model, (newModel, oldModel) => {
-  // Only reset if switching back to a freemode ped from a non-freemode ped
+  // Check if the new model is freemode
   const isNewFreemode = newModel === 'mp_m_freemode_01' || newModel === 'mp_f_freemode_01'
-  const wasOldFreemode = oldModel === 'mp_m_freemode_01' || oldModel === 'mp_f_freemode_01'
   
-  // Reset heritage to defaults when returning to freemode
-  if (isNewFreemode && !wasOldFreemode) {
-    console.log('[HeritageEditor] Model changed back to freemode, resetting heritage to defaults')
+  // Reset heritage to defaults whenever switching TO a freemode ped
+  // This ensures clean slate when changing models
+  if (isNewFreemode) {
+    console.log('[HeritageEditor] Model changed to freemode, resetting all heritage fields to defaults')
     
     // Reset to first index for each heritage component
-    const motherList = heritageFaces.value['female'] || []
-    if (motherList.length > 0) {
-      updateShapeFirst(motherList[0])
-      updateSkinFirst(motherList[0])
+    const motherFaceList = heritageFaces.value['female'] || []
+    const fatherFaceList = heritageFaces.value['male'] || []
+    
+    // Reset all 4 heritage fields explicitly
+    if (motherFaceList.length > 0) {
+      console.log('[HeritageEditor] Resetting shapeFirst to:', motherFaceList[0])
+      updateShapeFirst(motherFaceList[0])
     }
     
-    const fatherList = heritageFaces.value['male'] || []
-    if (fatherList.length > 0) {
-      updateShapeSecond(fatherList[0])
-      updateSkinSecond(fatherList[0])
+    if (fatherFaceList.length > 0) {
+      console.log('[HeritageEditor] Resetting shapeSecond to:', fatherFaceList[0])
+      updateShapeSecond(fatherFaceList[0])
+    }
+    
+    if (motherFaceList.length > 0) {
+      console.log('[HeritageEditor] Resetting skinFirst to:', motherFaceList[0])
+      updateSkinFirst(motherFaceList[0])
+    }
+    
+    if (fatherFaceList.length > 0) {
+      console.log('[HeritageEditor] Resetting skinSecond to:', fatherFaceList[0])
+      updateSkinSecond(fatherFaceList[0])
     }
     
     // Reset gender toggles to defaults
