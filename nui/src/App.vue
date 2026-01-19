@@ -32,6 +32,9 @@
     
     <!-- Banking Menu -->
     <BankingMenu />
+    
+    <!-- Job Menu -->
+    <JobMenu />
   </div>
 </template>
 
@@ -50,6 +53,7 @@ import AppearanceCustomization from './components/appearance/AppearanceCustomiza
 import TargetMenu from './components/target/TargetMenu.vue'
 import GarageMenu from './components/GarageMenu.vue'
 import BankingMenu from './components/BankingMenu.vue'
+import JobMenu from './components/job/JobMenu.vue'
 
 const uiStore = useUIStore()
 
