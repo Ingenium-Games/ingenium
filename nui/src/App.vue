@@ -35,6 +35,9 @@
     
     <!-- Job Menu -->
     <JobMenu />
+    
+    <!-- Phone -->
+    <Phone />
   </div>
 </template>
 
@@ -54,6 +57,7 @@ import TargetMenu from './components/target/TargetMenu.vue'
 import GarageMenu from './components/GarageMenu.vue'
 import BankingMenu from './components/BankingMenu.vue'
 import JobMenu from './components/job/JobMenu.vue'
+import Phone from './components/Phone.vue'
 
 const uiStore = useUIStore()
 

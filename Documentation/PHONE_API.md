@@ -1,0 +1,386 @@
+# Phone System API Reference
+
+## Overview
+The Ingenium Phone System provides an integrated NUI-based phone with Settings and Contacts apps. Each phone has a unique IMEI and is tracked in the database.
+
+## Server API
+
+### Phone Management (`ig.phone`)
+
+```lua
+-- Get or create phone data for inventory item
+local phoneData = ig.phone.GetOrCreate(xPlayer, inventoryPosition)
+-- Returns: table with {IMEI, Phone_Number, Contacts, Settings} or nil on error
+
+-- Get phone data from inventory
+local phoneData = ig.phone.GetFromInventory(xPlayer, inventoryPosition)
+-- Returns: table or nil if no IMEI
+
+-- Trigger phone usage (called automatically on item use)
+ig.phone.Use(source, inventoryPosition)
+```
+
+### Settings Management
+
+```lua
+-- Update phone settings
+local success = ig.phone.UpdateSettings(imei, settingsTable)
+-- settingsTable = {planeMode, emergencyAlerts, provider}
+
+-- Get phone settings
+local settings = ig.phone.GetSettings(imei)
+-- Returns: {planeMode, emergencyAlerts, provider}
+
+-- Check plane mode
+local isPlaneMode = ig.phone.IsPlaneMode(imei)
+-- Returns: boolean
+
+-- Check emergency alerts
+local hasAlerts = ig.phone.EmergencyAlertsEnabled(imei)
+-- Returns: boolean
+```
+
+### Contacts Management
+
+```lua
+-- Add a contact
+local success = ig.phone.AddContact(imei, contactTable)
+-- contactTable = {name, number, type, email}
+
+-- Update a contact
+local success = ig.phone.UpdateContact(imei, contactId, updatedContact)
+
+-- Remove a contact
+local success = ig.phone.RemoveContact(imei, contactId)
+
+-- Get all contacts
+local contacts = ig.phone.GetContacts(imei)
+-- Returns: array of contact tables
+
+-- Update all contacts (replaces entire contact list)
+local success = ig.phone.UpdateContacts(imei, contactsArray)
+```
+
+## SQL Module (`ig.sql.phone`)
+
+### Retrieval
+
+```lua
+-- Get phone by IMEI
+local phoneData = ig.sql.phone.Get(imei)
+
+-- Get phone by number
+local phoneData = ig.sql.phone.GetByNumber(phoneNumber)
+
+-- Get all phones for a character
+local phones = ig.sql.phone.GetByCharacter(characterId)
+
+-- Check if phone exists
+local exists = ig.sql.phone.Exists(imei)
+```
+
+### Creation
+
+```lua
+-- Create new phone record
+local success, imei = ig.sql.phone.Create({
+    Phone_Number = phoneNumber,
+    Character_ID = characterId,
+    IMEI = imei  -- optional, auto-generated if omitted
+})
+```
+
+### Updates
+
+```lua
+-- Update contacts
+local success = ig.sql.phone.UpdateContacts(imei, contactsArray)
+
+-- Update settings
+local success = ig.sql.phone.UpdateSettings(imei, settingsTable)
+
+-- Update owner
+local success = ig.sql.phone.UpdateOwner(imei, characterId, phoneNumber)
+
+-- Update last used timestamp
+local success = ig.sql.phone.UpdateLastUsed(imei)
+```
+
+### Deletion
+
+```lua
+-- Delete phone record
+local success = ig.sql.phone.Delete(imei)
+```
+
+## Client API
+
+### Opening Phone
+
+```lua
+-- Open phone with data (called from server event)
+ig.phone.Open(phoneData)
+-- phoneData = {imei, phoneNumber, contacts, settings}
+
+-- Close phone
+ig.phone.Close()
+```
+
+## Server Events
+
+### Receiving from Client
+
+```lua
+-- Update settings
+RegisterNetEvent("Server:Phone:UpdateSettings", function(imei, settings)
+    -- Validates and persists settings
+end)
+
+-- Add contact
+RegisterNetEvent("Server:Phone:AddContact", function(imei, contact)
+    -- Validates and adds contact
+end)
+
+-- Update contact
+RegisterNetEvent("Server:Phone:UpdateContact", function(imei, contactId, contact)
+    -- Validates and updates contact
+end)
+
+-- Delete contact
+RegisterNetEvent("Server:Phone:DeleteContact", function(imei, contactId)
+    -- Deletes contact
+end)
+```
+
+### Sending to Client
+
+```lua
+-- Trigger phone usage
+TriggerClientEvent("Client:Phone:Use", source, {
+    imei = phoneData.IMEI,
+    phoneNumber = phoneData.Phone_Number,
+    contacts = phoneData.Contacts,
+    settings = phoneData.Settings
+})
+
+-- Update contacts
+TriggerClientEvent("Client:Phone:ContactsUpdated", source, contactsArray)
+
+-- Update settings
+TriggerClientEvent("Client:Phone:SettingsUpdated", source, settingsTable)
+```
+
+## Client Events
+
+```lua
+-- Phone usage (from server)
+RegisterNetEvent("Client:Phone:Use", function(phoneData)
+    -- Opens phone UI with animation
+end)
+
+-- Settings updated (from server)
+RegisterNetEvent("Client:Phone:SettingsUpdated", function(settings)
+    -- Updates NUI with new settings
+end)
+
+-- Contacts updated (from server)
+RegisterNetEvent("Client:Phone:ContactsUpdated", function(contacts)
+    -- Updates NUI with new contacts
+end)
+```
+
+## NUI Messages
+
+### From Lua to NUI
+
+```lua
+-- Open phone
+SendNUIMessage({
+    message = "Client:NUI:PhoneOpen",
+    data = {
+        imei = imei,
+        phoneNumber = phoneNumber,
+        contacts = contactsArray,
+        settings = settingsTable
+    }
+})
+
+-- Close phone
+SendNUIMessage({
+    message = "Client:NUI:PhoneClose",
+    data = {}
+})
+
+-- Update settings
+SendNUIMessage({
+    message = "Client:NUI:PhoneSettingsUpdated",
+    data = settingsTable
+})
+
+-- Update contacts
+SendNUIMessage({
+    message = "Client:NUI:PhoneContactsUpdated",
+    data = contactsArray
+})
+```
+
+### From NUI to Lua (Callbacks)
+
+```javascript
+// Close phone
+RegisterNUICallback('NUI:Client:PhoneClose', function(data, cb) {
+    // Close phone
+    cb({ok: true})
+})
+
+// Update settings
+RegisterNUICallback('NUI:Client:PhoneUpdateSettings', function(data, cb) {
+    // data = {settings: {planeMode, emergencyAlerts, provider}}
+    cb({ok: true})
+})
+
+// Add contact
+RegisterNUICallback('NUI:Client:PhoneAddContact', function(data, cb) {
+    // data = {contact: {name, number, type, email}}
+    cb({ok: true})
+})
+
+// Update contact
+RegisterNUICallback('NUI:Client:PhoneUpdateContact', function(data, cb) {
+    // data = {contactId: string, contact: {name, number, type, email}}
+    cb({ok: true})
+})
+
+// Delete contact
+RegisterNUICallback('NUI:Client:PhoneDeleteContact', function(data, cb) {
+    // data = {contactId: string}
+    cb({ok: true})
+})
+```
+
+## Data Structures
+
+### Phone Data
+
+```lua
+{
+    ID = 1,                          -- Database ID
+    IMEI = "uuid-string",            -- Unique identifier
+    Phone_Number = "123456",         -- Character's phone number
+    Character_ID = "char_id",        -- Owner's character ID
+    Contacts = {},                   -- Array of contacts
+    Settings = {                     -- Phone settings
+        planeMode = false,
+        emergencyAlerts = true,
+        provider = "Warstock"
+    },
+    Created = "2026-01-19 12:00:00", -- Creation timestamp
+    Last_Used = "2026-01-19 12:30:00" -- Last usage timestamp
+}
+```
+
+### Contact Object
+
+```lua
+{
+    id = "uuid-string",       -- Unique contact ID
+    name = "John Doe",        -- Contact name (1-50 chars)
+    number = "123456",        -- Phone number (6-7 chars)
+    type = "personal",        -- "personal" or "work"
+    email = "john@email.com"  -- Optional email (0-100 chars)
+}
+```
+
+### Settings Object
+
+```lua
+{
+    planeMode = false,         -- Disable calls when true
+    emergencyAlerts = true,    -- Alert EMS when downed
+    provider = "Warstock"      -- Network provider name
+}
+```
+
+## Example Usage
+
+### Server: Phone Item Handler
+
+```lua
+-- Already implemented via:
+AddEventHandler("Inventory:Consume:Phone", function(source, position, quantity)
+    ig.phone.Use(source, position)
+end)
+```
+
+### Server: Check Before Allowing Call
+
+```lua
+function CanMakeCall(source, targetPhoneNumber)
+    local xPlayer = ig.data.GetPlayer(source)
+    local has, position = xPlayer.HasItem("Phone")
+    
+    if not has then
+        return false, "No phone"
+    end
+    
+    local phoneData = ig.phone.GetFromInventory(xPlayer, position)
+    if not phoneData then
+        return false, "Phone not initialized"
+    end
+    
+    if ig.phone.IsPlaneMode(phoneData.IMEI) then
+        return false, "Phone is in plane mode"
+    end
+    
+    return true
+end
+```
+
+### Server: Emergency Alert on Down
+
+```lua
+AddEventHandler("Player:Down", function(source)
+    local xPlayer = ig.data.GetPlayer(source)
+    local has, position = xPlayer.HasItem("Phone")
+    
+    if has then
+        local phoneData = ig.phone.GetFromInventory(xPlayer, position)
+        if phoneData and ig.phone.EmergencyAlertsEnabled(phoneData.IMEI) and 
+           not ig.phone.IsPlaneMode(phoneData.IMEI) then
+            -- Alert EMS
+            TriggerEvent("EMS:Alert", xPlayer.GetCoords(), xPlayer.Name)
+        end
+    end
+end)
+```
+
+## Validation Rules
+
+### Settings
+- `planeMode`: boolean (default: false)
+- `emergencyAlerts`: boolean (default: true, forced false if plane mode on)
+- `provider`: string (default: "Warstock")
+
+### Contacts
+- `name`: string, 1-50 characters, required
+- `number`: string, 6-7 characters, required
+- `type`: "personal" or "work" (default: "personal")
+- `email`: string, 0-100 characters, optional
+
+## Error Handling
+
+All functions return `false` or `nil` on error and log to console:
+```lua
+local success = ig.phone.AddContact(imei, badContact)
+if not success then
+    -- Check server console for error details
+end
+```
+
+## Performance Notes
+
+- Phone data loaded on-demand (not preloaded)
+- Contacts/settings stored as JSON (efficient for small datasets)
+- IMEI used as primary key (fast lookups)
+- All queries use prepared statements
+- Last_Used timestamp updated on phone use
