@@ -37,12 +37,15 @@
           </div>
         </fieldset>
       </form>
-      <button 
-        type="button" 
-        @click="cancelCreate"
-        class="btn-cancel btn-cancel-outside"
-      >Cancel</button>
     </div>
+    
+    <!-- Cancel button - positioned absolutely outside form container -->
+    <button 
+      v-if="characterStore.isCreatingCharacter"
+      type="button" 
+      @click="cancelCreate"
+      class="btn-cancel btn-cancel-outside"
+    >Cancel</button>
     
     <!-- Character Selection -->
     <div v-else class="character-select-main">

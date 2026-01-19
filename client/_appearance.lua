@@ -576,12 +576,12 @@ function ig.appearance.SetCameraView(mode)
     local heading = GetEntityHeading(ped)
     
     -- Calculate camera position with rotation
-    -- SUBTRACT offset to position camera opposite of ped facing direction
-    -- This puts camera in front of the ped, looking at the ped
-    local rad = math.rad(heading + cameraRotation)
+    -- Add 180 degrees to heading to position camera opposite of ped facing direction
+    -- This puts camera behind the ped's original facing, looking at their front
+    local rad = math.rad(heading + cameraRotation + 180.0)
     local camPos = vector3(
-        coords.x - (view.offset.y * math.sin(rad)),
-        coords.y - (view.offset.y * math.cos(rad)),
+        coords.x + (view.offset.y * math.sin(rad)),
+        coords.y + (view.offset.y * math.cos(rad)),
         coords.z + view.offset.z
     )
     
