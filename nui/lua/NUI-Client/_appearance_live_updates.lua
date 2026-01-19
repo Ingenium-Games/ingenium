@@ -27,6 +27,7 @@
 
 -- Update model
 RegisterNUICallback('Client:Appearance:UpdateModel', function(data, cb)
+
     local model = data[1]
     if not model then
         cb({ok = false, error = "Missing model"})
@@ -44,6 +45,12 @@ RegisterNUICallback('Client:Appearance:UpdateModel', function(data, cb)
         
         -- Recreate cameras for new ped
         TriggerEvent('Client:Appearance:InitializeCameras', {})
+        
+        --
+        local ped = PlayerPedId()
+        if DoesEntityExist(ped) then
+            SetEntityVisible(ped, true, true)
+        end
         
         cb({ok = true})
     end)

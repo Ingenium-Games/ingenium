@@ -305,6 +305,7 @@ RegisterNUICallback("Client:Appearance:InitializeCameras", function(data, cb)
         ig.log.Error("AppearanceCamera", "Player ped does not exist yet, retrying...")
         Citizen.Wait(500)
         playerPed = PlayerPedId()
+        --
     end
     
     -- Create new cameras
