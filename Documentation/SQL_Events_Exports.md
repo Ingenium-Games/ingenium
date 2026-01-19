@@ -109,7 +109,7 @@ exports['ingenium']:fetchScalar(query, params, callback)
 
 **Example:**
 ```lua
-local balance = exports['ingenium']:fetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {charId})
+local balance = exports['ingenium']:fetchScalar("SELECT Bank FROM banking_accounts WHERE Character_ID = ?", {charId})
 ```
 
 ---

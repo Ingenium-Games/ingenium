@@ -64,7 +64,7 @@ function ig.sql.gen.AccountNumber(cb)
     local new = nil
     repeat
         new = string.upper(ig.rng.chars(8))
-        local r = ig.sql.FetchScalar("SELECT `Character_ID` FROM `character_accounts` WHERE `Account_Number` = ? LIMIT 1;", {new})
+        local r = ig.sql.FetchScalar("SELECT `Character_ID` FROM `banking_accounts` WHERE `Account_Number` = ? LIMIT 1;", {new})
         if r then
             bool = true
         else

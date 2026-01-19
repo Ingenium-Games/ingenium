@@ -59,7 +59,7 @@ ig.sql.FetchScalar(query, parameters, callback)
 **Examples:**
 ```lua
 -- Get bank balance
-local balance = ig.sql.FetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {characterId})
+local balance = ig.sql.FetchScalar("SELECT Bank FROM banking_accounts WHERE Character_ID = ?", {characterId})
 
 -- Get count
 local count = ig.sql.FetchScalar("SELECT COUNT(*) FROM characters WHERE Primary_ID = ?", {primaryId})
@@ -131,7 +131,7 @@ local insertId = ig.sql.Insert(
 
 -- With callback
 ig.sql.Insert(
-    "INSERT INTO character_accounts (Character_ID, Account_Number, Bank) VALUES (?, ?, ?)",
+    "INSERT INTO banking_accounts (Character_ID, Account_Number, Bank) VALUES (?, ?, ?)",
     {characterId, accountNumber, startingBalance},
     function(insertId)
         print("Created account with ID: " .. insertId)
@@ -161,7 +161,7 @@ ig.sql.Update(query, parameters, callback)
 **Examples:**
 ```lua
 -- Update bank balance
-local affected = ig.sql.Update("UPDATE character_accounts SET Bank = ? WHERE Character_ID = ?", {newBalance, characterId})
+local affected = ig.sql.Update("UPDATE banking_accounts SET Bank = ? WHERE Character_ID = ?", {newBalance, characterId})
 
 -- Delete character
 ig.sql.Update("DELETE FROM characters WHERE Character_ID = ? LIMIT 1", {characterId}, function(affected)
@@ -194,8 +194,8 @@ ig.sql.Transaction(queries, callback)
 ```lua
 -- Transfer money between accounts
 ig.sql.Transaction({
-    {query = "UPDATE character_accounts SET Bank = Bank - ? WHERE Character_ID = ?", parameters = {amount, fromId}},
-    {query = "UPDATE character_accounts SET Bank = Bank + ? WHERE Character_ID = ?", parameters = {amount, toId}},
+    {query = "UPDATE banking_accounts SET Bank = Bank - ? WHERE Character_ID = ?", parameters = {amount, fromId}},
+    {query = "UPDATE banking_accounts SET Bank = Bank + ? WHERE Character_ID = ?", parameters = {amount, toId}},
     {query = "INSERT INTO transactions (From_ID, To_ID, Amount, Timestamp) VALUES (?, ?, ?, ?)", parameters = {fromId, toId, amount, timestamp}}
 }, function(success, results)
     if success then

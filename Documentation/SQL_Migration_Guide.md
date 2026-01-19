@@ -78,7 +78,7 @@ end)
 ```lua
 local IsBusy = true
 local result = nil
-MySQL.Async.fetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = @Character_ID", {
+MySQL.Async.fetchScalar("SELECT Bank FROM banking_accounts WHERE Character_ID = @Character_ID", {
     ["@Character_ID"] = characterId
 }, function(data)
     result = data
@@ -92,7 +92,7 @@ return result
 
 #### After:
 ```lua
-local result = ig.sql.FetchScalar("SELECT Bank FROM character_accounts WHERE Character_ID = ?", {characterId})
+local result = ig.sql.FetchScalar("SELECT Bank FROM banking_accounts WHERE Character_ID = ?", {characterId})
 return result
 ```
 
@@ -100,7 +100,7 @@ return result
 
 #### Before (execute):
 ```lua
-MySQL.Async.execute("UPDATE character_accounts SET Bank = @Bank WHERE Character_ID = @Character_ID", {
+MySQL.Async.execute("UPDATE banking_accounts SET Bank = @Bank WHERE Character_ID = @Character_ID", {
     ["@Bank"] = newBalance,
     ["@Character_ID"] = characterId
 }, function(affectedRows)
@@ -110,7 +110,7 @@ end)
 
 #### After:
 ```lua
-ig.sql.Update("UPDATE character_accounts SET Bank = ? WHERE Character_ID = ?", {newBalance, characterId}, function(affectedRows)
+ig.sql.Update("UPDATE banking_accounts SET Bank = ? WHERE Character_ID = ?", {newBalance, characterId}, function(affectedRows)
     print("Updated " .. affectedRows .. " rows")
 end)
 ```
