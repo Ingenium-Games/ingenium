@@ -6,7 +6,7 @@ ig.sql.char = {}
 -- SHould remake htis one..
 function ig.sql.char.Add(t, cb)
     ig.sql.Insert(
-        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Iban`, `Phone`, `Coords`, `Accounts`, `Modifiers`, `Appearance`, `Skills`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        "INSERT INTO `characters` (`Created`, `Last_Seen`, `Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Iban`, `Phone`, `Coords`, `Modifiers`, `Appearance`, `Skills`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         {
             ig.func.Timestamp(),
             ig.func.Timestamp(),
@@ -18,7 +18,6 @@ function ig.sql.char.Add(t, cb)
             t.Iban,
             t.Phone,
             t.Coords,
-            t.Accounts,
             t.Modifiers,
             t.Appearance,
             t.Skills

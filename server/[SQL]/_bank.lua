@@ -3,27 +3,27 @@
 
 function ig.sql.bank.AddAccount(Character_ID, Account_Number, IBan, cb)
     if not startingloan then
-    local Amount = ig.check.Number(conf.default.bank)
-    ig.sql.Insert(
-        "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Bank`, `Iban`) VALUES (?, ?, ?, ?);",
-        {Character_ID, Account_Number, Amount, IBan},
-        function(insertId)
-            if cb then
-                cb(insertId)
-            end
-        end)
+        local Amount = ig.check.Number(conf.default.bank)
+        ig.sql.Insert(
+            "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Bank`, `Iban`) VALUES (?, ?, ?, ?);",
+            {Character_ID, Account_Number, Amount, IBan},
+            function(insertId)
+                if cb then
+                    cb(insertId)
+                end
+            end)
     else
-    local Amount = ig.check.Number(conf.default.bank) + ig.check.Number(conf.banking.startingloanamount)
-    local Loan = conf.banking.startingloanamount
-    local Duration = conf.banking.startingloanduration -- 30 days
-    ig.sql.Insert(
-        "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Bank`, `Iban`, `Loan`, `Duration`) VALUES (?, ?, ?, ?, ?, ?);",
-        {Character_ID, Account_Number, Amount, IBan, Loan, Duration},
-        function(insertId)
-            if cb then
-                cb(insertId)
-            end
-        end)
+        local Amount = ig.check.Number(conf.default.bank) + ig.check.Number(conf.banking.startingloanamount)
+        local Loan = conf.banking.startingloanamount
+        local Duration = conf.banking.startingloanduration -- 30 days
+        ig.sql.Insert(
+            "INSERT INTO `banking_accounts` (`Character_ID`, `Account_Number`, `Bank`, `Iban`, `Loan`, `Duration`) VALUES (?, ?, ?, ?, ?, ?);",
+            {Character_ID, Account_Number, Amount, IBan, Loan, Duration},
+            function(insertId)
+                if cb then
+                    cb(insertId)
+                end
+            end)
     end
 end
 
