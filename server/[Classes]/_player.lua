@@ -724,7 +724,7 @@ function ig.class.Player(source, character_id)
     --- func desc
     ---@param t any
     self.SetJob = function(Name, Grade)
-        if ig.job.Exist(Name, Grade) then
+        if ig.job.Exists(Name, Grade) then
             if self.Job.Name ~= Name or self.Job.Grade ~= Grade then
                 self.Job.Name = Name
                 self.Job.Grade = Grade

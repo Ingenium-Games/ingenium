@@ -113,7 +113,7 @@
             @click="selectNew"
             :disabled="!canCreateMore"
             class="character-select-character new"
-            :title="canCreateMore ? 'Create New Character' : `Maximum characters reached (${slots}/${slots})`"
+            :title="canCreateMore ? 'Create New Character' : `Maximum characters reached (${characterStore.characters.length}/${characterStore.slots})`"
           >
             <span class="icon">+</span>
             <span class="label">New</span>
@@ -170,7 +170,6 @@ const appearanceStore = useAppearanceStore()
 
 const showCancelConfirm = ref(false)
 const showQuitConfirm = ref(false)
-const slots = ref(1)
 const newCharacter = ref({
   firstName: '',
   lastName: ''
@@ -190,18 +189,13 @@ onUnmounted(() => {
   window.removeEventListener('appearance:cancel-request', handleCancelRequest)
 })
 
-// Set slots from parent data (passed from Lua)
-const setSlots = (slotCount) => {
-  slots.value = slotCount || 1
-}
-
-// Check if player can create more characters
+// Check if player can create more characters (use characterStore.slots, not local ref)
 const canCreateMore = computed(() => {
-  return characterStore.characters.length < slots.value
+  return characterStore.characters.length < characterStore.slots
 })
 
 const availableSlots = computed(() => {
-  return slots.value - characterStore.characters.length
+  return characterStore.slots - characterStore.characters.length
 })
 
 function selectCharacter(char) {
@@ -211,7 +205,7 @@ function selectCharacter(char) {
 
 function selectNew() {
   if (!canCreateMore.value) {
-    alert(`You have reached the maximum number of characters (${slots.value})`)
+    alert(`You have reached the maximum number of characters (${characterStore.slots})`)
     return
   }
   
