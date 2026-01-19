@@ -485,15 +485,20 @@ if not IS_SERVER then
 		local responseEventName = ("Client:Callback:Response:%s:%s"):format(args.eventName, SERVER_ID)
 		ig.log.Trace("CALLBACK:CLIENT", "Listening for response: %s", responseEventName)
 		
+		-- Flag to ensure handler only fires once
+		local handlerFired = false
+		
 		-- save the event data to remove it when resolved
 		local eventData = RegisterNetEvent(responseEventName,
 		function(packed)
-			ig.log.Debug("CALLBACK:CLIENT", "Received response for: %s", args.eventName)
+			-- CRITICAL: Prevent duplicate responses with early exit
+			if handlerFired then
+				ig.log.Warn("CALLBACK:CLIENT", "Duplicate response received for: %s (ignored)", args.eventName)
+				return
+			end
+			handlerFired = true
 			
-			-- CRITICAL FIX: Remove event handler immediately to prevent duplicate responses
-			-- This must happen BEFORE any processing to avoid race conditions
-			RemoveEventHandler(eventData)
-			ig.log.Trace("CALLBACK:CLIENT", "Event handler removed for: %s", responseEventName)
+			ig.log.Debug("CALLBACK:CLIENT", "Received response for: %s", args.eventName)
 			
 			local success, result = pcall(function()
 				return table_unpack(msgpack_unpack(packed))
@@ -552,12 +557,17 @@ if not IS_SERVER then
 		if not eventCallback then
 			ig.log.Debug("CALLBACK:CLIENT", "Awaiting synchronous response for: %s", args.eventName)
 			local result = Citizen.Await(prom)
-			-- No need to remove handler here - already removed in response handler
+			RemoveEventHandler(eventData)
+			ig.log.Trace("CALLBACK:CLIENT", "Event handler removed after sync completion: %s", args.eventName)
 			ig.log.Debug("CALLBACK:CLIENT", "Synchronous callback completed: %s", args.eventName)
 			return result
 		else
 			ig.log.Debug("CALLBACK:CLIENT", "Async callback registered for: %s", args.eventName)
-			-- Event handler already removed in response handler, no cleanup needed
+			-- For async callbacks, clean up after a delay to ensure callback completes
+			SetTimeout(100, function()
+				RemoveEventHandler(eventData)
+				ig.log.Trace("CALLBACK:CLIENT", "Event handler removed after async completion: %s", args.eventName)
+			end)
 		end
 	end
 	exports("TriggerServerCallback", TriggerServerCallback)
