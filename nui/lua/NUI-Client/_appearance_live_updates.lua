@@ -399,25 +399,35 @@ end)
 -- Cancel appearance customization
 RegisterNUICallback('Client:Appearance:Cancel', function(data, cb)
     ig.log.Trace("Appearance", "Cancel appearance customization")
-    
+    --
+    local ped = PlayerPedId()
+    if DoesEntityExist(ped) then
+        SetEntityVisible(ped, false, false)
+    end
+    --
     ig.nui.character.HideAppearance()
-
-    ig.fun.IsBusyPleaseWait(2500)
-
+    --
+    ig.func.IsBusyPleaseWait(2500)
+    --
     cb({ok = true})
 end)
 
 -- Cancel appearance and return to character selection (for character creation)
 RegisterNUICallback('Client:Appearance:CancelToCharacterSelect', function(data, cb)
     ig.log.Info("Appearance", "Canceling character creation - returning to character selection")
-
+    --
+    local ped = PlayerPedId()
+    if DoesEntityExist(ped) then
+        SetEntityVisible(ped, false, false)
+    end
+    --
     ig.nui.character.HideAppearance()
     -- Trigger event to reopen character selection
     -- The character selection handler should restore camera and UI
     ig.func.IsBusyPleaseWait(2500)
-
+    --
     ig.nui.character.ShowSelect()
-    
+    --   
     cb({ok = true})
 end)
 
