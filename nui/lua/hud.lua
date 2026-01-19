@@ -39,6 +39,8 @@ RegisterCommand('toggleHudFocus', function()
     end
     
     -- Trigger event for other resources to hook into
+    -- NOTE: This event is currently triggered but has no registered handlers
+    -- TODO: If HUD focus state needs to be consumed by other systems, add handlers
     TriggerEvent("Client:HUD:FocusToggled", hudFocused)
 end, false)
 
@@ -75,6 +77,9 @@ RegisterCommand('resetHudPosition', function()
     })
     
     ig.log.Info("HUD", "HUD position reset to default")
+    
+    -- NOTE: This event is currently triggered but has no registered handlers
+    -- TODO: If HUD position reset needs to be consumed by other systems, add handlers
     TriggerEvent("Client:HUD:PositionReset", hudPosition)
 end, false)
 
