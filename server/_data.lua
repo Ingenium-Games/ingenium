@@ -15,13 +15,31 @@ local reviveRegistered = false
 
 --- func desc
 function ig.data.CreateJobObjects()
-    local jobs = ig.job.GetJobs()
-    for k, v in pairs(jobs) do
-        if not ig.jdex[k] then
-            ig.jdex[k] = ig.class.Job(v)
+    -- Load jobs from JSON file
+    local jobs = ig.jobs
+    
+    for jobName, jobData in pairs(jobs) do
+        if not ig.jdex[jobName] then
+            -- Create job object with new structure
+            ig.jdex[jobName] = ig.class.Job({
+                Name = jobName,
+                Label = jobData.label or jobName,
+                Description = jobData.description or "",
+                Boss = jobData.boss,
+                Grades = jobData.grades or {},
+                Members = jobData.members or {},
+                Prices = jobData.prices or {},
+                Locations = jobData.locations or {sales = {}, delivery = {}, safe = nil},
+                Memos = jobData.memos or {},
+                Settings = jobData.settings or {showFinancials = true, allowEmployeeActions = true},
+                Inventory = json.encode({}),
+                Stock = json.encode({}),
+                Updated = ig.func.Timestamp()
+            })
         end
     end
-    ig.json.Write(conf.file.jobs, ig.jobs)
+    
+    ig.log.Info('Data', '- Job Objects Created: %d', ig.table.Count(ig.jdex))
 end
 
 --- func desc

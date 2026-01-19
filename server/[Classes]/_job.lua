@@ -14,33 +14,191 @@ function ig.class.Job(tab)
     self.Grades = tab.Grades
     self.Members = tab.Members
     self.Description = tab.Description
+    -- New JSON-based fields for Job Management UI
+    self.Prices = tab.Prices or {}
+    self.Locations = tab.Locations or {sales = {}, delivery = {}, safe = nil}
+    self.Memos = tab.Memos or {}
+    self.Settings = tab.Settings or {showFinancials = true, allowEmployeeActions = true}
     --
     self.Inventory = json.decode(tab.Inventory)
     self.Stock = json.decode(tab.Stock)
     self.Contact = conf.phone[self.Name] or false
     --
     self.Updated = tab.Updated
-    self.Save = false
+    self.IsDirty = false
     --- func desc
     self.SetUpdated = function()
         self.Updated = ig.func.Timestamp()
-        self.Save = true
+        self.IsDirty = true
     end
     --- func desc
     self.Saved = function()
-        self.Save = false
+        self.IsDirty = false
     end
     --- func desc
-    self.ShouldSave = function()
-         return self.Save
+    self.GetIsDirty = function()
+        return self.IsDirty
+    end
+    --- func desc
+    self.ClearDirty = function()
+        self.IsDirty = false
     end
     --- func desc
     self.GetName = function()
         return self.Name
     end
+    --- Get the job label (display name)
+    self.GetLabel = function()
+        return self.Label
+    end
     --- func desc
     self.GetGrades = function()
         return self.Grades
+    end
+    --- Get boss Character_ID
+    self.GetBoss = function()
+        return self.Boss
+    end
+    --- Get all members
+    self.GetMembers = function()
+        return self.Members
+    end
+    --- Get job settings
+    self.GetSettings = function()
+        return self.Settings
+    end
+    --- Update job settings
+    ---@param settings table Settings object {showFinancials, allowEmployeeActions}
+    self.SetSettings = function(settings)
+        if type(settings) == "table" then
+            self.Settings = settings
+            self.SetUpdated()
+        end
+    end
+    --- Get all prices
+    self.GetPrices = function()
+        return self.Prices
+    end
+    --- Set price for an item
+    ---@param itemName string The item name
+    ---@param price number The price value
+    self.SetPrice = function(itemName, price)
+        local p = ig.check.Number(price, 0, 999999)
+        if ig.item.Exists(itemName) then
+            self.Prices[itemName] = p
+            self.SetUpdated()
+        else
+            ig.log.Debug("Job", "Cannot set price for non-existent item: " .. tostring(itemName))
+        end
+    end
+    --- Remove price for an item
+    ---@param itemName string The item name
+    self.RemovePrice = function(itemName)
+        if self.Prices[itemName] then
+            self.Prices[itemName] = nil
+            self.SetUpdated()
+        end
+    end
+    --- Get all locations
+    self.GetLocations = function()
+        return self.Locations
+    end
+    --- Get sales locations
+    self.GetSalesLocations = function()
+        return self.Locations.sales or {}
+    end
+    --- Add sales location
+    ---@param location table {name, coords {x, y, z}}
+    self.AddSalesLocation = function(location)
+        if type(location) == "table" and location.name and location.coords then
+            if not self.Locations.sales then
+                self.Locations.sales = {}
+            end
+            table.insert(self.Locations.sales, location)
+            self.SetUpdated()
+        end
+    end
+    --- Remove sales location by index
+    ---@param index number Location array index
+    self.RemoveSalesLocation = function(index)
+        if self.Locations.sales and self.Locations.sales[index] then
+            table.remove(self.Locations.sales, index)
+            self.SetUpdated()
+        end
+    end
+    --- Get delivery locations
+    self.GetDeliveryLocations = function()
+        return self.Locations.delivery or {}
+    end
+    --- Add delivery location
+    ---@param location table {name, coords {x, y, z}}
+    self.AddDeliveryLocation = function(location)
+        if type(location) == "table" and location.name and location.coords then
+            if not self.Locations.delivery then
+                self.Locations.delivery = {}
+            end
+            table.insert(self.Locations.delivery, location)
+            self.SetUpdated()
+        end
+    end
+    --- Remove delivery location by index
+    ---@param index number Location array index
+    self.RemoveDeliveryLocation = function(index)
+        if self.Locations.delivery and self.Locations.delivery[index] then
+            table.remove(self.Locations.delivery, index)
+            self.SetUpdated()
+        end
+    end
+    --- Get safe location
+    self.GetSafeLocation = function()
+        return self.Locations.safe
+    end
+    --- Set safe location
+    ---@param location table {name, coords {x, y, z}} or nil to remove
+    self.SetSafeLocation = function(location)
+        if location == nil or (type(location) == "table" and location.name and location.coords) then
+            self.Locations.safe = location
+            self.SetUpdated()
+        end
+    end
+    --- Get all memos
+    self.GetMemos = function()
+        return self.Memos
+    end
+    --- Add memo
+    ---@param memo table {title, content, date, author, pinned}
+    self.AddMemo = function(memo)
+        if type(memo) == "table" and memo.title and memo.content then
+            memo.date = memo.date or os.date("!%Y-%m-%dT%H:%M:%SZ")
+            memo.pinned = memo.pinned or false
+            table.insert(self.Memos, memo)
+            self.SetUpdated()
+        end
+    end
+    --- Remove memo by index
+    ---@param index number Memo array index
+    self.RemoveMemo = function(index)
+        if self.Memos[index] then
+            table.remove(self.Memos, index)
+            self.SetUpdated()
+        end
+    end
+    --- Update memo by index
+    ---@param index number Memo array index
+    ---@param memo table Updated memo object
+    self.UpdateMemo = function(index, memo)
+        if self.Memos[index] and type(memo) == "table" then
+            self.Memos[index] = memo
+            self.SetUpdated()
+        end
+    end
+    --- Toggle memo pinned status
+    ---@param index number Memo array index
+    self.ToggleMemoPinned = function(index)
+        if self.Memos[index] then
+            self.Memos[index].pinned = not self.Memos[index].pinned
+            self.SetUpdated()
+        end
     end
     --- func desc
     self.GetGradeSalery = function(Grade)

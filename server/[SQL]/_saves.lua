@@ -253,30 +253,48 @@ end
 
 --[[ Jobs ]] --
 
-local JobSaveData = -1
-ig.sql.PrepareQuery("UPDATE `job_accounts` SET `Accounts` = ? WHERE `Name` = ?;", function(id)
-    JobSaveData = id
-end)
-
---- Save All Job Accounts
----@param cb function "To be called on SQL 'UPDATE' statements are completed."
+--- Save All Jobs to JSON (Jobs are now JSON-based, not SQL)
+---@param cb function "To be called on save completion."
 function ig.sql.save.Jobs(cb)
+    local startTime = os.clock()
+    local saveCount = 0
     local xJobs = ig.data.GetJobs()
-    for k, data in pairs(xJobs) do
-        if (data.GetIsDirty() == true) then
-            -- Tables require JSON Encoding.
-            local Accounts = json.encode(data.GetAccounts(false))
-            -- 
-            local Name = data.GetName()
-            ig.sql.ExecutePrepared(JobSaveData, {
-                Accounts,
-                -- Where Conditions
-                Name
-            }, function(r)
-                data.ClearDirty()
-            end)
+    local jobsData = {}
+    
+    -- Build jobs data structure from job objects
+    for jobName, jobObj in pairs(xJobs) do
+        if jobObj.GetIsDirty() then
+            saveCount = saveCount + 1
+            jobsData[jobName] = {
+                label = jobObj.GetLabel(),
+                description = jobObj.GetDescription(),
+                boss = jobObj.GetBoss(),
+                grades = jobObj.GetGrades(),
+                members = jobObj.GetMembers(),
+                prices = jobObj.GetPrices(),
+                locations = jobObj.GetLocations(),
+                memos = jobObj.GetMemos(),
+                settings = jobObj.GetSettings()
+            }
+            jobObj.ClearDirty()
+        else
+            -- Keep existing data for non-dirty jobs
+            if ig.jobs[jobName] then
+                jobsData[jobName] = ig.jobs[jobName]
+            end
         end
     end
+    
+    -- Write to JSON file
+    if saveCount > 0 then
+        ig.json.Write(conf.file.jobs, jobsData)
+        -- Update runtime table
+        ig.jobs = jobsData
+        
+        local elapsed = (os.clock() - startTime) * 1000
+        ig.log.Info("SQL", "Saved %d jobs to JSON in %.2fms", saveCount, elapsed)
+    end
+    
     if cb then
         cb()
     end

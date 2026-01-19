@@ -90,10 +90,13 @@ set mysql_connection_limit "10"
 ### Appearance System
 - Character customization and appearance management
 
-### Job Management System
+### Job Management System (Recently Updated - 2025-01-16) ✅ NEW
+- **[Job Management System Quick Reference](./Job_Management_System_Quick_Reference.md)** - Quick start guide and API reference
+- **[Job Management System Developer Guide](./Job_Management_System_Developer_Guide.md)** - Complete technical documentation
 - **[Job Management UI](./Job_Management_UI.md)** - Complete job management interface documentation
 - **[Job Management Implementation](../Implementations/Job_Management_UI_Implementation.md)** - Server integration guide
 - **[Job Management Visual Guide](./Job_Management_UI_Visual_Guide.md)** - UI component preview and styling
+- **Changes**: Complete restructure from SQL to JSON-based storage, 30+ new class methods, ACE-based admin commands
 
 ### Drop System
 - Item drop mechanics and world interaction

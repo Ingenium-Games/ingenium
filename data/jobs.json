@@ -1,240 +1,759 @@
 {
   "none": {
-    "Unemployed": {
-      "org": "Unemployed",
-      "rank": 1
+    "label": "Unemployed",
+    "description": "Not currently employed",
+    "boss": null,
+    "grades": {
+      "Unemployed": {
+        "org": "Unemployed",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": false
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": false
     }
   },
   "police": {
-    "Cadet": {
-      "org": "Police Department",
-      "rank": 1
+    "label": "Police Department",
+    "description": "Law enforcement agency serving the city",
+    "boss": null,
+    "grades": {
+      "Cadet": {
+        "org": "Police Department",
+        "rank": 1,
+        "pay": 17,
+        "isBoss": false
+      },
+      "Junior Officer": {
+        "org": "Police Department",
+        "rank": 2,
+        "pay": 20,
+        "isBoss": false
+      },
+      "Officer": {
+        "org": "Police Department",
+        "rank": 3,
+        "pay": 22,
+        "isBoss": false
+      },
+      "Senior Officer": {
+        "org": "Police Department",
+        "rank": 4,
+        "pay": 26,
+        "isBoss": false
+      },
+      "Cheif of Police": {
+        "org": "Police Department",
+        "rank": 5,
+        "pay": 33,
+        "isBoss": true
+      }
     },
-    "Junior Officer": {
-      "org": "Police Department",
-      "rank": 2
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
     },
-    "Officer": {
-      "org": "Police Department",
-      "rank": 3
-    },
-    "Senior Officer": {
-      "org": "Police Department",
-      "rank": 4
-    },
-    "Cheif of Police": {
-      "org": "Police Department",
-      "rank": 5
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "medic": {
-    "Trainee": {
-      "org": "Emergancy Medical Services",
-      "rank": 1
+    "label": "Emergency Medical Services",
+    "description": "Emergency medical response and hospital services",
+    "boss": null,
+    "grades": {
+      "Trainee": {
+        "org": "Emergency Medical Services",
+        "rank": 1,
+        "pay": 16,
+        "isBoss": false
+      },
+      "Paramedic": {
+        "org": "Emergency Medical Services",
+        "rank": 2,
+        "pay": 21,
+        "isBoss": false
+      },
+      "Doctor": {
+        "org": "Emergency Medical Services",
+        "rank": 3,
+        "pay": 28,
+        "isBoss": false
+      },
+      "Cheif Medical Officer": {
+        "org": "Emergency Medical Services",
+        "rank": 4,
+        "pay": 35,
+        "isBoss": true
+      }
     },
-    "Paramedic": {
-      "org": "Emergancy Medical Services",
-      "rank": 2
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
     },
-    "Doctor": {
-      "org": "Emergancy Medical Services",
-      "rank": 3
-    },
-    "Cheif Medical Officer": {
-      "org": "Emergancy Medical Services",
-      "rank": 4
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "pdm": {
-    "Pre-Delivery": {
-      "org": "Premium Motor Sport",
-      "rank": 1
+    "label": "Premium Motor Sport",
+    "description": "Luxury and performance vehicle dealership",
+    "boss": null,
+    "grades": {
+      "Pre-Delivery": {
+        "org": "Premium Motor Sport",
+        "rank": 1,
+        "pay": 18,
+        "isBoss": false
+      },
+      "Floor Sales": {
+        "org": "Premium Motor Sport",
+        "rank": 2,
+        "pay": 23,
+        "isBoss": false
+      },
+      "Sales Expert": {
+        "org": "Premium Motor Sport",
+        "rank": 3,
+        "pay": 28,
+        "isBoss": false
+      },
+      "Operations Director": {
+        "org": "Premium Motor Sport",
+        "rank": 4,
+        "pay": 35,
+        "isBoss": true
+      }
     },
-    "Floor Sales": {
-      "org": "Premium Motor Sport",
-      "rank": 2
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
     },
-    "Sales Expert": {
-      "org": "Premium Motor Sport",
-      "rank": 3
-    },
-    "Operations Director": {
-      "org": "Premium Motor Sport",
-      "rank": 4
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "mechanic": {
-    "Apprentice": {
-      "org": "Benny's Original Motorworks",
-      "rank": 1
+    "label": "Benny's Original Motorworks",
+    "description": "Vehicle repair and customization services",
+    "boss": null,
+    "grades": {
+      "Apprentice": {
+        "org": "Benny's Original Motorworks",
+        "rank": 1,
+        "pay": 15,
+        "isBoss": false
+      },
+      "Mechanic": {
+        "org": "Benny's Original Motorworks",
+        "rank": 2,
+        "pay": 22,
+        "isBoss": false
+      },
+      "Import Logistics": {
+        "org": "Benny's Original Motorworks",
+        "rank": 3,
+        "pay": 28,
+        "isBoss": false
+      },
+      "Boss Man": {
+        "org": "Benny's Original Motorworks",
+        "rank": 4,
+        "pay": 35,
+        "isBoss": true
+      }
     },
-    "Mechanic": {
-      "org": "Benny's Original Motorworks",
-      "rank": 2
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
     },
-    "Import Logistics": {
-      "org": "Benny's Original Motorworks",
-      "rank": 3
-    },
-    "Boss Man": {
-      "org": "Benny's Original Motorworks",
-      "rank": 4
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "news": {
-    "Intern": {
-      "org": "Wezeal News",
-      "rank": 1
+    "label": "Weazel News",
+    "description": "News broadcasting and journalism",
+    "boss": null,
+    "grades": {
+      "Intern": {
+        "org": "Weazel News",
+        "rank": 1,
+        "pay": 14,
+        "isBoss": false
+      },
+      "Camera Crew": {
+        "org": "Weazel News",
+        "rank": 2,
+        "pay": 18,
+        "isBoss": false
+      },
+      "Reporter": {
+        "org": "Weazel News",
+        "rank": 3,
+        "pay": 24,
+        "isBoss": false
+      },
+      "DJ Mixer": {
+        "org": "Weazel News",
+        "rank": 4,
+        "pay": 28,
+        "isBoss": false
+      },
+      "News Anchor": {
+        "org": "Weazel News",
+        "rank": 5,
+        "pay": 35,
+        "isBoss": true
+      }
     },
-    "Camera Crew": {
-      "org": "Wezeal News",
-      "rank": 2
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
     },
-    "Reporter": {
-      "org": "Wezeal News",
-      "rank": 3
-    },
-    "DJ Mixer": {
-      "org": "Wezeal News",
-      "rank": 4
-    },
-    "News Anchor": {
-      "org": "Wezeal News",
-      "rank": 5
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "garbage": {
-    "Waste Colector": {
-      "org": "Desperado's Waste Services",
-      "rank": 1
+    "label": "Desperado's Waste Services",
+    "description": "Waste collection and recycling services",
+    "boss": null,
+    "grades": {
+      "Waste Colector": {
+        "org": "Desperado's Waste Services",
+        "rank": 1,
+        "pay": 14,
+        "isBoss": false
+      },
+      "Heavy Colections": {
+        "org": "Desperado's Waste Services",
+        "rank": 2,
+        "pay": 18,
+        "isBoss": false
+      },
+      "Renew Technition": {
+        "org": "Desperado's Waste Services",
+        "rank": 3,
+        "pay": 24,
+        "isBoss": false
+      },
+      "Service Logistic Manager": {
+        "org": "Desperado's Waste Services",
+        "rank": 4,
+        "pay": 30,
+        "isBoss": true
+      }
     },
-    "Heavy Colections": {
-      "org": "Desperado's Waste Services",
-      "rank": 2
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
     },
-    "Renew Technition": {
-      "org": "Desperado's Waste Services",
-      "rank": 3
-    },
-    "Service Logistic Manager": {
-      "org": "Desperado's Waste Services",
-      "rank": 4
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "vargos": {
-    "Repin Yellow": {
-      "org": "Vargos",
-      "rank": 1
+    "label": "Vargos",
+    "description": "Vargos street organization",
+    "boss": null,
+    "grades": {
+      "Repin Yellow": {
+        "org": "Vargos",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "ballers": {
-    "Repin Purple": {
-      "org": "Ballers",
-      "rank": 1
+    "label": "Ballers",
+    "description": "Ballers street organization",
+    "boss": null,
+    "grades": {
+      "Repin Purple": {
+        "org": "Ballers",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "famillies": {
-    "Repin Green": {
-      "org": "Famillies",
-      "rank": 1
+    "label": "Families",
+    "description": "Families street organization",
+    "boss": null,
+    "grades": {
+      "Repin Green": {
+        "org": "Famillies",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "aztecas": {
-    "Repin Red": {
-      "org": "Aztecas",
-      "rank": 1
+    "label": "Aztecas",
+    "description": "Aztecas street organization",
+    "boss": null,
+    "grades": {
+      "Repin Red": {
+        "org": "Aztecas",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "pepe": {
-    "Delivery Driver": {
-      "org": "Pepe's Pizzaria",
-      "rank": 1
+    "label": "Pepe's Pizzaria",
+    "description": "Pizza delivery and restaurant services",
+    "boss": null,
+    "grades": {
+      "Delivery Driver": {
+        "org": "Pepe's Pizzaria",
+        "rank": 1,
+        "pay": 15,
+        "isBoss": false
+      },
+      "Pizza Chef": {
+        "org": "Pepe's Pizzaria",
+        "rank": 2,
+        "pay": 20,
+        "isBoss": false
+      },
+      "Franchisee": {
+        "org": "Pepe's Pizzaria",
+        "rank": 3,
+        "pay": 30,
+        "isBoss": true
+      }
     },
-    "Pizza Chef": {
-      "org": "Pepe's Pizzaria",
-      "rank": 2
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
     },
-    "Franchisee": {
-      "org": "Pepe's Pizzaria",
-      "rank": 3
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "postal": {
-    "Delivery Driver": {
-      "org": "Go Postal",
-      "rank": 1
+    "label": "Go Postal",
+    "description": "Package and mail delivery services",
+    "boss": null,
+    "grades": {
+      "Delivery Driver": {
+        "org": "Go Postal",
+        "rank": 1,
+        "pay": 16,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "mining": {
-    "Miner": {
-      "org": "Caveat Cutters Union",
-      "rank": 1
+    "label": "Caveat Cutters Union",
+    "description": "Mining and resource extraction operations",
+    "boss": null,
+    "grades": {
+      "Miner": {
+        "org": "Caveat Cutters Union",
+        "rank": 1,
+        "pay": 18,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "lumber": {
-    "Wood Cutter": {
-      "org": "Chippy Chop'ns Wood Shop'n",
-      "rank": 1
+    "label": "Chippy Chop'ns Wood Shop'n",
+    "description": "Lumber harvesting and processing",
+    "boss": null,
+    "grades": {
+      "Wood Cutter": {
+        "org": "Chippy Chop'ns Wood Shop'n",
+        "rank": 1,
+        "pay": 16,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "chicken": {
-    "Chicken Packer": {
-      "org": "Cluckin' Bell",
-      "rank": 1
+    "label": "Cluckin' Bell",
+    "description": "Poultry processing facility",
+    "boss": null,
+    "grades": {
+      "Chicken Packer": {
+        "org": "Cluckin' Bell",
+        "rank": 1,
+        "pay": 14,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "bank": {
-    "Associate": {
-      "org": "Fleeca",
-      "rank": 1
+    "label": "Fleeca",
+    "description": "Financial services and banking",
+    "boss": null,
+    "grades": {
+      "Associate": {
+        "org": "Fleeca",
+        "rank": 1,
+        "pay": 25,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "city": {
-    "Major": {
-      "org": "State Department",
-      "rank": 1
+    "label": "State Department",
+    "description": "City government and administration",
+    "boss": null,
+    "grades": {
+      "Major": {
+        "org": "State Department",
+        "rank": 1,
+        "pay": 40,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "logistics": {
-    "Driver": {
-      "org": "OP Logistics",
-      "rank": 1
+    "label": "OP Logistics",
+    "description": "Freight and logistics management",
+    "boss": null,
+    "grades": {
+      "Driver": {
+        "org": "OP Logistics",
+        "rank": 1,
+        "pay": 20,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   },
   "altruists": {
-    "Repin Nude": {
-      "org": "Altruists",
-      "rank": 1
+    "label": "Altruists",
+    "description": "Altruist cult organization",
+    "boss": null,
+    "grades": {
+      "Repin Nude": {
+        "org": "Altruists",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "lostsc": {
-    "Repin Bikes": {
-      "org": "Lost SC",
-      "rank": 1
+    "label": "Lost Santos Chapter",
+    "description": "Lost Santos Chapter motorcycle club",
+    "boss": null,
+    "grades": {
+      "Repin Bikes": {
+        "org": "Lost SC",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "marabunta": {
-    "Repin Things": {
-      "org": "Marabuntas",
-      "rank": 1
+    "label": "Marabunta Grande",
+    "description": "Marabunta Grande organization",
+    "boss": null,
+    "grades": {
+      "Repin Things": {
+        "org": "Marabuntas",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "triads": {
-    "Repin Golden Dragons": {
-      "org": "Triads",
-      "rank": 1
+    "label": "Triads",
+    "description": "Triads criminal organization",
+    "boss": null,
+    "grades": {
+      "Repin Golden Dragons": {
+        "org": "Triads",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "lostmc": {
-    "Repin Bikes": {
-      "org": "Lost MC",
-      "rank": 1
+    "label": "Lost Motorcycle Club",
+    "description": "Lost Motorcycle Club",
+    "boss": null,
+    "grades": {
+      "Repin Bikes": {
+        "org": "Lost MC",
+        "rank": 1,
+        "pay": 0,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": false,
+      "allowEmployeeActions": true
     }
   },
   "taxi": {
-    "Driver": {
-      "org": "Taxi Service",
-      "rank": 1
+    "label": "Taxi Service",
+    "description": "Taxi and transportation services",
+    "boss": null,
+    "grades": {
+      "Driver": {
+        "org": "Taxi Service",
+        "rank": 1,
+        "pay": 18,
+        "isBoss": true
+      }
+    },
+    "members": [],
+    "prices": {},
+    "locations": {
+      "sales": [],
+      "delivery": [],
+      "safe": null
+    },
+    "memos": [],
+    "settings": {
+      "showFinancials": true,
+      "allowEmployeeActions": true
     }
   }
 }
