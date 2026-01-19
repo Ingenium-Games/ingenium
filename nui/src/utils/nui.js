@@ -203,6 +203,7 @@ export function setupNuiHandlers() {
   let appearanceStore = null
   let bankingStore = null
   let jobStore = null
+  let phoneStore = null
   
   console.log('[setupNuiHandlers] Attaching window message event listener')
   
@@ -446,6 +447,36 @@ export function setupNuiHandlers() {
         }
         break
       
+      // Phone system
+      case 'Client:NUI:PhoneOpen':
+        if (!phoneStore) {
+          import('../stores/phone.js').then(module => {
+            phoneStore = module.usePhoneStore()
+            phoneStore.open(data)
+          })
+        } else {
+          phoneStore.open(data)
+        }
+        break
+      
+      case 'Client:NUI:PhoneClose':
+        if (phoneStore) {
+          phoneStore.close()
+        }
+        break
+      
+      case 'Client:NUI:PhoneSettingsUpdated':
+        if (phoneStore) {
+          phoneStore.updateSettings(data)
+        }
+        break
+      
+      case 'Client:NUI:PhoneContactsUpdated':
+        if (phoneStore) {
+          phoneStore.updateContacts(data)
+        }
+        break
+      
       default:
         console.log('Unhandled NUI message:', message, data)
         break
@@ -464,6 +495,9 @@ export function setupNuiHandlers() {
       if (chatStore.isVisible) {
         chatStore.hide()
         sendNuiMessage('NUI:Client:ChatClose')
+      } else if (phoneStore && phoneStore.isVisible) {
+        phoneStore.close()
+        sendNuiMessage('NUI:Client:PhoneClose')
       } else if (jobStore && jobStore.isVisible) {
         jobStore.close()
         sendNuiMessage('NUI:Client:JobClose')
