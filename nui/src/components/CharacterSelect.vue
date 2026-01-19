@@ -218,23 +218,21 @@ async function confirmCancelCreate() {
   showCancelConfirm.value = false
   
   try {
-    console.log('[CharacterSelect] Sending NUI:Client:CancelCharacterCreation to Lua')
-    // Don't await - just send the message
-    sendNuiMessage('NUI:Client:CancelCharacterCreation', {})
-    
     console.log('[CharacterSelect] Resetting form state')
     newCharacter.value = { firstName: '', lastName: '' }
     
-    console.log('[CharacterSelect] Closing appearance store')
-    appearanceStore.close()
+    console.log('[CharacterSelect] Canceling character creation via appearance store')
+    // Use the appearance store's cancel method which handles the proper callback
+    // based on isCreatingCharacter flag (Client:Appearance:CancelToCharacterSelect)
+    await appearanceStore.cancel()
     
-    console.log('[CharacterSelect] Canceling character creation in store')
+    console.log('[CharacterSelect] Resetting creation flag in character store')
     characterStore.cancelCreatingCharacter()
     
     console.log('[CharacterSelect] Cancel complete')
   } catch (error) {
     console.error('[CharacterSelect] Error canceling character creation:', error)
-    // Still return to character selection even on error
+    // Still reset state even on error
     characterStore.cancelCreatingCharacter()
   }
 }

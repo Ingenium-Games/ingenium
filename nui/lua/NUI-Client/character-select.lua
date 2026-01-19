@@ -168,12 +168,6 @@ RegisterNUICallback("NUI:Client:CancelCharacterCreation", function(data, cb)
         SetEntityVisible(ped, false, false)
     end
     
-    -- Reset camera to third person
-    SetFollowPedCamViewMode(0)
-    
-    -- Show character selection UI
-    ig.nui.character.ShowSelect()
-    
     cb({
         message = "ok",
         data = "Character creation canceled"

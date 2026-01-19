@@ -7,6 +7,7 @@
 -- Camera storage
 local appearanceCameras = {
     face = nil,
+    hands = nil,  -- New camera for accessories/wrists
     body = nil,
     legs = nil,
     feet = nil,
@@ -48,7 +49,7 @@ local function CreateAppearanceCameras(ped)
     
     -- Create cameras at different heights
     -- All cameras positioned directly behind ped (180°) with FOV adjustments for different views
-    -- Face camera - directly behind, tight FOV, head level
+    -- Face camera - directly behind, very tight FOV for detailed face view (30% more zoom)
     local faceRadians = math.rad(heading + 180.0)  -- Directly behind
     local faceDistance = 2.0
     local faceOffsetX = math.sin(faceRadians) * faceDistance
@@ -61,11 +62,30 @@ local function CreateAppearanceCameras(ped)
         0.0,
         0.0,
         heading - 180.0,
-        35.0,  -- Tighter FOV to zoom on face
+        24.5,  -- Very tight FOV for detailed face view (30% more zoom)
         false,
         2
     )
     ig.camera.PointAtEntity(appearanceCameras.face, ped, 0.0, 0.0, 0.65, true)  -- Point at head
+    
+    -- Hands camera - directly behind, tight FOV, chest/hand level for accessories
+    local handsRadians = math.rad(heading + 180.0)  -- Directly behind
+    local handsDistance = 2.0
+    local handsOffsetX = math.sin(handsRadians) * handsDistance
+    local handsOffsetY = math.cos(handsRadians) * handsDistance
+    
+    appearanceCameras.hands = ig.camera.Basic(
+        coords.x + handsOffsetX,
+        coords.y + handsOffsetY,
+        coords.z + 0.2,  -- Chest/hand level
+        0.0,
+        0.0,
+        heading - 180.0,
+        32.0,  -- Tight FOV to see hands/wrists clearly
+        false,
+        2
+    )
+    ig.camera.PointAtEntity(appearanceCameras.hands, ped, 0.0, 0.0, 0.2, true)  -- Point at hands/chest area
     
     -- Body camera - directly behind, moderate FOV, chest level
     local bodyRadians = math.rad(heading + 180.0)  -- Directly behind
@@ -145,6 +165,7 @@ local function CreateAppearanceCameras(ped)
     
     -- Set all cameras to inactive initially (best practice)
     SetCamActive(appearanceCameras.face, false)
+    SetCamActive(appearanceCameras.hands, false)
     SetCamActive(appearanceCameras.body, false)
     SetCamActive(appearanceCameras.legs, false)
     SetCamActive(appearanceCameras.feet, false)
@@ -224,6 +245,11 @@ local function CleanupAppearanceCameras()
         SetCamActive(appearanceCameras.face, false)
         ig.camera.CleanUp(appearanceCameras.face)
         appearanceCameras.face = nil
+    end
+    if appearanceCameras.hands then
+        SetCamActive(appearanceCameras.hands, false)
+        ig.camera.CleanUp(appearanceCameras.hands)
+        appearanceCameras.hands = nil
     end
     if appearanceCameras.body then
         SetCamActive(appearanceCameras.body, false)

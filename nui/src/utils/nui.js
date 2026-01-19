@@ -75,9 +75,10 @@ function checkSpam(eventName, threshold) {
  * Check if callback should be throttled
  */
 function shouldThrottle(eventName) {
-  // Explicitly exclude UpdateHeadBlend from throttling for smooth slider updates
-  if (eventName === 'Client:Appearance:UpdateHeadBlend') {
-    return false // Never throttle heritage sliders
+  // Explicitly exclude these from throttling for smooth slider/immediate updates
+  if (eventName === 'Client:Appearance:UpdateHeadBlend' || 
+      eventName === 'Client:Appearance:UpdateHeadOverlay') {
+    return false // Never throttle these events
   }
   
   const now = Date.now()

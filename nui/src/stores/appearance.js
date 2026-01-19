@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 import { callClientCallback } from '../utils/nui'
+import { useCharacterStore } from './character'
 
 export const useAppearanceStore = defineStore('appearance', () => {
   // State
@@ -444,7 +445,18 @@ export const useAppearanceStore = defineStore('appearance', () => {
   }
   
   async function cancel() {
-    await callClientCallback('Client:Appearance:Cancel')
+    // Check if this is character creation mode using the character store
+    const characterStore = useCharacterStore()
+    const isCreating = characterStore.isCreatingCharacter
+    
+    if (isCreating) {
+      // Character creation - return to character selection
+      await callClientCallback('Client:Appearance:CancelToCharacterSelect')
+    } else {
+      // Normal appearance edit - just cancel
+      await callClientCallback('Client:Appearance:Cancel')
+    }
+    
     close()
   }
   

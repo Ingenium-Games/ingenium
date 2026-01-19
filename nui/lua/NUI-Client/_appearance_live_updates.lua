@@ -402,6 +402,23 @@ RegisterNUICallback('Client:Appearance:Cancel', function(data, cb)
     
     -- Close NUI
     SetNuiFocus(false, false)
+
+    ig.fun.IsBusyPleaseWait(2500)
+
+    
+    
+    cb({ok = true})
+end)
+
+-- Cancel appearance and return to character selection (for character creation)
+RegisterNUICallback('Client:Appearance:CancelToCharacterSelect', function(data, cb)
+    ig.log.Info("Appearance", "Canceling character creation - returning to character selection")
+    
+    -- Trigger event to reopen character selection
+    -- The character selection handler should restore camera and UI
+    ig.fun.IsBusyPleaseWait(2500)
+
+    ig.nui.character.ShowSelect()
     
     cb({ok = true})
 end)
