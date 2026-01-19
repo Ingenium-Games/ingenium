@@ -207,10 +207,7 @@ export function setupNuiHandlers() {
     
     const { message, data } = payload
     
-    console.log('[handleMessage] ========================================')
-    console.log('[handleMessage] Processing message:', message)
-    console.log('[handleMessage] Data:', data)
-    console.log('[handleMessage] ========================================')
+    console.log('[handleMessage] Processing message:', message, '| Data keys:', data ? Object.keys(data).join(', ') : 'none')
     
     try {
       switch (message) {

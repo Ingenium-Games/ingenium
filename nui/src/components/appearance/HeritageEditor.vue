@@ -151,7 +151,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import { useAppearanceStore } from '../../stores/appearance'
 
 const appearanceStore = useAppearanceStore()
@@ -291,6 +291,37 @@ onMounted(() => {
   const fatherSkinList = heritageFaces.value['male'] || []
   if (fatherSkinList.length > 0 && !headBlend.value.skinSecond) {
     updateSkinSecond(fatherSkinList[0])
+  }
+})
+
+// Watch model changes - reset to defaults when switching back to freemode
+watch(() => appearanceStore.currentAppearance?.model, (newModel, oldModel) => {
+  // Only reset if switching back to a freemode ped from a non-freemode ped
+  const isNewFreemode = newModel === 'mp_m_freemode_01' || newModel === 'mp_f_freemode_01'
+  const wasOldFreemode = oldModel === 'mp_m_freemode_01' || oldModel === 'mp_f_freemode_01'
+  
+  // Reset heritage to defaults when returning to freemode
+  if (isNewFreemode && !wasOldFreemode) {
+    console.log('[HeritageEditor] Model changed back to freemode, resetting heritage to defaults')
+    
+    // Reset to first index for each heritage component
+    const motherList = heritageFaces.value['female'] || []
+    if (motherList.length > 0) {
+      updateShapeFirst(motherList[0])
+      updateSkinFirst(motherList[0])
+    }
+    
+    const fatherList = heritageFaces.value['male'] || []
+    if (fatherList.length > 0) {
+      updateShapeSecond(fatherList[0])
+      updateSkinSecond(fatherList[0])
+    }
+    
+    // Reset gender toggles to defaults
+    motherFaceGender.value = 'female'
+    fatherFaceGender.value = 'male'
+    motherSkinGender.value = 'female'
+    fatherSkinGender.value = 'male'
   }
 })
 </script>

@@ -34,14 +34,14 @@
           
           <div class="form-actions">
             <button type="submit" class="btn-create">Create</button>
-            <button 
-              type="button" 
-              @click.prevent.stop="cancelCreate"
-              class="btn-cancel"
-            >Cancel</button>
           </div>
         </fieldset>
       </form>
+      <button 
+        type="button" 
+        @click="cancelCreate"
+        class="btn-cancel btn-cancel-outside"
+      >Cancel</button>
     </div>
     
     <!-- Character Selection -->
@@ -541,6 +541,35 @@ function formatDate(dateString) {
 
 .btn-cancel:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* Cancel button positioned outside form - styled like quit button */
+.btn-cancel-outside {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(239, 68, 68, 0.5);
+  border-radius: 8px;
+  color: rgba(239, 68, 68, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  z-index: 100;
+  min-width: auto;
+}
+
+.btn-cancel-outside:hover {
+  background: rgba(239, 68, 68, 0.9);
+  border-color: rgba(239, 68, 68, 1);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
 
 /* Quit Button */

@@ -578,8 +578,8 @@ function ig.appearance.SetCameraView(mode)
     -- Calculate camera position with rotation
     local rad = math.rad(heading + cameraRotation)
     local camPos = vector3(
-        coords.x + (view.offset.x * math.sin(rad)),
-        coords.y - (view.offset.x * math.cos(rad)),
+        coords.x + (view.offset.y * math.sin(rad)),
+        coords.y + (view.offset.y * math.cos(rad)),
         coords.z + view.offset.z
     )
     
