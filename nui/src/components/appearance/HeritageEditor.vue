@@ -269,29 +269,33 @@ watch(fatherSkinGender, (newGender) => {
 
 // Initialize defaults on mount
 onMounted(() => {
-  // Set mother face to first female face
-  const motherList = heritageFaces.value['female'] || []
-  if (motherList.length > 0 && !headBlend.value.shapeFirst) {
-    updateShapeFirst(motherList[0])
-  }
-  
-  // Set father face to first male face
-  const fatherList = heritageFaces.value['male'] || []
-  if (fatherList.length > 0 && !headBlend.value.shapeSecond) {
-    updateShapeSecond(fatherList[0])
-  }
-  
-  // Set mother skin to first female skin
-  const motherSkinList = heritageFaces.value['female'] || []
-  if (motherSkinList.length > 0 && !headBlend.value.skinFirst) {
-    updateSkinFirst(motherSkinList[0])
-  }
-  
-  // Set father skin to first male skin
-  const fatherSkinList = heritageFaces.value['male'] || []
-  if (fatherSkinList.length > 0 && !headBlend.value.skinSecond) {
-    updateSkinSecond(fatherSkinList[0])
-  }
+  nextTick(() => {
+    // Always initialize all heritage values to proper defaults for freemode peds
+    const femaleList = heritageFaces.value['female'] || []
+    const maleList = heritageFaces.value['male'] || []
+    
+    console.log('[HeritageEditor] onMounted - initializing heritage')
+    console.log('[HeritageEditor] Female list length:', femaleList.length, 'Male list length:', maleList.length)
+    console.log('[HeritageEditor] Current headBlend:', JSON.stringify(headBlend.value))
+    
+    if (femaleList.length > 0 && maleList.length > 0) {
+      // Always set defaults on mount - don't check existing values
+      // This ensures proper initialization when appearance menu opens
+      console.log('[HeritageEditor] Setting all heritage defaults')
+      
+      // Set gender toggles
+      motherFaceGender.value = 'female'
+      fatherFaceGender.value = 'male'
+      motherSkinGender.value = 'female'
+      fatherSkinGender.value = 'male'
+      
+      // Set all 4 heritage values to first in their respective lists
+      updateShapeFirst(femaleList[0])    // Mother face
+      updateShapeSecond(maleList[0])     // Father face  
+      updateSkinFirst(femaleList[0])     // Mother skin
+      updateSkinSecond(maleList[0])      // Father skin
+    }
+  })
 })
 
 // Watch model changes - reset to defaults when switching to freemode
@@ -304,38 +308,36 @@ watch(() => appearanceStore.currentAppearance?.model, (newModel, oldModel) => {
   if (isNewFreemode) {
     console.log('[HeritageEditor] Model changed to freemode, resetting all heritage fields to defaults')
     
-    // FIRST: Reset gender toggles to defaults
-    // This updates the computed properties (motherFaceList, fatherFaceList, etc.)
-    motherFaceGender.value = 'female'
-    fatherFaceGender.value = 'male'
-    motherSkinGender.value = 'female'
-    fatherSkinGender.value = 'male'
+    const femaleList = heritageFaces.value['female'] || []
+    const maleList = heritageFaces.value['male'] || []
     
-      // THEN: Reset all 4 heritage fields using the computed property lists
-      // Need to use setTimeout to ensure computed properties have updated
+    if (femaleList.length > 0 && maleList.length > 0) {
+      // FIRST: Reset gender toggles to defaults
+      motherFaceGender.value = 'female'
+      fatherFaceGender.value = 'male'
+      motherSkinGender.value = 'female'
+      fatherSkinGender.value = 'male'
+      
+      // THEN: Update all heritage values in one go
       nextTick(() => {
-        if (motherFaceList.value.length > 0) {
-          console.log('[HeritageEditor] Resetting shapeFirst (Mother Face) to:', motherFaceList.value[0])
-          updateShapeFirst(motherFaceList.value[0])
-        }
-      
-        if (fatherFaceList.value.length > 0) {
-          console.log('[HeritageEditor] Resetting shapeSecond (Father Face) to:', fatherFaceList.value[0])
-          updateShapeSecond(fatherFaceList.value[0])
-        }
-      
-        if (motherSkinList.value.length > 0) {
-          console.log('[HeritageEditor] Resetting skinFirst (Mother Skin) to:', motherSkinList.value[0])
-          updateSkinFirst(motherSkinList.value[0])
-        }
-      
-        if (fatherSkinList.value.length > 0) {
-          console.log('[HeritageEditor] Resetting skinSecond (Father Skin) to:', fatherSkinList.value[0])
-          updateSkinSecond(fatherSkinList.value[0])
-        }
+        console.log('[HeritageEditor] Setting heritage - Mother Face:', femaleList[0], 'Father Face:', maleList[0])
+        console.log('[HeritageEditor] Setting heritage - Mother Skin:', femaleList[0], 'Father Skin:', maleList[0])
+        
+        // Update all 4 values at once using the store's updateHeadBlend
+        appearanceStore.updateHeadBlend({
+          shapeFirst: femaleList[0],    // Mother face - first female
+          shapeSecond: maleList[0],      // Father face - first male
+          skinFirst: femaleList[0],      // Mother skin - first female
+          skinSecond: maleList[0],       // Father skin - first male
+          shapeMix: 0.5,                 // 50% blend
+          skinMix: 0.5,                  // 50% blend
+          thirdMix: 0.0                  // No third parent
+        })
       })
+    }
   }
 })
+
 </script>
 
 <style scoped>

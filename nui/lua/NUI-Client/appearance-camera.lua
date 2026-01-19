@@ -51,21 +51,21 @@ local function CreateAppearanceCameras(ped)
     appearanceCameras.face = ig.camera.Basic(
         coords.x + rightX,
         coords.y + rightY,
-        coords.z + 0.6,  -- Head height
-        -10.0,  -- Slight downward angle
+        coords.z + 0.65,  -- Head height (slightly higher)
+        0.0,  -- Level angle
         0.0,
         heading - 180.0,  -- Face the ped
         fov,
         false,
         2
     )
-    ig.camera.PointAtEntity(appearanceCameras.face, ped, 0.0, 0.0, 0.6, true)  -- Point at head height
+    ig.camera.PointAtEntity(appearanceCameras.face, ped, 0.0, 0.0, 0.65, true)  -- Point at head
     
     -- Body camera - chest level
     appearanceCameras.body = ig.camera.Basic(
         coords.x + rightX,
         coords.y + rightY,
-        coords.z + 0.2,  -- Chest height
+        coords.z + 0.3,  -- Chest height (slightly higher)
         0.0,  -- Level angle
         0.0,
         heading - 180.0,
@@ -73,35 +73,35 @@ local function CreateAppearanceCameras(ped)
         false,
         2
     )
-    ig.camera.PointAtEntity(appearanceCameras.body, ped, 0.0, 0.0, 0.0, true)  -- Point at center
+    ig.camera.PointAtEntity(appearanceCameras.body, ped, 0.0, 0.0, 0.3, true)  -- Point at chest
     
     -- Legs camera - lower body
     appearanceCameras.legs = ig.camera.Basic(
         coords.x + rightX,
         coords.y + rightY,
-        coords.z - 0.5,  -- Lower body height
-        10.0,  -- Slight upward angle
+        coords.z - 0.3,  -- Lower body height (higher up)
+        0.0,  -- Level angle
         0.0,
         heading - 180.0,
         fov,
         false,
         2
     )
-    ig.camera.PointAtEntity(appearanceCameras.legs, ped, 0.0, 0.0, -0.5, true)  -- Point at lower body
+    ig.camera.PointAtEntity(appearanceCameras.legs, ped, 0.0, 0.0, -0.3, true)  -- Point at knees
     
     -- Feet camera - shoes and feet
     appearanceCameras.feet = ig.camera.Basic(
         coords.x + rightX,
         coords.y + rightY,
-        coords.z - 0.8,  -- Feet height
-        15.0,  -- Upward angle to see feet
+        coords.z - 0.6,  -- Feet height (higher up)
+        0.0,  -- Level angle
         0.0,
         heading - 180.0,
         fov,
         false,
         2
     )
-    ig.camera.PointAtEntity(appearanceCameras.feet, ped, 0.0, 0.0, -0.8, true)  -- Point at feet
+    ig.camera.PointAtEntity(appearanceCameras.feet, ped, 0.0, 0.0, -0.6, true)  -- Point at feet
     
     -- Full body camera - behind and to the side for full view
     local fullDistance = 2.5
