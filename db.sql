@@ -231,6 +231,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `Slots` (`Slots`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Users Table';
 
+-- Dumping structure for table db.phones
+CREATE TABLE IF NOT EXISTS `phones` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IMEI` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Unique phone identifier (UUID)',
+  `Phone_Number` varchar(7) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Phone number from characters table',
+  `Character_ID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Current owner',
+  `Contacts` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '[]' COMMENT 'Contact list JSON',
+  `Settings` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{"planeMode":false,"emergencyAlerts":true,"provider":"Warstock"}' COMMENT 'Phone settings JSON',
+  `Created` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Last_Used` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `IMEI` (`IMEI`),
+  KEY `Phone_Number` (`Phone_Number`),
+  KEY `Character_ID` (`Character_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Phone data storage table';
+
 -- Dumping structure for table db.vehicles
 CREATE TABLE IF NOT EXISTS `vehicles` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
