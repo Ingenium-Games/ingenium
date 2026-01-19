@@ -197,7 +197,7 @@ RegisterNUICallback("Client:Request:OnJoinGetCharactersFromServer", function(dat
     --
     local ped = PlayerPedId()
     if DoesEntityExist(ped) then
-        SetEntityVisible(ped, false, false)
+        SetEntityVisible(ped, true, true)
     end
     --
     SetEntityCoords(ped, -550.21, 1340.24, 559.22)
