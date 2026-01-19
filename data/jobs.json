@@ -236,11 +236,5 @@
       "org": "Taxi Service",
       "rank": 1
     }
-  },
-  "none": {
-    "Unemployed": {
-      "org": "Unemployed",
-      "rank": 1
-    }
   }
 }
