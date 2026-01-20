@@ -216,6 +216,19 @@ AddEventHandler("Server:Character:Ready", function()
     SetPlayerRoutingBucket(xPlayer.GetID(), xPlayer.GetInstance())
     SetEntityRoutingBucket(xPlayer.GetPed(), xPlayer.GetInstance())
 
+    -- Track loaded player for persistent vehicle spawning
+    if not ig.table.MatchValue(ig._loadedPlayers, src) then
+        table.insert(ig._loadedPlayers, src)
+        ig.log.Debug("Character", "Player " .. src .. " added to loaded players list (" .. #ig._loadedPlayers .. " total)")
+        
+        -- If this is the first loaded player, spawn persistent vehicles
+        if #ig._loadedPlayers == 1 then
+            if ig.vehicle and ig.vehicle.SpawnPersistentVehicles then
+                ig.vehicle.SpawnPersistentVehicles()
+            end
+        end
+    end
+
     -- Send appearance data to client for final appearance application
     local appearance = xPlayer.GetAppearance()
     if appearance then

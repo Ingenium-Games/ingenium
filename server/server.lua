@@ -72,6 +72,15 @@ AddEventHandler("playerDropped", function()
     local src = source
     local Primary_ID = ig.func.identifier(src)
     ExecuteCommand(("remove_principal identifier.%s group.public"):format(Primary_ID))
+    
+    -- Remove from loaded players tracking
+    for i, playerId in ipairs(ig._loadedPlayers) do
+        if playerId == src then
+            table.remove(ig._loadedPlayers, i)
+            ig.log.Debug("Server", "Player " .. src .. " removed from loaded players list (\" .. #ig._loadedPlayers .. \" remaining)")
+            break
+        end
+    end
     --
     local xPlayer = ig.data.GetPlayer(src)
     -- if the data not false?

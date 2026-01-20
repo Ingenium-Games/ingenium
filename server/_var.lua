@@ -22,6 +22,7 @@ ig.locale = conf.locale
 ig._running = false
 ig._loading = true
 ig._dataloaded = false
+ig._loadedPlayers = {}  -- Track fully loaded player IDs for vehicle spawning
 
 -- ====================================================================================--
 -- Core System Tables

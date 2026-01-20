@@ -131,9 +131,6 @@ function ig.data.Packet()
         Thirst = ig.status.GetThirst(),
         Stress = ig.status.GetStress(),
         Modifiers = ig.modifier.GetModifiers(),
-        -- 
-        
-
     }
 end
 

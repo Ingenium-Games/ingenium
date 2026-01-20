@@ -11,7 +11,10 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
         ig.appearance.ApplyAppearance(ped, Appearance)
         ig.log.Info("Character", "Appearance applied from server")
     end
-
+    
+    if not Coords.x and not Coords.y and not Coords.z and not Coords.h then
+        Coords = conf.spawn
+    end
     -- Reset position or mark at airport or config spawn location
     SetEntityCoords(ped, Coords["x"], Coords["y"], Coords["z"])
     SetEntityHeading(ped, Coords["h"])

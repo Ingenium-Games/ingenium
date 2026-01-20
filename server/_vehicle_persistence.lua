@@ -47,6 +47,9 @@ function ig.vehicle.InitializePersistence()
 end
 
 ---Load persistent vehicles from JSON file into memory
+---IMPORTANT: This only loads data into ig.vehicleCache (memory).
+---It does NOT spawn entities - vehicles only spawn when players interact with them.
+---Without active players, spawned entities would be immediately cleaned up by FiveM.
 function ig.vehicle.LoadPersistentVehicles()
     local filePath = GetResourcePath(GetCurrentResourceName()) .. "/" .. ig._persistentVehiclesFile
     
@@ -74,7 +77,7 @@ function ig.vehicle.LoadPersistentVehicles()
     end
     
     ig.vehicleCache = data.vehicles or {}
-    ig.log.Info("Loaded " .. ig.table.SizeOf(ig.vehicleCache) .. " persistent vehicles from file")
+    ig.log.Info("Loaded " .. ig.table.SizeOf(ig.vehicleCache) .. " persistent vehicles into memory (not spawned)")
 end
 
 ---Restore parked vehicles from database (marked Parked during server empty)
@@ -323,6 +326,9 @@ function ig.vehicle.RestorePersistentVehicle(vehicleData)
     -- Set plate
     SetVehicleNumberPlateText(vehicle, vehicleData.plate)
     
+    -- Mark as mission entity to prevent despawning
+    SetEntityAsMissionEntity(vehicle, true, true)
+    
     -- Restore condition using ig.func utilities if available
     if vehicleData.condition and ig.func and ig.func.SetVehicleCondition then
         ig.func.SetVehicleCondition(vehicle, vehicleData.condition)
@@ -335,7 +341,7 @@ function ig.vehicle.RestorePersistentVehicle(vehicleData)
     
     -- Set fuel
     if vehicleData.fuel then
-        SetVehicleFuelLevel(vehicle, vehicleData.fuel)
+        Entity(vehicle).state.Fuel = vehicleData.fuel
     end
     
     -- Clean up model
@@ -346,6 +352,61 @@ function ig.vehicle.RestorePersistentVehicle(vehicleData)
     end
     
     return vehicle
+end
+
+---Spawn all persistent vehicles from cache (called when first player loads)
+---Only spawns vehicles that don't already exist in the world
+function ig.vehicle.SpawnPersistentVehicles()
+    if not ig.vehicleCache or ig.table.SizeOf(ig.vehicleCache) == 0 then
+        ig.log.Debug("PERSISTENCE", "No persistent vehicles to spawn")
+        return
+    end
+    
+    ig.log.Info("PERSISTENCE", "Spawning persistent vehicles (first player loaded)...")
+    
+    local spawnedCount = 0
+    local failedCount = 0
+    
+    for plate, vehicleData in pairs(ig.vehicleCache) do
+        -- Safety check: verify vehicle doesn't already exist by plate
+        if not ig.vehicle.DoesVehicleExistByPlate(plate) then
+            local vehicle = ig.vehicle.RestorePersistentVehicle(vehicleData)
+            if vehicle then
+                spawnedCount = spawnedCount + 1
+            else
+                failedCount = failedCount + 1
+            end
+            
+            -- Add small delay between spawns to prevent server lag
+            Wait(50)
+        else
+            ig.log.Debug("PERSISTENCE", "Vehicle already exists, skipping: " .. plate)
+        end
+    end
+    
+    if spawnedCount > 0 then
+        ig.log.Info("PERSISTENCE", "Spawned %d persistent vehicles (%d failed)", spawnedCount, failedCount)
+    end
+end
+
+---Safety check: Verify if a vehicle exists by plate number
+---@param plate string Vehicle plate to check
+---@return boolean True if vehicle with this plate exists in world
+function ig.vehicle.DoesVehicleExistByPlate(plate)
+    if not plate or plate == "" then return false end
+    
+    -- Check all vehicles in the game pool
+    local vehicles = GetAllVehicles()
+    for _, vehicle in ipairs(vehicles) do
+        if DoesEntityExist(vehicle) then
+            local vehiclePlate = GetVehicleNumberPlateText(vehicle)
+            if vehiclePlate and string.upper(vehiclePlate) == string.upper(plate) then
+                return true
+            end
+        end
+    end
+    
+    return false
 end
 
 ---Hook into existing vehicle events

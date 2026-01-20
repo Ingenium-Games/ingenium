@@ -46,6 +46,19 @@ RegisterNetEvent("Server:Vehicle:PlayerLeft", function(netId, seat, vehicleName)
     
     ig.log.Trace("Vehicle", "Player " .. source .. " left vehicle: " .. vehicleName)
     
+    -- Get vehicle entity from network ID
+    local vehicle = NetworkGetEntityFromNetworkId(netId)
+    if vehicle and DoesEntityExist(vehicle) then
+        local vehicleState = Entity(vehicle).state
+        
+        -- If this is a persistent vehicle (not player-owned), mark it to persist
+        if not vehicleState.Owner or vehicleState.Owner == false then
+            -- Set as mission entity to prevent despawning
+            SetEntityAsMissionEntity(vehicle, true, true)
+            ig.log.Debug("Vehicle", "Marked persistent vehicle as mission entity: " .. vehicleName)
+        end
+    end
+    
     -- Trigger any server-side vehicle exit logic
     TriggerEvent("Server:Vehicle:OnPlayerLeft", source, netId, seat)
 end)
