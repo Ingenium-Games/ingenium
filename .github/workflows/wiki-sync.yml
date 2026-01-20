@@ -239,6 +239,14 @@ jobs:
           path: scripts
         continue-on-error: true
 
+      - name: Regenerate wiki README
+        run: |
+          echo "🔄 Regenerating wiki README..."
+          python3 scripts/generate_readme_complete.py
+          echo "✅ Wiki README regenerated"
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+
       - name: Install GitHub CLI
         if: runner.os == 'Linux'
         run: |
