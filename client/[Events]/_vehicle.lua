@@ -40,7 +40,7 @@ AddEventHandler("gameEventTriggered", function(eventName, eventData)
         local ped = PlayerPedId()
         -- eventData[1] = ped, eventData[2] = vehicle
         if eventData[1] == ped then
-            local vehicle = eventData[2] or currentVehicle
+            local vehicle = eventData[2] or ig.vehicle._currentVehicle
             local seat = ig.vehicle._currentSeat
             
             if DoesEntityExist(vehicle) then

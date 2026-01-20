@@ -83,8 +83,10 @@ RegisterServerCallback({
             ig.data.LoadPlayer(src, Character_ID)
             -- Trigger client to spawn at location
             local xPlayer = ig.data.GetPlayer(src)
+            local Coords = xPlayer.GetCoords()
+            local Appearance = xPlayer.GetAppearance()
             if xPlayer then
-                TriggerClientEvent("Client:Character:Loaded", src, Coords)
+                TriggerClientEvent("Client:Character:Loaded", src, Coords, Appearance)
             end
         else
             DropPlayer(src, "No character selected. Please rejoin.")
@@ -213,7 +215,13 @@ AddEventHandler("Server:Character:Ready", function()
     -- Return users back to their last known instance or routing bucket.
     SetPlayerRoutingBucket(xPlayer.GetID(), xPlayer.GetInstance())
     SetEntityRoutingBucket(xPlayer.GetPed(), xPlayer.GetInstance())
-    SetEntityVisible(ped, true, true)
+
+    -- Send appearance data to client for final appearance application
+    local appearance = xPlayer.GetAppearance()
+    if appearance then
+        TriggerClientEvent("Client:Character:SetAppearance", src, appearance)
+    end
+    
 end)
 
 -- ====================================================================================--

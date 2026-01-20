@@ -1,22 +1,33 @@
 
 RegisterNetEvent("Client:Character:Loaded")
-AddEventHandler("Client:Character:Loaded", function()
+AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
     ig.log.Info("Character", "Character loaded - initializing systems")
-    
+    local ped = PlayerPedId()
+    --
     exports.spawnmanager:setAutoSpawn(false)
+    
+    -- Apply appearance using the appearance system
+    if Appearance and ig.appearance and ig.appearance.ApplyAppearance then
+        ig.appearance.ApplyAppearance(ped, Appearance)
+        ig.log.Info("Character", "Appearance applied from server")
+    end
+
+    -- Reset position or mark at airport or config spawn location
+    SetEntityCoords(ped, Coords["x"], Coords["y"], Coords["z"])
+    SetEntityHeading(ped, Coords["h"])
 
     -- CRITICAL: Wait for StateBag synchronization with state verification
     -- Instead of hardcoded 5-second wait, verify state is actually synced
     local maxWait = 0
     local timeStep = 50  -- Check every 50ms
     local timeout = 5000 -- Max 5 seconds
-    local ped = GetPlayerPed(-1)
 
     local function checkStateSync()
         local state = Entity(ped).state
         
         -- Check if critical state fields are synced from server
         if state and state.Health then
+            ig.log.Info("Character", "StateBag sync confirmed - Health: " .. tostring(state.Health))
             return true
         end
         return false
@@ -52,15 +63,10 @@ AddEventHandler("Client:Character:Loaded", function()
     ig.func.FadeOut(1000)
     ig.func.IsBusyPleaseWait(5000)
     PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
-    -- Reset position or mark at airport or config spawn location
-    local ords = ig.data.GetLocalPlayerState("Coords") or conf.spawn
-    SetEntityCoords(ped, ords["x"], ords["y"], ords["z"])
-    SetEntityHeading(ped, ords["h"])
-    local apperance = ig.data.GetLocalPlayerState("Apperance")
-    ig.appearance.SetAppearance(apperance)
-    PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
+
     ig.func.FadeIn(5000)
-    
+    PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
+
     -- Set RP-specific native configurations
     SetMaxWantedLevel(0)
     SetPedMinGroundTimeForStungun(ped, 12500)
@@ -69,7 +75,11 @@ AddEventHandler("Client:Character:Loaded", function()
     SetWeaponsNoAutoswap(true)
     SetWeaponsNoAutoreload(true)
     RemoveMultiplayerHudCash()
-    FreezeEntityPosition(ped, false)
+        --
+        
+        if DoesEntityExist(ped) then
+            SetEntityVisible(ped, true, true)
+        end
 
     ig.func.FadeIn(5000)
 end)
@@ -166,4 +176,15 @@ AddEventHandler("Client:Character:Death", function(data)
             -- Handle object death
         end
     end
+end)
+
+-- Receive and apply appearance from server after character ready
+RegisterNetEvent("Client:Character:SetAppearance")
+AddEventHandler("Client:Character:SetAppearance", function(appearance)
+    if not appearance then return end
+    
+    local ped = PlayerPedId()
+    if not ped or ped == 0 then return end
+    
+
 end)
