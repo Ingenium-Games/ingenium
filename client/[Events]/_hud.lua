@@ -50,6 +50,18 @@ Citizen.CreateThread(function()
     end
 end)
 
+-- Handle NUI callback to set focus (NUI can't call natives directly)
+RegisterNUICallback('NUI:Client:HUDSetFocus', function(data, cb)
+    cb(1)
+    if data.focused then
+        SetNuiFocus(true, true)
+        print("^3[HUD] SetNuiFocus enabled, IsNuiFocused():", IsNuiFocused(), "^7")
+    else
+        SetNuiFocus(false, false)
+        print("^3[HUD] SetNuiFocus disabled, IsNuiFocused():", IsNuiFocused(), "^7")
+    end
+end)
+
 -- Continuously update HUD with player stats
 Citizen.CreateThread(function()
     while true do
