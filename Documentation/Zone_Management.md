@@ -1,401 +1,665 @@
-# Zone Management (ig.zone)
+# Zone Management System
 
 ## Overview
 
-Ingenium includes an integrated zone management system built on PolyZone, accessible through the `ig.zone` namespace. This system provides powerful zone definition and point-checking capabilities for creating interactive areas in your FiveM resource.
-
-## Credits
-
-The zone system is based on [PolyZone](https://github.com/mkafrin/PolyZone) by Michael Afrin, integrated into Ingenium with full MIT license compliance. See `client/[Zones]/LICENSE` for the original license.
+Ingenium's zone management system wraps **PolyZone** with an integrated IPL (Interior Prop List) loader for proximity-based interior management. The system uses a **consolidated single-threaded manager** for optimal performance.
 
 ## Zone Types
 
-### PolyZone (ig.zone.Poly)
-Define complex polygonal zones with any number of points.
+### Available Zone Classes
+
+| Zone Type | Class | Use Case |
+|-----------|-------|----------|
+| **Poly** | PolyZone | Custom polygon shapes, irregular areas |
+| **Box** | BoxZone | Rectangular zones with rotation |
+| **Circle** | CircleZone | Circular/spherical zones |
+| **Entity** | EntityZone | Zones that follow entities |
+| **Combo** | ComboZone | Multiple zones as single unit |
+
+## Zone Creation
+
+### Circle Zone
 
 ```lua
-local zone = ig.zone.Poly:Create({
-    vector2(100.0, 100.0),
-    vector2(200.0, 100.0),
-    vector2(200.0, 200.0),
-    vector2(100.0, 200.0)
-}, {
-    name = "my_polygon_zone",
-    minZ = 0.0,
-    maxZ = 100.0,
-    debugPoly = false
-})
+local zone = ig.zone.Circle:Create(center, radius, options)
 ```
 
-### BoxZone (ig.zone.Box)
-Rectangular zones with rotation support.
+Example:
+```lua
+local bankZone = ig.zone.Circle:Create(
+    vector3(150.0, -1040.0, 29.37),  -- Center
+    25.0,                              -- Radius
+    {
+        name = "bank_entrance",
+        debugPoly = false,
+        useZ = true
+    }
+)
+```
+
+### Box Zone
 
 ```lua
-local zone = ig.zone.Box:Create(
-    vector3(100.0, 100.0, 20.0),  -- center
-    10.0,  -- length
-    10.0,  -- width
+local zone = ig.zone.Box:Create(center, length, width, options)
+```
+
+Example:
+```lua
+local garageZone = ig.zone.Box:Create(
+    vector3(215.0, -809.0, 30.73),
+    40.0,   -- Length
+    30.0,   -- Width
     {
-        name = "my_box_zone",
+        name = "garage_area",
         heading = 45.0,
-        minZ = 15.0,
-        maxZ = 25.0,
+        minZ = 29.0,
+        maxZ = 32.0
+    }
+)
+```
+
+### Polygon Zone
+
+```lua
+local zone = ig.zone.Poly:Create(points, options)
+```
+
+Example:
+```lua
+local customZone = ig.zone.Poly:Create(
+    {
+        vector2(150.0, -1040.0),
+        vector2(200.0, -1040.0),
+        vector2(200.0, -1080.0),
+        vector2(150.0, -1080.0)
+    },
+    {
+        name = "custom_area",
+        minZ = 28.0,
+        maxZ = 35.0
+    }
+)
+```
+
+### Entity Zone
+
+```lua
+local zone = ig.zone.Entity:Create(entity, options)
+```
+
+Example:
+```lua
+local playerZone = ig.zone.Entity:Create(
+    PlayerPedId(),
+    {
+        name = "player_proximity",
+        scale = vector3(5.0, 5.0, 2.0),  -- Size around entity
         debugPoly = false
     }
 )
 ```
 
-### CircleZone (ig.zone.Circle)
-Circular or spherical zones.
+### Combo Zone
 
 ```lua
--- 2D Circle (ignores Z coordinate)
-local zone = ig.zone.Circle:Create(
-    vector2(100.0, 100.0),  -- center
-    50.0,  -- radius
-    {
-        name = "my_circle_zone",
-        debugPoly = false
-    }
-)
+local zone = ig.zone.Combo:Create({zone1, zone2, ...}, options)
+```
 
--- 3D Sphere (uses Z coordinate)
-local zone = ig.zone.Circle:Create(
-    vector3(100.0, 100.0, 20.0),  -- center
-    50.0,  -- radius
+Example:
+```lua
+local restrictedArea = ig.zone.Combo:Create(
+    {militaryBaseZone, airportZone},
     {
-        name = "my_sphere_zone",
-        useZ = true,
-        debugPoly = false
+        name = "restricted_combined"
     }
 )
 ```
 
-### EntityZone (ig.zone.Entity)
-Zones attached to and following an entity (vehicle, ped, object).
+## Zone Options
+
+### Common Options
 
 ```lua
-local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-local zone = ig.zone.Entity:Create(
-    vehicle,
-    {
-        name = "vehicle_zone",
-        useZ = true,
-        debugPoly = false
-    }
-)
-```
-
-### ComboZone (ig.zone.Combo)
-Combine multiple zones with grid optimization for efficient checking.
-
-```lua
-local zones = {
-    ig.zone.Box:Create(vector3(100.0, 100.0, 20.0), 10.0, 10.0, {name = "box1"}),
-    ig.zone.Circle:Create(vector2(200.0, 200.0), 50.0, {name = "circle1"}),
-    ig.zone.Poly:Create(points, {name = "poly1"})
+{
+    name = "zone_name",           -- Zone identifier (string)
+    debugPoly = false,            -- Visualize zone (green outline)
+    debugBlip = false,            -- Add map blip
+    debugColor = {0, 255, 0},     -- Debug visualization color (RGB)
+    data = {},                    -- Custom data storage (table)
+    useZ = false                  -- Include Z-axis in distance checks (boolean)
 }
-
-local combo = ig.zone.Combo:Create(zones, {
-    name = "my_combo_zone",
-    debugPoly = false
-})
 ```
 
-## Common Methods
-
-### Check if Point is Inside Zone
+### Circle-Specific Options
 
 ```lua
-local playerPos = GetEntityCoords(PlayerPedId())
-if zone:isPointInside(playerPos) then
-    print("Player is inside the zone!")
+{
+    type = "circle",
+    coords = vector2(x, y) or vector3(x, y, z),
+    radius = 100.0,
+    useZ = false  -- If false, uses 2D distance
+}
+```
+
+### Box-Specific Options
+
+```lua
+{
+    type = "box",
+    coords = vector3(x, y, z),
+    length = 100.0,
+    width = 50.0,
+    heading = 0.0,      -- Rotation in degrees
+    minZ = 0.0,         -- Height boundaries
+    maxZ = 20.0
+}
+```
+
+### Polygon-Specific Options
+
+```lua
+{
+    type = "poly",
+    points = {
+        vector2(x1, y1),
+        vector2(x2, y2),
+        vector2(x3, y3)
+        -- ... more points
+    },
+    minZ = 0.0,
+    maxZ = 100.0
+}
+```
+
+## Zone Methods
+
+### Check if Point Inside
+
+```lua
+zone:isPointInside(point)
+```
+
+Example:
+```lua
+local coords = GetEntityCoords(PlayerPedId())
+if bankZone:isPointInside(coords) then
+    print("Player is inside bank")
 end
 ```
 
-### Player In/Out Callbacks
-
-**⚠️ Performance Note:** All zone callbacks use a consolidated single-thread manager for optimal performance. Multiple zones share one checking thread instead of creating individual threads per zone.
+### Player Enter/Exit Events
 
 ```lua
-zone:onPlayerInOut(function(isInside, point)
-    if isInside then
-        print("Player entered the zone")
-    else
-        print("Player left the zone")
-    end
-end, 500)  -- Check every 500ms (default: 250ms)
+zone:onPlayerInOut(callback, interval)
 ```
 
-**How it works:**
-- All zones using `onPlayerInOut()` or `onPointInOut()` are managed by a single thread
-- Each zone can have its own check interval
-- The manager efficiently schedules checks based on each zone's configured interval
-- This approach dramatically reduces resource usage compared to per-zone threads
+Example:
+```lua
+bankZone:onPlayerInOut(function(isInside, point, zone)
+    if isInside then
+        print("Player entered bank:", zone.name)
+        -- Show UI, load interior, etc.
+    else
+        print("Player left bank:", zone.name)
+        -- Hide UI, unload interior, etc.
+    end
+end, 250)  -- Check every 250ms
+```
 
-### Custom Point Callbacks
+### Custom Point Tracking
 
 ```lua
-zone:onPointInOut(function()
-    -- Return the point to check
-    return GetEntityCoords(someEntity)
-end, function(isInside, point)
+zone:onPointInOut(getPointFunc, callback, interval)
+```
+
+Example:
+```lua
+local function getVehicleCoords()
+    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+    if vehicle ~= 0 then
+        return GetEntityCoords(vehicle)
+    end
+    return nil
+end
+
+garageZone:onPointInOut(getVehicleCoords, function(isInside, point, zone)
     if isInside then
-        print("Entity entered the zone")
+        print("Vehicle entered garage")
     else
-        print("Entity left the zone")
+        print("Vehicle left garage")
     end
 end, 500)
 ```
 
-### Pause/Resume Zone Checking
+### Pause/Resume
 
 ```lua
-zone:setPaused(true)   -- Pause zone checks
-zone:setPaused(false)  -- Resume zone checks
-print(zone:isPaused()) -- Check if paused
+zone:setPaused(paused)
+```
+
+Example:
+```lua
+-- Pause checking
+zone:setPaused(true)
+
+-- Resume checking
+zone:setPaused(false)
 ```
 
 ### Destroy Zone
 
 ```lua
-zone:destroy()  -- Clean up zone and stop all callbacks
+zone:destroy()
 ```
 
-### Debug Visualization
-
+Example:
 ```lua
--- Enable debug polygon visualization
-local zone = ig.zone.Box:Create(center, length, width, {
-    name = "debug_zone",
-    debugPoly = true,  -- Shows zone outline
-    debugBlip = true   -- Adds a blip at zone center
-})
+-- Cleanup when done
+bankZone:destroy()
 ```
 
 ## Helper Functions
 
 ### Get Player Position
+
 ```lua
-local pos = ig.zone.GetPlayerPosition()
+ig.zone.GetPlayerPosition()
+```
+
+Returns current player coordinates:
+
+```lua
+local coords = ig.zone.GetPlayerPosition()
+print(coords.x, coords.y, coords.z)
 ```
 
 ### Get Player Head Position
+
 ```lua
-local headPos = ig.zone.GetPlayerHeadPosition()
+ig.zone.GetPlayerHeadPosition()
 ```
 
-### Ensure Zone Metatable
+Returns player's head coordinates (useful for line-of-sight):
+
 ```lua
--- Restore zone metatable after deserialization
-ig.zone.EnsureMetatable(zoneObject)
+local headCoords = ig.zone.GetPlayerHeadPosition()
 ```
 
-## Zone Properties
-
-All zones have these common properties:
-
-- `name` - Optional name for the zone
-- `minZ` - Minimum Z coordinate (height)
-- `maxZ` - Maximum Z coordinate (height)
-- `debugPoly` - Enable debug visualization
-- `debugColors` - Custom debug colors
-- `data` - Custom data storage for the zone
-
-## Advanced Features
-
-### Grid Optimization
-
-PolyZone and ComboZone use grid optimization by default to speed up point checking:
+### Validate Zone Metatable
 
 ```lua
-local zone = ig.zone.Poly:Create(points, {
-    name = "optimized_zone",
-    useGrid = true,      -- Enable grid (default)
-    lazyGrid = true,     -- Lazy grid calculation (default)
-    gridDivisions = 30   -- Grid density (default 30)
-})
+ig.zone.EnsureMetatable(zone)
 ```
 
-### Scale and Offset (BoxZone)
+Ensures zone has proper metatable (internal use).
+
+## IPL (Interior Prop List) System
+
+### Core Functions
+
+#### Load Single IPL
 
 ```lua
-local zone = ig.zone.Box:Create(center, length, width, {
-    name = "scaled_box",
-    scale = {1.5, 1.5, 2.0},    -- Scale forward/back, left/right, up/down
-    offset = {0.0, 0.0, 5.0}    -- Offset forward/back, left/right, up/down
-})
+ig.ipl.Load(iplName)
 ```
 
-### Zone Modifications
-
-BoxZone supports dynamic modifications:
-
+Example:
 ```lua
--- Change box dimensions
-zone:setLength(20.0)
-zone:setWidth(15.0)
-zone:setCenter(vector3(150.0, 150.0, 20.0))
-zone:setHeading(90.0)
-
--- Get current values
-local length = zone:getLength()
-local width = zone:getWidth()
-local heading = zone:getHeading()
+ig.ipl.Load("v_carshowroom")  -- Load car showroom
 ```
 
-CircleZone supports dynamic modifications:
+#### Unload Single IPL
 
 ```lua
--- Change circle properties
-zone:setRadius(75.0)
-zone:setCenter(vector2(150.0, 150.0))
-
--- Get current values
-local radius = zone:getRadius()
-local center = zone:getCenter()
+ig.ipl.Unload(iplName)
 ```
 
-### ComboZone Management
-
+Example:
 ```lua
--- Add zone to combo
-combo:AddZone(newZone)
-
--- Remove zone by name
-combo:RemoveZone("zone_name")
-
--- Remove zone by predicate function
-combo:RemoveZone(function(zone)
-    return zone.data.type == "temporary"
-end)
-
--- Check specific zone in combo
-local isInside, zone = combo:isPointInside(point, "specific_zone_name")
+ig.ipl.Unload("v_carshowroom")
 ```
 
-## Examples
-
-### Simple Interaction Zone
+#### Check if Loaded
 
 ```lua
-local shopZone = ig.zone.Circle:Create(
-    vector2(100.0, 200.0),
-    5.0,
-    {name = "shop_entrance"}
-)
-
-shopZone:onPlayerInOut(function(isInside)
-    if isInside then
-        -- Show help text or marker
-        print("Press E to open shop")
-    else
-        -- Hide help text
-        print("Left shop area")
-    end
-end)
+ig.ipl.IsLoaded(iplName)
 ```
 
-### Vehicle Damage Zone
-
+Example:
 ```lua
-local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-local damageZone = ig.zone.Entity:Create(vehicle, {
-    name = "vehicle_damage_zone",
-    useZ = true
-})
-
-damageZone:onEntityDamaged(function(died, attacker, weapon, melee)
-    print("Vehicle damaged!", died, attacker, weapon, melee)
-end)
-```
-
-### Multi-Zone Area
-
-```lua
-local policeStation = ig.zone.Combo:Create({
-    ig.zone.Box:Create(vector3(400.0, -1000.0, 29.0), 50.0, 50.0, {
-        name = "main_building",
-        minZ = 25.0,
-        maxZ = 35.0
-    }),
-    ig.zone.Circle:Create(vector2(450.0, -1000.0), 30.0, {
-        name = "parking_lot"
-    })
-}, {
-    name = "police_station_complex"
-})
-
-policeStation:onPlayerInOutExhaustive(function(isInside, point, insideZones, enteredZones, leftZones)
-    if enteredZones then
-        for _, zone in ipairs(enteredZones) do
-            print("Entered:", zone.name)
-        end
-    end
-    if leftZones then
-        for _, zone in ipairs(leftZones) do
-            print("Left:", zone.name)
-        end
-    end
-end)
-```
-
-## PolyZone Compatibility
-
-Ingenium provides PolyZone compatibility through the `provide "polyzone"` directive in fxmanifest.lua. This means:
-
-1. Resources that depend on PolyZone will automatically use Ingenium's implementation
-2. External resources can access zones via `exports.ingenium:GetZone()`
-3. All standard PolyZone functions and methods are available
-
-## Performance Tips
-
-1. **Use Grid Optimization**: Keep `useGrid = true` for PolyZone and ComboZone
-2. **Appropriate Check Intervals**: Use 500-1000ms intervals for most cases
-3. **Destroy Unused Zones**: Always call `zone:destroy()` when done
-4. **ComboZone for Multiple Zones**: Use ComboZone instead of separate zones when checking the same point against many zones
-5. **Pause When Not Needed**: Use `zone:setPaused(true)` when temporarily not needed
-6. **Consolidated Manager**: All zones automatically use a single-thread manager - no need for manual optimization
-
-### Zone Manager Statistics
-
-Monitor zone performance and active zones:
-
-```lua
--- In-game command (client-side)
-/zonestats
-
--- Programmatically
-local stats = ig.zoneManager.GetStats()
-print("Total Zones:", stats.totalZones)
-print("Manager Running:", stats.isRunning)
-print("Check Interval:", stats.checkInterval, "ms")
-
--- Inspect zones by type
-for zoneType, count in pairs(stats.byType) do
-    print(zoneType .. ":", count)
+if ig.ipl.IsLoaded("v_carshowroom") then
+    print("Car showroom is loaded")
 end
 ```
 
-### Developer Commands
+#### Load Multiple IPLs
 
-**View Active Zones** (client-side):
+```lua
+ig.ipl.LoadMultiple(table)
 ```
+
+Example:
+```lua
+ig.ipl.LoadMultiple({
+    "v_carshowroom",
+    "vw_casino_main",
+    "hei_carrier"
+})
+```
+
+#### Unload Multiple IPLs
+
+```lua
+ig.ipl.UnloadMultiple(table)
+```
+
+Example:
+```lua
+ig.ipl.UnloadMultiple({"v_carshowroom", "vw_casino_main"})
+```
+
+### IPL Registry System
+
+#### Register Configuration
+
+```lua
+ig.ipl.Register(config)
+```
+
+Example:
+```lua
+ig.ipl.Register({
+    name = "casino",
+    ipls = {"vw_casino_main", "vw_casino_garage"},
+    autoload = true,
+    zone = {
+        type = "circle",
+        coords = vector3(925.0, 46.0, 81.0),
+        radius = 150.0,
+        dynamicLoad = true
+    }
+})
+```
+
+#### Load by Name
+
+```lua
+ig.ipl.LoadByName(name)
+```
+
+Example:
+```lua
+ig.ipl.LoadByName("casino")
+```
+
+#### Unload by Name
+
+```lua
+ig.ipl.UnloadByName(name)
+```
+
+Example:
+```lua
+ig.ipl.UnloadByName("casino")
+```
+
+#### Setup Zone Handler
+
+```lua
+ig.ipl.SetupZoneHandler(name, zoneConfig)
+```
+
+Automatically load/unload IPL based on zone proximity:
+
+```lua
+ig.ipl.SetupZoneHandler("casino", {
+    type = "circle",
+    coords = vector3(925.0, 46.0, 81.0),
+    radius = 150.0
+})
+```
+
+#### Get Configuration
+
+```lua
+ig.ipl.Get(name)
+ig.ipl.GetAll()
+```
+
+Example:
+```lua
+local casinoConfig = ig.ipl.Get("casino")
+local allConfigs = ig.ipl.GetAll()
+```
+
+### IPL Configuration Structure
+
+```lua
+-- In _config/ipls.lua
+conf.ipls.example = {
+    name = "example",
+    ipls = {"ipl_name_1", "ipl_name_2"},  -- IPL array
+    autoload = true,                       -- Load on startup
+    zone = {
+        type = "circle",
+        coords = vector3(x, y, z),
+        radius = 100.0,
+        dynamicLoad = true                 -- Auto load/unload on enter/exit
+    },
+    loaded = false                         -- Track state
+}
+```
+
+## Common IPLs
+
+### Interiors
+
+```lua
+-- Car Showroom
+ig.ipl.Load("v_carshowroom")
+
+-- Casino
+ig.ipl.LoadMultiple({"vw_casino_main", "vw_casino_garage", "vw_casino_carpark"})
+
+-- Nightclub (After Hours DLC)
+ig.ipl.LoadMultiple({"ba_case_0", "ba_barriers_case0"})
+
+-- Aircraft Carrier
+ig.ipl.Load("hei_carrier")
+
+-- FIB Building
+ig.ipl.Load("FIBlobby")
+
+-- Bunker Interior
+ig.ipl.Load("gr_case0")
+
+-- Yacht
+ig.ipl.Load("hei_yacht_heist")
+```
+
+## Zone-IPL Integration
+
+### Automatic Loading
+
+Configure zones to automatically load IPLs on enter:
+
+```lua
+local config = {
+    name = "bunker_entrance",
+    ipls = {"gr_case0"},
+    zone = {
+        type = "circle",
+        coords = vector3(892.0, -3245.0, -98.0),
+        radius = 50.0,
+        dynamicLoad = true,  -- Enable auto load/unload
+        debug = false
+    }
+}
+
+ig.ipl.Register(config)
+ig.ipl.SetupZoneHandler("bunker_entrance", config.zone)
+```
+
+### Manual Control
+
+```lua
+local bunkerZone = ig.zone.Circle:Create(
+    vector3(892.0, -3245.0, -98.0),
+    50.0,
+    {name = "bunker"}
+)
+
+bunkerZone:onPlayerInOut(function(isInside)
+    if isInside then
+        ig.ipl.LoadByName("bunker_entrance")
+    else
+        ig.ipl.UnloadByName("bunker_entrance")
+    end
+end, 500)
+```
+
+## Consolidated Zone Manager
+
+The zone system uses a **single consolidated thread** for all zone checks:
+
+**Features:**
+- One thread manages all zones (reduces overhead)
+- Configurable check intervals per zone
+- Automatic state tracking (only callbacks on enter/exit)
+- Supports pause/resume and destruction tracking
+- Efficient callback dispatch
+
+**Performance Benefits:**
+- 100 zones with individual threads = 100 threads
+- 100 zones with consolidated manager = 1 thread
+- Significantly reduced CPU usage
+
+## Debugging Commands
+
+### Zone Statistics
+
+```bash
 /zonestats
 ```
-Shows:
-- Total number of registered zones
-- Manager running status
-- Default check interval
-- Breakdown by zone type (PolyZone, BoxZone, CircleZone, etc.)
 
-**List Client Zones** (client-side):
-```
+Displays:
+- Total zones active
+- Zones by type
+- Callback count
+- Thread status
+
+### List Zones
+
+```bash
 /listzones
 ```
-Shows all zones registered for the current client with details about each zone.
 
-## See Also
+Shows all active zones with:
+- Name
+- Type
+- Center coordinates
+- Radius/dimensions
+- Callback status
 
-- [IPL Management (ig.ipl/ig.ipls)](./Zone_IPL_Management.md)
-- [PolyZone Original Documentation](https://github.com/mkafrin/PolyZone)
+## Best Practices
+
+1. **Use appropriate zone types** - Circle for simple areas, Poly for complex shapes
+2. **Set reasonable intervals** - 250-500ms for most cases
+3. **Clean up zones** - Call destroy() when done
+4. **Use debugPoly during development** - Visualize zone boundaries
+5. **Consolidate checks** - Let manager handle timing
+6. **Cache zone references** - Don't recreate zones repeatedly
+7. **Use IPL registry** - Register common interiors once
+8. **Test zone boundaries** - Verify enter/exit triggers correctly
+9. **Avoid excessive zones** - Too many zones can still impact performance
+10. **Use combo zones** - Combine related areas
+
+## Configuration Reference
+
+### Complete Zone Config
+
+```lua
+conf.zones = {
+    checkInterval = 250,        -- Default check interval (ms)
+    debugEnabled = false,       -- Enable all debug visuals
+    maxZones = 500             -- Maximum zones allowed
+}
+```
+
+### Complete IPL Config
+
+```lua
+conf.ipls = {
+    autoload = true,           -- Auto-load registered IPLs on startup
+    dynamicLoading = true,     -- Enable proximity-based loading
+    unloadDistance = 200.0     -- Distance to unload (meters)
+}
+```
+
+## Example: Complete Zone Setup
+
+```lua
+-- Register IPL configuration
+ig.ipl.Register({
+    name = "police_station",
+    ipls = {"cs1_02_cf_onmission1", "cs1_02_cf_onmission2"},
+    autoload = false,
+    zone = {
+        type = "box",
+        coords = vector3(442.0, -982.0, 30.69),
+        length = 50.0,
+        width = 40.0,
+        heading = 0.0,
+        minZ = 28.0,
+        maxZ = 35.0,
+        dynamicLoad = true
+    }
+})
+
+-- Create zone with callbacks
+local policeZone = ig.zone.Box:Create(
+    vector3(442.0, -982.0, 30.69),
+    50.0,
+    40.0,
+    {
+        name = "police_station",
+        debugPoly = false,
+        heading = 0.0,
+        minZ = 28.0,
+        maxZ = 35.0,
+        data = {
+            jobRequired = "police"
+        }
+    }
+)
+
+-- Setup enter/exit handler
+policeZone:onPlayerInOut(function(isInside, point, zone)
+    local xPlayer = ig.data.GetLocalPlayer()
+    
+    if isInside then
+        -- Player entered
+        if xPlayer.Job == "police" then
+            ig.ipl.LoadByName("police_station")
+            TriggerEvent('Client:UI:ShowNotification', {
+                message = "Welcome to LSPD",
+                type = "info"
+            })
+        else
+            TriggerEvent('Client:UI:ShowNotification', {
+                message = "Authorized personnel only",
+                type = "warning"
+            })
+        end
+    else
+        -- Player left
+        ig.ipl.UnloadByName("police_station")
+    end
+end, 250)
+```
+
+## Related Documentation
+
+- [Data Persistence](Data_Persistence.md) - Zone data storage
+- [Callback System](Callback_System.md) - Zone event handling
+- [NUI Architecture](NUI_Architecture.md) - Zone UI integration

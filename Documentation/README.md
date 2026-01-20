@@ -1,152 +1,378 @@
-# ingenium Documentation
+# Ingenium Framework Documentation
 
-Welcome to the ingenium documentation hub. This centralized resource provides comprehensive information about the ingenium FiveM framework.
+## Overview
 
-## ⚡ Latest Updates
+Ingenium is a **proprietary FiveM framework** built on a class-based entity system with Vue 3 Single-App NUI architecture. The server maintains all entity state, automatically syncs to clients via StateBags, and persists to MySQL2 database with dirty flag optimization.
 
-### Code Refactoring (2026-01-19) ✅ COMPLETE
-- **[File Logging Refactor](./FILE_LOGGING_REFACTOR.md)** - Eliminated code duplication in logging infrastructure
-- **[Gamemode Handler Refactor](./GAMEMODE_HANDLER_REFACTOR.md)** - Consolidated gamemode event handlers using registry pattern
-- **[Event Registration Analysis](./EVENT_REGISTRATION_ANALYSIS.md)** - Comprehensive event audit and documentation
-- **Impact**: 150+ lines of duplicate code removed, improved maintainability and performance
+**Key Constraint:** OneSync Infinity is mandatory for StateBag replication.
 
-### Character Connection Fixes (2026-01-16) ✅ COMPLETE
-- **[Character Connection Status](./CHARACTER_CONNECTION_STATUS.md)** - Overview of all fixes applied
-- **[Character Connection Fixes](./CHARACTER_CONNECTION_FIXES.md)** - Detailed technical documentation
-- **[Character Connection Code Reference](./CHARACTER_CONNECTION_CODE_REFERENCE.md)** - Side-by-side code comparisons
-- **Issues Fixed**: 8 critical issues resolved in client-server character lifecycle
-- **Impact**: Character selection, loading, and initialization now fully functional
+**Important:** This is closed-source proprietary software. Only authorized personnel should use this codebase.
 
-## 📚 Core Systems
+## Core Architecture
 
-### Character System (Recently Updated)
-- **[Class System Architecture](./Class%20System%20Architecture.md)** - Entity lifecycle and class patterns
-- **[CLIENT_CHARACTER_LIFECYCLE_ANALYSIS](./CLIENT_CHARACTER_LIFECYCLE_ANALYSIS.md)** - Client-side analysis (reference)
+### Entity System
 
-### Internationalization & Debugging
-- **[i18n and Debugging Guide](./I18N_AND_DEBUGGING.md)** - Multi-language support and enhanced error tracking
-- **[i18n & Debug Examples](./EXAMPLES_I18N_DEBUG.lua)** - Code examples for locale and debugging features
+Ingenium uses **server-authoritative entities** where all game state flows through class instances:
 
-### Zone Management
-- **[Zone Management (ig.zone)](./Zone_Management.md)** - Integrated PolyZone system for zone definition and checking
-- **[IPL Management (ig.ipl/ig.ipls)](./Zone_IPL_Management.md)** - Interior prop list loading with zone triggers
+- **Dual-Update Pattern** - Setters update both internal state AND StateBags automatically
+- **Dirty Flag Optimization** - Only changed entities saved to database
+- **StateBag Replication** - Clients receive real-time updates via StateBags
+- **Validation Layer** - All client data validated before processing
 
-### SQL & Database
-- **[SQL Architecture](./SQL_Architecture.md)** - Overview of the integrated MySQL2 SQL system
-- **[SQL API Reference](./SQL_API_Reference.md)** - Complete API documentation for SQL operations
-- **[SQL Migration Guide](./SQL_Migration_Guide.md)** - Step-by-step migration from mysql-async
-- **[SQL Events & Exports](./SQL_Events_Exports.md)** - Server events, exports, and commands
-- **[SQL Performance](./SQL_Performance.md)** - Performance optimization and monitoring
-- **[SQL Compatibility](./SQL_Compatibility.md)** - Legacy MySQL.Async compatibility layer
+**Entities:** Player, OwnedVehicle, Vehicle, Job, NPC, BlankObject, ExistingObject, OfflinePlayer (8 types total)
 
-### Validation & Security
-- **[Validation Architecture](./Validation_Architecture.md)** - Centralized validation system
-- **[Security Guide](./Security_Guide.md)** - Security best practices and implementation
-- **[Discord Integration](./Discord_Integration.md)** - Internal Discord role-based authentication and queue priority
+[Learn more: Class System →](Class_System.md)
 
-### Data & Migration
-- **[Migration Infrastructure](./Migration_Infrastructure.md)** - Data migration system and tools
+### Data Persistence
 
-### Testing
-- **[Testing Guide](./Testing_Guide.md)** - Testing frameworks and procedures
+**Hybrid Model** combining SQL and JSON:
 
-## 🚀 Quick Start
+- **SQL Database** - Player data, vehicles, banking, jobs
+- **JSON Files** - Drops, pickups, scenes, notes, GSR
+- **ConsolidatedSaveLoop** - Single-threaded scheduler with interval-based saves
+- **Reference Data** - Protected read-only static data
+
+Save intervals:
+- Players: 90 seconds
+- Vehicles: 5 minutes
+- Jobs: 10 minutes
+- Objects: 5 minutes
+
+[Learn more: Data Persistence →](Data_Persistence.md)
+
+### SQL Database Layer
+
+Integrated **MySQL2 system** with:
+
+- Connection pooling (configurable limit)
+- Prepared statements for frequent queries
+- Transaction support (ACID compliance)
+- Performance monitoring & slow query detection
+- Batch operations
+- Exponential backoff connection ready check
+
+[Learn more: SQL System →](SQL_System.md)
+
+### Security & Validation
+
+**Defense-in-depth approach:**
+
+- **ig.check module** - Type validation (Number, String, Boolean, Table)
+- **ig.validation module** - Inventory integrity checks (duplication/injection detection)
+- **StateBag Protection** - Whitelist + Blacklist dual-layer security
+- **Rate Limiting** - Per-player, per-type transaction cooldowns
+- **Exploit Logging** - Automatic ban on detected violations
+
+All client data validated before processing. Server is always authority.
+
+[Learn more: Validation & Security →](Validation_Security.md)
+
+## User Interface
+
+### NUI Vue 3 Architecture
+
+**Centralized Single-App System:**
+
+- All UI components render through one Vue 3 application
+- Pinia stores manage state (ui, character, notifications, chat, etc.)
+- SendNUIMessage for Lua → Vue broadcasts
+- RegisterNUICallback for Vue → Lua requests
+- TailwindCSS for styling
+- Vite build system with HMR
+
+**Components:** Chat, HUD, Menu, Phone, CharacterSelect, Banking, Job Management, Appearance Editor
+
+**Critical:** Always run `npm run build` before committing UI changes.
+
+[Learn more: NUI Architecture →](NUI_Architecture.md)
+
+### Callback System
+
+**Bidirectional communication:**
+
+- Promise-based async/await patterns
+- Security tickets (one-time use, 30s expiration)
+- Timeout handling with automatic cleanup
+- Rate limiting to prevent spam
+- Duplicate request prevention
+
+**Patterns:** Await (blocking), Async (non-blocking), AsyncWithTimeout
+
+[Learn more: Callback System →](Callback_System.md)
+
+## System Documentation
+
+### Core Systems
+
+| System | Description |
+|--------|-------------|
+| [Class System](Class_System.md) | Entity lifecycle, dirty flags, StateBag sync |
+| [SQL System](SQL_System.md) | Database layer, queries, prepared statements |
+| [Data Persistence](Data_Persistence.md) | Hybrid SQL+JSON, save loops, indexes |
+| [Validation & Security](Validation_Security.md) | Input validation, exploit detection, rate limiting |
+| [NUI Architecture](NUI_Architecture.md) | Vue 3 UI, Pinia stores, component system |
+| [Callback System](Callback_System.md) | Client-server communication, promises, events |
+
+### Feature Systems
+
+| System | Description | Documentation |
+|--------|-------------|---------------|
+| [Inventory System](Inventory_System.md) | Item management with multi-layer validation | ✅ Complete |
+| [Zone Management](Zone_Management.md) | PolyZone integration, IPL loading | ✅ Complete |
+| Appearance System | Character customization with live preview | ⏳ Doc pending |
+| Job Management | Job accounts, employees, payroll | ⏳ Doc pending |
+| Drop/Pickup System | World items, loot spawns | ⏳ Doc pending |
+| Target System | ox_target integration | ⏳ Doc pending |
+| Door System | Door locks, access control | ⏳ Doc pending |
+| Voice/VOIP System | Proximity voice, radio | ⏳ Doc pending |
+
+### Supporting Systems
+
+| System | Description | Documentation |
+|--------|-------------|---------------|
+| [Logging & i18n](Logging_Internationalization.md) | Multi-level logging, 5-language support | ✅ Complete |
+| Threading & Performance | SetTimeout chains, consolidated loops | ⏳ Doc pending |
+| Banking & Loans | Banking system with interest/overdrafts | ⏳ Doc pending |
+
+## Function Reference (Wiki)
+
+The **[wiki](wiki/)** directory contains 400+ function documentation files:
+
+- **ig.appearance** - Character customization (60+ functions)
+- **ig.callback** - Callback system (10 functions)
+- **ig.data** - Entity data helpers (30+ functions)
+- **ig.sql** - Database queries (20+ functions)
+- **ig.validation** - Input validation (10 functions)
+- **ig.func** - Utility functions (50+ functions)
+- **ig.item** - Item system (40+ functions)
+- **ig.job** - Job management (25+ functions)
+- **ig.vehicle** - Vehicle system (30+ functions)
+
+See [wiki/README.md](wiki/README.md) for complete function index.
+
+## Quick Start
 
 ### Prerequisites
+
+```
 - FiveM Server (latest recommended)
-- OneSync Infinity enabled
+- OneSync Infinity enabled (REQUIRED)
 - MySQL 5.7+ or MariaDB 10.3+
 - Node.js 16+ (for NUI development)
+```
 
 ### Configuration
 
-#### Locale Configuration
-Set your preferred language in `_config/config.lua`:
+**Locale** (`_config/config.lua`):
 ```lua
-conf.locale = "en"  -- Options: "en", "fr", "es", "de", "pt"
+conf.locale = "en"  -- Options: en, fr, es, de, pt
 ```
 
-#### MySQL Connection
-Set one of the following in your `server.cfg`:
-
+**MySQL Connection** (`server.cfg`):
 ```bash
-# Option 1: Connection string
+# Connection string
 set mysql_connection_string "mysql://user:password@host:port/database"
 
-# Option 2: Individual parameters
+# OR individual parameters
 set mysql_host "localhost"
 set mysql_port "3306"
 set mysql_user "root"
-set mysql_password "yourpassword"
+set mysql_password "password"
 set mysql_database "fivem"
 set mysql_connection_limit "10"
 ```
 
-### First Steps
-1. Review the [i18n and Debugging Guide](./I18N_AND_DEBUGGING.md) to understand localization and error tracking
-2. Review the [SQL Architecture](./SQL_Architecture.md) to understand the database layer
-3. Check [Security Guide](./Security_Guide.md) for security best practices
-4. Explore [SQL API Reference](./SQL_API_Reference.md) for available functions
+**Save Intervals** (`_config/config.lua`):
+```lua
+conf.serversync     = 90000   -- Players: 90 seconds
+conf.vehiclesync    = 300000  -- Vehicles: 5 minutes
+conf.jobsync        = 600000  -- Jobs: 10 minutes
+conf.objectsync     = 300000  -- Objects: 5 minutes
+```
 
-## 📖 Feature Documentation
+### NUI Development
 
-### Inventory System
-- Comprehensive documentation available in repository documentation
+```bash
+cd nui
+npm install          # First time only
+npm run build        # REQUIRED before committing
+npm run watch        # Auto-rebuild on changes
+npm run dev          # Dev server with HMR (NOT for production)
+```
 
-### Appearance System
-- Character customization and appearance management
+## Developer Workflows
 
-### Job Management System (Recently Updated - 2025-01-16) ✅ NEW
-- **[Job Management System Quick Reference](./Job_Management_System_Quick_Reference.md)** - Quick start guide and API reference
-- **[Job Management System Developer Guide](./Job_Management_System_Developer_Guide.md)** - Complete technical documentation
-- **[Job Management UI](./Job_Management_UI.md)** - Complete job management interface documentation
-- **[Job Management Implementation](../Implementations/Job_Management_UI_Implementation.md)** - Server integration guide
-- **[Job Management Visual Guide](./Job_Management_UI_Visual_Guide.md)** - UI component preview and styling
-- **Changes**: Complete restructure from SQL to JSON-based storage, 30+ new class methods, ACE-based admin commands
+### Adding a New Feature
 
-### Drop System
-- Item drop mechanics and world interaction
+1. **Create Entity Method** (if needed in `server/[Classes]/`)
+   - Use `ig.check.Type()` validation
+   - Update both `self.Property` and `self.State.Property`
+   - Set `self.IsDirty = true` and `self.DirtyFields.fieldName = true`
 
-## 🤝 Contributing
+2. **Add Server Logic** (events in `server/[Events]/` or callbacks)
+   - Retrieve entity via `ig.data.GetEntity()` helpers
+   - Validate permissions (statebag + role checks)
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines on:
+3. **Add Client UI** (if needed, Vue component in `nui/src/components/`)
+   - Create store in `nui/src/stores/` if managing state
+   - Use TailwindCSS for styling (no raw CSS)
+   - Register NUICallback in `nui/lua/ui.lua`
+
+4. **Update Documentation**
+   - Create `/Documentation/FEATURE_NAME.md` for user docs
+   - Update this README with links
+
+### Testing Changes
+
+- **Server**: Load resource, check console for `ig.log.Info()` logs
+- **Client**: Use `ig.debug` commands in chat; read from StateBags
+- **Database**: Verify dirty flags saved via `/sqlstats` command
+- **NUI**: Build with `npm run build`, test in-game
+
+## Directory Structure
+
+### Server
+
+```
+server/
+├── [Classes]/           # Entity classes (Player, Vehicle, Job, etc.)
+├── [SQL]/               # Database layer (queries, saves, handlers)
+├── [Validation]/        # Input validation (ig.check, ig.validation)
+├── [Security]/          # StateBag protection, rate limiting
+├── [Events]/            # Event handlers (character, vehicle, etc.)
+├── [Callbacks]/         # Callback handlers (banking, inventory, etc.)
+├── [Data - Save to File]/   # JSON-based persistence
+├── [Data - No Save Needed]/ # Runtime-only data
+├── [API]/               # Public exports
+├── [Commands]/          # Chat commands
+├── _data.lua            # Entity indexes, load/save routines
+├── _var.lua             # Global namespace (ig.*)
+├── _functions.lua       # Utility functions
+└── _save_routine.lua    # Periodic save loops
+```
+
+### Client
+
+```
+client/
+├── [Callbacks]/         # Client-side callback handlers
+├── [Events]/            # Client event listeners
+├── [Target]/            # ox_target integration
+├── [Zones]/             # PolyZone wrapper
+├── [Garage]/            # Vehicle management
+├── [Voice]/             # VOIP system
+├── _data.lua            # Client data initialization
+└── _vehicle.lua         # StateBag-based vehicle state reading
+```
+
+### NUI
+
+```
+nui/
+├── src/
+│   ├── main.js          # Vue app initialization
+│   ├── App.vue          # Root component
+│   ├── components/      # Vue 3 SFCs (20+ components)
+│   ├── stores/          # Pinia stores (8 stores)
+│   └── utils/nui.js     # NUI message handler
+├── lua/
+│   ├── ui.lua           # Export API
+│   └── NUI-Client/      # Callback handlers
+├── dist/                # Built production files (committed)
+├── vite.config.js       # Build configuration
+└── package.json
+```
+
+### Shared & Data
+
+```
+shared/               # Cross-platform Lua utilities
+data/                 # JSON game data (items, vehicles, weapons, jobs, etc.)
+locale/               # Internationalization (en, fr, es, de, pt)
+_config/              # Configuration files
+```
+
+## Code Style Conventions
+
+### Lua
+
+- **Variables:** camelCase (`local playerName`)
+- **Constants:** UPPER_SNAKE_CASE (`local MAX_HEALTH = 100`)
+- **Functions:** PascalCase (global), camelCase (local)
+- **Indentation:** 4 spaces (no tabs)
+
+### JavaScript (NUI)
+
+- **Const/Let:** No `var`
+- **Arrow functions:** For callbacks
+- **Async/Await:** Use for promises, no `.then()`
+
+## Common Pitfalls
+
+1. **Setting State Directly** - Use entity setters, not `self.State.X = value`
+2. **Client Authority** - Never trust client data without validation
+3. **Missing Dirty Flags** - Forget `self.IsDirty = true` → data won't persist
+4. **Creating Too Many Threads** - Use SetTimeout chains instead
+5. **Ignoring Hybrid Data Loading** - Use JSON files for dynamic data
+6. **UI in Old HTML** - Add Vue components to `nui/src/components/`
+7. **Skipping Validation** - `ig.check` module prevents exploits
+8. **Manual SQL Persistence** - Rely on dirty flags + ConsolidatedSaveLoop
+9. **Modifying Read-Only Data** - Static data protected via `MakeReadOnly()`
+10. **Forgetting NUI Build** - Always `npm run build` before committing
+
+## Performance Optimization
+
+### Threading Guidelines
+
+- **Avoid CreateThread** for recurring tasks
+- **Use SetTimeout chains** for repeating intervals
+- **One master loop** handles multiple save operations
+- **Only create threads** for long-running blocking operations
+
+### Data Loading Patterns
+
+1. **Load JSON files first** (immediate availability)
+2. **Load database data on-demand** (for entities accessed by player)
+3. **Job data at startup** (static, cached in memory)
+
+### Save Optimization
+
+- **Dirty flags** - Only save changed entities
+- **Batch writes** - Group related updates
+- **Prepared statements** - Pre-compile frequent queries
+- **Deferred saves** - Write on intervals, not per-change
+- **Consolidated loop** - Single scheduler thread
+
+## Security Best Practices
+
+1. **Always validate client data** - Use `ig.check.*` on all inputs
+2. **Server is authority** - Never trust client state
+3. **Validate existence** - Check items exist in database
+4. **Clamp ranges** - Use min/max bounds on numbers
+5. **Rate limit operations** - Prevent spam/abuse
+6. **Log exploits** - Track and ban violators
+7. **Sanitize logs** - Remove newlines from user input
+8. **Protect StateBags** - Whitelist + blacklist approach
+9. **Current state validation** - Use GetInventory(), not cached data
+10. **One-time tickets** - Callbacks use expiring security tokens
+
+## Contributing
+
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for:
 - Code style and standards
 - Documentation requirements
 - Pull request process
 - Testing requirements
 
-## 📝 Additional Resources
+## Support & Resources
 
-### Architecture Documents
-All architecture and implementation documents are organized in this `Documentation/` folder for easy reference.
-
-### Support
-- Report issues via GitHub Issues
-- Check existing documentation before requesting features
-- Follow contribution guidelines for pull requests
-
-## 🔄 Recent Updates
-
-### Internationalization & Debugging (v1.1.0+)
-- Multi-language support (English, French, Spanish, German, Portuguese)
-- Enhanced error tracking with resource name, file path, and line numbers
-- Structured debug levels (ERROR, WARN, INFO, DEBUG, TRACE)
-- Server-side error logging to files
-- Function wrapping for automatic error handling
-- Backward compatible with existing debug functions
-
-### SQL System Overhaul (v0.9.0+)
-- Integrated MySQL2 in-resource implementation
-- Removed external mysql-async dependency
-- Added performance profiling and monitoring
-- Improved prepared statement handling
-- Full backward compatibility layer
-
-## Related Resources
-
-- [Implementation Documentation](../Implementations/README.md) - Technical details on how features were built
-- [Contributing Guidelines](../CONTRIBUTING.md) - How to contribute to this project
+- **Report Issues:** GitHub Issues
+- **Implementation Details:** [Implementations](../Implementations/) folder
+- **Function Reference:** [wiki](wiki/) directory (400+ functions)
+- **Contributing:** [CONTRIBUTING.md](../CONTRIBUTING.md)
 
 ---
 
-**Note**: This documentation is actively maintained. Last updated: 2025-12-15
+**Last Updated:** 2026-01-20
+
+**Documentation Status:** Core systems documented, feature systems in progress.
