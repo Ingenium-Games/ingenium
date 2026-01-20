@@ -213,6 +213,7 @@ AddEventHandler("Server:Character:Ready", function()
     -- Return users back to their last known instance or routing bucket.
     SetPlayerRoutingBucket(xPlayer.GetID(), xPlayer.GetInstance())
     SetEntityRoutingBucket(xPlayer.GetPed(), xPlayer.GetInstance())
+    SetEntityVisible(ped, true, true)
 end)
 
 -- ====================================================================================--

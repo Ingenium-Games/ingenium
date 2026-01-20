@@ -230,13 +230,6 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
         statebag = {}
     }
     
-    -- Update database with registration (for backup/admin queries)
-    ig.sql.veh.RegisterPersistent(plate, vehicleType, npcOwner, function(affectedRows)
-        if conf.persistence.logging.enabled then
-            ig.log.Info("PERSISTENCE", "Vehicle registered as persistent in DB: " .. plate)
-        end
-    end)
-    
     -- Request client to capture full vehicle condition
     TriggerClientEvent("Client:Vehicle:CaptureCondition", playerId, plate, vehicleEntity)
     
@@ -260,8 +253,7 @@ function ig.vehicle.UpdateVehicleState(plate, condition, modifications)
     vehicleData.modifications = modifications
     vehicleData.lastInteraction = os.date("!%Y-%m-%dT%H:%M:%SZ")
     
-    -- Update database async
-    ig.sql.veh.UpdateVehicleState(plate, condition, modifications)
+    -- Data stored in memory cache, saved to JSON on periodic save
 end
 
 ---Update vehicle position and fuel
@@ -278,9 +270,7 @@ function ig.vehicle.UpdateVehicleLocation(plate, coords, heading, fuel)
     ig.vehicleCache[plate].fuel = fuel
     ig.vehicleCache[plate].lastInteraction = os.date("!%Y-%m-%dT%H:%M:%SZ")
     
-    -- Update database
-    ig.sql.veh.UpdatePosition(plate, coords)
-    ig.sql.veh.UpdateVehicleStats(plate, fuel, 0)
+    -- Data stored in memory cache, saved to JSON on periodic save
 end
 
 ---Get persistent vehicle by plate

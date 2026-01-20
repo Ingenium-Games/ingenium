@@ -60,27 +60,18 @@ AddEventHandler("Client:Character:Loaded", function()
     ig.appearance.SetAppearance(apperance)
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     ig.func.FadeIn(5000)
-
-    -- Apply RP mode specific configurations if enabled
-    if conf.gamemode == "RP" then
-        local ped = PlayerPedId()
-        
-        -- Set RP-specific native configurations
-        SetMaxWantedLevel(0)
-        SetPedMinGroundTimeForStungun(ped, 12500)
-        SetCanAttackFriendly(ped, true, false)
-        NetworkSetFriendlyFireOption(true)
-        SetWeaponsNoAutoswap(true)
-        SetWeaponsNoAutoreload(true)
-        RemoveMultiplayerHudCash()
-        FreezeEntityPosition(ped, false)
-        SetEntityVisible(ped, true, true)
-
-        ig.log.Info("Character", "RP Mode character initialization complete")
-    end
+    
+    -- Set RP-specific native configurations
+    SetMaxWantedLevel(0)
+    SetPedMinGroundTimeForStungun(ped, 12500)
+    SetCanAttackFriendly(ped, true, false)
+    NetworkSetFriendlyFireOption(true)
+    SetWeaponsNoAutoswap(true)
+    SetWeaponsNoAutoreload(true)
+    RemoveMultiplayerHudCash()
+    FreezeEntityPosition(ped, false)
 
     ig.func.FadeIn(5000)
-
 end)
 
 -- ====================================================================================--
