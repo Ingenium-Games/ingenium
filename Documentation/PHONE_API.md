@@ -67,6 +67,25 @@ local contacts = ig.phone.GetContacts(imei)
 local success = ig.phone.UpdateContacts(imei, contactsArray)
 ```
 
+### Call History Management
+
+```lua
+-- Add a call to history
+local success = ig.phone.AddCallHistory(imei, callTable)
+-- callTable = {id, number, type, duration, timestamp}
+-- type = "incoming" | "outgoing" | "missed"
+
+-- Get call history
+local callHistory = ig.phone.GetCallHistory(imei)
+-- Returns: array of call history tables
+
+-- Delete a call from history
+local success = ig.phone.DeleteCallHistory(imei, callId)
+
+-- Update all call history (replaces entire history)
+local success = ig.phone.UpdateCallHistory(imei, callHistoryArray)
+```
+
 ## SQL Module (`ig.sql.phone`)
 
 ### Retrieval
@@ -108,6 +127,9 @@ local success = ig.sql.phone.UpdateContacts(imei, contactsArray)
 
 -- Update settings
 local success = ig.sql.phone.UpdateSettings(imei, settingsTable)
+
+-- Update call history
+local success = ig.sql.phone.UpdateCallHistory(imei, callHistoryArray)
 
 -- Update owner
 local success = ig.sql.phone.UpdateOwner(imei, characterId, phoneNumber)
@@ -160,6 +182,26 @@ end)
 RegisterNetEvent("Server:Phone:DeleteContact", function(imei, contactId)
     -- Deletes contact
 end)
+
+-- Initiate call
+RegisterNetEvent("Server:Phone:InitiateCall", function(imei, targetNumber)
+    -- Validates numbers, finds target player, initiates call via VOIP
+end)
+
+-- Answer call
+RegisterNetEvent("Server:Phone:AnswerCall", function(imei, callId)
+    -- Answers incoming call via VOIP
+end)
+
+-- End call
+RegisterNetEvent("Server:Phone:EndCall", function(imei, callId)
+    -- Ends active call
+end)
+
+-- Delete call history
+RegisterNetEvent("Server:Phone:DeleteCallHistory", function(imei, callId)
+    -- Deletes call history entry
+end)
 ```
 
 ### Sending to Client
@@ -197,6 +239,26 @@ end)
 RegisterNetEvent("Client:Phone:ContactsUpdated", function(contacts)
     -- Updates NUI with new contacts
 end)
+
+-- Call history updated (from server)
+RegisterNetEvent("Client:Phone:CallHistoryUpdated", function(callHistory)
+    -- Updates NUI with new call history
+end)
+
+-- Incoming call (from server)
+RegisterNetEvent("Client:Phone:CallIncoming", function(callData)
+    -- Triggers incoming call UI with {callId, callerNumber}
+end)
+
+-- Outgoing call (from server)
+RegisterNetEvent("Client:Phone:CallOutgoing", function(callData)
+    -- Triggers outgoing call UI with {callId, targetNumber}
+end)
+
+-- Call ended (from server)
+RegisterNetEvent("Client:Phone:CallEnded", function(callData)
+    -- Closes call UI and updates history
+end)
 ```
 
 ## NUI Messages
@@ -232,6 +294,30 @@ SendNUIMessage({
     message = "Client:NUI:PhoneContactsUpdated",
     data = contactsArray
 })
+
+-- Update call history
+SendNUIMessage({
+    message = "Client:NUI:PhoneCallHistoryUpdated",
+    data = callHistoryArray
+})
+
+-- Incoming call
+SendNUIMessage({
+    message = "Client:NUI:PhoneCallIncoming",
+    data = {callId = "uuid", callerNumber = "123456"}
+})
+
+-- Outgoing call
+SendNUIMessage({
+    message = "Client:NUI:PhoneCallOutgoing",
+    data = {callId = "uuid", targetNumber = "123456"}
+})
+
+-- Call ended
+SendNUIMessage({
+    message = "Client:NUI:PhoneCallEnded",
+    data = {callId = "uuid"}
+})
 ```
 
 ### From NUI to Lua (Callbacks)
@@ -266,6 +352,30 @@ RegisterNUICallback('NUI:Client:PhoneDeleteContact', function(data, cb) {
     // data = {contactId: string}
     cb({ok: true})
 })
+
+// Initiate call
+RegisterNUICallback('NUI:Client:PhoneInitiateCall', function(data, cb) {
+    // data = {imei: string, number: string}
+    cb({ok: true})
+})
+
+// Answer call
+RegisterNUICallback('NUI:Client:PhoneAnswerCall', function(data, cb) {
+    // data = {imei: string, callId: string}
+    cb({ok: true})
+})
+
+// End call
+RegisterNUICallback('NUI:Client:PhoneEndCall', function(data, cb) {
+    // data = {imei: string, callId: string}
+    cb({ok: true})
+})
+
+// Delete call history
+RegisterNUICallback('NUI:Client:PhoneDeleteCallHistory', function(data, cb) {
+    // data = {imei: string, callId: string}
+    cb({ok: true})
+})
 ```
 
 ## Data Structures
@@ -279,6 +389,7 @@ RegisterNUICallback('NUI:Client:PhoneDeleteContact', function(data, cb) {
     Phone_Number = "123456",         -- Device's phone number (6-7 digits, device-tied)
     Character_ID = "char_id",        -- Current owner's character ID
     Contacts = {},                   -- Array of contacts
+    CallHistory = {},                -- Array of call history
     Settings = {                     -- Phone settings
         planeMode = false,
         emergencyAlerts = true,
@@ -308,6 +419,18 @@ RegisterNUICallback('NUI:Client:PhoneDeleteContact', function(data, cb) {
     planeMode = false,         -- Disable calls when true
     emergencyAlerts = true,    -- Alert EMS when downed
     provider = "Warstock"      -- Network provider name
+}
+```
+
+### Call History Object
+
+```lua
+{
+    id = "uuid-string",        -- Unique call ID
+    number = "123456",         -- Other party's number (6-7 chars)
+    type = "incoming",         -- "incoming", "outgoing", or "missed"
+    duration = 120,            -- Call duration in seconds (0 for missed)
+    timestamp = 1705680000000  -- Unix timestamp (ms) when call occurred
 }
 ```
 

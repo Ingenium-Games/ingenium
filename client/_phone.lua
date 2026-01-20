@@ -232,6 +232,113 @@ RegisterNUICallback("NUI:Client:PhoneDeleteContact", function(data, cb)
     cb({ok = true})
 end)
 
+--- Handle call initiation from NUI
+RegisterNUICallback("NUI:Client:PhoneInitiateCall", function(data, cb)
+    if not ig.phone.currentPhoneData then
+        cb({ok = false, error = "No phone data"})
+        return
+    end
+    
+    -- Send to server to find target and initiate call
+    TriggerServerEvent("Server:Phone:InitiateCall", ig.phone.currentPhoneData.imei, data.number)
+    
+    cb({ok = true})
+end)
+
+--- Handle call answer from NUI
+RegisterNUICallback("NUI:Client:PhoneAnswerCall", function(data, cb)
+    if not ig.phone.currentPhoneData then
+        cb({ok = false, error = "No phone data"})
+        return
+    end
+    
+    -- Send to server to answer call
+    TriggerServerEvent("Server:Phone:AnswerCall", ig.phone.currentPhoneData.imei, data.callId)
+    
+    cb({ok = true})
+end)
+
+--- Handle call end from NUI
+RegisterNUICallback("NUI:Client:PhoneEndCall", function(data, cb)
+    if not ig.phone.currentPhoneData then
+        cb({ok = false, error = "No phone data"})
+        return
+    end
+    
+    -- Send to server to end call
+    TriggerServerEvent("Server:Phone:EndCall", ig.phone.currentPhoneData.imei, data.callId)
+    
+    cb({ok = true})
+end)
+
+--- Handle call history delete from NUI
+RegisterNUICallback("NUI:Client:PhoneDeleteCallHistory", function(data, cb)
+    if not ig.phone.currentPhoneData then
+        cb({ok = false, error = "No phone data"})
+        return
+    end
+    
+    -- Send to server for validation and persistence
+    TriggerServerEvent("Server:Phone:DeleteCallHistory", ig.phone.currentPhoneData.imei, data.callId)
+    
+    cb({ok = true})
+end)
+
+--- Handle incoming call from server
+RegisterNetEvent("Client:Phone:CallIncoming", function(callData)
+    if not ig.phone.currentPhoneData then
+        return
+    end
+    
+    -- Send to NUI
+    SendNUIMessage({
+        message = "Client:NUI:PhoneCallIncoming",
+        data = callData
+    })
+end)
+
+--- Handle outgoing call from server
+RegisterNetEvent("Client:Phone:CallOutgoing", function(callData)
+    if not ig.phone.currentPhoneData then
+        return
+    end
+    
+    -- Send to NUI
+    SendNUIMessage({
+        message = "Client:NUI:PhoneCallOutgoing",
+        data = callData
+    })
+end)
+
+--- Handle call ended from server
+RegisterNetEvent("Client:Phone:CallEnded", function(callData)
+    if not ig.phone.currentPhoneData then
+        return
+    end
+    
+    -- Send to NUI
+    SendNUIMessage({
+        message = "Client:NUI:PhoneCallEnded",
+        data = callData
+    })
+end)
+
+--- Handle call history update from server
+RegisterNetEvent("Client:Phone:CallHistoryUpdated", function(callHistory)
+    if not ig.phone.currentPhoneData then
+        return
+    end
+    
+    -- Update local cache
+    ig.phone.currentPhoneData.callHistory = callHistory
+    
+    -- Send to NUI
+    SendNUIMessage({
+        message = "Client:NUI:PhoneCallHistoryUpdated",
+        data = callHistory
+    })
+end)
+
 -- Close phone on ESC key (handled by NUI ESC handler)
 
 ig.log.Info("Phone", "Phone client module loaded")

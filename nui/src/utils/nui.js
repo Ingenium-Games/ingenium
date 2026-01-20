@@ -486,6 +486,30 @@ export function setupNuiHandlers() {
         }
         break
       
+      case 'Client:NUI:PhoneCallHistoryUpdated':
+        if (phoneStore) {
+          phoneStore.updateCallHistory(data)
+        }
+        break
+      
+      case 'Client:NUI:PhoneCallIncoming':
+        if (phoneStore) {
+          phoneStore.receiveCall(data)
+        }
+        break
+      
+      case 'Client:NUI:PhoneCallOutgoing':
+        if (phoneStore) {
+          phoneStore.initiateCall(data.targetNumber)
+        }
+        break
+      
+      case 'Client:NUI:PhoneCallEnded':
+        if (phoneStore) {
+          phoneStore.endCall()
+        }
+        break
+      
       default:
         console.log('Unhandled NUI message:', message, data)
         break
