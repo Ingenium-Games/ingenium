@@ -193,11 +193,17 @@ function stopDrag() {
 
 .hud-stat-container {
   position: fixed;
+  pointer-events: none; /* Default: clicks pass through */
+}
+
+.hud-stat-container.hud-focused {
+  pointer-events: auto; /* Enable interaction when focused */
   pointer-events: auto;
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hud-stat-container.hud-focused {
+  pointer-events: auto; /* Enable interaction when focused */
   cursor: grab;
 }
 
