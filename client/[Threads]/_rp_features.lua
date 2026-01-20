@@ -25,12 +25,18 @@ Citizen.CreateThread(function()
         ig.log.Info("RPFeatures", "Trains disabled")
     end
     
-    -- Disable police dispatch if configured
+    -- Disable police dispatch and spawning if configured
     if modeSettings.disableDispatch then
         for i = 1, 15 do
             EnableDispatchService(i, false)
         end
-        ig.log.Info("RPFeatures", "Dispatch services disabled")
+        
+        -- Completely disable police
+        SetCreateRandomCops(false)
+        SetCreateRandomCopsNotOnScenarios(false)
+        SetCreateRandomCopsOnScenarios(false)
+        
+        ig.log.Info("RPFeatures", "Dispatch services and police spawning disabled")
     end
     
     -- Set audio flags for RP experience
@@ -108,21 +114,40 @@ Citizen.CreateThread(function()
         -- NPC weapon drop disable check (every 2.5 seconds)
         if modeSettings.disableNPCWeaponDrops and (currentTime - lastNPCWeaponCheck) >= NPC_WEAPON_INTERVAL then
             local ped = PlayerPedId()
-            -- Disable weapon drops from NPCs
+            local playerCoords = GetEntityCoords(ped)
+            
+            -- Disable weapon drops from player
             SetPedDropsWeaponsWhenDead(ped, false)
             
-            -- Remove nearby dropped weapons (within 50 units)
-            local playerCoords = GetEntityCoords(ped)
-            ClearAreaOfCops(playerCoords.x, playerCoords.y, playerCoords.z, 120)
-            -- GetClosestPickupOfType is available in game natives
-            if GetClosestPickupOfType then
-                for _, pickupHash in ipairs(weaponPickupHashes) do
-                    local pickup = GetClosestPickupOfType(pickupHash, playerCoords.x, playerCoords.y, playerCoords.z, 50.0)
-                    if pickup and DoesPickupExist(pickup) then
-                        RemovePickup(pickup)
+            -- Disable weapon drops for ALL nearby peds (within 100 units)
+            local nearbyPeds = GetGamePool('CPed')
+            for _, pedHandle in ipairs(nearbyPeds) do
+                if pedHandle ~= ped and DoesEntityExist(pedHandle) then
+                    local pedCoords = GetEntityCoords(pedHandle)
+                    local distance = #(playerCoords - pedCoords)
+                    if distance <= 100.0 then
+                        SetPedDropsWeaponsWhenDead(pedHandle, false)
+                        -- Remove weapons from dead peds
+                        if IsEntityDead(pedHandle) then
+                            RemoveAllPedWeapons(pedHandle, true)
+                        end
                     end
                 end
             end
+            
+            -- Clear area of cops
+            ClearAreaOfCops(playerCoords.x, playerCoords.y, playerCoords.z, 120.0)
+            
+            -- Remove ALL weapon pickups in area (within 100 units)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_PISTOL`)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_COMBATPISTOL`)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_PUMPSHOTGUN`)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_SAWNOFFSHOTGUN`)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_CARBINERIFLE`)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_ASSAULTRIFLE`)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_SMG`)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_MICROSMG`)
+            RemoveAllPickupsOfType(`PICKUP_WEAPON_SNIPER_RIFLE`)
             
             lastNPCWeaponCheck = currentTime
         end

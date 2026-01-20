@@ -90,7 +90,7 @@ AddEventHandler("playerDropped", function()
         ExecuteCommand(("remove_principal identifier.%s job.%s"):format(xPlayer.GetLicense_ID(), xPlayer.GetJob().Name))
         -- Save Data
         ig.sql.save.User(xPlayer, function()
-            ig.sql.char.SetActive(xPlayer.GetIdentifier(), false, function()
+            ig.sql.char.SetActive(xPlayer.GetCharacter_ID(), false, function()
                 ig.log.Info("Server", "Player disconnection event triggered")
                 ig.data.RemovePlayer(src)
             end)

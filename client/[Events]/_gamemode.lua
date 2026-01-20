@@ -19,6 +19,24 @@ local gameModeHandlers = {
                 -- Passenger
                 LocalPlayer.state:set("IsPassenger", true, false)
             end
+            
+            -- Remove any weapons that might spawn in vehicle (police cars, etc.)
+            local modeSettings = ig.game.GetGameModeSettings("RP")
+            if modeSettings and modeSettings.disableNPCWeaponDrops then
+                Citizen.CreateThread(function()
+                    Wait(100) -- Small delay to let vehicle fully load
+                    local vehicleCoords = GetEntityCoords(vehicle)
+                    
+                    -- Remove weapon pickups near vehicle
+                    RemoveAllPickupsOfType(`PICKUP_WEAPON_PISTOL`)
+                    RemoveAllPickupsOfType(`PICKUP_WEAPON_COMBATPISTOL`)
+                    RemoveAllPickupsOfType(`PICKUP_WEAPON_PUMPSHOTGUN`)
+                    RemoveAllPickupsOfType(`PICKUP_WEAPON_CARBINERIFLE`)
+                    
+                    -- Clear small area around vehicle
+                    ClearAreaOfWeapons(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z, 5.0, false)
+                end)
+            end
         end,
         onLeftVehicle = function(vehicle, seat, name, netId)
             -- Clear vehicle-related states
