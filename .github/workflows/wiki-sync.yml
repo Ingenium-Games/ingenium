@@ -217,7 +217,7 @@ jobs:
 
   create-issues:
     runs-on: ubuntu-latest
-    name: Create issues for missing scopes
+    name: Create issues for missing documentation
     needs: verify-function-scopes
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -232,14 +232,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Download mismatch report
-        uses: actions/download-artifact@v4
-        with:
-          name: function_scope_mismatches
-          path: scripts
-        continue-on-error: true
-
-      - name: Regenerate wiki README
+      - name: Regenerate wiki README and generate missing docs report
         run: |
           echo "🔄 Regenerating wiki README..."
           set +e
@@ -264,12 +257,12 @@ jobs:
       - name: Authenticate gh CLI
         run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
-      - name: Create issues from mismatch report
+      - name: Create issues from missing documentation report
         run: |
-          if [ -f scripts/function_scope_mismatches.json ]; then
+          if [ -f MISSING_DOCUMENTATION_REPORT.txt ]; then
             python3 scripts/create_missing_docs_issues.py --auto-create --yes --repo "${{ github.repository }}"
           else
-            echo "No mismatch report found; skipping issue creation."
+            echo "No missing documentation report found; skipping issue creation."
           fi
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
