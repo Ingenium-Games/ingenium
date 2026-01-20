@@ -416,3 +416,17 @@ function ig.func.HasPlayers()
     end
 end
 
+-- returns the complete statebag data for a vehicle (captures all state changes made by any script)
+--- func desc
+---@param vehicle number Vehicle entity handle
+---@return table Statebag data
+function ig.func.GetVehicleStatebag(vehicle)
+    local statebag = {}
+    local state = Entity(vehicle).state
+    if state then
+        for key, value in pairs(state) do
+            statebag[key] = value
+        end
+    end
+    return statebag
+end

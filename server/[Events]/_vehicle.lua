@@ -69,16 +69,15 @@ RegisterNetEvent("Server:VehiclePersistence:RegisterCondition", function(netId, 
     
     -- Get vehicle entity from network ID to read statebag directly (don't trust client)
     local vehicle = NetworkGetEntityFromNetworkId(netId)
-    local statebag = {}
     
-    if vehicle and DoesEntityExist(vehicle) then
-        -- Read statebag directly from server vehicle entity (authoritative)
-        statebag = ig.func.GetVehicleStatebag(vehicle)
+    if not vehicle or not DoesEntityExist(vehicle) then
+        ig.log.Warn("Vehicle", "Invalid vehicle entity for netId: " .. tostring(netId))
+        return
     end
     
-    -- Update persistence system with condition and server-read statebag (not client-provided)
+    -- Update persistence system with condition and modifications (statebag not needed here)
     if ig.vehicle and ig.vehicle.UpdateVehicleState then
-        ig.vehicle.UpdateVehicleState(plate, condition, modifications, statebag)
+        ig.vehicle.UpdateVehicleState(plate, condition, modifications)
     end
     
     if conf.persistence and conf.persistence.logging and conf.persistence.logging.enabled then
@@ -102,18 +101,17 @@ RegisterNetEvent("Server:VehiclePersistence:UpdateCondition", function(netId, pl
         return
     end
     
-    -- Get vehicle entity from network ID to read statebag directly (don't trust client)
+    -- Get vehicle entity from network ID to validate it exists
     local vehicle = NetworkGetEntityFromNetworkId(netId)
-    local statebag = {}
     
-    if vehicle and DoesEntityExist(vehicle) then
-        -- Read statebag directly from server vehicle entity (authoritative)
-        statebag = ig.func.GetVehicleStatebag(vehicle)
+    if not vehicle or not DoesEntityExist(vehicle) then
+        ig.log.Warn("Vehicle", "Invalid vehicle entity for netId: " .. tostring(netId))
+        return
     end
     
-    -- Update persistence system with final condition and server-read statebag (not client-provided)
+    -- Update persistence system with final condition and location
     if ig.vehicle then
-        ig.vehicle.UpdateVehicleState(plate, condition, modifications, statebag)
+        ig.vehicle.UpdateVehicleState(plate, condition, modifications)
         ig.vehicle.UpdateVehicleLocation(plate, coords, 0, fuel)
     end
     

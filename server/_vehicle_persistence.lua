@@ -201,7 +201,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
         return
     end
     
-    local player = GetPlayer(playerId)
+    local player = ig.data.GetPlayer(playerId)
     if not player then return end
     
     if not DoesEntityExist(vehicleEntity) then return end
@@ -375,9 +375,12 @@ function ig.vehicle.HookVehicleEvents()
             return
         end
         
-        -- Check if this is a player-owned vehicle (skip, already in DB)
-        local player = GetPlayer(playerId)
-        if not player then return end
+        -- Check if this is a player-owned vehicle (has Owner statebag set)
+        local vehicleState = Entity(vehicleEntity).state
+        if vehicleState.Owner and vehicleState.Owner ~= false then
+            -- This is an owned vehicle, skip persistence system (handled by vehicle class)
+            return
+        end
         
         -- Register as persistent if not already in cache
         if not ig.vehicleCache[plate] then

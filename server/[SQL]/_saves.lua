@@ -42,6 +42,13 @@ function ig.sql.save.User(data, cb)
         return 
     end
     
+    -- Guard: Check if prepared query is initialized
+    if PlayerSaveData == -1 then
+        ig.log.Warn("SQL", "PlayerSaveData prepared query not ready yet, skipping save")
+        if cb then cb() end
+        return
+    end
+    
     -- Other Variables.
     local Health = data.GetHealth()
     local Armour = data.GetArmour()
@@ -84,6 +91,13 @@ end
 --- Save All Characters from the xPLayer Table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function ig.sql.save.Users(cb)
+    -- Guard: Check if prepared query is initialized
+    if PlayerSaveData == -1 then
+        ig.log.Warn("SQL", "PlayerSaveData prepared query not ready yet, skipping batch save")
+        if cb then cb() end
+        return
+    end
+    
     local startTime = os.clock()
     local saveCount = 0
     local xPlayers = ig.data.GetPlayers()
@@ -157,6 +171,13 @@ function ig.sql.save.Vehicle(data, cb)
         return
     end
     
+    -- Guard: Check if prepared query is initialized
+    if VehicleSaveData == -1 then
+        ig.log.Warn("SQL", "VehicleSaveData prepared query not ready yet, skipping save")
+        if cb then cb() end
+        return
+    end
+    
     local Fuel = data.GetFuel()
     -- Booleans
     local Parked = data.GetParked()
@@ -200,6 +221,13 @@ end
 --- Save all vehicles from the xVehicle table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function ig.sql.save.Vehicles(cb)
+    -- Guard: Check if prepared query is initialized
+    if VehicleSaveData == -1 then
+        ig.log.Warn("SQL", "VehicleSaveData prepared query not ready yet, skipping batch save")
+        if cb then cb() end
+        return
+    end
+    
     local startTime = os.clock()
     local saveCount = 0
     local xVehicles = ig.vehicle.GetVehicles()
@@ -311,6 +339,13 @@ ig.sql.PrepareQuery("UPDATE `objects` SET `Inventory` = ?, `Coords` = ? WHERE `U
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function ig.sql.save.Objects(cb)
+    -- Guard: Check if prepared query is initialized
+    if ObjectSaveData == -1 then
+        ig.log.Warn("SQL", "ObjectSaveData prepared query not ready yet, skipping save")
+        if cb then cb() end
+        return
+    end
+    
     local xObjs = ig.object.GetObjects()
     for k, data in pairs(xObjs) do
         if data then
