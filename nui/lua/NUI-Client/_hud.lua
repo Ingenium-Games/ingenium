@@ -24,32 +24,6 @@ RegisterNUICallback('NUI:Client:HUDClose', function(data, cb)
     cb({ok = true})
 end)
 
--- Player toggles HUD focus from NUI (e.g., pressing F2 while focused)
--- Sent from: nui/src/components/HUD.vue when F2 is pressed in focus mode
-RegisterNUICallback('NUI:Client:HUDFocusToggle', function(data, cb)
-    ig.log.Trace("HUD", "HUD focus toggled from NUI")
-    
-    -- Toggle focus state
-    hudFocused = not hudFocused
-    
-    -- Send message to NUI to update focus state
-    SendNUIMessage({
-        message = "Client:NUI:HUDFocus",
-        data = { 
-            focused = hudFocused,
-            timestamp = GetGameTimer()
-        }
-    })
-    
-    -- Set NUI focus accordingly
-    SetNuiFocus(hudFocused, hudFocused)
-    
-    -- Trigger event for other resources
-    TriggerEvent("Client:HUD:FocusToggled", hudFocused)
-    
-    cb({ok = true})
-end)
-
 -- HUD element was updated by player interaction
 -- Sent from: nui/src/components/HUD.vue with element data
 RegisterNUICallback('NUI:Client:HUDUpdate', function(data, cb)

@@ -29,8 +29,8 @@ RegisterCommand('toggleHudFocus', function()
             timestamp = GetGameTimer()
         }
     })
-    -- Set NUI focus to allow/deny keyboard input
-    SetNuiFocus(hudFocused, hudFocused)
+    -- Set NUI focus: cursor captured when focused (for dragging), keyboard never captured (allows command to work)
+    SetNuiFocus(hudFocused, false)
     -- Trigger event for other resources to hook into
     -- NOTE: This event is currently triggered but has no registered handlers
     -- TODO: If HUD focus state needs to be consumed by other systems, add handlers
