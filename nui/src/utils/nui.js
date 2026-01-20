@@ -291,7 +291,10 @@ export function setupNuiHandlers() {
         break
 
       case 'Client:NUI:HUDFocus':
+        console.log('[nui.js] HUDFocus received, data:', data)
+        console.log('[nui.js] Calling uiStore.setHudFocus with:', data.focused)
         uiStore.setHudFocus(data.focused)
+        console.log('[nui.js] uiStore.hudFocused is now:', uiStore.hudFocused)
         break
 
       case 'Client:NUI:HUDResetPosition':

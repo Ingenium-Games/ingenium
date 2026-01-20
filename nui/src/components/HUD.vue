@@ -105,10 +105,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useUIStore } from '../stores/ui'
 
 const uiStore = useUIStore()
+
+// Debug: Watch hudFocused changes
+watch(() => uiStore.hudFocused, (newVal, oldVal) => {
+  console.log('[HUD.vue] hudFocused changed from', oldVal, 'to', newVal)
+})
 
 // Default positions for each stat (stacked vertically on left side)
 const defaultPositions = {

@@ -51,7 +51,9 @@ export const useUIStore = defineStore('ui', () => {
   }
   
   function setHudFocus(focused) {
+    console.log('[ui.js] setHudFocus called with:', focused)
     hudFocused.value = focused
+    console.log('[ui.js] hudFocused.value is now:', hudFocused.value)
   }
   
   function openMenu(data) {
