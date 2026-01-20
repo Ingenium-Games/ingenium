@@ -67,6 +67,8 @@ Citizen.CreateThread(function()
             -- Hide radar (can be toggled by player separately)
             -- DisplayRadar(false)
         end
+
+        
     end
 end)
 
@@ -111,7 +113,7 @@ Citizen.CreateThread(function()
             
             -- Remove nearby dropped weapons (within 50 units)
             local playerCoords = GetEntityCoords(ped)
-            
+            ClearAreaOfCops(playerCoords.x, playerCoords.y, playerCoords.z, 120)
             -- GetClosestPickupOfType is available in game natives
             if GetClosestPickupOfType then
                 for _, pickupHash in ipairs(weaponPickupHashes) do

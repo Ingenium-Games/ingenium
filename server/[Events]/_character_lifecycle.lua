@@ -216,7 +216,7 @@ AddEventHandler("Server:Character:Ready", function()
     -- Track loaded player for persistent vehicle spawning
     if not ig.table.MatchValue(ig._loadedPlayers, src) then
         table.insert(ig._loadedPlayers, src)
-        ig.log.Debug("Character", "Player " .. src .. " added to loaded players list (" .. #ig._loadedPlayers .. " total)")
+        ig.log.Debug("Character", "Player " .. src .. " added to loaded players list (" .. (#ig._loadedPlayers or 0) .. " total)")
         
         -- If this is the first loaded player, spawn persistent vehicles
         if #ig._loadedPlayers == 1 then

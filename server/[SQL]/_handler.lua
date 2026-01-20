@@ -176,11 +176,11 @@ end
 -- ====================================================================================--
 
 Citizen.CreateThread(function()
-    ig.log.Info("SQL Handler", "Lua wrapper interface loaded")
+    ig.log.Debug("SQL Handler", "Lua wrapper interface loaded")
     
     -- Wait for SQL to be ready
     if ig.sql.AwaitReady() then
-        ig.log.Info("SQL Handler", "Connection ready")
+        ig.log.Debug("SQL Handler", "Connection ready")
     else
         ig.log.Error("SQL Handler", "Connection timeout - check your MySQL configuration")
     end
