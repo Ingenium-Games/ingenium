@@ -62,6 +62,11 @@ def parse_missing_report():
 
 def parse_mismatch_json(json_path: Path):
     """Parse verifier mismatch JSON into the same namespace->functions map.
+    
+    NOTE: This function is for scope verification mismatches ([S], [C] markers),
+    NOT for missing documentation. It's kept for future compatibility but not
+    currently used by this script. Missing documentation issues are created from
+    MISSING_DOCUMENTATION_REPORT.txt instead.
 
     Expects JSON of the form: {"mismatches": [{"func": "namespace.func", ...}, ...]}
     """
@@ -231,21 +236,12 @@ def main():
     if args.repo:
         REPO = args.repo
 
-    print('📋 Parsing missing documentation report and verifier mismatches...')
+    print('📋 Parsing missing documentation report...')
 
-    # Prefer verifier JSON if present (produced by scripts/verify_function_scopes.py in CI)
-    mismatch_json_path = REPO_ROOT / 'scripts' / 'function_scope_mismatches.json'
-
-    # Prefer verifier JSON when present (even if empty). Only fall back to the
-    # legacy text report when the JSON file is missing entirely. This ensures
-    # CI runs that intentionally produce an empty mismatch report don't get
-    # overridden by stale legacy reports.
-    if mismatch_json_path.exists():
-        missing = parse_mismatch_json(mismatch_json_path)
-        print(f'ℹ️  Loaded {sum(len(v) for v in missing.values())} mismatches from {mismatch_json_path}')
-    else:
-        # Fall back to legacy MISSING_DOCUMENTATION_REPORT.txt parsing
-        missing = parse_missing_report()
+    # Always use MISSING_DOCUMENTATION_REPORT.txt for missing documentation issues
+    # The function_scope_mismatches.json is for scope verification ([S], [C] markers), not missing docs
+    missing = parse_missing_report()
+    print(f'ℹ️  Loaded {sum(len(v) for v in missing.values())} functions from {MISSING_REPORT_PATH}')
     
     print(f'✅ Found {len(missing)} namespaces with missing documentation\n')
     
