@@ -300,7 +300,21 @@ function ig.func.CreateVehicle(name, x, y, z, h, data, routingBucket)
         ig.inst.SetEntity(entity, routingBucket)
     end
     
+    -- Wait for network ID to be valid
     local net = NetworkGetNetworkIdFromEntity(entity)
+    local attempts = 0
+    while net == 0 and attempts < 100 do
+        Citizen.Wait(10)
+        net = NetworkGetNetworkIdFromEntity(entity)
+        attempts = attempts + 1
+    end
+    
+    if net == 0 then
+        ig.log.Error("ENTITY", "Failed to get network ID for vehicle after 1 second")
+        DeleteEntity(entity)
+        return false, false
+    end
+    
     if data and data.Owner then
         ig.data.AddVehicle(net, ig.class.OwnedVehicle, net, data)
     else
@@ -340,7 +354,21 @@ function ig.func.CreatePed(name, x, y, z, h, routingBucket)
         ig.inst.SetEntity(entity, routingBucket)
     end
     
+    -- Wait for network ID to be valid
     local net = NetworkGetNetworkIdFromEntity(entity)
+    local attempts = 0
+    while net == 0 and attempts < 100 do
+        Citizen.Wait(10)
+        net = NetworkGetNetworkIdFromEntity(entity)
+        attempts = attempts + 1
+    end
+    
+    if net == 0 then
+        ig.log.Error("ENTITY", "Failed to get network ID for ped after 1 second")
+        DeleteEntity(entity)
+        return false, false
+    end
+    
     ig.data.AddPed(net, ig.class.Npc, net)
     return entity, net
 end
@@ -373,7 +401,22 @@ function ig.func.CreateObject(model, x, y, z, isdoor, data)
             return false, false
         end
     end
+    
+    -- Wait for network ID to be valid
     local net = NetworkGetNetworkIdFromEntity(entity)
+    local attempts = 0
+    while net == 0 and attempts < 100 do
+        Citizen.Wait(10)
+        net = NetworkGetNetworkIdFromEntity(entity)
+        attempts = attempts + 1
+    end
+    
+    if net == 0 then
+        ig.log.Error("ENTITY", "Failed to get network ID for object after 1 second")
+        DeleteEntity(entity)
+        return false, false
+    end
+    
     if data then
         ig.data.AddObject(net, ig.class.ExistingObject, net, data)
     else
