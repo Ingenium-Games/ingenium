@@ -143,7 +143,13 @@ def get_existing_md_files():
 def detect_orphaned_wiki_pages(functions):
     """
     Detect wiki pages that no longer have corresponding functions in the codebase.
-    Returns list of orphaned files to delete.
+    
+    Args:
+        functions (dict): Dictionary mapping namespace (str) to list of function dicts.
+                         Each function dict contains 'name', 'full_name', 'scope', etc.
+    
+    Returns:
+        list: List of orphaned wiki filenames (str) to delete.
     """
     # Build set of all valid function wiki filenames
     valid_filenames = set()
@@ -177,8 +183,17 @@ def detect_orphaned_wiki_pages(functions):
     return orphaned
 
 def remove_orphaned_wiki_pages(orphaned_files):
-    """Remove orphaned wiki pages and return list of deleted files"""
+    """
+    Remove orphaned wiki pages and return list of deleted files.
+    
+    Args:
+        orphaned_files (list): List of wiki filenames (str) to delete.
+    
+    Returns:
+        list: List of successfully deleted filenames (str).
+    """
     deleted = []
+    failed = []
     
     for file in orphaned_files:
         filepath = WIKI_DIR / file
@@ -187,8 +202,17 @@ def remove_orphaned_wiki_pages(orphaned_files):
                 os.remove(filepath)
                 deleted.append(file)
                 print(f'  🗑️  Deleted orphaned wiki page: {file}')
-        except Exception as e:
+        except PermissionError as e:
+            print(f'  ⚠️  Permission denied when deleting {file}: {e}')
+            failed.append(file)
+        except OSError as e:
             print(f'  ⚠️  Failed to delete {file}: {e}')
+            failed.append(file)
+    
+    if failed:
+        print(f'\n⚠️  Warning: {len(failed)} file(s) could not be deleted')
+        for file in failed:
+            print(f'     - {file}')
     
     return deleted
 
@@ -354,11 +378,13 @@ def main():
     # Detect and remove orphaned wiki pages
     print('\n🧹 Checking for orphaned wiki pages...')
     orphaned = detect_orphaned_wiki_pages(functions)
+    deleted_count = 0
     
     if orphaned:
         print(f'⚠️  Found {len(orphaned)} orphaned wiki pages (functions no longer exist in codebase):')
         deleted = remove_orphaned_wiki_pages(orphaned)
-        print(f'✅ Deleted {len(deleted)} orphaned wiki pages')
+        deleted_count = len(deleted)
+        print(f'✅ Deleted {deleted_count} orphaned wiki pages')
     else:
         print('✅ No orphaned wiki pages found')
     
@@ -388,8 +414,8 @@ def main():
     print(f'Functions Documented:         {total_found - len(missing_docs)}')
     print(f'Functions Missing Docs:       {len(missing_docs)} ⚠️')
     print(f'Functions Ignored (Internal): {ignored_count}')
-    if orphaned:
-        print(f'Orphaned Pages Removed:       {len(orphaned)} 🗑️')
+    if deleted_count > 0:
+        print(f'Orphaned Pages Removed:       {deleted_count} 🗑️')
     print(f'Namespaces:                   {len(functions)}')
     print('=' * 60)
     
