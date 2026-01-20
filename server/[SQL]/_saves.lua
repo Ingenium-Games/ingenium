@@ -63,16 +63,47 @@ local function MonitoredSave(saveName, saveFunc, cb)
     end)
 end
 
---[[ Players ]] --
+--[[ Prepared Query Variables ]] --
 
 local PlayerSaveData = -1
-ig.sql.PrepareQuery(
-    "UPDATE `characters` SET `Health` = ?, `Armour` = ?, `Hunger` = ?, `Thirst` = ?, `Stress` = ?, `Coords` = ?, `Skills` = ?, `Modifiers` = ?, `Inventory` = ?, `Ammo` = ?, `Job` = ? WHERE `Character_ID` = ?;",
-    function(id)
-        PlayerSaveData = id
-        preparedQueriesReady.PlayerSaveData = true
-        ig.log.Debug("SQL", "PlayerSaveData prepared query initialized with ID: " .. id)
-    end)
+local VehicleSaveData = -1
+local ObjectSaveData = -1
+
+--[[ Prepared Query Initialization ]] --
+
+--- Initialize all prepared queries (must be called after SQL is ready)
+function ig.sql.save.InitializePreparedQueries()
+    ig.log.Info("SQL", "Initializing prepared queries for save system...")
+    
+    -- Player save query
+    ig.sql.PrepareQuery(
+        "UPDATE `characters` SET `Health` = ?, `Armour` = ?, `Hunger` = ?, `Thirst` = ?, `Stress` = ?, `Coords` = ?, `Skills` = ?, `Modifiers` = ?, `Inventory` = ?, `Ammo` = ?, `Job` = ? WHERE `Character_ID` = ?;",
+        function(id)
+            PlayerSaveData = id
+            preparedQueriesReady.PlayerSaveData = true
+            ig.log.Debug("SQL", "PlayerSaveData prepared query initialized with ID: " .. id)
+        end)
+    
+    -- Vehicle save query
+    ig.sql.PrepareQuery(
+        "UPDATE `vehicles` SET `Fuel` = ?, `Coords` = ?, `Keys` = ?, `Condition` = ?, `Modifications` = ?, `Inventory` = ?, `Parked` = ?, `Impound` = ?, `Wanted` = ?  WHERE `Plate` = ?;",
+        function(id)
+            VehicleSaveData = id
+            preparedQueriesReady.VehicleSaveData = true
+            ig.log.Debug("SQL", "VehicleSaveData prepared query initialized with ID: " .. id)
+        end)
+    
+    -- Object save query
+    ig.sql.PrepareQuery(
+        "UPDATE `objects` SET `Inventory` = ?, `Coords` = ? WHERE `UUID` = ?;",
+        function(id)
+            ObjectSaveData = id
+            preparedQueriesReady.ObjectSaveData = true
+            ig.log.Debug("SQL", "ObjectSaveData prepared query initialized with ID: " .. id)
+        end)
+end
+
+--[[ Players ]] --
 
 --- Save Single User/Character
 ---@param data table "xPlayer table"
@@ -197,15 +228,6 @@ function ig.sql.save.Users(cb)
 end
 
 --[[ Vehicles ]] --
-
-local VehicleSaveData = -1
-ig.sql.PrepareQuery(
-    "UPDATE `vehicles` SET `Fuel` = ?, `Coords` = ?, `Keys` = ?, `Condition` = ?, `Modifications` = ?, `Inventory` = ?, `Parked` = ?, `Impound` = ?, `Wanted` = ?  WHERE `Plate` = ?", -- AND `Parked` = TRUE;
-    function(id)
-        VehicleSaveData = id
-        preparedQueriesReady.VehicleSaveData = true
-        ig.log.Debug("SQL", "VehicleSaveData prepared query initialized with ID: " .. id)
-    end)
 
 --- Save Single User/Character
 ---@param data table "xCar table"
@@ -374,14 +396,6 @@ function ig.sql.save.Jobs(cb)
 end
 
 --[[ Objects ]] --
-
-local ObjectSaveData = -1
-ig.sql.PrepareQuery("UPDATE `objects` SET `Inventory` = ?, `Coords` = ? WHERE `UUID` = ?;",
-    function(id)
-        ObjectSaveData = id
-        preparedQueriesReady.ObjectSaveData = true
-        ig.log.Debug("SQL", "ObjectSaveData prepared query initialized with ID: " .. id)
-    end)
 
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."

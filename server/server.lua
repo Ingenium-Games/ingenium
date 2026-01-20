@@ -19,6 +19,9 @@ AddEventHandler("onResourceStart", function(resourceName)
         Wait(25)
     end
     
+    -- Initialize prepared queries (must happen after SQL is ready)
+    ig.sql.save.InitializePreparedQueries()
+    
     -- Wait for prepared queries to be ready before starting save loops
     ig.log.Info("Server", "Waiting for SQL prepared queries...")
     local queriesReady = ig.sql.save.AwaitPreparedQueries(10000)
