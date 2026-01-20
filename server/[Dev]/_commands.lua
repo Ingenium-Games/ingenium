@@ -113,6 +113,16 @@ RegisterCommand("pos", function(source, args, rawCommand)
     xPlayer.Notify("Added pos to pos.lua")
 end, true)
 
+ExecuteCommand("add_ace group.developer command.spot allow")
+RegisterCommand("tp", function(source, args, rawCommand)
+    local src = source
+    TriggerClientCallback({
+        source = src,
+        eventName = "TeleportOnMarker",
+        args = {}
+    })
+end, true)
+
 ExecuteCommand("add_ace group.developer command.debug allow")
 RegisterCommand("debug", function(source, args, rawCommand)
     local src = source
