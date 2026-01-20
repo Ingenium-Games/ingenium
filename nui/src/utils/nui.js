@@ -108,9 +108,7 @@ function shouldThrottle(eventName) {
  */
 export async function sendNuiMessage(callback, data = {}) {
   try {
-    console.log(`[NUI] Sending message: ${callback}`, data)
     const resourceName = await GetParentResourceName()
-    console.log(`[NUI] Resource: ${resourceName}, URL: https://${resourceName}/${callback}`)
     
     const response = await fetch(`https://${resourceName}/${callback}`, {
       method: 'POST',
@@ -120,7 +118,6 @@ export async function sendNuiMessage(callback, data = {}) {
       body: JSON.stringify(data)
     })
     
-    console.log(`[NUI] Response status: ${response.status} for callback: ${callback}`)
     return response
   } catch (error) {
     console.error(`[NUI] Failed to send NUI message: ${callback}`, error)
@@ -193,7 +190,6 @@ function GetParentResourceName() {
  * Setup NUI message handlers
  */
 export function setupNuiHandlers() {
-  console.log('[setupNuiHandlers] Starting setup of NUI handlers')
   const uiStore = useUIStore()
   const notificationStore = useNotificationStore()
   const characterStore = useCharacterStore()
@@ -205,8 +201,6 @@ export function setupNuiHandlers() {
   let jobStore = null
   let phoneStore = null
   
-  console.log('[setupNuiHandlers] Attaching window message event listener')
-  
   // Simple message handler
   const handleMessage = (event) => {
     const payload = event.data || event.detail
@@ -217,14 +211,11 @@ export function setupNuiHandlers() {
     
     const { message, data } = payload
     
-    console.log('[handleMessage] Processing message:', message, '| Data keys:', data ? Object.keys(data).join(', ') : 'none')
-    
     try {
       switch (message) {
       // Connection status
       case 'connected':
         // Server connection established, NUI is ready
-        console.log('NUI connected to server')
         break
 
       // Chat system
@@ -297,6 +288,14 @@ export function setupNuiHandlers() {
 
       case 'Client:NUI:HUDUpdate':
         uiStore.updateHUD(data)
+        break
+
+      case 'Client:NUI:HUDFocus':
+        uiStore.setHudFocus(data.focused)
+        break
+
+      case 'Client:NUI:HUDResetPosition':
+        // HUD component handles position reset directly
         break
 
       // Menu system

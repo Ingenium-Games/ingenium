@@ -9,6 +9,9 @@ export const useUIStore = defineStore('ui', () => {
   const showInput = ref(false)
   const showContextMenu = ref(false)
   
+  // HUD states
+  const hudFocused = ref(false)
+  
   // HUD data
   const hudData = ref({
     health: 100,
@@ -47,6 +50,10 @@ export const useUIStore = defineStore('ui', () => {
     hudData.value = { ...hudData.value, ...data }
   }
   
+  function setHudFocus(focused) {
+    hudFocused.value = focused
+  }
+  
   function openMenu(data) {
     menuData.value = data
     showMenu.value = true
@@ -75,6 +82,7 @@ export const useUIStore = defineStore('ui', () => {
     showMenu,
     showInput,
     showContextMenu,
+    hudFocused,
     hudData,
     menuData,
     inputData,
@@ -82,6 +90,7 @@ export const useUIStore = defineStore('ui', () => {
     
     // Actions
     updateHUD,
+    setHudFocus,
     openMenu,
     openInput,
     openContextMenu,

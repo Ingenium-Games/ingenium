@@ -9,9 +9,9 @@
         top: positions.health.y + 'px',
         zIndex: dragging === 'health' ? 1001 : 100
       }"
-      :class="{ 'hud-focused': isFocused }"
+      :class="{ 'hud-focused': uiStore.hudFocused }"
       @mousedown="(e) => startDrag(e, 'health')"
-      :title="isFocused ? 'Drag to reposition Health' : 'Press F2 to enable drag mode'"
+      :title="uiStore.hudFocused ? 'Drag to reposition Health' : 'Press F2 to enable drag mode'"
     >
       <div class="hud-stat">
         <span class="hud-stat-label">Health</span>
@@ -30,9 +30,9 @@
         top: positions.armor.y + 'px',
         zIndex: dragging === 'armor' ? 1001 : 100
       }"
-      :class="{ 'hud-focused': isFocused }"
+      :class="{ 'hud-focused': uiStore.hudFocused }"
       @mousedown="(e) => startDrag(e, 'armor')"
-      :title="isFocused ? 'Drag to reposition Armor' : 'Press F2 to enable drag mode'"
+      :title="uiStore.hudFocused ? 'Drag to reposition Armor' : 'Press F2 to enable drag mode'"
     >
       <div class="hud-stat">
         <span class="hud-stat-label">Armor</span>
@@ -50,9 +50,9 @@
         top: positions.hunger.y + 'px',
         zIndex: dragging === 'hunger' ? 1001 : 100
       }"
-      :class="{ 'hud-focused': isFocused }"
+      :class="{ 'hud-focused': uiStore.hudFocused }"
       @mousedown="(e) => startDrag(e, 'hunger')"
-      :title="isFocused ? 'Drag to reposition Hunger' : 'Press F2 to enable drag mode'"
+      :title="uiStore.hudFocused ? 'Drag to reposition Hunger' : 'Press F2 to enable drag mode'"
     >
       <div class="hud-stat">
         <span class="hud-stat-label">Hunger</span>
@@ -70,9 +70,9 @@
         top: positions.thirst.y + 'px',
         zIndex: dragging === 'thirst' ? 1001 : 100
       }"
-      :class="{ 'hud-focused': isFocused }"
+      :class="{ 'hud-focused': uiStore.hudFocused }"
       @mousedown="(e) => startDrag(e, 'thirst')"
-      :title="isFocused ? 'Drag to reposition Thirst' : 'Press F2 to enable drag mode'"
+      :title="uiStore.hudFocused ? 'Drag to reposition Thirst' : 'Press F2 to enable drag mode'"
     >
       <div class="hud-stat">
         <span class="hud-stat-label">Thirst</span>
@@ -90,9 +90,9 @@
         top: positions.stress.y + 'px',
         zIndex: dragging === 'stress' ? 1001 : 100
       }"
-      :class="{ 'hud-focused': isFocused }"
+      :class="{ 'hud-focused': uiStore.hudFocused }"
       @mousedown="(e) => startDrag(e, 'stress')"
-      :title="isFocused ? 'Drag to reposition Stress' : 'Press F2 to enable drag mode'"
+      :title="uiStore.hudFocused ? 'Drag to reposition Stress' : 'Press F2 to enable drag mode'"
     >
       <div class="hud-stat">
         <span class="hud-stat-label">Stress</span>
@@ -122,7 +122,7 @@ const defaultPositions = {
 const positions = ref({ ...defaultPositions })
 const dragging = ref(null)
 const dragStart = ref({ x: 0, y: 0 })
-const isFocused = ref(false)
+const uiStore = useUIStore()
 
 onMounted(() => {
   // Load saved positions
@@ -147,16 +147,16 @@ onUnmounted(() => {
 function handleHudMessage(event) {
   const { message, data } = event.data
   
-  if (message === 'Client:NUI:HUDFocus') {
-    isFocused.value = data.focused
-  } else if (message === 'Client:NUI:HUDResetPosition') {
+  console.log('[HUD.vue] Received message:', message, 'data:', data)
+  
+  if (message === 'Client:NUI:HUDResetPosition') {
     positions.value = { ...defaultPositions }
     localStorage.setItem('hud_stat_positions', JSON.stringify(positions.value))
   }
 }
 
 function startDrag(e, statName) {
-  if (!isFocused.value) return
+  if (!uiStore.hudFocused) return
   
   e.preventDefault()
   dragging.value = statName

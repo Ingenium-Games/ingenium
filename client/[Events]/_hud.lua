@@ -38,10 +38,11 @@ Citizen.CreateThread(function()
         if hudVisible and IsControlJustPressed(0, 289) then -- F2 key
             hudDragMode = not hudDragMode
             
-            SendNUIMessage({
-                message = "Client:NUI:HUDFocus",
-                data = { focused = hudDragMode }
-            })
+            print("^3[HUD] F2 pressed, hudDragMode:", hudDragMode, "^7")
+            
+            ig.ui.Send("Client:NUI:HUDFocus", {}, hudDragMode)
+            
+            print("^3[HUD] Sent HUDFocus message to NUI^7")
             
             if hudDragMode then
                 ig.ui.Notify("HUD drag mode enabled. Click and drag to reposition.", "green", 3000)
