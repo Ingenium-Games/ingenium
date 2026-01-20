@@ -122,7 +122,6 @@ const defaultPositions = {
 const positions = ref({ ...defaultPositions })
 const dragging = ref(null)
 const dragStart = ref({ x: 0, y: 0 })
-const uiStore = useUIStore()
 
 onMounted(() => {
   // Load saved positions
@@ -146,8 +145,6 @@ onUnmounted(() => {
 
 function handleHudMessage(event) {
   const { message, data } = event.data
-  
-  console.log('[HUD.vue] Received message:', message, 'data:', data)
   
   if (message === 'Client:NUI:HUDResetPosition') {
     positions.value = { ...defaultPositions }
