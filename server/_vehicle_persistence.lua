@@ -331,10 +331,7 @@ function ig.vehicle.RestorePersistentVehicle(vehicleData)
     -- Set plate
     SetVehicleNumberPlateText(vehicle, vehicleData.plate)
     
-    -- Mark as mission entity to prevent despawning
-    SetEntityAsMissionEntity(vehicle, true, true)
-    
-    -- Restore condition using ig.func utilities if available
+    -- Restore condition using ig.func utilities if available (handles mission entity flag)
     if vehicleData.condition and ig.func and ig.func.SetVehicleCondition then
         ig.func.SetVehicleCondition(vehicle, vehicleData.condition)
     end

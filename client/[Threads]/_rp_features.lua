@@ -143,7 +143,10 @@ Citizen.CreateThread(function()
         Wait(1000) -- Check every second
         
         local ped = PlayerPedId()
-        
+        -- Remove nearby dropped weapons (within 50 units)
+        local playerCoords = GetEntityCoords(ped)
+        ClearAreaOfCops(playerCoords.x, playerCoords.y, playerCoords.z, 120)
+        --
         -- Update death state
         local isDead = IsEntityDead(ped) or IsPedDeadOrDying(ped, true)
         if LocalPlayer.state.IsDead ~= isDead then
