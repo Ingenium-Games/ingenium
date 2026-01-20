@@ -18,11 +18,12 @@ local function ConvertParameters(params)
     if type(params) ~= 'table' then return params end
     
     local converted = {}
-    for k, v in pairs(params) do
+    -- Use ipairs for array-like tables to preserve order and indices
+    for i, v in ipairs(params) do
         if type(v) == 'boolean' then
-            converted[k] = v and 1 or 0
+            converted[i] = v and 1 or 0
         else
-            converted[k] = v
+            converted[i] = v
         end
     end
     return converted
