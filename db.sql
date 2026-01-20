@@ -199,6 +199,37 @@ CREATE TABLE IF NOT EXISTS `phones` (
 
 -- Data exporting was unselected.
 
+-- Dumping structure for table db.phone_email_accounts
+CREATE TABLE IF NOT EXISTS `phone_email_accounts` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Character_ID` varchar(50) NOT NULL COMMENT 'Owner character ID',
+  `Email_Address` varchar(100) NOT NULL COMMENT 'Email address (e.g., user@domain.com)',
+  `Password_Hash` varchar(255) NOT NULL COMMENT 'Hashed password',
+  `Created_At` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Account creation timestamp',
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `unique_email` (`Email_Address`),
+  KEY `idx_character` (`Character_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Phone email accounts';
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table db.phone_emails
+CREATE TABLE IF NOT EXISTS `phone_emails` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Sender` varchar(100) NOT NULL COMMENT 'Sender email address',
+  `Recipient` varchar(100) NOT NULL COMMENT 'Recipient email address',
+  `Subject` varchar(200) DEFAULT NULL COMMENT 'Email subject',
+  `Message` longtext NOT NULL COMMENT 'Email message body',
+  `Sent_At` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Email send timestamp',
+  `Read_Status` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Whether email has been read (0=unread, 1=read)',
+  PRIMARY KEY (`ID`),
+  KEY `idx_sender` (`Sender`),
+  KEY `idx_recipient` (`Recipient`),
+  KEY `idx_sent_at` (`Sent_At`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Phone emails';
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table db.users
 CREATE TABLE IF NOT EXISTS `users` (
   `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Default ID - Auto Inc on new insert.',
