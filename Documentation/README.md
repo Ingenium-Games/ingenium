@@ -19,7 +19,7 @@ Ingenium uses **server-authoritative entities** where all game state flows throu
 - **StateBag Replication** - Clients receive real-time updates via StateBags
 - **Validation Layer** - All client data validated before processing
 
-**Entities:** Player, Vehicle, Job, NPC, Object (8 types total)
+**Entities:** Player, OwnedVehicle, Vehicle, Job, NPC, BlankObject, ExistingObject, OfflinePlayer (8 types total)
 
 [Learn more: Class System →](Class_System.md)
 

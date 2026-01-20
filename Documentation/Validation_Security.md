@@ -8,7 +8,7 @@ Ingenium implements **defense-in-depth security** with server-authoritative vali
 
 ### Type Validation
 
-Located in `server/[Validation]/_check.lua`, provides type-safe value validation:
+Located in `shared/[Tools]/_check.lua`, provides type-safe value validation:
 
 #### Boolean Validation
 

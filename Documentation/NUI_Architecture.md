@@ -367,7 +367,7 @@ npm run storybook
 4. Commit dist/ files       # Built files are versioned
 ```
 
-**Critical:** Always run `npm run build` before committing UI changes. Dev server is for development iteration only.
+**Critical:** Always run `npm run build` before committing UI changes. Built files are output to `nui/dist/` and are committed to version control. Dev server is for development iteration only.
 
 ## NUI Callback Mechanism
 
