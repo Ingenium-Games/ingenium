@@ -186,10 +186,22 @@ function GetParentResourceName() {
   })
 }
 
+// Guard to prevent duplicate handler registration
+let handlersSetup = false
+
 /**
  * Setup NUI message handlers
  */
 export function setupNuiHandlers() {
+  // Prevent duplicate handler registration (can happen during HMR or remounts)
+  if (handlersSetup) {
+    console.warn('[nui.js] setupNuiHandlers already called, skipping duplicate registration')
+    return
+  }
+  
+  handlersSetup = true
+  console.log('[nui.js] Setting up NUI handlers (first time)')
+  
   const uiStore = useUIStore()
   const notificationStore = useNotificationStore()
   const characterStore = useCharacterStore()

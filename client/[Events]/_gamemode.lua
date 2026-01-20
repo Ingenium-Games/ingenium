@@ -32,9 +32,6 @@ local gameModeHandlers = {
                     RemoveAllPickupsOfType(`PICKUP_WEAPON_COMBATPISTOL`)
                     RemoveAllPickupsOfType(`PICKUP_WEAPON_PUMPSHOTGUN`)
                     RemoveAllPickupsOfType(`PICKUP_WEAPON_CARBINERIFLE`)
-                    
-                    -- Clear small area around vehicle
-                    ClearAreaOfWeapons(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z, 5.0, false)
                 end)
             end
         end,
