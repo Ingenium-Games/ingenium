@@ -40,12 +40,17 @@ AddEventHandler('Client:NUI:ChatAddMessage', function(messageData)
 end)
 
 -- Open chat with keybind (T key by default)
+local chatOpen = false
+
 RegisterCommand('+openchat', function()
-    -- Show chat input
-    SendNUIMessage({
-        message = 'Client:NUI:ChatShow'
-    })
-    SetNuiFocus(true, false)  -- Focus for typing, but no cursor
+    if not chatOpen then
+        chatOpen = true
+        -- Show chat input
+        SendNUIMessage({
+            message = 'Client:NUI:ChatShow'
+        })
+        SetNuiFocus(true, false)  -- Focus for typing, but no cursor
+    end
 end, false)
 
 RegisterCommand('-openchat', function()
@@ -54,3 +59,9 @@ end, false)
 
 -- Register the keybind (T key)
 RegisterKeyMapping('+openchat', 'Open Chat', 'keyboard', 'T')
+
+-- Event to track when chat closes
+RegisterNetEvent('Client:Chat:Closed')
+AddEventHandler('Client:Chat:Closed', function()
+    chatOpen = false
+end)

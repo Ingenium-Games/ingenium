@@ -455,5 +455,27 @@ AddEventHandler("onResourceStop", function(resource)
     end
 end)
 
+-- ====================================================================================--
+-- Server Events for Vehicle Data Capture
+-- ====================================================================================--
+
+--- Receive and store vehicle condition/modifications from client
+RegisterNetEvent("Server:Vehicle:StoreCondition")
+AddEventHandler("Server:Vehicle:StoreCondition", function(plate, condition, modifications)
+    local playerId = source
+    
+    if not plate or not condition or not modifications then
+        ig.log.Warn("PERSISTENCE", "Invalid condition data received for vehicle")
+        return
+    end
+    
+    -- Update vehicle state in cache
+    ig.vehicle.UpdateVehicleState(plate, condition, modifications)
+    
+    if conf.persistence and conf.persistence.logging and conf.persistence.logging.enabled then
+        ig.log.Debug("PERSISTENCE", "Updated vehicle condition for plate: " .. plate)
+    end
+end)
+
 
 

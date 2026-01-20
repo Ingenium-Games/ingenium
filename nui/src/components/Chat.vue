@@ -44,13 +44,14 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useChatStore } from '../stores/chat'
 import { sendNuiMessage } from '../utils/nui'
 
 const chatStore = useChatStore()
 const messagesContainer = ref(null)
 const chatInput = ref(null)
+const forceUpdate = ref(0)
 
 // Get resource name for NUI callbacks with validation
 let resourceName = 'ingenium' // Safe fallback
@@ -64,6 +65,9 @@ if (window.GetParentResourceName) {
 
 // Show messages from the last 10 seconds, or all messages if chat is visible
 const visibleMessages = computed(() => {
+  // Force reactivity update
+  forceUpdate.value
+  
   if (chatStore.isVisible) {
     return chatStore.messages
   }
@@ -74,6 +78,31 @@ const visibleMessages = computed(() => {
   return chatStore.messages.filter(msg => {
     return (now - msg.timestamp) < visibilityTime
   })
+})
+
+// Clean up old messages every second to trigger fade-out
+let cleanupInterval = null
+onMounted(() => {
+  cleanupInterval = setInterval(() => {
+    if (!chatStore.isVisible && chatStore.messages.length > 0) {
+      const now = Date.now()
+      const visibilityTime = 10000
+      
+      // Remove messages older than 10 seconds
+      chatStore.messages = chatStore.messages.filter(msg => {
+        return (now - msg.timestamp) < visibilityTime
+      })
+      
+      // Force computed to re-evaluate
+      forceUpdate.value++
+    }
+  }, 1000) // Check every second
+})
+
+onUnmounted(() => {
+  if (cleanupInterval) {
+    clearInterval(cleanupInterval)
+  }
 })
 
 // Filter suggestions based on input

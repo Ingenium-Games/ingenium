@@ -41,6 +41,9 @@ RegisterNUICallback('NUI:Client:ChatClose', function(data, cb)
     -- Trigger internal event for chat cleanup
     TriggerEvent("Client:Chat:Close")
     
+    -- Trigger event to reset chat state (for T key responsiveness)
+    TriggerEvent('Client:Chat:Closed')
+    
     cb({ok = true})
 end)
 

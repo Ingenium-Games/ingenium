@@ -93,13 +93,10 @@ RegisterServerCallback({
         end
     end
 })
-    
-
 
 -- ====================================================================================--
 -- STAGE 2: Character Creation (New Characters)
 -- ====================================================================================--
-
 -- Player creates a new character (called after character creation NUI submission)
 -- SECURE CALLBACK - Validates client data server-side
 RegisterServerCallback({

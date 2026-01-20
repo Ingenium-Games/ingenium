@@ -430,3 +430,39 @@ function ig.func.GetVehicleStatebag(vehicle)
     end
     return statebag
 end
+
+-- ====================================================================================--
+-- Vehicle Modification Application (for persistence system)
+-- ====================================================================================--
+
+--- Apply vehicle modifications (colors, mods, extras)
+---@param vehicle number Vehicle entity handle
+---@param modifications table Modifications data from persistence
+function ig.func.SetVehicleModifications(vehicle, modifications)
+    if not DoesEntityExist(vehicle) or not modifications then return end
+    
+    -- Wait for vehicle to be fully networked
+    local timeout = 0
+    while not DoesEntityExist(vehicle) and timeout < 100 do
+        Wait(10)
+        timeout = timeout + 1
+    end
+    
+    if not DoesEntityExist(vehicle) then
+        ig.log.Warn("Functions", "Vehicle disappeared before modifications could be applied")
+        return
+    end
+    
+    -- Request all clients to apply modifications
+    TriggerClientEvent("Client:Vehicle:ApplyModifications", -1, NetworkGetNetworkIdFromEntity(vehicle), modifications)
+end
+
+--- Apply vehicle condition (damage, dirt, etc)
+---@param vehicle number Vehicle entity handle
+---@param condition table Condition data from persistence
+function ig.func.SetVehicleCondition(vehicle, condition)
+    if not DoesEntityExist(vehicle) or not condition then return end
+    
+    -- Request all clients to apply condition
+    TriggerClientEvent("Client:Vehicle:ApplyCondition", -1, NetworkGetNetworkIdFromEntity(vehicle), condition)
+end

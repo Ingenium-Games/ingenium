@@ -18,6 +18,15 @@ AddEventHandler("onResourceStart", function(resourceName)
     while ig._loading do
         Wait(25)
     end
+    
+    -- Wait for prepared queries to be ready before starting save loops
+    ig.log.Info("Server", "Waiting for SQL prepared queries...")
+    local queriesReady = ig.sql.save.AwaitPreparedQueries(10000)
+    if not queriesReady then
+        ig.log.Error("Server", "CRITICAL: Prepared queries failed to initialize!")
+        ig.log.Error("Server", "Save system may not function correctly")
+    end
+    
     -- Time now updates
     ig.time.ServerSync()
     -- Players save to the DB.

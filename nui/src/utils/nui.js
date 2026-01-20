@@ -259,8 +259,6 @@ export function setupNuiHandlers() {
 
       // Character select
       case 'Client:NUI:CharacterSelectShow':
-        console.log('[NUI] Character select show received with data:', data)
-        console.log('[NUI] Raw characters:', JSON.stringify(data.characters, null, 2))
         // Transform character data from server format to NUI format
         const transformedCharacters = (data.characters || [])
           .filter(char => char != null)  // Filter out null/undefined entries
@@ -278,12 +276,9 @@ export function setupNuiHandlers() {
               // Include all original data for reference
               ...char
             }
-            console.log('[NUI] Transformed character:', JSON.stringify(transformed, null, 2))
             return transformed
           })
-        console.log('[NUI] Total transformed characters:', transformedCharacters.length)
         characterStore.setCharacters(transformedCharacters, data.slots || 1)
-        console.log('[NUI] UI Store showCharacterSelect set to true')
         uiStore.showCharacterSelect = true
         break
 

@@ -3,6 +3,45 @@ if not ig.sql then ig.sql = {} end
 ig.sql.save = {}
 -- ====================================================================================--
 
+--[[ Prepared Query Status Tracking ]] --
+
+local preparedQueriesReady = {
+    PlayerSaveData = false,
+    VehicleSaveData = false,
+    ObjectSaveData = false
+}
+
+--- Check if all prepared queries are ready
+---@return boolean All queries ready
+function ig.sql.save.ArePreparedQueriesReady()
+    for name, ready in pairs(preparedQueriesReady) do
+        if not ready then
+            return false
+        end
+    end
+    return true
+ end
+
+--- Wait for all prepared queries to be ready
+---@param timeout number Timeout in milliseconds
+---@return boolean Success
+function ig.sql.save.AwaitPreparedQueries(timeout)
+    local startTime = os.clock() * 1000
+    local timeoutMs = timeout or 10000
+    
+    while not ig.sql.save.ArePreparedQueriesReady() do
+        Wait(100)
+        local elapsed = (os.clock() * 1000) - startTime
+        if elapsed >= timeoutMs then
+            ig.log.Error("SQL", "Timeout waiting for prepared queries to initialize")
+            return false
+        end
+    end
+    
+    ig.log.Info("SQL", "All prepared queries ready")
+    return true
+end
+
 --[[ Performance Monitoring Wrapper ]] --
 
 --- Wrapper for monitoring save operation performance
@@ -31,6 +70,8 @@ ig.sql.PrepareQuery(
     "UPDATE `characters` SET `Health` = ?, `Armour` = ?, `Hunger` = ?, `Thirst` = ?, `Stress` = ?, `Coords` = ?, `Skills` = ?, `Modifiers` = ?, `Inventory` = ?, `Ammo` = ?, `Job` = ? WHERE `Character_ID` = ?;",
     function(id)
         PlayerSaveData = id
+        preparedQueriesReady.PlayerSaveData = true
+        ig.log.Debug("SQL", "PlayerSaveData prepared query initialized with ID: " .. id)
     end)
 
 --- Save Single User/Character
@@ -162,6 +203,8 @@ ig.sql.PrepareQuery(
     "UPDATE `vehicles` SET `Fuel` = ?, `Coords` = ?, `Keys` = ?, `Condition` = ?, `Modifications` = ?, `Inventory` = ?, `Parked` = ?, `Impound` = ?, `Wanted` = ?  WHERE `Plate` = ?", -- AND `Parked` = TRUE;
     function(id)
         VehicleSaveData = id
+        preparedQueriesReady.VehicleSaveData = true
+        ig.log.Debug("SQL", "VehicleSaveData prepared query initialized with ID: " .. id)
     end)
 
 --- Save Single User/Character
@@ -336,6 +379,8 @@ local ObjectSaveData = -1
 ig.sql.PrepareQuery("UPDATE `objects` SET `Inventory` = ?, `Coords` = ? WHERE `UUID` = ?;",
     function(id)
         ObjectSaveData = id
+        preparedQueriesReady.ObjectSaveData = true
+        ig.log.Debug("SQL", "ObjectSaveData prepared query initialized with ID: " .. id)
     end)
 
 --- Save All Job Accounts
