@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `phones` (
     `Phone_Number` VARCHAR(7) NOT NULL COMMENT 'Device phone number (6-7 digits)',
     `Character_ID` VARCHAR(50) NOT NULL COMMENT 'Current owner character ID',
     `Contacts` LONGTEXT DEFAULT '[]' COMMENT 'JSON array of contacts',
+    `CallHistory` LONGTEXT DEFAULT '[]' COMMENT 'JSON array of call history',
     `Settings` LONGTEXT DEFAULT '{"planeMode":false,"emergencyAlerts":true,"provider":"Warstock"}' COMMENT 'JSON object of phone settings',
     `Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Phone device creation timestamp',
     `Last_Used` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last time phone was opened',
