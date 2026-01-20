@@ -27,7 +27,8 @@ end
 ---Change ped model
 ---@param model string|number Ped model name or hash
 ---@param callback function|nil Optional callback when model is loaded
-function ig.appearance.SetModel(model, callback)
+---@param freezePed boolean|nil Whether to freeze ped for customization (default: false for normal gameplay)
+function ig.appearance.SetModel(model, callback, freezePed)
     local modelHash = type(model) == "string" and GetHashKey(model) or model
     
     RequestModel(modelHash)
@@ -50,14 +51,18 @@ function ig.appearance.SetModel(model, callback)
     SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false)
     SetEntityHeading(ped, heading)
     
-    -- Freeze ped in place for appearance customization
-    FreezeEntityPosition(ped, true)
-    
-    -- Make invincible during customization
-    SetEntityInvincible(ped, true)
-    
-    -- Disable ragdoll
-    SetPedCanRagdoll(ped, false)
+    -- Only freeze/make invincible if explicitly requested (for customization UI)
+    if freezePed then
+        FreezeEntityPosition(ped, true)
+        SetEntityInvincible(ped, true)
+        SetPedCanRagdoll(ped, false)
+    else
+        -- Normal gameplay mode - ensure ped is mobile and visible
+        SetEntityVisible(ped, true, false)
+        FreezeEntityPosition(ped, false)
+        SetEntityInvincible(ped, false)
+        SetPedCanRagdoll(ped, true)
+    end
     
     -- For animal models, set additional flags
     SetPedConfigFlag(ped, 32, false)  -- Can be stunned
@@ -458,22 +463,22 @@ function ig.appearance.ApplyAppearanceData(appearance)
         ig.appearance.SetHeadBlend(appearance.headBlend)
     end
     
-    -- Face features
-    if appearance.faceFeatures then
+    -- Face features (skip if empty array)
+    if appearance.faceFeatures and type(appearance.faceFeatures) == "table" and next(appearance.faceFeatures) then
         ig.appearance.SetFaceFeatures(appearance.faceFeatures)
     end
     
-    -- Head overlays
-    if appearance.headOverlays then
+    -- Head overlays (skip if empty array)
+    if appearance.headOverlays and type(appearance.headOverlays) == "table" and next(appearance.headOverlays) then
         ig.appearance.SetHeadOverlays(appearance.headOverlays)
     end
     
     -- Hair
     if appearance.hair then
         ig.appearance.SetHair(
-            appearance.hair.style,
-            appearance.hair.color,
-            appearance.hair.highlight
+            appearance.hair.style or 0,
+            appearance.hair.color or 0,
+            appearance.hair.highlight or 0
         )
     end
     
@@ -482,18 +487,18 @@ function ig.appearance.ApplyAppearanceData(appearance)
         ig.appearance.SetEyeColor(appearance.eyeColor)
     end
     
-    -- Components (clothing)
-    if appearance.components then
+    -- Components (clothing) - skip if empty array
+    if appearance.components and type(appearance.components) == "table" and next(appearance.components) then
         ig.appearance.SetComponents(appearance.components)
     end
     
-    -- Props (accessories)
-    if appearance.props then
+    -- Props (accessories) - skip if empty array
+    if appearance.props and type(appearance.props) == "table" and next(appearance.props) then
         ig.appearance.SetProps(appearance.props)
     end
     
     -- Tattoos
-    if appearance.tattoos then
+    if appearance.tattoos and type(appearance.tattoos) == "table" and next(appearance.tattoos) then
         ig.appearance.ApplyTattoos(appearance.tattoos)
     end
 end

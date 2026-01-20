@@ -106,8 +106,8 @@ AddEventHandler('chat:addMessage', function(message)
 end)
 
 -- Handle server chat messages (for logging)
-RegisterServerEvent('ig:chat:serverMessage')
-AddEventHandler('ig:chat:serverMessage', function(message)
+RegisterServerEvent('Server:Chat:Send')
+AddEventHandler('Server:Chat:Send', function(message)
     local source = source
     local playerName = GetPlayerName(source)
     
@@ -121,17 +121,17 @@ AddEventHandler('ig:chat:serverMessage', function(message)
     -- Log the message
     ig.chat.LogMessage(source, playerName, message, isCommand)
     
-    -- If it's a regular message, broadcast it to all players
+    -- If it's a regular message, broadcast it to all players via NUI
     if not isCommand then
-        TriggerClientEvent('chat:addMessage', -1, {
+        TriggerClientEvent('Client:NUI:ChatAddMessage', -1, {
             author = playerName,
-            message = message,
+            text = message,
             color = {255, 255, 255}
         })
     else
-        -- If it's a command, execute it
+        -- If it's a command, let the command system handle it
         local command = string.sub(message, 2)
-        -- The client will handle command execution
+        ExecuteCommand(command)
     end
 end)
 

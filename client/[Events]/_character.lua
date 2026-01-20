@@ -7,8 +7,8 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
     exports.spawnmanager:setAutoSpawn(false)
     
     -- Apply appearance using the appearance system
-    if Appearance and ig.appearance and ig.appearance.ApplyAppearance then
-        ig.appearance.ApplyAppearance(ped, Appearance)
+    if Appearance and ig.appearance and ig.appearance.SetAppearance then
+        ig.appearance.SetAppearance(Appearance)
         ig.log.Info("Character", "Appearance applied from server")
     end
     
@@ -78,11 +78,15 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
     SetWeaponsNoAutoswap(true)
     SetWeaponsNoAutoreload(true)
     RemoveMultiplayerHudCash()
-        --
-        
-        if DoesEntityExist(ped) then
-            SetEntityVisible(ped, true, true)
-        end
+    
+    -- Ensure ped is visible, not frozen, and can move
+    if DoesEntityExist(ped) then
+        SetEntityVisible(ped, true, false)
+        SetEntityInvincible(ped, false)
+        FreezeEntityPosition(ped, false)
+        SetPedCanRagdoll(ped, true)
+        ig.log.Debug("Character", "Ped visibility and physics enabled")
+    end
 
     ig.func.FadeIn(5000)
 end)
@@ -184,10 +188,30 @@ end)
 -- Receive and apply appearance from server after character ready
 RegisterNetEvent("Client:Character:SetAppearance")
 AddEventHandler("Client:Character:SetAppearance", function(appearance)
-    if not appearance then return end
+    if not appearance then 
+        ig.log.Warn("Character", "SetAppearance called with no appearance data")
+        return 
+    end
     
     local ped = PlayerPedId()
-    if not ped or ped == 0 then return end
+    if not ped or ped == 0 then 
+        ig.log.Error("Character", "SetAppearance: Invalid ped")
+        return 
+    end
     
-
+    -- Apply the appearance
+    if ig.appearance and ig.appearance.SetAppearance then
+        ig.appearance.SetAppearance(appearance)
+        ig.log.Info("Character", "Appearance applied via SetAppearance event")
+    else
+        ig.log.Error("Character", "Appearance system not available")
+    end
+    
+    -- Ensure ped is visible and not frozen
+    SetEntityVisible(ped, true, false)
+    SetEntityInvincible(ped, false)
+    FreezeEntityPosition(ped, false)
+    SetPedCanRagdoll(ped, true)
+    
+    ig.log.Debug("Character", "Ped visibility and physics restored")
 end)
