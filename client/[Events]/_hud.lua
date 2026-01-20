@@ -31,28 +31,8 @@ AddEventHandler("Client:Character:Unloaded", function()
 end)
 
 -- Toggle HUD drag mode with F2
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        
-        if hudVisible and IsControlJustPressed(0, 289) then -- F2 key
-            hudDragMode = not hudDragMode
-            
-            print("^1[HUD DEBUG] F2 pressed! hudDragMode toggled to:", hudDragMode, "^7")
-            print("^1[HUD DEBUG] Stack trace:^7")
-            print(debug.traceback())
-            
-            -- Send focus state as data (NUI will handle SetNuiFocus internally)
-            ig.ui.Send("Client:NUI:HUDFocus", { focused = hudDragMode })
-            
-            if hudDragMode then
-                ig.ui.Notify("HUD drag mode enabled. Click and drag to reposition.", "green", 3000)
-            else
-                ig.ui.Notify("HUD drag mode disabled. Position saved.", "blue", 3000)
-            end
-        end
-    end
-end)
+-- HUD drag mode state (managed by nui/lua/hud.lua command)
+-- This file only handles the NUI callback for SetNuiFocus
 
 -- Handle NUI callback to set focus (NUI can't call natives directly)
 RegisterNUICallback('NUI:Client:HUDSetFocus', function(data, cb)
