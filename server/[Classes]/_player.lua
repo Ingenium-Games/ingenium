@@ -1088,6 +1088,12 @@ function ig.class.Player(source, character_id)
         return self.EncodedInventory
     end
     --
+    self.GetEncodedCoords = function()
+        -- Always get fresh coordinates from entity for saving
+        local currentCoords = self.GetEntityCoords()
+        return json.encode(currentCoords)
+    end
+    --
     self.GetEncodedModifiers = function()
         if not self.EncodedModifiers or self.DirtyFields.Modifiers then
             self.EncodedModifiers = json.encode(self.GetModifiers())
@@ -1118,14 +1124,6 @@ function ig.class.Player(source, character_id)
             self.DirtyFields.Job = false
         end
         return self.EncodedJob
-    end
-    --
-    self.GetEncodedCoords = function()
-        if not self.EncodedCoords or self.DirtyFields.Coords then
-            self.EncodedCoords = json.encode(self.GetCoords())
-            self.DirtyFields.Coords = false
-        end
-        return self.EncodedCoords
     end
     --
     -- ====================================================================================--

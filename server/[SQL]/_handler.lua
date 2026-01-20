@@ -7,6 +7,28 @@ if not ig then ig = {} end
 if not ig.sql then ig.sql = {} end
 
 -- ====================================================================================--
+-- Parameter Conversion Helpers
+-- ====================================================================================--
+
+--- Convert parameters for MySQL2 compatibility
+--- Converts Lua booleans to integers (true=1, false=0) for SQL
+---@param params table Parameters array
+---@return table Converted parameters
+local function ConvertParameters(params)
+    if type(params) ~= 'table' then return params end
+    
+    local converted = {}
+    for k, v in pairs(params) do
+        if type(v) == 'boolean' then
+            converted[k] = v and 1 or 0
+        else
+            converted[k] = v
+        end
+    end
+    return converted
+end
+
+-- ====================================================================================--
 -- Core Query Functions
 -- ====================================================================================--
 
@@ -25,6 +47,7 @@ function ig.sql.Query(query, parameters, callback)
         params = {}
     end
     
+    params = ConvertParameters(params)
     return exports['ingenium.sql']:query(query, params, cb)
 end
 
@@ -42,6 +65,7 @@ function ig.sql.FetchSingle(query, parameters, callback)
         params = {}
     end
     
+    params = ConvertParameters(params)
     return exports['ingenium.sql']:fetchSingle(query, params, cb)
 end
 
@@ -59,6 +83,7 @@ function ig.sql.FetchScalar(query, parameters, callback)
         params = {}
     end
     
+    params = ConvertParameters(params)
     return exports['ingenium.sql']:fetchScalar(query, params, cb)
 end
 
@@ -76,6 +101,7 @@ function ig.sql.Insert(query, parameters, callback)
         params = {}
     end
     
+    params = ConvertParameters(params)
     return exports['ingenium.sql']:insert(query, params, cb)
 end
 
@@ -93,6 +119,7 @@ function ig.sql.Update(query, parameters, callback)
         params = {}
     end
     
+    params = ConvertParameters(params)
     return exports['ingenium.sql']:update(query, params, cb)
 end
 
