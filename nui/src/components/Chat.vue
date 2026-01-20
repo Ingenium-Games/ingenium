@@ -122,7 +122,7 @@ function sendMessage() {
   }
   
   // Send message to Lua
-  fetch(`https://${resourceName}/chatSubmit`, {
+  fetch(`https://${resourceName}/NUI:Client:ChatSubmit`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -137,7 +137,7 @@ function sendMessage() {
 }
 
 function closeChat() {
-  fetch(`https://${resourceName}/chatClose`, {
+  fetch(`https://${resourceName}/NUI:Client:ChatClose`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

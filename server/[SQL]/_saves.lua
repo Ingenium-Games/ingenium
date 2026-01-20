@@ -86,6 +86,7 @@ function ig.sql.save.User(data, cb)
     if cb then
         cb()
     end
+    ig.log.Debug("SQL", "Saved player: ", Character_ID)
 end
 
 --- Save All Characters from the xPLayer Table.
@@ -146,6 +147,7 @@ function ig.sql.save.Users(cb)
     
     local elapsed = (os.clock() - startTime) * 1000
     if saveCount > 0 then
+        ig.log.Debug("SQL", "Saved %d players in %.2fms", saveCount, elapsed)
         ig.log.Info("SQL", "Saved %d players in %.2fms", saveCount, elapsed)
     end
     if cb then

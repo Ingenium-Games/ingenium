@@ -21,6 +21,9 @@ RegisterNUICallback('NUI:Client:ChatSubmit', function(data, cb)
     local message = tostring(data.message):sub(1, 500)  -- Limit message length
     ig.log.Trace("Chat", "Chat message submitted: " .. message:sub(1, 30))
     
+    -- Release NUI focus immediately
+    SetNuiFocus(false, false)
+    
     -- Send message to server for broadcast
     TriggerServerEvent("Server:Chat:Send", message)
     
