@@ -1,0 +1,128 @@
+📋 MISSING DOCUMENTATION REPORT
+================================
+
+Functions Without Wiki Files: 81
+
+  camera:
+    - ig.camera.PointAtCoord [C]
+    - ig.camera.PointAtEntity [C]
+    - ig.camera.StopPointing [C]
+
+  data:
+    - ig.data.GetObject [S]
+    - ig.data.GetObjectFromUUID [S]
+    - ig.data.GetObjects [S]
+    - ig.data.GetPed [S]
+    - ig.data.GetPeds [S]
+    - ig.data.GetPlayers [S]
+    - ig.data.GetVehicle [S]
+    - ig.data.GetVehicleByPlate [S]
+    - ig.data.GetVehicles [S]
+
+  death:
+    - ig.death.PlayerKilled [C]
+
+  discord:
+    - ig.discord.GetDiscordId [S]
+    - ig.discord.GetPriority [S]
+    - ig.discord.HasAnyRole [S]
+    - ig.discord.HasMemberRole [S]
+    - ig.discord.HasRole [S]
+
+  fileLog:
+    - ig.fileLog.Create [S]
+    - ig.fileLog.CreateSimple [S]
+
+  job:
+    - ig.job.IsBoss [S]
+
+  object:
+    - ig.object.AddObject [S]
+    - ig.object.FindObject [S]
+    - ig.object.FindObjectFromUUID [S]
+    - ig.object.GetObject [S]
+    - ig.object.GetObjectFromUUID [S]
+    - ig.object.GetObjects [S]
+    - ig.object.RemoveObject [S]
+
+  payroll:
+    - ig.payroll.ProcessPayroll [S]
+
+  phone:
+    - ig.phone.AddContact [S]
+    - ig.phone.Close [C]
+    - ig.phone.EmergencyAlertsEnabled [S]
+    - ig.phone.GeneratePhoneNumber [S]
+    - ig.phone.GetContacts [S]
+    - ig.phone.GetFromInventory [S]
+    - ig.phone.GetOrCreate [S]
+    - ig.phone.GetSettings [S]
+    - ig.phone.IsPlaneMode [S]
+    - ig.phone.Open [C]
+    - ig.phone.RemoveContact [S]
+    - ig.phone.UpdateContact [S]
+    - ig.phone.UpdateContacts [S]
+    - ig.phone.UpdateSettings [S]
+    - ig.phone.Use [S]
+
+  player:
+    - ig.player.GetPlayerByCharacterID [S]
+    - ig.player.GetPlayerByCharacterId [S]
+
+  queue:
+    - ig.queue.GetQueueList [S]
+    - ig.queue.GetQueueSize [S]
+    - ig.queue.HandleConnection [S]
+    - ig.queue.InitiateShutdown [S]
+    - ig.queue.RegisterConnectionStep [S]
+    - ig.queue.RemovePlayer [S]
+    - ig.queue.SendAlert [S]
+
+  table:
+    - ig.table.Convert2Plain [S C]
+    - ig.table.Count [S C]
+
+  ui:
+    - ig.ui.HideContext [C]
+    - ig.ui.HideHUD [C]
+    - ig.ui.HideInput [C]
+    - ig.ui.HideMenu [C]
+    - ig.ui.Notify [C]
+    - ig.ui.Send [C]
+    - ig.ui.ShowContext [C]
+    - ig.ui.ShowHUD [C]
+    - ig.ui.ShowInput [C]
+    - ig.ui.ShowMenu [C]
+    - ig.ui.UpdateHUD [C]
+
+  util:
+    - ig.util.CheckBoneDistance [S C]
+    - ig.util.EnsureTable [S C]
+    - ig.util.IsVehicleLocked [S C]
+
+  vehicle:
+    - ig.vehicle.ClearLocateBlips [C]
+    - ig.vehicle.DoesVehicleExistByPlate [S]
+    - ig.vehicle.InitializeClient [C]
+    - ig.vehicle.LocatePlayerVehicles [S]
+    - ig.vehicle.RestoreParkedVehicles [S]
+    - ig.vehicle.SpawnPersistentVehicles [S]
+
+  weapon:
+    - ig.weapon.GetAllWeaponComponents [C]
+    - ig.weapon.GetInitializedCategories [C]
+    - ig.weapon.GetWeaponComponents [C]
+    - ig.weapon.HasWeaponComponents [C]
+    - ig.weapon.InitializeWeaponData [C]
+    - ig.weapon.IsAllowedCategory [C]
+
+Functions Ignored (marked @wiki:ignore): 20
+
+ACTIONS TAKEN:
+✅ Functions added to README.md (with placeholders if missing docs)
+⚠️  Missing documentation marked with ⚠️ symbol
+
+NEXT STEPS:
+1. Create .md files for marked functions
+2. Update README.md entry once documentation is complete
+3. Run verify script to confirm all links

@@ -140,6 +140,81 @@ def get_existing_md_files():
                 existing.add(file)
     return existing
 
+def detect_orphaned_wiki_pages(functions):
+    """
+    Detect wiki pages that no longer have corresponding functions in the codebase.
+    
+    Args:
+        functions (dict): Dictionary mapping namespace (str) to list of function dicts.
+                         Each function dict contains 'name', 'full_name', 'scope', etc.
+    
+    Returns:
+        list: List of orphaned wiki filenames (str) to delete.
+    """
+    # Build set of all valid function wiki filenames
+    valid_filenames = set()
+    
+    for namespace, funcs in functions.items():
+        for func in funcs:
+            filename = get_md_filename(namespace, func['name'])
+            valid_filenames.add(filename)
+    
+    # Get all existing wiki MD files
+    existing_files = get_existing_md_files()
+    
+    # Special files that should not be deleted (non-function documentation)
+    special_files = {
+        'README.md',
+        'README_ORIGINAL.md',
+        'DOCUMENTATION_UPDATE_SUMMARY.md',
+        'EVENTS_REFERENCE.md',
+        'EXPORTS_GUIDE.md',
+        'PUBLIC_API.md',
+    }
+    
+    # Find orphaned files: existing files that are not in valid filenames and not special files
+    orphaned = []
+    for file in existing_files:
+        # Check if it follows the ig_namespace_FunctionName.md pattern and is not valid
+        if (file not in valid_filenames and file not in special_files and 
+            file.startswith('ig_') and file.endswith('.md')):
+            orphaned.append(file)
+    
+    return orphaned
+
+def remove_orphaned_wiki_pages(orphaned_files):
+    """
+    Remove orphaned wiki pages and return list of deleted files.
+    
+    Args:
+        orphaned_files (list): List of wiki filenames (str) to delete.
+    
+    Returns:
+        list: List of successfully deleted filenames (str).
+    """
+    deleted = []
+    failed = []
+    
+    for file in orphaned_files:
+        filepath = WIKI_DIR / file
+        try:
+            os.remove(filepath)
+            deleted.append(file)
+            print(f'  🗑️  Deleted orphaned wiki page: {file}')
+        except PermissionError as e:
+            print(f'  ⚠️  Permission denied when deleting {file}: {e}')
+            failed.append(file)
+        except OSError as e:
+            print(f'  ⚠️  Failed to delete {file}: {e}')
+            failed.append(file)
+    
+    if failed:
+        print(f'\n⚠️  Warning: {len(failed)} file(s) could not be deleted')
+        for file in failed:
+            print(f'     - {file}')
+    
+    return deleted
+
 def get_md_filename(namespace, func_name):
     """Get expected markdown filename"""
     return f'ig_{namespace}_{func_name}.md'
@@ -299,6 +374,19 @@ def main():
     print(f'✅ Found {total_found} functions across {len(functions)} namespaces')
     print(f'⏭️  Ignoring {len(ignored)} functions marked with @wiki:ignore')
     
+    # Detect and remove orphaned wiki pages
+    print('\n🧹 Checking for orphaned wiki pages...')
+    orphaned = detect_orphaned_wiki_pages(functions)
+    deleted_count = 0
+    
+    if orphaned:
+        print(f'⚠️  Found {len(orphaned)} orphaned wiki pages (functions no longer exist in codebase):')
+        deleted = remove_orphaned_wiki_pages(orphaned)
+        deleted_count = len(deleted)
+        print(f'✅ Deleted {deleted_count} orphaned wiki pages')
+    else:
+        print('✅ No orphaned wiki pages found')
+    
     print('\n📝 Generating README.md...')
     readme_content, missing_docs, ignored_count = generate_readme(functions, ignored)
     
@@ -325,6 +413,8 @@ def main():
     print(f'Functions Documented:         {total_found - len(missing_docs)}')
     print(f'Functions Missing Docs:       {len(missing_docs)} ⚠️')
     print(f'Functions Ignored (Internal): {ignored_count}')
+    if deleted_count > 0:
+        print(f'Orphaned Pages Removed:       {deleted_count} 🗑️')
     print(f'Namespaces:                   {len(functions)}')
     print('=' * 60)
     
