@@ -284,6 +284,46 @@ RegisterNUICallback("NUI:Client:PhoneDeleteCallHistory", function(data, cb)
     cb({ok = true})
 end)
 
+--- Handle email registration from NUI
+RegisterNUICallback("NUI:Client:EmailRegister", function(data, cb)
+    -- Send to server for validation and persistence
+    TriggerServerEvent("Server:Email:Register", data.email, data.password)
+    
+    cb({ok = true})
+end)
+
+--- Handle email login from NUI
+RegisterNUICallback("NUI:Client:EmailLogin", function(data, cb)
+    -- Send to server for validation and authentication
+    TriggerServerEvent("Server:Email:Login", data.email, data.password)
+    
+    cb({ok = true})
+end)
+
+--- Handle email send from NUI
+RegisterNUICallback("NUI:Client:EmailSend", function(data, cb)
+    -- Send to server for validation and sending
+    TriggerServerEvent("Server:Email:Send", data.sender, data.recipient, data.subject, data.message)
+    
+    cb({ok = true})
+end)
+
+--- Handle mark email as read from NUI
+RegisterNUICallback("NUI:Client:EmailMarkRead", function(data, cb)
+    -- Send to server to mark as read
+    TriggerServerEvent("Server:Email:MarkRead", data.emailId)
+    
+    cb({ok = true})
+end)
+
+--- Handle email logout from NUI
+RegisterNUICallback("NUI:Client:EmailLogout", function(data, cb)
+    -- Notify server
+    TriggerServerEvent("Server:Email:Logout")
+    
+    cb({ok = true})
+end)
+
 --- Handle incoming call from server
 RegisterNetEvent("Client:Phone:CallIncoming", function(callData)
     if not ig.phone.currentPhoneData then
@@ -336,6 +376,58 @@ RegisterNetEvent("Client:Phone:CallHistoryUpdated", function(callHistory)
     SendNUIMessage({
         message = "Client:NUI:PhoneCallHistoryUpdated",
         data = callHistory
+    })
+end)
+
+--- Handle email registration success from server
+RegisterNetEvent("Client:Email:RegisterSuccess", function(data)
+    SendNUIMessage({
+        type = "email:registerSuccess",
+        email = data.email,
+        inbox = data.inbox,
+        sent = data.sent
+    })
+end)
+
+--- Handle email registration error from server
+RegisterNetEvent("Client:Email:RegisterError", function(message)
+    SendNUIMessage({
+        type = "email:registerError",
+        message = message
+    })
+end)
+
+--- Handle email login success from server
+RegisterNetEvent("Client:Email:LoginSuccess", function(data)
+    SendNUIMessage({
+        type = "email:loginSuccess",
+        email = data.email,
+        inbox = data.inbox,
+        sent = data.sent
+    })
+end)
+
+--- Handle email login error from server
+RegisterNetEvent("Client:Email:LoginError", function(message)
+    SendNUIMessage({
+        type = "email:loginError",
+        message = message
+    })
+end)
+
+--- Handle inbox updated from server
+RegisterNetEvent("Client:Email:InboxUpdated", function(inbox)
+    SendNUIMessage({
+        type = "email:inboxUpdated",
+        inbox = inbox
+    })
+end)
+
+--- Handle sent updated from server
+RegisterNetEvent("Client:Email:SentUpdated", function(sent)
+    SendNUIMessage({
+        type = "email:sentUpdated",
+        sent = sent
     })
 end)
 

@@ -47,6 +47,14 @@
                     <div class="icon">👤</div>
                     <div class="label">Contacts</div>
                   </div>
+                  <div class="app-icon" @click="phoneStore.openApp('calculator')">
+                    <div class="icon">🔢</div>
+                    <div class="label">Calculator</div>
+                  </div>
+                  <div class="app-icon" @click="phoneStore.openApp('email')">
+                    <div class="icon">📧</div>
+                    <div class="label">Email</div>
+                  </div>
                   <div class="app-icon" @click="phoneStore.openApp('settings')">
                     <div class="icon">⚙️</div>
                     <div class="label">Settings</div>
@@ -67,6 +75,12 @@
               
               <!-- Contacts App -->
               <ContactsApp v-else-if="phoneStore.currentApp === 'contacts'" />
+              
+              <!-- Calculator App -->
+              <CalculatorApp v-else-if="phoneStore.currentApp === 'calculator'" />
+              
+              <!-- Email App -->
+              <EmailApp v-else-if="phoneStore.currentApp === 'email'" />
             </div>
             
             <!-- Navigation bar -->
@@ -92,6 +106,8 @@ import { sendNuiMessage } from '../utils/nui'
 import SettingsApp from './phone/apps/SettingsApp.vue'
 import ContactsApp from './phone/apps/ContactsApp.vue'
 import CallsApp from './phone/apps/CallsApp.vue'
+import CalculatorApp from './phone/apps/CalculatorApp.vue'
+import EmailApp from './phone/apps/EmailApp.vue'
 
 const phoneStore = usePhoneStore()
 

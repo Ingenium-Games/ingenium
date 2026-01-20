@@ -21,6 +21,17 @@ Ingenium uses **server-authoritative entities** where all game state flows throu
 
 **Entities:** Player, OwnedVehicle, Vehicle, Job, NPC, BlankObject, ExistingObject, OfflinePlayer (8 types total)
 
+### Phone System
+- **[Phone Apps: Calculator & Email](./PHONE_APPS_CALCULATOR_EMAIL.md)** - Calculator and Email applications for the in-game phone
+
+### SQL & Database
+- **[SQL Architecture](./SQL_Architecture.md)** - Overview of the integrated MySQL2 SQL system
+- **[SQL API Reference](./SQL_API_Reference.md)** - Complete API documentation for SQL operations
+- **[SQL Migration Guide](./SQL_Migration_Guide.md)** - Step-by-step migration from mysql-async
+- **[SQL Events & Exports](./SQL_Events_Exports.md)** - Server events, exports, and commands
+- **[SQL Performance](./SQL_Performance.md)** - Performance optimization and monitoring
+- **[SQL Compatibility](./SQL_Compatibility.md)** - Legacy MySQL.Async compatibility layer
+
 [Learn more: Class System →](Class_System.md)
 
 ### Data Persistence

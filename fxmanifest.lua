@@ -235,7 +235,9 @@ server_scripts {
     "server/[Commands]/_job_management.lua",
     "server/[Data - No Save Needed]/_phone.lua",
     "server/[Events]/_phone.lua",
+    "server/[Events]/_phone_email.lua",
     "server/[SQL]/_phone.lua",
+    "server/[SQL]/_phone_email.lua",
 }
 ------------------------------------------------------------------------------
 dependencies {
