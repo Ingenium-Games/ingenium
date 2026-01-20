@@ -118,9 +118,17 @@ end
 
 --- Prepare a query for later execution (returns query ID)
 ---@param query string SQL query to prepare
+---@param callback function|nil Optional callback(queryId)
 ---@return string Query ID
-function ig.sql.PrepareQuery(query)
-    return exports['ingenium.sql']:prepareQuery(query)
+function ig.sql.PrepareQuery(query, callback)
+    local queryId = exports['ingenium.sql']:prepareQuery(query)
+    
+    -- If callback provided, invoke it with the query ID
+    if callback and type(callback) == 'function' then
+        callback(queryId)
+    end
+    
+    return queryId
 end
 
 --- Execute a prepared query
