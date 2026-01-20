@@ -443,18 +443,20 @@ function ig.func.SetVehicleModifications(vehicle, modifications)
     
     -- Wait for vehicle to be fully networked
     local timeout = 0
-    while not DoesEntityExist(vehicle) and timeout < 100 do
+    local netId = NetworkGetNetworkIdFromEntity(vehicle)
+    while (not DoesEntityExist(vehicle) or netId == 0) and timeout < 100 do
         Wait(10)
+        netId = NetworkGetNetworkIdFromEntity(vehicle)
         timeout = timeout + 1
     end
     
-    if not DoesEntityExist(vehicle) then
-        ig.log.Warn("Functions", "Vehicle disappeared before modifications could be applied")
+    if not DoesEntityExist(vehicle) or netId == 0 then
+        ig.log.Warn("Functions", "Vehicle disappeared or failed to network before modifications could be applied")
         return
     end
     
     -- Request all clients to apply modifications
-    TriggerClientEvent("Client:Vehicle:ApplyModifications", -1, NetworkGetNetworkIdFromEntity(vehicle), modifications)
+    TriggerClientEvent("Client:Vehicle:ApplyModifications", -1, netId, modifications)
 end
 
 --- Apply vehicle condition (damage, dirt, etc)
@@ -463,6 +465,20 @@ end
 function ig.func.SetVehicleCondition(vehicle, condition)
     if not DoesEntityExist(vehicle) or not condition then return end
     
+    -- Wait for vehicle to be fully networked
+    local timeout = 0
+    local netId = NetworkGetNetworkIdFromEntity(vehicle)
+    while (not DoesEntityExist(vehicle) or netId == 0) and timeout < 100 do
+        Wait(10)
+        netId = NetworkGetNetworkIdFromEntity(vehicle)
+        timeout = timeout + 1
+    end
+    
+    if not DoesEntityExist(vehicle) or netId == 0 then
+        ig.log.Warn("Functions", "Vehicle disappeared or failed to network before condition could be applied")
+        return
+    end
+    
     -- Request all clients to apply condition
-    TriggerClientEvent("Client:Vehicle:ApplyCondition", -1, NetworkGetNetworkIdFromEntity(vehicle), condition)
+    TriggerClientEvent("Client:Vehicle:ApplyCondition", -1, netId, condition)
 end
