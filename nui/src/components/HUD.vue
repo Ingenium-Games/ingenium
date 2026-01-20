@@ -107,6 +107,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useUIStore } from '../stores/ui'
+import { sendNuiMessage } from '../utils/nui'
 
 const uiStore = useUIStore()
 
@@ -128,6 +129,23 @@ const positions = ref({ ...defaultPositions })
 const dragging = ref(null)
 const dragStart = ref({ x: 0, y: 0 })
 
+// Keydown handler for configured focus key to toggle focus
+const keydownHandler = (e) => {
+  if (uiStore.hudData.focusKey && e.key.toLowerCase() === uiStore.hudData.focusKey.toLowerCase()) {
+    e.preventDefault()
+    sendNuiMessage('NUI:Client:HUDFocusToggle', {})
+  }
+}
+
+// Watch for focus changes to add/remove key listener
+watch(() => uiStore.hudFocused, (newVal) => {
+  if (newVal) {
+    document.addEventListener('keydown', keydownHandler)
+  } else {
+    document.removeEventListener('keydown', keydownHandler)
+  }
+})
+
 onMounted(() => {
   // Load saved positions
   const savedPositions = localStorage.getItem('hud_stat_positions')
@@ -146,10 +164,16 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('message', handleHudMessage)
   stopDrag()
+  document.removeEventListener('keydown', keydownHandler)
 })
 
 function handleHudMessage(event) {
   const { message, data } = event.data
+  
+  if (message === 'Client:NUI:HUDFocus') {
+    // Update focus state and key
+    uiStore.hudData.focusKey = data.focusKey
+  }
   
   if (message === 'Client:NUI:HUDResetPosition') {
     positions.value = { ...defaultPositions }

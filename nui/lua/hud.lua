@@ -26,7 +26,8 @@ RegisterCommand('toggleHudFocus', function()
         message = "Client:NUI:HUDFocus",
         data = { 
             focused = hudFocused,
-            timestamp = GetGameTimer()
+            timestamp = GetGameTimer(),
+            focusKey = conf.hud.focusKey
         }
     })
     -- Set NUI focus: cursor captured when focused (for dragging), keyboard never captured (allows command to work)
