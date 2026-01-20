@@ -1,6 +1,6 @@
 <template>
   <!-- Individual draggable HUD elements -->
-  <div class="hud-elements">
+  <div class="hud-elements" :class="{ 'hud-parent-focused': uiStore.hudFocused }">
     <!-- Health -->
     <div 
       class="hud-stat-container"
@@ -194,6 +194,10 @@ function stopDrag() {
 <style scoped>
 .hud-elements {
   pointer-events: none;
+}
+
+.hud-elements.hud-parent-focused {
+  pointer-events: auto; /* Enable parent interaction when focused */
 }
 
 .hud-stat-container {

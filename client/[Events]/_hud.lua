@@ -38,8 +38,8 @@ Citizen.CreateThread(function()
         if hudVisible and IsControlJustPressed(0, 289) then -- F2 key
             hudDragMode = not hudDragMode
             
-            -- Send focus state as data, enable NUI focus for mouse interaction
-            ig.ui.Send("Client:NUI:HUDFocus", { focused = hudDragMode }, hudDragMode)
+            -- Send focus state as data (NUI will handle SetNuiFocus internally)
+            ig.ui.Send("Client:NUI:HUDFocus", { focused = hudDragMode })
             
             if hudDragMode then
                 ig.ui.Notify("HUD drag mode enabled. Click and drag to reposition.", "green", 3000)

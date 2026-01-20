@@ -187,7 +187,7 @@ function closeChat() {
   max-width: 90vw;
   pointer-events: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  z-index: 100;
+  z-index: 10000; /* Above all other UI elements */
 }
 
 .chat-messages {

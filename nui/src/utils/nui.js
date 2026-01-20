@@ -295,6 +295,27 @@ export function setupNuiHandlers() {
         console.log('[nui.js] Calling uiStore.setHudFocus with:', data.focused)
         uiStore.setHudFocus(data.focused)
         console.log('[nui.js] uiStore.hudFocused is now:', uiStore.hudFocused)
+        
+        // Directly ensure NUI focus matches the intended state
+        if (data.focused) {
+          console.log('[nui.js] Enabling NUI focus via SetNuiFocus')
+          window.SetNuiFocus(true, true)
+          
+          // Check if it actually worked
+          setTimeout(() => {
+            const isFocused = window.IsNuiFocused ? window.IsNuiFocused() : 'IsNuiFocused not available'
+            console.log('[nui.js] IsNuiFocused() after enable:', isFocused)
+          }, 100)
+        } else {
+          console.log('[nui.js] Disabling NUI focus via SetNuiFocus')
+          window.SetNuiFocus(false, false)
+          
+          // Check if it actually worked
+          setTimeout(() => {
+            const isFocused = window.IsNuiFocused ? window.IsNuiFocused() : 'IsNuiFocused not available'
+            console.log('[nui.js] IsNuiFocused() after disable:', isFocused)
+          }, 100)
+        }
         break
 
       case 'Client:NUI:HUDResetPosition':
