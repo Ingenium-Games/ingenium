@@ -26,20 +26,32 @@ function ig.sql.save.ArePreparedQueriesReady()
 ---@param timeout number Timeout in milliseconds
 ---@return boolean Success
 function ig.sql.save.AwaitPreparedQueries(timeout)
-    local startTime = os.clock() * 1000
+    local p = promise.new()
     local timeoutMs = timeout or 10000
+    local startTime = GetGameTimer()
     
-    while not ig.sql.save.ArePreparedQueriesReady() do
-        Wait(100)
-        local elapsed = (os.clock() * 1000) - startTime
-        if elapsed >= timeoutMs then
-            ig.log.Error("SQL", "Timeout waiting for prepared queries to initialize")
-            return false
+    -- Use SetTimeout chain instead of blocking Wait()
+    local function CheckReady()
+        if ig.sql.save.ArePreparedQueriesReady() then
+            ig.log.Info("SQL", "All prepared queries ready")
+            p:resolve(true)
+        else
+            local elapsed = GetGameTimer() - startTime
+            if elapsed >= timeoutMs then
+                ig.log.Error("SQL", "Timeout waiting for prepared queries to initialize")
+                p:resolve(false)
+            else
+                -- Check again in 50ms without blocking
+                SetTimeout(50, CheckReady)
+            end
         end
     end
     
-    ig.log.Info("SQL", "All prepared queries ready")
-    return true
+    -- Start checking
+    CheckReady()
+    
+    -- Wait for promise to resolve
+    return Citizen.Await(p)
 end
 
 --[[ Performance Monitoring Wrapper ]] --
