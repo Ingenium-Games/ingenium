@@ -3,6 +3,8 @@ RegisterNetEvent("Client:Character:Loaded")
 AddEventHandler("Client:Character:Loaded", function()
     ig.log.Info("Character", "Character loaded - initializing systems")
     
+    exports.spawnmanager:setAutoSpawn(false)
+
     -- CRITICAL: Wait for StateBag synchronization with state verification
     -- Instead of hardcoded 5-second wait, verify state is actually synced
     local maxWait = 0
@@ -40,7 +42,6 @@ AddEventHandler("Client:Character:Loaded", function()
     ig.status.SetPlayer()
     ig.modifier.SetModifiers()
 
-            
     -- Notify server that client is fully ready
     -- NOTE: This tells server that ped is fully initialized and state is - Will force update Instance or bucket to last known bucket or instance.
     TriggerServerEvent("Server:Character:Ready")
@@ -48,18 +49,17 @@ AddEventHandler("Client:Character:Loaded", function()
     -- Trigger internal event for other resources
     TriggerEvent("Client:Character:Ready")
 
-    
-
     ig.func.FadeOut(1000)
+    ig.func.IsBusyPleaseWait(5000)
     PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
     -- Reset position or mark at airport or config spawn location
     local ords = ig.data.GetLocalPlayerState("Coords") or conf.spawn
     SetEntityCoords(ped, ords["x"], ords["y"], ords["z"])
     SetEntityHeading(ped, ords["h"])
+    local apperance = ig.data.GetLocalPlayerState("Apperance")
+    ig.appearance.SetAppearance(apperance)
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
     ig.func.FadeIn(5000)
-
-    ig.func.IsBusyPleaseWait(500)
 
     -- Apply RP mode specific configurations if enabled
     if conf.gamemode == "RP" then

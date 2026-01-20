@@ -209,6 +209,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
     -- Capture vehicle state using ig.func utilities
     local vehicleModel = GetEntityModel(vehicleEntity)
     local coords = GetEntityCoords(vehicleEntity)
+    local vehicleState = Entity(vehicleEntity).state
     
     ig.vehicleCache[plate] = {
         plate = plate,
@@ -221,7 +222,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
         lastInteraction = os.date("!%Y-%m-%dT%H:%M:%SZ"),
         interactionCount = 1,
         coords = {x = coords.x, y = coords.y, z = coords.z, h = GetEntityHeading(vehicleEntity)},
-        fuel = GetVehicleFuelLevel(vehicleEntity),
+        fuel = vehicleState.Fuel or 65.0,
         mileage = 0,
         -- Condition/modifications will be captured by client
         condition = nil,

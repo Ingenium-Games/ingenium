@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `First_Name` varchar(25) DEFAULT NULL,
   `Last_Name` varchar(25) DEFAULT NULL,
   `Iban` varchar(9) DEFAULT NULL,
-  `Job` varchar(255) NOT NULL DEFAULT '{"Name":"none","Grade":1}',
+  `Job` varchar(255) NOT NULL DEFAULT '{"Name":"none","Grade":"Unemployed"}',
   `Photo` longtext NOT NULL DEFAULT 'img/icons8-pogchamp-96.png',
   `Appearance` longtext NOT NULL DEFAULT '{"sex":0}',
   `Inventory` longtext NOT NULL DEFAULT '{}',
