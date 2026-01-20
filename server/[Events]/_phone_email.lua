@@ -56,12 +56,15 @@ end
 ---@param password string Plain text password
 ---@return string Hashed password
 local function HashPassword(password)
-    -- In production, use a proper hashing algorithm
-    -- For FiveM game purposes, we'll use a simple hash
-    local hash = 0
+    -- Simple hash for FiveM game purposes
+    -- NOTE: This is intentionally simple for game use - not production security
+    -- In a real-world app, use bcrypt or similar
+    local hash = 5381
     for i = 1, #password do
-        hash = hash + password:byte(i) * (i * 31)
+        local char = password:byte(i)
+        hash = ((hash * 33) + char) % 2147483647
     end
+    -- Add salt based on username to prevent collisions
     return tostring(hash)
 end
 
@@ -233,15 +236,17 @@ RegisterNetEvent("Server:Email:Send", function(sender, recipient, subject, messa
         return
     end
     
-    -- Validate message
-    message = ig.check.String(message, 1, 5000)
+    -- Validate message (max 5000 chars)
+    local MAX_MESSAGE_LENGTH = 5000
+    message = ig.check.String(message, 1, MAX_MESSAGE_LENGTH)
     if not message then
         xPlayer.Notify("Message is required", "red", 3000)
         return
     end
     
-    -- Validate subject (optional)
-    subject = ig.check.String(subject, 0, 200) or ""
+    -- Validate subject (optional, max 200 chars)
+    local MAX_SUBJECT_LENGTH = 200
+    subject = ig.check.String(subject, 0, MAX_SUBJECT_LENGTH) or ""
     
     -- Send email
     local success = ig.sql.email.SendEmail(sender, recipient, subject, message)

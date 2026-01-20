@@ -31,6 +31,9 @@ Welcome to the ingenium documentation hub. This centralized resource provides co
 - **[Zone Management (ig.zone)](./Zone_Management.md)** - Integrated PolyZone system for zone definition and checking
 - **[IPL Management (ig.ipl/ig.ipls)](./Zone_IPL_Management.md)** - Interior prop list loading with zone triggers
 
+### Phone System
+- **[Phone Apps: Calculator & Email](./PHONE_APPS_CALCULATOR_EMAIL.md)** - Calculator and Email applications for the in-game phone
+
 ### SQL & Database
 - **[SQL Architecture](./SQL_Architecture.md)** - Overview of the integrated MySQL2 SQL system
 - **[SQL API Reference](./SQL_API_Reference.md)** - Complete API documentation for SQL operations

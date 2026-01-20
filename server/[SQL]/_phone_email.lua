@@ -117,7 +117,8 @@ end
 ---@return table Array of email objects
 function ig.sql.email.GetInbox(emailAddress)
     local result = MySQL.query.await([[
-        SELECT * FROM phone_emails 
+        SELECT ID, Sender, Recipient, Subject, Message, Sent_At, Read_Status
+        FROM phone_emails 
         WHERE Recipient = ? 
         ORDER BY Sent_At DESC
         LIMIT 100
@@ -135,7 +136,8 @@ end
 ---@return table Array of email objects
 function ig.sql.email.GetSent(emailAddress)
     local result = MySQL.query.await([[
-        SELECT * FROM phone_emails 
+        SELECT ID, Sender, Recipient, Subject, Message, Sent_At, Read_Status
+        FROM phone_emails 
         WHERE Sender = ? 
         ORDER BY Sent_At DESC
         LIMIT 100

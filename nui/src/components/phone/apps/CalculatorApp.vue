@@ -55,6 +55,9 @@ const previousValue = ref('')
 const operator = ref('')
 const shouldResetDisplay = ref(false)
 
+// Constants
+const PRECISION_MULTIPLIER = 100000000
+
 // Append number to display
 const appendNumber = (num) => {
   if (shouldResetDisplay.value) {
@@ -123,7 +126,7 @@ const calculate = () => {
   }
   
   // Round to avoid floating point issues
-  result = Math.round(result * 100000000) / 100000000
+  result = Math.round(result * PRECISION_MULTIPLIER) / PRECISION_MULTIPLIER
   
   currentValue.value = result.toString()
   previousValue.value = ''
