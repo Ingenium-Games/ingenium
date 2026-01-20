@@ -1,51 +1,99 @@
 <template>
-  <div 
-    class="hud-container"
-    :style="{ 
-      left: position.x + 'px', 
-      top: position.y + 'px',
-      zIndex: hudZIndex
-    }"
-    :class="{ 'hud-focused': isFocused }"
-  >
+  <!-- Individual draggable HUD elements -->
+  <div class="hud-elements">
+    <!-- Health -->
     <div 
-      class="hud-stats" 
-      @mousedown="startDrag"
-      :title="isFocused ? 'Drag to reposition HUD' : 'Press F2 to enable drag mode'"
+      class="hud-stat-container"
+      :style="{ 
+        left: positions.health.x + 'px', 
+        top: positions.health.y + 'px',
+        zIndex: dragging === 'health' ? 1001 : 100
+      }"
+      :class="{ 'hud-focused': isFocused }"
+      @mousedown="(e) => startDrag(e, 'health')"
+      :title="isFocused ? 'Drag to reposition Health' : 'Press F2 to enable drag mode'"
     >
-      <!-- Health -->
       <div class="hud-stat">
         <span class="hud-stat-label">Health</span>
         <div class="hud-stat-bar">
           <div class="hud-stat-fill health" :style="{ width: `${uiStore.hudData.health}%` }"></div>
         </div>
       </div>
-      
-      <!-- Armor -->
-      <div class="hud-stat" v-if="uiStore.hudData.armor > 0">
+    </div>
+
+    <!-- Armor -->
+    <div 
+      v-if="uiStore.hudData.armor > 0"
+      class="hud-stat-container"
+      :style="{ 
+        left: positions.armor.x + 'px', 
+        top: positions.armor.y + 'px',
+        zIndex: dragging === 'armor' ? 1001 : 100
+      }"
+      :class="{ 'hud-focused': isFocused }"
+      @mousedown="(e) => startDrag(e, 'armor')"
+      :title="isFocused ? 'Drag to reposition Armor' : 'Press F2 to enable drag mode'"
+    >
+      <div class="hud-stat">
         <span class="hud-stat-label">Armor</span>
         <div class="hud-stat-bar">
           <div class="hud-stat-fill armor" :style="{ width: `${uiStore.hudData.armor}%` }"></div>
         </div>
       </div>
-      
-      <!-- Hunger -->
+    </div>
+
+    <!-- Hunger -->
+    <div 
+      class="hud-stat-container"
+      :style="{ 
+        left: positions.hunger.x + 'px', 
+        top: positions.hunger.y + 'px',
+        zIndex: dragging === 'hunger' ? 1001 : 100
+      }"
+      :class="{ 'hud-focused': isFocused }"
+      @mousedown="(e) => startDrag(e, 'hunger')"
+      :title="isFocused ? 'Drag to reposition Hunger' : 'Press F2 to enable drag mode'"
+    >
       <div class="hud-stat">
         <span class="hud-stat-label">Hunger</span>
         <div class="hud-stat-bar">
           <div class="hud-stat-fill hunger" :style="{ width: `${uiStore.hudData.hunger}%` }"></div>
         </div>
       </div>
-      
-      <!-- Thirst -->
+    </div>
+
+    <!-- Thirst -->
+    <div 
+      class="hud-stat-container"
+      :style="{ 
+        left: positions.thirst.x + 'px', 
+        top: positions.thirst.y + 'px',
+        zIndex: dragging === 'thirst' ? 1001 : 100
+      }"
+      :class="{ 'hud-focused': isFocused }"
+      @mousedown="(e) => startDrag(e, 'thirst')"
+      :title="isFocused ? 'Drag to reposition Thirst' : 'Press F2 to enable drag mode'"
+    >
       <div class="hud-stat">
         <span class="hud-stat-label">Thirst</span>
         <div class="hud-stat-bar">
           <div class="hud-stat-fill thirst" :style="{ width: `${uiStore.hudData.thirst}%` }"></div>
         </div>
       </div>
-      
-      <!-- Stress -->
+    </div>
+
+    <!-- Stress -->
+    <div 
+      class="hud-stat-container"
+      :style="{ 
+        left: positions.stress.x + 'px', 
+        top: positions.stress.y + 'px',
+        zIndex: dragging === 'stress' ? 1001 : 100
+      }"
+      :class="{ 'hud-focused': isFocused }"
+      @mousedown="(e) => startDrag(e, 'stress')"
+      :title="isFocused ? 'Drag to reposition Stress' : 'Press F2 to enable drag mode'"
+    >
       <div class="hud-stat">
         <span class="hud-stat-label">Stress</span>
         <div class="hud-stat-bar">
@@ -57,36 +105,43 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useUIStore } from '../stores/ui'
 
 const uiStore = useUIStore()
-const position = ref({ x: 20, y: window.innerHeight - 120 })
-const isDragging = ref(false)
+
+// Default positions for each stat (stacked vertically on left side)
+const defaultPositions = {
+  health: { x: 20, y: window.innerHeight - 200 },
+  armor: { x: 20, y: window.innerHeight - 160 },
+  hunger: { x: 20, y: window.innerHeight - 120 },
+  thirst: { x: 20, y: window.innerHeight - 80 },
+  stress: { x: 20, y: window.innerHeight - 40 }
+}
+
+const positions = ref({ ...defaultPositions })
+const dragging = ref(null)
 const dragStart = ref({ x: 0, y: 0 })
 const isFocused = ref(false)
 
-// Compute z-index based on focus state
-const hudZIndex = computed(() => 
-  isFocused.value ? 1001 : 100
-)
-
 onMounted(() => {
-  const savedPos = localStorage.getItem('hud_position')
-  if (savedPos) {
+  // Load saved positions
+  const savedPositions = localStorage.getItem('hud_stat_positions')
+  if (savedPositions) {
     try {
-      position.value = JSON.parse(savedPos)
+      const parsed = JSON.parse(savedPositions)
+      positions.value = { ...defaultPositions, ...parsed }
     } catch (e) {
-      console.error('Failed to parse HUD position:', e)
+      console.error('Failed to parse HUD stat positions:', e)
     }
   }
   
-  // Listen for HUD focus toggle messages from Lua
   window.addEventListener('message', handleHudMessage)
 })
 
 onUnmounted(() => {
   window.removeEventListener('message', handleHudMessage)
+  stopDrag()
 })
 
 function handleHudMessage(event) {
@@ -95,86 +150,85 @@ function handleHudMessage(event) {
   if (message === 'Client:NUI:HUDFocus') {
     isFocused.value = data.focused
   } else if (message === 'Client:NUI:HUDResetPosition') {
-    position.value = { x: 20, y: window.innerHeight - 120 }
-    localStorage.setItem('hud_position', JSON.stringify(position.value))
-  } else if (message === 'Client:NUI:HUDSetPosition') {
-    position.value = data.position
-    localStorage.setItem('hud_position', JSON.stringify(position.value))
+    positions.value = { ...defaultPositions }
+    localStorage.setItem('hud_stat_positions', JSON.stringify(positions.value))
   }
 }
 
-function startDrag(e) {
-  // Only allow dragging when HUD is focused
+function startDrag(e, statName) {
   if (!isFocused.value) return
   
-  isDragging.value = true
-  dragStart.value = { x: e.clientX - position.value.x, y: e.clientY - position.value.y }
+  e.preventDefault()
+  dragging.value = statName
+  dragStart.value = { 
+    x: e.clientX - positions.value[statName].x, 
+    y: e.clientY - positions.value[statName].y 
+  }
+  
   document.addEventListener('mousemove', handleDrag)
   document.addEventListener('mouseup', stopDrag)
 }
 
 function handleDrag(e) {
-  if (isDragging.value) {
-    position.value.x = e.clientX - dragStart.value.x
-    position.value.y = e.clientY - dragStart.value.y
+  if (dragging.value) {
+    positions.value[dragging.value] = {
+      x: e.clientX - dragStart.value.x,
+      y: e.clientY - dragStart.value.y
+    }
   }
 }
 
 function stopDrag() {
-  isDragging.value = false
-  localStorage.setItem('hud_position', JSON.stringify(position.value))
+  if (dragging.value) {
+    // Save positions when drag ends
+    localStorage.setItem('hud_stat_positions', JSON.stringify(positions.value))
+  }
+  dragging.value = null
   document.removeEventListener('mousemove', handleDrag)
   document.removeEventListener('mouseup', stopDrag)
 }
-
-onUnmounted(() => {
-  document.removeEventListener('mousemove', handleDrag)
-  document.removeEventListener('mouseup', stopDrag)
-})
 </script>
 
 <style scoped>
-.hud-container {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  z-index: 100;
-  transition: border 0.2s ease;
+.hud-elements {
+  pointer-events: none;
 }
 
-.hud-container.hud-focused {
-  border: 2px solid #4CAF50;
-  border-radius: 4px;
+.hud-stat-container {
+  position: fixed;
+  pointer-events: auto;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hud-stat-container.hud-focused {
+  cursor: grab;
+}
+
+.hud-stat-container.hud-focused:hover {
+  border: 2px solid rgba(76, 175, 80, 0.5);
+  border-radius: 6px;
   box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
 }
 
-.hud-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  cursor: grab;
-  user-select: none;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  transition: background-color 0.2s, cursor 0.2s;
-}
-
-.hud-container.hud-focused .hud-stats {
+.hud-stat-container.hud-focused:active {
   cursor: grabbing;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.hud-stats:hover {
-  background: rgba(0, 0, 0, 0.5);
+  border-color: #4CAF50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
 }
 
 .hud-stat {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.hud-focused .hud-stat:hover {
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .hud-stat-label {
