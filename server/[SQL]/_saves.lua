@@ -115,6 +115,33 @@ function ig.sql.save.InitializePreparedQueries()
         end)
 end
 
+-- Start prepared query initialization in separate thread
+Citizen.CreateThread(function()
+    ig.log.Info("SQL", "Waiting for SQL connection before initializing prepared queries...")
+    
+    -- Wait for SQL to be ready
+    while not ig.sql.IsReady() do
+        Wait(100)
+    end
+    
+    ig.log.Info("SQL", "SQL connection ready, initializing prepared queries...")
+    ig.sql.save.InitializePreparedQueries()
+    
+    -- Wait for all queries to initialize
+    local timeout = 0
+    while not ig.sql.save.ArePreparedQueriesReady() and timeout < 100 do
+        Wait(50)
+        timeout = timeout + 1
+    end
+    
+    if ig.sql.save.ArePreparedQueriesReady() then
+        ig.log.Info("SQL", "All prepared queries initialized successfully")
+    else
+        ig.log.Error("SQL", "Timeout waiting for prepared queries to initialize")
+        ig.log.Error("SQL", "Save system may not function correctly")
+    end
+end)
+
 --[[ Players ]] --
 
 --- Save Single User/Character
