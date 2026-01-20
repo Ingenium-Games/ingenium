@@ -182,9 +182,9 @@ function ig.sql.save.User(data, cb)
         Hunger,
         Thirst,
         Stress,
-        -- Table Informaiton.
-        Skills,
+        -- Table Information (ORDER MUST MATCH QUERY: Coords, Skills)
         Coords,
+        Skills,
         Modifiers,
         Inventory,
         Ammo,

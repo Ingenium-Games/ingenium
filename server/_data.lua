@@ -407,3 +407,105 @@ end
 function ig.data.GetPlayerByCharacterId(characterId)
     return ig.player.GetPlayerByCharacterId(characterId)
 end
+
+-- ====================================================================================--
+-- Vehicle Data Functions (Wrappers for ig.vehicle)
+-- ====================================================================================--
+
+--- Get all vehicles
+function ig.data.GetVehicles()
+    return ig.vehicle.GetVehicles()
+end
+
+--- Get a vehicle by network ID
+---@param net number Network ID
+function ig.data.GetVehicle(net)
+    return ig.vehicle.GetVehicle(net)
+end
+
+--- Get a vehicle by plate
+---@param plate string Vehicle plate
+function ig.data.GetVehicleByPlate(plate)
+    return ig.vehicle.GetVehicleByPlate(plate)
+end
+
+--- Add a vehicle
+---@wiki:ignore
+---@param net number Network ID
+---@param cb function Constructor callback
+function ig.data.AddVehicle(net, cb, ...)
+    ig.vehicle.AddVehicle(net, cb, ...)
+end
+
+--- Remove a vehicle
+---@wiki:ignore
+---@param net number Network ID
+function ig.data.RemoveVehicle(net)
+    ig.vehicle.RemoveVehicle(net)
+end
+
+-- ====================================================================================--
+-- Ped Data Functions (Wrappers for ig.ped)
+-- ====================================================================================--
+
+--- Get all peds
+function ig.data.GetPeds()
+    return ig.ped.GetPeds()
+end
+
+--- Get a ped by network ID
+---@param net number Network ID
+function ig.data.GetPed(net)
+    return ig.ped.GetPed(net)
+end
+
+--- Add a ped
+---@wiki:ignore
+---@param net number Network ID
+---@param cb function Constructor callback
+function ig.data.AddPed(net, cb, ...)
+    ig.ped.AddPed(net, cb, ...)
+end
+
+--- Remove a ped
+---@wiki:ignore
+---@param net number Network ID
+function ig.data.RemovePed(net)
+    ig.ped.RemovePed(net)
+end
+
+-- ====================================================================================--
+-- Object Data Functions (Wrappers for ig.object)
+-- ====================================================================================--
+
+--- Get all objects
+function ig.data.GetObjects()
+    return ig.object.GetObjects()
+end
+
+--- Get an object by network ID
+---@param net number Network ID
+function ig.data.GetObject(net)
+    return ig.object.GetObject(net)
+end
+
+--- Get an object by UUID
+---@param uuid string Object UUID
+function ig.data.GetObjectFromUUID(uuid)
+    return ig.object.GetObjectFromUUID(uuid)
+end
+
+--- Add an object
+---@wiki:ignore
+---@param net number Network ID
+---@param cb function Constructor callback
+function ig.data.AddObject(net, cb, ...)
+    ig.object.AddObject(net, cb, ...)
+end
+
+--- Remove an object
+---@wiki:ignore
+---@param net number Network ID
+function ig.data.RemoveObject(net)
+    ig.object.RemoveObject(net)
+end
