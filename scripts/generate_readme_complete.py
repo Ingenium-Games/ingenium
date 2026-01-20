@@ -175,10 +175,10 @@ def detect_orphaned_wiki_pages(functions):
     # Find orphaned files: existing files that are not in valid filenames and not special files
     orphaned = []
     for file in existing_files:
-        if file not in valid_filenames and file not in special_files:
-            # Check if it follows the ig_namespace_FunctionName.md pattern
-            if file.startswith('ig_') and file.endswith('.md'):
-                orphaned.append(file)
+        # Check if it follows the ig_namespace_FunctionName.md pattern and is not valid
+        if (file not in valid_filenames and file not in special_files and 
+            file.startswith('ig_') and file.endswith('.md')):
+            orphaned.append(file)
     
     return orphaned
 
@@ -198,10 +198,9 @@ def remove_orphaned_wiki_pages(orphaned_files):
     for file in orphaned_files:
         filepath = WIKI_DIR / file
         try:
-            if os.path.exists(filepath):
-                os.remove(filepath)
-                deleted.append(file)
-                print(f'  🗑️  Deleted orphaned wiki page: {file}')
+            os.remove(filepath)
+            deleted.append(file)
+            print(f'  🗑️  Deleted orphaned wiki page: {file}')
         except PermissionError as e:
             print(f'  ⚠️  Permission denied when deleting {file}: {e}')
             failed.append(file)
