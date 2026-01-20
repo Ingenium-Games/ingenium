@@ -120,7 +120,7 @@ RegisterServerCallback({
     local iban = ig.sql.gen.Iban()
     local bank_number = ig.sql.gen.AccountNumber()
     
-    ig.log.Trace("Character", "Generated IDs - CharID: " .. character_id .. ", Phone: " .. phone_number)
+    ig.log.Trace("Character", "Generated IDs - CharID: " .. character_id .. ", CityID: " .. city_id .. ", IBAN: " .. iban .. ", BankAcc: " .. bank_number)
     
     local data = {
         Primary_ID = primary_id,
