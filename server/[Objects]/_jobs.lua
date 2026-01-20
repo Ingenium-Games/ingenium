@@ -21,7 +21,7 @@ end
 
 ---Check if job exists
 ---@param name string Job name
----@param grade number|nil Grade (if checking specific grade)
+---@param grade string|nil Grade name (if checking specific grade)
 ---@return boolean True if exists
 function ig.job.Exists(name, grade)
     if not ig.jobs[name] then
@@ -29,7 +29,19 @@ function ig.job.Exists(name, grade)
     end
     
     if grade then
-        return ig.jobs[name].Grades and ig.jobs[name].Grades[grade] ~= nil
+        -- Grades are now keyed by name (string), not numeric index
+        if not ig.jobs[name].grades then
+            return false
+        end
+        
+        -- Check if grade name exists in grades table
+        for gradeName, _ in pairs(ig.jobs[name].grades) do
+            if gradeName == grade then
+                return true
+            end
+        end
+        
+        return false
     end
     
     return true
@@ -64,7 +76,7 @@ end
 
 ---Get online members by grade
 ---@param jobName string Job name
----@param grade number Grade level
+---@param grade string Grade name
 ---@return table Array of online player objects
 function ig.job.GetOnlineMembersByGrade(jobName, grade)
     local result = {}
@@ -86,56 +98,71 @@ end
 ---@return table Array of boss player objects
 function ig.job.GetBosses(jobName)
     local job = ig.jobs[jobName]
-    if not job then
+    if not job or not job.grades then
         return {}
     end
     
-    local maxGrade = #job.Grades
-    return ig.job.GetOnlineMembersByGrade(jobName, maxGrade)
+    -- Find all boss grades and get players with those grades
+    local result = {}
+    for gradeName, gradeData in pairs(job.grades) do
+        if gradeData.isBoss then
+            local bossPlayers = ig.job.GetOnlineMembersByGrade(jobName, gradeName)
+            for _, player in ipairs(bossPlayers) do
+                table.insert(result, player)
+            end
+        end
+    end
+    
+    return result
 end
 
 ---Get grade information
 ---@param jobName string Job name
----@param grade number Grade level
+---@param grade string Grade name
 ---@return table|nil Grade data or nil
 function ig.job.GetGradeInfo(jobName, grade)
     local job = ig.jobs[jobName]
-    if not job or not job.Grades then
+    if not job or not job.grades then
         return nil
     end
     
-    return job.Grades[grade]
+    return job.grades[grade]
 end
 
----Get grade name
+---Get grade name (for display)
 ---@param jobName string Job name
----@param grade number Grade level
+---@param grade string Grade name
 ---@return string Grade name or "Unknown"
 function ig.job.GetGradeName(jobName, grade)
+    -- Grade is already the name, just return it or check if it exists
     local gradeInfo = ig.job.GetGradeInfo(jobName, grade)
-    return gradeInfo and gradeInfo.Grade_Name or "Unknown"
+    return gradeInfo and grade or "Unknown"
 end
 
 ---Get grade salary
 ---@param jobName string Job name
----@param grade number Grade level
+---@param grade string Grade name
 ---@return number Salary amount
 function ig.job.GetGradeSalary(jobName, grade)
     local gradeInfo = ig.job.GetGradeInfo(jobName, grade)
-    return gradeInfo and gradeInfo.Grade_Salary or 0
+    return gradeInfo and gradeInfo.pay or 0
 end
 
 ---Check if grade is boss
 ---@param jobName string Job name
----@param grade number Grade level
+---@param grade string Grade name
 ---@return boolean True if boss grade
 function ig.job.IsBossGrade(jobName, grade)
-    local job = ig.jobs[jobName]
-    if not job or not job.Grades then
-        return false
-    end
-    
-    return grade == #job.Grades
+    local gradeInfo = ig.job.GetGradeInfo(jobName, grade)
+    return gradeInfo and gradeInfo.isBoss == true
+end
+
+---Alias for IsBossGrade (for compatibility)
+---@param jobName string Job name
+---@param grade string Grade name
+---@return boolean True if boss grade
+function ig.job.IsBoss(jobName, grade)
+    return ig.job.IsBossGrade(jobName, grade)
 end
 
 ---Get job count

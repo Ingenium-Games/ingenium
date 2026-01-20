@@ -133,6 +133,22 @@ function ig.class.Player(source, character_id)
     self.State.Duty = false
     -- Tables (JSONIZE)
     self.Job = json.decode(char.Job)
+    
+    -- Migration: Convert old array format to new object format
+    -- Old format: ["none", "Unemployed"] or {"none", "Unemployed"}
+    -- New format: {Name = "none", Grade = "Unemployed"}
+    if type(self.Job) == "table" and self.Job[1] and not self.Job.Name then
+        -- Old array format detected, convert to object format
+        self.Job = {
+            Name = self.Job[1],
+            Grade = self.Job[2]
+        }
+        ig.log.Debug("PLAYER", "Migrated job format for player " .. self.ID .. " from array to object")
+        -- Mark as dirty to save the new format
+        self.IsDirty = true
+        self.DirtyFields.Job = true
+    end
+    
     self.State.Job = self.Job.Name
     self.State.Grade = self.Job.Grade
     self.State.Boss = false

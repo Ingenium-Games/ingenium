@@ -56,7 +56,7 @@ ExecuteCommand("add_ace group.mod command.setjob allow")
 RegisterCommand("setjob", function(source, args, rawCommand)
     local src = source
     local xPlayer = ig.data.GetPlayer(args[1])
-    if ig.job.Exist(args[2], args[3]) then
+    if ig.job.Exists(args[2], args[3]) then
         xPlayer.SetJob(args[2], args[3])
         TriggerClientEvent("Client:Notify", src, "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
         TriggerClientEvent("Client:Notify", args[1], "Set ID:"..args[1]..", as Job: "..args[2]..", Grade: "..args[3]..".")
