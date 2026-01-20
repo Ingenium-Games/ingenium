@@ -3,7 +3,7 @@
 -- Manages HUD positioning, focus states, and drag mode toggling
 -- ====================================================================================--
 
-local hudFocused = false
+hudFocused = false
 local hudPosition = { x = 20, y = 0 }
 
 -- Calculate initial HUD Y position (bottom-left area)
@@ -21,7 +21,6 @@ end)
 --- When unfocused, HUD returns to normal z-index and can be hidden by other menus
 RegisterCommand('toggleHudFocus', function()
     hudFocused = not hudFocused
-    
     -- Send message to NUI
     SendNUIMessage({
         message = "Client:NUI:HUDFocus",
@@ -30,14 +29,8 @@ RegisterCommand('toggleHudFocus', function()
             timestamp = GetGameTimer()
         }
     })
-    
-    -- Log state change
-    if hudFocused then
-        ig.log.Info("HUD", "HUD focus enabled - drag mode active")
-    else
-        ig.log.Info("HUD", "HUD focus disabled - drag mode inactive")
-    end
-    
+    -- Set NUI focus to allow/deny keyboard input
+    SetNuiFocus(hudFocused, hudFocused)
     -- Trigger event for other resources to hook into
     -- NOTE: This event is currently triggered but has no registered handlers
     -- TODO: If HUD focus state needs to be consumed by other systems, add handlers
