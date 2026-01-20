@@ -146,9 +146,9 @@ camera namespace functions.
 - [ig.camera.Basic](ig_camera_Basic.md) [C]
 - [ig.camera.CleanUp](ig_camera_CleanUp.md) [C]
 - [ig.camera.NewName](ig_camera_NewName.md) [C]
-- [ig.camera.PointAtCoord](ig_camera_PointAtCoord.md) [C] ⚠️ Missing Documentation
-- [ig.camera.PointAtEntity](ig_camera_PointAtEntity.md) [C] ⚠️ Missing Documentation
-- [ig.camera.StopPointing](ig_camera_StopPointing.md) [C] ⚠️ Missing Documentation
+- [ig.camera.PointAtCoord](ig_camera_PointAtCoord.md) [C]
+- [ig.camera.PointAtEntity](ig_camera_PointAtEntity.md) [C]
+- [ig.camera.StopPointing](ig_camera_StopPointing.md) [C]
 
 ### chat
 
@@ -189,19 +189,19 @@ data namespace functions.
 - [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md) [C]
 - [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md) [C]
 - [ig.data.GetLocale](ig_data_GetLocale.md) [C]
-- [ig.data.GetObject](ig_data_GetObject.md) [S] ⚠️ Missing Documentation
-- [ig.data.GetObjectFromUUID](ig_data_GetObjectFromUUID.md) [S] ⚠️ Missing Documentation
-- [ig.data.GetObjects](ig_data_GetObjects.md) [S] ⚠️ Missing Documentation
-- [ig.data.GetPed](ig_data_GetPed.md) [S] ⚠️ Missing Documentation
-- [ig.data.GetPeds](ig_data_GetPeds.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetObject](ig_data_GetObject.md) [S]
+- [ig.data.GetObjectFromUUID](ig_data_GetObjectFromUUID.md) [S]
+- [ig.data.GetObjects](ig_data_GetObjects.md) [S]
+- [ig.data.GetPed](ig_data_GetPed.md) [S]
+- [ig.data.GetPeds](ig_data_GetPeds.md) [S]
 - [ig.data.GetPlayer](ig_data_GetPlayer.md) [S C]
 - [ig.data.GetPlayerByCharacterId](ig_data_GetPlayerByCharacterId.md) [S]
 - [ig.data.GetPlayerPedState](ig_data_GetPlayerPedState.md) [C]
 - [ig.data.GetPlayerState](ig_data_GetPlayerState.md) [C]
-- [ig.data.GetPlayers](ig_data_GetPlayers.md) [S] ⚠️ Missing Documentation
-- [ig.data.GetVehicle](ig_data_GetVehicle.md) [S] ⚠️ Missing Documentation
-- [ig.data.GetVehicleByPlate](ig_data_GetVehicleByPlate.md) [S] ⚠️ Missing Documentation
-- [ig.data.GetVehicles](ig_data_GetVehicles.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetPlayers](ig_data_GetPlayers.md) [S]
+- [ig.data.GetVehicle](ig_data_GetVehicle.md) [S]
+- [ig.data.GetVehicleByPlate](ig_data_GetVehicleByPlate.md) [S]
+- [ig.data.GetVehicles](ig_data_GetVehicles.md) [S]
 - [ig.data.Initilize](ig_data_Initilize.md) [S C]
 - [ig.data.IsPlayerLoaded](ig_data_IsPlayerLoaded.md) [C]
 - [ig.data.LoadJSONData](ig_data_LoadJSONData.md) [S]
@@ -221,17 +221,17 @@ data namespace functions.
 
 death namespace functions.
 
-- [ig.death.PlayerKilled](ig_death_PlayerKilled.md) [C] ⚠️ Missing Documentation
+- [ig.death.PlayerKilled](ig_death_PlayerKilled.md) [C]
 
 ### discord
 
 discord namespace functions.
 
-- [ig.discord.GetDiscordId](ig_discord_GetDiscordId.md) [S] ⚠️ Missing Documentation
-- [ig.discord.GetPriority](ig_discord_GetPriority.md) [S] ⚠️ Missing Documentation
-- [ig.discord.HasAnyRole](ig_discord_HasAnyRole.md) [S] ⚠️ Missing Documentation
-- [ig.discord.HasMemberRole](ig_discord_HasMemberRole.md) [S] ⚠️ Missing Documentation
-- [ig.discord.HasRole](ig_discord_HasRole.md) [S] ⚠️ Missing Documentation
+- [ig.discord.GetDiscordId](ig_discord_GetDiscordId.md) [S]
+- [ig.discord.GetPriority](ig_discord_GetPriority.md) [S]
+- [ig.discord.HasAnyRole](ig_discord_HasAnyRole.md) [S]
+- [ig.discord.HasMemberRole](ig_discord_HasMemberRole.md) [S]
+- [ig.discord.HasRole](ig_discord_HasRole.md) [S]
 
 ### door
 
@@ -279,8 +279,8 @@ file namespace functions.
 
 fileLog namespace functions.
 
-- [ig.fileLog.Create](ig_fileLog_Create.md) [S] ⚠️ Missing Documentation
-- [ig.fileLog.CreateSimple](ig_fileLog_CreateSimple.md) [S] ⚠️ Missing Documentation
+- [ig.fileLog.Create](ig_fileLog_Create.md) [S]
+- [ig.fileLog.CreateSimple](ig_fileLog_CreateSimple.md) [S]
 
 ### func
 
@@ -489,7 +489,7 @@ job namespace functions.
 - [ig.job.GetRichest](ig_job_GetRichest.md) [S]
 - [ig.job.GetStats](ig_job_GetStats.md) [S]
 - [ig.job.GetTotalMemberCount](ig_job_GetTotalMemberCount.md) [S]
-- [ig.job.IsBoss](ig_job_IsBoss.md) [S] ⚠️ Missing Documentation
+- [ig.job.IsBoss](ig_job_IsBoss.md) [S]
 - [ig.job.IsBossGrade](ig_job_IsBossGrade.md) [S]
 - [ig.job.IsBossOfAny](ig_job_IsBossOfAny.md) [S]
 - [ig.job.ProcessPayroll](ig_job_ProcessPayroll.md) [S]
@@ -609,19 +609,19 @@ npc namespace functions.
 
 object namespace functions.
 
-- [ig.object.AddObject](ig_object_AddObject.md) [S] ⚠️ Missing Documentation
-- [ig.object.FindObject](ig_object_FindObject.md) [S] ⚠️ Missing Documentation
-- [ig.object.FindObjectFromUUID](ig_object_FindObjectFromUUID.md) [S] ⚠️ Missing Documentation
-- [ig.object.GetObject](ig_object_GetObject.md) [S] ⚠️ Missing Documentation
-- [ig.object.GetObjectFromUUID](ig_object_GetObjectFromUUID.md) [S] ⚠️ Missing Documentation
-- [ig.object.GetObjects](ig_object_GetObjects.md) [S] ⚠️ Missing Documentation
-- [ig.object.RemoveObject](ig_object_RemoveObject.md) [S] ⚠️ Missing Documentation
+- [ig.object.AddObject](ig_object_AddObject.md) [S]
+- [ig.object.FindObject](ig_object_FindObject.md) [S]
+- [ig.object.FindObjectFromUUID](ig_object_FindObjectFromUUID.md) [S]
+- [ig.object.GetObject](ig_object_GetObject.md) [S]
+- [ig.object.GetObjectFromUUID](ig_object_GetObjectFromUUID.md) [S]
+- [ig.object.GetObjects](ig_object_GetObjects.md) [S]
+- [ig.object.RemoveObject](ig_object_RemoveObject.md) [S]
 
 ### payroll
 
 payroll namespace functions.
 
-- [ig.payroll.ProcessPayroll](ig_payroll_ProcessPayroll.md) [S] ⚠️ Missing Documentation
+- [ig.payroll.ProcessPayroll](ig_payroll_ProcessPayroll.md) [S]
 
 ### ped
 
@@ -653,21 +653,25 @@ persistance namespace functions.
 
 phone namespace functions.
 
-- [ig.phone.AddContact](ig_phone_AddContact.md) [S] ⚠️ Missing Documentation
-- [ig.phone.Close](ig_phone_Close.md) [C] ⚠️ Missing Documentation
-- [ig.phone.EmergencyAlertsEnabled](ig_phone_EmergencyAlertsEnabled.md) [S] ⚠️ Missing Documentation
-- [ig.phone.GeneratePhoneNumber](ig_phone_GeneratePhoneNumber.md) [S] ⚠️ Missing Documentation
-- [ig.phone.GetContacts](ig_phone_GetContacts.md) [S] ⚠️ Missing Documentation
-- [ig.phone.GetFromInventory](ig_phone_GetFromInventory.md) [S] ⚠️ Missing Documentation
-- [ig.phone.GetOrCreate](ig_phone_GetOrCreate.md) [S] ⚠️ Missing Documentation
-- [ig.phone.GetSettings](ig_phone_GetSettings.md) [S] ⚠️ Missing Documentation
-- [ig.phone.IsPlaneMode](ig_phone_IsPlaneMode.md) [S] ⚠️ Missing Documentation
-- [ig.phone.Open](ig_phone_Open.md) [C] ⚠️ Missing Documentation
-- [ig.phone.RemoveContact](ig_phone_RemoveContact.md) [S] ⚠️ Missing Documentation
-- [ig.phone.UpdateContact](ig_phone_UpdateContact.md) [S] ⚠️ Missing Documentation
-- [ig.phone.UpdateContacts](ig_phone_UpdateContacts.md) [S] ⚠️ Missing Documentation
-- [ig.phone.UpdateSettings](ig_phone_UpdateSettings.md) [S] ⚠️ Missing Documentation
-- [ig.phone.Use](ig_phone_Use.md) [S] ⚠️ Missing Documentation
+- [ig.phone.AddCallHistory](ig_phone_AddCallHistory.md) [S]
+- [ig.phone.AddContact](ig_phone_AddContact.md) [S]
+- [ig.phone.Close](ig_phone_Close.md) [C]
+- [ig.phone.DeleteCallHistory](ig_phone_DeleteCallHistory.md) [S]
+- [ig.phone.EmergencyAlertsEnabled](ig_phone_EmergencyAlertsEnabled.md) [S]
+- [ig.phone.GeneratePhoneNumber](ig_phone_GeneratePhoneNumber.md) [S]
+- [ig.phone.GetCallHistory](ig_phone_GetCallHistory.md) [S]
+- [ig.phone.GetContacts](ig_phone_GetContacts.md) [S]
+- [ig.phone.GetFromInventory](ig_phone_GetFromInventory.md) [S]
+- [ig.phone.GetOrCreate](ig_phone_GetOrCreate.md) [S]
+- [ig.phone.GetSettings](ig_phone_GetSettings.md) [S]
+- [ig.phone.IsPlaneMode](ig_phone_IsPlaneMode.md) [S]
+- [ig.phone.Open](ig_phone_Open.md) [C]
+- [ig.phone.RemoveContact](ig_phone_RemoveContact.md) [S]
+- [ig.phone.UpdateCallHistory](ig_phone_UpdateCallHistory.md) [S]
+- [ig.phone.UpdateContact](ig_phone_UpdateContact.md) [S]
+- [ig.phone.UpdateContacts](ig_phone_UpdateContacts.md) [S]
+- [ig.phone.UpdateSettings](ig_phone_UpdateSettings.md) [S]
+- [ig.phone.Use](ig_phone_Use.md) [S]
 
 ### pick
 
@@ -699,21 +703,21 @@ player namespace functions.
 - [ig.player.ArePlayersActive](ig_player_ArePlayersActive.md) [S]
 - [ig.player.GetOfflinePlayer](ig_player_GetOfflinePlayer.md) [S]
 - [ig.player.GetPlayer](ig_player_GetPlayer.md) [S]
-- [ig.player.GetPlayerByCharacterID](ig_player_GetPlayerByCharacterID.md) [S] ⚠️ Missing Documentation
-- [ig.player.GetPlayerByCharacterId](ig_player_GetPlayerByCharacterId.md) [S] ⚠️ Missing Documentation
+- [ig.player.GetPlayerByCharacterID](ig_player_GetPlayerByCharacterID.md) [S]
+- [ig.player.GetPlayerByCharacterId](ig_player_GetPlayerByCharacterId.md) [S]
 - [ig.player.GetPlayers](ig_player_GetPlayers.md) [S]
 
 ### queue
 
 queue namespace functions.
 
-- [ig.queue.GetQueueList](ig_queue_GetQueueList.md) [S] ⚠️ Missing Documentation
-- [ig.queue.GetQueueSize](ig_queue_GetQueueSize.md) [S] ⚠️ Missing Documentation
-- [ig.queue.HandleConnection](ig_queue_HandleConnection.md) [S] ⚠️ Missing Documentation
-- [ig.queue.InitiateShutdown](ig_queue_InitiateShutdown.md) [S] ⚠️ Missing Documentation
-- [ig.queue.RegisterConnectionStep](ig_queue_RegisterConnectionStep.md) [S] ⚠️ Missing Documentation
-- [ig.queue.RemovePlayer](ig_queue_RemovePlayer.md) [S] ⚠️ Missing Documentation
-- [ig.queue.SendAlert](ig_queue_SendAlert.md) [S] ⚠️ Missing Documentation
+- [ig.queue.GetQueueList](ig_queue_GetQueueList.md) [S]
+- [ig.queue.GetQueueSize](ig_queue_GetQueueSize.md) [S]
+- [ig.queue.HandleConnection](ig_queue_HandleConnection.md) [S]
+- [ig.queue.InitiateShutdown](ig_queue_InitiateShutdown.md) [S]
+- [ig.queue.RegisterConnectionStep](ig_queue_RegisterConnectionStep.md) [S]
+- [ig.queue.RemovePlayer](ig_queue_RemovePlayer.md) [S]
+- [ig.queue.SendAlert](ig_queue_SendAlert.md) [S]
 
 ### rng
 
@@ -838,8 +842,8 @@ status namespace functions.
 table namespace functions.
 
 - [ig.table.Clone](ig_table_Clone.md) [S C]
-- [ig.table.Convert2Plain](ig_table_Convert2Plain.md) [S C] ⚠️ Missing Documentation
-- [ig.table.Count](ig_table_Count.md) [S C] ⚠️ Missing Documentation
+- [ig.table.Convert2Plain](ig_table_Convert2Plain.md) [S C]
+- [ig.table.Count](ig_table_Count.md) [S C]
 - [ig.table.Dump](ig_table_Dump.md) [S C]
 - [ig.table.MakeReadOnly](ig_table_MakeReadOnly.md) [S C]
 - [ig.table.MatchKey](ig_table_MatchKey.md) [S C]
@@ -906,25 +910,25 @@ time namespace functions.
 
 ui namespace functions.
 
-- [ig.ui.HideContext](ig_ui_HideContext.md) [C] ⚠️ Missing Documentation
-- [ig.ui.HideHUD](ig_ui_HideHUD.md) [C] ⚠️ Missing Documentation
-- [ig.ui.HideInput](ig_ui_HideInput.md) [C] ⚠️ Missing Documentation
-- [ig.ui.HideMenu](ig_ui_HideMenu.md) [C] ⚠️ Missing Documentation
-- [ig.ui.Notify](ig_ui_Notify.md) [C] ⚠️ Missing Documentation
-- [ig.ui.Send](ig_ui_Send.md) [C] ⚠️ Missing Documentation
-- [ig.ui.ShowContext](ig_ui_ShowContext.md) [C] ⚠️ Missing Documentation
-- [ig.ui.ShowHUD](ig_ui_ShowHUD.md) [C] ⚠️ Missing Documentation
-- [ig.ui.ShowInput](ig_ui_ShowInput.md) [C] ⚠️ Missing Documentation
-- [ig.ui.ShowMenu](ig_ui_ShowMenu.md) [C] ⚠️ Missing Documentation
-- [ig.ui.UpdateHUD](ig_ui_UpdateHUD.md) [C] ⚠️ Missing Documentation
+- [ig.ui.HideContext](ig_ui_HideContext.md) [C]
+- [ig.ui.HideHUD](ig_ui_HideHUD.md) [C]
+- [ig.ui.HideInput](ig_ui_HideInput.md) [C]
+- [ig.ui.HideMenu](ig_ui_HideMenu.md) [C]
+- [ig.ui.Notify](ig_ui_Notify.md) [C]
+- [ig.ui.Send](ig_ui_Send.md) [C]
+- [ig.ui.ShowContext](ig_ui_ShowContext.md) [C]
+- [ig.ui.ShowHUD](ig_ui_ShowHUD.md) [C]
+- [ig.ui.ShowInput](ig_ui_ShowInput.md) [C]
+- [ig.ui.ShowMenu](ig_ui_ShowMenu.md) [C]
+- [ig.ui.UpdateHUD](ig_ui_UpdateHUD.md) [C]
 
 ### util
 
 util namespace functions.
 
-- [ig.util.CheckBoneDistance](ig_util_CheckBoneDistance.md) [S C] ⚠️ Missing Documentation
-- [ig.util.EnsureTable](ig_util_EnsureTable.md) [S C] ⚠️ Missing Documentation
-- [ig.util.IsVehicleLocked](ig_util_IsVehicleLocked.md) [S C] ⚠️ Missing Documentation
+- [ig.util.CheckBoneDistance](ig_util_CheckBoneDistance.md) [S C]
+- [ig.util.EnsureTable](ig_util_EnsureTable.md) [S C]
+- [ig.util.IsVehicleLocked](ig_util_IsVehicleLocked.md) [S C]
 
 ### validation
 
@@ -943,8 +947,8 @@ validation namespace functions.
 vehicle namespace functions.
 
 - [ig.vehicle.AddVehicle](ig_vehicle_AddVehicle.md) [S]
-- [ig.vehicle.ClearLocateBlips](ig_vehicle_ClearLocateBlips.md) [C] ⚠️ Missing Documentation
-- [ig.vehicle.DoesVehicleExistByPlate](ig_vehicle_DoesVehicleExistByPlate.md) [S] ⚠️ Missing Documentation
+- [ig.vehicle.ClearLocateBlips](ig_vehicle_ClearLocateBlips.md) [C]
+- [ig.vehicle.DoesVehicleExistByPlate](ig_vehicle_DoesVehicleExistByPlate.md) [S]
 - [ig.vehicle.FindVehicle](ig_vehicle_FindVehicle.md) [S]
 - [ig.vehicle.FindVehicleFromPlate](ig_vehicle_FindVehicleFromPlate.md) [S]
 - [ig.vehicle.GetAll](ig_vehicle_GetAll.md) [S]
@@ -961,20 +965,20 @@ vehicle namespace functions.
 - [ig.vehicle.GetVehicleByPlate](ig_vehicle_GetVehicleByPlate.md) [S]
 - [ig.vehicle.GetVehicles](ig_vehicle_GetVehicles.md) [S]
 - [ig.vehicle.HookVehicleEvents](ig_vehicle_HookVehicleEvents.md) [S]
-- [ig.vehicle.InitializeClient](ig_vehicle_InitializeClient.md) [C] ⚠️ Missing Documentation
+- [ig.vehicle.InitializeClient](ig_vehicle_InitializeClient.md) [C]
 - [ig.vehicle.InitializePersistence](ig_vehicle_InitializePersistence.md) [S]
 - [ig.vehicle.IsAircraft](ig_vehicle_IsAircraft.md) [S]
 - [ig.vehicle.IsBoa](ig_vehicle_IsBoa.md) [S]
 - [ig.vehicle.IsInVehicle](ig_vehicle_IsInVehicle.md) [C]
 - [ig.vehicle.LoadPersistentVehicles](ig_vehicle_LoadPersistentVehicles.md) [S]
-- [ig.vehicle.LocatePlayerVehicles](ig_vehicle_LocatePlayerVehicles.md) [S] ⚠️ Missing Documentation
+- [ig.vehicle.LocatePlayerVehicles](ig_vehicle_LocatePlayerVehicles.md) [S]
 - [ig.vehicle.RegisterPersistent](ig_vehicle_RegisterPersistent.md) [S]
 - [ig.vehicle.RemoveVehicle](ig_vehicle_RemoveVehicle.md) [S]
-- [ig.vehicle.RestoreParkedVehicles](ig_vehicle_RestoreParkedVehicles.md) [S] ⚠️ Missing Documentation
+- [ig.vehicle.RestoreParkedVehicles](ig_vehicle_RestoreParkedVehicles.md) [S]
 - [ig.vehicle.RestorePersistentVehicle](ig_vehicle_RestorePersistentVehicle.md) [S]
 - [ig.vehicle.SavePersistentVehicles](ig_vehicle_SavePersistentVehicles.md) [S]
 - [ig.vehicle.SetVehicle](ig_vehicle_SetVehicle.md) [S]
-- [ig.vehicle.SpawnPersistentVehicles](ig_vehicle_SpawnPersistentVehicles.md) [S] ⚠️ Missing Documentation
+- [ig.vehicle.SpawnPersistentVehicles](ig_vehicle_SpawnPersistentVehicles.md) [S]
 - [ig.vehicle.StartPeriodicSave](ig_vehicle_StartPeriodicSave.md) [S]
 - [ig.vehicle.UpdateVehicleLocation](ig_vehicle_UpdateVehicleLocation.md) [S]
 - [ig.vehicle.UpdateVehicleState](ig_vehicle_UpdateVehicleState.md) [S]
@@ -1000,16 +1004,16 @@ weapon namespace functions.
 - [ig.weapon.Exist](ig_weapon_Exist.md) [S]
 - [ig.weapon.Get](ig_weapon_Get.md) [C]
 - [ig.weapon.GetAll](ig_weapon_GetAll.md) [S]
-- [ig.weapon.GetAllWeaponComponents](ig_weapon_GetAllWeaponComponents.md) [C] ⚠️ Missing Documentation
+- [ig.weapon.GetAllWeaponComponents](ig_weapon_GetAllWeaponComponents.md) [C]
 - [ig.weapon.GetByCategory](ig_weapon_GetByCategory.md) [S]
 - [ig.weapon.GetByHash](ig_weapon_GetByHash.md) [S]
 - [ig.weapon.GetByName](ig_weapon_GetByName.md) [S]
 - [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md) [S]
-- [ig.weapon.GetInitializedCategories](ig_weapon_GetInitializedCategories.md) [C] ⚠️ Missing Documentation
-- [ig.weapon.GetWeaponComponents](ig_weapon_GetWeaponComponents.md) [C] ⚠️ Missing Documentation
-- [ig.weapon.HasWeaponComponents](ig_weapon_HasWeaponComponents.md) [C] ⚠️ Missing Documentation
-- [ig.weapon.InitializeWeaponData](ig_weapon_InitializeWeaponData.md) [C] ⚠️ Missing Documentation
-- [ig.weapon.IsAllowedCategory](ig_weapon_IsAllowedCategory.md) [C] ⚠️ Missing Documentation
+- [ig.weapon.GetInitializedCategories](ig_weapon_GetInitializedCategories.md) [C]
+- [ig.weapon.GetWeaponComponents](ig_weapon_GetWeaponComponents.md) [C]
+- [ig.weapon.HasWeaponComponents](ig_weapon_HasWeaponComponents.md) [C]
+- [ig.weapon.InitializeWeaponData](ig_weapon_InitializeWeaponData.md) [C]
+- [ig.weapon.IsAllowedCategory](ig_weapon_IsAllowedCategory.md) [C]
 - [ig.weapon.IsMelee](ig_weapon_IsMelee.md) [S]
 - [ig.weapon.Resync](ig_weapon_Resync.md) [S]
 
@@ -1018,8 +1022,8 @@ weapon namespace functions.
 ## Documentation Status
 
 **Total Functions:** 681
-**Documented:** 600 (88%)
-**Missing Documentation:** 81 ⚠️
+**Documented:** 681 (100%) ✅
+**Missing Documentation:** 0
 
 ## Ignored Functions (Internal Only)
 
