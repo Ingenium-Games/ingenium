@@ -291,12 +291,9 @@ export function setupNuiHandlers() {
         break
 
       case 'Client:NUI:HUDFocus':
-        console.log('[nui.js] HUDFocus received, data:', data)
-        console.log('[nui.js] Calling uiStore.setHudFocus with:', data.focused)
+        console.log(`[nui.js @ ${Date.now()}] HUDFocus received, focused=${data.focused}`)
         uiStore.setHudFocus(data.focused)
-        console.log('[nui.js] uiStore.hudFocused is now:', uiStore.hudFocused)
-        
-        // Send callback to Lua to handle SetNuiFocus (native only available in Lua)
+        console.log(`[nui.js @ ${Date.now()}] Sending NUI callback to Lua with focused=${data.focused}`)
         sendNuiMessage('NUI:Client:HUDSetFocus', { focused: data.focused })
         break
 

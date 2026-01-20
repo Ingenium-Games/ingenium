@@ -43,7 +43,8 @@ end)
 local chatOpen = false
 
 RegisterCommand('+openchat', function()
-    if not chatOpen then
+    -- Don't toggle if already focused (prevents 'T' key from closing chat when typing)
+    if not chatOpen and not IsNuiFocused() then
         chatOpen = true
         -- Show chat input
         SendNUIMessage({

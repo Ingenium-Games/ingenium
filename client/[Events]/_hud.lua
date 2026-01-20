@@ -38,6 +38,10 @@ Citizen.CreateThread(function()
         if hudVisible and IsControlJustPressed(0, 289) then -- F2 key
             hudDragMode = not hudDragMode
             
+            print("^1[HUD DEBUG] F2 pressed! hudDragMode toggled to:", hudDragMode, "^7")
+            print("^1[HUD DEBUG] Stack trace:^7")
+            print(debug.traceback())
+            
             -- Send focus state as data (NUI will handle SetNuiFocus internally)
             ig.ui.Send("Client:NUI:HUDFocus", { focused = hudDragMode })
             
@@ -53,12 +57,15 @@ end)
 -- Handle NUI callback to set focus (NUI can't call natives directly)
 RegisterNUICallback('NUI:Client:HUDSetFocus', function(data, cb)
     cb(1)
+    local timestamp = GetGameTimer()
+    print(string.format("^3[HUD @ %d] NUI Callback received, focused=%s^7", timestamp, tostring(data.focused)))
+    
     if data.focused then
         SetNuiFocus(true, true)
-        print("^3[HUD] SetNuiFocus enabled, IsNuiFocused():", IsNuiFocused(), "^7")
+        print(string.format("^3[HUD @ %d] SetNuiFocus(true, true) called, IsNuiFocused()=%s^7", timestamp, tostring(IsNuiFocused())))
     else
         SetNuiFocus(false, false)
-        print("^3[HUD] SetNuiFocus disabled, IsNuiFocused():", IsNuiFocused(), "^7")
+        print(string.format("^3[HUD @ %d] SetNuiFocus(false, false) called, IsNuiFocused()=%s^7", timestamp, tostring(IsNuiFocused())))
     end
 end)
 
