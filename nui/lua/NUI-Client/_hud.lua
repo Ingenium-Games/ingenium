@@ -33,8 +33,6 @@ RegisterNUICallback('NUI:Client:HUDUpdate', function(data, cb)
         return
     end
     
-    ig.log.Trace("HUD", "HUD element updated: " .. data.element)
-    
     -- Trigger element-specific update event
     TriggerEvent("Client:HUD:Update", data)
     

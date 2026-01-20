@@ -54,7 +54,7 @@ function ig.ui.HideHUD()
 end
 
 function ig.ui.UpdateHUD(data)
-    ig.ui.Send("Client:NUI:HUDUpdate", data, false)
+    ig.ui.Send("Client:NUI:HUDUpdate", data)
 end
 
 function ig.ui.Notify(text, colour, fade)
