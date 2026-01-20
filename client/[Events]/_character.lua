@@ -4,20 +4,24 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
     ig.log.Info("Character", "Character loaded - initializing systems")
     local ped = PlayerPedId()
     --
+    print(Coords, ig.table.Dump(Coords))
     exports.spawnmanager:setAutoSpawn(false)
-    
-    -- Apply appearance using the appearance system
-    if Appearance and ig.appearance and ig.appearance.SetAppearance then
-        ig.appearance.SetAppearance(Appearance)
-        ig.log.Info("Character", "Appearance applied from server")
-    end
-    
+
+    ig.func.FadeOut(1000)
+    ig.func.IsBusyPleaseWait(2500)
+
     if not Coords.x and not Coords.y and not Coords.z and not Coords.h then
         Coords = conf.spawn
     end
     -- Reset position or mark at airport or config spawn location
     SetEntityCoords(ped, Coords["x"], Coords["y"], Coords["z"])
     SetEntityHeading(ped, Coords["h"])
+
+    -- Apply appearance using the appearance system
+    if Appearance and ig.appearance and ig.appearance.SetAppearance then
+        ig.appearance.SetAppearance(Appearance)
+        ig.log.Info("Character", "Appearance applied from server")
+    end
 
     -- CRITICAL: Wait for StateBag synchronization with state verification
     -- Instead of hardcoded 5-second wait, verify state is actually synced
@@ -63,11 +67,9 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
     -- Trigger internal event for other resources
     TriggerEvent("Client:Character:Ready")
 
-    ig.func.FadeOut(1000)
-    ig.func.IsBusyPleaseWait(5000)
     PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
 
-    ig.func.FadeIn(5000)
+    
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
 
     -- Set RP-specific native configurations
@@ -88,7 +90,7 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
         ig.log.Debug("Character", "Ped visibility and physics enabled")
     end
 
-    ig.func.FadeIn(5000)
+    ig.func.FadeIn(2500)
 end)
 
 -- ====================================================================================--
