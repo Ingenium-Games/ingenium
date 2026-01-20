@@ -125,7 +125,7 @@ RegisterNetEvent("Server:VehiclePersistence:UpdateCondition", function(netId, pl
     -- Update persistence system with final condition and location
     if ig.vehicle then
         ig.vehicle.UpdateVehicleState(plate, condition, modifications)
-        ig.vehicle.UpdateVehicleLocation(plate, coords, 0, fuel)
+        ig.vehicle.UpdateVehicleLocation(plate, coords, 0, fuel, vehicle)
     end
     
     if conf.persistence and conf.persistence.logging and conf.persistence.logging.enabled then

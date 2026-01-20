@@ -301,7 +301,7 @@ function ig.func.CreateVehicle(name, x, y, z, h, data, routingBucket)
     end
     
     local net = NetworkGetNetworkIdFromEntity(entity)
-    if data then
+    if data.Owner then
         ig.data.AddVehicle(net, ig.class.OwnedVehicle, net, data)
     else
         ig.data.AddVehicle(net, ig.class.Vehicle, net)

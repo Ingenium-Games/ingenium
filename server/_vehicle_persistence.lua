@@ -213,6 +213,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
     local vehicleModel = GetEntityModel(vehicleEntity)
     local coords = GetEntityCoords(vehicleEntity)
     local vehicleState = Entity(vehicleEntity).state
+    local routingBucket = GetEntityRoutingBucket(vehicleEntity)
     
     ig.vehicleCache[plate] = {
         plate = plate,
@@ -227,6 +228,7 @@ function ig.vehicle.RegisterPersistent(vehicleEntity, playerId, plate, vehicleTy
         coords = {x = coords.x, y = coords.y, z = coords.z, h = GetEntityHeading(vehicleEntity)},
         fuel = vehicleState.Fuel or 65.0,
         mileage = 0,
+        routingBucket = routingBucket,
         -- Condition/modifications will be captured by client
         condition = nil,
         modifications = nil,
@@ -259,12 +261,13 @@ function ig.vehicle.UpdateVehicleState(plate, condition, modifications)
     -- Data stored in memory cache, saved to JSON on periodic save
 end
 
----Update vehicle position and fuel
+---Update vehicle position, fuel, and routing bucket
 ---@param plate string Vehicle plate
 ---@param coords table Vehicle coordinates
 ---@param heading number Vehicle heading
 ---@param fuel number Current fuel level
-function ig.vehicle.UpdateVehicleLocation(plate, coords, heading, fuel)
+---@param vehicleEntity number|nil Optional vehicle entity to capture routing bucket
+function ig.vehicle.UpdateVehicleLocation(plate, coords, heading, fuel, vehicleEntity)
     if not ig.vehicleCache[plate] then
         return
     end
@@ -272,6 +275,11 @@ function ig.vehicle.UpdateVehicleLocation(plate, coords, heading, fuel)
     ig.vehicleCache[plate].coords = coords
     ig.vehicleCache[plate].fuel = fuel
     ig.vehicleCache[plate].lastInteraction = os.date("!%Y-%m-%dT%H:%M:%SZ")
+    
+    -- Update routing bucket if vehicle entity provided (in case vehicle moved between instances)
+    if vehicleEntity and DoesEntityExist(vehicleEntity) then
+        ig.vehicleCache[plate].routingBucket = GetEntityRoutingBucket(vehicleEntity)
+    end
     
     -- Data stored in memory cache, saved to JSON on periodic save
 end
@@ -290,37 +298,34 @@ function ig.vehicle.GetAllPersistentVehicles()
 end
 
 ---Restore vehicle from persistent data (spawn)
----Uses ig.func utilities for setting condition/modifications
+---Uses ig.func.CreateVehicle for proper entity creation with statebag setup
 ---@param vehicleData table Vehicle data from cache
----@return number Vehicle entity handle or nil
+---@return number|boolean Vehicle entity handle or false on failure
+---@return number|boolean Network ID or false on failure
 function ig.vehicle.RestorePersistentVehicle(vehicleData)
     if not vehicleData or not vehicleData.model then
-        ig.log.Warn("Cannot restore vehicle: missing model")
-        return nil
+        ig.log.Warn("PERSISTENCE", "Cannot restore vehicle: missing model")
+        return false, false
     end
     
-    local modelHash = vehicleData.model
     local coords = vehicleData.coords or {x = 0, y = 0, z = 0, h = 0}
+    local routingBucket = vehicleData.routingBucket or 0
     
-    -- Request model with timeout
-    RequestModel(modelHash)
-    local timeout = GetGameTimer() + 5000
-    while not HasModelLoaded(modelHash) and GetGameTimer() < timeout do
-        Wait(10)
-    end
+    -- Use ig.func.CreateVehicle which handles timeout, statebag creation, and routing bucket
+    -- Pass nil for data parameter to avoid triggering owned vehicle logic
+    local vehicle, netId = ig.func.CreateVehicle(
+        vehicleData.model,
+        coords.x,
+        coords.y,
+        coords.z,
+        coords.h or 0.0,
+        nil, -- No special data, will be marked as persistent separately
+        routingBucket
+    )
     
-    if not HasModelLoaded(modelHash) then
-        ig.log.Error("PERSISTENCE", "Failed to load model for vehicle: " .. vehicleData.plate)
-        return nil
-    end
-    
-    -- Create vehicle at saved location
-    local vehicle = CreateVehicle(modelHash, coords.x, coords.y, coords.z, coords.h or 0.0, true, false)
-    
-    if not DoesEntityExist(vehicle) then
-        ig.log.Error("PERSISTENCE", "Failed to create vehicle entity: " .. vehicleData.plate)
-        SetModelAsNoLongerNeeded(modelHash)
-        return nil
+    if not vehicle or vehicle == false then
+        ig.log.Error("PERSISTENCE", "Failed to create vehicle entity for plate: " .. (vehicleData.plate or "UNKNOWN"))
+        return false, false
     end
     
     -- Set plate
@@ -339,19 +344,16 @@ function ig.vehicle.RestorePersistentVehicle(vehicleData)
         ig.func.SetVehicleModifications(vehicle, vehicleData.modifications)
     end
     
-    -- Set fuel
+    -- Set fuel via statebag (already created by ig.func.CreateVehicle)
     if vehicleData.fuel then
         Entity(vehicle).state.Fuel = vehicleData.fuel
     end
     
-    -- Clean up model
-    SetModelAsNoLongerNeeded(modelHash)
-    
-    if conf.persistence.logging.enabled then
-        ig.log.Info("PERSISTENCE", "Restored persistent vehicle: " .. vehicleData.plate)
+    if conf.persistence and conf.persistence.logging and conf.persistence.logging.enabled then
+        ig.log.Info("PERSISTENCE", "Restored persistent vehicle: " .. vehicleData.plate .. " in routing bucket " .. routingBucket)
     end
     
-    return vehicle
+    return vehicle, netId
 end
 
 ---Spawn all persistent vehicles from cache (called when first player loads)
@@ -370,8 +372,8 @@ function ig.vehicle.SpawnPersistentVehicles()
     for plate, vehicleData in pairs(ig.vehicleCache) do
         -- Safety check: verify vehicle doesn't already exist by plate
         if not ig.vehicle.DoesVehicleExistByPlate(plate) then
-            local vehicle = ig.vehicle.RestorePersistentVehicle(vehicleData)
-            if vehicle then
+            local vehicle, netId = ig.vehicle.RestorePersistentVehicle(vehicleData)
+            if vehicle and vehicle ~= false then
                 spawnedCount = spawnedCount + 1
             else
                 failedCount = failedCount + 1
