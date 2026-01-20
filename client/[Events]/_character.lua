@@ -4,34 +4,46 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
     ig.log.Info("Character", "Character loaded - initializing systems")
     local ped = PlayerPedId()
     --
-    print(Coords, ig.table.Dump(Coords))
     exports.spawnmanager:setAutoSpawn(false)
-
+    --
     ig.func.FadeOut(1000)
     ig.func.IsBusyPleaseWait(2500)
-
-    if not Coords.x and not Coords.y and not Coords.z and not Coords.h then
-        Coords = conf.spawn
+    --
+    if conf.gamemode == "RP" then
+        -- Set RP-specific native configurations
+        SetMaxWantedLevel(0)
+        SetPedMinGroundTimeForStungun(ped, 12500)
+        SetCanAttackFriendly(ped, true, false)
+        NetworkSetFriendlyFireOption(true)
+        SetWeaponsNoAutoswap(true)
+        SetWeaponsNoAutoreload(true)
+        RemoveMultiplayerHudCash()
     end
-    -- Reset position or mark at airport or config spawn location
-    SetEntityCoords(ped, Coords["x"], Coords["y"], Coords["z"])
-    SetEntityHeading(ped, Coords["h"])
-
+    -- Ensure ped is visible, not frozen, and can move
+    if DoesEntityExist(ped) then
+        -- Reset position or mark at airport or config spawn location
+        SetEntityCoords(ped, Coords["x"], Coords["y"], Coords["z"])
+        SetEntityHeading(ped, Coords["h"])
+        --
+        SetEntityVisible(ped, true, false)
+        SetEntityInvincible(ped, false)
+        FreezeEntityPosition(ped, false)
+        SetPedCanRagdoll(ped, true)
+        ig.log.Debug("Character", "Ped visibility and physics enabled")
+    end
     -- Apply appearance using the appearance system
     if Appearance and ig.appearance and ig.appearance.SetAppearance then
         ig.appearance.SetAppearance(Appearance)
         ig.log.Info("Character", "Appearance applied from server")
     end
-
     -- CRITICAL: Wait for StateBag synchronization with state verification
     -- Instead of hardcoded 5-second wait, verify state is actually synced
     local maxWait = 0
     local timeStep = 50  -- Check every 50ms
     local timeout = 5000 -- Max 5 seconds
-
+    --
     local function checkStateSync()
         local state = Entity(ped).state
-        
         -- Check if critical state fields are synced from server
         if state and state.Health then
             ig.log.Info("Character", "StateBag sync confirmed - Health: " .. tostring(state.Health))
@@ -39,19 +51,17 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
         end
         return false
     end
-    
     -- Wait with verification instead of hardcoded delay
     while not checkStateSync() and maxWait < timeout do
         SetTimeout(timeStep, function() end)
         maxWait = maxWait + timeStep
     end
-    
+    --
     if maxWait >= timeout then
         ig.log.Warn("Character", "State sync timeout after 5 seconds, proceeding anyway")
     else
         ig.log.Trace("Character", "State sync verified in " .. maxWait .. "ms")
     end
-    
     -- Initialize all character systems
     ig.data.SetLoadedStatus(true)
     ig.chat.AddSuggestions()
@@ -59,37 +69,15 @@ AddEventHandler("Client:Character:Loaded", function(Coords, Appearance)
     ig.skill.SetSkills()
     ig.status.SetPlayer()
     ig.modifier.SetModifiers()
-
     -- Notify server that client is fully ready
     -- NOTE: This tells server that ped is fully initialized and state is - Will force update Instance or bucket to last known bucket or instance.
     TriggerServerEvent("Server:Character:Ready")
-
     -- Trigger internal event for other resources
     TriggerEvent("Client:Character:Ready")
-
+    --
     PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
-
-    
     PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
-
-    -- Set RP-specific native configurations
-    SetMaxWantedLevel(0)
-    SetPedMinGroundTimeForStungun(ped, 12500)
-    SetCanAttackFriendly(ped, true, false)
-    NetworkSetFriendlyFireOption(true)
-    SetWeaponsNoAutoswap(true)
-    SetWeaponsNoAutoreload(true)
-    RemoveMultiplayerHudCash()
-    
-    -- Ensure ped is visible, not frozen, and can move
-    if DoesEntityExist(ped) then
-        SetEntityVisible(ped, true, false)
-        SetEntityInvincible(ped, false)
-        FreezeEntityPosition(ped, false)
-        SetPedCanRagdoll(ped, true)
-        ig.log.Debug("Character", "Ped visibility and physics enabled")
-    end
-
+    --
     ig.func.FadeIn(2500)
 end)
 

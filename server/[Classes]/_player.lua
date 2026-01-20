@@ -771,8 +771,14 @@ function ig.class.Player(source, character_id)
     self.GetEntity = function()
         return self.Entity
     end
-    --- func desc
+    --- Gets the character's saved spawn coordinates from database
+    ---@return table Saved coordinates {x, y, z, h}
     self.GetCoords = function()
+        return self.Coords
+    end
+    --- Gets the entity's current world position (live position)
+    ---@return table Current entity coordinates {x, y, z, h}
+    self.GetEntityCoords = function()
         local x, y, z = table.unpack(GetEntityCoords(self.Entity))
         local h = GetEntityHeading(self.Entity)
         return {
@@ -782,10 +788,10 @@ function ig.class.Player(source, character_id)
             ["h"] = ig.math.Decimals(h, 2)
         }
     end
-    --- func desc
-    ---@param t any
+    --- Sets the character's saved spawn coordinates and updates entity position
+    ---@param t table New coordinates {x, y, z, h}
     self.SetCoords = function(t)
-        self.OldCoords = self.GetCoords()
+        self.OldCoords = self.GetEntityCoords()  -- Capture current entity position
         local newCoords = {
             x = ig.math.Decimals(t.x, 2),
             y = ig.math.Decimals(t.y, 2),
