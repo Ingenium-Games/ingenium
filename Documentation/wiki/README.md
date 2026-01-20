@@ -76,7 +76,6 @@ appearance namespace functions.
 - [ig.appearance.GetPricing](ig_appearance_GetPricing.md) [S]
 - [ig.appearance.GetProp](ig_appearance_GetProp.md) [C]
 - [ig.appearance.GetProps](ig_appearance_GetProps.md) [S C]
-- [ig.appearance.Initialize](ig_appearance_Initialize.md) [C]
 - [ig.appearance.IsCustomizationActive](ig_appearance_IsCustomizationActive.md) [C]
 - [ig.appearance.IsFreemode](ig_appearance_IsFreemode.md) [C]
 - [ig.appearance.LoadJobPricing](ig_appearance_LoadJobPricing.md) [S]
@@ -147,6 +146,9 @@ camera namespace functions.
 - [ig.camera.Basic](ig_camera_Basic.md) [C]
 - [ig.camera.CleanUp](ig_camera_CleanUp.md) [C]
 - [ig.camera.NewName](ig_camera_NewName.md) [C]
+- [ig.camera.PointAtCoord](ig_camera_PointAtCoord.md) [C] ⚠️ Missing Documentation
+- [ig.camera.PointAtEntity](ig_camera_PointAtEntity.md) [C] ⚠️ Missing Documentation
+- [ig.camera.StopPointing](ig_camera_StopPointing.md) [C] ⚠️ Missing Documentation
 
 ### chat
 
@@ -166,19 +168,6 @@ check namespace functions.
 - [ig.check.String](ig_check_String.md) [S C]
 - [ig.check.Table](ig_check_Table.md) [S C]
 
-### class
-
-class namespace functions.
-
-- [ig.class.BlankObject](ig_class_BlankObject.md) [S]
-- [ig.class.ExistingObject](ig_class_ExistingObject.md) [S]
-- [ig.class.Job](ig_class_Job.md) [S]
-- [ig.class.Npc](ig_class_Npc.md) [S]
-- [ig.class.OfflinePlayer](ig_class_OfflinePlayer.md) [S]
-- [ig.class.OwnedVehicle](ig_class_OwnedVehicle.md) [S]
-- [ig.class.Player](ig_class_Player.md) [S]
-- [ig.class.Vehicle](ig_class_Vehicle.md) [S]
-
 ### cron
 
 cron namespace functions.
@@ -188,14 +177,8 @@ cron namespace functions.
 
 ### data
 
-  - [ig.data.AddPlayer_Server](ig_data_AddPlayer_Server.md) [UNKNOWN]
-  - [ig.data.GetPlayer_Server](ig_data_GetPlayer_Server.md) [UNKNOWN]
-  - [ig.data.GetPlayers_Server](ig_data_GetPlayers_Server.md) [UNKNOWN]
-  - [ig.data.RemovePlayer_Server](ig_data_RemovePlayer_Server.md) [UNKNOWN]
-  - [ig.data.SetPlayer_Server](ig_data_SetPlayer_Server.md) [UNKNOWN]
 data namespace functions.
 
-- [ig.data.AddPlayer](ig_data_AddPlayer.md) [S] ⚠️ Missing Documentation
 - [ig.data.CharacterValues](ig_data_CharacterValues.md) [S]
 - [ig.data.CreateJobObjects](ig_data_CreateJobObjects.md) [S]
 - [ig.data.GetEntityState](ig_data_GetEntityState.md) [C]
@@ -206,17 +189,24 @@ data namespace functions.
 - [ig.data.GetLocalPlayer](ig_data_GetLocalPlayer.md) [C]
 - [ig.data.GetLocalPlayerState](ig_data_GetLocalPlayerState.md) [C]
 - [ig.data.GetLocale](ig_data_GetLocale.md) [C]
+- [ig.data.GetObject](ig_data_GetObject.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetObjectFromUUID](ig_data_GetObjectFromUUID.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetObjects](ig_data_GetObjects.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetPed](ig_data_GetPed.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetPeds](ig_data_GetPeds.md) [S] ⚠️ Missing Documentation
 - [ig.data.GetPlayer](ig_data_GetPlayer.md) [S C]
 - [ig.data.GetPlayerByCharacterId](ig_data_GetPlayerByCharacterId.md) [S]
 - [ig.data.GetPlayerPedState](ig_data_GetPlayerPedState.md) [C]
 - [ig.data.GetPlayerState](ig_data_GetPlayerState.md) [C]
 - [ig.data.GetPlayers](ig_data_GetPlayers.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetVehicle](ig_data_GetVehicle.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetVehicleByPlate](ig_data_GetVehicleByPlate.md) [S] ⚠️ Missing Documentation
+- [ig.data.GetVehicles](ig_data_GetVehicles.md) [S] ⚠️ Missing Documentation
 - [ig.data.Initilize](ig_data_Initilize.md) [S C]
 - [ig.data.IsPlayerLoaded](ig_data_IsPlayerLoaded.md) [C]
 - [ig.data.LoadJSONData](ig_data_LoadJSONData.md) [S]
 - [ig.data.LoadPlayer](ig_data_LoadPlayer.md) [S]
 - [ig.data.Packet](ig_data_Packet.md) [C]
-- [ig.data.RemovePlayer](ig_data_RemovePlayer.md) [S] ⚠️ Missing Documentation
 - [ig.data.RestoreDrops](ig_data_RestoreDrops.md) [S]
 - [ig.data.RetrievePackets](ig_data_RetrievePackets.md) [S]
 - [ig.data.ReviveSync](ig_data_ReviveSync.md) [S]
@@ -226,29 +216,12 @@ data namespace functions.
 - [ig.data.SetLoadedStatus](ig_data_SetLoadedStatus.md) [C]
 - [ig.data.SetLocalPlayerState](ig_data_SetLocalPlayerState.md) [C]
 - [ig.data.SetLocale](ig_data_SetLocale.md) [C]
-- [ig.data.SetPlayer](ig_data_SetPlayer.md) [S] ⚠️ Missing Documentation
 
 ### death
 
 death namespace functions.
 
 - [ig.death.PlayerKilled](ig_death_PlayerKilled.md) [C] ⚠️ Missing Documentation
-
-### debug
-
-debug namespace functions.
-
-- [ig.debug.Debug](ig_debug_Debug.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.Error](ig_debug_Error.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.ErrorHandler](ig_debug_ErrorHandler.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.FormatMessage](ig_debug_FormatMessage.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.GetContext](ig_debug_GetContext.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.GetLevel](ig_debug_GetLevel.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.Info](ig_debug_Info.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.Log](ig_debug_Log.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.Trace](ig_debug_Trace.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.Warn](ig_debug_Warn.md) [S C] ⚠️ Missing Documentation
-- [ig.debug.Wrap](ig_debug_Wrap.md) [S C] ⚠️ Missing Documentation
 
 ### discord
 
@@ -278,7 +251,6 @@ door namespace functions.
 
 ### drop
 
-  - [ig.drop.StartCleanupRoutine](ig_drop_StartCleanupRoutine.md) [UNKNOWN]
 drop namespace functions.
 
 - [ig.drop.Activate](ig_drop_Activate.md) [S]
@@ -303,10 +275,16 @@ file namespace functions.
 - [ig.file.Read](ig_file_Read.md) [S C]
 - [ig.file.Write](ig_file_Write.md) [S C]
 
+### fileLog
+
+fileLog namespace functions.
+
+- [ig.fileLog.Create](ig_fileLog_Create.md) [S] ⚠️ Missing Documentation
+- [ig.fileLog.CreateSimple](ig_fileLog_CreateSimple.md) [S] ⚠️ Missing Documentation
+
 ### func
 
 func namespace functions.
-
 
 - [ig.func.ClearInterval](ig_func_ClearInterval.md) [S C]
 - [ig.func.CompareCoords](ig_func_CompareCoords.md) [C]
@@ -316,12 +294,9 @@ func namespace functions.
 - [ig.func.DeleteVehicle](ig_func_DeleteVehicle.md) [C]
 - [ig.func.Discord](ig_func_Discord.md) [S]
 - [ig.func.Discorse](ig_func_Discorse.md) [S]
-- [ig.func.Err](ig_func_Err.md) [S C]
-- [ig.func.Error](ig_func_Error.md) [S C]
 - [ig.func.Eventban](ig_func_Eventban.md) [S]
 - [ig.func.FadeIn](ig_func_FadeIn.md) [C]
 - [ig.func.FadeOut](ig_func_FadeOut.md) [C]
-- [ig.func.Func](ig_func_Func.md) [S C]
 - [ig.func.GetAllPlayerPeds](ig_func_GetAllPlayerPeds.md) [S]
 - [ig.func.GetClosestPed](ig_func_GetClosestPed.md) [C]
 - [ig.func.GetClosestPlayer](ig_func_GetClosestPlayer.md) [S C]
@@ -340,7 +315,7 @@ func namespace functions.
 - [ig.func.GetVehicleModifications](ig_func_GetVehicleModifications.md) [C]
 - [ig.func.GetVehicleMods](ig_func_GetVehicleMods.md) [C]
 - [ig.func.GetVehicleSeatOfPed](ig_func_GetVehicleSeatOfPed.md) [C]
-- [ig.func.GetVehicleStatebag](ig_func_GetVehicleStatebag.md) [C]
+- [ig.func.GetVehicleStatebag](ig_func_GetVehicleStatebag.md) [S C]
 - [ig.func.GetVehicleTireStates](ig_func_GetVehicleTireStates.md) [C]
 - [ig.func.GetVehicleWindowStates](ig_func_GetVehicleWindowStates.md) [C]
 - [ig.func.GetVehiclesInArea](ig_func_GetVehiclesInArea.md) [C]
@@ -354,11 +329,11 @@ func namespace functions.
 - [ig.func.NotBusy](ig_func_NotBusy.md) [C]
 - [ig.func.PleaseWait](ig_func_PleaseWait.md) [C]
 - [ig.func.SetInterval](ig_func_SetInterval.md) [S C]
-- [ig.func.SetVehicleCondition](ig_func_SetVehicleCondition.md) [C]
+- [ig.func.SetVehicleCondition](ig_func_SetVehicleCondition.md) [S C]
 - [ig.func.SetVehicleDoorStates](ig_func_SetVehicleDoorStates.md) [C]
 - [ig.func.SetVehicleExtras](ig_func_SetVehicleExtras.md) [C]
 - [ig.func.SetVehicleExtrasFalse](ig_func_SetVehicleExtrasFalse.md) [C]
-- [ig.func.SetVehicleModifications](ig_func_SetVehicleModifications.md) [C]
+- [ig.func.SetVehicleModifications](ig_func_SetVehicleModifications.md) [S C]
 - [ig.func.SetVehicleMods](ig_func_SetVehicleMods.md) [C]
 - [ig.func.SetVehicleStatebag](ig_func_SetVehicleStatebag.md) [C]
 - [ig.func.SetVehicleTireStates](ig_func_SetVehicleTireStates.md) [C]
@@ -405,7 +380,6 @@ gsr namespace functions.
 - [ig.gsr.GetStats](ig_gsr_GetStats.md) [S]
 - [ig.gsr.HasRecent](ig_gsr_HasRecent.md) [S]
 - [ig.gsr.IncrementShots](ig_gsr_IncrementShots.md) [S]
-- [ig.gsr.Load](ig_gsr_Load.md) [S]
 - [ig.gsr.Remove](ig_gsr_Remove.md) [S]
 - [ig.gsr.Test](ig_gsr_Test.md) [S]
 
@@ -488,7 +462,6 @@ item namespace functions.
 - [ig.item.RequiresLicense](ig_item_RequiresLicense.md) [S]
 - [ig.item.ReturnPosition](ig_item_ReturnPosition.md) [S C]
 - [ig.item.Search](ig_item_Search.md) [S]
-- [ig.item.SetItems](ig_item_SetItems.md) [C]
 - [ig.item.ValidateItemData](ig_item_ValidateItemData.md) [S]
 
 ### job
@@ -516,6 +489,7 @@ job namespace functions.
 - [ig.job.GetRichest](ig_job_GetRichest.md) [S]
 - [ig.job.GetStats](ig_job_GetStats.md) [S]
 - [ig.job.GetTotalMemberCount](ig_job_GetTotalMemberCount.md) [S]
+- [ig.job.IsBoss](ig_job_IsBoss.md) [S] ⚠️ Missing Documentation
 - [ig.job.IsBossGrade](ig_job_IsBossGrade.md) [S]
 - [ig.job.IsBossOfAny](ig_job_IsBossOfAny.md) [S]
 - [ig.job.ProcessPayroll](ig_job_ProcessPayroll.md) [S]
@@ -579,26 +553,21 @@ modifier namespace functions.
 
 modkit namespace functions.
 
-- [ig.modkit.ClearCache](ig_modkit_ClearCache.md) [C]
-- [ig.modkit.GetAll](ig_modkit_GetAll.md) [S C]
+- [ig.modkit.GetAll](ig_modkit_GetAll.md) [S]
 - [ig.modkit.GetByID](ig_modkit_GetByID.md) [S]
-- [ig.modkit.GetForVehicle](ig_modkit_GetForVehicle.md) [S C]
+- [ig.modkit.GetForVehicle](ig_modkit_GetForVehicle.md) [S]
 - [ig.modkit.HasModkit](ig_modkit_HasModkit.md) [S]
-- [ig.modkit.Load](ig_modkit_Load.md) [S]
 
 ### name
 
 name namespace functions.
 
-- [ig.name.Load](ig_name_Load.md) [S]
 - [ig.name.RandomFemale](ig_name_RandomFemale.md) [S]
 - [ig.name.RandomMale](ig_name_RandomMale.md) [S]
 - [ig.name.RandomUnisex](ig_name_RandomUnisex.md) [S]
 
 ### note
 
-  - [ig.note.CleanUp](ig_note_CleanUp.md) [UNKNOWN]
-  - [ig.note.Clean](ig_note_Clean.md) [UNKNOWN]
 note namespace functions.
 
 - [ig.note.Add](ig_note_Add.md) [S]
@@ -680,6 +649,26 @@ persistance namespace functions.
 - [ig.persistance.UpdateVehicle](ig_persistance_UpdateVehicle.md) [C]
 - [ig.persistance.VehicleThread](ig_persistance_VehicleThread.md) [S]
 
+### phone
+
+phone namespace functions.
+
+- [ig.phone.AddContact](ig_phone_AddContact.md) [S] ⚠️ Missing Documentation
+- [ig.phone.Close](ig_phone_Close.md) [C] ⚠️ Missing Documentation
+- [ig.phone.EmergencyAlertsEnabled](ig_phone_EmergencyAlertsEnabled.md) [S] ⚠️ Missing Documentation
+- [ig.phone.GeneratePhoneNumber](ig_phone_GeneratePhoneNumber.md) [S] ⚠️ Missing Documentation
+- [ig.phone.GetContacts](ig_phone_GetContacts.md) [S] ⚠️ Missing Documentation
+- [ig.phone.GetFromInventory](ig_phone_GetFromInventory.md) [S] ⚠️ Missing Documentation
+- [ig.phone.GetOrCreate](ig_phone_GetOrCreate.md) [S] ⚠️ Missing Documentation
+- [ig.phone.GetSettings](ig_phone_GetSettings.md) [S] ⚠️ Missing Documentation
+- [ig.phone.IsPlaneMode](ig_phone_IsPlaneMode.md) [S] ⚠️ Missing Documentation
+- [ig.phone.Open](ig_phone_Open.md) [C] ⚠️ Missing Documentation
+- [ig.phone.RemoveContact](ig_phone_RemoveContact.md) [S] ⚠️ Missing Documentation
+- [ig.phone.UpdateContact](ig_phone_UpdateContact.md) [S] ⚠️ Missing Documentation
+- [ig.phone.UpdateContacts](ig_phone_UpdateContacts.md) [S] ⚠️ Missing Documentation
+- [ig.phone.UpdateSettings](ig_phone_UpdateSettings.md) [S] ⚠️ Missing Documentation
+- [ig.phone.Use](ig_phone_Use.md) [S] ⚠️ Missing Documentation
+
 ### pick
 
 pick namespace functions.
@@ -705,22 +694,17 @@ pick namespace functions.
 
 ### player
 
-  - [ig.player.GetPlayerByCharacter](ig_player_GetPlayerByCharacter.md) [UNKNOWN]
 player namespace functions.
 
-- [ig.player.AddPlayer](ig_player_AddPlayer.md) [S]
 - [ig.player.ArePlayersActive](ig_player_ArePlayersActive.md) [S]
 - [ig.player.GetOfflinePlayer](ig_player_GetOfflinePlayer.md) [S]
 - [ig.player.GetPlayer](ig_player_GetPlayer.md) [S]
 - [ig.player.GetPlayerByCharacterID](ig_player_GetPlayerByCharacterID.md) [S] ⚠️ Missing Documentation
 - [ig.player.GetPlayerByCharacterId](ig_player_GetPlayerByCharacterId.md) [S] ⚠️ Missing Documentation
 - [ig.player.GetPlayers](ig_player_GetPlayers.md) [S]
-- [ig.player.RemovePlayer](ig_player_RemovePlayer.md) [S]
-- [ig.player.SetPlayer](ig_player_SetPlayer.md) [S]
 
 ### queue
 
-  - [ig.queue.Join](ig_queue_Join.md) [UNKNOWN]
 queue namespace functions.
 
 - [ig.queue.GetQueueList](ig_queue_GetQueueList.md) [S] ⚠️ Missing Documentation
@@ -782,93 +766,6 @@ skill namespace functions.
 
 ### sql
 
-  - [ig.sql.ResetActiveCharacters](ig_sql_ResetActiveCharacters.md) [UNKNOWN]
-  - [ig.sql.bank_AddAccount](ig_sql_bank_AddAccount.md) [UNKNOWN]
-  - [ig.sql.bank_GetBank](ig_sql_bank_GetBank.md) [UNKNOWN]
-  - [ig.sql.bank_GetLoan](ig_sql_bank_GetLoan.md) [UNKNOWN]
-  - [ig.sql.bank_SetBank](ig_sql_bank_SetBank.md) [UNKNOWN]
-  - [ig.sql.bank_SetLoan](ig_sql_bank_SetLoan.md) [UNKNOWN]
-  - [ig.sql.bank_TakeOutLoan](ig_sql_bank_TakeOutLoan.md) [UNKNOWN]
-  - [ig.sql.bank_TickOverLoanDuration](ig_sql_bank_TickOverLoanDuration.md) [UNKNOWN]
-  - [ig.sql.bank_TickOverLoanInterest](ig_sql_bank_TickOverLoanInterest.md) [UNKNOWN]
-  - [ig.sql.bank_TickOverLoansInactive](ig_sql_bank_TickOverLoansInactive.md) [UNKNOWN]
-  - [ig.sql.banking_AddBankOffline](ig_sql_banking_AddBankOffline.md) [UNKNOWN]
-  - [ig.sql.banking_AddFavorite](ig_sql_banking_AddFavorite.md) [UNKNOWN]
-  - [ig.sql.banking_AddTransaction](ig_sql_banking_AddTransaction.md) [UNKNOWN]
-  - [ig.sql.banking_GetFavorites](ig_sql_banking_GetFavorites.md) [UNKNOWN]
-  - [ig.sql.banking_GetTransactions](ig_sql_banking_GetTransactions.md) [UNKNOWN]
-  - [ig.sql.banking_RemoveFavorite](ig_sql_banking_RemoveFavorite.md) [UNKNOWN]
-  - [ig.sql.char_AddOutfit](ig_sql_char_AddOutfit.md) [UNKNOWN]
-  - [ig.sql.char_Add](ig_sql_char_Add.md) [UNKNOWN]
-  - [ig.sql.char_Current](ig_sql_char_Current.md) [UNKNOWN]
-  - [ig.sql.char_Delete](ig_sql_char_Delete.md) [UNKNOWN]
-  - [ig.sql.char_GetAllNotDead](ig_sql_char_GetAllNotDead.md) [UNKNOWN]
-  - [ig.sql.char_GetAllPermited](ig_sql_char_GetAllPermited.md) [UNKNOWN]
-  - [ig.sql.char_GetAllWanted](ig_sql_char_GetAllWanted.md) [UNKNOWN]
-  - [ig.sql.char_GetAll](ig_sql_char_GetAll.md) [UNKNOWN]
-  - [ig.sql.char_GetAppearance](ig_sql_char_GetAppearance.md) [UNKNOWN]
-  - [ig.sql.char_GetArmour](ig_sql_char_GetArmour.md) [UNKNOWN]
-  - [ig.sql.char_GetByIban](ig_sql_char_GetByIban.md) [UNKNOWN]
-  - [ig.sql.char_GetCityId](ig_sql_char_GetCityId.md) [UNKNOWN]
-  - [ig.sql.char_GetCoords](ig_sql_char_GetCoords.md) [UNKNOWN]
-  - [ig.sql.char_GetCount](ig_sql_char_GetCount.md) [UNKNOWN]
-  - [ig.sql.char_GetFromCityId](ig_sql_char_GetFromCityId.md) [UNKNOWN]
-  - [ig.sql.char_GetFromPhone](ig_sql_char_GetFromPhone.md) [UNKNOWN]
-  - [ig.sql.char_GetHealth](ig_sql_char_GetHealth.md) [UNKNOWN]
-  - [ig.sql.char_GetHunger](ig_sql_char_GetHunger.md) [UNKNOWN]
-  - [ig.sql.char_GetOutfitByNumber](ig_sql_char_GetOutfitByNumber.md) [UNKNOWN]
-  - [ig.sql.char_GetOutfitsAsCount](ig_sql_char_GetOutfitsAsCount.md) [UNKNOWN]
-  - [ig.sql.char_GetPhone](ig_sql_char_GetPhone.md) [UNKNOWN]
-  - [ig.sql.char_GetStress](ig_sql_char_GetStress.md) [UNKNOWN]
-  - [ig.sql.char_GetThirst](ig_sql_char_GetThirst.md) [UNKNOWN]
-  - [ig.sql.char_Get](ig_sql_char_Get.md) [UNKNOWN]
-  - [ig.sql.char_ReviveDeadCharacters](ig_sql_char_ReviveDeadCharacters.md) [UNKNOWN]
-  - [ig.sql.char_SetActive](ig_sql_char_SetActive.md) [UNKNOWN]
-  - [ig.sql.char_SetAppearance](ig_sql_char_SetAppearance.md) [UNKNOWN]
-  - [ig.sql.char_SetArmour](ig_sql_char_SetArmour.md) [UNKNOWN]
-  - [ig.sql.char_SetCoords](ig_sql_char_SetCoords.md) [UNKNOWN]
-  - [ig.sql.char_SetDead](ig_sql_char_SetDead.md) [UNKNOWN]
-  - [ig.sql.char_SetHealth](ig_sql_char_SetHealth.md) [UNKNOWN]
-  - [ig.sql.char_SetHunger](ig_sql_char_SetHunger.md) [UNKNOWN]
-  - [ig.sql.char_SetInstance](ig_sql_char_SetInstance.md) [UNKNOWN]
-  - [ig.sql.char_SetStress](ig_sql_char_SetStress.md) [UNKNOWN]
-  - [ig.sql.char_SetThirst](ig_sql_char_SetThirst.md) [UNKNOWN]
-  - [ig.sql.char_SetWanted](ig_sql_char_SetWanted.md) [UNKNOWN]
-  - [ig.sql.gen_AccountNumber](ig_sql_gen_AccountNumber.md) [UNKNOWN]
-  - [ig.sql.gen_CarPlate](ig_sql_gen_CarPlate.md) [UNKNOWN]
-  - [ig.sql.gen_CharacterID](ig_sql_gen_CharacterID.md) [UNKNOWN]
-  - [ig.sql.gen_CityID](ig_sql_gen_CityID.md) [UNKNOWN]
-  - [ig.sql.gen_Iban](ig_sql_gen_Iban.md) [UNKNOWN]
-  - [ig.sql.gen_PhoneNumber](ig_sql_gen_PhoneNumber.md) [UNKNOWN]
-  - [ig.sql.save_Jobs](ig_sql_save_Jobs.md) [UNKNOWN]
-  - [ig.sql.save_Objects](ig_sql_save_Objects.md) [UNKNOWN]
-  - [ig.sql.save_User](ig_sql_save_User.md) [UNKNOWN]
-  - [ig.sql.save_Users](ig_sql_save_Users.md) [UNKNOWN]
-  - [ig.sql.save_Vehicle](ig_sql_save_Vehicle.md) [UNKNOWN]
-  - [ig.sql.save_Vehicles](ig_sql_save_Vehicles.md) [UNKNOWN]
-  - [ig.sql.user_AddCharacterSlot](ig_sql_user_AddCharacterSlot.md) [UNKNOWN]
-  - [ig.sql.user_Add](ig_sql_user_Add.md) [UNKNOWN]
-  - [ig.sql.user_Find](ig_sql_user_Find.md) [UNKNOWN]
-  - [ig.sql.user_GetAce](ig_sql_user_GetAce.md) [UNKNOWN]
-  - [ig.sql.user_GetBanReason](ig_sql_user_GetBanReason.md) [UNKNOWN]
-  - [ig.sql.user_GetBan](ig_sql_user_GetBan.md) [UNKNOWN]
-  - [ig.sql.user_GetLastLogin](ig_sql_user_GetLastLogin.md) [UNKNOWN]
-  - [ig.sql.user_GetLocale](ig_sql_user_GetLocale.md) [UNKNOWN]
-  - [ig.sql.user_GetPriority](ig_sql_user_GetPriority.md) [UNKNOWN]
-  - [ig.sql.user_GetSlots](ig_sql_user_GetSlots.md) [UNKNOWN]
-  - [ig.sql.user_Get](ig_sql_user_Get.md) [UNKNOWN]
-  - [ig.sql.user_SetAce](ig_sql_user_SetAce.md) [UNKNOWN]
-  - [ig.sql.user_SetBan](ig_sql_user_SetBan.md) [UNKNOWN]
-  - [ig.sql.user_SetLocale](ig_sql_user_SetLocale.md) [UNKNOWN]
-  - [ig.sql.user_SetPriority](ig_sql_user_SetPriority.md) [UNKNOWN]
-  - [ig.sql.user_Update](ig_sql_user_Update.md) [UNKNOWN]
-  - [ig.sql.veh_Add](ig_sql_veh_Add.md) [UNKNOWN]
-  - [ig.sql.veh_ChangeOwner](ig_sql_veh_ChangeOwner.md) [UNKNOWN]
-  - [ig.sql.veh_GetAll](ig_sql_veh_GetAll.md) [UNKNOWN]
-  - [ig.sql.veh_GetByPlate](ig_sql_veh_GetByPlate.md) [UNKNOWN]
-  - [ig.sql.veh_GetID](ig_sql_veh_GetID.md) [UNKNOWN]
-  - [ig.sql.veh_GetVehicles](ig_sql_veh_GetVehicles.md) [UNKNOWN]
-  - [ig.sql.veh_Reset](ig_sql_veh_Reset.md) [UNKNOWN]
 sql namespace functions.
 
 - [ig.sql.AwaitReady](ig_sql_AwaitReady.md) [S]
@@ -941,6 +838,8 @@ status namespace functions.
 table namespace functions.
 
 - [ig.table.Clone](ig_table_Clone.md) [S C]
+- [ig.table.Convert2Plain](ig_table_Convert2Plain.md) [S C] ⚠️ Missing Documentation
+- [ig.table.Count](ig_table_Count.md) [S C] ⚠️ Missing Documentation
 - [ig.table.Dump](ig_table_Dump.md) [S C]
 - [ig.table.MakeReadOnly](ig_table_MakeReadOnly.md) [S C]
 - [ig.table.MatchKey](ig_table_MatchKey.md) [S C]
@@ -978,11 +877,10 @@ target namespace functions.
 
 tattoo namespace functions.
 
-- [ig.tattoo.ClearCache](ig_tattoo_ClearCache.md) [C]
 - [ig.tattoo.GetAll](ig_tattoo_GetAll.md) [S C]
 - [ig.tattoo.GetByCollection](ig_tattoo_GetByCollection.md) [S]
 - [ig.tattoo.GetByHash](ig_tattoo_GetByHash.md) [S]
-- [ig.tattoo.GetByZone](ig_tattoo_GetByZone.md) [S C]
+- [ig.tattoo.GetByZone](ig_tattoo_GetByZone.md) [S]
 - [ig.tattoo.IsFemale](ig_tattoo_IsFemale.md) [S]
 - [ig.tattoo.IsMale](ig_tattoo_IsMale.md) [S]
 
@@ -1045,19 +943,19 @@ validation namespace functions.
 vehicle namespace functions.
 
 - [ig.vehicle.AddVehicle](ig_vehicle_AddVehicle.md) [S]
-- [ig.vehicle.ClearCache](ig_vehicle_ClearCache.md) [C]
 - [ig.vehicle.ClearLocateBlips](ig_vehicle_ClearLocateBlips.md) [C] ⚠️ Missing Documentation
+- [ig.vehicle.DoesVehicleExistByPlate](ig_vehicle_DoesVehicleExistByPlate.md) [S] ⚠️ Missing Documentation
 - [ig.vehicle.FindVehicle](ig_vehicle_FindVehicle.md) [S]
 - [ig.vehicle.FindVehicleFromPlate](ig_vehicle_FindVehicleFromPlate.md) [S]
-- [ig.vehicle.GetAll](ig_vehicle_GetAll.md) [S C]
+- [ig.vehicle.GetAll](ig_vehicle_GetAll.md) [S]
 - [ig.vehicle.GetAllPersistentVehicles](ig_vehicle_GetAllPersistentVehicles.md) [S]
 - [ig.vehicle.GetByClass](ig_vehicle_GetByClass.md) [S]
-- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md) [S C]
+- [ig.vehicle.GetByHash](ig_vehicle_GetByHash.md) [S]
 - [ig.vehicle.GetByManufacturer](ig_vehicle_GetByManufacturer.md) [S]
 - [ig.vehicle.GetByName](ig_vehicle_GetByName.md) [S]
 - [ig.vehicle.GetCurrentSeat](ig_vehicle_GetCurrentSeat.md) [C]
 - [ig.vehicle.GetCurrentVehicle](ig_vehicle_GetCurrentVehicle.md) [C]
-- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md) [S C]
+- [ig.vehicle.GetDisplayName](ig_vehicle_GetDisplayName.md) [S]
 - [ig.vehicle.GetPersistentVehicle](ig_vehicle_GetPersistentVehicle.md) [S]
 - [ig.vehicle.GetVehicle](ig_vehicle_GetVehicle.md) [S]
 - [ig.vehicle.GetVehicleByPlate](ig_vehicle_GetVehicleByPlate.md) [S]
@@ -1068,7 +966,6 @@ vehicle namespace functions.
 - [ig.vehicle.IsAircraft](ig_vehicle_IsAircraft.md) [S]
 - [ig.vehicle.IsBoa](ig_vehicle_IsBoa.md) [S]
 - [ig.vehicle.IsInVehicle](ig_vehicle_IsInVehicle.md) [C]
-- [ig.vehicle.Load](ig_vehicle_Load.md) [S]
 - [ig.vehicle.LoadPersistentVehicles](ig_vehicle_LoadPersistentVehicles.md) [S]
 - [ig.vehicle.LocatePlayerVehicles](ig_vehicle_LocatePlayerVehicles.md) [S] ⚠️ Missing Documentation
 - [ig.vehicle.RegisterPersistent](ig_vehicle_RegisterPersistent.md) [S]
@@ -1077,46 +974,13 @@ vehicle namespace functions.
 - [ig.vehicle.RestorePersistentVehicle](ig_vehicle_RestorePersistentVehicle.md) [S]
 - [ig.vehicle.SavePersistentVehicles](ig_vehicle_SavePersistentVehicles.md) [S]
 - [ig.vehicle.SetVehicle](ig_vehicle_SetVehicle.md) [S]
+- [ig.vehicle.SpawnPersistentVehicles](ig_vehicle_SpawnPersistentVehicles.md) [S] ⚠️ Missing Documentation
 - [ig.vehicle.StartPeriodicSave](ig_vehicle_StartPeriodicSave.md) [S]
 - [ig.vehicle.UpdateVehicleLocation](ig_vehicle_UpdateVehicleLocation.md) [S]
 - [ig.vehicle.UpdateVehicleState](ig_vehicle_UpdateVehicleState.md) [S]
 
 ### voip
 
-  - [ig.voip.client_GetVoiceMode](ig_voip_client_GetVoiceMode.md) [UNKNOWN]
-  - [ig.voip.client_HandleAdminCallStateChange](ig_voip_client_HandleAdminCallStateChange.md) [UNKNOWN]
-  - [ig.voip.client_HandleCallStateChange](ig_voip_client_HandleCallStateChange.md) [UNKNOWN]
-  - [ig.voip.client_HandleConnectionStateChange](ig_voip_client_HandleConnectionStateChange.md) [UNKNOWN]
-  - [ig.voip.client_InitializeMumble](ig_voip_client_InitializeMumble.md) [UNKNOWN]
-  - [ig.voip.client_IsTalking](ig_voip_client_IsTalking.md) [UNKNOWN]
-  - [ig.voip.client_JoinRadioChannel](ig_voip_client_JoinRadioChannel.md) [UNKNOWN]
-  - [ig.voip.client_LeaveRadioChannel](ig_voip_client_LeaveRadioChannel.md) [UNKNOWN]
-  - [ig.voip.client_NextVoiceMode](ig_voip_client_NextVoiceMode.md) [UNKNOWN]
-  - [ig.voip.client_PreviousVoiceMode](ig_voip_client_PreviousVoiceMode.md) [UNKNOWN]
-  - [ig.voip.client_SetRadioTransmitting](ig_voip_client_SetRadioTransmitting.md) [UNKNOWN]
-  - [ig.voip.client_SetVoiceMode](ig_voip_client_SetVoiceMode.md) [UNKNOWN]
-  - [ig.voip.client_UpdateAdminCallTargets](ig_voip_client_UpdateAdminCallTargets.md) [UNKNOWN]
-  - [ig.voip.client_UpdateCallTargets](ig_voip_client_UpdateCallTargets.md) [UNKNOWN]
-  - [ig.voip.client_UpdateConnectionTargets](ig_voip_client_UpdateConnectionTargets.md) [UNKNOWN]
-  - [ig.voip.client_UpdateProximityTargets](ig_voip_client_UpdateProximityTargets.md) [UNKNOWN]
-  - [ig.voip.client_UpdateRadioTargets](ig_voip_client_UpdateRadioTargets.md) [UNKNOWN]
-  - [ig.voip.client_UpdateTalkingState](ig_voip_client_UpdateTalkingState.md) [UNKNOWN]
-  - [ig.voip.server_CleanupPlayer](ig_voip_server_CleanupPlayer.md) [UNKNOWN]
-  - [ig.voip.server_EndAdminCall](ig_voip_server_EndAdminCall.md) [UNKNOWN]
-  - [ig.voip.server_EndCall](ig_voip_server_EndCall.md) [UNKNOWN]
-  - [ig.voip.server_EndConnection](ig_voip_server_EndConnection.md) [UNKNOWN]
-  - [ig.voip.server_GetPlayersInProximity](ig_voip_server_GetPlayersInProximity.md) [UNKNOWN]
-  - [ig.voip.server_GetVoiceMode](ig_voip_server_GetVoiceMode.md) [UNKNOWN]
-  - [ig.voip.server_InitializePlayer](ig_voip_server_InitializePlayer.md) [UNKNOWN]
-  - [ig.voip.server_JoinRadioChannel](ig_voip_server_JoinRadioChannel.md) [UNKNOWN]
-  - [ig.voip.server_LeaveRadioChannel](ig_voip_server_LeaveRadioChannel.md) [UNKNOWN]
-  - [ig.voip.server_RemoveFromGrid](ig_voip_server_RemoveFromGrid.md) [UNKNOWN]
-  - [ig.voip.server_SetRadioTransmitting](ig_voip_server_SetRadioTransmitting.md) [UNKNOWN]
-  - [ig.voip.server_SetVoiceMode](ig_voip_server_SetVoiceMode.md) [UNKNOWN]
-  - [ig.voip.server_StartAdminCall](ig_voip_server_StartAdminCall.md) [UNKNOWN]
-  - [ig.voip.server_StartCall](ig_voip_server_StartCall.md) [UNKNOWN]
-  - [ig.voip.server_StartConnection](ig_voip_server_StartConnection.md) [UNKNOWN]
-  - [ig.voip.server_UpdateGrid](ig_voip_server_UpdateGrid.md) [UNKNOWN]
 voip namespace functions.
 
 - [ig.voip.Debug](ig_voip_Debug.md) [S C]
@@ -1133,18 +997,15 @@ voip namespace functions.
 
 weapon namespace functions.
 
-- [ig.weapon.ClearCache](ig_weapon_ClearCache.md) [C]
 - [ig.weapon.Exist](ig_weapon_Exist.md) [S]
 - [ig.weapon.Get](ig_weapon_Get.md) [C]
-- [ig.weapon.GetAll](ig_weapon_GetAll.md) [S C]
+- [ig.weapon.GetAll](ig_weapon_GetAll.md) [S]
 - [ig.weapon.GetAllWeaponComponents](ig_weapon_GetAllWeaponComponents.md) [C] ⚠️ Missing Documentation
 - [ig.weapon.GetByCategory](ig_weapon_GetByCategory.md) [S]
-- [ig.weapon.GetByHash](ig_weapon_GetByHash.md) [S C]
+- [ig.weapon.GetByHash](ig_weapon_GetByHash.md) [S]
 - [ig.weapon.GetByName](ig_weapon_GetByName.md) [S]
-- [ig.weapon.GetComponents](ig_weapon_GetComponents.md) [C]
-- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md) [S C]
+- [ig.weapon.GetDisplayName](ig_weapon_GetDisplayName.md) [S]
 - [ig.weapon.GetInitializedCategories](ig_weapon_GetInitializedCategories.md) [C] ⚠️ Missing Documentation
-- [ig.weapon.GetName](ig_weapon_GetName.md) [C]
 - [ig.weapon.GetWeaponComponents](ig_weapon_GetWeaponComponents.md) [C] ⚠️ Missing Documentation
 - [ig.weapon.HasWeaponComponents](ig_weapon_HasWeaponComponents.md) [C] ⚠️ Missing Documentation
 - [ig.weapon.InitializeWeaponData](ig_weapon_InitializeWeaponData.md) [C] ⚠️ Missing Documentation
@@ -1156,6 +1017,31 @@ weapon namespace functions.
 
 ## Documentation Status
 
-**Total Functions:** 692
-**Documented:** 630 (91%)
-**Missing Documentation:** 62 ⚠️
+**Total Functions:** 681
+**Documented:** 600 (88%)
+**Missing Documentation:** 81 ⚠️
+
+## Ignored Functions (Internal Only)
+
+The following 20 functions are marked with @wiki:ignore and are not exposed in the public API:
+
+- `ig.class.BlankObject` (internal)
+- `ig.class.ExistingObject` (internal)
+- `ig.class.Job` (internal)
+- `ig.class.Npc` (internal)
+- `ig.class.OfflinePlayer` (internal)
+- `ig.class.OwnedVehicle` (internal)
+- `ig.class.Player` (internal)
+- `ig.class.Vehicle` (internal)
+- `ig.data.AddObject` (internal)
+- `ig.data.AddPed` (internal)
+- `ig.data.AddPlayer` (internal)
+- `ig.data.AddVehicle` (internal)
+- `ig.data.RemoveObject` (internal)
+- `ig.data.RemovePed` (internal)
+- `ig.data.RemovePlayer` (internal)
+- `ig.data.RemoveVehicle` (internal)
+- `ig.data.SetPlayer` (internal)
+- `ig.player.AddPlayer` (internal)
+- `ig.player.RemovePlayer` (internal)
+- `ig.player.SetPlayer` (internal)
