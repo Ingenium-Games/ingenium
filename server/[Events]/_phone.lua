@@ -191,4 +191,180 @@ RegisterNetEvent("Server:Phone:DeleteContact", function(imei, contactId)
     end
 end)
 
+--- Handle initiate call from client
+RegisterNetEvent("Server:Phone:InitiateCall", function(imei, targetNumber)
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    
+    if not xPlayer then
+        ig.log.Error("Phone", "Player not found for initiate call")
+        return
+    end
+    
+    -- Validate IMEI
+    if not imei or type(imei) ~= "string" or #imei < 36 then
+        ig.log.Warn("Phone", "Invalid IMEI format from player: " .. xPlayer.Name)
+        return
+    end
+    
+    -- Validate target number
+    if not targetNumber or type(targetNumber) ~= "string" or #targetNumber < 6 or #targetNumber > 7 then
+        ig.log.Warn("Phone", "Invalid target number from player: " .. xPlayer.Name)
+        xPlayer.Notify("Invalid phone number", "red", 3000)
+        return
+    end
+    
+    -- Check if phone is in plane mode
+    if ig.phone.IsPlaneMode(imei) then
+        xPlayer.Notify("Cannot make calls in plane mode", "red", 3000)
+        return
+    end
+    
+    -- Find target player by phone number
+    local targetPhoneData = ig.sql.phone.GetByNumber(targetNumber)
+    if not targetPhoneData then
+        xPlayer.Notify("This number does not exist", "red", 3000)
+        return
+    end
+    
+    -- Find target player online
+    local targetPlayer = nil
+    for _, playerId in ipairs(GetPlayers()) do
+        local tPlayer = ig.data.GetPlayer(tonumber(playerId))
+        if tPlayer and tPlayer.Character_ID == targetPhoneData.Character_ID then
+            targetPlayer = tPlayer
+            break
+        end
+    end
+    
+    if not targetPlayer then
+        xPlayer.Notify("This number is not available", "red", 3000)
+        return
+    end
+    
+    -- Check if target is in plane mode
+    if ig.phone.IsPlaneMode(targetPhoneData.IMEI) then
+        xPlayer.Notify("This number is not available", "red", 3000)
+        return
+    end
+    
+    -- Generate call ID
+    local callId = ig.rng.UUID()
+    
+    -- Get caller's phone number
+    local callerPhoneData = ig.sql.phone.Get(imei)
+    if not callerPhoneData then
+        xPlayer.Notify("Failed to initiate call", "red", 3000)
+        return
+    end
+    
+    -- Initiate call via VOIP system
+    ig.voip.server.StartCall(src, targetPlayer.source, callId)
+    
+    -- Send call events to both parties
+    TriggerClientEvent("Client:Phone:CallOutgoing", src, {
+        callId = callId,
+        targetNumber = targetNumber
+    })
+    
+    TriggerClientEvent("Client:Phone:CallIncoming", targetPlayer.source, {
+        callId = callId,
+        callerNumber = callerPhoneData.Phone_Number
+    })
+    
+    ig.log.Debug("Phone", "Call initiated from " .. callerPhoneData.Phone_Number .. " to " .. targetNumber)
+end)
+
+--- Handle answer call from client
+RegisterNetEvent("Server:Phone:AnswerCall", function(imei, callId)
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    
+    if not xPlayer then
+        ig.log.Error("Phone", "Player not found for answer call")
+        return
+    end
+    
+    -- Validate IMEI
+    if not imei or type(imei) ~= "string" or #imei < 36 then
+        ig.log.Warn("Phone", "Invalid IMEI format from player: " .. xPlayer.Name)
+        return
+    end
+    
+    -- Validate call ID
+    if not callId or type(callId) ~= "string" then
+        ig.log.Warn("Phone", "Invalid call ID from player: " .. xPlayer.Name)
+        return
+    end
+    
+    -- Answer call via VOIP system
+    ig.voip.server.AnswerCall(src, callId)
+    
+    ig.log.Debug("Phone", "Call answered: " .. callId)
+end)
+
+--- Handle end call from client
+RegisterNetEvent("Server:Phone:EndCall", function(imei, callId)
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    
+    if not xPlayer then
+        ig.log.Error("Phone", "Player not found for end call")
+        return
+    end
+    
+    -- Validate IMEI
+    if not imei or type(imei) ~= "string" or #imei < 36 then
+        ig.log.Warn("Phone", "Invalid IMEI format from player: " .. xPlayer.Name)
+        return
+    end
+    
+    -- Validate call ID
+    if not callId or type(callId) ~= "string" then
+        ig.log.Warn("Phone", "Invalid call ID from player: " .. xPlayer.Name)
+        return
+    end
+    
+    -- End call via VOIP system
+    ig.voip.server.EndCall(src)
+    
+    ig.log.Debug("Phone", "Call ended: " .. callId)
+end)
+
+--- Handle delete call history from client
+RegisterNetEvent("Server:Phone:DeleteCallHistory", function(imei, callId)
+    local src = source
+    local xPlayer = ig.data.GetPlayer(src)
+    
+    if not xPlayer then
+        ig.log.Error("Phone", "Player not found for delete call history")
+        return
+    end
+    
+    -- Validate IMEI
+    if not imei or type(imei) ~= "string" or #imei < 36 then
+        ig.log.Warn("Phone", "Invalid IMEI format from player: " .. xPlayer.Name)
+        return
+    end
+    
+    -- Validate call ID
+    if not callId or type(callId) ~= "string" then
+        ig.log.Warn("Phone", "Invalid call ID from player: " .. xPlayer.Name)
+        return
+    end
+    
+    -- Delete call history entry
+    local success = ig.phone.DeleteCallHistory(imei, callId)
+    
+    if success then
+        ig.log.Debug("Phone", "Call history deleted for IMEI: " .. imei .. " (ID: " .. callId .. ")")
+        
+        -- Get updated call history and send to client
+        local callHistory = ig.phone.GetCallHistory(imei)
+        TriggerClientEvent("Client:Phone:CallHistoryUpdated", src, callHistory)
+    else
+        ig.log.Error("Phone", "Failed to delete call history for IMEI: " .. imei)
+    end
+end)
+
 ig.log.Info("Phone", "Phone server event handlers loaded")

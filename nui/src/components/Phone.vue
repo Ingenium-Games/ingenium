@@ -39,25 +39,28 @@
               <!-- Home screen -->
               <div v-if="phoneStore.currentApp === 'home'" class="home-screen">
                 <div class="app-grid">
-                  <div class="app-icon" @click="phoneStore.openApp('settings')">
-                    <div class="icon">⚙️</div>
-                    <div class="label">Settings</div>
+                  <div class="app-icon" @click="phoneStore.openApp('calls')">
+                    <div class="icon">📱</div>
+                    <div class="label">Calls</div>
                   </div>
                   <div class="app-icon" @click="phoneStore.openApp('contacts')">
                     <div class="icon">👤</div>
                     <div class="label">Contacts</div>
                   </div>
-                  <!-- Placeholder for future apps -->
-                  <div class="app-icon app-disabled">
-                    <div class="icon">📱</div>
-                    <div class="label">Calls</div>
+                  <div class="app-icon" @click="phoneStore.openApp('settings')">
+                    <div class="icon">⚙️</div>
+                    <div class="label">Settings</div>
                   </div>
+                  <!-- Placeholder for future apps -->
                   <div class="app-icon app-disabled">
                     <div class="icon">💬</div>
                     <div class="label">Messages</div>
                   </div>
                 </div>
               </div>
+              
+              <!-- Calls App -->
+              <CallsApp v-else-if="phoneStore.currentApp === 'calls'" />
               
               <!-- Settings App -->
               <SettingsApp v-else-if="phoneStore.currentApp === 'settings'" />
@@ -88,6 +91,7 @@ import { usePhoneStore } from '../stores/phone'
 import { sendNuiMessage } from '../utils/nui'
 import SettingsApp from './phone/apps/SettingsApp.vue'
 import ContactsApp from './phone/apps/ContactsApp.vue'
+import CallsApp from './phone/apps/CallsApp.vue'
 
 const phoneStore = usePhoneStore()
 

@@ -23,6 +23,7 @@ function ig.sql.phone.Get(imei)
         local phone = result[1]
         -- Parse JSON fields
         phone.Contacts = json.decode(phone.Contacts) or {}
+        phone.CallHistory = json.decode(phone.CallHistory) or {}
         phone.Settings = json.decode(phone.Settings) or {
             planeMode = false,
             emergencyAlerts = true,
@@ -46,6 +47,7 @@ function ig.sql.phone.GetByNumber(phoneNumber)
         local phone = result[1]
         -- Parse JSON fields
         phone.Contacts = json.decode(phone.Contacts) or {}
+        phone.CallHistory = json.decode(phone.CallHistory) or {}
         phone.Settings = json.decode(phone.Settings) or {
             planeMode = false,
             emergencyAlerts = true,
@@ -69,6 +71,7 @@ function ig.sql.phone.GetByCharacter(characterId)
         for i, phone in ipairs(result) do
             -- Parse JSON fields
             phone.Contacts = json.decode(phone.Contacts) or {}
+            phone.CallHistory = json.decode(phone.CallHistory) or {}
             phone.Settings = json.decode(phone.Settings) or {
                 planeMode = false,
                 emergencyAlerts = true,
@@ -213,6 +216,30 @@ function ig.sql.phone.UpdateLastUsed(imei)
     })
     
     return result ~= nil
+end
+
+--- Update phone call history
+---@param imei string Phone IMEI
+---@param callHistory table Array of call history objects
+---@return boolean Success status
+function ig.sql.phone.UpdateCallHistory(imei, callHistory)
+    local callHistoryJson = json.encode(callHistory)
+    
+    local result = MySQL.update.await([[
+        UPDATE phones SET CallHistory = ?, Last_Used = ? WHERE IMEI = ?
+    ]], {
+        callHistoryJson,
+        os.date("%Y-%m-%d %H:%M:%S"),
+        imei
+    })
+    
+    if result then
+        ig.log.Debug("Phone", "Updated call history for IMEI: " .. imei)
+        return true
+    else
+        ig.log.Error("Phone", "Failed to update call history for IMEI: " .. imei)
+        return false
+    end
 end
 
 -- ====================================================================================--

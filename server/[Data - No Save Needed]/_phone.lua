@@ -265,6 +265,75 @@ function ig.phone.UpdateContact(imei, contactId, updatedContact)
 end
 
 -- ====================================================================================--
+-- Phone Call History Management
+-- ====================================================================================--
+
+--- Get phone call history
+---@param imei string Phone IMEI
+---@return table|nil Call history array or nil
+function ig.phone.GetCallHistory(imei)
+    local phoneData = ig.sql.phone.Get(imei)
+    if phoneData then
+        return phoneData.CallHistory or {}
+    end
+    return nil
+end
+
+--- Update phone call history
+---@param imei string Phone IMEI
+---@param callHistory table Array of call history objects
+---@return boolean Success status
+function ig.phone.UpdateCallHistory(imei, callHistory)
+    return ig.sql.phone.UpdateCallHistory(imei, callHistory)
+end
+
+--- Add a call to history
+---@param imei string Phone IMEI
+---@param call table Call object {id, number, type, duration, timestamp}
+---@return boolean Success status
+function ig.phone.AddCallHistory(imei, call)
+    local callHistory = ig.phone.GetCallHistory(imei) or {}
+    
+    -- Validate call
+    if not call.number or not call.type or not call.timestamp then
+        ig.log.Error("Phone", "Invalid call data")
+        return false
+    end
+    
+    -- Add call ID if not present
+    call.id = call.id or ig.rng.UUID()
+    call.duration = call.duration or 0
+    
+    -- Add to beginning of history
+    table.insert(callHistory, 1, call)
+    
+    -- Limit history to 100 entries
+    while #callHistory > 100 do
+        table.remove(callHistory)
+    end
+    
+    return ig.phone.UpdateCallHistory(imei, callHistory)
+end
+
+--- Delete a call from history
+---@param imei string Phone IMEI
+---@param callId string Call ID
+---@return boolean Success status
+function ig.phone.DeleteCallHistory(imei, callId)
+    local callHistory = ig.phone.GetCallHistory(imei) or {}
+    
+    for i, call in ipairs(callHistory) do
+        if call.id == callId then
+            table.remove(callHistory, i)
+            return ig.phone.UpdateCallHistory(imei, callHistory)
+        end
+    end
+    
+    ig.log.Warn("Phone", "Call history entry not found: " .. callId)
+    return false
+end
+
+-- ====================================================================================--
 -- Phone Usage Event Handler
 -- ====================================================================================--
 
@@ -292,6 +361,7 @@ function ig.phone.Use(source, position)
         imei = phoneData.IMEI,
         phoneNumber = phoneData.Phone_Number,
         contacts = phoneData.Contacts,
+        callHistory = phoneData.CallHistory or {},
         settings = phoneData.Settings
     })
     
