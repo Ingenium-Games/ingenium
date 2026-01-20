@@ -1,0 +1,33 @@
+# ig.object.GetObjectFromUUID
+
+## Description
+
+Retrieves an object entity by its unique UUID.
+
+## Signature
+
+```lua
+function ig.object.GetObjectFromUUID(uuid)
+```
+
+## Parameters
+
+- **`uuid`**: string - The unique identifier of the object
+
+## Returns
+
+- **`table|false`** - The object entity table if found, `false` otherwise
+
+## Example
+
+```lua
+-- Get an object by UUID
+local obj = ig.object.GetObjectFromUUID("abc-123-def-456")
+if obj then
+    print("Object network ID:", obj.Network)
+end
+```
+
+## Source
+
+Defined in: `server/[Objects]/_objects.lua`
