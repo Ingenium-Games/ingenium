@@ -115,23 +115,22 @@ All client data validated before processing. Server is always authority.
 
 ### Feature Systems
 
-| System | Description | Status |
-|--------|-------------|--------|
+| System | Description | Documentation |
+|--------|-------------|---------------|
+| [Inventory System](Inventory_System.md) | Item management with multi-layer validation | ✅ Complete |
+| [Zone Management](Zone_Management.md) | PolyZone integration, IPL loading | ✅ Complete |
 | Appearance System | Character customization with live preview | ⏳ Doc pending |
 | Job Management | Job accounts, employees, payroll | ⏳ Doc pending |
-| Inventory System | Item management with validation | ⏳ Doc pending |
 | Drop/Pickup System | World items, loot spawns | ⏳ Doc pending |
-| Zone Management | PolyZone integration, IPL loading | ⏳ Doc pending |
 | Target System | ox_target integration | ⏳ Doc pending |
 | Door System | Door locks, access control | ⏳ Doc pending |
 | Voice/VOIP System | Proximity voice, radio | ⏳ Doc pending |
 
 ### Supporting Systems
 
-| System | Description | Status |
-|--------|-------------|--------|
-| Logging & Debug | Multi-level logging, error tracking | ⏳ Doc pending |
-| Internationalization | Multi-language support (en, fr, es, de, pt) | ⏳ Doc pending |
+| System | Description | Documentation |
+|--------|-------------|---------------|
+| [Logging & i18n](Logging_Internationalization.md) | Multi-level logging, 5-language support | ✅ Complete |
 | Threading & Performance | SetTimeout chains, consolidated loops | ⏳ Doc pending |
 | Banking & Loans | Banking system with interest/overdrafts | ⏳ Doc pending |
 
