@@ -1,7 +1,23 @@
 <template>
   <Transition name="box-open">
-    <div v-if="isVisible" class="inventory-container">
+    <div v-if="isVisible || isLoading" class="inventory-container">
+      <!-- Loading Spinner -->
+      <div v-if="isLoading" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading {{ loadingTitle }}...</div>
+      </div>
+      
+      <!-- Timeout Error Message -->
+      <div v-else-if="hasTimeout" class="timeout-overlay">
+        <div class="timeout-icon">⚠️</div>
+        <div class="timeout-title">Connection Timeout</div>
+        <div class="timeout-message">{{ timeoutMessage }}</div>
+        <button class="timeout-button" @click="closeInventory">Close</button>
+      </div>
+      
+      <!-- Inventory Content -->
       <div 
+        v-else
         ref="inventoryWrapper"
         class="inventory-wrapper"
         :style="wrapperStyle"
@@ -54,6 +70,10 @@ export default {
   },
   setup() {
     const isVisible = ref(false)
+    const isLoading = ref(false)
+    const hasTimeout = ref(false)
+    const loadingTitle = ref('')
+    const timeoutMessage = ref('Failed to load inventory data. Please close and try again.')
     const isDualMode = ref(false)
     const externalTitle = ref('Storage')
     const externalInventory = ref([])
@@ -173,16 +193,39 @@ export default {
       const { message, data } = event.data
 
       switch (message) {
+        case 'Client:NUI:InventoryLoading':
+          // Show loading spinner
+          isLoading.value = true
+          hasTimeout.value = false
+          isVisible.value = false
+          loadingTitle.value = data.title || 'Inventory'
+          break
+
+        case 'Client:NUI:InventoryTimeout':
+          // Show timeout error
+          isLoading.value = false
+          hasTimeout.value = true
+          timeoutMessage.value = data.error || 'Failed to load inventory data. Please close and try again.'
+          break
+
         case 'Client:NUI:InventoryOpenDual':
+          // Hide loading, show inventory
+          isLoading.value = false
+          hasTimeout.value = false
           loadAndMergeInventory(data, true)
           break
 
         case 'Client:NUI:InventoryOpenSingle':
+          // Hide loading, show inventory
+          isLoading.value = false
+          hasTimeout.value = false
           loadAndMergeInventory(data, false)
           break
 
         case 'Client:NUI:InventoryClose':
           isVisible.value = false
+          isLoading.value = false
+          hasTimeout.value = false
           closeInventory()
           break
 
@@ -296,26 +339,34 @@ export default {
      * Close inventory and save to server
      */
     const closeInventory = () => {
-      // Compress inventory arrays (remove empty slots for server transmission)
-      const compressedPlayer = playerInventory.value.filter(item => item != null)
-      const compressedExternal = externalInventory.value.filter(item => item != null)
+      // Clear loading and timeout states
+      isLoading.value = false
+      hasTimeout.value = false
+      
+      // Only send close data if inventory was actually open
+      if (isVisible.value && (playerInventory.value.length > 0 || externalInventory.value.length > 0)) {
+        // Compress inventory arrays (remove empty slots for server transmission)
+        const compressedPlayer = playerInventory.value.filter(item => item != null)
+        const compressedExternal = externalInventory.value.filter(item => item != null)
 
-      // Send to server for validation and saving
-      fetch(`https://${RESOURCE_NAME}/NUI:Client:InventoryClose`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          playerInventory: compressedPlayer,
-          externalInventory: compressedExternal,
-          externalNetId: externalNetId.value
+        // Send to server for validation and saving
+        fetch(`https://${RESOURCE_NAME}/NUI:Client:InventoryClose`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            playerInventory: compressedPlayer,
+            externalInventory: compressedExternal,
+            externalNetId: externalNetId.value
+          })
+        }).catch(err => {
+          console.error('Error closing inventory:', err)
         })
-      }).catch(err => {
-        console.error('Error closing inventory:', err)
-      })
+      }
 
       // Clear state
+      isVisible.value = false
       externalInventory.value = []
       playerInventory.value = []
       externalNetId.value = null
@@ -366,8 +417,10 @@ export default {
      * Handle ESC key to close inventory
      */
     const handleKeydown = (event) => {
-      if (event.key === 'Escape' && isVisible.value) {
+      if (event.key === 'Escape' && (isVisible.value || isLoading.value || hasTimeout.value)) {
         isVisible.value = false
+        isLoading.value = false
+        hasTimeout.value = false
         closeInventory()
       }
     }
@@ -386,6 +439,10 @@ export default {
 
     return {
       isVisible,
+      isLoading,
+      hasTimeout,
+      loadingTitle,
+      timeoutMessage,
       isDualMode,
       externalTitle,
       externalInventory,
@@ -522,5 +579,113 @@ export default {
     opacity: 0;
     transform: scale(0.3) rotateX(90deg) rotateY(0deg);
   }
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  pointer-events: auto;
+  background: rgba(15, 15, 15, 0.98);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 60px 80px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #FFC107;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Timeout Overlay */
+.timeout-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  pointer-events: auto;
+  background: rgba(15, 15, 15, 0.98);
+  border: 2px solid rgba(255, 100, 100, 0.5);
+  border-radius: 12px;
+  padding: 40px 60px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+  max-width: 500px;
+  text-align: center;
+}
+
+.timeout-icon {
+  font-size: 3rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.timeout-title {
+  color: #ff4444;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.timeout-message {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.timeout-button {
+  margin-top: 20px;
+  padding: 12px 40px;
+  background: rgba(255, 100, 100, 0.2);
+  border: 2px solid rgba(255, 100, 100, 0.5);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeout-button:hover {
+  background: rgba(255, 100, 100, 0.3);
+  border-color: rgba(255, 100, 100, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 100, 100, 0.3);
+}
+
+.timeout-button:active {
+  transform: translateY(0);
 }
 </style>

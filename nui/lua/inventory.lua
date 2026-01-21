@@ -28,10 +28,34 @@ AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTit
 
     if inventoryOpen then return end
     
+    -- Show loading spinner immediately
+    SendNUIMessage({
+        message = "Client:NUI:InventoryLoading",
+        data = {
+            isLoading = true,
+            title = externalTitle or "Storage"
+        }
+    })
+    SetNuiFocus(true, true)
+    
     local playerInventory = ig.inventory.GetInventory()
     
-    -- Get external inventory via callback using ig.callback wrapper
-    local externalInventory = ig.callback.Await("GetInventory", externalNetId)
+    -- Get external inventory via callback with timeout (15 seconds to match conf.callback.ticketValidity)
+    local externalInventory = ig.callback.AwaitWithTimeout(
+        "GetInventory",
+        15,  -- 15 second timeout
+        function(state)
+            -- Timeout handler
+            ig.log.Warn("Inventory", "Inventory data fetch timed out after 15 seconds")
+            SendNUIMessage({
+                message = "Client:NUI:InventoryTimeout",
+                data = {
+                    error = "Failed to load inventory data. Please close and try again."
+                }
+            })
+        end,
+        externalNetId
+    )
     
     if externalInventory then
         inventoryOpen = true
@@ -49,8 +73,13 @@ AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTit
                 externalMaxSlots = 50
             }
         })
-        
-        SetNuiFocus(true, true)
+    else
+        -- Failed to get inventory, close NUI
+        SetNuiFocus(false, false)
+        SendNUIMessage({
+            message = "Client:NUI:InventoryClose",
+            data = {}
+        })
     end
 end)
 
@@ -66,6 +95,16 @@ AddEventHandler("Client:Inventory:OpenSingle", function()
 
     if inventoryOpen then return end
     
+    -- Show loading spinner immediately
+    SendNUIMessage({
+        message = "Client:NUI:InventoryLoading",
+        data = {
+            isLoading = true,
+            title = "Player Inventory"
+        }
+    })
+    SetNuiFocus(true, true)
+    
     local playerInventory = ig.inventory.GetInventory()
     
     inventoryOpen = true
@@ -79,8 +118,6 @@ AddEventHandler("Client:Inventory:OpenSingle", function()
             playerMaxSlots = 50
         }
     })
-    
-    SetNuiFocus(true, true)
 end)
 
 ---
