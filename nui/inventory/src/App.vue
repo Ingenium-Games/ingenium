@@ -1,32 +1,47 @@
 <template>
   <Transition name="box-open">
     <div v-if="isVisible" class="inventory-container">
-    <div class="inventory-wrapper">
-      <!-- Left Panel - External Storage/Object -->
-      <InventoryPanel
-        :title="externalTitle"
-        :items="externalInventory"
-        :maxSlots="externalMaxSlots"
-        panel-id="external"
-        @update-items="updateExternalInventory"
-        @item-action="handleItemAction"
-      />
-      
-      <!-- Right Panel - Player Inventory -->
-      <InventoryPanel
-        :title="'Player Inventory'"
-        :items="playerInventory"
-        :maxSlots="playerMaxSlots"
-        panel-id="player"
-        @update-items="updatePlayerInventory"
-        @item-action="handleItemAction"
-      />
+      <div 
+        ref="inventoryWrapper"
+        class="inventory-wrapper"
+        :style="wrapperStyle"
+        @mousedown="startDrag"
+      >
+        <div class="drag-handle" @mousedown.stop="startDrag">
+          <span class="drag-indicator">⠿</span>
+          <span class="drag-text">Inventory</span>
+          <button class="close-button" @click="closeInventory">✕</button>
+        </div>
+        
+        <div class="inventory-panels">
+          <!-- Left Panel - External Storage/Object (only shown in dual mode) -->
+          <InventoryPanel
+            v-if="isDualMode"
+            :title="externalTitle"
+            :items="externalInventory"
+            :maxSlots="externalMaxSlots"
+            panel-id="external"
+            @update-items="updateExternalInventory"
+            @item-action="handleItemAction"
+          />
+          
+          <!-- Right Panel - Player Inventory -->
+          <InventoryPanel
+            :title="'Player Inventory'"
+            :items="playerInventory"
+            :maxSlots="playerMaxSlots"
+            panel-id="player"
+            @update-items="updatePlayerInventory"
+            @item-action="handleItemAction"
+          />
+        </div>
+      </div>
     </div>
   </Transition>
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import InventoryPanel from './components/InventoryPanel.vue'
 
 // Configuration constants
@@ -39,13 +54,56 @@ export default {
   },
   setup() {
     const isVisible = ref(false)
+    const isDualMode = ref(false)
     const externalTitle = ref('Storage')
     const externalInventory = ref([])
     const playerInventory = ref([])
     const externalMaxSlots = ref(50)
     const playerMaxSlots = ref(50)
     const externalNetId = ref(null)
+    
+    // Draggable state
+    const inventoryWrapper = ref(null)
+    const isDragging = ref(false)
+    const dragOffset = ref({ x: 0, y: 0 })
+    const position = ref({ x: 0, y: 0 })
+    
+    // Computed style for wrapper position
+    const wrapperStyle = computed(() => {
+      if (position.value.x === 0 && position.value.y === 0) {
+        return {}
+      }
+      return {
+        transform: `translate(${position.value.x}px, ${position.value.y}px)`
+      }
+    })
 
+    /**
+     * Load saved window position from localStorage
+     */
+    const loadWindowPosition = () => {
+      try {
+        const saved = localStorage.getItem('inventory_window_position')
+        if (saved) {
+          const pos = JSON.parse(saved)
+          position.value = pos
+        }
+      } catch (e) {
+        console.error('Error loading window position:', e)
+      }
+    }
+    
+    /**
+     * Save window position to localStorage
+     */
+    const saveWindowPosition = () => {
+      try {
+        localStorage.setItem('inventory_window_position', JSON.stringify(position.value))
+      } catch (e) {
+        console.error('Error saving window position:', e)
+      }
+    }
+    
     /**
      * Load saved inventory positions from localStorage
      * @param {string} panelId - The panel identifier
@@ -75,6 +133,40 @@ export default {
     }
 
     /**
+     * Load and merge inventory data (shared between single and dual modes)
+     * @param {Object} data - Inventory data from server
+     * @param {boolean} dualMode - Whether to load external inventory
+     */
+    const loadAndMergeInventory = (data, dualMode) => {
+      // Load player inventory
+      playerInventory.value = mergeInventoryWithPositions(
+        data.playerInventory || [],
+        loadInventoryPositions('player')
+      )
+      playerMaxSlots.value = data.playerMaxSlots || 50
+      
+      // Load external inventory if in dual mode
+      if (dualMode) {
+        externalTitle.value = data.externalTitle || 'Storage'
+        externalNetId.value = data.externalNetId
+        externalInventory.value = mergeInventoryWithPositions(
+          data.externalInventory || [],
+          loadInventoryPositions(`external_${data.externalNetId}`)
+        )
+        externalMaxSlots.value = data.externalMaxSlots || 50
+      } else {
+        externalTitle.value = ''
+        externalNetId.value = null
+        externalInventory.value = []
+        externalMaxSlots.value = 0
+      }
+      
+      isDualMode.value = dualMode
+      isVisible.value = true
+      loadWindowPosition()
+    }
+    
+    /**
      * Handle NUI message events from FiveM
      */
     const handleMessage = (event) => {
@@ -82,39 +174,11 @@ export default {
 
       switch (message) {
         case 'Client:NUI:InventoryOpenDual':
-          // Open dual-panel inventory
-          isVisible.value = true
-          externalTitle.value = data.externalTitle || 'Storage'
-          externalNetId.value = data.externalNetId
-          
-          // Merge server inventory with saved positions
-          playerInventory.value = mergeInventoryWithPositions(
-            data.playerInventory || [],
-            loadInventoryPositions('player')
-          )
-          externalInventory.value = mergeInventoryWithPositions(
-            data.externalInventory || [],
-            loadInventoryPositions(`external_${data.externalNetId}`)
-          )
-          
-          playerMaxSlots.value = data.playerMaxSlots || 50
-          externalMaxSlots.value = data.externalMaxSlots || 50
+          loadAndMergeInventory(data, true)
           break
 
         case 'Client:NUI:InventoryOpenSingle':
-          // Open single-panel inventory (player only)
-          isVisible.value = true
-          externalTitle.value = ''
-          externalNetId.value = null
-          
-          playerInventory.value = mergeInventoryWithPositions(
-            data.playerInventory || [],
-            loadInventoryPositions('player')
-          )
-          externalInventory.value = []
-          
-          playerMaxSlots.value = data.playerMaxSlots || 50
-          externalMaxSlots.value = 0
+          loadAndMergeInventory(data, false)
           break
 
         case 'Client:NUI:InventoryClose':
@@ -130,7 +194,7 @@ export default {
               loadInventoryPositions('player')
             )
           }
-          if (data.externalInventory) {
+          if (data.externalInventory && isDualMode.value) {
             externalInventory.value = mergeInventoryWithPositions(
               data.externalInventory,
               loadInventoryPositions(`external_${externalNetId.value}`)
@@ -258,6 +322,47 @@ export default {
     }
 
     /**
+     * Start dragging the inventory window
+     */
+    const startDrag = (event) => {
+      if (event.button !== 0) return // Only left mouse button
+      
+      isDragging.value = true
+      dragOffset.value = {
+        x: event.clientX - position.value.x,
+        y: event.clientY - position.value.y
+      }
+      
+      document.addEventListener('mousemove', onDrag)
+      document.addEventListener('mouseup', stopDrag)
+      event.preventDefault()
+    }
+    
+    /**
+     * Handle dragging motion
+     */
+    const onDrag = (event) => {
+      if (!isDragging.value) return
+      
+      position.value = {
+        x: event.clientX - dragOffset.value.x,
+        y: event.clientY - dragOffset.value.y
+      }
+    }
+    
+    /**
+     * Stop dragging and save position
+     */
+    const stopDrag = () => {
+      if (isDragging.value) {
+        isDragging.value = false
+        saveWindowPosition()
+        document.removeEventListener('mousemove', onDrag)
+        document.removeEventListener('mouseup', stopDrag)
+      }
+    }
+    
+    /**
      * Handle ESC key to close inventory
      */
     const handleKeydown = (event) => {
@@ -270,23 +375,30 @@ export default {
     onMounted(() => {
       window.addEventListener('message', handleMessage)
       window.addEventListener('keydown', handleKeydown)
+      loadWindowPosition()
     })
 
     onUnmounted(() => {
       window.removeEventListener('message', handleMessage)
       window.removeEventListener('keydown', handleKeydown)
+      stopDrag()
     })
 
     return {
       isVisible,
+      isDualMode,
       externalTitle,
       externalInventory,
       playerInventory,
       externalMaxSlots,
       playerMaxSlots,
+      inventoryWrapper,
+      wrapperStyle,
       updateExternalInventory,
       updatePlayerInventory,
-      handleItemAction
+      handleItemAction,
+      startDrag,
+      closeInventory
     }
   }
 }
@@ -305,13 +417,75 @@ export default {
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(5px);
   z-index: 1000;
+  pointer-events: none;
 }
 
 .inventory-wrapper {
+  position: relative;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  background: rgba(15, 15, 15, 0.98);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
   max-width: 90vw;
   max-height: 90vh;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+  pointer-events: auto;
+  transition: transform 0.1s ease-out;
+}
+
+.drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(30, 30, 30, 0.95);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  cursor: grab;
+  user-select: none;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-indicator {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-right: 10px;
+}
+
+.drag-text {
+  flex: 1;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 8px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: #ff4444;
+  transform: scale(1.1);
+}
+
+.inventory-panels {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  overflow: auto;
 }
 
 /* Box opening animation */
