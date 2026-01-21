@@ -277,6 +277,8 @@ file namespace functions.
 
 ### fileLog
 
+  - [ig.fileLog.CreateSimple](ig_fileLog_CreateSimple.md) [UNKNOWN]
+  - [ig.fileLog.Create](ig_fileLog_Create.md) [UNKNOWN]
 fileLog namespace functions.
 
 - [ig.fileLog.Create](ig_fileLog_Create.md) [S]
