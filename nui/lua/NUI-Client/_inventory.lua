@@ -76,4 +76,36 @@ RegisterNUICallback('NUI:Client:InventorySwap', function(data, cb)
     cb({ok = true})
 end)
 
+-- Generic inventory action handler (for use, give, drop)
+-- Sent from: nui/inventory/src/App.vue with action data
+RegisterNUICallback('NUI:Client:InventoryAction', function(data, cb)
+    if not data or not data.action or not data.item then
+        ig.log.Error("Inventory", "NUI:Client:InventoryAction: missing action or item data")
+        cb({ok = false, error = "Missing action or item data"})
+        return
+    end
+    
+    local action = data.action
+    local item = data.item
+    local position = data.position or 0
+    local panelId = data.panelId or "player"
+    
+    ig.log.Trace("Inventory", string.format("Item action: %s on %s (pos: %d, panel: %s)", action, item.Item or "unknown", position, panelId))
+    
+    -- Route action to appropriate server event
+    if action == "use" then
+        TriggerServerEvent("Server:Inventory:UseItem", item.Item, item.Quantity or 1, position, panelId)
+    elseif action == "give" then
+        TriggerServerEvent("Server:Inventory:GiveItem", item.Item, item.Quantity or 1, position)
+    elseif action == "drop" then
+        TriggerServerEvent("Server:Inventory:DropItem", item.Item, item.Quantity or 1, position)
+    else
+        ig.log.Error("Inventory", "Unknown inventory action: " .. action)
+        cb({ok = false, error = "Unknown action"})
+        return
+    end
+    
+    cb({ok = true})
+end)
+
 ig.log.Info("NUI-Client", "Inventory callbacks registered")

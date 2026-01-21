@@ -28,10 +28,34 @@ AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTit
 
     if inventoryOpen then return end
     
+    -- Show loading spinner immediately
+    SendNUIMessage({
+        message = "Client:NUI:InventoryLoading",
+        data = {
+            isLoading = true,
+            title = externalTitle or "Storage"
+        }
+    })
+    SetNuiFocus(true, true)
+    
     local playerInventory = ig.inventory.GetInventory()
     
-    -- Get external inventory via callback using ig.callback wrapper
-    local externalInventory = ig.callback.Await("GetInventory", externalNetId)
+    -- Get external inventory via callback with timeout (15 seconds to match conf.callback.ticketValidity)
+    local externalInventory = ig.callback.AwaitWithTimeout(
+        "GetInventory",
+        15,  -- 15 second timeout
+        function(state)
+            -- Timeout handler
+            ig.log.Warn("Inventory", "Inventory data fetch timed out after 15 seconds")
+            SendNUIMessage({
+                message = "Client:NUI:InventoryTimeout",
+                data = {
+                    error = "Failed to load inventory data. Please close and try again."
+                }
+            })
+        end,
+        externalNetId
+    )
     
     if externalInventory then
         inventoryOpen = true
@@ -49,8 +73,13 @@ AddEventHandler("Client:Inventory:OpenDual", function(externalNetId, externalTit
                 externalMaxSlots = 50
             }
         })
-        
-        SetNuiFocus(true, true)
+    else
+        -- Failed to get inventory, close NUI
+        SetNuiFocus(false, false)
+        SendNUIMessage({
+            message = "Client:NUI:InventoryClose",
+            data = {}
+        })
     end
 end)
 
@@ -66,6 +95,16 @@ AddEventHandler("Client:Inventory:OpenSingle", function()
 
     if inventoryOpen then return end
     
+    -- Show loading spinner immediately
+    SendNUIMessage({
+        message = "Client:NUI:InventoryLoading",
+        data = {
+            isLoading = true,
+            title = "Player Inventory"
+        }
+    })
+    SetNuiFocus(true, true)
+    
     local playerInventory = ig.inventory.GetInventory()
     
     inventoryOpen = true
@@ -79,8 +118,6 @@ AddEventHandler("Client:Inventory:OpenSingle", function()
             playerMaxSlots = 50
         }
     })
-    
-    SetNuiFocus(true, true)
 end)
 
 ---
@@ -160,6 +197,83 @@ else
 end
 
 -- ====================================================================================--
+-- Quick Slot Hotkeys - Slots 1-4 mapped to keyboard 1-4
+-- ====================================================================================--
+
+--- Use item from quick slot
+--- @param slotNumber number The quick slot number (1-4)
+local function useQuickSlot(slotNumber)
+    if inventoryOpen then return end  -- Don't use quick slots while inventory is open
+    if not ig.data.IsPlayerLoaded() then return end
+    
+    -- Trigger server callback to use item from slot
+    TriggerServerCallback({
+        eventName = "UseItemQuick",
+        args = {slotNumber}
+    })
+end
+
+--- Register quick slot commands
+if conf.inventory.allowQuickSlots and conf.inventory.quickSlots then
+    -- Slot 1
+    RegisterCommand('useQuickSlot1', function()
+        useQuickSlot(1)
+    end, false)
+    
+    RegisterKeyMapping(
+        'useQuickSlot1',
+        'Use Quick Slot 1',
+        'keyboard',
+        conf.inventory.quickSlots.slot1:lower()
+    )
+    
+    -- Slot 2
+    RegisterCommand('useQuickSlot2', function()
+        useQuickSlot(2)
+    end, false)
+    
+    RegisterKeyMapping(
+        'useQuickSlot2',
+        'Use Quick Slot 2',
+        'keyboard',
+        conf.inventory.quickSlots.slot2:lower()
+    )
+    
+    -- Slot 3
+    RegisterCommand('useQuickSlot3', function()
+        useQuickSlot(3)
+    end, false)
+    
+    RegisterKeyMapping(
+        'useQuickSlot3',
+        'Use Quick Slot 3',
+        'keyboard',
+        conf.inventory.quickSlots.slot3:lower()
+    )
+    
+    -- Slot 4
+    RegisterCommand('useQuickSlot4', function()
+        useQuickSlot(4)
+    end, false)
+    
+    RegisterKeyMapping(
+        'useQuickSlot4',
+        'Use Quick Slot 4',
+        'keyboard',
+        conf.inventory.quickSlots.slot4:lower()
+    )
+    
+    ig.log.Info("Inventory", string.format("Quick slot hotkeys registered: %s, %s, %s, %s",
+        conf.inventory.quickSlots.slot1,
+        conf.inventory.quickSlots.slot2,
+        conf.inventory.quickSlots.slot3,
+        conf.inventory.quickSlots.slot4
+    ))
+else
+    ig.log.Warn("Inventory", "Quick slot hotkeys disabled by configuration")
+end
+
+-- ====================================================================================--
 -- Exports
 -- ====================================================================================--
 
@@ -175,3 +289,4 @@ end)
 exports("OpenSingleInventory", function()
     TriggerEvent("Client:Inventory:OpenSingle")
 end)
+

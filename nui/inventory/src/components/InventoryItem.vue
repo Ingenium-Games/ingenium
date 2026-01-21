@@ -2,9 +2,12 @@
   <div 
     v-if="item" 
     class="inventory-item" 
-    :class="{ 'item-degraded': isDegraded }"
+    :class="{ 'item-degraded': isDegraded, 'quickslot-item': isQuickSlot }"
     @contextmenu.prevent="showContextMenu"
   >
+    <!-- Quick Slot Badge -->
+    <div v-if="isQuickSlot" class="quickslot-badge">{{ quickSlotNumber }}</div>
+    
     <div class="item-image">
       <img :src="itemImage" :alt="item.Name || item.Item" />
       <div v-if="item.Quality < 100" class="quality-bar">
@@ -28,7 +31,9 @@
     </div>
   </div>
   
-  <div v-else class="inventory-item empty">
+  <div v-else class="inventory-item empty" :class="{ 'quickslot-item': isQuickSlot }">
+    <!-- Quick Slot Badge for empty slots -->
+    <div v-if="isQuickSlot" class="quickslot-badge empty-badge">{{ quickSlotNumber }}</div>
     <div class="empty-slot"></div>
   </div>
 </template>
@@ -51,12 +56,30 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    panelId: {
+      type: String,
+      default: 'player'
     }
   },
   emits: ['use', 'give', 'drop'],
   setup(props, { emit }) {
     const showMenu = ref(false)
     const menuPosition = ref({})
+
+    /**
+     * Check if this is a quick slot (slots 0-3 for player inventory)
+     */
+    const isQuickSlot = computed(() => {
+      return props.panelId === 'player' && props.index >= 0 && props.index <= 3
+    })
+    
+    /**
+     * Get quick slot number (1-4 instead of 0-3)
+     */
+    const quickSlotNumber = computed(() => {
+      return props.index + 1
+    })
 
     /**
      * Computed property for item image path
@@ -148,7 +171,9 @@ export default {
       showContextMenu,
       emitUse,
       emitGive,
-      emitDrop
+      emitDrop,
+      isQuickSlot,
+      quickSlotNumber
     }
   }
 }
@@ -292,5 +317,34 @@ export default {
 
 .menu-item:active {
   background: rgba(100, 150, 255, 0.5);
+}
+
+/* Quick Slot Badge */
+.quickslot-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: rgba(255, 193, 7, 0.9);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 1;
+}
+
+.quickslot-badge.empty-badge {
+  background: rgba(150, 150, 150, 0.5);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.inventory-item.quickslot-item {
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+.inventory-item.quickslot-item:hover {
+  border-color: rgba(255, 193, 7, 0.7);
 }
 </style>

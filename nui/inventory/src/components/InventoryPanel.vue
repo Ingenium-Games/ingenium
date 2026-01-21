@@ -22,6 +22,7 @@
           <InventoryItem
             :item="element"
             :index="index"
+            :panel-id="panelId"
             @use="handleUse(element, index)"
             @give="handleGive(element, index)"
             @drop="handleDrop(element, index)"
