@@ -27,9 +27,10 @@ AddEventHandler("onResourceStart", function(resourceName)
     ig.data.ReviveSync()
     -- Get character values every x seconds.
     ig.data.CharacterValues()
-    --
+    -- 
     ig.vehicle.InitializePersistence()
     --
+    ig.event.GenerateRegistryLog()
 end)
 
 -- ====================================================================================--
