@@ -20,6 +20,7 @@ Implementation documents provide:
 - [Inventory Documentation](./INVENTORY_DOCUMENTATION.md) - Complete inventory system reference
 - [Inventory Summary](./INVENTORY_SUMMARY.md) - Overview and architecture
 - [Inventory Testing](./INVENTORY_TESTING.md) - Testing procedures and validation
+- [Inventory Vue UI Improvements](./INVENTORY_VUE_UI_IMPROVEMENTS.md) - Vue UI enhancements (draggable, callbacks, code cleanup)
 
 ### Drop System
 - [Drop System Guide](./DROP_SYSTEM_GUIDE.md) - User guide for the drop system
