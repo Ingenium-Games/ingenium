@@ -9,6 +9,9 @@
     <!-- HUD -->
     <HUD v-if="uiStore.showHUD" />
     
+    <!-- Vehicle HUD (speed and fuel) -->
+    <VehicleHUD />
+    
     <!-- Notifications -->
     <NotificationContainer />
     
@@ -48,6 +51,7 @@ import { setupNuiHandlers, sendNuiMessage } from './utils/nui'
 import Chat from './components/Chat.vue'
 import CharacterSelect from './components/CharacterSelect.vue'
 import HUD from './components/HUD.vue'
+import VehicleHUD from './components/VehicleHUD.vue'
 import NotificationContainer from './components/NotificationContainer.vue'
 import InputDialog from './components/InputDialog.vue'
 import Menu from './components/Menu.vue'

@@ -161,6 +161,17 @@ conf.persistence.autoRespawnOnJoin = false      -- Auto-respawn garaged vehicles
 conf.persistence.logging = {
     enabled = false                             -- Enable persistence system logging
 }
+--[[
+TARGET SYSTEM CONFIGURATION:
+    -- Icon customization options
+    -- [1] iconType - "svg" (default eye), "emoji", "png", or "gif"
+    -- [2] iconValue - emoji character, URL to PNG/GIF, or leave empty for default SVG
+    -- [3] iconSize - size in pixels (default is 18 for half the original 36px)
+]]--
+conf.target = {}
+conf.target.iconType = "svg"                    -- "svg", "emoji", "png", or "gif"
+conf.target.iconValue = ""                      -- emoji character or URL to image file
+conf.target.iconSize = 18                       -- icon size in pixels (18 = half of original 36px)
 -- ====================================================================================--
 conf.resourcename = GetCurrentResourceName()
 conf.consolechannel = "script:"..tostring(conf.resourcename)

@@ -1,17 +1,44 @@
 <template>
   <div v-if="isVisible" class="target-container">
     <!-- Eye icon -->
-    <div class="target-eye">
+    <div class="target-eye" :style="{ fontSize: targetConfig.iconSize + 'px' }">
+      <!-- SVG icon (default) -->
       <svg 
+        v-if="targetConfig.iconType === 'svg'"
         xmlns="http://www.w3.org/2000/svg" 
-        height="36px" 
+        :height="targetConfig.iconSize + 'px'" 
         viewBox="0 0 24 24" 
-        width="36px" 
+        :width="targetConfig.iconSize + 'px'" 
         :fill="hasTarget ? '#cfd2da' : '#000000'"
       >
         <path d="M0 0h24v24H0V0z" fill="none"/>
         <path d="M12 4C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
       </svg>
+      
+      <!-- Emoji icon -->
+      <span 
+        v-else-if="targetConfig.iconType === 'emoji'"
+        class="emoji-icon"
+        :style="{ 
+          color: hasTarget ? '#cfd2da' : '#000000',
+          fontSize: targetConfig.iconSize + 'px'
+        }"
+      >
+        {{ targetConfig.iconValue || '👁️' }}
+      </span>
+      
+      <!-- PNG/GIF icon -->
+      <img 
+        v-else-if="targetConfig.iconType === 'png' || targetConfig.iconType === 'gif'"
+        :src="targetConfig.iconValue"
+        :width="targetConfig.iconSize"
+        :height="targetConfig.iconSize"
+        :style="{
+          filter: hasTarget ? 'none' : 'brightness(0)',
+          opacity: hasTarget ? 1 : 0.5
+        }"
+        alt="Target icon"
+      />
     </div>
 
     <!-- Options list -->
@@ -42,6 +69,11 @@ import { sendNuiMessage } from '../../utils/nui'
 
 const isVisible = ref(false)
 const options = ref({})
+const targetConfig = ref({
+  iconType: 'svg',
+  iconValue: '',
+  iconSize: 18
+})
 
 const hasTarget = computed(() => {
   return Object.keys(options.value).length > 0
@@ -54,7 +86,7 @@ function selectOption(type, id) {
 // Listen for NUI messages
 if (typeof window !== 'undefined') {
   window.addEventListener('message', (event) => {
-    const { event: eventName, state, options: newOptions } = event.data
+    const { event: eventName, state, options: newOptions, config } = event.data
 
     switch (eventName) {
       case 'visible':
@@ -70,6 +102,12 @@ if (typeof window !== 'undefined') {
 
       case 'setTarget':
         options.value = newOptions || {}
+        break
+      
+      case 'targetConfig':
+        if (config) {
+          targetConfig.value = { ...targetConfig.value, ...config }
+        }
         break
     }
   })
@@ -96,6 +134,12 @@ if (typeof window !== 'undefined') {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 22pt;
+}
+
+.emoji-icon {
+  display: inline-block;
+  line-height: 1;
+  user-select: none;
 }
 
 .target-options {

@@ -130,10 +130,11 @@ All client data validated before processing. Server is always authority.
 |--------|-------------|---------------|
 | [Inventory System](Inventory_System.md) | Item management with multi-layer validation | ✅ Complete |
 | [Zone Management](Zone_Management.md) | PolyZone integration, IPL loading | ✅ Complete |
+| [Target System](Target_System_Configuration.md) | Configurable targeting icons, vehicle bone targets | ✅ Complete |
+| [Vehicle HUD](Vehicle_HUD_System.md) | Speed and fuel display for drivers | ✅ Complete |
 | Appearance System | Character customization with live preview | ⏳ Doc pending |
 | Job Management | Job accounts, employees, payroll | ⏳ Doc pending |
 | Drop/Pickup System | World items, loot spawns | ⏳ Doc pending |
-| Target System | ox_target integration | ⏳ Doc pending |
 | Door System | Door locks, access control | ⏳ Doc pending |
 | Voice/VOIP System | Proximity voice, radio | ⏳ Doc pending |
 
