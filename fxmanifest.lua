@@ -90,6 +90,7 @@ client_scripts {
     "client/_time.lua",
     "client/_ui.lua",
     "client/_vehicle.lua",
+    "client/_vehicle_hud.lua",
     "client/_vehicle_persistence.lua",
     "client/_weapon.lua",
     "client/_weather.lua",

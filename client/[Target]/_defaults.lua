@@ -86,7 +86,7 @@ ig.target.addGlobalVehicle({
 })
 
 
-ig.target.addGlobalVVehicle({
+ig.target.addGlobalVehicle({
     {
         name = 'ig.target:bonnet',
         icon = 'fa-solid fa-car',

@@ -366,3 +366,16 @@ RegisterNUICallback('NUI:Client:TargetSelect', function(data, cb)
         isActive = false
     end
 end)
+
+-- Send target configuration to NUI on resource start
+CreateThread(function()
+    Wait(100) -- Wait for conf to load
+    SendNuiMessage(json.encode({
+        event = 'targetConfig',
+        config = {
+            iconType = conf.target.iconType or 'svg',
+            iconValue = conf.target.iconValue or '',
+            iconSize = conf.target.iconSize or 18
+        }
+    }))
+end)
