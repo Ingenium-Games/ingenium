@@ -53,7 +53,14 @@ conf.default.tax = 10.00
 conf.inventory = {
     openKey = "I",                -- Default key to open/toggle inventory
     closeKey = "ESC",             -- Key to close inventory (can also close via button)
-    allowHotkey = true            -- Enable/disable the hotkey entirely
+    allowHotkey = true,           -- Enable/disable the hotkey entirely
+    quickSlots = {
+        slot1 = "1",              -- Hotkey for inventory slot 1
+        slot2 = "2",              -- Hotkey for inventory slot 2
+        slot3 = "3",              -- Hotkey for inventory slot 3
+        slot4 = "4"               -- Hotkey for inventory slot 4
+    },
+    allowQuickSlots = true        -- Enable/disable quick slot hotkeys
 }
 
 -- HUD Configuration
