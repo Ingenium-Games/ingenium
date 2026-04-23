@@ -4,13 +4,13 @@
 
 © 2021-2026 Ingenium Games. All rights reserved.
 
-**This is closed-source proprietary software. ** Unauthorized copying, distribution, modification, or use is strictly prohibited.
+*As of 24/04/2026 I am here by opensourcing this prject as I have abanodoned it. *
 
 ---
 
 ## ⚠️ Legal Notice
 
-As of 24/04/2026 I am here by opensourcing this prject as I have abanodoned it. Reason being, along while ago I found the reasons behind the fall of fivem, and honestly, **** em.
+*As of 24/04/2026 I am here by opensourcing this prject as I have abanodoned it. Reason being, along while ago I found the reasons behind the fall of fivem, and honestly, **** em.*
 
 ### Third-Party Dependencies
 
