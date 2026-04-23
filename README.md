@@ -6,11 +6,14 @@
 
 *As of 24/04/2026 I am here by opensourcing this prject as I have abanodoned it. *
 
+MIT Standard License applies.
+
 ---
 
 ## ⚠️ Legal Notice
 
 *As of 24/04/2026 I am here by opensourcing this prject as I have abanodoned it. Reason being, along while ago I found the reasons behind the fall of fivem, and honestly, **** em.*
+MIT Standard License applies.
 
 ### Third-Party Dependencies
 
@@ -485,7 +488,7 @@ For authorized users:
 
 ## Copyright
 
-**© 2021-2026 Ingenium Games.  All rights reserved.**
+MIT Standard License applies.
 
 **Twiitchter** - [https://github.com/Ingenium-Games](https://github.com/Ingenium-Games)
 
