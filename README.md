@@ -10,9 +10,7 @@
 
 ## ⚠️ Legal Notice
 
-This software is the exclusive property of Ingenium Games and is protected by copyright law. 
-
-**All Rights Reserved. ** This codebase is **NOT** licensed under open-source terms. Use is restricted to authorized personnel only.
+As of 24/04/2026 I am here by opensourcing this prject as I have abanodoned it. Reason being, along while ago I found the reasons behind the fall of fivem, and honestly, **** em.
 
 ### Third-Party Dependencies
 
