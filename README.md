@@ -2,8 +2,6 @@
 
 **Proprietary Game Framework**
 
-© 2021-2026 Ingenium Games. All rights reserved.
-
 *As of 24/04/2026 I am here by opensourcing this prject as I have abanodoned it. *
 
 MIT Standard License applies.
@@ -491,8 +489,6 @@ For authorized users:
 MIT Standard License applies.
 
 **Twiitchter** - [https://github.com/Ingenium-Games](https://github.com/Ingenium-Games)
-
-This software is proprietary and confidential.  Unauthorized use, reproduction, or distribution is strictly prohibited and may result in legal action.
 
 ---
 
